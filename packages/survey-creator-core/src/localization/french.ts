@@ -562,6 +562,73 @@ export var frenchTranslation = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Description"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Assistant d’expression",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Écrire avec l’IA",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Décrivez ce que l’expression devrait faire",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Par exemple : montrez cette question lorsque le répondant a 18 ans ou plus",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Décrivez la condition en mots",
+    // [Auto-translated] "Generate"
+    generate: "Générer",
+    // [Auto-translated] "Refine"
+    refine: "Affiner",
+    // [Auto-translated] "Explain"
+    explain: "Expliquez",
+    // [Auto-translated] "Stop"
+    stop: "Arrête",
+    // [Auto-translated] "Accept"
+    accept: "Accepter",
+    // [Auto-translated] "Reject"
+    reject: "Rejeter",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Appliquer la solution : {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Expression actuelle",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Expression suggérée",
+    // [Auto-translated] "Reads as"
+    readsAs: "Se lit comme",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "L’explication de l’assistant",
+    // [Auto-translated] "Check results"
+    findings: "Vérifier les résultats",
+    // [Auto-translated] "Error"
+    severityError: "Erreur",
+    // [Auto-translated] "Warning"
+    severityWarning: "Avertissement",
+    // [Auto-translated] "Info"
+    severityInfo: "Infos",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "dans « {0} »",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Décrivez l’expression et sélectionnez Générer.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "En attendant l’assistant...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "La demande a été annulée.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "L’assistant a rapporté : {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "L’assistante ne suggéra aucune expression.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Révisez l’expression suggérée.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "L’assistante expliqua l’expression actuelle.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "L’expression suggérée comporte des erreurs et ne peut être acceptée.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "L’expression suggérée ne pouvait pas être vérifiée pour chaque endroit où elle est écrite, elle ne peut donc pas être acceptée.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Ajoutez une action à la règle avant de demander à l’assistant.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "La première proposition comportait des erreurs et a été corrigée automatiquement."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -651,8 +718,10 @@ export var frenchTranslation = {
       templateErrorLocation: "Alignement des messages d’erreur",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nouveau lieu d’entrée",
-      // [Auto-translated] "Panels per data page"
-      pageSize: "Panneaux par page de données",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Entrées par page",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Permettre aux utilisateurs de trier les panneaux",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Éviter les réponses en double à la question suivante"
     },
@@ -740,6 +809,12 @@ export var frenchTranslation = {
       // [Auto-translated] "Expression"
       expression: "Expression"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Trier par",
+      // [Auto-translated] "Order"
+      direction: "Ordre"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Expression"
@@ -793,7 +868,9 @@ export var frenchTranslation = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Rendez la colonne obligatoire si",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Chaque option dans une colonne distincte"
+      showInMultipleColumns: "Chaque option dans une colonne distincte",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Autoriser le tri par cette colonne"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -963,6 +1040,8 @@ export var frenchTranslation = {
     "listIsEmpty@navigateToUrlOnCondition": "Vous n’avez pas encore de liens",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Vous n’avez pas encore de pages",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Tu n’as pas encore de niveaux de type",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Ajouter un nouveau choix",
     // [Auto-translated] "Add new column"
@@ -979,6 +1058,8 @@ export var frenchTranslation = {
     "addNew@navigateToUrlOnCondition": "Ajouter une nouvelle URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Ajouter une nouvelle page",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Ajouter un nouveau niveau de tri",
     // "Value"
     value: "Valeur",
     // "Text"
@@ -1085,8 +1166,16 @@ export var frenchTranslation = {
     maxFiles: "Nombre maximum de fichiers",
     // "Row count"
     rowCount: "Nombre de lignes",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "Lignes par page de données",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Lignes par page",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Permettre aux utilisateurs de trier les lignes",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Niveaux de tri maximaux",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Ordre de tri par défaut",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Afficher la barre de tri",
     // "Columns layout"
     columnLayout: "Inverser les lignes et les colonnes",
     // "\"Add Row\" button alignment"
@@ -1359,9 +1448,9 @@ export var frenchTranslation = {
     waitForUpload: "Attendez la fin du téléchargement",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Alignement des détails de la ligne",
-    // [Auto-translated] "Minimum row count"
-    minRowCount: "Nombre minimal de lignes",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Minimum number of rows"
+    minRowCount: "Nombre minimum de lignes",
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Nombre maximal de lignes",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Expression du nombre de lignes",
@@ -1617,6 +1706,8 @@ export var frenchTranslation = {
       columns: "Colonnes",
       // "Rows"
       rows: "Lignes",
+      // [Auto-translated] "Entries"
+      entries: "Participations",
       // "Choice Options"
       choices: "Choix",
       // [Auto-translated] "Items"
@@ -2211,6 +2302,8 @@ export var frenchTranslation = {
     underRowSingle: "Sous la rangée, n’affichez qu’une seule section",
     // [Auto-translated] "Auto"
     auto: "Auto",
+    // [Auto-translated] "Always"
+    always: "Toujours",
     timerInfoMode: {
       // "Both"
       combined: "Les deux"
@@ -2749,21 +2842,33 @@ export var frenchTranslation = {
       confirmDelete: "Déclenche une invite de confirmation avant de supprimer une entrée.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Spécifiez une expression qui calcule le nombre d’entrées. Cette expression remplace le paramètre « Nombre initial d’entrées » et est réévaluée chaque fois que les valeurs qu’elle cite changent. Le résultat est limité par les paramètres « Nombre minimum d’entrées » et « Nombre maximal d’entrées ». Tant que cette expression est définie, les répondants ne peuvent pas ajouter ou retirer des entrées manuellement.",
-      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
-      pageSize: "Spécifie le nombre de cases affichées sur chaque page de données. 0 désactive la pagination et affiche toutes les cases.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Spécifie le nombre d’entrées affichées sur chaque page du panneau. « 0 » désactive la pagination et affiche toutes les entrées.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Permet aux répondants de trier les entrées depuis la barre de tri.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Définit l’ordre dans lequel les entrées sont affichées au début de l’enquête. Les répondants peuvent le modifier si le tri est autorisé. Chaque niveau de tri trie par une question ; le niveau supérieur s’applique en premier. Faites glisser les niveaux pour changer leur priorité.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Attribue des numéros aux questions imbriquées dans le panneau dynamique."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Spécifier une expression qui calcule le nombre de lignes. Cette expression supprime le paramètre « Nombre de lignes » et est réévaluée chaque fois que les valeurs qu’elle cite changent. Le résultat est limité par les paramètres « Nombre minimum de lignes » et « Nombre maximal de lignes ». Tant que cette expression est définie, les répondants ne peuvent pas ajouter ou retirer des lignes manuellement.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Permet aux répondants de trier les lignes en cliquant sur les en-têtes de colonnes ou depuis la barre de tri.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Définit l’ordre dans lequel les lignes sont affichées au début de l’enquête. Les répondants peuvent le modifier si le tri est autorisé. Chaque niveau de tri est trié par une colonne ; le niveau supérieur s’applique en premier. Faites glisser les niveaux pour changer leur priorité.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "« Auto » affiche la barre de tri uniquement lorsque la matrice ne possède pas d’en-têtes de colonne triables : les en-têtes sont cachés, la matrice utilise la disposition mobile, ou les lignes sont transposées en colonnes. « Toujours » affiche également la barre de tri à côté des en-têtes de colonne.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Spécifiez une expression qui calcule le nombre de lignes. Cette expression supprime le paramètre « Nombre initial de lignes » et est réévaluée chaque fois que les valeurs qu’elle cite changent. Le résultat est limité par les paramètres « Nombre minimum de lignes » et « Nombre maximal de lignes ». Tant que cette expression est définie, les répondants ne peuvent pas ajouter ou retirer des lignes manuellement.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Déclenche une invite de confirmation avant de supprimer une ligne.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Développe automatiquement la section de détail lorsqu’une nouvelle ligne est ajoutée à la matrice."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "Spécifie le nombre de lignes matricielles affichées sur chaque page de données. 0 désactive la pagination et affiche toutes les lignes.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Spécifie le nombre de lignes affichées sur chaque page de la matrice. « 0 » désactive la pagination et affiche toutes les lignes.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Précise combien de champs un répondant peut trier simultanément.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplique les réponses de la dernière ligne et les attribue à la ligne dynamique suivante ajoutée.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3837,6 +3942,10 @@ export var frenchTranslation = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "Le {prop} « {expression} » est toujours vrai, car {facts} - il ne décide de rien."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "Le {prop} « {expression} » ne lit aucune question ni variable."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "La valeur par défaut de « {name} » est {valuesText}, qu’elle ne pourra jamais tenir. Autorisé : {availableText}.",
@@ -4034,6 +4143,8 @@ export var frenchTranslation = {
       itemScope: "« {0} » n’est disponible qu’à l’intérieur des conditions de choix, ligne et colonne.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "« {0}. » références ne sont disponibles qu’à l’intérieur d’une question composite.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "« {0} » n’est pas disponible dans un filtre inArray, qui s’exécute sur l’élément puis sur l’enquête.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "« {0} » est une colonne de cette matrice – référencez-la avec le préfixe ligne.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

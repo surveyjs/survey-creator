@@ -114,8 +114,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     this.useSourceTargetColumns = this.isSideBySideGrid;
     // The form view maps every localizable string of the survey copies; the grid view keeps
     // the default ("used strings only") and lets the user switch via the toolbar dropdown.
+    // Set directly: the property's onSet would build the tree here, before the owner sets the
+    // callbacks and the read-only flag the tree depends on - the owner resets the model itself.
     if (!this.isSideBySideGrid) {
-      this.showAllStrings = true;
+      this.setPropertyValueDirectly("showAllStrings", true);
     }
   }
   public get isSideBySide(): boolean {
@@ -1512,6 +1514,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     toolbar.flushUpdates();
     this.surveyTitleToolbar = toolbar;
     Object.defineProperty(survey, "hasTitleActions", { get: (): boolean => true, configurable: true });
+    Object.defineProperty(survey, "hasVisibleTitleActions", { get: (): boolean => true, configurable: true });
     survey.getTitleToolbar = (): AdaptiveActionContainer => toolbar;
   }
   // The translate title action of a target-pane element opens a dialog with a strings matrix
@@ -1734,9 +1737,9 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     this.copiesMap.build(this.root, editableRoot, this.createCopyRoot(this.sourceSurvey));
   }
   private createCopyRoot(survey: SurveyModel): TranslationGroup {
+    // Built by the constructor; see TranslationBase.reset for why setAsRoot needs no rebuild.
     const root = new TranslationGroup("survey", survey, this);
     root.setAsRoot();
-    root.reset();
     return root;
   }
 }

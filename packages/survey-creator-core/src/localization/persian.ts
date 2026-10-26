@@ -562,6 +562,73 @@ export var persianStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "توضیحات"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "دستیار بیان",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "نوشتن با هوش مصنوعی",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "توضیح دهید که عبارت باید چه کاری انجام دهد",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "برای مثال: این سؤال را زمانی نشان دهید که پاسخ دهنده ۱۸ سال یا بیشتر دارد",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "وضعیت را با کلمات توصیف کنید",
+    // [Auto-translated] "Generate"
+    generate: "تولید کنید",
+    // [Auto-translated] "Refine"
+    refine: "پالایش",
+    // [Auto-translated] "Explain"
+    explain: "توضیح دهید",
+    // [Auto-translated] "Stop"
+    stop: "بس کن",
+    // [Auto-translated] "Accept"
+    accept: "قبول کن",
+    // [Auto-translated] "Reject"
+    reject: "رد",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "اصلاح: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "بیان کنونی",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "بیان پیشنهادی",
+    // [Auto-translated] "Reads as"
+    readsAs: "به صورت زیر خوانده می شود",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "توضیح دستیار",
+    // [Auto-translated] "Check results"
+    findings: "نتایج را بررسی کنید",
+    // [Auto-translated] "Error"
+    severityError: "خطا",
+    // [Auto-translated] "Warning"
+    severityWarning: "هشدار",
+    // [Auto-translated] "Info"
+    severityInfo: "اطلاعات",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "در «{0}»",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "عبارت را توصیف کنید و گزینه تولید را انتخاب کنید.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "منتظر دستیار...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "درخواست لغو شد.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "دستیار گزارش داد: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "دستیار هیچ حالتی به خود نداد.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "عبارت پیشنهادی را مرور کنید.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "دستیار حالت فعلی را توضیح داد.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "عبارت پیشنهادی دارای خطا است و قابل پذیرش نیست.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "عبارت پیشنهادی نمی توانست برای هر جایی که نوشته شده بررسی شود، بنابراین قابل پذیرش نیست.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "قبل از پرسیدن از دستیار، یک اقدام به قانون اضافه کنید.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "پیشنهاد اول اشتباهاتی داشت و به طور خودکار اصلاح می شد."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -651,8 +718,10 @@ export var persianStrings = {
       templateErrorLocation: "همترازسازی پیام خطا",
       // [Auto-translated] "New entry location"
       newPanelPosition: "محل ورود جدید",
-      // [Auto-translated] "Panels per data page"
-      pageSize: "پنل ها در هر صفحه داده",
+      // [Auto-translated] "Entries per page"
+      pageSize: "ورودی ها در هر صفحه",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "اجازه دادن به کاربران برای مرتب سازی پنل ها",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "از پاسخ های تکراری در سوال زیر جلوگیری کنید"
     },
@@ -740,6 +809,12 @@ export var persianStrings = {
       // [Auto-translated] "Expression"
       expression: "بیان"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "مرتب سازی بر اساس",
+      // [Auto-translated] "Order"
+      direction: "نشان"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "بیان"
@@ -793,7 +868,9 @@ export var persianStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "ایجاد ستون مورد نیاز اگر",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "هر گزینه در یک ستون جداگانه"
+      showInMultipleColumns: "هر گزینه در یک ستون جداگانه",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "اجازه مرتب سازی بر اساس این ستون را بدهید"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -963,6 +1040,8 @@ export var persianStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "شما هنوز هیچ لینکی ندارید",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "شما هنوز هیچ صفحه ای ندارید",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "هنوز هیچ سطحی نداری",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "اضافه کردن انتخاب جدید",
     // [Auto-translated] "Add new column"
@@ -979,6 +1058,8 @@ export var persianStrings = {
     "addNew@navigateToUrlOnCondition": "افزودن نشانی وب جدید",
     // [Auto-translated] "Add new page"
     "addNew@pages": "افزودن صفحه جدید",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "افزودن سطح مرتب سازی جدید",
     // "Value"
     value: "مقدار",
     // "Text"
@@ -1085,8 +1166,16 @@ export var persianStrings = {
     maxFiles: "حداکثر تعداد فایل ها",
     // "Row count"
     rowCount: "تعداد سطر",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "ردیف ها در هر صفحه داده",
+    // [Auto-translated] "Rows per page"
+    pageSize: "ردیف ها در هر صفحه",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "اجازه دادن به کاربران برای مرتب سازی ردیف ها",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "حداکثر سطوح مرتب سازی",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "ترتیب پیش فرض مرتب سازی",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "نوار مرتب سازی نمایش",
     // "Columns layout"
     columnLayout: "قالب ستون ها",
     // "\"Add Row\" button alignment"
@@ -1359,10 +1448,10 @@ export var persianStrings = {
     waitForUpload: "منتظر بمانید تا آپلود کامل شود",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "تراز جزئیات ردیف",
-    // [Auto-translated] "Minimum row count"
-    minRowCount: "حداقل تعداد سطرها",
-    // [Auto-translated] "Maximum row count"
-    maxRowCount: "حداکثر تعداد سطرها",
+    // [Auto-translated] "Minimum number of rows"
+    minRowCount: "حداقل تعداد ردیف ها",
+    // [Auto-translated] "Maximum number of rows"
+    maxRowCount: "حداکثر تعداد ردیف ها",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "عبارت شمارش ردیف",
     // "Confirm row removal"
@@ -1617,6 +1706,8 @@ export var persianStrings = {
       columns: "ستون ها",
       // "Rows"
       rows: "سطرها",
+      // [Auto-translated] "Entries"
+      entries: "ورودی ها",
       // "Choice Options"
       choices: "انتخاب ها",
       // "Items"
@@ -2211,6 +2302,8 @@ export var persianStrings = {
     underRowSingle: "در زیر ردیف، فقط یک بخش نمایش داده می شود",
     // "Auto"
     auto: "خودکار",
+    // [Auto-translated] "Always"
+    always: "همیشه",
     timerInfoMode: {
       // "Both"
       combined: "هر دو"
@@ -2749,21 +2842,33 @@ export var persianStrings = {
       confirmDelete: "قبل از حذف یک ورودی، یک اعلان تأیید را فعال می کند.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "یک عبارت مشخص کنید که تعداد ورودی ها را محاسبه کند. این عبارت تنظیم «تعداد اولیه ورودی» را لغو می کند و هرگاه مقادیر ارجاع داده شده تغییر کنند، مجددا ارزیابی می شود. نتیجه محدود به تنظیمات «حداقل تعداد ورودی» و «حداکثر تعداد ورودی» است. در حالی که این عبارت تنظیم شده است، پاسخ دهندگان نمی توانند ورودی ها را به صورت دستی اضافه یا حذف کنند.",
-      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
-      pageSize: "تعداد پنل های نمایش داده شده در هر صفحه داده را مشخص می کند. ۰ صفحه بندی را غیرفعال می کند و همه پنل ها را نمایش می دهد.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "تعداد ورودی های نمایش داده شده در هر صفحه پنل را مشخص می کند. '0' صفحه بندی را غیرفعال می کند و همه ورودی ها را نمایش می دهد.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "به پاسخ دهندگان اجازه می دهد ورودی ها را از نوار مرتب سازی مرتب کنند.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "ترتیب نمایش ورودی ها هنگام شروع نظرسنجی را تعریف می کند. پاسخ دهندگان می توانند در صورت اجازه مرتب سازی آن را تغییر دهند. هر سطح مرتب سازی بر اساس یک سوال مرتب سازی می شود؛ سطح بالایی ابتدا اعمال می شود. سطوح را بکشید تا اولویت آن ها تغییر کند.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "اعداد را به سؤالات تودرتو در پانل پویا اختصاص می دهد."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "یک عبارت مشخص کنید که تعداد ردیف ها را محاسبه کند. این عبارت تنظیم «تعداد سطر» را لغو می کند و هرگاه مقادیر ارجاع داده شده تغییر کنند، مجددا ارزیابی می شود. نتیجه محدود به تنظیمات «حداقل تعداد سطر» و «حداکثر تعداد سطر» است. در حالی که این عبارت تنظیم شده است، پاسخ دهندگان نمی توانند به صورت دستی ردیف ها را اضافه یا حذف کنند.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "به پاسخ دهندگان اجازه می دهد با کلیک روی سرستون ها یا از نوار مرتب سازی، ردیف ها را مرتب کنند.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "ترتیب نمایش ردیف ها هنگام شروع نظرسنجی را تعریف می کند. پاسخ دهندگان می توانند در صورت اجازه مرتب سازی آن را تغییر دهند. هر سطح مرتب سازی بر اساس یک ستون مرتب سازی می شود؛ سطح بالایی ابتدا اعمال می شود. سطوح را بکشید تا اولویت آن ها تغییر کند.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "«Auto» فقط زمانی نوار مرتب سازی را نمایش می دهد که ماتریس سرستون های قابل مرتب سازی نداشته باشد: سربرگ ها مخفی هستند، ماتریس از چیدمان متحرک استفاده می کند یا ردیف ها به ستون ها منتقل می شوند. «همیشه» نوار مرتب سازی کنار سرستون ها را نیز نمایش می دهد.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "یک عبارت مشخص کنید که تعداد ردیف ها را محاسبه کند. این عبارت تنظیم «تعداد اولیه ردیف ها» را لغو می کند و هرگاه مقادیر ارجاع داده شده تغییر کنند، مجددا ارزیابی می شود. نتیجه محدود به تنظیمات «حداقل تعداد ردیف ها» و «حداکثر تعداد ردیف ها» است. در حالی که این عبارت تنظیم شده است، پاسخ دهندگان نمی توانند به صورت دستی ردیف ها را اضافه یا حذف کنند.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "قبل از حذف ردیف، یک اعلان تأیید را فعال می کند.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "هنگامی که یک ردیف جدید به ماتریس اضافه می شود، به طور خودکار بخش جزئیات را گسترش می دهد."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "تعداد ردیف های ماتریس نمایش داده شده در هر صفحه داده را مشخص می کند. 0 صفحه بندی را غیرفعال کرده و همه ردیف ها را نمایش می دهد.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "تعداد ردیف های نمایش داده شده در هر صفحه ماتریس را مشخص می کند. '0' صفحه بندی را غیرفعال کرده و همه ردیف ها را نمایش می دهد.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "مشخص می کند که پاسخ دهنده چند فیلد می تواند همزمان بر اساس آن مرتب کند.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "پاسخ ها را از اخرین ردیف تکرار می کند و انها را به ردیف دینامیک بعدی اضافه می کند.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3837,6 +3942,10 @@ export var persianStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} «{expression} همیشه برقرار است، چون {facts} - هیچ چیز را تعیین نمی کند."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} «{expression}» هیچ سوال یا متغیری را نمی خواند."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "مقدار پیش فرض «{name}» {valuesText} است که هرگز نمی تواند آن را نگه دارد. مجاز: {availableText}.",
@@ -4034,6 +4143,8 @@ export var persianStrings = {
       itemScope: "«{0}» فقط در شرایط انتخاب، ردیف و ستون در دسترس است.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "ارجاعات «{0}.» فقط در داخل یک سؤال ترکیبی موجود است.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "«{0}» در داخل فیلتر inArray که روی آیتم و سپس نظرسنجی اجرا می شود، در دسترس نیست.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "«{0}» ستونی از این ماتریس است - آن را با پیشوند سطر ارجاع دهید.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

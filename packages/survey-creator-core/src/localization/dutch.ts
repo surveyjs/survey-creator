@@ -562,6 +562,73 @@ export var nlStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Beschrijving"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Expressieassistent",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Schrijf met AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Beschrijf wat de uitdrukking moet doen",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Bijvoorbeeld: toon deze vraag wanneer de respondent 18 jaar of ouder is",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Beschrijf de aandoening in woorden",
+    // [Auto-translated] "Generate"
+    generate: "Genereren",
+    // [Auto-translated] "Refine"
+    refine: "Verfijnen",
+    // [Auto-translated] "Explain"
+    explain: "Leg het uit",
+    // [Auto-translated] "Stop"
+    stop: "Stop",
+    // [Auto-translated] "Accept"
+    accept: "Accepteer",
+    // [Auto-translated] "Reject"
+    reject: "Weiger",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Apply fix: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Huidige uitdrukking",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Voorgestelde uitdrukking",
+    // [Auto-translated] "Reads as"
+    readsAs: "Luidt als volgt",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "De uitleg van de assistent",
+    // [Auto-translated] "Check results"
+    findings: "Controleer de resultaten",
+    // [Auto-translated] "Error"
+    severityError: "Fout",
+    // [Auto-translated] "Warning"
+    severityWarning: "Waarschuwing",
+    // [Auto-translated] "Info"
+    severityInfo: "Info",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "In \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Beschrijf de expressie en selecteer Genereren.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Wachten op de assistent...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Het verzoek werd geannuleerd.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "De assistent meldde: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "De assistent maakte geen uitdrukking.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Bekijk de voorgestelde uitdrukking.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "De assistent legde de huidige uitdrukking uit.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "De voorgestelde uitdrukking bevat fouten en kan niet worden geaccepteerd.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "De voorgestelde uitdrukking kon niet voor elke plek worden gecontroleerd waar deze naartoe geschreven is, dus deze kan niet worden geaccepteerd.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Voeg een actie toe aan de regel voordat je het aan de assistent vraagt.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "De eerste suggestie bevatte fouten en werd automatisch gecorrigeerd."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -651,8 +718,10 @@ export var nlStrings = {
       templateErrorLocation: "Uitlijning van foutmeldingen",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nieuwe ingangslocatie",
-      // [Auto-translated] "Panels per data page"
-      pageSize: "Panelen per datapagina",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Vermeldingen per pagina",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Laat gebruikers panelen sorteren",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Voorkom dubbele antwoorden op de volgende vraag"
     },
@@ -740,6 +809,12 @@ export var nlStrings = {
       // [Auto-translated] "Expression"
       expression: "Uitdrukking"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sorteer op",
+      // [Auto-translated] "Order"
+      direction: "Orde"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Uitdrukking"
@@ -793,7 +868,9 @@ export var nlStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Maak de kolom verplicht als",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Elke optie in een aparte kolom"
+      showInMultipleColumns: "Elke optie in een aparte kolom",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Sta sortering toe op deze kolom"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -963,6 +1040,8 @@ export var nlStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Je hebt nog geen links",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Je hebt nog geen pagina's",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Je hebt nog geen soort levels",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Nieuwe keuze toevoegen",
     // [Auto-translated] "Add new column"
@@ -979,6 +1058,8 @@ export var nlStrings = {
     "addNew@navigateToUrlOnCondition": "Nieuwe URL toevoegen",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Nieuwe pagina toevoegen",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Voeg een nieuw sorteerniveau toe",
     // "Value"
     value: "Waarde",
     // "Text"
@@ -1085,8 +1166,16 @@ export var nlStrings = {
     maxFiles: "Maximaal aantal bestanden",
     // "Row count"
     rowCount: "Aantal rijen",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "Rijen per datapagina",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Rijen per pagina",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Laat gebruikers rijen sorteren",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maximale sorteerniveaus",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Standaard sorteervolgorde",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Showsorteerbalk",
     // "Columns layout"
     columnLayout: "Kolommen layout",
     // "\"Add Row\" button alignment"
@@ -1359,9 +1448,9 @@ export var nlStrings = {
     waitForUpload: "Wacht tot het uploaden is voltooid",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Uitlijning van rijdetails",
-    // [Auto-translated] "Minimum row count"
-    minRowCount: "Minimaal aantal rijen",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Minimum number of rows"
+    minRowCount: "Minimum aantal rijen",
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Maximaal aantal rijen",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Rijtelling-expressie",
@@ -1617,6 +1706,8 @@ export var nlStrings = {
       columns: "Kolommen",
       // "Rows"
       rows: "Rijen",
+      // [Auto-translated] "Entries"
+      entries: "Inschrijvingen",
       // "Choice Options"
       choices: "Keuzes",
       // "Items"
@@ -2211,6 +2302,8 @@ export var nlStrings = {
     underRowSingle: "Geef onder de rij slechts één sectie weer",
     // [Auto-translated] "Auto"
     auto: "Auto",
+    // [Auto-translated] "Always"
+    always: "Altijd",
     timerInfoMode: {
       // "Both"
       combined: "Beide"
@@ -2749,21 +2842,33 @@ export var nlStrings = {
       confirmDelete: "Activeert een bevestigingsprompt voordat een item wordt verwijderd.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Specificeer een expressie die het aantal vermeldingen berekent. Deze uitdrukking overschrijft de instelling \"Initiële aanstellingen\" en wordt opnieuw geëvalueerd telkens wanneer de waarden die hij verwijst veranderen. Het resultaat wordt beperkt door de instellingen \"Minimum aantal vermeldingen\" en \"Maximaal aantal vermeldingen\". Terwijl deze uitdrukking is ingesteld, kunnen respondenten geen vermeldingen handmatig toevoegen of verwijderen.",
-      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
-      pageSize: "Specificeert het aantal panelen dat op elke datapagina wordt weergegeven. 0 schakelt paginering uit en toont alle panelen.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Specificeert het aantal vermeldingen dat op elke pagina van het paneel wordt weergegeven. '0' schakelt de paginering uit en toont alle vermeldingen.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Stelt respondenten in staat om vermeldingen te sorteren uit de sorteerbalk.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Bepaalt de volgorde waarin de vermeldingen worden weergegeven wanneer de enquête begint. Respondenten kunnen dit aanpassen als sorteren is toegestaan. Elk sorteerniveau sorteert op één vraag; het hoogste niveau geldt eerst. Sleep levels om hun prioriteit te wijzigen.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Wijst nummers toe aan vragen die zijn genest in het dynamische paneel."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Specificeer een expressie die het aantal rijen berekent. Deze expressie overschrijft de instelling \"Rijaantal\" en wordt opnieuw geëvalueerd telkens wanneer de waarden waarnaar hij verwijst veranderen. Het resultaat wordt beperkt door de instellingen \"Minimum aantal rijen\" en \"Maximaal aantal rijen\". Zolang deze expressie is ingesteld, kunnen respondenten niet handmatig rijen toevoegen of verwijderen.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Stelt respondenten in staat om rijen te sorteren door op kolomkoppen te klikken of via de sorteerbalk.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Definieert de volgorde waarin rijen worden weergegeven wanneer de enquête begint. Respondenten kunnen deze wijzigen als sorteren is toegestaan. Elk sorteerniveau sorteert per kolom; het bovenste niveau wordt eerst toegepast. Sleep levels om hun prioriteit te wijzigen.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" toont de sorteerbalk alleen wanneer de matrix geen sorteerbare kolomkoppen heeft: de kopstukken zijn verborgen, de matrix gebruikt de mobiele indeling, of rijen worden omgezet naar kolommen. \"Altijd\" toont ook de sorteerbalk naast de kolomkoppen.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Specificeer een expressie die het aantal rijen berekent. Deze uitdrukking overschrijft de instelling \"Initiële aantal rijen\" en wordt opnieuw geëvalueerd telkens wanneer de waarden die hij verwijst veranderen. Het resultaat wordt beperkt door de instellingen \"Minimum aantal rijen\" en \"Maximaal aantal rijen\". Zolang deze uitdrukking is ingesteld, kunnen respondenten geen rijen handmatig toevoegen of verwijderen.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Activeert een bevestigingsprompt voordat een rij wordt verwijderd.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Breidt de detailsectie automatisch uit wanneer een nieuwe rij aan de matrix wordt toegevoegd."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "Specificeert het aantal matrixrijen dat op elke datapagina wordt weergegeven. 0 schakelt de paginering uit en toont alle rijen.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Specificeert het aantal rijen dat op elke pagina van de matrix wordt weergegeven. '0' schakelt de paginering uit en toont alle rijen.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Geeft aan hoeveel velden een respondent tegelijk kan sorteren.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3837,6 +3942,10 @@ export var nlStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "De {prop} \"{expressie}\" geldt altijd, omdat {feiten} - het beslist niets."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "De {prop} \"{expressie}\" leest geen vraag of variabele."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "De standaardwaarde van \"{naam}\" is {valuesText}, die het nooit kan vasthouden. Toegestaan: {availableText}.",
@@ -4034,6 +4143,8 @@ export var nlStrings = {
       itemScope: "\"{0}\" is alleen beschikbaar binnen keuze-, rij- en kolomcondities.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\"-referenties zijn alleen beschikbaar binnen een samengestelde kwestie.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" is niet beschikbaar binnen een inArray-filter, dat zowel tegen het item als de enquête draait.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" is een kolom van deze matrix - verwijs ernaar met het rijvoorvoegsel.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

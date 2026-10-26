@@ -323,7 +323,11 @@ export class Translation extends TranslationBase {
   }
   public resetLocales(): void {
     var locales = [""];
-    this.root.fillLocales(locales);
+    if (this.isPageScopeForced) {
+      this.fillSurveyLocales(locales);
+    } else {
+      this.root.fillLocales(locales);
+    }
     this.getVisibleLocales().forEach(loc => {
       if (locales.indexOf(loc) < 0) locales.push(loc);
     });
@@ -435,7 +439,7 @@ export class Translation extends TranslationBase {
     if (!this.hasLocale(this.defaultLocale)) return;
     // The reaction on the own writes is suppressed - the grid is rebuilt by the reset below.
     this.runWithoutSurveyReaction(() => {
-      this.root.mergeLocaleWithDefault(this.defaultLocale);
+      this.getBulkOperationsRoot().mergeLocaleWithDefault(this.defaultLocale);
     });
     this.setVisibleLocales([]);
     this.setSelectedLocales([]);

@@ -562,6 +562,73 @@ export let svStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Beskrivning"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Expressionsassistent",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Skriv med AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Beskriv vad uttrycket ska göra",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Till exempel: visa denna fråga när respondenten är 18 år eller äldre",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Beskriv tillståndet med ord",
+    // [Auto-translated] "Generate"
+    generate: "Generera",
+    // [Auto-translated] "Refine"
+    refine: "Förfina",
+    // [Auto-translated] "Explain"
+    explain: "Förklara",
+    // [Auto-translated] "Stop"
+    stop: "Stopp",
+    // [Auto-translated] "Accept"
+    accept: "Acceptera",
+    // [Auto-translated] "Reject"
+    reject: "Avvisa",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Applicera fix: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Aktuell uttryck",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Föreslagen uttrycksform",
+    // [Auto-translated] "Reads as"
+    readsAs: "Lyder som",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Assistentens förklaring",
+    // [Auto-translated] "Check results"
+    findings: "Kontrollera resultat",
+    // [Auto-translated] "Error"
+    severityError: "Fel",
+    // [Auto-translated] "Warning"
+    severityWarning: "Varning",
+    // [Auto-translated] "Info"
+    severityInfo: "Info",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "I \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Beskriv uttrycket och välj Generera.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Väntar på assistenten...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Begäran avbröts.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Assistenten rapporterade: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Assistenten visade ingen min.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Gå igenom det föreslagna uttrycket.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Assistenten förklarade det nuvarande uttrycket.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Det föreslagna uttrycket har fel och kan inte accepteras.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Det föreslagna uttrycket kunde inte kontrolleras för varje plats det är skrivet till, så det kan inte accepteras.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Lägg till en åtgärd i regeln innan du frågar assistenten.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Det första förslaget hade fel och rättades automatiskt."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -651,8 +718,10 @@ export let svStrings = {
       templateErrorLocation: "Justering av felmeddelande",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ny plats för inresa",
-      // [Auto-translated] "Panels per data page"
-      pageSize: "Paneler per datasida",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Poster per sida",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Låt användare sortera paneler",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Förhindra dubbla svar i följande fråga"
     },
@@ -741,6 +810,12 @@ export let svStrings = {
       // [Auto-translated] "Expression"
       expression: "Uttryck"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sortera efter",
+      // [Auto-translated] "Order"
+      direction: "Ordning"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Uttryck"
@@ -794,7 +869,9 @@ export let svStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Gör kolumnen obligatorisk om",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Varje alternativ i en separat kolumn"
+      showInMultipleColumns: "Varje alternativ i en separat kolumn",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Tillåt sortering efter denna kolumn"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -964,6 +1041,8 @@ export let svStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Du har inga länkar ännu",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Du har inga sidor ännu",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Du har inga sortnivåer än",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Lägg till nytt val",
     // [Auto-translated] "Add new column"
@@ -980,6 +1059,8 @@ export let svStrings = {
     "addNew@navigateToUrlOnCondition": "Lägg till ny URL",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Lägg till ny sida",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Lägg till ny sorteringsnivå",
     // "Value"
     value: "Värde",
     // [Auto-translated] "Text"
@@ -1086,8 +1167,16 @@ export let svStrings = {
     maxFiles: "Maximalt antal filer",
     // "Row count"
     rowCount: "Antal rader",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "Rader per datasida",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Rader per sida",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Tillåt användare att sortera rader",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maximala sorteringsnivåer",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Standardsorteringsordning",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Showsorteringsbar",
     // "Columns layout"
     columnLayout: "Stil på kolumn",
     // "\"Add Row\" button alignment"
@@ -1360,9 +1449,9 @@ export let svStrings = {
     waitForUpload: "Vänta tills uppladdningen är klar",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Justering av raddetaljer",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "Minsta antal rader",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Maximalt antal rader",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Radräkningsuttryck",
@@ -1618,6 +1707,8 @@ export let svStrings = {
       columns: "Kolumner",
       // "Rows"
       rows: "Rader",
+      // [Auto-translated] "Entries"
+      entries: "Bidrag",
       // "Choice Options"
       choices: "Välj",
       // "Items"
@@ -2212,6 +2303,8 @@ export let svStrings = {
     underRowSingle: "Under raden visas endast ett avsnitt",
     // "Auto"
     auto: "Automatisk",
+    // [Auto-translated] "Always"
+    always: "Alltid",
     timerInfoMode: {
       // "Both"
       combined: "Båda"
@@ -2750,21 +2843,33 @@ export let svStrings = {
       confirmDelete: "Utlöser en bekräftelseprompt innan en post tas bort.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Ange ett uttryck som beräknar antalet poster. Detta uttryck åsidosätter inställningen \"Initialt antal poster\" och omvärderas varje gång värdena det refererar till ändras. Resultatet begränsas av inställningarna \"Minsta antal poster\" och \"Maximalt antal poster\". Medan detta uttryck är inställt kan respondenter inte lägga till eller ta bort poster manuellt.",
-      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
-      pageSize: "Specificerar antalet paneler som visas på varje datasida. 0 inaktiverar paginering och visar alla paneler.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Specificerar antalet poster som visas på varje sida i panelen. '0' inaktiverar paginering och visar alla poster.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Tillåter respondenter att sortera poster från sorteringsfältet.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Definierar ordningen i vilken poster visas när undersökningen startar. Respondenter kan ändra den om sortering är tillåten. Varje sorteringsnivå sorterar efter en fråga; den högsta nivån gäller först. Drag-nivåer för att ändra deras prioritet.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Tilldelar nummer till frågor som är kapslade i den dynamiska panelen."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Specificera ett uttryck som beräknar antalet rader. Detta uttryck åsidosätter inställningen \"Radräkning\" och utvärderas om varje gång värdena det refererar till ändras. Resultatet begränsas av inställningarna \"Minsta radantal\" och \"Maximalt radantal\". Medan detta uttryck är inställt kan respondenter inte lägga till eller ta bort rader manuellt.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Tillåter respondenter att sortera rader genom att klicka på kolumnrubriker eller från sorteringsfältet.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Definierar ordningen i vilken rader visas när undersökningen startar. Respondenter kan ändra den om sortering är tillåten. Varje sorteringsnivå sorterar med en kolumn; den översta nivån gäller först. Dra nivåer för att ändra deras prioritet.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" visar sorteringsfältet endast när matrisen inte har några sorterbara kolumnhuvuden: rubrikerna är dolda, matrisen använder mobillayouten eller rader transponeras till kolumner. \"Alltid\" visar sorteringsfältet bredvid kolumnhuvudena också.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Specificera ett uttryck som beräknar antalet rader. Detta uttryck åsidosätter inställningen \"Initialt antal rader\" och omvärderas när de värden det refererar till ändras. Resultatet begränsas av inställningarna \"Minsta antal rader\" och \"Maximalt antal rader\". Medan detta uttryck är satt kan respondenter inte lägga till eller ta bort rader manuellt.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Utlöser en bekräftelseprompt innan en rad tas bort.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Expanderar automatiskt detaljavsnittet när en ny rad läggs till i matrisen."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "Specificerar antalet matrisrader som visas på varje datasida. 0 inaktiverar paginering och visar alla rader.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Specificerar antalet rader som visas på varje sida i matrisen. '0' inaktiverar paginering och visar alla rader.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Specificerar hur många fält en respondent kan sortera efter samtidigt.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplicerar svar från den sista raden och tilldelar dem till nästa tillagda dynamiska rad.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3838,6 +3943,10 @@ export let svStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{uttryck}\" gäller alltid, eftersom {fakta} – den avgör ingenting."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" läser ingen fråga eller variabel."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Standardvärdet för \"{name}\" är {valuesText}, vilket den aldrig kan hålla. Tillåtet: {availableText}.",
@@ -4035,6 +4144,8 @@ export let svStrings = {
       itemScope: "\"{0}\" finns endast i val-, rad- och kolumnförhållanden.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" referenser finns endast i en sammansatt fråga.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" finns inte tillgängligt i ett inArray-filter, som körs mot objektet och sedan undersökningen.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" är en kolumn i denna matris – referera till den med radprefixet.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

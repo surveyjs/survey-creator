@@ -45,6 +45,16 @@ export interface QuestionBannerParams {
   onClick: () => void;
 }
 
+interface IConvertToSelection {
+  item?: QuestionToolboxItem;
+  // The item whose subitems make the input type list; subitemsWithDefault: the list starts with its default subitem.
+  subitemsOwner?: QuestionToolboxItem;
+  subitemsWithDefault?: boolean;
+  // The selected subitem; the item itself when isDefaultSubitem is true.
+  subitem?: QuestionToolboxItem;
+  isDefaultSubitem?: boolean;
+}
+
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   @property({ defaultValue: "" }) _currentAddQuestionType: string;
   get currentAddQuestionType(): string {
@@ -598,86 +608,124 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       element.closest(".sd-element__header") && !element.closest(".svc-string-editor");
   }
 
+  // Finds the toolbox item, subitem list and subitem that match the element, without creating actions.
+  // The order rules are those the lists have always used: the first item of the element type matches
+  // by type, later ones by json too; a later match keeps the earlier subitem and subitem list unless it
+  // has its own; with subitems shown, the last matching subitem wins and an item that needs a default
+  // subitem selects it (the item itself) when none of its subitems matches.
+  private findConvertToSelection(availableItems: Array<QuestionToolboxItem>): IConvertToSelection {
+    QuestionAdornerViewModel.checkForNeedDefaultSubitems(availableItems);
+    const showSubitems = this.creator.toolbox.showSubitems;
+    const res: IConvertToSelection = {};
+    availableItems.forEach((item: QuestionToolboxItem) => {
+      if (this.toolboxItemIsCorresponded(item, !!res.item)) {
+        res.item = item;
+        if (item.items) {
+          res.subitemsOwner = item;
+          res.subitemsWithDefault = false;
+        }
+      }
+      if (item.items?.length > 0 && showSubitems) {
+        let subitem: QuestionToolboxItem = undefined;
+        item.items.forEach(sub => {
+          if (this.toolboxItemIsCorresponded(sub, !!res.item)) subitem = sub;
+        });
+        const isDefaultSubitem = !subitem && !!item.needDefaultSubitem && res.item === item;
+        if (isDefaultSubitem) subitem = item;
+        if (subitem) {
+          res.item = item;
+          res.subitem = subitem;
+          res.isDefaultSubitem = isDefaultSubitem;
+          res.subitemsOwner = item;
+          res.subitemsWithDefault = !!item.needDefaultSubitem;
+        }
+      }
+    });
+    return res;
+  }
+  private getConvertInputTypeTitle(selection: IConvertToSelection, propName: string, propValue: any): string {
+    return selection.subitem?.title || editorLocalization.getPropertyValueInEditor(propName, propValue) || "SUBTYPE";
+  }
+
   protected updateQuestionTypeOrSubtypeListModel(listModel: ListModel, subtypeOnly: boolean) {
     const availableItems = this.getConvertToTypes();
-    QuestionAdornerViewModel.checkForNeedDefaultSubitems(availableItems);
+    const selection = this.findConvertToSelection(availableItems);
     const defaultJsons = this.buildDefaultJsonMap(availableItems);
-    const newItems: Array<IAction> = [];
-    let lastItem: QuestionToolboxItem;
-    let selectedAction: IAction;
-    let selectedSubaction: IAction = undefined;
-    let selectedSubactions = undefined;
 
     const toolboxItemToAction = (item, needSeparator = false) => {
       return this.creator.createIActionBarItemByClass(item, needSeparator, (questionType, json) => { this.convertQuestion(questionType, json, defaultJsons); });
     };
+    const createDefaultSubaction = (item: QuestionToolboxItem) => {
+      const defaultSubaction = toolboxItemToAction(item);
+      defaultSubaction.id = item.name + "-default";
+      defaultSubaction.iconName = undefined;
+      defaultSubaction.markerIconName = undefined;
+      defaultSubaction.items = [];
+      defaultSubaction.component = undefined;
+      return defaultSubaction;
+    };
+    // A matched subitem is selected as the toolbox item itself, the default one as its action.
+    const getSelectedSubaction = (defaultSubaction?: IAction): IAction => {
+      if (!selection.isDefaultSubitem) return selection.subitem;
+      return defaultSubaction || createDefaultSubaction(selection.subitem);
+    };
 
+    if (subtypeOnly) {
+      const owner = selection.subitemsOwner;
+      if (!owner) return;
+      const subactions: Array<IAction> = owner.items.map(subitem => toolboxItemToAction(subitem));
+      let defaultSubaction: IAction = undefined;
+      if (selection.subitemsWithDefault) {
+        defaultSubaction = createDefaultSubaction(owner);
+        subactions.unshift(defaultSubaction);
+      }
+      listModel.setItems(subactions);
+      listModel.selectedItem = getSelectedSubaction(selection.subitem === owner ? defaultSubaction : undefined);
+      return true;
+    }
+
+    const newItems: Array<IAction> = [];
+    let lastItem: QuestionToolboxItem;
+    let selectedAction: IAction;
+    let selectedSubaction: IAction;
     availableItems.forEach((item: QuestionToolboxItem) => {
       const needSeparator = lastItem && item.category != lastItem.category;
       const action = toolboxItemToAction(item, needSeparator);
-      if (this.toolboxItemIsCorresponded(item, !!selectedAction)) {
-        selectedAction = action;
-        if (item.items) {
-          selectedSubactions = item.items.map(subitem => toolboxItemToAction(subitem));
-        }
-      }
+      if (item === selection.item) selectedAction = action;
       if (item.items?.length > 0 && this.creator.toolbox.showSubitems) {
-        const subactions = [];
-        let selectedSubactionLocal: IAction = undefined;
-        item.items.forEach(subitem => {
-          const subaction = toolboxItemToAction(subitem,);
-          if (this.toolboxItemIsCorresponded(subitem, !!selectedAction)) selectedSubactionLocal = subitem;
-          subactions.push(subaction);
-        });
-        if (item.needDefaultSubitem && subactions.length > 0) {
-          const defaultSubaction = toolboxItemToAction(item);
-          defaultSubaction.id = action.id + "-default";
-          defaultSubaction.iconName = undefined;
-          defaultSubaction.markerIconName = undefined;
-          defaultSubaction.items = [];
-          defaultSubaction.component = undefined;
+        const subactions = item.items.map(subitem => toolboxItemToAction(subitem));
+        let defaultSubaction: IAction = undefined;
+        if (item.needDefaultSubitem) {
+          defaultSubaction = createDefaultSubaction(item);
           subactions.unshift(defaultSubaction);
-          if (selectedAction == action && !selectedSubactionLocal) selectedSubactionLocal = defaultSubaction;
         }
         action.setSubItems({ items: subactions });
-        if (selectedSubactionLocal) {
-          selectedAction = action;
-          selectedSubaction = selectedSubactionLocal;
-          selectedSubactions = subactions;
-        }
+        if (item === selection.subitem && selection.isDefaultSubitem) selectedSubaction = defaultSubaction;
       }
       lastItem = item;
       newItems.push(action);
     });
-
-    if (subtypeOnly) {
-      if (selectedSubactions) {
-        listModel.setItems(selectedSubactions);
-        listModel.selectedItem = selectedSubaction;
-        return !!selectedSubactions;
-      }
-    } else {
-      const _listModel = selectedAction?.popupModel?.contentComponentData.model;
-      if (_listModel) _listModel.selectedItem = selectedSubaction;
-      listModel.setItems(newItems);
-      listModel.selectedItem = selectedAction;
-    }
+    if (selection.subitem && !selection.isDefaultSubitem) selectedSubaction = getSelectedSubaction();
+    const _listModel = selectedAction?.popupModel?.contentComponentData.model;
+    if (_listModel) _listModel.selectedItem = selectedSubaction;
+    listModel.setItems(newItems);
+    listModel.selectedItem = selectedAction;
   }
 
   private createConvertInputType() {
     if (!this.surveyElement || this.surveyElement.isPanel) {
       return null;
     }
-    const listModel = new ListModel({
-      items: [],
-    });
-    this.updateQuestionTypeOrSubtypeListModel(listModel, true);
+    // The list is built when the popup opens; here only whether the action exists and its title.
+    const selection = this.findConvertToSelection(this.getConvertToTypes());
+    const owner = selection.subitemsOwner;
+    const subitemsCount = !owner ? 0 : owner.items.length + (selection.subitemsWithDefault ? 1 : 0);
     const propName = QuestionToolbox.getSubTypePropertyName(this.surveyElement.getType());
-    if (listModel.actions.length === 0 || (!listModel.selectedItem && !propName)) return null;
+    if (subitemsCount === 0 || (!selection.subitem && !propName)) return null;
     const actionData: IAction = {
       id: "convertInputType",
       visibleIndex: 1,
-      title: listModel.selectedItem?.title || editorLocalization.getPropertyValueInEditor(propName, this.surveyElement.getPropertyValue(propName)) || "SUBTYPE",
+      title: this.getConvertInputTypeTitle(selection, propName, this.surveyElement.getPropertyValue(propName)),
       disableShrink: true,
       iconName: "icon-chevron_16x16"
     };
@@ -692,9 +740,14 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       [propName],
       (newValue) => {
         const popup = newAction.popupModel;
-        const list = popup.contentComponentData.model;
-        this.updateQuestionTypeOrSubtypeListModel(list, true);
-        newAction.title = list.selectedItem?.title || editorLocalization.getPropertyValueInEditor(propName, newValue) || "SUBTYPE";
+        if (popup.isVisible) {
+          const list = popup.contentComponentData.model;
+          this.updateQuestionTypeOrSubtypeListModel(list, true);
+          newAction.title = list.selectedItem?.title || editorLocalization.getPropertyValueInEditor(propName, newValue) || "SUBTYPE";
+        } else {
+          // A closed popup rebuilds its list when it opens.
+          newAction.title = this.getConvertInputTypeTitle(this.findConvertToSelection(this.getConvertToTypes()), propName, newValue);
+        }
       },
       "inputTypeAdorner"
     );

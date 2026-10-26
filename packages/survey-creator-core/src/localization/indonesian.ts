@@ -562,6 +562,73 @@ export var indonesianStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Deskripsi"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Asisten Ekspresi",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Menulis dengan AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Jelaskan apa yang harus dilakukan ekspresi tersebut",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Misalnya: tampilkan pertanyaan ini saat responden berusia 18 tahun atau lebih",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Jelaskan kondisi dengan kata-kata",
+    // [Auto-translated] "Generate"
+    generate: "Menghasilkan",
+    // [Auto-translated] "Refine"
+    refine: "menyempurnakan",
+    // [Auto-translated] "Explain"
+    explain: "Jelaskan",
+    // [Auto-translated] "Stop"
+    stop: "Berhenti",
+    // [Auto-translated] "Accept"
+    accept: "Terima",
+    // [Auto-translated] "Reject"
+    reject: "Tolak",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Terapkan perbaikan: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Ekspresi saat ini",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Ekspresi yang disarankan",
+    // [Auto-translated] "Reads as"
+    readsAs: "Dibaca sebagai",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Penjelasan dari asisten",
+    // [Auto-translated] "Check results"
+    findings: "Periksa hasil",
+    // [Auto-translated] "Error"
+    severityError: "Kesalahan",
+    // [Auto-translated] "Warning"
+    severityWarning: "Peringatan",
+    // [Auto-translated] "Info"
+    severityInfo: "Info",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "dalam \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Jelaskan ekspresi dan pilih Generate.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Menunggu asisten...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Permintaan tersebut dibatalkan.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Asisten melaporkan: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Asisten itu tidak menyarankan ekspresi.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Tinjau ekspresi yang disarankan.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asisten menjelaskan ekspresi saat itu.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Ekspresi yang disarankan memiliki kesalahan dan tidak dapat diterima.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Ekspresi yang disarankan tidak dapat diperiksa untuk setiap tempat penulisannya, sehingga tidak dapat diterima.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Tambahkan tindakan ke aturan sebelum meminta bantuan asisten.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Saran pertama memiliki kesalahan dan otomatis diperbaiki."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -651,8 +718,10 @@ export var indonesianStrings = {
       templateErrorLocation: "Perataan pesan kesalahan",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Lokasi entri baru",
-      // [Auto-translated] "Panels per data page"
-      pageSize: "Panel per halaman data",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Entri per halaman",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Izinkan pengguna mengurutkan panel",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Cegah respons duplikat dalam pertanyaan berikut"
     },
@@ -740,6 +809,12 @@ export var indonesianStrings = {
       // [Auto-translated] "Expression"
       expression: "Ekspresi"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Urutkan berdasarkan",
+      // [Auto-translated] "Order"
+      direction: "Pesanan"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Ekspresi"
@@ -793,7 +868,9 @@ export var indonesianStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Buat kolom diperlukan jika",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Setiap opsi dalam kolom terpisah"
+      showInMultipleColumns: "Setiap opsi dalam kolom terpisah",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Izinkan pengurutan berdasarkan kolom ini"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -963,6 +1040,8 @@ export var indonesianStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Anda belum memiliki tautan apa pun",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Anda belum memiliki halaman apa pun",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Kamu belum punya tingkat sorting",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Tambahkan pilihan baru",
     // [Auto-translated] "Add new column"
@@ -979,6 +1058,8 @@ export var indonesianStrings = {
     "addNew@navigateToUrlOnCondition": "Tambahkan URL baru",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Tambahkan halaman baru",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Tambahkan tingkat pengurutan baru",
     // "Value"
     value: "Nilai",
     // "Text"
@@ -1085,8 +1166,16 @@ export var indonesianStrings = {
     maxFiles: "Jumlah file maksimum",
     // "Row count"
     rowCount: "Jumlah baris",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "Baris per halaman data",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Baris per halaman",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Izinkan pengguna mengurutkan baris",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Tingkat pengurutan maksimum",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Urutan pengurutan default",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Tampilkan bilah pengurutan",
     // "Columns layout"
     columnLayout: "Tata letak kolom",
     // "\"Add Row\" button alignment"
@@ -1359,9 +1448,9 @@ export var indonesianStrings = {
     waitForUpload: "Tunggu hingga upload selesai",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Perataan detail baris",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "Jumlah baris minimum",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Jumlah baris maksimum",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Ekspresi hitungan baris",
@@ -1617,6 +1706,8 @@ export var indonesianStrings = {
       columns: "Kolom",
       // "Rows"
       rows: "Baris",
+      // [Auto-translated] "Entries"
+      entries: "Entri",
       // "Choice Options"
       choices: "Pilihan",
       // "Items"
@@ -2211,6 +2302,8 @@ export var indonesianStrings = {
     underRowSingle: "Di bawah baris, tampilkan satu bagian saja",
     // [Auto-translated] "Auto"
     auto: "Otomatis",
+    // [Auto-translated] "Always"
+    always: "Selalu",
     timerInfoMode: {
       // "Both"
       combined: "Keduanya"
@@ -2749,21 +2842,33 @@ export var indonesianStrings = {
       confirmDelete: "Memicu prompt konfirmasi sebelum menghapus entri.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Tentukan ekspresi yang menghitung jumlah entri. Ekspresi ini menimpa pengaturan \"Jumlah awal entri\" dan dievaluasi ulang setiap kali nilai yang dirujuk berubah. Hasilnya dibatasi oleh pengaturan \"Jumlah minimum entri\" dan \"Jumlah maksimum entri\". Selama ekspresi ini diatur, responden tidak dapat menambahkan atau menghapus entri secara manual.",
-      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
-      pageSize: "Menentukan jumlah panel yang ditampilkan di setiap halaman data. 0 menonaktifkan paginasi dan menampilkan semua panel.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Menentukan jumlah entri yang ditampilkan di setiap halaman panel. '0' menonaktifkan paginasi dan menampilkan semua entri.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Memungkinkan responden mengurutkan entri dari bilah pengurutan.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Mendefinisikan urutan entri ditampilkan saat survei dimulai. Responden dapat mengubahnya jika pengurutan diizinkan. Setiap tingkat pengurutan mengurutkan berdasarkan satu pertanyaan; tingkat atas berlaku terlebih dahulu. Seret tingkat untuk mengubah prioritasnya.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Menetapkan nomor ke pertanyaan yang bersarang dalam panel dinamis."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Tentukan ekspresi yang menghitung jumlah baris. Ekspresi ini menimpa pengaturan \"Jumlah baris\" dan dievaluasi ulang setiap kali nilai yang direferensikan berubah. Hasilnya dibatasi oleh pengaturan \"Jumlah baris minimum\" dan \"Jumlah baris maksimum\". Selama ekspresi ini diatur, responden tidak dapat menambahkan atau menghapus baris secara manual.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Memungkinkan responden mengurutkan baris dengan mengklik header kolom atau dari bilah pengurutan.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Mendefinisikan urutan baris ditampilkan saat survei dimulai. Responden dapat mengubahnya jika pengurutan diizinkan. Setiap tingkat pengurutan mengurutkan berdasarkan satu kolom; tingkat atas berlaku terlebih dahulu. Seret tingkat untuk mengubah prioritasnya.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" hanya menampilkan bar pengurutan ketika matriks tidak memiliki header kolom yang dapat diurutkan: header disembunyikan, matriks menggunakan tata letak mobile, atau baris ditransposisi ke kolom. \"Selalu\" juga menampilkan bar pengurutan di samping header kolom.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Tentukan ekspresi yang menghitung jumlah baris. Ekspresi ini menggantikan pengaturan \"Jumlah baris awal\" dan dievaluasi ulang setiap kali nilai yang dirujuk berubah. Hasilnya dibatasi oleh pengaturan \"Jumlah minimum baris\" dan \"Jumlah maksimum baris\". Selama ekspresi ini diatur, responden tidak dapat menambahkan atau menghapus baris secara manual.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Memicu perintah konfirmasi sebelum menghapus baris.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Secara otomatis memperluas bagian detail saat baris baru ditambahkan ke matriks."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "Menentukan jumlah baris matriks yang ditampilkan di setiap halaman data. 0 menonaktifkan paginasi dan menampilkan semua baris.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Menentukan jumlah baris yang ditampilkan di setiap halaman matriks. '0' menonaktifkan paginasi dan menampilkan semua baris.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Menentukan berapa banyak bidang yang dapat diurutkan oleh responden sekaligus.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Menduplikasi jawaban dari baris terakhir dan menetapkannya ke baris dinamis berikutnya yang ditambahkan.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3837,6 +3942,10 @@ export var indonesianStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{ekspresi}\" selalu berlaku, karena {facts} - tidak menentukan apa pun."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" tidak membaca pertanyaan atau variabel apa pun."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Nilai default \"{name}\" adalah {valuesText}, yang tidak pernah bisa ditahan. Diizinkan: {availableText}.",
@@ -4034,6 +4143,8 @@ export var indonesianStrings = {
       itemScope: "\"{0}\" hanya tersedia dalam kondisi pilihan, baris, dan kolom.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "Referensi \"{0}.\" hanya tersedia dalam pertanyaan komposit.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" tidak tersedia di dalam filter inArray, yang berjalan terhadap item dan kemudian survei.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" adalah kolom dari matriks ini - referensikan dengan awalan baris.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

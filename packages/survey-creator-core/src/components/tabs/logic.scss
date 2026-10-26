@@ -299,6 +299,16 @@
 .svc-logic-question-text-editor {
   margin-top: var(--sjs2-spacing-x200);
 }
+// The AI line has a title and its action only: without an input to size it, the question
+// would shrink to its title, so it takes the whole row and its empty content is hidden
+.svc-logic-question-ai-prompt {
+  & > * {
+    flex-grow: 1;
+  }
+}
+.svc-logic-question-ai-prompt__content {
+  display: none;
+}
 .svc-logic-question-value {
   --sd-base-padding: var(--sjs2-spacing-x500);
   --sd-base-vertical-padding: var(--sjs2-spacing-x400);

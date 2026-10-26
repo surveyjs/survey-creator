@@ -24,7 +24,11 @@ export class PreviewViewModel extends Base {
   @property({
     defaultValue: false,
     onSet: (val: boolean, target: PreviewViewModel) => {
-      target.simulator.survey.showInvisibleElements = val;
+      // survey-core runs every condition again on each assignment, even of the same value, and show()
+      // assigns false to every new survey, which has it already
+      if (target.simulator.survey.showInvisibleElements !== val) {
+        target.simulator.survey.showInvisibleElements = val;
+      }
     }
   })
     showInvisibleElements;
@@ -183,8 +187,13 @@ export class PreviewViewModel extends Base {
         survey.setVariables({ ...this.activeVariables }, true);
       }
     });
-    const hasSurveyBefore = !!this.simulator.survey;
+    const oldSurvey = this.simulator.survey;
+    const hasSurveyBefore = !!oldSurvey;
     this.simulator.survey = newSurvey;
+    // the survey of the previous run (Test Again, a theme, an update) is not shown anywhere any more
+    if (hasSurveyBefore) {
+      this.disposeSurvey(oldSurvey);
+    }
     if (this.onSurveyCreatedCallback)this.onSurveyCreatedCallback(this.survey);
     this.survey.onComplete.add((sender: SurveyModel) => {
       this.isRunning = false;
@@ -221,6 +230,13 @@ export class PreviewViewModel extends Base {
     }
   }
 
+  private disposeSurvey(survey: SurveyModel): void {
+    if (!survey || survey.isDisposed) return;
+    // SurveyModel.dispose disposes its layout elements' data, and this one's container outlives the
+    // survey: every new survey gets it, with the plugin's Test Again action in it
+    survey.removeLayoutElement("complete-customization");
+    survey.dispose();
+  }
   public setJSON(json: any, currTheme: any) {
     this.json = json;
     if (json != null) {
@@ -569,7 +585,9 @@ export class PreviewViewModel extends Base {
     }
     this.surveyProvider.onVariablePresetsChanged.remove(this.variablePresetsChangedCallback);
     this.surveyProvider.onPropertyChanged.remove(this.creatorPropertyChangedCallback);
+    const survey = this.simulator.survey;
     this.simulator.dispose();
+    this.disposeSurvey(survey);
     super.dispose();
   }
 }

@@ -562,6 +562,73 @@ export var jaStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "概要"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "表現アシスタント",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "AIで書く",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "表現が何をすべきか説明してください",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "例えば:回答者が18歳以上の場合にこの質問を提示してください",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "その状態を言葉で説明してください",
+    // [Auto-translated] "Generate"
+    generate: "生成",
+    // [Auto-translated] "Refine"
+    refine: "リファイン",
+    // [Auto-translated] "Explain"
+    explain: "説明してください",
+    // [Auto-translated] "Stop"
+    stop: "やめて",
+    // [Auto-translated] "Accept"
+    accept: "受け入れろ",
+    // [Auto-translated] "Reject"
+    reject: "拒否",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "修正を適用:{0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "現在の表現",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "提案表現",
+    // [Auto-translated] "Reads as"
+    readsAs: "読み上げは",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "助手の説明",
+    // [Auto-translated] "Check results"
+    findings: "結果を確認してください",
+    // [Auto-translated] "Error"
+    severityError: "エラー",
+    // [Auto-translated] "Warning"
+    severityWarning: "警告",
+    // [Auto-translated] "Info"
+    severityInfo: "情報",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "「{0}」にて",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "式を説明し、「生成」を選択します。",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "助手を待ってる...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "その要請は取り消されました。",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "助手はこう報告しました。{0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "助手は表情を示さなかった。",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "提案された表現を見直してください。",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "助手はその表情について説明した。",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "提案された表現には誤りがあり、受け入れられません。",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "提案された式は、書き込まれたすべての場所で検証できないため、受け入れられません。",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "アシスタントに聞く前にルールにアクションを追加してください。",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "最初の提案には誤りがあり、自動的に修正されました。"
+  },
   // Property Editors
   pe: {
     panel: {
@@ -651,8 +718,10 @@ export var jaStrings = {
       templateErrorLocation: "エラー・メッセージのアライメント",
       // [Auto-translated] "New entry location"
       newPanelPosition: "新しいエントリー場所",
-      // [Auto-translated] "Panels per data page"
-      pageSize: "データページごとのパネル数",
+      // [Auto-translated] "Entries per page"
+      pageSize: "ページごとのエントリー数",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "ユーザーがパネルをソートできるようにする",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "次の質問の重複回答の防止"
     },
@@ -740,6 +809,12 @@ export var jaStrings = {
       // [Auto-translated] "Expression"
       expression: "表現"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "並べ替え",
+      // [Auto-translated] "Order"
+      direction: "秩序"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "表現"
@@ -793,7 +868,9 @@ export var jaStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "次の場合は、列を必須にします",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "個別の列に各オプション"
+      showInMultipleColumns: "個別の列に各オプション",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "この列によるソートを許可してください"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -963,6 +1040,8 @@ export var jaStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "リンクはまだありません",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "まだページがありません",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "まだレベルは何もありません",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "新しい選択肢を追加する",
     // [Auto-translated] "Add new column"
@@ -979,6 +1058,8 @@ export var jaStrings = {
     "addNew@navigateToUrlOnCondition": "新しい URL を追加",
     // [Auto-translated] "Add new page"
     "addNew@pages": "新しいページを追加",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "新しいソートレベルを追加する",
     // "Value"
     value: "値",
     // "Text"
@@ -1085,8 +1166,16 @@ export var jaStrings = {
     maxFiles: "最大ファイル数",
     // "Row count"
     rowCount: "列数",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "データページごとの行数",
+    // [Auto-translated] "Rows per page"
+    pageSize: "ページあたりの行数",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "ユーザーが行を並べ替えることを許可します",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "最大ソートレベル",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "デフォルトのソート順序",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "ソートバー表示",
     // "Columns layout"
     columnLayout: "行のレイアウト",
     // "\"Add Row\" button alignment"
@@ -1359,9 +1448,9 @@ export var jaStrings = {
     waitForUpload: "アップロードが完了するまで待ちます",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "行の詳細の配置",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "最小行数",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "最大行数",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "行数の表現",
@@ -1617,6 +1706,8 @@ export var jaStrings = {
       columns: "列",
       // "Rows"
       rows: "行",
+      // [Auto-translated] "Entries"
+      entries: "エントリー",
       // "Choice Options"
       choices: "選択",
       // "Items"
@@ -2211,6 +2302,8 @@ export var jaStrings = {
     underRowSingle: "行の下には、1 つのセクションのみを表示します",
     // "Auto"
     auto: "自動",
+    // [Auto-translated] "Always"
+    always: "いつも",
     timerInfoMode: {
       // "Both"
       combined: "両方とも"
@@ -2749,21 +2842,33 @@ export var jaStrings = {
       confirmDelete: "エントリを削除する前に確認プロンプトをトリガーします。",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "エントリ数を計算する式を指定します。この式は「初期エントリ数」設定を上書きし、参照する値が変わるたびに再評価されます。結果は「最小エントリ数」と「最大エントリ数」設定によって制限されます。この式が設定されている間、回答者は手動でエントリを追加または削除することはできません。",
-      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
-      pageSize: "各データページに表示されるパネル数を指定します。0はページ分けを無効にし、すべてのパネルを表示します。",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "パネルの各ページに表示されるエントリ数を指定します。「0」はページ分けを無効にし、すべてのエントリーを表示します。",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "回答者がソートバーからエントリーをソートできます。",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "アンケート開始時にエントリーが表示される順序を定義します。ソートが許可されている場合、回答者は変更可能です。各ソートレベルは1つの質問でソートされます。最上位レベルが最初に適用されます。優先順位を変更するにはレベルをドラッグします。",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "動的パネル内にネストされた質問に番号を割り当てます。"
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "行数を計算する式を指定します。この式は「行数」設定を上書きし、参照する値が変わるたびに再評価されます。結果は「最小行数」と「最大行数」設定によって制限されます。この式が設定されている間は、回答者が手動で行を追加または削除することはできません。",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "回答者が列ヘッダーやソートバーから行を並べ替えることができます。",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "調査開始時に行が表示される順序を定義します。ソートが許可されている場合、回答者は変更可能です。各ソートレベルは1つの列でソートされます。最上層が最初に適用されます。優先度を変更するにはレベルをドラッグしてください。",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "「Auto」は、マトリックスにソート可能な列ヘッダーがない場合にのみソートバーを表示します。つまり、ヘッダーが非表示の場合、マトリックスがモバイルレイアウトを使用している場合、または行がカラムに置き換えられている場合です。「Always」は列ヘッダーの隣にソートバーを表示します。",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "行数を計算する式を指定します。この式は「初期行数」設定を上書きし、参照する値が変わるたびに再評価されます。結果は「最小行数」と「最大行数」設定によって制限されます。この式が設定されている間、回答者は手動で行を追加または削除することはできません。",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "行を削除する前に確認プロンプトをトリガーします。",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "新しい行がマトリックスに追加されると、詳細セクションが自動的に展開されます。"
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "各データページに表示される行数を指定します。0はページ分けを無効にし、すべての行を表示します。",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "行列の各ページに表示される行数を指定します。「0」はページングを無効にし、すべての行を表示します。",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "回答者が一度に何つのフィールドでソートできるかを指定します。",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "最後の行から回答を複製し、次に追加された動的行に割り当てます。",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3837,6 +3942,10 @@ export var jaStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} 「{expression}」は常に成り立つ。なぜなら{facts}は何も決定しないからだ。"
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} 「{expression}」は質問や変数を読み取っていません。"
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "「{name}」のデフォルト値は{valuesText}であり、保持することはできません。許可:{availableText}。",
@@ -4034,6 +4143,8 @@ export var jaStrings = {
       itemScope: "「{0}」は選択肢、行、列の条件の内側のみ利用可能です。",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "「{0}.」の参照は、複合質問の中でのみ利用可能です。",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "「{0}」はinArrayフィルター内では利用できず、アイテムとアンケートの両方で処理されます。",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "「{0}」はこの行列の一列であり、行プレフィックスで参照してください。",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

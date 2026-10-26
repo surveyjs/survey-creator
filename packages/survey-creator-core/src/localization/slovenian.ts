@@ -562,6 +562,73 @@ export var slStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Opis"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Pomočnik za izraze",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Pišite z umetno inteligenco",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Opišite, kaj naj izraz počne",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Na primer: pokažite to vprašanje, ko je anketiranec star 18 let ali več",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Opišite stanje z besedami",
+    // [Auto-translated] "Generate"
+    generate: "Generiraj",
+    // [Auto-translated] "Refine"
+    refine: "Rafinirajte",
+    // [Auto-translated] "Explain"
+    explain: "Pojasnite",
+    // [Auto-translated] "Stop"
+    stop: "Ustavi se",
+    // [Auto-translated] "Accept"
+    accept: "Sprejmi",
+    // [Auto-translated] "Reject"
+    reject: "Zavrni",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Uporabi popravek: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Trenutni izraz",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Predlagani izraz",
+    // [Auto-translated] "Reads as"
+    readsAs: "Bere se kot",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Pojasnilo pomočnika",
+    // [Auto-translated] "Check results"
+    findings: "Preverite rezultate",
+    // [Auto-translated] "Error"
+    severityError: "Napaka",
+    // [Auto-translated] "Warning"
+    severityWarning: "Opozorilo",
+    // [Auto-translated] "Info"
+    severityInfo: "Informacije",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "v \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Opišite izraz in izberite Generiraj.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Čakam na pomočnika...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Prošnja je bila preklicana.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Pomočnik je poročal: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Pomočnik ni predlagal izraza.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Preberite predlagani izraz.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asistent je pojasnil trenutni izraz.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Predlagani izraz vsebuje napake in ga ni mogoče sprejeti.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Predlaganega izraza ni bilo mogoče preveriti za vsako mesto, kamor je zapisan, zato ga ni mogoče sprejeti.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Dodajte dejanje k pravilu, preden vprašate pomočnika.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Prvi predlog je imel napake in je bil samodejno popravljen."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -651,8 +718,10 @@ export var slStrings = {
       templateErrorLocation: "Poravnava sporočila o napaki",
       // "New entry location"
       newPanelPosition: "Nova lokacija plošče",
-      // [Auto-translated] "Panels per data page"
-      pageSize: "Paneli na podatkovno stran",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Vnosi na stran",
+      // [Auto-translated] "Allow users to sort panels"
+      allowSort: "Omogočiti uporabnikom razvrščanje panelov",
       // "Prevent duplicate responses in the following question"
       keyName: "Prepreči podvojene odgovore v naslednjem vprašanju"
     },
@@ -740,6 +809,12 @@ export var slStrings = {
       // "Expression"
       expression: "Izraz"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Razvrsti po",
+      // [Auto-translated] "Order"
+      direction: "Red"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Izražanje"
@@ -793,7 +868,9 @@ export var slStrings = {
       // "Make the column required if"
       requiredIf: "Naredi stolpec obvezen, če",
       // "Each option in a separate column"
-      showInMultipleColumns: "Vsaka možnost v ločenem stolpcu"
+      showInMultipleColumns: "Vsaka možnost v ločenem stolpcu",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Dovoli razvrščanje po tem stolpcu"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -963,6 +1040,8 @@ export var slStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Še nimate nobenih povezav",
     // "You don't have any pages yet"
     "listIsEmpty@pages": "Še nimate nobenih strani",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Še nimaš nobenih sort nivojev",
     // "Add new choice"
     "addNew@choices": "Dodaj novo možnost",
     // "Add new column"
@@ -979,6 +1058,8 @@ export var slStrings = {
     "addNew@navigateToUrlOnCondition": "Dodaj novo URL",
     // "Add new page"
     "addNew@pages": "Dodaj novo stran",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Dodajte novo stopnjo sortiranja",
     // "Value"
     value: "Vrednost",
     // "Text"
@@ -1085,8 +1166,16 @@ export var slStrings = {
     maxFiles: "Največje število datotek",
     // "Row count"
     rowCount: "Število vrstic",
-    // [Auto-translated] "Rows per data page"
-    pageSize: "Vrstice na podatkovno stran",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Vrstice na stran",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Uporabnikom omogočite razvrščanje vrstic",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Največje ravni sortiranja",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Privzeti vrstni red razporejanja",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Pokaži vrstico za razvrščanje",
     // "Columns layout"
     columnLayout: "Postavitev stolpcev",
     // "\"Add Row\" button alignment"
@@ -1617,6 +1706,8 @@ export var slStrings = {
       columns: "Stolpci",
       // "Rows"
       rows: "Vrstice",
+      // [Auto-translated] "Entries"
+      entries: "Prispevki",
       // "Choice Options"
       choices: "Možnosti izbire",
       // "Items"
@@ -2211,6 +2302,8 @@ export var slStrings = {
     underRowSingle: "Pod řádkem, zobrazit pouze jednu expanze řádku",
     // "Auto"
     auto: "Automaticky",
+    // [Auto-translated] "Always"
+    always: "Vedno",
     timerInfoMode: {
       // "Both"
       combined: "Obojí"
@@ -2749,21 +2842,33 @@ export var slStrings = {
       confirmDelete: "Sproži potrditveni poziv pred odstranitvijo plošče.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Določite izraz, ki izračuna število vnosov. Ta izraz preglasi nastavitev \"Začetno število vnosov\" in se ponovno oceni vsakič, ko se spremenijo vrednosti, na katere se sklicuje. Rezultat je omejen z nastavitvami \"Minimalno število vnosov\" in \"Največje število vnosov\". Medtem ko je ta izraz nastavljen, anketiranci ne morejo ročno dodajati ali odstranjevati vnosov.",
-      // [Auto-translated] "Specifies the number of panels displayed on each data page. 0 disables pagination and displays all panels."
-      pageSize: "Določa število panelov, prikazanih na vsaki podatkovni strani. 0 izklopi oštevilčenje in prikaže vse panele.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Določa število vnosov, prikazanih na vsaki strani panela. '0' onemogoči oštevilčenje in prikaže vse vnose.",
+      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
+      allowSort: "Omogoča anketirancem, da razvrstijo vnose iz vrstice za urejanje.",
+      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Določa vrstni red, v katerem so vnosi prikazani ob začetku ankete. Anketiranci ga lahko spremenijo, če je razvrščanje dovoljeno. Vsaka stopnja sortiranja razvrsti po enem vprašanju; najprej se uporabi najvišja raven. Povlecite nivoje, da spremenite njihovo prioriteto.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Dodeli številke vprašanjem, ugnezdenim v dinamični plošči."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Določite izraz, ki izračuna število vrstic. Ta izraz preglasi nastavitev \"Število vrstic\" in se ponovno oceni vsakič, ko se spremenijo vrednosti, na katere se sklicuje. Rezultat je omejen z nastavitvami \"Minimalno število vrstic\" in \"Največje število vrstic\". Medtem ko je ta izraz nastavljen, anketiranci ne morejo ročno dodajati ali odstranjevati vrstic.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
+      allowSort: "Omogoča anketirancem, da razvrstijo vrstice s klikom na glave stolpcev ali iz vrstice za urejanje.",
+      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
+      sortCriteria: "Določa vrstni red, v katerem so vrstice prikazane ob začetku ankete. Anketiranci ga lahko spremenijo, če je razvrščanje dovoljeno. Vsaka razporejena stopnja razvrsti po enem stolpcu; najprej velja najvišja raven. Povlecite nivoje, da spremenite njihovo prioriteto.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
+      showSortBar: "\"Auto\" prikazuje vrstico za urejanje le, kadar matrika nima uredljivih glav stolpcev: glave so skrite, matrika uporablja mobilno postavitev ali pa so vrstice prestavljene v stolpce. \"Vedno\" prikazuje vrstico za urejanje poleg glav stolpcev.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Določite izraz, ki izračuna število vrstic. Ta izraz preglasi nastavitev \"Začetno število vrstic\" in se ponovno oceni vsakič, ko se spremenijo vrednosti, na katere se sklicuje. Rezultat je omejen z nastavitvami \"Minimalno število vrstic\" in \"Največje število vrstic\". Medtem ko je ta izraz nastavljen, anketiranci ne morejo ročno dodajati ali odstranjevati vrstic.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Sproži potrditveni poziv pred odstranitvijo vrstice.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Samodejno razširi razdelek s podrobnostmi, ko je v matriko dodana nova vrstica."
     },
-    // [Auto-translated] "Specifies the number of matrix rows displayed on each data page. 0 disables pagination and displays all rows."
-    pageSize: "Določa število vrstic matrike, prikazanih na vsaki podatkovni strani. 0 izklopi oštevilčenje in prikaže vse vrstice.",
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Določa število vrstic, prikazanih na vsaki strani matrike. '0' onemogoči oštevilčenje in prikaže vse vrstice.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Določa, koliko polj lahko anketiranec razvrsti hkrati.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Podvoji odgovore iz zadnje vrstice in jih dodeli naslednji dinamično dodani vrstici.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3837,6 +3942,10 @@ export var slStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{expression}\" vedno velja, ker {facts} - ne odloča ničesar."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" ne bere nobenega vprašanja ali spremenljivke."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Privzeta vrednost \"{name}\" je {valuesText}, ki je nikoli ne more hraniti. Dovoljeno: {availableText}.",
@@ -4034,6 +4143,8 @@ export var slStrings = {
       itemScope: "\"{0}\" je na voljo le znotraj pogojev izbire, vrstic in stolpcev.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" so na voljo le znotraj sestavljenega vprašanja.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" ni na voljo znotraj inArray filtra, ki teče proti elementu in nato anketi.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" je stolpec te matrike – referenco uporabite s predpono vrstice.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

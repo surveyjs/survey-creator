@@ -657,6 +657,100 @@ test("Check onNewSurveyCreatedCallback", () => {
   propertyGrid.obj = question;
   expect(count).toEqual(2); //"onNewSurveyCreatedCallback is called after changing obj value"
 });
+test("Switching edited object releases the onPropertyChanged listener of the previous object", () => {
+  const survey = new SurveyModel({ elements: [
+    { type: "checkbox", name: "q1", choices: [1, 2], validators: [{ type: "answercount", minCount: 1 }] },
+    { type: "text", name: "q2", maskType: "currency" }
+  ] });
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  const item = q1.choices[0];
+  const validator = q1.validators[0];
+  const maskSettings = q2.maskSettings;
+  const handlers = [q1, item, validator, q2, maskSettings].map(obj => obj.onPropertyChanged.length);
+  const getHandlers = () => [q1, item, validator, q2, maskSettings].map(obj => obj.onPropertyChanged.length);
+  const propertyGrid = new PropertyGridModelTester(q1);
+  expect(propertyGrid.survey.editingObj).toBe(q1);
+  expect((<QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("choices")).visibleRows).toHaveLength(2);
+  expect((<QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("validators")).visibleRows).toHaveLength(1);
+  expect(q1.onPropertyChanged.length).toBeGreaterThan(handlers[0]);
+  expect(item.onPropertyChanged.length).toBeGreaterThan(handlers[1]);
+  expect(validator.onPropertyChanged.length).toBeGreaterThan(handlers[2]);
+  propertyGrid.obj = q2;
+  expect(propertyGrid.survey.getQuestionByName("maskSettings")).toBeTruthy();
+  expect(q2.onPropertyChanged.length).toBeGreaterThan(handlers[3]);
+  expect(maskSettings.onPropertyChanged.length).toBeGreaterThan(handlers[4]);
+  expect(getHandlers().slice(0, 3)).toEqual(handlers.slice(0, 3));
+  propertyGrid.obj = q1;
+  expect(getHandlers().slice(3)).toEqual(handlers.slice(3));
+  propertyGrid.obj = null;
+  expect(getHandlers()).toEqual(handlers);
+});
+test("Switching edited object does not modify the previous object", () => {
+  const survey = new SurveyModel({ elements: [
+    { type: "checkbox", name: "q1", title: "Question 1", visibleIf: "{q2} = 'a'",
+      choices: [{ value: 1, text: "Item 1" }, 2, 3], validators: [{ type: "answercount", minCount: 1 }] },
+    { type: "text", name: "q2" }
+  ] });
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  const q1Json = JSON.stringify(q1.toJSON());
+  const propertyGrid = new PropertyGridModelTester(q1);
+  expect(propertyGrid.survey.getValue("title")).toEqual("Question 1");
+  propertyGrid.obj = q2;
+  expect(JSON.stringify(q1.toJSON())).toEqual(q1Json);
+  propertyGrid.obj = q1;
+  expect(JSON.stringify(q1.toJSON())).toEqual(q1Json);
+  expect(propertyGrid.survey.getValue("title")).toEqual("Question 1");
+});
+test("The property grid survey of the previous object is disposed and not updated after switching", () => {
+  const survey = new SurveyModel({ elements: [{ type: "text", name: "q1", title: "Title 1" }, { type: "text", name: "q2" }] });
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  const propertyGrid = new PropertyGridModelTester(q1);
+  const q1Survey = propertyGrid.survey;
+  const q1TitleEditor = q1Survey.getQuestionByName("title");
+  expect(q1TitleEditor.value).toEqual("Title 1");
+  propertyGrid.obj = q2;
+  const q2Survey = propertyGrid.survey;
+  const q2NameEditor = q2Survey.getQuestionByName("name");
+  expect(q2Survey).not.toBe(q1Survey);
+  expect(q1Survey.isDisposed).toBeTruthy();
+  expect(q1Survey.editingObj).toBeFalsy();
+  const q1TitleEditorValue = q1TitleEditor.value;
+  propertyGrid.obj = q1;
+  expect(q2Survey.isDisposed).toBeTruthy();
+  expect(q2Survey.editingObj).toBeFalsy();
+  const q2NameEditorValue = q2NameEditor.value;
+  q1.title = "Title 1 changed";
+  q2.name = "q2_changed";
+  //the editors of the disposed surveys are not updated any more
+  expect(q1TitleEditor.value).toEqual(q1TitleEditorValue);
+  expect(q2NameEditor.value).toEqual(q2NameEditorValue);
+  expect(propertyGrid.survey.editingObj).toBe(q1);
+  expect(propertyGrid.survey.getQuestionByName("title").value).toEqual("Title 1 changed");
+});
+test("Selecting elements in creator does not modify the survey or the undo stack", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [
+    { type: "checkbox", name: "q1", title: "Question 1", visibleIf: "{q2} = 'a'",
+      choices: [{ value: 1, text: "Item 1" }, 2, 3], validators: [{ type: "answercount", minCount: 1 }] },
+    { type: "text", name: "q2", maskType: "currency" },
+    { type: "matrixdropdown", name: "q3", columns: [{ name: "col1" }], rows: ["row1"] }
+  ] };
+  const json = JSON.stringify(creator.JSON);
+  let modifiedCount = 0;
+  creator.onModified.add(() => modifiedCount++);
+  ["q1", "q2", "q3", "q1"].forEach(name => {
+    creator.selectElement(creator.survey.getQuestionByName(name));
+    expect(creator.propertyGrid.editingObj).toBe(creator.survey.getQuestionByName(name));
+  });
+  creator.selectElement(creator.survey);
+  expect(modifiedCount).toEqual(0);
+  expect(creator.state).toBeFalsy();
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  expect(JSON.stringify(creator.JSON)).toEqual(json);
+});
 test("Support property visibleIf attribute", () => {
   var question = new QuestionCheckboxModel("q1");
   var propertyGrid = new PropertyGridModelTester(question);
@@ -762,6 +856,37 @@ test("Support select base question property editor", () => {
   expect(question.choicesFromQuestion).toBeFalsy();
   gotoNamePropEd.value = "q3";
   expect(question.choicesFromQuestion).toEqual("q3");
+});
+test("choicesFromQuestion editor doesn't list questions that copy choices from the edited question, Bug#8096", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "checkbox", name: "q1" },
+      { type: "checkbox", name: "q2", choicesFromQuestion: "q1" },
+      { type: "checkbox", name: "q3", choicesFromQuestion: "q2" },
+      { type: "checkbox", name: "q4" }
+    ]
+  });
+  const getChoiceValues = (name: string): Array<string> => {
+    const propertyGrid = new PropertyGridModelTester(survey.getQuestionByName(name));
+    const editor = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("choicesFromQuestion");
+    return editor.choices.map(item => item.value);
+  };
+  expect(getChoiceValues("q1"), "q1: q2 and q3 copy choices from q1 directly or through q2").toEqual(["q4"]);
+  expect(getChoiceValues("q2"), "q2: q3 copies choices from q2").toEqual(["q1", "q4"]);
+  expect(getChoiceValues("q3"), "q3: nobody copies choices from q3").toEqual(["q1", "q2", "q4"]);
+  expect(getChoiceValues("q4"), "q4: nobody copies choices from q4").toEqual(["q1", "q2", "q3"]);
+});
+test("choicesFromQuestion editor handles an existing circular reference, Bug#8096", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "checkbox", name: "q1", choicesFromQuestion: "q2" },
+      { type: "checkbox", name: "q2", choicesFromQuestion: "q1" },
+      { type: "checkbox", name: "q3" }
+    ]
+  });
+  const propertyGrid = new PropertyGridModelTester(survey.getQuestionByName("q1"));
+  const editor = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("choicesFromQuestion");
+  expect(editor.choices.map(item => item.value)).toEqual(["q2", "q3"]);
 });
 
 test("check Fast Entry for Rating", () => {

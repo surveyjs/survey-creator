@@ -5,6 +5,7 @@ export const pgTabIcons = {
   "logic": "icon-pg-conditions-24x24",
   "data": "icon-pg-data-24x24",
   "design": "icon-pg-design-24x24",
+  "entries": "icon-pg-rows-24x24",
   "general": "icon-pg-general-24x24",
   "header": "icon-pg-header-24x24",
   "language": "icon-pg-language-24x24",

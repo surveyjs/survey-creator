@@ -250,4 +250,57 @@ test.describe(title, () => {
     await page.hover(".sv-action--zoomOut");
     await compareScreenshot(page, page.locator(".svc-tab-designer__surface-toolbar"), "design-surface-toolbar-with-zoom.png");
   });
+
+  test("Question adorner - collapsed custom question box gap", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    const json = {
+      showQuestionNumbers: true,
+      elements: [
+        {
+          type: "text",
+          name: "question1"
+        }
+      ]
+    };
+    await setExpandCollapseButtonVisibility(page, "onhover");
+    await setJSON(page, json);
+    // 48px instead of the default spacing-x200 (16px): collapsed padding-bottom is spacing-x200 + this gap.
+    await page.evaluate(() => {
+      const creator = (window as any).creator;
+      creator.defaultSurfaceCssVariables["--sjs2-layout-component-question-box-gap-vertical"] = "48px";
+      creator.getPlugin("designer").model.updateSurfaceCssVariables();
+    });
+    const qContent = page.locator(".svc-question__content");
+    const qCollapseButton = page.getByRole("button", { name: "Collapse" }).first();
+    await qContent.nth(0).click({ position: { x: 10, y: 10 } });
+    await qCollapseButton.click();
+    await expect(qContent.nth(0)).toHaveClass(/svc-question__content--collapsed/);
+    await compareScreenshot(page, qContent.nth(0), "question-adorner-collapsed-custom-gap.png");
+  });
+
+  test("Question adorner - collapsed title location left", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    const json = {
+      showQuestionNumbers: true,
+      elements: [
+        {
+          type: "text",
+          name: "question1",
+          title: "Question title",
+          titleLocation: "left"
+        }
+      ]
+    };
+    await setExpandCollapseButtonVisibility(page, "onhover");
+    await setJSON(page, json);
+    const qAdorner = page.locator(".svc-question__adorner");
+    const qContent = page.locator(".svc-question__content");
+    const qCollapseButton = page.getByRole("button", { name: "Collapse" }).first();
+    await qContent.nth(0).click({ position: { x: 10, y: 10 } });
+    await qCollapseButton.click();
+    await expect(qContent.nth(0)).toHaveClass(/svc-question__content--collapsed/);
+    await expect(qContent.locator(".sd-question__header--location--left")).toBeHidden();
+    await expect(qAdorner.locator("> .svc-element__header--hidden")).toBeVisible();
+    await compareScreenshot(page, qAdorner, "question-adorner-collapsed-title-left.png");
+  });
 });
