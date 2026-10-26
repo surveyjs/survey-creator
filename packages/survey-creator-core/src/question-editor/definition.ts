@@ -783,6 +783,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     ],
     tabs: [
       { name: "entries", index: 10 },
+      { name: "questionSettings", index: 20 },
       { name: "numbering", index: 350 }
     ]
   },
