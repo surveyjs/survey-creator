@@ -8,6 +8,7 @@ import {
   Question,
   ItemValue,
   Serializer,
+  JsonObject,
   IAction,
   ComputedUpdater,
   DragOrClickHelper,
@@ -569,6 +570,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   private static jsonsAreCompatible(element: SurveyElement, json: any): boolean {
     let question = element;
+    let jsonElement: SurveyElement;
     const keys = Object.keys(json);
     for (let i = 0; i < keys.length; i++) {
       const p = keys[i];
@@ -577,9 +579,29 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       if (propertyValue === undefined) {
         propertyValue = p === "type" ? question.getType() : question.getDefaultPropertyValue(p);
       }
-      if (!Helpers.isTwoValueEquals(json[p], propertyValue)) return false;
+      let jsonValue = json[p];
+      // Choices, rows, columns, etc. are stored as ItemValue/MatrixColumn objects while the json holds
+      // plain objects or strings, so compare both values serialized the same way.
+      if (Helpers.isValueObject(propertyValue)) {
+        if (!jsonElement) {
+          jsonElement = Serializer.createClass(question.getType());
+          jsonElement?.fromJSON(json);
+        }
+        if (jsonElement) {
+          propertyValue = QuestionAdornerViewModel.getPropertyJsonValue(question, p);
+          jsonValue = QuestionAdornerViewModel.getPropertyJsonValue(jsonElement, p);
+        }
+      }
+      if (!Helpers.isTwoValueEquals(jsonValue, propertyValue)) return false;
     }
     return true;
+  }
+  private static getPropertyJsonValue(element: SurveyElement, name: string): any {
+    const prop = Serializer.findProperty(element.getType(), name);
+    if (!prop) return element.getPropertyValue(name);
+    const res = {};
+    new JsonObject().valueToJson(element, res, prop);
+    return res[name];
   }
   private jsonIsCorresponded(json: any) {
     return QuestionAdornerViewModel.jsonsAreCompatible(this.element, json);
