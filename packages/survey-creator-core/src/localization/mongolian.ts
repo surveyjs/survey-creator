@@ -720,8 +720,8 @@ export var mnStrings = {
       newPanelPosition: "Шинэ оролцооны байршил",
       // [Auto-translated] "Entries per page"
       pageSize: "Хуудас бүрт бичлэг тоо",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "Хэрэглэгчдэд самбаруудыг эрэмбэлэх боломж олгох",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Хэрэглэгчдэд бичлэгүүдийг эрэмбэлэх боломж олгох",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Дараах асуултад хувилж хариулахаас сэргийлье"
     },
@@ -2844,20 +2844,20 @@ export var mnStrings = {
       panelCountExpression: "Бичлэгийн тоог тооцоолдог илэрхийллийг тодорхойл. Энэ илэрхийлэл нь \"Эхний оролтын тоо\" тохиргоог давж, хамаарах утгууд өөрчлөгдөхөд дахин үнэлэгддэг. Үр дүн нь \"Хамгийн бага оруулалтын тоо\" болон \"Хамгийн их оруулалтын тоо\" тохиргоогоор хязгаарлагддаг. Энэ илэрхийлэл тохируулсан үед хариуцагчид гараар нэмэх эсвэл хасах боломжгүй.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Панелийн хуудас бүрт харагдах бичлэгийн тоог заадаг. '0' нь хуудаслалыг идэвхгүй болгож, бүх бичлэгийг харуулдаг.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Хариуцагчид sort bar-аас бүртгэлүүдийг эрэмбэлэх боломж олгодог.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Судалгаа эхлэх үед орчуулгын дарааллыг тодорхойлдог. Хэрэв эрэмбэл оролцогчид үүнийг өөрчилж болно. Эрэглэл бүрийн түвшин нэг асуултаар эрэмбэлдэг; дээд түвшин эхэлж хэрэглэгддэг. Давхаргуудыг чирж давхаргыг нь өөрчилнө.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Хариуцалд оролцогчдыг sort bar ашиглан эрэмбэлэх боломж олгодог.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Эхний оруулалтын дарааллыг тодорхойлно. Хэрэв эрэмбэлэх зөвшөөрөгдсөн бол хариулагчид үүнийг өөрчилж болно. Олон асуултаар эрэмбэлэхэд асуулт бүр өмнөх асуултын дарааллын дагуу бичлэгүүдийг эрэмбэлдэг. Асуултыг чирж тэргүүлж тэргүүлэхийг нь өөрчилнө.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Динамик панел дотор байрласан асуултуудад дугаар онооно."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Хариуцагчдад баганын толгойг дарж эсвэл эрэмбэлэх самбараас мөрүүдийг эрэмбэлэх боломж олгодог.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Судалгаа эхлэх үед мөрүүдийн дарааллыг тодорхойлдог. Хэрэв эрэмбэлэх зөвшөөрөгдсөн бол оролцогчид үүнийг өөрчилж болно. Ангилах түвшин бүрийг нэг баганаар эрэмбэлдэг; дээд түвшин эхэлж хэрэглэгддэг. Давхаргуудыг нь чирж давуу талтайг нь өөрчилнө.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Auto\" нь зөвхөн матриц дээр эрэглэх боломжтой баганын толгойгүй үед л sort bar-ийг харуулдаг: толгой нь нуугдсан, матриц нь мобайл зохион байгуулалтыг ашигладаг, эсвэл мөрүүдийг баган руу шилжүүлдэг. \"Always\" нь баганын толгойн хажууд байрлах эрэглэлийн самбарыг харуулдаг.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Хариуцагчдад баганын толгойг дарж эсвэл sort bar ашиглан мөрүүдийг эрэмбэлэх боломж олгодог.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Эхний мөрийн дарааллыг тодорхойлно. Хэрэв эрэмбэл хариуцагчид үүнийг өөрчилж болно. Олон баганаар эрэмбэлэхэд багана бүр мөрүүдийг өмнөх баганын дарааллаар эрэмбэлдэг. Багануудыг чирж тэргүүлэн тэдгээрийн давуу талаа өөрчилнө.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" нь зөвхөн матриц дээр эрэглэх боломжтой баганын толгойгүй үед л сортлох самбарыг харуулдаг: толгой нь нуугдсан, матриц нь гар утасны зохион байгуулалтыг ашигладаг, эсвэл мөрүүдийг багана руу шилжүүлдэг. \"Always\" нь эргэж ангилах баганын толгой харагдаж байхад ч сортлох самбарыг харуулдаг.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Мөрийн тоог тооцох илэрхийллийг тодорхойлно. Энэ илэрхийлэл нь \"Эхний мөрийн тоо\" тохиргоог даван туулж, иш татсан утгууд өөрчлөгдөхөд дахин үнэлэгддэг. Үр дүн нь \"Хамгийн бага мөрийн тоо\" болон \"Хамгийн их мөрийн тоо\" тохиргоогоор хязгаарлагддаг. Энэ илэрхийллийг тохируулсан үед хариу өгөх хүмүүс мөрүүдийг гараар нэмэх эсвэл хасах боломжгүй.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

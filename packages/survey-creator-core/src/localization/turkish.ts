@@ -720,8 +720,8 @@ export var turkishStrings = {
       newPanelPosition: "Yeni giriş konumu",
       // [Auto-translated] "Entries per page"
       pageSize: "Sayfa başına başvuru sayısı",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "Kullanıcıların panelleri sıralamasına izin verin",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Kullanıcıların girişleri sıralamasına izin verin",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Aşağıdaki soruda yinelenen yanıtları önleyin"
     },
@@ -2844,20 +2844,20 @@ export var turkishStrings = {
       panelCountExpression: "Giriş sayısını hesaplayan bir ifade belirtin. Bu ifade \"Başlangıç girdi sayısı\" ayarını geçersiz kılar ve referans verdiği değerler değiştiğinde yeniden değerlendirilir. Sonuç, \"Minimum giriş sayısı\" ve \"En fazla giriş sayısı\" ayarlarıyla sınırlıdır. Bu ifade ayarlanmışken, katılımcılar girişleri manuel olarak ekleyip çıkaramaz.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Panelin her sayfasında gösterilen giriş sayısını belirtir. '0' sayfa sayısını devre dışı bırakır ve tüm girişleri gösterir.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Katılımcıların sıralama çubuğundan girişleri sıralamasına izin verir.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Anket başladığında girişlerin gösterilme sırasını tanımlar. Yanıtlayanlar sıralamaya izin verilirse bunu değiştirebilir. Her sıralama seviyesi bir soruya göre sıralanır; ilk seviye uygulanır. Önceliklerini değiştirmek için seviyeleri sürükleyin.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Katılımcıların sıralama çubuğu kullanarak girişleri sıralamasına olanak tanır.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "İlk giriş sırasını tanımlar. Yanıtlayanlar sıralamaya izin verilirse bunu değiştirebilir. Birden fazla soruya göre sıralarken, her soru girişleri önceki sorunun belirlediği sırayla sıralar. Soruları sürükleyerek önceliklerini değiştirin.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Dinamik panelde iç içe geçmiş sorulara numaralar atar."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Yanıtçıların sütun başlıklarına tıklayarak veya sıralama çubuğundan satır sıralarını sıralamalarına olanak tanır.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Anket başladığında satır sırasını tanımlar. Yanıtlayanlar sıralamaya izin verilirse bunu değiştirebilir. Her sıralama seviyesi bir sütuna göre sıralanır; ilk üst seviye uygulanır. Önceliklerini değiştirmek için seviyeleri sürükleyin.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Otomatik\" sıralama çubuğunu yalnızca matrisin sıralanabilir sütun başlıkları olmadığında gösterir: başlıklar gizli, matris mobil düzeni kullanır veya satırlar sütunlara aktarılır. \"Her zaman\" ayrıca sütun başlıklarının yanında sıralama çubuğu da gösterir.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Yanıtlayıcıların sütun başlıklarına tıklayarak veya sıralama çubuğunu kullanarak satır sıralamalarına olanak tanır.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "İlk satır sırasını tanımlar. Yanıtlayanlar sıralamaya izin verilirse bunu değiştirebilir. Birden fazla sütuna göre sıralarken, her sütun önceki sütunun belirlediği sırayla sıraları sıralar. Sütunları sürükleyerek önceliklerini değiştirin.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Otomatik\" sıralama çubuğunu yalnızca matrisin sıralanabilir sütun başlıkları olmadığında gösterir: başlıklar gizli, matris mobil düzeni kullanır veya satırlar sütunlara aktarılır. \"Her zaman\", sıralanabilir sütun başlıkları görünürken bile sıralama çubuğunu gösterir.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Satır sayısını hesaplayan bir ifade belirtin. Bu ifade \"İlk satır sayısı\" ayarını geçersiz kılar ve referans verdiği değerler değiştiğinde yeniden değerlendirilir. Sonuç, \"Minimum satır sayısı\" ve \"Maksimum satır sayısı\" ayarlarıyla sınırlıdır. Bu ifade ayarlanmışken, yanıtlayıcılar el ile satır ekleyemez veya çıkaramaz.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

@@ -720,8 +720,8 @@ export var italianTranslation = {
       newPanelPosition: "Nuova posizione di ingresso",
       // [Auto-translated] "Entries per page"
       pageSize: "Voci per pagina",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "Permette agli utenti di ordinare i pannelli",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Consentire agli utenti di ordinare le voci",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Impedisci risposte duplicate nella seguente domanda"
     },
@@ -2844,20 +2844,20 @@ export var italianTranslation = {
       panelCountExpression: "Specifica un'espressione che calcoli il numero di voci. Questa espressione sovrascrive l'impostazione \"Numero iniziale di voci\" e viene rivalutata ogni volta che i valori a cui fa riferimento cambiano. Il risultato è limitato dalle impostazioni \"Numero minimo di voci\" e \"Numero massimo di voci\". Sebbene questa espressione sia impostata, i rispondenti non possono aggiungere o rimuovere voci manualmente.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Specifica il numero di voci visualizzate in ogni pagina del panel. '0' disabilita la paginazione e mostra tutte le voci.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Permette ai rispondenti di ordinare le voci dalla barra di ordinamento.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Definisce l'ordine in cui le voci vengono visualizzate all'inizio del sondaggio. I rispondenti possono cambiarlo se è consentito l'ordinamento. Ogni livello di ordinamento viene ordinato per una domanda; il livello superiore si applica per primo. Trascina i livelli per cambiarne la priorità.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Permette ai rispondenti di ordinare le voci usando la barra di ordinamento.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definisce l'ordine di inserimento iniziale. I rispondenti possono cambiarlo se è consentito l'ordinamento. Quando si ordina per più domande, ogni domanda ordina le voci nell'ordine stabilito dalla domanda precedente. Trascina le domande per cambiarne la priorità.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Assegna numeri alle domande nidificate all'interno del pannello dinamico."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Permette ai rispondenti di ordinare le righe cliccando sulle intestazioni delle colonne o dalla barra di ordinamento.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Definisce l'ordine in cui le righe vengono visualizzate all'inizio del sondaggio. I rispondenti possono cambiarlo se è consentito l'ordinamento. Ogni livello di ordinamento viene ordinato per una colonna; il livello superiore si applica per primo. Trascina i livelli per cambiarne la priorità.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Auto\" mostra la barra di ordinamento solo quando la matrice non ha intestazioni di colonna ordinabili: le intestazioni sono nascoste, la matrice utilizza la disposizione mobile oppure le righe vengono trasposte in colonne. \"Always\" mostra anche la barra di ordinamento accanto alle intestazioni delle colonne.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Permette ai rispondenti di ordinare le righe cliccando sulle intestazioni delle colonne o utilizzando la barra di ordinamento.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definisce l'ordine iniziale delle righe. I rispondenti possono cambiarlo se è consentito l'ordinamento. Quando si ordina per più colonne, ogni colonna ordina le righe all'interno dell'ordine stabilito dalla colonna precedente. Trascina le colonne per cambiarne la priorità.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" mostra la barra di ordinamento solo quando la matrice non ha intestazioni di colonna ordinabili: le intestazioni sono nascoste, la matrice utilizza la disposizione mobile oppure le righe vengono trasposte in colonne. \"Always\" mostra la barra di ordinamento anche quando sono visibili intestazioni di colonna ordinabili.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Specificare un'espressione che calcoli il numero di righe. Questa espressione sovrascrive l'impostazione \"Numero iniziale di righe\" e viene rivalutata ogni volta che i valori a cui viene riferita cambiano. Il risultato è limitato dalle impostazioni \"Numero minimo di righe\" e \"Numero massimo di righe\". Sebbene questa espressione sia impostata, i rispondenti non possono aggiungere o rimuovere righe manualmente.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

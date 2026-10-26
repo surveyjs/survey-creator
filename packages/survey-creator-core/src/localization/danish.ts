@@ -720,8 +720,8 @@ export var danishStrings = {
       newPanelPosition: "Ny indgangsplacering",
       // [Auto-translated] "Entries per page"
       pageSize: "Indlæg pr. side",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "Tillad brugere at sortere paneler",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Tillad brugere at sortere poster",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Undgå dublerede svar i følgende spørgsmål"
     },
@@ -2845,20 +2845,20 @@ export var danishStrings = {
       panelCountExpression: "Angiv et udtryk, der beregner antallet af poster. Dette udtryk tilsidesætter indstillingen \"Initial number of postries\" og revurderes, hver gang de værdier, det refererer til, ændres. Resultatet er begrænset af indstillingerne \"Minimum antal poster\" og \"Maximum antal poster\". Mens dette udtryk er sat, kan respondenter ikke tilføje eller fjerne poster manuelt.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Angiver antallet af opslag, der vises på hver side i panelet. '0' deaktiverer paginering og viser alle indtastninger.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Tillader respondenter at sortere poster fra sorteringslinjen.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Definerer rækkefølgen, hvori poster vises, når undersøgelsen starter. Respondenter kan ændre den, hvis sortering er tilladt. Hvert sorteringsniveau sorterer efter ét spørgsmål; det øverste niveau gælder først. Træk niveauer for at ændre deres prioritet.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Tillader respondenter at sortere poster ved hjælp af sorteringslinjen.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definerer den indledende indtastningsrækkefølge. Respondenterne kan ændre den, hvis sortering er tilladt. Når man sorterer efter flere spørgsmål, sorterer hvert spørgsmål opslagene inden for den rækkefølge, der er fastlagt af det foregående spørgsmål. Træk spørgsmålene for at ændre deres prioritet.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Tildeler numre til spørgsmål, der er indlejret i det dynamiske panel."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Giver respondenter mulighed for at sortere rækker ved at klikke på kolonneoverskrifter eller fra sorteringslinjen.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Definerer rækkefølgen, som rækkerne vises i, når undersøgelsen starter. Respondenterne kan ændre den, hvis sortering er tilladt. Hvert sorteringsniveau sorterer efter én kolonne; det øverste niveau gælder først. Træk niveauer for at ændre deres prioritet.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Auto\" viser kun sorteringslinjen, når matricen ikke har sorterbare kolonneoverskrifter: overskrifterne er skjulte, matricen bruger det mobile layout, eller rækkerne er transponeret til kolonner. \"Altid\" viser også sorteringsbjælken ved siden af kolonneoverskrifterne.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Tillader respondenter at sortere rækker ved at klikke på kolonneoverskrifter eller bruge sorteringslinjen.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definerer den indledende rækkefølge. Respondenter kan ændre den, hvis sortering er tilladt. Når der sorteres efter flere kolonner, sorterer hver kolonne rækker inden for den rækkefølge, der er fastlagt af den foregående kolonne. Træk kolonner for at ændre deres prioritet.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" viser kun sorteringslinjen, når matricen ikke har sortérbare kolonneoverskrifter: overskrifterne er skjulte, matricen bruger det mobile layout, eller rækkerne er transponeret til kolonner. \"Altid\" viser sorteringslinjen, selv når sorterbare kolonneoverskrifter er synlige.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Angiv et udtryk, der beregner antallet af rækker. Dette udtryk tilsidesætter indstillingen \"Indledende antal rækker\" og revurderes, når de værdier, det refererer til, ændres. Resultatet er begrænset af indstillingerne \"Minimum antal rækker\" og \"Maksimum antal rækker\". Mens dette udtryk er sat, kan respondenter ikke tilføje eller fjerne rækker manuelt.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

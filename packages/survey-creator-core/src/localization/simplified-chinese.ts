@@ -720,8 +720,8 @@ export var simplifiedChineseTranslation = {
       newPanelPosition: "新入场地点",
       // [Auto-translated] "Entries per page"
       pageSize: "每页条目",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "允许用户排序面板",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "允许用户排序条目",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "防止以下问题中的重复回答"
     },
@@ -2844,20 +2844,20 @@ export var simplifiedChineseTranslation = {
       panelCountExpression: "指定一个计算条目数量的表达式。该表达式覆盖“初始条目数”设置，并在引用值变化时重新评估。结果受限于“最小条目数”和“最大条目数”设置。在此表达式设置期间，受访者无法手动添加或删除条目。",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "指定面板每页显示的条目数量。“0”禁用分页，显示所有条目。",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "允许受访者从排序栏中排序条目。",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "定义调查开始时条目显示的顺序。如果允许排序，受访者可以更改排序。每个排序层次按一个问题排序;最上层优先排序。拖动层级以更改优先级。",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "允许受访者使用排序栏对条目进行排序。",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "定义初始输入顺序。如果允许排序，受访者可以更改。在按多个问题排序时，每个问题会按照前一个问题确定的顺序排序条目。拖拽问题以改变其优先级。",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "为嵌套在动态面板中的问题分配编号。"
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "允许受访者通过点击列头或排序栏来排序行。",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "定义调查开始时行的显示顺序。如果允许排序，受访者可以更改顺序。每个排序层级按一列排序;最顶层优先排序。拖拽层级以更改优先级。",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "“自动”仅在矩阵没有可排序列头时显示排序栏：标题被隐藏、矩阵使用移动版布局，或行被转为列时。“Always”也会在列标题旁边显示排序栏。",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "允许受访者通过点击列头或使用排序栏来排序行。",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "定义初始行顺序。如果允许排序，受访者可以更改顺序。在多列排序时，每列排序顺序与前一列确定的顺序相同。拖动列以更改优先级。",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "“自动”仅在矩阵没有可排序列头时显示排序栏：标题隐藏、矩阵使用移动版布局，或行被转为列时。“始终”显示排序栏，即使可排序列头可见。",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "指定一个计算行数的表达式。该表达式覆盖“初始行数”设置，并在引用值变化时重新评估。结果受限于“最小行数”和“最大行数”设置。在此表达式设置期间，受访者无法手动添加或删除行数。",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

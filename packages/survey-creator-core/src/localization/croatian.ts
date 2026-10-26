@@ -720,8 +720,8 @@ export var hrStrings = {
       newPanelPosition: "Nova lokacija ulaska",
       // [Auto-translated] "Entries per page"
       pageSize: "Unosi po stranici",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "Omogućiti korisnicima sortiranje panela",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Dopustite korisnicima sortiranje unosa",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Sprječavanje dupliciranih odgovora u sljedećem pitanju"
     },
@@ -2844,20 +2844,20 @@ export var hrStrings = {
       panelCountExpression: "Specificirajte izraz koji izračunava broj unosa. Ovaj izraz nadjačava postavku \"Početni broj unosa\" i ponovno se procjenjuje kad god se vrijednosti na koje se odnosi promijene. Rezultat je ograničen postavkama \"Minimalan broj unosa\" i \"Maksimalan broj unosa\". Dok je ovaj izraz postavljen, ispitanici ne mogu ručno dodavati ili uklanjati unose.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Specificira broj unosa prikazanih na svakoj stranici panela. '0' onemogućuje paginaciju i prikazuje sve unose.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Omogućuje ispitanicima sortiranje unosa iz trake za sortiranje.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Definira redoslijed prikaza unosa na početku ankete. Ispitanici ga mogu promijeniti ako je dopušteno sortiranje. Svaka razina sortiranja sortira po jednom pitanju; prva se primjenjuje najviša razina. Povlačenje razina radi promjene prioriteta.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Omogućuje ispitanicima sortiranje unosa pomoću trake za sortiranje.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definira početni redoslijed unosa. Ispitanici ga mogu promijeniti ako je dopušteno sortiranje. Kod sortiranja po više pitanja, svako pitanje sortira unose unutar redoslijeda utvrđenog prethodnim pitanjem. Povlačite pitanja kako biste promijenili prioritet.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Dodjeljuje brojeve pitanjima ugniježđenim unutar dinamičke ploče."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Omogućuje ispitanicima sortiranje redaka klikom na zaglavlje stupaca ili putem trake za sortiranje.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Definira redoslijed prikaza redaka na početku ankete. Ispitanici ga mogu promijeniti ako je sortiranje dopušteno. Svaka razina sortiranja sortira po jednom stupcu; prva se primjenjuje najviša razina. Povlačite razine kako biste promijenili njihov prioritet.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Auto\" prikazuje traku za sortiranje samo kada matrica nema zaglavlja stupaca za sortiranje: zaglavlja su skrivena, matrica koristi mobilni raspored ili su redci prebačeni u stupce. \"Uvijek\" također prikazuje traku sortiranja pored zaglavlja stupaca.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Omogućuje ispitanicima sortiranje redaka klikom na zaglavlje stupaca ili korištenjem trake za sortiranje.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definira početni redoslijed redaka. Ispitanici ga mogu promijeniti ako je dopušteno sortiranje. Kod sortiranja po više stupaca, svaki stupac sortira retke unutar redoslijeda koji je uspostavio prethodni stupac. Prevucite stupce kako biste promijenili njihov prioritet.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" prikazuje traku za sortiranje samo kada matrica nema zaglavlja stupaca koja se mogu sortirati: zaglavlja su skrivena, matrica koristi mobilni raspored ili su retki prebačeni u stupce. \"Uvijek\" prikazuje traku za sortiranje čak i kada su vidljivi naslovi stupaca koji se mogu sortirati.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Specificirajte izraz koji izračunava broj redaka. Ovaj izraz nadjačava postavku \"Početni broj redaka\" i ponovno se procjenjuje svaki put kad se vrijednosti na koje se poziva promijene. Rezultat je ograničen postavkama \"Minimalan broj redaka\" i \"Maksimalan broj redaka\". Dok je ovaj izraz postavljen, ispitanici ne mogu ručno dodavati ili uklanjati retke.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

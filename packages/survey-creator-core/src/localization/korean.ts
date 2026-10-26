@@ -720,8 +720,8 @@ export var koreanStrings = {
       newPanelPosition: "새로운 진입 위치",
       // [Auto-translated] "Entries per page"
       pageSize: "페이지당 항목 수",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "사용자가 패널을 정렬할 수 있게 합니다",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "사용자가 항목을 정렬할 수 있게 합니다",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "다음 질문에서 중복 응답 방지"
     },
@@ -2845,20 +2845,20 @@ export var koreanStrings = {
       panelCountExpression: "항목 수를 계산하는 표현식을 지정하세요. 이 표현식은 \"초기 항목 수\" 설정을 덮어쓰며, 참조하는 값이 바뀔 때마다 재평가됩니다. 결과는 \"최소 항목 수\"와 \"최대 항목 수\" 설정에 의해 제한됩니다. 이 표현식이 설정된 동안, 응답자는 수동으로 항목을 추가하거나 제거할 수 없습니다.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "패널의 각 페이지에 표시되는 항목 수를 지정합니다. '0'은 페이지 지정을 비활성화하고 모든 항목을 표시합니다.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "응답자가 정렬 바에서 항목을 정렬할 수 있게 합니다.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "설문조사가 시작될 때 항목이 표시되는 순서를 정의합니다. 정렬이 허용된다면 응답자는 순서를 변경할 수 있습니다. 각 정렬 수준은 한 개의 질문으로 정렬되며; 가장 높은 단계가 먼저 적용됩니다. 우선순위를 변경하려면 단계를 드래그합니다.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "응답자가 정렬 바를 사용해 항목을 정렬할 수 있게 합니다.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "초기 입력 순서를 정의합니다. 정렬이 허용된다면 응답자는 이를 변경할 수 있습니다. 여러 질문으로 정렬할 때, 각 질문은 이전 질문이 정한 순서로 항목을 정렬합니다. 질문을 드래그하여 우선순위를 변경합니다.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "동적 패널 내에 중첩된 질문에 번호를 할당합니다."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "응답자가 열 헤더를 클릭하거나 정렬 바에서 정렬할 수 있게 합니다.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "설문조사가 시작될 때 행이 표시되는 순서를 정의합니다. 정렬이 허용된다면 응답자는 이를 변경할 수 있습니다. 각 정렬 수준은 한 열로 정렬되며; 가장 높은 단계가 먼저 적용됩니다. 우선순위를 변경하려면 단계를 드래그하세요.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Auto\"는 정렬 가능한 열 헤더가 없을 때만 정렬 바를 표시합니다: 헤더가 숨겨져 있거나, 행이 모바일 레이아웃을 사용하거나, 행이 열로 옮겨진 경우입니다. \"Always\"는 열 헤더 옆에 정렬 바를 표시합니다.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "응답자가 열 헤더를 클릭하거나 정렬 바를 사용하여 행을 정렬할 수 있게 합니다.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "초기 행 순서를 정의합니다. 정렬이 허용되면 응답자가 변경할 수 있습니다. 여러 열로 정렬할 때, 각 열은 앞선 열이 정한 순서 내에서 행을 정렬합니다. 열을 드래그하면 우선순위를 변경할 수 있습니다.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\"는 정렬 가능한 열 헤더가 없을 때만 정렬 바를 표시합니다: 헤더가 숨겨져 있거나, 매트릭스가 모바일 레이아웃을 사용하거나, 행이 열로 옮겨졌을 때입니다. \"Always\"는 정렬 가능한 열 헤더가 보여도 정렬 바를 표시합니다.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "행 수를 계산하는 식을 지정하세요. 이 표현식은 \"초기 행 수\" 설정을 덮어쓰며, 참조하는 값이 바뀔 때마다 재평가됩니다. 결과는 \"최소 행 수\"와 \"최대 행 수\" 설정에 의해 제한됩니다. 이 표현식이 설정된 동안, 응답자는 수동으로 행을 추가하거나 제거할 수 없습니다.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

@@ -720,8 +720,8 @@ export var msStrings = {
       newPanelPosition: "Lokasi kemasukan baharu",
       // [Auto-translated] "Entries per page"
       pageSize: "Entri setiap halaman",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "Benarkan pengguna menyusun panel",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Benarkan pengguna menyusun entri",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Elakkan respons pendua dalam soalan berikut"
     },
@@ -2844,20 +2844,20 @@ export var msStrings = {
       panelCountExpression: "Tentukan ungkapan yang mengira bilangan entri. Ungkapan ini menggantikan tetapan \"Bilangan awal entri\" dan dinilai semula setiap kali nilai yang dirujuk berubah. Keputusan dihadkan oleh tetapan \"Bilangan minimum entri\" dan \"Bilangan maksimum entri\". Semasa ungkapan ini ditetapkan, responden tidak boleh menambah atau mengeluarkan entri secara manual.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Menentukan bilangan entri yang dipaparkan pada setiap halaman panel. '0' mematikan penpaginahan dan memaparkan semua entri.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Membenarkan responden menyusun entri dari bar pengisihan.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Mentakrifkan susunan entri dipaparkan apabila tinjauan bermula. Responden boleh mengubahnya jika penyusunan dibenarkan. Setiap tahap penyusunan menyusun mengikut satu soalan; tahap atas digunakan terlebih dahulu. Seret tahap untuk menukar keutamaan mereka.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Membolehkan responden menyusun entri menggunakan bar pengisihan.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Mentakrifkan susunan kemasukan awal. Responden boleh mengubahnya jika penyusunan dibenarkan. Apabila menyusun mengikut beberapa soalan, setiap soalan menyusun entri mengikut susunan yang ditetapkan oleh soalan sebelumnya. Seret soalan untuk menukar keutamaannya.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Memperuntukkan nombor kepada soalan yang bersarang dalam panel dinamik."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Membolehkan responden menyusun baris dengan mengklik tajuk lajur atau dari bar pengisihan.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Mentakrifkan susunan baris dipaparkan apabila tinjauan bermula. Responden boleh mengubahnya jika penyusunan dibenarkan. Setiap tahap penyusunan menyusun mengikut satu lajur; tahap atas digunakan terlebih dahulu. Seret tahap untuk menukar keutamaan mereka.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Auto\" memaparkan bar pengisihan hanya apabila matriks tiada pengepala lajur yang boleh diuruskan: pengepala disembunyikan, matriks menggunakan susun atur mudah alih, atau baris ditukar ke lajur. \"Sentiasa\" juga memaparkan bar pengisihan di sebelah pengepala lajur.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Membolehkan responden menyusun baris dengan mengklik tajuk lajur atau menggunakan bar pengisihan.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Mentakrifkan susunan baris awal. Responden boleh mengubahnya jika penyusunan dibenarkan. Apabila menyusun mengikut beberapa lajur, setiap lajur menyusun baris mengikut susunan yang ditetapkan oleh lajur sebelumnya. Seret lajur untuk menukar keutamaan mereka.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" memaparkan bar pengisihan hanya apabila matriks tiada pengepala lajur yang boleh diuruskan: pengepala disembunyikan, matriks menggunakan susun atur mudah alih, atau baris ditukar ke lajur. \"Sentiasa\" memaparkan bar pengisihan walaupun pengepala lajur boleh disusun kelihatan.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Tentukan ungkapan yang mengira bilangan baris. Ungkapan ini menggantikan tetapan \"Bilangan baris awal\" dan akan dinilai semula setiap kali nilai yang dirujuknya berubah. Hasilnya dihadkan oleh tetapan \"Bilangan minimum baris\" dan \"Bilangan maksimum baris\". Walaupun ungkapan ini ditetapkan, responden tidak boleh menambah atau membuang baris secara manual.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

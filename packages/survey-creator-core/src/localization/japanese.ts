@@ -720,8 +720,8 @@ export var jaStrings = {
       newPanelPosition: "新しいエントリー場所",
       // [Auto-translated] "Entries per page"
       pageSize: "ページごとのエントリー数",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "ユーザーがパネルをソートできるようにする",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "ユーザーがエントリーを並べ替えられるように",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "次の質問の重複回答の防止"
     },
@@ -2844,20 +2844,20 @@ export var jaStrings = {
       panelCountExpression: "エントリ数を計算する式を指定します。この式は「初期エントリ数」設定を上書きし、参照する値が変わるたびに再評価されます。結果は「最小エントリ数」と「最大エントリ数」設定によって制限されます。この式が設定されている間、回答者は手動でエントリを追加または削除することはできません。",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "パネルの各ページに表示されるエントリ数を指定します。「0」はページ分けを無効にし、すべてのエントリーを表示します。",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "回答者がソートバーからエントリーをソートできます。",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "アンケート開始時にエントリーが表示される順序を定義します。ソートが許可されている場合、回答者は変更可能です。各ソートレベルは1つの質問でソートされます。最上位レベルが最初に適用されます。優先順位を変更するにはレベルをドラッグします。",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "回答者がソートバーを使ってエントリーを並べ替えられます。",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "最初の入力順序を定義します。ソートが許可されている場合、回答者はそれを変更することができます。複数の質問でソートする場合、各質問は前の質問が定めた順序に従ってエントリーをソートします。質問をドラッグすると優先順位を変えられます。",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "動的パネル内にネストされた質問に番号を割り当てます。"
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "回答者が列ヘッダーやソートバーから行を並べ替えることができます。",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "調査開始時に行が表示される順序を定義します。ソートが許可されている場合、回答者は変更可能です。各ソートレベルは1つの列でソートされます。最上層が最初に適用されます。優先度を変更するにはレベルをドラッグしてください。",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "「Auto」は、マトリックスにソート可能な列ヘッダーがない場合にのみソートバーを表示します。つまり、ヘッダーが非表示の場合、マトリックスがモバイルレイアウトを使用している場合、または行がカラムに置き換えられている場合です。「Always」は列ヘッダーの隣にソートバーを表示します。",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "回答者は列ヘッダーをクリックしたりソートバーを使って行をソートできます。",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "最初の行の順序を定義します。ソートが許可されている場合、回答者は変更できます。複数列でソートする場合、各列は前の列が定めた順序に従って行をソートします。カラムをドラッグすると優先順位が変わります。",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "「Auto」は、マトリックスにソート可能な列ヘッダーがない場合にのみソートバーを表示します。つまり、ヘッダーが非表示の場合、マトリックスがモバイルレイアウトを使用している場合、または行が列に転置されている場合です。「Always」はソート可能な列ヘッダーが見えてもソートバーを表示します。",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "行数を計算する式を指定します。この式は「初期行数」設定を上書きし、参照する値が変わるたびに再評価されます。結果は「最小行数」と「最大行数」設定によって制限されます。この式が設定されている間、回答者は手動で行を追加または削除することはできません。",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

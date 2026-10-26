@@ -720,8 +720,8 @@ export const thStrings = {
       newPanelPosition: "ตำแหน่งแผงใหม่",
       // [Auto-translated] "Entries per page"
       pageSize: "จํานวนรายการต่อหน้า",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "อนุญาตให้ผู้ใช้จัดเรียงแผง",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "อนุญาตให้ผู้ใช้จัดเรียงรายการ",
       // "Prevent duplicate responses in the following question"
       keyName: "ป้องกันการตอบซ้ำในคำถามต่อไปนี้"
     },
@@ -2844,20 +2844,20 @@ export const thStrings = {
       panelCountExpression: "ระบุนิพจน์ที่คํานวณจํานวนรายการนิพจน์นี้จะมีผลเหนือการตั้งค่า \"จํานวนรายการเริ่มต้น\" และจะถูกประเมินใหม่ทุกครั้งที่ค่าที่อ้างอิงเปลี่ยนแปลงผลลัพธ์จะถูกจํากัดด้วยการตั้งค่า \"จํานวนรายการขั้นต่ํา\" และ \"จํานวนรายการสูงสุด\"ในขณะที่นิพจน์นี้ถูกตั้งค่า ผู้ตอบไม่สามารถเพิ่มหรือลบรายการด้วยตนเองได้",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "ระบุจํานวนรายการที่แสดงในแต่ละหน้าของแผง'0' จะปิดการแบ่งหน้าและแสดงรายการทั้งหมด",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "อนุญาตให้ผู้ตอบแบบสอบถามจัดเรียงรายการจากแถบจัดเรียง",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "กําหนดลําดับที่แสดงรายการเมื่อเริ่มแบบสํารวจผู้ตอบแบบสอบถามสามารถเปลี่ยนได้หากอนุญาตให้จัดเรียงแต่ละระดับการจัดเรียงจะเรียงตามคําถามหนึ่งข้อ;ระดับบนสุดจะถูกนํามาใช้ก่อนลากระดับเพื่อเปลี่ยนลําดับความสําคัญ",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "อนุญาตให้ผู้ตอบแบบสอบถามจัดเรียงรายการโดยใช้แถบเรียงลําดับ",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "กําหนดลําดับการป้อนข้อมูลเริ่มต้นผู้ตอบสามารถเปลี่ยนลําดับได้หากอนุญาตให้จัดเรียงเมื่อจัดเรียงตามคําถามหลายข้อ แต่ละคําถามจะจัดเรียงรายการภายในลําดับที่กําหนดโดยคําถามก่อนหน้าลากคําถามเพื่อเปลี่ยนลําดับความสําคัญ",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "กําหนดตัวเลขให้กับคําถามที่ซ้อนกันภายในแผงแบบไดนามิก"
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "อนุญาตให้ผู้ตอบแบบสอบถามจัดเรียงแถวโดยคลิกที่หัวคอลัมน์หรือจากแถบจัดเรียง",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "กําหนดลําดับที่แสดงแถวเมื่อเริ่มสํารวจผู้ตอบแบบสอบถามสามารถเปลี่ยนลําดับนี้ได้หากอนุญาตให้จัดเรียงแต่ละระดับการจัดเรียงจะเรียงตามหนึ่งคอลัมน์;ระดับบนสุดจะถูกนํามาใช้ก่อนลากระดับเพื่อเปลี่ยนลําดับความสําคัญ",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Auto\" จะแสดงแถบเรียงลําดับเฉพาะเมื่อเมทริกซ์ไม่มีหัวคอลัมน์ที่เรียงลําดับได้: ส่วนหัวจะถูกซ่อน, เมทริกซ์ใช้รูปแบบเคลื่อนที่ หรือแถวถูกสลับไปยังคอลัมน์\"เสมอ\" จะแสดงแถบเรียงลําดับถัดจากหัวคอลัมน์ด้วย",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "อนุญาตให้ผู้ตอบแบบสอบถามจัดเรียงแถวโดยคลิกที่หัวคอลัมน์หรือใช้แถบจัดเรียง",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "กําหนดลําดับแถวเริ่มต้นผู้ตอบแบบสอบถามสามารถเปลี่ยนได้หากอนุญาตให้จัดเรียงเมื่อจัดเรียงตามหลายคอลัมน์ แต่ละคอลัมน์จะจัดเรียงแถวภายในลําดับที่กําหนดโดยคอลัมน์ก่อนหน้าลากคอลัมน์เพื่อเปลี่ยนลําดับความสําคัญ",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" จะแสดงแถบเรียงลําดับเฉพาะเมื่อเมทริกซ์ไม่มีหัวคอลัมน์ที่เรียงได้: หัวคอลัมน์ถูกซ่อน, เมทริกซ์ใช้รูปแบบเคลื่อนที่ หรือแถวถูกสลับไปยังคอลัมน์\"เสมอ\" จะแสดงแถบเรียงลําดับแม้จะมีหัวคอลัมน์ที่เรียงลําดับได้แสดงอยู่",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "ระบุนิพจน์ที่คํานวณจํานวนแถวนิพจน์นี้จะมีผลเหนือการตั้งค่า \"จํานวนแถวเริ่มต้น\" และจะถูกประเมินใหม่ทุกครั้งที่ค่าที่อ้างอิงเปลี่ยนแปลงผลลัพธ์จะถูกจํากัดด้วยการตั้งค่า \"จํานวนแถวขั้นต่ํา\" และ \"จํานวนแถวสูงสุด\"ในขณะที่นิพจน์นี้ถูกตั้งค่า ผู้ตอบแบบสอบถามไม่สามารถเพิ่มหรือลบแถวด้วยตนเองได้",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

@@ -720,8 +720,8 @@ export var nlStrings = {
       newPanelPosition: "Nieuwe ingangslocatie",
       // [Auto-translated] "Entries per page"
       pageSize: "Vermeldingen per pagina",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "Laat gebruikers panelen sorteren",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Laat gebruikers de vermeldingen sorteren",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Voorkom dubbele antwoorden op de volgende vraag"
     },
@@ -2844,20 +2844,20 @@ export var nlStrings = {
       panelCountExpression: "Specificeer een expressie die het aantal vermeldingen berekent. Deze uitdrukking overschrijft de instelling \"Initiële aanstellingen\" en wordt opnieuw geëvalueerd telkens wanneer de waarden die hij verwijst veranderen. Het resultaat wordt beperkt door de instellingen \"Minimum aantal vermeldingen\" en \"Maximaal aantal vermeldingen\". Terwijl deze uitdrukking is ingesteld, kunnen respondenten geen vermeldingen handmatig toevoegen of verwijderen.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Specificeert het aantal vermeldingen dat op elke pagina van het paneel wordt weergegeven. '0' schakelt de paginering uit en toont alle vermeldingen.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Stelt respondenten in staat om vermeldingen te sorteren uit de sorteerbalk.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Bepaalt de volgorde waarin de vermeldingen worden weergegeven wanneer de enquête begint. Respondenten kunnen dit aanpassen als sorteren is toegestaan. Elk sorteerniveau sorteert op één vraag; het hoogste niveau geldt eerst. Sleep levels om hun prioriteit te wijzigen.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Stelt respondenten in staat om vermeldingen te sorteren met behulp van de sorteerbalk.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definieert de initiële invoervolgorde. Respondenten kunnen deze wijzigen als sorteren is toegestaan. Bij sorteren op meerdere vragen sorteert elke vraag de vermeldingen binnen de volgorde die door de voorgaande vraag is vastgesteld. Sleep vragen om hun prioriteit te veranderen.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Wijst nummers toe aan vragen die zijn genest in het dynamische paneel."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Stelt respondenten in staat om rijen te sorteren door op kolomkoppen te klikken of via de sorteerbalk.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Definieert de volgorde waarin rijen worden weergegeven wanneer de enquête begint. Respondenten kunnen deze wijzigen als sorteren is toegestaan. Elk sorteerniveau sorteert per kolom; het bovenste niveau wordt eerst toegepast. Sleep levels om hun prioriteit te wijzigen.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Auto\" toont de sorteerbalk alleen wanneer de matrix geen sorteerbare kolomkoppen heeft: de kopstukken zijn verborgen, de matrix gebruikt de mobiele indeling, of rijen worden omgezet naar kolommen. \"Altijd\" toont ook de sorteerbalk naast de kolomkoppen.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Stelt respondenten in staat om rijen te sorteren door op kolomkoppen te klikken of de sorteerbalk te gebruiken.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definieert de initiële rijvolgorde. Respondenten kunnen deze wijzigen als sorteren is toegestaan. Bij sorteren op meerdere kolommen sorteert elke kolom rijen binnen de volgorde die door de voorgaande kolom is vastgesteld. Sleep kolommen om hun prioriteit te wijzigen.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" toont de sorteerbalk alleen wanneer de matrix geen sorteerbare kolomkoppen heeft: de kopstukken zijn verborgen, de matrix gebruikt de mobiele indeling, of rijen worden omgezet naar kolommen. \"Altijd\" toont de sorteerbalk zelfs wanneer sorteerbare kolomkoppen zichtbaar zijn.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Specificeer een expressie die het aantal rijen berekent. Deze uitdrukking overschrijft de instelling \"Initiële aantal rijen\" en wordt opnieuw geëvalueerd telkens wanneer de waarden die hij verwijst veranderen. Het resultaat wordt beperkt door de instellingen \"Minimum aantal rijen\" en \"Maximaal aantal rijen\". Zolang deze uitdrukking is ingesteld, kunnen respondenten geen rijen handmatig toevoegen of verwijderen.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

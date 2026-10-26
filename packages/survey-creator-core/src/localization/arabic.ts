@@ -720,8 +720,8 @@ export var arStrings = {
       newPanelPosition: "موقع دخول جديد",
       // [Auto-translated] "Entries per page"
       pageSize: "الإدخالات في الصفحة",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "السماح للمستخدمين بفرز اللوحات",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "السماح للمستخدمين بفرز الإدخالات",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "منع الردود المكررة في السؤال التالي"
     },
@@ -2844,20 +2844,20 @@ export var arStrings = {
       panelCountExpression: "حدد تعبيرا يحسب عدد الإدخالات. هذا التعبير يتجاوز إعداد \"العدد الأولي للإدخالات\" ويعاد تقييمه كلما تغيرت القيم التي يشير إليها. النتيجة محدودة بإعدادات \"الحد الأدنى لعدد الإدخالات\" و\"الحد الأقصى لعدد الإدخالات\". أثناء تعيين هذا التعبير، لا يمكن للمشاركين إضافة أو إزالة الإدخالات يدويا.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "يحدد عدد الإدخالات المعروضة في كل صفحة من اللوحة. '0' يعطل تقسيم الصفحات ويعرض جميع الإدخالات.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "يسمح للمشاركين بفرز الإدخالات من شريط الفرز.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "يحدد ترتيب عرض الإدخالات عند بدء الاستبيان. يمكن للمشاركين تغييره إذا كان الفرز مسموحا. يتم فرز كل مستوى فرز حسب سؤال واحد؛ المستوى الأعلى ينطبق أولا. اسحب المستويات لتغيير أولويتها.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "يسمح للمشاركين بفرز الإدخالات باستخدام شريط الفرز.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "يحدد ترتيب الإدخال الأولي. يمكن للمشاركين تغييره إذا كان الفرز مسموحا. عند الفرز حسب عدة أسئلة، يقوم كل سؤال بفرز المدخلات ضمن الترتيب الذي حدده السؤال السابق. اسحب الأسئلة لتغيير أولويتها.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "تعيين أرقام للأسئلة المتداخلة داخل اللوحة الديناميكية."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "يسمح للمستجيبين بفرز الصفوف بالنقر على رؤوس الأعمدة أو من شريط الفرز.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "يحدد ترتيب عرض الصفوف عند بدء الاستبيان. يمكن للمشاركين تغييره إذا كان الترتيب مسموحا. كل مستوى فرز يصنف بعمود واحد؛ المستوى الأعلى ينطبق أولا. اسحب المستويات لتغيير أولويتها.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"تلقائي\" يعرض شريط الفرز فقط عندما لا تحتوي المصفوفة على رؤوس أعمدة قابلة للفرز: تكون الرؤوس مخفية، أو تستخدم المصفوفة تخطيط النقل، أو يتم نقل الصفوف إلى أعمدة. \"دائما\" يعرض شريط الفرز بجانب رؤوس الأعمدة أيضا.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "يسمح للمشاركين بفرز الصفوف بالنقر على رؤوس الأعمدة أو باستخدام شريط الفرز.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "يحدد ترتيب الصفوف الأولي. يمكن للمشاركين تغييره إذا كان الفرز مسموحا. عند الفرز حسب عدة أعمدة، يقوم كل عمود بفرز الصفوف ضمن الترتيب الذي حدده العمود السابق. اسحب الأعمدة لتغيير أولويتها.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"تلقائي\" يعرض شريط الفرز فقط عندما لا تحتوي المصفوفة على رؤوس أعمدة قابلة للفرز: تكون الرؤوس مخفية، أو تستخدم المصفوفة تخطيط المتحرك، أو تنقل الصفوف إلى أعمدة. \"دائما\" يعرض شريط الفرز حتى عندما تكون رؤوس الأعمدة القابلة للفرز مرئية.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "حدد تعبيرا يحسب عدد الصفوف. هذا التعبير يتجاوز إعداد \"العدد الابتدائي للصفوف\" ويعاد تقييمه كلما تغيرت القيم التي يشير إليها. النتيجة محدودة بإعدادات \"الحد الأدنى لعدد الصفوف\" و\"الحد الأقصى لعدد الصفوف\". أثناء تعيين هذا التعبير، لا يمكن للمشاركين إضافة أو إزالة الصفوف يدويا.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
