@@ -938,8 +938,7 @@ export class PropertyGridModel {
     this.surveyValue.onMatrixCellValueChanging.clear();
     this.surveyValue.onMatrixCellValidate.clear();
     this.surveyValue.onMatrixCellValueChanged.clear();
-    this.surveyValue.editingObj = undefined;
-    this.surveyValue.data = {};
+    // dispose() unconnects editingObj itself, so values are not unbound first
     this.surveyValue.dispose();
   }
   private createSurveyValue(): void {
