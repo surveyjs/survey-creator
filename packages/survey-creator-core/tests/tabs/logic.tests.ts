@@ -1369,6 +1369,40 @@ test("LogicItemEditorUI: create new logic item using detail panel", () => {
   expect(row.cells[0].question.value).toEqual("If 'q1' == 1, make question 'q2' visible");
   expect(survey.getQuestionByName("q2").visibleIf).toEqual("{q1} = 1");
 });
+test("Logic rule cell keeps Clear hidden after the rule is saved", () => {
+  const alone = new QuestionLinkValueModel("alone");
+  expect(alone.allowClear).toBeTruthy();
+  alone.allowClear = false;
+  alone.value = "If 'q1' == 1, make question 'q2' visible";
+  expect(alone.allowClear).toBeFalsy();
+  expect(alone.showClear).toBeFalsy();
+
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNewUI();
+  const itemsQuestion = <QuestionMatrixDynamicModel>logic.itemsSurvey.getQuestionByName("items");
+  const row = itemsQuestion.visibleRows[0];
+  const newRuleQuestion = <QuestionLinkValueModel>row.cells[0].question;
+  expect(newRuleQuestion.value).toEqual("New rule");
+  expect(newRuleQuestion.allowClear).toBeFalsy();
+  expect(newRuleQuestion.showClear).toBeFalsy();
+
+  logic.expressionEditor.text = "{q1} = 1";
+  const panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  panel.getQuestionByName("elementSelector").value = "q2";
+  row.detailPanel.footerActions[0].action();
+
+  const savedQuestion = <QuestionLinkValueModel>itemsQuestion.visibleRows[0].cells[0].question;
+  expect(savedQuestion.value).toEqual("If 'q1' == 1, make question 'q2' visible");
+  expect(savedQuestion.allowClear).toBeFalsy();
+  expect(savedQuestion.showClear).toBeFalsy();
+});
 test("LogicItemEditorUI: create new logic several times", () => {
   const dummy = new QuestionEmbeddedSurveyModel("dummy");
   const survey = new SurveyModel({
