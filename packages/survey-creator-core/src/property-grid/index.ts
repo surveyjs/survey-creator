@@ -2270,21 +2270,30 @@ export class PropertyGridEditorQuestionCarryForward extends PropertyGridEditorQu
   protected getQuestions(survey: SurveyModel, obj: Base): Array<Question> {
     const questions = super.getQuestions(survey, obj);
     const currentName = obj["choicesFromQuestion"];
+    const copyingNames = this.getNamesCopyingChoicesFrom(survey, obj["name"]);
     // Exclude questions that already copy choices from obj (directly or through a chain) to prevent circular references.
     // Keep the currently selected question, so an existing circular reference is still displayed and can be cleared.
-    return questions.filter(q => q.name === currentName || !this.isCopyingChoicesFrom(survey, q, obj));
+    return questions.filter(q => q.name === currentName || !copyingNames.has(q.name));
   }
-  private isCopyingChoicesFrom(survey: SurveyModel, question: Question, obj: Base): boolean {
-    const visited: Array<Question> = [];
-    let q: Question = question;
-    while(!!q && visited.indexOf(q) < 0) {
-      visited.push(q);
+  // Builds the "copied by" map once and walks it from the obj name, so the cost is linear in the number of questions.
+  private getNamesCopyingChoicesFrom(survey: SurveyModel, name: string): Set<string> {
+    const copiedBy = new Map<string, Array<string>>();
+    survey.getAllQuestions().forEach(q => {
       const sourceName = q["choicesFromQuestion"];
-      if (!sourceName) return false;
-      q = survey.getQuestionByName(sourceName);
-      if (q === obj) return true;
+      if (!sourceName) return;
+      if (!copiedBy.has(sourceName)) copiedBy.set(sourceName, []);
+      copiedBy.get(sourceName).push(q.name);
+    });
+    const res = new Set<string>();
+    const names = [name];
+    while(names.length > 0) {
+      (copiedBy.get(names.pop()) || []).forEach(n => {
+        if (res.has(n)) return;
+        res.add(n);
+        names.push(n);
+      });
     }
-    return false;
+    return res;
   }
 }
 
