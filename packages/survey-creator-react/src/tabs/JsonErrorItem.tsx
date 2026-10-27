@@ -20,7 +20,7 @@ class ItemTemplateComponent extends SurveyElementBase<{ item: ItemValue }, any> 
   renderFixButton() {
     if (!this.props.item.data.showFixButton) return null;
     const item = this.props.item;
-    return (attachKey2click(<button type="button" onClick={(event) => { event.stopPropagation(); item.data.fixError(); }} title={item.data.fixButtonTitle} className={"svc-json-error__fix-button"}>
+    return (attachKey2click(<button type="button" onClick={(event) => { event.stopPropagation(); item.data.fixError(); }} title={item.data.fixButtonTitle} data-sv-tooltip={item.data.fixButtonTitle} className={"svc-json-error__fix-button"}>
       <SvgIcon iconName={item.data.fixButtonIcon} size={"auto"}></SvgIcon>
     </button>));
   }

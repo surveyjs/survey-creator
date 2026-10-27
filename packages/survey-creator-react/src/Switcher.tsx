@@ -26,6 +26,7 @@ export class SwitcherComponent extends SurveyElementBase<ISwitcherComponentProps
         disabled={this.item.disabled}
         onClick={(args) => this.item.action(this.item, this.item.getIsTrusted(args))}
         title={tooltip}
+        data-sv-tooltip={tooltip}
         aria-checked={this.item.ariaChecked}
         aria-expanded={this.item.ariaExpanded}
         role={this.item.ariaRole}
