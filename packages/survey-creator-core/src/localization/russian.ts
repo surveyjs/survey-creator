@@ -720,8 +720,8 @@ export var ruStrings = {
       newPanelPosition: "Новое место входа",
       // [Auto-translated] "Entries per page"
       pageSize: "Количество записей на страницу",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "Позвольте пользователям сортировать панели",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Разрешить пользователям сортировать записи",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Избегайте дублирования ответов на следующий вопрос"
     },
@@ -2844,20 +2844,20 @@ export var ruStrings = {
       panelCountExpression: "Укажите выражение, которое вычисляет количество записей. Это выражение переопределяет параметры «Начальное количество записей» и пересчитывается при каждом изменении ссылающихся значений. Результат ограничен настройками «Минимальное количество записей» и «Максимальное количество записей». Пока это выражение установлено, респонденты не могут вручную добавлять или удалять записи.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Указывает количество записей, отображаемых на каждой странице панели. '0' отключает пагинацию и отображает все записи.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Позволяет респондентам сортировать записи с панели сортировки.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Определяет порядок отображения записей при начале опроса. Респонденты могут изменить его, если разрешена сортировка. Каждый уровень сортировки сортирует по одному вопросу; первым применяется верхний уровень. Перетаскивайте уровни для изменения приоритета.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Позволяет респондентам сортировать записи с помощью панели сортировки.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Определяет первоначальный порядок входа. Респонденты могут изменить его, если разрешена сортировка. При сортировке по нескольким вопросам каждый вопрос сортирует записи в порядке, установленном предыдущим вопросом. Перетащите вопросы, чтобы изменить их приоритет.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Присваивает номера вопросам, вложенным в динамическую панель."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Позволяет респондентам сортировать строки, кликая по заголовкам столбцов или с панели сортировки.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Определяет порядок отображения строк при начале опроса. Респонденты могут изменить его, если разрешена сортировка. Каждый уровень сортировки сортируется по одному столбцу; первым применяется верхний уровень. Перетаскивайте уровни для изменения приоритета.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "«Авто» отображает панель сортировки только тогда, когда в матрице нет сортируемых заголовков столбцов: заголовки скрыты, матрица использует мобильную структуру или строки переносятся в столбцы. «Всегда» также отображает панель сортировки рядом с заголовками столбцов.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Позволяет респондентам сортировать строки, нажимая на заголовки столбцов или используя панель сортировки.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Определяет начальный порядок строк. Респонденты могут изменить его, если разрешена сортировка. При сортировке по нескольким столбцам каждый столбец сортирует строки в порядке, установленном предыдущим столбцом. Перетащите столбцы, чтобы изменить их приоритет.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "«Авто» отображает панель сортировки только тогда, когда в матрице нет сортируемых заголовков столбцов: заголовки скрыты, матрица использует мобильную структуру или строки переносятся в столбцы. «Всегда» отображает панель сортировки, даже когда видны сортируемые заголовки столбцов.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Закажите выражение, которое вычисляет количество строк. Это выражение переопределяет параметры «Начальное количество строк» и пересчитывается при изменении значений, на которые оно ссылается. Результат ограничен настройками «Минимальное количество строк» и «Максимальное количество строк». Пока это выражение зададено, респонденты не могут вручную добавлять или удалять строки.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

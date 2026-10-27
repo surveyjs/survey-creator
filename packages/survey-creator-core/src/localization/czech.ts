@@ -720,8 +720,8 @@ export var czStrings = {
       newPanelPosition: "Nová vstupní lokace",
       // [Auto-translated] "Entries per page"
       pageSize: "Záznamy na stránce",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "Umožnit uživatelům třídit panely",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Umožnit uživatelům třídit položky",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zabraňte duplicitním odpovědím v následující otázce"
     },
@@ -2844,20 +2844,20 @@ export var czStrings = {
       panelCountExpression: "Zadejte výraz, který počítá počet záznamů. Tento výraz přepisuje nastavení \"Počáteční počet záznamů\" a je znovu vyhodnocován pokaždé, když se změní hodnoty, na které odkazuje. Výsledek je omezen nastavením \"Minimální počet záznamů\" a \"Maximální počet položek\". Dokud je tento výraz nastaven, respondenti nemohou položky ručně přidávat ani odebírat.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Určuje počet položek zobrazených na každé stránce panelu. '0' deaktivuje stránkování a zobrazuje všechny položky.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Umožňuje respondentům třídit položky z řadicího panelu.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Definuje pořadí, v jakém jsou položky zobrazeny na začátku průzkumu. Respondenti jej mohou změnit, pokud je třídění povoleno. Každá úroveň třídění třídí podle jedné otázky; nejvyšší úroveň platí jako první. Úrovně přetahují, aby se změnila jejich priorita.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Umožňuje respondentům třídit položky pomocí řazovacího panelu.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definuje pořadí počátečních příspěvků. Respondenti jej mohou změnit, pokud je třídění povoleno. Při třídění podle více otázek každá otázka třídí položky v pořadí stanoveném předchozí otázkou. Dotazy přetáhněte, abyste změnili jejich prioritu.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Přiřadí čísla otázkám vnořeným v dynamickém panelu."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Umožňuje respondentům třídit řádky kliknutím na záhlaví sloupců nebo z řadicího panelu.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Definuje pořadí, v jakém jsou řádky zobrazeny na začátku průzkumu. Respondenti jej mohou změnit, pokud je třídění povoleno. Každá úroveň třídění se třídí podle jednoho sloupce; nejvyšší úroveň se uplatní jako první. Táhněte úrovně pro změnu priority.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Auto\" zobrazuje řazovací lištu pouze tehdy, když matice nemá žádné tříditelné hlavičky sloupců: hlavičky jsou skryté, matice používá mobilní rozložení nebo jsou řádky převedeny do sloupců. \"Always\" zobrazuje také řazovací lištu vedle hlaviček sloupců.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Umožňuje respondentům třídit řádky kliknutím na záhlaví sloupců nebo použitím řazovacího panelu.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definuje pořadí počátečních řádků. Respondenti jej mohou změnit, pokud je třídění povoleno. Při třídění podle více sloupců každý sloupec třídí řádky v pořadí stanoveném předchozím sloupcem. Táhněte sloupce pro změnu jejich priority.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" zobrazuje řazovací lištu pouze tehdy, když matice nemá žádné tříditelné hlavičky sloupců: hlavičky jsou skryté, matice používá mobilní rozložení nebo jsou řádky převedeny do sloupců. \"Alright\" zobrazuje řazovací lištu i tehdy, když jsou viditelné seřazitelné hlavičky sloupců.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Zadejte výraz, který počítá počet řádků. Tento výraz přepisuje nastavení \"Počáteční počet řádků\" a je znovu vyhodnocován vždy, když se změní hodnoty, na které odkazuje. Výsledek je omezen nastavením \"Minimální počet řádků\" a \"Maximální počet řádků\". Dokud je tento výraz nastaven, respondenti nemohou řádky přidávat ani odebírat ručně.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

@@ -720,8 +720,8 @@ export var nbStrings = {
       newPanelPosition: "Ny inngangsplassering",
       // [Auto-translated] "Entries per page"
       pageSize: "Oppføringer per side",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "La brukere sortere paneler",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "La brukere sortere oppføringer",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Forhindre dupliserte svar i følgende spørsmål"
     },
@@ -2844,20 +2844,20 @@ export var nbStrings = {
       panelCountExpression: "Spesifiser et uttrykk som beregner antall oppføringer. Dette uttrykket overstyrer innstillingen \"Innledende antall oppføringer\" og revurderes hver gang verdiene det refererer til endres. Resultatet er begrenset av innstillingene \"Minimum antall oppføringer\" og \"Maksimalt antall oppføringer\". Mens dette uttrykket er satt, kan ikke respondenter legge til eller fjerne oppføringer manuelt.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Angir antall oppføringer som vises på hver side i panelet. '0' deaktiverer paginering og viser alle oppføringer.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Lar respondentene sortere oppføringer fra sorteringslinjen.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Definerer rekkefølgen oppføringene vises i når undersøkelsen starter. Respondentene kan endre det hvis sortering er tillatt. Hvert sorteringsnivå sorterer etter ett spørsmål; det øverste nivået gjelder først. Drag nivåer for å endre prioriteten deres.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Lar respondenter sortere oppføringer ved hjelp av sorteringslinjen.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definerer den opprinnelige oppslagsrekkefølgen. Respondentene kan endre den hvis sortering er tillatt. Når man sorterer etter flere spørsmål, sorterer hvert spørsmål oppføringer innenfor rekkefølgen som er fastsatt av det foregående spørsmålet. Dra spørsmål for å endre prioritet.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Tildeler numre til spørsmål som er nestet i det dynamiske panelet."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Lar respondenter sortere rader ved å klikke på kolonneoverskrifter eller fra sorteringslinjen.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Definerer rekkefølgen radene vises i når undersøkelsen starter. Respondenter kan endre den hvis sortering er tillatt. Hvert sorteringsnivå sorterer etter én kolonne; øverste nivå gjelder først. Drag nivåer for å endre prioriteten sin.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Auto\" viser sorteringslinjen bare når matrisen ikke har sorterbare kolonneoverskrifter: overskriftene er skjult, matrisen bruker det mobile oppsettet, eller rader overføres til kolonner. \"Alltid\" viser sorteringslinjen ved siden av kolonneoverskriftene også.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Lar respondenter sortere rader ved å klikke på kolonneoverskrifter eller bruke sorteringslinjen.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definerer den opprinnelige rekkefølgen. Respondenter kan endre den hvis sortering er tillatt. Når man sorterer etter flere kolonner, sorterer hver kolonne rader innenfor rekkefølgen som er fastsatt av den foregående kolonnen. Dra kolonnene for å endre prioriteten deres.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" viser sorteringslinjen bare når matrisen ikke har sorterbare kolonneoverskrifter: overskriftene er skjult, matrisen bruker det mobile oppsettet, eller rader overføres til kolonner. \"Alltid\" viser sorteringslinjen selv når sorterbare kolonneoverskrifter er synlige.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Spesifiser et uttrykk som beregner antall rader. Dette uttrykket overstyrer innstillingen «Startantall rader» og revurderes hver gang verdiene det refererer til endres. Resultatet er begrenset av innstillingene «Minimum antall rader» og «Maksimalt antall rader». Mens dette uttrykket er satt, kan ikke respondenter legge til eller fjerne rader manuelt.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

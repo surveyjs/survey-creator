@@ -720,8 +720,8 @@ export var grStrings = {
       newPanelPosition: "Θέση νέου πλαισίου",
       // [Auto-translated] "Entries per page"
       pageSize: "Καταχωρήσεις ανά σελίδα",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "Να επιτρέπεται στους χρήστες να ταξινομούν πίνακες",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Να επιτρέπεται στους χρήστες να ταξινομούν καταχωρήσεις",
       // "Prevent duplicate responses in the following question"
       keyName: "Αποτροπή διπλών απαντήσεων στην εξής ερώτηση"
     },
@@ -2844,20 +2844,20 @@ export var grStrings = {
       panelCountExpression: "Καθορίστε μια παράσταση που υπολογίζει τον αριθμό των καταχωρήσεων. Αυτή η έκφραση παρακάμπτει τη ρύθμιση \"Αρχικός αριθμός καταχωρήσεων\" και επαναξιολογείται κάθε φορά που αλλάζουν οι τιμές στις οποίες αναφέρεται. Το αποτέλεσμα περιορίζεται από τις ρυθμίσεις \"Ελάχιστος αριθμός καταχωρήσεων\" και \"Μέγιστος αριθμός καταχωρήσεων\". Ενώ έχει οριστεί αυτή η έκφραση, οι ερωτηθέντες δεν μπορούν να προσθέσουν ή να αφαιρέσουν καταχωρήσεις με μη αυτόματο τρόπο.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Καθορίζει τον αριθμό των καταχωρήσεων που εμφανίζονται σε κάθε σελίδα του πίνακα. Το '0' απενεργοποιεί τη σελιδοποίηση και εμφανίζει όλες τις καταχωρήσεις.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Επιτρέπει στους ερωτηθέντες να ταξινομούν τις καταχωρήσεις από τη γραμμή ταξινόμησης.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Καθορίζει τη σειρά με την οποία εμφανίζονται οι καταχωρήσεις κατά την έναρξη της έρευνας. Οι ερωτηθέντες μπορούν να την αλλάξουν εάν επιτρέπεται η ταξινόμηση. Κάθε επίπεδο ταξινόμησης ταξινομείται κατά μία ερώτηση. Το ανώτερο επίπεδο εφαρμόζεται πρώτο. Σύρετε τα επίπεδα για να αλλάξετε την προτεραιότητά τους.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Επιτρέπει στους ερωτηθέντες να ταξινομούν τις καταχωρήσεις χρησιμοποιώντας τη γραμμή ταξινόμησης.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Καθορίζει την αρχική σειρά καταχώρισης. Οι ερωτηθέντες μπορούν να την αλλάξουν εάν επιτρέπεται η ταξινόμηση. Κατά την ταξινόμηση κατά πολλές ερωτήσεις, κάθε ερώτηση ταξινομεί τις καταχωρήσεις με τη σειρά που καθορίζεται από την προηγούμενη ερώτηση. Σύρετε τις ερωτήσεις για να αλλάξετε την προτεραιότητά τους.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Αντιστοιχίζει αριθμούς σε ερωτήσεις που είναι ένθετες στον δυναμικό πίνακα."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Επιτρέπει στους ερωτηθέντες να ταξινομούν σειρές κάνοντας κλικ στις κεφαλίδες στηλών ή από τη γραμμή ταξινόμησης.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Καθορίζει τη σειρά με την οποία εμφανίζονται οι γραμμές κατά την έναρξη της έρευνας. Οι ερωτηθέντες μπορούν να την αλλάξουν εάν επιτρέπεται η ταξινόμηση. Κάθε επίπεδο ταξινόμησης ταξινομείται κατά μία στήλη. Το ανώτερο επίπεδο εφαρμόζεται πρώτο. Σύρετε τα επίπεδα για να αλλάξετε την προτεραιότητά τους.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "Το \"Auto\" εμφανίζει τη γραμμή ταξινόμησης μόνο όταν η μήτρα δεν έχει κεφαλίδες στηλών με δυνατότητα ταξινόμησης: οι κεφαλίδες είναι κρυφές, η μήτρα χρησιμοποιεί τη διάταξη για κινητά ή οι σειρές μεταφέρονται σε στήλες. Το \"Always\" εμφανίζει επίσης τη γραμμή ταξινόμησης δίπλα στις κεφαλίδες στηλών.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Επιτρέπει στους ερωτηθέντες να ταξινομούν σειρές κάνοντας κλικ στις κεφαλίδες στηλών ή χρησιμοποιώντας τη γραμμή ταξινόμησης.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Καθορίζει την αρχική σειρά γραμμών. Οι ερωτηθέντες μπορούν να την αλλάξουν εάν επιτρέπεται η ταξινόμηση. Κατά την ταξινόμηση κατά πολλές στήλες, κάθε στήλη ταξινομεί τις σειρές με τη σειρά που καθορίζεται από την προηγούμενη στήλη. Σύρετε στήλες για να αλλάξετε την προτεραιότητά τους.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "Το \"Auto\" εμφανίζει τη γραμμή ταξινόμησης μόνο όταν ο πίνακας δεν έχει κεφαλίδες στηλών με δυνατότητα ταξινόμησης: οι κεφαλίδες είναι κρυφές, ο πίνακας χρησιμοποιεί τη διάταξη για κινητά ή οι γραμμές μεταφέρονται σε στήλες. Το \"Always\" εμφανίζει τη γραμμή ταξινόμησης ακόμα και όταν είναι ορατές οι κεφαλίδες στηλών με δυνατότητα ταξινόμησης.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Καθορίστε μια παράσταση που υπολογίζει τον αριθμό των σειρών. Αυτή η έκφραση παρακάμπτει τη ρύθμιση \"Αρχικός αριθμός γραμμών\" και επαναξιολογείται κάθε φορά που αλλάζουν οι τιμές στις οποίες αναφέρεται. Το αποτέλεσμα περιορίζεται από τις ρυθμίσεις \"Ελάχιστος αριθμός γραμμών\" και \"Μέγιστος αριθμός γραμμών\". Ενώ έχει οριστεί αυτή η έκφραση, οι ερωτηθέντες δεν μπορούν να προσθέσουν ή να αφαιρέσουν σειρές με μη αυτόματο τρόπο.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

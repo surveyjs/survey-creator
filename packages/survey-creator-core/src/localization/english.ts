@@ -378,7 +378,7 @@ export var enStrings = {
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New entry location",
       pageSize: "Entries per page",
-      allowSort: "Allow users to sort panels",
+      allowSort: "Allow users to sort entries",
       keyName: "Prevent duplicate responses in the following question"
     },
     question: {
@@ -1539,14 +1539,14 @@ export var enStrings = {
       confirmDelete: "Triggers a confirmation prompt before removing an entry.",
       panelCountExpression: "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually.",
       pageSize: "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries.",
-      allowSort: "Allows respondents to sort entries from the sort bar.",
-      sortCriteria: "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority.",
+      allowSort: "Allows respondents to sort entries using the sort bar.",
+      sortCriteria: "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority.",
       showQuestionNumbers: "Assigns numbers to questions nested within the dynamic panel."
     },
     matrixdynamic: {
-      allowSort: "Allows respondents to sort rows by clicking column headers or from the sort bar.",
-      sortCriteria: "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority.",
-      showSortBar: "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well.",
+      allowSort: "Allows respondents to sort rows by clicking column headers or using the sort bar.",
+      sortCriteria: "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority.",
+      showSortBar: "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible.",
       rowCountExpression: "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually.",
       confirmDelete: "Triggers a confirmation prompt before removing a row.",
       detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix."

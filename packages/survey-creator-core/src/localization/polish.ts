@@ -720,8 +720,8 @@ export var polishStrings = {
       newPanelPosition: "Nowa lokalizacja wejścia",
       // [Auto-translated] "Entries per page"
       pageSize: "Wpisy na stronę",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "Pozwól użytkownikom na sortowanie paneli",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Pozwól użytkownikom na sortowanie wpisów",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zapobiegaj zduplikowanym odpowiedziom w następującym pytaniu"
     },
@@ -2845,20 +2845,20 @@ export var polishStrings = {
       panelCountExpression: "Określ wyrażenie, które oblicza liczbę wpisów. To wyrażenie nadpisuje ustawienie \"Początkowa liczba wpisów\" i jest ponownie oceniane za każdym razem, gdy zmieniają się wartości, do których się odwołuje. Wynik jest ograniczony ustawieniami \"Minimalna liczba wpisów\" i \"Maksymalna liczba wpisów\". Podczas gdy to wyrażenie jest ustawione, respondenci nie mogą ręcznie dodawać ani usuwać wpisów.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Określa liczbę wpisów wyświetlanych na każdej stronie panelu. '0' wyłącza paginację i wyświetla wszystkie wpisy.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Pozwala respondentom sortować wpisy z paska sortowania.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Określa kolejność wyświetlania wpisów na początku ankiety. Respondenci mogą ją zmienić, jeśli dozwolone jest sortowanie. Każdy poziom sortowania sortuje według jednego pytania; najpierw stosuje się najwyższy poziom. Przeciągnij poziomy, aby zmienić ich priorytet.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Pozwala respondentom sortować wpisy za pomocą paska sortowania.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definiuje kolejność początkowych wpisów. Respondentzy mogą ją zmienić, jeśli dozwolone jest sortowanie. Podczas sortowania według wielu pytań, każde pytanie sortuje wpisy w kolejności ustalonej przez poprzednie pytanie. Przeciągnij pytania, aby zmienić ich priorytet.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Przypisuje numery pytaniom zagnieżdżonym w panelu dynamicznym."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Pozwala respondentom sortować wiersze klikając nagłówki kolumn lub z paska sortowania.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Określa kolejność wyświetlania wierszy na początku ankiety. Respondenci mogą ją zmienić, jeśli sortowanie jest dozwolone. Każdy poziom sortowania sortuje według jednej kolumny; najpierw stosuje się poziom najwyższy. Przeciągnij poziomy, aby zmienić ich priorytet.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Auto\" wyświetla pasek sortowania tylko wtedy, gdy macierz nie ma nagłówków kolumn do sortowania: nagłówki są ukryte, macierz korzysta z mobilnego układu lub wiersze są przekształcane w kolumny. \"Zawsze\" wyświetla pasek sortowania obok nagłówków kolumn.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Pozwala respondentom sortować wiersze poprzez kliknięcie nagłówków kolumn lub użycie paska sortowania.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definiuje początkową kolejność wierszy. Respondenci mogą ją zmienić, jeśli dozwolone jest sortowanie. Podczas sortowania według wielu kolumn każda kolumna sortuje wiersze w kolejności ustalonej przez poprzednią kolumnę. Przeciągnij kolumny, aby zmienić ich priorytet.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" wyświetla pasek sortowania tylko wtedy, gdy macierz nie ma nagłówków kolumn do sortowania: nagłówki są ukryte, macierz korzysta z układu mobilnego lub wiersze są przekształcane w kolumny. \"Zawsze\" wyświetla pasek sortowania nawet wtedy, gdy nagłówki kolumn do sortowania są widoczne.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Określ wyrażenie, które oblicza liczbę wierszy. To wyrażenie nadpisuje ustawienie \"Początkowa liczba wierszy\" i jest ponownie oceniane za każdym razem, gdy zmieniają się wartości, do których się odwołuje. Wynik jest ograniczony ustawieniami \"Minimalna liczba wierszy\" i \"Maksymalna liczba wierszy\". Podczas gdy to wyrażenie jest ustawione, respondenci nie mogą ręcznie dodawać ani usuwać wierszy.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

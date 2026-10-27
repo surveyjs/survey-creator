@@ -635,6 +635,49 @@ test("Check question converter selected item for customized rating subitems (jso
   surveySettings.animationEnabled = true;
 });
 
+test("Convert input type shows the subitem title for subitems with choices, columns or rows, Bug#8102", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+  const agreeDisagree = [
+    { value: 1, text: "Strongly disagree" },
+    { value: 2, text: "Disagree" },
+    { value: 3, text: "Agree" }
+  ];
+  const getChoices = () => agreeDisagree.map(item => ({ ...item }));
+  creator.toolbox.getItemByName("radiogroup").addSubitem(<any>{
+    name: "agreeDisagree", title: "Agree - Disagree",
+    json: { type: "radiogroup", colCount: 3, choices: getChoices() }
+  });
+  creator.toolbox.getItemByName("dropdown").addSubitem(<any>{
+    name: "agreeDisagree", title: "Agree - Disagree",
+    json: { type: "dropdown", choices: [1, { value: 2 }, { value: 3, text: "Agree" }] }
+  });
+  creator.toolbox.getItemByName("matrix").addSubitem(<any>{
+    name: "agreeDisagree", title: "Agree - Disagree",
+    json: { type: "matrix", columns: getChoices(), rows: ["Row 1", "Row 2"] }
+  });
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", colCount: 3, choices: getChoices() },
+      { type: "dropdown", name: "q2", choices: [1, 2, { value: 3, text: "Agree" }] },
+      { type: "matrix", name: "q3", columns: getChoices(), rows: ["Row 1", "Row 2"] },
+      { type: "radiogroup", name: "q4", choices: [1, 2, 3] }
+    ]
+  };
+  const getConvertInputTypeTitle = (name: string): string => {
+    const question = creator.survey.getQuestionByName(name);
+    creator.selectElement(question);
+    const questionAdorner = new QuestionAdornerViewModel(creator, question, <any>undefined);
+    return questionAdorner.actionContainer.getActionById("convertInputType").title;
+  };
+  expect(getConvertInputTypeTitle("q1"), "radiogroup with choices").toBe("Agree - Disagree");
+  expect(getConvertInputTypeTitle("q2"), "dropdown with choices").toBe("Agree - Disagree");
+  expect(getConvertInputTypeTitle("q3"), "matrix with columns and rows").toBe("Agree - Disagree");
+  expect(getConvertInputTypeTitle("q4"), "radiogroup with other choices").toBe("Radio Button Group");
+
+  surveySettings.animationEnabled = true;
+});
+
 test("Check question converter - convert to 5 stars", (): any => {
   surveySettings.animationEnabled = false;
   const creator = new CreatorTester();

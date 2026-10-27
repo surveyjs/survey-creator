@@ -720,8 +720,8 @@ export var hebrewStrings = {
       newPanelPosition: "מיקום כניסה חדש",
       // [Auto-translated] "Entries per page"
       pageSize: "רשומות בעמוד",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "אפשר למשתמשים למיין לוחות",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "אפשר למשתמשים למיין רשומות",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "מניעת תגובות כפולות בשאלה הבאה"
     },
@@ -2844,20 +2844,20 @@ export var hebrewStrings = {
       panelCountExpression: "יש לציין ביטוי שמחשב את מספר הערכים. ביטוי זה גובר על הגדרת \"מספר הרשומות ההתחלתי\" ומוערך מחדש בכל פעם שהערכים אליהם מתייחס משתנים. התוצאה מוגבלת על ידי הגדרות \"מספר מינימלי של רשומות\" ו\"מספר מקסימלי של כניסות\". בעוד שהביטוי הזה מוגדר, המשיבים אינם יכולים להוסיף או להסיר רשומות ידנית.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "מציין את מספר הערכים המוצגים בכל עמוד של הפאנל. '0' מבטל את העמוד ומציג את כל הערכים.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "מאפשר למשיבים למיין רשומות מתוך סרגל המיון.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "מגדיר את סדר הצגת הערכים כאשר הסקר מתחיל. המשיבים יכולים לשנות זאת אם מותר מיון. כל רמת מיון ממיין לפי שאלה אחת; הרמה העליונה חלה ראשונה. גרור רמות כדי לשנות את העדיפויות שלהן.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "מאפשר למשיבים למיין רשומות באמצעות שורת המיון.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "מגדיר את סדר ההגשה הראשוני. המשיבים יכולים לשנות אותו אם מותר מיון. בעת מיון לפי מספר שאלות, כל שאלה ממיינת את הרשומות בסדר שנקבע על ידי השאלה הקודמת. גררו שאלות כדי לשנות את סדר העדיפויות שלהן.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "מקצה מספרים לשאלות המקוננות בחלונית הדינמית."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "מאפשר למשיבים למיין שורות על ידי לחיצה על כותרות עמודות או מתוך שורת המיון.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "מגדיר את הסדר שבו מוצגות השורות כאשר הסקר מתחיל. המשיבים יכולים לשנות זאת אם מותר מיון. כל רמת מיון ממיין לפי עמודה אחת; הרמה העליונה חלה ראשונה. גרור רמות כדי לשנות את העדיפויות שלהן.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Auto\" מציג את שורת המיון רק כאשר למטריצה אין כותרות עמודות שניתן למיין: הכותרות מוסתרות, המטריצה משתמשת בפריסת הנייד, או שהשורות מועברות לעמודות. \"תמיד\" מציג גם את שורת המיון ליד כותרות העמודות.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "מאפשר למשיבים למיין שורות על ידי לחיצה על כותרות עמודות או שימוש בסרגל המיון.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "מגדיר את סדר השורות ההתחלתי. המשיבים יכולים לשנות אותו אם מותר מיון. בעת מיון לפי מספר עמודות, כל עמודה ממיין שורות בתוך הסדר שנקבע על ידי העמודה הקודמת. גרור עמודות כדי לשנות את העדיפות שלהן.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" מציג את סרגל המיון רק כאשר למטריצה אין כותרות עמודות שניתן למיין: הכותרות מוסתרות, המטריצה משתמשת בפריסת הנייד, או שהשורות מועברות לעמודות. \"תמיד\" מציג את סרגל המיון גם כאשר כותרות עמודות ניתנות למיון נראות.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "ציין ביטוי שמחשב את מספר השורות. ביטוי זה מחליף את הגדרת \"מספר שורות התחלתי\" ומוערך מחדש בכל פעם שהערכים אליהם מתייחס משתנים. התוצאה מוגבלת על ידי הגדרות \"מספר מינימלי של שורות\" ו\"מספר מקסימלי של שורות\". כאשר ביטוי זה מוגדר, המשיבים אינם יכולים להוסיף או להסיר שורות ידנית.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

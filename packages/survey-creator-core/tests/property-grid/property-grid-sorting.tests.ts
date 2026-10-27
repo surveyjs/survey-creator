@@ -85,7 +85,7 @@ describe("Property grid: records sorting", () => {
     expect(panelVisibility(), "#10: the dynamic panel has no showSortBar").toEqual([true, false, false, true]);
     gridQuestion(panelCreator, "allowSort").value = true;
     expect(panelVisibility(), "#11").toEqual([true, true, false, true]);
-    expect(gridQuestion(panelCreator, "allowSort").title, "#12").toBe("Allow users to sort panels");
+    expect(gridQuestion(panelCreator, "allowSort").title, "#12").toBe("Allow users to sort entries");
 
     const dropdownCreator = createCreator({ type: "matrixdropdown", name: "m2", rows: ["r1"], columns: [{ name: "col1" }] });
     expect(["allowSort", "maxSortLevel", "showSortBar", "sortCriteria"]

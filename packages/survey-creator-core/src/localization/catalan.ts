@@ -720,8 +720,8 @@ export var catalanTranslation = {
       newPanelPosition: "Nova ubicación de entrada",
       // [Auto-translated] "Entries per page"
       pageSize: "Entrades per pàgina",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "Permetre als usuaris ordenar els panells",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Permetre als usuaris ordenar les entrades",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Evitar respuestas duplicadas en la següent pregunta"
     },
@@ -2844,20 +2844,20 @@ export var catalanTranslation = {
       panelCountExpression: "Especifica una expressió que calculi el nombre d'entrades. Aquesta expressió sobreescriu l'opció \"Nombre inicial d'entrades\" i es reavalua sempre que canviïn els valors que referencia. El resultat està limitat per les configuracions \"Nombre mínim d'entrades\" i \"Nombre màxim d'entrades\". Mentre aquesta expressió està establerta, els participants no poden afegir o eliminar entrades manualment.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Especifica el nombre d'entrades mostrades a cada pàgina del panell. El '0' desactiva la paginació i mostra totes les entrades.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Permet als enquestats ordenar entrades des de la barra d'ordenació.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Defineix l'ordre en què es mostren les entrades quan comença l'enquesta. Els enquestats poden canviar-ho si es permet ordenar. Cada nivell d'ordenació ordena per una pregunta; el nivell superior s'aplica primer. Arrossega els nivells per canviar-ne la prioritat.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Permet als participants ordenar les entrades utilitzant la barra d'ordenació.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Defineix l'ordre d'entrada inicial. Els enquestats poden canviar-lo si es permet ordenar. Quan ordenes per múltiples preguntes, cada pregunta ordena les entrades dins de l'ordre establert per la pregunta anterior. Arrossega les preguntes per canviar-ne la prioritat.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Assigna números a les preguntes anidades dins del panell dinàmic."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Permet als enquestats ordenar files fent clic a les capçaleres de columnes o des de la barra d'ordenació.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Defineix l'ordre en què es mostren les files quan comença l'enquesta. Els enquestats poden canviar-ho si es permet ordenar. Cada nivell d'ordenació es classifica per una columna; s'aplica primer el nivell superior. Arrossega els nivells per canviar-ne la prioritat.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Auto\" mostra la barra d'ordenació només quan la matriu no té capçaleres de columna ordenables: les capçaleres estan ocultes, la matriu utilitza la disposició mòbil, o les files es transposen a columnes. \"Sempre\" mostra la barra d'ordenació al costat de les capçaleres de columna també.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Permet als enquestats ordenar files fent clic a les capçaleres de columnes o utilitzant la barra d'ordenació.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Defineix l'ordre inicial de les files. Els enquestats poden canviar-lo si es permet ordenar. Quan ordenes per múltiples columnes, cada columna ordena les files dins de l'ordre establert per la columna anterior. Arrossega les columnes per canviar la seva prioritat.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" mostra la barra d'ordenació només quan la matriu no té capçaleres de columna ordenables: les capçaleres estan ocultes, la matriu utilitza la disposició mòbil, o les files es transposen a columnes. \"Sempre\" mostra la barra d'ordenació fins i tot quan hi ha capçaleres de columna ordenables visibles.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Especifica una expressió que calculi el nombre de files. Aquesta expressió sobreescriu l'opció \"Nombre inicial de files\" i es reavalua sempre que canviïn els valors que referencia. El resultat està limitat per les configuracions \"Nombre mínim de files\" i \"Nombre màxim de files\". Mentre aquesta expressió està establerta, els enquestats no poden afegir ni eliminar files manualment.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

@@ -720,8 +720,8 @@ export var huStrings = {
       newPanelPosition: "Új belépési hely",
       // [Auto-translated] "Entries per page"
       pageSize: "Bejegyzések oldalonként",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "Lehetővé tenni a felhasználók számára, hogy paneleket rendezzenek",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Engedd a felhasználók a bejegyzések rendezésére",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Ismétlődő válaszok elkerülése a következő kérdésben"
     },
@@ -2844,20 +2844,20 @@ export var huStrings = {
       panelCountExpression: "Határozz meg egy kifejezést, amely kiszámítja a bejegyzések számát. Ez a kifejezés felülírja a \"Kezdeti bejegyzések száma\" beállítást, és újraértékelik, amikor az adott értékek változnak. Az eredményt a \"Minimum bejegyzések száma\" és \"Maximális bejegyzések száma\" beállítások korlátozzák. Amíg ez az kifejezés be van állítva, a válaszadók nem adhatnak hozzá vagy törölhetnek bejegyzéseket manuálisan.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Megadja, hogy hány bejegyzést jelenítsen meg a panel egyes oldalain. A '0' letiltja az oldalozást, és minden bejegyzést megjelenít.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Lehetővé teszi a válaszadók számára, hogy a sortozó sávból rendezzék be a bejegyzéseket.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Meghatározza a sorrendet, ahogyan a bejegyzések megjelennek, amikor a felmérés elkezdődik. A válaszadók módosíthatják azt, ha a rendezés engedélyezett. Minden rendezési szint egy kérdés szerint rendeződik; a legfelső szint érvényes először. Húzd a szinteket, hogy megváltoztasd az prioritásukat.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Lehetővé teszi a válaszadók számára, hogy a sortozó sáv segítségével rendezzék a bejegyzéseket.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Meghatározza az első belépési sorrendet. A válaszadók megváltoztathatják azt, ha a rendezés engedélyezett. Több kérdés szerinti rendezéskor minden kérdés a korábbi kérdés által meghatározott sorrendben rendezi a bejegyzéseket. Húzd a kérdéseket a prioritásuk megváltoztatásához.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Számokat rendel a dinamikus panelbe ágyazott kérdésekhez."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Lehetővé teszi a válaszadók számára, hogy sorokat válogassanak oszlopfejlécekre kattintva vagy a rendezési sávból.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Meghatározza, hogy a sorok sorok sorban jelennek meg a felmérés kezdetekor. A válaszadók módosíthatják azt, ha a rendezés engedélyezett. Minden rendezési szint egy oszlop szerint rendeződik; a legfelső szint érvényes először. Húzd a szinteket, hogy megváltoztasd az elsőbbséget.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "Az \"Auto\" csak akkor jeleníti meg a rendezési sávot, ha a mátrixnak nincsenek rendezhető oszlopfejlécei: a fejlécek el vannak rejtve, a mátrix mobil elrendezést használja, vagy a sorokat oszlopokba transzponálják. A \"Mindig\" a sorozássáv is megjelenik az oszlopfejlécek mellett.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Lehetővé teszi a válaszadók számára, hogy sorokat rendezjenek oszlopfejlécekre kattintva vagy a rendezési sáv használatával.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definiálja az eredeti sorrendet. A válaszadók megváltoztathatják azt, ha a rendezés engedélyezett. Több oszlop szerinti rendezés esetén minden oszlop sorokat rendez az előző oszlop által meghatározott sorrendben. Húzd az oszlopokat, hogy megváltoztasd prioritásukat.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "Az \"Auto\" csak akkor jeleníti meg a sorozási sávot, ha a mátrixnak nincsenek rendezhető oszlopfejlécei: a fejlécek rejtettek, a mátrix mobil elrendezést használja, vagy a sorok oszlopokba vannak áthelyezve. \"Mindig\" akkor is megjeleníti a rendezési sávot, ha a rendezhető oszlopfejlécek láthatóak.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Határozz meg egy kifejezést, amely kiszámítja a sorok számát. Ez a kifejezés felülírja a \"Kezdeti sorszám\" beállítást, és újraértékelik, amikor az említett értékek változnak. Az eredményt korlátozzák a \"Minimum sorszám\" és \"Maximális sorszám\" beállítások. Amíg ez a kifejezés be van állítva, a válaszadók nem adhatnak hozzá vagy távolíthatnak sorokat manuálisan.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

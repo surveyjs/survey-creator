@@ -720,8 +720,8 @@ export var fiStrings = {
       newPanelPosition: "Uusi sisääntulopaikka",
       // [Auto-translated] "Entries per page"
       pageSize: "Merkinnät per sivu",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "Anna käyttäjien lajitella paneeleja",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Salli käyttäjien lajitella merkintöjä",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Estä päällekkäiset vastaukset seuraavassa kysymyksessä"
     },
@@ -2844,20 +2844,20 @@ export var fiStrings = {
       panelCountExpression: "Määritä lauseke, joka laskee merkintöjen määrän. Tämä lauseke ohittaa \"Alkuperäinen merkintöjen määrä\" -asetuksen ja sitä arvioidaan uudelleen aina, kun viittaavat arvot muuttuvat. Tulos on rajoitettu \"Vähimmäismäärä merkintöjä\" ja \"Suurin määrä merkintöjä\" -asetuksilla. Kun tämä lauseke on asetettu, vastaajat eivät voi lisätä tai poistaa merkintöjä manuaalisesti.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Määrittää, kuinka monta merkintää näytetään jokaisella paneelin sivulla. '0' poistaa sivuttamisen käytöstä ja näyttää kaikki merkinnät.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Mahdollistaa vastaajien lajitella merkinnät lajittelupalkista.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Määrittelee, missä järjestyksessä merkinnät näytetään kyselyn alkaessa. Vastaajat voivat muuttaa sitä, jos lajittelu on sallittua. Jokainen lajittelutaso lajitellaan yhden kysymyksen mukaan; ylin taso sovelletaan ensin. Vedä tasoja muuttaaksesi niiden prioriteettia.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Sallii vastaajien lajitella merkintöjä lajittelupalkin avulla.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Määrittelee alkuperäisen merkintäjärjestyksen. Vastaajat voivat muuttaa sitä, jos lajittelu on sallittua. Kun lajitellaan useamman kysymyksen mukaan, jokainen kysymys lajittelee merkinnät edellisen kysymyksen määrittelemässä järjestyksessä. Vedä kysymyksiä muuttaaksesi niiden prioriteettia.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Määrittää numerot kysymyksiin, jotka on sisäkkäin dynaamisessa paneelissa."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Sallii vastaajien lajitella rivejä klikkaamalla sarakeotsikoita tai lajittelupalkista.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Määrittelee järjestyksen, jossa rivit näytetään kyselyn alkaessa. Vastaajat voivat muuttaa sitä, jos lajittelu on sallittua. Jokainen lajittelutaso lajitellaan yhden sarakkeen mukaan; ylin taso sovelletaan ensin. Vedä tasoja muuttaaksesi niiden prioriteettia.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Auto\" näyttää lajittelupalkin vain, kun matriisissa ei ole lajiteltavia sarakeotsikoita: otsikot ovat piilotettuja, matriisi käyttää mobiiliasettelua tai rivit on siirretty sarakkeiksi. \"Aina\" näyttää lajittelupalkin myös sarakkeiden otsikoiden vieressä.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Antaa vastaajille mahdollisuuden lajitella rivejä klikkaamalla sarakeotsikoita tai käyttämällä lajittelupalkkia.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Määrittelee alkuperäisen rivijärjestyksen. Vastaajat voivat muuttaa sitä, jos lajittelu on sallittua. Kun lajitellaan useamman sarakkeen mukaan, jokainen sarake lajittelee rivit edellisen sarakkeen asettaman järjestyksen mukaisesti. Vedä sarakkeita muuttaaksesi niiden prioriteettia.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" näyttää lajittelupalkin vain, kun matriisissa ei ole lajiteltavia sarakeotsikoita: otsikot ovat piilotettuja, matriisi käyttää mobiiliasettelua tai rivit siirretään sarakkeisiin. \"Aina\" näyttää lajittelupalkin, vaikka lajitteltavat sarakkeen otsikot näkyisivät.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Määritä lauseke, joka laskee rivien määrän. Tämä lauseke ohittaa \"Alkuperäinen rivien määrä\" -asetuksen ja arvioidaan uudelleen aina, kun viittaamat arvot muuttuvat. Tulos on rajoitettu asetuksilla \"Minimimäärä rivejä\" ja \"Suurin määrä rivejä\". Vaikka tämä lauseke on asetettu, vastaajat eivät voi lisätä tai poistaa rivejä manuaalisesti.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."

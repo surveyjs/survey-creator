@@ -720,8 +720,8 @@ export var htStrings = {
       newPanelPosition: "Nouvo kote panèl",
       // [Auto-translated] "Entries per page"
       pageSize: "Entries pou chak paj",
-      // [Auto-translated] "Allow users to sort panels"
-      allowSort: "Pèmèt itilizatè yo sòt panno",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Pèmèt itilizatè yo sòt antre yo",
       // "Prevent duplicate responses in the following question"
       keyName: "Anpeche repons doub nan kesyon sa a"
     },
@@ -2844,20 +2844,20 @@ export var htStrings = {
       panelCountExpression: "Espesifye yon ekspresyon ki kalkile kantite antre yo. Ekspresyon sa a depase anviwònman an \"Premye kantite antre\" epi li re-evalye chak fwa valè yo li referans chanje. Rezilta a limite pa \"Kantite minimòm antre yo\" ak \"Maksimòm kantite antre\". Pandan ke ekspresyon sa a mete, moun ki repond yo pa ka ajoute oswa retire antre manyèlman.",
       // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
       pageSize: "Espesifye kantite antre yo montre sou chak paj nan panèl la. '0' enfim paginasyon ak montre tout antre yo.",
-      // [Auto-translated] "Allows respondents to sort entries from the sort bar."
-      allowSort: "Pèmèt moun ki repond sòt antre soti nan ba a sòt.",
-      // [Auto-translated] "Defines the order in which entries are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one question; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Defini lòd nan ki antre yo parèt lè sondaj la kòmanse. Moun ki repond yo ka chanje li si klasman pèmèt. Chak nivo sòt sòt pa yon kesyon; nivo tèt la aplike an premye. Trennen nivo yo chanje priyorite yo.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Pèmèt moun ki repond sòt antre lè l sèvi avèk ba a sòt.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Defini lòd antre inisyal la. Moun ki repond yo ka chanje li si klasman pèmèt. Lè triye pa kesyon miltip, chak kesyon sòt antre nan lòd la etabli pa kesyon anvan an. Trennen kesyon yo chanje priyorite yo.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Asiyen nimewo nan kesyon ki enbrike nan panèl dinamik la."
     },
     matrixdynamic: {
-      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or from the sort bar."
-      allowSort: "Pèmèt moun ki repond sòt ranje ranje pa klike sou kolòn oswa soti nan ba a sòt.",
-      // [Auto-translated] "Defines the order in which rows are displayed when the survey starts. Respondents can change it if sorting is allowed. Each sort level sorts by one column; the top level applies first. Drag levels to change their priority."
-      sortCriteria: "Defini lòd nan ki ranje yo parèt lè sondaj la kòmanse. Moun ki repond yo ka chanje li si klasman pèmèt. Chak sòt klase pa yon kolòn; nivo tèt la aplike an premye. Trennen nivo yo chanje priyorite yo.",
-      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar next to the column headers as well."
-      showSortBar: "\"Auto\" montre ba a sòt sèlman lè matris la pa gen okenn kolòn triyabl: headers yo kache, matris la itilize Layout mobil lan, oswa ranje yo transpoze nan kolòn. \"Toujou\" montre ba a sòt akote kolòn yo tou.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Pèmèt moun ki repond sòt ranje ranje pa klike sou kolòn oswa lè l sèvi avèk ba a sòt.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Defini lòd premye ranje a. Moun ki repond yo ka chanje li si se klasman pèmèt. Lè triye pa kolòn miltip, chak kolòn sòt ranje ranje nan lòd la etabli pa kolòn anvan an. Trennen kolòn yo chanje priyorite yo.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" montre ba a sòt sèlman lè matris la pa gen okenn kolòn triyabl: yo kache, matris la itilize Layout mobil lan, oswa ranje yo transpoze nan kolòn. \"Toujou\" montre ba a sòt menm lè kolòn triyabl yo vizib.",
       // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
       rowCountExpression: "Presize yon ekspresyon ki kalkile kantite ranje. Ekspresyon sa a depase anviwònman an \"Nimewo inisyal ranje\" epi li re-evalye chak fwa valè yo li referans chanje. Rezilta a limite pa \"Kantite minimòm\" ak \"Maksimòm kantite ranje\" anviwònman. Pandan ke ekspresyon sa a mete, moun ki repond yo pa ka ajoute oswa retire ranje manyèlman.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
