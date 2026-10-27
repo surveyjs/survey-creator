@@ -22,8 +22,8 @@ class FakeIntersectionObserver {
   public disconnect(): void {
     this.targets = [];
   }
-  public fireIntersecting(): void {
-    this.callback(this.targets.map(target => ({ target, isIntersecting: true })));
+  public fireIntersecting(isIntersecting: boolean = true): void {
+    this.callback(this.targets.map(target => ({ target, isIntersecting })));
   }
 }
 
@@ -122,6 +122,38 @@ describe("CreatorSurveyPageComponent lazy content rendering", () => {
     expect(root.querySelector(".svc-question__drag-area .svc-page__content-actions")).toBeTruthy();
     expect(root.querySelector(".svc-page__footer .svc-add-new-question-action .svc-surface-btn__selector")).toBeTruthy();
     expect(root.getAttribute("data-sv-drop-target-survey-page")).toBe("page6");
+
+    ReactDOM.unmountComponentAtNode(container);
+    document.body.removeChild(container);
+  });
+
+  test("A page placeholder's loading indicator is marked visible only while the page is in the viewport", async () => {
+    const creator = new SurveyCreator({ showLogicTab: false });
+    creator.JSON = createJSON(8);
+    // keeps the placeholder on screen: the page content does not render when the page becomes visible
+    (creator.survey as any)._isLazyRenderingSuspended = true;
+    const container = document.createElement("div");
+    document.body.appendChild(container);
+    const page = creator.survey.pages[5];
+    ReactDOM.render(
+      React.createElement(CreatorSurveyPageComponent as any, { creator, survey: creator.survey, page, isGhost: false }),
+      container
+    );
+
+    const adorner = getAdorner(page);
+    const getPlaceholderClass = () => container.querySelector(".svc-page__loading-content").className;
+    expect(adorner.needRenderContent).toBe(false);
+    expect(getPlaceholderClass()).toBe("svc-page__loading-content");
+
+    adorner["visibilityObserver"].fireIntersecting(true);
+    await new Promise(resolve => setTimeout(resolve, 10));
+    expect(adorner.needRenderContent).toBe(false);
+    expect(getPlaceholderClass()).toBe("svc-page__loading-content svc-page__loading-content--visible");
+
+    adorner["visibilityObserver"].fireIntersecting(false);
+    await new Promise(resolve => setTimeout(resolve, 10));
+    expect(adorner.needRenderContent).toBe(false);
+    expect(getPlaceholderClass()).toBe("svc-page__loading-content");
 
     ReactDOM.unmountComponentAtNode(container);
     document.body.removeChild(container);
