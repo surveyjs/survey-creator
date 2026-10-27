@@ -1,5 +1,6 @@
 import type { Locator, Page } from "@playwright/test";
 import { expect, test as baseTest } from "@playwright/test";
+import * as path from "path";
 
 export const url = "http://127.0.0.1:8080/test-pages/default";
 export const urlByPage = "http://127.0.0.1:8080/test-pages/by-page";
@@ -49,7 +50,8 @@ export async function compareScreenshot(
   const pwOptions: {timeout: number, maxDiffPixels?: number} = {
     timeout: 10000,
     maskColor: "#000000",
-    ...options
+    ...options,
+    stylePath: [path.join(__dirname, "hide-tooltips.css")].concat(options.stylePath || [])
   };
 
   // Web fonts (Open Sans, several weights) load lazily over the network; a screenshot taken
