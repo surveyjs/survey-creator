@@ -39,6 +39,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "visible",
       "readOnly",
       "isRequired",
+      "allowClear",
       "showTitle",
       "showCommentArea",
       "commentText",
@@ -160,6 +161,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "rows", tab: "rows" },
       { name: "alternateRows", tab: "rows" },
       { name: "transposeData", tab: "rows" },
+      { name: "allowClear", tab: "choices" },
       { name: "choices", tab: "choices" },
       { name: "columnColCount", tab: "choices" }
     ],
@@ -285,7 +287,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "tooltipVisibility", tab: "sliderSettings" },
       { name: "tooltipFormat", tab: "sliderSettings" },
       { name: "allowSwap", tab: "sliderSettings" },
-      { name: "allowClear", tab: "sliderSettings" },
       { name: "minValueExpression", tab: "logic", index: 410 },
       { name: "maxValueExpression", tab: "logic", index: 420 },
     ],
@@ -293,6 +294,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   selectbase: {
     properties: [
+      { name: "allowClear", tab: "choices" },
       { name: "choices", tab: "choices" },
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
@@ -700,7 +702,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "tooltipVisibility", tab: "sliderSettings" },
       { name: "tooltipFormat", tab: "sliderSettings" },
       { name: "allowSwap", tab: "sliderSettings" },
-      { name: "allowClear", tab: "sliderSettings" },
       { name: "minValueExpression", tab: "logic", index: 410 },
       { name: "maxValueExpression", tab: "logic", index: 420 },
     ],

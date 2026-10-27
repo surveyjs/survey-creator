@@ -3300,6 +3300,7 @@ test("isSupportGrouping", () => {
 
 test("QuestionLinkValueModel showClear #2563", (): any => {
   const q = new QuestionLinkValueModel("q1");
+  expect(q.getTitleActions()).toHaveLength(0);
   expect(q.showClear).toBeFalsy();
   q.value = ["one"];
   expect(q.showClear).toBeTruthy();
