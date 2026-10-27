@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Base, SurveyModel, PageModel } from "survey-core";
 import {
+  ComponentsContainer,
+  Popup,
   ReactElementFactory,
   Scroll,
   SurveyActionBar,
@@ -10,6 +12,9 @@ import {
 import { SurveyCreatorModel, TabDesignerViewModel } from "survey-creator-core";
 import { SurveyPageNavigator } from "../PageNavigator";
 import { SurfacePlaceholder } from "../components/SurfacePlaceholder";
+import "../inline-designer/InlineElementToolbar";
+import "../inline-designer/InlineAddHandle";
+import "../inline-designer/InlinePropertyGrid";
 interface ITabDesignerComponentProps {
   data: TabDesignerViewModel;
 }
@@ -22,6 +27,19 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     return this.model.creator;
   }
 
+  private inlineRoot: HTMLDivElement;
+  private setInlineRoot = (el: HTMLDivElement) => {
+    this.inlineRoot = el;
+    this.model.setInlineRootElement(el);
+  };
+  componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
+    // React reuses this component and its root for a new creator: the ref callback does not run again.
+    if (prevProps.data !== this.props.data && !!this.inlineRoot) {
+      prevProps.data?.setInlineRootElement(null);
+      this.model.setInlineRootElement(this.inlineRoot);
+    }
+  }
   private denyUpdate = () => {
     this.denyComponentUpdate();
   };
@@ -77,6 +95,27 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   }
   renderElement(): React.JSX.Element {
     const designerTabClassName = "svc-tab-designer " + this.model.getRootCss();
+    const content = (
+      <div className="svc-tab-designer_content">
+        {this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent()}
+      </div>
+    );
+    // Inline mode: no toolbox column and no Scroll, the host page scrolls. The element toolbar is a sibling
+    // of the surface: the survey theme variables and clickDesigner stay on the surface (ET02).
+    if (this.creator.isInlineLayout) {
+      const inlineDesigner = this.model.inlineDesigner;
+      return (
+        <React.Fragment>
+          {this.renderInlineSurface(designerTabClassName, content)}
+          {!!inlineDesigner ? ReactElementFactory.Instance.createElement("svc-inline-element-toolbar", { model: inlineDesigner, key: "svc-inline-element-toolbar" }) : null}
+          {!!inlineDesigner ? ReactElementFactory.Instance.createElement("svc-inline-add-handle", { model: inlineDesigner, key: "svc-inline-add-handle" }) : null}
+          {/* The toolbox popup (04): a sibling too, not inside the toolbar root, which hides on every re-target. */}
+          {!!inlineDesigner ? <Popup key="svc-inline-toolbox-popup" model={inlineDesigner.toolboxPopupModel}></Popup> : null}
+          {/* The floating property grid (05): outside .svc-tab-designer, so it keeps the Creator theme. */}
+          {!!inlineDesigner ? ReactElementFactory.Instance.createElement("svc-inline-property-grid", { model: inlineDesigner, key: "svc-inline-property-grid" }) : null}
+        </React.Fragment>
+      );
+    }
 
     return (
       <React.Fragment>
@@ -85,12 +124,24 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
         </div>
         <div className={designerTabClassName} onClick={() => this.model.clickDesigner()}>
           <Scroll>
-            <div className="svc-tab-designer_content">
-              {this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent()}
-            </div>
+            {content}
           </Scroll>
         </div>
       </React.Fragment>
+    );
+  }
+  private renderInlineSurface(designerTabClassName: string, content: React.JSX.Element): React.JSX.Element {
+    // Keyed: the standard branch's first child is a div too, and React must not reuse it for the inline root.
+    return (
+      <div key="svc-inline-surface" ref={this.setInlineRoot} className={designerTabClassName} style={this.model.getRootStyle()} onClick={() => this.model.clickDesigner()}
+        onClickCapture={(e) => {
+          if (this.model.isInlineInertTarget(e.target as HTMLElement)) {
+            e.stopPropagation();
+            e.preventDefault();
+          }
+        }}>
+        {content}
+      </div>
     );
   }
 
@@ -98,6 +149,12 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     if (!condition) return null;
 
     const survey: SurveyModel = this.creator.survey;
+    // Inline mode renders the header the live survey renders: the advanced header is a layout element.
+    if (this.creator.isInlineLayout && survey.headerView !== "basic") {
+      return (<div className="svc-designer-header">
+        <ComponentsContainer survey={survey} container={"header"} needRenderWrapper={false}></ComponentsContainer>
+      </div>);
+    }
     return (<React.Fragment>
       <div className="svc-designer-header">
         <SurveyHeader survey={survey}></SurveyHeader>
@@ -121,10 +178,13 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   renderTabContent(): React.JSX.Element {
     const survey: SurveyModel = this.creator.survey;
     const surveyHeader = this.renderHeader(this.creator.showSurveyHeader);
-    const style: any = { ...this.model.surfaceCssVariables };
+    const style: any = { ...this.model.getSurfaceCssVariables() };
     style.maxWidth = survey.renderedWidth;
 
     const tabTools = this.renderTabTools();
+    if (this.creator.isInlineLayout) {
+      return this.renderInlineTabContent(surveyHeader, style);
+    }
 
     return (<React.Fragment>
       <div className={this.model.designerCss} style={style} >
@@ -141,6 +201,43 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     </React.Fragment>);
   }
 
+  // Inline mode: the page sits in the live survey's body structure (sd-body and its column wrappers),
+  // followed by the survey's own navigation bar (SP07).
+  renderInlineTabContent(surveyHeader: React.JSX.Element, style: any): React.JSX.Element {
+    const survey: SurveyModel = this.creator.survey;
+    const bodyStyle: any = {};
+    if (!!survey.renderedWidth) bodyStyle.maxWidth = survey.renderedWidth;
+    delete style.maxWidth;
+    return (
+      <div className={this.model.designerCss} style={style} >
+        {surveyHeader}
+        <div className={survey.bodyContainerCss}>
+          <div className="sv-components-column sv-components-column--expandable">
+            <div className={survey.bodyCss} style={bodyStyle}>
+              <ComponentsContainer survey={survey} container={"contentTop"}></ComponentsContainer>
+              {this.getRenderedPages()}
+              {this.renderInlineNavigation()}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  renderInlineNavigation(): React.JSX.Element {
+    const survey: SurveyModel = this.creator.survey;
+    // isNavigationButtonsShowing is "none" in design mode, so the layout element is in no container.
+    if (!survey.showNavigationButtons || survey.navigationButtonsLocation === "top") return null;
+    return (
+      <div className="sv-components-column sv-components-container-contentBottom svc-inline-navigation"
+        onClickCapture={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          this.model.onInlineNavigationClick(e.target as HTMLElement);
+        }}>
+        <SurveyActionBar model={survey.navigationBar}></SurveyActionBar>
+      </div>
+    );
+  }
   renderTabTools(): React.JSX.Element {
     if (!this.model.showSurfaceTools) return null;
 

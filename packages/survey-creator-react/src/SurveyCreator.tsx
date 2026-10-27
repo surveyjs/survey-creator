@@ -97,35 +97,49 @@ export class SurveyCreatorComponent extends SurveyElementBase<
           {this.renderCollabBar()}
           <div className={fullContainerClassName}>
             <div className="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
-              <div className="svc-top-bar">
-                {(creator.showTabs ?
-                  <div className="svc-tabbed-menu-wrapper">
-                    <TabbedMenuComponent model={creator.tabbedMenu}></TabbedMenuComponent>
-                  </div> : null)}
-                {(creator.showToolbar ?
-                  <div className="svc-toolbar-wrapper">
-                    <SurveyActionBar model={creator.toolbar}></SurveyActionBar>
-                  </div>
-                  : null)}
-              </div>
+              {this.renderTopBar()}
               <div className={contentWrapperClassName}>
                 <div className="svc-creator__content-holder svc-flex-column">
                   {this.renderActiveTab()}
                 </div>
               </div>
-              <div className="svc-footer-bar">
-                {(creator.isMobileView ?
-                  <div className="svc-toolbar-wrapper">
-                    <SurveyActionBar model={creator.footerToolbar}></SurveyActionBar>
-                  </div>
-                  : null)}
-              </div>
+              {this.renderFooterBar()}
             </div>
             {this.renderSidebar()}
           </div>
           {licenseBanner}
           <NotifierComponent notifier={creator.notifier}></NotifierComponent>
         </div>
+      </div>
+    );
+  }
+  renderTopBar() {
+    const creator: SurveyCreatorModel = this.props.creator;
+    if (creator.isInlineLayout) return null;
+    return (
+      <div className="svc-top-bar">
+        {(creator.showTabs ?
+          <div className="svc-tabbed-menu-wrapper">
+            <TabbedMenuComponent model={creator.tabbedMenu}></TabbedMenuComponent>
+          </div> : null)}
+        {(creator.showToolbar ?
+          <div className="svc-toolbar-wrapper">
+            <SurveyActionBar model={creator.toolbar}></SurveyActionBar>
+          </div>
+          : null)}
+      </div>
+    );
+  }
+  renderFooterBar() {
+    const creator: SurveyCreatorModel = this.props.creator;
+    if (creator.isInlineLayout) return null;
+    return (
+      <div className="svc-footer-bar">
+        {(creator.isMobileView ?
+          <div className="svc-toolbar-wrapper">
+            <SurveyActionBar model={creator.footerToolbar}></SurveyActionBar>
+          </div>
+          : null)}
       </div>
     );
   }

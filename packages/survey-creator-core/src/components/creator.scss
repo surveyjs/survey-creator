@@ -181,3 +181,40 @@ survey-creator,
   bottom: var(--sjs2-spacing-negative-x050);
 }
 
+
+// Inline layout mode (creator.layoutMode = "inline"): the root grows with its content and the host page
+// scrolls. Every wrapper between the root and the design surface drops its fixed height, its scroll
+// container and its background.
+.svc-creator.svc-creator--inline {
+  height: auto;
+  background-color: transparent;
+
+  .svc-creator__area,
+  .svc-full-container {
+    height: auto;
+  }
+
+  .svc-flex-row.svc-full-container {
+    height: auto;
+    min-height: 0;
+  }
+
+  .svc-flex-row__element--growing {
+    overflow: visible;
+  }
+
+  // In an auto-height column "height: 0; flex-grow: 1" collapses to 0.
+  .svc-creator__content-wrapper {
+    height: auto;
+    flex-grow: 0;
+  }
+
+  .svc-creator__content-holder {
+    height: auto;
+  }
+
+  .svc-creator-tab {
+    height: auto;
+    overflow: visible;
+  }
+}

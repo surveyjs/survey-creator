@@ -135,6 +135,8 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     // The loading placeholder renders no header and no footer: reading their action containers builds them
     // (and fires onElementGetActions / onPageGetFooterActions) for every page, rendered or not.
     if (!this.model.needRenderContent) return null;
+    // Inline mode (SP03): no page drag area, actions or footer; their models stay unbuilt.
+    if (this.props.creator.isInlineLayout) return null;
     const actions = (<div className="svc-page__content-actions">
       <SurveyActionBar model={this.model.actionContainer}></SurveyActionBar>
       {(this.model.topActionContainer.hasActions ? <SurveyActionBar model={this.model.topActionContainer}></SurveyActionBar> : null)}
@@ -152,7 +154,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     );
   }
   protected renderFooter(): React.JSX.Element {
-    if (!this.model.needRenderContent) return null;
+    if (!this.model.needRenderContent || this.props.creator.isInlineLayout) return null;
     return <SurveyActionBar model={this.model.footerActionsBar}></SurveyActionBar>;
   }
 }

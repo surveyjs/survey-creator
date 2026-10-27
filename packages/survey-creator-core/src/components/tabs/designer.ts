@@ -1,4 +1,4 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation, IAction, activateLazyRenderingChecks, toCssClasses, ITheme } from "survey-core";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation, IAction, activateLazyRenderingChecks, toCssClasses, ITheme, classesToSelector } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
@@ -7,6 +7,8 @@ import { DragDropSurveyElements } from "../../dragdrop-survey-elements";
 import { SurveyElementAdornerBase } from "../survey-element-adorner-base";
 import { assign } from "../../utils/utils";
 import "./designer.scss";
+import "../inline-designer/inline-surface.scss";
+import { InlineDesignerModel } from "../inline-designer/inline-designer";
 
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.designMode.showEmptyTitles;
 
@@ -83,6 +85,8 @@ export class TabDesignerViewModel extends Base {
   }
   private get canShowNewPage(): boolean {
     if (!this.survey || this.creator.pageEditMode === "single" || !this.creator.allowModifyPages) return false;
+    // Inline mode has no ghost page; the empty-survey placeholder (showPlaceholder) still gets its drop target.
+    if (this.creator.isInlineLayout) return false;
     return true;
     // if (this.creator.pageEditMode === "bypage") return true;
     // const pages: PageModel[] = this.survey.pages;
@@ -101,7 +105,7 @@ export class TabDesignerViewModel extends Base {
       const cssVariables = {};
       if (!this.creator.dragDropChoices["parentElement"]?.survey["isPopupEditorContent"]) {
         shortcut.classList.add("svc-surface-drag-drop-choices-shortcut");
-        assign(cssVariables, this.surfaceCssVariables);
+        assign(cssVariables, this.getSurfaceCssVariables());
       }
       Object.keys(cssVariables).forEach((key) => {
         shortcut.style.setProperty(key, cssVariables[key]);
@@ -112,6 +116,18 @@ export class TabDesignerViewModel extends Base {
     this.initSurvey();
     this.updateUnitDictionaryFromTheme();
     this.updateSurfaceCssVariables();
+    this.updateInlineDesigner();
+  }
+
+  // Inline mode (G02): the floating parts (element toolbar, later the toolbox popup and the property grid panel).
+  @property() inlineDesigner: InlineDesignerModel;
+  private updateInlineDesigner(): void {
+    if (this.creator.isInlineLayout && !this.inlineDesigner) {
+      this.inlineDesigner = new InlineDesignerModel(this.creator, () => this.inlineRootElement);
+    } else if (!this.creator.isInlineLayout && !!this.inlineDesigner) {
+      this.inlineDesigner.dispose();
+      this.inlineDesigner = undefined;
+    }
   }
 
   public updateUnitDictionaryFromTheme() {
@@ -122,6 +138,59 @@ export class TabDesignerViewModel extends Base {
 
   public updateSurfaceCssVariables() {
     this.surfaceCssVariables = { ...this.creator.defaultSurfaceCssVariables, ...this.scaleCssVariables };
+  }
+  // Inline mode paints the surface with the survey's own theme. The designer never renders the survey's
+  // root, which is where the live survey puts these variables.
+  public getSurfaceCssVariables(): { [index: string]: string } {
+    return this.creator.isInlineLayout ? this.survey.themeVariables : this.surfaceCssVariables;
+  }
+  public getRootStyle(): { [index: string]: string } {
+    return this.creator.isInlineLayout ? this.survey.themeVariables : undefined;
+  }
+  public updateInlineLayout(): void {
+    this.checkNewPage(true);
+    this.updatePages();
+    this.updateInlineDesigner();
+  }
+  // Inline mode (SP10): the design survey becomes mobile at the same width as the live one. The live survey
+  // observes its root and compares its width with the --sd-mobile-width css variable; so does this.
+  private inlineResizeObserver: ResizeObserver;
+  public inlineRootElement: HTMLElement;
+  public setInlineRootElement(el: HTMLElement): void {
+    this.inlineRootElement = el;
+    this.inlineDesigner?.resolveTarget();
+    this.inlineResizeObserver?.disconnect();
+    this.inlineResizeObserver = undefined;
+    if (!el || !this.creator.isInlineLayout || typeof ResizeObserver === "undefined") return;
+    const update = () => {
+      const survey = this.survey;
+      if (!survey || survey.isDisposed || !this.creator.isInlineLayout) return;
+      const varName = survey.css.variables?.mobileWidth || "--sd-mobile-width";
+      const mobileWidth = Number.parseFloat(getComputedStyle(el).getPropertyValue(varName));
+      if (!mobileWidth) return;
+      survey.setIsMobile(el.offsetWidth < mobileWidth);
+    };
+    this.inlineResizeObserver = new ResizeObserver(() => update());
+    this.inlineResizeObserver.observe(el);
+    update();
+  }
+  // Inline mode: the dynamic panel's Add / Remove buttons are rendered only to keep the live layout; clicks do nothing.
+  public isInlineInertTarget(target: HTMLElement): boolean {
+    if (!this.creator.isInlineLayout || !target || !target.closest) return false;
+    const css = this.survey.css.paneldynamic || {};
+    return [css.buttonAdd, css.buttonRemove].some(c => !!c && !!target.closest(classesToSelector(c)));
+  }
+  // Inline mode (SP07): Previous / Next of the rendered survey navigation switch the displayed page.
+  public onInlineNavigationClick(target: HTMLElement): void {
+    const css = this.survey.css.navigation || {};
+    const pages = this.survey.pages.filter(p => p.isVisible);
+    const index = pages.indexOf(this.pagesController.page2Display);
+    let delta = 0;
+    if (!!css.prev && !!target.closest(classesToSelector(css.prev))) delta = -1;
+    if (!!css.next && !!target.closest(classesToSelector(css.next))) delta = 1;
+    const page = pages[index + delta];
+    if (!delta || !page) return;
+    this.pagesController.currentPage = page;
   }
 
   private initSurfaceToolbar() {
@@ -246,9 +315,10 @@ export class TabDesignerViewModel extends Base {
   }
   public get showSurfaceToolbar(): boolean {
     const hasVisibleItems = this.surfaceToolbar.actions.some((action) => action.visible);
-    return this.creator.allowShowSurfaceToolbar && hasVisibleItems;
+    return this.creator.allowShowSurfaceToolbar && !this.creator.isInlineLayout && hasVisibleItems;
   }
   public get showSurfaceTools(): boolean {
+    if (this.creator.isInlineLayout) return false;
     return !this.creator.isMobileView && (this.showSurfaceToolbar || (this.creator.showPageNavigator && (this.survey.pageCount > 1 || this.creator.pageEditMode === "bypage")));
   }
 
@@ -335,6 +405,11 @@ export class TabDesignerViewModel extends Base {
     this.pages = this.survey.pages.concat(this.showNewPage ? [this.newPage] : []);
   }
   public dispose(): void {
+    this.inlineDesigner?.dispose();
+    this.inlineDesigner = undefined;
+    this.inlineRootElement = undefined;
+    this.inlineResizeObserver?.disconnect();
+    this.inlineResizeObserver = undefined;
     super.dispose();
     this.cssUpdater && this.cssUpdater.dispose();
     this.survey.unRegisterFunctionOnPropertyValueChanged("pages", "__designer_tab_model__");
@@ -413,6 +488,11 @@ export class TabDesignerViewModel extends Base {
   }
   public getRootCss(): string {
     let rootCss = this.survey.css.root;
+    if (this.creator.isInlineLayout) {
+      // The live survey's root carries rootTheme too; without it the variables would resolve differently here.
+      rootCss += " " + this.survey.css.rootTheme + " svc-tab-designer--inline";
+      if (this.survey.isMobile) rootCss += " " + this.survey.css.rootMobile;
+    }
     if (this.showSurfaceTools) {
       rootCss += " svc-tab-designer--with-surface-tools";
     }

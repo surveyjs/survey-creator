@@ -27,6 +27,8 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
   }
 
   renderElementPlaceholder(): React.JSX.Element {
+    // Inline mode (SP09): the editable choice list under the input only for the selected question.
+    if (this.model.creator.isInlineLayout && !this.model.creator.isElementSelected(this.question)) return null;
     const textStyle = (this.question as any).textStyle;
     return (
       <div

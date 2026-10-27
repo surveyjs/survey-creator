@@ -53,6 +53,7 @@ import { ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
 import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
+import { findSuitableTheme, isThemeEmpty } from "./components/tabs/theme-model";
 import { DragDropSurveyElements } from "./dragdrop-survey-elements";
 import { PageAdorner } from "./components/page";
 import {
@@ -201,7 +202,13 @@ export class SurveyCreatorModel extends Base
    *
    * [View Demo](https://surveyjs.io/survey-creator/examples/expand-and-collapse-survey-elements/ (linkStyle))
    */
-  @property({ defaultValue: true }) allowZoom: boolean;
+  public get allowZoom(): boolean {
+    return !this.isInlineLayout && this.allowZoomValue;
+  }
+  public set allowZoom(val: boolean) {
+    this.allowZoomValue = val;
+  }
+  @property({ defaultValue: true }) private allowZoomValue: boolean;
   /**
    * Specifies whether to display the [Translation](https://surveyjs.io/survey-creator/documentation/end-user-guide/user-interface#translation-tab) tab.
    *
@@ -524,6 +531,8 @@ export class SurveyCreatorModel extends Base
    * @see allowModifyPages
    */
   public get pageEditMode(): "standard" | "single" | "bypage" {
+    // Inline mode shows one page at a time, as the live survey does. The stored value stays untouched.
+    if (this.isInlineLayout && this.pageEditModeValue !== "single") return "bypage";
     return this.pageEditModeValue;
   }
   public set pageEditMode(val: "standard" | "single" | "bypage") {
@@ -539,6 +548,88 @@ export class SurveyCreatorModel extends Base
     if (oldValue !== val) {
       this.onPropertyChanged.fire(this, { name: "pageEditMode", oldValue: oldValue, newValue: val });
     }
+  }
+
+  @property({
+    defaultValue: "standard", onSet: (val, creator: SurveyCreatorModel) => {
+      creator.updateInlineLayout();
+    }
+  }) layoutMode: "standard" | "inline";
+  public get isInlineLayout(): boolean {
+    return this.layoutMode === "inline";
+  }
+  // Applies or reverts everything the inline layout changes. The constructor runs setOptions before the
+  // survey, the toolbox and the plugins exist: createSurvey and setRootElement cover that case.
+  protected updateInlineLayout(): void {
+    const isInline = this.isInlineLayout;
+    if (isInline) {
+      if (!!this.responsivityManager) {
+        this.resetResponsivityManager();
+        this.resetResponsivityState();
+      }
+      if (!!this.pluginMenuHash["designer"] && this.activeTab !== "designer") {
+        this.switchTab("designer");
+      }
+    } else if (!!this.rootElement && !this.responsivityManager && !!this.toolbox) {
+      this.initResponsivityManager(this.rootElement as HTMLDivElement);
+    }
+    const survey = this.survey;
+    if (!survey) return;
+    survey.css = this.getSurfaceCss();
+    if (isInline) {
+      this.applyInlineSurfaceTheme(survey);
+    } else {
+      survey["cssVariables"] = {};
+    }
+    survey.liveLayoutInDesignMode = isInline;
+    if (!isInline) {
+      survey.setIsMobile(!!this.isMobileView);
+    }
+    if (this.pageEditModeValue !== "single" && this.pageEditModeValue !== "bypage") {
+      this.onPropertyChanged.fire(this, { name: "pageEditMode", oldValue: isInline ? this.pageEditModeValue : "bypage", newValue: this.pageEditMode });
+    }
+    // Placeholder choice items depend on the mode (SP04).
+    survey.getAllQuestions(false, true, true).forEach((q: Question) => {
+      const adorner = SurveyElementAdornerBase.GetAdorner<any>(q);
+      adorner?.refreshOptionItems?.();
+    });
+    const designerPlugin = this.getPlugin<TabDesignerPlugin>("designer", false);
+    designerPlugin?.model?.updateInlineLayout();
+  }
+  // Inline mode: the placeholders of an empty survey or page title and of an empty survey logo show only
+  // while that element is selected, so the surface keeps the live survey's layout.
+  public beforeShowEmptyPlaceholder(element: Base, propertyName: string, show: boolean): boolean {
+    if (!this.isInlineLayout || !show) return show;
+    return this.isElementSelected(element);
+  }
+  // Inline mode: element descriptions are cached in hasDescription; recompute them on a selection change.
+  private updateInlineDescriptions(elements: Array<Base>): void {
+    if (!this.isInlineLayout) return;
+    elements.forEach((el: any) => {
+      if (!el || el.isDisposed || typeof el.calcDescriptionVisibility !== "function") return;
+      el.hasDescription = el.calcDescriptionVisibility();
+    });
+  }
+  // CreatorResponsivityManager.dispose() resets only the toolbox and page navigator permissions.
+  private resetResponsivityState(): void {
+    this.isMobileView = undefined;
+    this.showTabs = undefined;
+    this.showToolbar = undefined;
+    this.allowShowSurfaceToolbar = true;
+    if (!!this.sidebar) {
+      this.sidebar.flyoutMode = false;
+      this.sidebar.narrowMode = false;
+    }
+  }
+  // The designer never renders the survey's root element, so the renderer puts survey.themeVariables on the
+  // surface itself. Only cssVariables are applied: the other ITheme keys (backgroundImage, headerView, ...)
+  // are serializable survey properties and would leak into the edited JSON and the undo stack.
+  private applyInlineSurfaceTheme(survey: SurveyModel): void {
+    let theme: ITheme = this.theme;
+    if (isThemeEmpty(theme)) {
+      theme = findSuitableTheme(undefined, this.preferredColorPalette, undefined, undefined);
+    }
+    survey.applyTheme({ cssVariables: { ...(theme?.cssVariables || {}) }, isPanelless: theme?.isPanelless });
   }
 
   @property() surveyValue: SurveyModel;
@@ -1592,6 +1683,9 @@ export class SurveyCreatorModel extends Base
     if (!!surveyTheme && surveyTheme.headerView) {
       this.survey.headerView = surveyTheme.headerView;
     }
+    if (this.isInlineLayout && !!this.survey) {
+      this.applyInlineSurfaceTheme(this.survey);
+    }
   }
 
   private _doSaveThemeCore(onSaveComplete?: () => void) {
@@ -1877,6 +1971,8 @@ export class SurveyCreatorModel extends Base
    */
   public switchTab(tabName: string): boolean {
     if (tabName == this.viewType) return false;
+    // Inline mode shows only the designer; the other tabs stay registered for the switch back.
+    if (this.isInlineLayout && this.fixPluginName(tabName) !== "designer" && !!this.pluginMenuHash["designer"]) return false;
     const plugin: ICreatorPlugin = this.currentPlugin;
     if (!!plugin && !!plugin.canDeactivateAsync) {
       plugin.canDeactivateAsync(() => {
@@ -1950,7 +2046,7 @@ export class SurveyCreatorModel extends Base
   @property() removeSidebar: boolean;
   public sidebar: SidebarModel;
   public get isSidebarVisible() {
-    return this.sidebar && !this.removeSidebar;
+    return this.sidebar && !this.removeSidebar && !this.isInlineLayout;
   }
 
   constructor(protected options: ICreatorOptions = {}, options2?: ICreatorOptions) {
@@ -2006,7 +2102,7 @@ export class SurveyCreatorModel extends Base
   @property({ defaultValue: true }) allowShowToolbox: boolean;
   @property({ defaultValue: true }) showToolboxValue: boolean;
   public get showToolbox() {
-    return this.showToolboxValue && this.allowShowToolbox;
+    return this.showToolboxValue && this.allowShowToolbox && !this.isInlineLayout;
   }
   /**
    * Specifies whether to show the Toolbox.
@@ -2552,7 +2648,9 @@ export class SurveyCreatorModel extends Base
   private existingPages: {};
   private getSurfaceCss() {
     const result = JSON.parse(JSON.stringify(defaultCss));
-    result.header += " svc-surface-header";
+    if (!this.isInlineLayout) {
+      result.header += " svc-surface-header";
+    }
 
     return result;
   }
@@ -2698,6 +2796,10 @@ export class SurveyCreatorModel extends Base
   }
 
   beforeShowInplaceDescriptionEditor(element: SurveyModel | Question | PageModel | PanelModel, show: boolean): boolean {
+    // Inline mode: an empty description shows its placeholder only for the selected element (SP04).
+    if (this.isInlineLayout && show && !!element.locDescription && element.locDescription.isEmpty && !this.isElementSelected(element)) {
+      show = false;
+    }
     if (this.onBeforeShowInplaceDescriptionEditor.isEmpty) return show;
     const options: BeforeShowInplaceDescriptionEditorEvent = {
       element: element,
@@ -3067,6 +3169,10 @@ export class SurveyCreatorModel extends Base
     if (callback) {
       callback(survey);
     }
+    if (reason === "designer" && this.isInlineLayout) {
+      this.applyInlineSurfaceTheme(survey);
+      survey.liveLayoutInDesignMode = true;
+    }
     this.onSurveyInstanceCreated.fire(this, {
       survey: survey,
       reason: reason,
@@ -3083,7 +3189,8 @@ export class SurveyCreatorModel extends Base
     }
 
     survey.onPopupVisibleChanged.add((_, options) => {
-      if (!options.popup.getAreaCallback) options.popup.getAreaCallback = () => { return this.rootElement; };
+      // In inline mode the root grows with its content and can be shorter than a dropdown, so popups use the window.
+      if (!options.popup.getAreaCallback) options.popup.getAreaCallback = () => { return this.isInlineLayout ? undefined : this.rootElement; };
       if (reason === "property-grid" && options.question?.parentQuestion?.isDescendantOf("matrixdropdownbase") && options.question?.parent?.getType() !== "panel") {
         options.popup.setWidthByTarget = false;
       }
@@ -3371,11 +3478,53 @@ export class SurveyCreatorModel extends Base
     if (panel) {
       parent = panel;
     }
+    this.addElementIntoParent(element, parent, index, modifiedType);
+  }
+  private addElementIntoParent(element: IElement, parent: IPanel, index: number, modifiedType: string): void {
     this.addNewElementReason = modifiedType;
     element.setVisibleIndex(-1);
     parent.addElement(element, index);
     this.addNewElementReason = "";
     this.setModified({ type: modifiedType, question: element });
+  }
+  // Inline layout mode (prompt 04, prototype): the toolbox popup's insertion. With `target`, the new element goes
+  // right after it in target.parent (inside panels and dynamic panel templates too); otherwise it is appended to
+  // `container` (a panel or a page). Unlike clickToolboxItem, it never climbs to the top-level element and ignores
+  // addNewQuestionLast. A survey without pages gets one first.
+  @undoRedoTransaction()
+  public addNewElementAfter(target: IElement, json: any, container?: IPanel): IElement {
+    if (this.readOnly || !json) return null;
+    let parent: IPanel = container;
+    let index = -1;
+    if (this.survey.pageCount == 0) {
+      parent = this.addNewPageIntoSurvey();
+    } else if (!!target && !!target.parent) {
+      parent = target.parent;
+      index = parent.elements.indexOf(target);
+      if (index > -1) {
+        index++;
+        // Keep the target's row intact: a new full-width element placed before a `startWithNewLine: false`
+        // neighbour would pull it into its own row (and undo would then reset that neighbour's flag).
+        while(index < parent.elements.length && parent.elements[index].startWithNewLine === false) index++;
+      }
+    }
+    if (!parent) parent = this.currentPage;
+    if (!parent) return null;
+    const newElement: IElement = json["getType"] === undefined ? this.createNewElement(json) : json;
+    this.survey.lazyRenderEnabled = false;
+    this.addElementIntoParent(newElement, parent, index, "ADDED_FROM_TOOLBOX");
+    this.selectElement(newElement, null, true, this.startEditTitleOnQuestionAdded);
+    return newElement;
+  }
+  // Inline layout mode (prompt 04, prototype): "Add Page" after the given page (or at the end), then selects it.
+  @undoRedoTransaction()
+  public addNewPageAfter(page?: PageModel): PageModel {
+    if (this.readOnly) return null;
+    const pageIndex = !!page ? this.survey.pages.indexOf(page) : -1;
+    const index = pageIndex > -1 ? pageIndex + 1 : -1;
+    const newPage = this.survey.addNewPage(SurveyHelper.getNewPageName(this.survey.pages), index);
+    this.selectElement(newPage);
+    return newPage;
   }
 
   public setNewNames(element: ISurveyElement) {
@@ -3670,6 +3819,7 @@ export class SurveyCreatorModel extends Base
             true
           );
         }
+        this.updateInlineDescriptions([oldValue, this.selectedElementValue]);
       }
     }
     if (oldValue !== element || !!propertyName) {
@@ -4072,7 +4222,9 @@ export class SurveyCreatorModel extends Base
     this._rootElementValue = element;
     ensureBaseThemeStyles(element);
     this.initKeyboardShortcuts(element);
-    this.initResponsivityManager(element as HTMLDivElement);
+    if (!this.isInlineLayout) {
+      this.initResponsivityManager(element as HTMLDivElement);
+    }
     this.subscribeToReducedMotion();
   }
   public unsubscribeRootElement() {
@@ -4815,10 +4967,7 @@ export class SurveyCreatorModel extends Base
     };
     const getActions = () => {
       const ownerElement = this._getActualElementToAddNewElements(element);
-      const availableTypes = this.getAvailableToolboxItems(ownerElement).map((item) => {
-        return this.createIActionBarItemByClass(item, item.needSeparator, onSelectQuestionType);
-      });
-      return availableTypes;
+      return this.createToolboxItemActions(this.getAvailableToolboxItems(ownerElement), onSelectQuestionType);
     };
 
     const newAction = createDropdownActionModel({
@@ -4882,6 +5031,16 @@ export class SurveyCreatorModel extends Base
     this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
   }
 
+  // Shared by the "Add Question" dropdown (item's own needSeparator) and the inline toolbox popup
+  // (separatorsByCategory: a separator at each category change, as in getConvertToTypesActions).
+  public createToolboxItemActions(items: Array<QuestionToolboxItem>, onSelectQuestionType: (questionType: string, json?: any) => void, separatorsByCategory: boolean = false): Array<Action> {
+    let lastItem: QuestionToolboxItem = null;
+    return items.map((item) => {
+      const needSeparator = separatorsByCategory ? !!lastItem && item.category != lastItem.category : item.needSeparator;
+      lastItem = item;
+      return this.createIActionBarItemByClass(item, needSeparator, onSelectQuestionType);
+    });
+  }
   createIActionBarItemByClass(item: QuestionToolboxItem, needSeparator: boolean, onSelectQuestionType?: (questionType: string, json?: any) => void): Action {
     const action = new Action({
       title: item.title,
@@ -4997,15 +5156,28 @@ export class SurveyCreatorModel extends Base
   @property({ defaultValue: true }) private showPageNavigatorValue;
 
   public get showPageNavigator() {
-    return this.showPageNavigatorValue && this.allowShowPageNavigator;
+    return this.showPageNavigatorValue && this.allowShowPageNavigator && !this.isInlineLayout;
   }
   public set showPageNavigator(val: boolean) {
     this.showPageNavigatorValue = val;
   }
   public showTabsDefault: boolean = settings.layout.showTabs;
   public showToolbarDefault: boolean = settings.layout.showToolbar;
-  @property({ getDefaultValue: (obj: any) => { return obj.showTabsDefault; } }) showTabs;
-  @property({ getDefaultValue: (obj: any) => { return obj.showToolbarDefault; } }) showToolbar;
+  // The stored values stay untouched in inline mode, so switching back to "standard" restores them.
+  @property({ getDefaultValue: (obj: any) => { return obj.showTabsDefault; } }) private showTabsValue: boolean;
+  @property({ getDefaultValue: (obj: any) => { return obj.showToolbarDefault; } }) private showToolbarValue: boolean;
+  public get showTabs(): boolean {
+    return !this.isInlineLayout && this.showTabsValue;
+  }
+  public set showTabs(val: boolean) {
+    this.showTabsValue = val;
+  }
+  public get showToolbar(): boolean {
+    return !this.isInlineLayout && this.showToolbarValue;
+  }
+  public set showToolbar(val: boolean) {
+    this.showToolbarValue = val;
+  }
   @property({ getDefaultValue: () => { return settings.layout.allowCollapseSidebar; } }) allowCollapseSidebar;
   @property({ getDefaultValue: () => { return settings.designer.showAddQuestionButton; } }) showAddQuestionButton;
   @property({
@@ -5194,6 +5366,7 @@ export class SurveyCreatorModel extends Base
       "svc-creator",
       "sd-theme-root",
       "sjs-theme-overrides",
+      this.isInlineLayout && "svc-creator--inline",
       this.isMobileView && "svc-creator--mobile",
       this.isTouch && "svc-creator--touch",
       (reducedMotion || !this.animationEnabled) && "svc-creator--disable-animations"
@@ -5404,6 +5577,9 @@ export function initializeDesignTimeSurveyModel(model: any, creator: SurveyCreat
   model.isPopupEditorContent = false;
   model.beforeShowInplaceDescriptionEditorCallback = (element: SurveyModel | Question | PageModel | PanelModel, show: boolean): boolean => {
     return creator.beforeShowInplaceDescriptionEditor(element, show);
+  };
+  model.beforeShowEmptyPlaceholderCallback = (element: Base, propertyName: string, show: boolean): boolean => {
+    return creator.beforeShowEmptyPlaceholder(element, propertyName, show);
   };
   model.onElementWrapperComponentName.add((_, opt) => {
     const compName = opt.componentName;

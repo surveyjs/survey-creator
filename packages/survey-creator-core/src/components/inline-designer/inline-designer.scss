@@ -1,0 +1,276 @@
+@use "../../variables" as *;
+
+// Inline layout mode, prompt 03: the selected element's floating toolbar. It is rendered next to
+// .svc-tab-designer (not inside it), so --sjs2-* resolve against the Creator theme, not the survey theme.
+// Its containing block is .svc-creator-tab; the model writes top / left / max-width.
+.svc-inline-element-toolbar {
+  position: absolute;
+  // Above the survey surface, below the Creator popups (sv-popup is 2000; the toolbar's own popups render
+  // inside it and stack within it).
+  z-index: 20;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--sjs2-spacing-x050, 4px);
+  min-height: var(--sjs2-size-x500, 40px);
+  padding: var(--sjs2-spacing-x050, 4px);
+  background: var(--sjs2-color-bg-basic-primary, #fff);
+  color: var(--sjs2-color-fg-basic-primary);
+  border-radius: var(--sjs2-radius-x100, 8px);
+  box-shadow: var(--sjs2-border-effect-floating-default);
+  white-space: nowrap;
+  text-align: start;
+
+  @include sjs2--typography--default;
+
+  .sd-action-bar {
+    flex-wrap: nowrap;
+    padding: 0;
+  }
+}
+
+.svc-inline-element-toolbar--hidden {
+  display: none;
+}
+
+// Rendered once to be measured, then shown at its place.
+.svc-inline-element-toolbar--unpositioned {
+  visibility: hidden;
+}
+
+.svc-inline-element-toolbar__drag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--sjs2-size-x400, 32px);
+  height: var(--sjs2-size-x400, 32px);
+  border-radius: var(--sjs2-radius-x075, 6px);
+  cursor: move;
+  touch-action: none;
+
+  .sv-svg-icon {
+    width: 24px;
+    height: 16px;
+
+    use {
+      fill: var(--sjs2-color-fg-basic-tertiary, #909090);
+    }
+  }
+
+  &:hover {
+    background: var(--sjs2-color-bg-basic-primary-dim, #f4f4f4);
+  }
+}
+
+.svc-inline-element-toolbar__title {
+  flex-shrink: 1;
+  min-width: 0;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 var(--sjs2-spacing-x100, 8px);
+  color: var(--sjs2-color-fg-basic-secondary);
+}
+
+.svc-inline-element-toolbar__extra {
+  flex-shrink: 0;
+}
+
+// The bar is fitted to the space the model supplies (getAvailableSpaceCallback), not to its own width.
+.svc-inline-element-toolbar__actions {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+// Inline layout mode, prompt 04: the "+" handle left of the selected element. A sibling of .svc-tab-designer,
+// like the toolbar; the model writes top / left.
+.svc-creator--inline .svc-inline-add-handle {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--sjs2-size-x300, 24px);
+  height: var(--sjs2-size-x300, 24px);
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--sjs2-color-bg-basic-primary, #fff);
+  box-shadow: var(--sjs2-border-effect-floating-default);
+  cursor: pointer;
+  outline: none;
+
+  .sv-svg-icon {
+    width: 24px;
+    height: 24px;
+
+    use {
+      fill: var(--svc-inline-outline-color, #19b394);
+    }
+  }
+
+  &:hover,
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--sjs2-color-bg-basic-primary, #fff), 0 0 0 4px var(--svc-inline-outline-color, #19b394);
+  }
+}
+
+.svc-creator--inline .svc-inline-add-handle--hidden {
+  display: none;
+}
+
+// The toolbox popup: a fixed-width list, 8px away from the handle; the popup view model caps its height by the
+// viewport and reads the margins when it places the popup. Direct child only: the subitems popup is nested inside.
+.svc-creator--inline .svc-inline-toolbox-popup > .sv-popup__container {
+  width: 240px;
+  max-width: calc(100vw - 32px);
+  margin: 0 var(--sjs2-spacing-x100, 8px);
+}
+
+// Inline layout mode, prompt 05: the floating property grid. A sibling of .svc-tab-designer, like the toolbar, so the
+// grid keeps the Creator theme. Fixed: the model writes left / top / width / max-height in viewport coordinates.
+.svc-creator--inline .svc-inline-property-grid {
+  position: fixed;
+  // Above the host page's own sticky chrome (the demo bar is 100), below survey-core popups and modals (2000):
+  // the grid's dropdowns render inside the panel, its modal editors in body.
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: var(--sjs2-color-bg-basic-primary, #fff);
+  color: var(--sjs2-color-fg-basic-primary);
+  border-radius: var(--sjs2-radius-x150, 12px);
+  box-shadow: var(--sjs2-border-effect-floating-default);
+  text-align: start;
+
+  @include sjs2--typography--default;
+}
+
+.svc-creator--inline .svc-inline-property-grid__header {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--sjs2-spacing-x050, 4px);
+  padding: var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x100, 8px) var(--sjs2-spacing-x200, 16px);
+  border-bottom: 1px solid var(--sjs2-color-border-basic-secondary, #e5e5e5);
+  cursor: grab;
+  touch-action: none;
+
+  @include disableUserSelect;
+}
+
+.svc-creator--inline .svc-inline-property-grid--dragging,
+.svc-creator--inline .svc-inline-property-grid--dragging .svc-inline-property-grid__header {
+  cursor: grabbing;
+  user-select: none;
+}
+
+// The category (one-category mode) and, below it, the element: as the sidebar's property grid header.
+.svc-creator--inline .svc-inline-property-grid__caption {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.svc-creator--inline .svc-inline-property-grid__title {
+  @include sjs2--typography--default-strong;
+  @include textEllipsis;
+}
+
+.svc-creator--inline .svc-inline-property-grid__subtitle {
+  color: var(--sjs2-color-fg-basic-secondary);
+
+  @include sjs2--typography--small;
+  @include textEllipsis;
+}
+
+// The grid and the category strip side by side; each scrolls on its own.
+.svc-creator--inline .svc-inline-property-grid__content {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.svc-creator--inline .svc-inline-property-grid__tabs {
+  flex: none;
+  justify-content: flex-start;
+  padding-top: var(--sjs2-spacing-x150, 12px);
+  padding-bottom: var(--sjs2-spacing-x150, 12px);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.svc-creator--inline .svc-inline-property-grid__close {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--sjs2-size-x400, 32px);
+  height: var(--sjs2-size-x400, 32px);
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: var(--sjs2-radius-x075, 6px);
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+
+  .sv-svg-icon {
+    width: 16px;
+    height: 16px;
+
+    use {
+      fill: var(--sjs2-color-fg-basic-secondary, #767676);
+    }
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: var(--sjs2-color-bg-basic-primary-dim, #f4f4f4);
+  }
+}
+
+// The grid normally fills a sized sidebar (spg-container 100% high, spg-root-modern height 0 + flex-grow, with the
+// survey's own Scroll). Here it takes its content's height and the panel body scrolls.
+.svc-creator--inline .svc-inline-property-grid__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+
+  .spg-container {
+    height: auto;
+  }
+
+  .spg-root-modern {
+    height: auto;
+    flex-grow: 0;
+  }
+
+  .spg-root-modern .sv-scroll__wrapper {
+    height: auto;
+  }
+
+  .spg-root-modern .sv-scroll__scrollbar {
+    display: none;
+  }
+
+  // The search box stays on top while the categories scroll (its look comes from spg-search-editor.scss).
+  .svc-search {
+    position: sticky;
+    top: 0;
+    // Above the grid's title actions (help icons) that scroll under it; the grid's popups stack above (2000).
+    z-index: 10;
+  }
+}
