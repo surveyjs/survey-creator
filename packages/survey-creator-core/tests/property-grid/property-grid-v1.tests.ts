@@ -958,9 +958,9 @@ test("SurveyPropertyMatrixDropdownColumns show error on setting same column name
     propertyGrid.survey.getQuestionByName("columns")
   );
   expect(columnsQuestion.hideColumnsIfEmpty).toBeTruthy();
-  expect(columnsQuestion.emptyRowsText).toEqual("You don't have any columns yet");
-  expect(columnsQuestion.noRowsText).toEqual("You don't have any columns yet");
-  expect(columnsQuestion.addRowText).toEqual("Add new column");
+  expect(columnsQuestion.emptyRowsText).toEqual("No columns");
+  expect(columnsQuestion.noRowsText).toEqual("No columns");
+  expect(columnsQuestion.addRowText).toEqual("Add column");
   expect(columnsQuestion.getColumnByName("name").isUnique).toBeTruthy();
   var rows = columnsQuestion.visibleRows;
   expect(rows[1].getQuestionByColumnName("name").value).toEqual("column2");
@@ -1210,7 +1210,7 @@ test("SurveyPropertyPagesEditor custom loc item for 'add item'.", () => {
   var pagesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("pages")
   );
-  expect(pagesQuestion.addRowText).toEqual("Add new page");
+  expect(pagesQuestion.addRowText).toEqual("Add page");
 
   defaultStrings.pe["addNew@pages"] = "Add New Page";
   propertyGrid = new PropertyGridModelTester(survey);
