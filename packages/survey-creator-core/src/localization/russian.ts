@@ -562,6 +562,73 @@ export var ruStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Описание"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Ассистент по выражению выражения",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Пишите с помощью ИИ",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Опишите, что должно делать это выражение",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Например: покажите этот вопрос, если респонденту 18 лет и старше",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Опишите состояние словами",
+    // [Auto-translated] "Generate"
+    generate: "Генерировать",
+    // [Auto-translated] "Refine"
+    refine: "Уточняйте",
+    // [Auto-translated] "Explain"
+    explain: "Объясните",
+    // [Auto-translated] "Stop"
+    stop: "Стой",
+    // [Auto-translated] "Accept"
+    accept: "Принимаю",
+    // [Auto-translated] "Reject"
+    reject: "Отклонить",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Применить исправление: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Текущее выражение",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Рекомендуемое выражение",
+    // [Auto-translated] "Reads as"
+    readsAs: "Читается как",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Объяснение ассистента",
+    // [Auto-translated] "Check results"
+    findings: "Проверьте результаты",
+    // [Auto-translated] "Error"
+    severityError: "Ошибка",
+    // [Auto-translated] "Warning"
+    severityWarning: "Предупреждение",
+    // [Auto-translated] "Info"
+    severityInfo: "Информация",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "в «{0}»",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Опишите выражение и выберите Генерировать.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Жду помощника...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Запрос был отменён.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Ассистент сообщил: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Ассистент не показал выражения лица.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Пересмотрите предложенное выражение.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Ассистент объяснил текущее выражение лица.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Предложенное выражение содержит ошибки и не может быть принято.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Предлагаемое выражение нельзя было проверять в каждом месте, куда оно было записано, поэтому его нельзя принять.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Добавьте действие в правило, прежде чем обращаться к ассистенту.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Первое предложение содержало ошибки и исправлялось автоматически."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -653,6 +720,8 @@ export var ruStrings = {
       newPanelPosition: "Новое место входа",
       // [Auto-translated] "Entries per page"
       pageSize: "Количество записей на страницу",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Разрешить пользователям сортировать записи",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Избегайте дублирования ответов на следующий вопрос"
     },
@@ -740,6 +809,12 @@ export var ruStrings = {
       // [Auto-translated] "Expression"
       expression: "Выражение"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Сортировать по",
+      // [Auto-translated] "Order"
+      direction: "Порядок"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Выражение"
@@ -793,7 +868,9 @@ export var ruStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Сделайте столбец обязательным, если",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Каждый вариант в отдельной колонке"
+      showInMultipleColumns: "Каждый вариант в отдельной колонке",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Разрешите сортировку по этому столбцу"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -963,6 +1040,8 @@ export var ruStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "У вас еще нет ссылок",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "У вас еще нет страниц",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "У тебя пока нет уровней сортировки",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Добавить новый вариант",
     // [Auto-translated] "Add new column"
@@ -979,6 +1058,8 @@ export var ruStrings = {
     "addNew@navigateToUrlOnCondition": "Добавить новый URL-адрес",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Добавить новую страницу",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Добавить новый уровень сортировки",
     // "Value"
     value: "Значение",
     // "Text"
@@ -1087,6 +1168,14 @@ export var ruStrings = {
     rowCount: "Количество строк",
     // [Auto-translated] "Rows per page"
     pageSize: "Строки на странице",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Разрешить пользователям сортировать строки",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Максимальные уровни сортировки",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Порядок сортировки по умолчанию",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Панель сортировки показать",
     // "Columns layout"
     columnLayout: "Макет столбцов",
     // "\"Add Row\" button alignment"
@@ -1359,9 +1448,9 @@ export var ruStrings = {
     waitForUpload: "Дождитесь завершения загрузки",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Выравнивание сведений о строке",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "Минимальное количество строк",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Максимальное количество строк",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Выражение количества строк",
@@ -1617,6 +1706,8 @@ export var ruStrings = {
       columns: "Столбцы",
       // "Rows"
       rows: "Строки",
+      // [Auto-translated] "Entries"
+      entries: "Участники",
       // "Choice Options"
       choices: "Выбор",
       // "Items"
@@ -2211,6 +2302,8 @@ export var ruStrings = {
     underRowSingle: "Под строкой отображается только один раздел",
     // "Auto"
     auto: "Авто",
+    // [Auto-translated] "Always"
+    always: "Всегда",
     timerInfoMode: {
       // "Both"
       combined: "Оба"
@@ -2749,14 +2842,24 @@ export var ruStrings = {
       confirmDelete: "Запускает запрос на подтверждение перед удалением записи.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Укажите выражение, которое вычисляет количество записей. Это выражение переопределяет параметры «Начальное количество записей» и пересчитывается при каждом изменении ссылающихся значений. Результат ограничен настройками «Минимальное количество записей» и «Максимальное количество записей». Пока это выражение установлено, респонденты не могут вручную добавлять или удалять записи.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Указывает количество записей, отображаемых на каждой странице панели. '0' отключает пагинацию и отображает все строки.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Указывает количество записей, отображаемых на каждой странице панели. '0' отключает пагинацию и отображает все записи.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Позволяет респондентам сортировать записи с помощью панели сортировки.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Определяет первоначальный порядок входа. Респонденты могут изменить его, если разрешена сортировка. При сортировке по нескольким вопросам каждый вопрос сортирует записи в порядке, установленном предыдущим вопросом. Перетащите вопросы, чтобы изменить их приоритет.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Присваивает номера вопросам, вложенным в динамическую панель."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Укажите выражение, которое вычисляет количество строк. Это выражение переопределяет параметр «Количество строк» и пересчитывается при каждом изменении ссылающихся значений. Результат ограничен настройками «Минимальное количество строк» и «Максимальное количество строк». Пока это выражение установлено, респонденты не могут вручную добавлять или удалять строки.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Позволяет респондентам сортировать строки, нажимая на заголовки столбцов или используя панель сортировки.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Определяет начальный порядок строк. Респонденты могут изменить его, если разрешена сортировка. При сортировке по нескольким столбцам каждый столбец сортирует строки в порядке, установленном предыдущим столбцом. Перетащите столбцы, чтобы изменить их приоритет.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "«Авто» отображает панель сортировки только тогда, когда в матрице нет сортируемых заголовков столбцов: заголовки скрыты, матрица использует мобильную структуру или строки переносятся в столбцы. «Всегда» отображает панель сортировки, даже когда видны сортируемые заголовки столбцов.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Закажите выражение, которое вычисляет количество строк. Это выражение переопределяет параметры «Начальное количество строк» и пересчитывается при изменении значений, на которые оно ссылается. Результат ограничен настройками «Минимальное количество строк» и «Максимальное количество строк». Пока это выражение зададено, респонденты не могут вручную добавлять или удалять строки.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Запускает запрос на подтверждение перед удалением строки.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2764,6 +2867,8 @@ export var ruStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Указывает количество строк, отображаемых на каждой странице матрицы. '0' отключает пагинацию и отображает все строки.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Указывает, по какому полям респондент может отсортировать одновременно.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Дублирует ответы из последней строки и присваивает их следующей добавленной динамической строке.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3837,6 +3942,10 @@ export var ruStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} «{expression}» всегда выполняется, потому что {facts} — он ничего не решает."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} «{expression}» не читает никакой вопрос или переменную."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "По умолчанию значение «{name}» — {valuesText}, которое оно никогда не может удержать. Разрешено: {availableText}.",
@@ -4034,6 +4143,8 @@ export var ruStrings = {
       itemScope: "«{0}» доступна только внутри условий выбора, строки и столбцов.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "«{0}.» Ссылки доступны только в составном вопросе.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "«{0}» недоступна внутри фильтра inArray, который работает с элементом и опросом.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "«{0}» — это столбец этой матрицы, ссылайтесь на неё с префиксом строки.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

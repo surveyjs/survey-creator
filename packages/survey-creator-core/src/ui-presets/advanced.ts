@@ -90,29 +90,37 @@ export const Advanced = {
           matrixdropdownbase: {
             properties: [
               "cellType",
-              { name: "columns", tab: "columns" },
               { name: "verticalAlign", tab: "layout" },
-              { name: "alternateRows", tab: "layout" },
               { name: "cellErrorLocation", tab: "layout" },
+              { name: "columns", tab: "columns" },
+              { name: "alternateRows", tab: "rows" },
             ],
+            tabs: [
+              { name: "columns", index: 10 },
+              { name: "rows", index: 11 },
+            ]
           },
           matrixdynamic: {
             properties: [
-              "allowAddRows",
-              "allowRemoveRows",
-              "allowRowReorder",
-              "confirmDelete",
-              "addRowButtonLocation",
-              "rowCount",
-              "minRowCount",
-              "maxRowCount",
+              { name: "rowCount", tab: "rows" },
+              { name: "minRowCount", tab: "rows" },
+              { name: "maxRowCount", tab: "rows" },
+              { name: "allowAddRows", tab: "rows" },
+              { name: "allowRemoveRows", tab: "rows" },
+              { name: "confirmDelete", tab: "rows" },
+              { name: "allowRowReorder", tab: "rows" },
+              { name: "alternateRows", tab: "rows" },
+              { name: "addRowButtonLocation", tab: "layout" },
               { name: "keyName", tab: "validation" },
               { name: "defaultRowValue", tab: "data" },
               { name: "copyDefaultValueFromLastEntry", tab: "data" },
             ]
           },
           matrixdropdown: {
-            properties: [{ name: "rows", tab: "rows" }],
+            properties: [
+              { name: "rows", tab: "rows" },
+              { name: "alternateRows", tab: "rows" },
+            ],
           },
           matrix: {
             properties: [
@@ -120,7 +128,7 @@ export const Advanced = {
               { name: "columns", tab: "columns" },
               { name: "rows", tab: "rows" },
               { name: "rowOrder", tab: "rows" },
-              { name: "alternateRows", tab: "layout" },
+              { name: "alternateRows", tab: "rows" },
               { name: "eachRowRequired", tab: "validation" },
               { name: "eachRowUnique", tab: "validation" },
             ],
@@ -289,17 +297,17 @@ export const Advanced = {
           },
           paneldynamic: {
             properties: [
-              "displayMode",
-              "templateTabTitle",
-              "tabAlign",
-              "panelCount",
-              "minPanelCount",
-              "maxPanelCount",
-              { name: "allowAddPanel" },
-              { name: "allowRemovePanel" },
-              "confirmDelete",
-              "templateTitle",
-              "templateDescription",
+              { name: "panelCount", tab: "entries" },
+              { name: "minPanelCount", tab: "entries" },
+              { name: "maxPanelCount", tab: "entries" },
+              { name: "allowAddPanel", tab: "entries" },
+              { name: "allowRemovePanel", tab: "entries" },
+              { name: "confirmDelete", tab: "entries" },
+              { name: "displayMode", tab: "entries" },
+              { name: "templateTitle", tab: "entries" },
+              { name: "templateDescription", tab: "entries" },
+              { name: "templateTabTitle", tab: "entries" },
+              { name: "tabAlign", tab: "entries" },
               { name: "showQuestionNumbers", tab: "numbering" },
               { name: "templateQuestionTitleLocation", tab: "questionSettings" },
               { name: "templateQuestionTitleWidth", tab: "questionSettings" },
@@ -307,6 +315,8 @@ export const Advanced = {
               { name: "copyDefaultValueFromLastEntry", tab: "data" },
             ],
             tabs: [
+              { name: "entries", index: 10 },
+              { name: "questionSettings", index: 20 },
               { name: "numbering", index: 350 }
             ]
           },
@@ -406,6 +416,9 @@ export const Advanced = {
               { name: "showOnCompleted", index: 600 },
               { name: "timer", index: 700 }
             ]
+          },
+          matrixdropdowncolumn: {
+            properties: ["name", "title"]
           },
           "matrixdropdowncolumn@default": {
             properties: [
@@ -549,6 +562,12 @@ export const Advanced = {
             tabs: [
               { name: "mask", index: 250 }
             ]
+          },
+          "multipletext@items": {
+            properties: ["name", "title"]
+          },
+          "calculatedvalue@items": {
+            properties: ["name", "expression"]
           },
         }
       }

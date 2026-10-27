@@ -12,6 +12,10 @@ import { TranslationDropdownViewModel, translationDropdownComponentName } from "
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { StringEditorViewModelBase } from "../../src/components/string-editor";
 import { CreatorTester } from "../creator-tester";
+import {
+  countRootBuilds, createTreeOnceCreator, getSideBySideSnapshot, getTranslationModel, getTranslationPlugin, getTreeOnceJSON
+} from "./translation-tree-once-helper";
+import { treeOnceBaseline } from "./translation-tree-once-baseline";
 import "survey-core/survey.i18n";
 
 const defaultStringRenderer = LocalizableString.defaultRenderer;
@@ -2557,4 +2561,132 @@ test("element strings dialog: the caption row names the element, with the markdo
   expect(getCaption(survey.getQuestionByName("q1"))).toBe("Question 1#markup");
   // A question with no title of its own is named by its name, as it is everywhere else.
   expect(getCaption(survey.getQuestionByName("q2"))).toBe("q2#markup");
+});
+
+describe("Translation tree is built once: side-by-side", () => {
+  // The state recorded on the commit before the change, when the tree was built twice per reset
+  // and the form view's constructor reset the model before the plugin configured it.
+  const EXPECTED = treeOnceBaseline.sideBySide;
+  const formOptions = { translationMode: "sideBySide" };
+  const gridOptions = { translationMode: "sideBySide", translationSideBySideView: "grid" };
+  // With a survey locale, the form view opens with a target pane.
+  const create = (options: any, activate: boolean = true): CreatorTester => createTreeOnceCreator(options, activate, "de");
+  const hideQ1Title = (creator: CreatorTester): void => {
+    creator.onTranslationStringVisibility.add((_, options) => {
+      if (options.propertyName === "title" && (<any>options.obj).name === "q1") options.visible = false;
+    });
+  };
+
+  test("form view: the tree, the pane mapping and the counters", () => {
+    expect(getSideBySideSnapshot(create(formOptions))).toEqual(EXPECTED.form);
+  });
+  test("grid view: the tree, the strings survey and the counters: all pages, the first page, a later page", () => {
+    const creator = create(gridOptions);
+    const model = getTranslationModel(creator);
+    expect(getSideBySideSnapshot(creator)).toEqual(EXPECTED.grid);
+    model.filteredPage = creator.survey.pages[0];
+    expect(getSideBySideSnapshot(creator)).toEqual(EXPECTED.gridFirstPage);
+    model.filteredPage = creator.survey.pages[1];
+    expect(getSideBySideSnapshot(creator)).toEqual(EXPECTED.gridLaterPage);
+  });
+  test("form view activation applies the plugin settings: string visibility, read-only, all element strings", () => {
+    // The visibility callback and the read-only flag are set after the model is created, so the
+    // tree must be built after that.
+    const variants: Array<{ name: string, expected: any, apply: (creator: CreatorTester) => void }> = [
+      { name: "hidden title", expected: EXPECTED.hiddenTitle, apply: hideQ1Title },
+      { name: "read-only", expected: EXPECTED.readOnly, apply: (creator) => { creator.readOnly = true; } },
+      // The form view shows all strings anyway: the stored element dialogs' choice changes nothing.
+      { name: "all element strings", expected: EXPECTED.form, apply: (creator) => { (<any>getTranslationPlugin(creator)).showAllElementStrings = true; } },
+      {
+        name: "all", expected: EXPECTED.hiddenTitleReadOnly, apply: (creator) => {
+          hideQ1Title(creator);
+          creator.readOnly = true;
+          (<any>getTranslationPlugin(creator)).showAllElementStrings = true;
+        }
+      }
+    ];
+    variants.forEach(variant => {
+      const creator = create(formOptions, false);
+      variant.apply(creator);
+      creator.activeTab = "translation";
+      expect(getSideBySideSnapshot(creator), variant.name).toEqual(variant.expected);
+    });
+  });
+  test("the root is built once per activation and per update", () => {
+    const counts: any = {};
+    [{ name: "form", options: formOptions }, { name: "grid", options: gridOptions }].forEach(view => {
+      const creator = create(view.options, false);
+      const plugin = getTranslationPlugin(creator);
+      const res: any = {};
+      res.activation = countRootBuilds(creator, () => { creator.activeTab = "translation"; });
+      res.firstUpdate = countRootBuilds(creator, () => { plugin.update(); });
+      res.laterUpdate = countRootBuilds(creator, () => { plugin.update(); });
+      // A new JSON updates the active tab's plugin twice (SurveyCreatorModel.updatePlugin ignores
+      // the plugin name), so it is two update() calls.
+      res.json = countRootBuilds(creator, () => { creator.JSON = getTreeOnceJSON("de"); });
+      if (view.name === "grid") {
+        const page = creator.survey.pages[1];
+        getTranslationModel(creator).filteredPage = page;
+        res.jsonWithLaterPage = countRootBuilds(creator, () => { creator.JSON = getTreeOnceJSON("de"); }, [page]);
+      }
+      counts[view.name] = res;
+    });
+    // One main tree and one used-strings tree per reset; in the form view, the two pane copies
+    // once per instances rebuild. Before the change, the form view: main/used/copy 4/4/4 on
+    // activation, 2/2/4 per update(); the grid view: 2/2 on activation, 4/4 on the first update()
+    // and 2/2 on a later one; a later page filtered added 2 builds rooted on the old survey's page.
+    const formOnce = { main: 1, used: 1, copy: 2, page: 0, other: 0 };
+    const formTwice = { main: 2, used: 2, copy: 4, page: 0, other: 0 };
+    const gridOnce = { main: 1, used: 1, copy: 0, page: 0, other: 0 };
+    const gridTwice = { main: 2, used: 2, copy: 0, page: 0, other: 0 };
+    expect(counts).toEqual({
+      form: { activation: formOnce, firstUpdate: formOnce, laterUpdate: formOnce, json: formTwice },
+      grid: { activation: gridOnce, firstUpdate: gridOnce, laterUpdate: gridOnce, json: gridTwice, jsonWithLaterPage: gridTwice }
+    });
+  });
+  const filters: Array<{ name: string, apply: (creator: CreatorTester) => void }> = [
+    { name: "undefined", apply: () => { } },
+    { name: "null", apply: (creator) => { getTranslationModel(creator).filteredPage = null; } },
+    { name: "first page", apply: (creator) => { getTranslationModel(creator).filteredPage = creator.survey.pages[0]; } },
+    { name: "later page", apply: (creator) => { getTranslationModel(creator).filteredPage = creator.survey.pages[1]; } }
+  ];
+  const getGridUpdateSnapshot = (creator: CreatorTester): any => {
+    const action = creator.toolbar.getActionById("svc-translation-filter-page");
+    const selected = (<ListModel>action.data).selectedItem;
+    return {
+      state: getSideBySideSnapshot(creator),
+      action: { title: action.title, selected: !!selected ? selected.id : null }
+    };
+  };
+  test("grid view update() with a new survey: the same state whatever the page filter was", () => {
+    filters.forEach(filter => {
+      const creator = create(gridOptions);
+      filter.apply(creator);
+      creator.JSON = getTreeOnceJSON("de");
+      expect(getGridUpdateSnapshot(creator), filter.name).toEqual(EXPECTED.gridUpdate);
+    });
+  });
+  test("grid view: a single update() clears the page filter: the same state whatever the filter was", () => {
+    filters.forEach(filter => {
+      const creator = create(gridOptions);
+      filter.apply(creator);
+      getTranslationPlugin(creator).update();
+      expect(getGridUpdateSnapshot(creator), filter.name).toEqual(EXPECTED.gridUpdate);
+    });
+  });
+  test("form view update() with a new survey: the same state", () => {
+    const creator = create(formOptions);
+    creator.JSON = getTreeOnceJSON("de");
+    expect(getSideBySideSnapshot(creator)).toEqual(EXPECTED.form);
+  });
+  test("form view after update(): target pane edits reach the survey, survey edits reach the copies", () => {
+    const creator = create(formOptions);
+    creator.JSON = getTreeOnceJSON("de");
+    const model = getModel(creator);
+    model.targetSurvey.getQuestionByName("q2").locTitle.text = "Frage 2";
+    expect(creator.survey.getQuestionByName("q2").locTitle.getLocaleText("de")).toBe("Frage 2");
+    creator.survey.getQuestionByName("q1").locTitle.setLocaleText("de", "Frage 1 neu");
+    expect(model.targetSurvey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBe("Frage 1 neu");
+    expect(model.sourceSurvey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBe("Frage 1 neu");
+  });
 });

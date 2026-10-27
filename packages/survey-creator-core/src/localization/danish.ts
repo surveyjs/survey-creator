@@ -562,6 +562,73 @@ export var danishStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Beskrivelse"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Udtryksassistent",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Skriv med AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Beskriv, hvad udtrykket skal gøre",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "For eksempel: vis dette spørgsmål, når respondenten er 18 år eller ældre",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Beskriv tilstanden med ord",
+    // [Auto-translated] "Generate"
+    generate: "Generer",
+    // [Auto-translated] "Refine"
+    refine: "Forfine",
+    // [Auto-translated] "Explain"
+    explain: "Forklar",
+    // [Auto-translated] "Stop"
+    stop: "Stop",
+    // [Auto-translated] "Accept"
+    accept: "Accepter",
+    // [Auto-translated] "Reject"
+    reject: "Afvis",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Påfør rettelse: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Nuværende udtryk",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Foreslået udtryk",
+    // [Auto-translated] "Reads as"
+    readsAs: "Lyder som",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Assistentens forklaring",
+    // [Auto-translated] "Check results"
+    findings: "Tjek resultater",
+    // [Auto-translated] "Error"
+    severityError: "Fejl",
+    // [Auto-translated] "Warning"
+    severityWarning: "Advarsel",
+    // [Auto-translated] "Info"
+    severityInfo: "Info",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "i \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Beskriv udtrykket og vælg Generer.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Venter på assistenten...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Anmodningen blev annulleret.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Assistenten rapporterede: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Assistenten foreslog ikke noget udtryk.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Gennemgå det foreslåede udtryk.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Assistenten forklarede det nuværende udtryk.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Det foreslåede udtryk har fejl og kan ikke accepteres.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Det foreslåede udtryk kunne ikke kontrolleres for alle steder, det er skrevet til, så det kan ikke accepteres.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Tilføj en handling til reglen, før du spørger assistenten.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Det første forslag havde fejl og blev rettet automatisk."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -653,6 +720,8 @@ export var danishStrings = {
       newPanelPosition: "Ny indgangsplacering",
       // [Auto-translated] "Entries per page"
       pageSize: "Indlæg pr. side",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Tillad brugere at sortere poster",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Undgå dublerede svar i følgende spørgsmål"
     },
@@ -741,6 +810,12 @@ export var danishStrings = {
       // [Auto-translated] "Expression"
       expression: "Udtryk"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sorter efter",
+      // [Auto-translated] "Order"
+      direction: "Orden"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Udtryk"
@@ -794,7 +869,9 @@ export var danishStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Gør kolonnen obligatorisk, hvis",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Hver indstilling i en separat kolonne"
+      showInMultipleColumns: "Hver indstilling i en separat kolonne",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Tillad sortering efter denne kolonne"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -964,6 +1041,8 @@ export var danishStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Du har ingen links endnu",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Du har ingen sider endnu",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Du har endnu ingen sort-niveauer",
     // [Auto-translated] "Add new choice"
     "addNew@choices": "Tilføj nyt valg",
     // [Auto-translated] "Add new column"
@@ -980,6 +1059,8 @@ export var danishStrings = {
     "addNew@navigateToUrlOnCondition": "Tilføj ny webadresse",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Tilføj ny side",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Tilføj nyt sorteringsniveau",
     // "Value"
     value: "Værdi",
     // "Text"
@@ -1088,6 +1169,14 @@ export var danishStrings = {
     rowCount: "Antal rækker",
     // [Auto-translated] "Rows per page"
     pageSize: "Rækker pr. side",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Tillad brugere at sortere rækker",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maksimale sorteringsniveauer",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Standard sorteringsrækkefølge",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Show-sorteringsbjælke",
     // "Columns layout"
     columnLayout: "Kolonnelayout",
     // "\"Add Row\" button alignment"
@@ -1360,9 +1449,9 @@ export var danishStrings = {
     waitForUpload: "Vent på, at overførslen er fuldført",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Justering af rækkedetaljer",
-    // [Auto-translated] "Minimum row count"
-    minRowCount: "Mindste antal rækker",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Minimum number of rows"
+    minRowCount: "Minimum antal rækker",
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Maksimalt antal rækker",
     // [Auto-translated] "Row count expression"
     rowCountExpression: "Rækketælling-udtryk",
@@ -1618,6 +1707,8 @@ export var danishStrings = {
       columns: "Kolonner",
       // "Rows"
       rows: "Rækker",
+      // [Auto-translated] "Entries"
+      entries: "Bidrag",
       // "Choice Options"
       choices: "Valgmuligheder",
       // "Items"
@@ -2212,6 +2303,8 @@ export var danishStrings = {
     underRowSingle: "Under rækken skal du kun få vist én sektion",
     // [Auto-translated] "Auto"
     auto: "Auto",
+    // [Auto-translated] "Always"
+    always: "Altid",
     timerInfoMode: {
       // "Both"
       combined: "Begge"
@@ -2750,14 +2843,24 @@ export var danishStrings = {
       confirmDelete: "Udløser en bekræftelsesprompt, før en post fjernes.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Angiv et udtryk, der beregner antallet af poster. Dette udtryk tilsidesætter indstillingen \"Initial number of postries\" og revurderes, hver gang de værdier, det refererer til, ændres. Resultatet er begrænset af indstillingerne \"Minimum antal poster\" og \"Maximum antal poster\". Mens dette udtryk er sat, kan respondenter ikke tilføje eller fjerne poster manuelt.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Angiver antallet af opslag, der vises på hver side i panelet. '0' deaktiverer paginering og viser alle rækker.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Angiver antallet af opslag, der vises på hver side i panelet. '0' deaktiverer paginering og viser alle indtastninger.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Tillader respondenter at sortere poster ved hjælp af sorteringslinjen.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definerer den indledende indtastningsrækkefølge. Respondenterne kan ændre den, hvis sortering er tilladt. Når man sorterer efter flere spørgsmål, sorterer hvert spørgsmål opslagene inden for den rækkefølge, der er fastlagt af det foregående spørgsmål. Træk spørgsmålene for at ændre deres prioritet.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Tildeler numre til spørgsmål, der er indlejret i det dynamiske panel."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Angiv et udtryk, der beregner antallet af rækker. Dette udtryk tilsidesætter indstillingen \"Rækkeantal\" og revurderes, hver gang de værdier, det refererer til, ændres. Resultatet er begrænset af indstillingerne \"Minimum rækkeantal\" og \"Maksimum rækkeantal\". Mens dette udtryk er sat, kan respondenter ikke tilføje eller fjerne rækker manuelt.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Tillader respondenter at sortere rækker ved at klikke på kolonneoverskrifter eller bruge sorteringslinjen.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definerer den indledende rækkefølge. Respondenter kan ændre den, hvis sortering er tilladt. Når der sorteres efter flere kolonner, sorterer hver kolonne rækker inden for den rækkefølge, der er fastlagt af den foregående kolonne. Træk kolonner for at ændre deres prioritet.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" viser kun sorteringslinjen, når matricen ikke har sortérbare kolonneoverskrifter: overskrifterne er skjulte, matricen bruger det mobile layout, eller rækkerne er transponeret til kolonner. \"Altid\" viser sorteringslinjen, selv når sorterbare kolonneoverskrifter er synlige.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Angiv et udtryk, der beregner antallet af rækker. Dette udtryk tilsidesætter indstillingen \"Indledende antal rækker\" og revurderes, når de værdier, det refererer til, ændres. Resultatet er begrænset af indstillingerne \"Minimum antal rækker\" og \"Maksimum antal rækker\". Mens dette udtryk er sat, kan respondenter ikke tilføje eller fjerne rækker manuelt.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Udløser en bekræftelsesprompt, før en række fjernes.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2765,6 +2868,8 @@ export var danishStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Angiver antallet af rækker, der vises på hver side i matricen. '0' deaktiverer paginering og viser alle rækker.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Specificerer, hvor mange felter en respondent kan sortere efter på én gang.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Dublerer svar fra den sidste række og tildeler dem til den næste tilføjede dynamiske række.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3838,6 +3943,10 @@ export var danishStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{prop} \"{udtryk}\" gælder altid, fordi {facts} - det afgør ingenting."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{udtryk}\" læser ikke noget spørgsmål eller variabel."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Standardværdien for \"{name}\" er {valuesText}, som den aldrig kan holde. Tilladt: {availableText}.",
@@ -4035,6 +4144,8 @@ export var danishStrings = {
       itemScope: "\"{0}\" er kun tilgængelig inden for valg-, række- og kolonneforhold.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "\"{0}.\" referencer er kun tilgængelige i et sammensat spørgsmål.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" er ikke tilgængeligt i et inArray-filter, som kører mod elementet og derefter undersøgelsen.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" er en kolonne i denne matrix – referer til den med rækkepræfikset.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

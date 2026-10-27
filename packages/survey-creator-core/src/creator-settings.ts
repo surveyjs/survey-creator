@@ -28,7 +28,13 @@ export var settings = {
     /*
      * The name of the translation export file in csv format
      */
-    exportFileName: "survey_translation.csv"
+    exportFileName: "survey_translation.csv",
+    /*
+     * On a multi-page survey with more elements (questions and panels, nested ones included) the
+     * Translation tab offers no "All Pages" choice and always shows a single page: the strings grid
+     * of the whole survey takes about 1 ms per element to build and render. 0 removes the limit.
+     */
+    maxElementsForAllPages: 500
   },
   themeEditor: {
     exportFileName: "survey_theme.json",
@@ -78,6 +84,14 @@ export var settings = {
     updateExpressionsOnDeleting: {
       question: true
     }
+  },
+  // How much of a large survey the AI context of the expression assistant describes. Questions the
+  // current expression reads are never cut; the rest is cut in the order: the target's page, then
+  // calculated values and variables, then the other questions.
+  expressionAssistant: {
+    maxVariables: 150,
+    maxChoicesPerQuestion: 30,
+    maxExamples: 8,
   },
   /*
    * Determines which types of questions the conversion will be available for.

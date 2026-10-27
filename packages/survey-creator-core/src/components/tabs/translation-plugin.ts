@@ -91,6 +91,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     }
     const model = new Translation(this.creator.survey, this.creator);
     this.model = model;
+    model.limitAllPagesOnLargeSurvey = true;
     this.wireModelCallbacks(model);
     this.updateSettingsSurvey();
     this.sidebarTab.componentData = model.settingsSurvey;
@@ -114,7 +115,9 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
     model.onPropertyChanged.add((sender, options) => {
       if (options.name === "filteredPage") {
-        this.updateFilterPageAction();
+        // The model can scope the grid itself (see TranslationBase.canShowAllPages) - the list's
+        // selection follows it as well.
+        this.updateFilterPageAction(true);
       }
       if (options.name === "showAllStrings") {
         this.updateFilterStrigsAction();
@@ -139,6 +142,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     const model = new TranslationSideBySide(this.creator.survey, this.creator,
       this.creator.translationSideBySideView, this.creator.translationFormViewOrientation);
     this.model = model;
+    model.limitAllPagesOnLargeSurvey = true;
     this.wireModelCallbacks(model);
     model.showAllElementStrings = this.showAllElementStrings;
     model.onShowAllElementStringsChanged = (value: boolean): void => {
@@ -197,7 +201,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
         this.updateSideBySidePagesAction();
       }
       if (options.name === "filteredPage") {
-        this.updateFilterPageAction();
+        this.updateFilterPageAction(true);
       }
       if (options.name === "showAllStrings") {
         this.updateFilterStrigsAction();
@@ -210,8 +214,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
   public update(): void {
     if (!this.model) return;
-    this.model.survey = this.creator.survey;
     if (this.isSideBySide && !this.isSideBySideGrid) {
+      this.model.survey = this.creator.survey;
       const model = <TranslationSideBySide>this.model;
       const pages = this.creator.survey.pages;
       model.selectedPageName = pages.length > 0 ? pages[0].name : "";
@@ -219,12 +223,14 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       this.updateSideBySidePagesAction();
       model.updateSettingsSurveyValues();
     } else if (this.isSideBySideGrid) {
-      this.model.filteredPage = null;
+      this.model.setSurveyAndClearPageFilter(this.creator.survey);
       this.setFilterPageActionItems();
       this.updateFilterPageAction(true);
       (<TranslationSideBySide>this.model).updateSettingsSurveyValues();
     } else {
-      this.model.filteredPage = null;
+      this.model.setSurveyAndClearPageFilter(this.creator.survey);
+      // The new survey has its own pages, and its size decides whether "All Pages" is offered.
+      this.setFilterPageActionItems();
       this.updateFilterPageAction(true);
       this.updateTabControl();
     }
@@ -436,9 +442,10 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.updateFilterPageActionTitle(!!selectedItem ? this.creator.survey.getPageByName(selectedId) : null);
   }
   private setFilterPageActionItems(): void {
-    (<ListModel>this.filterPageAction.data).setItems([<IAction>{ id: null, title: this.showAllPagesText }].concat(
-      this.creator.survey.pages.map((page) => this.createPageItem(page))
-    ), false);
+    const pageItems: Array<IAction> = this.creator.survey.pages.map((page) => this.createPageItem(page));
+    // A large survey is always shown page by page (see TranslationBase.canShowAllPages).
+    const canShowAllPages = !this.model || this.model.canShowAllPages;
+    (<ListModel>this.filterPageAction.data).setItems(canShowAllPages ? [<IAction>{ id: null, title: this.showAllPagesText }].concat(pageItems) : pageItems, false);
   }
   // The initial target language is taken from survey.locale, and only from it: the model does not
   // write the survey locale back and does not follow its later changes. An empty survey locale

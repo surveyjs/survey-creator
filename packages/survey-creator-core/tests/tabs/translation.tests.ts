@@ -1,5 +1,9 @@
-import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, LocalizableString, Action, IAction, ItemValue, QuestionMatrixDynamicModel, QuestionMatrixModel, settings as coreSettings } from "survey-core";
-import { Translation, TranslationItem } from "../../src/components/tabs/translation";
+import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, LocalizableString, Action, IAction, ItemValue, QuestionMatrixDynamicModel, QuestionMatrixModel, PanelModelBase, settings as coreSettings } from "survey-core";
+import { Translation, TranslationGroup, TranslationItem } from "../../src/components/tabs/translation";
+import {
+  countRootBuilds, createTreeOnceCreator, getModelSnapshot, getTranslationModel, getTranslationPlugin, getTreeOnceJSON, getTreeSnapshot
+} from "./translation-tree-once-helper";
+import { treeOnceBaseline } from "./translation-tree-once-baseline";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { EmptySurveyCreatorOptions, settings } from "../../src/creator-settings";
 import { CreatorTester } from "../creator-tester";
@@ -155,6 +159,28 @@ test("Recreated strings survey uses a distinct element id space so React remount
   // and the cell textareas never render. Distinct id spaces make the keys differ and force a remount.
   expect(keys1.length).toBeGreaterThan(0);
   expect(keys2.some(k => keys1.indexOf(k) !== -1)).toBe(false);
+});
+test("The strings survey has a fixed responsive width mode and does not compute it over its elements", () => {
+  const survey = new SurveyModel({ pages: [
+    { name: "page1", elements: [{ type: "panel", name: "panel1", elements: [{ type: "text", name: "q1", title: "Q1" }] }] },
+    { name: "page2", elements: [{ type: "radiogroup", name: "q2", choices: ["Item 1", "Item 2"] }] }
+  ] });
+  const translation = new Translation(survey);
+  const spy = vi.spyOn(PanelModelBase.prototype, "needResponsiveWidth");
+  let contexts: Array<any>;
+  try {
+    translation.reset();
+    contexts = spy.mock.contexts.slice();
+  } finally {
+    spy.mockRestore();
+  }
+  const stringsSurvey = translation.stringsSurvey;
+  // The header survey (a single matrix) still resolves "auto" - only the grid no longer walks its elements.
+  expect(contexts.filter(panel => panel.survey === stringsSurvey)).toHaveLength(0);
+  expect(stringsSurvey.widthMode).toBe("responsive");
+  // "auto" resolved to the same value: every strings-grid matrix needs a responsive width.
+  expect(stringsSurvey.calculatedWidthMode).toBe("responsive");
+  expect(stringsSurvey.getAllQuestions().length).toBeGreaterThan(0);
 });
 test("stringsSurvey - one question in survey", () => {
   const survey = new SurveyModel({
@@ -3118,4 +3144,295 @@ test("Page filter dropdown shows page titles, it does not edit them: no inplace 
 
   tabTranslationPlugin.model.filteredPage = creator.survey.pages[1];
   expect(filterPageAction.locTitle?.renderAs).toEqual(defaultRenderer);
+});
+
+describe("Translation tree is built once: default mode", () => {
+  // The state recorded on the commit before the change, when the tree was built twice per reset.
+  const EXPECTED = treeOnceBaseline.defaultMode;
+  const getUpdateSnapshot = (creator: CreatorTester): any => {
+    const action = creator.toolbar.getActionById("svc-translation-filter-page");
+    const selected = (<ListModel>action.data).selectedItem;
+    return {
+      model: getModelSnapshot(getTranslationModel(creator)),
+      action: { title: action.title, selected: !!selected ? selected.id : null }
+    };
+  };
+  const filters: Array<{ name: string, apply: (creator: CreatorTester) => void }> = [
+    { name: "undefined", apply: () => { } },
+    { name: "null", apply: (creator) => { getTranslationModel(creator).filteredPage = null; } },
+    { name: "first page", apply: (creator) => { getTranslationModel(creator).filteredPage = creator.survey.pages[0]; } },
+    { name: "later page", apply: (creator) => { getTranslationModel(creator).filteredPage = creator.survey.pages[1]; } }
+  ];
+
+  test("the tree and the strings survey: all pages, the first page, a later page", () => {
+    const creator = createTreeOnceCreator();
+    const model = getTranslationModel(creator);
+    expect(getModelSnapshot(model)).toEqual(EXPECTED.all);
+    model.filteredPage = creator.survey.pages[0];
+    expect(getModelSnapshot(model)).toEqual(EXPECTED.firstPage);
+    model.filteredPage = creator.survey.pages[1];
+    expect(getModelSnapshot(model)).toEqual(EXPECTED.laterPage);
+  });
+  test("the root is built once per activation and per update", () => {
+    const creator = createTreeOnceCreator({}, false);
+    const plugin = getTranslationPlugin(creator);
+    const counts: any = {};
+    counts.activation = countRootBuilds(creator, () => { creator.activeTab = "translation"; });
+    counts.firstUpdate = countRootBuilds(creator, () => { plugin.update(); });
+    counts.laterUpdate = countRootBuilds(creator, () => { plugin.update(); });
+    // A new JSON updates the active tab's plugin twice (SurveyCreatorModel.updatePlugin ignores
+    // the plugin name), so it is two update() calls.
+    counts.json = countRootBuilds(creator, () => { creator.JSON = getTreeOnceJSON(); });
+    const page = creator.survey.pages[1];
+    getTranslationModel(creator).filteredPage = page;
+    counts.jsonWithLaterPage = countRootBuilds(creator, () => { creator.JSON = getTreeOnceJSON(); }, [page]);
+    // Before the change: 2, 4, 2, 4 and 4 (plus 2 builds rooted on the old survey's page).
+    const once = { main: 1, used: 0, copy: 0, page: 0, other: 0 };
+    const twice = { main: 2, used: 0, copy: 0, page: 0, other: 0 };
+    expect(counts).toEqual({ activation: once, firstUpdate: once, laterUpdate: once, json: twice, jsonWithLaterPage: twice });
+  });
+  test("update() with a new survey: the same state whatever the page filter was", () => {
+    filters.forEach(filter => {
+      const creator = createTreeOnceCreator();
+      filter.apply(creator);
+      const oldPages = creator.survey.pages.slice();
+      creator.JSON = getTreeOnceJSON();
+      expect(creator.survey.pages[0]).not.toBe(oldPages[0]);
+      expect(getUpdateSnapshot(creator), filter.name).toEqual(EXPECTED.update);
+    });
+  });
+  test("a single update() clears the page filter: the same state whatever the filter was", () => {
+    filters.forEach(filter => {
+      const creator = createTreeOnceCreator();
+      filter.apply(creator);
+      getTranslationPlugin(creator).update();
+      expect(getUpdateSnapshot(creator), filter.name).toEqual(EXPECTED.update);
+    });
+  });
+  test("a root built by hand (new + setAsRoot + reset) is the same as the model's", () => {
+    const creator = createTreeOnceCreator();
+    const model = getTranslationModel(creator);
+    const root = new TranslationGroup("survey", creator.survey, model);
+    root.setAsRoot();
+    root.reset();
+    expect(root.isRoot).toBeTruthy();
+    expect(getTreeSnapshot(root)).toEqual(getTreeSnapshot(model.root));
+    expect(getTreeSnapshot(root)).toEqual(EXPECTED.all.tree);
+  });
+});
+
+describe("Translation tab: no \"All Pages\" on a large survey", () => {
+  // Elements (questions and panels): page1 3, page2 2, page3 1. The "de" strings live on page2 only.
+  const getLargeJSON = (): any => ({
+    pages: [
+      { name: "page1", elements: [{ type: "panel", name: "panel1", elements: [{ type: "text", name: "q1", title: "Question 1" }] }, { type: "text", name: "q2" }] },
+      { name: "page2", elements: [{ type: "text", name: "q3", title: { default: "Question 3", de: "Frage 3" } }, { type: "text", name: "q4" }] },
+      { name: "page3", elements: [{ type: "text", name: "q5", title: "Question 5" }] }
+    ]
+  });
+  let savedMax: number;
+  beforeEach(() => {
+    savedMax = settings.translation.maxElementsForAllPages;
+    settings.translation.maxElementsForAllPages = 5;
+  });
+  afterEach(() => {
+    settings.translation.maxElementsForAllPages = savedMax;
+  });
+  const createCreator = (options: any = {}, json: any = getLargeJSON()): CreatorTester => {
+    const creator = new CreatorTester(Object.assign({ showTranslationTab: true }, options));
+    creator.JSON = json;
+    return creator;
+  };
+  const getFilterAction = (creator: CreatorTester): Action => <Action>creator.toolbar.getActionById("svc-translation-filter-page");
+  const getFilterItemIds = (creator: CreatorTester): Array<any> => (<ListModel>getFilterAction(creator).data).actions.map(item => item.id);
+  const getSelectedFilterId = (creator: CreatorTester): any => {
+    const selected = (<ListModel>getFilterAction(creator).data).selectedItem;
+    return !!selected ? selected.id : undefined;
+  };
+  const getStringsMatrixFor = (model: any, locStr: any): QuestionMatrixDropdownModel =>
+    model.stringsSurvey.getAllQuestions().filter((q: any) => q.rows[0]["translationData"].locString === locStr)[0];
+  const getStringsOwnerNames = (model: any): Array<string> =>
+    model.stringsSurvey.getAllQuestions().map((q: any) => q.rows[0]["translationData"].context.name);
+
+  test("above the limit the tab opens on the first page, built once, with no \"All Pages\" item", () => {
+    const creator = createCreator();
+    const builds = countRootBuilds(creator, () => { creator.activeTab = "translation"; });
+    const model = getTranslationModel(creator);
+    expect(model.canShowAllPages).toBe(false);
+    expect(model.filteredPage.name).toBe("page1");
+    // The first page keeps the survey as the root, cut down to page1.
+    expect(builds).toEqual({ main: 1, used: 0, copy: 0, page: 0, other: 0 });
+    expect(getFilterItemIds(creator)).toEqual(["page1", "page2", "page3"]);
+    expect(getSelectedFilterId(creator)).toBe("page1");
+    expect(getFilterAction(creator).title).toBe("page1");
+    const names = getStringsOwnerNames(model);
+    expect(names.indexOf("q1") > -1).toBe(true);
+    expect(names.indexOf("q3") > -1).toBe(false);
+  });
+  test("at the limit, on a single page or with the limit off, \"All Pages\" stays", () => {
+    settings.translation.maxElementsForAllPages = 6;
+    let creator = createCreator();
+    creator.activeTab = "translation";
+    expect(getTranslationModel(creator).filteredPage).toBeFalsy();
+    expect(getFilterItemIds(creator)[0]).toBe(null);
+
+    settings.translation.maxElementsForAllPages = 1;
+    creator = createCreator({}, { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] });
+    creator.activeTab = "translation";
+    expect(getTranslationModel(creator).canShowAllPages).toBe(true);
+    expect(getTranslationModel(creator).filteredPage).toBeFalsy();
+
+    settings.translation.maxElementsForAllPages = 0;
+    creator = createCreator();
+    creator.activeTab = "translation";
+    expect(getTranslationModel(creator).filteredPage).toBeFalsy();
+    expect(getFilterItemIds(creator)).toEqual([null, "page1", "page2", "page3"]);
+  });
+  test("nested panels and questions are counted", () => {
+    const json = { pages: [
+      { name: "p1", elements: [{ type: "panel", name: "pn1", elements: [{ type: "panel", name: "pn2", elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] }] }] },
+      { name: "p2", elements: <Array<any>>[{ type: "text", name: "q3" }] }
+    ] };
+    let creator = createCreator({}, JSON.parse(JSON.stringify(json)));
+    creator.activeTab = "translation";
+    expect(getTranslationModel(creator).canShowAllPages).toBe(true); // 5 elements
+    json.pages[1].elements.push({ type: "text", name: "q4" });
+    creator = createCreator({}, json);
+    creator.activeTab = "translation";
+    expect(getTranslationModel(creator).canShowAllPages).toBe(false); // 6 elements
+  });
+  test("the selected page is kept on creator.JSON while it exists, otherwise the first page is shown", () => {
+    const creator = createCreator();
+    creator.activeTab = "translation";
+    const model = getTranslationModel(creator);
+    model.filteredPage = creator.survey.getPageByName("page3");
+    creator.JSON = getLargeJSON();
+    expect(model.filteredPage).toBe(creator.survey.getPageByName("page3"));
+    expect(getSelectedFilterId(creator)).toBe("page3");
+    expect(getFilterItemIds(creator)).toEqual(["page1", "page2", "page3"]);
+    const json = getLargeJSON();
+    json.pages.splice(2, 1);
+    json.pages[0].elements.push({ type: "text", name: "q6" });
+    creator.JSON = json;
+    expect(model.filteredPage).toBe(creator.survey.pages[0]);
+    expect(getSelectedFilterId(creator)).toBe("page1");
+    expect(getFilterItemIds(creator)).toEqual(["page1", "page2"]);
+  });
+  test("deleting the shown page shows the first page", () => {
+    // The survey keeps 4 elements after the deletion - still above the limit.
+    settings.translation.maxElementsForAllPages = 3;
+    const creator = createCreator();
+    creator.activeTab = "translation";
+    const model = getTranslationModel(creator);
+    model.filteredPage = creator.survey.getPageByName("page2");
+    creator.survey.removePage(creator.survey.getPageByName("page2"));
+    expect(model.filteredPage).toBe(creator.survey.pages[0]);
+    expect(getSelectedFilterId(creator)).toBe("page1");
+  });
+  test("an edit in a page shown later writes to its string, and undo restores it", () => {
+    const creator = createCreator();
+    creator.activeTab = "translation";
+    const model = getTranslationModel(creator);
+    model.filteredPage = creator.survey.getPageByName("page3");
+    const q5 = creator.survey.getQuestionByName("q5");
+    const matrix = getStringsMatrixFor(model, q5.locTitle);
+    matrix.visibleRows[0].cells[0].question.value = "New title";
+    expect(q5.title).toBe("New title");
+    creator.undo();
+    expect(q5.title).toBe("Question 5");
+  });
+  test("the locales list, CSV export, locale deletion and merge cover the whole survey", () => {
+    const creator = createCreator();
+    creator.activeTab = "translation";
+    const model = <Translation>getTranslationModel(creator);
+    expect(model.filteredPage.name).toBe("page1");
+    expect(model.locales.slice()).toEqual(["", "de"]);
+    const csv = model.exportToCSV();
+    expect(csv.indexOf("survey.page2.q3.title") > -1).toBe(true);
+    expect(csv.indexOf("Frage 3") > -1).toBe(true);
+    const q3 = creator.survey.getQuestionByName("q3");
+    model.deleteLocaleStrings("de");
+    expect(q3.locTitle.getLocaleText("de")).toBeFalsy();
+    expect(q3.locTitle.getLocaleText("")).toBe("Question 3");
+
+    const q1 = creator.survey.getQuestionByName("q1");
+    q1.locTitle.setLocaleText("en", "English question 1");
+    q3.locTitle.setLocaleText("en", "English question 3");
+    model.reset();
+    expect(model.canMergeLocaleWithDefault).toBe(true);
+    model.mergeLocaleWithDefault();
+    expect(q1.locTitle.getLocaleText("")).toBe("English question 1");
+    expect(q3.locTitle.getLocaleText("")).toBe("English question 3");
+  });
+  test("side-by-side grid view: the same rule", () => {
+    const creator = createCreator({ translationMode: "sideBySide", translationSideBySideView: "grid" });
+    creator.activeTab = "translation";
+    const model = getTranslationModel(creator);
+    expect(model.isSideBySideGrid).toBe(true);
+    expect(model.filteredPage.name).toBe("page1");
+    expect(getFilterItemIds(creator)).toEqual(["page1", "page2", "page3"]);
+    model.filteredPage = creator.survey.getPageByName("page2");
+    creator.JSON = getLargeJSON();
+    expect(model.filteredPage).toBe(creator.survey.getPageByName("page2"));
+  });
+  test("a model the tab did not create is not limited", () => {
+    const creator = createCreator();
+    const translation = new Translation(creator.survey, creator);
+    translation.reset();
+    expect(translation.canShowAllPages).toBe(true);
+    expect(translation.filteredPage).toBeFalsy();
+  });
+});
+
+describe("Translation tab: a large survey builds the strings of one page", () => {
+  // Every question has a title, so it is a used string and the default filter shows it.
+  const getPagesJSON = (pageCount: number): any => {
+    const pages = [];
+    for (let p = 1; p <= pageCount; p++) {
+      const elements = [];
+      for (let q = 1; q <= 10; q++) {
+        elements.push({ type: "text", name: "p" + p + "q" + q, title: "Question " + p + "." + q });
+      }
+      pages.push({ name: "page" + p, elements: elements });
+    }
+    return { title: "Survey title", pages: pages };
+  };
+  const getBuiltStrings = (pageCount: number, options: any = {}): any => {
+    const creator = new CreatorTester(Object.assign({ showTranslationTab: true }, options));
+    creator.JSON = getPagesJSON(pageCount);
+    const spy = vi.spyOn(<any>TranslationGroup.prototype, "fillItems");
+    try {
+      creator.activeTab = "translation";
+      const model = getTranslationModel(creator);
+      return {
+        matrices: model.stringsSurvey.getAllQuestions().length,
+        items: model.root.allLocItems.length,
+        groups: spy.mock.contexts.filter((group: any) => group.translation === model).length,
+        page: !!model.filteredPage ? model.filteredPage.name : undefined
+      };
+    } finally {
+      spy.mockRestore();
+    }
+  };
+  test("the default element limit is 500", () => {
+    expect(settings.translation.maxElementsForAllPages).toBe(500);
+  });
+  test("the strings built do not grow with the number of pages", () => {
+    const expected = { matrices: 11, items: 11, groups: 12, page: "page1" };
+    const n = getBuiltStrings(60);
+    const n2 = getBuiltStrings(120);
+    expect(n).toEqual(expected);
+    expect(n2).toEqual(n);
+  });
+  test("side-by-side grid view: the strings built do not grow with the number of pages", () => {
+    const options = { translationMode: "sideBySide", translationSideBySideView: "grid" };
+    const expected = { matrices: 11, items: 11, groups: 12, page: "page1" };
+    const n = getBuiltStrings(60, options);
+    const n2 = getBuiltStrings(120, options);
+    expect(n).toEqual(expected);
+    expect(n2).toEqual(n);
+  });
+  test("below the limit the strings of all pages are built", () => {
+    expect(getBuiltStrings(4)).toEqual({ matrices: 41, items: 41, groups: 45, page: undefined });
+  });
 });

@@ -5,6 +5,8 @@ import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { QuestionToolboxItem } from "../src/toolbox";
 import { DropIndicatorPosition } from "../src/drag-drop-enums";
+import { vi } from "vitest";
+export * from "../src/localization/german";
 
 test("Collapse action updates when the adorner is re-attached after expandCollapseButtonVisibility changes", (): any => {
   const creator = new CreatorTester();
@@ -629,6 +631,49 @@ test("Check question converter selected item for customized rating subitems (jso
   popupSubtype.show();
   const listSubtype = popupSubtype.contentComponentData.model;
   expect(listSubtype.selectedItem.id).toBe("stars-5");
+
+  surveySettings.animationEnabled = true;
+});
+
+test("Convert input type shows the subitem title for subitems with choices, columns or rows, Bug#8102", (): any => {
+  surveySettings.animationEnabled = false;
+  const creator = new CreatorTester();
+  const agreeDisagree = [
+    { value: 1, text: "Strongly disagree" },
+    { value: 2, text: "Disagree" },
+    { value: 3, text: "Agree" }
+  ];
+  const getChoices = () => agreeDisagree.map(item => ({ ...item }));
+  creator.toolbox.getItemByName("radiogroup").addSubitem(<any>{
+    name: "agreeDisagree", title: "Agree - Disagree",
+    json: { type: "radiogroup", colCount: 3, choices: getChoices() }
+  });
+  creator.toolbox.getItemByName("dropdown").addSubitem(<any>{
+    name: "agreeDisagree", title: "Agree - Disagree",
+    json: { type: "dropdown", choices: [1, { value: 2 }, { value: 3, text: "Agree" }] }
+  });
+  creator.toolbox.getItemByName("matrix").addSubitem(<any>{
+    name: "agreeDisagree", title: "Agree - Disagree",
+    json: { type: "matrix", columns: getChoices(), rows: ["Row 1", "Row 2"] }
+  });
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", colCount: 3, choices: getChoices() },
+      { type: "dropdown", name: "q2", choices: [1, 2, { value: 3, text: "Agree" }] },
+      { type: "matrix", name: "q3", columns: getChoices(), rows: ["Row 1", "Row 2"] },
+      { type: "radiogroup", name: "q4", choices: [1, 2, 3] }
+    ]
+  };
+  const getConvertInputTypeTitle = (name: string): string => {
+    const question = creator.survey.getQuestionByName(name);
+    creator.selectElement(question);
+    const questionAdorner = new QuestionAdornerViewModel(creator, question, <any>undefined);
+    return questionAdorner.actionContainer.getActionById("convertInputType").title;
+  };
+  expect(getConvertInputTypeTitle("q1"), "radiogroup with choices").toBe("Agree - Disagree");
+  expect(getConvertInputTypeTitle("q2"), "dropdown with choices").toBe("Agree - Disagree");
+  expect(getConvertInputTypeTitle("q3"), "matrix with columns and rows").toBe("Agree - Disagree");
+  expect(getConvertInputTypeTitle("q4"), "radiogroup with other choices").toBe("Radio Button Group");
 
   surveySettings.animationEnabled = true;
 });
@@ -1445,6 +1490,345 @@ test("Check question converter subitems", (): any => {
   expect(text.needDefaultSubitem).toBeFalsy(); // needDefaultSubitem is recalculated after clearSubitems
 
   surveySettings.animationEnabled = true;
+});
+describe("convertInputType builds its list when the popup opens", () => {
+  const textIds = "color,date,datetime-local,email,month,number,password,range,tel,text-default,time,url,week";
+  const textIdsNoEmail = "color,date,datetime-local,month,number,password,range,tel,text-default,time,url,week";
+  const ratingIds = "labels,stars,smileys";
+  const withTel = (creator: CreatorTester, index?: number) => {
+    creator.toolbox.addItem(<any>{ name: "phone", title: "Phone", json: { type: "text", inputType: "tel" }, category: "custom" }, index);
+    return creator;
+  };
+  const withText2 = (creator: CreatorTester, index?: number) => {
+    creator.toolbox.addItem(<any>{ name: "text2", title: "Text 2", json: { type: "text" }, category: "custom" }, index);
+    creator.toolbox.getItemByName("text2").addSubitem(<any>{ name: "tel2", title: "Tel 2", json: { type: "text", inputType: "tel" } });
+    return creator;
+  };
+  const noSubitems = (creator: CreatorTester) => {
+    creator.toolbox.showSubitems = false;
+    return creator;
+  };
+  const withRadiogroupSubitem = (creator: CreatorTester) => {
+    creator.toolbox.getItemByName("radiogroup").addSubitem(<any>{ name: "rg2", title: "Two columns", json: { type: "radiogroup", colCount: 2 } });
+    return creator;
+  };
+  const creators: { [name: string]: () => CreatorTester } = {
+    default: () => new CreatorTester(),
+    noSubitems: () => noSubitems(new CreatorTester()),
+    customJson: () => {
+      const creator = withTel(new CreatorTester());
+      const booleans = creator.toolbox.getItemByName("boolean");
+      booleans.addSubitem(<any>{ name: "boolradio", json: { type: "boolean", displayMode: "radio" }, title: "Radio" });
+      booleans.addSubitem(<any>{ name: "boolcheckbox", json: { type: "boolean", displayMode: "checkbox" }, title: "Checkbox" });
+      return creator;
+    },
+    telItemFirst: () => withTel(new CreatorTester(), 0),
+    telItemFirstNoSubitems: () => noSubitems(withTel(new CreatorTester(), 0)),
+    text2Last: () => withText2(new CreatorTester()),
+    text2First: () => withText2(new CreatorTester(), 0),
+    text2FirstNoSubitems: () => noSubitems(withText2(new CreatorTester(), 0)),
+    restricted: () => new CreatorTester({ questionTypes: ["text", "rating", "checkbox"] }),
+    typeNotAvailable: () => new CreatorTester({ questionTypes: ["rating", "checkbox"] }),
+    removedSubitem: () => {
+      const creator = new CreatorTester();
+      creator.toolbox.getItemByName("text").removeSubitem("email");
+      return creator;
+    },
+    removedSubitemNoSubitems: () => {
+      const creator = noSubitems(new CreatorTester());
+      creator.toolbox.getItemByName("text").removeSubitem("email");
+      return creator;
+    },
+    clearedSubitems: () => {
+      const creator = new CreatorTester();
+      creator.toolbox.getItemByName("text").clearSubitems();
+      return creator;
+    },
+    matrixSubitems: () => {
+      const creator = new CreatorTester();
+      const matrixItem = creator.toolbox.getItemByName("matrix");
+      matrixItem.addSubitem(<any>{ name: "matrixdefault", json: { type: "matrix" }, title: "Single-Select" });
+      matrixItem.addSubitem(creator.toolbox.getItemByName("matrixdropdown"));
+      matrixItem.addSubitem(creator.toolbox.getItemByName("matrixdynamic"));
+      creator.toolbox.removeItem("matrixdropdown");
+      creator.toolbox.removeItem("matrixdynamic");
+      return creator;
+    },
+    radiogroupSubitems: () => withRadiogroupSubitem(new CreatorTester()),
+    radiogroupSubitemsNoSubitems: () => withRadiogroupSubitem(noSubitems(new CreatorTester())),
+    german: () => {
+      const creator = new CreatorTester();
+      creator.locale = "de";
+      return creator;
+    },
+  };
+  // Generated once on master faa307505, before the list was built on demand, and pasted here.
+  // [case, toolbox item path or question JSON, title (null: no action), list item ids after the popup opens, selected item id after it opens]
+  const baseline: Array<[string, any, string, string?, string?]> = [
+    ["default", "radiogroup", null],
+    ["default", "rating", "Labels", ratingIds, "labels"],
+    ["default", "rating/labels", "Labels", ratingIds, "labels"],
+    ["default", "rating/stars", "Stars", ratingIds, "stars"],
+    ["default", "rating/smileys", "Smileys", ratingIds, "smileys"],
+    ["default", "slider", null],
+    ["default", "checkbox", null],
+    ["default", "dropdown", null],
+    ["default", "tagbox", null],
+    ["default", "boolean", null],
+    ["default", "file", null],
+    ["default", "imagepicker", null],
+    ["default", "ranking", null],
+    ["default", "text", "Text", textIds, "text-default"],
+    ["default", "text/color", "Color", textIds, "color"],
+    ["default", "text/date", "Date", textIds, "date"],
+    ["default", "text/datetime-local", "Date and Time", textIds, "datetime-local"],
+    ["default", "text/email", "Email", textIds, "email"],
+    ["default", "text/month", "Month", textIds, "month"],
+    ["default", "text/number", "Number", textIds, "number"],
+    ["default", "text/password", "Password", textIds, "password"],
+    ["default", "text/range", "Range", textIds, "range"],
+    ["default", "text/tel", "Phone Number", textIds, "tel"],
+    ["default", "text/text-default", "Text", textIds, "text-default"],
+    ["default", "text/time", "Time", textIds, "time"],
+    ["default", "text/url", "URL", textIds, "url"],
+    ["default", "text/week", "Week", textIds, "week"],
+    ["default", "comment", null],
+    ["default", "multipletext", null],
+    ["default", "paneldynamic", null],
+    ["default", "matrix", null],
+    ["default", "matrixdropdown", null],
+    ["default", "matrixdynamic", null],
+    ["default", "html", null],
+    ["default", "expression", null],
+    ["default", "image", null],
+    ["default", "signaturepad", null],
+    ["noSubitems", "radiogroup", null],
+    ["noSubitems", "rating", "Labels", ratingIds, null],
+    ["noSubitems", "rating/labels", "Labels", ratingIds, null],
+    ["noSubitems", "rating/stars", "Stars", ratingIds, null],
+    ["noSubitems", "rating/smileys", "Smileys", ratingIds, null],
+    ["noSubitems", "slider", null],
+    ["noSubitems", "checkbox", null],
+    ["noSubitems", "dropdown", null],
+    ["noSubitems", "tagbox", null],
+    ["noSubitems", "boolean", null],
+    ["noSubitems", "file", null],
+    ["noSubitems", "imagepicker", null],
+    ["noSubitems", "ranking", null],
+    ["noSubitems", "text", "Text", textIds, null],
+    ["noSubitems", "text/color", "Color", textIds, null],
+    ["noSubitems", "text/date", "Date", textIds, null],
+    ["noSubitems", "text/datetime-local", "Date and Time", textIds, null],
+    ["noSubitems", "text/email", "Email", textIds, null],
+    ["noSubitems", "text/month", "Month", textIds, null],
+    ["noSubitems", "text/number", "Number", textIds, null],
+    ["noSubitems", "text/password", "Password", textIds, null],
+    ["noSubitems", "text/range", "Range", textIds, null],
+    ["noSubitems", "text/tel", "Phone Number", textIds, null],
+    ["noSubitems", "text/text-default", "Text", textIds, null],
+    ["noSubitems", "text/time", "Time", textIds, null],
+    ["noSubitems", "text/url", "URL", textIds, null],
+    ["noSubitems", "text/week", "Week", textIds, null],
+    ["noSubitems", "comment", null],
+    ["noSubitems", "multipletext", null],
+    ["noSubitems", "paneldynamic", null],
+    ["noSubitems", "matrix", null],
+    ["noSubitems", "matrixdropdown", null],
+    ["noSubitems", "matrixdynamic", null],
+    ["noSubitems", "html", null],
+    ["noSubitems", "expression", null],
+    ["noSubitems", "image", null],
+    ["noSubitems", "signaturepad", null],
+    ["customJson", "radiogroup", null],
+    ["customJson", "rating", "Labels", ratingIds, "labels"],
+    ["customJson", "rating/labels", "Labels", ratingIds, "labels"],
+    ["customJson", "rating/stars", "Stars", ratingIds, "stars"],
+    ["customJson", "rating/smileys", "Smileys", ratingIds, "smileys"],
+    ["customJson", "slider", null],
+    ["customJson", "checkbox", null],
+    ["customJson", "dropdown", null],
+    ["customJson", "tagbox", null],
+    ["customJson", "boolean", "Yes/No (Boolean)", "boolean-default,boolradio,boolcheckbox", "boolean-default"],
+    ["customJson", "boolean/boolradio", "Radio", "boolean-default,boolradio,boolcheckbox", "boolradio"],
+    ["customJson", "boolean/boolcheckbox", "Checkbox", "boolean-default,boolradio,boolcheckbox", "boolcheckbox"],
+    ["customJson", "file", null],
+    ["customJson", "imagepicker", null],
+    ["customJson", "ranking", null],
+    ["customJson", "text", "Text", textIds, "text-default"],
+    ["customJson", "text/color", "Color", textIds, "color"],
+    ["customJson", "text/date", "Date", textIds, "date"],
+    ["customJson", "text/datetime-local", "Date and Time", textIds, "datetime-local"],
+    ["customJson", "text/email", "Email", textIds, "email"],
+    ["customJson", "text/month", "Month", textIds, "month"],
+    ["customJson", "text/number", "Number", textIds, "number"],
+    ["customJson", "text/password", "Password", textIds, "password"],
+    ["customJson", "text/range", "Range", textIds, "range"],
+    ["customJson", "text/tel", "Phone Number", textIds, "tel"],
+    ["customJson", "text/text-default", "Text", textIds, "text-default"],
+    ["customJson", "text/time", "Time", textIds, "time"],
+    ["customJson", "text/url", "URL", textIds, "url"],
+    ["customJson", "text/week", "Week", textIds, "week"],
+    ["customJson", "comment", null],
+    ["customJson", "multipletext", null],
+    ["customJson", "paneldynamic", null],
+    ["customJson", "matrix", null],
+    ["customJson", "matrixdropdown", null],
+    ["customJson", "matrixdynamic", null],
+    ["customJson", "html", null],
+    ["customJson", "expression", null],
+    ["customJson", "image", null],
+    ["customJson", "signaturepad", null],
+    ["customJson", "phone", "Phone Number", textIds, "tel"],
+    ["telItemFirst", { type: "text", name: "q1" }, "Text", textIds, "text-default"],
+    ["telItemFirst", { type: "text", name: "q1", inputType: "email" }, "Email", textIds, "email"],
+    ["telItemFirst", { type: "text", name: "q1", inputType: "tel" }, "Phone Number", textIds, "tel"],
+    ["telItemFirstNoSubitems", { type: "text", name: "q1" }, "Text", textIds, null],
+    ["telItemFirstNoSubitems", { type: "text", name: "q1", inputType: "email" }, "Email", textIds, null],
+    ["telItemFirstNoSubitems", { type: "text", name: "q1", inputType: "tel" }, "Phone Number", textIds, null],
+    ["text2Last", { type: "text", name: "q1" }, "Text 2", "text2-default,tel2", "text2-default"],
+    ["text2Last", { type: "text", name: "q1", inputType: "email" }, "Text 2", "text2-default,tel2", "text2-default"],
+    ["text2Last", { type: "text", name: "q1", inputType: "tel" }, "Tel 2", "text2-default,tel2", "tel2"],
+    ["text2First", { type: "text", name: "q1" }, "Text", textIds, "text-default"],
+    ["text2First", { type: "text", name: "q1", inputType: "email" }, "Email", textIds, "email"],
+    ["text2First", { type: "text", name: "q1", inputType: "tel" }, "Phone Number", textIds, "tel"],
+    ["text2FirstNoSubitems", { type: "text", name: "q1" }, "Text", textIds, null],
+    ["text2FirstNoSubitems", { type: "text", name: "q1", inputType: "email" }, "Email", textIds, null],
+    ["text2FirstNoSubitems", { type: "text", name: "q1", inputType: "tel" }, "Phone Number", textIds, null],
+    ["restricted", "text", "Text", textIds, "text-default"],
+    ["restricted", "text/color", "Color", textIds, "color"],
+    ["restricted", "text/date", "Date", textIds, "date"],
+    ["restricted", "text/datetime-local", "Date and Time", textIds, "datetime-local"],
+    ["restricted", "text/email", "Email", textIds, "email"],
+    ["restricted", "text/month", "Month", textIds, "month"],
+    ["restricted", "text/number", "Number", textIds, "number"],
+    ["restricted", "text/password", "Password", textIds, "password"],
+    ["restricted", "text/range", "Range", textIds, "range"],
+    ["restricted", "text/tel", "Phone Number", textIds, "tel"],
+    ["restricted", "text/text-default", "Text", textIds, "text-default"],
+    ["restricted", "text/time", "Time", textIds, "time"],
+    ["restricted", "text/url", "URL", textIds, "url"],
+    ["restricted", "text/week", "Week", textIds, "week"],
+    ["restricted", "rating", "Labels", ratingIds, "labels"],
+    ["restricted", "rating/labels", "Labels", ratingIds, "labels"],
+    ["restricted", "rating/stars", "Stars", ratingIds, "stars"],
+    ["restricted", "rating/smileys", "Smileys", ratingIds, "smileys"],
+    ["restricted", "checkbox", null],
+    ["typeNotAvailable", { type: "text", name: "q1", inputType: "email" }, null],
+    ["removedSubitem", { type: "text", name: "q1", inputType: "email" }, "Email", textIdsNoEmail, null],
+    ["removedSubitemNoSubitems", { type: "text", name: "q1", inputType: "email" }, "Email", textIdsNoEmail, null],
+    ["clearedSubitems", { type: "text", name: "q1", inputType: "email" }, null],
+    ["matrixSubitems", { type: "matrix", name: "q1" }, "Single-Select", "matrixdefault,matrixdropdown,matrixdynamic", "matrixdefault"],
+    ["matrixSubitems", { type: "matrixdropdown", name: "q1" }, "Multi-Select Matrix", "matrixdefault,matrixdropdown,matrixdynamic", "matrixdropdown"],
+    ["matrixSubitems", { type: "matrixdynamic", name: "q1" }, "Dynamic Matrix", "matrixdefault,matrixdropdown,matrixdynamic", "matrixdynamic"],
+    ["radiogroupSubitems", { type: "radiogroup", name: "q1" }, "Radio Button Group", "radiogroup-default,rg2", "radiogroup-default"],
+    ["radiogroupSubitems", { type: "radiogroup", name: "q1", colCount: 2 }, "Two columns", "radiogroup-default,rg2", "rg2"],
+    ["radiogroupSubitems", { type: "radiogroup", name: "q1", colCount: 3 }, "Radio Button Group", "radiogroup-default,rg2", "radiogroup-default"],
+    ["radiogroupSubitemsNoSubitems", { type: "radiogroup", name: "q1" }, null],
+    ["radiogroupSubitemsNoSubitems", { type: "radiogroup", name: "q1", colCount: 2 }, null],
+    ["german", { type: "text", name: "q1" }, "Text", textIds, "text-default"],
+    ["german", { type: "text", name: "q1", inputType: "email" }, "E-Mail", textIds, "email"],
+    ["german", { type: "rating", name: "q1", rateType: "stars" }, "Sterne", ratingIds, "stars"],
+  ];
+  const caseNames = Object.keys(creators);
+  // Every question toolbox item and subitem, named as the path rows of the table name them.
+  // Components that other tests in this file register (and leave registered) are skipped.
+  const getToolboxQuestionJsons = (creator: CreatorTester): Array<{ path: string, json: any }> => {
+    const res = [];
+    creator.toolbox.items.forEach(item => {
+      if (ComponentCollection.Instance.getCustomQuestionByName(item.name)) return;
+      [item].concat(item.items || []).forEach(i => {
+        if (!i.json?.type || i.isPanel || i.json.type === "panel") return;
+        res.push({ path: i === item ? item.name : item.name + "/" + i.name, json: { ...JSON.parse(JSON.stringify(i.json)), name: "q1" } });
+      });
+    });
+    return res;
+  };
+  const getCaseRows = (caseName: string, creator: CreatorTester): Array<{ row: Array<any>, json: any }> => {
+    const rows = baseline.filter(r => r[0] === caseName);
+    if (typeof rows[0][1] !== "string") return rows.map(row => ({ row, json: row[1] }));
+    const jsons = getToolboxQuestionJsons(creator);
+    expect(rows.map(r => r[1])).toEqual(jsons.map(j => j.path));
+    return rows.map((row, index) => ({ row, json: jsons[index].json }));
+  };
+  const createAdorner = (creator: CreatorTester, json: any): QuestionAdornerViewModel => {
+    creator.JSON = { elements: [json] };
+    return new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], <any>undefined);
+  };
+  const openPopup = (action: Action) => {
+    new PopupDropdownViewModel(action.popupModel); // need for popupModel.onShow
+    action.popupModel.show();
+    return action.popupModel.contentComponentData.model;
+  };
+  beforeEach(() => { surveySettings.animationEnabled = false; });
+  afterEach(() => { surveySettings.animationEnabled = true; });
+
+  test.each(caseNames)("the action and its title are the same as before: %s", (caseName: string) => {
+    const creator = creators[caseName]();
+    getCaseRows(caseName, creator).forEach(({ row, json }) => {
+      const action = createAdorner(creator, json).actionContainer.getActionById("convertInputType");
+      expect(action ? action.title : null, JSON.stringify(row[1])).toBe(row[2]);
+      if (action) expect(action.visible, JSON.stringify(row[1])).toBe(true);
+    });
+  });
+  test.each(caseNames)("no list before the popup opens, the same list after it opens: %s", (caseName: string) => {
+    const creator = creators[caseName]();
+    getCaseRows(caseName, creator).filter(({ row }) => row[2] !== null).forEach(({ row, json }) => {
+      const createItemSpy = vi.spyOn(creator, "createIActionBarItemByClass");
+      const action = createAdorner(creator, json).actionContainer.getActionById("convertInputType");
+      expect(createItemSpy, JSON.stringify(row[1])).toHaveBeenCalledTimes(0);
+      createItemSpy.mockRestore();
+      expect(action.popupModel.contentComponentData.model.actions.length).toBe(0);
+      const list = openPopup(action);
+      expect(list.actions.map(a => a.id).join(","), JSON.stringify(row[1])).toBe(row[3]);
+      expect(list.selectedItem?.id ?? null, JSON.stringify(row[1])).toBe(row[4]);
+      action.popupModel.hide();
+    });
+  });
+  test("the subtype changes while the popup is closed: the title follows, the list is built on the next open", () => {
+    // [creator, question JSON, property, title at build, [value, title after the change], list item ids and selected item id on the next open]
+    const sequences: Array<[() => CreatorTester, any, string, string, Array<[string, string]>, string, string]> = [
+      [creators.default, { type: "rating", name: "q1" }, "rateType", "Labels", [["stars", "Stars"], ["smileys", "Smileys"]], ratingIds, "smileys"],
+      [creators.default, { type: "text", name: "q1" }, "inputType", "Text", [["email", "Email"], ["tel", "Phone Number"], ["text", "Text"]], textIds, "text-default"],
+      [creators.telItemFirst, { type: "text", name: "q1", inputType: "email" }, "inputType", "Email", [["tel", "Phone Number"], ["url", "URL"]], textIds, "url"],
+      [creators.text2First, { type: "text", name: "q1", inputType: "email" }, "inputType", "Email", [["tel", "Phone Number"], ["url", "URL"]], textIds, "url"],
+      [creators.noSubitems, { type: "text", name: "q1" }, "inputType", "Text", [["email", "Email"], ["tel", "Phone Number"]], textIds, null],
+    ];
+    sequences.forEach(([createCreator, json, propName, buildTitle, changes, ids, selectedId]) => {
+      const adorner = createAdorner(createCreator(), json);
+      const question = adorner.element as any;
+      const action = adorner.actionContainer.getActionById("convertInputType");
+      const list = action.popupModel.contentComponentData.model;
+      expect(action.title).toBe(buildTitle);
+      changes.forEach(([value, title]) => {
+        question[propName] = value;
+        expect(action.title, value).toBe(title);
+        expect(list.actions.length, value).toBe(0);
+      });
+      openPopup(action);
+      expect(list.actions.map(a => a.id).join(",")).toBe(ids);
+      expect(list.selectedItem?.id ?? null).toBe(selectedId);
+    });
+  });
+  test("the subtype changes while the popup is open: the title and the list follow", () => {
+    // [creator, question JSON, property, [value, title and selected item id after the change], list item ids]
+    const sequences: Array<[() => CreatorTester, any, string, Array<[string, string, string]>, string]> = [
+      [creators.default, { type: "rating", name: "q1" }, "rateType", [["stars", "Stars", "stars"], ["smileys", "Smileys", "smileys"]], ratingIds],
+      [creators.telItemFirst, { type: "text", name: "q1", inputType: "email" }, "inputType", [["tel", "Phone Number", "tel"], ["url", "URL", "url"]], textIds],
+      [creators.text2First, { type: "text", name: "q1", inputType: "email" }, "inputType", [["tel", "Phone Number", "tel"], ["url", "URL", "url"]], textIds],
+    ];
+    sequences.forEach(([createCreator, json, propName, changes, ids]) => {
+      const adorner = createAdorner(createCreator(), json);
+      const question = adorner.element as any;
+      const action = adorner.actionContainer.getActionById("convertInputType");
+      const list = openPopup(action);
+      changes.forEach(([value, title, selectedId]) => {
+        question[propName] = value;
+        expect(action.title, value).toBe(title);
+        expect(list.selectedItem?.id ?? null, value).toBe(selectedId);
+      });
+      expect(list.actions.map(a => a.id).join(",")).toBe(ids);
+    });
+  });
 });
 test("Test showHiddenTitle functionality", (): any => {
   const creator = new CreatorTester();

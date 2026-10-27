@@ -562,6 +562,73 @@ export const roStrings = {
     // [Auto-translated] "Description"
     listDescriptionColumn: "Descriere"
   },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Asistent de expresie",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Scrie cu AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Descrie ce ar trebui să facă expresia",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "De exemplu: arată această întrebare când respondentul are 18 ani sau mai mult",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Descrie condiția în cuvinte",
+    // [Auto-translated] "Generate"
+    generate: "Generează",
+    // [Auto-translated] "Refine"
+    refine: "Rafinare",
+    // [Auto-translated] "Explain"
+    explain: "Explică",
+    // [Auto-translated] "Stop"
+    stop: "Stop",
+    // [Auto-translated] "Accept"
+    accept: "Acceptă",
+    // [Auto-translated] "Reject"
+    reject: "Respinge",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Aplică soluția: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Expresia curentă",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Expresie sugerată",
+    // [Auto-translated] "Reads as"
+    readsAs: "Se citește ca",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Explicația asistentului",
+    // [Auto-translated] "Check results"
+    findings: "Verifică rezultatele",
+    // [Auto-translated] "Error"
+    severityError: "Eroare",
+    // [Auto-translated] "Warning"
+    severityWarning: "Atenție",
+    // [Auto-translated] "Info"
+    severityInfo: "Informații",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "în \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Descrie expresia și selectează Generate.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Așteptând asistenta...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Cererea a fost anulată.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Asistentul a raportat: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Asistentul nu a sugerat nicio expresie.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Revizuiește expresia sugerată.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asistentul i-a explicat expresia curentă.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Expresia sugerată conține erori și nu poate fi acceptată.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Expresia sugerată nu putea fi verificată pentru fiecare loc în care este scrisă, deci nu poate fi acceptată.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Adaugă o acțiune la regulă înainte de a întreba asistentul.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Prima sugestie avea erori și a fost corectată automat."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -653,6 +720,8 @@ export const roStrings = {
       newPanelPosition: "Locația noului panou",
       // [Auto-translated] "Entries per page"
       pageSize: "Înscrieri pe pagină",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Permite utilizatorilor să sorteze intrările",
       // "Prevent duplicate responses in the following question"
       keyName: "Prevenirea răspunsurilor duplicate în următoarea întrebare"
     },
@@ -740,6 +809,12 @@ export const roStrings = {
       // "Expression"
       expression: "Expresie"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sortează după",
+      // [Auto-translated] "Order"
+      direction: "Ordinea"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Exprimare"
@@ -793,7 +868,9 @@ export const roStrings = {
       // "Make the column required if"
       requiredIf: "Fă coloana obligatorie dacă",
       // "Each option in a separate column"
-      showInMultipleColumns: "Fiecare opțiune într-o coloană separată"
+      showInMultipleColumns: "Fiecare opțiune într-o coloană separată",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Permiteți sortarea după această coloană"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -963,6 +1040,8 @@ export const roStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "Nu aveți încă niciun link",
     // [Auto-translated] "You don't have any pages yet"
     "listIsEmpty@pages": "Nu aveți încă nicio pagină",
+    // [Auto-translated] "You don't have any sort levels yet"
+    "listIsEmpty@sortCriteria": "Nu ai încă niveluri de tip",
     // "Add new choice"
     "addNew@choices": "Adăugați o alegere nouă",
     // "Add new column"
@@ -979,6 +1058,8 @@ export const roStrings = {
     "addNew@navigateToUrlOnCondition": "Adăugați un URL nou",
     // [Auto-translated] "Add new page"
     "addNew@pages": "Adaugă o pagină nouă",
+    // [Auto-translated] "Add new sort level"
+    "addNew@sortCriteria": "Adaugă un nou nivel de sortare",
     // "Value"
     value: "Valoare",
     // [Auto-translated] "Text"
@@ -1087,6 +1168,14 @@ export const roStrings = {
     rowCount: "Număr de rânduri",
     // [Auto-translated] "Rows per page"
     pageSize: "Rânduri pe pagină",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Permite utilizatorilor să sorteze rândurile",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Niveluri maxime de sortare",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Ordinea implicită de sortare",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Afișează bara de sortare",
     // "Columns layout"
     columnLayout: "Aspect coloane",
     // "\"Add Row\" button alignment"
@@ -1617,6 +1706,8 @@ export const roStrings = {
       columns: "Coloane",
       // "Rows"
       rows: "Rânduri",
+      // [Auto-translated] "Entries"
+      entries: "Înscrieri",
       // "Choice Options"
       choices: "Opțiuni de alegere",
       // "Items"
@@ -2211,6 +2302,8 @@ export const roStrings = {
     underRowSingle: "Sub rând, afișați doar o singură extindere de rând",
     // [Auto-translated] "Auto"
     auto: "Auto",
+    // [Auto-translated] "Always"
+    always: "Întotdeauna",
     timerInfoMode: {
       // "Both"
       combined: "Ambele"
@@ -2749,14 +2842,24 @@ export const roStrings = {
       confirmDelete: "Declanșează o solicitare de confirmare înainte de a elimina un panou.",
       // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
       panelCountExpression: "Specifică o expresie care calculează numărul de intrări. Această expresie suprascrie setarea \"Număr inițial de intrări\" și este reevaluată ori de câte ori valorile la care face referire se schimbă. Rezultatul este limitat de setările \"Număr minim de intrări\" și \"Număr maxim de intrări\". Deși această expresie este setată, respondenții nu pot adăuga sau elimina manual elementele.",
-      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all rows."
-      pageSize: "Specifică numărul de intrări afișate pe fiecare pagină a panoului. \"0\" dezactivează paginarea și afișează toate rândurile.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Specifică numărul de intrări afișate pe fiecare pagină a panoului. '0' dezactivează paginarea și afișează toate intrările.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Permite respondenților să sorteze intrările folosind bara de sortare.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definește ordinea inițială a intrărilor. Respondenții o pot schimba dacă sortarea este permisă. Când sortezi după mai multe întrebări, fiecare întrebare sortează intrările în ordinea stabilită de întrebarea precedentă. Trage întrebările pentru a-și schimba prioritatea.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Atribuie numere întrebărilor imbricate în panoul dinamic."
     },
     matrixdynamic: {
-      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Row count\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum row count\" and \"Maximum row count\" settings. While this expression is set, respondents cannot add or remove rows manually."
-      rowCountExpression: "Specifică o expresie care calculează numărul de rânduri. Această expresie suprascrie setarea \"Număr de rânduri\" și este reevaluată ori de câte ori valorile la care face referire se schimbă. Rezultatul este limitat de setările \"Număr minim de rânduri\" și \"Număr maxim de rânduri\". Deși această expresie este setată, respondenții nu pot adăuga sau elimina rânduri manual.",
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Permite respondenților să sorteze rândurile făcând clic pe anteturile de coloană sau folosind bara de sortare.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definește ordinea inițială a rândurilor. Respondenții o pot schimba dacă sortarea este permisă. Când sortezi după mai multe coloane, fiecare coloană sortează rândurile în ordinea stabilită de coloana precedentă. Trage coloanele pentru a le schimba prioritatea.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" afișează bara de sortare doar atunci când matricea nu are antete de coloană sortabile: antetele sunt ascunse, matricea folosește configurația mobilă sau rândurile sunt transpuse în coloane. \"Întotdeauna\" afișează bara de sortare chiar și atunci când sunt vizibile antete de coloane sortabile.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Specifică o expresie care calculează numărul de rânduri. Această expresie suprascrie setarea \"Număr inițial de rânduri\" și este reevaluată ori de câte ori valorile la care face referire se schimbă. Rezultatul este limitat de setările \"Număr minim de rânduri\" și \"Număr maxim de rânduri\". În timp ce această expresie este setată, respondenții nu pot adăuga sau elimina rânduri manual.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Declanșează o solicitare de confirmare înainte de a elimina un rând.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
@@ -2764,6 +2867,8 @@ export const roStrings = {
     },
     // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
     pageSize: "Specifică numărul de rânduri afișate pe fiecare pagină a matricei. '0' dezactivează paginarea și afișează toate rândurile.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Specifică câte câmpuri poate sorta un respondent simultan.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplică răspunsurile din ultimul rând și le atribuie următorului rând dinamic adăugat.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -3837,6 +3942,10 @@ export const roStrings = {
         // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
         alwaysTrueViaConstants: "{Prop} \"{expresie}\" este întotdeauna valabilă, pentru că {faptele} - nu decide nimic."
       },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expresie}\" nu citește nicio întrebare sau variabilă."
+      },
       "value/not-a-choice": {
         // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
         defaultValue: "Valoarea implicită a \"{name}\" este {valuesText}, pe care nu o poate menține niciodată. Permis: {availableText}.",
@@ -4034,6 +4143,8 @@ export const roStrings = {
       itemScope: "\"{0}\" este disponibil doar în interiorul condițiilor de alegere, rând și coloană.",
       // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
       compositeScopePrefix: "Referințele \"{0}.\" sunt disponibile doar în interiorul unei întrebări compozite.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" nu este disponibil în interiorul unui filtru inArray, care rulează atât pe element, cât și apoi pe sondaj.",
       // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
       matrixColumn: "\"{0}\" este o coloană a acestei matrice – refereți-o cu prefixul rândului.",
       // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."

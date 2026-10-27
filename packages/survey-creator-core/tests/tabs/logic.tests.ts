@@ -1369,6 +1369,40 @@ test("LogicItemEditorUI: create new logic item using detail panel", () => {
   expect(row.cells[0].question.value).toEqual("If 'q1' == 1, make question 'q2' visible");
   expect(survey.getQuestionByName("q2").visibleIf).toEqual("{q1} = 1");
 });
+test("Logic rule cell keeps Clear hidden after the rule is saved", () => {
+  const alone = new QuestionLinkValueModel("alone");
+  expect(alone.allowClear).toBeTruthy();
+  alone.allowClear = false;
+  alone.value = "If 'q1' == 1, make question 'q2' visible";
+  expect(alone.allowClear).toBeFalsy();
+  expect(alone.showClear).toBeFalsy();
+
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNewUI();
+  const itemsQuestion = <QuestionMatrixDynamicModel>logic.itemsSurvey.getQuestionByName("items");
+  const row = itemsQuestion.visibleRows[0];
+  const newRuleQuestion = <QuestionLinkValueModel>row.cells[0].question;
+  expect(newRuleQuestion.value).toEqual("New rule");
+  expect(newRuleQuestion.allowClear).toBeFalsy();
+  expect(newRuleQuestion.showClear).toBeFalsy();
+
+  logic.expressionEditor.text = "{q1} = 1";
+  const panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  panel.getQuestionByName("elementSelector").value = "q2";
+  row.detailPanel.footerActions[0].action();
+
+  const savedQuestion = <QuestionLinkValueModel>itemsQuestion.visibleRows[0].cells[0].question;
+  expect(savedQuestion.value).toEqual("If 'q1' == 1, make question 'q2' visible");
+  expect(savedQuestion.allowClear).toBeFalsy();
+  expect(savedQuestion.showClear).toBeFalsy();
+});
 test("LogicItemEditorUI: create new logic several times", () => {
   const dummy = new QuestionEmbeddedSurveyModel("dummy");
   const survey = new SurveyModel({
@@ -4142,3 +4176,165 @@ test("SurveyLogicUI: display text respects survey locale when useElementTitles i
   expect(displayText).toContain("Question 2 en francais");
 });
 
+describe("Logic tab: rows of modified and new rules are marked in the rendered table", () => {
+  const filterJSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+      { type: "text", name: "q3", visibleIf: "{q2} = 2" },
+      { type: "text", name: "q4", enableIf: "{q1} = 3" },
+    ]
+  };
+  function isTableCreated(logic: SurveyLogicUI): boolean {
+    return logic.matrixItems["isRenderedTableCreated"];
+  }
+  function getDataRows(logic: SurveyLogicUI) {
+    return logic.matrixItems.renderedTable.rows.filter(row => !row.isDetailRow && !row.isErrorsRow && !!row.row);
+  }
+  function getMarks(logic: SurveyLogicUI): Array<boolean> {
+    return getDataRows(logic).map(row => row.isAdditionalClasses);
+  }
+  function modifyItem(logic: SurveyLogicUI, index: number, expression: string): void {
+    const row = logic.matrixItems.visibleRows[index];
+    row.showDetailPanel();
+    logic.expressionEditor.text = expression;
+    row.hideDetailPanel();
+  }
+  test("B1: a modified, unsaved rule's row is marked when the table is read", () => {
+    const survey = new SurveyModel({
+      elements: [
+        { type: "text", name: "q1" },
+        { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+        { type: "text", name: "q3", visibleIf: "{q1} = 2" },
+      ]
+    });
+    const logic = new SurveyLogicUI(survey);
+    expect(logic.items).toHaveLength(2);
+    modifyItem(logic, 0, "{q1} = 5");
+    expect(logic.items[0].isModified, "#1").toBeTruthy();
+    expect(logic.items[1].isModified, "#2").toBeFalsy();
+    const rows = getDataRows(logic);
+    expect(rows).toHaveLength(2);
+    expect(rows[0].isAdditionalClasses, "#3").toBe(true);
+    expect(rows[0].className, "#4").toContain("sl-table__row--additional");
+    expect(rows[1].isAdditionalClasses, "#5").toBe(false);
+    expect(rows[1].className, "#6").not.toContain("sl-table__row--additional");
+
+    const row = logic.matrixItems.visibleRows[0];
+    row.showDetailPanel();
+    row.detailPanel.footerActions[0].action();
+    expect(logic.mode, "#7").toEqual("view");
+    expect(logic.items[0].isModified, "#8").toBeFalsy();
+    expect(getMarks(logic), "#9").toEqual([false, false]);
+  });
+  test("B2: activation does not build the table", () => {
+    const creator = new CreatorTester({ showLogicTab: true });
+    creator.JSON = filterJSON;
+    creator.makeNewViewActive("logic");
+    const logic = (<TabLogicPlugin>creator.getPlugin("logic")).model;
+    expect(logic.items).toHaveLength(3);
+    expect(isTableCreated(logic), "#1").toBe(false);
+    modifyItem(logic, 0, "{q1} = 5");
+    expect(logic.items[0].isModified, "#2").toBeTruthy();
+    expect(isTableCreated(logic), "#3").toBe(false);
+    expect(getMarks(logic), "#4").toEqual([true, false, false]);
+    expect(isTableCreated(logic), "#5").toBe(true);
+  });
+  test("B3a: a new rule, the table read before the add", () => {
+    const logic = new SurveyLogicUI(new SurveyModel(filterJSON));
+    modifyItem(logic, 1, "{q2} = 5");
+    const table = logic.matrixItems.renderedTable;
+    expect(getMarks(logic), "#1").toEqual([false, true, false]);
+    logic.addNewUI();
+    expect(logic.items).toHaveLength(4);
+    expect(logic.items[3].isNew, "#2").toBeTruthy();
+    expect(logic.matrixItems.renderedTable, "#3").toBe(table);
+    expect(getMarks(logic), "#4").toEqual([false, true, false, false]);
+    logic.matrixItems.visibleRows[3].hideDetailPanel();
+    expect(getMarks(logic), "#5").toEqual([false, true, false, true]);
+  });
+  test("B3b: a new rule, no table read before the add", () => {
+    const logic = new SurveyLogicUI(new SurveyModel(filterJSON));
+    modifyItem(logic, 1, "{q2} = 5");
+    logic.addNewUI();
+    expect(logic.items).toHaveLength(4);
+    expect(isTableCreated(logic), "#1").toBe(false);
+    logic.matrixItems.visibleRows[3].hideDetailPanel();
+    expect(isTableCreated(logic), "#2").toBe(false);
+    expect(getMarks(logic), "#3").toEqual([false, true, false, true]);
+  });
+  test("B4a: detail panel show and hide, the table read", () => {
+    const logic = new SurveyLogicUI(new SurveyModel(filterJSON));
+    modifyItem(logic, 0, "{q1} = 5");
+    modifyItem(logic, 2, "{q1} = 7");
+    expect(getMarks(logic), "#1").toEqual([true, false, true]);
+    const row = logic.matrixItems.visibleRows[0];
+    row.showDetailPanel();
+    expect(getMarks(logic), "#2").toEqual([false, false, true]);
+    row.hideDetailPanel();
+    expect(getMarks(logic), "#3").toEqual([true, false, true]);
+  });
+  test("B4b: a panel opened before the first table read", () => {
+    const logic = new SurveyLogicUI(new SurveyModel(filterJSON));
+    modifyItem(logic, 0, "{q1} = 5");
+    modifyItem(logic, 1, "{q2} = 5");
+    logic.matrixItems.visibleRows[0].showDetailPanel();
+    const table = logic.matrixItems.renderedTable;
+    expect(table.rows.filter(row => row.isDetailRow), "#1").toHaveLength(1);
+    expect(getMarks(logic), "#2").toEqual([false, true, false]);
+  });
+  test("B4c: a table reset and rebuilt while a panel is open", () => {
+    const logic = new SurveyLogicUI(new SurveyModel(filterJSON));
+    modifyItem(logic, 0, "{q1} = 5");
+    modifyItem(logic, 1, "{q2} = 5");
+    logic.matrixItems.visibleRows[0].showDetailPanel();
+    const table = logic.matrixItems.renderedTable;
+    logic.matrixItems.resetRenderedTable();
+    expect(logic.matrixItems.renderedTable, "#1").not.toBe(table);
+    expect(logic.matrixItems.renderedTable.rows.filter(row => row.isDetailRow), "#2").toHaveLength(1);
+    expect(getMarks(logic), "#3").toEqual([false, true, false]);
+  });
+  test("B5: filters keep the marks right for the rows that remain", () => {
+    const logic = new SurveyLogicUI(new SurveyModel(filterJSON));
+    modifyItem(logic, 0, "{q1} = 5");
+    modifyItem(logic, 2, "{q1} = 7");
+    expect(getMarks(logic), "#1").toEqual([true, false, true]);
+    logic.questionFilter = "q4";
+    expect(logic.matrixItems.rowCount).toEqual(1);
+    expect(getMarks(logic), "#2").toEqual([true]);
+    logic.questionFilter = "q3";
+    expect(logic.matrixItems.rowCount).toEqual(1);
+    expect(getMarks(logic), "#3").toEqual([false]);
+    logic.questionFilter = "";
+    logic.actionTypeFilter = "question_enable";
+    expect(logic.matrixItems.rowCount).toEqual(1);
+    expect(getMarks(logic), "#4").toEqual([true]);
+    logic.actionTypeFilter = "";
+    logic.questionFilter = "qNotUsed";
+    expect(logic.matrixItems.rowCount).toEqual(0);
+    expect(getMarks(logic), "#5").toEqual([]);
+    logic.questionFilter = "";
+    expect(logic.matrixItems.rowCount).toEqual(3);
+    expect(getMarks(logic), "#6").toEqual([true, false, true]);
+  });
+  test("B6: filtering before the first read does not build the table", () => {
+    const logic = new SurveyLogicUI(new SurveyModel(filterJSON));
+    modifyItem(logic, 2, "{q1} = 7");
+    logic.questionFilter = "q4";
+    expect(isTableCreated(logic), "#1").toBe(false);
+    logic.questionFilter = "";
+    logic.actionTypeFilter = "question_enable";
+    expect(isTableCreated(logic), "#2").toBe(false);
+    expect(logic.matrixItems.rowCount).toEqual(1);
+    expect(getMarks(logic), "#3").toEqual([true]);
+  });
+  test("B7: a reset leaves the table unbuilt", () => {
+    const logic = new SurveyLogicUI(new SurveyModel(filterJSON));
+    modifyItem(logic, 2, "{q1} = 7");
+    expect(getMarks(logic), "#1").toEqual([false, false, true]);
+    logic.questionFilter = "q1";
+    expect(logic.matrixItems.rowCount).toEqual(2);
+    expect(isTableCreated(logic), "#2").toBe(false);
+    expect(getMarks(logic), "#3").toEqual([false, true]);
+  });
+});
