@@ -4074,7 +4074,8 @@ export class SurveyCreatorModel extends Base
     this.initKeyboardShortcuts(element);
     // Creator's own controls (tabs, switchers, action buttons) carry `data-sv-tooltip` too;
     // install the tooltip here so it does not depend on a survey action being rendered first.
-    if (!!element) initTooltips(element.ownerDocument);
+    // Passing the root (not its document) also covers the shadow root the creator is rendered in.
+    if (!!element) initTooltips(element);
     this.initResponsivityManager(element as HTMLDivElement);
     this.subscribeToReducedMotion();
   }
