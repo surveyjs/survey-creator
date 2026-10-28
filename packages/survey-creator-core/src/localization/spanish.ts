@@ -980,6 +980,10 @@ export var spanishTranslation = {
     expandNestedChoices: "Expandir las opciones anidadas",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Colapso de las elecciones anidadas",
+    // [Auto-translated] "Show description"
+    showDescription: "Descripción del programa",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Descripción del escondite",
     // "Edit"
     edit: "Editar",
     // "Done"

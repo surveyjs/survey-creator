@@ -980,6 +980,10 @@ export var indonesianStrings = {
     expandNestedChoices: "Perluas pilihan bersarang",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Menggabungkan pilihan bersarang",
+    // [Auto-translated] "Show description"
+    showDescription: "Tampilkan deskripsi",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Sembunyikan deskripsi",
     // "Edit"
     edit: "Ubah",
     // [Auto-translated] "Done"

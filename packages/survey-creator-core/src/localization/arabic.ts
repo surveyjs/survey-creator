@@ -980,6 +980,10 @@ export var arStrings = {
     expandNestedChoices: "توسيع الخيارات المتداخلة",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "انهيار الخيارات المتداخلة",
+    // [Auto-translated] "Show description"
+    showDescription: "وصف العرض",
+    // [Auto-translated] "Hide description"
+    hideDescription: "إخفاء الوصف",
     // "Edit"
     edit: "التعديل",
     // "Done"

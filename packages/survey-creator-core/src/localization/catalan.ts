@@ -980,6 +980,10 @@ export var catalanTranslation = {
     expandNestedChoices: "Expandeix les opcions anidades",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Col·lapse de les eleccions nidades",
+    // [Auto-translated] "Show description"
+    showDescription: "Descripció de l'espectacle",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Descripció de l'amagatall",
     // "Edit"
     edit: "Editar",
     // "Done"

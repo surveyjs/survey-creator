@@ -980,6 +980,10 @@ export var persianStrings = {
     expandNestedChoices: "گسترش گزینه های تو در تو",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "انتخاب های تو در تو فروپاشی",
+    // [Auto-translated] "Show description"
+    showDescription: "توضیحات برنامه",
+    // [Auto-translated] "Hide description"
+    hideDescription: "پنهان کردن توضیحات",
     // "Edit"
     edit: "ویرایش",
     // [Auto-translated] "Done"

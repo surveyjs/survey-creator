@@ -981,6 +981,10 @@ export var koreanStrings = {
     expandNestedChoices: "중첩 선택 확장",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "붕괴 중첩 선택",
+    // [Auto-translated] "Show description"
+    showDescription: "쇼 설명",
+    // [Auto-translated] "Hide description"
+    hideDescription: "숨기기 설명",
     // "Edit"
     edit: "편집",
     // [Auto-translated] "Done"

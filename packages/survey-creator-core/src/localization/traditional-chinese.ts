@@ -981,6 +981,10 @@ export var traditionalChineseTranslation = {
     expandNestedChoices: "擴展巢狀選擇",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "坍縮巢狀選擇",
+    // [Auto-translated] "Show description"
+    showDescription: "節目簡介",
+    // [Auto-translated] "Hide description"
+    hideDescription: "隱藏描述",
     // "Edit"
     edit: "編輯器",
     // [Auto-translated] "Done"

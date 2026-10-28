@@ -980,6 +980,10 @@ export var huStrings = {
     expandNestedChoices: "Bővítsd a bészkelő lehetőségeket",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Összerakás egymásba helyezett választások",
+    // [Auto-translated] "Show description"
+    showDescription: "Műsorleírás",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Rejtőzködés leírása",
     // "Edit"
     edit: "Szerkesztés",
     // [Auto-translated] "Done"

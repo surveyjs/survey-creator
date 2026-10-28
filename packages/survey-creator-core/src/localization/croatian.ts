@@ -980,6 +980,10 @@ export var hrStrings = {
     expandNestedChoices: "Proširi ugniježđene izbore",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse ugnježđeni izbori",
+    // [Auto-translated] "Show description"
+    showDescription: "Opis serije",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Opis skrivanja",
     // "Edit"
     edit: "Uređivanje",
     // [Auto-translated] "Done"

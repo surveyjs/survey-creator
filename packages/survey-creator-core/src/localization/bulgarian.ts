@@ -980,6 +980,10 @@ export var bgStrings = {
     expandNestedChoices: "Разширете вложените избори",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Вложени избори с колапс",
+    // [Auto-translated] "Show description"
+    showDescription: "Описание на шоуто",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Скрий описанието",
     // "Edit"
     edit: "Редактиране",
     // "Done"

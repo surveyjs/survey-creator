@@ -980,6 +980,10 @@ export var italianTranslation = {
     expandNestedChoices: "Espandi le scelte annidate",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collasso delle scelte annidate",
+    // [Auto-translated] "Show description"
+    showDescription: "Descrizione dello show",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Descrizione del nascondimento",
     // "Edit"
     edit: "Modifica",
     // "Done"

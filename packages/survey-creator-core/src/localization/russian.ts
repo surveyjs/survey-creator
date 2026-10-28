@@ -980,6 +980,10 @@ export var ruStrings = {
     expandNestedChoices: "Расширение вложенных вариантов",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Варианты с вложением коллапса",
+    // [Auto-translated] "Show description"
+    showDescription: "Описание шоу",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Скрыть описание",
     // "Edit"
     edit: "Редактировать",
     // [Auto-translated] "Done"

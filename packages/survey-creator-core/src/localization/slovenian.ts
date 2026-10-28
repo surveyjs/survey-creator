@@ -980,6 +980,10 @@ export var slStrings = {
     expandNestedChoices: "Razširite gnezdene izbire",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse gnezdene izbire",
+    // [Auto-translated] "Show description"
+    showDescription: "Opis oddaje",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Opis skrivanja",
     // "Edit"
     edit: "Uredi",
     // "Done"

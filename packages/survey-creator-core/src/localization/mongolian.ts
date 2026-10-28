@@ -980,6 +980,10 @@ export var mnStrings = {
     expandNestedChoices: "Nested сонголтуудыг өргөжүүлэх",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Уналтад орсон сонголтууд",
+    // [Auto-translated] "Show description"
+    showDescription: "Нэвтрүүлгийн тайлбар",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Тайлбарыг нуух",
     // "Edit"
     edit: "Засах",
     // "Done"

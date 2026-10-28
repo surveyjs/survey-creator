@@ -980,6 +980,10 @@ export var nbStrings = {
     expandNestedChoices: "Utvid nestede valg",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Kollaps-nestede valg",
+    // [Auto-translated] "Show description"
+    showDescription: "Seriens beskrivelse",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Skjul beskrivelse",
     // "Edit"
     edit: "Rediger",
     // [Auto-translated] "Done"

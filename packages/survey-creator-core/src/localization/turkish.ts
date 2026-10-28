@@ -980,6 +980,10 @@ export var turkishStrings = {
     expandNestedChoices: "İç içe seçenekleri genişlet",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Çöktü iç içe seçimler",
+    // [Auto-translated] "Show description"
+    showDescription: "Gösteri açıklaması",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Gizle açıklaması",
     // "Edit"
     edit: "Düzenle",
     // [Auto-translated] "Done"

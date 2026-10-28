@@ -980,6 +980,10 @@ export var grStrings = {
     expandNestedChoices: "Ανάπτυξη ένθετων επιλογών",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Σύμπτυξη ένθετων επιλογών",
+    // [Auto-translated] "Show description"
+    showDescription: "Εμφάνιση περιγραφής",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Απόκρυψη περιγραφής",
     // "Edit"
     edit: "Επεξεργασία",
     // "Done"

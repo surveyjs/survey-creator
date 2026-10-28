@@ -981,6 +981,10 @@ export let svStrings = {
     expandNestedChoices: "Utöka nästlade val",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Kollapsnästlade val",
+    // [Auto-translated] "Show description"
+    showDescription: "Showbeskrivning",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Beskrivning av gömma",
     // "Edit"
     edit: "Redigera",
     // [Auto-translated] "Done"

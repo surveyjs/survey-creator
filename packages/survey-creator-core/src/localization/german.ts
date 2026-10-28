@@ -980,6 +980,10 @@ export var germanTranslation = {
     expandNestedChoices: "Verschachtelte Optionen erweitern",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse verschachtelte Entscheidungen",
+    // [Auto-translated] "Show description"
+    showDescription: "Serienbeschreibung",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Beschreibung ausfliegen",
     // "Edit"
     edit: "Bearbeiten",
     // "Done"
