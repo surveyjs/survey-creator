@@ -17,6 +17,7 @@
       <span
         v-if="adorner.isDraggable"
         class="svc-item-value-controls__button svc-item-value-controls__drag"
+        :data-sv-tooltip="adorner.dragTooltip"
       >
         <SvComponent
           :is="'sv-svg-icon'"

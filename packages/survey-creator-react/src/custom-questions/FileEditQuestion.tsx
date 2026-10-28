@@ -67,6 +67,7 @@ export class SurveyQuestionFileEditorButton extends SurveyElementBase<{ item: Ac
             onClick={event => this.question.chooseFiles(event.nativeEvent)}
             className={this.item.getActionBarItemCss()}
             htmlFor={this.question.inputId}
+            data-sv-tooltip={this.item.title}
             aria-label={this.question.chooseButtonCaption}>
             <SvgIcon iconName={this.item.iconName} size={"auto"} title={this.item.title} className={this.item.cssClasses.itemIcon}></SvgIcon>
             <span className="sv-visuallyhidden">{this.question.chooseButtonCaption}</span>

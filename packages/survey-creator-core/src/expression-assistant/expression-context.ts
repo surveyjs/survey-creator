@@ -69,7 +69,7 @@ export const creatorInternalFunctions: Array<string> = [
 // application registers later is a custom function.
 const builtInFunctions: Array<string> = FunctionFactory.Instance.getAll();
 
-// Every spelling the grammar (survey-core expressions/grammar.pegjs) accepts per operator. Not
+// Every spelling the expression parser (survey-core expressions/expressionParserCore.ts) accepts per operator. Not
 // OperandMaker.signs, which is a display table. A test parses each spelling to its operator.
 export const expressionOperatorSpellings: { [name: string]: Array<string> } = {
   empty: ["empty"],
