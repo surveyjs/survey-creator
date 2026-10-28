@@ -43,6 +43,7 @@ export class ActionButton extends SurveyElementBase<IActionButtonProps, any> {
               this.props.click();
             }}
             title={this.props.title}
+            data-sv-tooltip={this.props.title}
           >
             {this.props.text}
           </span>
@@ -66,6 +67,7 @@ export class ActionButton extends SurveyElementBase<IActionButtonProps, any> {
               this.props.click();
             }}
             title={this.props.title}
+            data-sv-tooltip={this.props.title}
           >
             <SvgIcon size={"auto"} iconName={this.props.iconName}></SvgIcon>
           </span>

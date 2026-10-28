@@ -529,6 +529,8 @@ export var enStrings = {
     dragItem: "Drag the item",
     expandNestedChoices: "Expand nested choices",
     collapseNestedChoices: "Collapse nested choices",
+    showDescription: "Show description",
+    hideDescription: "Hide description",
     edit: "Edit",
     doneEditing: "Done",
     emptyValue: "Value is empty",

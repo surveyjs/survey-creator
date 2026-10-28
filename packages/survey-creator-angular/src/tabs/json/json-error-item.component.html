@@ -5,7 +5,7 @@
             <sv-ng-string [model]="model.locTitle"></sv-ng-string>
         </div>
         <button type="button" *ngIf="model.data.showFixButton" (click)="fixError($event)" [key2click]
-            [attr.title]="model.data.fixButtonTitle" [attr.aria-label]="model.data.fixButtonTitle"
+            [attr.title]="model.data.fixButtonTitle" [attr.data-sv-tooltip]="model.data.fixButtonTitle" [attr.aria-label]="model.data.fixButtonTitle"
             class="svc-json-error__fix-button">
             <svg [iconName]="model.data.fixButtonIcon" [size]="'auto'" sv-ng-svg-icon></svg>
         </button>
