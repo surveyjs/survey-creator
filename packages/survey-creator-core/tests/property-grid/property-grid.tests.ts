@@ -2933,15 +2933,18 @@ test("property editor show help as description", () => {
   expect(actions).toHaveLength(2);
   expect(actions[0].id).toEqual("property-grid-help");
   expect(actions[0].iconName).toEqual("icon-description");
+  expect(actions[0].getTooltip()).toEqual("Show description");
   expect(defaultValueExpressionQuestion.descriptionLocation).toEqual("hidden");
   actions[0].action();
   expect(defaultValueExpressionQuestion.descriptionLocation).toEqual(
     "underTitle"
   );
   expect(actions[0].iconName).toEqual("icon-description-hide");
+  expect(actions[0].getTooltip()).toEqual("Hide description");
   actions[0].action();
   expect(defaultValueExpressionQuestion.descriptionLocation).toEqual("hidden");
   expect(actions[0].iconName).toEqual("icon-description");
+  expect(actions[0].getTooltip()).toEqual("Show description");
 });
 test("Use maxLength property attribute", () => {
   Serializer.findProperty("question", "name").maxLength = 10;
