@@ -218,7 +218,5 @@
   @include sjs2--typography--default;
   color: var(--sjs2-color-fg-basic-primary, #1c1b20);
   text-align: center;
-  height: calc(
-    var(--sjs2-spacing-x400, 32px) + var(--sjs2-spacing-x300, 24px) + var(--sjs2-typography-line-height-default, 24px)
-  );
+  height: calc(var(--sjs2-spacing-x400, 32px) + var(--sjs2-spacing-x300, 24px) + 1lh);
 }

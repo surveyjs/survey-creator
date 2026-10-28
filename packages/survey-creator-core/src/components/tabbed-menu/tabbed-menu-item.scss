@@ -3,7 +3,10 @@
 .svc-tabbed-menu-item {
   display: flex;
   align-items: center;
-  min-height: calc(var(--sjs2-typography-line-height-default) + var(--sjs2-spacing-x500));
+  // 1lh follows this element's font-size, so it has to be the label's font-size.
+  font-size: var(--sjs2-typography-font-size-default);
+  line-height: var(--sjs2-typography-line-height-default);
+  min-height: calc(1lh + var(--sjs2-spacing-x500));
   padding: var(--sjs2-spacing-x250) var(--sjs2-spacing-x300);
   box-sizing: border-box;
   cursor: pointer;
