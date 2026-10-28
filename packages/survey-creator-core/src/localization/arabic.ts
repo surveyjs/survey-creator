@@ -1026,44 +1026,60 @@ export var arStrings = {
     propertyNameIsIncorrect: "لا تستخدم الكلمات المحجوزة: \"عنصر\" ، \"اختيار\" ، \"لوحة\" ، \"صف\".",
     // "You don't have any items yet"
     listIsEmpty: "No items have been added yet",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "ليس لديك أي خيارات حتى الآن",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "ليس لديك أي أعمدة حتى الآن",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "ليس لديك أعمدة تخطيط حتى الآن",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "ليس لديك أي صفوف حتى الآن",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "ليس لديك أي قواعد تحقق حتى الآن",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "ليس لديك أي متغيرات مخصصة حتى الآن",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "ليس لديك أي محفزات حتى الآن",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "ليس لديك أي روابط حتى الآن",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "ليس لديك أي صفحات حتى الآن",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "ليس لديك أي مستويات تصنيف بعد",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "إضافة خيار جديد",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "إضافة عمود جديد",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "إضافة صف جديد",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "إضافة قاعدة جديدة",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "إضافة متغير جديد",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "إضافة مشغل جديد",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "إضافة عنوان URL جديد",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "إضافة صفحة جديدة",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "إضافة مستوى فرز جديد",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "لا خيارات",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "لا توجد قيم تقييم مخصصة",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "لا توجد ملصقات مخصصة",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "لا توجد مناطق",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "لا توجد أعمدة",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "لا توجد أعمدة تخطيط",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "لا صفوف",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "لا توجد قواعد تحقق",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "لا توجد متغيرات مخصصة",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "لا محفزات",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "لا يوجد ترميز شرطي",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "لا روابط",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "لا صفحات",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "لا توجد مستويات فرز",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "إضافة الاختيار",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "إضافة قيمة التقييم",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "إضافة تسمية",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "إضافة المساحة",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "إضافة عمود",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "إضافة صف",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "قاعدة الإضافة",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "إضافة المتغير",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "إضافة الزناد",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "أضف الترميز",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "أضف رابط",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "إضافة صفحة",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "أضف مستوى الفرز",
     // "Value"
     value: "القيمة",
     // "Text"

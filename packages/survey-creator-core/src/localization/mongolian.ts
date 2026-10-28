@@ -1028,42 +1028,58 @@ export var mnStrings = {
     listIsEmpty: "Одоогоор ямар ч зүйл ороогүй байна",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Одоогор ямар ч сонголт ороогүй байна",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Танд ямар ч багана байхгүй",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Танд загварын багана хараахан байхгүй байна",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Чамд ямар ч мөр байхгүй",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Танд ямар нэгэн баталгаажуулалтын дүрэм байхгүй байна",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Танд ямар ч хувийн хувьсагч байхгүй",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Танд ямар ч өдөөгч байхгүй",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Танд ямар ч холбоос байхгүй",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Танд одоохондоо хуудас байхгүй байна",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Чи одоогоор төрөлжүүлэх түвшингүй байна",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Захиалгат үнэлгээний утга байхгүй",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Захиалгат шошго байхгүй",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Бүс нутаг байхгүй",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Баганагүй",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Зохион байгуулалтын баганууд байхгүй",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Маргаангүй",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Баталгаажуулалтын дүрэмгүй",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Захиалгат хувьсагч байхгүй",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Триггергүй",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Нөхцөлт тэмдэглэгээ байхгүй",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Холбоос байхгүй",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Хуудас байхгүй",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Сортлох түвшин байхгүй",
     // "Add new choice"
     "addNew@choices": "Сонголт оруулах",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Шинэ багана нэмэх",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Шинэ мөр нэмэх",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Шинэ дүрэм нэмэх",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Шинэ хувьсагч нэмэх",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Шинэ триггер нэмэх",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Шинэ URL нэмэх",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Шинэ хуудас нэмж",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Шинэ эрэглэлийн түвшин нэмэх",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Үнэлгээний үнэ цэнийг нэмэх",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Шошго нэмэх",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Талбай нэмэх",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Багана нэмэх",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Мөр нэмэх",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Дүрэм нэмэх",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Хувьсагч нэмэх",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Триггер нэмэх",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Тэмдэглэгээ нэмэх",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Холбоос нэмэх",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Хуудас нэмэх",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Сорт түвшин нэмэх",
     // "Value"
     value: "Утга",
     // "Text"

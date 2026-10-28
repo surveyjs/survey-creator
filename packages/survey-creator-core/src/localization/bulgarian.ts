@@ -1028,42 +1028,58 @@ export var bgStrings = {
     listIsEmpty: "Все още няма добавени елементи.",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Все още няма добавени възможности за избор.",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Все още нямате колони",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Все още нямате графи за оформление",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Все още нямате никакви редове",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Все още нямате правила за валидиране",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Все още нямате никакви персонализирани променливи",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Все още нямате никакви тригери",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Все още нямате връзки",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Все още нямате страници",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Все още нямаш никакви нива на сортиране",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Няма персонализирани стойности на рейтинга",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Без персонализирани етикети",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Няма зони",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Няма колони",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Няма колони за оформление",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Без редици",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Няма правила за валидиране",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Няма персонализирани променливи",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Без тригери",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Няма условна надценка",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Няма връзки",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Без страници",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Няма нива на сортиране",
     // "Add new choice"
     "addNew@choices": "Добавяне на възможност за избор",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Добавяне на нова колона",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Добавяне на нов ред",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Добавяне на ново правило",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Добавяне на нова променлива",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Добавяне на нов превключвател",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Добавяне на нов URL адрес",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Добавяне на нова страница",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Добавете ново ниво на сортиране",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Добави стойност на рейтинга",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Добави етикет",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Добави площ",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Добави колона",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Добави ред",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Добави правило",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Добави променлива",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Добави спусък",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Добавете надценка",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Добави линк",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Добави страница",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Добавете ниво на сортиране",
     // "Value"
     value: "Стойност",
     // "Text"

@@ -1026,44 +1026,60 @@ export var nlStrings = {
     propertyNameIsIncorrect: "Gebruik geen gereserveerde woorden: \"item\", \"keuze\", \"paneel\", \"rij\".",
     // "You don't have any items yet"
     listIsEmpty: "Voeg een nieuw item toe",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Je hebt nog geen keuze",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Je hebt nog geen kolommen",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Je hebt nog geen lay-outkolommen",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Je hebt nog geen rijen",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Je hebt nog geen validatieregels",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Je hebt nog geen aangepaste variabelen",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Je hebt nog geen triggers",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Je hebt nog geen links",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Je hebt nog geen pagina's",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Je hebt nog geen soort levels",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Nieuwe keuze toevoegen",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Nieuwe kolom toevoegen",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Nieuwe rij toevoegen",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Nieuwe regel toevoegen",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Nieuwe variabele toevoegen",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Nieuwe trigger toevoegen",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Nieuwe URL toevoegen",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Nieuwe pagina toevoegen",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Voeg een nieuw sorteerniveau toe",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Geen keuzes",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Geen aangepaste beoordelingswaarden",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Geen aangepaste labels",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Geen gebieden",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Geen kolommen",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Geen layoutkolommen",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Geen rijen",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Geen validatieregels",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Geen aangepaste variabelen",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Geen triggers",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Geen voorwaardelijke markup",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Geen links",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Geen pagina's",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Geen sort-levels",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Voeg keuze toe",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Waarde toevoegen",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Label toevoegen",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Voeg gebied toe",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Voeg kolom toe",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Voeg rij toe",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Regel toevoegen",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Variabele toevoegen",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Voeg trigger toe",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Voeg markup toe",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Link toevoegen",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Pagina toevoegen",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Voeg sorteerniveau toe",
     // "Value"
     value: "Waarde",
     // "Text"

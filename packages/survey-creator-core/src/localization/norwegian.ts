@@ -1026,44 +1026,60 @@ export var nbStrings = {
     propertyNameIsIncorrect: "Ikke bruk reserverte ord: \"element\", \"valg\", \"panel\", \"rad\".",
     // "You don't have any items yet"
     listIsEmpty: "Legg til nytt element",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Du har ingen valg ennå",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Du har ingen kolonner ennå",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Du har ikke oppsettkolonner ennå",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Du har ingen rader ennå",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Du har ingen valideringsregler ennå",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Du har ingen egendefinerte variabler ennå",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Du har ingen utløsere ennå",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Du har ingen koblinger ennå",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Du har ingen sider ennå",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Du har ingen type-nivåer ennå",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Legg til nytt valg",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Legg til ny kolonne",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Legg til ny rad",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Legg til ny regel",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Legg til ny variabel",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Legg til ny utløser",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Legg til ny URL-adresse",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Legg til ny side",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Legg til nytt sorteringsnivå",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Ingen valg",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Ingen egendefinerte vurderingsverdier",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Ingen egendefinerte etiketter",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Ingen områder",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Ingen søyler",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Ingen layoutkolonner",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Ingen rader",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Ingen valideringsregler",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Ingen egendefinerte variabler",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Ingen triggere",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Ingen betinget markering",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Ingen lenker",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Ingen sider",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Ingen sorteringsnivåer",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Legg til valg",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Legg til vurderingsverdi",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Legg til etikett",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Legg til areal",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Legg til kolonne",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Legg til rad",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Legg til regel",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Legg til variabel",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Legg til utløser",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Legg til pålegg",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Legg til lenke",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Legg til side",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Legg til sorteringsnivå",
     // "Value"
     value: "Verdi",
     // "Text"

@@ -1025,46 +1025,62 @@ export var koreanStrings = {
     propertyNameIsNotUnique: "고유한 이름을 입력하십시오.",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "예약어를 사용하지 마십시오: \"item\", \"choice\", \"panel\", \"row\".",
-    // [Auto-translated] "You don't have any items yet"
-    listIsEmpty: "아직 항목이 없습니다.",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "아직 선택의 여지가 없습니다",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "아직 열이 없습니다.",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "레이아웃 열이 아직 없습니다.",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "아직 행이 없습니다.",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "아직 유효성 검사 규칙이 없습니다.",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "아직 맞춤 변수가 없습니다.",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "아직 트리거가 없습니다.",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "아직 링크가 없습니다.",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "아직 페이지가 없습니다.",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "아직 어떤 종류의 레벨도 없어요",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "새 선택 항목 추가",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "새 열 추가",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "새 행 추가",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "새 규칙 추가",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "새 변수 추가",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "새 트리거 추가",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "새 URL 추가",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "새 페이지 추가",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "새로운 정렬 레벨 추가",
+    // [Auto-translated] "No items"
+    listIsEmpty: "아이템 없음",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "선택의 여지가 없다",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "사용자 지정 등급 값은 없습니다",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "커스텀 라벨은 없습니다",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "구역 없음",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "기둥은 없습니다",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "레이아웃 칼럼은 없습니다",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "다툼 금지",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "검증 규칙은 없습니다",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "사용자 지정 변수 없음",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "트리거가 없어요",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "조건부 마크업 없음",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "링크 없음",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "부지 없어",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "분류 없는 레벨",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "선택권 추가로",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "평가 가치 추가",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "라벨 추가하기",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "면적 추가",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "열 추가",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "행 추가하기",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "규칙 추가",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "변수 추가",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "트리거 추가하세요",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "마크업 추가하기",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "링크 추가하기",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "페이지 추가",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "정렬 단계 추가",
     // "Value"
     value: "값",
     // "Text"

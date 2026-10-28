@@ -1028,6 +1028,12 @@ export var slStrings = {
     listIsEmpty: "Še nimate nobenih elementov",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Še nimate nobenih možnosti",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Brez prilagojenih ocen",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Brez prilagojenih etiket",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Brez območij",
     // "You don't have any columns yet"
     "listIsEmpty@columns": "Še nimate nobenih stolpcev",
     // "You don't have layout columns yet"
@@ -1040,14 +1046,22 @@ export var slStrings = {
     "listIsEmpty@calculatedValues": "Še nimate nobenih spremenljivk",
     // "You don't have any triggers yet"
     "listIsEmpty@triggers": "Še nimate nobenih sprožilcev",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Brez pogojnega označevanja",
     // "You don't have any links yet"
     "listIsEmpty@navigateToUrlOnCondition": "Še nimate nobenih povezav",
     // "You don't have any pages yet"
     "listIsEmpty@pages": "Še nimate nobenih strani",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Še nimaš nobenih sort nivojev",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Brez nivojev razvrščanja",
     // "Add new choice"
     "addNew@choices": "Dodaj novo možnost",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Dodajte vrednost ocene",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Dodaj oznako",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Dodaj površino",
     // "Add new column"
     "addNew@columns": "Dodaj nov stolpec",
     // "Add new row"
@@ -1058,12 +1072,14 @@ export var slStrings = {
     "addNew@calculatedValues": "Dodaj novo spremenljivko",
     // "Add new trigger"
     "addNew@triggers": "Dodaj nov sprožilec",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Dodaj oznake",
     // "Add new URL"
     "addNew@navigateToUrlOnCondition": "Dodaj novo URL",
     // "Add new page"
     "addNew@pages": "Dodaj novo stran",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Dodajte novo stopnjo sortiranja",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Dodaj stopnjo sortiranja",
     // "Value"
     value: "Vrednost",
     // "Text"

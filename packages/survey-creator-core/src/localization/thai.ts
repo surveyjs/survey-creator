@@ -1028,10 +1028,16 @@ export const thStrings = {
     listIsEmpty: "คุณยังไม่มีรายการใดๆ",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "คุณยังไม่มีตัวเลือกใดๆ",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "ไม่มีค่าการให้คะแนนแบบกําหนดเอง",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "ไม่มีป้ายกํากับแบบกําหนดเอง",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "ไม่มีพื้นที่",
     // "You don't have any columns yet"
     "listIsEmpty@columns": "คุณยังไม่มีคอลัมน์ใดๆ",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "คุณยังไม่มีคอลัมน์เค้าโครง",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "ไม่มีคอลัมน์จัดวาง",
     // "You don't have any rows yet"
     "listIsEmpty@rows": "คุณยังไม่มีแถวใดๆ",
     // "You don't have any validation rules yet"
@@ -1040,14 +1046,22 @@ export const thStrings = {
     "listIsEmpty@calculatedValues": "คุณยังไม่มีตัวแปรใดๆ",
     // "You don't have any triggers yet"
     "listIsEmpty@triggers": "คุณยังไม่มีทริกเกอร์ใดๆ",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "ไม่มีการทําเครื่องหมายเงื่อนไข",
     // "You don't have any links yet"
     "listIsEmpty@navigateToUrlOnCondition": "คุณยังไม่มีลิงก์ใดๆ",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "คุณยังไม่มีหน้าใด ๆ",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "คุณยังไม่มีระดับการแบ่งประเภทเลย",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "ไม่มีหน้า",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "ไม่มีระดับการจัดเรียง",
     // "Add new choice"
     "addNew@choices": "เพิ่มตัวเลือกใหม่",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "เพิ่มมูลค่าการให้คะแนน",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "เพิ่มป้ายกํากับ",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "เพิ่มพื้นที่",
     // "Add new column"
     "addNew@columns": "เพิ่มคอลัมน์ใหม่",
     // "Add new row"
@@ -1058,12 +1072,14 @@ export const thStrings = {
     "addNew@calculatedValues": "เพิ่มตัวแปรใหม่",
     // "Add new trigger"
     "addNew@triggers": "เพิ่มทริกเกอร์ใหม่",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "เพิ่มมาร์กอัป",
     // "Add new URL"
     "addNew@navigateToUrlOnCondition": "เพิ่ม URL ใหม่",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "เพิ่มหน้าใหม่",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "เพิ่มระดับการจัดเรียงใหม่",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "เพิ่มหน้า",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "เพิ่มระดับการจัดเรียง",
     // "Value"
     value: "ค่า",
     // "Text"

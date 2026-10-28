@@ -1028,42 +1028,58 @@ export var germanTranslation = {
     listIsEmpty: "Neues Element hinzufügen",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Bisher wurden noch keine Auswahlmöglichkeiten hinzugefügt",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Sie haben noch keine Spalten",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Sie haben noch keine Layoutspalten",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Sie haben noch keine Zeilen",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Sie haben noch keine Validierungsregeln",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Sie haben noch keine benutzerdefinierten Variablen",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Sie haben noch keine Auslöser",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Sie haben noch keine Links",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Sie haben noch keine Seiten",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Du hast noch keine Sortenstufen",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Keine benutzerdefinierten Bewertungswerte",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Keine eigenen Etiketten",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Keine Bereiche",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Keine Säulen",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Keine Layout-Spalten",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Keine Reihen",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Keine Validierungsregeln",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Keine benutzerdefinierten Variablen",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Keine Auslöser",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Kein bedingtes Markup",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Keine Links",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Keine Seiten",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Keine Sortier-Level",
     // "Add new choice"
     "addNew@choices": "Auswahlmöglichkeit hinzufügen",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Neue Spalte hinzufügen",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Neue Zeile hinzufügen",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Neue Regel hinzufügen",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Neue Variable hinzufügen",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Neuen Auslöser hinzufügen",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Neue URL hinzufügen",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Neue Seite hinzufügen",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Neue Sortierebene hinzufügen",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Wertungswert hinzufügen",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Beschriftung hinzufügen",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Fläche hinzufügen",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Spalte hinzufügen",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Reihe hinzufügen",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Regel hinzufügen",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Variable hinzufügen",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Trigger hinzufügen",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Fügen Sie Markup hinzu",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Link hinzufügen",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Seite hinzufügen",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Sortierebene hinzufügen",
     // "Value"
     value: "Wert",
     // [Auto-translated] "Text"

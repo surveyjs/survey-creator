@@ -1025,45 +1025,61 @@ export var traditionalChineseTranslation = {
     propertyNameIsNotUnique: "請輸入唯一名稱",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "不要使用保留字：「專案」、「選項」、「面板」、“行”。",
-    // [Auto-translated] "You don't have any items yet"
-    listIsEmpty: "您還沒有任何物品",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "你還沒有任何選擇",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "您還沒有任何列",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "您還沒有佈局列",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "您還沒有任何行",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "尚無任何驗證規則",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "您還沒有任何自訂變數",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "您還沒有任何觸發器",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "您還沒有任何連結",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "您還沒有任何頁面",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "你還沒有任何等級",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "添加新選擇",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "添加新列",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "添加新行",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "添加新規則",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "添加新變數",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "添加新觸發器",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "添加新 URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "添加新頁面",
-    // [Auto-translated] "Add new sort level"
+    // [Auto-translated] "No items"
+    listIsEmpty: "沒有物品",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "沒有選擇",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "沒有自訂分級值",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "沒有自訂標籤",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "沒有區域",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "無柱子",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "無版面欄",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "沒有排隊",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "沒有驗證規則",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "沒有自訂變數",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "沒有觸發點",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "無條件標記",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "無連結",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "沒有頁數",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "無分類等級",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "增加選擇",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "增加評分值",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "新增標籤",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "新增面積",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "新增欄位",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "新增列",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "新增規則",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "新增變數",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "新增觸發器",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "加上加價",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "新增連結",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "新增頁面",
+    // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "新增排序層級",
     // "Value"
     value: "值",

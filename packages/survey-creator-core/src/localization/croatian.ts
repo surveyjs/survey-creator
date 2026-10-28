@@ -1026,44 +1026,60 @@ export var hrStrings = {
     propertyNameIsIncorrect: "Nemojte koristiti rezervirane riječi: \"stavka\", \"izbor\", \"ploča\", \"red\".",
     // "You don't have any items yet"
     listIsEmpty: "Dodavanje nove stavke",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Još nemate izbora",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Još nemate kolumne",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Još nemate stupce izgleda",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Još nemate redaka",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Još nemate pravila provjere valjanosti",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Još nemate prilagođene varijable",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Još nemaš okidača",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Još nemate poveznice",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Još nemate stranice",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Još nemaš nikakve razine sortiranja",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Dodavanje novog izbora",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Dodaj novi stupac",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Dodaj novi redak",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Dodaj novo pravilo",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Dodaj novu varijablu",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Dodaj novi okidač",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Dodaj novi URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Dodaj novu stranicu",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Dodajte novu razinu sortiranja",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Nema izbora",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Nema prilagođenih ocjena",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Nema prilagođenih etiketa",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Nema područja",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Nema stupaca",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Bez stupaca za raspored",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Nema svađa",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Nema pravila validacije",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Nema prilagođenih varijabli",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Nema okidača",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Nema uvjetnog označavanja",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Nema poveznica",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Nema stranica",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Nema razina sortiranja",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Dodaj izbor",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Dodajte vrijednost ocjene",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Dodaj oznaku",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Dodaj površinu",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Dodaj stupac",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Dodaj red",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Pravilo dodavanja",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Dodaj varijablu",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Dodaj okidač",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Dodaj oznake",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Dodaj poveznicu",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Dodaj stranicu",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Dodaj razinu sortiranja",
     // "Value"
     value: "Vrijednost",
     // "Text"

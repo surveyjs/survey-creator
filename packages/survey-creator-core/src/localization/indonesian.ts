@@ -1024,46 +1024,62 @@ export var indonesianStrings = {
     propertyNameIsNotUnique: "Silakan masukkan nama yang unik",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "Jangan gunakan kata-kata khusus: \"item\", \"pilihan\", \"panel\", \"baris\".",
-    // [Auto-translated] "You don't have any items yet"
-    listIsEmpty: "Anda belum memiliki item apa pun",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Anda belum punya pilihan",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Anda belum memiliki kolom apa pun",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Anda belum memiliki kolom tata letak",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Anda belum memiliki baris",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Anda belum memiliki aturan validasi apa pun",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Anda belum memiliki variabel khusus",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Anda belum memiliki pemicu apa pun",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Anda belum memiliki tautan apa pun",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Anda belum memiliki halaman apa pun",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Kamu belum punya tingkat sorting",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Tambahkan pilihan baru",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Tambahkan kolom baru",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Menambahkan baris baru",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Tambahkan aturan baru",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Tambahkan variabel baru",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Tambahkan pemicu baru",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Tambahkan URL baru",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Tambahkan halaman baru",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Tambahkan tingkat pengurutan baru",
+    // [Auto-translated] "No items"
+    listIsEmpty: "Tidak ada item",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Tidak ada pilihan",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Tidak ada nilai penilaian khusus",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Tidak ada label khusus",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Tidak ada area",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Tidak ada kolom",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Tidak ada kolom tata letak",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Tidak ada baris",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Tidak ada aturan validasi",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Tidak ada variabel kustom",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Tidak ada pemicu",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Tidak ada markup bersyarat",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Tidak ada tautan",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Tidak ada halaman",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Tidak ada tingkat pengurutan",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Tambahkan pilihan",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Tambahkan nilai penilaian",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Tambahkan label",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Tambah area",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Tambah kolom",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Tambah baris",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Tambah aturan",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Tambah variabel",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Tambah pemicu",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Tambahkan markup",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Tambahkan tautan",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Tambah halaman",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Tambahkan tingkat pengurutan",
     // "Value"
     value: "Nilai",
     // "Text"

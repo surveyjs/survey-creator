@@ -1025,46 +1025,62 @@ export let svStrings = {
     propertyNameIsNotUnique: "Ange ett unikt namn",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "Använd inte reserverade ord: \"objekt\", \"val\", \"panel\", \"rad\".",
-    // [Auto-translated] "You don't have any items yet"
-    listIsEmpty: "Du har inga objekt ännu",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Du har inga val ännu",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Du har inga kolumner ännu",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Du har inga layoutkolumner ännu",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Du har inga rader ännu",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Du har inga valideringsregler ännu",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Du har inga anpassade variabler ännu",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Du har inga utlösare ännu",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Du har inga länkar ännu",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Du har inga sidor ännu",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Du har inga sortnivåer än",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Lägg till nytt val",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Lägg till ny kolumn",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Lägg till ny rad",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Lägg till ny regel",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Lägg till ny variabel",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Lägga till ny utlösare",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Lägg till ny URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Lägg till ny sida",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Lägg till ny sorteringsnivå",
+    // [Auto-translated] "No items"
+    listIsEmpty: "Inga föremål",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Inga val",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Inga anpassade betygsvärden",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Inga egna etiketter",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Inga områden",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Inga kolumner",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Inga layoutkolonner",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Inga rader",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Inga valideringsregler",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Inga anpassade variabler",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Inga utlösare",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Ingen villkorlig markering",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Inga länkar",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Inga sidor",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Inga sorteringsnivåer",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Lägg till valmöjligheter",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Lägg till betygsvärde",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Lägg till etikett",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Lägg till område",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Lägg till kolumn",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Lägg till rad",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Lägg till regel",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Lägg till variabel",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Lägg till avtryckare",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Lägg till påslag",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Lägg till länk",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Lägg till sida",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Lägg till sorteringsnivå",
     // "Value"
     value: "Värde",
     // [Auto-translated] "Text"

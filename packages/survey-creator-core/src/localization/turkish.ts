@@ -1026,44 +1026,60 @@ export var turkishStrings = {
     propertyNameIsIncorrect: "Ayrılmış kelimeler kullanmayın: \"öğe\", \"seçim\", \"panel\", \"satır\".",
     // "You don't have any items yet"
     listIsEmpty: "Yeni eleman ekle",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Henüz başka seçeneğiniz yok",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Henüz sütununuz yok",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Henüz düzen sütunlarına sahip değilsiniz",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Henüz satırınız yok",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Henüz herhangi bir doğrulama kuralınız yok",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Henüz özelleştirilebilen değişkeniniz yok",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Henüz herhangi bir tetikleyiciniz yok",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Henüz bağlantınız yok",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Henüz hiç sayfanız yok",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Henüz sıralama seviyen yok",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Yeni seçim ekle",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Yeni sütun ekle",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Yeni satır ekle",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Yeni kural ekle",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Yeni değişken ekle",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Yeni tetikleyici ekle",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Yeni URL ekle",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Yeni sayfa ekle",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Yeni sıralama seviyesi ekleyin",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Seçenek yok",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Özel derecelendirme değerleri yok",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Özel etiket yok",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Bölge yok",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Sütun yok",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Yerleşim sütunları yok",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Sıralar yok",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Doğrulama kuralları yok",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Özel değişken yok",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Tetikleyici yok",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Koşullu işaretleme yok",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Bağlantı yok",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Sayfa yok",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Sıralama seviyeleri yok",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Seçenek ekle",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Puan değeri ekleyin",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Etiket ekleyin",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Alan ekle",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Sütun ekle",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Sıra ekle",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Ekle kuralı",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Değişken ekle",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Tetikleyici ekle",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Markup ekleyin",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Bağlantı ekle",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Sayfa ekle",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Sıralama seviyesi ekleyin",
     // "Value"
     value: "Değer",
     // "Text"

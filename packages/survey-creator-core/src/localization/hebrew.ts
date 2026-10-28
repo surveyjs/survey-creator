@@ -1028,42 +1028,58 @@ export var hebrewStrings = {
     listIsEmpty: "טרם הוספו פריטים",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "טרם הוספו ברירות בחירה",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "עדיין אין לך עמודות",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "עדיין אין לך עמודות פריסה",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "עדיין אין לך שורות",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "עדיין אין לך כללי אימות",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "עדיין אין לך משתנים מותאמים אישית",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "עדיין אין לך טריגרים",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "עדיין אין לך קישורים",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "עדיין אין לך דפים",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "עדיין אין לך שום רמות מסוגים",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "אין ערכי דירוג מותאמים אישית",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "אין תוויות מותאמות אישית",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "אין אזורים",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "ללא עמודות",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "אין עמודות פריסה",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "אין שורות",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "אין כללי אימות",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "אין משתנים מותאמים אישית",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "אין טריגרים",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "אין סימון מותנה",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "אין קישורים",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "אין עמודים",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "אין רמות מיון",
     // "Add new choice"
     "addNew@choices": "הוסף ברירת בחירה",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "הוספת עמודה חדשה",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "הוספת שורה חדשה",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "הוספת כלל חדש",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "הוספת משתנה חדש",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "הוספת גורם מפעיל חדש",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "הוספת כתובת URL חדשה",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "הוספת עמוד חדש",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "הוספת רמת מיון חדשה",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "הוספת ערך דירוג",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "הוספת תווית",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "הוספת שטח",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "עמודת הוספה",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "הוספת שורה",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "כלל הוספה",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "משתנה הוסף",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "הוסף טריגר",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "הוסף סימון",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "הוסף קישור",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "דף הוסף",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "הוספת רמת מיון",
     // "Value"
     value: "ערך",
     // "Text"

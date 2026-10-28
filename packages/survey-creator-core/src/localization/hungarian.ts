@@ -1024,46 +1024,62 @@ export var huStrings = {
     propertyNameIsNotUnique: "Kérjük, adjon meg egy egyedi nevet",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "Ne használjon fenntartott szavakat: \"elem\", \"választás\", \"panel\", \"sor\".",
-    // [Auto-translated] "You don't have any items yet"
-    listIsEmpty: "Még nincs tárgya",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Még nincs választásod",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Még nincsenek oszlopai",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Még nincsenek elrendezésoszlopok",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Még nincsenek sorai",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Még nincsenek érvényességi szabályai",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Még nincsenek egyéni változói",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Még nincsenek triggerek",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Még nincsenek linkek",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Még nincsenek oldalai",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Még nincsenek sortozási szintjeid",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Új választás hozzáadása",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Új oszlop hozzáadása",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Új sor hozzáadása",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Új szabály hozzáadása",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Új változó hozzáadása",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Új eseményindító hozzáadása",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Új URL hozzáadása",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Új oldal hozzáadása",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Új rendezési szint hozzáadása",
+    // [Auto-translated] "No items"
+    listIsEmpty: "Nincsenek tárgyak",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Nincs választási lehetőség",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Nincsenek egyedi értékelési értékek",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Nincs egyedi címkék",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Nincsenek területek",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Nincsenek oszlopok",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Nincsenek elrendezésoszlopok",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Nincsenek sorok",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Nincsenek validációs szabályok",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Nincsenek egyedi változók",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Nincsenek kiváltó tényezők",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Nincs feltételes jelölés",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Nincsenek linkek",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Nincsenek oldalak",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Nincsenek sortozási szintek",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Választási lehetőségek hozzáadása",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Érték hozzáadása",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Címkét adj hozzá",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Terület hozzáadása",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Oszlop hozzáadása",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Sor hozzáadása",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Add szabályt",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Add hozzá változót",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Add hozzá trigger",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Add hozzá a jelölést",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Link hozzáadása",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Oldal hozzáadása",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Szűrési szint hozzáadása",
     // "Value"
     value: "Érték",
     // "Text"

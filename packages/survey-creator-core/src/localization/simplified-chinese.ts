@@ -1024,46 +1024,62 @@ export var simplifiedChineseTranslation = {
     propertyNameIsNotUnique: "请输入唯一名称",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "不要使用保留字：“项目”、“选项”、“面板”、“行”。",
-    // [Auto-translated] "You don't have any items yet"
-    listIsEmpty: "您还没有任何物品",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "你还没有任何选择",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "您还没有任何列",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "您还没有布局列",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "您还没有任何行",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "尚无任何验证规则",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "您还没有任何自定义变量",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "您还没有任何触发器",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "您还没有任何链接",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "您还没有任何页面",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "你还没有任何等级",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "添加新选择",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "添加新列",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "添加新行",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "添加新规则",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "添加新变量",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "添加新触发器",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "添加新 URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "添加新页面",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "添加新的排序层级",
+    // [Auto-translated] "No items"
+    listIsEmpty: "没有物品",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "别无选择",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "没有自定义评级值",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "没有自定义标签",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "没有区域",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "无柱",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "无布局列",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "没有排队",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "没有验证规则",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "没有自定义变量",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "没有触发因素",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "无条件标记",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "没有链接",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "没有页面",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "无等级",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "增加选择",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "增加评级值",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "添加标签",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "添加面积",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "添加列",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "添加行",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "添加规则",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "添加变量",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "添加触发器",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "加价",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "添加链接",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "添加页面",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "添加排序层级",
     // "Value"
     value: "值",
     // "Text"

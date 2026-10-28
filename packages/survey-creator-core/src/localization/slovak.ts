@@ -1026,44 +1026,60 @@ export var skStrings = {
     propertyNameIsIncorrect: "Nepoužívajte vyhradené slová: \"položka\", \"výber\", \"panel\", \"riadok\".",
     // "You don't have any items yet"
     listIsEmpty: "Pridajte novú položku",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Zatiaľ nemáte na výber",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Zatiaľ nemáte žiadne stĺpce",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Ešte nemáte stĺpce rozloženia",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Zatiaľ nemáte žiadne riadky",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Zatiaľ nemáte žiadne overovacie pravidlá",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Zatiaľ nemáte žiadne vlastné premenné",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Zatiaľ nemáte žiadne spúšťače",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Zatiaľ nemáte žiadne odkazy",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Zatiaľ nemáte žiadne stránky",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Ešte nemáš žiadne úrovne triedenia",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Pridanie novej možnosti",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Pridať nový stĺpec",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Pridať nový riadok",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Pridať nové pravidlo",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Pridanie novej premennej",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Pridať nový spúšťač",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Pridať novú URL adresu",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Pridať novú stránku",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Pridajte novú úroveň triedenia",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Žiadne možnosti",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Žiadne vlastné hodnotenia",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Žiadne vlastné štítky",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Žiadne oblasti",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Žiadne stĺpce",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Žiadne stĺpce rozloženia",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Žiadne hádky",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Žiadne validačné pravidlá",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Žiadne vlastné premenné",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Žiadne spúšťače",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Žiadne podmienené značkovanie",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Žiadne odkazy",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Žiadne stránky",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Žiadne triedenie úrovní",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Pridajte výber",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Pridajte hodnotu hodnotenia",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Pridať štítok",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Pridať plochu",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Pridať stĺpec",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Pridať riadok",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Pridať pravidlo",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Pridaj premennú",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Pridať spúšťač",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Pridaj značku",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Pridať odkaz",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Pridať stránku",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Pridať úroveň triedenia",
     // "Value"
     value: "Hodnota",
     // [Auto-translated] "Text"

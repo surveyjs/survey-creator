@@ -1026,44 +1026,60 @@ export var fiStrings = {
     propertyNameIsIncorrect: "Älä käytä varattuja sanoja: \"kohde\", \"valinta\", \"paneeli\", \"rivi\".",
     // "You don't have any items yet"
     listIsEmpty: "Lisää uusi kohde",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Sinulla ei ole vielä vaihtoehtoja",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Sinulla ei ole vielä sarakkeita",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Sinulla ei vielä ole asettelusarakkeita",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Sinulla ei ole vielä rivejä",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Sinulla ei ole vielä vahvistussääntöjä",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Sinulla ei ole vielä mukautettuja muuttujia",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Sinulla ei ole vielä käynnistimiä",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Sinulla ei ole vielä linkkejä",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Sinulla ei ole vielä sivuja",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Sinulla ei ole vielä lajittelutasoja",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Lisää uusi valinta",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Lisää uusi sarake",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Lisää uusi rivi",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Lisää uusi sääntö",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Lisää uusi muuttuja",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Lisää uusi käynnistin",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Lisää uusi URL-osoite",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Lisää uusi sivu",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Lisää uusi lajittelutaso",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Ei vaihtoehtoja",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Ei mukautettuja luokitusarvoja",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Ei räätälöityjä etikettejä",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Ei alueita",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Ei kolumneja",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Ei layout-sarakkeita",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Ei rivejä",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Ei validointisääntöjä",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Ei mukautettuja muuttujia",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Ei laukaisevia tekijöitä",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Ei ehdollista merkintää",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Ei linkkejä",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Ei sivuja",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Ei lajittelutasoja",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Lisää valinta",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Lisää arvostusarvoa",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Lisää etiketti",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Lisää alue",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Lisää sarake",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Lisää rivi",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Lisää sääntö",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Lisää muuttuja",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Lisää liipaisin",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Lisää merkintä",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Lisää linkki",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Lisää sivu",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Lisää lajittelutaso",
     // "Value"
     value: "Arvo",
     // "Text"

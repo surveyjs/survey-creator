@@ -1026,44 +1026,60 @@ export var jaStrings = {
     propertyNameIsIncorrect: "予約語は使用しないでください: \"アイテム\"、 \"選択肢\"、 \"パネル\"、 \"行\"。",
     // "You don't have any items yet"
     listIsEmpty: "新しいアイテムを追加",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "まだ選択肢はありません",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "まだ列がありません",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "レイアウト列がまだありません",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "まだ行がありません",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "入力規則はまだありません",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "カスタム変数はまだありません",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "トリガーはまだありません",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "リンクはまだありません",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "まだページがありません",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "まだレベルは何もありません",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "新しい選択肢を追加する",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "新しい列を追加",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "新しい行を追加",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "新しいルールを追加",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "新しい変数を追加",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "新しいトリガーを追加する",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "新しい URL を追加",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "新しいページを追加",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "新しいソートレベルを追加する",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "選択肢はない",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "カスタム評価値はありません",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "カスタムラベルは使いません",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "エリアはない",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "柱はありません",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "レイアウト欄はありません",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "列はなし",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "検証ルールはありません",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "カスタム変数は使いません",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "トリガーなし",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "条件付きマークアップはありません",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "リンクはありません",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "ページはない",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "レベルはない",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "選択肢を加える",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "評価価値の追加",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "ラベルを追加",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "面積の追加",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "列を追加",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "行を追加",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "ルールを追加",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "変数を追加する",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "トリガーを追加する",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "マークアップを足します",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "リンクを追加",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "ページを追加",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "ソートレベルを追加",
     // "Value"
     value: "値",
     // "Text"

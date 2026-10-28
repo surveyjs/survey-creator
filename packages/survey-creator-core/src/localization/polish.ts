@@ -1025,46 +1025,62 @@ export var polishStrings = {
     propertyNameIsNotUnique: "Podaj unikalną nazwę",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "Nie używaj zastrzeżonych słów: \"element\", \"wybór\", \"panel\", \"wiersz\".",
-    // [Auto-translated] "You don't have any items yet"
-    listIsEmpty: "Nie masz jeszcze żadnych przedmiotów",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Nie masz jeszcze żadnego wyboru",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Nie masz jeszcze żadnych kolumn",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Nie masz jeszcze kolumn układu",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Nie masz jeszcze żadnych wierszy",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Nie masz jeszcze żadnych reguł sprawdzania poprawności",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Nie masz jeszcze żadnych zmiennych niestandardowych",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Nie masz jeszcze żadnych wyzwalaczy",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Nie masz jeszcze żadnych linków",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Nie masz jeszcze żadnych stron",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Nie masz jeszcze żadnych poziomów sortowania",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Dodaj nowy wybór",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Dodaj nową kolumnę",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Dodaj nowy wiersz",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Dodaj nową regułę",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Dodaj nową zmienną",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Dodaj nowy wyzwalacz",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Dodaj nowy adres URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Dodaj nową stronę",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Dodaj nowy poziom sortowania",
+    // [Auto-translated] "No items"
+    listIsEmpty: "Brak przedmiotów",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Brak wyboru",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Brak niestandardowych wartości ocen",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Brak indywidualnych etykiet",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Brak obszarów",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Brak kolumn",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Brak kolumn układu",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Bez kłótni",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Brak reguł walidacji",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Brak niestandardowych zmiennych",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Brak wyzwalaczy",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Brak warunkowego marżowania",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Brak linków",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Brak stron",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Brak poziomów sortowania",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Dodaj wybór",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Dodaj wartość ratingową",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Dodaj etykietę",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Dodaj obszar",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Dodaj kolumnę",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Dodaj wiersz",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Reguła dodawania",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Dodaj zmienną",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Dodaj trigger",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Dodaj znaczniki",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Dodaj link",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Dodaj stronę",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Dodaj poziom sortowania",
     // "Value"
     value: "Wartość",
     // "Text"

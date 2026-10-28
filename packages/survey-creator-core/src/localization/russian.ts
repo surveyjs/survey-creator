@@ -1026,44 +1026,60 @@ export var ruStrings = {
     propertyNameIsIncorrect: "Не используйте зарезервированные слова: «элемент», «выбор», «панель», «строка».",
     // "You don't have any items yet"
     listIsEmpty: "Добавьте новое условие",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "У вас пока нет выбора",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "У вас еще нет столбцов",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "У вас еще нет столбцов макета",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "У вас еще нет строк",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "У вас еще нет правил валидации",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "У вас еще нет пользовательских переменных",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "У вас еще нет триггеров",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "У вас еще нет ссылок",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "У вас еще нет страниц",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "У тебя пока нет уровней сортировки",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Добавить новый вариант",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Добавить новый столбец",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Добавить новую строку",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Добавить новое правило",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Добавить новую переменную",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Добавить новый триггер",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Добавить новый URL-адрес",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Добавить новую страницу",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Добавить новый уровень сортировки",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Выбора нет",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Нет пользовательских рейтинговых значений",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Нет индивидуальных этикеток",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Нет зон",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Колонок нет",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Нет колонок для верстки",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Без рядов",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Нет правил валидации",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Нет пользовательских переменных",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Без триггеров",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Без условной наценки",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Нет ссылок",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Нет страниц",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Нет уровней сортировки",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Добавьте выбор",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Добавить рейтинговую ценность",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Добавить этикетку",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Добавить площадь",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Добавить колонку",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Добавить строку",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Добавьте правило",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Добавить переменную",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Добавить триггер",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Добавьте наценку",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Добавить ссылку",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Добавить страницу",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Добавить уровень сортировки",
     // "Value"
     value: "Значение",
     // "Text"

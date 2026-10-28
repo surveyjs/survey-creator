@@ -1028,6 +1028,12 @@ export var grStrings = {
     listIsEmpty: "Δεν έχετε προσθέσει ακόμα στοιχεία",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Δεν έχετε προσθέσει επιλογές",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Δεν υπάρχουν προσαρμοσμένες τιμές αξιολόγησης",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Χωρίς προσαρμοσμένες ετικέτες",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Δεν υπάρχουν περιοχές",
     // "You don't have any columns yet"
     "listIsEmpty@columns": "Δεν έχετε προσθέσει στήλες",
     // "You don't have layout columns yet"
@@ -1040,14 +1046,22 @@ export var grStrings = {
     "listIsEmpty@calculatedValues": "Δεν έχετε προσθέσει μεταβλητές",
     // "You don't have any triggers yet"
     "listIsEmpty@triggers": "Δεν έχετε προσθέσει triggers",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Χωρίς σήμανση υπό όρους",
     // "You don't have any links yet"
     "listIsEmpty@navigateToUrlOnCondition": "Δεν έχετε προσθέσει συνδέσμους",
     // "You don't have any pages yet"
     "listIsEmpty@pages": "Δεν έχετε προσθέσει σελίδες",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Δεν έχετε ακόμη επίπεδα ταξινόμησης",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Χωρίς επίπεδα ταξινόμησης",
     // "Add new choice"
     "addNew@choices": "Προσθήκη νέας επιλογής",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Προσθήκη τιμής αξιολόγησης",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Προσθήκη ετικέτας",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Προσθήκη περιοχής",
     // "Add new column"
     "addNew@columns": "Προσθήκη νέας στήλης",
     // "Add new row"
@@ -1058,12 +1072,14 @@ export var grStrings = {
     "addNew@calculatedValues": "Προσθήκη νέας μεταβλητής",
     // "Add new trigger"
     "addNew@triggers": "Προσθήκη νέου trigger",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Προσθήκη σήμανσης",
     // "Add new URL"
     "addNew@navigateToUrlOnCondition": "Προσθήκη νέου URL",
     // "Add new page"
     "addNew@pages": "Προσθήκη νέας σελίδας",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Προσθήκη νέου επιπέδου ταξινόμησης",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Προσθήκη επιπέδου ταξινόμησης",
     // "Value"
     value: "Τιμή",
     // "Text"

@@ -1028,6 +1028,12 @@ export var htStrings = {
     listIsEmpty: "Ou pa gen okenn atik ankò",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Ou pa gen okenn chwa ankò",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Pa gen valè Rating koutim",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Pa gen etikèt koutim",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Pa gen zòn",
     // "You don't have any columns yet"
     "listIsEmpty@columns": "Ou poko gen okenn kolòn",
     // "You don't have layout columns yet"
@@ -1040,14 +1046,22 @@ export var htStrings = {
     "listIsEmpty@calculatedValues": "Ou pa gen okenn varyab koutim ankò",
     // "You don't have any triggers yet"
     "listIsEmpty@triggers": "Ou pa gen okenn deklanche ankò",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Pa gen okenn markeup kondisyonèl",
     // "You don't have any links yet"
     "listIsEmpty@navigateToUrlOnCondition": "Ou poko gen okenn lyen",
     // "You don't have any pages yet"
     "listIsEmpty@pages": "Ou poko gen okenn paj",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Ou pa gen okenn nivo sòt ankò",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Pa gen nivo sòt",
     // "Add new choice"
     "addNew@choices": "Ajoute nouvo chwa",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Add valè rating",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Ajoute etikèt",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Ajoute zòn",
     // "Add new column"
     "addNew@columns": "Ajoute nouvo kolòn",
     // "Add new row"
@@ -1058,12 +1072,14 @@ export var htStrings = {
     "addNew@calculatedValues": "Ajoute nouvo varyab",
     // "Add new trigger"
     "addNew@triggers": "Ajoute nouvo deklanche",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Ajoute marke-up",
     // "Add new URL"
     "addNew@navigateToUrlOnCondition": "Ajoute nouvo URL",
     // "Add new page"
     "addNew@pages": "Ajoute nouvo paj",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Ajoute nouvo nivo sòt",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Ajoute triye nivo",
     // "Value"
     value: "Valè",
     // "Text"

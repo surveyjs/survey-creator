@@ -1028,10 +1028,16 @@ export const roStrings = {
     listIsEmpty: "Nu aveți încă niciun element",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Nu aveți încă nicio alegere",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Fără valori de rating personalizate",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Fără etichete personalizate",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Nicio zonă",
     // "You don't have any columns yet"
     "listIsEmpty@columns": "Nu aveți încă nicio coloană",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Nu aveți încă coloane de aspect",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Fără coloane de layout",
     // "You don't have any rows yet"
     "listIsEmpty@rows": "Nu aveți încă niciun rând",
     // "You don't have any validation rules yet"
@@ -1040,14 +1046,22 @@ export const roStrings = {
     "listIsEmpty@calculatedValues": "Nu aveți încă nicio variabilă personalizată",
     // "You don't have any triggers yet"
     "listIsEmpty@triggers": "Nu aveți încă niciun declanșator",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Fără marcare condiționată",
     // "You don't have any links yet"
     "listIsEmpty@navigateToUrlOnCondition": "Nu aveți încă niciun link",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Nu aveți încă nicio pagină",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Nu ai încă niveluri de tip",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Fără pagini",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Fără niveluri de sortare",
     // "Add new choice"
     "addNew@choices": "Adăugați o alegere nouă",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Valoare de rating adăugat",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Adaugă etichetă",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Adaugă arie",
     // "Add new column"
     "addNew@columns": "Adăugați o coloană nouă",
     // "Add new row"
@@ -1058,12 +1072,14 @@ export const roStrings = {
     "addNew@calculatedValues": "Adăugați o variabilă nouă",
     // "Add new trigger"
     "addNew@triggers": "Adăugați un declanșator nou",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Adaugă marajul",
     // "Add new URL"
     "addNew@navigateToUrlOnCondition": "Adăugați un URL nou",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Adaugă o pagină nouă",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Adaugă un nou nivel de sortare",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Adaugă pagină",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Adaugă nivelul de sortare",
     // "Value"
     value: "Valoare",
     // [Auto-translated] "Text"

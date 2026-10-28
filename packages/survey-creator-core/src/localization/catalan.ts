@@ -1028,42 +1028,58 @@ export var catalanTranslation = {
     listIsEmpty: "Afegir un nou artículo",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "No se han añadido opcions todavía",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Todavía no tienes ninguna columna",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Todavía no tiene columnes de diseño",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Todavía no tienes ninguna fila",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Todavía no tiene ninguna regla de validació",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Todavía no tiene ninguna variable personalitzada",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Todavía no tienes ningún desencadenante",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Todavía no tienes ningún enlace",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Todavía no tienes ninguna pàgina",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Encara no tens cap nivell de tipus",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "No hi ha valors de valoració personalitzats",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "No hi ha etiquetes personalitzades",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Sense zones",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Sense columnes",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "No hi ha columnes de disposició",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "No hi ha files",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "No hi ha regles de validació",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "No hi ha variables personalitzades",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Sense desencadenants",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Sense marcatge condicional",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Sense enllaços",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Sense pàgines",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "No hi ha nivells de sort",
     // "Add new choice"
     "addNew@choices": "Añade una opción",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Agregar nova columna",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Agregar nova fila",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Agregar nova regla",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Adición de una nova variable",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Agregar nou disparador",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Agregar nova URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Agregar nova pàgina",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Afegeix un nou nivell d'ordenació",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Valor d'avaluació",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Afegir etiqueta",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Afegeix àrea",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Afegir columna",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Afegeix fila",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Regla d'afegir",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Suma la variable",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Afegir disparador",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Afegeix el marge",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Afegeix enllaç",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Afegeix pàgina",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Afegeix nivell d'ordenació",
     // "Value"
     value: "Valor",
     // [Auto-translated] "Text"

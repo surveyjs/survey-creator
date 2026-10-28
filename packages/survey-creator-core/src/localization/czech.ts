@@ -1028,42 +1028,58 @@ export var czStrings = {
     listIsEmpty: "Přidat novou položku",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Zatím nebyly přidány žádné volby",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Zatím nemáte žádné sloupce.",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Sloupce rozložení ještě nemáte",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Zatím nemáte žádné řádky",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Zatím nemáte žádná ověřovací pravidla.",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Zatím nemáte žádné vlastní proměnné.",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Zatím nemáte žádné spouštěče",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Zatím nemáte žádné odkazy",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Zatím nemáte žádné stránky",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Ještě nemáš žádné úrovně třídění",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Žádné vlastní hodnoty hodnocení",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Žádné vlastní štítky",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Žádné oblasti",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Žádné sloupce",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Žádné sloupce pro rozložení",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Žádné hádky",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Žádná validační pravidla",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Žádné vlastní proměnné",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Žádné spouštěče",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Žádné podmíněné značkování",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Žádné odkazy",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Žádné stránky",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Žádné úrovně třídění",
     // "Add new choice"
     "addNew@choices": "Přidat volbu",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Přidat nový sloupec",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Přidat nový řádek",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Přidat nové pravidlo",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Přidat novou proměnnou",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Přidání nového triggeru",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Přidat novou adresu URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Přidat novou stránku",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Přidejte novou úroveň třídění",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Přidejte hodnotu hodnocení",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Přidat štítek",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Přidat oblast",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Přidat sloupec",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Přidat řádek",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Pravidlo přidat",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Přidat proměnnou",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Přidat trigger",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Přidejte značkování",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Přidat odkaz",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Přidat stránku",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Přidat úroveň třídění",
     // "Value"
     value: "Hodnota",
     // [Auto-translated] "Text"

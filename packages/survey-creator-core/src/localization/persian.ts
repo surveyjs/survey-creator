@@ -1026,44 +1026,60 @@ export var persianStrings = {
     propertyNameIsIncorrect: "از کلمات رزرو شده استفاده نکنید: \"item\"، \"choice\"، \"panel\"، \"row\".",
     // "You don't have any items yet"
     listIsEmpty: "یک آیتم جدید اضافه کنید",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "شما هنوز هیچ انتخابی ندارید",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "شما هنوز هیچ ستونی ندارید",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "شما هنوز ستون های طرح بندی ندارید",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "شما هنوز هیچ ردیفی ندارید",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "شما هنوز هیچ قانون اعتبار سنجی ندارید",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "شما هنوز هیچ متغیر سفارشی ندارید",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "شما هنوز هیچ محرکی ندارید",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "شما هنوز هیچ لینکی ندارید",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "شما هنوز هیچ صفحه ای ندارید",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "هنوز هیچ سطحی نداری",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "اضافه کردن انتخاب جدید",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "افزودن ستون جدید",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "افزودن سطر جدید",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "افزودن قانون جدید",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "افزودن متغیر جدید",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "افزودن ماشه جدید",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "افزودن نشانی وب جدید",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "افزودن صفحه جدید",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "افزودن سطح مرتب سازی جدید",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "چاره ای نیست",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "هیچ مقدار امتیازدهی سفارشی وجود ندارد",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "هیچ برچسب سفارشی وجود ندارد",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "هیچ منطقه ای وجود ندارد",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "بدون ستون",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "ستون های طرح بندی وجود ندارد",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "بدون ردیف",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "هیچ قانون اعتبارسنجی وجود ندارد",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "هیچ متغیر سفارشی وجود ندارد",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "هیچ محرکی وجود ندارد",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "هیچ نشانه گذاری شرطی وجود ندارد",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "هیچ لینکی نیست",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "بدون صفحه",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "بدون سطح مرتب سازی",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "انتخاب اضافه کنید",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "ارزش امتیاز اضافه کنید",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "افزودن برچسب",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "افزودن مساحت",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "ستون افزودن",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "افزودن ردیف",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "قاعده افزودن",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "متغیر جمع",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "افزودن ماشه",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "اضافه کردن نشانه گذاری",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "افزودن لینک",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "صفحه افزودن",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "افزودن سطح مرتب سازی",
     // "Value"
     value: "مقدار",
     // "Text"

@@ -1026,44 +1026,60 @@ export var msStrings = {
     propertyNameIsIncorrect: "Jangan gunakan perkataan terpelihara: \"item\", \"pilihan\", \"panel\", \"baris\".",
     // "You don't have any items yet"
     listIsEmpty: "Tambahkan item baharu",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Anda belum mempunyai sebarang pilihan lagi",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Anda belum mempunyai sebarang lajur",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Anda belum mempunyai lajur reka letak lagi",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Anda belum mempunyai sebarang baris",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Anda belum mempunyai sebarang peraturan pengesahihan",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Anda belum mempunyai sebarang pemboleh ubah tersuai",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Anda belum mempunyai sebarang pencetus",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Anda belum mempunyai pautan",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Anda belum mempunyai sebarang halaman lagi",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Anda belum ada tahap sort lagi",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Tambah pilihan baharu",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Menambah lajur baru",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Menambah baris baru",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Tambah peraturan baru",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Menambah pemboleh ubah baru",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Tambah pencetus baharu",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Tambah URL baru",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Tambah halaman baru",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Tambah tahap penyusunan baru",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Tiada pilihan",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Tiada nilai penilaian tersuai",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Tiada label tersuai",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Tiada kawasan",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Tiada lajur",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Tiada lajur susun atur",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Tiada baris",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Tiada peraturan pengesahan",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Tiada pembolehubah tersuai",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Tiada pencetus",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Tiada markup bersyarat",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Tiada pautan",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Tiada halaman",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Tiada tahap pengisihan",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Tambah pilihan",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Tambah nilai penarafan",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Tambah label",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Tambah kawasan",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Tambah lajur",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Tambah baris",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Tambah peraturan",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Tambah pembolehubah",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Tambah pencetus",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Tambah markup",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Tambah pautan",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Tambah halaman",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Tambah tahap pengisihan",
     // "Value"
     value: "Nilai",
     // "Text"
