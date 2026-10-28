@@ -146,9 +146,9 @@ describe("Property grid: records sorting", () => {
     const creator = createCreator();
     const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
     const grid = sortGrid(creator);
-    expect([grid.visibleRows.length, grid.noRowsText], "#1").toEqual([0, "You don't have any sort levels yet"]);
+    expect([grid.visibleRows.length, grid.noRowsText], "#1").toEqual([0, "No sort levels"]);
     const add = findAction(grid, "add-item");
-    expect([add.title, add.enabled], "#2").toEqual(["Add new sort level", true]);
+    expect([add.title, add.enabled], "#2").toEqual(["Add sort level", true]);
     let modified = 0;
     creator.onModified.add(() => modified++);
     addLevel(grid);

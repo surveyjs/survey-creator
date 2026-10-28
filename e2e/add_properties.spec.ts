@@ -94,7 +94,7 @@ test.describe(title, () => {
 
     await page.getByText("Others").filter({ visible: true }).click();
 
-    const addButton = page.locator('button[title="Add New"]').first();
+    const addButton = page.locator('button[title="Add item"]').first();
     await addButton.click();
     await addButton.click();
 

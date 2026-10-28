@@ -3039,8 +3039,8 @@ test("Show empty rows template if there is no rows", () => {
   );
   expect(propEditorQuestion.hideColumnsIfEmpty).toBeTruthy();
   expect(propEditorQuestion.renderedTable.showTable).toBeFalsy();
-  expect(propEditorQuestion.noRowsText).toEqual("You don't have any triggers yet");
-  expect(propEditorQuestion.addRowText).toEqual("Add new trigger");
+  expect(propEditorQuestion.noRowsText).toEqual("No triggers");
+  expect(propEditorQuestion.addRowText).toEqual("Add trigger");
 
   propertyGrid = new PropertyGridModelTester(survey.getQuestionByName("q1"));
   propEditorQuestion = <QuestionMatrixDynamicModel>(
@@ -3048,8 +3048,8 @@ test("Show empty rows template if there is no rows", () => {
   );
   expect(propEditorQuestion.hideColumnsIfEmpty).toBeTruthy();
   expect(propEditorQuestion.renderedTable.showTable).toBeFalsy();
-  expect(propEditorQuestion.noRowsText).toEqual("You don't have any choices yet");
-  expect(propEditorQuestion.addRowText).toEqual("Add new choice");
+  expect(propEditorQuestion.noRowsText).toEqual("No choices");
+  expect(propEditorQuestion.addRowText).toEqual("Add choice");
 });
 test("Espace new line and tabs, Bug#6818", () => {
   PropertyGridEditorCollection.register(new PropertyGridEditorExpression());
