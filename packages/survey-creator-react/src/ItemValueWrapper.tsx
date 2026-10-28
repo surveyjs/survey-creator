@@ -86,6 +86,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
         {this.model.isDraggable ? (
           <span
             className="svc-item-value-controls__drag"
+            data-sv-tooltip={this.model.dragTooltip}
           >
             <SvgIcon className="svc-item-value-controls__drag-icon" size={"auto"} iconName={"icon-drag-24x24"} title={this.model.dragTooltip}></SvgIcon>
           </span>

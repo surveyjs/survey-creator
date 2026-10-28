@@ -980,6 +980,10 @@ export var hebrewStrings = {
     expandNestedChoices: "הרחבת אפשרויות מקוננות",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "קריסת בחירות מקוננות",
+    // [Auto-translated] "Show description"
+    showDescription: "תיאור התוכנית",
+    // [Auto-translated] "Hide description"
+    hideDescription: "הסתרת תיאור",
     // "Edit"
     edit: "ערוך",
     // "Done"

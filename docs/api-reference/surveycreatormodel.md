@@ -1132,7 +1132,7 @@ If you want to implement custom toast notification from scratch, handle the [`on
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `message` | `string` | A message to display. |
-| `type` | `"info" \| "error"` | A notification type: `"info"` (default) or `"error"`. |
+| `type` | `"error" \| "info"` | A notification type: `"info"` (default) or `"error"`. |
 
 ### `openCreatorThemeSettings()`
 
@@ -1797,6 +1797,69 @@ An element that is going to be selected.
 Available since: v2.0.0
 
 **Related APIs:** [`onElementSelected`](#onElementSelected), [`selectedElement`](#selectedElement)
+
+### `onExpressionAssistantRequest`
+
+An event that is raised when the expression assistant requests an expression to be generated, modified, corrected, or explained. Handle this event to enable the assistant in the Survey Creator UI.
+
+
+Parameters:
+
+ - `sender`: `SurveyCreatorModel`  
+A Survey Creator instance that raised the event.
+- `options.kind`: `"generate" | "modify" | "fix" | "explain"`  
+The requested operation. `"fix"` is requested automatically when a generated expression fails validation.
+- `options.userPrompt`: `string`  
+The user's prompt. Empty for `"fix"` and `"explain"` requests.
+- `options.expression`: `string`  
+The expression to process: empty for `"generate"`, the property value or suggestion to revise for `"modify"`, the invalid AI result for `"fix"`, or the current property value for `"explain"`.
+- `options.isCondition`: `boolean`  
+Indicates whether the expression must return a Boolean value.
+- `options.targets`: `{ element: Base; propertyName: string; }[]`  
+The survey object instances and property names to which the expression applies.
+- `options.context`: `IExpressionContext`  
+A copy of the survey and target information for this request. After editing it, call `options.rebuildSystemPrompt()` to update `options.systemPrompt`. Changes apply only to this request.
+- `options.systemPrompt`: `string`  
+A prepared system prompt built from `options.context`. Send it to the AI model or replace it with custom text.
+- `options.rebuildSystemPrompt`: `() => void`  
+Rebuilds `options.systemPrompt` from the current `options.context`. Call this function after editing the context.
+- `options.validationFindings`: `{ ruleId: string; reason: string; severity: string; message: string; }[]`  
+Validation findings for `"fix"` requests, with messages in English. Included in the last entry of `options.messages`.
+- `options.messages`: `{ role: "user" | "assistant"; content: string; }[]`  
+Prepared conversation messages in chronological order, ending with the current request. Previous `"explain"` requests are excluded. Send these messages with `options.systemPrompt`, which is not included in this array.
+- `options.signal`: `AbortSignal`  
+A cancellation signal to pass to your HTTP client or AI SDK.
+- `options.callback`: `(result?: { expression?: string; explanation?: string; text?: string; error?: string; }) => void`  
+A callback that completes the request. Pass an object containing the AI response as `text`, as `expression` and `explanation`, or as `error`. Omit the argument to return no result.
+
+The example below uses an application endpoint that returns the AI response as `{ text: "..." }`:
+
+```ts
+import { SurveyCreatorModel } from "survey-creator-core";
+const creatorOptions = { ... };
+const creator = new SurveyCreatorModel(creatorOptions);
+
+creator.onExpressionAssistantRequest.add(async (_, options) => {
+  try {
+    const response = await fetch("/api/ai", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      signal: options.signal,
+      body: JSON.stringify({
+        system: options.systemPrompt,
+        messages: options.messages
+      })
+    });
+    if (!response.ok) throw new Error(response.statusText);
+    const { text } = await response.json();
+    options.callback({ text });
+  } catch (error) {
+    if (!options.signal.aborted) {
+      options.callback({ error: error.message });
+    }
+  }
+});
+```
 
 ### `onFastEntryFinished`
 

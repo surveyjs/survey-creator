@@ -980,6 +980,10 @@ export const thStrings = {
     expandNestedChoices: "ขยายตัวเลือกซ้อน",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "ยุบตัวเลือกซ้อน",
+    // [Auto-translated] "Show description"
+    showDescription: "แสดงรายละเอียด",
+    // [Auto-translated] "Hide description"
+    hideDescription: "ซ่อนคําอธิบาย",
     // "Edit"
     edit: "แก้ไข",
     // "Done"

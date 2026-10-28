@@ -980,6 +980,10 @@ export var msStrings = {
     expandNestedChoices: "Kembangkan pilihan bersarang",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Runtuhkan pilihan bersarang",
+    // [Auto-translated] "Show description"
+    showDescription: "Tunjukkan penerangan",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Sembunyikan penerangan",
     // [Auto-translated] "Edit"
     edit: "Suntingan",
     // [Auto-translated] "Done"

@@ -890,7 +890,7 @@ test.describe(title, () => {
     await page.waitForTimeout(1000);
 
     await question1.click({ position: { x: 20, y: 20 } });
-    await page.getByRole("button", { name: "Defines whether the selected" }).click();
+    await page.locator(".spg-question[data-name='visible']").getByRole("button", { name: "Show description" }).click();
     await compareScreenshot(page, ".spg-row.spg-row--multiple", "multiline-help-text.png");
   });
 

@@ -5,7 +5,8 @@
     #container>
     <div class="svc-item-value__ghost"></div>
     <div class="svc-item-value-controls">
-      <span *ngIf="adorner.isDraggable" class="svc-item-value-controls__button svc-item-value-controls__drag">
+      <span *ngIf="adorner.isDraggable" class="svc-item-value-controls__button svc-item-value-controls__drag"
+        [attr.data-sv-tooltip]="adorner.dragTooltip">
         <svg class="svc-item-value-controls__drag-icon" [iconName]="'icon-drag-24x24'" [size]="'auto'"
           [attr.title]="adorner.dragTooltip" sv-ng-svg-icon></svg>
       </span>

@@ -97,7 +97,7 @@ import { iconsV1, iconsV2 } from "./svgbundle";
 import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
-import { DomDocumentHelper } from "survey-core";
+import { DomDocumentHelper, initTooltips } from "survey-core";
 import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
 import { DefaultLight } from "survey-core/themes";
 import { legacyCssVariables } from "./themes/legacy-vars";
@@ -4072,6 +4072,10 @@ export class SurveyCreatorModel extends Base
     this._rootElementValue = element;
     ensureBaseThemeStyles(element);
     this.initKeyboardShortcuts(element);
+    // Creator's own controls (tabs, switchers, action buttons) carry `data-sv-tooltip` too;
+    // install the tooltip here so it does not depend on a survey action being rendered first.
+    // Passing the root (not its document) also covers the shadow root the creator is rendered in.
+    if (!!element) initTooltips(element);
     this.initResponsivityManager(element as HTMLDivElement);
     this.subscribeToReducedMotion();
   }

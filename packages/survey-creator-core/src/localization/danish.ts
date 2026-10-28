@@ -981,6 +981,10 @@ export var danishStrings = {
     expandNestedChoices: "Udvid indlejrede valg",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse indlejrede valg",
+    // [Auto-translated] "Show description"
+    showDescription: "Showbeskrivelse",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Skjul beskrivelsen",
     // "Edit"
     edit: "Rediger",
     // [Auto-translated] "Done"

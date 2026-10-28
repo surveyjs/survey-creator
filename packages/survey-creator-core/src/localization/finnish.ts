@@ -980,6 +980,10 @@ export var fiStrings = {
     expandNestedChoices: "Laajenna sisäkkäisiä valintoja",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse sisäkkäiset valinnat",
+    // [Auto-translated] "Show description"
+    showDescription: "Ohjelman kuvaus",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Piilotuskuvaus",
     // "Edit"
     edit: "Muokkaa",
     // [Auto-translated] "Done"

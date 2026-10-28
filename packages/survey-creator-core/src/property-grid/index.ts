@@ -470,7 +470,7 @@ export class PropertyGridTitleActionsCreator {
     if (!question.description) return null;
     const action = new Action({
       title: "",
-      tooltip: question.description,
+      tooltip: this.getHelpActionTooltip(question),
       id: "property-grid-help",
       iconName: this.getHelpActionIconName(question),
       iconSize: "auto",
@@ -482,12 +482,16 @@ export class PropertyGridTitleActionsCreator {
         question.descriptionLocation =
           question.descriptionLocation != "hidden" ? "hidden" : "underTitle";
         action.iconName = this.getHelpActionIconName(question);
+        action.tooltip = this.getHelpActionTooltip(question);
       }
     });
     return action;
   }
   private getHelpActionIconName(question: Question): string {
     return question.descriptionLocation != "hidden" ? "icon-description-hide" : "icon-description";
+  }
+  private getHelpActionTooltip(question: Question): string {
+    return getLocString(question.descriptionLocation != "hidden" ? "pe.hideDescription" : "pe.showDescription");
   }
 }
 

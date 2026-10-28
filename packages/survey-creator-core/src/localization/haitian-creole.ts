@@ -980,6 +980,10 @@ export var htStrings = {
     expandNestedChoices: "Elaji chwa imbriqué",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Efondreman chwa enbrike",
+    // [Auto-translated] "Show description"
+    showDescription: "Montre deskripsyon",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Kache deskripsyon",
     // "Edit"
     edit: "Modifye",
     // "Done"

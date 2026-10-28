@@ -980,6 +980,10 @@ export var czStrings = {
     expandNestedChoices: "Rozšiřte vnořené volby",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Kolaps vnořených voleb",
+    // [Auto-translated] "Show description"
+    showDescription: "Popis pořadu",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Popis skrýť",
     // "Edit"
     edit: "Upravit",
     // "Done"

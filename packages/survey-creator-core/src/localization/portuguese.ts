@@ -980,6 +980,10 @@ export var portugueseTranslation = {
     expandNestedChoices: "Expandir escolhas aninhadas",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Colapso das escolhas aninhadas",
+    // [Auto-translated] "Show description"
+    showDescription: "Descrição do programa",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Descrição de esconder",
     // "Edit"
     edit: "Editar",
     // "Done"

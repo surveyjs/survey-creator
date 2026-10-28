@@ -980,6 +980,10 @@ export var simplifiedChineseTranslation = {
     expandNestedChoices: "扩展嵌套选项",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "折叠嵌套选择",
+    // [Auto-translated] "Show description"
+    showDescription: "节目简介",
+    // [Auto-translated] "Hide description"
+    hideDescription: "隐蔽描述",
     // "Edit"
     edit: "编辑器",
     // [Auto-translated] "Done"

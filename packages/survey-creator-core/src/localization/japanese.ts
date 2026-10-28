@@ -980,6 +980,10 @@ export var jaStrings = {
     expandNestedChoices: "ネストされた選択肢を拡大する",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "崩壊入れ子選択",
+    // [Auto-translated] "Show description"
+    showDescription: "番組の説明",
+    // [Auto-translated] "Hide description"
+    hideDescription: "隠れ家の説明",
     // "Edit"
     edit: "編集",
     // [Auto-translated] "Done"

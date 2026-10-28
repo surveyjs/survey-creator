@@ -980,6 +980,10 @@ export var skStrings = {
     expandNestedChoices: "Rozšíriť vnorené voľby",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse vnorené voľby",
+    // [Auto-translated] "Show description"
+    showDescription: "Popis relácie",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Popis skrýť",
     // "Edit"
     edit: "Upraviť",
     // [Auto-translated] "Done"

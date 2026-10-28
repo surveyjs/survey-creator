@@ -980,6 +980,10 @@ export var frenchTranslation = {
     expandNestedChoices: "Élargir les choix imbriqués",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Effondrement des choix imbriqués",
+    // [Auto-translated] "Show description"
+    showDescription: "Description de l’émission",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Description du dissimulage",
     // "Edit"
     edit: "Éditer",
     // [Auto-translated] "Done"

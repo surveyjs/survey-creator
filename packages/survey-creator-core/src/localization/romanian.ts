@@ -980,6 +980,10 @@ export const roStrings = {
     expandNestedChoices: "Extinde alegerile imbricate",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Colapsul alegerilor imbricate",
+    // [Auto-translated] "Show description"
+    showDescription: "Descrierea emisiunii",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Descrierea ascunsului",
     // "Edit"
     edit: "Editează",
     // "Done"

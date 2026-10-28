@@ -5,6 +5,7 @@
       class="svc-action-button svc-action-button--disabled"
       :class="classes"
       :title="title"
+      :data-sv-tooltip="title"
       >{{ text }}</span
     >
     <span
@@ -14,6 +15,7 @@
       v-key2click
       :class="getButtonCss()"
       :title="title"
+      :data-sv-tooltip="title"
       >{{ text }}</span
     >
   </template>
@@ -22,6 +24,7 @@
       v-if="disabled"
       :class="getButtonCss()"
       :title="title"
+      :data-sv-tooltip="title"
       ><SvComponent :is="'sv-svg-icon'" :iconName="iconName" :size="'auto'"></SvComponent
     ></span>
     <span
@@ -30,6 +33,7 @@
       v-key2click
       :class="getButtonCss()"
       :title="title"
+      :data-sv-tooltip="title"
       ><SvComponent :is="'sv-svg-icon'" :iconName="iconName" :size="'auto'"></SvComponent
     ></span>
   </template>

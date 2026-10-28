@@ -980,6 +980,10 @@ export var nlStrings = {
     expandNestedChoices: "Breid geneste keuzes uit",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse geneste keuzes",
+    // [Auto-translated] "Show description"
+    showDescription: "Beschrijving van de show",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Beschrijving verbergen",
     // "Edit"
     edit: "Bewerk",
     // [Auto-translated] "Done"

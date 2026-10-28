@@ -981,6 +981,10 @@ export var polishStrings = {
     expandNestedChoices: "Rozwiń zagnieżdżone wybory",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Wybory zagnieżdżone w upadku",
+    // [Auto-translated] "Show description"
+    showDescription: "Opis programu",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Opis ukrycia",
     // "Edit"
     edit: "Edytuj",
     // [Auto-translated] "Done"
