@@ -444,7 +444,6 @@ export var enStrings = {
       title: "Survey title",
       description: "Survey description",
       readOnly: "Make the survey read-only",
-      readOnlyMode: "Read-only mode",
       regionalFormat: "Regional formats"
     },
     page: {
@@ -1515,7 +1514,7 @@ export var enStrings = {
       showQuestionNumbers: "Assigns numbers to questions nested within this panel.",
       effectiveColSpan: "Specifies how many columns this panel spans within the grid layout.",
       gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column.",
-      readOnlyMode: "Specifies how questions inside this panel are displayed when they are read-only. \"Read-only\" keeps the input fields visible but not editable. \"View\" shows the answers as plain text. The \"Inherit\" option applies the setting from the parent panel or the survey (\"Read-only\" by default)."
+      readOnlyMode: "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
     },
     paneldynamic: {
       name: "A panel ID that is not visible to respondents.",
@@ -1585,7 +1584,7 @@ export var enStrings = {
       searchMode: "A comparison operation used to filter the drop-down list.",
       textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip.",
       effectiveColSpan: "Specifies how many columns this question spans within the grid layout.",
-      readOnlyMode: "Specifies how the question is displayed when it is read-only. \"Read-only\" keeps the input fields visible but not editable. \"View\" shows the answer as plain text. The \"Inherit\" option applies the setting from the parent panel, the parent question, or the survey (\"Read-only\" by default)."
+      readOnlyMode: "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
     },
     surveyvalidator: {
       expression: "Use the magic wand icon to define when the question's value is considered valid.",
@@ -1617,7 +1616,7 @@ export var enStrings = {
     // survey templates
     survey: {
       readOnly: "Select if you want to prevent respondents from filling out your survey.",
-      readOnlyMode: "Specifies how questions are displayed when the survey is read-only, including on the preview page. \"Read-only\" keeps the input fields visible but not editable. \"View\" shows the answers as plain text.",
+      readOnlyMode: "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements.",
       progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
     },
     matrixdropdowncolumn: {
@@ -1629,7 +1628,7 @@ export var enStrings = {
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
       showInMultipleColumns: "When selected, creates an individual column for each choice option.",
       colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix.",
-      readOnlyMode: "Specifies how cells in this column are displayed when they are read-only. \"Read-only\" keeps the input fields visible but not editable. \"View\" shows the answers as plain text. The \"Inherit\" option applies the matrix or survey setting (\"Read-only\" by default)."
+      readOnlyMode: "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
     },
     slider: {
       min: "The lowest number that users can select.",
@@ -1719,7 +1718,7 @@ export var enStrings = {
       questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab.",
       showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\".",
       gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column.",
-      readOnlyMode: "Specifies how questions on this page are displayed when they are read-only. \"Read-only\" keeps the input fields visible but not editable. \"View\" shows the answers as plain text. The \"Inherit\" option applies the survey setting (\"Read-only\" by default)."
+      readOnlyMode: "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
     },
     timerLocation: "Sets the location of a timer on a page.",
     panelsState: "Choose from: \"Locked\" - users cannot expand or collapse entries; \"Collapse all\" - all entries start in a collapsed state; \"Expand all\" - all entries start in an expanded state; \"First expanded\" - only the first entry is initially expanded. Applies if \"Entry display mode\" is set to \"List\" and the \"Entry title pattern\" property is specified.",
