@@ -1646,6 +1646,8 @@ export var arStrings = {
     logoHeight: "ارتفاع الشعار",
     // "Read-only"
     readOnly: "للقراءة فقط",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "وضع القراءة فقط",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "قم بتعطيل وضع القراءة فقط إذا",
     // "\"No rows\" message"
@@ -2073,6 +2075,12 @@ export var arStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "أبدا"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "قراءة فقط",
+      // [Auto-translated] "View"
+      view: "منظر"
     },
     // [Auto-translated] "Radio buttons"
     radio: "أزرار الراديو",
@@ -2809,7 +2817,9 @@ export var arStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "يحدد عدد الأعمدة التي تمتد إليها هذه اللوحة داخل تخطيط الشبكة.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "يتيح لك هذا الجدول تكوين كل عمود شبكة داخل اللوحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
+      gridLayoutColumns: "يتيح لك هذا الجدول تكوين كل عمود شبكة داخل اللوحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "يحدد كيف تظهر الأسئلة داخل هذه اللوحة عندما تكون للقراءة فقط. يعرض \"القراءة فقط\" الأسئلة باستخدام أدوات التحكم المعتادة في الإدخال، ولكن معطلة للتحرير. \"العرض\" يعرض الإجابات كنص أو عناصر غير تفاعلية أخرى. \"الوراثة\" يستخدم الوضع المعين للوحة الأب أو الصفحة أو الاستبيان (\"للقراءة فقط\" افتراضيا)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2937,7 +2947,9 @@ export var arStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "ستنشئ النصوص الطويلة في خيارات الاختيار فواصل أسطر تلقائيا لتلائم القائمة المنسدلة. قم بإلغاء تحديد ما إذا كنت تريد قص النصوص.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "يحدد عدد الأعمدة التي يمتد إليها هذا السؤال داخل تخطيط الشبكة."
+      effectiveColSpan: "يحدد عدد الأعمدة التي يمتد إليها هذا السؤال داخل تخطيط الشبكة.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "يحدد كيف يظهر السؤال عندما يكون للقراءة فقط. يعرض \"القراءة فقط\" السؤال مع أدوات التحكم المعتادة في الإدخال، ولكن معطلة للتحرير. \"العرض\" تعرض الإجابات كنص أو عناصر غير تفاعلية أخرى. \"الوراثة\" تستخدم الوضع المعين للوحة الأم أو الصفحة أو الاستبيان (\"للقراءة فقط\" افتراضيا)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2985,6 +2997,8 @@ export var arStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "حدد ما إذا كنت تريد منع المستجيبين من ملء الاستطلاع الخاص بك.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "يحدد كيف تظهر الأسئلة للقراءة فقط، بما في ذلك صفحة المعاينة. \"القراءة فقط\" (الافتراضية) يعرض الأسئلة التي تحتوي على أدوات التحكم المعتادة في الإدخال، ولكن يتم تعطيلها للتحرير. \"العرض\" يعرض الإجابات كنص أو عناصر غير تفاعلية أخرى.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "لتعيين موقع شريط التقدم. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
     },
@@ -3004,7 +3018,9 @@ export var arStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "عند تحديده، ينشئ عمود منفرد لكل خيار اختيار.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "ترتيب خيارات الاختيار في تخطيط متعدد الأعمدة. عند التعيين إلى 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من الخاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصلية."
+      colCount: "ترتيب خيارات الاختيار في تخطيط متعدد الأعمدة. عند التعيين إلى 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من الخاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصلية.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "يحدد كيف تظهر الخلايا في هذا العمود عندما تكون للقراءة فقط. يعرض \"القراءة فقط\" الخلايا التي تحتوي على أدوات التحكم المعتادة في الإدخال، ولكن معطلة للتحرير. \"العرض\" تعرض الإجابات كنص أو عناصر غير تفاعلية أخرى. يستخدم \"الوراثة\" الوضع المعين للمصفوفة أو المسح (\"للقراءة فقط\" افتراضيا)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3170,7 +3186,9 @@ export var arStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "يضبط رؤية أزرار التنقل على الصفحة. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع ، والذي يتم تعيينه افتراضيا على \"مرئي\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "يتيح لك هذا الجدول تكوين كل عمود شبكة على الصفحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
+      gridLayoutColumns: "يتيح لك هذا الجدول تكوين كل عمود شبكة على الصفحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "يحدد كيف تظهر الأسئلة في هذه الصفحة عندما تكون للقراءة فقط. يعرض \"القراءة فقط\" الأسئلة مع أدوات التحكم المعتادة في الإدخال، ولكن معطلة للتحرير. \"العرض\" يعرض الإجابات كنص أو عناصر غير تفاعلية أخرى. \"الوراثة\" يستخدم الوضع المعين للاستبيان (\"للقراءة فقط\" افتراضيا)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "يضبط موقع المؤقت على الصفحة.",

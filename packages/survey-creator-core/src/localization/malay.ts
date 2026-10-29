@@ -1646,6 +1646,8 @@ export var msStrings = {
     logoHeight: "Ketinggian logo",
     // "Read-only"
     readOnly: "Baca sahaja",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Mod baca sahaja",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Lumpuhkan mod baca sahaja jika",
     // "\"No rows\" message"
@@ -2073,6 +2075,12 @@ export var msStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Tidak pernah"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Baca sahaja",
+      // [Auto-translated] "View"
+      view: "Lihat"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Butang radio",
@@ -2809,7 +2817,9 @@ export var msStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Menentukan bilangan lajur panel ini merangkumi dalam tataletak grid.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Jadual ini membolehkan anda mengkonfigurasi setiap lajur grid dalam panel. Ia secara automatik menetapkan peratusan lebar untuk setiap lajur berdasarkan bilangan maksimum elemen dalam baris. Untuk menyesuaikan tataletak grid, laraskan nilai ini secara manual dan takrifkan lebar tajuk untuk semua soalan dalam setiap lajur."
+      gridLayoutColumns: "Jadual ini membolehkan anda mengkonfigurasi setiap lajur grid dalam panel. Ia secara automatik menetapkan peratusan lebar untuk setiap lajur berdasarkan bilangan maksimum elemen dalam baris. Untuk menyesuaikan tataletak grid, laraskan nilai ini secara manual dan takrifkan lebar tajuk untuk semua soalan dalam setiap lajur.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Menentukan bagaimana soalan dalam panel ini muncul apabila ia hanya baca. \"Baca Hanya\" memaparkan soalan dengan kawalan input biasa mereka, tetapi dinyahaktifkan untuk penyuntingan. \"Lihat\" memaparkan jawapan sebagai teks atau elemen bukan interaktif lain. \"Warisan\" menggunakan mod yang ditetapkan untuk panel induk, halaman, atau tinjauan (\"Baca Hanya\" secara lalai)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2937,7 +2947,9 @@ export var msStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Teks panjang dalam pilihan pilihan akan menjana pemisah baris secara automatik agar muat dalam menu lungsur. Nyahpilih jika anda mahu teks klip.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Menentukan bilangan lajur soalan ini merangkumi dalam reka letak grid."
+      effectiveColSpan: "Menentukan bilangan lajur soalan ini merangkumi dalam reka letak grid.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Menentukan bagaimana soalan muncul apabila ia hanya dibaca. \"Baca Hanya\" memaparkan soalan dengan kawalan input biasa, tetapi dinyahaktifkan untuk penyuntingan. \"Lihat\" memaparkan jawapan sebagai teks atau elemen bukan interaktif lain. \"Mewarisi\" menggunakan mod yang ditetapkan untuk panel induk, halaman, atau tinjauan (\"Baca Hanya\" secara lalai)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2985,6 +2997,8 @@ export var msStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Pilih jika anda mahu menghalang responden daripada mengisi tinjauan anda.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Menentukan bagaimana soalan baca sahaja dipaparkan, termasuk pada halaman pratonton. \"Baca Hanya\" (lalai) memaparkan soalan dengan kawalan input biasa mereka, tetapi dinyahaktifkan untuk penyuntingan. \"Lihat\" memaparkan jawapan sebagai teks atau elemen bukan interaktif lain.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Menetapkan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan."
     },
@@ -3004,7 +3018,9 @@ export var msStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Apabila dipilih, cipta lajur individu untuk setiap opsyen pilihan.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Menyusun pilihan pilihan dalam susun atur berbilang lajur. Apabila ditetapkan kepada 0, pilihan dipaparkan dalam satu baris. Apabila ditetapkan kepada -1, nilai sebenar diwarisi daripada sifat \"Kiraan lajur bersarang\" matriks induk."
+      colCount: "Menyusun pilihan pilihan dalam susun atur berbilang lajur. Apabila ditetapkan kepada 0, pilihan dipaparkan dalam satu baris. Apabila ditetapkan kepada -1, nilai sebenar diwarisi daripada sifat \"Kiraan lajur bersarang\" matriks induk.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Menentukan bagaimana sel dalam lajur ini muncul apabila ia hanya baca. \"Baca Hanya\" memaparkan sel dengan kawalan input biasa mereka, tetapi dinyahaktifkan untuk penyuntingan. \"Lihat\" memaparkan jawapan sebagai teks atau elemen bukan interaktif lain. \"Warisan\" menggunakan mod yang ditetapkan untuk matriks atau tinjauan (\"Baca Hanya\" secara lalai)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3170,7 +3186,9 @@ export var msStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Mengesetkan keterlihatan butang navigasi pada halaman. Opsyen \"Warisan\" menggunakan seting aras tinjauan, yang lalai kepada \"Boleh Dilihat\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Jadual ini membolehkan anda mengkonfigurasi setiap lajur grid pada halaman. Ia secara automatik menetapkan peratusan lebar untuk setiap lajur berdasarkan bilangan maksimum elemen dalam baris. Untuk menyesuaikan tataletak grid, laraskan nilai ini secara manual dan takrifkan lebar tajuk untuk semua soalan dalam setiap lajur."
+      gridLayoutColumns: "Jadual ini membolehkan anda mengkonfigurasi setiap lajur grid pada halaman. Ia secara automatik menetapkan peratusan lebar untuk setiap lajur berdasarkan bilangan maksimum elemen dalam baris. Untuk menyesuaikan tataletak grid, laraskan nilai ini secara manual dan takrifkan lebar tajuk untuk semua soalan dalam setiap lajur.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Menentukan bagaimana soalan pada halaman ini muncul apabila ia hanya baca. \"Baca Hanya\" memaparkan soalan dengan kawalan input biasa mereka, tetapi dinyahaktifkan untuk penyuntingan. \"Lihat\" memaparkan jawapan sebagai teks atau elemen bukan interaktif lain. \"Warisan\" menggunakan mod yang ditetapkan untuk tinjauan (\"Baca Hanya\" secara lalai)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Menetapkan lokasi pemasa pada halaman.",

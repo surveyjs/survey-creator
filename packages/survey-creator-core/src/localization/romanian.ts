@@ -1646,6 +1646,8 @@ export const roStrings = {
     logoHeight: "Înălțimea logo-ului",
     // "Read-only"
     readOnly: "Doar citire",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Modul doar citire",
     // "Disable the read-only mode if"
     enableIf: "Dezactivează modul doar citire dacă",
     // "\"No rows\" message"
@@ -2073,6 +2075,12 @@ export const roStrings = {
     clearIfInvisible: {
       // "Never"
       none: "Niciodată"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Doar citire",
+      // [Auto-translated] "View"
+      view: "Vizualizare"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Butoane radio",
@@ -2809,7 +2817,9 @@ export const roStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Specifică câte coloane se întinde acest panou în aspectul grilei.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Acest tabel vă permite să configurați fiecare coloană de grilă din panou. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană."
+      gridLayoutColumns: "Acest tabel vă permite să configurați fiecare coloană de grilă din panou. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifică cum apar întrebările din acest panou atunci când sunt doar citire. \"Read-Only\" afișează întrebările cu controalele lor obișnuite de intrare, dar dezactivate pentru editare. \"View\" afișează răspunsurile ca text sau alte elemente neinteractive. \"Inherit\" folosește modul setat pentru panoul părinte, pagina sau sondajul (\"Read-Only\" implicit)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2937,7 +2947,9 @@ export const roStrings = {
       // "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Textele lungi din opțiunile de alegere vor genera automat întreruperi de linie pentru a se încadra în meniul derulant. Deselectați dacă doriți ca textele să fie tăiate.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Specifică câte coloane se întinde această întrebare în aspectul grilei."
+      effectiveColSpan: "Specifică câte coloane se întinde această întrebare în aspectul grilei.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifică cum apare întrebarea când este doar citire. \"Doar citire\" afișează întrebarea cu controalele sale obișnuite de intrare, dar dezactivat pentru editare. \"Vizualizare\" afișează răspunsurile ca text sau alte elemente neinteractive. \"Inherit\" folosește modul setat pentru panoul părinte, pagina sau sondajul (\"Doar citire\" implicit)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2985,6 +2997,8 @@ export const roStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Selectați dacă doriți să împiedicați respondenții să completeze chestionarul.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Specifică modul în care apar întrebările doar pentru citire, inclusiv pe pagina de previzualizare. \"Doar citire\" (implicit) afișează întrebările cu comenzile lor obișnuite de intrare, dar dezactivate pentru editare. \"Vizualizare\" afișează răspunsurile ca text sau alte elemente neinteractive.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Setează locația barei de progres. Valoarea \"Auto\" afișează bara de progres deasupra sau dedesubtul antetului sondajului."
     },
@@ -3004,7 +3018,9 @@ export const roStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Când este selectat, creează o coloană individuală pentru fiecare opțiune de alegere.",
       // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Aranjează opțiunile de alegere într-un aspect cu mai multe coloane. Când este setat la 0, opțiunile sunt afișate într-o singură linie. Când este setată la -1, valoarea reală este moștenită de la proprietatea \"Număr de coloane imbricate\" a matricei părinte."
+      colCount: "Aranjează opțiunile de alegere într-un aspect cu mai multe coloane. Când este setat la 0, opțiunile sunt afișate într-o singură linie. Când este setată la -1, valoarea reală este moștenită de la proprietatea \"Număr de coloane imbricate\" a matricei părinte.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifică cum apar celulele din această coloană când sunt doar citire. \"Doar citire\" afișează celulele cu controalele lor obișnuite de intrare, dar dezactivate pentru editare. \"Vizualizare\" afișează răspunsurile ca text sau alte elemente neinteractive. \"Inherit\" folosește modul setat pentru matrice sau sondaj (\"Read-Only\" implicit)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3170,7 +3186,9 @@ export const roStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Setează vizibilitatea butoanelor de navigare pe pagină. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar, care implicit este „Vizibilă”.",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Acest tabel vă permite să configurați fiecare coloană de grilă din pagină. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană."
+      gridLayoutColumns: "Acest tabel vă permite să configurați fiecare coloană de grilă din pagină. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifică modul în care apar întrebările de pe această pagină atunci când sunt doar citire. \"Read-Only\" afișează întrebările cu comenzile lor obișnuite de intrare, dar dezactivate pentru editare. \"View\" afișează răspunsurile ca text sau alte elemente neinteractive. \"Inherit\" folosește modul setat pentru chestionar (\"Read-Only\" implicit)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Setează locația unui cronometru pe o pagină.",

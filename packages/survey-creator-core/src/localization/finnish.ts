@@ -1646,6 +1646,8 @@ export var fiStrings = {
     logoHeight: "Logon korkeus",
     // "Read-only"
     readOnly: "Vain luku -tilassa",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Vain luku -tila",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Poista vain luku -tila käytöstä, jos",
     // "\"No rows\" message"
@@ -2073,6 +2075,12 @@ export var fiStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Ei koskaan"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Vain luku",
+      // [Auto-translated] "View"
+      view: "Näkymä"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Radiopainikkeet",
@@ -2809,7 +2817,9 @@ export var fiStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Määrittää, kuinka monta saraketta tämä paneeli kattaa ruudukkoasettelussa.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Tämän taulukon avulla voit määrittää paneelin jokaisen ruudukkosarakkeen. Se määrittää automaattisesti kunkin sarakkeen leveysprosentin rivin elementtien enimmäismäärän perusteella. Jos haluat mukauttaa ruudukon asettelua, säädä näitä arvoja manuaalisesti ja määritä otsikon leveys kunkin sarakkeen kaikille kysymyksille."
+      gridLayoutColumns: "Tämän taulukon avulla voit määrittää paneelin jokaisen ruudukkosarakkeen. Se määrittää automaattisesti kunkin sarakkeen leveysprosentin rivin elementtien enimmäismäärän perusteella. Jos haluat mukauttaa ruudukon asettelua, säädä näitä arvoja manuaalisesti ja määritä otsikon leveys kunkin sarakkeen kaikille kysymyksille.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Määrittelee, miltä kysymykset tässä paneelissa näyttävät, kun ne ovat vain luku -tilassa. \"Vain luku\" näyttää kysymykset niiden tavallisilla syöteohjauksilla, mutta muokkaus on pois päältä. \"Näkymä\" näyttää vastaukset tekstinä tai muina ei-vuorovaikutteisina elementteinä. \"Peri\" käyttää vanhemman paneelin, sivun tai kyselyn tilaa (\"Vain luku\" oletuksena)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2937,7 +2947,9 @@ export var fiStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Valintavaihtoehtojen pitkät tekstit luovat automaattisesti rivinvaihdot, jotka mahtuvat avattavaan valikkoon. Poista valinta, jos haluat leikata tekstit.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Määrittää, kuinka monta saraketta tämä kysymys kattaa ruudukkoasettelussa."
+      effectiveColSpan: "Määrittää, kuinka monta saraketta tämä kysymys kattaa ruudukkoasettelussa.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Määrittelee, miltä kysymys näyttää, kun se on vain luku -tilassa. \"Vain luku\" näyttää kysymyksen tavallisilla syöteohjauksillaan, mutta muokkaus on pois päältä. \"View\" näyttää vastaukset tekstinä tai muina ei-interaktiivisena elementtinä. \"Inherit\" käyttää vanhemman paneelin, sivun tai kyselyn tilaa (\"Vain luku\" oletuksena)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2985,6 +2997,8 @@ export var fiStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Valitse tämä, jos haluat estää vastaajia vastaamasta kyselyyn.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Määrittelee, miten vain luku -kysymykset näyttävät, myös esikatselusivulla. \"Vain luku -tilassa\" (oletus) näyttää kysymykset tavallisilla syöteohjauksillaan, mutta muokkauksen vuoksi pois käytöstä. \"Näytä\" näyttää vastaukset tekstinä tai muina ei-interaktiivisena elementtinä.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Määrittää edistymispalkin sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella."
     },
@@ -3004,7 +3018,9 @@ export var fiStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Kun tämä asetus on valittuna, kullekin vaihtoehdolle luodaan oma sarake.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, vaihtoehdot näkyvät yhdellä rivillä. Kun arvoksi on määritetty -1, todellinen arvo periytyy päämatriisin Sisäkkäisten sarakkeiden määrä -ominaisuudesta."
+      colCount: "Järjestää valintavaihtoehdot monisarakkeiseen asetteluun. Kun asetuksena on 0, vaihtoehdot näkyvät yhdellä rivillä. Kun arvoksi on määritetty -1, todellinen arvo periytyy päämatriisin Sisäkkäisten sarakkeiden määrä -ominaisuudesta.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Määrittelee, miltä tämän sarakkeen solut näyttävät, kun ne ovat vain luku -tilassa. \"Vain luku\" näyttää solut, joissa on tavalliset syötteenohjaimet, mutta ne on pois päältä muokkauksen vuoksi. \"View\" näyttää vastaukset tekstinä tai muina ei-interaktiivisena elementtinä. \"Inherit\" käyttää matriisin tai kyselyn tilaa (\"Read-only\" oletuksena)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3170,7 +3186,9 @@ export var fiStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Määrittää navigointipainikkeiden näkyvyyden sivulla. \"Peri\" -vaihtoehto käyttää kyselytason asetusta, jonka oletusarvo on \"Näkyvä\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Tämän taulukon avulla voit määrittää sivun jokaisen ruudukkosarakkeen. Se määrittää automaattisesti kunkin sarakkeen leveysprosentin rivin elementtien enimmäismäärän perusteella. Jos haluat mukauttaa ruudukon asettelua, säädä näitä arvoja manuaalisesti ja määritä otsikon leveys kunkin sarakkeen kaikille kysymyksille."
+      gridLayoutColumns: "Tämän taulukon avulla voit määrittää sivun jokaisen ruudukkosarakkeen. Se määrittää automaattisesti kunkin sarakkeen leveysprosentin rivin elementtien enimmäismäärän perusteella. Jos haluat mukauttaa ruudukon asettelua, säädä näitä arvoja manuaalisesti ja määritä otsikon leveys kunkin sarakkeen kaikille kysymyksille.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Määrittelee, miltä kysymykset tällä sivulla näyttävät, kun ne ovat vain luku -tilassa. \"Vain luku -tilassa\" näyttää kysymykset niiden tavanomaisilla syöttöohjauksilla, mutta ne on poistettu käytöstä muokkauksen vuoksi. \"Näytä\" näyttää vastaukset tekstinä tai muina ei-interaktiivisena elementtinä. \"Inherit\" käyttää kyselylle asetettua tilaa (\"Vain luku\" oletuksena)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Määrittää ajastimen sijainnin sivulla.",

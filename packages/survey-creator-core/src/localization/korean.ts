@@ -1647,6 +1647,8 @@ export var koreanStrings = {
     logoHeight: "로고 높이",
     // "Read-only"
     readOnly: "읽기 전용",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "읽기 전용 모드",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "다음과 같은 경우 읽기 전용 모드를 비활성화합니다.",
     // "\"No rows\" message"
@@ -2074,6 +2076,12 @@ export var koreanStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "결코"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "읽기 전용",
+      // [Auto-translated] "View"
+      view: "전망"
     },
     // [Auto-translated] "Radio buttons"
     radio: "라디오 버튼",
@@ -2810,7 +2818,9 @@ export var koreanStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "이 패널이 그리드 레이아웃 내에서 확장되는 열의 수를 지정합니다.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "이 테이블에서는 패널 내의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오."
+      gridLayoutColumns: "이 테이블에서는 패널 내의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "이 패널 내에서 질문이 읽기 전용일 때 어떻게 보이는지 지정합니다. \"읽기 전용\"은 일반적인 입력 컨트롤이 있는 질문을 표시하지만, 편집은 비활성화되어 있습니다. \"보기\"는 답변을 텍스트 또는 기타 비인터랙티브 요소로 표시합니다. \"상속\"은 부모 패널, 페이지 또는 설문조사에서 설정된 모드를 사용합니다(\"기본적으로 읽기 전용\")."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2938,7 +2948,9 @@ export var koreanStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "선택 옵션의 긴 텍스트는 드롭다운 메뉴에 맞게 줄 바꿈을 자동으로 생성합니다. 텍스트를 자르려면 선택을 취소합니다.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "이 질문이 그리드 레이아웃 내에서 얼마나 많은 열에 걸쳐 있는지 지정합니다."
+      effectiveColSpan: "이 질문이 그리드 레이아웃 내에서 얼마나 많은 열에 걸쳐 있는지 지정합니다.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "읽기 전용일 때 질문이 어떻게 나타나는지 지정합니다. \"읽기 전용\"은 일반적인 입력 제어와 함께 질문을 표시하지만, 편집은 비활성화되어 있습니다. \"보기\"는 답변을 텍스트나 기타 비상호작용 요소로 표시합니다. \"상속\"은 부모 패널, 페이지 또는 설문조사 모드(\"기본적으로 읽기 전용\")를 사용합니다."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2986,6 +2998,8 @@ export var koreanStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "응답자가 설문조사를 작성하지 못하도록 하려면 선택합니다.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "읽기 전용 질문이 미리보기 페이지 포함 어떻게 나타나는지 지정합니다. \"읽기 전용\"(기본값)은 일반적인 입력 제어가 있는 질문을 표시하지만 편집 시 비활성화되어 있습니다. \"보기\"는 답변을 텍스트 또는 기타 비인터랙티브 요소로 표시합니다.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "진행률 표시줄의 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
     },
@@ -3005,7 +3019,9 @@ export var koreanStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "이 옵션을 선택하면 각 선택 옵션에 대한 개별 열이 만들어집니다.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "선택 옵션을 다중 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩된 열 수\" 속성에서 상속됩니다."
+      colCount: "선택 옵션을 다중 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩된 열 수\" 속성에서 상속됩니다.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "이 열의 셀이 읽기 전용일 때 어떻게 나타나는지 지정합니다. \"읽기 전용\"은 일반적인 입력 제어가 있는 셀을 표시하지만, 편집은 비활성화되어 있습니다. \"보기\"는 답변을 텍스트나 기타 비인터랙티브 요소로 표시합니다. \"상속\"은 매트릭스 또는 설문조사 모드(\"기본적으로 읽기 전용\")를 사용합니다."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3171,7 +3187,9 @@ export var koreanStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다.",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "이 테이블을 사용하면 페이지의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오."
+      gridLayoutColumns: "이 테이블을 사용하면 페이지의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "이 페이지의 질문이 읽기 전용일 때 어떻게 나타나는지 명시합니다. \"읽기 전용\"은 질문을 평소 입력 컨트롤로 표시하지만 편집 시 비활성화되어 있습니다. \"보기\"는 답변을 텍스트나 기타 비인터라믹 요소로 표시합니다. \"상속\"은 설문조사 모드(\"기본적으로 읽기 전용\")를 사용합니다."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "페이지에서 타이머의 위치를 설정합니다.",

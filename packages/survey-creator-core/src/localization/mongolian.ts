@@ -1646,6 +1646,8 @@ export var mnStrings = {
     logoHeight: "Логөны өндөр (CSS хүлээн зөвшөөрсөн утга)",
     // "Read-only"
     readOnly: "Зөвхөн унших",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Зөвхөн унших горим",
     // "Disable the read-only mode if"
     enableIf: "Засах боломжтой хэрэв",
     // "\"No rows\" message"
@@ -2073,6 +2075,12 @@ export var mnStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Хэзээ ч"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Зөвхөн унших зориулалттай",
+      // [Auto-translated] "View"
+      view: "Үзэмж"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Радио товчлуурууд",
@@ -2809,7 +2817,9 @@ export var mnStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Энэ панел grid загварт хэдэн багана багтаахыг тодорхойлно.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Энэ хүснэгт нь панел доторх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл."
+      gridLayoutColumns: "Энэ хүснэгт нь панел доторх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Энэ самбар доторх асуултууд зөвхөн унших боломжтой үед хэрхэн харагдахыг тодорхойлдог. \"Зөвхөн унших\" нь асуултуудыг ердийн оролтын удирдлагуудтай харуулдаг боловч засварлах үед идэвхгүй болгодог. \"View\" нь хариултыг текст эсвэл бусад харилцан үйлчлэлгүй элементээр харуулдаг. \"Inherit\" нь эцэг самбар, хуудас эсвэл судалгааны горимыг ашигладаг (\"Зөвхөн унших\" нь анхдагчаар)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2937,7 +2947,9 @@ export var mnStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Сонголтын сонголтуудын урт текстүүд нь дусал цэсний дотор багтахын тулд автоматаар шугамын завсар үүсгэх болно. Хэрэв та бичвэрүүдийг хайчлахыг хүсвэл сонгогдоогүй.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Энэ асуулт хүснэгтийн загварт хэдэн багана багтаахыг тодорхойлно."
+      effectiveColSpan: "Энэ асуулт хүснэгтийн загварт хэдэн багана багтаахыг тодорхойлно.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Зөвхөн унших боломжтой үед асуулт хэрхэн харагдахыг зааж өгдөг. \"Зөвхөн унших\" нь асуултыг ердийн оролтын удирдлагуудтай харуулдаг боловч засварлах үед идэвхгүй болгодог. \"View\" нь хариултыг текст эсвэл бусад харилцан үйлчлэлгүй элементээр харуулдаг. \"Inherit\" нь эцэг самбар, хуудас эсвэл судалгааны горимыг ашигладаг (\"Зөвхөн унших\" нь анхдагчаар)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2985,6 +2997,8 @@ export var mnStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Хэрэв та хариулагчдыг таны судалгааг бөглөхөд саад болохыг хүсвэл сонго.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Зөвхөн унших асуултууд хэрхэн харагдахыг заасан, урьдчилсан үзэх хуудсанд ч багтана. \"Зөвхөн унших\" (анхдагч) нь асуултыг ердийн оролтын удирдлагуудтай харуулдаг боловч засварлах үед идэвхгүй болгодог. \"Харах\" нь хариултыг текст эсвэл бусад харилцан үйлчлэлгүй элементээр харуулдаг.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Явцын барын байршлыг тогтооно. \"Auto\" value нь судалгааны гарчгийн дээр эсвэл доод тал дахь явцын барыг харуулна."
     },
@@ -3004,7 +3018,9 @@ export var mnStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Сонгогдсон тохиолдолд сонголт бүрд зориулж багана үүсгэнэ.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Сонголтын хувилбаруудыг олон баганатай загвараар байрлуулна. 0 болговол сонголтууд нэг мөр хэлбэрээр харагдана. -1 болговол бодит үнэ нь эцэг матрицын \"Nested column count\" шинж чанараас өвлөгдэнэ."
+      colCount: "Сонголтын хувилбаруудыг олон баганатай загвараар байрлуулна. 0 болговол сонголтууд нэг мөр хэлбэрээр харагдана. -1 болговол бодит үнэ нь эцэг матрицын \"Nested column count\" шинж чанараас өвлөгдэнэ.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Энэ баганын эсүүд зөвхөн унших үед хэрхэн харагдахыг заадаг. \"Зөвхөн унших\" нь эсүүдийг ердийн оролтын удирдлагуудтай харуулдаг боловч засварлах үед идэвхгүй болгодог. \"View\" нь хариултыг текст эсвэл бусад харилцан үйлчлэлгүй элементээр харуулдаг. \"Inherit\" нь матриц эсвэл судалгааны горимыг ашигладаг (\"Зөвхөн унших\" нь анхдагчаар)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3170,7 +3186,9 @@ export var mnStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг.",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Энэ хүснэгт нь хуудас дээрх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл."
+      gridLayoutColumns: "Энэ хүснэгт нь хуудас дээрх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Энэ хуудсан дээрх асуултууд зөвхөн унших үед хэрхэн харагдахыг заана. \"Зөвхөн унших\" нь асуултуудыг ердийн оролтын удирдлагуудтай харуулдаг боловч засварлах үед идэвхгүй болгодог. \"View\" нь хариултыг текст эсвэл бусад харилцан үйлчлэлгүй элементээр харуулдаг. \"Inherit\" нь судалгааны горимыг ашигладаг (\"Зөвхөн унших\" нь анхдагчаар)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Хуудас дээрх цаг хэмжигчийн байрлалыг тогтооно.",

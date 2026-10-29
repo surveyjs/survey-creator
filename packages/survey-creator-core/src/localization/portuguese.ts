@@ -1646,6 +1646,8 @@ export var portugueseTranslation = {
     logoHeight: "Altura do logotipo (em valores aceitos pelo CSS)",
     // "Read-only"
     readOnly: "Apenas para leitura",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Modo somente leitura",
     // "Disable the read-only mode if"
     enableIf: "Editável se",
     // "\"No rows\" message"
@@ -2073,6 +2075,12 @@ export var portugueseTranslation = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Nunca"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Somente leitura",
+      // [Auto-translated] "View"
+      view: "Visão"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Botões de rádio",
@@ -2809,7 +2817,9 @@ export var portugueseTranslation = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Especifica quantas colunas esse painel abrange dentro do layout da grade.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Esta tabela permite configurar cada coluna de grade dentro do painel. Ele define automaticamente a porcentagem de largura para cada coluna com base no número máximo de elementos em uma linha. Para personalizar o layout da grade, ajuste manualmente esses valores e defina a largura do título para todas as perguntas em cada coluna."
+      gridLayoutColumns: "Esta tabela permite configurar cada coluna de grade dentro do painel. Ele define automaticamente a porcentagem de largura para cada coluna com base no número máximo de elementos em uma linha. Para personalizar o layout da grade, ajuste manualmente esses valores e defina a largura do título para todas as perguntas em cada coluna.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica como as perguntas dentro deste painel aparecem quando são somente leitura. \"Somente leitura\" exibe as perguntas com seus controles de entrada habituais, mas desativado para edição. \"Visualizar\" exibe as respostas como texto ou outros elementos não interativos. \"Herdar\" usa o modo definido para o painel, página ou pesquisa principal (\"Somente leitura\" por padrão)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2937,7 +2947,9 @@ export var portugueseTranslation = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Textos longos nas opções de escolha gerarão automaticamente quebras de linha para caber no menu suspenso. Desmarque se quiser que os textos sejam recortados.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Especifica quantas colunas essa pergunta abrange dentro do layout da grade."
+      effectiveColSpan: "Especifica quantas colunas essa pergunta abrange dentro do layout da grade.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica como a pergunta aparece quando é somente leitura. \"Somente leitura\" exibe a pergunta com seus controles de entrada habituais, mas desativados para edição. \"Visualizar\" exibe as respostas como texto ou outros elementos não interativos. \"Herdar\" usa o modo definido para o painel, página ou pesquisa principal (\"Somente leitura\" por padrão)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2985,6 +2997,8 @@ export var portugueseTranslation = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Selecione se deseja impedir que os respondentes preencham seu questionário.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Especifica como perguntas somente leitura aparecem, inclusive na página de prévia. \"Somente leitura\" (padrão) exibe perguntas com seus controles de entrada habituais, mas desativados para edição. \"Visualizar\" exibe as respostas como texto ou outros elementos não interativos.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Define a localização da barra de progresso. O valor \"Auto\" exibe a barra de progresso acima ou abaixo do cabeçalho da pesquisa."
     },
@@ -3004,7 +3018,9 @@ export var portugueseTranslation = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Quando selecionada, cria uma coluna individual para cada opção de escolha.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Organiza as opções de escolha em um layout de várias colunas. Quando definido como 0, as opções são exibidas em uma única linha. Quando definido como -1, o valor real é herdado da propriedade \"Contagem de colunas aninhadas\" da matriz pai."
+      colCount: "Organiza as opções de escolha em um layout de várias colunas. Quando definido como 0, as opções são exibidas em uma única linha. Quando definido como -1, o valor real é herdado da propriedade \"Contagem de colunas aninhadas\" da matriz pai.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica como as células desta coluna aparecem quando são somente leitura. \"Somente leitura\" exibe as células com seus controles de entrada habituais, mas desativadas para edição. \"Visualizar\" exibe respostas como texto ou outros elementos não interativos. \"Herdar\" usa o modo definido para a matriz ou pesquisa (\"Somente leitura\" por padrão)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3170,7 +3186,9 @@ export var portugueseTranslation = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Define a visibilidade dos botões de navegação na página. A opção \"Herdar\" aplica a configuração de nível de pesquisa, que tem como padrão \"Visível\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Esta tabela permite configurar cada coluna de grade na página. Ele define automaticamente a porcentagem de largura para cada coluna com base no número máximo de elementos em uma linha. Para personalizar o layout da grade, ajuste manualmente esses valores e defina a largura do título para todas as perguntas em cada coluna."
+      gridLayoutColumns: "Esta tabela permite configurar cada coluna de grade na página. Ele define automaticamente a porcentagem de largura para cada coluna com base no número máximo de elementos em uma linha. Para personalizar o layout da grade, ajuste manualmente esses valores e defina a largura do título para todas as perguntas em cada coluna.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica como as perguntas nesta página aparecem quando são somente leitura. \"Somente leitura\" exibe as perguntas com seus controles de entrada habituais, mas desativado para edição. \"Visualizar\" exibe as respostas como texto ou outros elementos não interativos. \"Herdar\" usa o modo definido para a pesquisa (\"Somente leitura\" por padrão)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Define a localização de um cronômetro em uma página.",

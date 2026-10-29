@@ -1647,6 +1647,8 @@ export var polishStrings = {
     logoHeight: "Wysokość logo",
     // "Read-only"
     readOnly: "Tylko do odczytu",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Tryb tylko do odczytu",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Wyłącz tryb tylko do odczytu, jeśli",
     // "\"No rows\" message"
@@ -2074,6 +2076,12 @@ export var polishStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Nigdy"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Tylko do odczytu",
+      // [Auto-translated] "View"
+      view: "Zobacz"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Przyciski radiowe",
@@ -2810,7 +2818,9 @@ export var polishStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Określa, ile kolumn w układzie siatki obejmuje ten panel.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki w panelu. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie."
+      gridLayoutColumns: "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki w panelu. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Określa, jak pytania w tym panelu pojawiają się, gdy są tylko do odczytu. \"Tylko do odczytu\" wyświetla pytania z ich standardowymi kontrolkami wprowadzania, ale wyłączone dla edycji. \"Widok\" wyświetla odpowiedzi jako tekst lub inne elementy nieinteraktywne. \"Dziedzicz\" używa trybu ustawionego dla panelu nadrzędnego, strony lub ankiety (\"Domyślnie tylko do odczytu\")."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2938,7 +2948,9 @@ export var polishStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Długie teksty w opcjach wyboru automatycznie wygenerują podziały wierszy, aby zmieścić się w menu rozwijanym. Usuń zaznaczenie, jeśli chcesz, aby teksty zostały przycięte.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Określa, ile kolumn obejmuje to pytanie w układzie siatki."
+      effectiveColSpan: "Określa, ile kolumn obejmuje to pytanie w układzie siatki.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Określa, jak pytanie pojawia się, gdy jest tylko do odczytu. \"Tylko do odczytu\" wyświetla pytanie z jego standardowymi kontrolkami wprowadzania, ale wyłączone dla edycji. \"Widok\" wyświetla odpowiedzi jako tekst lub inne elementy nieinteraktywne. \"Dziedzicz\" używa trybu ustawionego dla panelu nadrzędnego, strony lub ankiety (\"Domyślnie tylko do odczytu\")."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2986,6 +2998,8 @@ export var polishStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Wybierz, czy chcesz uniemożliwić respondentom wypełnianie ankiety.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Określa, jak pojawiają się pytania tylko do czytania, w tym na stronie podglądowej. \"Tylko do czytania\" (domyślnie) wyświetla pytania z ich standardowymi kontrolkami wprowadzania, ale wyłączone do edycji. \"Widok\" wyświetla odpowiedzi jako tekst lub inne elementy nieinteraktywne.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Ustawia położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu powyżej lub poniżej nagłówka ankiety."
     },
@@ -3005,7 +3019,9 @@ export var polishStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Gdy ta opcja jest zaznaczona, tworzy osobną kolumnę dla każdej opcji wyboru.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu. Po ustawieniu wartości -1 rzeczywista wartość jest dziedziczona z właściwości \"Liczba kolumn zagnieżdżonych\" macierzy nadrzędnej."
+      colCount: "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu. Po ustawieniu wartości -1 rzeczywista wartość jest dziedziczona z właściwości \"Liczba kolumn zagnieżdżonych\" macierzy nadrzędnej.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Określa, jak komórki w tej kolumnie pojawiają się, gdy są tylko do odczytu. \"Tylko do odczytu\" wyświetla komórki z ich standardowymi kontrolkami wejściowymi, ale wyłączone dla edycji. \"Widok\" wyświetla odpowiedzi jako tekst lub inne elementy nieinteraktywne. \"Dziedzicz\" używa trybu ustawionego dla macierzy lub ankiety (\"Domyślnie tylko do odczytu\")."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3171,7 +3187,9 @@ export var polishStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Ustawia widoczność przycisków nawigacyjnych na stronie. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety, które domyślnie ma wartość \"Widoczny\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki na stronie. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie."
+      gridLayoutColumns: "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki na stronie. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Określa, jak pytania na tej stronie pojawiają się, gdy są tylko do odczytu. \"Tylko do odczytu\" wyświetla pytania z ich standardowymi kontrolkami wprowadzania, ale wyłączone do edycji. \"Widok\" wyświetla odpowiedzi jako tekst lub inne elementy nieinteraktywne. \"Dziedzicz\" używa trybu ustawionego dla ankiety (\"Domyślnie tylko do odczytu\")."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Ustawia położenie czasomierza na stronie.",

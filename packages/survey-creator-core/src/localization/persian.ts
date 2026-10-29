@@ -1646,6 +1646,8 @@ export var persianStrings = {
     logoHeight: "ارتفاع لوگو",
     // "Read-only"
     readOnly: "فقط خواندنی",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "حالت فقط خواندنی",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "حالت فقط خواندنی را غیرفعال کنید اگر",
     // "\"No rows\" message"
@@ -2073,6 +2075,12 @@ export var persianStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "هرگز"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "فقط خواندنی",
+      // [Auto-translated] "View"
+      view: "نمای"
     },
     // [Auto-translated] "Radio buttons"
     radio: "دکمه های رادیویی",
@@ -2809,7 +2817,9 @@ export var persianStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "مشخص می کند که این پانل چند ستون در طرح بندی شبکه قرار دارد.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "این جدول به شما امکان می دهد هر ستون شبکه را در پانل پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید."
+      gridLayoutColumns: "این جدول به شما امکان می دهد هر ستون شبکه را در پانل پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "مشخص می کند که سوالات داخل این پنل هنگام فقط خواندنی بودن چگونه ظاهر می شوند. «فقط خواندنی» سوالات را با کنترل های ورودی معمول نمایش می دهد، اما برای ویرایش غیرفعال است. «نمایش» پاسخ ها را به صورت متن یا عناصر غیرتعاملی نمایش می دهد. «ارث برد» از حالت تنظیم شده برای پنل والد، صفحه یا نظرسنجی استفاده می کند (به طور پیش فرض «فقط خواندنی»)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2937,7 +2947,9 @@ export var persianStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "متون طولانی در گزینه های انتخاب به طور خودکار شکستن خط را ایجاد می کنند تا در منوی کشویی قرار بگیرند. اگر می خواهید متن ها کلیپ شوند، انتخاب را لغو کنید.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "مشخص می کند که این سوال چند ستون در طرح بندی شبکه قرار دارد."
+      effectiveColSpan: "مشخص می کند که این سوال چند ستون در طرح بندی شبکه قرار دارد.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "مشخص می کند که سؤال هنگام فقط خواندنی بودن چگونه ظاهر می شود. «فقط خواندنی بودن» سؤال را با کنترل های ورودی معمول نمایش می دهد، اما برای ویرایش غیرفعال است. «نمایش» پاسخ ها را به صورت متن یا عناصر غیرتعاملی نمایش می دهد. «ارث برد» از حالت تنظیم شده برای پنل والد، صفحه یا نظرسنجی («فقط خواندنی» به طور پیش فرض) استفاده می کند."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2985,6 +2997,8 @@ export var persianStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "اگر می خواهید از پر کردن نظرسنجی پاسخ دهندگان جلوگیری کنید، انتخاب کنید.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "مشخص می کند که سوالات فقط خواندنی چگونه ظاهر می شوند، از جمله در صفحه پیش نمایش. «فقط خواندنی» (پیش فرض) سوالاتی را با کنترل های ورودی معمول نمایش می دهد، اما برای ویرایش غیرفعال است. «نمایش» پاسخ ها را به صورت متن یا عناصر غیرتعاملی نمایش می دهد.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "مکان نوار پیشرفت را تنظیم می کند. مقدار \"خودکار\" نوار پیشرفت را در بالا یا پایین سربرگ نظرسنجی نشان می دهد."
     },
@@ -3004,7 +3018,9 @@ export var persianStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "هنگامی که انتخاب می شود، یک ستون فردی برای هر گزینه انتخاب ایجاد می کند.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند. هنگامی که روی -1 تنظیم می شود، مقدار واقعی از ویژگی \"تعداد ستون های تو در تو\" ماتریس والد به ارث می رسد."
+      colCount: "گزینه های انتخاب را در یک طرح چند ستونی مرتب می کند. هنگامی که روی 0 تنظیم می شود، گزینه ها در یک خط نمایش داده می شوند. هنگامی که روی -1 تنظیم می شود، مقدار واقعی از ویژگی \"تعداد ستون های تو در تو\" ماتریس والد به ارث می رسد.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "مشخص می کند که سلول های این ستون هنگام فقط خواندنی بودن چگونه ظاهر می شوند. «فقط خواندنی» سلول هایی را با کنترل های ورودی معمول نمایش می دهد، اما برای ویرایش غیرفعال است. «View» پاسخ ها را به صورت متن یا عناصر غیرتعاملی نمایش می دهد. «Inherit» از حالت های تنظیم شده برای ماتریس یا نظرسنجی استفاده می کند («Only-Only» به طور پیش فرض)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3170,7 +3186,9 @@ export var persianStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "قابلیت مشاهده دکمههای پیمایش را روی صفحه تنظیم میکند. گزینه \"به ارث بردن\" تنظیم سطح نظرسنجی را اعمال می کند که به طور پیش فرض به \"قابل مشاهده\" است.",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "این جدول به شما امکان می دهد هر ستون شبکه را در صفحه پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید."
+      gridLayoutColumns: "این جدول به شما امکان می دهد هر ستون شبکه را در صفحه پیکربندی کنید. به طور خودکار درصد عرض هر ستون را بر اساس حداکثر تعداد عناصر در یک ردیف تنظیم می کند. برای سفارشی کردن طرح بندی شبکه، این مقادیر را به صورت دستی تنظیم کنید و عرض عنوان را برای همه سوالات در هر ستون تعریف کنید.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "مشخص می کند که سوالات این صفحه هنگام فقط خواندنی بودن چگونه ظاهر می شوند. «فقط خواندنی» سوالات را با کنترل ورودی معمول نمایش می دهد، اما برای ویرایش غیرفعال است. «نمایش» پاسخ ها را به صورت متن یا عناصر غیرتعاملی نمایش می دهد. «ارث برد» از حالت تنظیم شده برای نظرسنجی استفاده می کند («فقط خواندنی» به طور پیش فرض)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "مکان یک تایمر را در یک صفحه تنظیم می کند.",

@@ -1646,6 +1646,8 @@ export var simplifiedChineseTranslation = {
     logoHeight: "标志高度",
     // "Read-only"
     readOnly: "只读",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "只读模式",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "在以下情况下禁用只读模式",
     // "\"No rows\" message"
@@ -2073,6 +2075,12 @@ export var simplifiedChineseTranslation = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "从不"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "只读",
+      // [Auto-translated] "View"
+      view: "景观"
     },
     // [Auto-translated] "Radio buttons"
     radio: "单选按钮",
@@ -2809,7 +2817,9 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "指定此面板在网格布局中跨越的列数。",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "此表允许您配置面板中的每个网格列。它根据行中的最大元素数自动设置每列的宽度百分比。要自定义网格布局，请手动调整这些值并定义每列中所有问题的标题宽度。"
+      gridLayoutColumns: "此表允许您配置面板中的每个网格列。它根据行中的最大元素数自动设置每列的宽度百分比。要自定义网格布局，请手动调整这些值并定义每列中所有问题的标题宽度。",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "指定该面板内问题在只读时的显示方式。“只读”显示问题及其常用输入控件，但禁用编辑功能。“查看”以文本或其他非交互元素显示答案。“继承”使用父面板、页面或调查设置的模式（“默认为”只读“）。"
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2937,7 +2947,9 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "选项选项中的长文本将自动生成换行符以适合下拉菜单。如果要剪裁文本，请取消选择。",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "指定此问题在网格布局中跨越多少列。"
+      effectiveColSpan: "指定此问题在网格布局中跨越多少列。",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "指定问题在只读时的显示方式。“只读”显示问题及其常用输入控件，但禁用编辑功能。“查看”以文本或其他非交互元素显示答案。“继承”使用父面板、页面或调查设置的模式（“默认为”仅读“）。"
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2985,6 +2997,8 @@ export var simplifiedChineseTranslation = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "选择是否要阻止受访者填写您的调查。",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "指定只读题的呈现方式，包括预览页面。“只读”（默认）显示带有常规输入控制但禁用编辑的题目。“查看”以文本或其他非交互元素显示答案。",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "设置进度条的位置。“自动”值在调查标题的上方或下方显示进度条。"
     },
@@ -3004,7 +3018,9 @@ export var simplifiedChineseTranslation = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "选中后，为每个选项创建一个单独的列。",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "在多列布局中排列选择选项。设置为 0 时，选项将显示在一行中。当设置为 -1 时，实际值将继承自父矩阵的“嵌套列计数”属性。"
+      colCount: "在多列布局中排列选择选项。设置为 0 时，选项将显示在一行中。当设置为 -1 时，实际值将继承自父矩阵的“嵌套列计数”属性。",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "指定该列单元格在只读时的显示方式。“只读”显示单元格及其常规输入控件，但禁用编辑功能。“视图”以文本或其他非交互元素形式显示答案。“继承”使用矩阵或调查设置的模式（“默认为”唯读“）。"
     },
     slider: {
       // "The lowest number that users can select."
@@ -3170,7 +3186,9 @@ export var simplifiedChineseTranslation = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "设置导航按钮在页面上的可见性。“继承”选项应用调查级别设置，默认为“可见”。",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "此表允许您配置页面上的每个网格列。它根据行中的最大元素数自动设置每列的宽度百分比。要自定义网格布局，请手动调整这些值并定义每列中所有问题的标题宽度。"
+      gridLayoutColumns: "此表允许您配置页面上的每个网格列。它根据行中的最大元素数自动设置每列的宽度百分比。要自定义网格布局，请手动调整这些值并定义每列中所有问题的标题宽度。",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "指定本页问题在只读时的显示方式。“只读”显示问题及其常用输入控件，但禁用编辑功能。“查看”以文本或其他非交互元素显示答案。“继承”使用调查设置的模式（“默认为”仅读“）。"
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "设置计时器在页面上的位置。",

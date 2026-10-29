@@ -1646,6 +1646,8 @@ export var spanishTranslation = {
     logoHeight: "Alto de Logo (en valores aceptados CSS)",
     // "Read-only"
     readOnly: "Sólo-lectura",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Modo de solo lectura",
     // "Disable the read-only mode if"
     enableIf: "Editable si",
     // "\"No rows\" message"
@@ -2073,6 +2075,12 @@ export var spanishTranslation = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Nunca"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Solo lectura",
+      // [Auto-translated] "View"
+      view: "Vista"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Botones de radio",
@@ -2809,7 +2817,9 @@ export var spanishTranslation = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Especifica el número de columnas que abarca este panel dentro del diseño de cuadrícula.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Esta tabla le permite configurar cada columna de cuadrícula dentro del panel. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valores y defina el ancho del título para todas las preguntas de cada columna."
+      gridLayoutColumns: "Esta tabla le permite configurar cada columna de cuadrícula dentro del panel. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valores y defina el ancho del título para todas las preguntas de cada columna.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica cómo aparecen las preguntas dentro de este panel cuando son de solo lectura. \"Solo lectura\" muestra las preguntas con sus controles habituales de entrada, pero deshabilitados para edición. \"Ver\" muestra las respuestas como texto u otros elementos no interactivos. \"Heredar\" utiliza el modo establecido para el panel principal, página o encuesta (\"Solo lectura\" por defecto)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2937,7 +2947,9 @@ export var spanishTranslation = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Los textos largos en las opciones de elección generarán automáticamente saltos de línea para que se ajusten al menú desplegable. Anule la selección si desea que los textos se recorten.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Especifica el número de columnas que abarca esta pregunta dentro del diseño de cuadrícula."
+      effectiveColSpan: "Especifica el número de columnas que abarca esta pregunta dentro del diseño de cuadrícula.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica cómo aparece la pregunta cuando es de solo lectura. \"Solo lectura\" muestra la pregunta con sus controles habituales de entrada, pero deshabilitada para edición. \"Ver\" muestra las respuestas como texto u otros elementos no interactivos. \"Heredar\" utiliza el modo establecido para el panel principal, página o encuesta (\"Solo lectura\" por defecto)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2985,6 +2997,8 @@ export var spanishTranslation = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Seleccione si desea evitar que los encuestados completen su encuesta.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Especifica cómo aparecen las preguntas de solo lectura, incluyendo la página de vista previa. \"Solo lectura\" (por defecto) muestra las preguntas con sus controles habituales de entrada, pero deshabilitadas para editar. \"Ver\" muestra las respuestas como texto u otros elementos no interactivos.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Establece la ubicación de la barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la encuesta."
     },
@@ -3004,7 +3018,9 @@ export var spanishTranslation = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Cuando se selecciona, crea una columna individual para cada opción de opción.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Organiza las opciones de elección en un diseño de varias columnas. Cuando se establece en 0, las opciones se muestran en una sola línea. Cuando se establece en -1, el valor real se hereda de la propiedad \"Recuento de columnas anidadas\" de la matriz primaria."
+      colCount: "Organiza las opciones de elección en un diseño de varias columnas. Cuando se establece en 0, las opciones se muestran en una sola línea. Cuando se establece en -1, el valor real se hereda de la propiedad \"Recuento de columnas anidadas\" de la matriz primaria.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica cómo aparecen las celdas de esta columna cuando son de solo lectura. \"Solo lectura\" muestra las celdas con sus controles habituales de entrada, pero deshabilitadas para editar. \"Ver\" muestra las respuestas como texto u otros elementos no interactivos. \"Heredar\" utiliza el modo establecido para la matriz o encuesta (\"Solo lectura\" por defecto)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3170,7 +3186,9 @@ export var spanishTranslation = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Establece la visibilidad de los botones de navegación en la página. La opción \"Heredar\" aplica la configuración de nivel de encuesta, que por defecto es \"Visible\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Esta tabla le permite configurar cada columna de cuadrícula en la página. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valores y defina el ancho del título para todas las preguntas de cada columna."
+      gridLayoutColumns: "Esta tabla le permite configurar cada columna de cuadrícula en la página. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valores y defina el ancho del título para todas las preguntas de cada columna.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica cómo aparecen las preguntas de esta página cuando son de solo lectura. \"Solo lectura\" muestra las preguntas con sus controles habituales de entrada, pero deshabilitados para edición. \"Ver\" muestra las respuestas como texto u otros elementos no interactivos. \"Heredar\" utiliza el modo establecido para la encuesta (\"Solo lectura\" por defecto)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Establece la ubicación de un temporizador en una página.",

@@ -1646,6 +1646,8 @@ export var indonesianStrings = {
     logoHeight: "Tinggi logo",
     // "Read-only"
     readOnly: "Baca-saja",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Mode hanya-baca",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Nonaktifkan mode baca-saja jika",
     // "\"No rows\" message"
@@ -2073,6 +2075,12 @@ export var indonesianStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Tidak pernah"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Hanya-baca",
+      // [Auto-translated] "View"
+      view: "Lihat"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Tombol radio",
@@ -2809,7 +2817,9 @@ export var indonesianStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Menentukan berapa banyak kolom panel ini dalam tata letak kisi.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi dalam panel. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom."
+      gridLayoutColumns: "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi dalam panel. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Menentukan bagaimana pertanyaan di dalam panel ini muncul ketika hanya baca. \"Hanya-baca\" menampilkan pertanyaan dengan kontrol input biasa, tetapi dinonaktifkan untuk penyuntingan. \"Lihat\" menampilkan jawaban sebagai teks atau elemen non-interaktif lainnya. \"Mewarisi\" menggunakan mode yang diatur untuk panel induk, halaman, atau survei (\"Hanya-Baca\" secara default)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2937,7 +2947,9 @@ export var indonesianStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Teks panjang dalam opsi pilihan akan secara otomatis menghasilkan jeda baris agar sesuai dengan menu tarik-turun. Batalkan pilihan jika Anda ingin teks dipotong.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Menentukan berapa banyak kolom yang mencakup pertanyaan ini dalam tata letak kisi."
+      effectiveColSpan: "Menentukan berapa banyak kolom yang mencakup pertanyaan ini dalam tata letak kisi.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Menentukan bagaimana pertanyaan muncul saat hanya baca. \"Hanya Baca\" menampilkan pertanyaan dengan kontrol input biasanya, tetapi dinonaktifkan untuk penyuntingan. \"Lihat\" menampilkan jawaban sebagai teks atau elemen non-interaktif lainnya. \"Mewarisi\" menggunakan mode yang diatur untuk panel induk, halaman, atau survei (\"Hanya-Baca\" secara default)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2985,6 +2997,8 @@ export var indonesianStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Pilih jika Anda ingin mencegah responden mengisi survei Anda.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Menentukan bagaimana pertanyaan hanya-baca muncul, termasuk di halaman pratinjau. \"Hanya-Baca\" (default) menampilkan pertanyaan dengan kontrol input biasanya, tetapi dinonaktifkan untuk penyuntingan. \"Lihat\" menampilkan jawaban sebagai teks atau elemen non-interaktif lainnya.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Mengatur lokasi bilah progres. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei."
     },
@@ -3004,7 +3018,9 @@ export var indonesianStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Saat dipilih, buat kolom individual untuk setiap opsi pilihan.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Mengatur opsi pilihan dalam tata letak multi-kolom. Saat diatur ke 0, opsi ditampilkan dalam satu baris. Saat diatur ke -1, nilai aktual diwarisi dari properti \"Jumlah kolom berlapis\" dari matriks induk."
+      colCount: "Mengatur opsi pilihan dalam tata letak multi-kolom. Saat diatur ke 0, opsi ditampilkan dalam satu baris. Saat diatur ke -1, nilai aktual diwarisi dari properti \"Jumlah kolom berlapis\" dari matriks induk.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Menentukan bagaimana sel di kolom ini muncul saat hanya baca. \"Hanya-baca\" menampilkan sel dengan kontrol input biasa, tetapi dinonaktifkan untuk penyuntingan. \"Tampilan\" menampilkan jawaban sebagai teks atau elemen non-interaktif lainnya. \"Warisi\" menggunakan mode yang diatur untuk matriks atau survei (\"Hanya-Baca\" secara default)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3170,7 +3186,9 @@ export var indonesianStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Mengatur visibilitas tombol navigasi di halaman. Opsi \"Warisi\" menerapkan pengaturan tingkat survei, yang defaultnya adalah \"Terlihat\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi pada halaman. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom."
+      gridLayoutColumns: "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi pada halaman. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Menentukan bagaimana pertanyaan di halaman ini muncul ketika hanya baca. \"Hanya-Baca\" menampilkan pertanyaan dengan kontrol input biasa, tetapi dinonaktifkan untuk penyuntingan. \"Lihat\" menampilkan jawaban sebagai teks atau elemen non-interaktif lainnya. \"Mewarisi\" menggunakan mode yang diatur untuk survei (\"Hanya-Baca\" secara default)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Mengatur lokasi pengatur waktu pada halaman.",

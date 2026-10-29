@@ -1647,6 +1647,8 @@ export let svStrings = {
     logoHeight: "Logotypens höjd",
     // "Read-only"
     readOnly: "Skrivskyddad",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Skrivskyddat läge",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Inaktivera det skrivskyddade läget om",
     // "\"No rows\" message"
@@ -2074,6 +2076,12 @@ export let svStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Aldrig"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Skrivbart",
+      // [Auto-translated] "View"
+      view: "Vy"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Radioknappar",
@@ -2810,7 +2818,9 @@ export let svStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Anger hur många kolumner den här panelen sträcker sig över i rutnätslayouten.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "I den här tabellen kan du konfigurera varje rutnätskolumn i panelen. Den ställer automatiskt in breddprocenten för varje kolumn baserat på det maximala antalet element i en rad. Om du vill anpassa rutnätslayouten justerar du dessa värden manuellt och definierar rubrikbredden för alla frågor i varje kolumn."
+      gridLayoutColumns: "I den här tabellen kan du konfigurera varje rutnätskolumn i panelen. Den ställer automatiskt in breddprocenten för varje kolumn baserat på det maximala antalet element i en rad. Om du vill anpassa rutnätslayouten justerar du dessa värden manuellt och definierar rubrikbredden för alla frågor i varje kolumn.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificerar hur frågor i denna panel visas när de är skrivskyddade. \"Skrivskyddad\" visar frågorna med deras vanliga inmatningskontroller, men inaktiverade för redigering. \"Visa\" visar svaren som text eller andra icke-interaktiva element. \"Inherit\" använder läget som är inställt för föräldrapanelen, sidan eller undersökningen (\"Skrivskyddad\" som standard)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2938,7 +2948,9 @@ export let svStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Långa texter i valalternativ genererar automatiskt radbrytningar för att passa in i rullgardinsmenyn. Avmarkera om du vill att texterna ska klippas.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Anger hur många kolumner den här frågan sträcker sig över i rutnätslayouten."
+      effectiveColSpan: "Anger hur många kolumner den här frågan sträcker sig över i rutnätslayouten.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificerar hur frågan visas när den är skrivskyddad. \"Skrivskyddad\" visar frågan med dess vanliga inmatningskontroller, men inaktiverad för redigering. \"Visa\" visar svaren som text eller andra icke-interaktiva element. \"Inherit\" använder det läge som är inställt för föräldrapanelen, sidan eller undersökningen (\"Skrivskyddad\" som standard)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2986,6 +2998,8 @@ export let svStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Välj om du vill hindra respondenterna från att fylla i din undersökning.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Specificerar hur skrivskyddade frågor visas, inklusive på förhandsgranskningssidan. \"Skrivskyddad\" (standard) visar frågor med deras vanliga inmatningskontroller, men inaktiverade för redigering. \"Visa\" visar svar som text eller andra icke-interaktiva element.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Ställer in platsen för förloppsindikatorn. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet."
     },
@@ -3005,7 +3019,9 @@ export let svStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "När du väljer det här alternativet skapas en enskild kolumn för varje alternativ.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad. När värdet är -1 ärvs det faktiska värdet från egenskapen \"Kapslad kolumnantal\" i den överordnade matrisen."
+      colCount: "Ordnar valalternativ i en layout med flera kolumner. När värdet är 0 visas alternativen på en enda rad. När värdet är -1 ärvs det faktiska värdet från egenskapen \"Kapslad kolumnantal\" i den överordnade matrisen.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificerar hur celler i denna kolumn visas när de är skrivskyddade. \"Skrivskyddad\" visar cellerna med deras vanliga inmatningskontroller, men inaktiverade för redigering. \"Visa\" visar svar som text eller andra icke-interaktiva element. \"Inherit\" använder det läge som är inställt för matrisen eller undersökningen (\"Skrivskyddat\" som standard)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3171,7 +3187,9 @@ export let svStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Ställer in synligheten för navigeringsknapparna på sidan. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå, som standard är \"Synlig\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "I den här tabellen kan du konfigurera varje rutnätskolumn på sidan. Den ställer automatiskt in breddprocenten för varje kolumn baserat på det maximala antalet element i en rad. Om du vill anpassa rutnätslayouten justerar du dessa värden manuellt och definierar rubrikbredden för alla frågor i varje kolumn."
+      gridLayoutColumns: "I den här tabellen kan du konfigurera varje rutnätskolumn på sidan. Den ställer automatiskt in breddprocenten för varje kolumn baserat på det maximala antalet element i en rad. Om du vill anpassa rutnätslayouten justerar du dessa värden manuellt och definierar rubrikbredden för alla frågor i varje kolumn.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificerar hur frågorna på denna sida visas när de är skrivskyddade. \"Endast läsvara\" visar frågorna med deras vanliga inmatningskontroller, men inaktiverade för redigering. \"Visa\" visar svaren som text eller andra icke-interaktiva element. \"Inherit\" använder det läge som är inställt för undersökningen (\"Endast läsvara\" som standard)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Ställer in platsen för en timer på en sida.",

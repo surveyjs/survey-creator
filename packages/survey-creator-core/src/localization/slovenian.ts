@@ -1646,6 +1646,8 @@ export var slStrings = {
     logoHeight: "Višina logotipa",
     // "Read-only"
     readOnly: "Samo za branje",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Način samo za branje",
     // "Disable the read-only mode if"
     enableIf: "Onemogoči način samo za branje, če",
     // "\"No rows\" message"
@@ -2073,6 +2075,12 @@ export var slStrings = {
     clearIfInvisible: {
       // "Never"
       none: "Nikoli"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Samo za branje",
+      // [Auto-translated] "View"
+      view: "Pogled"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Radijski gumbi",
@@ -2809,7 +2817,9 @@ export var slStrings = {
       // "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Določi, koliko stolpcev ta panel zajema v mrežnem načrtu.",
       // "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Ta tabela vam omogoča konfiguracijo vsakega mrežnega stolpca znotraj panela. Samodejno nastavi širino odstotkov za vsak stolpec na podlagi največjega števila elementov v vrstici. Za prilagoditev mrežnega načrta ročno prilagodite te vrednosti in določite širino naslova za vsa vprašanja v vsakem stolpcu."
+      gridLayoutColumns: "Ta tabela vam omogoča konfiguracijo vsakega mrežnega stolpca znotraj panela. Samodejno nastavi širino odstotkov za vsak stolpec na podlagi največjega števila elementov v vrstici. Za prilagoditev mrežnega načrta ročno prilagodite te vrednosti in določite širino naslova za vsa vprašanja v vsakem stolpcu.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Določa, kako se vprašanja v tem panelu prikazujejo, ko so samo za branje. \"Samo za branje\" prikazuje vprašanja z njihovimi običajnimi vhodnimi kontrolami, vendar je za urejanje onemogočeno. \"Pogled\" prikazuje odgovore kot besedilo ali druge neinteraktivne elemente. \"Dedi\" uporablja način, nastavljen za nadrejeno ploščo, stran ali anketo (\"Samo za branje\" privzeto)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2937,7 +2947,9 @@ export var slStrings = {
       // "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Dolga besedila v možnostih izbire bodo samodejno prelomljena, da se prilegajo v spustni meni. Odznačite, če želite, da se besedila odrežejo.",
       // "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Določa, koliko stolpcev to vprašanje zavzema v postavitvi mreže."
+      effectiveColSpan: "Določa, koliko stolpcev to vprašanje zavzema v postavitvi mreže.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Določa, kako se vprašanje pojavi, ko je samo za branje. \"Samo za branje\" prikaže vprašanje z običajnimi vhodnimi kontrolami, vendar je za urejanje onemogočeno. \"Pogled\" prikazuje odgovore kot besedilo ali druge neinteraktivne elemente. \"Dedi\" uporablja način, nastavljen za nadrejeno ploščo, stran ali anketo (\"Samo za branje\" privzeto)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2985,6 +2997,8 @@ export var slStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Izberite, če želite preprečiti anketirancem izpolnjevanje ankete.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Določa, kako se prikažejo vprašanja samo za branje, tudi na predogledni strani. \"Samo za branje\" (privzeto) prikazuje vprašanja z običajnimi vhodnimi kontrolami, vendar je onemogočeno za urejanje. \"Pogled\" prikazuje odgovore kot besedilo ali druge neinteraktivne elemente.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Določa lokacijo vrstice napredka. Vrednost \"Samodejno\" prikaže vrstico napredka nad ali pod glavo ankete."
     },
@@ -3004,7 +3018,9 @@ export var slStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Ko je izbrano, ustvari posamezen stolpec za vsako izbiro.",
       // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Razvrsti možnosti izbire v postavitev z več stolpci. Ko je nastavljeno na 0, so možnosti prikazane v eni sami vrstici. Ko je nastavljeno na -1, se dejanska vrednost podeduje iz lastnosti \"Število gnezdenih stolpcev\" nadrejenega matriksa."
+      colCount: "Razvrsti možnosti izbire v postavitev z več stolpci. Ko je nastavljeno na 0, so možnosti prikazane v eni sami vrstici. Ko je nastavljeno na -1, se dejanska vrednost podeduje iz lastnosti \"Število gnezdenih stolpcev\" nadrejenega matriksa.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Določa, kako se celice v tem stolpcu prikazujejo, ko so samo za branje. \"Samo za branje\" prikazuje celice z njihovimi običajnimi vhodnimi kontrolami, vendar je onemogočeno za urejanje. \"Pogled\" prikazuje odgovore kot besedilo ali druge neinteraktivne elemente. \"Dedi\" uporablja način, nastavljen za matriko ali anketo (\"Samo za branje\" privzeto)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3170,7 +3186,9 @@ export var slStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Nastavi vidnost navigacijskih gumbov na strani. Možnost Podedovano uporabi nastavitev na ravni ankete, ki je privzeto Vidno",
       // "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Ta tabela vam omogoča konfiguracijo vsakega stolpca mreže na strani. Samodejno nastavi odstotke širine za vsak stolpec glede na največje število elementov v vrstici. Če želite prilagoditi postavitev mreže, ročno prilagodite te vrednosti in določite širino naslova za vsa vprašanja v posameznem stolpcu"
+      gridLayoutColumns: "Ta tabela vam omogoča konfiguracijo vsakega stolpca mreže na strani. Samodejno nastavi odstotke širine za vsak stolpec glede na največje število elementov v vrstici. Če želite prilagoditi postavitev mreže, ročno prilagodite te vrednosti in določite širino naslova za vsa vprašanja v posameznem stolpcu",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Določa, kako se vprašanja na tej strani prikazujejo, ko so samo za branje. \"Samo za branje\" prikazuje vprašanja z običajnimi vhodnimi kontrolami, vendar je onemogočeno za urejanje. \"Pogled\" prikazuje odgovore kot besedilo ali druge neinteraktivne elemente. \"Dedi\" uporablja način, nastavljen za anketo (\"Samo za branje\" privzeto)."
     },
     // "Sets the location of a timer on a page."
     timerLocation: "Nastavi lokacijo časovnika na strani",

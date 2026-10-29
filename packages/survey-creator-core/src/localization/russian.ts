@@ -1646,6 +1646,8 @@ export var ruStrings = {
     logoHeight: "Высота логотипа",
     // "Read-only"
     readOnly: "Только для чтения",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Режим только для чтения",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Отключите режим только для чтения, если",
     // "\"No rows\" message"
@@ -2073,6 +2075,12 @@ export var ruStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Никогда"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Только для чтения",
+      // [Auto-translated] "View"
+      view: "Вид"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Кнопки радио",
@@ -2809,7 +2817,9 @@ export var ruStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Указывает, сколько столбцов занимает эта панель в макете сетки.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "В этой таблице можно настроить каждый столбец сетки на панели. Он автоматически устанавливает процент ширины для каждого столбца в зависимости от максимального количества элементов в строке. Чтобы настроить макет сетки, вручную настройте эти значения и определите ширину заголовка для всех вопросов в каждом столбце."
+      gridLayoutColumns: "В этой таблице можно настроить каждый столбец сетки на панели. Он автоматически устанавливает процент ширины для каждого столбца в зависимости от максимального количества элементов в строке. Чтобы настроить макет сетки, вручную настройте эти значения и определите ширину заголовка для всех вопросов в каждом столбце.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Указывает, как вопросы внутри этой панели отображаются при их использовании только для чтения. «Только для чтения» отображает вопросы с обычными элементами ввода, но отключён для редактирования. «Просмотр» отображает ответы как текст или другие неинтерактивные элементы. «Наследование» использует режим, установленный для родительской панели, страницы или опроса («Только для чтения» по умолчанию)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2937,7 +2947,9 @@ export var ruStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Длинные тексты в параметрах выбора будут автоматически создавать разрывы строк в соответствии с раскрывающимся меню. Снимите флажок, если вы хотите, чтобы тексты были обрезаны.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Указывает, сколько столбцов занимает этот вопрос в макете сетки."
+      effectiveColSpan: "Указывает, сколько столбцов занимает этот вопрос в макете сетки.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Указывает, как вопрос отображается при доступе только для чтения. «Только для чтения» отображает вопрос с обычными элементами ввода, но отключён для редактирования. «Просмотр» отображает ответы в виде текста или других неинтерактивных элементов. «Наследование» использует режим, установленный для родительской панели, страницы или опроса («Только для чтения» по умолчанию)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2985,6 +2997,8 @@ export var ruStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Выберите, хотите ли вы запретить респондентам заполнять ваш опрос.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Указывает, как отображаются вопросы только для чтения, включая страницу предварительного просмотра. «Только для чтения» (по умолчанию) отображает вопросы с обычными элементами ввода, но отключён для редактирования. «Просмотр» отображает ответы в виде текста или других неинтерактивных элементов.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Задает расположение индикатора выполнения. Значение \"Auto\" отображает индикатор выполнения над или под заголовком опроса."
     },
@@ -3004,7 +3018,9 @@ export var ruStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "При выборе этого параметра создается отдельный столбец для каждого варианта выбора.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. При значении -1 фактическое значение наследуется от свойства \"Количество вложенных столбцов\" родительской матрицы."
+      colCount: "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. При значении -1 фактическое значение наследуется от свойства \"Количество вложенных столбцов\" родительской матрицы.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Указывает, как ячейки в этом столбце отображаются при использовании только для чтения. «Только для чтения» отображает ячейки с обычными элементами ввода, но отключён для редактирования. «Просмотр» отображает ответы в виде текста или других неинтерактивных элементов. «Наследование» использует режим, установленный для матрицы или опроса («Только для чтения» по умолчанию)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3170,7 +3186,9 @@ export var ruStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Задает видимость кнопок навигации на странице. Опция \"Наследовать\" применяет настройку уровня опроса, которая по умолчанию имеет значение \"Видимый\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "В этой таблице можно настроить каждый столбец сетки на странице. Он автоматически устанавливает процент ширины для каждого столбца в зависимости от максимального количества элементов в строке. Чтобы настроить макет сетки, вручную настройте эти значения и определите ширину заголовка для всех вопросов в каждом столбце."
+      gridLayoutColumns: "В этой таблице можно настроить каждый столбец сетки на странице. Он автоматически устанавливает процент ширины для каждого столбца в зависимости от максимального количества элементов в строке. Чтобы настроить макет сетки, вручную настройте эти значения и определите ширину заголовка для всех вопросов в каждом столбце.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Указывает, как вопросы на этой странице отображаются, когда они только для чтения. «Только для чтения» отображает вопросы с обычными элементами ввода, но отключён для редактирования. «Просмотр» отображает ответы как текст или другие неинтерактивные элементы. «Наследование» использует режим, установленный для опроса («Только для чтения» по умолчанию)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Задает расположение таймера на странице.",

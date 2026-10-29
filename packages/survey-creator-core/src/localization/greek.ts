@@ -1646,6 +1646,8 @@ export var grStrings = {
     logoHeight: "Ύψος λογότυπου",
     // "Read-only"
     readOnly: "Μόνο ανάγνωση",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Λειτουργία μόνο για ανάγνωση",
     // "Disable the read-only mode if"
     enableIf: "Απενεργοποίηση λειτουργίας μόνο για ανάγνωση αν",
     // "\"No rows\" message"
@@ -2073,6 +2075,12 @@ export var grStrings = {
     clearIfInvisible: {
       // "Never"
       none: "Ποτέ"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Μόνο για ανάγνωση",
+      // [Auto-translated] "View"
+      view: "Προβολή"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Κουμπιά επιλογής",
@@ -2809,7 +2817,9 @@ export var grStrings = {
       // "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Καθορίζει πόσες στήλες καλύπτει αυτό το πάνελ στη διάταξη πλέγματος.",
       // "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Αυτός ο πίνακας σας επιτρέπει να ρυθμίσετε κάθε στήλη πλέγματος εντός του πάνελ. Ορίζει αυτόματα το ποσοστό πλάτους για κάθε στήλη με βάση τον μέγιστο αριθμό στοιχείων σε μια σειρά. Για να προσαρμόσετε τη διάταξη πλέγματος, ρυθμίστε χειροκίνητα αυτές τις τιμές και ορίστε το πλάτος τίτλου για όλες τις ερωτήσεις σε κάθε στήλη."
+      gridLayoutColumns: "Αυτός ο πίνακας σας επιτρέπει να ρυθμίσετε κάθε στήλη πλέγματος εντός του πάνελ. Ορίζει αυτόματα το ποσοστό πλάτους για κάθε στήλη με βάση τον μέγιστο αριθμό στοιχείων σε μια σειρά. Για να προσαρμόσετε τη διάταξη πλέγματος, ρυθμίστε χειροκίνητα αυτές τις τιμές και ορίστε το πλάτος τίτλου για όλες τις ερωτήσεις σε κάθε στήλη.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Καθορίζει τον τρόπο εμφάνισης των ερωτήσεων μέσα σε αυτόν τον πίνακα όταν είναι μόνο για ανάγνωση. Το \"Μόνο για ανάγνωση\" εμφανίζει τις ερωτήσεις με τα συνηθισμένα στοιχεία ελέγχου εισαγωγής, αλλά απενεργοποιημένο για επεξεργασία. Το \"Προβολή\" εμφανίζει τις απαντήσεις ως κείμενο ή άλλα μη αλληλεπιδραστικά στοιχεία. Το \"Μεταβίβαση\" χρησιμοποιεί τη λειτουργία που έχει οριστεί για τον γονικό πίνακα, τη σελίδα ή την έρευνα (\"Μόνο για ανάγνωση\" από προεπιλογή)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2937,7 +2947,9 @@ export var grStrings = {
       // "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Τα μεγάλα κείμενα στις επιλογές θα δημιουργούν αυτόματα αλλαγές γραμμής για να προσαρμοστούν στο αναπτυσσόμενο μενού. Αποεπιλέξτε αν θέλετε τα κείμενα να κόβονται.",
       // "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Καθορίζει πόσες στήλες καλύπτει αυτή η ερώτηση στη διάταξη πλέγματος."
+      effectiveColSpan: "Καθορίζει πόσες στήλες καλύπτει αυτή η ερώτηση στη διάταξη πλέγματος.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Καθορίζει τον τρόπο εμφάνισης της ερώτησης όταν είναι μόνο για ανάγνωση. Η επιλογή \"Μόνο για ανάγνωση\" εμφανίζει την ερώτηση με τους συνήθεις ελέγχους εισαγωγής, αλλά απενεργοποιημένη για επεξεργασία. Η \"Προβολή\" εμφανίζει τις απαντήσεις ως κείμενο ή άλλα μη αλληλεπιδραστικά στοιχεία. Η \"Μεταβίβαση\" χρησιμοποιεί τη λειτουργία που έχει οριστεί για τον γονικό πίνακα, τη σελίδα ή την έρευνα (\"Μόνο για ανάγνωση\" από προεπιλογή)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2985,6 +2997,8 @@ export var grStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Επιλέξτε αν θέλετε να αποτρέψετε τους συμμετέχοντες από το να συμπληρώσουν την έρευνά σας.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Καθορίζει τον τρόπο εμφάνισης των ερωτήσεων μόνο για ανάγνωση, συμπεριλαμβανομένης της σελίδας προεπισκόπησης. Η επιλογή \"Μόνο για ανάγνωση\" (προεπιλογή) εμφανίζει ερωτήσεις με τα συνήθη στοιχεία ελέγχου εισαγωγής, αλλά απενεργοποιημένες για επεξεργασία. Η \"Προβολή\" εμφανίζει τις απαντήσεις ως κείμενο ή άλλα μη αλληλεπιδραστικά στοιχεία.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Ορίζει την τοποθεσία της γραμμής προόδου. Η τιμή \"Αυτόματα\" εμφανίζει τη γραμμή προόδου πάνω ή κάτω από την κεφαλίδα της έρευνας."
     },
@@ -3004,7 +3018,9 @@ export var grStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Όταν επιλεγεί, δημιουργεί μια ατομική στήλη για κάθε επιλογή.",
       // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Διατάσσει τις επιλογές επιλογής σε διάταξη πολλαπλών στηλών. Όταν οριστεί σε 0, οι επιλογές εμφανίζονται σε μία γραμμή. Όταν οριστεί σε -1, η πραγματική τιμή κληρονομείται από την ιδιότητα \"Αριθμός εισχωρημένων στηλών\" του γονικού πίνακα."
+      colCount: "Διατάσσει τις επιλογές επιλογής σε διάταξη πολλαπλών στηλών. Όταν οριστεί σε 0, οι επιλογές εμφανίζονται σε μία γραμμή. Όταν οριστεί σε -1, η πραγματική τιμή κληρονομείται από την ιδιότητα \"Αριθμός εισχωρημένων στηλών\" του γονικού πίνακα.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Καθορίζει τον τρόπο εμφάνισης των κελιών σε αυτήν τη στήλη όταν είναι μόνο για ανάγνωση. Το \"Μόνο για ανάγνωση\" εμφανίζει τα κελιά με τα συνηθισμένα στοιχεία ελέγχου εισόδου, αλλά απενεργοποιημένα για επεξεργασία. Το \"Προβολή\" εμφανίζει τις απαντήσεις ως κείμενο ή άλλα μη αλληλεπιδραστικά στοιχεία. Το \"Μεταβίβαση\" χρησιμοποιεί τη λειτουργία που έχει οριστεί για τη μήτρα ή την έρευνα (\"Μόνο για ανάγνωση\" από προεπιλογή)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3170,7 +3186,9 @@ export var grStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Ορίζει την ορατότητα των κουμπιών πλοήγησης στη σελίδα. Η επιλογή \"Κληρονομία\" εφαρμόζει τη ρύθμιση σε επίπεδο έρευνας, η οποία είναι \"Ορατή\" από προεπιλογή.",
       // "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Αυτός ο πίνακας σας επιτρέπει να ρυθμίσετε κάθε στήλη πλέγματος στη σελίδα. Ορίζει αυτόματα το ποσοστό πλάτους για κάθε στήλη με βάση τον μέγιστο αριθμό στοιχείων σε μια σειρά. Για να προσαρμόσετε τη διάταξη πλέγματος, ρυθμίστε χειροκίνητα αυτές τις τιμές και ορίστε το πλάτος τίτλου για όλες τις ερωτήσεις σε κάθε στήλη."
+      gridLayoutColumns: "Αυτός ο πίνακας σας επιτρέπει να ρυθμίσετε κάθε στήλη πλέγματος στη σελίδα. Ορίζει αυτόματα το ποσοστό πλάτους για κάθε στήλη με βάση τον μέγιστο αριθμό στοιχείων σε μια σειρά. Για να προσαρμόσετε τη διάταξη πλέγματος, ρυθμίστε χειροκίνητα αυτές τις τιμές και ορίστε το πλάτος τίτλου για όλες τις ερωτήσεις σε κάθε στήλη.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Καθορίζει τον τρόπο εμφάνισης των ερωτήσεων σε αυτή τη σελίδα όταν είναι μόνο για ανάγνωση. Η επιλογή \"Μόνο για ανάγνωση\" εμφανίζει τις ερωτήσεις με τα συνήθη στοιχεία ελέγχου εισαγωγής, αλλά απενεργοποιημένες για επεξεργασία. Η \"Προβολή\" εμφανίζει τις απαντήσεις ως κείμενο ή άλλα μη αλληλεπιδραστικά στοιχεία. Η \"Μεταβίβαση\" χρησιμοποιεί τη λειτουργία που έχει οριστεί για την έρευνα (\"Μόνο για ανάγνωση\" από προεπιλογή)."
     },
     // "Sets the location of a timer on a page."
     timerLocation: "Ορίζει την τοποθεσία ενός χρονομετρητή στη σελίδα.",

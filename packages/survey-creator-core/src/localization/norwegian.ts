@@ -1646,6 +1646,8 @@ export var nbStrings = {
     logoHeight: "Logo høyde",
     // "Read-only"
     readOnly: "Skrivebeskyttet",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Skrivebeskyttet modus",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Deaktiver skrivebeskyttet modus hvis",
     // "\"No rows\" message"
@@ -2073,6 +2075,12 @@ export var nbStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Aldri"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Skrivebeskyttet",
+      // [Auto-translated] "View"
+      view: "Utsikt"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Radioknapper",
@@ -2809,7 +2817,9 @@ export var nbStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Angir hvor mange kolonner dette panelet strekker seg over i rutenettoppsettet.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "I denne tabellen kan du konfigurere hver rutenettkolonne i panelet. Den angir automatisk breddeprosenten for hver kolonne basert på maksimalt antall elementer på rad. For å tilpasse rutenettoppsettet, juster disse verdiene manuelt og definer tittelbredden for alle spørsmålene i hver kolonne."
+      gridLayoutColumns: "I denne tabellen kan du konfigurere hver rutenettkolonne i panelet. Den angir automatisk breddeprosenten for hver kolonne basert på maksimalt antall elementer på rad. For å tilpasse rutenettoppsettet, juster disse verdiene manuelt og definer tittelbredden for alle spørsmålene i hver kolonne.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Spesifiserer hvordan spørsmål i dette panelet vises når de er skrivebeskyttet. \"Skrivebeskyttet\" viser spørsmålene med deres vanlige inndatakontroller, men deaktivert for redigering. \"Visning\" viser svar som tekst eller andre ikke-interaktive elementer. \"Inherit\" bruker modusen som er satt for foreldrepanelet, siden eller undersøkelsen (\"Read-Only\" som standard)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2937,7 +2947,9 @@ export var nbStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Lange tekster i valgalternativer genererer automatisk linjeskift slik at de passer inn i rullegardinmenyen. Fjern merket hvis du vil at tekstene skal klippes ut.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Angir hvor mange kolonner dette spørsmålet strekker seg over i rutenettoppsettet."
+      effectiveColSpan: "Angir hvor mange kolonner dette spørsmålet strekker seg over i rutenettoppsettet.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Spesifiserer hvordan spørsmålet vises når det er skrivebeskyttet. \"Skrivebeskyttet\" viser spørsmålet med vanlige inndatakontroller, men deaktivert for redigering. \"Visning\" viser svar som tekst eller andre ikke-interaktive elementer. \"Inherit\" bruker modusen som er satt for foreldrepanelet, siden eller undersøkelsen (\"Read-Only\" som standard)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2985,6 +2997,8 @@ export var nbStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Velg hvis du vil hindre respondenter i å fylle ut undersøkelsen.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Spesifiserer hvordan skrivebeskyttede spørsmål vises, inkludert på forhåndsvisningssiden. \"Skrivebeskyttet\" (standard) viser spørsmål med deres vanlige inndatakontroller, men deaktivert for redigering. \"Vis\" viser svar som tekst eller andre ikke-interaktive elementer.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Angir plasseringen av fremdriftslinjen. \"Auto\"-verdien viser fremdriftslinjen over eller under undersøkelsesoverskriften."
     },
@@ -3004,7 +3018,9 @@ export var nbStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Når dette alternativet er valgt, opprettes det én kolonne for hvert valgalternativ.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje. Når satt til -1, arves den faktiske verdien fra egenskapen \"Nestet kolonneantall\" for den overordnede matrisen."
+      colCount: "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje. Når satt til -1, arves den faktiske verdien fra egenskapen \"Nestet kolonneantall\" for den overordnede matrisen.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Spesifiserer hvordan cellene i denne kolonnen vises når de er skrivebeskyttet. \"Skrivebeskyttet\" viser cellene med deres vanlige inndatakontroller, men deaktivert for redigering. \"Visning\" viser svar som tekst eller andre ikke-interaktive elementer. \"Inherit\" bruker modusen som er satt for matrisen eller undersøkelsen (\"Skrivebeskyttet\" som standard)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3170,7 +3186,9 @@ export var nbStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Angir synligheten til navigasjonsknapper på siden. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå, som som standard er \"Synlig\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "I denne tabellen kan du konfigurere hver rutenettkolonne på siden. Den angir automatisk breddeprosenten for hver kolonne basert på maksimalt antall elementer på rad. For å tilpasse rutenettoppsettet, juster disse verdiene manuelt og definer tittelbredden for alle spørsmålene i hver kolonne."
+      gridLayoutColumns: "I denne tabellen kan du konfigurere hver rutenettkolonne på siden. Den angir automatisk breddeprosenten for hver kolonne basert på maksimalt antall elementer på rad. For å tilpasse rutenettoppsettet, juster disse verdiene manuelt og definer tittelbredden for alle spørsmålene i hver kolonne.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Spesifiserer hvordan spørsmålene på denne siden vises når de er skrivebeskyttet. \"Skrivebeskyttet\" viser spørsmålene med deres vanlige inndatakontroller, men deaktivert for redigering. \"Vis\" viser svarene som tekst eller andre ikke-interaktive elementer. \"Inherit\" bruker modusen som er satt for undersøkelsen (\"Skrivebeskyttet\" som standard)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Angir plasseringen av en tidtaker på en side.",

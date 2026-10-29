@@ -1646,6 +1646,8 @@ export const thStrings = {
     logoHeight: "ความสูงของโลโก้",
     // "Read-only"
     readOnly: "อ่านอย่างเดียว",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "โหมดอ่านอย่างเดียว",
     // "Disable the read-only mode if"
     enableIf: "ปิดโหมดอ่านอย่างเดียวถ้า",
     // "\"No rows\" message"
@@ -2073,6 +2075,12 @@ export const thStrings = {
     clearIfInvisible: {
       // "Never"
       none: "ไม่เคย"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "อ่านอย่างเดียว",
+      // [Auto-translated] "View"
+      view: "ดู"
     },
     // [Auto-translated] "Radio buttons"
     radio: "ปุ่มวิทยุ",
@@ -2809,7 +2817,9 @@ export const thStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "ระบุจํานวนคอลัมน์ที่แผงนี้ครอบคลุมภายในเค้าโครงกริด",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "ตารางนี้ให้คุณกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์ภายในแผงควบคุม โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์"
+      gridLayoutColumns: "ตารางนี้ให้คุณกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์ภายในแผงควบคุม โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "ระบุว่าคําถามภายในแผงนี้จะปรากฏอย่างไรเมื่อเป็นแบบอ่านอย่างเดียว\"อ่านอย่างเดียว\" จะแสดงคําถามพร้อมปุ่มป้อนข้อมูลปกติ แต่ปิดใช้งานสําหรับการแก้ไข\"View\" จะแสดงคําตอบในรูปแบบข้อความหรือองค์ประกอบที่ไม่โต้ตอบอื่น ๆ\"Inherit\" ใช้โหมดที่ตั้งไว้สําหรับแผงหลัก หน้า หรือแบบสํารวจ (\"Read-Only\" โดยค่าเริ่มต้น)"
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2937,7 +2947,9 @@ export const thStrings = {
       // "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "ข้อความยาวในตัวเลือกจะสร้างการตัดบรรทัดอัตโนมัติเพื่อให้พอดีกับเมนูดรอปดาวน์ ยกเลิกการเลือกถ้าคุณต้องการให้ข้อความถูกตัด",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "ระบุจํานวนคอลัมน์ที่คําถามนี้ครอบคลุมภายในเค้าโครงกริด"
+      effectiveColSpan: "ระบุจํานวนคอลัมน์ที่คําถามนี้ครอบคลุมภายในเค้าโครงกริด",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "ระบุว่าคําถามจะแสดงผลอย่างไรเมื่อเป็นแบบอ่านอย่างเดียว\"อ่านอย่างเดียว\" จะแสดงคําถามพร้อมตัวควบคุมการป้อนข้อมูลตามปกติ แต่ปิดใช้งานสําหรับการแก้ไข\"View\" จะแสดงคําตอบในรูปแบบข้อความหรือองค์ประกอบที่ไม่โต้ตอบอื่น ๆ\"Inherit\" ใช้โหมดที่ตั้งไว้สําหรับแผงหลัก หน้า หรือแบบสํารวจ (\"Read-Only\" โดยค่าเริ่มต้น)"
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2985,6 +2997,8 @@ export const thStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "เลือกว่าคุณต้องการป้องกันไม่ให้ผู้ตอบแบบสอบถามกรอกแบบสํารวจหรือไม่",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "ระบุว่าคําถามแบบอ่านอย่างเดียวจะแสดงอย่างไร รวมถึงในหน้าตัวอย่าง\"อ่านอย่างเดียว\" (ค่าเริ่มต้น) จะแสดงคําถามพร้อมปุ่มป้อนข้อมูลปกติ แต่ปิดการแก้ไข\"View\" จะแสดงคําตอบในรูปแบบข้อความหรือองค์ประกอบที่ไม่โต้ตอบอื่น ๆ",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "ตั้งค่าตําแหน่งของแถบความคืบหน้า ค่า \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าด้านบนหรือด้านล่างส่วนหัวของแบบสํารวจ"
     },
@@ -3004,7 +3018,9 @@ export const thStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "เมื่อเลือก จะสร้างคอลัมน์แยกสำหรับตัวเลือกแต่ละตัว",
       // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "จัดเรียงตัวเลือกตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งค่าเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว เมื่อตั้งค่าเป็น -1 ค่าจริงจะถูกสืบทอดมาจากคุณสมบัติ \"จํานวนคอลัมน์ที่ซ้อนกัน\" ของเมทริกซ์หลัก"
+      colCount: "จัดเรียงตัวเลือกตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งค่าเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว เมื่อตั้งค่าเป็น -1 ค่าจริงจะถูกสืบทอดมาจากคุณสมบัติ \"จํานวนคอลัมน์ที่ซ้อนกัน\" ของเมทริกซ์หลัก",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "ระบุว่าเซลล์ในคอลัมน์นี้จะปรากฏอย่างไรเมื่อเป็นแบบอ่านอย่างเดียว\"อ่านอย่างเดียว\" จะแสดงเซลล์ที่มีการควบคุมอินพุตตามปกติ แต่ปิดใช้งานสําหรับการแก้ไข\"View\" จะแสดงคําตอบในรูปแบบข้อความหรือองค์ประกอบที่ไม่โต้ตอบ\"Inherit\" ใช้โหมดที่ตั้งไว้สําหรับเมทริกซ์หรือแบบสํารวจ (\"Read-Only\" โดยค่าเริ่มต้น)"
     },
     slider: {
       // "The lowest number that users can select."
@@ -3170,7 +3186,9 @@ export const thStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "ตั้งการมองเห็นของปุ่มนำทางในหน้า ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจซึ่งค่าเริ่มต้นคือ \"มองเห็นได้\"",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "ตารางนี้ช่วยให้คุณสามารถกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์บนหน้า โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์"
+      gridLayoutColumns: "ตารางนี้ช่วยให้คุณสามารถกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์บนหน้า โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "ระบุว่าคําถามในหน้านี้จะแสดงผลอย่างไรเมื่อเป็นแบบอ่านอย่างเดียว\"อ่านอย่างเดียว\" จะแสดงคําถามพร้อมปุ่มป้อนข้อมูลปกติ แต่ปิดการใช้งานสําหรับการแก้ไข\"ดู\" จะแสดงคําตอบเป็นข้อความหรือองค์ประกอบที่ไม่โต้ตอบอื่น ๆ\"สืบทอด\" ใช้โหมดที่ตั้งไว้สําหรับแบบสํารวจ (\"อ่านอย่างเดียว\" โดยค่าเริ่มต้น)"
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "ตั้งค่าตําแหน่งของตัวจับเวลาบนหน้า",
