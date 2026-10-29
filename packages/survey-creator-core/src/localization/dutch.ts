@@ -1026,44 +1026,60 @@ export var nlStrings = {
     propertyNameIsIncorrect: "Gebruik geen gereserveerde woorden: \"item\", \"keuze\", \"paneel\", \"rij\".",
     // "You don't have any items yet"
     listIsEmpty: "Voeg een nieuw item toe",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Je hebt nog geen keuze",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Je hebt nog geen kolommen",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Je hebt nog geen lay-outkolommen",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Je hebt nog geen rijen",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Je hebt nog geen validatieregels",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Je hebt nog geen aangepaste variabelen",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Je hebt nog geen triggers",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Je hebt nog geen links",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Je hebt nog geen pagina's",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Je hebt nog geen soort levels",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Nieuwe keuze toevoegen",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Nieuwe kolom toevoegen",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Nieuwe rij toevoegen",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Nieuwe regel toevoegen",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Nieuwe variabele toevoegen",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Nieuwe trigger toevoegen",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Nieuwe URL toevoegen",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Nieuwe pagina toevoegen",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Voeg een nieuw sorteerniveau toe",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Geen keuzes",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Geen aangepaste beoordelingswaarden",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Geen aangepaste labels",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Geen gebieden",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Geen kolommen",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Geen layoutkolommen",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Geen rijen",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Geen validatieregels",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Geen aangepaste variabelen",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Geen triggers",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Geen voorwaardelijke markup",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Geen links",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Geen pagina's",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Geen sort-levels",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Voeg keuze toe",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Waarde toevoegen",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Label toevoegen",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Voeg gebied toe",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Voeg kolom toe",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Voeg rij toe",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Regel toevoegen",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Variabele toevoegen",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Voeg trigger toe",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Voeg markup toe",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Link toevoegen",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Pagina toevoegen",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Voeg sorteerniveau toe",
     // "Value"
     value: "Waarde",
     // "Text"
@@ -1630,6 +1646,8 @@ export var nlStrings = {
     logoHeight: "Hoogte logo",
     // "Read-only"
     readOnly: "Alleen-lezen",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Alleen-lezen modus",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Schakel de alleen-lezen modus uit als",
     // "\"No rows\" message"
@@ -2057,6 +2075,12 @@ export var nlStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Nooit"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Alleen-lezen",
+      // [Auto-translated] "View"
+      view: "Uitzicht"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Radioknoppen",
@@ -2793,7 +2817,9 @@ export var nlStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Hiermee geeft u aan hoeveel kolommen dit deelvenster beslaat binnen de rasterlay-out.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Met deze tabel kunt u elke rasterkolom in het deelvenster configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."
+      gridLayoutColumns: "Met deze tabel kunt u elke rasterkolom in het deelvenster configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Geeft aan hoe vragen in dit paneel verschijnen wanneer ze alleen-lezen zijn. \"Alleen-lezen\" toont de vragen met hun gebruikelijke invoerbesturing, maar uitgeschakeld voor bewerking. \"Weergave\" toont antwoorden als tekst of andere niet-interactieve elementen. \"Inherit\" gebruikt de modus die is ingesteld voor het ouderpaneel, pagina of enquête (\"Alleen-lezen\" standaard)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2921,7 +2947,9 @@ export var nlStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Lange teksten in keuze-opties genereren automatisch regeleinden die in het vervolgkeuzemenu passen. Schakel de selectie uit als u wilt dat de teksten worden afgekapt.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Hiermee geeft u aan hoeveel kolommen deze vraag beslaat binnen de rasterlay-out."
+      effectiveColSpan: "Hiermee geeft u aan hoeveel kolommen deze vraag beslaat binnen de rasterlay-out.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Geeft aan hoe de vraag eruitziet wanneer deze alleen-lezen is. \"Alleen-lezen\" toont de vraag met de gebruikelijke invoerbesturing, maar uitgeschakeld voor bewerking. \"Weergave\" toont antwoorden als tekst of andere niet-interactieve elementen. \"Inherit\" gebruikt de modus die is ingesteld voor het ouderpaneel, de pagina of de enquête (\"Alleen-lezen\" standaard)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2969,6 +2997,8 @@ export var nlStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Selecteer deze optie als u wilt voorkomen dat respondenten uw enquête invullen.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Specificeert hoe alleen-lezen-vragen verschijnen, ook op de previewpagina. \"Alleen-lezen\" (standaard) toont vragen met hun gebruikelijke invoerbesturing, maar uitgeschakeld voor bewerking. \"Bekijken\" toont antwoorden als tekst of andere niet-interactieve elementen.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Hiermee stelt u de locatie van de voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer."
     },
@@ -2988,7 +3018,9 @@ export var nlStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Als deze optie is geselecteerd, wordt er een afzonderlijke kolom gemaakt voor elke keuzeoptie.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Wanneer deze is ingesteld op 0, worden de opties op één regel weergegeven. Wanneer deze instelling is ingesteld op -1, wordt de werkelijke waarde overgenomen van de eigenschap 'Aantal geneste kolommen' van de bovenliggende matrix."
+      colCount: "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Wanneer deze is ingesteld op 0, worden de opties op één regel weergegeven. Wanneer deze instelling is ingesteld op -1, wordt de werkelijke waarde overgenomen van de eigenschap 'Aantal geneste kolommen' van de bovenliggende matrix.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Geeft aan hoe cellen in deze kolom verschijnen wanneer ze alleen-lezen zijn. \"Alleen-lezen\" toont de cellen met hun gebruikelijke invoerbesturing, maar uitgeschakeld voor bewerking. \"View\" toont antwoorden als tekst of andere niet-interactieve elementen. \"Inherit\" gebruikt de modus die is ingesteld voor de matrix of survey (\"Alleen-lezen\" standaard)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3154,7 +3186,9 @@ export var nlStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Hiermee stelt u de zichtbaarheid van navigatieknoppen op de pagina in. De optie \"Overerven\" past de instelling op enquêteniveau toe, die standaard op \"Zichtbaar\" staat.",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Met deze tabel kunt u elke rasterkolom op de pagina configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."
+      gridLayoutColumns: "Met deze tabel kunt u elke rasterkolom op de pagina configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Geeft aan hoe vragen op deze pagina verschijnen wanneer ze alleen-lezen zijn. \"Alleen-lezen\" toont de vragen met hun gebruikelijke invoerbesturing, maar uitgeschakeld voor bewerking. \"Bekijken\" toont antwoorden als tekst of andere niet-interactieve elementen. \"Inherit\" gebruikt de modus die voor de enquête is ingesteld (\"Alleen-lezen\" standaard)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Hiermee stelt u de locatie van een timer op een pagina in.",

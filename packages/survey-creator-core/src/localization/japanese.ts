@@ -1026,44 +1026,60 @@ export var jaStrings = {
     propertyNameIsIncorrect: "予約語は使用しないでください: \"アイテム\"、 \"選択肢\"、 \"パネル\"、 \"行\"。",
     // "You don't have any items yet"
     listIsEmpty: "新しいアイテムを追加",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "まだ選択肢はありません",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "まだ列がありません",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "レイアウト列がまだありません",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "まだ行がありません",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "入力規則はまだありません",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "カスタム変数はまだありません",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "トリガーはまだありません",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "リンクはまだありません",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "まだページがありません",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "まだレベルは何もありません",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "新しい選択肢を追加する",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "新しい列を追加",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "新しい行を追加",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "新しいルールを追加",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "新しい変数を追加",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "新しいトリガーを追加する",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "新しい URL を追加",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "新しいページを追加",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "新しいソートレベルを追加する",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "選択肢はない",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "カスタム評価値はありません",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "カスタムラベルは使いません",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "エリアはない",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "柱はありません",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "レイアウト欄はありません",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "列はなし",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "検証ルールはありません",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "カスタム変数は使いません",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "トリガーなし",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "条件付きマークアップはありません",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "リンクはありません",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "ページはない",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "レベルはない",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "選択肢を加える",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "評価価値の追加",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "ラベルを追加",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "面積の追加",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "列を追加",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "行を追加",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "ルールを追加",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "変数を追加する",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "トリガーを追加する",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "マークアップを足します",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "リンクを追加",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "ページを追加",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "ソートレベルを追加",
     // "Value"
     value: "値",
     // "Text"
@@ -1630,6 +1646,8 @@ export var jaStrings = {
     logoHeight: "ロゴの高さ",
     // "Read-only"
     readOnly: "読み取り専用",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "読み取り専用モード",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "次の場合は読み取り専用モードを無効にします。",
     // "\"No rows\" message"
@@ -2057,6 +2075,12 @@ export var jaStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "一度もない"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "読み取り専用",
+      // [Auto-translated] "View"
+      view: "眺め"
     },
     // [Auto-translated] "Radio buttons"
     radio: "ラジオボタン",
@@ -2793,7 +2817,9 @@ export var jaStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "このパネルがグリッドレイアウト内で何列にまたがっているかを指定します。",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "このテーブルでは、パネル内の各グリッド列を構成できます。行内の要素の最大数に基づいて、各列の幅の割合が自動的に設定されます。グリッドレイアウトをカスタマイズするには、これらの値を手動で調整し、各列のすべての質問のタイトル幅を定義します。"
+      gridLayoutColumns: "このテーブルでは、パネル内の各グリッド列を構成できます。行内の要素の最大数に基づいて、各列の幅の割合が自動的に設定されます。グリッドレイアウトをカスタマイズするには、これらの値を手動で調整し、各列のすべての質問のタイトル幅を定義します。",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "このパネル内の問題が読み取り専用のときにどのように表示されるかを指定します。「読み取り専用」は通常の入力コントロール付きで問題を表示しますが、編集時には無効化されています。「表示」は回答をテキストやその他の非インタラクティブな要素として表示します。「継承」は親パネル、ページ、または調査のモード(デフォルトで「読み取り専用」)を使用します。"
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2921,7 +2947,9 @@ export var jaStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "選択肢オプションのテキスト(長い)は、ドロップダウンメニュー内に収まるように改行を自動的に生成します。テキストをクリップする場合は、選択を解除します。",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "この質問がグリッドレイアウト内で何列にまたがっているかを指定します。"
+      effectiveColSpan: "この質問がグリッドレイアウト内で何列にまたがっているかを指定します。",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "問題が読み取り専用のときにどのように表示されるかを指定します。「読み取り専用」は通常の入力コントロールで問題を表示しますが、編集は無効化されています。「表示」は回答をテキストやその他の非インタラクティブな要素として表示します。「継承」は親パネル、ページ、または調査のモード(デフォルトで「読み取り専用」)を使用します。"
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2969,6 +2997,8 @@ export var jaStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "回答者がアンケートに回答できないようにする場合に選択します。",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "読み取り専用問題の表示方法を指定し、プレビューページにも表示されます。「読み取り専用」(デフォルト)は通常の入力コントロールを持つ問題を表示しますが、編集時には無効化されています。「表示」は回答をテキストやその他の非インタラクティブな要素として表示します。",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "プログレスバーの位置を設定します。「自動」の値は、調査ヘッダーの上または下に進行状況バーを表示します。"
     },
@@ -2988,7 +3018,9 @@ export var jaStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "選択すると、選択肢オプションごとに個別の列が作成されます。",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "選択肢を複数列のレイアウトに配置します。0 に設定すると、オプションが 1 行に表示されます。-1 に設定すると、実際の値は親行列の \"入れ子になった列数\" プロパティから継承されます。"
+      colCount: "選択肢を複数列のレイアウトに配置します。0 に設定すると、オプションが 1 行に表示されます。-1 に設定すると、実際の値は親行列の \"入れ子になった列数\" プロパティから継承されます。",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "この列のセルが読み取り専用のときにどのように表示されるかを指定します。「読み取り専用」は通常の入力コントロール付きセルを表示しますが、編集時には無効化されています。「表示」は回答をテキストやその他の非インタラクティブな要素として表示します。「継承」はマトリックスまたは調査のモード(デフォルトで「読み取り専用」)を使用します。"
     },
     slider: {
       // "The lowest number that users can select."
@@ -3154,7 +3186,9 @@ export var jaStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "ページ上のナビゲーションボタンの表示を設定します。「継承」オプションは、アンケートレベルの設定を適用し、デフォルトは「表示」です。",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "このテーブルでは、ページ上の各グリッド列を構成できます。行内の要素の最大数に基づいて、各列の幅の割合が自動的に設定されます。グリッドレイアウトをカスタマイズするには、これらの値を手動で調整し、各列のすべての質問のタイトル幅を定義します。"
+      gridLayoutColumns: "このテーブルでは、ページ上の各グリッド列を構成できます。行内の要素の最大数に基づいて、各列の幅の割合が自動的に設定されます。グリッドレイアウトをカスタマイズするには、これらの値を手動で調整し、各列のすべての質問のタイトル幅を定義します。",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "このページ上の問題が読み取り専用のときにどのように表示されるかを指定します。「読み取り専用」は通常の入力コントロール付きで質問を表示しますが、編集時には無効化されています。「表示」では回答をテキストやその他の非インタラクティブ要素として表示します。「継承」は調査用に設定されたモード(デフォルトで「読み取り専用」)を使用します。"
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "ページ上のタイマーの位置を設定します。",

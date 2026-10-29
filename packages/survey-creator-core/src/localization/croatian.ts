@@ -1026,44 +1026,60 @@ export var hrStrings = {
     propertyNameIsIncorrect: "Nemojte koristiti rezervirane riječi: \"stavka\", \"izbor\", \"ploča\", \"red\".",
     // "You don't have any items yet"
     listIsEmpty: "Dodavanje nove stavke",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Još nemate izbora",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Još nemate kolumne",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Još nemate stupce izgleda",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Još nemate redaka",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Još nemate pravila provjere valjanosti",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Još nemate prilagođene varijable",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Još nemaš okidača",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Još nemate poveznice",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Još nemate stranice",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Još nemaš nikakve razine sortiranja",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Dodavanje novog izbora",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Dodaj novi stupac",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Dodaj novi redak",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Dodaj novo pravilo",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Dodaj novu varijablu",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Dodaj novi okidač",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Dodaj novi URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Dodaj novu stranicu",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Dodajte novu razinu sortiranja",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Nema izbora",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Nema prilagođenih ocjena",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Nema prilagođenih etiketa",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Nema područja",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Nema stupaca",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Bez stupaca za raspored",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Nema svađa",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Nema pravila validacije",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Nema prilagođenih varijabli",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Nema okidača",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Nema uvjetnog označavanja",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Nema poveznica",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Nema stranica",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Nema razina sortiranja",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Dodaj izbor",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Dodajte vrijednost ocjene",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Dodaj oznaku",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Dodaj površinu",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Dodaj stupac",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Dodaj red",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Pravilo dodavanja",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Dodaj varijablu",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Dodaj okidač",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Dodaj oznake",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Dodaj poveznicu",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Dodaj stranicu",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Dodaj razinu sortiranja",
     // "Value"
     value: "Vrijednost",
     // "Text"
@@ -1630,6 +1646,8 @@ export var hrStrings = {
     logoHeight: "Visina logotipa",
     // "Read-only"
     readOnly: "Samo za čitanje",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Način samo za čitanje",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Onemogućite način rada samo za čitanje ako",
     // "\"No rows\" message"
@@ -2057,6 +2075,12 @@ export var hrStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Nikada"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Samo za čitanje",
+      // [Auto-translated] "View"
+      view: "Pogled"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Radio tipke",
@@ -2793,7 +2817,9 @@ export var hrStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Određuje koliko stupaca ova ploča obuhvaća unutar rasporeda rešetke.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Ova tablica omogućuje konfiguriranje svakog stupca rešetke unutar ploče. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu."
+      gridLayoutColumns: "Ova tablica omogućuje konfiguriranje svakog stupca rešetke unutar ploče. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificira kako se pitanja unutar ovog panela pojavljuju kada su samo za čitanje. \"Samo za čitanje\" prikazuje pitanja s njihovim uobičajenim kontrolama unosa, ali je onemogućeno za uređivanje. \"Prikaz\" prikazuje odgovore kao tekst ili druge neinteraktivne elemente. \"Naslijedi\" koristi način rada postavljen za roditeljsku ploču, stranicu ili anketu (\"Samo za čitanje\" po defaultu)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2921,7 +2947,9 @@ export var hrStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Dugi tekstovi u mogućnostima izbora automatski će generirati prijelome redaka kako bi stali unutar padajućeg izbornika. Poništite odabir ako želite da se tekstovi izrežu.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Određuje koliko stupaca ovo pitanje obuhvaća unutar rasporeda rešetke."
+      effectiveColSpan: "Određuje koliko stupaca ovo pitanje obuhvaća unutar rasporeda rešetke.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificira kako se pitanje pojavljuje kada je samo za čitanje. \"Samo za čitanje\" prikazuje pitanje s uobičajenim kontrolama unosa, ali je isključeno za uređivanje. \"Prikaz\" prikazuje odgovore kao tekst ili druge neinteraktivne elemente. \"Naslijedi\" koristi način rada postavljen za roditeljsku ploču, stranicu ili anketu (\"Samo za čitanje\" po defaultu)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2969,6 +2997,8 @@ export var hrStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Odaberite želite li ispitanicima onemogućiti ispunjavanje upitnika.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Specificira kako se pojavljuju pitanja samo za čitanje, uključujući i na stranici za pregled. \"Samo za čitanje\" (zadano) prikazuje pitanja s uobičajenim kontrolama unosa, ali je onemogućeno za uređivanje. \"Prikaz\" prikazuje odgovore kao tekst ili druge neinteraktivne elemente.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Postavlja lokaciju trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja ankete."
     },
@@ -2988,7 +3018,9 @@ export var hrStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Kada je odabrano, stvara pojedinačni stupac za svaku mogućnost izbora.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice."
+      colCount: "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificira kako se ćelije u ovom stupcu pojavljuju kada su samo za čitanje. \"Samo za čitanje\" prikazuje ćelije s njihovim uobičajenim kontrolama unosa, ali onemogućeno za uređivanje. \"Prikaz\" prikazuje odgovore kao tekst ili druge neinteraktivne elemente. \"Naslijedi\" koristi način rada postavljen za matricu ili anketu (\"Samo za čitanje\" po defaultu)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3154,7 +3186,9 @@ export var hrStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Ova tablica omogućuje konfiguriranje svakog stupca rešetke na stranici. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu."
+      gridLayoutColumns: "Ova tablica omogućuje konfiguriranje svakog stupca rešetke na stranici. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificira kako se pitanja na ovoj stranici pojavljuju kada su samo za čitanje. \"Samo za čitanje\" prikazuje pitanja s njihovim uobičajenim kontrolama unosa, ali je isključeno za uređivanje. \"Prikaz\" prikazuje odgovore kao tekst ili druge neinteraktivne elemente. \"Naslijedi\" koristi način rada postavljen za anketu (\"Samo za čitanje\" po zadanim postavkama)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Postavlja lokaciju mjerača vremena na stranici.",

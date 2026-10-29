@@ -1026,44 +1026,60 @@ export var frenchTranslation = {
     propertyNameIsIncorrect: "N’utilisez pas de mots réservés : « item », « choice », « panel », « row ».",
     // "You don't have any items yet"
     listIsEmpty: "Ajouter un nouvel élément",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Vous n’avez pas encore le choix",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Vous n’avez pas encore de colonnes",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Vous n’avez pas encore de colonnes de mise en page",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Vous n’avez pas encore de lignes",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Vous n’avez pas encore de règles de validation",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Vous n’avez pas encore de variables personnalisées",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Vous n’avez pas encore de déclencheurs",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Vous n’avez pas encore de liens",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Vous n’avez pas encore de pages",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Tu n’as pas encore de niveaux de type",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Ajouter un nouveau choix",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Ajouter une nouvelle colonne",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Ajouter une nouvelle ligne",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Ajouter une nouvelle règle",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Ajouter une nouvelle variable",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Ajouter un nouveau déclencheur",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Ajouter une nouvelle URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Ajouter une nouvelle page",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Ajouter un nouveau niveau de tri",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Pas de choix",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Aucune valeur de classification personnalisée",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Pas d’étiquettes personnalisées",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Pas de zones",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Pas de colonnes",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Aucune colonne de disposition",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Pas de rangées",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Aucune règle de validation",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Aucune variable personnalisée",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Aucun déclencheur",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Aucun balisage conditionnel",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Aucun lien",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Pas de pages",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Aucun niveau de tri",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Ajouter le choix",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Valeur ajoutée de notation",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Ajouter une étiquette",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Ajouter une surface",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Ajouter la colonne",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Ajouter une ligne",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Règle d’ajouter",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Ajouter une variable",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Ajouter déclencheur",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Ajouter le marge",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Ajouter le lien",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Ajouter la page",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Ajouter le niveau de tri",
     // "Value"
     value: "Valeur",
     // "Text"
@@ -1630,6 +1646,8 @@ export var frenchTranslation = {
     logoHeight: "Hauteur du logo",
     // "Read-only"
     readOnly: "Lecture seule",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Mode lecture seule",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Désactivez le mode lecture seule si",
     // "\"No rows\" message"
@@ -2057,6 +2075,12 @@ export var frenchTranslation = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Jamais"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Lecture seule",
+      // [Auto-translated] "View"
+      view: "Vue"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Boutons radio",
@@ -2793,7 +2817,9 @@ export var frenchTranslation = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Spécifie le nombre de colonnes de ce panneau dans la disposition de la grille.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Ce tableau vous permet de configurer chaque colonne de la grille dans le panneau. Il définit automatiquement le pourcentage de largeur de chaque colonne en fonction du nombre maximal d’éléments dans une rangée. Pour personnaliser la disposition de la grille, ajustez manuellement ces valeurs et définissez la largeur du titre pour toutes les questions de chaque colonne."
+      gridLayoutColumns: "Ce tableau vous permet de configurer chaque colonne de la grille dans le panneau. Il définit automatiquement le pourcentage de largeur de chaque colonne en fonction du nombre maximal d’éléments dans une rangée. Pour personnaliser la disposition de la grille, ajustez manuellement ces valeurs et définissez la largeur du titre pour toutes les questions de chaque colonne.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Précise comment apparaissent les questions dans ce panneau lorsqu’elles sont en lecture seule. « Lecture seule » affiche les questions avec leurs contrôles d’entrée habituels, mais désactivés pour l’édition. « Voir » affiche les réponses sous forme de texte ou d’autres éléments non interactifs. « Héritier » utilise le mode défini pour le panneau parent, la page ou le sondage (« Lecture seule » par défaut)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2921,7 +2947,9 @@ export var frenchTranslation = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Les longs textes dans les options de choix généreront automatiquement des sauts de ligne pour s’adapter au menu déroulant. Désélectionnez cette option si vous souhaitez que les textes soient coupés.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Spécifie le nombre de colonnes que cette question couvre dans la disposition de la grille."
+      effectiveColSpan: "Spécifie le nombre de colonnes que cette question couvre dans la disposition de la grille.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Précise comment la question apparaît lorsqu’elle est en lecture seule. « Lecture seule » affiche la question avec ses contrôles d’entrée habituels, mais désactivée pour l’édition. « Voir » affiche les réponses sous forme de texte ou d’autres éléments non interactifs. « Héritage » utilise le mode défini pour le panneau parent, la page ou le sondage (« Lecture seule » par défaut)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2969,6 +2997,8 @@ export var frenchTranslation = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Sélectionnez cette option si vous souhaitez empêcher les personnes interrogées de remplir votre sondage.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Précise comment apparaissent les questions en lecture seule, y compris sur la page d’aperçu. « Lecture seule » (par défaut) affiche les questions avec leurs contrôles d’entrée habituels, mais désactivés pour la modification. « Voir » affiche les réponses sous forme de texte ou d’autres éléments non interactifs.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Définit l’emplacement de la barre de progression. La valeur « Auto » affiche la barre de progression au-dessus ou en dessous de l’en-tête de l’enquête."
     },
@@ -2988,7 +3018,9 @@ export var frenchTranslation = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Lorsque cette option est sélectionnée, une colonne individuelle est créée pour chaque option de choix.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Organise les options de choix dans une mise en page à plusieurs colonnes. Lorsqu’elle est définie sur 0, les options sont affichées sur une seule ligne. Lorsqu’elle est définie sur -1, la valeur réelle est héritée de la propriété « Nombre de colonnes imbriquées » de la matrice parente."
+      colCount: "Organise les options de choix dans une mise en page à plusieurs colonnes. Lorsqu’elle est définie sur 0, les options sont affichées sur une seule ligne. Lorsqu’elle est définie sur -1, la valeur réelle est héritée de la propriété « Nombre de colonnes imbriquées » de la matrice parente.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Spécifie comment apparaissent les cellules de cette colonne lorsqu’elles sont en lecture seule. « Lecture seule » affiche les cellules avec leurs contrôles d’entrée habituels, mais désactivées pour l’édition. « Voir » affiche les réponses sous forme de texte ou d’autres éléments non interactifs. « Hériter » utilise le mode défini pour la matrice ou le sondage (« Lecture seule » par défaut)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3154,7 +3186,9 @@ export var frenchTranslation = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Définit la visibilité des boutons de navigation sur la page. L’option « Hériter » applique le paramètre au niveau de l’enquête, qui est par défaut « Visible ».",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Ce tableau vous permet de configurer chaque colonne de la grille de la page. Il définit automatiquement le pourcentage de largeur de chaque colonne en fonction du nombre maximal d’éléments dans une rangée. Pour personnaliser la disposition de la grille, ajustez manuellement ces valeurs et définissez la largeur du titre pour toutes les questions de chaque colonne."
+      gridLayoutColumns: "Ce tableau vous permet de configurer chaque colonne de la grille de la page. Il définit automatiquement le pourcentage de largeur de chaque colonne en fonction du nombre maximal d’éléments dans une rangée. Pour personnaliser la disposition de la grille, ajustez manuellement ces valeurs et définissez la largeur du titre pour toutes les questions de chaque colonne.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Précise comment les questions sur cette page apparaissent lorsqu’elles sont en lecture seule. « Lecture seule » affiche les questions avec leurs contrôles d’entrée habituels, mais désactivées pour la modification. « Voir » affiche les réponses sous forme de texte ou d’autres éléments non interactifs. « Héritier » utilise le mode défini pour l’enquête (« Lecture seule » par défaut)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Définit l’emplacement d’un minuteur sur une page.",

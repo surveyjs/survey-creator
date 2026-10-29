@@ -1028,42 +1028,58 @@ export var catalanTranslation = {
     listIsEmpty: "Afegir un nou artículo",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "No se han añadido opcions todavía",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Todavía no tienes ninguna columna",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Todavía no tiene columnes de diseño",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Todavía no tienes ninguna fila",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Todavía no tiene ninguna regla de validació",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Todavía no tiene ninguna variable personalitzada",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Todavía no tienes ningún desencadenante",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Todavía no tienes ningún enlace",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Todavía no tienes ninguna pàgina",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Encara no tens cap nivell de tipus",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "No hi ha valors de valoració personalitzats",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "No hi ha etiquetes personalitzades",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Sense zones",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Sense columnes",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "No hi ha columnes de disposició",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "No hi ha files",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "No hi ha regles de validació",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "No hi ha variables personalitzades",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Sense desencadenants",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Sense marcatge condicional",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Sense enllaços",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Sense pàgines",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "No hi ha nivells de sort",
     // "Add new choice"
     "addNew@choices": "Añade una opción",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Agregar nova columna",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Agregar nova fila",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Agregar nova regla",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Adición de una nova variable",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Agregar nou disparador",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Agregar nova URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Agregar nova pàgina",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Afegeix un nou nivell d'ordenació",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Valor d'avaluació",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Afegir etiqueta",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Afegeix àrea",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Afegir columna",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Afegeix fila",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Regla d'afegir",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Suma la variable",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Afegir disparador",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Afegeix el marge",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Afegeix enllaç",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Afegeix pàgina",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Afegeix nivell d'ordenació",
     // "Value"
     value: "Valor",
     // [Auto-translated] "Text"
@@ -1630,6 +1646,8 @@ export var catalanTranslation = {
     logoHeight: "Alto de Logo (en valors aceptados CSS)",
     // "Read-only"
     readOnly: "Sólo-lectura",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Mode de només lectura",
     // "Disable the read-only mode if"
     enableIf: "Editable si",
     // "\"No rows\" message"
@@ -2057,6 +2075,12 @@ export var catalanTranslation = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Nunca"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Només lectura",
+      // [Auto-translated] "View"
+      view: "Vista"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Botons de ràdio",
@@ -2793,7 +2817,9 @@ export var catalanTranslation = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Especifica quantes columnes abasta aquest panell dins la disposició de la quadrícula.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Aquesta taula et permet configurar cada columna de la graella dins del panell. Estableix automàticament el percentatge d'amplada per a cada columna basant-se en el nombre màxim d'elements en una fila. Per personalitzar la disposició de la graella, ajusta manualment aquests valors i defineix l'amplada del títol per a totes les preguntes de cada columna."
+      gridLayoutColumns: "Aquesta taula et permet configurar cada columna de la graella dins del panell. Estableix automàticament el percentatge d'amplada per a cada columna basant-se en el nombre màxim d'elements en una fila. Per personalitzar la disposició de la graella, ajusta manualment aquests valors i defineix l'amplada del títol per a totes les preguntes de cada columna.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica com apareixen les preguntes dins d'aquest panell quan són de només lectura. \"Només lectura\" mostra les preguntes amb els seus controls d'entrada habituals, però desactivat per a l'edició. \"Veure\" mostra les respostes com a text o altres elements no interactius. \"Heretar\" utilitza el mode establert per al panell pare, la pàgina o l'enquesta (\"Només lectura\" per defecte)."
     },
     paneldynamic: {
       // "A panell ID that is not visible to respondents."
@@ -2921,7 +2947,9 @@ export var catalanTranslation = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Los textos largos en las opcions de elección generarán automáticamente saltos de línea para que se ajusten al menú desplegable. Anule la selección si desea que los textos se recorten.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Especifica el número de columnes que abarca esta pregunta dentro del diseño de cuadrícula."
+      effectiveColSpan: "Especifica el número de columnes que abarca esta pregunta dentro del diseño de cuadrícula.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica com apareix la pregunta quan és només lectura. \"Només lectura\" mostra la pregunta amb els seus controls d'entrada habituals, però desactivats per editar. \"Veure\" mostra les respostes com a text o altres elements no interactius. \"Heretar\" utilitza el mode establert per al panell pare, pàgina o enquesta (\"Només lectura\" per defecte)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2969,6 +2997,8 @@ export var catalanTranslation = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Seleccione si desea evitar que los encuestados completen su enquesta.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Especifica com apareixen les preguntes de només lectura, incloent-hi la pàgina de previsualització. \"Només lectura\" (per defecte) mostra les preguntes amb els seus controls d'entrada habituals, però desactivats per editar. \"Veure\" mostra les respostes com a text o altres elements no interactius.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Establece la ubicación de la barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la enquesta."
     },
@@ -2988,7 +3018,9 @@ export var catalanTranslation = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Cuando se selecciona, crea una columna individual para cada opción de opción.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Organiza las opciones de elección en un diseño de varias columnes. Cuando se establece en 0, las opcions se muestran en una sola línea. Cuando se establece en -1, el valor real se hereda de la propiedad \"Recuento de columnas anidadas\" de la matriz primaria."
+      colCount: "Organiza las opciones de elección en un diseño de varias columnes. Cuando se establece en 0, las opcions se muestran en una sola línea. Cuando se establece en -1, el valor real se hereda de la propiedad \"Recuento de columnas anidadas\" de la matriz primaria.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica com apareixen les cel·les d'aquesta columna quan són de només lectura. \"Només lectura\" mostra les cel·les amb els seus controls d'entrada habituals, però desactivats per editar. \"Veure\" mostra les respostes com a text o altres elements no interactius. \"Heretar\" utilitza el mode establert per a la matriu o enquesta (\"Només lectura\" per defecte)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3154,7 +3186,9 @@ export var catalanTranslation = {
       // "Sets the visibility of navigation buttons on the page. The \"Heredar\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Establece la visibilidad de los botones de navegación en la pàgina. La opción \"Heredar\" aplica la configuració de nivel de enquesta, que por defecte es \"Visible\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Esta tabla le permite configurar cada columna de cuadrícula en la pàgina. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valors y defina el ancho del títol para todas las preguntes de cada columna."
+      gridLayoutColumns: "Esta tabla le permite configurar cada columna de cuadrícula en la pàgina. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valors y defina el ancho del títol para todas las preguntes de cada columna.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica com apareixen les preguntes d'aquesta pàgina quan són de només lectura. \"Només lectura\" mostra les preguntes amb els seus controls d'entrada habituals, però desactivats per editar. \"Veure\" mostra les respostes com a text o altres elements no interactius. \"Heretar\" utilitza el mode establert per a l'enquesta (\"Només lectura\" per defecte)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Establece la ubicación de un temporizador en una pàgina.",

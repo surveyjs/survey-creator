@@ -1028,42 +1028,58 @@ export var bgStrings = {
     listIsEmpty: "Все още няма добавени елементи.",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Все още няма добавени възможности за избор.",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Все още нямате колони",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Все още нямате графи за оформление",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Все още нямате никакви редове",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Все още нямате правила за валидиране",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Все още нямате никакви персонализирани променливи",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Все още нямате никакви тригери",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Все още нямате връзки",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Все още нямате страници",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Все още нямаш никакви нива на сортиране",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Няма персонализирани стойности на рейтинга",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Без персонализирани етикети",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Няма зони",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Няма колони",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Няма колони за оформление",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Без редици",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Няма правила за валидиране",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Няма персонализирани променливи",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Без тригери",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Няма условна надценка",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Няма връзки",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Без страници",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Няма нива на сортиране",
     // "Add new choice"
     "addNew@choices": "Добавяне на възможност за избор",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Добавяне на нова колона",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Добавяне на нов ред",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Добавяне на ново правило",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Добавяне на нова променлива",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Добавяне на нов превключвател",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Добавяне на нов URL адрес",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Добавяне на нова страница",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Добавете ново ниво на сортиране",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Добави стойност на рейтинга",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Добави етикет",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Добави площ",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Добави колона",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Добави ред",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Добави правило",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Добави променлива",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Добави спусък",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Добавете надценка",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Добави линк",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Добави страница",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Добавете ниво на сортиране",
     // "Value"
     value: "Стойност",
     // "Text"
@@ -1630,6 +1646,8 @@ export var bgStrings = {
     logoHeight: "Височина на логото (в CSS-допустими стойности)",
     // "Read-only"
     readOnly: "Само за четене",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Режим само за четене",
     // "Disable the read-only mode if"
     enableIf: "Може да се редактира",
     // "\"No rows\" message"
@@ -2057,6 +2075,12 @@ export var bgStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Никога"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Само за четене",
+      // [Auto-translated] "View"
+      view: "Изглед"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Радио бутони",
@@ -2793,7 +2817,9 @@ export var bgStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Указва колко колони обхваща този панел в оформлението на мрежата.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Тази таблица ви позволява да конфигурирате всяка колона на мрежата в панела. Той автоматично задава процента на ширината за всяка колона въз основа на максималния брой елементи в реда. За да персонализирате оформлението на мрежата, ръчно коригирайте тези стойности и определете ширината на заглавието за всички въпроси във всяка колона."
+      gridLayoutColumns: "Тази таблица ви позволява да конфигурирате всяка колона на мрежата в панела. Той автоматично задава процента на ширината за всяка колона въз основа на максималния брой елементи в реда. За да персонализирате оформлението на мрежата, ръчно коригирайте тези стойности и определете ширината на заглавието за всички въпроси във всяка колона.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Уточнява как се появяват въпросите в този панел, когато са само за четене. \"Само за четене\" показва въпросите с обичайните им входни контроли, но са изключени за редактиране. \"View\" показва отговорите като текст или други неинтерактивни елементи. \"Inherit\" използва режима, зададен за родителския панел, страница или анкета (\"Read-Only\" по подразбиране)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2921,7 +2947,9 @@ export var bgStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Дългите текстове в опциите за избор автоматично ще генерират нови редове, за да се поберат в падащото меню. Премахнете отметката, ако искате текстовете да бъдат изрязани.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Указва колко колони обхваща този въпрос в оформлението на мрежата."
+      effectiveColSpan: "Указва колко колони обхваща този въпрос в оформлението на мрежата.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Уточнява как се появява въпросът, когато е само за четене. \"Само за четене\" показва въпроса с обичайните входни контроли, но е изключен за редактиране. \"Преглед\" показва отговорите като текст или други неинтерактивни елементи. \"Наследяване\" използва режима, зададен за родителския панел, страница или анкета (\"Само за четене\" по подразбиране)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2969,6 +2997,8 @@ export var bgStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Изберете дали искате да попречите на респондентите да попълват анкетата ви.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Уточнява как изглеждат въпросите само за четене, включително на страницата за предварителен преглед. \"Само за четене\" (по подразбиране) показва въпроси с обичайните си контроли за въвеждане, но е изключен за редактиране. \"Преглед\" показва отговорите като текст или други неинтерактивни елементи.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Задава местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването."
     },
@@ -2988,7 +3018,9 @@ export var bgStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Когато е избрано, създава отделна колона за всяка опция за избор.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред. Когато е зададена на -1, действителната стойност се наследява от свойството \"Брой вложени колони\" на родителската матрица."
+      colCount: "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред. Когато е зададена на -1, действителната стойност се наследява от свойството \"Брой вложени колони\" на родителската матрица.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Определя как изглеждат клетките в тази колона, когато са само за четене. \"Само за четене\" показва клетките с обичайните им входни контроли, но са изключени за редактиране. \"Преглед\" показва отговорите като текст или други неинтерактивни елементи. \"Наследяване\" използва режима, зададен за матрицата или анкетата (\"Само за четене\" по подразбиране)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3154,7 +3186,9 @@ export var bgStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Тази таблица ви позволява да конфигурирате всяка колона на мрежата на страницата. Той автоматично задава процента на ширината за всяка колона въз основа на максималния брой елементи в реда. За да персонализирате оформлението на мрежата, ръчно коригирайте тези стойности и определете ширината на заглавието за всички въпроси във всяка колона."
+      gridLayoutColumns: "Тази таблица ви позволява да конфигурирате всяка колона на мрежата на страницата. Той автоматично задава процента на ширината за всяка колона въз основа на максималния брой елементи в реда. За да персонализирате оформлението на мрежата, ръчно коригирайте тези стойности и определете ширината на заглавието за всички въпроси във всяка колона.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Уточнява как изглеждат въпросите на тази страница, когато са само за четене. \"Само за четене\" показва въпросите с обичайните им входни контроли, но са изключени за редактиране. \"Преглед\" показва отговорите като текст или други неинтерактивни елементи. \"Наследяване\" използва режима, зададен за анкетата (\"Само за четене\" по подразбиране)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Задава местоположението на таймер на страница.",

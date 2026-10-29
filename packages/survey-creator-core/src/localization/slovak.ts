@@ -1026,44 +1026,60 @@ export var skStrings = {
     propertyNameIsIncorrect: "Nepoužívajte vyhradené slová: \"položka\", \"výber\", \"panel\", \"riadok\".",
     // "You don't have any items yet"
     listIsEmpty: "Pridajte novú položku",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Zatiaľ nemáte na výber",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Zatiaľ nemáte žiadne stĺpce",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Ešte nemáte stĺpce rozloženia",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Zatiaľ nemáte žiadne riadky",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Zatiaľ nemáte žiadne overovacie pravidlá",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Zatiaľ nemáte žiadne vlastné premenné",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Zatiaľ nemáte žiadne spúšťače",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Zatiaľ nemáte žiadne odkazy",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Zatiaľ nemáte žiadne stránky",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Ešte nemáš žiadne úrovne triedenia",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Pridanie novej možnosti",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Pridať nový stĺpec",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Pridať nový riadok",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Pridať nové pravidlo",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Pridanie novej premennej",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Pridať nový spúšťač",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Pridať novú URL adresu",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Pridať novú stránku",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Pridajte novú úroveň triedenia",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Žiadne možnosti",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Žiadne vlastné hodnotenia",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Žiadne vlastné štítky",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Žiadne oblasti",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Žiadne stĺpce",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Žiadne stĺpce rozloženia",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Žiadne hádky",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Žiadne validačné pravidlá",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Žiadne vlastné premenné",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Žiadne spúšťače",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Žiadne podmienené značkovanie",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Žiadne odkazy",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Žiadne stránky",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Žiadne triedenie úrovní",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Pridajte výber",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Pridajte hodnotu hodnotenia",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Pridať štítok",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Pridať plochu",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Pridať stĺpec",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Pridať riadok",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Pridať pravidlo",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Pridaj premennú",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Pridať spúšťač",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Pridaj značku",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Pridať odkaz",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Pridať stránku",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Pridať úroveň triedenia",
     // "Value"
     value: "Hodnota",
     // [Auto-translated] "Text"
@@ -1630,6 +1646,8 @@ export var skStrings = {
     logoHeight: "Výška loga",
     // "Read-only"
     readOnly: "Iba na čítanie",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Režim iba na čítanie",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Vypnite režim iba na čítanie, ak",
     // "\"No rows\" message"
@@ -2057,6 +2075,12 @@ export var skStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Nikdy"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Iba na čítanie",
+      // [Auto-translated] "View"
+      view: "Zobraziť"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Tlačidlá rádia",
@@ -2793,7 +2817,9 @@ export var skStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Určuje, koľko stĺpcov má tento panel v rozložení mriežky.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Táto tabuľka umožňuje nakonfigurovať každý stĺpec mriežky v paneli. Automaticky nastaví percentuálnu šírku pre každý stĺpec na základe maximálneho počtu prvkov v riadku. Ak chcete prispôsobiť rozloženie mriežky, manuálne upravte tieto hodnoty a definujte šírku názvu pre všetky otázky v každom stĺpci."
+      gridLayoutColumns: "Táto tabuľka umožňuje nakonfigurovať každý stĺpec mriežky v paneli. Automaticky nastaví percentuálnu šírku pre každý stĺpec na základe maximálneho počtu prvkov v riadku. Ak chcete prispôsobiť rozloženie mriežky, manuálne upravte tieto hodnoty a definujte šírku názvu pre všetky otázky v každom stĺpci.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Špecifikuje, ako sa otázky v tomto paneli zobrazujú, keď sú len na čítanie. \"Len na čítanie\" zobrazuje otázky s ich obvyklými ovládacími prvkami, ale je deaktivované na úpravy. \"Zobrazenie\" zobrazuje odpovede ako text alebo iné neinteraktívne prvky. \"Dedičné\" používa režim nastavený pre rodičovský panel, stránku alebo prieskum (\"Iba na čítanie\" v predvolenom nastavení)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2921,7 +2947,9 @@ export var skStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Dlhé texty v možnostiach výberu automaticky vygenerujú zlomy riadkov, aby sa zmestili do rozbaľovacej ponuky. Zrušte výber, či chcete texty vystrihnúť.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Určuje, koľko stĺpcov táto otázka zahŕňa v rozložení mriežky."
+      effectiveColSpan: "Určuje, koľko stĺpcov táto otázka zahŕňa v rozložení mriežky.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Špecifikuje, ako sa otázka zobrazí, keď je len na čítanie. \"Len na čítanie\" zobrazuje otázku s bežnými ovládacími prvkami, ale je deaktivovaná pre úpravy. \"Zobrazenie\" zobrazuje odpovede ako text alebo iné neinteraktívne prvky. \"Dedičiť\" používa režim nastavený pre rodičovský panel, stránku alebo prieskum (\"Iba na čítanie\" v predvolenom nastavení)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2969,6 +2997,8 @@ export var skStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Vyberte, či chcete respondentom zabrániť vo vypĺňaní prieskumu.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Špecifikuje, ako sa otázky len na čítanie zobrazujú, vrátane na stránke náhľadu. \"Iba na čítanie\" (predvolené) zobrazuje otázky s ich bežnými ovládacími prvkami, ale je deaktivované na úpravy. \"Zobrazenie\" zobrazuje odpovede ako text alebo iné neinteraktívne prvky.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Nastaví umiestnenie indikátora priebehu. Hodnota \"Auto\" zobrazuje indikátor priebehu nad alebo pod hlavičkou prieskumu."
     },
@@ -2988,7 +3018,9 @@ export var skStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Ak je táto voľba vybratá, vytvorí samostatný stĺpec pre každú možnosť výberu.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice."
+      colCount: "Usporiada možnosti výberu vo viacstĺpcovom rozložení. Ak je nastavená hodnota 0, možnosti sa zobrazia v jednom riadku. Ak je nastavená na -1, skutočná hodnota sa zdedí z vlastnosti \"Počet vnorených stĺpcov\" nadradenej matice.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Špecifikuje, ako sa bunky v tomto stĺpci zobrazujú, keď sú len na čítanie. \"Iba na čítanie\" zobrazuje bunky s ich bežnými ovládacími prvkami, ale je deaktivované na úpravy. \"Zobrazenie\" zobrazuje odpovede ako text alebo iné neinteraktívne prvky. \"Dedičné\" používa režim nastavený pre maticu alebo prieskum (\"Iba na čítanie\" v predvolenom nastavení)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3154,7 +3186,9 @@ export var skStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Nastavuje viditeľnosť navigačných tlačidiel na stránke. Možnosť Zdediť použije nastavenie na úrovni prieskumu, ktoré je predvolene nastavené na \"Viditeľné\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Táto tabuľka umožňuje nakonfigurovať každý stĺpec mriežky na strane. Automaticky nastaví percentuálnu šírku pre každý stĺpec na základe maximálneho počtu prvkov v riadku. Ak chcete prispôsobiť rozloženie mriežky, manuálne upravte tieto hodnoty a definujte šírku názvu pre všetky otázky v každom stĺpci."
+      gridLayoutColumns: "Táto tabuľka umožňuje nakonfigurovať každý stĺpec mriežky na strane. Automaticky nastaví percentuálnu šírku pre každý stĺpec na základe maximálneho počtu prvkov v riadku. Ak chcete prispôsobiť rozloženie mriežky, manuálne upravte tieto hodnoty a definujte šírku názvu pre všetky otázky v každom stĺpci.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Špecifikuje, ako sa otázky na tejto stránke zobrazujú, keď sú len na čítanie. \"Len na čítanie\" zobrazuje otázky s ich bežnými ovládacími prvkami, ale je deaktivované na úpravy. \"Zobrazenie\" zobrazuje odpovede ako text alebo iné neinteraktívne prvky. \"Dedičné\" používa režim nastavený pre prieskum (\"Iba na čítanie\" v predvolenom nastavení)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Nastaví umiestnenie časovača na strane.",

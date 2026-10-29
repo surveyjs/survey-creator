@@ -523,7 +523,7 @@ export var enStrings = {
     change: "Change",
     close: "Close",
     delete: "Delete",
-    addNew: "Add New",
+    addNew: "Add item",
     addItem: "Click to add an item...",
     removeItem: "Click to remove the item...",
     dragItem: "Drag the item",
@@ -551,26 +551,34 @@ export var enStrings = {
     propertyIsNoUnique: "Please enter a unique value",
     propertyNameIsNotUnique: "Please enter a unique name",
     propertyNameIsIncorrect: "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\".",
-    listIsEmpty: "You don't have any items yet",
-    "listIsEmpty@choices": "You don't have any choices yet",
-    "listIsEmpty@columns": "You don't have any columns yet",
-    "listIsEmpty@gridLayoutColumns": "You don't have layout columns yet",
-    "listIsEmpty@rows": "You don't have any rows yet",
-    "listIsEmpty@validators": "You don't have any validation rules yet",
-    "listIsEmpty@calculatedValues": "You don't have any custom variables yet",
-    "listIsEmpty@triggers": "You don't have any triggers yet",
-    "listIsEmpty@navigateToUrlOnCondition": "You don't have any links yet",
-    "listIsEmpty@pages": "You don't have any pages yet",
-    "listIsEmpty@sortCriteria": "You don't have any sort levels yet",
-    "addNew@choices": "Add new choice",
-    "addNew@columns": "Add new column",
-    "addNew@rows": "Add new row",
-    "addNew@validators": "Add new rule",
-    "addNew@calculatedValues": "Add new variable",
-    "addNew@triggers": "Add new trigger",
-    "addNew@navigateToUrlOnCondition": "Add new URL",
-    "addNew@pages": "Add new page",
-    "addNew@sortCriteria": "Add new sort level",
+    listIsEmpty: "No items",
+    "listIsEmpty@choices": "No choices",
+    "listIsEmpty@rateValues": "No custom rating values",
+    "listIsEmpty@customLabels": "No custom labels",
+    "listIsEmpty@areas": "No areas",
+    "listIsEmpty@columns": "No columns",
+    "listIsEmpty@gridLayoutColumns": "No layout columns",
+    "listIsEmpty@rows": "No rows",
+    "listIsEmpty@validators": "No validation rules",
+    "listIsEmpty@calculatedValues": "No custom variables",
+    "listIsEmpty@triggers": "No triggers",
+    "listIsEmpty@completedHtmlOnCondition": "No conditional markup",
+    "listIsEmpty@navigateToUrlOnCondition": "No links",
+    "listIsEmpty@pages": "No pages",
+    "listIsEmpty@sortCriteria": "No sort levels",
+    "addNew@choices": "Add choice",
+    "addNew@rateValues": "Add rating value",
+    "addNew@customLabels": "Add label",
+    "addNew@areas": "Add area",
+    "addNew@columns": "Add column",
+    "addNew@rows": "Add row",
+    "addNew@validators": "Add rule",
+    "addNew@calculatedValues": "Add variable",
+    "addNew@triggers": "Add trigger",
+    "addNew@completedHtmlOnCondition": "Add markup",
+    "addNew@navigateToUrlOnCondition": "Add link",
+    "addNew@pages": "Add page",
+    "addNew@sortCriteria": "Add sort level",
     value: "Value",
     text: "Text",
     imageLink: "Image or video file URL",
@@ -865,6 +873,7 @@ export var enStrings = {
     logoWidth: "Logo width",
     logoHeight: "Logo height",
     readOnly: "Read-only",
+    readOnlyMode: "Read-only mode",
     enableIf: "Disable the read-only mode if",
     noRowsText: "\"No rows\" message",
     separateSpecialChoices: "Separate special choices",
@@ -1089,6 +1098,10 @@ export var enStrings = {
     },
     clearIfInvisible: {
       none: "Never"
+    },
+    readOnlyMode: {
+      readonly: "Read-only",
+      view: "View"
     },
     radio: "Radio buttons",
     inputType: {
@@ -1516,7 +1529,8 @@ export var enStrings = {
       width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.).",
       showQuestionNumbers: "Assigns numbers to questions nested within this panel.",
       effectiveColSpan: "Specifies how many columns this panel spans within the grid layout.",
-      gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
+      gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column.",
+      readOnlyMode: "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
     },
     paneldynamic: {
       name: "A panel ID that is not visible to respondents.",
@@ -1586,6 +1600,7 @@ export var enStrings = {
       searchMode: "A comparison operation used to filter the drop-down list.",
       textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip.",
       effectiveColSpan: "Specifies how many columns this question spans within the grid layout.",
+      readOnlyMode: "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default).",
       showKeyboardHints: "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
     },
     surveyvalidator: {
@@ -1618,6 +1633,7 @@ export var enStrings = {
     // survey templates
     survey: {
       readOnly: "Select if you want to prevent respondents from filling out your survey.",
+      readOnlyMode: "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements.",
       progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
     },
     matrixdropdowncolumn: {
@@ -1628,7 +1644,8 @@ export var enStrings = {
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the column.",
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
       showInMultipleColumns: "When selected, creates an individual column for each choice option.",
-      colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
+      colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix.",
+      readOnlyMode: "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
     },
     slider: {
       min: "The lowest number that users can select.",
@@ -1718,7 +1735,8 @@ export var enStrings = {
       questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
       questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab.",
       showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\".",
-      gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
+      gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column.",
+      readOnlyMode: "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
     },
     timerLocation: "Sets the location of a timer on a page.",
     panelsState: "Choose from: \"Locked\" - users cannot expand or collapse entries; \"Collapse all\" - all entries start in a collapsed state; \"Expand all\" - all entries start in an expanded state; \"First expanded\" - only the first entry is initially expanded. Applies if \"Entry display mode\" is set to \"List\" and the \"Entry title pattern\" property is specified.",

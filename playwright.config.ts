@@ -28,7 +28,7 @@ export default defineConfig({
       // state (e.g. a freshly opened popup renders grayscale until its composited layer is
       // released ~1-2s later), which made screenshot tests flaky. All baselines are captured
       // with this flag; removing it invalidates them.
-      args: ["--disable-lcd-text"],
+      args: ["--disable-lcd-text", "--disable-partial-raster"],
     }
   },
   projects: [
