@@ -66,12 +66,17 @@ test.describe(title, () => {
 
     await sectionContentElement.locator(".sd-action").nth(1).click();
     await page.locator(".sl-dropdown").first().click();
-    await getVisibleSelectListItemByText(page, "region").click({ position: { x: 10, y: 20 } });
-    await page.waitForTimeout(1000);
-    await page.keyboard.press("Tab");
-    await page.keyboard.press("Tab");
-    await page.keyboard.press("ArrowDown");
-    await page.keyboard.press("ArrowDown");
+    await getVisibleSelectListItemByText(page, "region").click();
+
+    const valueDropdown = page.locator("[data-name='questionValue'] .sd-dropdown");
+    await expect(valueDropdown).toBeVisible();
+    await valueDropdown.click();
+    const americas = getVisibleSelectListItemByText(page, "Americas");
+    await expect(americas).toBeVisible();
+    // Clicking a row selects it and closes the list. The snapshot needs the open list with the keyboard focus ring, so highlight Americas from this dropdown.
+    await valueDropdown.press("ArrowDown");
+    await valueDropdown.press("ArrowDown");
+    await expect(americas).toHaveClass(/sd-selectlist__item--focused/);
 
     await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), "pg-logic-popup-dropdown-list-item--focused.png");
