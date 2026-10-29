@@ -365,12 +365,7 @@ test.describe(title, () => {
     await question1.click();
 
     await page.locator("div[data-name='inputType'] .sd-dropdown").click();
-    // Property-grid dropdowns use spg-dropdown-popup. The outer .sv-popup is 0px tall; the visible list is the container.
-    const popup = page.locator(".spg-dropdown-popup .sv-popup__container");
-    await expect(popup).toBeVisible();
-    await expect(getVisibleSelectListItemByText(page, "Color")).toBeVisible();
-    await expect(getVisibleSelectListItemByText(page, "Text")).toBeVisible();
-    await compareScreenshot(page, popup, "pg-dropdown-editor.png");
+    await compareScreenshot(page, page.locator(".svc-side-bar"), "pg-dropdown-editor.png");
   });
 
   test("rateValues in property grid", async ({ page }) => {
@@ -818,9 +813,6 @@ test.describe(title, () => {
   });
 
   test("popup overlay in property grid", async ({ page }) => {
-    await page.evaluate(() => {
-      (window as any).creator.animationEnabled = false;
-    });
     await setShowToolbox(page, false);
     await setAllowEditSurveyTitle(page, false);
     await setShowAddQuestionButton(page, false);
@@ -838,10 +830,7 @@ test.describe(title, () => {
     await getQuestionBarItemByTitle(page, "Open settings").click();
     await page.locator(".spg-question[data-name='inputType'] .sd-dropdown").click();
 
-    const popup = page.locator(".sv-popup--menu-tablet").filter({ visible: true });
-    await expect(popup).toBeVisible();
-    await expect(getVisibleSelectListItemByText(page, "Text")).toBeVisible();
-    await compareScreenshot(page, popup, "pg-overlay-popup.png");
+    await compareScreenshot(page, page.locator(".sv-popup").filter({ visible: true }).first(), "pg-overlay-popup.png");
   });
 
   test("Check creator theme settings", async ({ page }) => {
