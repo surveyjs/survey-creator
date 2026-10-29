@@ -568,6 +568,26 @@ test("Toolbox forceCompact property", (): any => {
   expect(creator.toolbox.isCompact).toEqual(false);
 });
 
+test("Sidebar toolbox stays full when forceCompact or a narrow width would compact the rail, Bug#7551", (): any => {
+  const creator = new CreatorTester();
+  creator.toolboxLocation = "sidebar";
+  creator.toolbox.forceCompact = true;
+  creator.updateToolboxIsCompact(true);
+  expect(creator.toolbox.isCompact).toEqual(false);
+
+  creator.toolbox.forceCompact = undefined;
+  creator.updateToolboxIsCompact(true);
+  expect(creator.toolbox.isCompact).toEqual(false);
+
+  creator.toolboxLocation = "left";
+  creator.toolbox.forceCompact = true;
+  creator.updateToolboxIsCompact(false);
+  expect(creator.toolbox.isCompact).toEqual(true);
+
+  creator.toolboxLocation = "sidebar";
+  expect(creator.toolbox.isCompact).toEqual(false);
+});
+
 test("the toolbox gets compact after the sidebar was collapsed/expanded ", (): any => {
   const creator = new CreatorTester();
   expect(creator.toolbox.isCompact).toEqual(false);
