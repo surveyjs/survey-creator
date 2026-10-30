@@ -25,7 +25,7 @@ async function readLength(page: Page, selector: string, value: string): Promise<
 }
 
 test.describe(title, () => {
-  test("sizes stay valid when line-height is a number", async ({ page }) => {
+  test("tab menu sizes stay valid when line-height is a number", async ({ page }) => {
     await page.goto(url);
     await page.setViewportSize({ width: 1920, height: 900 });
     const tabItem = page.locator(".svc-tabbed-menu-item").first();
@@ -49,11 +49,15 @@ test.describe(title, () => {
     });
     expect(Math.abs(tab.lineHeight - tab.fontSize * 1.5)).toBeLessThan(0.5);
     expect(Math.abs(tab.minHeight - (tab.lineHeight + tabSpacing))).toBeLessThan(1);
+  });
 
+  test("sidebar flyout sizes stay valid when line-height is a number", async ({ page }) => {
+    await page.goto(url);
     await page.setViewportSize({ width: 1000, height: 900 });
     const showSidebarButton = page.locator("[title='Show Panel']");
     await expect(showSidebarButton).toBeVisible();
     await showSidebarButton.click();
+    await useUnitlessLineHeight(page);
 
     const panel = page.locator(".svc-side-bar--flyout.svc-side-bar--side-area .svc-side-bar__container-wrapper");
     const tabs = page.locator(".svc-sidebar-tabs");
@@ -61,9 +65,9 @@ test.describe(title, () => {
     await expect(tabs).toBeVisible();
 
     const flyoutSpacing = await readLength(page, ".svc-side-bar--flyout.svc-side-bar--side-area .svc-side-bar__container-wrapper", "var(--sjs2-spacing-x500)");
-    const flyout = await page.evaluate(() => {
-      const panelEl = document.querySelector(".svc-side-bar--flyout.svc-side-bar--side-area .svc-side-bar__container-wrapper") as HTMLElement;
-      const tabsEl = document.querySelector(".svc-sidebar-tabs") as HTMLElement;
+    const flyout = await page.evaluate((docEl) => {
+      const panelEl = docEl.querySelector(".svc-side-bar--flyout.svc-side-bar--side-area .svc-side-bar__container-wrapper") as HTMLElement;
+      const tabsEl = docEl.querySelector(".svc-sidebar-tabs") as HTMLElement;
       const cs = getComputedStyle(panelEl);
       const panelBox = panelEl.getBoundingClientRect();
       const tabsBox = tabsEl.getBoundingClientRect();
@@ -73,11 +77,13 @@ test.describe(title, () => {
         inset: parseFloat(cs.insetInlineEnd),
         gap: Math.abs(panelBox.right - tabsBox.left)
       };
-    });
+    }, await page.evaluateHandle(() => document));
     expect(Math.abs(flyout.lineHeight - flyout.fontSize * 1.5)).toBeLessThan(0.5);
     expect(Math.abs(flyout.inset - (flyout.lineHeight + flyoutSpacing))).toBeLessThan(1);
     expect(flyout.gap).toBeLessThanOrEqual(2);
+  });
 
+  test("presets empty row size stays valid when line-height is a number", async ({ page }) => {
     await page.goto(urlPresets);
     await page.setViewportSize({ width: 1920, height: 1400 });
     await expect(page.locator(".svc-creator")).toBeVisible();
