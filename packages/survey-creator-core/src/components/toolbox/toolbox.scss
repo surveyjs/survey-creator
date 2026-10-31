@@ -1,10 +1,12 @@
 @use "../../variables" as *;
 
 .svc-toolbox {
-  --thm-toolbox-width-compact: calc(var(--sjs2-line-height-x300) + var(--sjs2-spacing-x600));
+  // 1lh is the toolbox icon. Text that sets its own typography keeps that line-height.
+  line-height: var(--sjs2-line-height-x300);
+  --thm-toolbox-width-compact: calc(1lh + var(--sjs2-spacing-x600));
 
   --thm-toolbox-item-banner-left: calc(
-    var(--sjs2-line-height-x300) + var(--sjs2-spacing-x300) + var(--sjs2-spacing-x150) + var(--sjs2-size-x100)
+    1lh + var(--sjs2-spacing-x300) + var(--sjs2-spacing-x150) + var(--sjs2-size-x100)
   );
 
   width: auto;
