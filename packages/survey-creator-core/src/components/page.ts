@@ -13,6 +13,14 @@ import { defaultActionBarCss } from "survey-core";
 import "./page.scss";
 import "./surface-btn.scss";
 
+function hasElementOnSameLine(elements: Array<any>): boolean {
+  return elements.some(el => el.startWithNewLine === false || hasElementOnSameLine(getNestedElements(el)));
+}
+function getNestedElements(element: any): Array<any> {
+  if (!!element.contentPanel) return element.contentPanel.elements;
+  return (element.contentQuestion || element).getElementsInDesign(false);
+}
+
 export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
   @property({ defaultValue: true }) isPageLive: boolean;
@@ -44,10 +52,34 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   @property({ defaultValue: false }) isVisibleInViewPort: boolean;
-  @property({ defaultValue: !settings.pageContentLazyRendering }) needRenderContent: boolean;
+  @property({
+    defaultValue: !settings.pageContentLazyRendering,
+    // Not onSet: it runs after the subscribers are notified, and the content would render without rows.
+    onSetting(val, target: PageAdorner) {
+      if (val) {
+        target.buildPageRows();
+      }
+      return val;
+    }
+  }) needRenderContent: boolean;
 
   protected updateShowPlaceholder(visibleRows?: Array<QuestionRowModel>) {
-    this.showPlaceholder = !this.isGhost && (visibleRows || this.page.visibleRows).length === 0;
+    const page = this.page;
+    const isEmpty = page.wasRendered ? (visibleRows || page.visibleRows).length === 0 : page.elements.length === 0;
+    this.showPlaceholder = !this.isGhost && isEmpty;
+  }
+  private buildPageRows(): void {
+    const page = this.page;
+    if (this.isDisposed || !page || page.isDisposed) return;
+    page.onFirstRendering();
+    this.updateShowPlaceholder();
+  }
+  // Rows are not only for rendering. survey-core reads them for the survey width mode (needResponsiveWidth),
+  // for startWithNewLine of the next element when an element leaves a row (updateRowsRemoveElementFromRow)
+  // and for the grid columns (generateColumns drops the columns of a panel without rows). These pages keep their rows.
+  // startWithNewLine set on a page without rows can come from API or a remote operation only: a selection builds the rows.
+  private canDeferPageRows(page: PageModel): boolean {
+    return !(<SurveyModel>page.survey).gridLayoutEnabled && !hasElementOnSameLine(page.elements);
   }
 
   constructor(creator: SurveyCreatorModel, page: PageModel) {
@@ -91,8 +123,24 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       surveyElement.registerFunctionOnPropertiesValueChanged(["visibleRows"], (newValue: Array<QuestionRowModel>) => {
         this.updateShowPlaceholder(newValue);
       }, "updatePlaceholder");
+      // visibleRows of a page without rows stays empty and does not fire
+      surveyElement.registerFunctionOnPropertiesValueChanged(["elements"], () => {
+        if (!surveyElement.wasRendered) {
+          this.updateShowPlaceholder();
+        }
+      }, "updatePlaceholder");
       this.updateShowPlaceholder();
-      surveyElement.onFirstRendering();
+      const needRenderContent = this.calcNeedRenderContent(surveyElement);
+      // Building the rows builds the rows of every nested panel, so a page whose content does not render does not build them.
+      if (needRenderContent || surveyElement.wasRendered || !this.canDeferPageRows(surveyElement)) {
+        surveyElement.onFirstRendering();
+      } else {
+        this.creator.survey.registerFunctionOnPropertyValueChanged("gridLayoutEnabled", (newValue: boolean) => {
+          if (newValue) {
+            this.buildPageRows();
+          }
+        }, "pageRows" + surveyElement.uniqueId);
+      }
       surveyElement.updateCustomWidgets();
       surveyElement.setWasShown(true);
       this.checkActionProperties();
@@ -100,7 +148,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
         (<any>surveyElement.locTitle).placeholder = () => { return surveyElement.isStartPage ? "pe.startPageTitlePlaceholder" : "pe.pageTitlePlaceholder"; };
         (<any>surveyElement.locDescription).placeholder = "pe.pageDescriptionPlaceholder";
       }
-      this.needRenderContent = this.calcNeedRenderContent(surveyElement);
+      this.needRenderContent = needRenderContent;
     }
   }
   private calcNeedRenderContent(surveyElement: PageModel): boolean {
@@ -113,6 +161,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     if (!!surveyElement) {
       delete (<any>surveyElement.locTitle).placeholder;
       delete (<any>surveyElement.locDescription).placeholder;
+      this.creator.survey.unRegisterFunctionOnPropertyValueChanged("gridLayoutEnabled", "pageRows" + surveyElement.uniqueId);
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["elements"], "updatePlaceholder");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["title", "description"], "add_ghost");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["visibleRows"], "updatePlaceholder");
