@@ -135,7 +135,8 @@ $reverse-cubic-ease-out: cubic-bezier(0.32, 0, 0.67, 0);
   height: 100%;
 }
 
-$tabs-width: calc(var(--sjs2-typography-line-height-default) + var(--sjs2-spacing-x500));
+// 1lh is this element's used line box. A unitless line-height token cannot be added to a length.
+$tabs-width: calc(1lh + var(--sjs2-spacing-x500));
 
 .svc-side-bar--flyout {
   z-index: 1000;
@@ -155,8 +156,14 @@ $tabs-width: calc(var(--sjs2-typography-line-height-default) + var(--sjs2-spacin
     max-width: 100%;
   }
   &.svc-side-bar--side-area .svc-side-bar__container-wrapper {
+    line-height: var(--sjs2-typography-line-height-default);
     max-width: calc(100% - #{$tabs-width});
     inset-inline-end: $tabs-width;
+
+    // 1lh is resolved on the wrapper. The panel keeps the initial line-height.
+    > .svc-side-bar__container {
+      line-height: normal;
+    }
   }
   .svc-side-bar__container { 
     display: flex;

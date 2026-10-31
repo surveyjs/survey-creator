@@ -127,7 +127,10 @@ svc-page {
 // button) so that the scroll height and the number of pages rendered at load stay the same.
 // Collapsed pages hide the footer, so they do not need it.
 .svc-page__content:not(.svc-page__content--collapsed) > .svc-page__loading-content {
-  padding-bottom: calc(var(--sjs2-spacing-x500, 40px) + 3 * var(--sjs2-spacing-x200, 16px) + var(--sjs2-typography-line-height-component-action-large-content, 24px));
+  // 1lh follows this element's font-size, so it uses the add-question button's font metrics.
+  font-size: var(--sjs2-typography-font-size-component-action-large-content);
+  line-height: var(--sjs2-typography-line-height-component-action-large-content, 24px);
+  padding-bottom: calc(var(--sjs2-spacing-x500, 40px) + 3 * var(--sjs2-spacing-x200, 16px) + 1lh);
 }
 
 .svc-question__drag-area > .svc-page__content-actions {
