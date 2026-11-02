@@ -1,13 +1,6 @@
 @use "../../typography-mixins.scss" as *;
 @use "../../variables.scss" as *;
 
-// The input has its own line-height, so 1lh is resolved on the row and inherited as a length.
-@property --sps-action-width {
-  syntax: "<length>";
-  inherits: true;
-  initial-value: 0px;
-}
-
 .sps-table-wrapper {
   overflow: hidden;
 }
@@ -188,12 +181,12 @@
 
 .sps-table__row {
   line-height: var(--sjs2-line-height-x300);
-  --sps-action-width: calc(var(--sjs2-spacing-x200, 8px) + 1lh);
-  --action-container-width: calc(3 * var(--sps-action-width));
+  --action-width: calc(var(--sjs2-spacing-x200, 8px) + 1lh);
+  --action-container-width: calc(3 * var(--action-width));
 }
 
 .sps-table__row:has(> .sps-table__cell:last-of-type .sd-action:nth-child(4)) {
-  --action-container-width: calc(4 * var(--sps-action-width));
+  --action-container-width: calc(4 * var(--action-width));
 }
 
 .sps-table__row {
