@@ -97,7 +97,8 @@
 
 .svc-sidebar__header--tabbed,
 .svc-sidebar__header-container {
-  min-height: calc(var(--sjs2-line-height-x300) + var(--sjs2-spacing-x500));
+  line-height: var(--sjs2-line-height-x300);
+  min-height: calc(1lh + var(--sjs2-spacing-x500));
 }
 
 .svc-sidebar__header-container.svc-sidebar__header-container--with-subtitle {

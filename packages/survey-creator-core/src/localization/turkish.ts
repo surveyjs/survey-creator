@@ -1026,44 +1026,60 @@ export var turkishStrings = {
     propertyNameIsIncorrect: "Ayrılmış kelimeler kullanmayın: \"öğe\", \"seçim\", \"panel\", \"satır\".",
     // "You don't have any items yet"
     listIsEmpty: "Yeni eleman ekle",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Henüz başka seçeneğiniz yok",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Henüz sütununuz yok",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Henüz düzen sütunlarına sahip değilsiniz",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Henüz satırınız yok",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Henüz herhangi bir doğrulama kuralınız yok",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Henüz özelleştirilebilen değişkeniniz yok",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Henüz herhangi bir tetikleyiciniz yok",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Henüz bağlantınız yok",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Henüz hiç sayfanız yok",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Henüz sıralama seviyen yok",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Yeni seçim ekle",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Yeni sütun ekle",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Yeni satır ekle",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Yeni kural ekle",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Yeni değişken ekle",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Yeni tetikleyici ekle",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Yeni URL ekle",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Yeni sayfa ekle",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Yeni sıralama seviyesi ekleyin",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Seçenek yok",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Özel derecelendirme değerleri yok",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Özel etiket yok",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Bölge yok",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Sütun yok",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Yerleşim sütunları yok",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Sıralar yok",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Doğrulama kuralları yok",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Özel değişken yok",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Tetikleyici yok",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Koşullu işaretleme yok",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Bağlantı yok",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Sayfa yok",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Sıralama seviyeleri yok",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Seçenek ekle",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Puan değeri ekleyin",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Etiket ekleyin",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Alan ekle",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Sütun ekle",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Sıra ekle",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Ekle kuralı",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Değişken ekle",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Tetikleyici ekle",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Markup ekleyin",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Bağlantı ekle",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Sayfa ekle",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Sıralama seviyesi ekleyin",
     // "Value"
     value: "Değer",
     // "Text"
@@ -1630,6 +1646,8 @@ export var turkishStrings = {
     logoHeight: "Logo uzunluk",
     // "Read-only"
     readOnly: "Salt okunur",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Yalnızca okunma modu",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Aşağıdaki durumlarda salt okunur modunu devre dışı bırakın",
     // "\"No rows\" message"
@@ -2057,6 +2075,12 @@ export var turkishStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Hiç"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Sadece okuma",
+      // [Auto-translated] "View"
+      view: "Görünüm"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Radyo düğmeleri",
@@ -2793,7 +2817,9 @@ export var turkishStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Bu panelin ızgara mizanpajı içinde kaç sütuna yayılacağını belirtir.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Bu tablo, panel içindeki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın."
+      gridLayoutColumns: "Bu tablo, panel içindeki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Bu paneldeki soruların yalnızca okunabilir olduğunda nasıl göründüğünü belirtir. \"Sadece Okuyur\" soruları olağan giriş kontrolleriyle gösterir, ancak düzenleme için devre dışı bırakılır. \"Görüntü\" cevapları metin veya etkileşimsiz diğer öğeler olarak gösterir. \"Miras\" ana panel, sayfa veya anket için ayarlanmış modu kullanır (\"Varsayılan olarak \"Sadece Okuyur\")."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2921,7 +2947,9 @@ export var turkishStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Seçim seçeneklerindeki uzun metinler, açılır menüye sığacak şekilde otomatik olarak satır sonları oluşturur. Metinlerin kırpılmasını istiyorsanız seçimi kaldırın.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Bu sorunun ızgara düzeni içinde kaç sütuna yayılacağını belirtir."
+      effectiveColSpan: "Bu sorunun ızgara düzeni içinde kaç sütuna yayılacağını belirtir.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Sorunun sadece okunabilir olduğunda nasıl göründüğünü belirtir. \"Sadece Okuyur\" seçeneği, soruyu alışılmış giriş kontrolleriyle gösterir, ancak düzenleme için devre dışı bırakılır. \"Görüntü\" cevapları metin veya etkileşimsiz diğer öğeler olarak gösterir. \"Inherit\" ana panel, sayfa veya anket için ayarlanmış mod ayarını kullanır (\"Varsayılan olarak \"Sadece Oku\")."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2969,6 +2997,8 @@ export var turkishStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Yanıtlayanların anketinizi doldurmasını engellemek isteyip istemediğinizi seçin.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Önizleme sayfasında da dahil olmak üzere sadece okunabilir soruların nasıl göründüğünü belirtir. \"Sadece Okuyur\" (varsayılan) soruları alışılmış giriş kontrolleriyle gösterir, ancak düzenleme için devre dışı bırakılır. \"Görüntü\" cevapları metin veya etkileşimsiz diğer öğeler olarak gösterir.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "İlerleme çubuğunun konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."
     },
@@ -2988,7 +3018,9 @@ export var turkishStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Seçildiğinde, her seçim seçeneği için ayrı bir sütun oluşturur.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir. -1 olarak ayarlandığında, gerçek değer üst matrisin \"İç içe sütun sayısı\" özelliğinden devralınır."
+      colCount: "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir. -1 olarak ayarlandığında, gerçek değer üst matrisin \"İç içe sütun sayısı\" özelliğinden devralınır.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Bu sütundaki hücrelerin yalnızca okunabilir olduğunda nasıl göründüğünü belirtir. \"Sadece Okunan\" hücreleri alışılmış giriş kontrolleriyle gösterir, ancak düzenleme için devre dışı bırakılır. \"Görüntü\" cevapları metin veya etkileşimsiz diğer öğeler olarak gösterir. \"Miras\" matris veya anket için ayarlanmış mod kullanır (\"Varsayılan olarak \"Sadece Okunan\")."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3154,7 +3186,9 @@ export var turkishStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular.",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Bu tablo, sayfadaki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın."
+      gridLayoutColumns: "Bu tablo, sayfadaki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Bu sayfadaki soruların yalnızca okunabilir olduğunda nasıl göründüğünü belirtir. \"Sadece Okuyur\" soruları alışılmış giriş kontrolleriyle gösterir, ancak düzenleme için devre dışı bırakılmıştır. \"Görüntü\" cevapları metin veya etkileşimsiz diğer öğeler olarak gösterir. \"Inherit\" anket için ayarlanmış modu kullanır (\"Varsayılan olarak \"Sadece Okudan\")."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Sayfadaki bir zamanlayıcının konumunu ayarlar.",

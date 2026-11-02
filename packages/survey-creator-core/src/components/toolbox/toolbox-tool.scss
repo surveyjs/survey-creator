@@ -78,7 +78,6 @@
 
 //is visible only on hover
 .svc-toolbox__item-banner {
-  @include sjs2--typography--small-strong;
   opacity: var(--sjs2-opacity-hidden);
   box-sizing: border-box;
   align-items: center;
@@ -102,6 +101,9 @@
   top: calc(50% + var(--sjs2-spacing-x025));
   transform: translate(0, -50%);
   pointer-events: none;
+  > span {
+    @include sjs2--typography--small-strong;
+  }
   .svc-toolbox__item-icon {
     position: absolute;
     display: none;

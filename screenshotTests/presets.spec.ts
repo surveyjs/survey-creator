@@ -187,7 +187,7 @@ test.describe(title, () => {
     await page.locator(".sd-menu-list__container").filter({ visible: true }).getByText("Tabs").click();
 
     await page.getByRole("row", { name: "Designer" }).hover();
-    await page.getByRole("row", { name: "Designer" }).getByRole("button").nth(1).click();
+    await page.getByRole("row", { name: "Designer" }).getByRole("button", { name: "Edit", exact: true }).click();
     await page.getByRole("combobox", { name: "Icon name" }).focus();
     await page.waitForTimeout(500);
     await page.getByRole("combobox", { name: "Icon name" }).click({ force: true });

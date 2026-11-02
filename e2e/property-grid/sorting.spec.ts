@@ -38,7 +38,7 @@ test.describe(title, () => {
   const grid = (page) => page.locator("[data-name='sortCriteria']");
   const gridRows = (page) => grid(page).locator("[data-sv-drop-target-matrix-row]");
   // the title action; the empty matrix shows a second Add button
-  const addLevel = (page) => grid(page).locator("button[title='Add new sort level']");
+  const addLevel = (page) => grid(page).locator("button[title='Add sort level']");
   // The combobox is the dropdown's filter input; the value is drawn over it, so the cell is clicked and read.
   const dropdownCell = (page, row: number, column: number) =>
     gridRows(page).nth(row - 1).locator("td").filter({ has: page.getByRole("combobox") }).nth(column);
@@ -71,7 +71,7 @@ test.describe(title, () => {
     await setJSON(page, json);
     await page.locator("[data-name='matrix']").first().click();
     await page.locator(".svc-sidebar-tabs").getByTitle("Rows", { exact: true }).click();
-    await expect(grid(page).getByText("You don't have any sort levels yet")).toBeVisible();
+    await expect(grid(page).getByText("No sort levels")).toBeVisible();
 
     await addLevel(page).click();
     await addLevel(page).click();

@@ -1024,46 +1024,62 @@ export var huStrings = {
     propertyNameIsNotUnique: "Kérjük, adjon meg egy egyedi nevet",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "Ne használjon fenntartott szavakat: \"elem\", \"választás\", \"panel\", \"sor\".",
-    // [Auto-translated] "You don't have any items yet"
-    listIsEmpty: "Még nincs tárgya",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Még nincs választásod",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Még nincsenek oszlopai",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Még nincsenek elrendezésoszlopok",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Még nincsenek sorai",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Még nincsenek érvényességi szabályai",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Még nincsenek egyéni változói",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Még nincsenek triggerek",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Még nincsenek linkek",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Még nincsenek oldalai",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Még nincsenek sortozási szintjeid",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Új választás hozzáadása",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Új oszlop hozzáadása",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Új sor hozzáadása",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Új szabály hozzáadása",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Új változó hozzáadása",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Új eseményindító hozzáadása",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Új URL hozzáadása",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Új oldal hozzáadása",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Új rendezési szint hozzáadása",
+    // [Auto-translated] "No items"
+    listIsEmpty: "Nincsenek tárgyak",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Nincs választási lehetőség",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Nincsenek egyedi értékelési értékek",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Nincs egyedi címkék",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Nincsenek területek",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Nincsenek oszlopok",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Nincsenek elrendezésoszlopok",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Nincsenek sorok",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Nincsenek validációs szabályok",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Nincsenek egyedi változók",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Nincsenek kiváltó tényezők",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Nincs feltételes jelölés",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Nincsenek linkek",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Nincsenek oldalak",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Nincsenek sortozási szintek",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Választási lehetőségek hozzáadása",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Érték hozzáadása",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Címkét adj hozzá",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Terület hozzáadása",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Oszlop hozzáadása",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Sor hozzáadása",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Add szabályt",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Add hozzá változót",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Add hozzá trigger",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Add hozzá a jelölést",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Link hozzáadása",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Oldal hozzáadása",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Szűrési szint hozzáadása",
     // "Value"
     value: "Érték",
     // "Text"
@@ -1630,6 +1646,8 @@ export var huStrings = {
     logoHeight: "Embléma magassága",
     // "Read-only"
     readOnly: "Csak olvasható",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Csak olvasható mód",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Tiltsa le a csak olvasható módot, ha",
     // "\"No rows\" message"
@@ -2057,6 +2075,12 @@ export var huStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Soha"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Csak olvasható",
+      // [Auto-translated] "View"
+      view: "Kilátás"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Rádiógombok",
@@ -2793,7 +2817,9 @@ export var huStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Megadja, hogy ez a panel hány oszlopot ölel fel a rácselrendezésen belül.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Ez a táblázat lehetővé teszi az egyes rácsoszlopok konfigurálását a panelen. Automatikusan beállítja az egyes oszlopok szélességének százalékos arányát a sorban lévő elemek maximális száma alapján. A rácsos elrendezés testreszabásához manuálisan állítsa be ezeket az értékeket, és határozza meg az egyes oszlopokban lévő összes kérdés címszélességét."
+      gridLayoutColumns: "Ez a táblázat lehetővé teszi az egyes rácsoszlopok konfigurálását a panelen. Automatikusan beállítja az egyes oszlopok szélességének százalékos arányát a sorban lévő elemek maximális száma alapján. A rácsos elrendezés testreszabásához manuálisan állítsa be ezeket az értékeket, és határozza meg az egyes oszlopokban lévő összes kérdés címszélességét.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Megadja, hogyan jelennek meg a kérdések ezen a panelen belül, ha csak olvashatóak. \"Csak olvasható\" megjeleníti a kérdéseket a szokásos bemeneti vezérlőkkel, de szerkesztés miatt letiltva. A \"Megtekintés\" válaszokat szövegként vagy más nem interaktív elemként jeleníti meg. Az \"Örökölés\" a szülőpanel, oldal vagy felmérés módját használja (\"Alapértelmezés szerint csak olvasható\")."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2921,7 +2947,9 @@ export var huStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "A választási lehetőségekben szereplő hosszú szövegek automatikusan sortöréseket generálnak, hogy elférjenek a legördülő menüben. Törölje a jelet a jelölőnégyzetből, ha le szeretné vágni a szövegeket.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Megadja, hogy ez a kérdés hány oszlopra terjed ki a rácsos elrendezésen belül."
+      effectiveColSpan: "Megadja, hogy ez a kérdés hány oszlopra terjed ki a rácsos elrendezésen belül.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Megadja, hogyan jelenik meg a kérdés, ha csak olvasható. \"Csak olvasható\" a kérdést a szokásos bemeneti vezérlőkkel jeleníti meg, de szerkesztés esetén letiltva. A \"Megtekintés\" válaszokat szövegként vagy más nem interaktív elemként jeleníti meg. Az \"Örökölés\" a szülőpanel, oldal vagy felmérés módját használja (\"Alapértelmezés szerint csak olvasható\")."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2969,6 +2997,8 @@ export var huStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Válassza ki, ha meg szeretné akadályozni, hogy a válaszadók kitöltsék a felmérést.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Megadja, hogyan jelennek meg csak olvasható kérdések, beleértve az előnézeti oldalt is. \"Csak olvasható\" (alapértelmezett) a szokásos bemeneti vezérlőkkel rendelkező kérdéseket jeleníti meg, de szerkesztés miatt letiltva. A \"Megtekintés\" válaszokat szövegként vagy más, nem interaktív elemként jeleníti meg.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Beállítja a folyamatjelző sáv helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt."
     },
@@ -2988,7 +3018,9 @@ export var huStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Ha be van jelölve, minden választási lehetőséghez külön oszlopot hoz létre.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Többoszlopos elrendezésben rendezi a választási lehetőségeket. Ha 0-ra van állítva, a beállítások egyetlen sorban jelennek meg. Ha -1-re van állítva, a tényleges érték a szülőmátrix \"Beágyazott oszlopok száma\" tulajdonságából öröklődik."
+      colCount: "Többoszlopos elrendezésben rendezi a választási lehetőségeket. Ha 0-ra van állítva, a beállítások egyetlen sorban jelennek meg. Ha -1-re van állítva, a tényleges érték a szülőmátrix \"Beágyazott oszlopok száma\" tulajdonságából öröklődik.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Megadja, hogyan jelennek meg a cellák ebben az oszlopban, amikor csak olvashatóak. \"Csak Olvasható\" megjeleníti a szokásos bemeneti vezérlőkkel rendelkező cellákat, de szerkesztés miatt letiltva. A \"Megtekintés\" válaszokat szövegként vagy más nem interaktív elemként jeleníti meg. Az \"Örökölés\" a mátrix vagy felmérés módját használja (\"Alapértelmezés szerint csak olvasható\")."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3154,7 +3186,9 @@ export var huStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Beállítja a navigációs gombok láthatóságát az oldalon. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza, amely alapértelmezés szerint \"Látható\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Ez a táblázat lehetővé teszi az oldal egyes rácsoszlopainak konfigurálását. Automatikusan beállítja az egyes oszlopok szélességének százalékos arányát a sorban lévő elemek maximális száma alapján. A rácsos elrendezés testreszabásához manuálisan állítsa be ezeket az értékeket, és határozza meg az egyes oszlopokban lévő összes kérdés címszélességét."
+      gridLayoutColumns: "Ez a táblázat lehetővé teszi az oldal egyes rácsoszlopainak konfigurálását. Automatikusan beállítja az egyes oszlopok szélességének százalékos arányát a sorban lévő elemek maximális száma alapján. A rácsos elrendezés testreszabásához manuálisan állítsa be ezeket az értékeket, és határozza meg az egyes oszlopokban lévő összes kérdés címszélességét.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Megadja, hogyan jelennek meg a kérdések ezen az oldalon, ha csak olvashatóak. \"Csak olvasható\" a kérdéseket a szokásos bemeneti vezérlőkkel jeleníti meg, de szerkesztés esetén letiltva. A \"Megtekintés\" válaszokat szövegként vagy más nem interaktív elemként jeleníti meg. Az \"Örökölés\" a felméréshez beállított módot használja (\"Alapértelmezés szerint csak olvasható\")."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Beállítja az időzítő helyét az oldalon.",

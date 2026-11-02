@@ -23,10 +23,11 @@ svc-tab-json-editor-textarea {
 }
 
 .svc-json-errors {
+  line-height: var(--sjs2-line-height-x300);
   --thm-json-error-row: calc(
     var(--sjs2-border-width-x100) +
       var(--sjs2-spacing-x200) +
-      var(--sjs2-line-height-x300)
+      1lh
   );
   display: flex;
   max-height: calc(5 * var(--thm-json-error-row));

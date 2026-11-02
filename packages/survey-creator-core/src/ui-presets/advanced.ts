@@ -34,6 +34,7 @@ export const Advanced = {
               "description",
               "visible",
               "readOnly",
+              "readOnlyMode",
               "isRequired",
               "showTitle",
               "showCommentArea",

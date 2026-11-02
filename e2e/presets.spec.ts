@@ -95,7 +95,7 @@ test.describe(title, () => {
     expect(await items.locator("tr").nth(0).locator(".sd-action use").nth(0).getAttribute("xlink:href")).toBe("#icon-wrench-24x24");
 
     await page.getByRole("row", { name: "Designer" }).hover();
-    await page.getByRole("row", { name: "Designer" }).getByRole("button").nth(1).click();
+    await page.getByRole("row", { name: "Designer" }).getByRole("button", { name: "Edit", exact: true }).click();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Designer1");
     await page.getByRole("combobox", { name: "Icon name" }).focus();
     await page.waitForTimeout(500);
@@ -106,8 +106,8 @@ test.describe(title, () => {
     expect(await getRowsInputValues(items)).toEqual(["Designer1", "Preview", "Themes", "Logic", "JSON Editor", "Translations"]);
 
     await page.getByRole("row", { name: "Designer1" }).hover();
-    expect(await page.getByRole("row", { name: "Designer1" }).getByRole("button").nth(1)).toBeVisible();
-    await page.getByRole("row", { name: "Designer1" }).getByRole("button").nth(1).click();
+    await expect(page.getByRole("row", { name: "Designer1" }).getByRole("button", { name: "Edit", exact: true })).toBeVisible();
+    await page.getByRole("row", { name: "Designer1" }).getByRole("button", { name: "Edit", exact: true }).click();
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Reset" }).waitFor({ state: "visible" });
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Reset" }).click();
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Apply" }).click();
@@ -124,7 +124,7 @@ test.describe(title, () => {
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic table").nth(0);
     await items.getByRole("row", { name: "Choice Questions" }).hover();
     await items.getByRole("row", { name: "Choice Questions" }).getByTitle("Expand").click();
-    await items.getByRole("row", { name: "Slider" }).getByRole("button").nth(3).click();
+    await items.getByRole("row", { name: "Slider" }).getByRole("button", { name: "More", exact: true }).click();
     await items.getByText("Remove from Toolbox").click();
     expect((await getToolboxTexts(page)).slice(0, 3)).toEqual(["Radio Button Group", "Rating Scale", "Checkboxes"]);
 
@@ -207,7 +207,7 @@ test.describe(title, () => {
     expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers", "Matrix Questions", "Misc"]);
 
     await page.getByRole("row", { name: "Containers" }).hover();
-    await page.getByRole("row", { name: "Containers" }).getByRole("button").nth(1).click();
+    await page.getByRole("row", { name: "Containers" }).getByRole("button", { name: "Edit", exact: true }).click();
     // Target the popup's Title field by data-name rather than accessible name: the edit popup and the
     // main presets survey are two un-namespaced SurveyModels, and on Angular (where renderedIdSuffix
     // is disabled) their aria-labelledby ids collide, so the field's accessible name resolves to the
@@ -217,8 +217,8 @@ test.describe(title, () => {
     expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Containers1", "Matrix Questions", "Misc"]);
 
     await page.getByRole("row", { name: "Containers1" }).hover();
-    expect(await page.getByRole("row", { name: "Containers1" }).getByRole("button").nth(1)).toBeVisible();
-    await page.getByRole("row", { name: "Containers1" }).getByRole("button").nth(1).click();
+    await expect(page.getByRole("row", { name: "Containers1" }).getByRole("button", { name: "Edit", exact: true })).toBeVisible();
+    await page.getByRole("row", { name: "Containers1" }).getByRole("button", { name: "Edit", exact: true }).click();
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Reset" }).waitFor({ state: "visible" });
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Reset" }).click();
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Apply" }).click();
@@ -284,7 +284,7 @@ test.describe(title, () => {
     const hidden = page.locator(".sps-row--multiple > div").nth(1).locator(".sps-question--matrixdynamic table").nth(0);
     await items.getByRole("row", { name: "General" }).getByTitle("Expand").click();
     await items.getByRole("row", { name: "Survey description" }).hover();
-    await items.getByRole("row", { name: "Survey description" }).getByRole("button").nth(2).click();
+    await items.getByRole("row", { name: "Survey description" }).getByRole("button", { name: "More", exact: true }).click();
     await items.getByText("Remove from properties").click();
     expect((await getPropertiesTexts(page)).slice(0, 3)).toEqual(["Survey title", "Make the title and description visible", "Make the survey read-only"]);
 
@@ -373,7 +373,7 @@ test.describe(title, () => {
     expect((await getRowsInputValues(items)).slice(0, 4)).toEqual(["General", "Logo in the Survey Header", "Navigation", "Question Settings"]);
 
     await page.getByRole("row", { name: "Navigation" }).hover();
-    await page.getByRole("row", { name: "Navigation" }).getByRole("button").nth(2).click();
+    await page.getByRole("row", { name: "Navigation" }).getByRole("button", { name: "Edit", exact: true }).click();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Navigation1");
     await page.getByRole("combobox", { name: "Icon name" }).focus();
     await page.waitForTimeout(500);
@@ -385,8 +385,8 @@ test.describe(title, () => {
     expect(await page.locator(".svc-sidebar-tabs__item svg use").filter({ visible: true }).nth(3).getAttribute("xlink:href")).toBe("#icon-more-24x24");
 
     await page.getByRole("row", { name: "Navigation1" }).hover();
-    expect(await page.getByRole("row", { name: "Navigation1" }).getByRole("button").nth(1)).toBeVisible();
-    await page.getByRole("row", { name: "Navigation1" }).getByRole("button").nth(2).click();
+    await expect(page.getByRole("row", { name: "Navigation1" }).getByRole("button", { name: "Edit", exact: true })).toBeVisible();
+    await page.getByRole("row", { name: "Navigation1" }).getByRole("button", { name: "Edit", exact: true }).click();
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Reset" }).waitFor({ state: "visible" });
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Reset" }).click();
     await page.locator(".sv-popup").filter({ visible: true }).getByRole("button", { name: "Apply" }).click();

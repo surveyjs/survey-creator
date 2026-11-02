@@ -1025,46 +1025,62 @@ export var polishStrings = {
     propertyNameIsNotUnique: "Podaj unikalną nazwę",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "Nie używaj zastrzeżonych słów: \"element\", \"wybór\", \"panel\", \"wiersz\".",
-    // [Auto-translated] "You don't have any items yet"
-    listIsEmpty: "Nie masz jeszcze żadnych przedmiotów",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Nie masz jeszcze żadnego wyboru",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Nie masz jeszcze żadnych kolumn",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Nie masz jeszcze kolumn układu",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Nie masz jeszcze żadnych wierszy",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Nie masz jeszcze żadnych reguł sprawdzania poprawności",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Nie masz jeszcze żadnych zmiennych niestandardowych",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Nie masz jeszcze żadnych wyzwalaczy",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Nie masz jeszcze żadnych linków",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Nie masz jeszcze żadnych stron",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Nie masz jeszcze żadnych poziomów sortowania",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Dodaj nowy wybór",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Dodaj nową kolumnę",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Dodaj nowy wiersz",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Dodaj nową regułę",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Dodaj nową zmienną",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Dodaj nowy wyzwalacz",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Dodaj nowy adres URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Dodaj nową stronę",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Dodaj nowy poziom sortowania",
+    // [Auto-translated] "No items"
+    listIsEmpty: "Brak przedmiotów",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Brak wyboru",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Brak niestandardowych wartości ocen",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Brak indywidualnych etykiet",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Brak obszarów",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Brak kolumn",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Brak kolumn układu",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Bez kłótni",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Brak reguł walidacji",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Brak niestandardowych zmiennych",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Brak wyzwalaczy",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Brak warunkowego marżowania",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Brak linków",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Brak stron",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Brak poziomów sortowania",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Dodaj wybór",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Dodaj wartość ratingową",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Dodaj etykietę",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Dodaj obszar",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Dodaj kolumnę",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Dodaj wiersz",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Reguła dodawania",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Dodaj zmienną",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Dodaj trigger",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Dodaj znaczniki",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Dodaj link",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Dodaj stronę",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Dodaj poziom sortowania",
     // "Value"
     value: "Wartość",
     // "Text"
@@ -1631,6 +1647,8 @@ export var polishStrings = {
     logoHeight: "Wysokość logo",
     // "Read-only"
     readOnly: "Tylko do odczytu",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Tryb tylko do odczytu",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Wyłącz tryb tylko do odczytu, jeśli",
     // "\"No rows\" message"
@@ -2058,6 +2076,12 @@ export var polishStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Nigdy"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Tylko do odczytu",
+      // [Auto-translated] "View"
+      view: "Zobacz"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Przyciski radiowe",
@@ -2794,7 +2818,9 @@ export var polishStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Określa, ile kolumn w układzie siatki obejmuje ten panel.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki w panelu. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie."
+      gridLayoutColumns: "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki w panelu. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Określa, jak pytania w tym panelu pojawiają się, gdy są tylko do odczytu. \"Tylko do odczytu\" wyświetla pytania z ich standardowymi kontrolkami wprowadzania, ale wyłączone dla edycji. \"Widok\" wyświetla odpowiedzi jako tekst lub inne elementy nieinteraktywne. \"Dziedzicz\" używa trybu ustawionego dla panelu nadrzędnego, strony lub ankiety (\"Domyślnie tylko do odczytu\")."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2922,7 +2948,9 @@ export var polishStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Długie teksty w opcjach wyboru automatycznie wygenerują podziały wierszy, aby zmieścić się w menu rozwijanym. Usuń zaznaczenie, jeśli chcesz, aby teksty zostały przycięte.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Określa, ile kolumn obejmuje to pytanie w układzie siatki."
+      effectiveColSpan: "Określa, ile kolumn obejmuje to pytanie w układzie siatki.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Określa, jak pytanie pojawia się, gdy jest tylko do odczytu. \"Tylko do odczytu\" wyświetla pytanie z jego standardowymi kontrolkami wprowadzania, ale wyłączone dla edycji. \"Widok\" wyświetla odpowiedzi jako tekst lub inne elementy nieinteraktywne. \"Dziedzicz\" używa trybu ustawionego dla panelu nadrzędnego, strony lub ankiety (\"Domyślnie tylko do odczytu\")."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2970,6 +2998,8 @@ export var polishStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Wybierz, czy chcesz uniemożliwić respondentom wypełnianie ankiety.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Określa, jak pojawiają się pytania tylko do czytania, w tym na stronie podglądowej. \"Tylko do czytania\" (domyślnie) wyświetla pytania z ich standardowymi kontrolkami wprowadzania, ale wyłączone do edycji. \"Widok\" wyświetla odpowiedzi jako tekst lub inne elementy nieinteraktywne.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Ustawia położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu powyżej lub poniżej nagłówka ankiety."
     },
@@ -2989,7 +3019,9 @@ export var polishStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Gdy ta opcja jest zaznaczona, tworzy osobną kolumnę dla każdej opcji wyboru.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu. Po ustawieniu wartości -1 rzeczywista wartość jest dziedziczona z właściwości \"Liczba kolumn zagnieżdżonych\" macierzy nadrzędnej."
+      colCount: "Rozmieszcza opcje wyboru w układzie wielokolumnowym. Po ustawieniu wartości 0 opcje są wyświetlane w jednym wierszu. Po ustawieniu wartości -1 rzeczywista wartość jest dziedziczona z właściwości \"Liczba kolumn zagnieżdżonych\" macierzy nadrzędnej.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Określa, jak komórki w tej kolumnie pojawiają się, gdy są tylko do odczytu. \"Tylko do odczytu\" wyświetla komórki z ich standardowymi kontrolkami wejściowymi, ale wyłączone dla edycji. \"Widok\" wyświetla odpowiedzi jako tekst lub inne elementy nieinteraktywne. \"Dziedzicz\" używa trybu ustawionego dla macierzy lub ankiety (\"Domyślnie tylko do odczytu\")."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3155,7 +3187,9 @@ export var polishStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Ustawia widoczność przycisków nawigacyjnych na stronie. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety, które domyślnie ma wartość \"Widoczny\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki na stronie. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie."
+      gridLayoutColumns: "Ta tabela umożliwia skonfigurowanie każdej kolumny siatki na stronie. Automatycznie ustawia procent szerokości dla każdej kolumny na podstawie maksymalnej liczby elementów w wierszu. Aby dostosować układ siatki, ręcznie dostosuj te wartości i zdefiniuj szerokość tytułu dla wszystkich pytań w każdej kolumnie.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Określa, jak pytania na tej stronie pojawiają się, gdy są tylko do odczytu. \"Tylko do odczytu\" wyświetla pytania z ich standardowymi kontrolkami wprowadzania, ale wyłączone do edycji. \"Widok\" wyświetla odpowiedzi jako tekst lub inne elementy nieinteraktywne. \"Dziedzicz\" używa trybu ustawionego dla ankiety (\"Domyślnie tylko do odczytu\")."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Ustawia położenie czasomierza na stronie.",

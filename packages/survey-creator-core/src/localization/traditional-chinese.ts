@@ -1025,45 +1025,61 @@ export var traditionalChineseTranslation = {
     propertyNameIsNotUnique: "請輸入唯一名稱",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "不要使用保留字：「專案」、「選項」、「面板」、“行”。",
-    // [Auto-translated] "You don't have any items yet"
-    listIsEmpty: "您還沒有任何物品",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "你還沒有任何選擇",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "您還沒有任何列",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "您還沒有佈局列",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "您還沒有任何行",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "尚無任何驗證規則",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "您還沒有任何自訂變數",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "您還沒有任何觸發器",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "您還沒有任何連結",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "您還沒有任何頁面",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "你還沒有任何等級",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "添加新選擇",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "添加新列",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "添加新行",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "添加新規則",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "添加新變數",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "添加新觸發器",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "添加新 URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "添加新頁面",
-    // [Auto-translated] "Add new sort level"
+    // [Auto-translated] "No items"
+    listIsEmpty: "沒有物品",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "沒有選擇",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "沒有自訂分級值",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "沒有自訂標籤",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "沒有區域",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "無柱子",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "無版面欄",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "沒有排隊",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "沒有驗證規則",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "沒有自訂變數",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "沒有觸發點",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "無條件標記",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "無連結",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "沒有頁數",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "無分類等級",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "增加選擇",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "增加評分值",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "新增標籤",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "新增面積",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "新增欄位",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "新增列",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "新增規則",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "新增變數",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "新增觸發器",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "加上加價",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "新增連結",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "新增頁面",
+    // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "新增排序層級",
     // "Value"
     value: "值",
@@ -1631,6 +1647,8 @@ export var traditionalChineseTranslation = {
     logoHeight: "標誌高度",
     // "Read-only"
     readOnly: "唯讀",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "唯讀模式",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "在以下情況下禁用唯讀模式",
     // "\"No rows\" message"
@@ -2058,6 +2076,12 @@ export var traditionalChineseTranslation = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "從不"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "唯讀",
+      // [Auto-translated] "View"
+      view: "景觀"
     },
     // [Auto-translated] "Radio buttons"
     radio: "單選按鈕",
@@ -2794,7 +2818,9 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "指定此面板在網格佈局中跨越的列數。",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "此表允許您設定面板中的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
+      gridLayoutColumns: "此表允許您設定面板中的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "指定此面板中問題在唯讀時的呈現方式。「唯讀」顯示問題及其常見輸入控制，但無法編輯。「檢視」以文字或其他非互動元素顯示答案。「繼承」則使用父面板、頁面或調查的模式（預設為「唯讀」）。"
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2922,7 +2948,9 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "選項選項中的長文本將自動生成換行符以適合下拉功能表。如果要剪裁文字，請取消選擇。",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "指定此問題在網格佈局中跨越多少列。"
+      effectiveColSpan: "指定此問題在網格佈局中跨越多少列。",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "指定問題在唯讀時的呈現方式。「唯讀」顯示問題及其常見的輸入控制，但因編輯而被禁用。「檢視」以文字或其他非互動元素顯示答案。「繼承」則使用父面板、頁面或調查的模式（預設為「唯讀」模式）。"
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2970,6 +2998,8 @@ export var traditionalChineseTranslation = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "選擇是否要阻止受訪者填寫您的調查。",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "指定唯讀題目如何呈現，包括預覽頁面。「唯讀」（預設）顯示帶有常見輸入控制但無法編輯的題目。「檢視」以文字或其他非互動元素顯示答案。",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "設置進度條的位置。“自動”值在調查標題的上方或下方顯示進度條。"
     },
@@ -2989,7 +3019,9 @@ export var traditionalChineseTranslation = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "選取後，為每個選項創建一個單獨的列。",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "在多列佈局中排列選擇選項。設置為 0 時，選項將顯示在一行中。當設置為 -1 時，實際值將繼承自父矩陣的“嵌套列計數”屬性。"
+      colCount: "在多列佈局中排列選擇選項。設置為 0 時，選項將顯示在一行中。當設置為 -1 時，實際值將繼承自父矩陣的“嵌套列計數”屬性。",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "指定本欄儲存格在唯讀時的呈現方式。「唯讀」顯示儲存格及其常用輸入控制，但無法編輯。「檢視」以文字或其他非互動元素顯示答案。「繼承」則使用矩陣或調查設定的模式（預設為「唯讀」）。"
     },
     slider: {
       // "The lowest number that users can select."
@@ -3155,7 +3187,9 @@ export var traditionalChineseTranslation = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "設置導航按鈕在頁面上的可見性。“繼承”選項應用調查級別設置，預設為“可見”。",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "此表允許您設定頁面上的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
+      gridLayoutColumns: "此表允許您設定頁面上的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "指定本頁問題在唯讀時的呈現方式。「唯讀」顯示問題及其常見輸入控制，但無法編輯。「檢視」以文字或其他非互動元素顯示答案。「繼承」則使用調查模式（預設為「唯讀」）。"
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "設置計時器在頁面上的位置。",

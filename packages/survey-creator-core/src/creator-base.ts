@@ -1994,7 +1994,11 @@ export class SurveyCreatorModel extends Base
   public updateToolboxIsCompact(newVal?: boolean) {
     if (!this.toolbox) return;
     const hasValue = newVal != undefined && newVal != null;
-    if (this.toolbox.forceCompact !== undefined) {
+    // Compact mode is the left/right rail (icon column + flyout). The sidebar
+    // hosts the full toolbox; the rail's 100vw scroller stretches that panel.
+    if (this.toolboxLocation == "sidebar") {
+      this.toolbox.isCompact = false;
+    } else if (this.toolbox.forceCompact !== undefined) {
       this.toolbox.isCompact = this.toolbox.forceCompact;
     } else if (this.toolboxLocation == "right") {
       this.toolbox.isCompact = this.showSidebar || (hasValue && newVal);

@@ -1028,6 +1028,12 @@ export var htStrings = {
     listIsEmpty: "Ou pa gen okenn atik ankò",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Ou pa gen okenn chwa ankò",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Pa gen valè Rating koutim",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Pa gen etikèt koutim",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Pa gen zòn",
     // "You don't have any columns yet"
     "listIsEmpty@columns": "Ou poko gen okenn kolòn",
     // "You don't have layout columns yet"
@@ -1040,14 +1046,22 @@ export var htStrings = {
     "listIsEmpty@calculatedValues": "Ou pa gen okenn varyab koutim ankò",
     // "You don't have any triggers yet"
     "listIsEmpty@triggers": "Ou pa gen okenn deklanche ankò",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Pa gen okenn markeup kondisyonèl",
     // "You don't have any links yet"
     "listIsEmpty@navigateToUrlOnCondition": "Ou poko gen okenn lyen",
     // "You don't have any pages yet"
     "listIsEmpty@pages": "Ou poko gen okenn paj",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Ou pa gen okenn nivo sòt ankò",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Pa gen nivo sòt",
     // "Add new choice"
     "addNew@choices": "Ajoute nouvo chwa",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Add valè rating",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Ajoute etikèt",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Ajoute zòn",
     // "Add new column"
     "addNew@columns": "Ajoute nouvo kolòn",
     // "Add new row"
@@ -1058,12 +1072,14 @@ export var htStrings = {
     "addNew@calculatedValues": "Ajoute nouvo varyab",
     // "Add new trigger"
     "addNew@triggers": "Ajoute nouvo deklanche",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Ajoute marke-up",
     // "Add new URL"
     "addNew@navigateToUrlOnCondition": "Ajoute nouvo URL",
     // "Add new page"
     "addNew@pages": "Ajoute nouvo paj",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Ajoute nouvo nivo sòt",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Ajoute triye nivo",
     // "Value"
     value: "Valè",
     // "Text"
@@ -1630,6 +1646,8 @@ export var htStrings = {
     logoHeight: "Wotè logo",
     // "Read-only"
     readOnly: "Lekti sèlman",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Mòd li sèlman",
     // "Disable the read-only mode if"
     enableIf: "Enfim mòd lekti sèlman si",
     // "\"No rows\" message"
@@ -2057,6 +2075,12 @@ export var htStrings = {
     clearIfInvisible: {
       // "Never"
       none: "Pa janm"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Li sèlman",
+      // [Auto-translated] "View"
+      view: "Gade"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Bouton radyo",
@@ -2793,7 +2817,9 @@ export var htStrings = {
       // "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Espesifye konbyen kolòn panèl sa a kouvri nan layout kadriyaj la.",
       // "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Tablo sa a pèmèt ou konfigirasyon chak kolòn kadriyaj nan panèl la. Li otomatikman fikse pousantaj lajè pou chak kolòn ki baze sou kantite maksimòm eleman nan yon ranje. Pou personnaliser layout kadriyaj la, ajiste valè sa yo manyèlman epi defini lajè tit la pou tout kesyon ki nan chak kolòn."
+      gridLayoutColumns: "Tablo sa a pèmèt ou konfigirasyon chak kolòn kadriyaj nan panèl la. Li otomatikman fikse pousantaj lajè pou chak kolòn ki baze sou kantite maksimòm eleman nan yon ranje. Pou personnaliser layout kadriyaj la, ajiste valè sa yo manyèlman epi defini lajè tit la pou tout kesyon ki nan chak kolòn.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Espesifye ki jan kesyon yo andedan panèl sa a parèt lè yo se li sèlman. \"Li sèlman\" montre kesyon yo ak kontwòl opinyon abityèl yo, men enfim pou koreksyon. \"View\" montre repons kòm tèks oswa lòt eleman ki pa entèaktif. \"Eritye\" itilize mòd ki mete pou panèl paran, paj, oswa sondaj (\"Li sèlman\" pa default)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2921,7 +2947,9 @@ export var htStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Long tèks nan opsyon chwa pral otomatikman jenere liy liy yo anfòm nan meni an gout-desann. Sòf si ou vle tèks yo klip.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Espesifye konbyen kolòn kesyon sa a kouvri nan layout la kadriyaj."
+      effectiveColSpan: "Espesifye konbyen kolòn kesyon sa a kouvri nan layout la kadriyaj.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Espesifye ki jan kesyon an parèt lè li se li sèlman. \"Li sèlman\" montre kesyon an ak kontwòl opinyon abityèl li yo, men enfim pou koreksyon. \"View\" montre repons kòm tèks oswa lòt eleman ki pa entèaktif. \"Eritye\" itilize mòd la mete pou panèl paran, paj, oswa sondaj (\"Read-Only\" pa default)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2969,6 +2997,8 @@ export var htStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Chwazi si ou vle anpeche moun ki repond ranpli sondaj ou a.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Espesifye ki jan kesyon li sèlman parèt, ki gen ladan sou paj la preview \"Li sèlman\" (default) montre kesyon ak kontwòl opinyon abityèl yo, men enfim pou koreksyon. \"View\" montre repons kòm tèks oswa lòt eleman ki pa entèaktif.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Mete kote ba pwogrè a. Valè \"Oto\" a montre ba pwogrè a anwo oswa anba tèt sondaj la."
     },
@@ -2988,7 +3018,9 @@ export var htStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Lè yo chwazi, kreye yon kolòn endividyèl pou chak opsyon chwa.",
       // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Fè aranjman pou chwa chwa nan yon layout milti-kolòn. Lè yo mete sou 0, opsyon yo parèt sou yon sèl liy. Lè yo mete sou -1, valè aktyèl la eritye nan pwopriyete \"Konte kolòn ki nichye\" nan matris paran an."
+      colCount: "Fè aranjman pou chwa chwa nan yon layout milti-kolòn. Lè yo mete sou 0, opsyon yo parèt sou yon sèl liy. Lè yo mete sou -1, valè aktyèl la eritye nan pwopriyete \"Konte kolòn ki nichye\" nan matris paran an.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Espesifye ki jan selil yo nan kolòn sa a parèt lè yo ap li sèlman. \"Li sèlman\" montre selil yo ak kontwòl opinyon abityèl yo, men enfim pou koreksyon. \"View\" montre repons kòm tèks oswa lòt eleman ki pa entèaktif. \"Eritye\" sèvi ak mòd la mete pou matris la oswa sondaj (\"Li sèlman\" pa default)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3154,7 +3186,9 @@ export var htStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Mete vizibilite bouton navigasyon yo sou paj la. Opsyon \"Eritite\" aplike paramèt nivo sondaj la, ki se \"Vizib\".",
       // "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Tablo sa a pèmèt ou konfigirasyon chak kolòn kadriyaj sou paj la. Li otomatikman fikse pousantaj lajè pou chak kolòn ki baze sou kantite maksimòm eleman nan yon ranje. Pou personnaliser layout griy la, ajiste valè sa yo manyèlman epi defini lajè tit la pou tout kesyon ki nan chak kolòn."
+      gridLayoutColumns: "Tablo sa a pèmèt ou konfigirasyon chak kolòn kadriyaj sou paj la. Li otomatikman fikse pousantaj lajè pou chak kolòn ki baze sou kantite maksimòm eleman nan yon ranje. Pou personnaliser layout griy la, ajiste valè sa yo manyèlman epi defini lajè tit la pou tout kesyon ki nan chak kolòn.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Espesifye ki jan kesyon yo nan paj sa a parèt lè yo ap li sèlman. \"Li sèlman\" montre kesyon yo ak kontwòl opinyon abityèl yo, men enfim pou koreksyon. \"View\" montre repons kòm tèks oswa lòt eleman ki pa entèaktif. \"Eritye\" sèvi ak mòd ki mete pou sondaj la (\"Read-Only\" pa default)."
     },
     // "Sets the location of a timer on a page."
     timerLocation: "Mete kote yon revèy sou yon paj.",

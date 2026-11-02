@@ -1025,46 +1025,62 @@ export var danishStrings = {
     propertyNameIsNotUnique: "Indtast et unikt navn",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "Brug ikke reserverede ord: \"element\", \"valg\", \"panel\", \"række\".",
-    // [Auto-translated] "You don't have any items yet"
-    listIsEmpty: "Du har ingen varer endnu",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Du har ingen valg endnu",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Du har ikke nogen kolonner endnu",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Du har ikke layoutkolonner endnu",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Du har ingen rækker endnu",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Du har endnu ingen valideringsregler",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Du har endnu ingen tilpassede variabler",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Du har ingen udløsere endnu",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Du har ingen links endnu",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Du har ingen sider endnu",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Du har endnu ingen sort-niveauer",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Tilføj nyt valg",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Tilføj ny kolonne",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Tilføj ny række",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Tilføj ny regel",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Tilføj ny variabel",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Tilføj ny udløser",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Tilføj ny webadresse",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Tilføj ny side",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Tilføj nyt sorteringsniveau",
+    // [Auto-translated] "No items"
+    listIsEmpty: "Ingen genstande",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Ingen valg",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Ingen brugerdefinerede vurderingsværdier",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Ingen specialetiketter",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Ingen områder",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Ingen søjler",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Ingen layoutkolonner",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Ingen rækker",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Ingen valideringsregler",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Ingen brugerdefinerede variabler",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Ingen triggere",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Ingen betinget markup",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Ingen links",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Ingen sider",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Ingen sort-niveauer",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Tilføj valg",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Tilføj vurderingsværdi",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Tilføj label",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Tilføj areal",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Tilføj kolonne",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Tilføj række",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Tilføj regel",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Tilføj variabel",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Tilføj trigger",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Tilføj markup",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Tilføj link",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Tilføj side",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Tilføj sorteringsniveau",
     // "Value"
     value: "Værdi",
     // "Text"
@@ -1631,6 +1647,8 @@ export var danishStrings = {
     logoHeight: "Logo højde",
     // "Read-only"
     readOnly: "Skrivebeskyttet",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Skrivebeskyttet tilstand",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Deaktiver skrivebeskyttet tilstand, hvis",
     // "\"No rows\" message"
@@ -2058,6 +2076,12 @@ export var danishStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Aldrig"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Skrivebeskyttet",
+      // [Auto-translated] "View"
+      view: "Udsigt"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Radioknapper",
@@ -2794,7 +2818,9 @@ export var danishStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Angiver, hvor mange kolonner dette panel strækker sig over i gitterlayoutet.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Denne tabel giver dig mulighed for at konfigurere hver gitterkolonne i panelet. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."
+      gridLayoutColumns: "Denne tabel giver dig mulighed for at konfigurere hver gitterkolonne i panelet. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificerer, hvordan spørgsmålene i dette panel vises, når de er skrivebeskyttede. \"Skrivebeskyttet\" viser spørgsmålene med deres sædvanlige inputkontroller, men deaktiveret ved redigering. \"Visning\" viser svarene som tekst eller andre ikke-interaktive elementer. \"Inherit\" bruger den tilstand, der er sat til forældrepanelet, siden eller undersøgelsen (\"Skrivebeskyttet\" som standard)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2922,7 +2948,9 @@ export var danishStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Lange tekster i valgmuligheder genererer automatisk linjeskift, så de passer ind i rullemenuen. Fjern markeringen, hvis teksterne skal klippes.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Angiver, hvor mange kolonner dette spørgsmål strækker sig over i gitterlayoutet."
+      effectiveColSpan: "Angiver, hvor mange kolonner dette spørgsmål strækker sig over i gitterlayoutet.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificerer, hvordan spørgsmålet vises, når det er skrivebeskyttet. \"Skrivebeskyttet\" viser spørgsmålet med dets sædvanlige inputkontroller, men deaktiveret ved redigering. \"Visning\" viser svar som tekst eller andre ikke-interaktive elementer. \"Arve\" bruger den tilstand, der er sat til forældrepanelet, siden eller undersøgelsen (\"Skrivebeskyttet\" som standard)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2970,6 +2998,8 @@ export var danishStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Vælg, hvis du vil forhindre respondenter i at udfylde din undersøgelse.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Specificerer, hvordan skrivebeskyttede spørgsmål vises, inklusive på forhåndsvisningssiden. \"Skrivebeskyttet\" (standard) viser spørgsmål med deres sædvanlige inputkontroller, men deaktiveret ved redigering. \"Vis\" viser svar som tekst eller andre ikke-interaktive elementer.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Angiver placeringen af statuslinjen. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften."
     },
@@ -2989,7 +3019,9 @@ export var danishStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Når denne indstilling er valgt, oprettes der en individuel kolonne for hver valgmulighed.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje. Når den er angivet til -1, nedarves den faktiske værdi fra egenskaben \"Antal indlejrede kolonner\" for den overordnede matrix."
+      colCount: "Arrangerer valgmuligheder i et layout med flere kolonner. Når den er indstillet til 0, vises indstillingerne på en enkelt linje. Når den er angivet til -1, nedarves den faktiske værdi fra egenskaben \"Antal indlejrede kolonner\" for den overordnede matrix.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificerer, hvordan celler i denne kolonne vises, når de er skrivebeskyttet. \"Skrivebeskyttet\" viser cellerne med deres sædvanlige inputkontroller, men deaktiveret ved redigering. \"Visning\" viser svar som tekst eller andre ikke-interaktive elementer. \"Inherit\" bruger den tilstand, der er sat til matrixen eller undersøgelsen (\"Skrivebeskyttet\" som standard)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3155,7 +3187,9 @@ export var danishStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Indstiller synligheden af navigationsknapper på siden. Indstillingen \"Arv\" anvender indstillingen på undersøgelsesniveau, som som standard er \"Synlig\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "I denne tabel kan du konfigurere hver gitterkolonne på siden. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne."
+      gridLayoutColumns: "I denne tabel kan du konfigurere hver gitterkolonne på siden. Den indstiller automatisk breddeprocenten for hver kolonne baseret på det maksimale antal elementer i en række. Hvis du vil tilpasse gitterlayoutet, skal du manuelt justere disse værdier og definere titelbredden for alle spørgsmål i hver kolonne.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificerer, hvordan spørgsmålene på denne side vises, når de er skrivebeskyttede. \"Skrivebeskyttet\" viser spørgsmålene med deres sædvanlige inputkontroller, men deaktiveret ved redigering. \"Visning\" viser svarene som tekst eller andre ikke-interaktive elementer. \"Inherit\" bruger den tilstand, der er sat til undersøgelsen (\"Læsebeskyttet\" som standard)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Indstiller placeringen af en timer på en side.",

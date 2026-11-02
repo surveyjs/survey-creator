@@ -1028,42 +1028,58 @@ export var czStrings = {
     listIsEmpty: "Přidat novou položku",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Zatím nebyly přidány žádné volby",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Zatím nemáte žádné sloupce.",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Sloupce rozložení ještě nemáte",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Zatím nemáte žádné řádky",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Zatím nemáte žádná ověřovací pravidla.",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Zatím nemáte žádné vlastní proměnné.",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Zatím nemáte žádné spouštěče",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Zatím nemáte žádné odkazy",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Zatím nemáte žádné stránky",
-    // [Auto-translated] "You don't have any sort levels yet"
-    "listIsEmpty@sortCriteria": "Ještě nemáš žádné úrovně třídění",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Žádné vlastní hodnoty hodnocení",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Žádné vlastní štítky",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Žádné oblasti",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Žádné sloupce",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Žádné sloupce pro rozložení",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Žádné hádky",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Žádná validační pravidla",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Žádné vlastní proměnné",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Žádné spouštěče",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Žádné podmíněné značkování",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Žádné odkazy",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Žádné stránky",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Žádné úrovně třídění",
     // "Add new choice"
     "addNew@choices": "Přidat volbu",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Přidat nový sloupec",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Přidat nový řádek",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Přidat nové pravidlo",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Přidat novou proměnnou",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Přidání nového triggeru",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Přidat novou adresu URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Přidat novou stránku",
-    // [Auto-translated] "Add new sort level"
-    "addNew@sortCriteria": "Přidejte novou úroveň třídění",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Přidejte hodnotu hodnocení",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Přidat štítek",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Přidat oblast",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Přidat sloupec",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Přidat řádek",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Pravidlo přidat",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Přidat proměnnou",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Přidat trigger",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Přidejte značkování",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Přidat odkaz",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Přidat stránku",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Přidat úroveň třídění",
     // "Value"
     value: "Hodnota",
     // [Auto-translated] "Text"
@@ -1630,6 +1646,8 @@ export var czStrings = {
     logoHeight: "Výška loga (v hodnotách akceptovaných CSS)",
     // "Read-only"
     readOnly: "Pouze pro čtení",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Režim pouze pro čtení",
     // "Disable the read-only mode if"
     enableIf: "Upravitelná pokud",
     // "\"No rows\" message"
@@ -2057,6 +2075,12 @@ export var czStrings = {
     clearIfInvisible: {
       // [Auto-translated] "Never"
       none: "Nikdy"
+    },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Pouze pro čtení",
+      // [Auto-translated] "View"
+      view: "Zobrazit"
     },
     // [Auto-translated] "Radio buttons"
     radio: "Tlačítka rádia",
@@ -2793,7 +2817,9 @@ export var czStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Určuje, kolik sloupců se tento panel rozprostírá v rozvržení mřížky.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Tato tabulka umožňuje konfigurovat jednotlivé sloupce mřížky v panelu. Automaticky nastaví procentuální šířku pro každý sloupec na základě maximálního počtu prvků v řádku. Chcete-li přizpůsobit rozvržení mřížky, upravte tyto hodnoty ručně a definujte šířku nadpisu pro všechny otázky v každém sloupci."
+      gridLayoutColumns: "Tato tabulka umožňuje konfigurovat jednotlivé sloupce mřížky v panelu. Automaticky nastaví procentuální šířku pro každý sloupec na základě maximálního počtu prvků v řádku. Chcete-li přizpůsobit rozvržení mřížky, upravte tyto hodnoty ručně a definujte šířku nadpisu pro všechny otázky v každém sloupci.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifikuje, jak se otázky uvnitř tohoto panelu objevují, když jsou pouze pro čtení. \"Pouze pro čtení\" zobrazuje otázky s jejich obvyklými ovládacími prvky, ale je deaktivováno pro úpravy. \"Zobrazení\" zobrazuje odpovědi jako text nebo jiné neinteraktivní prvky. \"Dědit\" používá režim nastavený pro rodičovský panel, stránku nebo průzkum (\"Pouze pro čtení\" ve výchozím nastavení)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2921,7 +2947,9 @@ export var czStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Dlouhé texty v možnostech volby automaticky vygenerují zalomení řádků, aby se vešly do rozbalovací nabídky. Odznačte, pokud chcete, aby se texty ořízly.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Určuje, kolik sloupců tato otázka zabírá v rozvržení mřížky."
+      effectiveColSpan: "Určuje, kolik sloupců tato otázka zabírá v rozvržení mřížky.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifikuje, jak se otázka zobrazí, když je pouze pro čtení. \"Pouze pro čtení\" zobrazuje otázku s obvyklými ovládacími prvky, ale je deaktivována pro úpravy. \"Zobrazení\" zobrazuje odpovědi jako text nebo jiné neinteraktivní prvky. \"Dědit\" používá režim nastavený pro rodičovský panel, stránku nebo průzkum (\"Pouze pro čtení\" ve výchozím nastavení)."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2969,6 +2997,8 @@ export var czStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Vyberte, zda chcete respondentům zabránit ve vyplnění průzkumu.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Specifikuje, jak se otázky pouze pro čtení zobrazují, včetně na stránce náhledu. \"Pouze pro čtení\" (výchozí) zobrazuje otázky s jejich obvyklými ovládacími prvky, ale je deaktivováno pro úpravy. \"Zobrazení\" zobrazuje odpovědi jako text nebo jiné neinteraktivní prvky.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Nastaví umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu."
     },
@@ -2988,7 +3018,9 @@ export var czStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Pokud je tato možnost vybraná, vytvoří samostatný sloupec pro každou možnost volby.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Uspořádá volby voleb ve vícesloupcovém rozvržení. Když je nastavená hodnota 0, volby se zobrazí na jednom řádku. Pokud je nastavena hodnota -1, skutečná hodnota je zděděna z vlastnosti \"Počet vnořených sloupců\" nadřazené matice."
+      colCount: "Uspořádá volby voleb ve vícesloupcovém rozvržení. Když je nastavená hodnota 0, volby se zobrazí na jednom řádku. Pokud je nastavena hodnota -1, skutečná hodnota je zděděna z vlastnosti \"Počet vnořených sloupců\" nadřazené matice.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifikuje, jak se buňky v tomto sloupci zobrazují, když jsou pouze pro čtení. \"Pouze pro čtení\" zobrazuje buňky s jejich obvyklými vstupními ovládacími prvky, ale je deaktivováno pro úpravy. \"Zobrazení\" zobrazuje odpovědi jako text nebo jiné neinteraktivní prvky. \"Dědit\" používá režim nastavený pro matici nebo průzkum (\"Pouze pro čtení\" ve výchozím nastavení)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -3154,7 +3186,9 @@ export var czStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Nastaví viditelnost navigačních tlačítek na stránce. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu, které je ve výchozím nastavení \"Viditelné\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Tato tabulka umožňuje konfigurovat jednotlivé sloupce mřížky na stránce. Automaticky nastaví procentuální šířku pro každý sloupec na základě maximálního počtu prvků v řádku. Chcete-li přizpůsobit rozvržení mřížky, upravte tyto hodnoty ručně a definujte šířku nadpisu pro všechny otázky v každém sloupci."
+      gridLayoutColumns: "Tato tabulka umožňuje konfigurovat jednotlivé sloupce mřížky na stránce. Automaticky nastaví procentuální šířku pro každý sloupec na základě maximálního počtu prvků v řádku. Chcete-li přizpůsobit rozvržení mřížky, upravte tyto hodnoty ručně a definujte šířku nadpisu pro všechny otázky v každém sloupci.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifikuje, jak se otázky na této stránce zobrazují, když jsou pouze pro čtení. \"Pouze pro čtení\" zobrazuje otázky s jejich obvyklými vstupními ovládacími prvky, ale je deaktivováno pro úpravy. \"Zobrazení\" zobrazuje odpovědi jako text nebo jiné neinteraktivní prvky. \"Dědit\" používá režim nastavený pro průzkum (\"Pouze pro čtení\" ve výchozím nastavení)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Nastaví umístění časovače na stránce.",
