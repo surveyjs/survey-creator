@@ -1316,6 +1316,8 @@ export var persianStrings = {
     autoFocusFirstQuestion: "تمرکز بر روی اولین سوال با تغییر صفحه",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "فعال سازی میانبرهای انتخاب",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "نمایش نکات صفحه کلید",
     // "Question order"
     questionOrder: "ترتیب المان ها در صفحه",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var persianStrings = {
       survey: "همانند نظرسنجی",
       // [Auto-translated] "Same as container"
       container: "همانند کانتینر"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "ارث بردن",
+      // [Auto-translated] "Hide"
+      "false": "پنهان شو",
+      // [Auto-translated] "Show"
+      "true": "برنامه"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var persianStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "مشخص می کند که این سوال چند ستون در طرح بندی شبکه قرار دارد.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "مشخص می کند که سؤال هنگام فقط خواندنی بودن چگونه ظاهر می شود. «فقط خواندنی بودن» سؤال را با کنترل های ورودی معمول نمایش می دهد، اما برای ویرایش غیرفعال است. «نمایش» پاسخ ها را به صورت متن یا عناصر غیرتعاملی نمایش می دهد. «ارث برد» از حالت تنظیم شده برای پنل والد، صفحه یا نظرسنجی («فقط خواندنی» به طور پیش فرض) استفاده می کند."
+      readOnlyMode: "مشخص می کند که سؤال هنگام فقط خواندنی بودن چگونه ظاهر می شود. «فقط خواندنی بودن» سؤال را با کنترل های ورودی معمول نمایش می دهد، اما برای ویرایش غیرفعال است. «نمایش» پاسخ ها را به صورت متن یا عناصر غیرتعاملی نمایش می دهد. «ارث برد» از حالت تنظیم شده برای پنل والد، صفحه یا نظرسنجی («فقط خواندنی» به طور پیش فرض) استفاده می کند.",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "در زیر این سؤال، سرنخ هایی برای اقدامات موجود صفحه کلید نمایش داده می شود. گزینه «ارث برد» از تنظیمات سطح نظرسنجی استفاده می کند."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var persianStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "حروف (A, B, C, ...) را در کنار گزینه ها نمایش می دهد و به پاسخ دهندگان اجازه می دهد با فشار دادن کلیدهای حروف مربوطه آن ها را انتخاب کنند. گزینه «ارث بردن» از تنظیمات سطح نظرسنجی استفاده می کند."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "نکاتی برای اقدامات کیبورد موجود در زیر سوالات نمایش داده می شود. می توانید این تنظیم را برای سوالات فردی نادیده بگیرید.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "ترتیب اصلی سوالات را نگه می دارد یا انها را تصادفی می کند. اثر این تنظیم فقط در تب Preview قابل مشاهده است.",
     // [Auto-translated] "For text entry questions only."

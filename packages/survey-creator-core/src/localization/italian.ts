@@ -1316,6 +1316,8 @@ export var italianTranslation = {
     autoFocusFirstQuestion: "Al cambio pagina, posiziona il cursore sulla prima domanda",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Abilita scorciatoie di scelta",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Mostra suggerimenti per la tastiera",
     // "Question order"
     questionOrder: "Ordine delle domande sulla pagina",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var italianTranslation = {
       survey: "Come il sondaggio",
       // [Auto-translated] "Same as container"
       container: "Uguale al contenitore"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Ereditare",
+      // [Auto-translated] "Hide"
+      "false": "Nasconditi",
+      // [Auto-translated] "Show"
+      "true": "Programma"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var italianTranslation = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Specifica il numero di colonne su cui si estende la domanda all'interno del layout della griglia.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Specifica come appare la domanda quando è di sola lettura. \"Solo lettura\" mostra la domanda con i suoi consueti controlli di input, ma disabilitato per la modifica. \"Visualizza\" mostra le risposte come testo o altri elementi non interattivi. \"Ereditare\" utilizza la modalità impostata per il pannello genitore, la pagina o il sondaggio (\"Solo lettura\" di default)."
+      readOnlyMode: "Specifica come appare la domanda quando è di sola lettura. \"Solo lettura\" mostra la domanda con i suoi consueti controlli di input, ma disabilitato per la modifica. \"Visualizza\" mostra le risposte come testo o altri elementi non interattivi. \"Ereditare\" utilizza la modalità impostata per il pannello genitore, la pagina o il sondaggio (\"Solo lettura\" di default).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Mostra suggerimenti per le azioni disponibili della tastiera sotto questa domanda. L'opzione \"Eredita\" applica l'impostazione a livello di sondaggio."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var italianTranslation = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Mostra le lettere (A, B, C, ...) accanto alle opzioni e permette ai rispondenti di selezionarle premendo i tasti corrispondenti delle lettere. L'opzione \"Ereda\" utilizza l'impostazione a livello di sondaggio."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Mostra suggerimenti per le azioni disponibili della tastiera sotto le domande. Puoi sovrascrivere questa impostazione per singole domande.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Mantiene l'ordine originale delle domande o le rende casuali. L'effetto di questa impostazione è visibile solo nella scheda Anteprima.",
     // [Auto-translated] "For text entry questions only."

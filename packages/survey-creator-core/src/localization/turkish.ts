@@ -1316,6 +1316,8 @@ export var turkishStrings = {
     autoFocusFirstQuestion: "İlk soruyu sayfayı değiştirmeye odakla",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Seçim kısayollarını etkinleştir",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Klavye ipuçlarını göster",
     // "Question order"
     questionOrder: "Sayfadaki öğelerin sırası",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var turkishStrings = {
       survey: "Anketle aynı",
       // [Auto-translated] "Same as container"
       container: "Konteyner ile aynı"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Miras Alma",
+      // [Auto-translated] "Hide"
+      "false": "Saklan",
+      // [Auto-translated] "Show"
+      "true": "Gösteri"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var turkishStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Bu sorunun ızgara düzeni içinde kaç sütuna yayılacağını belirtir.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Sorunun sadece okunabilir olduğunda nasıl göründüğünü belirtir. \"Sadece Okuyur\" seçeneği, soruyu alışılmış giriş kontrolleriyle gösterir, ancak düzenleme için devre dışı bırakılır. \"Görüntü\" cevapları metin veya etkileşimsiz diğer öğeler olarak gösterir. \"Inherit\" ana panel, sayfa veya anket için ayarlanmış mod ayarını kullanır (\"Varsayılan olarak \"Sadece Oku\")."
+      readOnlyMode: "Sorunun sadece okunabilir olduğunda nasıl göründüğünü belirtir. \"Sadece Okuyur\" seçeneği, soruyu alışılmış giriş kontrolleriyle gösterir, ancak düzenleme için devre dışı bırakılır. \"Görüntü\" cevapları metin veya etkileşimsiz diğer öğeler olarak gösterir. \"Inherit\" ana panel, sayfa veya anket için ayarlanmış mod ayarını kullanır (\"Varsayılan olarak \"Sadece Oku\").",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Bu sorunun altında mevcut klavye işlemleri için ipuçları gösterilir. \"Inherit\" seçeneği anket seviyesi ayarını uygular."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var turkishStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Seçeneklerin yanında harfler (A, B, C, ...) gösterir ve yanıtıcıların ilgili harf tuşlarına basarak seçmelerine olanak tanır. \"Miras\" seçeneği, anket seviyesindeki ayarı kullanır."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Soruların altında mevcut klavye eylemleri için ipuçları gösterilir. Bu ayarı bireysel sorular için geçersiz kılabilirsiniz.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür.",
     // [Auto-translated] "For text entry questions only."

@@ -1316,6 +1316,8 @@ export var nbStrings = {
     autoFocusFirstQuestion: "Sett fokus på første spørsmål når en endrer side",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Aktiver snarveier til valg",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Show-tastaturtips",
     // "Question order"
     questionOrder: "Rekkefølge på elementer på siden",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var nbStrings = {
       survey: "Samme som undersøkelse",
       // [Auto-translated] "Same as container"
       container: "Samme som container"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Arv",
+      // [Auto-translated] "Hide"
+      "false": "Gjem deg",
+      // [Auto-translated] "Show"
+      "true": "Show"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var nbStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Angir hvor mange kolonner dette spørsmålet strekker seg over i rutenettoppsettet.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Spesifiserer hvordan spørsmålet vises når det er skrivebeskyttet. \"Skrivebeskyttet\" viser spørsmålet med vanlige inndatakontroller, men deaktivert for redigering. \"Visning\" viser svar som tekst eller andre ikke-interaktive elementer. \"Inherit\" bruker modusen som er satt for foreldrepanelet, siden eller undersøkelsen (\"Read-Only\" som standard)."
+      readOnlyMode: "Spesifiserer hvordan spørsmålet vises når det er skrivebeskyttet. \"Skrivebeskyttet\" viser spørsmålet med vanlige inndatakontroller, men deaktivert for redigering. \"Visning\" viser svar som tekst eller andre ikke-interaktive elementer. \"Inherit\" bruker modusen som er satt for foreldrepanelet, siden eller undersøkelsen (\"Read-Only\" som standard).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Viser hint for tilgjengelige tastaturhandlinger under dette spørsmålet. Alternativet \"Inherit\" bruker undersøkelsesnivå-innstillingen."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var nbStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Viser bokstaver (A, B, C, ...) ved siden av valgene og lar respondentene velge dem ved å trykke på de tilsvarende bokstavtastene. Alternativet \"Inherit\" bruker undersøkelsesnivå-innstillingen."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Viser hint for tilgjengelige tastaturhandlinger under spørsmålene. Du kan overstyre denne innstillingen for individuelle spørsmål.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Beholder den opprinnelige rekkefølgen på spørsmål eller randomiserer dem. Effekten av denne innstillingen er bare synlig i kategorien Forhåndsvisning.",
     // [Auto-translated] "For text entry questions only."

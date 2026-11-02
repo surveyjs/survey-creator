@@ -1316,6 +1316,8 @@ export var hrStrings = {
     autoFocusFirstQuestion: "Usredotočite prvo pitanje na promjenu stranice",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Omogući prečace za odabir",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Prikaži savjete za tipkovnicu",
     // "Question order"
     questionOrder: "Redoslijed elemenata na stranici",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var hrStrings = {
       survey: "Isto kao i anketa",
       // [Auto-translated] "Same as container"
       container: "Isto kao spremnik"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Naslijedi",
+      // [Auto-translated] "Hide"
+      "false": "Sakrij se",
+      // [Auto-translated] "Show"
+      "true": "Emisija"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var hrStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Određuje koliko stupaca ovo pitanje obuhvaća unutar rasporeda rešetke.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Specificira kako se pitanje pojavljuje kada je samo za čitanje. \"Samo za čitanje\" prikazuje pitanje s uobičajenim kontrolama unosa, ali je isključeno za uređivanje. \"Prikaz\" prikazuje odgovore kao tekst ili druge neinteraktivne elemente. \"Naslijedi\" koristi način rada postavljen za roditeljsku ploču, stranicu ili anketu (\"Samo za čitanje\" po defaultu)."
+      readOnlyMode: "Specificira kako se pitanje pojavljuje kada je samo za čitanje. \"Samo za čitanje\" prikazuje pitanje s uobičajenim kontrolama unosa, ali je isključeno za uređivanje. \"Prikaz\" prikazuje odgovore kao tekst ili druge neinteraktivne elemente. \"Naslijedi\" koristi način rada postavljen za roditeljsku ploču, stranicu ili anketu (\"Samo za čitanje\" po defaultu).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Ispod ovog pitanja prikazuje savjete za dostupne radnje tipkovnice. Opcija \"Naslijedi\" primjenjuje postavku na razini ankete."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var hrStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Prikazuje slova (A, B, C, ...) pored izbora i omogućuje ispitanicima da ih odaberu pritiskom na odgovarajuće tipke. Opcija \"Naslijedi\" koristi postavku na razini ankete."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Ispod pitanja prikazuje savjete za dostupne radnje na tipkovnici. Ovu postavku možete nadjačati za pojedinačna pitanja.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
     // [Auto-translated] "For text entry questions only."

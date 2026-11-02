@@ -1316,6 +1316,8 @@ export var arStrings = {
     autoFocusFirstQuestion: "ركز المؤشر على السؤال الأول عند تغير الصفحة",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "تمكين اختصارات الاختيار",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "تلميحات لوحة المفاتيح",
     // "Question order"
     questionOrder: "ترتيب العناصر على الصفحة",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var arStrings = {
       survey: "نفس المسح",
       // [Auto-translated] "Same as container"
       container: "نفس الحاوية"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "الوراثة",
+      // [Auto-translated] "Hide"
+      "false": "اختبئ",
+      // [Auto-translated] "Show"
+      "true": "العرض"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var arStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "يحدد عدد الأعمدة التي يمتد إليها هذا السؤال داخل تخطيط الشبكة.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "يحدد كيف يظهر السؤال عندما يكون للقراءة فقط. يعرض \"القراءة فقط\" السؤال مع أدوات التحكم المعتادة في الإدخال، ولكن معطلة للتحرير. \"العرض\" تعرض الإجابات كنص أو عناصر غير تفاعلية أخرى. \"الوراثة\" تستخدم الوضع المعين للوحة الأم أو الصفحة أو الاستبيان (\"للقراءة فقط\" افتراضيا)."
+      readOnlyMode: "يحدد كيف يظهر السؤال عندما يكون للقراءة فقط. يعرض \"القراءة فقط\" السؤال مع أدوات التحكم المعتادة في الإدخال، ولكن معطلة للتحرير. \"العرض\" تعرض الإجابات كنص أو عناصر غير تفاعلية أخرى. \"الوراثة\" تستخدم الوضع المعين للوحة الأم أو الصفحة أو الاستبيان (\"للقراءة فقط\" افتراضيا).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "يعرض تلميحات لإجراءات لوحة المفاتيح المتاحة أسفل هذا السؤال. خيار \"الوراثة\" يطبق إعداد مستوى المسح."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var arStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "يعرض الحروف (A, B, C, ...) بجانب الخيارات ويسمح للمشاركين باختيارها بالضغط على مفاتيح الحروف المقابلة. يستخدم خيار \"الوراثة\" إعداد مستوى المسح."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "يعرض تلميحات لإجراءات لوحة المفاتيح المتاحة أسفل الأسئلة. يمكنك تجاوز هذا الإعداد للأسئلة الفردية.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
     // [Auto-translated] "For text entry questions only."

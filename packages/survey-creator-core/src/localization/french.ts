@@ -1316,6 +1316,8 @@ export var frenchTranslation = {
     autoFocusFirstQuestion: "Focus sur la première question au changement de page",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Activer les raccourcis de choix",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Montrer des astuces clavier",
     // "Question order"
     questionOrder: "Ordre des éléments sur la page",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var frenchTranslation = {
       survey: "Identique à l’enquête",
       // [Auto-translated] "Same as container"
       container: "Identique au conteneur"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Héritage",
+      // [Auto-translated] "Hide"
+      "false": "Cache-toi",
+      // [Auto-translated] "Show"
+      "true": "Émission"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var frenchTranslation = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Spécifie le nombre de colonnes que cette question couvre dans la disposition de la grille.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Précise comment la question apparaît lorsqu’elle est en lecture seule. « Lecture seule » affiche la question avec ses contrôles d’entrée habituels, mais désactivée pour l’édition. « Voir » affiche les réponses sous forme de texte ou d’autres éléments non interactifs. « Héritage » utilise le mode défini pour le panneau parent, la page ou le sondage (« Lecture seule » par défaut)."
+      readOnlyMode: "Précise comment la question apparaît lorsqu’elle est en lecture seule. « Lecture seule » affiche la question avec ses contrôles d’entrée habituels, mais désactivée pour l’édition. « Voir » affiche les réponses sous forme de texte ou d’autres éléments non interactifs. « Héritage » utilise le mode défini pour le panneau parent, la page ou le sondage (« Lecture seule » par défaut).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Affiche des indices pour les actions clavier disponibles sous cette question. L’option « Héritage » applique le paramètre au niveau de l’enquête."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var frenchTranslation = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Affiche les lettres (A, B, C, ...) à côté des choix et permet aux répondants de les sélectionner en appuyant sur les touches correspondantes. L’option « Héritier » utilise le réglage au niveau de l’enquête."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Affiche des indices pour les actions clavier disponibles sous les questions. Vous pouvez contourner ce paramètre pour chaque question.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Conserve l’ordre d’origine des questions ou les rend aléatoires. L’effet de ce paramètre n’est visible que dans l’onglet Aperçu.",
     // [Auto-translated] "For text entry questions only."

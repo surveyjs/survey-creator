@@ -1317,6 +1317,8 @@ export var polishStrings = {
     autoFocusFirstQuestion: "Focus first question on changing the page",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Włącz skróty wyboru",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Pokaż wskazówki klawiatury",
     // "Question order"
     questionOrder: "Elements order on the page",
     // "Time limit to complete the survey"
@@ -2550,6 +2552,14 @@ export var polishStrings = {
       survey: "Tak samo jak w przypadku ankiety",
       // [Auto-translated] "Same as container"
       container: "Tak samo jak kontener"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Dziedziczenie",
+      // [Auto-translated] "Hide"
+      "false": "Ukryj się",
+      // [Auto-translated] "Show"
+      "true": "Pokaz"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2950,7 +2960,9 @@ export var polishStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Określa, ile kolumn obejmuje to pytanie w układzie siatki.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Określa, jak pytanie pojawia się, gdy jest tylko do odczytu. \"Tylko do odczytu\" wyświetla pytanie z jego standardowymi kontrolkami wprowadzania, ale wyłączone dla edycji. \"Widok\" wyświetla odpowiedzi jako tekst lub inne elementy nieinteraktywne. \"Dziedzicz\" używa trybu ustawionego dla panelu nadrzędnego, strony lub ankiety (\"Domyślnie tylko do odczytu\")."
+      readOnlyMode: "Określa, jak pytanie pojawia się, gdy jest tylko do odczytu. \"Tylko do odczytu\" wyświetla pytanie z jego standardowymi kontrolkami wprowadzania, ale wyłączone dla edycji. \"Widok\" wyświetla odpowiedzi jako tekst lub inne elementy nieinteraktywne. \"Dziedzicz\" używa trybu ustawionego dla panelu nadrzędnego, strony lub ankiety (\"Domyślnie tylko do odczytu\").",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Poniżej tego pytania wyświetlane są wskazówki dotyczące dostępnych czynności klawiatury. Opcja \"Dziedzicz\" stosuje ustawienie na poziomie ankiety."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3097,6 +3109,8 @@ export var polishStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Wyświetla litery (A, B, C, ...) obok opcji i pozwala respondentom wybrać je przez naciśnięcie odpowiednich klawiszy literowych. Opcja \"Dziedzicz\" wykorzystuje ustawienie na poziomie ankiety."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Poniżej pytań wyświetlane są wskazówki dotyczące dostępnych czynności klawiatury. Możesz nadpisać to ustawienie dla poszczególnych pytań.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Zachowuje pierwotną kolejność pytań lub losuje je. Efekt tego ustawienia jest widoczny tylko na karcie Podgląd.",
     // [Auto-translated] "For text entry questions only."

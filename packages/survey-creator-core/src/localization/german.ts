@@ -1316,6 +1316,8 @@ export var germanTranslation = {
     autoFocusFirstQuestion: "Erste Frage auf einer neuen Seite fokussieren",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Wahlkürzeln aktivieren",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Tastaturhinweise anzeigen",
     // "Question order"
     questionOrder: "Reihenfolge der Fragen auf der Seite",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var germanTranslation = {
       survey: "Wie bei der Umfrage",
       // [Auto-translated] "Same as container"
       container: "Identisch mit Container"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Erben",
+      // [Auto-translated] "Hide"
+      "false": "Versteck dich",
+      // [Auto-translated] "Show"
+      "true": "Show"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var germanTranslation = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Gibt an, über wie viele Spalten sich diese Frage innerhalb des Rasterlayouts erstreckt.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Spezifiziert, wie die Frage angezeigt wird, wenn sie nur lesbar ist. \"Nur lesen\" zeigt die Frage mit den üblichen Eingabesteuerungen an, ist jedoch für die Bearbeitung deaktiviert. \"Ansicht\" zeigt die Antworten als Text oder andere nicht-interaktive Elemente an. \"Inherit\" verwendet den Modus, der für das Elternpanel, die Seite oder die Umfrage eingestellt ist (\"standardmäßig Nur-Lesen\")."
+      readOnlyMode: "Spezifiziert, wie die Frage angezeigt wird, wenn sie nur lesbar ist. \"Nur lesen\" zeigt die Frage mit den üblichen Eingabesteuerungen an, ist jedoch für die Bearbeitung deaktiviert. \"Ansicht\" zeigt die Antworten als Text oder andere nicht-interaktive Elemente an. \"Inherit\" verwendet den Modus, der für das Elternpanel, die Seite oder die Umfrage eingestellt ist (\"standardmäßig Nur-Lesen\").",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Zeigt Hinweise für verfügbare Tastaturaktionen unter dieser Frage an. Die Option \"Inherit\" verwendet die Einstellung auf Umfrageebene."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var germanTranslation = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Zeigt Buchstaben (A, B, C, ...) neben den Auswahlmöglichkeiten an und ermöglicht es den Befragten, diese durch Drücken der entsprechenden Buchstabentasten auszuwählen. Die Option \"Inherit\" verwendet die Einstellung auf Umfrageebene."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Zeigt Hinweise für verfügbare Tastaturaktionen unter den Fragen. Sie können diese Einstellung für einzelne Fragen überschreiben.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Die Auswirkungen dieser Einstellung sind nur auf dem Tab \"Vorschau\" sichtbar.",
     // [Auto-translated] "For text entry questions only."

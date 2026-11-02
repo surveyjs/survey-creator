@@ -1316,6 +1316,8 @@ export var msStrings = {
     autoFocusFirstQuestion: "Fokus soalan pertama pada perubahan halaman",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Aktifkan pintasan pilihan",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Tunjukkan petunjuk papan kekunci",
     // "Question order"
     questionOrder: "Susunan elemen pada halaman",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var msStrings = {
       survey: "Sama seperti tinjauan",
       // [Auto-translated] "Same as container"
       container: "Sama seperti bekas"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "mewarisi",
+      // [Auto-translated] "Hide"
+      "false": "sembunyikan",
+      // [Auto-translated] "Show"
+      "true": "Tunjuk"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var msStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Menentukan bilangan lajur soalan ini merangkumi dalam reka letak grid.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Menentukan bagaimana soalan muncul apabila ia hanya dibaca. \"Baca Hanya\" memaparkan soalan dengan kawalan input biasa, tetapi dinyahaktifkan untuk penyuntingan. \"Lihat\" memaparkan jawapan sebagai teks atau elemen bukan interaktif lain. \"Mewarisi\" menggunakan mod yang ditetapkan untuk panel induk, halaman, atau tinjauan (\"Baca Hanya\" secara lalai)."
+      readOnlyMode: "Menentukan bagaimana soalan muncul apabila ia hanya dibaca. \"Baca Hanya\" memaparkan soalan dengan kawalan input biasa, tetapi dinyahaktifkan untuk penyuntingan. \"Lihat\" memaparkan jawapan sebagai teks atau elemen bukan interaktif lain. \"Mewarisi\" menggunakan mod yang ditetapkan untuk panel induk, halaman, atau tinjauan (\"Baca Hanya\" secara lalai).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Memaparkan petunjuk untuk tindakan papan kekunci yang tersedia di bawah soalan ini. Pilihan \"Warisi\" menggunakan tetapan tahap tinjauan."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var msStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Memaparkan huruf (A, B, C, ...) di sebelah pilihan dan membolehkan responden memilihnya dengan menekan kekunci huruf yang sepadan. Pilihan \"Warisi\" menggunakan tetapan tahap tinjauan."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Memaparkan petunjuk untuk tindakan papan kekunci yang tersedia di bawah soalan. Anda boleh mengatasi tetapan ini untuk soalan individu.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Mengekalkan susunan soalan asal atau rawak mereka. Kesan seting ini hanya kelihatan dalam tab Pratonton.",
     // [Auto-translated] "For text entry questions only."
