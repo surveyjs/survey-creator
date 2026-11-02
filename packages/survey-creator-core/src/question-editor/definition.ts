@@ -45,6 +45,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "showCommentArea",
       "commentText",
       "commentPlaceholder",
+      "showKeyboardHints",
       { name: "page", tab: "layout" },
       { name: "startWithNewLine", tab: "layout" },
       { name: "showNumber", tab: "layout" },
@@ -895,6 +896,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
         tab: "question"
       },
       { name: "choiceShortcutsEnabled", tab: "question" },
+      { name: "showKeyboardHints", tab: "question" },
       { name: "maxTextLength", tab: "question" },
       { name: "maxCommentLength", tab: "question" },
       { name: "commentAreaRows", tab: "question" },

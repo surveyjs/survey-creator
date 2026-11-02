@@ -698,6 +698,7 @@ export var enStrings = {
     questionErrorLocation: "Error message alignment",
     autoFocusFirstQuestion: "Focus first question on a new page",
     choiceShortcutsEnabled: "Enable choice shortcuts",
+    showKeyboardHints: "Show keyboard hints",
     questionOrder: "Question order",
     timeLimit: "Time limit to complete the survey",
     timeLimitPerPage: "Time limit to complete one page",
@@ -1373,6 +1374,11 @@ export var enStrings = {
     progressBarInheritWidthFrom: {
       survey: "Same as survey",
       container: "Same as container"
+    },
+    showKeyboardHints: {
+      auto: "Inherit",
+      "false": "Hide",
+      "true": "Show"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -1594,7 +1600,8 @@ export var enStrings = {
       searchMode: "A comparison operation used to filter the drop-down list.",
       textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip.",
       effectiveColSpan: "Specifies how many columns this question spans within the grid layout.",
-      readOnlyMode: "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default).",
+      showKeyboardHints: "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
     },
     surveyvalidator: {
       expression: "Use the magic wand icon to define when the question's value is considered valid.",
@@ -1680,6 +1687,7 @@ export var enStrings = {
     checkboxbase: {
       choiceShortcutsEnabled: "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
     },
+    showKeyboardHints: "Displays hints for available keyboard actions below questions. You can override this setting for individual questions.",
     questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab.",
     maxTextLength: "For text entry questions only.",
     maxCommentLength: "For question comments only.",
