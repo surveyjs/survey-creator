@@ -642,6 +642,61 @@ test("Hide text column in itemvalue (rateValues) if inplaceEditChoiceValues is t
   expect(qProperty.columns[0].name).toBe("icon");
   expect(qProperty.columns[1].name).toBe("value");
 });
+test("itemvalue.icon: items do not get an own icon accessor", () => {
+  const item = new ItemValue(1);
+  expect(Object.prototype.hasOwnProperty.call(item, "icon")).toBe(false);
+  expect(item.icon).toBe("");
+
+  const q = new QuestionCheckboxModel("q1");
+  q.choices = [1];
+  expect(Object.prototype.hasOwnProperty.call(q.choices[0], "icon")).toBe(false);
+  expect(q.choices[0].icon).toBe("");
+});
+test("itemvalue.icon: one regular property shared by the item classes", () => {
+  const prop = Serializer.findProperty("itemvalue", "icon");
+  expect(prop.isCustom).toBe(false);
+  expect(prop.visible).toBe(true);
+  expect(prop.readOnly).toBe(true);
+  expect(prop.isSerializable).toBe(false);
+  expect(prop.visibleIndex).toBe(0);
+  expect(prop.classInfo.name).toBe("itemvalue");
+
+  expect(Serializer.findProperty("choiceitem", "icon")).toBe(prop);
+  expect(Serializer.findProperty("ratingitem", "icon")).toBe(prop);
+  expect(Serializer.findClass("itemvalue").properties.filter(p => p.name === "icon")).toHaveLength(1);
+});
+test("itemvalue.icon: rateValues grid shows the smiley column for smileys only", () => {
+  const getGrid = (q: QuestionRatingModel) =>
+    <QuestionMatrixDynamicModel>new PropertyGridModelTester(q).survey.getQuestionByName("rateValues");
+
+  const smileys = new QuestionRatingModel("q1");
+  smileys.rateType = "smileys";
+  smileys.rateValues = [1, 2, 3];
+  const smileysGrid = getGrid(smileys);
+  expect(smileysGrid.columns.map(c => c.name)).toEqual(["icon", "value", "text"]);
+  expect(smileysGrid.columns[0].cellType).toBe("html");
+  const rows = smileysGrid.visibleRows;
+  expect(rows[0].cells[0].question.isVisible).toBe(true);
+  expect(rows[0].cells[0].question.html).toBe("<div class=\"spg-smiley-icon\"><svg><use xlink:href=\"#icon-smiley-rate4-24x24\"></use></svg></div>");
+  expect(rows[1].cells[0].question.html).toBe("<div class=\"spg-smiley-icon\"><svg><use xlink:href=\"#icon-smiley-rate6-24x24\"></use></svg></div>");
+
+  const labels = new QuestionRatingModel("q2");
+  labels.rateType = "labels";
+  labels.rateValues = [1, 2, 3];
+  const labelsGrid = getGrid(labels);
+  expect(labelsGrid.columns[0].name).toBe("icon");
+  expect(labelsGrid.visibleRows[0].cells[0].question.isVisible).toBe(false);
+  expect(labelsGrid.columns[0].hasVisibleCell).toBe(false);
+});
+test("itemvalue.icon: other item matrices do not list the icon column", () => {
+  const getColumns = (q: any, propName: string) =>
+    (<QuestionMatrixDynamicModel>new PropertyGridModelTester(q).survey.getQuestionByName(propName)).columns.map(c => c.name);
+
+  expect(getColumns(new QuestionCheckboxModel("q1"), "choices")).toEqual(["value", "text"]);
+  expect(getColumns(new QuestionMatrixModel("q2"), "rows")).toEqual(["value", "text"]);
+  expect(getColumns(new QuestionMatrixModel("q3"), "columns")).toEqual(["value", "text"]);
+  expect(getColumns(new QuestionImagePickerModel("q4"), "choices")).toEqual(["value", "text", "imageLink"]);
+});
 test("Hide text column in itemvalue (matrixdropdown.rows) if inplaceEditChoiceValues is true", () => {
   const q = new QuestionMatrixDropdownModel("q1");
   q.rows = ["item1", "item2", "item3"];

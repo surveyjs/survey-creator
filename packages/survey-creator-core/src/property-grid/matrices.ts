@@ -21,7 +21,10 @@ import { QuestionRatingAdornerViewModel } from "../components/question-rating";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { SurveyHelper } from "../survey-helper";
 
-Serializer.addProperty("itemvalue",
+// Not Serializer.addProperty: it makes a custom property, which defines an own accessor on every item.
+// The @property of ItemValue already serves "icon" on the prototype.
+const itemValueClass = Serializer.findClass("itemvalue");
+itemValueClass.createProperty(
   {
     name: "icon", isSerializable: false, readOnly: true, visibleIndex: 0, visibleIf: (obj: ItemValue): boolean => {
       return obj &&
@@ -30,6 +33,7 @@ Serializer.addProperty("itemvalue",
         obj.locOwner.rateType == "smileys";
     },
   });
+itemValueClass.resetAllProperties();
 export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   static getNewColumnName(
     objs: Array<any>,
