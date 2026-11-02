@@ -1316,6 +1316,8 @@ export var nlStrings = {
     autoFocusFirstQuestion: "Op volgende pagina focus op de eerste vraag zetten",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Schakel keuzesnelkoppelingen in",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Toon toetsenbordhints",
     // "Question order"
     questionOrder: "Volgorde elementen op pagina",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var nlStrings = {
       survey: "Zelfde als enquête",
       // [Auto-translated] "Same as container"
       container: "Zelfde als container"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Erven",
+      // [Auto-translated] "Hide"
+      "false": "Verstop",
+      // [Auto-translated] "Show"
+      "true": "Show"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var nlStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Hiermee geeft u aan hoeveel kolommen deze vraag beslaat binnen de rasterlay-out.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Geeft aan hoe de vraag eruitziet wanneer deze alleen-lezen is. \"Alleen-lezen\" toont de vraag met de gebruikelijke invoerbesturing, maar uitgeschakeld voor bewerking. \"Weergave\" toont antwoorden als tekst of andere niet-interactieve elementen. \"Inherit\" gebruikt de modus die is ingesteld voor het ouderpaneel, de pagina of de enquête (\"Alleen-lezen\" standaard)."
+      readOnlyMode: "Geeft aan hoe de vraag eruitziet wanneer deze alleen-lezen is. \"Alleen-lezen\" toont de vraag met de gebruikelijke invoerbesturing, maar uitgeschakeld voor bewerking. \"Weergave\" toont antwoorden als tekst of andere niet-interactieve elementen. \"Inherit\" gebruikt de modus die is ingesteld voor het ouderpaneel, de pagina of de enquête (\"Alleen-lezen\" standaard).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Toont hints voor beschikbare toetsenbordacties onder deze vraag. De optie \"Inherit\" past de instelling op surveyniveau toe."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var nlStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Toont letters (A, B, C, ...) naast keuzes en laat respondenten deze selecteren door op de bijbehorende lettertoetsen te drukken. De optie \"Inherit\" gebruikt de instelling op enquêteniveau."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Toont hints voor beschikbare toetsenbordacties onder de vragen. Je kunt deze instelling overschrijven voor individuele vragen.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
     // [Auto-translated] "For text entry questions only."

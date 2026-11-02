@@ -1317,6 +1317,8 @@ export var koreanStrings = {
     autoFocusFirstQuestion: "페이지 변경시 첫 번째 질문에 초점",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "선택 단축키를 활성화하세요",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "키보드 힌트 보여주기",
     // "Question order"
     questionOrder: "페이지의 요소 순서",
     // "Time limit to complete the survey"
@@ -2550,6 +2552,14 @@ export var koreanStrings = {
       survey: "설문 조사와 동일",
       // [Auto-translated] "Same as container"
       container: "컨테이너와 동일"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "상속",
+      // [Auto-translated] "Hide"
+      "false": "숨어",
+      // [Auto-translated] "Show"
+      "true": "쇼"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2950,7 +2960,9 @@ export var koreanStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "이 질문이 그리드 레이아웃 내에서 얼마나 많은 열에 걸쳐 있는지 지정합니다.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "읽기 전용일 때 질문이 어떻게 나타나는지 지정합니다. \"읽기 전용\"은 일반적인 입력 제어와 함께 질문을 표시하지만, 편집은 비활성화되어 있습니다. \"보기\"는 답변을 텍스트나 기타 비상호작용 요소로 표시합니다. \"상속\"은 부모 패널, 페이지 또는 설문조사 모드(\"기본적으로 읽기 전용\")를 사용합니다."
+      readOnlyMode: "읽기 전용일 때 질문이 어떻게 나타나는지 지정합니다. \"읽기 전용\"은 일반적인 입력 제어와 함께 질문을 표시하지만, 편집은 비활성화되어 있습니다. \"보기\"는 답변을 텍스트나 기타 비상호작용 요소로 표시합니다. \"상속\"은 부모 패널, 페이지 또는 설문조사 모드(\"기본적으로 읽기 전용\")를 사용합니다.",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "이 질문 아래에 사용 가능한 키보드 동작에 대한 힌트가 표시됩니다. \"상속\" 옵션은 설문조사 수준 설정을 적용합니다."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3097,6 +3109,8 @@ export var koreanStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "선택지 옆에 문자(A, B, C, ...)를 표시하며, 응답자가 해당 문자 키를 눌러 선택할 수 있습니다. \"상속\" 옵션은 설문 수준 설정을 사용합니다."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "질문 아래에 사용 가능한 키보드 동작에 대한 힌트를 표시합니다. 개별 질문에 대해서는 이 설정을 덮어쓸 수 있습니다.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
     // [Auto-translated] "For text entry questions only."

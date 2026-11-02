@@ -1317,6 +1317,8 @@ export var traditionalChineseTranslation = {
     autoFocusFirstQuestion: "改變頁面時聚焦在第一個問題",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "啟用選擇捷徑",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "顯示鍵盤提示",
     // "Question order"
     questionOrder: "Elements order on the page",
     // "Time limit to complete the survey"
@@ -2550,6 +2552,14 @@ export var traditionalChineseTranslation = {
       survey: "與調查相同",
       // [Auto-translated] "Same as container"
       container: "與容器相同"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "繼承",
+      // [Auto-translated] "Hide"
+      "false": "躲起來",
+      // [Auto-translated] "Show"
+      "true": "節目"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2950,7 +2960,9 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "指定此問題在網格佈局中跨越多少列。",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "指定問題在唯讀時的呈現方式。「唯讀」顯示問題及其常見的輸入控制，但因編輯而被禁用。「檢視」以文字或其他非互動元素顯示答案。「繼承」則使用父面板、頁面或調查的模式（預設為「唯讀」模式）。"
+      readOnlyMode: "指定問題在唯讀時的呈現方式。「唯讀」顯示問題及其常見的輸入控制，但因編輯而被禁用。「檢視」以文字或其他非互動元素顯示答案。「繼承」則使用父面板、頁面或調查的模式（預設為「唯讀」模式）。",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "在此問題下方顯示可用鍵盤操作的提示。「繼承」選項會套用調查層級的設定。"
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3097,6 +3109,8 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "選項旁顯示字母（A、B、C、...），讓受訪者透過按對應字母鍵選擇。「繼承」選項使用調查層級設定。"
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "在問題下方顯示可用鍵盤動作的提示。你可以針對個別問題覆蓋此設定。",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "保持問題的原始順序或隨機化問題。此設置的效果僅在「預覽」選項卡中可見。",
     // [Auto-translated] "For text entry questions only."

@@ -1316,6 +1316,8 @@ export var jaStrings = {
     autoFocusFirstQuestion: "ページを変える際に最初の質問に焦点を合わせる",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "選択ショートカットを有効にする",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "キーボードのヒントを表示",
     // "Question order"
     questionOrder: "ページ上の要素の順序",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var jaStrings = {
       survey: "調査と同じ",
       // [Auto-translated] "Same as container"
       container: "コンテナと同じ"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "継承",
+      // [Auto-translated] "Hide"
+      "false": "隠れて",
+      // [Auto-translated] "Show"
+      "true": "番組"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var jaStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "この質問がグリッドレイアウト内で何列にまたがっているかを指定します。",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "問題が読み取り専用のときにどのように表示されるかを指定します。「読み取り専用」は通常の入力コントロールで問題を表示しますが、編集は無効化されています。「表示」は回答をテキストやその他の非インタラクティブな要素として表示します。「継承」は親パネル、ページ、または調査のモード(デフォルトで「読み取り専用」)を使用します。"
+      readOnlyMode: "問題が読み取り専用のときにどのように表示されるかを指定します。「読み取り専用」は通常の入力コントロールで問題を表示しますが、編集は無効化されています。「表示」は回答をテキストやその他の非インタラクティブな要素として表示します。「継承」は親パネル、ページ、または調査のモード(デフォルトで「読み取り専用」)を使用します。",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "この質問の下に利用可能なキーボード操作のヒントが表示されます。「継承」オプションは調査レベルの設定を適用します。"
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var jaStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "選択肢の横に文字(A、B、C、...)が表示され、回答者は対応するアルファベットキーを押して選択できます。「継承」オプションはアンケートレベルの設定を使用しています。"
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "質問の下に利用可能なキーボード操作のヒントが表示されます。個別の質問ではこの設定を上書きできます。",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "質問の元の順序を維持するか、ランダム化します。この設定の効果は、「プレビュー」タブにのみ表示されます。",
     // [Auto-translated] "For text entry questions only."

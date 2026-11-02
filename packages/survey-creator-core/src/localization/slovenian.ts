@@ -1316,6 +1316,8 @@ export var slStrings = {
     autoFocusFirstQuestion: "Samodejno osredotoči prvo vprašanje na novi strani",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Omogočite bližnjice izbire",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Pokaži namige za tipkovnico",
     // "Question order"
     questionOrder: "Vrsta vprašanj",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var slStrings = {
       survey: "Enako kot anketa",
       // "Same as container"
       container: "Enako kot vsebnik"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Dedovanje",
+      // [Auto-translated] "Hide"
+      "false": "Skrij se",
+      // [Auto-translated] "Show"
+      "true": "Oddaja"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var slStrings = {
       // "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Določa, koliko stolpcev to vprašanje zavzema v postavitvi mreže.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Določa, kako se vprašanje pojavi, ko je samo za branje. \"Samo za branje\" prikaže vprašanje z običajnimi vhodnimi kontrolami, vendar je za urejanje onemogočeno. \"Pogled\" prikazuje odgovore kot besedilo ali druge neinteraktivne elemente. \"Dedi\" uporablja način, nastavljen za nadrejeno ploščo, stran ali anketo (\"Samo za branje\" privzeto)."
+      readOnlyMode: "Določa, kako se vprašanje pojavi, ko je samo za branje. \"Samo za branje\" prikaže vprašanje z običajnimi vhodnimi kontrolami, vendar je za urejanje onemogočeno. \"Pogled\" prikazuje odgovore kot besedilo ali druge neinteraktivne elemente. \"Dedi\" uporablja način, nastavljen za nadrejeno ploščo, stran ali anketo (\"Samo za branje\" privzeto).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Pod tem vprašanjem so prikazani namigi za razpoložljive tipkovniške akcije. Možnost \"Dedi\" uporablja nastavitev na ravni ankete."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var slStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Ob izbiri prikaže črke (A, B, C, ...) in omogoča anketirancem, da jih izberejo s pritiskom na ustrezne tipke za črke. Možnost \"Dedi\" uporablja nastavitev na ravni ankete."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Pod vprašanji so prikazani namigi za razpoložljive tipkovniške akcije. To nastavitev lahko preglasite za posamezna vprašanja.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Ohrani prvoten vrstni red vprašanj ali jih naključno postavi. Učinek te nastavitve je viden samo na zavihku Predogled",
     // "For text entry questions only."

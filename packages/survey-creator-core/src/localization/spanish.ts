@@ -1316,6 +1316,8 @@ export var spanishTranslation = {
     autoFocusFirstQuestion: "Enfoca la primera pregunta al cambiar la página",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Activar accesos directos de elección",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Consejos para mostrar el teclado",
     // "Question order"
     questionOrder: "Orden de elementos en la página",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var spanishTranslation = {
       survey: "Igual que la encuesta",
       // [Auto-translated] "Same as container"
       container: "Igual que el contenedor"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Heredaje",
+      // [Auto-translated] "Hide"
+      "false": "Escóndete",
+      // [Auto-translated] "Show"
+      "true": "Programa"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var spanishTranslation = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Especifica el número de columnas que abarca esta pregunta dentro del diseño de cuadrícula.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Especifica cómo aparece la pregunta cuando es de solo lectura. \"Solo lectura\" muestra la pregunta con sus controles habituales de entrada, pero deshabilitada para edición. \"Ver\" muestra las respuestas como texto u otros elementos no interactivos. \"Heredar\" utiliza el modo establecido para el panel principal, página o encuesta (\"Solo lectura\" por defecto)."
+      readOnlyMode: "Especifica cómo aparece la pregunta cuando es de solo lectura. \"Solo lectura\" muestra la pregunta con sus controles habituales de entrada, pero deshabilitada para edición. \"Ver\" muestra las respuestas como texto u otros elementos no interactivos. \"Heredar\" utiliza el modo establecido para el panel principal, página o encuesta (\"Solo lectura\" por defecto).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Muestra pistas para las acciones disponibles del teclado debajo de esta pregunta. La opción \"Heredar\" aplica la configuración a nivel de encuesta."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var spanishTranslation = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Muestra las letras (A, B, C, ...) junto a las opciones y permite a los encuestados seleccionarlas pulsando las teclas correspondientes. La opción \"Heredar\" utiliza la configuración a nivel de encuesta."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Muestra consejos para las acciones disponibles del teclado debajo de las preguntas. Puedes anular esta configuración para preguntas individuales.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Mantiene el orden original de las preguntas o las aleatoriza. El efecto de esta configuración solo es visible en la pestaña Vista previa.",
     // [Auto-translated] "For text entry questions only."

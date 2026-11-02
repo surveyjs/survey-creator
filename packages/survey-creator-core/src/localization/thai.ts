@@ -1316,6 +1316,8 @@ export const thStrings = {
     autoFocusFirstQuestion: "โฟกัสคำถามแรกในหน้าใหม่",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "เปิดใช้งานทางลัดตัวเลือก",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "แสดงคําแนะนําแป้นพิมพ์",
     // "Question order"
     questionOrder: "ลำดับคำถาม",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export const thStrings = {
       survey: "เช่นเดียวกับแบบสํารวจ",
       // [Auto-translated] "Same as container"
       container: "เหมือนกับคอนเทนเนอร์"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "สืบทอด",
+      // [Auto-translated] "Hide"
+      "false": "ซ่อน",
+      // [Auto-translated] "Show"
+      "true": "การแสดง"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export const thStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "ระบุจํานวนคอลัมน์ที่คําถามนี้ครอบคลุมภายในเค้าโครงกริด",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "ระบุว่าคําถามจะแสดงผลอย่างไรเมื่อเป็นแบบอ่านอย่างเดียว\"อ่านอย่างเดียว\" จะแสดงคําถามพร้อมตัวควบคุมการป้อนข้อมูลตามปกติ แต่ปิดใช้งานสําหรับการแก้ไข\"View\" จะแสดงคําตอบในรูปแบบข้อความหรือองค์ประกอบที่ไม่โต้ตอบอื่น ๆ\"Inherit\" ใช้โหมดที่ตั้งไว้สําหรับแผงหลัก หน้า หรือแบบสํารวจ (\"Read-Only\" โดยค่าเริ่มต้น)"
+      readOnlyMode: "ระบุว่าคําถามจะแสดงผลอย่างไรเมื่อเป็นแบบอ่านอย่างเดียว\"อ่านอย่างเดียว\" จะแสดงคําถามพร้อมตัวควบคุมการป้อนข้อมูลตามปกติ แต่ปิดใช้งานสําหรับการแก้ไข\"View\" จะแสดงคําตอบในรูปแบบข้อความหรือองค์ประกอบที่ไม่โต้ตอบอื่น ๆ\"Inherit\" ใช้โหมดที่ตั้งไว้สําหรับแผงหลัก หน้า หรือแบบสํารวจ (\"Read-Only\" โดยค่าเริ่มต้น)",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "แสดงคําแนะนําสําหรับการดําเนินการบนแป้นพิมพ์ที่มีอยู่ด้านล่างคําถามนี้ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสํารวจ"
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export const thStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "แสดงตัวอักษร (A, B, C, ...) ข้างตัวเลือก และให้ผู้ตอบแบบสอบถามเลือกได้โดยกดปุ่มตัวอักษรที่เกี่ยวข้องตัวเลือก \"สืบทอด\" ใช้การตั้งค่าระดับแบบสํารวจ"
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "แสดงคําแนะนําสําหรับการดําเนินการบนแป้นพิมพ์ที่มีอยู่ด้านล่างคําถามคุณสามารถแทนที่การตั้งค่านี้สําหรับคําถามแต่ละข้อได้",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "รักษาลำดับดั้งเดิมของคำถามหรือตั้งค่าให้สุ่ม ผลของการตั้งค่านี้จะแสดงในแท็บพรีวิวเท่านั้น",
     // "For text entry questions only."

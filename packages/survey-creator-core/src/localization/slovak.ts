@@ -1316,6 +1316,8 @@ export var skStrings = {
     autoFocusFirstQuestion: "Prechod na prvú otázku pri zmene stránky",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Povoliť skratky na výber",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Zobraziť tipy na klávesnicu",
     // "Question order"
     questionOrder: "Poradie prvkov na stránke",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var skStrings = {
       survey: "Rovnaké ako prieskum",
       // [Auto-translated] "Same as container"
       container: "Rovnaké ako kontajner"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Dedičstvo",
+      // [Auto-translated] "Hide"
+      "false": "Schovaj sa",
+      // [Auto-translated] "Show"
+      "true": "Relácia"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var skStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Určuje, koľko stĺpcov táto otázka zahŕňa v rozložení mriežky.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Špecifikuje, ako sa otázka zobrazí, keď je len na čítanie. \"Len na čítanie\" zobrazuje otázku s bežnými ovládacími prvkami, ale je deaktivovaná pre úpravy. \"Zobrazenie\" zobrazuje odpovede ako text alebo iné neinteraktívne prvky. \"Dedičiť\" používa režim nastavený pre rodičovský panel, stránku alebo prieskum (\"Iba na čítanie\" v predvolenom nastavení)."
+      readOnlyMode: "Špecifikuje, ako sa otázka zobrazí, keď je len na čítanie. \"Len na čítanie\" zobrazuje otázku s bežnými ovládacími prvkami, ale je deaktivovaná pre úpravy. \"Zobrazenie\" zobrazuje odpovede ako text alebo iné neinteraktívne prvky. \"Dedičiť\" používa režim nastavený pre rodičovský panel, stránku alebo prieskum (\"Iba na čítanie\" v predvolenom nastavení).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Pod touto otázkou sa zobrazujú pokyny pre dostupné klávesové akcie. Možnosť \"Dedičiť\" aplikuje nastavenie na úrovni prieskumu."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var skStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Zobrazuje písmená (A, B, C, ...) vedľa možností a umožňuje respondentom vybrať ich stlačením príslušných písmenových klávesov. Možnosť \"Dedičiť\" používa nastavenie na úrovni prieskumu."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Zobrazuje tipy na dostupné klávesové akcie pod otázkami. Toto nastavenie môžete prepísať pre jednotlivé otázky.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Zachová pôvodné poradie otázok alebo ich náhodne vyberie. Efekt tohto nastavenia je viditeľný iba na karte Ukážka.",
     // [Auto-translated] "For text entry questions only."

@@ -1317,6 +1317,8 @@ export let svStrings = {
     autoFocusFirstQuestion: "Fokusera på första frågan vid ändring av sidan",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Aktivera valgenvägar",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Visa tangentbordstips",
     // "Question order"
     questionOrder: "Element ordning på sidan",
     // "Time limit to complete the survey"
@@ -2550,6 +2552,14 @@ export let svStrings = {
       survey: "Samma som undersökning",
       // [Auto-translated] "Same as container"
       container: "Samma som behållare"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Ärva",
+      // [Auto-translated] "Hide"
+      "false": "Göm dig",
+      // [Auto-translated] "Show"
+      "true": "Show"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2950,7 +2960,9 @@ export let svStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Anger hur många kolumner den här frågan sträcker sig över i rutnätslayouten.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Specificerar hur frågan visas när den är skrivskyddad. \"Skrivskyddad\" visar frågan med dess vanliga inmatningskontroller, men inaktiverad för redigering. \"Visa\" visar svaren som text eller andra icke-interaktiva element. \"Inherit\" använder det läge som är inställt för föräldrapanelen, sidan eller undersökningen (\"Skrivskyddad\" som standard)."
+      readOnlyMode: "Specificerar hur frågan visas när den är skrivskyddad. \"Skrivskyddad\" visar frågan med dess vanliga inmatningskontroller, men inaktiverad för redigering. \"Visa\" visar svaren som text eller andra icke-interaktiva element. \"Inherit\" använder det läge som är inställt för föräldrapanelen, sidan eller undersökningen (\"Skrivskyddad\" som standard).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Visar ledtrådar för tillgängliga tangentbordsåtgärder under denna fråga. Alternativet \"Inherit\" applicerar undersökningsnivåinställningen."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3097,6 +3109,8 @@ export let svStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Visar bokstäver (A, B, C, ...) bredvid valen och låter respondenter välja dem genom att trycka på motsvarande bokstavstangenter. Alternativet \"Inherit\" använder undersökningsnivåinställningen."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Visar ledtrådar för tillgängliga tangentbordsåtgärder under frågorna. Du kan åsidosätta denna inställning för enskilda frågor.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Behåller den ursprungliga ordningen på frågorna eller slumpar dem. Effekten av den här inställningen visas bara på fliken Förhandsgranska.",
     // [Auto-translated] "For text entry questions only."

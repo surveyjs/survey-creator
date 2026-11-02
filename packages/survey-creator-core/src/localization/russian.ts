@@ -1316,6 +1316,8 @@ export var ruStrings = {
     autoFocusFirstQuestion: "Фокусирование на первом вопросе при изменении страницы",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Включить ярлыки выбора",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Показать подсказки по клавиатуре",
     // "Question order"
     questionOrder: "Сортировка элементов на странице",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var ruStrings = {
       survey: "То же, что и опрос",
       // [Auto-translated] "Same as container"
       container: "То же, что и контейнер"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Наследование",
+      // [Auto-translated] "Hide"
+      "false": "Спрячься",
+      // [Auto-translated] "Show"
+      "true": "Шоу"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var ruStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Указывает, сколько столбцов занимает этот вопрос в макете сетки.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Указывает, как вопрос отображается при доступе только для чтения. «Только для чтения» отображает вопрос с обычными элементами ввода, но отключён для редактирования. «Просмотр» отображает ответы в виде текста или других неинтерактивных элементов. «Наследование» использует режим, установленный для родительской панели, страницы или опроса («Только для чтения» по умолчанию)."
+      readOnlyMode: "Указывает, как вопрос отображается при доступе только для чтения. «Только для чтения» отображает вопрос с обычными элементами ввода, но отключён для редактирования. «Просмотр» отображает ответы в виде текста или других неинтерактивных элементов. «Наследование» использует режим, установленный для родительской панели, страницы или опроса («Только для чтения» по умолчанию).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Под этим вопросом отображаются подсказки по доступным действиям клавиатуры. Опция «Наследить» применяет параметр на уровне опроса."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var ruStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Отображает буквы (A, B, C, ...) рядом с вариантами и позволяет респондентам выбирать их, нажимая соответствующие клавиши букв. Опция «Наследить» использует параметры на уровне опроса."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Отображается подсказка по доступным действиям клавиатуры ниже вопросов. Вы можете обработать эту настройку для отдельных вопросов.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Эффект этого параметра виден только на вкладке «Предварительный просмотр».",
     // [Auto-translated] "For text entry questions only."

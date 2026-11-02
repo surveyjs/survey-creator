@@ -1316,6 +1316,8 @@ export var catalanTranslation = {
     autoFocusFirstQuestion: "Enfoca la primera pregunta al cambiar la pàgina",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Activar dreceres d'elecció",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Mostra consells de teclat",
     // "Question order"
     questionOrder: "Orden de elementos en la pàgina",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var catalanTranslation = {
       survey: "Igual que la enquesta",
       // [Auto-translated] "Same as container"
       container: "Igual que el contenedor"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Heretar",
+      // [Auto-translated] "Hide"
+      "false": "Amaga't",
+      // [Auto-translated] "Show"
+      "true": "Espectacle"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var catalanTranslation = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Especifica el número de columnes que abarca esta pregunta dentro del diseño de cuadrícula.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Especifica com apareix la pregunta quan és només lectura. \"Només lectura\" mostra la pregunta amb els seus controls d'entrada habituals, però desactivats per editar. \"Veure\" mostra les respostes com a text o altres elements no interactius. \"Heretar\" utilitza el mode establert per al panell pare, pàgina o enquesta (\"Només lectura\" per defecte)."
+      readOnlyMode: "Especifica com apareix la pregunta quan és només lectura. \"Només lectura\" mostra la pregunta amb els seus controls d'entrada habituals, però desactivats per editar. \"Veure\" mostra les respostes com a text o altres elements no interactius. \"Heretar\" utilitza el mode establert per al panell pare, pàgina o enquesta (\"Només lectura\" per defecte).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Mostra pistes per a accions disponibles del teclat sota aquesta pregunta. L'opció \"Heretar\" aplica la configuració a nivell d'enquesta."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var catalanTranslation = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Mostra les lletres (A, B, C, ...) al costat de les opcions i permet als enquestats seleccionar-les prement les tecles corresponents. L'opció \"Heretar\" utilitza la configuració a nivell d'enquesta."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Mostra pistes per a accions disponibles del teclat a sota de les preguntes. Pots sobreescriure aquesta configuració per a preguntes individuals.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Mantiene el orden original de las preguntes o las aleatoriza. El efecto de esta configuració solo es visible en la pestaña Vista prèvia.",
     // [Auto-translated] "For text entry questions only."
