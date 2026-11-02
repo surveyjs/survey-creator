@@ -1,4 +1,4 @@
-import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, LocalizableString, Action, IAction, ItemValue, QuestionMatrixDynamicModel, QuestionMatrixModel, PanelModelBase, settings as coreSettings } from "survey-core";
+import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, LocalizableString, Action, IAction, ItemValue, QuestionMatrixDynamicModel, QuestionMatrixModel, PanelModelBase, ComponentCollection, settings as coreSettings } from "survey-core";
 import { Translation, TranslationGroup, TranslationItem } from "../../src/components/tabs/translation";
 import {
   countRootBuilds, createTreeOnceCreator, getModelSnapshot, getTranslationModel, getTranslationPlugin, getTreeOnceJSON, getTreeSnapshot
@@ -3300,6 +3300,60 @@ describe("Translation tab: no \"All Pages\" on a large survey", () => {
     creator = createCreator({}, json);
     creator.activeTab = "translation";
     expect(getTranslationModel(creator).canShowAllPages).toBe(false); // 6 elements
+  });
+  test("the element count does not build the rows of the pages", () => {
+    const creator = createCreator();
+    const pages = creator.survey.pages;
+    expect(pages[2].wasRendered).toBe(false);
+    creator.activeTab = "translation";
+    expect(getTranslationModel(creator).canShowAllPages).toBe(false);
+    expect(pages[2].wasRendered).toBe(false);
+  });
+  test("the element count is the same without the rows of the pages", () => {
+    ComponentCollection.Instance.add({
+      name: "translationcountcomposite",
+      elementsJSON: [{ type: "text", name: "item1" }, { type: "text", name: "item2" }]
+    });
+    const json = { pages: [
+      { name: "p1", elements: [{ type: "text", name: "first" }] },
+      { name: "p2", elements: [
+        { type: "panel", name: "pn1", elements: [{ type: "multipletext", name: "mt", items: [{ name: "i1" }, { name: "i2" }] }] },
+        { type: "paneldynamic", name: "pd", panelCount: 2, templateElements: [{ type: "text", name: "pdq1" }, { type: "panel", name: "pdpn", elements: [{ type: "text", name: "pdq2" }] }] },
+        { type: "paneldynamic", name: "outer", templateElements: [
+          { type: "paneldynamic", name: "inner", templateElements: [{ type: "text", name: "deep" }] },
+          { type: "matrixdropdown", name: "tm", rows: ["r1"], columns: [{ name: "c1", cellType: "text" }] }
+        ] }
+      ] },
+      { name: "p3", elements: [
+        { type: "matrixdynamic", name: "md", rowCount: 2, columns: [{ name: "c1", cellType: "text" }, { name: "c2", cellType: "dropdown" }] },
+        { type: "matrixdropdown", name: "mdd", rows: ["r1", "r2"], columns: [{ name: "c1", cellType: "text" }] },
+        { type: "translationcountcomposite", name: "comp" },
+        { type: "checkbox", name: "chk", choices: [{ value: 1, elements: [{ type: "text", name: "chkq" }] }, 2] }
+      ] }
+    ] };
+    const expected = createCreator({}, json).survey;
+    const count = expected.getAllQuestions(false, false, true).length + expected.getAllPanels().length;
+    expect(count > 12).toBe(true);
+
+    settings.translation.maxElementsForAllPages = count;
+    let creator = createCreator({}, json);
+    expect(creator.survey.pages[2].wasRendered).toBe(false);
+    creator.activeTab = "translation";
+    expect(getTranslationModel(creator).canShowAllPages).toBe(true);
+
+    settings.translation.maxElementsForAllPages = count - 1;
+    creator = createCreator({}, json);
+    creator.activeTab = "translation";
+    expect(getTranslationModel(creator).canShowAllPages).toBe(false);
+
+    // The pages that have rendered are not counted twice.
+    creator = createCreator({}, json);
+    creator.survey.pages.forEach(page => page.onFirstRendering());
+    creator.activeTab = "translation";
+    expect(getTranslationModel(creator).canShowAllPages).toBe(false);
+    settings.translation.maxElementsForAllPages = count;
+    expect(getTranslationModel(creator).canShowAllPages).toBe(true);
+    ComponentCollection.Instance.clear();
   });
   test("the selected page is kept on creator.JSON while it exists, otherwise the first page is shown", () => {
     const creator = createCreator();
