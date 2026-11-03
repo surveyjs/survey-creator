@@ -1316,6 +1316,8 @@ export var mnStrings = {
     autoFocusFirstQuestion: "Эхний асуултыг шинэ хуудсанд төвлөрүүлэх",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Сонголтын богино замыг идэвхжүүлэх",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Гарын таавар үзүүл",
     // "Question order"
     questionOrder: "Хуудас дээрх элементийн дараалал",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var mnStrings = {
       survey: "Судалгаатай адил",
       // [Auto-translated] "Same as container"
       container: "Савтай адил"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Өв залгамжлах",
+      // [Auto-translated] "Hide"
+      "false": "Нуух",
+      // [Auto-translated] "Show"
+      "true": "Шоу"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var mnStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Энэ асуулт хүснэгтийн загварт хэдэн багана багтаахыг тодорхойлно.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Зөвхөн унших боломжтой үед асуулт хэрхэн харагдахыг зааж өгдөг. \"Зөвхөн унших\" нь асуултыг ердийн оролтын удирдлагуудтай харуулдаг боловч засварлах үед идэвхгүй болгодог. \"View\" нь хариултыг текст эсвэл бусад харилцан үйлчлэлгүй элементээр харуулдаг. \"Inherit\" нь эцэг самбар, хуудас эсвэл судалгааны горимыг ашигладаг (\"Зөвхөн унших\" нь анхдагчаар)."
+      readOnlyMode: "Зөвхөн унших боломжтой үед асуулт хэрхэн харагдахыг зааж өгдөг. \"Зөвхөн унших\" нь асуултыг ердийн оролтын удирдлагуудтай харуулдаг боловч засварлах үед идэвхгүй болгодог. \"View\" нь хариултыг текст эсвэл бусад харилцан үйлчлэлгүй элементээр харуулдаг. \"Inherit\" нь эцэг самбар, хуудас эсвэл судалгааны горимыг ашигладаг (\"Зөвхөн унших\" нь анхдагчаар).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Энэ асуултын доор гарын үйлдлүүдийн зөвлөмжийг харуулна. \"Inherit\" сонголт нь судалгааны түвшний тохиргоог хэрэгжүүлдэг."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var mnStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Сонголтын хажууд үсгүүдийг (A, B, C, ...) харуулж, хариулагчид тохирох үсгийн товчийг дарж сонгох боломж олгодог. \"Inherit\" сонголт нь судалгааны түвшний тохиргоог ашигладаг."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Асуултын доор гарын үйлдлийн боломжит зөвлөмжүүдийг харуулна. Та энэ тохиргоог хувь хүний асуултад өөрчилж болно.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана.",
     // [Auto-translated] "For text entry questions only."

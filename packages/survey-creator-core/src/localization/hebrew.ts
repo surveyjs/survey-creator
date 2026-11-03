@@ -1316,6 +1316,8 @@ export var hebrewStrings = {
     autoFocusFirstQuestion: "התמקד על השאלה הראשונה בעמוד חדש",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "הפעלת קיצורי דרך לבחירה",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "רמזים למקלדת הצג",
     // "Question order"
     questionOrder: "סדר הרכיבים בעמוד",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var hebrewStrings = {
       survey: "זהה לסקר",
       // [Auto-translated] "Same as container"
       container: "זהה למיכל"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "יורש",
+      // [Auto-translated] "Hide"
+      "false": "הסתתר",
+      // [Auto-translated] "Show"
+      "true": "תוכנית"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var hebrewStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "מציין כמה עמודות שאלה זו משתרעת בתוך פריסת הרשת.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "מגדיר כיצד השאלה מופיעה כאשר היא לקריאה בלבד. \"קריאה בלבד\" מציג את השאלה עם בקרות הקלט הרגילות שלה, אך מבוטל לעריכה. \"View\" מציג תשובות כטקסט או אלמנטים לא אינטראקטיביים אחרים. \"Inherit\" משתמש במצב שמוגדר עבור לוח האב, עמוד או סקר (\"Read-Only\" כברירת מחדל)."
+      readOnlyMode: "מגדיר כיצד השאלה מופיעה כאשר היא לקריאה בלבד. \"קריאה בלבד\" מציג את השאלה עם בקרות הקלט הרגילות שלה, אך מבוטל לעריכה. \"View\" מציג תשובות כטקסט או אלמנטים לא אינטראקטיביים אחרים. \"Inherit\" משתמש במצב שמוגדר עבור לוח האב, עמוד או סקר (\"Read-Only\" כברירת מחדל).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "מציג רמזים לפעולות מקלדת זמינות מתחת לשאלה זו. אפשרות \"ירושה\" מפעילה את הגדרת רמת הסקר."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var hebrewStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "מציג אותיות (A, B, C, ...) ליד הבחירות ומאפשר למשיבים לבחור אותן על ידי לחיצה על מקשי האותיות המתאימים. אפשרות \"ירושה\" משתמשת בהגדרת רמת הסקר."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "מציג רמזים לפעולות מקלדת זמינות מתחת לשאלות. ניתן לעקוף הגדרה זו עבור שאלות בודדות.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה.",
     // [Auto-translated] "For text entry questions only."

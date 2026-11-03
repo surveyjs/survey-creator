@@ -1316,6 +1316,8 @@ export var huStrings = {
     autoFocusFirstQuestion: "Első kérdés automatikus kijelölése lapváltás esetén",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Opció gyorsítványok engedélyezése",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Billentyűs tippek megjelenítése",
     // "Question order"
     questionOrder: "Elemek rendezése a lapon",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var huStrings = {
       survey: "Ugyanaz, mint a felmérés",
       // [Auto-translated] "Same as container"
       container: "Ugyanaz, mint a konténer"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Öröklés",
+      // [Auto-translated] "Hide"
+      "false": "Bújj el",
+      // [Auto-translated] "Show"
+      "true": "Műsor"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var huStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Megadja, hogy ez a kérdés hány oszlopra terjed ki a rácsos elrendezésen belül.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Megadja, hogyan jelenik meg a kérdés, ha csak olvasható. \"Csak olvasható\" a kérdést a szokásos bemeneti vezérlőkkel jeleníti meg, de szerkesztés esetén letiltva. A \"Megtekintés\" válaszokat szövegként vagy más nem interaktív elemként jeleníti meg. Az \"Örökölés\" a szülőpanel, oldal vagy felmérés módját használja (\"Alapértelmezés szerint csak olvasható\")."
+      readOnlyMode: "Megadja, hogyan jelenik meg a kérdés, ha csak olvasható. \"Csak olvasható\" a kérdést a szokásos bemeneti vezérlőkkel jeleníti meg, de szerkesztés esetén letiltva. A \"Megtekintés\" válaszokat szövegként vagy más nem interaktív elemként jeleníti meg. Az \"Örökölés\" a szülőpanel, oldal vagy felmérés módját használja (\"Alapértelmezés szerint csak olvasható\").",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "A kérdés alatt elérhető billentyűzetes műveletekhez mutatókat jelenít meg. A \"Inherit\" opció alkalmazza a felmérési szintű beállítást."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var huStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Megjeleníti a betűket (A, B, C, ...) a választások mellett, és lehetővé teszi a válaszadók számára, hogy a megfelelő betűgombok megnyomásával válasszák ki őket. Az \"Örökölés\" opció a felmérés-szintű beállítást használja."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "A kérdések alatt elérhető billentyűzetes műveletekhez mutatókat jelenít meg. Ezt a beállítást egyéni kérdéseknél felülírhatod.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Megtartja a kérdések eredeti sorrendjét, vagy véletlenszerűvé teszi őket. A beállítás hatása csak az Előnézet lapon látható.",
     // [Auto-translated] "For text entry questions only."

@@ -1317,6 +1317,8 @@ export var danishStrings = {
     autoFocusFirstQuestion: "Fokusér første spørgsmål ved sideskift",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Aktiver valggenveje",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Vis tastaturtips",
     // "Question order"
     questionOrder: "Rækkefølge af spørgsmål på siden",
     // "Time limit to complete the survey"
@@ -2550,6 +2552,14 @@ export var danishStrings = {
       survey: "Samme som undersøgelse",
       // [Auto-translated] "Same as container"
       container: "Samme som container"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Arve",
+      // [Auto-translated] "Hide"
+      "false": "Gem dig",
+      // [Auto-translated] "Show"
+      "true": "Show"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2950,7 +2960,9 @@ export var danishStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Angiver, hvor mange kolonner dette spørgsmål strækker sig over i gitterlayoutet.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Specificerer, hvordan spørgsmålet vises, når det er skrivebeskyttet. \"Skrivebeskyttet\" viser spørgsmålet med dets sædvanlige inputkontroller, men deaktiveret ved redigering. \"Visning\" viser svar som tekst eller andre ikke-interaktive elementer. \"Arve\" bruger den tilstand, der er sat til forældrepanelet, siden eller undersøgelsen (\"Skrivebeskyttet\" som standard)."
+      readOnlyMode: "Specificerer, hvordan spørgsmålet vises, når det er skrivebeskyttet. \"Skrivebeskyttet\" viser spørgsmålet med dets sædvanlige inputkontroller, men deaktiveret ved redigering. \"Visning\" viser svar som tekst eller andre ikke-interaktive elementer. \"Arve\" bruger den tilstand, der er sat til forældrepanelet, siden eller undersøgelsen (\"Skrivebeskyttet\" som standard).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Viser hints til tilgængelige tastaturhandlinger under dette spørgsmål. \"Inherit\"-muligheden anvender undersøgelsesniveau-indstillingen."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3097,6 +3109,8 @@ export var danishStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Viser bogstaver (A, B, C, ...) ved siden af valgmulighederne og lader respondenterne vælge dem ved at trykke på de tilsvarende bogstavtaster. Muligheden \"Inherit\" bruger undersøgelsesniveau-indstillingen."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Viser hints til tilgængelige tastaturhandlinger under spørgsmålene. Du kan tilsidesætte denne indstilling for individuelle spørgsmål.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Bevarer den oprindelige rækkefølge af spørgsmål eller randomiserer dem. Effekten af denne indstilling er kun synlig under fanen Eksempel.",
     // [Auto-translated] "For text entry questions only."

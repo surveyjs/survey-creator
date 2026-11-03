@@ -4,6 +4,14 @@ import { parseColor } from "../utils/color-utils";
 const DEFAULT_COLOR: string = "#000000";
 export class QuestionColorModel extends QuestionTextModel {
   @property() allowEmptyValue: boolean = false;
+
+  private getPopupWidthTarget(container: HTMLElement): HTMLElement {
+    if (!container) return undefined;
+    const root = container.closest(`[id="${this.id}"]`) as HTMLElement;
+    if (!root?.classList.contains("sd-formbox")) return undefined;
+    return root;
+  }
+
   constructor(name: string) {
     super(name);
     this.createItemValues("choices");
@@ -149,6 +157,7 @@ export class QuestionColorModel extends QuestionTextModel {
     popupModel.setWidthByTarget = true;
     popupModel.positionMode = "fixed";
     popupModel.getTargetCallback = () => this.contentElement;
+    popupModel.getWidthTargetCallback = (container: HTMLElement) => this.getPopupWidthTarget(container);
     listModel.isItemSelected = (itemValue: ItemValue) => itemValue.value == this.value;
     return action;
   }

@@ -1,5 +1,5 @@
 import { test, expect } from "playwright/test";
-import { url, setJSON, getPropertyGridCategory, generalGroupName, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton, compareScreenshot, doDragDrop, setIsCompact, resetFocusToBody, getVisibleSelectListItemByText, hideContentBehindPopup, showContentBehindPopup } from "./helper";
+import { url, setJSON, getPropertyGridCategory, generalGroupName, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton, compareScreenshot, doDragDrop, setIsCompact, resetFocusToBody, getVisibleSelectListItemByText, hideContentBehindPopup, showContentBehindPopup, clickAfterScrollIntoView } from "./helper";
 
 const title = "Property Grid Editors";
 test.describe(title, () => {
@@ -364,8 +364,22 @@ test.describe(title, () => {
     const question1 = page.locator("[data-name=\"question1\"]");
     await question1.click();
 
-    await page.locator("div[data-name='inputType'] .sd-dropdown").click();
+    await clickAfterScrollIntoView(page.locator("div[data-name='inputType'] .sd-dropdown"));
     await compareScreenshot(page, page.locator(".svc-side-bar"), "pg-dropdown-editor.png");
+  });
+
+  test("Dropdown popup matches the editor when the title is inside it", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.evaluate(() => {
+      const creator = (window as any).creator;
+      creator.showCreatorThemeSettings = true;
+      creator.getPlugin("designer").openCreatorThemeSettings();
+    });
+
+    const question = page.locator(".spg-question[data-name='--sjs2-color-project-brand-600']");
+    await clickAfterScrollIntoView(question.locator(".spg-color-editor .sd-action").last());
+    await expect(page.locator(".sv-popup").filter({ visible: true }).first()).toBeVisible();
+    await compareScreenshot(page, page.locator(".svc-side-bar"), "pg-dropdown-popup-with-title.png");
   });
 
   test("rateValues in property grid", async ({ page }) => {
@@ -828,7 +842,7 @@ test.describe(title, () => {
 
     await page.locator("div[data-sv-drop-target-survey-element='question1']").click({ position: { x: 200, y: 30 } });
     await getQuestionBarItemByTitle(page, "Open settings").click();
-    await page.locator(".spg-question[data-name='inputType'] .sd-dropdown").click();
+    await clickAfterScrollIntoView(page.locator(".spg-question[data-name='inputType'] .sd-dropdown"));
 
     await compareScreenshot(page, page.locator(".sv-popup").filter({ visible: true }).first(), "pg-overlay-popup.png");
   });

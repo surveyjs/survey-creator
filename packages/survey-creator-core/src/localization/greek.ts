@@ -1316,6 +1316,8 @@ export var grStrings = {
     autoFocusFirstQuestion: "Εστίαση στην πρώτη ερώτηση της νέας σελίδας",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Ενεργοποίηση συντομεύσεων επιλογής",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Εμφάνιση υποδείξεων πληκτρολογίου",
     // "Question order"
     questionOrder: "Σειρά ερωτήσεων",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var grStrings = {
       survey: "Ίδιο με την έρευνα",
       // "Same as container"
       container: "Ίδιο με το κοντέινερ"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Κληρονομώ",
+      // [Auto-translated] "Hide"
+      "false": "Απόκρυψη",
+      // [Auto-translated] "Show"
+      "true": "Προβολή"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var grStrings = {
       // "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Καθορίζει πόσες στήλες καλύπτει αυτή η ερώτηση στη διάταξη πλέγματος.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Καθορίζει τον τρόπο εμφάνισης της ερώτησης όταν είναι μόνο για ανάγνωση. Η επιλογή \"Μόνο για ανάγνωση\" εμφανίζει την ερώτηση με τους συνήθεις ελέγχους εισαγωγής, αλλά απενεργοποιημένη για επεξεργασία. Η \"Προβολή\" εμφανίζει τις απαντήσεις ως κείμενο ή άλλα μη αλληλεπιδραστικά στοιχεία. Η \"Μεταβίβαση\" χρησιμοποιεί τη λειτουργία που έχει οριστεί για τον γονικό πίνακα, τη σελίδα ή την έρευνα (\"Μόνο για ανάγνωση\" από προεπιλογή)."
+      readOnlyMode: "Καθορίζει τον τρόπο εμφάνισης της ερώτησης όταν είναι μόνο για ανάγνωση. Η επιλογή \"Μόνο για ανάγνωση\" εμφανίζει την ερώτηση με τους συνήθεις ελέγχους εισαγωγής, αλλά απενεργοποιημένη για επεξεργασία. Η \"Προβολή\" εμφανίζει τις απαντήσεις ως κείμενο ή άλλα μη αλληλεπιδραστικά στοιχεία. Η \"Μεταβίβαση\" χρησιμοποιεί τη λειτουργία που έχει οριστεί για τον γονικό πίνακα, τη σελίδα ή την έρευνα (\"Μόνο για ανάγνωση\" από προεπιλογή).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Εμφανίζει υποδείξεις για τις διαθέσιμες ενέργειες πληκτρολογίου κάτω από αυτήν την ερώτηση. Η επιλογή \"Μεταβίβαση\" εφαρμόζει τη ρύθμιση επιπέδου έρευνας."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var grStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Εμφανίζει γράμματα (A, B, C, ...) δίπλα στις επιλογές και επιτρέπει στους ερωτηθέντες να τα επιλέξουν πατώντας τα αντίστοιχα πλήκτρα γραμμάτων. Η επιλογή \"Μεταβίβαση\" χρησιμοποιεί τη ρύθμιση σε επίπεδο έρευνας."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Εμφανίζει υποδείξεις για τις διαθέσιμες ενέργειες πληκτρολογίου κάτω από τις ερωτήσεις. Μπορείτε να παρακάμψετε αυτήν τη ρύθμιση για μεμονωμένες ερωτήσεις.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Διατηρεί την αρχική σειρά των ερωτήσεων ή τις τυχαία ανακατεύει. Η επίδραση αυτής της ρύθμισης είναι ορατή μόνο στην καρτέλα Προεπισκόπηση.",
     // "For text entry questions only."

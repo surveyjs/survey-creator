@@ -1316,6 +1316,8 @@ export const roStrings = {
     autoFocusFirstQuestion: "Focalizați pe prima întrebare la o pagină nouă",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Activează scurtăturile de alegere",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Arată indicii pentru tastatură",
     // "Question order"
     questionOrder: "Ordinea întrebărilor",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export const roStrings = {
       survey: "La fel ca sondajul",
       // [Auto-translated] "Same as container"
       container: "La fel ca containerul"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Moștenire",
+      // [Auto-translated] "Hide"
+      "false": "Ascunde-te",
+      // [Auto-translated] "Show"
+      "true": "Emisiune"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export const roStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Specifică câte coloane se întinde această întrebare în aspectul grilei.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Specifică cum apare întrebarea când este doar citire. \"Doar citire\" afișează întrebarea cu controalele sale obișnuite de intrare, dar dezactivat pentru editare. \"Vizualizare\" afișează răspunsurile ca text sau alte elemente neinteractive. \"Inherit\" folosește modul setat pentru panoul părinte, pagina sau sondajul (\"Doar citire\" implicit)."
+      readOnlyMode: "Specifică cum apare întrebarea când este doar citire. \"Doar citire\" afișează întrebarea cu controalele sale obișnuite de intrare, dar dezactivat pentru editare. \"Vizualizare\" afișează răspunsurile ca text sau alte elemente neinteractive. \"Inherit\" folosește modul setat pentru panoul părinte, pagina sau sondajul (\"Doar citire\" implicit).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Afișează indicii pentru acțiunile tastaturii disponibile sub această întrebare. Opțiunea \"Inherit\" aplică setarea la nivel de sondaj."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export const roStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Afișează literele (A, B, C, ...) lângă opțiuni și permite respondenților să le selecteze apăsând tastele corespunzătoare. Opțiunea \"Moștenește\" folosește setarea la nivel de sondaj."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Afișează indicii pentru acțiunile tastaturii disponibile sub întrebări. Poți suprascrie această setare pentru întrebările individuale.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Efectul acestei setări este vizibil doar în fila Previzualizare.",
     // "For text entry questions only."

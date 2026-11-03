@@ -1316,6 +1316,8 @@ export var fiStrings = {
     autoFocusFirstQuestion: "Fokusoi ensimmäiseen kysymykseen sivun vaihtuessa",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Ota valintapikakuvakkeet käyttöön",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Näytä näppäimistövihjeet",
     // "Question order"
     questionOrder: "Kysymysten järjestys sivulla",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var fiStrings = {
       survey: "Sama kuin kyselyssä",
       // [Auto-translated] "Same as container"
       container: "Sama kuin kontti"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Perity",
+      // [Auto-translated] "Hide"
+      "false": "Piiloudu",
+      // [Auto-translated] "Show"
+      "true": "Ohjelma"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var fiStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Määrittää, kuinka monta saraketta tämä kysymys kattaa ruudukkoasettelussa.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Määrittelee, miltä kysymys näyttää, kun se on vain luku -tilassa. \"Vain luku\" näyttää kysymyksen tavallisilla syöteohjauksillaan, mutta muokkaus on pois päältä. \"View\" näyttää vastaukset tekstinä tai muina ei-interaktiivisena elementtinä. \"Inherit\" käyttää vanhemman paneelin, sivun tai kyselyn tilaa (\"Vain luku\" oletuksena)."
+      readOnlyMode: "Määrittelee, miltä kysymys näyttää, kun se on vain luku -tilassa. \"Vain luku\" näyttää kysymyksen tavallisilla syöteohjauksillaan, mutta muokkaus on pois päältä. \"View\" näyttää vastaukset tekstinä tai muina ei-interaktiivisena elementtinä. \"Inherit\" käyttää vanhemman paneelin, sivun tai kyselyn tilaa (\"Vain luku\" oletuksena).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Näyttää vihjeet saatavilla olevista näppäimistötoiminnoista tämän kysymyksen alapuolella. \"Inherit\"-vaihtoehto soveltaa kyselytason asetusta."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var fiStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Näyttää kirjaimet (A, B, C, ...) vaihtoehtojen vieressä ja antaa vastaajien valita ne painamalla vastaavia kirjainnäppäimiä. \"Peritä\"-vaihtoehto käyttää kyselytason asetusta."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Näyttää vihjeet saatavilla olevista näppäimistötoiminnoista kysymysten alla. Voit ohittaa tämän asetuksen yksittäisille kysymyksille.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Säilyttää kysymysten alkuperäisen järjestyksen tai satunnaistaa ne. Tämän asetuksen vaikutus näkyy vain Esikatselu-välilehdessä.",
     // [Auto-translated] "For text entry questions only."

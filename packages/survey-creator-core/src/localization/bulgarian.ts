@@ -1316,6 +1316,8 @@ export var bgStrings = {
     autoFocusFirstQuestion: "Постави първия въпрос на нова страница",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Активиране на преки пътища за избор",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Покажи подсказки за клавиатура",
     // "Question order"
     questionOrder: "Подреждане на елементите на страницата",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var bgStrings = {
       survey: "Същото като проучването",
       // [Auto-translated] "Same as container"
       container: "Същото като контейнера"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Наследи",
+      // [Auto-translated] "Hide"
+      "false": "Скрий се",
+      // [Auto-translated] "Show"
+      "true": "Шоу"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var bgStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Указва колко колони обхваща този въпрос в оформлението на мрежата.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Уточнява как се появява въпросът, когато е само за четене. \"Само за четене\" показва въпроса с обичайните входни контроли, но е изключен за редактиране. \"Преглед\" показва отговорите като текст или други неинтерактивни елементи. \"Наследяване\" използва режима, зададен за родителския панел, страница или анкета (\"Само за четене\" по подразбиране)."
+      readOnlyMode: "Уточнява как се появява въпросът, когато е само за четене. \"Само за четене\" показва въпроса с обичайните входни контроли, но е изключен за редактиране. \"Преглед\" показва отговорите като текст или други неинтерактивни елементи. \"Наследяване\" използва режима, зададен за родителския панел, страница или анкета (\"Само за четене\" по подразбиране).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Показва подсказки за налични действия на клавиатурата под този въпрос. Опцията \"Наследи\" прилага настройката на ниво проучване."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var bgStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Показва букви (A, B, C, ...) до изборите и позволява на респондентите да ги изберат, като натиснат съответните буквени клавиши. Опцията \"Наследи\" използва настройката на ниво анкета."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Показва подсказки за налични действия на клавиатурата под въпросите. Можете да заобиколите тази настройка за отделни въпроси.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Ефектът от тази настройка се вижда само в раздела Визуализация .",
     // [Auto-translated] "For text entry questions only."

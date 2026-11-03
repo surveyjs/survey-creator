@@ -5,7 +5,7 @@ import {
   Helpers, settings as surveySettings,
   MatrixDropdownColumn,
   MatrixCells,
-  QuestionMatrixModel,
+  QuestionMatrixModel, Question, QuestionPanelDynamicModel,
   DomDocumentHelper, DomWindowHelper
 } from "survey-core";
 import { SurveyElementActionContainer } from "../action-container-view-model";
@@ -30,9 +30,18 @@ const localizationNameByProperty: { [key: string]: string | ((obj: any) => strin
 };
 
 // Questions and panels, nested ones included: the size the strings grid follows. Cheap - counting
-// the strings themselves would mean building the translation tree.
+// the strings themselves would mean building the translation tree. Not getAllQuestions(false, false, true):
+// it builds the rows of every page, which the designer defers until a page renders.
 function getSurveyElementCount(survey: SurveyModel): number {
-  return survey.getAllQuestions(false, false, true).length + survey.getAllPanels().length;
+  return getQuestionsCount(survey.getAllQuestions()) + survey.getAllPanels().length;
+}
+function getQuestionsCount(questions: Array<Question>): number {
+  return questions.reduce((count, question) => count + getNestedQuestionsCount(question), 0);
+}
+function getNestedQuestionsCount(question: Question): number {
+  // In the designer a dynamic panel lists its template questions only after it has rendered.
+  if (question.isDescendantOf("paneldynamic")) return 1 + getQuestionsCount((<QuestionPanelDynamicModel>question).template.questions);
+  return question.getNestedQuestions(false, true, true).length;
 }
 
 export class TranslationItemBase extends Base {

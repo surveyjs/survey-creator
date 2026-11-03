@@ -57,7 +57,7 @@ Follow-up loops contain questions configured as Dynamic Matrix columns. The numb
 2. Give it a **name** and a user-friendly **title** (e.g., "Feedback overview"). This title will show on the overview page once all loops are complete.
 
    <img src="images/eud-dropdown-name.png" alt='Add name and title to a Dynamic Matrix' width="1544" height="872">
-3. Under the **General** category, locate and unselect the **Enable row addition** and **Enable row removal** check boxes. Since the number of matrix rows will be equal to the number of selected options in the Tag box question, we need to disable the ability for users to add or delete rows.
+3. Under the **Rows** category, locate and unselect the **Enable row addition** and **Enable row removal** check boxes. Since the number of matrix rows will be equal to the number of selected options in the Tag box question, we need to disable the ability for users to add or delete rows.
 
    <img src="images/eud-dropdown-add-remove-rows.png" alt='Disable row addition and removal in the Dynamic Matrix' width="1544" height="870">
 4. On the design surface, select a matrix column to access its settings.

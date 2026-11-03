@@ -1316,6 +1316,8 @@ export var htStrings = {
     autoFocusFirstQuestion: "Konsantre premye kesyon sou yon nouvo paj",
     // [Auto-translated] "Enable choice shortcuts"
     choiceShortcutsEnabled: "Pèmèt rakoursi chwa",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Montre endikasyon klavye",
     // "Question order"
     questionOrder: "Kesyon lòd",
     // "Time limit to complete the survey"
@@ -2549,6 +2551,14 @@ export var htStrings = {
       survey: "Menm jan ak sondaj",
       // "Same as container"
       container: "Menm jan ak veso"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Eritye",
+      // [Auto-translated] "Hide"
+      "false": "Kache",
+      // [Auto-translated] "Show"
+      "true": "Montre"
     }
   },
   // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
@@ -2949,7 +2959,9 @@ export var htStrings = {
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
       effectiveColSpan: "Espesifye konbyen kolòn kesyon sa a kouvri nan layout la kadriyaj.",
       // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
-      readOnlyMode: "Espesifye ki jan kesyon an parèt lè li se li sèlman. \"Li sèlman\" montre kesyon an ak kontwòl opinyon abityèl li yo, men enfim pou koreksyon. \"View\" montre repons kòm tèks oswa lòt eleman ki pa entèaktif. \"Eritye\" itilize mòd la mete pou panèl paran, paj, oswa sondaj (\"Read-Only\" pa default)."
+      readOnlyMode: "Espesifye ki jan kesyon an parèt lè li se li sèlman. \"Li sèlman\" montre kesyon an ak kontwòl opinyon abityèl li yo, men enfim pou koreksyon. \"View\" montre repons kòm tèks oswa lòt eleman ki pa entèaktif. \"Eritye\" itilize mòd la mete pou panèl paran, paj, oswa sondaj (\"Read-Only\" pa default).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Montre allusion pou aksyon klavye ki disponib anba kesyon sa a. Opsyon \"Eritye\" aplike anviwònman sondaj nivo a."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -3096,6 +3108,8 @@ export var htStrings = {
       // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
       choiceShortcutsEnabled: "Montre lèt (A, B, C, ...) akote chwa yo epi kite moun ki repond yo chwazi yo pa peze kle lèt ki koresponn lan. Opsyon \"Eritye\" itilize anviwònman sondaj nivo."
     },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Montre allusion pou aksyon klavye ki disponib anba kesyon Ou ka ranplase anviwònman sa a pou kesyon endividyèl yo.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Kenbe lòd orijinal la nan kesyon oswa randomize yo. Efè anviwònman sa a vizib sèlman nan tab la Preview.",
     // "For text entry questions only."
