@@ -24,6 +24,7 @@ export class TabJsonEditorAceComponent extends SurveyElementBase<
     return this.props.data;
   }
   componentDidMount() {
+    super.componentDidMount();
     this.model.init(ace.edit(this.aceEditorrRef.current as HTMLElement));
   }
   renderElement(): React.JSX.Element {

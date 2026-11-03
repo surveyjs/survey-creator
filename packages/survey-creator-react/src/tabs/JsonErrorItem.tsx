@@ -3,7 +3,7 @@ import { ItemValue } from "survey-core";
 import { ReactElementFactory, SurveyElementBase, SvgIcon, attachKey2click } from "survey-react-ui";
 
 class ItemTemplateComponent extends SurveyElementBase<{ item: ItemValue }, any> {
-  render() {
+  renderElement() {
     const item = this.props.item;
     return (
       <>

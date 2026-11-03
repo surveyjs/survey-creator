@@ -4,7 +4,7 @@ import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 import { Swatch } from "./Swatch";
 
 class ItemTemplateComponent extends SurveyElementBase<{ item: ItemValue }, any> {
-  render() {
+  renderElement() {
     const item = this.props.item;
     return (
       <div className="sd-color-swatch-item">

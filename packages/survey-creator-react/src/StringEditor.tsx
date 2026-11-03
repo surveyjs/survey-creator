@@ -129,7 +129,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   private htmlValue = {
     __html: this.locString?.renderedHtml
   };
-  public render(): React.JSX.Element {
+  public renderElement(): React.JSX.Element {
     if (!this.locString) {
       return null;
     }

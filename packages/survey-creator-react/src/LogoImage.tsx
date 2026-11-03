@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Base } from "survey-core";
-import { ReactElementFactory, LogoImage, SvgIcon, attachKey2click, LoadingIndicatorComponent, SurveyActionBar } from "survey-react-ui";
+import { Base, } from "survey-core";
+import { ReactElementFactory, LogoImage, attachKey2click, LoadingIndicatorComponent, SurveyActionBar } from "survey-react-ui";
 import { SurveyCreatorModel, LogoImageViewModel } from "survey-creator-core";
 import { CreatorModelElement } from "./ModelElement";
 
@@ -28,8 +28,20 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
   protected getStateElement(): Base {
     return this.model;
   }
+  private reactOnStrChanged = () => {
+    this.setState({ locLogoLinkchanged: !!this.state && this.state.locLogoLink ? this.state.locLogoLink + 1 : 1 });
+  };
+  componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
+    this.model.survey.locLogo.onStringChanged.add(this.reactOnStrChanged);
+  }
+  componentWillUnmount(): void {
+    super.componentWillUnmount();
+    this.model.survey.locLogo.onStringChanged.remove(this.reactOnStrChanged);
+  }
   componentDidMount() {
     super.componentDidMount();
+    this.model.survey.locLogo.onStringChanged.add(this.reactOnStrChanged);
     this.model.root = this.rootRef.current;
   }
   renderButtons() {
@@ -50,7 +62,7 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
   renderLoadingIndicator() {
     return <div className="svc-logo-image__loading"><LoadingIndicatorComponent></LoadingIndicatorComponent></div>;
   }
-  render(): React.JSX.Element {
+  renderElement(): React.JSX.Element {
     let content: React.JSX.Element = null;
     if (this.model.survey.locLogo.renderedHtml && !this.model.isUploading) {
       content = this.renderImage();

@@ -85,7 +85,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
     </>;
   }
 
-  render(): React.JSX.Element {
+  renderElement(): React.JSX.Element {
     this.model.item = this.props.item;
     const isNew = !this.props.question.isItemInList(this.props.item);
     this.model.isNew = isNew;

@@ -44,7 +44,7 @@ export class RowWrapper extends CreatorModelElement<
     super.componentWillUnmount();
   }
 
-  render(): React.JSX.Element {
+  renderElement(): React.JSX.Element {
     return (
       <div
         key={"svc-row-" + this.props.row.id}
