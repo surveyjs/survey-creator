@@ -98,7 +98,6 @@ export class TranslationDropdownViewModel extends Base implements IDropdownChoic
     }
   }
   public detachFromUI() {
-    this.questionValue = undefined;
     if (!!this.owner) {
       this.owner.onChoicesCollapsedChanged.remove(this.onCollapsedChanged);
     }
