@@ -63,7 +63,7 @@ This guide explains how to:
 
 <img src="images/eud-binding-6-906.png" alt="Add questions to the Dynamic Panel" width="1544" height="906">
 
-4. In the **General** category unselect the **Enable entry addition** and **Enable entry removal** properties. This ensures that respondents cannot manually remove or add new entries, and their number is controlled only by the bindings.
+4. In the **Entries** category, unselect the **Enable entry addition** and **Enable entry removal** properties. This ensures that respondents cannot manually remove or add new entries, and their number is controlled only by the bindings.
 5. To create a dynamic title for each entry, locate the **Entry title pattern** property.
 6. Enter a title pattern, for example: `Relative #{panelIndex}`. The `{panelIndex}` placeholder represents the entry's position among all entries. You can also use `{visiblePanelIndex}` to show the entry's position among *visible* entries, which is useful if the entries have dynamic visibility.
 
