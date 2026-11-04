@@ -99,6 +99,9 @@ const oxcLegacyDecorators = {
   typescript: { removeClassFieldsWithoutInitializer: true },
 };
 
+// PLACEHOLDER
+const sharedPool = { pool: "threads" as const };
+
 export default defineConfig({
   plugins: [stubAssets],
   test: {
@@ -130,6 +133,7 @@ export default defineConfig({
         oxc: oxcLegacyDecorators,
         resolve: { alias: coreSuiteAliases },
         test: {
+          ...sharedPool,
           name: "core",
           include: ["tests/**/*.{test,tests,spec}.{ts,tsx}"],
           environment: "jsdom",
@@ -150,6 +154,7 @@ export default defineConfig({
         oxc: oxcLegacyDecorators,
         resolve: { alias: collaborationSuiteAliases },
         test: {
+          ...sharedPool,
           name: "collaboration",
           include: ["tests-collaboration/**/*.{test,tests,spec}.{ts,tsx}"],
           environment: "jsdom",
@@ -165,6 +170,7 @@ export default defineConfig({
         oxc: oxcLegacyDecorators,
         resolve: { alias: presetsSuiteAliases },
         test: {
+          ...sharedPool,
           name: "presets",
           include: ["tests-presets/**/*.{test,tests,spec}.{ts,tsx}"],
           environment: "jsdom",
