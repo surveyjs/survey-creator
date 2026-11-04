@@ -10,7 +10,7 @@ test.describe(title, () => {
       const creator = window["creator"];
       creator.propertyGridNavigationMode = "buttons";
       window["aiRequests"] = [];
-      creator.onAIRequest.add((_, options) => {
+      creator.onAIExpressionRequest.add((_, options) => {
         window["aiRequests"].push({ action: options.action, attempt: options.attempt, userPrompt: options.userPrompt });
         options.callback({ data: { expression: "{q1} = 'yes'", explanation: "Shown when q1 is yes." } });
       });

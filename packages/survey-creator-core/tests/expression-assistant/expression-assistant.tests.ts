@@ -22,7 +22,7 @@ function createCreator(json: any = fruitJson, options?: any): { creator: Creator
   const creator = new CreatorTester(options);
   creator.JSON = json;
   const requests: Array<ExpressionAIRequestEvent> = [];
-  creator.onAIRequest.add((_, options) => { requests.push(<ExpressionAIRequestEvent>options); });
+  creator.onAIExpressionRequest.add((_, options) => { requests.push(options); });
   return { creator: creator, requests: requests };
 }
 function getTitleActions(creator: CreatorTester, obj: any, propertyName: string): Array<any> {
@@ -55,6 +55,24 @@ describe("The expression assistant: availability (ai-expressions)", () => {
     editor.isModal = false;
     expect(editor.assistantPrompt).toBeFalsy();
     expect(editor.showExpressionAssistant()).toBeUndefined();
+  });
+  test("a handler added after the property grid is built: the next grid shows the action, and without the handler hides it", () => {
+    const creator = new CreatorTester();
+    creator.JSON = fruitJson;
+    const fruit = creator.survey.getQuestionByName("fruit");
+    const q2 = creator.survey.getQuestionByName("q2");
+    const getActionIds = () => creator.propertyGrid.getQuestionByName("visibleIf").getTitleActions().map(a => a.id);
+    creator.selectElement(q2);
+    expect(getActionIds()).not.toContain("property-grid-expression-assistant");
+    const handler = () => { };
+    creator.onAIExpressionRequest.add(handler);
+    creator.selectElement(fruit);
+    creator.selectElement(q2);
+    expect(getActionIds()).toContain("property-grid-expression-assistant");
+    creator.onAIExpressionRequest.remove(handler);
+    creator.selectElement(fruit);
+    creator.selectElement(q2);
+    expect(getActionIds()).not.toContain("property-grid-expression-assistant");
   });
   test("with a handler: a title action on condition and expression properties, a prompt line in the Logic tab editor only", () => {
     const { creator } = createCreator({ elements: [{ type: "text", name: "q1", inputType: "number" }, { type: "text", name: "q2" }] });
@@ -645,12 +663,12 @@ describe("The expression assistant: the instruction Creator writes (ai-expressio
   });
 });
 
-describe("The expression assistant on creator.onAIRequest (ai-request)", () => {
-  test("an expression request names its feature and the JSON it expects", () => {
+describe("The expression assistant on creator.onAIExpressionRequest (ai-request)", () => {
+  test("an expression request carries the JSON it expects", () => {
     const { creator, requests } = createCreator();
     const assistant = createAssistant(creator);
     assistant.generate("apple");
-    expect(requests[0].feature).toBe("expression");
+    expect("feature" in requests[0]).toBe(false);
     expect(requests[0].responseFormat).toEqual({
       name: "survey_expression",
       schema: {

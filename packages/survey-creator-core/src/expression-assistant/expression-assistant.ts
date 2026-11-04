@@ -47,7 +47,7 @@ export function getExpressionAssistantCreator(obj: any): SurveyCreatorModel {
 }
 
 export function isExpressionAssistantAvailable(creator: SurveyCreatorModel): boolean {
-  return !!creator && !!creator.onAIRequest && !creator.onAIRequest.isEmpty;
+  return !!creator && !!creator.onAIExpressionRequest && !creator.onAIExpressionRequest.isEmpty;
 }
 
 const iconName = "icon-ai-24x24";
@@ -83,15 +83,15 @@ export class ExpressionAssistant extends Base {
   @property({ defaultValue: "" }) errorText: string;
   @property({ defaultValue: 0 }) fixCount: number;
   public checkResult: IExpressionCheckResult;
-  private session: AIRequestSession<IExpressionResponse, IExpressionAIIssue>;
+  private session: AIRequestSession<IExpressionResponse, IExpressionAIIssue, ExpressionAIRequestEvent>;
   private request: IAssistantRequest;
   private surveyValue: SurveyModel;
 
   constructor(public readonly options: IExpressionAssistantOptions) {
     super();
     const creator = options.creator;
-    this.session = new AIRequestSession<IExpressionResponse, IExpressionAIIssue>({
-      fire: options => creator.onAIRequest.fire(creator, options),
+    this.session = new AIRequestSession<IExpressionResponse, IExpressionAIIssue, ExpressionAIRequestEvent>({
+      fire: options => creator.onAIExpressionRequest.fire(creator, options),
       getFixAttempts: () => creator.aiFixAttempts,
     });
     this.prompt = options.prompt || "";

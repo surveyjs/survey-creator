@@ -10,7 +10,7 @@ import {
   addIconsToThemeSet,
   SvgThemeSets,
   QuestionPanelDynamicModel,
-  AIRequestEvent,
+  ExpressionAIRequestEvent,
   ChoiceItem,
   patchLegacyCSSVariables,
   ensureBaseThemeStyles,
@@ -1147,17 +1147,17 @@ export class SurveyCreatorModel extends Base
    * @see startMachineTranslationTo
    */
   public onMachineTranslate: EventBase<SurveyCreatorModel, MachineTranslateEvent> = this.addCreatorEvent<SurveyCreatorModel, MachineTranslateEvent>();
-  // The one event of every AI feature, typed with AIRequestEvent from survey-core, which also defines
-  // the shared types (AIMessage, AIResponseFormat, AIRequestIssue, AIResponse). A feature shows its UI
-  // only when this event has a handler. The handler sends options.systemPrompt and options.messages to
-  // a model and passes the answer to options.callback({ text }), ({ data }) or ({ error }). Creator never
-  // calls a model: it checks the answer and - while aiFixAttempts allow - sends a rejected answer back
-  // with the problems it found (attempt > 0, issues). options.feature names the feature that asks; a
-  // feature's payload extends AIRequestEvent ("expression": ExpressionAIRequestEvent, survey-core), and a
-  // new feature does not change the event's type.
+  // The expression assistant's event. The assistant shows its UI only when this event has a handler;
+  // no option is needed. The payload, ExpressionAIRequestEvent, extends survey-core's AIRequestEvent,
+  // which also defines the shared types (AIMessage, AIResponseFormat, AIRequestIssue, AIResponse).
+  // Every AI feature has its own event with the same payload base. The handler sends
+  // options.systemPrompt and options.messages to a model and passes the answer to
+  // options.callback({ text }), ({ data }) or ({ error }). Creator never calls a model: it checks the
+  // answer and - while aiFixAttempts allow - sends a rejected answer back with the problems it found
+  // (attempt > 0, issues).
   //
-  // The doccomment of onExpressionAssistantRequest (v3.2.3), which this event replaces, kept for the
-  // technical writer; only the event name in the example is changed:
+  // The doccomment of onExpressionAssistantRequest (v3.2.3), which onAIExpressionRequest replaces, kept
+  // for the technical writer; only the event name in the example is changed:
   //
   // An event that is raised when the expression assistant requests an expression to be generated, modified, corrected, or explained. Handle this event to enable the assistant in the Survey Creator UI.
   //
@@ -1170,7 +1170,7 @@ export class SurveyCreatorModel extends Base
   // const creatorOptions = { ... };
   // const creator = new SurveyCreatorModel(creatorOptions);
   //
-  // creator.onAIRequest.add(async (_, options) => {
+  // creator.onAIExpressionRequest.add(async (_, options) => {
   //   try {
   //     const response = await fetch("/api/ai", {
   //       method: "POST",
@@ -1191,7 +1191,7 @@ export class SurveyCreatorModel extends Base
   //   }
   // });
   // ```
-  public onAIRequest: EventBase<SurveyCreatorModel, AIRequestEvent> = this.addCreatorEvent<SurveyCreatorModel, AIRequestEvent>();
+  public onAIExpressionRequest: EventBase<SurveyCreatorModel, ExpressionAIRequestEvent> = this.addCreatorEvent<SurveyCreatorModel, ExpressionAIRequestEvent>();
 
   /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.
