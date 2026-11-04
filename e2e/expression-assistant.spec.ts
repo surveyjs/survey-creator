@@ -10,9 +10,9 @@ test.describe(title, () => {
       const creator = window["creator"];
       creator.propertyGridNavigationMode = "buttons";
       window["aiRequests"] = [];
-      creator.onExpressionAssistantRequest.add((_, options) => {
-        window["aiRequests"].push({ kind: options.kind, userPrompt: options.userPrompt });
-        options.callback({ expression: "{q1} = 'yes'", explanation: "Shown when q1 is yes." });
+      creator.onAIRequest.add((_, options) => {
+        window["aiRequests"].push({ action: options.action, attempt: options.attempt, userPrompt: options.userPrompt });
+        options.callback({ data: { expression: "{q1} = 'yes'", explanation: "Shown when q1 is yes." } });
       });
       creator.JSON = {
         elements: [
@@ -38,7 +38,7 @@ test.describe(title, () => {
     await expect(dialog.locator(".svc-expression-assistant__suggested")).toContainText("{q1} = 'yes'");
     await expect(dialog.locator(".svc-expression-assistant__explanation")).toContainText("Shown when q1 is yes.");
     await expect(dialog.locator("[role='status']")).toContainText("Review the suggested expression.");
-    expect(await page.evaluate(() => window["aiRequests"])).toEqual([{ kind: "generate", userPrompt: "show when q1 is yes" }]);
+    expect(await page.evaluate(() => window["aiRequests"])).toEqual([{ action: "generate", attempt: 0, userPrompt: "show when q1 is yes" }]);
 
     await dialog.getByRole("button", { name: "Accept" }).click();
     await expect(dialog).toBeHidden();

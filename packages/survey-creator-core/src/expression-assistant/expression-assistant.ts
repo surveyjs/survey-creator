@@ -1,17 +1,17 @@
 import {
-  Action, Base, IAction, IDialogOptions, PanelModel, Question, Serializer, SurveyModel, property, settings as surveySettings,
+  Action, AIRequestResult, AIRequestSession, Base, ExpressionAIFeature, ExpressionAIRequestEvent, IAction, IDialogOptions,
+  IExpressionAIIssue as ICoreExpressionAIIssue, IExpressionResponse, PanelModel, Question, Serializer, SurveyModel,
+  buildExpressionInstruction, property, settings as surveySettings,
 } from "survey-core";
 import { ISurveyLintOptions } from "survey-core/linter";
 import { SurveyCreatorModel } from "../creator-base";
-import { ExpressionAssistantRequestEvent, ExpressionAssistantRequestKind } from "../creator-events-api";
 import { getLocString } from "../editorLocalization";
 import { ConditionEditor } from "../property-grid/condition-survey";
 import { QuestionLinkValueModel } from "../components/link-value";
 import {
   checkExpression, getExpressionLintOptions, IExpressionCheckFinding, IExpressionCheckPending, IExpressionCheckResult, IExpressionSite,
 } from "./expression-check";
-import { buildExpressionContext, buildExpressionInstruction, buildExpressionSystemPrompt, IExpressionContext } from "./expression-context";
-import { parseExpressionResponse } from "./expression-response";
+import { buildExpressionContext, buildExpressionSystemPrompt } from "./expression-context";
 
 import "./expression-assistant.scss";
 
@@ -47,7 +47,7 @@ export function getExpressionAssistantCreator(obj: any): SurveyCreatorModel {
 }
 
 export function isExpressionAssistantAvailable(creator: SurveyCreatorModel): boolean {
-  return !!creator && !!creator.onExpressionAssistantRequest && !creator.onExpressionAssistantRequest.isEmpty;
+  return !!creator && !!creator.onAIRequest && !creator.onAIRequest.isEmpty;
 }
 
 const iconName = "icon-ai-24x24";
@@ -61,19 +61,19 @@ function format(name: string, ...args: Array<any>): string {
   const str = getLocString(name);
   return args.length > 0 ? (<any>str)["format"].apply(str, args) : str;
 }
-function clone<T>(value: T): T {
-  return value === undefined ? value : JSON.parse(JSON.stringify(value));
-}
+
+type ExpressionAction = ExpressionAIRequestEvent["action"];
+type IExpressionAIIssue = ICoreExpressionAIIssue<IExpressionCheckFinding>;
 
 interface IAssistantRequest {
   input: IExpressionAssistantInput;
   lintOptions: ISurveyLintOptions;
-  context: IExpressionContext;
-  systemPrompt: string;
 }
 
 // One assistant session: an entry point creates it, shows it, and it is disposed when the popup closes.
 // State lives here, not on the creator: the creator only owns the event and the fix-attempts option.
+// The requests go through an AIRequestSession, which keeps the conversation and sends a rejected
+// answer back.
 export class ExpressionAssistant extends Base {
   @property({ defaultValue: "ready" }) status: ExpressionAssistantStatus;
   @property({ defaultValue: "" }) prompt: string;
@@ -83,14 +83,17 @@ export class ExpressionAssistant extends Base {
   @property({ defaultValue: "" }) errorText: string;
   @property({ defaultValue: 0 }) fixCount: number;
   public checkResult: IExpressionCheckResult;
-  // the request's "messages": every instruction sent and the answer it got, explanations excluded
-  private conversation: Array<{ role: "user" | "assistant", content: string }> = [];
-  private controller: AbortController;
+  private session: AIRequestSession<IExpressionResponse, IExpressionAIIssue>;
   private request: IAssistantRequest;
   private surveyValue: SurveyModel;
 
   constructor(public readonly options: IExpressionAssistantOptions) {
     super();
+    const creator = options.creator;
+    this.session = new AIRequestSession<IExpressionResponse, IExpressionAIIssue>({
+      fire: options => creator.onAIRequest.fire(creator, options),
+      getFixAttempts: () => creator.aiFixAttempts,
+    });
     this.prompt = options.prompt || "";
   }
   public getType(): string { return "expressionassistant"; }
@@ -142,7 +145,7 @@ export class ExpressionAssistant extends Base {
     this.status = "cancelled";
   }
   public dispose(): void {
-    this.abort();
+    this.session.dispose();
     if (!!this.surveyValue) {
       this.surveyValue.dispose();
       this.surveyValue = undefined;
@@ -151,102 +154,82 @@ export class ExpressionAssistant extends Base {
   }
 
   private abort(): void {
-    if (!!this.controller) {
-      this.controller.abort();
-      this.controller = undefined;
-    }
+    this.session.cancel();
   }
-  private startRequest(kind: ExpressionAssistantRequestKind, prompt: string, expression: string): void {
+  private startRequest(action: ExpressionAction, prompt: string, expression: string): void {
     this.abort();
     const input = this.options.getInput() || { sites: [] };
     // one onLintSurvey per request: the same options build the context and every check of it, so
     // the AI is never told a name the check rejects
     const lintOptions = getExpressionLintOptions(this.creator);
     const built = buildExpressionContext(this.creator, input.sites, expression, this.options.editor, lintOptions);
-    this.request = { input: input, lintOptions: lintOptions, context: built.context, systemPrompt: built.systemPrompt };
+    this.request = { input: input, lintOptions: lintOptions };
     this.fixCount = 0;
     this.errorText = "";
-    if (kind !== "explain") {
+    if (action !== "explain") {
       this.checkResult = undefined;
     }
-    this.send(kind, prompt, expression);
-  }
-  private send(kind: ExpressionAssistantRequestKind, prompt: string, expression: string,
-    findings?: Array<IExpressionCheckFinding>): void {
-    const controller = new AbortController();
-    this.controller = controller;
+    const sites = input.sites || [];
+    // the check of the answer validated last: the session validates an answer right before it reports
+    // it or sends it back, so onRetry and the result read the check of their own answer
+    let answerCheckResult: IExpressionCheckResult;
+    // One instance per author request: it checks every answer against the request's sites with the
+    // request's lint options (one onLintSurvey per request).
+    const feature = new ExpressionAIFeature<IExpressionCheckFinding>(answerExpression => {
+      answerCheckResult = checkExpression(this.creator, answerExpression, sites, input.pending, lintOptions);
+      // an unchecked site is no defect of the expression: it is no issue a retry could help
+      return answerCheckResult.findings.map(f => ({ severity: f.severity, message: f.englishText, code: f.ruleId + ":" + f.reason, finding: f }));
+    });
     this.status = "loading";
-    let isAnswered = false;
-    const sites = this.request.input.sites || [];
-    const englishFindings = !!findings
-      ? findings.map(f => ({ ruleId: f.ruleId, reason: f.reason, severity: f.severity, message: f.englishText })) : undefined;
-    const instruction = buildExpressionInstruction(kind, prompt, expression, englishFindings);
-    const options: ExpressionAssistantRequestEvent = {
-      kind: kind, userPrompt: prompt || "", expression: expression || "",
-      isCondition: this.request.context.target.isCondition,
-      targets: sites.map(site => ({ element: site.obj, propertyName: site.propertyName })),
-      // copies: a handler that adjusts them changes this request only
-      context: clone(this.request.context),
-      systemPrompt: this.request.systemPrompt,
-      rebuildSystemPrompt: () => { options.systemPrompt = buildExpressionSystemPrompt(options.context); },
-      messages: clone(this.conversation).concat([{ role: "user", content: instruction }]),
-      signal: controller.signal,
-      callback: (result) => {
-        if (isAnswered || controller.signal.aborted || this.controller !== controller || this.isDisposed) return;
-        isAnswered = true;
-        this.controller = undefined;
-        this.onResult(kind, result, instruction);
-      }
-    };
-    if (!!englishFindings) {
-      options.validationFindings = englishFindings;
-    }
-    this.creator.onExpressionAssistantRequest.fire(this.creator, options);
+    this.session.send({
+      feature: feature,
+      action: action,
+      userPrompt: prompt,
+      instruction: buildExpressionInstruction(action, prompt, expression),
+      context: built.context,
+      systemPrompt: built.systemPrompt,
+      buildSystemPrompt: buildExpressionSystemPrompt,
+      // an explanation is no turn of the conversation that writes the expression
+      keepTurn: action !== "explain",
+      getFields: (retryOf?: IExpressionResponse) => ({
+        expression: !!retryOf ? retryOf.expression : expression || "",
+        isCondition: built.context.target.isCondition,
+        targets: sites.map(site => ({ element: site.obj, propertyName: site.propertyName })),
+      }),
+      onRetry: (answer: IExpressionResponse, _: Array<IExpressionAIIssue>, attempt: number) => {
+        this.fixCount = attempt;
+        this.setResult(answer.expression, answer.explanation, true, answerCheckResult);
+      },
+    }, (result) => {
+      if (!this.isDisposed)this.onResult(action, result, answerCheckResult);
+    });
   }
-  private onResult(kind: ExpressionAssistantRequestKind,
-    result: { expression?: string, explanation?: string, text?: string, error?: string }, instruction: string): void {
-    if (!!result && !!result.error) {
-      this.errorText = String(result.error);
+  private onResult(action: ExpressionAction, result: AIRequestResult<IExpressionResponse, IExpressionAIIssue>,
+    checkResult: IExpressionCheckResult): void {
+    if (result.status === "error") {
+      this.errorText = result.error;
       this.status = "error";
       return;
     }
-    let expression = !!result && typeof result.expression === "string" ? result.expression : undefined;
-    let explanation = !!result && typeof result.explanation === "string" ? result.explanation : undefined;
-    if (expression === undefined && !!result && typeof result.text === "string") {
-      const parsed = parseExpressionResponse(result.text);
-      if (!!parsed) {
-        expression = parsed.expression;
-        if (explanation === undefined) explanation = parsed.explanation;
-      }
-    }
-    expression = (expression || "").trim();
-    if (kind === "explain") {
-      this.explanation = explanation || "";
+    const answer = result.answer;
+    if (action === "explain") {
+      this.explanation = answer.explanation || "";
       this.status = !!this.explanation ? "explained" : "empty";
       return;
     }
-    // the answer as the system prompt asks for it, so the next request shows the model its own turn
-    this.conversation.push({ role: "user", content: instruction });
-    this.conversation.push({ role: "assistant", content: JSON.stringify({ expression: expression, explanation: explanation || "" }) });
-    if (!expression) {
-      this.explanation = explanation || "";
+    if (result.status === "empty") {
+      this.explanation = answer.explanation || "";
       this.status = "empty";
       return;
     }
-    const check = this.setResult(expression, explanation || "", true);
-    // an unchecked site is no defect of the expression: a correction request cannot help it
-    if (check.errorCount > 0 && this.fixCount < Math.max(0, this.creator.expressionAssistantFixAttempts || 0)) {
-      this.fixCount++;
-      this.send("fix", "", expression, check.findings);
-      return;
-    }
+    this.setResult(answer.expression, answer.explanation || "", true, checkResult);
     this.status = "review";
   }
-  private setResult(expression: string, explanation: string, isPending?: boolean): IExpressionCheckResult {
+  private setResult(expression: string, explanation: string, isPending?: boolean, checkResult?: IExpressionCheckResult): IExpressionCheckResult {
     const input = this.request.input;
     this.expression = expression;
     this.explanation = explanation;
-    this.checkResult = checkExpression(this.creator, expression, input.sites, input.pending, this.request.lintOptions);
+    this.checkResult = checkResult || checkExpression(this.creator, expression, input.sites, input.pending, this.request.lintOptions);
     if (!isPending) {
       this.status = "review";
       this.updateSurvey();
