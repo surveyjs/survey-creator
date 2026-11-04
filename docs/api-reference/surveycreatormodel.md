@@ -2364,6 +2364,8 @@ A Survey Creator instance that raised the event.
 - `options.area`: `string`  
 A Survey Creator UI element for which a survey is instantiated. Contains one of the following values:
   - `"designer-tab"` - A preview survey in the Designer tab. [View Demo](https://surveyjs.io/survey-creator/examples/customize-form-builder-ui/)
+  - `"designer-tab:creator-settings:theme"` - A survey that allows users to configure the Survey Creator UI theme in the Designer tab's settings panel.
+  - `"designer-tab:creator-settings:preset"` - A survey that allows users to select a Survey Creator UI preset in the Designer tab's settings panel.
   - `"preview-tab"` - A preview survey in the Preview tab. [View Demo](https://surveyjs.io/survey-creator/examples/customize-form-builder-ui/)
   - `"property-grid"` - A survey that represents the Property Grid. [View Demo](https://surveyjs.io/survey-creator/examples/hide-category-from-property-grid/)
   - `"default-value-popup-editor"` - A survey that allows you to specify the default or correct value (for quizzes) in a pop-up window.
@@ -2404,6 +2406,8 @@ A Survey Creator instance that raised the event.
 - `options.area`: `string`  
 A Survey Creator UI element for which a survey is instantiated. Contains one of the following values:
   - `"designer-tab"` - A preview survey in the Designer tab. [View Demo](https://surveyjs.io/survey-creator/examples/customize-form-builder-ui/)
+  - `"designer-tab:creator-settings:theme"` - A survey that allows users to configure the Survey Creator UI theme in the Designer tab's settings panel.
+  - `"designer-tab:creator-settings:preset"` - A survey that allows users to select a Survey Creator UI preset in the Designer tab's settings panel.
   - `"preview-tab"` - A preview survey in the Preview tab. [View Demo](https://surveyjs.io/survey-creator/examples/customize-form-builder-ui/)
   - `"property-grid"` - A survey that represents the Property Grid. [View Demo](https://surveyjs.io/survey-creator/examples/hide-category-from-property-grid/)
   - `"default-value-popup-editor"` - A survey that allows you to specify the default or correct value (for quizzes) in a pop-up window.
