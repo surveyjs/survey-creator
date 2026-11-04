@@ -1147,7 +1147,7 @@ export class SurveyCreatorModel extends Base
    * @see startMachineTranslationTo
    */
   public onMachineTranslate: EventBase<SurveyCreatorModel, MachineTranslateEvent> = this.addCreatorEvent<SurveyCreatorModel, MachineTranslateEvent>();
-  /**
+  /*
    * An event that is raised when the expression assistant requests an expression to be generated, modified, corrected, or explained. Handle this event to enable the assistant in the Survey Creator UI.
    *
    * For information on event handler parameters, refer to descriptions within the interface.
