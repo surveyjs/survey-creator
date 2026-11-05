@@ -2084,3 +2084,37 @@ test("Expression question: the banner has no link when the expression cannot be 
   allowEdit = false;
   expect(adorner.createBannerParams().actionText).toBe("");
 });
+test("Expression question: the banner shows an expression stored as a number", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "expression", name: "q1", expression: 5 }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const adorner = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  expect(adorner.createBannerParams().text).toBe("5");
+});
+test("Expression question: an adorner moved to another question shows that question's expression", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "expression", name: "q1", expression: "{a} + 1" },
+      { type: "expression", name: "q2", expression: "{b} * 2" }
+    ]
+  };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  const adorner = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  expect(adorner.expressionBannerText).toBe("{a} + 1");
+  // A newer adorner owns q1 now, so moving the old one does not detach it from q1
+  new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  adorner.attachToUI(q2);
+  expect(adorner.createBannerParams().text).toBe("{b} * 2");
+});
+test("Expression question: the banner link of a detached adorner does nothing", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "expression", name: "q2", expression: "1 + 1" }] };
+  creator.selectElement(creator.survey.getQuestionByName("q1"));
+  const adorner = new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("q2"), <any>undefined);
+  const params = adorner.createBannerParams();
+  adorner.detachFromUI();
+  params.onClick();
+  expect(creator.selectedElementName).toBe("q1");
+});

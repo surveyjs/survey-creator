@@ -218,7 +218,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.setPropertyValue("expressionBannerText", this.getExpressionBannerText());
   }
   private getExpressionBannerText(): string {
-    const expression: string = ((<any>this.surveyElement)?.expression || "").replace(/\s+/g, " ").trim();
+    // JSON can store the expression as a number or a boolean
+    const expression: string = String((<any>this.surveyElement)?.expression ?? "").replace(/\s+/g, " ").trim();
     if (expression.length <= maxExpressionBannerTextLength) return expression;
     return expression.substring(0, maxExpressionBannerTextLength - 3) + "...";
   }
@@ -262,8 +263,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   private canEditExpression(): boolean {
     const creator = this.creator;
-    if (creator.readOnly || !creator.isSidebarVisible) return false;
     const el = this.surveyElement;
+    if (!el || creator.readOnly || !creator.isSidebarVisible) return false;
     // setSidebarEnabled(false) collapses the sidebar and keeps it closed: the link must not reopen it.
     const designer = creator.getPlugin<TabDesignerPlugin>("designer", false);
     if (!!designer && !designer.isSidebarEnabled) return false;
@@ -392,6 +393,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
           this.updateRequiredAction(requiredAction);
         }
       }, "isRequiredAdorner");
+      // The text cached for the previous element stays when its detach was skipped (a newer adorner owns it)
+      this.resetPropertyValue("expressionBannerText");
       if (this.isExpressionQuestion) {
         surveyElement.registerFunctionOnPropertyValueChanged("expression", () => {
           this.updateExpressionBannerText();
