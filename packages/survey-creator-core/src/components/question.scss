@@ -1114,6 +1114,16 @@ svc-question,
   }
 }
 
+// The expression banner shows the "Edit expression" link under the expression
+.svc-question__content--expression {
+  .svc-carry-forward-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sjs2-spacing-x300, 24px);
+  }
+}
+
 .svc-question__content--paneldynamic {
   .sd-question__content {
     padding-bottom: 2px;
