@@ -122,6 +122,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   public setSidebarEnabled(value: boolean) {
     this.tabControlModel.expandCollapseAction.enabled = value;
   }
+  public get isSidebarEnabled(): boolean {
+    return this.tabControlModel.expandCollapseAction.enabled;
+  }
 
   private updateActivePage(showPlaceholder = true) {
     if (this.showOneCategoryInPropertyGrid) {

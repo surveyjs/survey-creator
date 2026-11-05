@@ -38,6 +38,7 @@ import { DragDropSurveyElements } from "../dragdrop-survey-elements";
 import { DropIndicatorPosition } from "../drag-drop-enums";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
 import { SurveyHelper } from "../survey-helper";
+import type { TabDesignerPlugin } from "./tabs/designer-plugin";
 import { DomDocumentHelper } from "survey-core";
 
 export interface QuestionBannerParams {
@@ -263,8 +264,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const creator = this.creator;
     if (creator.readOnly || !creator.isSidebarVisible) return false;
     const el = this.surveyElement;
+    // setSidebarEnabled(false) collapses the sidebar and keeps it closed: the link must not reopen it.
+    const designer = creator.getPlugin<TabDesignerPlugin>("designer", false);
+    if (!!designer && !designer.isSidebarEnabled) return false;
     const prop = Serializer.findProperty(el.getType(), "expression");
-    return !!prop && prop.isVisible("", el) && creator.onCanShowPropertyCallback(el, prop, undefined, null, null);
+    return SurveyHelper.isPropertyVisible(el, prop, creator) && creator.isCanModifyProperty(el, "expression");
   }
   private createCarryForwardParams(): QuestionBannerParams {
     if (!this.isUsingCarryForward) return null;

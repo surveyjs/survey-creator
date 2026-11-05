@@ -2044,3 +2044,43 @@ test("Expression question inside a custom component: no banner", (): any => {
     ComponentCollection.Instance.clear();
   }
 });
+test("Expression question: the banner has no link while the sidebar is disabled", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "expression", name: "q2", expression: "1 + 1" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  creator.selectElement(q1);
+  const adorner = new QuestionAdornerViewModel(creator, q2, <any>undefined);
+  creator.setSidebarEnabled(false);
+  expect(creator.showSidebar).toBe(false);
+  const params = adorner.createBannerParams();
+  expect(params.text).toBe("1 + 1");
+  expect(params.actionText).toBe("");
+  params.onClick();
+  expect(creator.showSidebar).toBe(false);
+  expect(creator.selectedElementName).toBe("q1");
+
+  creator.setSidebarEnabled(true);
+  expect(adorner.createBannerParams().actionText).toBe("Edit expression");
+});
+test("Expression question: the banner has no link when the expression cannot be modified", (): any => {
+  const creator = new CreatorTester();
+  let expressionReadOnly = true;
+  let allowEdit = true;
+  creator.onPropertyGetReadOnly.add((_, options) => {
+    if (options.property.name === "expression") options.readOnly = expressionReadOnly;
+  });
+  creator.onElementAllowOperations.add((_, options) => {
+    options.allowEdit = allowEdit;
+  });
+  creator.JSON = { elements: [{ type: "expression", name: "q1", expression: "1 + 1" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const adorner = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  expect(adorner.createBannerParams().actionText).toBe("");
+
+  expressionReadOnly = false;
+  expect(adorner.createBannerParams().actionText).toBe("Edit expression");
+
+  allowEdit = false;
+  expect(adorner.createBannerParams().actionText).toBe("");
+});
