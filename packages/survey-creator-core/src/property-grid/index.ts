@@ -897,13 +897,40 @@ export class PropertyGridModel {
       }
     }
     if (focus && !question.isReadOnly) {
-      question.focus();
+      this.focusQuestion(question);
     } else {
       if (this.showOneCategoryInPropertyGrid) {
         this.survey.currentPage = question.page;
       }
     }
   }
+  // The grid survey is created anew for every selected object. Until the renderers replace it,
+  // the page shows the previous grid, whose inputs have the same ids (pg-sq_0, ...): an editor
+  // focused at once focuses an input that is about to be removed. So the first focus in a new
+  // grid survey waits for one task, by which time the renderers have updated the page.
+  private focusQuestion(question: Question): void {
+    this.cancelDeferredFocus();
+    if (!this.isSurveyJustCreated) {
+      question.focus();
+      return;
+    }
+    // The category (page) is shown at once, as question.focus() would do.
+    const survey = this.survey;
+    if (!!question.page && survey.currentPage !== question.page) {
+      survey.currentPage = question.page;
+    }
+    this.focusTimeout = setTimeout(() => {
+      this.focusTimeout = undefined;
+      this.isSurveyJustCreated = false;
+      if (!question.isDisposed) question.focus();
+    }, 0);
+  }
+  private cancelDeferredFocus(): void {
+    clearTimeout(this.focusTimeout);
+    this.focusTimeout = undefined;
+  }
+  private isSurveyJustCreated: boolean;
+  private focusTimeout: ReturnType<typeof setTimeout>;
   private setObjFromAction(value: Base, propertyName: string) {
     if (this.changedFromActionCallback) {
       this.changedFromActionCallback(value, propertyName);
@@ -973,6 +1000,9 @@ export class PropertyGridModel {
     this.surveyValue = this.createSurvey(json, (survey: SurveyModel): void => {
       this.onCreateSurvey(survey);
     });
+    // A focus still waiting for the previous grid survey would mark this one as rendered
+    this.cancelDeferredFocus();
+    this.isSurveyJustCreated = true;
     if (this.onNewSurveyCreatedCallback) {
       this.onNewSurveyCreatedCallback();
     }

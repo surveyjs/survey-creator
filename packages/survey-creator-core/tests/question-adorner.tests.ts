@@ -5,7 +5,7 @@ import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { QuestionToolboxItem } from "../src/toolbox";
 import { DropIndicatorPosition } from "../src/drag-drop-enums";
-import { vi } from "vitest";
+import { onTestFinished, vi } from "vitest";
 export * from "../src/localization/german";
 
 test("Collapse action updates when the adorner is re-attached after expandCollapseButtonVisibility changes", (): any => {
@@ -1902,4 +1902,225 @@ test("Nested choice content panel shows the drop-over highlight while dragging o
 
   panelAdorner.dropIndicatorPosition = DropIndicatorPosition.Inside;
   expect(panelAdorner.css().indexOf("svc-question__content--drag-over-inside")).not.toBe(-1);
+});
+test("Expression question: the banner shows its expression", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "price" },
+      { type: "text", name: "quantity" },
+      { type: "expression", name: "total", expression: "{price} * {quantity}" }
+    ]
+  };
+  const total = creator.survey.getQuestionByName("total");
+  const adorner = new QuestionAdornerViewModel(creator, total, <any>undefined);
+  expect(adorner.isBannerShowing).toBe(true);
+  const params = adorner.createBannerParams();
+  expect(params.text).toBe("{price} * {quantity}");
+  expect(params.actionText).toBe("Edit expression");
+
+  const price = creator.survey.getQuestionByName("price");
+  const priceAdorner = new QuestionAdornerViewModel(creator, price, <any>undefined);
+  expect(priceAdorner.isBannerShowing).toBe(false);
+  expect(priceAdorner.createBannerParams()).toBeFalsy();
+});
+test("Expression question: the banner shows a placeholder when the expression is empty", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "expression", name: "q1" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const adorner = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  expect(adorner.isBannerShowing).toBe(true);
+  const params = adorner.createBannerParams();
+  expect(params.text).toBe("No expression set");
+  expect(params.actionText).toBe("Edit expression");
+});
+test("Expression question: the banner text updates when the expression changes", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "expression", name: "q1", expression: "1 + 1" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const adorner = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  expect(adorner.expressionBannerText).toBe("1 + 1");
+  // The renderers re-render on the adorner's own property changes, not on the question's.
+  let changedCount = 0;
+  adorner.registerFunctionOnPropertyValueChanged("expressionBannerText", () => changedCount++);
+  q1.expression = "{a} + {b}";
+  expect(changedCount).toBe(1);
+  expect(adorner.expressionBannerText).toBe("{a} + {b}");
+  expect(adorner.createBannerParams().text).toBe("{a} + {b}");
+  q1.expression = "";
+  expect(changedCount).toBe(2);
+  expect(adorner.createBannerParams().text).toBe("No expression set");
+
+  // The adorner stops following the question it is detached from.
+  adorner.detachFromUI();
+  q1.expression = "5";
+  expect(changedCount).toBe(2);
+});
+test("Expression question: the banner shortens long and multiline expressions", (): any => {
+  const creator = new CreatorTester();
+  const longExpression = "iif({q1} > 10, " + "{a} + ".repeat(30) + "{b}, 0)";
+  creator.JSON = { elements: [{ type: "expression", name: "q1", expression: "iif({a} > 1,\n    {b},\n\t{c})" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const adorner = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  expect(adorner.createBannerParams().text).toBe("iif({a} > 1, {b}, {c})");
+  q1.expression = longExpression;
+  const text = adorner.createBannerParams().text;
+  expect(longExpression.length > 100).toBe(true);
+  expect(text.length).toBe(100);
+  expect(text).toBe(longExpression.substring(0, 97) + "...");
+});
+test("Expression question: clicking the banner link opens the sidebar and focuses the expression editor", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "expression", name: "q2", expression: "{q1} + 1" }
+    ]
+  };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  creator.selectElement(q1);
+  creator.setShowSidebar(false);
+  expect(creator.showSidebar).toBe(false);
+  const propertyGrid = creator["designerPropertyGrid"];
+  const log: Array<{ propertyName: string, focus: boolean }> = [];
+  const originalSelectProperty = propertyGrid.selectProperty.bind(propertyGrid);
+  propertyGrid.selectProperty = (propertyName: string, focus: boolean) => {
+    log.push({ propertyName, focus });
+    originalSelectProperty(propertyName, focus);
+  };
+  const adorner = new QuestionAdornerViewModel(creator, q2, <any>undefined);
+  // The click starts the focus timers of the creator and the grid: they must not run after the test
+  vi.useFakeTimers();
+  onTestFinished(() => {
+    vi.clearAllTimers();
+    vi.useRealTimers();
+  });
+  adorner.createBannerParams().onClick();
+  expect(creator.showSidebar).toBe(true);
+  expect(creator.selectedElementName).toBe("q2");
+  expect(log).toEqual([{ propertyName: "expression", focus: true }]);
+  propertyGrid.selectProperty = originalSelectProperty;
+});
+test("Expression question: the banner has no link when the expression property is hidden or the creator is read-only", (): any => {
+  const creator = new CreatorTester();
+  let canShowExpression = false;
+  creator.onPropertyShowing.add((_, options) => {
+    if (options.property.name === "expression") options.show = canShowExpression;
+  });
+  creator.JSON = { elements: [{ type: "expression", name: "q1", expression: "1 + 1" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const adorner = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  let params = adorner.createBannerParams();
+  expect(adorner.isBannerShowing).toBe(true);
+  expect(params.text).toBe("1 + 1");
+  expect(params.actionText).toBe("");
+
+  canShowExpression = true;
+  params = adorner.createBannerParams();
+  expect(params.actionText).toBe("Edit expression");
+
+  creator.removeSidebar = true;
+  expect(adorner.createBannerParams().actionText).toBe("");
+  creator.removeSidebar = false;
+  expect(adorner.createBannerParams().actionText).toBe("Edit expression");
+
+  creator.readOnly = true;
+  params = adorner.createBannerParams();
+  expect(params.text).toBe("1 + 1");
+  expect(params.actionText).toBe("");
+  const selected = creator.selectedElement;
+  params.onClick();
+  expect(creator.selectedElement).toBe(selected);
+});
+test("Expression question inside a custom component: no banner", (): any => {
+  ComponentCollection.Instance.add({
+    name: "expressioncomponent",
+    questionJSON: { type: "expression", expression: "1 + 1" }
+  });
+  try {
+    const creator = new CreatorTester();
+    creator.JSON = { elements: [{ type: "expressioncomponent", name: "q1" }] };
+    const q1: any = creator.survey.getQuestionByName("q1");
+    const inner = q1.contentQuestion;
+    expect(inner.getType()).toBe("expression");
+    const adorner = new QuestionAdornerViewModel(creator, inner, <any>undefined);
+    expect(adorner.isBannerShowing).toBe(false);
+  } finally {
+    ComponentCollection.Instance.clear();
+  }
+});
+test("Expression question: the banner has no link while the sidebar is disabled", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "expression", name: "q2", expression: "1 + 1" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  creator.selectElement(q1);
+  const adorner = new QuestionAdornerViewModel(creator, q2, <any>undefined);
+  creator.setSidebarEnabled(false);
+  expect(creator.showSidebar).toBe(false);
+  const params = adorner.createBannerParams();
+  expect(params.text).toBe("1 + 1");
+  expect(params.actionText).toBe("");
+  params.onClick();
+  expect(creator.showSidebar).toBe(false);
+  expect(creator.selectedElementName).toBe("q1");
+
+  creator.setSidebarEnabled(true);
+  expect(adorner.createBannerParams().actionText).toBe("Edit expression");
+});
+test("Expression question: the banner has no link when the expression cannot be modified", (): any => {
+  const creator = new CreatorTester();
+  let expressionReadOnly = true;
+  let allowEdit = true;
+  creator.onPropertyGetReadOnly.add((_, options) => {
+    if (options.property.name === "expression") options.readOnly = expressionReadOnly;
+  });
+  creator.onElementAllowOperations.add((_, options) => {
+    options.allowEdit = allowEdit;
+  });
+  creator.JSON = { elements: [{ type: "expression", name: "q1", expression: "1 + 1" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const adorner = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  expect(adorner.createBannerParams().actionText).toBe("");
+
+  expressionReadOnly = false;
+  expect(adorner.createBannerParams().actionText).toBe("Edit expression");
+
+  allowEdit = false;
+  expect(adorner.createBannerParams().actionText).toBe("");
+});
+test("Expression question: the banner shows an expression stored as a number", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "expression", name: "q1", expression: 5 }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const adorner = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  expect(adorner.createBannerParams().text).toBe("5");
+});
+test("Expression question: an adorner moved to another question shows that question's expression", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "expression", name: "q1", expression: "{a} + 1" },
+      { type: "expression", name: "q2", expression: "{b} * 2" }
+    ]
+  };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  const adorner = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  expect(adorner.expressionBannerText).toBe("{a} + 1");
+  // A newer adorner owns q1 now, so moving the old one does not detach it from q1
+  new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  adorner.attachToUI(q2);
+  expect(adorner.createBannerParams().text).toBe("{b} * 2");
+});
+test("Expression question: the banner link of a detached adorner does nothing", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "expression", name: "q2", expression: "1 + 1" }] };
+  creator.selectElement(creator.survey.getQuestionByName("q1"));
+  const adorner = new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("q2"), <any>undefined);
+  const params = adorner.createBannerParams();
+  adorner.detachFromUI();
+  params.onClick();
+  expect(creator.selectedElementName).toBe("q1");
 });
