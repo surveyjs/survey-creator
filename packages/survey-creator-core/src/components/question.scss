@@ -1114,13 +1114,22 @@ svc-question,
   }
 }
 
-// The expression banner shows the "Edit expression" link under the expression
-.svc-question__content--expression {
-  .svc-carry-forward-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--sjs2-spacing-x300, 24px);
+// The expression banner shows the "Edit expression" link under the expression.
+// Inside the container query: a narrow container hides every banner (carry-forward-panel.scss).
+@container (min-width: #{$sd-panel-medium-min-width}) {
+  .svc-question__content--expression {
+    .svc-carry-forward-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--sjs2-spacing-x300, 24px);
+
+      // A long question name has no line break opportunities
+      & > span:first-child {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+      }
+    }
   }
 }
 

@@ -117,4 +117,34 @@ test.describe("Expression question banner", () => {
     await expect(banner).toContainText("{price} * {quantity}");
     await expect(banner.getByRole("button")).toHaveCount(0);
   });
+
+  test("The banner is hidden in a narrow container, as the other banners are", async ({ page }) => {
+    const wrapper = page.locator(".svc-question__content--expression .svc-carry-forward-panel-wrapper");
+    const banner = wrapper.locator(".svc-carry-forward-panel");
+    await expect(banner).toBeVisible();
+    // The wrapper is the size container of the banner
+    await wrapper.evaluate((el: HTMLElement) => { el.style.width = "150px"; });
+    await expect(banner).toBeHidden();
+  });
+
+  test("A long question name in the expression wraps inside the banner", async ({ page }) => {
+    // A name has no line break opportunities: the browser cannot wrap it without help
+    const name = "total_price_including_taxes_and_shipping_for_all_items_in_the_cart";
+    await page.evaluate((name) => {
+      window["creator"].survey.getQuestionByName("total").expression = "{" + name + "} * 2";
+    }, name);
+    const wrapper = page.locator(".svc-question__content--expression .svc-carry-forward-panel-wrapper");
+    const banner = wrapper.locator(".svc-carry-forward-panel");
+    await expect(banner).toContainText(name);
+    await wrapper.evaluate((el: HTMLElement) => { el.style.width = "520px"; });
+    const widths = await banner.evaluate((el: HTMLElement) => {
+      const style = getComputedStyle(el);
+      return {
+        text: el.querySelector("span")!.getBoundingClientRect().width,
+        content: el.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight)
+      };
+    });
+    // The text stays within the banner's padding
+    expect(widths.text).toBeLessThanOrEqual(widths.content);
+  });
 });
