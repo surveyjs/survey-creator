@@ -314,6 +314,10 @@ export var nlStrings = {
     choicesLoadedFromWebLinkText: "Ga naar instellingen",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Voorbeeld van geladen keuzeopties",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Geen expressieset",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Bewerkingsuitdrukking",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML-inhoud zal hier zijn.",
     // [Auto-translated] "Drop a question from the toolbox here."

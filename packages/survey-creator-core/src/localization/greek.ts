@@ -314,6 +314,10 @@ export var grStrings = {
     choicesLoadedFromWebLinkText: "Μετάβαση στις ρυθμίσεις",
     // "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Προεπισκόπηση επιλογών",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Δεν έχει οριστεί καμία έκφραση",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Επεξεργασία έκφρασης",
     // "HTML content will be here."
     htmlPlaceHolder: "Το περιεχόμενο HTML θα εμφανιστεί εδώ.",
     // "Drop a question from the toolbox here."

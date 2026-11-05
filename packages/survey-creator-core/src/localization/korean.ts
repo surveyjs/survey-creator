@@ -314,6 +314,10 @@ export var koreanStrings = {
     choicesLoadedFromWebLinkText: "설정으로 바로 가기",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "로드된 선택 옵션 미리보기",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "표현식 집합이 없습니다",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "편집 표현",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML 콘텐츠가 여기에 있습니다.",
     // [Auto-translated] "Drop a question from the toolbox here."

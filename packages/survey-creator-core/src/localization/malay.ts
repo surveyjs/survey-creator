@@ -314,6 +314,10 @@ export var msStrings = {
     choicesLoadedFromWebLinkText: "Pergi ke seting",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Pratonton pilihan pilihan yang dimuatkan",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Tiada set ungkapan",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Edit ungkapan",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "Kandungan HTML akan berada di sini.",
     // [Auto-translated] "Drop a question from the toolbox here."

@@ -314,6 +314,10 @@ export var czStrings = {
     choicesLoadedFromWebLinkText: "Přejděte do nastavení",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Náhled načtených voleb",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Žádná množina výrazů",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Edit expression",
     // "HTML content will be here."
     htmlPlaceHolder: "Zde bude HTML obsah.",
     // "Drop a question from the toolbox here."

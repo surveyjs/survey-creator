@@ -314,6 +314,10 @@ export var turkishStrings = {
     choicesLoadedFromWebLinkText: "Ayarlara git",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Yüklenen seçim seçeneklerinin önizlemesi",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "İfade kümesi yok",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Düzenleme ifadesi",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML içeriği burada olacak.",
     // [Auto-translated] "Drop a question from the toolbox here."

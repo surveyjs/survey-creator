@@ -314,6 +314,10 @@ export var htStrings = {
     choicesLoadedFromWebLinkText: "Ale nan paramèt",
     // "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Preview nan opsyon chwa chaje",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Pa gen ekspresyon mete",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Edit ekspresyon",
     // "HTML content will be here."
     htmlPlaceHolder: "Kontni HTML yo pral isit la.",
     // "Drop a question from the toolbox here."

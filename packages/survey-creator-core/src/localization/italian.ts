@@ -314,6 +314,10 @@ export var italianTranslation = {
     choicesLoadedFromWebLinkText: "Vai alle impostazioni",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Anteprima delle opzioni di scelta caricate",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Nessun insieme di espressioni",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Modifica espressione",
     // "HTML content will be here."
     htmlPlaceHolder: "Il contenuto HTML sarà qui.",
     // "Drop a question from the toolbox here."

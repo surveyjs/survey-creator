@@ -314,6 +314,10 @@ export var hebrewStrings = {
     choicesLoadedFromWebLinkText: "עבור אל הגדרות",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "תצוגה מקדימה של אפשרויות בחירה שנטענו",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "אין קבוצת ביטויים",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "ביטוי עריכה",
     // "HTML content will be here."
     htmlPlaceHolder: "התוכן של HTML יופיע כאן.",
     // "Drop a question from the toolbox here."

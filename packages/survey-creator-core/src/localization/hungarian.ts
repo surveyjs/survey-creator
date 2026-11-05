@@ -314,6 +314,10 @@ export var huStrings = {
     choicesLoadedFromWebLinkText: "Válassza a beállítások",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "A betöltött választási lehetőségek előnézete",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Nincs kifejezéshalmaz",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Szerkesztési kifejezés",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "A HTML tartalom itt lesz.",
     // [Auto-translated] "Drop a question from the toolbox here."

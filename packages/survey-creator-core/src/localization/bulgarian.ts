@@ -314,6 +314,10 @@ export var bgStrings = {
     choicesLoadedFromWebLinkText: "Отидете в настройките",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Визуализация на заредените опции за избор",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Без набор от изрази",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Редакция на израза",
     // "HTML content will be here."
     htmlPlaceHolder: "HTML съдържанието ще бъде тук.",
     // "Drop a question from the toolbox here."

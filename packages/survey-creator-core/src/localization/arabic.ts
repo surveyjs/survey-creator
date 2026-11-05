@@ -314,6 +314,10 @@ export var arStrings = {
     choicesLoadedFromWebLinkText: "انتقل إلى الإعدادات",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "معاينة خيارات الاختيار المحملة",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "لا توجد مجموعة تعبيرات",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "تعبير تعديل",
     // "HTML content will be here."
     htmlPlaceHolder: "محتوى HTML سيكون هنا",
     // "Drop a question from the toolbox here."

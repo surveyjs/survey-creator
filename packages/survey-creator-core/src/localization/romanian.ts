@@ -314,6 +314,10 @@ export const roStrings = {
     choicesLoadedFromWebLinkText: "Mergeți la setări",
     // "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Previzualizare opțiuni încărcate",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Fără mulțime de expresii",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Editare expresie",
     // "HTML content will be here."
     htmlPlaceHolder: "Conținutul HTML va fi aici.",
     // "Drop a question from the toolbox here."

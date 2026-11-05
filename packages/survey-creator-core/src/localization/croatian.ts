@@ -314,6 +314,10 @@ export var hrStrings = {
     choicesLoadedFromWebLinkText: "Idi na postavke",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Pretpregled učitanih mogućnosti izbora",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Skup izraza bez izraza",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Izraz uređivanja",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML sadržaj će biti ovdje.",
     // [Auto-translated] "Drop a question from the toolbox here."

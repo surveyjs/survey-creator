@@ -314,6 +314,10 @@ export var germanTranslation = {
     choicesLoadedFromWebLinkText: "Gehen Sie zu den Einstellungen",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Vorschau der geladenen Auswahloptionen",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Keine Ausdrucksmenge",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Bearbeitungsausdruck",
     // "HTML content will be here."
     htmlPlaceHolder: "HTML wird hier dargestellt werden.",
     // "Drop a question from the toolbox here."

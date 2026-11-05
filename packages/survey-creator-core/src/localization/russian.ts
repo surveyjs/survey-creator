@@ -314,6 +314,10 @@ export var ruStrings = {
     choicesLoadedFromWebLinkText: "Перейдите в настройки",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Предварительный просмотр загруженных вариантов выбора",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Нет множества выражений",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Редактировать выражение",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML-контент будет здесь.",
     // [Auto-translated] "Drop a question from the toolbox here."

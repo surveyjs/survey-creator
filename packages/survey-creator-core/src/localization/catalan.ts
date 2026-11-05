@@ -314,6 +314,10 @@ export var catalanTranslation = {
     choicesLoadedFromWebLinkText: "Ir a la configuració",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Vista prèvia de las opcions de elección cargadas",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Sense conjunt d'expressions",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Expressió d'edició",
     // "HTML content will be here."
     htmlPlaceHolder: "Contenido HTML irá aquí.",
     // "Drop a question from the toolbox here."

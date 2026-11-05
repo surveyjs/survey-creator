@@ -314,6 +314,10 @@ export var polishStrings = {
     choicesLoadedFromWebLinkText: "Przejdź do ustawień",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Podgląd wczytanych opcji wyboru",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Brak zbioru wyrażeń",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Wyrażenie edytucyjne",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "Zawartość HTML będzie tutaj.",
     // [Auto-translated] "Drop a question from the toolbox here."

@@ -314,6 +314,10 @@ export var traditionalChineseTranslation = {
     choicesLoadedFromWebLinkText: "前往“設置”",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "載入選項的預覽",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "無表達式集合",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "編輯表達式",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML內容將在這裡。",
     // [Auto-translated] "Drop a question from the toolbox here."

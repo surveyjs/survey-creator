@@ -314,6 +314,10 @@ export const thStrings = {
     choicesLoadedFromWebLinkText: "ไปที่การตั้งค่า",
     // "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "ดูตัวอย่างตัวเลือกที่โหลด",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "ไม่มีชุดนิพจน์",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "แก้ไขนิพจน์",
     // "HTML content will be here."
     htmlPlaceHolder: "เนื้อหา HTML จะอยู่ที่นี่",
     // "Drop a question from the toolbox here."

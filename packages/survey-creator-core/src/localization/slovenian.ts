@@ -314,6 +314,10 @@ export var slStrings = {
     choicesLoadedFromWebLinkText: "Pojdi na nastavitve",
     // "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Predogled naloženih možnosti izbire",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Brez množice izrazov",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Izraz za urejanje",
     // "HTML content will be here."
     htmlPlaceHolder: "Tukaj bo HTML vsebina.",
     // "Drop a question from the toolbox here."

@@ -314,6 +314,10 @@ export var skStrings = {
     choicesLoadedFromWebLinkText: "Prejdite na nastavenia",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Ukážka načítaných možností výberu",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Žiadna množina výrazov",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Edit výraz",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "Obsah HTML bude tu.",
     // [Auto-translated] "Drop a question from the toolbox here."

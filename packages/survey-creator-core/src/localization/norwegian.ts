@@ -314,6 +314,10 @@ export var nbStrings = {
     choicesLoadedFromWebLinkText: "Gå til innstillinger",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Forhåndsvisning av alternativer for lastet valg",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Ingen uttrykksmengde",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Redigeringsuttrykk",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML-innhold vil være her.",
     // [Auto-translated] "Drop a question from the toolbox here."

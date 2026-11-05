@@ -314,6 +314,10 @@ export let svStrings = {
     choicesLoadedFromWebLinkText: "Gå till inställningar",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Förhandsgranskning av inlästa alternativalternativ",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Ingen uttrycksmängd",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Redigeringsuttryck",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML-innehåll kommer att finnas här.",
     // [Auto-translated] "Drop a question from the toolbox here."

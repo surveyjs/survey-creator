@@ -314,6 +314,10 @@ export var danishStrings = {
     choicesLoadedFromWebLinkText: "Gå til indstillinger",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Forhåndsvisning af indlæste valgmuligheder",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Intet udtrykssæt",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Redigeringsudtryk",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML-indhold vil være her.",
     // [Auto-translated] "Drop a question from the toolbox here."

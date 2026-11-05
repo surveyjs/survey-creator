@@ -314,6 +314,10 @@ export var fiStrings = {
     choicesLoadedFromWebLinkText: "Siirry asetuksiin",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Ladattujen valintavaihtoehtojen esikatselu",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Ei lausekkeiden joukkoa",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Muokkauslauseke",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML-sisältö on täällä.",
     // [Auto-translated] "Drop a question from the toolbox here."

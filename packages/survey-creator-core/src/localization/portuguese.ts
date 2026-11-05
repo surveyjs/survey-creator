@@ -314,6 +314,10 @@ export var portugueseTranslation = {
     choicesLoadedFromWebLinkText: "Ir para configurações",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Pré-visualização das opções de escolha carregadas",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Sem conjunto de expressões",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Editar expressão",
     // "HTML content will be here."
     htmlPlaceHolder: "O conteúdo HTML ficará aqui.",
     // "Drop a question from the toolbox here."

@@ -314,6 +314,10 @@ export var indonesianStrings = {
     choicesLoadedFromWebLinkText: "Buka pengaturan",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Pratinjau opsi pilihan yang dimuat",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Tidak ada himpunan ekspresi",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Edit ekspresi",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "Konten HTML akan ada di sini.",
     // [Auto-translated] "Drop a question from the toolbox here."

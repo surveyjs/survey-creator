@@ -314,6 +314,10 @@ export var mnStrings = {
     choicesLoadedFromWebLinkText: "Тохиргоо руу явах",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Ачаалагдсан сонголтын урьдчилсан үзүүлэлт",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Илэрхийллийн багц байхгүй",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Илэрхийллийг засварлах",
     // "HTML content will be here."
     htmlPlaceHolder: "HTML агуулга энд байрлана.",
     // "Drop a question from the toolbox here."

@@ -314,6 +314,10 @@ export var jaStrings = {
     choicesLoadedFromWebLinkText: "設定に移動",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "読み込まれた選択肢オプションのプレビュー",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "式セットなし",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "編集式",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTMLコンテンツはここにあります。",
     // [Auto-translated] "Drop a question from the toolbox here."

@@ -314,6 +314,10 @@ export var persianStrings = {
     choicesLoadedFromWebLinkText: "رفتن به تنظیمات",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "پیش نمایش گزینه های انتخاب بار شده",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "بدون مجموعه عبارات",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "ویرایش عبارت",
     // "HTML content will be here."
     htmlPlaceHolder: "محتوای html اینجا خواهد بود",
     // "Drop a question from the toolbox here."
