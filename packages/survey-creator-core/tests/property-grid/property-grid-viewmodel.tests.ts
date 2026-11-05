@@ -14,6 +14,7 @@ import { CreatorTester } from "../creator-tester";
 import { ObjectSelectorModel } from "../../src/property-grid/object-selector";
 import { settings } from "../../src/creator-settings";
 import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
+import { onTestFinished, vi } from "vitest";
 
 test("Generate and update title correctly", () => {
   const creator = new CreatorTester();
@@ -223,6 +224,12 @@ test("Panel stay focused on question change - Bug#7547", () => {
   const question1 = creator.survey.getQuestionByName("question1");
   const question2 = creator.survey.getQuestionByName("question2");
   const propertyGrid = creator["designerPropertyGrid"];
+  // Focusing an editor of a new grid survey waits for a timer: it must not run after the test
+  vi.useFakeTimers();
+  onTestFinished(() => {
+    vi.clearAllTimers();
+    vi.useRealTimers();
+  });
 
   // Select question1 and open the Layout category
   creator.selectElement(question1);

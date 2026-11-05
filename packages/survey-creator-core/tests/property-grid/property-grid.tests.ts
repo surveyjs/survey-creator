@@ -4505,6 +4505,30 @@ test("selectProperty focuses an editor of a new grid survey after the renderers 
     vi.useRealTimers();
   }
 });
+test("A focus waiting for a replaced grid survey does not let the next grid survey focus at once", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] };
+  creator.selectElement(creator.survey.getQuestionByName("q1"));
+  vi.useFakeTimers();
+  try {
+    const propertyGrid = creator.sidebar.getPageById("propertyGrid").componentData.propertyGridModel as PropertyGridModel;
+    propertyGrid.selectProperty("title", true);
+    // Another object is selected before the waiting focus runs: its grid survey replaces the first one
+    creator.selectElement(creator.survey.getQuestionByName("q2"));
+    const log: Array<string> = [];
+    propertyGrid.survey.getAllQuestions().forEach(q => q.focus = () => { log.push(q.name); });
+    vi.runOnlyPendingTimers();
+
+    // The page may still show the replaced grid: the first focus in the new grid survey waits as well
+    propertyGrid.selectProperty("description", true);
+    expect(log).toEqual([]);
+    vi.runOnlyPendingTimers();
+    expect(log).toEqual(["description"]);
+  } finally {
+    vi.clearAllTimers();
+    vi.useRealTimers();
+  }
+});
 test("Choices as function & async function, Bug#7207", () => {
   Serializer.addProperty("dropdown", {
     name: "func",

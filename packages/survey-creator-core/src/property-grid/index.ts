@@ -909,8 +909,7 @@ export class PropertyGridModel {
   // focused at once focuses an input that is about to be removed. So the first focus in a new
   // grid survey waits for one task, by which time the renderers have updated the page.
   private focusQuestion(question: Question): void {
-    clearTimeout(this.focusTimeout);
-    this.focusTimeout = undefined;
+    this.cancelDeferredFocus();
     if (!this.isSurveyJustCreated) {
       question.focus();
       return;
@@ -925,6 +924,10 @@ export class PropertyGridModel {
       this.isSurveyJustCreated = false;
       if (!question.isDisposed) question.focus();
     }, 0);
+  }
+  private cancelDeferredFocus(): void {
+    clearTimeout(this.focusTimeout);
+    this.focusTimeout = undefined;
   }
   private isSurveyJustCreated: boolean;
   private focusTimeout: ReturnType<typeof setTimeout>;
@@ -997,6 +1000,8 @@ export class PropertyGridModel {
     this.surveyValue = this.createSurvey(json, (survey: SurveyModel): void => {
       this.onCreateSurvey(survey);
     });
+    // A focus still waiting for the previous grid survey would mark this one as rendered
+    this.cancelDeferredFocus();
     this.isSurveyJustCreated = true;
     if (this.onNewSurveyCreatedCallback) {
       this.onNewSurveyCreatedCallback();

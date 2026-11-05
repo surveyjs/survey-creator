@@ -5,7 +5,7 @@ import { PageAdorner } from "../src/components/page";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { QuestionToolboxItem } from "../src/toolbox";
 import { DropIndicatorPosition } from "../src/drag-drop-enums";
-import { vi } from "vitest";
+import { onTestFinished, vi } from "vitest";
 export * from "../src/localization/german";
 
 test("Collapse action updates when the adorner is re-attached after expandCollapseButtonVisibility changes", (): any => {
@@ -1990,6 +1990,12 @@ test("Expression question: clicking the banner link opens the sidebar and focuse
     originalSelectProperty(propertyName, focus);
   };
   const adorner = new QuestionAdornerViewModel(creator, q2, <any>undefined);
+  // The click starts the focus timers of the creator and the grid: they must not run after the test
+  vi.useFakeTimers();
+  onTestFinished(() => {
+    vi.clearAllTimers();
+    vi.useRealTimers();
+  });
   adorner.createBannerParams().onClick();
   expect(creator.showSidebar).toBe(true);
   expect(creator.selectedElementName).toBe("q2");
