@@ -24,7 +24,7 @@ export class ToolboxList extends SurveyElementBase<IListProps, any> {
     return this.model;
   }
 
-  render() {
+  renderElement() {
     if (!this.model || !this.model.renderElements) return null;
 
     const items = this.renderItems();

@@ -76,7 +76,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
     });
   }
 
-  render(): React.JSX.Element {
+  renderElement(): React.JSX.Element {
     this.model.item = this.props.item;
     const button = this.model.allowAdd ? (
       this.renderButton(this.model.addAction)

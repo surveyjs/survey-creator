@@ -12,15 +12,18 @@ export class TranslationDropdownQuestionComponent extends CreatorModelElement<
   QuestionAdornerComponentProps,
   any
 > {
-  model: TranslationDropdownViewModel;
+  private modelValue: TranslationDropdownViewModel;
+  public get model(): TranslationDropdownViewModel {
+    return this.modelValue;
+  }
   protected createModel(props: any): void {
-    if (!!this.model) {
-      this.model.dispose();
+    const { question } = props;
+    const translation = props.componentData ? props.componentData.translation : undefined;
+    if (!this.modelValue) {
+      this.modelValue = new TranslationDropdownViewModel(question, translation);
+    } else {
+      this.modelValue.attachToUI(question, translation);
     }
-    this.model = new TranslationDropdownViewModel(
-      props.question as QuestionSelectBase,
-      props.componentData ? props.componentData.translation : undefined
-    );
   }
   protected getUpdatedModelProps(): string[] {
     return ["question", "componentData"];
@@ -28,10 +31,15 @@ export class TranslationDropdownQuestionComponent extends CreatorModelElement<
   protected getStateElement(): Base {
     return this.model;
   }
+  componentDidMount(): void {
+    super.componentDidMount();
+    this.createModel(this.props);
+  }
   componentWillUnmount(): void {
     super.componentWillUnmount();
-    this.model.dispose();
+    this.model?.detachFromUI();
   }
+
   renderElement(): React.JSX.Element {
     const question = this.props.question as QuestionSelectBase;
     const textStyle = (this.props.question as any).textStyle;

@@ -137,7 +137,7 @@ export class TabbedMenuItemComponent extends SurveyElementBase<
     return this.item;
   }
 
-  render(): React.JSX.Element {
+  renderElement(): React.JSX.Element {
     const item = this.item;
     return (attachKey2click(
       <div

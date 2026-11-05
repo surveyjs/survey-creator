@@ -25,7 +25,7 @@ export class CellQuestionDropdownAdornerComponent extends CreatorModelElement<
   protected getStateElement(): Base {
     return this.model;
   }
-  render(): React.JSX.Element {
+  renderElement(): React.JSX.Element {
     const question = this.props.question as QuestionSelectBase;
     const textStyle = (this.props.question as any).textStyle;
     return (

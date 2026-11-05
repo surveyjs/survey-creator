@@ -16,9 +16,6 @@ export class SearchComponent extends SurveyElementBase<ISearchComponentProps, an
 
   constructor(props: any) {
     super(props);
-    this.state = {
-      filterString: this.model.filterString || ""
-    };
   }
 
   renderElement(): React.JSX.Element {
@@ -40,7 +37,7 @@ export class SearchComponent extends SurveyElementBase<ISearchComponentProps, an
         <input type="text" className="svc-search__input"
           aria-label={this.model.filterStringPlaceholder}
           placeholder={this.model.filterStringPlaceholder}
-          value={this.state.filterString}
+          value={this.model.filterString || ""}
           onChange={onChange} tabIndex={this.model.getTabIndex()}></input>
         <div className="svc-search__toolbar">
           <div className="svc-search__toolbar-counter">{(this.model as any).matchCounterText}</div>
