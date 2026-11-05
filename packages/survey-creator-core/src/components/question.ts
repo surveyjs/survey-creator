@@ -25,7 +25,7 @@ import {
   QuestionCompositeModel,
   defaultActionBarCss
 } from "survey-core";
-import { SurveyCreatorModel } from "../creator-base";
+import { SurveyCreatorModel, isContentElement } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
 import { IPortableEvent } from "../utils/events";
@@ -45,6 +45,8 @@ export interface QuestionBannerParams {
   actionText: string;
   onClick: () => void;
 }
+
+const maxExpressionBannerTextLength = 100;
 
 interface IConvertToSelection {
   item?: QuestionToolboxItem;
@@ -199,7 +201,25 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.creator.dragDropSurveyElements.dropTarget = null;
   }
   public get isBannerShowing(): boolean {
-    return this.isUsingCarryForward || this.isUsingRestfull || this.isMessagePanelVisible;
+    return !!(this.isUsingCarryForward || this.isUsingRestfull || this.isMessagePanelVisible || this.isExpressionQuestion);
+  }
+  // An Expression question renders nothing in the designer (its value is calculated at runtime),
+  // so its banner shows the expression instead.
+  private get isExpressionQuestion(): boolean {
+    const el: any = this.surveyElement;
+    return !!el && el.isQuestion && el.isDescendantOf("expression") && !isContentElement(el);
+  }
+  // Stored on the adorner: the renderers re-render on the adorner's property changes, not on the question's.
+  public get expressionBannerText(): string {
+    return this.getPropertyValue("expressionBannerText", undefined, () => this.getExpressionBannerText());
+  }
+  private updateExpressionBannerText(): void {
+    this.setPropertyValue("expressionBannerText", this.getExpressionBannerText());
+  }
+  private getExpressionBannerText(): string {
+    const expression: string = ((<any>this.surveyElement)?.expression || "").replace(/\s+/g, " ").trim();
+    if (expression.length <= maxExpressionBannerTextLength) return expression;
+    return expression.substring(0, maxExpressionBannerTextLength - 3) + "...";
   }
   private get isUsingCarryForward(): boolean {
     return (<any>this.element)?.isUsingCarryForward;
@@ -222,7 +242,29 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return this.element.cssTitle + " svc-element__title--hidden";
   }
   public createBannerParams(): QuestionBannerParams {
-    return this.createCarryForwardParams() || this.createUsingRestfulParams() || this.createCustomMessagePanel();
+    return this.createCarryForwardParams() || this.createUsingRestfulParams() || this.createCustomMessagePanel() || this.createExpressionParams();
+  }
+  private createExpressionParams(): QuestionBannerParams {
+    if (!this.isExpressionQuestion) return null;
+    return {
+      text: this.expressionBannerText || this.creator.getLocString("ed.expressionBannerPlaceholder"),
+      // An empty actionText renders the banner without a link.
+      actionText: this.canEditExpression() ? this.creator.getLocString("ed.expressionBannerLinkText") : "",
+      onClick: () => {
+        if (!this.canEditExpression()) return;
+        if (!this.creator.showSidebar) {
+          this.creator.setShowSidebar(true, true);
+        }
+        this.creator.selectElement(this.surveyElement, "expression");
+      }
+    };
+  }
+  private canEditExpression(): boolean {
+    const creator = this.creator;
+    if (creator.readOnly || !creator.isSidebarVisible) return false;
+    const el = this.surveyElement;
+    const prop = Serializer.findProperty(el.getType(), "expression");
+    return !!prop && prop.isVisible("", el) && creator.onCanShowPropertyCallback(el, prop, undefined, null, null);
   }
   private createCarryForwardParams(): QuestionBannerParams {
     if (!this.isUsingCarryForward) return null;
@@ -304,6 +346,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         surveyElement.unRegisterFunctionOnPropertiesValueChanged(["rows", "elements"], "isEmptyAdorner");
       }
       surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
+      surveyElement.unRegisterFunctionOnPropertyValueChanged("expression", "expressionBannerAdorner");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["inputType", "rateType"], "inputTypeAdorner");
       if (!!surveyElement["setCanShowOptionItemCallback"]) {
         (<any>surveyElement).setCanShowOptionItemCallback(undefined);
@@ -312,6 +355,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       delete (<any>surveyElement.locDescription).placeholder;
     }
     this.resetPropertyValue("isEmptyElement");
+    this.resetPropertyValue("expressionBannerText");
     super.detachElement(this.element);
   }
   protected attachElement(surveyElement: SurveyElement): void {
@@ -344,6 +388,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
           this.updateRequiredAction(requiredAction);
         }
       }, "isRequiredAdorner");
+      if (this.isExpressionQuestion) {
+        surveyElement.registerFunctionOnPropertyValueChanged("expression", () => {
+          this.updateExpressionBannerText();
+        }, "expressionBannerAdorner");
+      }
       (<any>surveyElement.locDescription).placeholder = "pe.descriptionPlaceholder";
     }
   }

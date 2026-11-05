@@ -70,3 +70,51 @@ test.describe(title, () => {
     expect(await page.locator(".sd-element__erbox").count()).toBe(0);
   });
 });
+
+test.describe("Expression question banner", () => {
+  const json = {
+    "elements": [
+      { "type": "text", "name": "price" },
+      { "type": "text", "name": "quantity" },
+      { "type": "expression", "name": "total", "expression": "{price} * {quantity}" }
+    ]
+  };
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto(`${url}`);
+    await page.evaluate((json) => {
+      window["creator"].JSON = json;
+    }, json);
+  });
+
+  test("Edit expression opens the sidebar and focuses the expression editor", async ({ page }) => {
+    await page.evaluate(() => { window["creator"].setShowSidebar(false); });
+    await expect(page.locator(".svc-side-bar__container")).toBeHidden();
+    const banner = page.locator(".svc-question__content--expression .svc-carry-forward-panel");
+    await expect(banner).toContainText("{price} * {quantity}");
+    await banner.getByRole("button", { name: "Edit expression" }).click();
+    await expect(page.locator(".svc-side-bar__container")).toBeVisible();
+    expect(await page.evaluate(() => window["creator"].selectedElement.name)).toBe("total");
+    await expect(page.getByRole("textbox", { name: "Expression", exact: true })).toBeFocused();
+  });
+
+  test("The banner follows the expression edited in the property grid", async ({ page }) => {
+    const banner = page.locator(".svc-question__content--expression .svc-carry-forward-panel");
+    await banner.getByRole("button", { name: "Edit expression" }).click();
+    const editor = page.getByRole("textbox", { name: "Expression", exact: true });
+    await expect(editor).toBeFocused();
+    await editor.fill("{price} + 1");
+    await editor.press("Tab");
+    await expect(banner).toContainText("{price} + 1");
+    await editor.fill("");
+    await editor.press("Tab");
+    await expect(banner).toContainText("No expression set");
+  });
+
+  test("No link in a read-only creator", async ({ page }) => {
+    await page.evaluate(() => { window["creator"].readOnly = true; });
+    const banner = page.locator(".svc-question__content--expression .svc-carry-forward-panel");
+    await expect(banner).toContainText("{price} * {quantity}");
+    await expect(banner.getByRole("button")).toHaveCount(0);
+  });
+});

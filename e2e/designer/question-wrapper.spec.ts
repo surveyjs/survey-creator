@@ -9,6 +9,7 @@ import {
   getListItemByText,
   generalGroupName,
   getVisibleSelectListItemByText,
+  mockChoicesByUrl,
 } from "../helper";
 
 const title = "Question wrapper";
@@ -378,6 +379,14 @@ test.describe(title + " dropdown collapse", () => {
     await expect(page.locator("span").getByText("Copy choices from")).toHaveCount(1);
     await page.locator(".svc-carry-forward-panel").locator(".svc-action-button").getByText("question1").click();
     expect(await getSelectedElementName()).toBe("question1");
+  });
+
+  test("Choices restful banner focuses the web service URL editor of a question that is not selected", async ({ page }) => {
+    await mockChoicesByUrl(page, "**/choices-url-banner*", []);
+    await setJSON(page, { elements: [{ type: "dropdown", name: "q1", choicesByUrl: { url: "http://localhost/choices-url-banner" } }] });
+    await page.locator(".svc-carry-forward-panel").getByRole("button", { name: "Go to settings" }).click();
+    expect(await page.evaluate(() => (window as any).creator.selectedElement.name)).toBe("q1");
+    await expect(page.getByRole("textbox", { name: "Web service URL" })).toBeFocused();
   });
 
   test("No tab stop in dynamic panel", async ({ page }) => {

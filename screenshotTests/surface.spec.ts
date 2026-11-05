@@ -942,6 +942,24 @@ test.describe(title, () => {
     await compareScreenshot(page, rootSelector, "carry-forward-panel-ranking.png");
   });
 
+  test("Check expression question banner", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1920 });
+    await setJSON(page, {
+      showQuestionNumbers: true,
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            { "type": "expression", "name": "question1", "expression": "{price} * {quantity}" },
+            { "type": "expression", "name": "question2" }
+          ]
+        }
+      ]
+    });
+    await compareScreenshot(page, page.locator(".svc-question__adorner").nth(0), "expression-question-banner.png");
+    await compareScreenshot(page, page.locator(".svc-question__adorner").nth(1), "expression-question-banner-empty.png");
+  });
+
   test("Check carry forward panel ranking: selectToRank", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await setJSON(page, {

@@ -2,7 +2,7 @@
   <div class="svc-carry-forward-panel-wrapper">
     <div class="svc-carry-forward-panel">
       <span>{{ model.text }}{{ " " }}</span>
-      <span class="svc-carry-forward-panel__link">
+      <span v-if="model.actionText" class="svc-carry-forward-panel__link">
         <SvComponent
           :is="'svc-action-button'"
           :text="model.actionText"

@@ -167,6 +167,8 @@ export var enStrings = {
     choicesLoadedFromWebText: "Choices are loaded from a web service.",
     choicesLoadedFromWebLinkText: "Go to settings",
     choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options",
+    expressionBannerPlaceholder: "No expression set",
+    expressionBannerLinkText: "Edit expression",
     htmlPlaceHolder: "HTML content will be here.",
     panelPlaceHolder: "Drop a question from the toolbox here.",
     surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",

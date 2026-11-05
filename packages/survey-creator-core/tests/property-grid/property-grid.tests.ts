@@ -4478,6 +4478,33 @@ test("The property is not translated for the custom question, Bug#7202", () => {
 
   Serializer.removeProperty("question", "testProp");
 });
+test("selectProperty focuses an editor of a new grid survey after the renderers update the page", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] };
+  creator.selectElement(creator.survey.getQuestionByName("q1"));
+  // Installed after the selection: the creator's own focus timers stay real
+  vi.useFakeTimers();
+  try {
+    const propertyGrid = creator.sidebar.getPageById("propertyGrid").componentData.propertyGridModel as PropertyGridModel;
+    const log: Array<string> = [];
+    propertyGrid.survey.getAllQuestions().forEach(q => q.focus = () => { log.push(q.name); });
+
+    // The page still shows the grid of the previously selected object
+    propertyGrid.selectProperty("title", true);
+    expect(log).toEqual([]);
+    // A later call replaces the waiting focus
+    propertyGrid.selectProperty("description", true);
+    expect(log).toEqual([]);
+    vi.runOnlyPendingTimers();
+    expect(log).toEqual(["description"]);
+
+    // The same grid survey focuses an editor at once
+    propertyGrid.selectProperty("title", true);
+    expect(log).toEqual(["description", "title"]);
+  } finally {
+    vi.useRealTimers();
+  }
+});
 test("Choices as function & async function, Bug#7207", () => {
   Serializer.addProperty("dropdown", {
     name: "func",
