@@ -1,4 +1,4 @@
-import { QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionTagboxModel, SurveyModel } from "survey-core";
+import { PanelModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionTagboxModel, SurveyModel } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 
 // The Filter Control (survey-library #11890) in the property grid: its own settings and the
@@ -103,5 +103,40 @@ describe("Property grid: the Filter Control presets", () => {
     const grid = new PropertyGridModelTester(survey.getQuestionByName("q1"));
     const matrix = <QuestionMatrixDynamicModel>grid.survey.getQuestionByName("items");
     expect(matrix.addRowText).not.toBe("Add preset");
+  });
+});
+
+describe("Property grid: the Filter Control layout", () => {
+  const panelNames = (grid: PropertyGridModelTester): Array<string> => grid.survey.pages[0].elements.map(el => el.name);
+  const elementNames = (grid: PropertyGridModelTester, tab: string): Array<string> =>
+    (<PanelModel>grid.survey.getPanelByName(tab)).elements.map(el => el.name);
+  test("filter tabs: General with the source, then Filter Settings, then Presets", () => {
+    const survey = new SurveyModel({ elements: [{ type: "filter", name: "f" }] });
+    const grid = new PropertyGridModelTester(survey.getQuestionByName("f"));
+    expect(panelNames(grid).slice(0, 3), "#1").toEqual(["general", "filterSettings", "presets"]);
+    expect(elementNames(grid, "general").indexOf("source") > -1, "#2").toBe(true);
+    expect(elementNames(grid, "filterSettings"), "#3").toEqual(["allowFastMode", "allowAdvancedMode", "showSearch", "searchFields"]);
+    expect(elementNames(grid, "presets"), "#4").toEqual(["items", "defaultItem", "allowMultipleItems", "allowAddItems"]);
+    expect(grid.survey.getPanelByName("filterSettings").title, "#5").toBe("Filter Settings");
+    expect(grid.survey.getPanelByName("presets").title, "#6").toBe("Presets");
+  });
+  test("filterOperators follows allowFiltering", () => {
+    const survey = new SurveyModel({ elements: [{ type: "text", name: "q1" },
+      { type: "matrixdynamic", name: "m", columns: [{ name: "col1", cellType: "text" }] }] });
+    const questionGrid = new PropertyGridModelTester(survey.getQuestionByName("q1"));
+    const dataNames = elementNames(questionGrid, "data");
+    expect(dataNames.indexOf("filterOperators"), "#1").toBe(dataNames.indexOf("allowFiltering") + 1);
+    expect(questionGrid.survey.getQuestionByName("filterOperators").title, "#2").toBe("Filter operators");
+    const columnGrid = new PropertyGridModelTester((<QuestionMatrixDynamicModel>survey.getQuestionByName("m")).columns[0]);
+    const generalNames = elementNames(columnGrid, "general");
+    expect(generalNames.indexOf("filterOperators"), "#3").toBe(generalNames.indexOf("allowFiltering") + 1);
+  });
+  test("no Others tab for the filter and a preset", () => {
+    const survey = new SurveyModel({ elements: [{ type: "filter", name: "f", items: [{ name: "a" }] }] });
+    const grid = new PropertyGridModelTester(survey.getQuestionByName("f"));
+    expect(panelNames(grid).indexOf("others"), "#1").toBe(-1);
+    const row = (<QuestionMatrixDynamicModel>grid.survey.getQuestionByName("items")).visibleRows[0];
+    row.showDetailPanel();
+    expect(row.detailPanel.elements.map(el => el.name).indexOf("others"), "#2").toBe(-1);
   });
 });

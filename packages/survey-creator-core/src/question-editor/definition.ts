@@ -82,6 +82,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "defaultDisplayValue", tab: "data" },
       { name: "clearIfInvisible", tab: "data" },
       { name: "allowFiltering", tab: "data" },
+      { name: "filterOperators", tab: "data" },
       { name: "validators", tab: "validation" },
       { name: "requiredErrorText", tab: "validation" }
     ],
@@ -145,6 +146,20 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   html: {
     properties: ["html"]
+  },
+  filter: {
+    properties: [
+      "source",
+      { name: "allowFastMode", tab: "filterSettings" },
+      { name: "allowAdvancedMode", tab: "filterSettings" },
+      { name: "showSearch", tab: "filterSettings" },
+      { name: "searchFields", tab: "filterSettings" },
+      { name: "items", tab: "presets" },
+      { name: "defaultItem", tab: "presets" },
+      { name: "allowMultipleItems", tab: "presets" },
+      { name: "allowAddItems", tab: "presets" }
+    ],
+    tabs: [{ name: "filterSettings", index: 10 }, { name: "presets", index: 20 }]
   },
   matrixdropdownbase: {
     properties: [
@@ -489,6 +504,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "showInMultipleColumns",
       "allowSort",
       "allowFiltering",
+      "filterOperators",
       "width",
       "minWidth",
       { name: "visibleIf", tab: "logic" },
