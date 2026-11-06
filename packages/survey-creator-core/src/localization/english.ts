@@ -42,6 +42,7 @@ export var enStrings = {
     boolean: "Yes/No (Boolean)",
     expression: "Expression (read-only)",
     signaturepad: "Signature",
+    filter: "Filter",
     buttongroup: "Button Group"
   },
   toolboxCategories: {

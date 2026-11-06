@@ -403,14 +403,14 @@ export class QuestionToolbox
     text: ["text", "comment", "multipletext"],
     containers: ["panel", "paneldynamic"],
     matrix: ["matrix", "matrixdropdown", "matrixdynamic"],
-    misc: ["html", "expression", "image", "signaturepad"]
+    misc: ["html", "expression", "image", "signaturepad", "filter"]
   };
   private _orderedQuestions = [
     "radiogroup", "rating", "slider", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking",
     "text", "comment", "multipletext",
     "panel", "paneldynamic",
     "matrix", "matrixdropdown", "matrixdynamic",
-    "html", "expression", "image", "signaturepad"
+    "html", "expression", "image", "signaturepad", "filter"
   ];
   private _containerElementValue: HTMLElement;
   private _rootElementValue: HTMLElement;

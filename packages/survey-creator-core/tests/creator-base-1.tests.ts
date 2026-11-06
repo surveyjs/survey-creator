@@ -2486,7 +2486,7 @@ test("ConvertTo, show the current question type selected", (): any => {
     undefined
   );
   const items = questionModel.getConvertToTypesActions();
-  expect(items).toHaveLength(22);
+  expect(items).toHaveLength(23);
   expect(items[0].id).toEqual("radiogroup");
   const popup = questionModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
@@ -2516,7 +2516,7 @@ test("ConvertTo, show it for a panel", (): any => {
     undefined
   );
   const items = panelModel.getConvertToTypesActions();
-  expect(items).toHaveLength(22);
+  expect(items).toHaveLength(23);
   const popup = panelModel.getActionById("convertTo").popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   expect(popup).toBeTruthy();
@@ -2559,7 +2559,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels (obsolete)", (): an
   const panel5 = creator.survey.getPanelByName("panel5");
   const panel6 = creator.survey.getQuestionByName("panel6");
   const itemCount = creator.getAvailableToolboxItems().length;
-  expect(itemCount).toBe(22);
+  expect(itemCount).toBe(23);
   const panel6Model = new QuestionAdornerViewModel(creator, panel6, undefined);
   const panel5Model = new QuestionAdornerViewModel(creator, panel5, undefined);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
@@ -2571,7 +2571,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels (obsolete)", (): an
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
-  expect(panel5Model.getConvertToTypesActions()).toHaveLength(22);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(23);
   creator.maxNestedPanels = 2;
   expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(2);
   expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount - 1);
@@ -2664,21 +2664,21 @@ test("ConvertTo & addNewQuestion refresh items", (): any => {
   expect(questionTypeSelectorListModel.actions.length).toBe(0);
 
   convertToAction.popupModel.show();
-  expect(convertToAction.data.actions.length).toBe(22);
+  expect(convertToAction.data.actions.length).toBe(23);
   convertToAction.popupModel.hide();
 
   questionTypeSelectorModel.popupModel.show();
-  expect(questionTypeSelectorListModel.actions.length).toBe(22);
+  expect(questionTypeSelectorListModel.actions.length).toBe(23);
   questionTypeSelectorModel.popupModel.hide();
 
   pageModel.addNewQuestion("text", "q2");
 
   convertToAction.popupModel.show();
-  expect(convertToAction.data.actions.length).toBe(21);
+  expect(convertToAction.data.actions.length).toBe(22);
   convertToAction.popupModel.hide();
 
   questionTypeSelectorModel.popupModel.show();
-  expect(questionTypeSelectorListModel.actions.length).toBe(21);
+  expect(questionTypeSelectorListModel.actions.length).toBe(22);
   questionTypeSelectorModel.popupModel.hide();
 
   const q2AdornerModel = new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("q2"), undefined);
@@ -2724,7 +2724,7 @@ test("ConvertTo separators", (): any => {
     undefined
   );
   const items = questionModel.getConvertToTypesActions();
-  expect(items).toHaveLength(22);
+  expect(items).toHaveLength(23);
   expect(items.filter(i => i.id == "text")[0].needSeparator).toBeTruthy();
   expect(items.filter(i => i.id == "comment")[0].needSeparator).toBeFalsy();
   expect(items.filter(i => i.id == "multipletext")[0].needSeparator).toBeFalsy();
@@ -2739,7 +2739,7 @@ test("ConvertTo separators", (): any => {
     undefined
   );
   const items2 = panelModel.getConvertToTypesActions();
-  expect(items2).toHaveLength(22);
+  expect(items2).toHaveLength(23);
 });
 test("convertInputType, change inputType for a text question", (): any => {
   surveySettings.animationEnabled = false;
