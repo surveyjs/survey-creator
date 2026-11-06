@@ -745,6 +745,13 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   "calculatedvalue@items": {
     properties: ["name", "expression"]
   },
+  // The Filter Control's presets: the row of the matrix, then its detail panel
+  "filter@items": {
+    properties: ["name", "title"]
+  },
+  "filteritem@items": {
+    properties: ["type", "expression", "prompt", "allowEdit", "allowDelete"]
+  },
   paneldynamic: {
     properties: [
       { name: "panelCount", tab: "entries" },
