@@ -2486,7 +2486,7 @@ test("ConvertTo, show the current question type selected", (): any => {
     undefined
   );
   const items = questionModel.getConvertToTypesActions();
-  expect(items).toHaveLength(22);
+  expect(items).toHaveLength(23);
   expect(items[0].id).toEqual("radiogroup");
   const popup = questionModel.getActionById("convertTo").popupModel;
   expect(popup).toBeTruthy();
@@ -2516,7 +2516,7 @@ test("ConvertTo, show it for a panel", (): any => {
     undefined
   );
   const items = panelModel.getConvertToTypesActions();
-  expect(items).toHaveLength(22);
+  expect(items).toHaveLength(23);
   const popup = panelModel.getActionById("convertTo").popupModel;
   const popupViewModel = new PopupDropdownViewModel(popup); // need for popupModel.onShow
   expect(popup).toBeTruthy();
@@ -2559,7 +2559,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels (obsolete)", (): an
   const panel5 = creator.survey.getPanelByName("panel5");
   const panel6 = creator.survey.getQuestionByName("panel6");
   const itemCount = creator.getAvailableToolboxItems().length;
-  expect(itemCount).toBe(22);
+  expect(itemCount).toBe(23);
   const panel6Model = new QuestionAdornerViewModel(creator, panel6, undefined);
   const panel5Model = new QuestionAdornerViewModel(creator, panel5, undefined);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
@@ -2571,7 +2571,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels (obsolete)", (): an
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
-  expect(panel5Model.getConvertToTypesActions()).toHaveLength(22);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(23);
   creator.maxNestedPanels = 2;
   expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(2);
   expect(creator.getAvailableToolboxItems(panel5, false)).toHaveLength(itemCount - 1);
@@ -2664,21 +2664,21 @@ test("ConvertTo & addNewQuestion refresh items", (): any => {
   expect(questionTypeSelectorListModel.actions.length).toBe(0);
 
   convertToAction.popupModel.show();
-  expect(convertToAction.data.actions.length).toBe(22);
+  expect(convertToAction.data.actions.length).toBe(23);
   convertToAction.popupModel.hide();
 
   questionTypeSelectorModel.popupModel.show();
-  expect(questionTypeSelectorListModel.actions.length).toBe(22);
+  expect(questionTypeSelectorListModel.actions.length).toBe(23);
   questionTypeSelectorModel.popupModel.hide();
 
   pageModel.addNewQuestion("text", "q2");
 
   convertToAction.popupModel.show();
-  expect(convertToAction.data.actions.length).toBe(21);
+  expect(convertToAction.data.actions.length).toBe(22);
   convertToAction.popupModel.hide();
 
   questionTypeSelectorModel.popupModel.show();
-  expect(questionTypeSelectorListModel.actions.length).toBe(21);
+  expect(questionTypeSelectorListModel.actions.length).toBe(22);
   questionTypeSelectorModel.popupModel.hide();
 
   const q2AdornerModel = new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("q2"), undefined);
@@ -2724,7 +2724,7 @@ test("ConvertTo separators", (): any => {
     undefined
   );
   const items = questionModel.getConvertToTypesActions();
-  expect(items).toHaveLength(22);
+  expect(items).toHaveLength(23);
   expect(items.filter(i => i.id == "text")[0].needSeparator).toBeTruthy();
   expect(items.filter(i => i.id == "comment")[0].needSeparator).toBeFalsy();
   expect(items.filter(i => i.id == "multipletext")[0].needSeparator).toBeFalsy();
@@ -2739,7 +2739,7 @@ test("ConvertTo separators", (): any => {
     undefined
   );
   const items2 = panelModel.getConvertToTypesActions();
-  expect(items2).toHaveLength(22);
+  expect(items2).toHaveLength(23);
 });
 test("convertInputType, change inputType for a text question", (): any => {
   surveySettings.animationEnabled = false;
@@ -4547,6 +4547,51 @@ test("Update choicesFromQuestion on question name change", (): any => {
   expect(q2.choicesFromQuestion).toEqual("q1");
   q1.name = "q3";
   expect(q2.choicesFromQuestion).toEqual("q3");
+});
+test("Renaming the source matrix rebinds the Filter Control", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "matrixdynamic", name: "m1", columns: [{ name: "a" }] },
+      { type: "text", name: "t1" },
+      { type: "filter", name: "f1", source: "m1" },
+      { type: "filter", name: "f2", source: "t1" }
+    ]
+  };
+  const matrix = creator.survey.getQuestionByName("m1");
+  const f1 = <any>creator.survey.getQuestionByName("f1");
+  const f2 = <any>creator.survey.getQuestionByName("f2");
+  matrix.name = "m2";
+  expect(f1.source, "#1").toBe("m2");
+  creator.survey.getQuestionByName("t1").name = "t2";
+  expect(f2.source, "#2: a text question is no source").toBe("t1");
+  creator.undo();
+  expect(f2.source, "#3: the text question's rename is undone").toBe("t1");
+  creator.undo();
+  expect(matrix.name, "#4").toBe("m1");
+  expect(f1.source, "#5: the undo of the matrix rename brings the source back").toBe("m1");
+});
+test("Renaming the default preset of a Filter Control is one undo step", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "filter", name: "f1", defaultItem: "a", items: [{ name: "a" }, { name: "c" }] }]
+  };
+  const filter = <any>creator.survey.getQuestionByName("f1");
+  filter.allowFastMode = false;
+  filter.items[1].name = "d";
+  expect(filter.defaultItem, "#1: another preset").toBe("a");
+  filter.items[0].name = "b";
+  expect(filter.defaultItem, "#2").toBe("b");
+  creator.undo();
+  expect([filter.items[0].name, filter.defaultItem], "#3").toEqual(["a", "a"]);
+  creator.undo();
+  expect(filter.items[1].name, "#4: the undo before it is the other preset's rename").toBe("c");
+  creator.undo();
+  expect(filter.allowFastMode, "#5").toBe(true);
+  creator.redo();
+  creator.redo();
+  creator.redo();
+  expect([filter.items[0].name, filter.defaultItem], "#6").toEqual(["b", "b"]);
 });
 test("creator.deleteLocaleStrings", () => {
   const creator = new CreatorTester();

@@ -42,6 +42,7 @@ export var enStrings = {
     boolean: "Yes/No (Boolean)",
     expression: "Expression (read-only)",
     signaturepad: "Signature",
+    filter: "Filter",
     buttongroup: "Button Group"
   },
   toolboxCategories: {
@@ -431,6 +432,26 @@ export var enStrings = {
     calculatedvalue: {
       expression: "Expression"
     },
+    filter: {
+      source: "Data source",
+      allowFastMode: "Show filter chips",
+      allowAdvancedMode: "Show the Filters button",
+      showSearch: "Show search",
+      searchFields: "Search in",
+      items: "Presets",
+      defaultItem: "Default preset",
+      allowMultipleItems: "Allow multiple presets",
+      allowAddItems: "Allow respondents to add presets"
+    },
+    filteritem: {
+      name: "Preset name",
+      title: "Preset title",
+      type: "Preset type",
+      expression: "Filter expression",
+      prompt: "AI prompt",
+      allowEdit: "Allow editing",
+      allowDelete: "Allow deleting"
+    },
     sortcriterion: {
       field: "Sort by",
       direction: "Order"
@@ -467,7 +488,8 @@ export var enStrings = {
       visibleIf: "Make the column visible if",
       requiredIf: "Make the column required if",
       showInMultipleColumns: "Each option in a separate column",
-      allowSort: "Allow sorting by this column"
+      allowSort: "Allow sorting by this column",
+      allowFiltering: "Allow filtering by this column"
     },
     matrixcolumn: {
       isExclusive: "Clear others in the same row"
@@ -568,6 +590,7 @@ export var enStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "No links",
     "listIsEmpty@pages": "No pages",
     "listIsEmpty@sortCriteria": "No sort levels",
+    "listIsEmpty@filterItems": "No presets",
     "addNew@choices": "Add choice",
     "addNew@rateValues": "Add rating value",
     "addNew@customLabels": "Add label",
@@ -581,6 +604,7 @@ export var enStrings = {
     "addNew@navigateToUrlOnCondition": "Add link",
     "addNew@pages": "Add page",
     "addNew@sortCriteria": "Add sort level",
+    "addNew@filterItems": "Add preset",
     value: "Value",
     text: "Text",
     imageLink: "Image or video file URL",
@@ -637,6 +661,8 @@ export var enStrings = {
     rowCount: "Initial number of rows",
     pageSize: "Rows per page",
     allowSort: "Allow users to sort rows",
+    allowFiltering: "Allow filtering by this question",
+    filterOperators: "Filter operators",
     maxSortLevel: "Maximum sort levels",
     sortCriteria: "Default sort order",
     showSortBar: "Show sort bar",
@@ -928,6 +954,8 @@ export var enStrings = {
       requiredIf: "Required If",
       rateValues: "Rating Values",
       sliderSettings: "Slider Settings",
+      filterSettings: "Filter Settings",
+      presets: "Presets",
       choicesByUrl: "Choices from a Web Service",
       numbering: "Numbering",
       validators: "Validators",
@@ -1124,6 +1152,10 @@ export var enStrings = {
     sliderType: {
       single: "Single-Value",
       range: "Range"
+    },
+    type: {
+      fields: "Conditions",
+      ai: "AI"
     },
     tooltipVisibility: {
       auto: "Auto",
@@ -1638,6 +1670,14 @@ export var enStrings = {
       readOnlyMode: "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements.",
       progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
     },
+    filter: {
+      source: "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down.",
+      defaultItem: "The preset applied when the survey starts."
+    },
+    filteritem: {
+      expression: "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+    },
+    filterOperators: "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field.",
     matrixdropdowncolumn: {
       name: "A column ID that is not visible to respondents.",
       isUnique: "When enabled for a column, a respondent is required to provide a unique response for each question within this column.",

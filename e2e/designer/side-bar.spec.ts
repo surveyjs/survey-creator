@@ -214,7 +214,7 @@ test.describe(title, () => {
     const toolboxInDesigner = page.locator(".svc-creator-tab .svc-toolbox");
     const toolboxInSidebar = page.locator(".svc-side-bar .svc-toolbox");
     const toolboxButtonSelector = page.locator(".sd-action[title=\"Toolbox\"]");
-    const toolboxItemCount = 22;
+    const toolboxItemCount = 23;
     const itemsInToolboxInDesigner = toolboxInDesigner.locator(".svc-toolbox__item:not(.svc-toolbox__item-subtype):not(.svc-toolbox__item--dots)");
     const visibleItemsInToolboxInDesigner = itemsInToolboxInDesigner.filter({ visible: true });
     const itemsInToolboxInSidebar = toolboxInSidebar.locator(".svc-toolbox__item:not(.svc-toolbox__item-subtype):not(.svc-toolbox__item--dots)");

@@ -2769,9 +2769,21 @@ export class SurveyCreatorModel extends Base
       if (propertyName === "name" && obj.isDescendantOf("selectbase")) {
         this.updateChoicesFromQuestionOnColumnNameChanged(oldValue, obj["name"]);
       }
+      // A question a Filter Control can filter (survey-core finds the source by the same duck typing)
+      if (propertyName === "name" && typeof obj["setControlFilter"] === "function") {
+        this.updateFilterSourceOnQuestionNameChanged(oldValue, obj["name"]);
+      }
     }
     if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
       this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
+    }
+    // A Filter Control's defaultItem names a preset: a renamed default preset stays the default one,
+    // in the same undo step as the rename.
+    if (propertyName === "name" && obj.getType() === "filteritem") {
+      const owner = obj["itemOwner"];
+      if (!!oldValue && !!owner && owner["defaultItem"] === oldValue) {
+        owner["defaultItem"] = obj["name"];
+      }
     }
   }
   private surveyLogicForUpdate: SurveyLogic;
@@ -2836,6 +2848,14 @@ export class SurveyCreatorModel extends Base
     questions.forEach(q => {
       if (q.choicesFromQuestion === oldName) {
         q.choicesFromQuestion = newName;
+      }
+    });
+  }
+  private updateFilterSourceOnQuestionNameChanged(oldName: string, newName: string) {
+    if (!oldName || oldName === newName) return;
+    this.getAllQuestions().forEach(q => {
+      if (q.isDescendantOf("filter") && q["source"] === oldName) {
+        q["source"] = newName;
       }
     });
   }

@@ -81,6 +81,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "useDisplayValuesInDynamicTexts", tab: "data" },
       { name: "defaultDisplayValue", tab: "data" },
       { name: "clearIfInvisible", tab: "data" },
+      { name: "allowFiltering", tab: "data" },
+      { name: "filterOperators", tab: "data" },
       { name: "validators", tab: "validation" },
       { name: "requiredErrorText", tab: "validation" }
     ],
@@ -144,6 +146,20 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   html: {
     properties: ["html"]
+  },
+  filter: {
+    properties: [
+      "source",
+      { name: "allowFastMode", tab: "filterSettings" },
+      { name: "allowAdvancedMode", tab: "filterSettings" },
+      { name: "showSearch", tab: "filterSettings" },
+      { name: "searchFields", tab: "filterSettings" },
+      { name: "items", tab: "presets" },
+      { name: "defaultItem", tab: "presets" },
+      { name: "allowMultipleItems", tab: "presets" },
+      { name: "allowAddItems", tab: "presets" }
+    ],
+    tabs: [{ name: "filterSettings", index: 10 }, { name: "presets", index: 20 }]
   },
   matrixdropdownbase: {
     properties: [
@@ -487,6 +503,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "isUnique",
       "showInMultipleColumns",
       "allowSort",
+      "allowFiltering",
+      "filterOperators",
       "width",
       "minWidth",
       { name: "visibleIf", tab: "logic" },
@@ -742,6 +760,13 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "calculatedvalue@items": {
     properties: ["name", "expression"]
+  },
+  // The Filter Control's presets: the row of the matrix, then its detail panel
+  "filter@items": {
+    properties: ["name", "title"]
+  },
+  "filteritem@items": {
+    properties: ["type", "expression", "prompt", "allowEdit", "allowDelete"]
   },
   paneldynamic: {
     properties: [
