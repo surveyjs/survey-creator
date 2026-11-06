@@ -2174,6 +2174,11 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       let text = editorLocalization.getString("qt." + value);
       if (text && text !== value) return text;
     }
+    // The operators are named the way the logic tab names them.
+    if (prop.name === "filterOperators") {
+      let text = editorLocalization.getString("op." + value);
+      if (text && text !== value) return text;
+    }
     if (value === null) return null;
     return editorLocalization.getPropertyValueInEditor(prop.name, value);
   }
@@ -2201,7 +2206,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     }
     return jsonItem;
   }
-  private setChoices(obj: Base, question: Question, prop: JsonObjectProperty) {
+  protected setChoices(obj: Base, question: Question, prop: JsonObjectProperty) {
     var propChoices = prop.getChoices(obj, (choices: any) => {
       this.setChoicesCore(question, prop, choices);
     });
@@ -2238,6 +2243,30 @@ export class PropertyGridEditorSet extends PropertyGridEditorDropdown {
     json.type = hasTagbox ? "tagbox" : "checkbox";
     json.showSelectAllItem = !hasTagbox;
     return json;
+  }
+}
+// A string[] property that names its choices (the Filter Control's searchFields, filterOperators) is
+// a pick list; one without them (dataList) stays a text area, see PropertyGridEditorStringArray.
+export class PropertyGridEditorStringArrayChoices extends PropertyGridEditorSet {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "string[]" && prop.hasChoices;
+  }
+  // The value is an array: keep the names the new choices still have. The dropdown's own check
+  // compares the whole array to a single choice and would clear it every time.
+  onMasterValueChanged(obj: Base, prop: JsonObjectProperty, question: Question): void {
+    const propChoices = prop.getChoices(obj, (choices: any) => { });
+    if (Array.isArray(propChoices) && propChoices.length > 0) {
+      this.setChoices(obj, question, prop);
+    } else {
+      // setChoices keeps the old list when it is handed an empty one
+      (<QuestionSelectBase>question).choices = [];
+    }
+    const value = question.value;
+    if (!Array.isArray(value)) return;
+    const kept = value.filter((val: any): boolean => !!ItemValue.getItemByValue((<QuestionSelectBase>question).choices, val));
+    if (kept.length !== value.length) {
+      question.value = kept;
+    }
   }
 }
 export class PropertyGridEditorPage extends PropertyGridEditorDropdown {
@@ -2319,6 +2348,17 @@ export class PropertyGridEditorQuestionSelectBase extends PropertyGridEditorQues
     return res;
   }
 }
+// The Filter Control's source: a question that holds records the control can filter - a dynamic or
+// dropdown matrix, a dynamic panel. survey-core resolves it by the same duck typing.
+export class PropertyGridEditorQuestionFilterSource extends PropertyGridEditorQuestionSelectBase {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "question_filtersource";
+  }
+  protected isQuestionFit(question: Question): boolean {
+    const q: any = question;
+    return typeof q.getFilterFields === "function" && typeof q.setControlFilter === "function";
+  }
+}
 export class PropertyGridEditorQuestionCarryForward extends PropertyGridEditorQuestionSelectBase {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "question_carryforward";
@@ -2379,10 +2419,12 @@ PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
 PropertyGridEditorCollection.register(new PropertyGridEditorSet());
 PropertyGridEditorCollection.register(new PropertyGridEditorPage());
 PropertyGridEditorCollection.register(new PropertyGridEditorStringArray());
+PropertyGridEditorCollection.register(new PropertyGridEditorStringArrayChoices());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionCarryForward());
+PropertyGridEditorCollection.register(new PropertyGridEditorQuestionFilterSource());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
 PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 PropertyGridEditorCollection.register(new PropertyGridEditorColorWithAlpha());
