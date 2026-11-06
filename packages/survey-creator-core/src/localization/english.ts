@@ -467,7 +467,8 @@ export var enStrings = {
       visibleIf: "Make the column visible if",
       requiredIf: "Make the column required if",
       showInMultipleColumns: "Each option in a separate column",
-      allowSort: "Allow sorting by this column"
+      allowSort: "Allow sorting by this column",
+      allowFiltering: "Allow filtering by this column"
     },
     matrixcolumn: {
       isExclusive: "Clear others in the same row"
@@ -637,6 +638,7 @@ export var enStrings = {
     rowCount: "Initial number of rows",
     pageSize: "Rows per page",
     allowSort: "Allow users to sort rows",
+    allowFiltering: "Allow filtering by this question",
     maxSortLevel: "Maximum sort levels",
     sortCriteria: "Default sort order",
     showSortBar: "Show sort bar",

@@ -81,6 +81,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "useDisplayValuesInDynamicTexts", tab: "data" },
       { name: "defaultDisplayValue", tab: "data" },
       { name: "clearIfInvisible", tab: "data" },
+      { name: "allowFiltering", tab: "data" },
       { name: "validators", tab: "validation" },
       { name: "requiredErrorText", tab: "validation" }
     ],
@@ -487,6 +488,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "isUnique",
       "showInMultipleColumns",
       "allowSort",
+      "allowFiltering",
       "width",
       "minWidth",
       { name: "visibleIf", tab: "logic" },
