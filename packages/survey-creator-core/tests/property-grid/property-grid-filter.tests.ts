@@ -167,7 +167,8 @@ describe("Designer: a Filter Control's preset chip", () => {
   const createCreator = (): { creator: CreatorTester, filter: any, adorner: QuestionAdornerViewModel } => {
     const creator = new CreatorTester();
     creator.JSON = { elements: [{ type: "text", name: "q1" },
-      { type: "filter", name: "f", items: [{ name: "a", expression: "{x} > 1" }, { name: "b", expression: "{x} > 2" }] }] };
+      { type: "filter", name: "f", fields: [{ name: "x" }],
+        items: [{ name: "a", expression: "{x} > 1" }, { name: "b", expression: "{x} > 2" }] }] };
     const filter = creator.survey.getQuestionByName("f");
     const adorner = new QuestionAdornerViewModel(creator, filter, <any>undefined);
     return { creator: creator, filter: filter, adorner: adorner };
@@ -190,6 +191,26 @@ describe("Designer: a Filter Control's preset chip", () => {
     filter.chipsToolbar.getActionById("sv-filter-item-a").action();
     expect(creator.propertyGrid.currentPage.name, "#1").toBe("presets");
     expect(detailShown(creator), "#2").toEqual([true, false]);
+  });
+  // The chips' clicks stop at the chip (Action.doAction stops the event), so the adorner never sees them
+  test("a badge, Filters and Show More select the filter", () => {
+    const { creator, filter } = createCreator();
+    ["sv-filter-field-x", "sv-filter-filters", "sv-filter-more"].forEach((id: string, index: number): void => {
+      creator.selectElement(creator.survey.getQuestionByName("q1"));
+      filter.chipsToolbar.getActionById(id).action();
+      expect(creator.selectedElement, "#" + index + ": " + id).toBe(filter);
+    });
+  });
+  test("with the property grid hidden, the preset opens on the Presets tab once it shows", () => {
+    const { creator, filter } = createCreator();
+    creator.selectElement(filter);
+    creator.propertyGrid.currentPage = creator.propertyGrid.getPageByName("filterSettings");
+    creator.sidebar.renderedIsVisible = false;
+    filter.chipsToolbar.getActionById("sv-filter-item-b").action();
+    creator.sidebar.renderedIsVisible = true;
+    (<any>creator.sidebar).afterExpand();
+    expect(creator.propertyGrid.currentPage.name, "#1").toBe("presets");
+    expect(detailShown(creator), "#2").toEqual([false, true]);
   });
   test("a detached adorner leaves no callback", () => {
     const { creator, filter, adorner } = createCreator();

@@ -109,14 +109,26 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     creator.selectElement(selEl, undefined, false);
     return true;
   }
-  // The Filter Control's preset: its row in the presets matrix ("items") with the details open. The
-  // click goes on to select(), which keeps the selection: the element is the selected one by then.
-  private selectFilterItem(item: Base): void {
+  // A Filter Control's button clicked in the designer. Its click never reaches select(): an action
+  // stops the event. Any button selects the control; a preset's chip also opens the preset - its row
+  // in the presets matrix ("items") with the details open.
+  private onFilterDesignClick(item?: Base): void {
     if (!this.canSelectElement()) return;
+    if (!item) {
+      this.creator.selectElement(this.surveyElement, undefined, false);
+      return;
+    }
     this.creator.selectElement(this.surveyElement, "items", false);
+    // The sidebar keeps one callback to run once it shows, and this one takes the place of the
+    // grid's own: it goes to the category of "items" itself.
     this.creator.sidebar.executeOnExpand(() => {
-      const matrix = <QuestionMatrixDynamicModel>this.creator.propertyGrid?.getQuestionByName("items");
+      const grid = this.creator.propertyGrid;
+      const matrix = <QuestionMatrixDynamicModel>grid?.getQuestionByName("items");
       if (!matrix) return;
+      const category = this.creator.showOneCategoryInPropertyGrid ? matrix.page?.name : (<any>matrix.parent)?.name;
+      if (!!category) {
+        this.creator.activatePropertyGridCategory(category);
+      }
       const row = matrix.visibleRows.filter(r => r.editingObj === item)[0];
       if (!!row && !row.isDetailPanelShowing) {
         row.showDetailPanel();
@@ -396,9 +408,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         }
         this.creator.onPermissionsChanged.add(this.permissionsChangedHandler);
       }
-      // The Filter Control: a preset's chip clicked in the designer opens the preset on the Presets tab
+      // The Filter Control: its buttons clicked in the designer select it, a preset's chip opens the preset
       if (!!surveyElement["setDesignItemClickCallback"]) {
-        (<any>surveyElement).setDesignItemClickCallback((item: Base): void => { this.selectFilterItem(item); });
+        (<any>surveyElement).setDesignItemClickCallback((item?: Base): void => { this.onFilterDesignClick(item); });
       }
       if (this.surveyElement instanceof QuestionHtmlModel) {
         surveyElement.registerFunctionOnPropertyValueChanged("html", (newValue: any) => {
