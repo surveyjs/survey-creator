@@ -94,7 +94,7 @@ test.describe(title, () => {
 
     const categoriesHeader = page.locator(".svc-toolbox__category-header");
     await expect(categoriesHeader).toHaveCount(3);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(17);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(18);
 
     await categoriesHeader.nth(1).click();
     expect(await getVisibleToolboxToolsCount(page)).toEqual(3);
@@ -117,7 +117,7 @@ test.describe(title, () => {
 
     await page.setViewportSize({ width: 1900, height: 600 });
     await expect(categoriesHeader).toHaveCount(3);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(17);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(18);
 
     await categoriesHeader.nth(1).click();
     expect(await getVisibleToolboxToolsCount(page)).toEqual(3);
@@ -135,7 +135,7 @@ test.describe(title, () => {
 
     const categoriesHeader = page.locator(".svc-toolbox__category-header");
     await expect(categoriesHeader).toHaveCount(3);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(17);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(18);
 
     await page.setViewportSize({ width: 1200, height: 600 });
     await expect(page.locator(".svc-toolbox .sv-dots__item")).toBeVisible();
@@ -158,16 +158,16 @@ test.describe(title, () => {
     expect(await getVisibleToolboxToolsCount(page)).toEqual(0);
 
     await categoriesHeader.nth(0).click();
-    await expect(categories.nth(0).locator(":scope>.svc-toolbox__tool")).toHaveCount(17);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(17);
+    await expect(categories.nth(0).locator(":scope>.svc-toolbox__tool")).toHaveCount(18);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(18);
 
     await categoriesHeader.nth(1).click();
     await expect(categories.nth(1).locator(":scope>.svc-toolbox__tool")).toHaveCount(3);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(20);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(21);
 
     await categoriesHeader.nth(2).click();
     await expect(categories.nth(2).locator(":scope>.svc-toolbox__tool")).toHaveCount(2);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(22);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(23);
   });
 
   test("Categories keepAllCategoriesExpanded property", async ({ page }) => {
@@ -185,7 +185,7 @@ test.describe(title, () => {
 
     await expect(categoriesHeader).toHaveCount(3);
     await expect(collapsibleCategories).toHaveCount(0);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(22);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(23);
 
     await categoriesHeader.nth(0).hover({ force: true });
     await expect(categoriesHeader.nth(0).locator(collapsedCategoriesClassName)).toHaveCount(0);
@@ -194,7 +194,7 @@ test.describe(title, () => {
     await categoriesHeader.nth(0).click();
     await expect(categoriesHeader).toHaveCount(3);
     await expect(collapsibleCategories).toHaveCount(0);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(22);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(23);
 
     await categoriesHeader.nth(1).hover({ force: true });
     await expect(categoriesHeader.nth(1).locator(collapsedCategoriesClassName)).toHaveCount(0);
@@ -203,7 +203,7 @@ test.describe(title, () => {
     await categoriesHeader.nth(1).click();
     await expect(categoriesHeader).toHaveCount(3);
     await expect(collapsibleCategories).toHaveCount(0);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(22);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(23);
 
     await categoriesHeader.nth(2).hover({ force: true });
     await expect(categoriesHeader.nth(2).locator(collapsedCategoriesClassName)).toHaveCount(0);
@@ -212,7 +212,7 @@ test.describe(title, () => {
     await categoriesHeader.nth(2).click();
     await expect(categoriesHeader).toHaveCount(3);
     await expect(collapsibleCategories).toHaveCount(0);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(22);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(23);
   });
 
   test("add question from toolbox popup items", async ({ page }) => {
@@ -282,13 +282,13 @@ test.describe(title, () => {
       ],
     });
     await expect(page.locator(".svc-toolbox .sv-dots__item")).toBeVisible();
-    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(23);
+    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(24);
     expect(await getVisibleToolboxToolsCount(page)).toEqual(11);
 
     await changeToolboxSearchEnabled(page, true);
     await page.setViewportSize({ width: 1920, height: 598 });
     await expect(page.locator(".svc-toolbox .sv-dots__item")).toBeVisible();
-    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(23);
+    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(24);
     // Wait for layout to recalculate visibility after enabling search and viewport change
     await page.waitForTimeout(100);
     expect(await getVisibleToolboxToolsCount(page)).toEqual(10);
@@ -352,7 +352,7 @@ test.describe(title, () => {
     const scrollContainerHeight = await page.locator(".sv-scroll__container").first().evaluate((el) => el.clientHeight);
     expect(scrollContainerHeight).toBeLessThanOrEqual(515);
     expect(await getVisibleToolboxToolsCount(page)).toEqual(11);
-    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(23);
+    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(24);
 
     await page.locator(".svc-question__content--text").click({ position: { x: 200, y: 20 } });
     await page.locator(".sd-action__title").getByText("Save as Toolbox Item").click();
@@ -361,7 +361,7 @@ test.describe(title, () => {
     const scrollContainerHeight2 = await page.locator(".sv-scroll__container").first().evaluate((el) => el.clientHeight);
     expect(scrollContainerHeight2).toBeLessThanOrEqual(515);
     expect(await getVisibleToolboxToolsCount(page)).toEqual(11);
-    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(24);
+    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(25);
   });
 
   test("toolbox subTypes: add items by drag-n-drop", async ({ page }) => {

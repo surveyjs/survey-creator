@@ -149,7 +149,7 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Containers2");
     await page.getByRole("button", { name: "Apply" }).click();
     expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Matrix Questions", "Misc", "Containers2"]);
-    expect((await getToolboxTexts(page)).slice(20, 21)).toEqual(["Dynamic Panel"]);
+    expect((await getToolboxTexts(page)).slice(21, 22)).toEqual(["Dynamic Panel"]);
 
   });
 
@@ -257,8 +257,8 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).blur();
     await page.getByRole("button", { name: "Apply" }).click();
     expect(await items.locator(".sd-table__cell-action--icon-action svg use").filter({ visible: true }).nth(1).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
-    expect(await page.locator(".svc-toolbox__item-title").filter({ visible: true }).nth(22)).toHaveText("Custom 1");
-    expect(await page.locator(".svc-toolbox__item").filter({ visible: true }).nth(22).locator("svg use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
+    expect(await page.locator(".svc-toolbox__item-title").filter({ visible: true }).nth(23)).toHaveText("Custom 1");
+    expect(await page.locator(".svc-toolbox__item").filter({ visible: true }).nth(23).locator("svg use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
 
     await hidden.getByRole("button", { name: "Add new item" }).click();
     await expect(page.getByRole("textbox", { name: "Name", exact: true })).toBeFocused();
