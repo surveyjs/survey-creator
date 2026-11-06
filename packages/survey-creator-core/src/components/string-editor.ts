@@ -1,4 +1,4 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter, toCssClasses } from "survey-core";
+import { ActionContainer, Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter, toCssClasses } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { htmlToMarkdownProbe } from "../rich-text-editor";
 import { editorLocalization } from "../editorLocalization";
@@ -253,16 +253,21 @@ export class StringEditorViewModelBase extends Base {
 
   public getEditorElement: () => HTMLElement;
   public characterCounter = new CharacterCounter();
+  private richTextHandle: { detach(): void };
+  private pendingBlurTarget: HTMLElement;
+  private richFocusOutArmed = false;
 
   @property() errorText: string;
   @property() focused: boolean;
   @property({ defaultValue: true }) editAsText: boolean;
+  @property({ defaultValue: "none" }) richTextEditMode: "none" | "inline" | "block";
+  @property() richTextToolbar: ActionContainer;
   compostionInProgress: boolean;
 
   constructor(private locString: LocalizableString, private creator?: SurveyCreatorModel) {
     super();
     this.locString = locString;
-    this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
+    this.updateEditMode();
     this.addCreatorEvents();
   }
   private onLocaleChanged = () => {
@@ -275,6 +280,7 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public detachFromUI() {
+    this.detachRichTextEditor();
     this.removeCreatorEvents();
     this.connector?.onDoActivate.remove(this.activate);
     this.getEditorElement = undefined;
@@ -313,6 +319,7 @@ export class StringEditorViewModelBase extends Base {
     this.connector = StringEditorConnector.get(locString);
     this.connector.onDoActivate.add(this.activate);
     this.addCreatorEvents();
+    this.updateEditMode();
   }
   public checkConstraints(event: any) {
     if (event.keyCode == 13 && !this.locString.allowLineBreaks) {
@@ -320,7 +327,9 @@ export class StringEditorViewModelBase extends Base {
     }
 
     if (event.ctrlKey || event.metaKey) {
-      if ([89, 90, 66, 73].indexOf(event.keyCode) !== -1) {
+      const formattingKey = event.keyCode === 66 || event.keyCode === 73;
+      // Ctrl/Cmd+B/I belong to the rich editor. Ctrl/Cmd+Z/Y stay with Creator undo.
+      if (event.keyCode === 89 || event.keyCode === 90 || (formattingKey && this.richTextEditMode === "none")) {
         event.stopImmediatePropagation();
         event.preventDefault();
       }
@@ -352,6 +361,9 @@ export class StringEditorViewModelBase extends Base {
     if (this.locString.hasHtml && this.editAsText) {
       event.target.innerText = event.target.textContent = this.locString.calculatedText;
     }
+    if (this.contentEditable) {
+      this.attachRichTextEditor(event.target);
+    }
 
     event.target.parentElement.click();
     event.target.spellcheck = true;
@@ -363,6 +375,14 @@ export class StringEditorViewModelBase extends Base {
     if (!this.creator) return;
     const text = htmlToMarkdownProbe((options) => this.creator.onHtmlToMarkdown.fire(this.creator, options), element, name);
     this.editAsText = text === null;
+  }
+  private updateEditMode(): void {
+    this.checkMarkdownToTextConversion(this.locString?.owner, this.locString?.name);
+    if (!this.creator || !this.creator.isRichStringsEnabled() || this.isInplaceForEditValues) {
+      this.richTextEditMode = "none";
+      return;
+    }
+    this.richTextEditMode = this.creator.richTextEditor.getStringEditMode(this.locString.owner as any, this.locString.name, this.locString);
   }
 
   public onCompositionStart(event: any): void {
@@ -400,6 +420,62 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public onBlur(event: any): void {
+    if (this.richTextHandle) {
+      this.queueRichTextBlur(event);
+      return;
+    }
+    this.applyBlur(event);
+  }
+  // The link dialog moves focus out of the field and applies the link after this blur.
+  // Commit and detach only once focus has left the field, its toolbar and that dialog.
+  private queueRichTextBlur(event: any): void {
+    this.pendingBlurTarget = event?.target;
+    const view = DomWindowHelper.getWindow();
+    if (!view) {
+      this.finishRichTextBlur();
+      return;
+    }
+    view.setTimeout(() => this.finishRichTextBlur(), 0);
+  }
+  private finishRichTextBlur = (): void => {
+    if (this.isDisposed || (!this.richTextHandle && !this.pendingBlurTarget)) return;
+    if (this.isRichTextFocusRetained()) {
+      this.armRichTextFocusOut();
+      return;
+    }
+    this.disarmRichTextFocusOut();
+    const target = this.pendingBlurTarget || this.getEditorElement?.();
+    this.pendingBlurTarget = undefined;
+    this.applyBlur({ target: target });
+  };
+  private isRichTextFocusRetained(): boolean {
+    const active = DomDocumentHelper.getDocument()?.activeElement as HTMLElement;
+    if (!active || typeof active.closest !== "function") return false;
+    const editor = this.getEditorElement?.();
+    if (editor && (active === editor || editor.contains(active))) return true;
+    return !!active.closest(".svc-string-editor__toolbar, .sv-popup, [role='dialog']");
+  }
+  private armRichTextFocusOut(): void {
+    if (this.richFocusOutArmed) return;
+    const doc = DomDocumentHelper.getDocument();
+    if (!doc) return;
+    this.richFocusOutArmed = true;
+    doc.addEventListener("focusout", this.onRichTextFocusOut, true);
+  }
+  private disarmRichTextFocusOut(): void {
+    if (!this.richFocusOutArmed) return;
+    DomDocumentHelper.getDocument()?.removeEventListener("focusout", this.onRichTextFocusOut, true);
+    this.richFocusOutArmed = false;
+  }
+  private onRichTextFocusOut = (): void => {
+    const view = DomWindowHelper.getWindow();
+    if (!view) {
+      this.finishRichTextBlur();
+      return;
+    }
+    view.setTimeout(() => this.finishRichTextBlur(), 0);
+  };
+  private applyBlur(event: any): void {
     const window = DomWindowHelper.getWindow();
     if (this.blurredByEscape) {
       this.blurredByEscape = false;
@@ -410,6 +486,7 @@ export class StringEditorViewModelBase extends Base {
       }
       this.errorText = null;
       this.focused = false;
+      this.detachRichTextEditor();
       window?.getSelection().removeAllRanges();
       return;
     }
@@ -437,6 +514,7 @@ export class StringEditorViewModelBase extends Base {
       this.locString.strChanged();
     }
     this.focused = false;
+    this.detachRichTextEditor();
     window?.getSelection().removeAllRanges();
   }
 
@@ -462,7 +540,8 @@ export class StringEditorViewModelBase extends Base {
       mdText = options.text;
     }
     let clearedText;
-    if (mdText) {
+    // "" is a saved empty string. null means the event has no converter.
+    if (mdText != null) {
       clearedText = mdText;
     } else {
       clearedText = this.locString.hasHtml && !this.editAsText ? html : text;
@@ -554,12 +633,8 @@ export class StringEditorViewModelBase extends Base {
     }
   }
   public onKeyDown(event: KeyboardEvent): boolean {
-    if (event.keyCode === 13 && !event.shiftKey) {
-      this.blurEditor();
-      if (!event.ctrlKey && !event.metaKey) {
-        this.connector.onEditComplete.fire(this, {});
-      }
-      this.done(event);
+    if (event.keyCode === 13 && !event.shiftKey && !this.shouldDelegateEnterToRichText(event)) {
+      this.commitFromEnter(event);
     }
     if (event.keyCode === 27) {
       this.blurredByEscape = true;
@@ -572,6 +647,53 @@ export class StringEditorViewModelBase extends Base {
     }
     this.checkConstraints(event);
     return true;
+  }
+  private commitFromEnter(event: KeyboardEvent): void {
+    this.blurEditor();
+    if (!event.ctrlKey && !event.metaKey && this.connector) {
+      this.connector.onEditComplete.fire(this, {});
+    }
+    this.done(event);
+  }
+  // Enter commits, except inside a list item in block mode: that key creates an item or leaves the list.
+  private shouldDelegateEnterToRichText(event: KeyboardEvent): boolean {
+    return this.richTextEditMode === "block" && this.isSelectionInsideListItem(event.target as HTMLElement);
+  }
+  private isSelectionInsideListItem(element: HTMLElement): boolean {
+    if (!element) return false;
+    const selection = element.ownerDocument?.getSelection?.();
+    if (!selection || selection.rangeCount === 0) return false;
+    let node: Node = selection.getRangeAt(0).startContainer;
+    if (node && node.nodeType !== 1) node = node.parentNode;
+    while (node && node !== element) {
+      if ((node as HTMLElement).tagName === "LI") return true;
+      node = node.parentNode;
+    }
+    return false;
+  }
+  private onRichTextKeyDown = (event: KeyboardEvent): void => {
+    if (event.keyCode !== 13 || event.shiftKey || event.ctrlKey || event.metaKey) return;
+    if (this.shouldDelegateEnterToRichText(event)) return;
+    event.stopImmediatePropagation();
+    this.commitFromEnter(event);
+  };
+  private attachRichTextEditor(element: HTMLElement): void {
+    this.detachRichTextEditor();
+    if (!this.creator || this.richTextEditMode === "none" || !element) return;
+    const handle = this.creator.richTextEditor.attachEditor(element, { mode: this.richTextEditMode as "inline" | "block" });
+    this.richTextHandle = handle;
+    this.richTextToolbar = handle.toolbar;
+    if (this.richTextEditMode === "block") {
+      element.addEventListener("keydown", this.onRichTextKeyDown, true);
+    }
+  }
+  private detachRichTextEditor(): void {
+    this.disarmRichTextFocusOut();
+    const element = this.getEditorElement?.();
+    if (element) element.removeEventListener("keydown", this.onRichTextKeyDown, true);
+    if (this.richTextHandle) this.richTextHandle.detach();
+    this.richTextHandle = undefined;
+    this.richTextToolbar = undefined;
   }
   public onKeyUp(event: KeyboardEvent): boolean {
     const rootNode = (event.target as HTMLElement).getRootNode() as Document | ShadowRoot;

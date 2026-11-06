@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { SurveyModel } from "survey-core";
+import { ActionContainer, QuestionRadiogroupModel, SurveyModel } from "survey-core";
 import { StringEditorViewModelBase } from "../src/components/string-editor";
 import { ICreatorRichTextEditor } from "../src/rich-text-editor";
 import { CreatorTester } from "./creator-tester";
@@ -35,6 +35,141 @@ const surveyJson = {
     { type: "text", name: "plain", title: "Plain title" }
   ]
 };
+
+function enableRich(creator: CreatorTester, getStringEditMode?: ICreatorRichTextEditor["getStringEditMode"]): { attached: Array<any> } {
+  const attached: Array<any> = [];
+  creator.registerRichTextEditor({
+    getStringEditMode: getStringEditMode || ((_owner, _name, locStr) => locStr.allowLineBreaks ? "block" : "inline"),
+    attachEditor: (element, options) => {
+      const handle = { element: element, options: options, toolbar: new ActionContainer(), detach: (): void => { handle.detached = true; }, detached: false };
+      attached.push(handle);
+      return handle;
+    }
+  });
+  creator.onHtmlToMarkdown.add((_sender, options) => { options.text = options.html; });
+  return { attached };
+}
+
+function keyEvent(keyCode: number, target?: HTMLElement): any {
+  return {
+    keyCode: keyCode,
+    target: target,
+    ctrlKey: false,
+    metaKey: false,
+    shiftKey: false,
+    preventDefault: (): void => { return; },
+    stopImmediatePropagation: (): void => { return; }
+  };
+}
+
+describe("rich text string editor", () => {
+  test("mode is none until an editor and an onHtmlToMarkdown handler are both present", () => {
+    const creator = new CreatorTester();
+    creator.JSON = surveyJson;
+    const title = creator.survey.getQuestionByName("q").locTitle;
+    expect(new StringEditorViewModelBase(title, creator).richTextEditMode).toBe("none");
+    creator.registerRichTextEditor(fakeEditor());
+    expect(new StringEditorViewModelBase(title, creator).richTextEditMode).toBe("none");
+  });
+
+  test("resolves inline, block and none, including plain strings, in-place values and the translation surface", () => {
+    const creator = new CreatorTester();
+    enableRich(creator);
+    creator.JSON = {
+      elements: [
+        { type: "text", name: "q", title: "Plain title", description: "A description" },
+        { type: "radiogroup", name: "r", choices: ["A"] }
+      ]
+    };
+    const question = creator.survey.getQuestionByName("q");
+    const titleEditor = new StringEditorViewModelBase(question.locTitle, creator);
+    expect(question.locTitle.hasHtml).toBeFalsy();
+    expect(question.locTitle.allowLineBreaks).toBe(true);
+    expect(titleEditor.richTextEditMode).toBe("block");
+    expect(new StringEditorViewModelBase(question.locDescription, creator).richTextEditMode).toBe("block");
+    expect(creator.survey.locTitle.allowLineBreaks).toBe(false);
+    expect(new StringEditorViewModelBase(creator.survey.locTitle, creator).richTextEditMode).toBe("inline");
+
+    creator.inplaceEditChoiceValues = true;
+    const choice = (<QuestionRadiogroupModel>creator.survey.getQuestionByName("r")).choices[0];
+    expect(new StringEditorViewModelBase(choice.locText, creator).richTextEditMode).toBe("none");
+    (creator.survey as any).isTranslationSurface = true;
+    expect(new StringEditorViewModelBase(choice.locText, creator).richTextEditMode).toBe("inline");
+  });
+
+  test("saves innerHTML through onHtmlToMarkdown, including empty content", () => {
+    const creator = new CreatorTester();
+    creator.registerRichTextEditor(fakeEditor());
+    creator.onHtmlToMarkdown.add((_sender, options) => { options.text = options.html === "<br>" ? "" : "md:" + options.html; });
+    creator.JSON = { elements: [{ type: "text", name: "q", title: "Hello" }] };
+    const loc = creator.survey.getQuestionByName("q").locTitle;
+    const editor = new StringEditorViewModelBase(loc, creator);
+    const target = document.createElement("div");
+    target.innerHTML = "<strong>a</strong>";
+    editor.onBlur({ target: target });
+    expect(loc.text).toBe("md:<strong>a</strong>");
+    target.innerHTML = "<br>";
+    editor.onBlur({ target: target });
+    expect(loc.text).toBe("");
+  });
+
+  test("allows Ctrl+B/I only in rich mode and still blocks Ctrl+Z", () => {
+    const plain = new CreatorTester();
+    plain.JSON = surveyJson;
+    const plainEditor = new StringEditorViewModelBase(plain.survey.getQuestionByName("q").locTitle, plain);
+    let stopped = false;
+    const track = (): void => { stopped = true; };
+    plainEditor.checkConstraints({ keyCode: 66, ctrlKey: true, stopImmediatePropagation: track, preventDefault: track });
+    expect(stopped).toBe(true);
+
+    const creator = new CreatorTester();
+    enableRich(creator);
+    creator.JSON = surveyJson;
+    const editor = new StringEditorViewModelBase(creator.survey.getQuestionByName("q").locTitle, creator);
+    stopped = false;
+    editor.checkConstraints({ keyCode: 66, ctrlKey: true, stopImmediatePropagation: () => { stopped = true; }, preventDefault: () => { stopped = true; } });
+    expect(stopped).toBe(false);
+    editor.checkConstraints({ keyCode: 73, metaKey: true, stopImmediatePropagation: () => { stopped = true; }, preventDefault: () => { stopped = true; } });
+    expect(stopped).toBe(false);
+    editor.checkConstraints({ keyCode: 90, ctrlKey: true, stopImmediatePropagation: () => { stopped = true; }, preventDefault: () => { stopped = true; } });
+    expect(stopped).toBe(true);
+  });
+
+  test("attaches the toolbar on focus and lets Enter inside a list item stay in the editor", async () => {
+    const creator = new CreatorTester();
+    const { attached } = enableRich(creator);
+    creator.JSON = surveyJson;
+    const question = creator.survey.getQuestionByName("q");
+    const editor = new StringEditorViewModelBase(question.locDescription, creator);
+    const element = document.createElement("div");
+    element.innerHTML = "<ul><li>item</li></ul>";
+    document.body.appendChild(element);
+    editor.getEditorElement = () => element;
+    let blurred = false;
+    editor.blurEditor = () => { blurred = true; };
+    editor.onFocus({ target: element });
+    expect(attached[0].options.mode).toBe("block");
+    expect(editor.richTextToolbar).toBe(attached[0].toolbar);
+
+    const selection = document.getSelection();
+    const range = document.createRange();
+    range.selectNodeContents(element.querySelector("li"));
+    selection.removeAllRanges();
+    selection.addRange(range);
+    editor.onKeyDown(keyEvent(13, element));
+    expect(blurred).toBe(false);
+
+    selection.removeAllRanges();
+    editor.onKeyDown(keyEvent(13, element));
+    expect(blurred).toBe(true);
+
+    editor.onBlur({ target: element });
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(attached[0].detached).toBe(true);
+    expect(editor.richTextToolbar).toBeFalsy();
+    element.remove();
+  });
+});
 
 describe("rich text registration", () => {
   test("registerRichTextEditor stores and clears the editor", () => {

@@ -1,12 +1,12 @@
 import * as React from "react";
 import { LocalizableString, Serializer, JsonObjectProperty, Base } from "survey-core";
-import { CharacterCounterComponent, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
+import { CharacterCounterComponent, ReactElementFactory, SurveyActionBar, SurveyElementBase, SvgIcon } from "survey-react-ui";
 import { SurveyCreatorModel, StringEditorViewModelBase, editableStringRendererName } from "survey-creator-core";
 import { CreatorModelElement } from "./ModelElement";
 
 export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   private baseModel: StringEditorViewModelBase;
-  private svStringEditorRef: React.RefObject<HTMLDivElement>;
+  private svStringEditorRef: React.RefObject<HTMLElement>;
   constructor(props: any) {
     super(props);
     this.state = { changed: 0 };
@@ -133,15 +133,16 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     if (!this.locString) {
       return null;
     }
+    const EditorTag = this.baseModel.richTextEditMode === "block" ? "div" : "span";
     let control = null;
     if (this.locString.hasHtml) {
       if (this.htmlValue.__html !== this.locString.renderedHtml) {
         this.htmlValue = { __html: this.locString.renderedHtml };
       }
       control = (
-        <span
+        <EditorTag
           role="textbox"
-          ref={this.svStringEditorRef}
+          ref={this.svStringEditorRef as React.Ref<HTMLDivElement>}
           className="sv-string-editor sv-string-editor--html"
           contentEditable={this.contentEditable}
           spellCheck={false}
@@ -149,20 +150,25 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           aria-label={this.placeholder || "content editable"}
           suppressContentEditableWarning={true}
           tabIndex={this.baseModel.tabIndex}
-          // style={this.style}
           dangerouslySetInnerHTML={this.htmlValue}
           onBlur={this.onBlur}
+          onBeforeInput={this.onBeforeInput}
+          onInput={this.onInput}
+          onPaste={this.onPaste}
+          onCompositionStart={this.onCompositionStart}
+          onCompositionEnd={this.onCompositionEnd}
           onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
+          onKeyUp={this.onKeyUp}
           onMouseUp={this.onMouseUp}
           onClick={this.edit}
-        ></span>
+        ></EditorTag>
       );
     } else {
       control = (
-        <span
+        <EditorTag
           role="textbox"
-          ref={this.svStringEditorRef}
+          ref={this.svStringEditorRef as React.Ref<HTMLDivElement>}
           className="sv-string-editor"
           contentEditable={this.contentEditable}
           tabIndex={this.baseModel.tabIndex}
@@ -170,7 +176,6 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           aria-placeholder={this.placeholder}
           aria-label={this.placeholder || "content editable"}
           suppressContentEditableWarning={true}
-          // style={this.style}
           key={this.locString.renderedHtml}
           onBlur={this.onBlur}
           onBeforeInput={this.onBeforeInput}
@@ -183,7 +188,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           onKeyUp={this.onKeyUp}
           onMouseUp={this.onMouseUp}
           onClick={this.edit}
-        >{this.locString.renderedHtml}</span>
+        >{this.locString.renderedHtml}</EditorTag>
       );
     }
     const counter = this.baseModel.showCharacterCounter ? (<CharacterCounterComponent counter={this.baseModel.characterCounter} remainingCharacterCounter={this.baseModel.getCharacterCounterClass}></CharacterCounterComponent>) : null;
@@ -207,6 +212,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
             </div>
             {counter}
           </span>
+          {this.baseModel.richTextToolbar ? <div className="svc-string-editor__toolbar" role="toolbar"><SurveyActionBar model={this.baseModel.richTextToolbar}></SurveyActionBar></div> : null}
         </span>
         {this.errorText ? <span className="svc-string-editor__error">{this.errorText}</span> : ""}
       </span>

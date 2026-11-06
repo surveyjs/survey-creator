@@ -76,18 +76,23 @@ function createCreator() {
   });
   var registerEditor = pluginLoaded && document.getElementById("register-editor").checked;
   var htmlHandler = pluginLoaded && document.getElementById("html-handler").checked;
+  var passThrough = pluginLoaded && document.getElementById("pass-through").checked;
   if (registerEditor) {
     creator.registerRichTextEditor(SurveyRichText.RichText);
   }
   if (pluginLoaded) {
     creator.onSurveyInstanceCreated.add(function (_, options) {
       if (richStringAreas.indexOf(options.area) > -1) {
-        options.survey.onTextMarkdown.add(SurveyRichText.RichText.textMarkdownHandler);
+        options.survey.onTextMarkdown.add(passThrough
+          ? function (_sender, markdownOptions) { markdownOptions.html = markdownOptions.text; }
+          : SurveyRichText.RichText.textMarkdownHandler);
       }
     });
   }
   if (htmlHandler) {
-    creator.onHtmlToMarkdown.add(SurveyRichText.RichText.htmlToMarkdownHandler);
+    creator.onHtmlToMarkdown.add(passThrough
+      ? function (_sender, markdownOptions) { markdownOptions.text = markdownOptions.html; }
+      : SurveyRichText.RichText.htmlToMarkdownHandler);
   }
   creator.JSON = JSON.parse(demoSurveyJson);
   window.creatorModel = creator;
@@ -102,4 +107,5 @@ function createCreator() {
 
 document.getElementById("register-editor").addEventListener("change", createCreator);
 document.getElementById("html-handler").addEventListener("change", createCreator);
+document.getElementById("pass-through").addEventListener("change", createCreator);
 createCreator();

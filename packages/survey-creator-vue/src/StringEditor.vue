@@ -8,7 +8,8 @@
         class="svc-string-editor__border svc-string-editor__border--focus"
       ></div>
       <span class="svc-string-editor__input">
-        <span
+        <component
+          :is="editorTag"
           role="textbox"
           v-if="!locString.hasHtml"
           class="sv-string-editor"
@@ -30,14 +31,18 @@
           :contenteditable="contentEditable"
           :tabindex="baseModel.tabIndex"
           ref="root"
-        ></span>
-        <span
+        ></component>
+        <component
+          :is="editorTag"
           role="textbox"
           v-if="locString.hasHtml"
           class="sv-string-editor sv-string-editor--html"
           spellcheck="false"
           @focus="onFocus"
+          @paste="onPaste"
           @blur="onBlur"
+          @input="baseModel?.onInput"
+          @beforeinput="baseModel?.onBeforeInput"
           @keydown="baseModel?.onKeyDown"
           @keyup="baseModel?.onKeyUp"
           @compositionstart="baseModel?.onCompositionStart"
@@ -50,7 +55,7 @@
           :tabindex="baseModel.tabIndex"
           v-html="renderedHtml"
           ref="root"
-        ></span>
+        ></component>
         <SvComponent
           :is="'sv-character-counter'"
           v-if="showCharacterCounter"
@@ -58,6 +63,9 @@
           :remainingCharacterCounter="getCharacterCounterClass"
         ></SvComponent>
       </span>
+      <div v-if="toolbar" class="svc-string-editor__toolbar" role="toolbar">
+        <SvComponent :is="'sv-action-bar'" :model="toolbar"></SvComponent>
+      </div>
     </span>
     <span v-if="errorText" class="svc-string-editor__error">{{
       errorText
@@ -118,6 +126,8 @@ const className = computed(() => {
 });
 const placeholder = computed(() => baseModel.value?.placeholder);
 const contentEditable = computed(() => baseModel.value?.contentEditable);
+const editorTag = computed(() => baseModel.value?.richTextEditMode === "block" ? "div" : "span");
+const toolbar = computed(() => baseModel.value?.richTextToolbar);
 const characterCounter = computed(() => baseModel.value?.characterCounter);
 const showCharacterCounter = computed(
   () => baseModel.value?.showCharacterCounter

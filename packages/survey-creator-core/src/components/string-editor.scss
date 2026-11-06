@@ -199,6 +199,10 @@
       left: calc(var(--sjs2-base-unit-spacing) * -0.7);
       right: calc(var(--sjs2-base-unit-spacing) * -0.7);
     }
+
+    .svc-string-editor__toolbar {
+      inset-inline-start: calc(var(--sjs2-base-unit-spacing) * -0.7 - var(--sjs2-border-width-x200));
+    }
   }
 }
 
@@ -216,6 +220,29 @@
 // .sv-title {
 //   position: relative;
 // }
+.svc-string-editor__toolbar {
+  display: none;
+  position: absolute;
+  z-index: 30;
+  // Outer edge of the focus ring: border inset plus the box-shadow spread.
+  inset-inline-start: calc(var(--sjs2-spacing-negative-x100) - var(--sjs2-border-width-x200));
+  top: calc(100% - var(--sjs2-spacing-negative-x050) + var(--sjs2-border-width-x200) + 2px);
+  box-sizing: border-box;
+  padding: var(--sjs2-spacing-x050);
+  border-radius: var(--sjs2-radius-component-drop);
+  border: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+  background: var(--sjs2-color-utility-sheet);
+  box-shadow: var(--sjs2-border-effect-floating-default);
+}
+
+.svc-string-editor:focus-within .svc-string-editor__content {
+  z-index: 20;
+}
+
+.svc-string-editor:focus-within .svc-string-editor__toolbar {
+  display: block;
+}
+
 .svc-string-editor--multiline .sv-string-editor {
   white-space: pre-wrap;
 }
