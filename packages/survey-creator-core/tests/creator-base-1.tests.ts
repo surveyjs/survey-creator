@@ -4566,9 +4566,32 @@ test("Renaming the source matrix rebinds the Filter Control", (): any => {
   creator.survey.getQuestionByName("t1").name = "t2";
   expect(f2.source, "#2: a text question is no source").toBe("t1");
   creator.undo();
+  expect(f2.source, "#3: the text question's rename is undone").toBe("t1");
   creator.undo();
-  expect(matrix.name, "#3").toBe("m1");
-  expect(f1.source, "#4: one undo of the rename brings the source back").toBe("m1");
+  expect(matrix.name, "#4").toBe("m1");
+  expect(f1.source, "#5: the undo of the matrix rename brings the source back").toBe("m1");
+});
+test("Renaming the default preset of a Filter Control is one undo step", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "filter", name: "f1", defaultItem: "a", items: [{ name: "a" }, { name: "c" }] }]
+  };
+  const filter = <any>creator.survey.getQuestionByName("f1");
+  filter.allowFastMode = false;
+  filter.items[1].name = "d";
+  expect(filter.defaultItem, "#1: another preset").toBe("a");
+  filter.items[0].name = "b";
+  expect(filter.defaultItem, "#2").toBe("b");
+  creator.undo();
+  expect([filter.items[0].name, filter.defaultItem], "#3").toEqual(["a", "a"]);
+  creator.undo();
+  expect(filter.items[1].name, "#4: the undo before it is the other preset's rename").toBe("c");
+  creator.undo();
+  expect(filter.allowFastMode, "#5").toBe(true);
+  creator.redo();
+  creator.redo();
+  creator.redo();
+  expect([filter.items[0].name, filter.defaultItem], "#6").toEqual(["b", "b"]);
 });
 test("creator.deleteLocaleStrings", () => {
   const creator = new CreatorTester();

@@ -2777,6 +2777,14 @@ export class SurveyCreatorModel extends Base
     if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
       this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
     }
+    // A Filter Control's defaultItem names a preset: a renamed default preset stays the default one,
+    // in the same undo step as the rename.
+    if (propertyName === "name" && obj.getType() === "filteritem") {
+      const owner = obj["itemOwner"];
+      if (!!oldValue && !!owner && owner["defaultItem"] === oldValue) {
+        owner["defaultItem"] = obj["name"];
+      }
+    }
   }
   private surveyLogicForUpdate: SurveyLogic;
   private surveyLogicRenaming: boolean;

@@ -1,5 +1,6 @@
 import { PanelModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionTagboxModel, SurveyModel } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
+import { CreatorTester } from "../creator-tester";
 
 // The Filter Control (survey-library #11890) in the property grid: its own settings and the
 // operators a question or a column offers as a filter field.
@@ -36,6 +37,21 @@ describe("Property grid: the Filter Control", () => {
     expect(Array.from(filter.searchFields), "#6: age is not in the new source, country stays").toEqual(["country"]);
     editor.value = ["country", "city"];
     expect(Array.from(filter.searchFields), "#7").toEqual(["country", "city"]);
+  });
+  test("search fields keep a nested path when search is turned off and on", () => {
+    const survey = new SurveyModel({ elements: [
+      { type: "filter", name: "f", source: "p", showSearch: true, searchFields: ["work.city"] },
+      { type: "paneldynamic", name: "p", templateElements: [
+        { type: "multipletext", name: "home", items: [{ name: "city" }] },
+        { type: "multipletext", name: "work", items: [{ name: "city" }] }] }] });
+    const filter = <any>survey.getQuestionByName("f");
+    const propertyGrid = new PropertyGridModelTester(filter);
+    const showSearch = propertyGrid.survey.getQuestionByName("showSearch");
+    showSearch.value = false;
+    showSearch.value = true;
+    expect(Array.from(filter.searchFields), "#1").toEqual(["work.city"]);
+    const editor = <QuestionTagboxModel>propertyGrid.survey.getQuestionByName("searchFields");
+    expect(editor.choices.map(item => item.value), "#2: two tags, not two 'city'").toEqual(["home.city", "work.city"]);
   });
   test("filter operators are a tag box with operator names", () => {
     const survey = new SurveyModel({ elements: [{ type: "text", name: "q1" }] });
@@ -81,12 +97,17 @@ describe("Property grid: the Filter Control presets", () => {
     expect(filter.items.length, "#1").toBe(1);
     expect(filter.items[0].name, "#2").toBe("preset1");
   });
+  // In the Creator: it moves defaultItem along with the rename (creator-base, one undo step)
   test("renaming a preset keeps it the default one", () => {
-    const { filter, grid, matrix } = createGrid({ items: [{ name: "a" }, { name: "c" }], defaultItem: "a" });
+    const creator = new CreatorTester();
+    creator.JSON = { elements: [{ type: "filter", name: "f", items: [{ name: "a" }, { name: "c" }], defaultItem: "a" }] };
+    const filter = <any>creator.survey.getQuestionByName("f");
+    creator.selectElement(filter);
+    const matrix = <QuestionMatrixDynamicModel>creator.propertyGrid.getQuestionByName("items");
     matrix.visibleRows[0].cells[0].question.value = "b";
     expect(filter.items[0].name, "#1").toBe("b");
     expect(filter.defaultItem, "#2").toBe("b");
-    const defaultItem = <QuestionDropdownModel>grid.survey.getQuestionByName("defaultItem");
+    const defaultItem = <QuestionDropdownModel>creator.propertyGrid.getQuestionByName("defaultItem");
     expect(defaultItem.choices.map(item => item.value), "#3").toEqual(["b", "c"]);
     expect(defaultItem.value, "#4").toBe("b");
   });
