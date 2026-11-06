@@ -157,7 +157,8 @@ export class QuestionColorModel extends QuestionTextModel {
     popupModel.setWidthByTarget = true;
     popupModel.positionMode = "fixed";
     popupModel.getTargetCallback = () => this.contentElement;
-    popupModel.getWidthTargetCallback = (container: HTMLElement) => this.getPopupWidthTarget(container);
+    // survey-core typings no longer declare this callback; the color popup still assigns it.
+    (popupModel as any).getWidthTargetCallback = (container: HTMLElement) => this.getPopupWidthTarget(container);
     listModel.isItemSelected = (itemValue: ItemValue) => itemValue.value == this.value;
     return action;
   }

@@ -52,6 +52,7 @@ import { SidebarModel } from "./components/side-bar/side-bar-model";
 import { ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
+import { htmlToMarkdownProbe, ICreatorRichTextEditor } from "./rich-text-editor";
 import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
 import { DragDropSurveyElements } from "./dragdrop-survey-elements";
 import { PageAdorner } from "./components/page";
@@ -749,6 +750,18 @@ export class SurveyCreatorModel extends Base
    */
   public onGetObjectDisplayName: EventBase<SurveyCreatorModel, ElementGetDisplayNameEvent> = this.onElementGetDisplayName;
   public onHtmlToMarkdown: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+  private richTextEditorValue: ICreatorRichTextEditor;
+  // The rich toolbar is enabled only when an editor is registered and onHtmlToMarkdown sets options.text.
+  // Rendering of survey strings stays on the customer's onTextMarkdown handlers.
+  public registerRichTextEditor(editor: ICreatorRichTextEditor | undefined): void {
+    this.richTextEditorValue = editor;
+  }
+  public get richTextEditor(): ICreatorRichTextEditor {
+    return this.richTextEditorValue;
+  }
+  public isRichStringsEnabled(): boolean {
+    return !!this.richTextEditorValue && htmlToMarkdownProbe((options) => this.onHtmlToMarkdown.fire(this, options)) !== null;
+  }
 
   /**
    * An event that is raised when Survey Creator obtains the expand/collapse state of a survey element on the design surface. Handle this event to set a required state.

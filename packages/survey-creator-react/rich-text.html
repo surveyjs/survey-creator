@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Creator rich text demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+    <script src="./node_modules/survey-core/survey.core.js"></script>
+    <script src="./node_modules/survey-core/themes/index.js"></script>
+    <link rel="stylesheet" href="./node_modules/survey-core/survey-core.css" />
+    <link rel="stylesheet" href="./node_modules/survey-creator-core/survey-creator-core.css" />
+    <link rel="stylesheet" href="./fonts.css" />
+    <script>
+      (function () {
+        var pluginOff = new URLSearchParams(location.search).get("plugin") === "off";
+        if (pluginOff) {
+          document.documentElement.classList.add("plugin-off");
+        } else {
+          document.write("<link rel=\"stylesheet\" href=\"./node_modules/survey-core/rich-text.css\" />");
+          document.write("<script src=\"./node_modules/survey-core/rich-text/index.js\"><\/script>");
+        }
+      })();
+    </script>
+    <script src="./node_modules/survey-react-ui/survey-react-ui.js"></script>
+    <script src="./node_modules/survey-creator-core/survey-creator-core.js"></script>
+    <script src="./build/survey-creator-react.js"></script>
+    <style>
+      html, body { height: 100%; margin: 0; }
+      #layout { display: flex; height: 100%; }
+      #creator-host { flex: 1; min-width: 0; height: 100%; }
+      #panel {
+        width: 280px;
+        flex: none;
+        overflow: auto;
+        box-sizing: border-box;
+        padding: 12px 14px 24px;
+        border-left: 1px solid #d4d4d8;
+        background: #f6f6f8;
+        font: 13px/1.4 "Open Sans", sans-serif;
+        color: #1c1c1c;
+      }
+      #panel h1 { font-size: 16px; margin: 0 0 4px; }
+      #panel h2 { font-size: 13px; margin: 16px 0 6px; }
+      #panel p { margin: 0 0 8px; }
+      #panel label { display: block; margin: 0 0 6px; }
+      .plugin-off .plugin-only { display: none; }
+    </style>
+</head>
+
+<body>
+    <div id="layout">
+        <div id="creator-host"></div>
+        <aside id="panel">
+            <h1>Creator rich text</h1>
+            <p id="plugin-status"></p>
+            <p id="rich-status"></p>
+            <div class="plugin-only">
+                <h2>Setup</h2>
+                <label><input type="checkbox" id="register-editor" checked /> registerRichTextEditor</label>
+                <label><input type="checkbox" id="html-handler" checked /> onHtmlToMarkdown handler</label>
+                <p>onTextMarkdown stays attached either way. ?plugin=off loads neither the plugin nor the handlers.</p>
+            </div>
+        </aside>
+    </div>
+    <script src="./rich-text.js"></script>
+</body>
+
+</html>

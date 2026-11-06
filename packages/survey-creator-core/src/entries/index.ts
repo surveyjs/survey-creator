@@ -14,6 +14,7 @@ export * from "../creator-events-api";
 export * from "../variable-presets";
 export * from "../variable-presets-editor";
 export * from "../creator-base";
+export type { ICreatorRichTextEditor } from "../rich-text-editor";
 export * from "../tabbed-menu";
 export * from "../creator-responsivity-manager";
 

@@ -9,6 +9,7 @@ example/
 examples/
 .gitignore
 index.js
+packages/survey-creator-react/rich-text.js
 copy-vrt-tests.js
 copy-src-tests.js
 figma-variables-opacity-converter.js

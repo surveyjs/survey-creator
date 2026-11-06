@@ -1,5 +1,6 @@
 import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter, toCssClasses } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
+import { htmlToMarkdownProbe } from "../rich-text-editor";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines } from "../utils/utils";
 import { getNextColumnTitle, getNextItemText, getNextItemValue, getNextValue } from "../utils/creator-utils";
@@ -360,14 +361,8 @@ export class StringEditorViewModelBase extends Base {
 
   private checkMarkdownToTextConversion(element, name): void {
     if (!this.creator) return;
-    const options = {
-      element: element,
-      text: <any>null,
-      name: name,
-      html: "",
-    };
-    this.creator.onHtmlToMarkdown.fire(this.creator, options);
-    this.editAsText = (options.text === null);
+    const text = htmlToMarkdownProbe((options) => this.creator.onHtmlToMarkdown.fire(this.creator, options), element, name);
+    this.editAsText = text === null;
   }
 
   public onCompositionStart(event: any): void {
