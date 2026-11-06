@@ -23,6 +23,8 @@ import {
   QuestionFactory,
   PopupModel,
   QuestionCompositeModel,
+  QuestionMatrixDynamicModel,
+  Base,
   defaultActionBarCss
 } from "survey-core";
 import { SurveyCreatorModel, isContentElement } from "../creator-base";
@@ -106,6 +108,20 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     event.cancelBubble = true;
     creator.selectElement(selEl, undefined, false);
     return true;
+  }
+  // The Filter Control's preset: its row in the presets matrix ("items") with the details open. The
+  // click goes on to select(), which keeps the selection: the element is the selected one by then.
+  private selectFilterItem(item: Base): void {
+    if (!this.canSelectElement()) return;
+    this.creator.selectElement(this.surveyElement, "items", false);
+    this.creator.sidebar.executeOnExpand(() => {
+      const matrix = <QuestionMatrixDynamicModel>this.creator.propertyGrid?.getQuestionByName("items");
+      if (!matrix) return;
+      const row = matrix.visibleRows.filter(r => r.editingObj === item)[0];
+      if (!!row && !row.isDetailPanelShowing) {
+        row.showDetailPanel();
+      }
+    });
   }
 
   rootCss() {
@@ -357,6 +373,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         (<any>surveyElement).setCanShowOptionItemCallback(undefined);
         this.creator.onPermissionsChanged.remove(this.permissionsChangedHandler);
       }
+      if (!!surveyElement["setDesignItemClickCallback"]) {
+        (<any>surveyElement).setDesignItemClickCallback(undefined);
+      }
       delete (<any>surveyElement.locDescription).placeholder;
     }
     this.resetPropertyValue("isEmptyElement");
@@ -376,6 +395,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
           this.permissionsChangedHandler = () => this.updateOptionItems();
         }
         this.creator.onPermissionsChanged.add(this.permissionsChangedHandler);
+      }
+      // The Filter Control: a preset's chip clicked in the designer opens the preset on the Presets tab
+      if (!!surveyElement["setDesignItemClickCallback"]) {
+        (<any>surveyElement).setDesignItemClickCallback((item: Base): void => { this.selectFilterItem(item); });
       }
       if (this.surveyElement instanceof QuestionHtmlModel) {
         surveyElement.registerFunctionOnPropertyValueChanged("html", (newValue: any) => {

@@ -1,6 +1,7 @@
 import { PanelModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionTagboxModel, SurveyModel } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { CreatorTester } from "../creator-tester";
+import { QuestionAdornerViewModel } from "../../src/components/question";
 
 // The Filter Control (survey-library #11890) in the property grid: its own settings and the
 // operators a question or a column offers as a filter field.
@@ -159,5 +160,42 @@ describe("Property grid: the Filter Control layout", () => {
     const row = (<QuestionMatrixDynamicModel>grid.survey.getQuestionByName("items")).visibleRows[0];
     row.showDetailPanel();
     expect(row.detailPanel.elements.map(el => el.name).indexOf("others"), "#2").toBe(-1);
+  });
+});
+
+describe("Designer: a Filter Control's preset chip", () => {
+  const createCreator = (): { creator: CreatorTester, filter: any, adorner: QuestionAdornerViewModel } => {
+    const creator = new CreatorTester();
+    creator.JSON = { elements: [{ type: "text", name: "q1" },
+      { type: "filter", name: "f", items: [{ name: "a", expression: "{x} > 1" }, { name: "b", expression: "{x} > 2" }] }] };
+    const filter = creator.survey.getQuestionByName("f");
+    const adorner = new QuestionAdornerViewModel(creator, filter, <any>undefined);
+    return { creator: creator, filter: filter, adorner: adorner };
+  };
+  const detailShown = (creator: CreatorTester): Array<boolean> =>
+    (<QuestionMatrixDynamicModel>creator.propertyGrid.getQuestionByName("items")).visibleRows.map(row => row.isDetailPanelShowing);
+  test("opens the preset on the Presets tab", () => {
+    const { creator, filter } = createCreator();
+    creator.selectElement(creator.survey.getQuestionByName("q1"));
+    filter.chipsToolbar.getActionById("sv-filter-item-b").action();
+    expect(creator.selectedElement, "#1").toBe(filter);
+    expect(creator.propertyGrid.currentPage.name, "#2").toBe("presets");
+    expect(detailShown(creator), "#3").toEqual([false, true]);
+    expect(filter.activeItemName, "#4: nothing is turned on").toBe("");
+  });
+  test("the same when the filter is already selected on another tab", () => {
+    const { creator, filter } = createCreator();
+    creator.selectElement(filter);
+    creator.propertyGrid.currentPage = creator.propertyGrid.getPageByName("filterSettings");
+    filter.chipsToolbar.getActionById("sv-filter-item-a").action();
+    expect(creator.propertyGrid.currentPage.name, "#1").toBe("presets");
+    expect(detailShown(creator), "#2").toEqual([true, false]);
+  });
+  test("a detached adorner leaves no callback", () => {
+    const { creator, filter, adorner } = createCreator();
+    creator.selectElement(creator.survey.getQuestionByName("q1"));
+    adorner.dispose();
+    filter.chipsToolbar.getActionById("sv-filter-item-a").action();
+    expect(creator.selectedElement.name).toBe("q1");
   });
 });
