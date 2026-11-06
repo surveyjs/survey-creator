@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { ActionContainer, QuestionRadiogroupModel, SurveyModel } from "survey-core";
+import { RichText } from "survey-core/rich-text";
 import { StringEditorViewModelBase } from "../src/components/string-editor";
 import { ICreatorRichTextEditor } from "../src/rich-text-editor";
 import { CreatorTester } from "./creator-tester";
@@ -283,5 +284,49 @@ describe("rich text rendering", () => {
     const gridQuestion = surveys["translation-tab:table"].getAllQuestions()[0];
     gridQuestion.title = "Grid **title**";
     expect(gridQuestion.locTitle.renderedHtml).toBe("Grid **title**");
+  });
+});
+
+describe("rich text property grid", () => {
+  test("text properties become rich comment editors and html properties stay plain", () => {
+    const creator = new CreatorTester();
+    creator.registerRichTextEditor(RichText);
+    creator.onHtmlToMarkdown.add(RichText.htmlToMarkdownHandler);
+    creator.JSON = {
+      completedHtml: "<p>Done</p>",
+      elements: [
+        { type: "text", name: "q", title: "Hello", description: "About" },
+        { type: "comment", name: "c" }
+      ]
+    };
+    creator.selectElement(creator.survey.getQuestionByName("q"));
+    const grid = creator.propertyGrid;
+    const title = grid.getQuestionByName("title");
+    const description = grid.getQuestionByName("description");
+    const required = grid.getQuestionByName("requiredErrorText");
+    expect(title.textFormat).toBe("markdown");
+    expect(title.richTextEditMode).toBe("block");
+    expect(title.richTextToolbarVisibility).toBe("onFocus");
+    expect(title.richTextConverter).toBeFalsy();
+    expect(description.textFormat).toBe("markdown");
+    expect(description.richTextEditMode).toBe("block");
+    expect(description.richTextConverter).toBeFalsy();
+    expect(required.textFormat).toBe("plain");
+
+    creator.selectElement(creator.survey);
+    const surveyTitle = creator.propertyGrid.getQuestionByName("title");
+    expect(surveyTitle.getType()).toBe("comment");
+    expect(surveyTitle.textFormat).toBe("markdown");
+    expect(surveyTitle.richTextEditMode).toBe("inline");
+    expect(surveyTitle.acceptCarriageReturn).toBe(false);
+    const completed = creator.propertyGrid.getQuestionByName("completedHtml");
+    expect(completed.getType()).toBe("comment");
+    expect(completed.textFormat).toBe("plain");
+
+    creator.selectElement(creator.survey.getQuestionByName("c"));
+    const textFormat = creator.propertyGrid.getQuestionByName("textFormat");
+    expect(textFormat.visible).toBe(true);
+    textFormat.value = "markdown";
+    expect(creator.survey.getQuestionByName("c").textFormat).toBe("markdown");
   });
 });

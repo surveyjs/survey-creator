@@ -1839,6 +1839,25 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
     });
   }
 }
+function applyRichTextPropertyEditor(json: any, obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
+  const creator = options as any;
+  if (!creator || typeof creator.isRichStringsEnabled !== "function" || !creator.isRichStringsEnabled() || !creator.richTextEditor) return;
+  const loc = typeof obj.getLocalizableString === "function" ? obj.getLocalizableString(prop.name) : undefined;
+  if (!loc) return;
+  const mode = creator.richTextEditor.getStringEditMode(obj, prop.name, loc);
+  if (mode === "none") return;
+  const editMode = !loc || loc.allowLineBreaks ? "block" : mode;
+  json.type = "comment";
+  json.textFormat = "markdown";
+  json.richTextEditMode = editMode;
+  json.richTextToolbarVisibility = "onFocus";
+  if (editMode === "inline") {
+    json.rows = 1;
+    json.acceptCarriageReturn = false;
+    json.allowResize = false;
+  }
+}
+
 export class PropertyGridEditorString extends PropertyGridEditorStringBase {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "string";
@@ -1858,6 +1877,7 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
     if (!!prop.dataList) {
       json.dataList = prop.dataList;
     }
+    applyRichTextPropertyEditor(json, obj, prop, options);
     return json;
   }
   public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
@@ -2025,10 +2045,12 @@ export class PropertyGridEditorText extends PropertyGridEditorStringBase {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return this.updateMaxLength(prop, {
+    const json = this.updateMaxLength(prop, {
       type: "comment",
       rows: 2
     });
+    applyRichTextPropertyEditor(json, obj, prop, options);
+    return json;
   }
 }
 export class PropertyGridEditorHtml extends PropertyGridEditorStringBase {
