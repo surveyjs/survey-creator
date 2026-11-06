@@ -4,6 +4,7 @@ import { RichText } from "survey-core/rich-text";
 import { StringEditorViewModelBase } from "../src/components/string-editor";
 import { ICreatorRichTextEditor } from "../src/rich-text-editor";
 import { CreatorTester } from "./creator-tester";
+import "../src/property-grid/matrices";
 
 const richStringAreas = ["designer-tab", "preview-tab", "theme-tab", "translation-tab:source-survey", "translation-tab:target-survey", "matrix-cell-question-popup-editor"];
 
@@ -306,10 +307,12 @@ describe("rich text property grid", () => {
     const required = grid.getQuestionByName("requiredErrorText");
     expect(title.textFormat).toBe("markdown");
     expect(title.richTextEditMode).toBe("block");
+    expect(title.richTextDisableBold).toBe(true);
     expect(title.richTextToolbarVisibility).toBe("onFocus");
     expect(title.richTextConverter).toBeFalsy();
     expect(description.textFormat).toBe("markdown");
     expect(description.richTextEditMode).toBe("block");
+    expect(description.richTextDisableBold).toBeFalsy();
     expect(description.richTextConverter).toBeFalsy();
     expect(required.textFormat).toBe("plain");
 
@@ -318,6 +321,7 @@ describe("rich text property grid", () => {
     expect(surveyTitle.getType()).toBe("comment");
     expect(surveyTitle.textFormat).toBe("markdown");
     expect(surveyTitle.richTextEditMode).toBe("inline");
+    expect(surveyTitle.richTextDisableBold).toBe(true);
     expect(surveyTitle.acceptCarriageReturn).toBe(false);
     const completed = creator.propertyGrid.getQuestionByName("completedHtml");
     expect(completed.getType()).toBe("comment");
@@ -328,5 +332,33 @@ describe("rich text property grid", () => {
     expect(textFormat.visible).toBe(true);
     textFormat.value = "markdown";
     expect(creator.survey.getQuestionByName("c").textFormat).toBe("markdown");
+  });
+
+  test("choice matrix cells edit rich strings", () => {
+    const creator = new CreatorTester();
+    creator.registerRichTextEditor(RichText);
+    creator.onHtmlToMarkdown.add(RichText.htmlToMarkdownHandler);
+    creator.JSON = {
+      elements: [{
+        type: "radiogroup",
+        name: "q",
+        choices: ["Alpha", "Beta"]
+      }]
+    };
+    creator.selectElement(creator.survey.getQuestionByName("q"));
+    const choices = creator.propertyGrid.getQuestionByName("choices") as any;
+    const textColumn = choices.columns.filter((column: any) => column.name === "text")[0];
+    const valueColumn = choices.columns.filter((column: any) => column.name === "value")[0];
+    expect(textColumn.cellType).toBe("comment");
+    expect(textColumn.templateQuestion.textFormat).toBe("markdown");
+    expect(textColumn.templateQuestion.richTextEditMode).toBe("inline");
+    expect(textColumn.templateQuestion.acceptCarriageReturn).toBe(false);
+    expect(valueColumn.cellType).toBe("text");
+    const textCell = choices.visibleRows[0].cells.filter((cell: any) => cell.column.name === "text")[0].question;
+    expect(textCell.getType()).toBe("comment");
+    expect(textCell.textFormat).toBe("markdown");
+    expect(textCell.richTextEditMode).toBe("inline");
+    expect(textCell.acceptCarriageReturn).toBe(false);
+    expect(textCell.richTextToolbarVisibility).toBe("onFocus");
   });
 });

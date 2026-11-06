@@ -66,7 +66,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   }
   private initializePlaceholder(rowObj: any, cellQuestion: Question, propertyName: string) {
     const objType = typeof rowObj.getType === "function" && rowObj.getType();
-    if (cellQuestion.getType() === "text" && !!objType) {
+    if ((cellQuestion.getType() === "text" || cellQuestion.getType() === "comment") && !!objType) {
       if (propertyName === "text" && Serializer.isDescendantOf(objType, "itemvalue")) {
         (<any>cellQuestion).placeholder = new ComputedUpdater<string>(() => {
           return rowObj.locText.getPlaceholder();
@@ -86,9 +86,26 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     q.obj = rowObj;
     this.initializePlaceholder(rowObj, q, options.columnName);
     q.property = Serializer.findProperty(rowObj.getType(), options.columnName);
+    this.copyRichTextCellSettings(options);
     if (q.getType() === "boolean" && q.renderAs === "checkbox") {
       q.titleLocation = "default";
     }
+  }
+  // Cell questions are cloned from the column template through JSON, which drops the
+  // non-serializable rich-text settings. Copy them onto the live cell.
+  private copyRichTextCellSettings(options: any): void {
+    const cell = options.cellQuestion;
+    if (!cell || cell.getType() !== "comment") return;
+    const matrix = options.question;
+    const column = options.column || (matrix && matrix.getColumnByName && matrix.getColumnByName(options.columnName));
+    const template = column && column.templateQuestion;
+    if (!template || (template.textFormat !== "markdown" && template.textFormat !== "html")) return;
+    cell.richTextEditMode = template.richTextEditMode;
+    cell.richTextToolbarVisibility = template.richTextToolbarVisibility;
+    cell.richTextDisableBold = template.richTextDisableBold;
+    cell.acceptCarriageReturn = template.acceptCarriageReturn;
+    cell.allowResize = template.allowResize;
+    if (template.rows) cell.rows = template.rows;
   }
   public onGetMatrixRowAction(
     obj: Base,
@@ -433,7 +450,8 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       this.filterPropertyNames(propNames, options)
     );
     for (var i = 0; i < res.length; i++) {
-      if (res[i].cellType == "comment") {
+      // A plain comment cell is a single-line text box. A rich-text comment keeps its cell type.
+      if (res[i].cellType == "comment" && res[i].textFormat !== "markdown" && res[i].textFormat !== "html") {
         res[i].cellType = "text";
       }
     }

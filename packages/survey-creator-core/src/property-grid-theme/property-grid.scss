@@ -145,3 +145,9 @@
   position: relative;
   z-index: 1;
 }
+
+// The rich text toolbar hangs over the next question. That title bar is also
+// z-index 1, so its help action would cover the toolbar.
+.spg-question .sd-rich-text__toolbar {
+  z-index: 2;
+}

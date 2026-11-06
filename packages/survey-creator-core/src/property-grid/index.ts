@@ -1851,6 +1851,7 @@ function applyRichTextPropertyEditor(json: any, obj: Base, prop: JsonObjectPrope
   json.textFormat = "markdown";
   json.richTextEditMode = editMode;
   json.richTextToolbarVisibility = "onFocus";
+  if (prop.name === "title") json.richTextDisableBold = true;
   if (editMode === "inline") {
     json.rows = 1;
     json.acceptCarriageReturn = false;
