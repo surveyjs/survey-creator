@@ -871,7 +871,9 @@ export class PropertyGridModel {
   }
   private expandPanel(panel: PanelModel): void {
     panel.blockAnimations();
-    panel.expand();
+    // Pass false: by default expand() scrolls to the category's first question after a delay,
+    // which moves a requested editor that has just been focused out of view.
+    panel.expand(false);
     panel.releaseAnimations();
   }
   public selectProperty(propertyName: string, focus = true) {
