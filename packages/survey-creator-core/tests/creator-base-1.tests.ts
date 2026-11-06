@@ -4548,6 +4548,28 @@ test("Update choicesFromQuestion on question name change", (): any => {
   q1.name = "q3";
   expect(q2.choicesFromQuestion).toEqual("q3");
 });
+test("Renaming the source matrix rebinds the Filter Control", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "matrixdynamic", name: "m1", columns: [{ name: "a" }] },
+      { type: "text", name: "t1" },
+      { type: "filter", name: "f1", source: "m1" },
+      { type: "filter", name: "f2", source: "t1" }
+    ]
+  };
+  const matrix = creator.survey.getQuestionByName("m1");
+  const f1 = <any>creator.survey.getQuestionByName("f1");
+  const f2 = <any>creator.survey.getQuestionByName("f2");
+  matrix.name = "m2";
+  expect(f1.source, "#1").toBe("m2");
+  creator.survey.getQuestionByName("t1").name = "t2";
+  expect(f2.source, "#2: a text question is no source").toBe("t1");
+  creator.undo();
+  creator.undo();
+  expect(matrix.name, "#3").toBe("m1");
+  expect(f1.source, "#4: one undo of the rename brings the source back").toBe("m1");
+});
 test("creator.deleteLocaleStrings", () => {
   const creator = new CreatorTester();
   creator.JSON = {

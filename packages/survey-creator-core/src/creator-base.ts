@@ -2769,6 +2769,10 @@ export class SurveyCreatorModel extends Base
       if (propertyName === "name" && obj.isDescendantOf("selectbase")) {
         this.updateChoicesFromQuestionOnColumnNameChanged(oldValue, obj["name"]);
       }
+      // A question a Filter Control can filter (survey-core finds the source by the same duck typing)
+      if (propertyName === "name" && typeof obj["setControlFilter"] === "function") {
+        this.updateFilterSourceOnQuestionNameChanged(oldValue, obj["name"]);
+      }
     }
     if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
       this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
@@ -2836,6 +2840,14 @@ export class SurveyCreatorModel extends Base
     questions.forEach(q => {
       if (q.choicesFromQuestion === oldName) {
         q.choicesFromQuestion = newName;
+      }
+    });
+  }
+  private updateFilterSourceOnQuestionNameChanged(oldName: string, newName: string) {
+    if (!oldName || oldName === newName) return;
+    this.getAllQuestions().forEach(q => {
+      if (q.isDescendantOf("filter") && q["source"] === oldName) {
+        q["source"] = newName;
       }
     });
   }
