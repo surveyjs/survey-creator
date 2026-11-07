@@ -1,9 +1,8 @@
-import { ActionContainer, PanelModel, Question, settings as surveySettings } from "survey-core";
+import { ActionContainer, ExpressionAIRequestEvent, PanelModel, Question, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "../creator-tester";
 import { PropertyGridModelTester } from "../property-grid/property-grid.base";
 import { ConditionEditor } from "../../src/property-grid/condition-survey";
 import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
-import { ExpressionAssistantRequestEvent } from "../../src/creator-events-api";
 import {
   ExpressionAssistant, IExpressionAssistantOptions, showExpressionAssistant,
 } from "../../src/expression-assistant/expression-assistant";
@@ -19,11 +18,11 @@ const fruitJson = {
   ],
 };
 
-function createCreator(json: any = fruitJson, options?: any): { creator: CreatorTester, requests: Array<ExpressionAssistantRequestEvent> } {
+function createCreator(json: any = fruitJson, options?: any): { creator: CreatorTester, requests: Array<ExpressionAIRequestEvent> } {
   const creator = new CreatorTester(options);
   creator.JSON = json;
-  const requests: Array<ExpressionAssistantRequestEvent> = [];
-  creator.onExpressionAssistantRequest.add((_, options) => { requests.push(options); });
+  const requests: Array<ExpressionAIRequestEvent> = [];
+  creator.onAIExpressionRequest.add((_, options) => { requests.push(options); });
   return { creator: creator, requests: requests };
 }
 function getTitleActions(creator: CreatorTester, obj: any, propertyName: string): Array<any> {
@@ -56,6 +55,24 @@ describe("The expression assistant: availability (ai-expressions)", () => {
     editor.isModal = false;
     expect(editor.assistantPrompt).toBeFalsy();
     expect(editor.showExpressionAssistant()).toBeUndefined();
+  });
+  test("a handler added after the property grid is built: the next grid shows the action, and without the handler hides it", () => {
+    const creator = new CreatorTester();
+    creator.JSON = fruitJson;
+    const fruit = creator.survey.getQuestionByName("fruit");
+    const q2 = creator.survey.getQuestionByName("q2");
+    const getActionIds = () => creator.propertyGrid.getQuestionByName("visibleIf").getTitleActions().map(a => a.id);
+    creator.selectElement(q2);
+    expect(getActionIds()).not.toContain("property-grid-expression-assistant");
+    const handler = () => { };
+    creator.onAIExpressionRequest.add(handler);
+    creator.selectElement(fruit);
+    creator.selectElement(q2);
+    expect(getActionIds()).toContain("property-grid-expression-assistant");
+    creator.onAIExpressionRequest.remove(handler);
+    creator.selectElement(fruit);
+    creator.selectElement(q2);
+    expect(getActionIds()).not.toContain("property-grid-expression-assistant");
   });
   test("with a handler: a title action on condition and expression properties, a prompt line in the Logic tab editor only", () => {
     const { creator } = createCreator({ elements: [{ type: "text", name: "q1", inputType: "number" }, { type: "text", name: "q2" }] });
@@ -121,7 +138,7 @@ describe("The expression assistant: a request and its result (ai-expressions)", 
     expect(assistant.status).toBe("loading");
     expect(requests).toHaveLength(1);
     const request = requests[0];
-    expect(request.kind).toBe("generate");
+    expect(request.action).toBe("generate");
     expect(request.userPrompt).toBe("show when apple is chosen");
     expect(request.expression).toBe("");
     expect(request.isCondition).toBe(true);
@@ -129,7 +146,7 @@ describe("The expression assistant: a request and its result (ai-expressions)", 
     expect(request.context.variables.map(v => v.name)).toEqual(["fruit"]);
     expect(request.systemPrompt.indexOf("SurveyJS expression syntax")).toBeGreaterThan(-1);
     expect(request.signal.aborted).toBe(false);
-    request.callback({ expression: "{fruit} = 'apple'", explanation: "Shown for apple." });
+    request.callback({ data: { expression: "{fruit} = 'apple'", explanation: "Shown for apple." } });
     expect(assistant.status).toBe("review");
     expect(assistant.expression).toBe("{fruit} = 'apple'");
     expect(assistant.checkResult.findings).toHaveLength(0);
@@ -150,7 +167,7 @@ describe("The expression assistant: a request and its result (ai-expressions)", 
     const canUndo = creator.undoRedoManager.canUndo();
     assistant.reject();
     expect(requests[0].signal.aborted).toBe(true);
-    requests[0].callback({ expression: "{fruit} = 'apple'" });
+    requests[0].callback({ data: { expression: "{fruit} = 'apple'" } });
     expect(assistant.expression).toBe("");
     expect(creator.survey.getQuestionByName("q2").visibleIf).toBeFalsy();
     expect(creator.undoRedoManager.canUndo()).toBe(canUndo);
@@ -160,11 +177,11 @@ describe("The expression assistant: a request and its result (ai-expressions)", 
     creator.survey.getQuestionByName("q2").visibleIf = "{fruit} = 'banana'";
     const assistant = createAssistant(creator);
     assistant.generate("also apple");
-    expect(requests[0].kind).toBe("modify");
+    expect(requests[0].action).toBe("modify");
     expect(requests[0].expression).toBe("{fruit} = 'banana'");
-    requests[0].callback({ expression: "{fruit} anyof ['apple', 'banana']" });
+    requests[0].callback({ data: { expression: "{fruit} anyof ['apple', 'banana']" } });
     assistant.refine("only apple");
-    expect(requests[1].kind).toBe("modify");
+    expect(requests[1].action).toBe("modify");
     expect(requests[1].userPrompt).toBe("only apple");
     expect(requests[1].expression).toBe("{fruit} anyof ['apple', 'banana']");
     expect(requests[1].messages.map(m => m.role)).toEqual(["user", "assistant", "user"]);
@@ -176,30 +193,34 @@ describe("The expression assistant: a request and its result (ai-expressions)", 
     const { creator, requests } = createCreator();
     const assistant = createAssistant(creator);
     assistant.generate("apple");
-    requests[0].callback({ expression: "{frut} = 'apple'" });
+    requests[0].callback({ data: { expression: "{frut} = 'apple'" } });
     expect(assistant.status).toBe("loading");
     expect(assistant.fixCount).toBe(1);
     expect(requests).toHaveLength(2);
-    expect(requests[1].kind).toBe("fix");
-    expect(requests[1].userPrompt).toBe("");
+    expect(requests[0].attempt).toBe(0);
+    expect(requests[0].issues).toEqual([]);
+    expect(requests[1].attempt).toBe(1);
+    // a retry keeps the author's action and prompt; expression is the rejected answer
+    expect(requests[1].action).toBe("generate");
+    expect(requests[1].userPrompt).toBe("apple");
     expect(requests[1].expression).toBe("{frut} = 'apple'");
-    expect(requests[1].validationFindings).toEqual([{
-      ruleId: "reference/unknown", reason: "notFound", severity: "error", message: requests[1].validationFindings[0].message,
+    expect(requests[1].issues).toEqual([{
+      severity: "error", message: requests[1].issues[0].message, code: "reference/unknown:notFound",
     }]);
-    expect(requests[1].validationFindings[0].message.indexOf("\"frut\" is not found")).toBe(0);
-    requests[1].callback({ expression: "{fruit} = 'apple'" });
+    expect(requests[1].issues[0].message.indexOf("\"frut\" is not found")).toBe(0);
+    requests[1].callback({ data: { expression: "{fruit} = 'apple'" } });
     expect(assistant.status).toBe("review");
     expect(assistant.canAccept).toBe(true);
     expect(assistant.getReviewHtml().indexOf("corrected automatically")).toBeGreaterThan(-1);
   });
   test("errors after the fix attempts: Accept disabled; the option sets the number of attempts", () => {
-    const { creator, requests } = createCreator(fruitJson, { expressionAssistantFixAttempts: 2 });
-    expect(creator.expressionAssistantFixAttempts).toBe(2);
+    const { creator, requests } = createCreator(fruitJson, { aiFixAttempts: 2 });
+    expect(creator.aiFixAttempts).toBe(2);
     const assistant = createAssistant(creator);
     assistant.generate("apple");
-    requests[0].callback({ expression: "{frut} = 'apple'" });
-    requests[1].callback({ expression: "{fruut} = 'apple'" });
-    requests[2].callback({ expression: "{fruuut} = 'apple'" });
+    requests[0].callback({ data: { expression: "{frut} = 'apple'" } });
+    requests[1].callback({ data: { expression: "{fruut} = 'apple'" } });
+    requests[2].callback({ data: { expression: "{fruuut} = 'apple'" } });
     expect(requests).toHaveLength(3);
     expect(assistant.status).toBe("review");
     expect(assistant.canAccept).toBe(false);
@@ -208,14 +229,14 @@ describe("The expression assistant: a request and its result (ai-expressions)", 
     expect(creator.survey.getQuestionByName("q2").visibleIf).toBeFalsy();
   });
   test("warnings only: Accept enabled; a one-click fix re-checks without a request", () => {
-    const { creator, requests } = createCreator(fruitJson, { expressionAssistantFixAttempts: 0 });
+    const { creator, requests } = createCreator(fruitJson, { aiFixAttempts: 0 });
     const assistant = createAssistant(creator);
     assistant.generate("apple");
-    requests[0].callback({ expression: "{fruit} = 'aple'" });
+    requests[0].callback({ data: { expression: "{fruit} = 'aple'" } });
     expect(assistant.checkResult.warningCount).toBe(1);
     expect(assistant.canAccept).toBe(true);
     assistant.generate("again");
-    requests[1].callback({ expression: "{frut} = 'apple'" });
+    requests[1].callback({ data: { expression: "{frut} = 'apple'" } });
     expect(assistant.canAccept).toBe(false);
     const finding = assistant.checkResult.findings[0];
     expect(finding.fix.expression).toBe("{fruit} = 'apple'");
@@ -229,9 +250,9 @@ describe("The expression assistant: a request and its result (ai-expressions)", 
     creator.survey.getQuestionByName("q2").visibleIf = "{fruit} = 'apple'";
     const assistant = createAssistant(creator);
     assistant.explain();
-    expect(requests[0].kind).toBe("explain");
+    expect(requests[0].action).toBe("explain");
     expect(requests[0].expression).toBe("{fruit} = 'apple'");
-    requests[0].callback({ explanation: "Shown when the respondent picks apple." });
+    requests[0].callback({ data: { explanation: "Shown when the respondent picks apple." } });
     expect(assistant.status).toBe("explained");
     expect(assistant.checkResult).toBeUndefined();
     expect(assistant.canAccept).toBe(false);
@@ -258,8 +279,8 @@ describe("The expression assistant: delivery (ai-expressions)", () => {
     const { creator, requests } = createCreator();
     const assistant = createAssistant(creator);
     assistant.generate("x");
-    requests[0].callback({ expression: "{fruit} = 'apple'" });
-    requests[0].callback({ expression: "{fruit} = 'banana'" });
+    requests[0].callback({ data: { expression: "{fruit} = 'apple'" } });
+    requests[0].callback({ data: { expression: "{fruit} = 'banana'" } });
     expect(assistant.expression).toBe("{fruit} = 'apple'");
   });
   test("a handler that never answers stays loading until Cancel; an answer after Cancel or closing is ignored", () => {
@@ -270,12 +291,12 @@ describe("The expression assistant: delivery (ai-expressions)", () => {
     assistant.cancel();
     expect(assistant.status).toBe("cancelled");
     expect(requests[0].signal.aborted).toBe(true);
-    requests[0].callback({ expression: "{fruit} = 'apple'" });
+    requests[0].callback({ data: { expression: "{fruit} = 'apple'" } });
     expect(assistant.status).toBe("cancelled");
     assistant.generate("y");
     assistant.dispose();
     expect(requests[1].signal.aborted).toBe(true);
-    requests[1].callback({ expression: "{fruit} = 'apple'" });
+    requests[1].callback({ data: { expression: "{fruit} = 'apple'" } });
     expect(assistant.expression).toBe("");
   });
   test("error, empty and raw text results", () => {
@@ -302,7 +323,7 @@ describe("The expression assistant: delivery (ai-expressions)", () => {
     const { creator, requests } = createCreator();
     const assistant = createAssistant(creator);
     assistant.generate("x");
-    requests[0].callback({ expression: "{fruit} = '<b>'", explanation: "<img src=x onerror=alert(1)>" });
+    requests[0].callback({ data: { expression: "{fruit} = '<b>'", explanation: "<img src=x onerror=alert(1)>" } });
     const html = assistant.getReviewHtml();
     expect(html.indexOf("<img")).toBe(-1);
     expect(html.indexOf("&lt;img src=x onerror=alert(1)&gt;")).toBeGreaterThan(-1);
@@ -316,8 +337,8 @@ describe("The expression assistant: delivery (ai-expressions)", () => {
     creator.onLintSurvey.add(() => { counter++; });
     const assistant = createAssistant(creator);
     assistant.generate("x");
-    requests[0].callback({ expression: "{frut} = 'apple'" });
-    requests[1].callback({ expression: "{fruit} = 'apple'" });
+    requests[0].callback({ data: { expression: "{frut} = 'apple'" } });
+    requests[1].callback({ data: { expression: "{fruit} = 'apple'" } });
     expect(counter).toBe(1);
     assistant.refine("y");
     expect(counter).toBe(2);
@@ -326,16 +347,17 @@ describe("The expression assistant: delivery (ai-expressions)", () => {
     const { creator, requests } = createCreator();
     const assistant = createAssistant(creator);
     assistant.generate("not apple");
-    requests[0].callback({ expression: "negate({fruit} = 'apple')", explanation: "Not apple." });
+    requests[0].callback({ data: { expression: "negate({fruit} = 'apple')", explanation: "Not apple." } });
     expect(requests).toHaveLength(2);
-    expect(requests[1].kind).toBe("fix");
-    expect(requests[1].validationFindings.map(f => f.ruleId)).toContain("expression/unknown-function");
-    expect(requests[1].validationFindings.filter(f => f.ruleId === "expression/unknown-function")[0].severity).toBe("error");
-    requests[1].callback({ expression: "negate({fruit} = 'apple')", explanation: "Not apple." });
+    expect(requests[1].attempt).toBe(1);
+    const unknownFunction = requests[1].issues.filter(f => f.code.indexOf("expression/unknown-function:") === 0);
+    expect(unknownFunction).toHaveLength(1);
+    expect(unknownFunction[0].severity).toBe("error");
+    requests[1].callback({ data: { expression: "negate({fruit} = 'apple')", explanation: "Not apple." } });
     expect(assistant.status).toBe("review");
     expect(assistant.canAccept).toBe(false);
     assistant.refine("not apple, please");
-    requests[2].callback({ expression: "!({fruit} = 'apple')", explanation: "Not apple." });
+    requests[2].callback({ data: { expression: "!({fruit} = 'apple')", explanation: "Not apple." } });
     expect(assistant.canAccept).toBe(true);
   });
   test("a host that lowers unknown-function to a warning gets no fix request for it", () => {
@@ -343,7 +365,7 @@ describe("The expression assistant: delivery (ai-expressions)", () => {
     creator.onLintSurvey.add((_, options) => { options.lintOptions.rules["expression/unknown-function"] = "warning"; });
     const assistant = createAssistant(creator);
     assistant.generate("not apple");
-    requests[0].callback({ expression: "negate({fruit} = 'apple')", explanation: "Not apple." });
+    requests[0].callback({ data: { expression: "negate({fruit} = 'apple')", explanation: "Not apple." } });
     expect(requests).toHaveLength(1);
     expect(assistant.checkResult.findings.filter(f => f.ruleId === "expression/unknown-function")[0].severity).toBe("warning");
     expect(assistant.canAccept).toBe(true);
@@ -357,8 +379,8 @@ describe("The expression assistant: delivery (ai-expressions)", () => {
     const assistant = createAssistant(creator);
     assistant.generate("x");
     expect(requests[0].context.variables.map(v => v.name)).not.toContain("tier");
-    requests[0].callback({ expression: "{tier} = 'gold'" });
-    requests[1].callback({ expression: "{tier} = 'gold'" });
+    requests[0].callback({ data: { expression: "{tier} = 'gold'" } });
+    requests[1].callback({ data: { expression: "{tier} = 'gold'" } });
     expect(assistant.checkResult.findings.map(f => f.ruleId)).toEqual(["reference/unknown"]);
   });
   test("the handler gets 02's context and prompt; its changes do not leak into the next request", () => {
@@ -371,7 +393,7 @@ describe("The expression assistant: delivery (ai-expressions)", () => {
     expect(requests[0].systemPrompt).toBe(expected.systemPrompt);
     requests[0].context.variables.splice(0, 1);
     requests[0].systemPrompt = "changed";
-    requests[0].callback({ expression: "{fruit} = 'apple'" });
+    requests[0].callback({ data: { expression: "{fruit} = 'apple'" } });
     assistant.refine("y");
     expect(requests[1].context.variables.map(v => v.name)).toEqual(["fruit"]);
     expect(requests[1].systemPrompt).toBe(expected.systemPrompt);
@@ -416,7 +438,7 @@ describe("The expression assistant: entry points (ai-expressions)", () => {
     footer.getActionById("expression-assistant-generate").action();
     expect(survey.getQuestionByName("prompt").isReadOnly).toBe(true);
     expect(footer.getActionById("expression-assistant-stop").visible).toBe(true);
-    requests[0].callback({ expression: "{fruit} = 'apple'" });
+    requests[0].callback({ data: { expression: "{fruit} = 'apple'" } });
     expect(footer.getActionById("apply").enabled).toBe(true);
     expect(footer.getActionById("expression-assistant-generate").title).toBe("Refine");
     // Accept writes through the property grid question: its value and the property change once
@@ -451,7 +473,7 @@ describe("The expression assistant: entry points (ai-expressions)", () => {
     const editor = new ConditionEditor(creator.survey, q2, creator, "visibleIf");
     let assistant = editor.showExpressionAssistant();
     assistant.generate("apple");
-    requests[0].callback({ expression: "{fruit} = 'apple'" });
+    requests[0].callback({ data: { expression: "{fruit} = 'apple'" } });
     expect(assistant.accept()).toBe(true);
     expect(editor.panel.visible).toBe(true);
     expect(editor.textEditor.visible).toBe(false);
@@ -459,7 +481,7 @@ describe("The expression assistant: entry points (ai-expressions)", () => {
     expect(q2.visibleIf).toBeFalsy();
     assistant = editor.showExpressionAssistant();
     assistant.generate("count");
-    requests[1].callback({ expression: "iif({fruit} = 'apple', 1, 0) > 0" });
+    requests[1].callback({ data: { expression: "iif({fruit} = 'apple', 1, 0) > 0" } });
     expect(assistant.accept()).toBe(true);
     expect(editor.panel.visible).toBe(false);
     expect(editor.textEditor.visible).toBe(true);
@@ -488,15 +510,15 @@ describe("The expression assistant: entry points (ai-expressions)", () => {
     expect(editor.assistantPrompt).toBeTruthy();
     const assistant = editor.showExpressionAssistant();
     assistant.generate("apple");
-    expect(requests[0].kind).toBe("modify");
+    expect(requests[0].action).toBe("modify");
     expect(requests[0].targets.map(s => s.propertyName)).toEqual(["visibleIf", "expression"]);
-    requests[0].callback({ expression: "{nosuch} = 1" });
-    requests[1].callback({ expression: "{nosuch} = 1" });
+    requests[0].callback({ data: { expression: "{nosuch} = 1" } });
+    requests[1].callback({ data: { expression: "{nosuch} = 1" } });
     expect(assistant.canAccept).toBe(false);
     // the finding of the trigger names the action it belongs to
     expect(assistant.getReviewHtml().indexOf("in &quot;Set answer&quot;")).toBeGreaterThan(-1);
     assistant.generate("apple");
-    requests[2].callback({ expression: "{fruit} = 'apple'" });
+    requests[2].callback({ data: { expression: "{fruit} = 'apple'" } });
     expect(assistant.accept()).toBe(true);
     expect(editor.text).toBe("{fruit} = 'apple'");
     expect(logic.expressionEditorIsFastEntry).toBe(false);
@@ -517,7 +539,7 @@ describe("The expression assistant: entry points (ai-expressions)", () => {
     logic.editItem(logic.items[0]);
     const assistant = logic.expressionEditor.showExpressionAssistant();
     assistant.generate("x");
-    requests[0].callback({ expression: "age({q1}) > 18" });
+    requests[0].callback({ data: { expression: "age({q1}) > 18" } });
     expect(assistant.accept()).toBe(true);
     expect(logic.expressionEditor.textEditor.visible).toBe(true);
     expect(logic.expressionEditorIsFastEntry).toBe(true);
@@ -538,7 +560,7 @@ describe("The expression assistant: entry points (ai-expressions)", () => {
     panel.getQuestionByName("setValueExpression").value = "{q3}";
     const assistant = logic.expressionEditor.showExpressionAssistant();
     assistant.generate("x");
-    requests[0].callback({ expression: "{q1} notempty" });
+    requests[0].callback({ data: { expression: "{q1} notempty" } });
     expect(assistant.checkResult.findings.map(f => f.ruleId)).toEqual(["cycle/value-write"]);
     // a warning: shown, Accept stays possible (D5: errors block)
     expect(assistant.canAccept).toBe(true);
@@ -551,7 +573,7 @@ describe("The expression assistant: entry points (ai-expressions)", () => {
     plugin.model.addNew();
     const assistant = plugin.model.expressionEditor.showExpressionAssistant();
     assistant.generate("x");
-    requests[0].callback({ expression: "{q1} = 1" });
+    requests[0].callback({ data: { expression: "{q1} = 1" } });
     expect(assistant.canAccept).toBe(false);
     expect(assistant.getStatusText()).toBe("Add an action to the rule before asking the assistant.");
   });
@@ -562,7 +584,7 @@ describe("The expression assistant: a condition that reads nothing (ai-expressio
     const { creator, requests } = createCreator();
     const assistant = createAssistant(creator);
     assistant.generate("show it when the country is Narnia");
-    requests[0].callback({ expression: "false", explanation: "There is no such question." });
+    requests[0].callback({ data: { expression: "false", explanation: "There is no such question." } });
     expect(requests).toHaveLength(1);
     expect(assistant.status).toBe("review");
     expect(assistant.checkResult.findings.map(f => f.ruleId)).toEqual(["expression/no-reference"]);
@@ -586,20 +608,20 @@ describe("The expression assistant: the instruction Creator writes (ai-expressio
     const generate = "Write an expression for this request:\napple lovers\n\n" + emptyOption;
     expect(requests[0].messages).toEqual([{ role: "user", content: generate }]);
 
-    requests[0].callback({ expression: "{frut} = 'apple'", explanation: "Apple." });
-    expect(requests[1].kind).toBe("fix");
-    const finding = requests[1].validationFindings[0];
+    requests[0].callback({ data: { expression: "{frut} = 'apple'", explanation: "Apple." } });
+    expect(requests[1].attempt).toBe(1);
+    const finding = requests[1].issues[0];
     const fix = "This expression failed the check:\n{frut} = 'apple'\n\nProblems found:\n- [error] " + finding.message + "\n\n" +
       "Return a corrected expression that still does what the author asked. " +
       "If it cannot be corrected with the listed variables and functions, return an empty expression and say why in the explanation.";
     const firstAnswer = { role: "assistant", content: JSON.stringify({ expression: "{frut} = 'apple'", explanation: "Apple." }) };
     expect(requests[1].messages).toEqual([{ role: "user", content: generate }, firstAnswer, { role: "user", content: fix }]);
 
-    requests[1].callback({ expression: "{fruit} = 'apple'" });
+    requests[1].callback({ data: { expression: "{fruit} = 'apple'" } });
     assistant.refine("or banana");
     // a refine of a result is a modify: it gets the same rules
     const modify = "Current expression:\n{fruit} = 'apple'\n\nChange it as follows:\nor banana\n\n" + modifyRules + "\n\n" + emptyOption;
-    expect(requests[2].kind).toBe("modify");
+    expect(requests[2].action).toBe("modify");
     expect(requests[2].messages).toEqual([
       { role: "user", content: generate }, firstAnswer, { role: "user", content: fix },
       { role: "assistant", content: JSON.stringify({ expression: "{fruit} = 'apple'", explanation: "" }) },
@@ -617,7 +639,7 @@ describe("The expression assistant: the instruction Creator writes (ai-expressio
     const explain = "Explain what this expression does, in plain words for a form author:\n{fruit} = 'banana'\n\n" +
       "Put the explanation in \"explanation\" and return the expression unchanged in \"expression\".";
     expect(requests[0].messages).toEqual([{ role: "user", content: explain }]);
-    requests[0].callback({ explanation: "Shown for banana." });
+    requests[0].callback({ data: { explanation: "Shown for banana." } });
     assistant.generate("also apple");
     const modify = "Current expression:\n{fruit} = 'banana'\n\nChange it as follows:\nalso apple\n\n" + modifyRules + "\n\n" + emptyOption;
     // an explanation is no turn of the conversation that writes the expression
@@ -630,7 +652,7 @@ describe("The expression assistant: the instruction Creator writes (ai-expressio
     requests[0].callback({ error: "Network down" });
     assistant.generate("second");
     expect(requests[1].messages).toHaveLength(1);
-    requests[1].callback({ expression: "", explanation: "Not possible." });
+    requests[1].callback({ data: { expression: "", explanation: "Not possible." } });
     expect(assistant.status).toBe("empty");
     assistant.generate("third");
     expect(requests[2].messages.map(m => m.role)).toEqual(["user", "assistant", "user"]);
@@ -638,5 +660,69 @@ describe("The expression assistant: the instruction Creator writes (ai-expressio
     assistant.cancel();
     assistant.generate("fourth");
     expect(requests[3].messages.map(m => m.role)).toEqual(["user", "assistant", "user"]);
+  });
+});
+
+describe("The expression assistant on creator.onAIExpressionRequest (ai-request)", () => {
+  test("an expression request carries the JSON it expects", () => {
+    const { creator, requests } = createCreator();
+    const assistant = createAssistant(creator);
+    assistant.generate("apple");
+    expect("feature" in requests[0]).toBe(false);
+    expect(requests[0].responseFormat).toEqual({
+      name: "survey_expression",
+      schema: {
+        type: "object",
+        properties: { expression: { type: "string" }, explanation: { type: "string" } },
+        required: ["expression", "explanation"],
+        additionalProperties: false,
+      },
+    });
+    // a copy: a handler that changes it changes this request only
+    requests[0].responseFormat.schema.required = [];
+    assistant.generate("banana");
+    expect(requests[1].responseFormat.schema.required).toEqual(["expression", "explanation"]);
+  });
+  test("a retry keeps the author's action: never \"fix\"", () => {
+    const { creator, requests } = createCreator(fruitJson, { aiFixAttempts: 2 });
+    creator.survey.getQuestionByName("q2").visibleIf = "{fruit} = 'banana'";
+    const assistant = createAssistant(creator);
+    assistant.generate("also apple");
+    requests[0].callback({ text: "{frut} = 'apple'" });
+    requests[1].callback({ text: "{fruut} = 'apple'" });
+    expect(requests.map(r => r.action)).toEqual(["modify", "modify", "modify"]);
+    expect(requests.map(r => r.attempt)).toEqual([0, 1, 2]);
+    expect(requests.map(r => r.expression)).toEqual(["{fruit} = 'banana'", "{frut} = 'apple'", "{fruut} = 'apple'"]);
+    expect(requests[2].issues[0].message.indexOf("\"fruut\" is not found")).toBe(0);
+  });
+  test("a retry that ends in an error or with no answer, and a cancel during a retry", () => {
+    const { creator, requests } = createCreator();
+    const assistant = createAssistant(creator);
+    assistant.generate("apple");
+    requests[0].callback({ text: "{frut} = 'apple'" });
+    requests[1].callback({ error: "Quota exceeded" });
+    expect(assistant.status).toBe("error");
+    expect(assistant.errorText).toBe("Quota exceeded");
+    assistant.generate("apple");
+    requests[2].callback({ text: "{frut} = 'apple'" });
+    requests[3].callback();
+    expect(assistant.status).toBe("empty");
+    assistant.generate("apple");
+    requests[4].callback({ text: "{frut} = 'apple'" });
+    expect(assistant.fixCount).toBe(1);
+    assistant.cancel();
+    expect(assistant.status).toBe("cancelled");
+    expect(requests[5].signal.aborted).toBe(true);
+    requests[5].callback({ text: "{fruit} = 'apple'" });
+    expect(assistant.status).toBe("cancelled");
+    expect(assistant.canAccept).toBe(false);
+  });
+  test("an answer in data wins over text", () => {
+    const { creator, requests } = createCreator();
+    const assistant = createAssistant(creator);
+    assistant.generate("apple");
+    requests[0].callback({ data: { expression: "{fruit} = 'apple'", explanation: "Apple." }, text: "{fruit} = 'banana'" });
+    expect(assistant.expression).toBe("{fruit} = 'apple'");
+    expect(assistant.explanation).toBe("Apple.");
   });
 });
