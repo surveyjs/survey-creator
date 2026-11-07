@@ -120,6 +120,7 @@ export const Basic = {
               "title",
               "description",
               "isRequired",
+              "requiredTrue",
               { name: "correctAnswer", index: 100000 }
             ]
           },
