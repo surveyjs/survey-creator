@@ -2108,6 +2108,7 @@ export var enStrings = {
         notSerializable: "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again.",
         aliasDuplicate: "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins.",
         inertMinMax: "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it.",
+        requiredTrueNotRequired: "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it.",
       },
       "property/invalid-value": {
         notInChoices: "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText}).",
