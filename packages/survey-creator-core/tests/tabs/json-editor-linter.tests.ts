@@ -1272,3 +1272,101 @@ test("Without the segment level of an older core, the third segment of a matrixd
   expect(editor.linter.composeMessage(olderCore(2))).toContain("has no column \"cx\"");
   expect(editor.linter.composeMessage(olderCore(1))).toContain("has no row \"cx\"");
 });
+
+describe("The nested-data findings are told in the words of the creator (nested data, survey-library #12233)", () => {
+  const addressPanel = (valueName: string, extra?: any): any => Object.assign({
+    type: "panel", name: "p1", valueName: valueName, elements: [{ type: "text", name: "street" }]
+  }, extra || {});
+  // every placeholder of the Creator's text is filled: "{name}"-like words are left only where the text quotes
+  // an expression ("{total}", "{total.x}")
+  const expectFilled = (text: string): void => {
+    expect(text.replace(/\{(total|customerTier|score)(\.x)?\}/g, "").match(/\{[A-Za-z0-9_]+\}/)).toBeNull();
+  };
+  test("A container key shadowed by a calculated value", () => {
+    const text = textOf({
+      elements: [addressPanel("total")],
+      calculatedValues: [{ name: "total", expression: "1" }]
+    }, "name/shadowing");
+    expect(text).toBe("The panel \"p1\" stores its questions' values under \"total\", which is also the calculated value" +
+      " \"total\" - {total} and {total.x} read the variable first.");
+    expectFilled(text);
+  });
+  test("A container key shadowed by a host variable or a trigger variable names which one", () => {
+    const shadowed = (json: any, options?: any): string => {
+      const editor = createEditor(JSON.stringify(json, null, 2), options);
+      const found = editor.linter.findings.filter(f => f.finding.reason === "containerKeyShadowed");
+      expect(found).toHaveLength(1);
+      return found[0].text;
+    };
+    expect(shadowed({ elements: [addressPanel("customerTier")] }, { variablePresets: { definition: variableDefinition } }))
+      .toBe("The panel \"p1\" stores its questions' values under \"customerTier\", which is also the host variable" +
+        " \"customerTier\" - {customerTier} and {customerTier.x} read the variable first.");
+    expect(shadowed({
+      pages: [{ name: "pg1", valueName: "score", elements: [{ type: "text", name: "q1" }] }],
+      triggers: [{ type: "setvalue", expression: "{q1} notempty", setToName: "score", isVariable: true, setValue: 1 }]
+    })).toBe("The page \"pg1\" stores its questions' values under \"score\", which is also the trigger variable" +
+      " \"score\" - {score} and {score.x} read the variable first.");
+  });
+  test("A reserved container key", () => {
+    const text = textOf({ elements: [addressPanel("constructor")] }, "name/reserved");
+    expect(text).toBe("\"p1\" stores its questions' values under \"constructor\", which is reserved - a member of" +
+      " Object.prototype.");
+    expectFilled(text);
+  });
+  test("A container key that is also a question's data key", () => {
+    const text = textOf({
+      elements: [addressPanel("addr"), { type: "text", name: "addr" }]
+    }, "nesting/key-conflict");
+    expect(text).toBe("\"p1\" stores its questions' values in an object under \"addr\", which is also the data key of" +
+      " the text question \"addr\" - one key cannot hold both: an answer to \"addr\" replaces the object, and the" +
+      " question shows it.");
+    expectFilled(text);
+  });
+  test("A container key inside a record is ignored", () => {
+    const text = textOf({
+      elements: [{ type: "paneldynamic", name: "people", templateElements: [
+        { type: "panel", name: "inner", valueName: "addr", elements: [{ type: "text", name: "street" }] }
+      ] }]
+    }, "nesting/ignored-key");
+    expect(text).toBe("The valueName \"addr\" of panel \"inner\" stores nothing: the panel is inside \"people\"" +
+      " (paneldynamic), which keeps its records flat - the panel's questions write into the record directly.");
+    expectFilled(text);
+  });
+  test("A generated name a by-name mode stores under, and the fix button that keeps the key", () => {
+    const editor = createEditor(JSON.stringify({
+      dataNesting: "panel",
+      elements: [{ type: "panel", name: "panel1", elements: [{ type: "text", name: "street" }] }]
+    }, null, 2));
+    const findings = editor.linter.findings.filter(f => f.ruleId === "nesting/generated-key");
+    expect(findings).toHaveLength(1);
+    expect(findings[0].text).toBe("The panel \"panel1\" keeps a generated name, and dataNesting \"panel\" stores its" +
+      " questions' values under it - renaming the panel moves them to another key. Set its valueName to \"panel1\"" +
+      " to keep the key.");
+    expectFilled(findings[0].text);
+    const action = editor.errorList.actions.filter(a => a.data.error.ruleId === "nesting/generated-key")[0];
+    expect(action.data.showFixButton).toBeTruthy();
+    expect(action.data.fixButtonTitle).toBe("Set the valueName to the current name");
+  });
+  test("An unnamed container a by-name mode stores under its generated name", () => {
+    const editor = createEditor(JSON.stringify({
+      dataNesting: "page",
+      pages: [{ elements: [{ type: "text", name: "q1" }] }]
+    }, null, 2));
+    const findings = editor.linter.findings.filter(f => f.ruleId === "nesting/generated-key");
+    expect(findings).toHaveLength(1);
+    expect(findings[0].text).toBe("This page has no name: dataNesting \"page\" stores its questions' values under" +
+      " \"page1\", the name the survey generates for it in load order - adding or moving pages changes it. Give it" +
+      " a name or a valueName.");
+    expectFilled(findings[0].text);
+  });
+  test("A path into a container key that does not nest gets the hint", () => {
+    const text = textOf({
+      dataNesting: "none",
+      elements: [addressPanel("addr"), { type: "text", name: "q2", visibleIf: "{addr.street} = 1" }]
+    }, "reference/unknown");
+    expect(text).toBe("\"addr.street\" is not found - no question, panel, page, calculated value, or variable with" +
+      " that name exists. \"addr\" is the valueName of a panel or page that stores no object: the survey's" +
+      " dataNesting is \"none\", or the panel is inside a dynamic panel, a matrix detail panel, or a composite" +
+      " question, which keep their records flat. In expression: {addr.street} = 1");
+  });
+});

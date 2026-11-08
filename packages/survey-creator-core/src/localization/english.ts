@@ -2104,9 +2104,7 @@ export var enStrings = {
         commentKeyCollision: "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other.",
         totalKeyCollision: "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other.",
         variableShadowsQuestion: "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question.",
-        // {kind} is a raw code (calculatedValue, variable, trigger) with no term for it yet, so the
-        // sentence names both kinds instead
-        containerKeyShadowed: "The {ownerText} \"{name}\" stores its questions' values under \"{key}\", which is also a calculated value or variable named \"{variable}\" - {{key}} and {{key}.x} read the variable first.",
+        containerKeyShadowed: "The {ownerText} \"{name}\" stores its questions' values under \"{key}\", which is also {kindText} \"{variable}\" - {{key}} and {{key}.x} read the variable first.",
       },
       "name/reserved": {
         questionName: "The name \"{name}\" is reserved - a member of Object.prototype.",
@@ -2343,6 +2341,13 @@ export var enStrings = {
       containerKind: {
         page: "page",
         panel: "panel",
+      },
+      // what a container key of name/shadowing is also the name of
+      variableKind: {
+        calculatedValue: "the calculated value",
+        variable: "the host variable",
+        trigger: "the trigger variable",
+        default: "the variable",
       },
       // which of the three name properties shadows a built-in variable
       nameKind: {
