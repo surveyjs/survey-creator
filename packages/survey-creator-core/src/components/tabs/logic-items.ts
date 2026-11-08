@@ -18,6 +18,28 @@ import { updateLogicExpression } from "./logic-expression";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 import { wrapTextByCurlyBraces } from "../../utils/creator-utils";
 import { SurveyHelper } from "../../survey-helper";
+import { findInnerQuestion, getExpressionScopePaths, isInnerQuestion } from "../../utils/data-path";
+
+// The variable prefixes a data key change rewrites for an element resolved in the given data scopes: for every
+// scope above the changed key, the relative path down to it ("page1.address" from the root, "address" from
+// inside page1) with its last key replaced.
+function getDataKeyRenames(oldPath: Array<string>, newKey: string, keepName: string, scopes: Array<Array<string>>): Array<{ oldName: string, newName: string }> {
+  const res: Array<{ oldName: string, newName: string }> = [];
+  scopes.forEach(scope => {
+    if (scope.length >= oldPath.length) return;
+    for (let i = 0; i < scope.length; i++) {
+      if (scope[i].toLowerCase() !== oldPath[i].toLowerCase()) return;
+    }
+    const rel = oldPath.slice(scope.length);
+    if (rel.length === 1 && !!keepName && rel[0].toLowerCase() === keepName.toLowerCase()) return;
+    const oldName = rel.join(".");
+    const newName = rel.slice(0, rel.length - 1).concat([newKey]).join(".");
+    if (oldName !== newName && !res.some(item => item.oldName.toLowerCase() === oldName.toLowerCase())) {
+      res.push({ oldName: oldName, newName: newName });
+    }
+  });
+  return res;
+}
 
 export class SurveyLogicAction {
   private surveyValue: SurveyModel;
@@ -67,6 +89,23 @@ export class SurveyLogicAction {
         this.element[names[i]] = newName;
       }
     }
+  }
+  // Nested data: a question name of the action (a trigger's setToName, fromName) that is a data path
+  // through a renamed key.
+  public renameDataKeyInNames(renames: Array<{ oldName: string, newName: string }>): void {
+    if (!this.element || renames.length === 0) return;
+    this.questionNames.forEach(propName => {
+      const str: string = this.element[propName];
+      if (!str || typeof str !== "string") return;
+      const lowStr = str.toLowerCase();
+      for (let i = 0; i < renames.length; i++) {
+        const oldName = renames[i].oldName.toLowerCase();
+        if (lowStr === oldName || lowStr.indexOf(oldName + ".") === 0) {
+          this.element[propName] = renames[i].newName + str.substring(oldName.length);
+          return;
+        }
+      }
+    });
   }
   public clone(): SurveyLogicAction {
     const el = this.logicType.cloneElement(this.element);
@@ -451,7 +490,62 @@ export class SurveyLogicItem {
     return (this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName)) && this.isSuitableByLogicTypeInActions(logicTypeName);
   }
   private isSuitableInExpression(filteredName: string): boolean {
-    return this.expression.indexOf(wrapTextByCurlyBraces(filteredName)) !== -1 || this.expression.indexOf("'" + filteredName + ".") !== -1;
+    if (this.expression.indexOf(wrapTextByCurlyBraces(filteredName)) !== -1 || this.expression.indexOf("'" + filteredName + ".") !== -1) return true;
+    return this.isInnerQuestionInExpression(filteredName);
+  }
+  private isInnerQuestionInExpression(questionName: string): boolean {
+    if (!this.expression || !this.survey) return false;
+    const question = this.survey.getQuestionByName(questionName);
+    if (!question || !isInnerQuestion(question)) return false;
+    const names: Array<string> = [];
+    this.getQuestionNamesFromExpression(names);
+    return names.some(name => {
+      // a name of a question is the name form, which the check above has already looked for
+      if (!!this.survey.getQuestionByName(name)) return false;
+      return this.findInnerQuestion(name) === question;
+    });
+  }
+  // Nested data: the inner question a variable of this rule names, by its name or by a data path
+  // ({address.street}) resolved in the data scopes of the rule's elements.
+  public findInnerQuestion(name: string): Question {
+    const owners: Array<Base> = this.actions.length > 0 ? this.actions.map(action => action.parentElement || action.element) : [null];
+    for (let i = 0; i < owners.length; i++) {
+      const info = findInnerQuestion(this.survey, name, owners[i]);
+      if (!!info && !info.rest) return info.question;
+    }
+    return null;
+  }
+  // Nested data: the data key at the end of oldPath (a container's key or an inner question's value name)
+  // became newKey. Every variable that reaches it through that key is rewritten, as resolved from the data
+  // scopes of each element: the path from the root ({page1.address.street}) and the path relative to an
+  // enclosing container ({address.street} inside page1). keepName: a one-key relative path equal to the
+  // question's name is the name form ({street}), which a valueName change never rewrites.
+  // Returns true when the rule's elements got different texts (they are resolved in different scopes), so
+  // the rule no longer has one expression and the logic has to be built again.
+  public renameDataKey(oldPath: Array<string>, newKey: string, keepName?: string): boolean {
+    if (!this.expression || this.actions.length === 0 || oldPath.length === 0 || !newKey) return false;
+    const texts = this.actions.map(action => {
+      const renames = getDataKeyRenames(oldPath, newKey, keepName, getExpressionScopePaths(action.parentElement || action.element));
+      action.renameDataKeyInNames(renames);
+      let res = this.expression;
+      renames.forEach(item => res = this.renameVariablePrefix(res, item.oldName, item.newName));
+      return res;
+    });
+    if (texts.every(text => text === this.expression)) return false;
+    if (texts.every(text => text === texts[0])) {
+      this.applyExpression(texts[0], true);
+      return false;
+    }
+    this.actions.forEach((action, index) => action.apply(texts[index], true));
+    return true;
+  }
+  private renameVariablePrefix(expression: string, oldName: string, newName: string): string {
+    const ob = surveyLibSettings.expressionVariableDelimiters.start;
+    let res = expression;
+    [surveyLibSettings.expressionVariableDelimiters.end, ".", "["].forEach(ch => {
+      res = this.renameQuestionInExpressionCore(res, res.toLocaleLowerCase(), (ob + oldName + ch).toLocaleLowerCase(), ob + newName + ch);
+    });
+    return res;
   }
   private isSuitableByNameInActions(filteredName: string): boolean {
     return this.actions.some(action => action.isSuitableByQuestionName(filteredName));

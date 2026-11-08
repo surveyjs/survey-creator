@@ -24,6 +24,7 @@ import {
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
+import { getContainerDataKey, isInnerQuestion } from "./utils/data-path";
 import { DragDropChoices } from "survey-core";
 import { IsTouch } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
@@ -2757,7 +2758,9 @@ export class SurveyCreatorModel extends Base
   }
   public updateConditionsOnNameChanged(obj: Base, propertyName: string, oldValue: any): void {
     if (this.isCreatingNewElement) return;
-    if (this.isObjQuestion(obj)) {
+    if (this.isObjQuestion(obj) && isInnerQuestion(obj)) {
+      this.updateConditionsOnInnerQuestionNameChanged(<Question>obj, propertyName, oldValue);
+    } else if (this.isObjQuestion(obj)) {
       if (propertyName === "name" && !obj["valueName"]) {
         this.updateLogicOnQuestionNameChanged(oldValue, obj["name"]);
       }
@@ -2766,12 +2769,49 @@ export class SurveyCreatorModel extends Base
         const newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
         this.updateLogicOnQuestionNameChanged(oldName, newName);
       }
-      if (propertyName === "name" && obj.isDescendantOf("selectbase")) {
-        this.updateChoicesFromQuestionOnColumnNameChanged(oldValue, obj["name"]);
-      }
+    }
+    if (this.isObjQuestion(obj) && propertyName === "name" && obj.isDescendantOf("selectbase")) {
+      this.updateChoicesFromQuestionOnColumnNameChanged(oldValue, obj["name"]);
     }
     if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
       this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
+    }
+    if ((propertyName === "name" || propertyName === "valueName") && obj instanceof PanelModelBase) {
+      this.updateConditionsOnContainerKeyChanged(obj, propertyName, oldValue);
+    }
+  }
+  // Nested data (survey-library #12233). The condition editor inserts an inner question by its name ({street}),
+  // which resolves at the root and inside its container; its value name is no key of the survey data, so a
+  // valueName change never rewrites {name} to {valueName}. A data path that reaches the question
+  // ({address.street}) follows the change of its last key.
+  private updateConditionsOnInnerQuestionNameChanged(question: Question, propertyName: string, oldValue: any): void {
+    if (propertyName === "name") {
+      this.updateLogicOnQuestionNameChanged(oldValue, question.name);
+      if (!question.valueName) {
+        this.updateLogicOnDataKeyChanged(question.getDataPath(), oldValue, question.name, oldValue);
+      }
+    }
+    if (propertyName === "valueName") {
+      this.updateLogicOnDataKeyChanged(question.getDataPath(), oldValue || question.name, question.getValueName(), question.name);
+    }
+  }
+  // A panel's or a page's data key changed (its valueName, or its name in a by-name dataNesting mode): every
+  // path through the key follows. A key that stays the same (a panel with its own valueName renamed), or a
+  // container that starts or stops nesting, rewrites nothing.
+  private updateConditionsOnContainerKeyChanged(panel: PanelModelBase, propertyName: string, oldValue: any): void {
+    const oldKey = propertyName === "name" ? getContainerDataKey(panel, panel.valueName, oldValue) : getContainerDataKey(panel, oldValue, panel.name);
+    const newKey = getContainerDataKey(panel, panel.valueName, panel.name);
+    if (!oldKey || !newKey || !panel.isDataNesting) return;
+    this.updateLogicOnDataKeyChanged(panel.getDataPath(), oldKey, newKey);
+  }
+  private updateLogicOnDataKeyChanged(newPath: Array<string>, oldKey: string, newKey: string, keepName?: string): void {
+    if (!oldKey || !newKey || oldKey === newKey || newPath.length === 0 || !settings.logic.updateExpressionsOnChanging.questionName) return;
+    const oldPath = newPath.slice(0, newPath.length - 1).concat([oldKey]);
+    this.surveyLogicRenaming = true;
+    const isSplit = this.getSurveyLogicForUpdate().renameDataKey(oldPath, newKey, keepName);
+    this.surveyLogicRenaming = false;
+    if (isSplit) {
+      this.surveyLogicForUpdate = undefined;
     }
   }
   private surveyLogicForUpdate: SurveyLogic;
