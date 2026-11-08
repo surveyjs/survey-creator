@@ -333,6 +333,9 @@ export var enStrings = {
   },
   // Property Editors
   pe: {
+    panelbase: {
+      valueName: "Data key"
+    },
     panel: {
       name: "Panel name",
       title: "Panel title",
@@ -674,6 +677,7 @@ export var enStrings = {
     landscapeOrientation: "Switch to landscape orientation",
     portraitOrientation: "Switch to portrait orientation",
     clearInvisibleValues: "Clear hidden question values",
+    dataNesting: "Store panel and page values in objects",
     cookieName: "Limit to one response",
     partialSendEnabled: "Auto-save survey progress on page change",
     storeOthersAsComment: "Save the \"Other\" option value as a separate property",
@@ -1099,6 +1103,13 @@ export var enStrings = {
     clearInvisibleValues: {
       none: "Never"
     },
+    dataNesting: {
+      auto: "Panels and pages with a data key",
+      none: "Never (flat data)",
+      panel: "Every panel",
+      page: "Every page",
+      panelAndPage: "Every panel and page"
+    },
     clearIfInvisible: {
       none: "Never"
     },
@@ -1514,6 +1525,9 @@ export var enStrings = {
     }
   },
   pehelp: {
+    panelbase: {
+      valueName: "The questions inside this panel or page store their values in an object under this key in survey results. If you leave it empty, their values are stored with the values of the enclosing panel or page (or at the top level), unless the survey's \"Store panel and page values in objects\" setting nests every panel or page under its name. When that setting is \"Never (flat data)\", the key is kept but ignored. The key is not available inside a dynamic panel, a matrix detail section, or a composite question, whose entries keep flat data."
+    },
     panel: {
       name: "A panel ID that is not visible to respondents.",
       description: "Type a panel subtitle.",
@@ -1701,6 +1715,7 @@ export var enStrings = {
     includeIntoResult: "Select if you wish the calculated value of the expression to be saved along with survey results.",
     triggers: "A trigger is an event or condition that is based on an expression. Once the expression is evaluated to \"true\", a trigger sets off an action. Such an action can optionally have a target question it affects.",
     clearInvisibleValues: "Choose whether or not to clear values for questions hidden by conditional logic and when to do it.",
+    dataNesting: "Specifies which panels and pages store their questions' values in an object. \"Panels and pages with a data key\" nests only the panels and pages whose data key is set. \"Every panel\", \"Every page\", and \"Every panel and page\" also nest the panels or pages without a data key, under their names. \"Never (flat data)\" ignores every data key and stores all values at the top level. Changing this setting does not move data you have already collected.",
     textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing.",
     columns: "The left value serves as a column ID used in conditional rules, the right value is displayed to respondents.",
     rows: "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents.",
