@@ -1162,6 +1162,8 @@ export var hebrewStrings = {
     visible: "נראה",
     // "Required"
     isRequired: "נדרש",
+    // [Auto-translated] "Accept only a positive answer"
+    requiredTrue: "קבל רק תשובה חיובית",
     // "Mark as required"
     markRequired: "סמן כשדה חובה",
     // "Remove the required mark"
@@ -3272,6 +3274,8 @@ export var hebrewStrings = {
     valueTrue: "ערך שיש לשמור בתוצאות הסקר כאשר המשיבים נותנים תשובה חיובית.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "ערך שיש לשמור בתוצאות הסקר כאשר המשיבים נותנים תשובה שלילית.",
+    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
+    requiredTrue: "בחר להתייחס לתשובה שלילית כלא נענתה, כך שהמשיבים חייבים לבחור \"כן\" (או לסמן את תיבת הסימון) כדי להמשיך. לדוגמה, השתמש בזה כדי לדרוש הסכמה לתנאים ולהגבלות. זה חל רק כאשר השאלה נדרשת.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "לא מומלץ להשבית אפשרות זו מכיוון שהיא עוקפת את תמונת התצוגה המקדימה ומקשה על המשתמש להבין אם הקבצים הועלו.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3888,7 +3892,9 @@ export var hebrewStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" ו-\"{aliasKey}\" של {ownerText} הם שני שמות של תכונה אחת - זמן הריצה מיישם אותם לפי הסדר שבו JSON כותב אותם, כך ש\"{winner}\" מנצח.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" מוגדר על \"{name}\", אבל ל-inputType \"{inputType}\" אין גבולות - זמן הריצה מתעלם ממנו."
+        inertMinMax: "\"{key}\" מוגדר על \"{name}\", אבל ל-inputType \"{inputType}\" אין גבולות - זמן הריצה מתעלם ממנו.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
+        requiredTrueNotRequired: "\"{key}\" מוגדר על \"{name}\", אך \"{name}\" אינו isRequired ולא requiredIf - זמן הריצה מתעלם ממנו."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

@@ -1162,6 +1162,8 @@ export var ruStrings = {
     visible: "Отображать?",
     // "Required"
     isRequired: "Обязательный?",
+    // [Auto-translated] "Accept only a positive answer"
+    requiredTrue: "Принимайте только положительный ответ",
     // [Auto-translated] "Mark as required"
     markRequired: "Отметьте как обязательный",
     // [Auto-translated] "Remove the required mark"
@@ -3272,6 +3274,8 @@ export var ruStrings = {
     valueTrue: "Значение, сохраняемое в результатах опроса, когда респонденты дают положительный ответ.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Значение, сохраняемое в результатах опроса, когда респонденты дают отрицательный ответ.",
+    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
+    requiredTrue: "Выберите считать отрицательный ответ неотвеченным, поэтому респондентам нужно выбрать «Да» (или поставить галочку) для продолжения. Например, используйте его для получения согласия на условия положений. Применяется только тогда, когда вопрос требуется.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Не рекомендуется отключать эту опцию, так как она переопределяет изображение предварительного просмотра и затрудняет понимание пользователем того, были ли файлы загружены.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3888,7 +3892,9 @@ export var ruStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" и \"{aliasKey}\" из {ownerText} — два названия одного свойства — время выполнения применяет их в порядке записи JSON, поэтому побеждает \"{winner}\".",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" установлен на \"{name}\", но inputType \"{inputType}\" не имеет ограничений — время выполнения игнорирует его."
+        inertMinMax: "\"{key}\" установлен на \"{name}\", но inputType \"{inputType}\" не имеет ограничений — время выполнения игнорирует его.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
+        requiredTrueNotRequired: "«{key}» установлен на «{name}», но «{name}» не имеет ни isRequired, ни requiredIf — время выполнения игнорирует его."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

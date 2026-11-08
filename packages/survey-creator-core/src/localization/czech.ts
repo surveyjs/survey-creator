@@ -1162,6 +1162,8 @@ export var czStrings = {
     visible: "Viditelná?",
     // "Required"
     isRequired: "Povinná?",
+    // [Auto-translated] "Accept only a positive answer"
+    requiredTrue: "Přijímejte pouze pozitivní odpověď",
     // [Auto-translated] "Mark as required"
     markRequired: "Označit podle potřeby",
     // [Auto-translated] "Remove the required mark"
@@ -3272,6 +3274,8 @@ export var czStrings = {
     valueTrue: "Hodnota, která se uloží do výsledků průzkumu, když respondenti odpoví kladně.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Hodnota, která se má uložit do výsledků průzkumu, když respondenti odpoví záporně.",
+    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
+    requiredTrue: "Zvolte považovat zápornou odpověď za nezodpovězenou, takže respondenti musí zvolit \"Ano\" (nebo zaškrtnout políčko), aby mohli pokračovat. Například použijte tuto možnost k požadavku souhlasu s podmínkami. Platí pouze tehdy, když je otázka vyžadována.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Nedoporučujeme tuto volbu vypínat, protože přepíše obraz náhledu a uživateli ztíží pochopení, zda byly soubory odeslány.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3888,7 +3892,9 @@ export var czStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" a \"{aliasKey}\" z {ownerText} jsou dvě jména jedné vlastnosti – během běhu je aplikuje v pořadí, v jakém je JSON zapisuje, takže \"{winner}\" vyhrává.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" je nastaveno na \"{name}\", ale inputType \"{inputType}\" nemá žádné mezí – běh jej ignoruje."
+        inertMinMax: "\"{key}\" je nastaveno na \"{name}\", ale inputType \"{inputType}\" nemá žádné mezí – běh jej ignoruje.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
+        requiredTrueNotRequired: "\"{key}\" je nastaveno na \"{name}\", ale \"{name}\" nemá ani isRequired, ani requiredIf - běh ho ignoruje."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

@@ -1162,6 +1162,8 @@ export var skStrings = {
     visible: "Je viditeľné?",
     // "Required"
     isRequired: "Vyžaduje sa?",
+    // [Auto-translated] "Accept only a positive answer"
+    requiredTrue: "Prijmite len pozitívnu odpoveď",
     // [Auto-translated] "Mark as required"
     markRequired: "Označiť podľa potreby",
     // [Auto-translated] "Remove the required mark"
@@ -3272,6 +3274,8 @@ export var skStrings = {
     valueTrue: "Hodnota, ktorú treba uložiť do výsledkov prieskumu, keď respondenti poskytnú kladnú odpoveď.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Hodnota, ktorú je potrebné uložiť do výsledkov prieskumu, keď respondenti poskytnú zápornú odpoveď.",
+    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
+    requiredTrue: "Vyberte tak, aby sa negatívna odpoveď považovala za nezodpovedanú, takže respondenti musia zvoliť \"Áno\" (alebo zaškrtnúť políčko), aby mohli pokračovať. Napríklad použite túto možnosť na vyžadovanie súhlasu s podmienkami. Platí len vtedy, keď je otázka potrebná.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Neodporúča sa vypnúť túto možnosť, pretože prepíše obrázok ukážky a používateľovi sťaží pochopenie, či boli súbory nahrané.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3888,7 +3892,9 @@ export var skStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" a \"{aliasKey}\" z {ownerText} sú dva názvy jednej vlastnosti – za behu ich aplikuje v poradí, v akom ich JSON zapisuje, takže \"{winner}\" vyhráva.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" je nastavený na \"{name}\", ale inputType \"{inputType}\" nemá žiadne hranice – čas behu ho ignoruje."
+        inertMinMax: "\"{key}\" je nastavený na \"{name}\", ale inputType \"{inputType}\" nemá žiadne hranice – čas behu ho ignoruje.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
+        requiredTrueNotRequired: "\"{key}\" je nastavený na \"{name}\", ale \"{name}\" nemá ani isRequired, ani requiredIf - čas behu ho ignoruje."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

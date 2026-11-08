@@ -1163,6 +1163,8 @@ export var koreanStrings = {
     visible: "보입니까??",
     // "Required"
     isRequired: "필수입니까?",
+    // [Auto-translated] "Accept only a positive answer"
+    requiredTrue: "긍정적인 답변만 받아들이세요",
     // [Auto-translated] "Mark as required"
     markRequired: "필요에 따라 표시",
     // [Auto-translated] "Remove the required mark"
@@ -3273,6 +3275,8 @@ export var koreanStrings = {
     valueTrue: "응답자들이 긍정적인 답변을 할 때 설문조사 결과에 저장하는 값입니다.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "응답자들이 부정적인 답변을 할 때 설문조사 결과에 저장하는 값입니다.",
+    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
+    requiredTrue: "부정적인 답변을 미답변으로 간주하므로, 응답자는 \"예\"를 선택하거나 체크박스를 체크해야 진행할 수 있습니다. 예를 들어, 이용 약관에 대한 동의를 요구하는 데 사용할 수 있습니다. 질문이 요구되는 경우에만 적용됩니다.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "이 옵션은 미리 보기 이미지를 재정의하고 사용자가 파일이 업로드되었는지 여부를 이해하기 어렵게 만들기 때문에 사용하지 않도록 설정하지 않는 것이 좋습니다.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3889,7 +3893,9 @@ export var koreanStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "{ownerText}의 \"{key}\"와 \"{aliasKey}\"는 하나의 속성에 대한 두 이름이며, 실행 시간이 JSON이 작성하는 순서대로 적용되므로 \"{winner}\"가 승리합니다.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\"는 \"{name}\" 위에 설정되어 있지만, inputType \"{inputType}\"는 경계가 없어 런타임이 이를 무시합니다."
+        inertMinMax: "\"{key}\"는 \"{name}\" 위에 설정되어 있지만, inputType \"{inputType}\"는 경계가 없어 런타임이 이를 무시합니다.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
+        requiredTrueNotRequired: "\"{key}\"는 \"{name}\" 위에 설정되어 있지만, \"{name}\"는 isRequired도, requiredIf도 없습니다 - 런타임이 이를 무시합니다."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

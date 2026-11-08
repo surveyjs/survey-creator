@@ -1162,6 +1162,8 @@ export var simplifiedChineseTranslation = {
     visible: "是否可见?",
     // "Required"
     isRequired: "是否为必填项?",
+    // [Auto-translated] "Accept only a positive answer"
+    requiredTrue: "只接受一个积极的答案",
     // [Auto-translated] "Mark as required"
     markRequired: "标记为必填",
     // [Auto-translated] "Remove the required mark"
@@ -3272,6 +3274,8 @@ export var simplifiedChineseTranslation = {
     valueTrue: "当受访者给出肯定答案时保存在调查结果中的值。",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "当受访者给出否定答案时保存在调查结果中的值。",
+    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
+    requiredTrue: "选择将否定回答视为未回答，因此受访者必须选择“是”（或勾选复选框）才能继续。例如，可以用它来要求对条款和条件的同意。仅在需要该问题时适用。",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "不建议禁用此选项，因为它会覆盖预览图像，并使用户难以了解文件是否已上传。",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3888,7 +3892,9 @@ export var simplifiedChineseTranslation = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "{ownerText} 中的“{key}” 和 “{aliasKey}} 是同一个属性的两个名称——运行时会按 JSON 写入顺序应用它们，所以”{winner}“ 获胜。",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "“{key}” 设置在 “{name}” 上，但 inputType “{inputType}” 没有边界——运行时会忽略它。"
+        inertMinMax: "“{key}” 设置在 “{name}” 上，但 inputType “{inputType}” 没有边界——运行时会忽略它。",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
+        requiredTrueNotRequired: "“{key}” 设置在“{name}”上，但“{name}”既没有 isRequired，也没有 requiredIf ——运行时会忽略它。"
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

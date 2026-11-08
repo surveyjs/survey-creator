@@ -1162,6 +1162,8 @@ export var nbStrings = {
     visible: "Er synlig?",
     // "Required"
     isRequired: "Er nødvendig?",
+    // [Auto-translated] "Accept only a positive answer"
+    requiredTrue: "Aksepter kun et positivt svar",
     // [Auto-translated] "Mark as required"
     markRequired: "Merk etter behov",
     // [Auto-translated] "Remove the required mark"
@@ -3272,6 +3274,8 @@ export var nbStrings = {
     valueTrue: "En verdi å spare i undersøkelsesresultater når respondentene gir et positivt svar.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "En verdi å lagre i undersøkelsesresultater når respondentene gir et negativt svar.",
+    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
+    requiredTrue: "Velg å behandle et negativt svar som ubesvart, så respondentene må velge \"Ja\" (eller krysse av i boksen) for å gå videre. For eksempel, bruk det for å kreve samtykke til vilkår og betingelser. Gjelder kun når spørsmålet er påkrevd.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Det anbefales ikke at du deaktiverer dette alternativet, da det overstyrer forhåndsvisningsbildet og gjør det vanskelig for en bruker å forstå om filene er lastet opp.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3888,7 +3892,9 @@ export var nbStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" og \"{aliasKey}\" i {ownerText} er to navn på én egenskap – kjøretiden bruker dem i den rekkefølgen JSON-en skriver dem, så \"{winner}\" vinner.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" settes på \"{name}\", men inputType \"{inputType}\" har ingen begrensninger – kjøretiden ignorerer det."
+        inertMinMax: "\"{key}\" settes på \"{name}\", men inputType \"{inputType}\" har ingen begrensninger – kjøretiden ignorerer det.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
+        requiredTrueNotRequired: "\"{key}\" er satt på \"{name}\", men \"{name}\" har verken isRequired eller requiredIf – kjøretiden ignorerer det."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

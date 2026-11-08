@@ -1162,6 +1162,8 @@ export var arStrings = {
     visible: "مرئي؟",
     // "Required"
     isRequired: "مطلوب؟",
+    // [Auto-translated] "Accept only a positive answer"
+    requiredTrue: "اقبل فقط إجابة إيجابية",
     // [Auto-translated] "Mark as required"
     markRequired: "وضع علامة كمطلوب",
     // [Auto-translated] "Remove the required mark"
@@ -3272,6 +3274,8 @@ export var arStrings = {
     valueTrue: "قيمة يجب حفظها في نتائج الاستطلاع عندما يعطي المستجيبون إجابة إيجابية.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "قيمة يجب حفظها في نتائج الاستطلاع عندما يعطي المستجيبون إجابة سلبية.",
+    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
+    requiredTrue: "اختر اعتبار الإجابة السلبية غير مجيبة، لذا يجب على المشاركين اختيار \"نعم\" (أو وضع علامة على خانة الاختيار) للاستمرار. على سبيل المثال، استخدمها لطلب الموافقة على الشروط والأحكام. ينطبق فقط عندما يكون السؤال مطلوبا.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "لا يوصى بتعطيل هذا الخيار لأنه يتجاوز صورة المعاينة ويجعل من الصعب على المستخدم فهم ما إذا كان قد تم تحميل الملفات.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3888,7 +3892,9 @@ export var arStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" و \"{aliasKey}\" من {ownerText} هما اسمان لخاصية واحدة - حيث يتم تطبيق وقت التشغيل عليهما بالترتيب الذي يكتبه JSON، لذا \"{winner}\" هو الفائز.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" مضبوط على \"{name}\"، لكن نوع inputType \"{inputType}\" لا حدود له - وقت التشغيل يتجاهله."
+        inertMinMax: "\"{key}\" مضبوط على \"{name}\"، لكن نوع inputType \"{inputType}\" لا حدود له - وقت التشغيل يتجاهله.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
+        requiredTrueNotRequired: "\"{key}\" مضبوط على \"{name}\"، لكن \"{name}\" لا يحتوي على isRequired ولا required If - وقت التشغيل يتجاهله."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

@@ -1162,6 +1162,8 @@ export var msStrings = {
     visible: "Boleh dilihat?",
     // "Required"
     isRequired: "Diperlukan?",
+    // [Auto-translated] "Accept only a positive answer"
+    requiredTrue: "Terima hanya jawapan positif",
     // [Auto-translated] "Mark as required"
     markRequired: "Tandakan mengikut keperluan",
     // [Auto-translated] "Remove the required mark"
@@ -3272,6 +3274,8 @@ export var msStrings = {
     valueTrue: "Nilai untuk menyimpan hasil tinjauan apabila responden memberikan jawapan yang positif.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Nilai untuk menyimpan hasil tinjauan apabila responden memberikan jawapan negatif.",
+    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
+    requiredTrue: "Pilih untuk menganggap jawapan negatif sebagai tidak terjawab, jadi responden mesti memilih \"Ya\" (atau tandakan kotak semak) untuk meneruskan. Sebagai contoh, gunakan untuk meminta persetujuan terhadap terma dan syarat. Hanya terpakai apabila soalan diperlukan.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Anda tidak disyorkan untuk menyahdayakan pilihan ini kerana ia mengatasi imej Pratonton dan menyukarkan pengguna untuk memahami sama ada fail telah dimuat naik.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3888,7 +3892,9 @@ export var msStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" dan \"{aliasKey}\" dalam {ownerText} adalah dua nama bagi satu sifat - masa jalan menggunakannya mengikut susunan JSON menulisnya, jadi \"{winner}\" menang.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" ditetapkan pada \"{name}\", tetapi inputType \"{inputType}\" tiada batasan - masa jalan mengabaikannya."
+        inertMinMax: "\"{key}\" ditetapkan pada \"{name}\", tetapi inputType \"{inputType}\" tiada batasan - masa jalan mengabaikannya.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
+        requiredTrueNotRequired: "\"{key}\" ditetapkan pada \"{name}\", tetapi \"{name}\" tidak mempunyai isRequired mahupun requiredIf - masa jalan mengabaikannya."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

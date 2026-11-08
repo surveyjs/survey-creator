@@ -1162,6 +1162,8 @@ export var nlStrings = {
     visible: "Is zichtbaar?",
     // "Required"
     isRequired: "Is verplicht?",
+    // [Auto-translated] "Accept only a positive answer"
+    requiredTrue: "Accepteer alleen een positief antwoord",
     // [Auto-translated] "Mark as required"
     markRequired: "Markeren zoals vereist",
     // [Auto-translated] "Remove the required mark"
@@ -3272,6 +3274,8 @@ export var nlStrings = {
     valueTrue: "Een waarde die moet worden opgeslagen in enquêteresultaten wanneer respondenten een positief antwoord geven.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Een waarde die moet worden opgeslagen in enquêteresultaten wanneer respondenten een negatief antwoord geven.",
+    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
+    requiredTrue: "Selecteer om een ontkennend antwoord als onbeantwoord te behandelen, zodat respondenten \"Ja\" moeten selecteren (of het vakje aanvinken) om verder te gaan. Gebruik het bijvoorbeeld om toestemming te vragen voor de voorwaarden en voorwaarden. Gilt alleen wanneer de vraag vereist is.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Het wordt niet aanbevolen om deze optie uit te schakelen, omdat deze de voorbeeldafbeelding overschrijft en het voor een gebruiker moeilijk maakt om te begrijpen of de bestanden zijn geüpload.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3888,7 +3892,9 @@ export var nlStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" en \"{aliasKey}\" van {ownerText} zijn twee namen van één eigenschap - de runtime past ze toe in de volgorde waarin de JSON ze schrijft, dus \"{winner}\" wint.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" is ingesteld op \"{name}\", maar inputType \"{inputType}\" kent geen grenzen - de looptijd negeert het."
+        inertMinMax: "\"{key}\" is ingesteld op \"{name}\", maar inputType \"{inputType}\" kent geen grenzen - de looptijd negeert het.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
+        requiredTrueNotRequired: "\"{key}\" is ingesteld op \"{name}\", maar \"{name}\" heeft noch isRequired noch requiredIf - de runtime negeert het."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

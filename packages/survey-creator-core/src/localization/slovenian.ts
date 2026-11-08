@@ -1162,6 +1162,8 @@ export var slStrings = {
     visible: "Vidno",
     // "Required"
     isRequired: "Obvezno",
+    // [Auto-translated] "Accept only a positive answer"
+    requiredTrue: "Sprejmite le pozitiven odgovor",
     // "Mark as required"
     markRequired: "Označi kot obvezno",
     // "Remove the required mark"
@@ -3272,6 +3274,8 @@ export var slStrings = {
     valueTrue: "Vrednost, ki se shrani v rezultate ankete, ko anketiranec poda pozitiven odgovor",
     // "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Vrednost, ki se shrani v rezultate ankete, ko anketiranec poda negativen odgovor",
+    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
+    requiredTrue: "Izberi, da se negativen odgovor obravnava kot neodgovorjen, zato morajo anketiranci izbrati \"Da\" (ali označiti potrditveno polje), da nadaljujejo. Na primer, uporabi ga za zahtevo po soglasju s pogoji in določili. Velja le, kadar je vprašanje zahtevano.",
     // "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Ni priporočljivo, da onemogočite to možnost, saj preglasi predogled slike in uporabniku oteži razumevanje, ali so bile datoteke naložene",
     // "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3888,7 +3892,9 @@ export var slStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" in \"{aliasKey}\" iz {ownerText} sta dve imeni ene lastnosti – čas izvajanja ju uporabi v vrstnem redu, v katerem ju JSON zapiše, zato zmaga \"{winner}\".",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" je nastavljen na \"{name}\", vendar inputType \"{inputType}\" nima meja – čas izvajanja ga ignorira."
+        inertMinMax: "\"{key}\" je nastavljen na \"{name}\", vendar inputType \"{inputType}\" nima meja – čas izvajanja ga ignorira.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
+        requiredTrueNotRequired: "\"{key}\" je nastavljen na \"{name}\", vendar \"{name}\" nima niti isRequired niti requiredIf - čas izvajanja ga ignorira."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
