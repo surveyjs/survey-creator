@@ -2041,6 +2041,7 @@ export var enStrings = {
       "mask/mismatch": { setMaskType: "Use the suggested mask" },
       "name/duplicate": { renameElement: "Give the element a free name" },
       "name/reserved": { renameElement: "Give the element a free name" },
+      "nesting/generated-key": { setValueName: "Set the valueName to the current name" },
       "property/dead": { removeKey: "Remove the property" },
       "property/invalid-value": {
         clampToRange: "Use the nearest allowed value",
@@ -2088,6 +2089,9 @@ export var enStrings = {
         commentKeyCollision: "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other.",
         totalKeyCollision: "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other.",
         variableShadowsQuestion: "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question.",
+        // {kind} is a raw code (calculatedValue, variable, trigger) with no term for it yet, so the
+        // sentence names both kinds instead
+        containerKeyShadowed: "The {ownerText} \"{name}\" stores its questions' values under \"{key}\", which is also a calculated value or variable named \"{variable}\" - {{key}} and {{key}.x} read the variable first.",
       },
       "name/reserved": {
         questionName: "The name \"{name}\" is reserved - a member of Object.prototype.",
@@ -2096,6 +2100,17 @@ export var enStrings = {
         itemName: "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype.",
         rowValue: "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype.",
         calculatedValueName: "The calculated value \"{name}\" is reserved - a member of Object.prototype.",
+        containerKey: "\"{name}\" stores its questions' values under \"{key}\", which is reserved - a member of Object.prototype.",
+      },
+      "nesting/generated-key": {
+        generatedName: "The {kind} \"{name}\" keeps a generated name, and dataNesting \"{dataNesting}\" stores its questions' values under it - renaming the {kind} moves them to another key. Set its valueName to \"{name}\" to keep the key.",
+        unnamed: "This {kind} has no name: dataNesting \"{dataNesting}\" stores its questions' values under \"{key}\", the name the survey generates for it in load order - adding or moving {kind}s changes it. Give it a name or a valueName.",
+      },
+      "nesting/ignored-key": {
+        insideRecord: "The valueName \"{valueName}\" of panel \"{name}\" stores nothing: the panel is inside \"{recordName}\" ({recordType}), which keeps its records flat - the panel's questions write into the record directly.",
+      },
+      "nesting/key-conflict": {
+        questionKey: "\"{name}\" stores its questions' values in an object under \"{key}\", which is also the data key of the {questionType} question \"{questionName}\" - one key cannot hold both: an answer to \"{questionName}\" replaces the object, and the question shows it.",
       },
       "element/unknown-type": {
         unknownType: "\"{name}\" has an unknown type \"{type}\".",
@@ -2301,6 +2316,7 @@ export var enStrings = {
       inArrayFilterScope: "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey.",
       matrixColumn: "\"{0}\" is a column of this matrix - reference it with the row prefix.",
       panelQuestion: "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix.",
+      containerKeyNotNesting: "\"{0}\" is the valueName of a panel or page that stores no object: the survey's dataNesting is \"none\", or the panel is inside a dynamic panel, a matrix detail panel, or a composite question, which keep their records flat.",
     },
     // Prose the linter reports as a "suggestion" instead of an identifier
     suggestions: {
