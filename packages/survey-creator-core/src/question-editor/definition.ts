@@ -766,7 +766,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: ["name", "title"]
   },
   "filteritem@items": {
-    properties: ["type", "expression", "prompt", "allowEdit", "allowDelete"]
+    properties: ["kind", "expression", "prompt", "allowEdit", "allowDelete"]
   },
   paneldynamic: {
     properties: [

@@ -446,7 +446,7 @@ export var enStrings = {
     filteritem: {
       name: "Preset name",
       title: "Preset title",
-      type: "Preset type",
+      kind: "Preset type",
       expression: "Filter expression",
       prompt: "AI prompt",
       allowEdit: "Allow editing",
