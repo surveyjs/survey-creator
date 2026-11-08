@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { ActionContainer, QuestionRadiogroupModel, SurveyModel } from "survey-core";
-import { RichText } from "survey-core/rich-text";
+import { ActionContainer, QuestionRadiogroupModel, Serializer, SurveyModel } from "survey-core";
+import { RichText, RichTextEditorModel } from "survey-core/rich-text";
 import { StringEditorViewModelBase } from "../src/components/string-editor";
 import { ICreatorRichTextEditor } from "../src/rich-text-editor";
 import { CreatorTester } from "./creator-tester";
@@ -305,33 +305,54 @@ describe("rich text property grid", () => {
     const title = grid.getQuestionByName("title");
     const description = grid.getQuestionByName("description");
     const required = grid.getQuestionByName("requiredErrorText");
-    expect(title.textFormat).toBe("markdown");
+    expect(title.allowRichText).toBe(true);
     expect(title.richTextEditMode).toBe("block");
     expect(title.richTextDisableBold).toBe(true);
     expect(title.richTextToolbarVisibility).toBe("onFocus");
-    expect(title.richTextConverter).toBeFalsy();
-    expect(description.textFormat).toBe("markdown");
+    expect(title.richTextConverter).toBeTruthy();
+    expect(title.richTextConverter.lossless).toBe(true);
+    expect(grid.onHtmlToMarkdown.isEmpty).toBe(true);
+    const host = {
+      getValue: () => title.value || "",
+      setValue: () => {},
+      isInputTextUpdate: false,
+      acceptCarriageReturn: title.acceptCarriageReturn !== false,
+      owner: title
+    };
+    expect(new RichTextEditorModel(host).canEditRich).toBe(false);
+    expect(new RichTextEditorModel({ ...host, converter: title.richTextConverter }).canEditRich).toBe(true);
+    expect(description.allowRichText).toBe(true);
     expect(description.richTextEditMode).toBe("block");
     expect(description.richTextDisableBold).toBeFalsy();
-    expect(description.richTextConverter).toBeFalsy();
-    expect(required.textFormat).toBe("plain");
+    expect(description.richTextConverter).toBe(title.richTextConverter);
+    expect(required.allowRichText).toBeFalsy();
 
     creator.selectElement(creator.survey);
     const surveyTitle = creator.propertyGrid.getQuestionByName("title");
     expect(surveyTitle.getType()).toBe("comment");
-    expect(surveyTitle.textFormat).toBe("markdown");
+    expect(surveyTitle.allowRichText).toBe(true);
     expect(surveyTitle.richTextEditMode).toBe("inline");
     expect(surveyTitle.richTextDisableBold).toBe(true);
     expect(surveyTitle.acceptCarriageReturn).toBe(false);
+    expect(surveyTitle.richTextConverter).toBeTruthy();
     const completed = creator.propertyGrid.getQuestionByName("completedHtml");
     expect(completed.getType()).toBe("comment");
-    expect(completed.textFormat).toBe("plain");
+    expect(completed.allowRichText).toBeFalsy();
 
-    creator.selectElement(creator.survey.getQuestionByName("c"));
-    const textFormat = creator.propertyGrid.getQuestionByName("textFormat");
-    expect(textFormat.visible).toBe(true);
-    textFormat.value = "markdown";
-    expect(creator.survey.getQuestionByName("c").textFormat).toBe("markdown");
+    const comment = creator.survey.getQuestionByName("c");
+    const allowRichTextProperty = Serializer.findProperty("comment", "allowRichText");
+    const wasVisible = allowRichTextProperty.visible;
+    allowRichTextProperty.visible = false;
+    creator.selectElement(comment);
+    expect(creator.propertyGrid.getQuestionByName("allowRichText")).toBeFalsy();
+    allowRichTextProperty.visible = true;
+    creator.selectElement(creator.survey);
+    creator.selectElement(comment);
+    const allowRichText = creator.propertyGrid.getQuestionByName("allowRichText");
+    expect(allowRichText.visible).toBe(true);
+    allowRichText.value = true;
+    expect(comment.allowRichText).toBe(true);
+    allowRichTextProperty.visible = wasVisible;
   });
 
   test("choice matrix cells edit rich strings", () => {
@@ -350,15 +371,58 @@ describe("rich text property grid", () => {
     const textColumn = choices.columns.filter((column: any) => column.name === "text")[0];
     const valueColumn = choices.columns.filter((column: any) => column.name === "value")[0];
     expect(textColumn.cellType).toBe("comment");
-    expect(textColumn.templateQuestion.textFormat).toBe("markdown");
+    expect(textColumn.templateQuestion.allowRichText).toBe(true);
     expect(textColumn.templateQuestion.richTextEditMode).toBe("inline");
     expect(textColumn.templateQuestion.acceptCarriageReturn).toBe(false);
     expect(valueColumn.cellType).toBe("text");
     const textCell = choices.visibleRows[0].cells.filter((cell: any) => cell.column.name === "text")[0].question;
     expect(textCell.getType()).toBe("comment");
-    expect(textCell.textFormat).toBe("markdown");
+    expect(textCell.allowRichText).toBe(true);
     expect(textCell.richTextEditMode).toBe("inline");
     expect(textCell.acceptCarriageReturn).toBe(false);
     expect(textCell.richTextToolbarVisibility).toBe("onFocus");
+    expect(textCell.richTextConverter).toBeTruthy();
+    expect(creator.propertyGrid.onHtmlToMarkdown.isEmpty).toBe(true);
+    expect(new RichTextEditorModel({
+      getValue: () => textCell.value || "",
+      setValue: () => {},
+      isInputTextUpdate: false,
+      acceptCarriageReturn: false,
+      owner: textCell,
+      converter: textCell.richTextConverter
+    }).canEditRich).toBe(true);
+  });
+
+  test("translation cells edit rich strings through the creator converter", () => {
+    const creator = new CreatorTester({ showTranslationTab: true });
+    creator.registerRichTextEditor(RichText);
+    creator.onSurveyInstanceCreated.add((_, options) => {
+      if (options.area !== "designer-tab") return;
+      options.survey.onTextMarkdown.add((_sender, markdownOptions) => {
+        if ((markdownOptions.text || "").indexOf("**") < 0) return;
+        markdownOptions.html = "<strong>" + markdownOptions.text.replace(/\*\*/g, "") + "</strong>";
+      });
+    });
+    creator.onHtmlToMarkdown.add(RichText.htmlToMarkdownHandler);
+    creator.JSON = {
+      elements: [{
+        type: "text",
+        name: "q",
+        title: { default: "**Hello**", de: "Hallo" }
+      }]
+    };
+    creator.activeTab = "translation";
+    const stringsSurvey = (creator.getPlugin("translation") as any).model.stringsSurvey;
+    const matrix = stringsSurvey.getAllQuestions().filter((question: any) => question.getType() === "matrixdropdown")[0];
+    const titleRow = matrix.visibleRows.filter((row: any) => row.name === "title")[0];
+    const cell = titleRow.cells.filter((item: any) => item.column.name === "de")[0].question;
+    expect(cell.allowRichText).toBe(true);
+    expect(cell.richTextEditMode).toBe("inline");
+    expect(cell.richTextToolbarVisibility).toBe("onFocus");
+    expect(cell.richTextConverter).toBeTruthy();
+    expect(cell.richTextConverter.lossless).toBe(true);
+    expect(stringsSurvey.onHtmlToMarkdown.isEmpty).toBe(true);
+    expect(cell.placeholder.indexOf("**")).toBe(-1);
+    expect(cell.placeholder.indexOf("Hello")).toBeGreaterThan(-1);
   });
 });

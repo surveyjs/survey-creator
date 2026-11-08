@@ -17,6 +17,7 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { SurveyHelper, getDefaultLocaleName, isDefaultLocale } from "../../survey-helper";
 import { translationCss } from "./translation-theme";
 import { CreatorDomHelper } from "../../dom-helper";
+import { applyRichTextTranslationCell, plainRichPlaceholder } from "../creator-string-converter";
 
 // The library localizes a few strings outside their localizable string: the property itself stays
 // empty and the text the survey renders comes from the error class that falls back to it (see
@@ -1007,7 +1008,6 @@ export class TranslationBase extends Base implements ITranslationLocales {
       if (options.cell.question instanceof QuestionCommentModel) {
         const cellQuestion = <QuestionCommentModel>options.cell.question;
         const item = getTransationItem(options.question, options.row.name);
-        this.setPlaceHolder(cellQuestion, item, options.columnName);
         let isMultiLine = false;
         if (!!item) {
           cellQuestion.maxLength = item.maxLength;
@@ -1018,6 +1018,8 @@ export class TranslationBase extends Base implements ITranslationLocales {
         if (!isMultiLine) {
           cellQuestion.rows = 1;
         }
+        this.applyRichTextTranslationCell(cellQuestion, item);
+        this.setPlaceHolder(cellQuestion, item, options.columnName);
       }
     });
     survey.onMatrixCellValueChanging.add((_: SurveyModel, options: any) => {
@@ -1045,8 +1047,13 @@ export class TranslationBase extends Base implements ITranslationLocales {
     survey.currentPage = survey.pages[0];
     return survey;
   }
+  private applyRichTextTranslationCell(cellQuestion: QuestionCommentModel, item: TranslationItem): void {
+    if (!item) return;
+    applyRichTextTranslationCell(cellQuestion, this.options, item.context, item.locString as LocalizableString);
+  }
   private setPlaceHolder(cellQuestion: QuestionCommentModel, item: TranslationItem, locale: string) {
-    cellQuestion.placeholder = item.getPlaceholder(locale);
+    const source = item.getPlaceholder(locale);
+    cellQuestion.placeholder = plainRichPlaceholder(cellQuestion, source, item.context, (item.locString as LocalizableString).name);
   }
   // The single write path for translation item edits on the real survey; subclasses hook it
   // to react to the change. No-op writes are filtered out.

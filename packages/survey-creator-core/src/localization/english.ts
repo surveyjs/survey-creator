@@ -1630,7 +1630,8 @@ export var enStrings = {
       contentMode: "Choose between \"Image\" and \"Video\" to set the content mode of the media selector. If \"Image\" is selected, ensure that all options provided are image files in the following formats: JPEG, GIF, PNG, APNG, SVG, BMP, ICO. Similarly, if \"Video\" is selected, ensure that all options are direct links to video files in the following formats: MP4, MOV, WMV, FLV, AVI, MKV. Please note that YouTube links are not supported for video options."
     },
     comment: {
-      rows: "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
+      rows: "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear.",
+      allowRichText: "Respondents can format their answer with bold, italic, lists, and links."
     },
     // survey templates
     survey: {
@@ -1917,6 +1918,7 @@ export var enStrings = {
     longTap: "Long tap", // Auto-generated string
     autoGrow: "Expand input field dynamically",
     allowResize: "Enable resize handle",
+    allowRichText: "Enable rich text formatting",
     acceptCarriageReturn: "Accept carriage return", // Auto-generated string
     displayMode: "Display mode",
     rateType: "Rate type", // Auto-generated string

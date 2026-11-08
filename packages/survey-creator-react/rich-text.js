@@ -31,19 +31,19 @@ var demoSurveyJson = String.raw`{
       "name": "editor",
       "title": "Editor",
       "elements": [
-        { "type": "comment", "name": "c_md", "title": "Markdown answer", "textFormat": "markdown", "placeholder": "Type and format text" },
-        { "type": "comment", "name": "c_typing", "title": "Updates while typing", "textFormat": "markdown", "textUpdateMode": "onTyping" },
-        { "type": "comment", "name": "c_html", "title": "HTML answer", "textFormat": "html" },
-        { "type": "comment", "name": "c_inline", "title": "Inline mode", "textFormat": "markdown", "acceptCarriageReturn": false },
-        { "type": "comment", "name": "c_max", "title": "Max length 50", "textFormat": "markdown", "maxLength": 50 },
-        { "type": "comment", "name": "c_rows", "title": "Rows, autoGrow, resize", "textFormat": "markdown", "rows": 6, "autoGrow": true, "allowResize": true },
+        { "type": "comment", "name": "c_md", "title": "Markdown answer", "allowRichText": true, "placeholder": "Type and format text" },
+        { "type": "comment", "name": "c_typing", "title": "Updates while typing", "allowRichText": true, "textUpdateMode": "onTyping" },
+        { "type": "comment", "name": "c_html", "title": "HTML answer", "allowRichText": true },
+        { "type": "comment", "name": "c_inline", "title": "Inline mode", "allowRichText": true, "acceptCarriageReturn": false },
+        { "type": "comment", "name": "c_max", "title": "Max length 50", "allowRichText": true, "maxLength": 50 },
+        { "type": "comment", "name": "c_rows", "title": "Rows, autoGrow, resize", "allowRichText": true, "rows": 6, "autoGrow": true, "allowResize": true },
         {
-          "type": "comment", "name": "c_unsupported", "title": "Unsupported stored content", "textFormat": "html",
+          "type": "comment", "name": "c_unsupported", "title": "Unsupported stored content", "allowRichText": true,
           "defaultValue": "<p style=\"color:red\">Red</p><table><tr><td>cell</td></tr></table>"
         },
         {
           "type": "matrixdropdown", "name": "m1", "title": "Matrix with a rich comment cell",
-          "columns": [{ "name": "notes", "cellType": "comment", "textFormat": "markdown" }],
+          "columns": [{ "name": "notes", "cellType": "comment", "allowRichText": true }],
           "rows": ["Row 1"]
         }
       ]
@@ -86,6 +86,10 @@ function createCreator() {
         options.survey.onTextMarkdown.add(passThrough
           ? function (_sender, markdownOptions) { markdownOptions.html = markdownOptions.text; }
           : SurveyRichText.RichText.textMarkdownHandler);
+        // Comment answers in the preview and theme tabs. Not forwarded from creator.onHtmlToMarkdown.
+        options.survey.onHtmlToMarkdown.add(passThrough
+          ? function (_sender, markdownOptions) { markdownOptions.text = markdownOptions.html; }
+          : SurveyRichText.RichText.htmlToMarkdownHandler);
       }
     });
   }

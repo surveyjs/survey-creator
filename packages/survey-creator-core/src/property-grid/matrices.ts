@@ -20,6 +20,7 @@ import { updateMatixActionsAppearance, updateMatrixRemoveAction } from "../utils
 import { QuestionRatingAdornerViewModel } from "../components/question-rating";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { SurveyHelper } from "../survey-helper";
+import { getCreatorStringConverter } from "../components/creator-string-converter";
 
 // Not Serializer.addProperty: it makes a custom property, which defines an own accessor on every item.
 // The @property of ItemValue already serves "icon" on the prototype.
@@ -99,10 +100,12 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     const matrix = options.question;
     const column = options.column || (matrix && matrix.getColumnByName && matrix.getColumnByName(options.columnName));
     const template = column && column.templateQuestion;
-    if (!template || (template.textFormat !== "markdown" && template.textFormat !== "html")) return;
+    if (!template || !template.allowRichText) return;
+    cell.allowRichText = true;
     cell.richTextEditMode = template.richTextEditMode;
     cell.richTextToolbarVisibility = template.richTextToolbarVisibility;
     cell.richTextDisableBold = template.richTextDisableBold;
+    cell.richTextConverter = getCreatorStringConverter(matrix && matrix.creatorOptions);
     cell.acceptCarriageReturn = template.acceptCarriageReturn;
     cell.allowResize = template.allowResize;
     if (template.rows) cell.rows = template.rows;
@@ -451,7 +454,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     );
     for (var i = 0; i < res.length; i++) {
       // A plain comment cell is a single-line text box. A rich-text comment keeps its cell type.
-      if (res[i].cellType == "comment" && res[i].textFormat !== "markdown" && res[i].textFormat !== "html") {
+      if (res[i].cellType == "comment" && !res[i].allowRichText) {
         res[i].cellType = "text";
       }
     }

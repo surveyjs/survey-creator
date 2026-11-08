@@ -64,6 +64,7 @@ export const Advanced = {
               { name: "rows", tab: "layout" },
               { name: "autoGrow", tab: "layout" },
               { name: "allowResize", tab: "layout" },
+              { name: "allowRichText", tab: "layout" },
               { name: "maxLength", tab: "validation" },
             ]
           },

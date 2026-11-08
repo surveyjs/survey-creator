@@ -16,6 +16,7 @@ import { QuestionLinkValueModel } from "../link-value";
 import { getDefaultLocaleName, isDefaultLocale } from "../../survey-helper";
 import { TranslationCopiesMap } from "./translation-copies-map";
 import { TranslationRowEqualizer, equalizerSourceSide, equalizerTargetSide } from "./translation-row-equalizer";
+import { applyRichTextTranslationCell, plainRichPlaceholder } from "../creator-string-converter";
 import {
   TranslationBase, TranslationEditor, TranslationGroup, TranslationItem,
   createMachineTranslationAction, runItemsMachineTranslation
@@ -2008,7 +2009,6 @@ export class TranslationElementStrings extends TranslationBase {
     const item = this.getMatrixItem(options.row);
     cellQuestion.autoGrow = true;
     cellQuestion.allowResize = false;
-    cellQuestion.placeholder = !!item ? item.getPlaceholder(options.columnName) : "";
     let isMultiLine = false;
     if (!!item) {
       cellQuestion.maxLength = item.maxLength;
@@ -2018,6 +2018,11 @@ export class TranslationElementStrings extends TranslationBase {
     }
     if (!isMultiLine) {
       cellQuestion.rows = 1;
+    }
+    if (!!item) {
+      const locStr = item.locString as LocalizableString;
+      applyRichTextTranslationCell(cellQuestion, this.options, item.context, locStr);
+      cellQuestion.placeholder = plainRichPlaceholder(cellQuestion, item.getPlaceholder(options.columnName), item.context, locStr.name);
     }
   };
   private onMatrixCellValueChanging = (_: SurveyModel, options: any): void => {

@@ -42,6 +42,7 @@ import { QuestionFactory } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { parsePropertyDescription } from "./description-parser";
+import { assignCreatorStringConverter } from "../components/creator-string-converter";
 import { QuestionFileEditorModel } from "../custom-questions/question-file";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
 import { QuestionLinkValueModel } from "../components/link-value";
@@ -604,6 +605,7 @@ export class PropertyJSONGenerator {
         q.description = helpText;
       }
       PropertyGridEditorCollection.onCreated(this.obj, q, prop, this.options, this.propertyGridDefinition);
+      assignCreatorStringConverter(q, this.options);
       PropertyGridEditorCollection.onAfterSetValue(this.obj, q, prop, this.options);
       this.options.onPropertyEditorCreatedCallback(this.obj, prop, q);
     }
@@ -1848,7 +1850,7 @@ function applyRichTextPropertyEditor(json: any, obj: Base, prop: JsonObjectPrope
   if (mode === "none") return;
   const editMode = !loc || loc.allowLineBreaks ? "block" : mode;
   json.type = "comment";
-  json.textFormat = "markdown";
+  json.allowRichText = true;
   json.richTextEditMode = editMode;
   json.richTextToolbarVisibility = "onFocus";
   if (prop.name === "title") json.richTextDisableBold = true;
