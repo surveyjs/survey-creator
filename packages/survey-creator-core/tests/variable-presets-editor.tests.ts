@@ -1,4 +1,4 @@
-import { Action, IAction, QuestionMatrixDynamicModel, settings as surveySettings } from "survey-core";
+import { Action, Helpers, IAction, QuestionMatrixDynamicModel, Serializer, SurveyModel, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { TabTestPlugin } from "../src/components/tabs/test-plugin";
 import { TestSurveyTabViewModel } from "../src/components/tabs/test";
@@ -657,5 +657,286 @@ describe("Variable presets editor: the dialog theme (issue #7982)", () => {
     expect(Object.keys(variables).filter(key => key.indexOf("--sjs2-color-") === 0 && allowedColors.indexOf(key) < 0)).toStrictEqual([]);
     expect(variables["--sjs2-color-utility-surface-survey"]).toBe("var(--sjs2-color-bg-basic-primary)");
     editor.dispose();
+  });
+});
+
+describe("Variable presets editor: nested values (nested data, survey-library #12233)", () => {
+  const nestedElements = [
+    { type: "panel", name: "user", valueName: "users", title: "User", elements: [
+      { type: "dropdown", name: "tier", title: "Tier", choices: ["gold", "silver"], isRequired: true },
+      { type: "text", name: "name", title: "Name" }] },
+    { type: "dropdown", name: "role", choices: ["admin", "user"] }
+  ];
+  const nestedDefinition = { elements: nestedElements };
+  const goldVariables = { users: { tier: "gold", name: "Ann" }, role: "admin" };
+  function createNestedContainer(definition: any = nestedDefinition, variables?: any): any {
+    return {
+      definition: definition,
+      presets: [
+        { name: "Gold", description: "The gold one", variables: variables || Helpers.getUnbindValue(goldVariables) },
+        { name: "Silver", variables: { users: { tier: "silver", name: "Bob" }, role: "user" } }
+      ]
+    };
+  }
+  const answers: { [name: string]: any } = { tier: "gold", name: "Ann", role: "admin" };
+  // The rule C8 states: for the same answers, the form saves exactly the data that the definition's
+  // own survey holds.
+  function getDefinitionData(definition: any): any {
+    const survey = new SurveyModel(definition);
+    Object.keys(answers).forEach(name => { survey.getQuestionByName(name).value = answers[name]; });
+    const res = survey.data;
+    survey.dispose();
+    return res;
+  }
+  function saveNewPreset(definition: any): any {
+    const creator = new CreatorTester({ variablePresets: { definition: definition, presets: [] } });
+    const editor = createEditor(creator);
+    getListQuestion(editor).addRow();
+    Object.keys(answers).forEach(name => { editor.editSurvey.getQuestionByName(name).value = answers[name]; });
+    expect(editor.backToList()).toBeTruthy();
+    const res = editor.presets[0].variables;
+    editor.dispose();
+    return res;
+  }
+  function openPreset(definition: any, variables: any): VariablePresetsEditor {
+    const creator = new CreatorTester({ variablePresets: createNestedContainer(definition, variables) });
+    const editor = createEditor(creator);
+    editor.editPreset(0);
+    return editor;
+  }
+  function getFormValues(editor: VariablePresetsEditor): any {
+    const res: any = {};
+    Object.keys(answers).forEach(name => { res[name] = editor.editSurvey.getQuestionByName(name).value; });
+    return res;
+  }
+
+  test("auto: opening a nested preset fills the inner questions and saving keeps the nesting", () => {
+    const editor = openPreset(nestedDefinition, Helpers.getUnbindValue(goldVariables));
+    expect(getFormValues(editor)).toStrictEqual(answers);
+    expect(editor.backToList()).toBeTruthy();
+    expect(editor.presets[0].variables).toStrictEqual(goldVariables);
+    editor.dispose();
+  });
+  test("auto: a new preset gets nested variables, and a missing required inner question blocks saving", () => {
+    expect(saveNewPreset(nestedDefinition)).toStrictEqual(goldVariables);
+    expect(getDefinitionData(nestedDefinition)).toStrictEqual(goldVariables);
+    const creator = new CreatorTester({ variablePresets: { definition: nestedDefinition, presets: [] } });
+    const editor = createEditor(creator);
+    getListQuestion(editor).addRow();
+    editor.editSurvey.getQuestionByName("name").value = "Ann";
+    expect(editor.backToList()).toBeFalsy();
+    const tier = editor.editSurvey.getQuestionByName("tier");
+    expect(tier.errors).toHaveLength(1);
+    expect(tier.errors[0].getText()).toBe(new SurveyModel().getLocalizationString("requiredError"));
+    editor.dispose();
+  });
+  test("panel mode: a panel without valueName nests under its name", () => {
+    const definition = { dataNesting: "panel", elements: [
+      { type: "panel", name: "user", elements: nestedElements[0].elements },
+      nestedElements[1]
+    ] };
+    const expected = { user: { tier: "gold", name: "Ann" }, role: "admin" };
+    expect(getDefinitionData(definition)).toStrictEqual(expected);
+    expect(saveNewPreset(definition)).toStrictEqual(expected);
+    const editor = openPreset(definition, Helpers.getUnbindValue(expected));
+    expect(getFormValues(editor)).toStrictEqual(answers);
+    editor.dispose();
+  });
+  test("page mode, one page: the variables are keyed under the page", () => {
+    const definition = { dataNesting: "page", pages: [{ name: "page1", elements: nestedElements }] };
+    const expected = { page1: goldVariables };
+    expect(getDefinitionData(definition)).toStrictEqual(expected);
+    expect(saveNewPreset(definition)).toStrictEqual(expected);
+    const editor = openPreset(definition, Helpers.getUnbindValue(expected));
+    expect(getFormValues(editor)).toStrictEqual(answers);
+    expect(editor.backToList()).toBeTruthy();
+    expect(editor.presets[0].variables).toStrictEqual(expected);
+    editor.dispose();
+  });
+  test("page mode, root elements: they land on page1 as in the definition", () => {
+    const definition = { dataNesting: "page", elements: nestedElements };
+    expect(getDefinitionData(definition)).toStrictEqual({ page1: goldVariables });
+    expect(saveNewPreset(definition)).toStrictEqual({ page1: goldVariables });
+  });
+  test("page mode, two pages: each page keys its own variables", () => {
+    const definition = { dataNesting: "page", pages: [
+      { name: "page1", elements: [nestedElements[0]] },
+      { name: "page2", elements: [nestedElements[1]] }
+    ] };
+    const expected = { page1: { users: { tier: "gold", name: "Ann" } }, page2: { role: "admin" } };
+    expect(getDefinitionData(definition)).toStrictEqual(expected);
+    expect(saveNewPreset(definition)).toStrictEqual(expected);
+    const editor = openPreset(definition, Helpers.getUnbindValue(expected));
+    expect(getFormValues(editor)).toStrictEqual(answers);
+    editor.dispose();
+  });
+  test("panelAndPage mode: pages and panels nest by name", () => {
+    const definition = { dataNesting: "panelAndPage", pages: [{ name: "page1", elements: [
+      { type: "panel", name: "user", elements: nestedElements[0].elements },
+      nestedElements[1]
+    ] }] };
+    const expected = { page1: { user: { tier: "gold", name: "Ann" }, role: "admin" } };
+    expect(getDefinitionData(definition)).toStrictEqual(expected);
+    expect(saveNewPreset(definition)).toStrictEqual(expected);
+  });
+  test("auto: a page with its own valueName nests, as the only page and as one of two", () => {
+    const onePage = { pages: [{ name: "page1", valueName: "account", elements: nestedElements }] };
+    expect(getDefinitionData(onePage)).toStrictEqual({ account: goldVariables });
+    expect(saveNewPreset(onePage)).toStrictEqual({ account: goldVariables });
+    const twoPages = { pages: [
+      { name: "page1", valueName: "account", elements: [nestedElements[0]] },
+      { name: "page2", elements: [nestedElements[1]] }
+    ] };
+    const expected = { account: { users: { tier: "gold", name: "Ann" } }, role: "admin" };
+    expect(getDefinitionData(twoPages)).toStrictEqual(expected);
+    expect(saveNewPreset(twoPages)).toStrictEqual(expected);
+    const editor = openPreset(twoPages, Helpers.getUnbindValue(expected));
+    expect(getFormValues(editor)).toStrictEqual(answers);
+    editor.dispose();
+  });
+  test("none mode: a panel valueName does not nest, in the definition or in the form", () => {
+    const definition = { dataNesting: "none", elements: nestedElements };
+    expect(getDefinitionData(definition)).toStrictEqual(answers);
+    expect(saveNewPreset(definition)).toStrictEqual(answers);
+    const editor = openPreset(definition, { ...answers });
+    expect(getFormValues(editor)).toStrictEqual(answers);
+    editor.dispose();
+  });
+  // Answers the inner questions, the ones inside a dynamic panel's panel and a detail panel included,
+  // and returns the survey's data.
+  function answerRecords(survey: SurveyModel): any {
+    survey.getQuestionByName("a").value = "x";
+    const list: any = survey.getQuestionByName("list");
+    list.panels[0].getQuestionByName("b").value = "y";
+    const matrix: any = survey.getQuestionByName("m");
+    const row = matrix.visibleRows[0];
+    row.showDetailPanel();
+    row.detailPanel.getQuestionByName("e").value = "z";
+    return survey.data;
+  }
+  test.each(["none", "auto", "panel", "page", "panelAndPage"])("%s mode: nested panels, and panels inside records, keep the definition's shape", (dataNesting) => {
+    const definition = { dataNesting: dataNesting, elements: [
+      { type: "panel", name: "outer", valueName: "o", elements: [
+        { type: "panel", name: "deeper", valueName: "d", elements: [{ type: "text", name: "a" }] }
+      ] },
+      { type: "paneldynamic", name: "list", panelCount: 1, templateElements: [
+        { type: "panel", name: "inner", valueName: "in", elements: [{ type: "text", name: "b" }] }
+      ] },
+      { type: "matrixdynamic", name: "m", rowCount: 1, columns: [{ name: "c", cellType: "text" }], detailPanelMode: "underRow", detailElements: [
+        { type: "panel", name: "detail", valueName: "det", elements: [{ type: "text", name: "e" }] }
+      ] }
+    ] };
+    const survey = new SurveyModel(definition);
+    const expected = answerRecords(survey);
+    survey.dispose();
+    // the by-name modes are checked against the definition's own data only
+    if (dataNesting === "none") {
+      expect(expected).toStrictEqual({ a: "x", list: [{ b: "y" }], m: [{ e: "z" }] });
+    } else if (dataNesting === "auto") {
+      expect(expected).toStrictEqual({ o: { d: { a: "x" } }, list: [{ in: { b: "y" } }], m: [{ det: { e: "z" } }] });
+    }
+    const creator = new CreatorTester({ variablePresets: { definition: definition, presets: [] } });
+    const editor = createEditor(creator);
+    getListQuestion(editor).addRow();
+    answerRecords(editor.editSurvey);
+    expect(editor.backToList()).toBeTruthy();
+    expect(editor.presets[0].variables).toStrictEqual(expected);
+    editor.editPreset(0);
+    expect(editor.editSurvey.getQuestionByName("a").value).toBe("x");
+    expect((<any>editor.editSurvey.getQuestionByName("list")).panels[0].getQuestionByName("b").value).toBe("y");
+    editor.dispose();
+  });
+  test("Keys in another spelling open the definition's questions and save in its spelling", () => {
+    const editor = openPreset(nestedDefinition, { Users: { Tier: "gold", Nope: 1 }, ROLE: "user" });
+    expect(editor.editSurvey.getQuestionByName("tier").value).toBe("gold");
+    expect(editor.editSurvey.getQuestionByName("role").value).toBe("user");
+    expect(editor.backToList()).toBeTruthy();
+    // an inner key the definition does not know is kept as written, like a root one
+    expect(editor.presets[0].variables).toStrictEqual({ users: { tier: "gold", Nope: 1 }, role: "user" });
+    editor.dispose();
+  });
+  test("The editor's own name and description survive opening and saving a nested preset", () => {
+    const editor = openPreset(nestedDefinition, Helpers.getUnbindValue(goldVariables));
+    expect(editor.editSurvey.getValue("variablePresetName")).toBe("Gold");
+    expect(editor.editSurvey.getValue("variablePresetDescription")).toBe("The gold one");
+    expect(editor.backToList()).toBeTruthy();
+    expect(editor.presets[0]).toStrictEqual({ name: "Gold", description: "The gold one", variables: goldVariables });
+    editor.dispose();
+  });
+  test("A preset key the definition does not know moves the editor's own key aside and round-trips", () => {
+    const variables = { users: { tier: "gold" }, variablePresetName: "a stray key" };
+    const editor = openPreset(nestedDefinition, Helpers.getUnbindValue(variables));
+    expect(editor.editSurvey.getValue("variablePresetName_1")).toBe("Gold");
+    expect(editor.backToList()).toBeTruthy();
+    expect(editor.presets[0].name).toBe("Gold");
+    expect(editor.presets[0].variables).toStrictEqual(variables);
+    editor.dispose();
+  });
+  test("A literal dotted key is no path: it stays an unknown key, as the companion reads it", () => {
+    const variables = { "users.tier": "gold", role: "admin" };
+    const editor = openPreset(nestedDefinition, { ...variables });
+    expect(editor.editSurvey.getQuestionByName("tier").value).toBeUndefined();
+    expect(editor.editSurvey.getValue("tier")).toBeUndefined();
+    expect(editor.backToList()).toBeFalsy();
+    editor.editSurvey.getQuestionByName("tier").value = "silver";
+    expect(editor.backToList()).toBeTruthy();
+    expect(editor.presets[0].variables).toStrictEqual({ "users.tier": "gold", users: { tier: "silver" }, role: "admin" });
+    editor.dispose();
+  });
+  test("The form keeps the definition's shape when a host changes the serializer default of dataNesting", () => {
+    const prop = Serializer.findProperty("survey", "dataNesting");
+    const oldDefault = prop.defaultValue;
+    try {
+      prop.defaultValue = "none";
+      const auto = { dataNesting: "auto", elements: nestedElements };
+      expect(getDefinitionData(auto)).toStrictEqual(goldVariables);
+      expect(saveNewPreset(auto)).toStrictEqual(goldVariables);
+      prop.defaultValue = "panel";
+      const twoPages = { pages: [
+        { name: "page1", elements: [{ type: "text", name: "tier" }, { type: "text", name: "name" }] },
+        { name: "page2", elements: [{ type: "text", name: "role" }] }
+      ] };
+      expect(getDefinitionData(twoPages)).toStrictEqual(answers);
+      expect(saveNewPreset(twoPages)).toStrictEqual(answers);
+    } finally {
+      prop.defaultValue = oldDefault;
+    }
+  });
+  test.each(["none", "auto"])("%s mode: a panel in a dynamic panel inside a detail panel keeps the definition's shape", (dataNesting) => {
+    const definition = { dataNesting: dataNesting, elements: [
+      { type: "matrixdynamic", name: "m", rowCount: 1, columns: [{ name: "c", cellType: "text" }], detailPanelMode: "underRow", detailElements: [
+        { type: "paneldynamic", name: "items", panelCount: 1, templateElements: [
+          { type: "panel", name: "p1", valueName: "address", elements: [{ type: "text", name: "street" }] }
+        ] }
+      ] }
+    ] };
+    const answer = (survey: SurveyModel): any => {
+      const row = (<any>survey.getQuestionByName("m")).visibleRows[0];
+      row.showDetailPanel();
+      const items = row.detailPanel.getQuestionByName("items");
+      if (items.panels.length === 0) items.addPanel();
+      items.panels[0].getQuestionByName("street").value = "s";
+      return survey.data;
+    };
+    const survey = new SurveyModel(definition);
+    const expected = answer(survey);
+    survey.dispose();
+    expect(expected).toStrictEqual(dataNesting === "none" ? { m: [{ items: [{ street: "s" }] }] } : { m: [{ items: [{ address: { street: "s" } }] }] });
+    const creator = new CreatorTester({ variablePresets: { definition: definition, presets: [] } });
+    const editor = createEditor(creator);
+    getListQuestion(editor).addRow();
+    answer(editor.editSurvey);
+    expect(editor.backToList()).toBeTruthy();
+    expect(editor.presets[0].variables).toStrictEqual(expected);
+    editor.dispose();
+  });
+  test("An element of an unknown type does not shift a nameless container's key", () => {
+    const definition = { dataNesting: "none", elements: [
+      { type: "nosuchtype" },
+      { type: "panel", valueName: "users", elements: nestedElements[0].elements },
+      nestedElements[1]
+    ] };
+    expect(getDefinitionData(definition)).toStrictEqual(answers);
+    expect(saveNewPreset(definition)).toStrictEqual(answers);
   });
 });
