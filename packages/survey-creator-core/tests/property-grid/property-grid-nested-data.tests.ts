@@ -95,7 +95,9 @@ describe("property grid: panel and page valueName, survey dataNesting (nested da
     editor.value = "a.b";
     expect(creator.JSON.pages[0].elements[0].valueName).toBe("a.b");
   });
-  test("valueName is hidden for a panel inside a dynamic panel's template and a matrix detail panel", () => {
+  // A panel inside a dynamic panel's template or a matrix detail panel nests by its valueName
+  // (survey-library records nesting, RN3), so the grid shows the property there.
+  test("valueName is shown for a panel inside a dynamic panel's template and a matrix detail panel", () => {
     const creator = new CreatorTester();
     creator.JSON = {
       elements: [
@@ -115,11 +117,11 @@ describe("property grid: panel and page valueName, survey dataNesting (nested da
     expect(isEditorVisible(creator.survey.getPanelByName("top")), "top").toBe(true);
     const template = (<QuestionPanelDynamicModel>creator.survey.getQuestionByName("pd")).template;
     const pin = <PanelModel>template.getElementByName("pin");
-    expect(isEditorVisible(pin), "pin").toBe(false);
-    expect(isEditorVisible(<PanelModel>pin.getElementByName("pin2")), "pin2").toBe(false);
+    expect(isEditorVisible(pin), "pin").toBe(true);
+    expect(isEditorVisible(<PanelModel>pin.getElementByName("pin2")), "pin2").toBe(true);
     const row = (<QuestionMatrixDynamicModel>creator.survey.getQuestionByName("m")).visibleRows[0];
     row.showDetailPanel();
-    expect(isEditorVisible(<PanelModel>row.detailPanel.getElementByName("din")), "din").toBe(false);
+    expect(isEditorVisible(<PanelModel>row.detailPanel.getElementByName("din")), "din").toBe(true);
   });
   test("valueName is hidden for a panel inside a composite's content", () => {
     ComponentCollection.Instance.add({ name: "nestedaddress", elementsJSON: [

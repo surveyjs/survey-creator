@@ -2120,7 +2120,7 @@ export var enStrings = {
         unnamed: "This {kind} has no name: dataNesting \"{dataNesting}\" stores its questions' values under \"{key}\", the name the survey generates for it in load order - adding or moving {kind}s changes it. Give it a name or a valueName.",
       },
       "nesting/ignored-key": {
-        insideRecord: "The valueName \"{valueName}\" of panel \"{name}\" stores nothing: the panel is inside \"{recordName}\" ({recordType}), which keeps its records flat - the panel's questions write into the record directly.",
+        insideRecord: "The valueName \"{valueName}\" of panel \"{name}\" stores nothing: the panel is inside the composite question \"{recordName}\", whose value stays flat - the panel's questions write into the question's value directly.",
       },
       "nesting/key-conflict": {
         questionKey: "\"{name}\" stores its questions' values in an object under \"{key}\", which is also the data key of the {questionType} question \"{questionName}\" - one key cannot hold both: an answer to \"{questionName}\" replaces the object, and the question shows it.",

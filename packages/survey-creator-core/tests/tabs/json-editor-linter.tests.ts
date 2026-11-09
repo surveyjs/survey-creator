@@ -1322,15 +1322,33 @@ describe("The nested-data findings are told in the words of the creator (nested 
       " question shows it.");
     expectFilled(text);
   });
-  test("A container key inside a record is ignored", () => {
-    const text = textOf({
+  // A panel inside a dynamic panel's template nests by its valueName (survey-library records nesting, RN3):
+  // nothing is ignored there.
+  test("A container key inside a record is not ignored", () => {
+    const editor = createEditor(JSON.stringify({
       elements: [{ type: "paneldynamic", name: "people", templateElements: [
         { type: "panel", name: "inner", valueName: "addr", elements: [{ type: "text", name: "street" }] }
       ] }]
-    }, "nesting/ignored-key");
-    expect(text).toBe("The valueName \"addr\" of panel \"inner\" stores nothing: the panel is inside \"people\"" +
-      " (paneldynamic), which keeps its records flat - the panel's questions write into the record directly.");
-    expectFilled(text);
+    }, null, 2));
+    expect(editor.linter.findings.filter(f => f.ruleId === "nesting/ignored-key")).toHaveLength(0);
+  });
+  // A composite question's content keeps its value flat: a panel's valueName there is ignored (N5).
+  test("A container key inside a composite question is ignored", () => {
+    const creator = new CreatorTester();
+    creator.onLintSurvey.add((_, options) => {
+      options.lintOptions.components = { nestedaddress: { elementsJSON: [
+        { type: "panel", name: "inner", valueName: "addr", elements: [{ type: "text", name: "street" }] }
+      ] } };
+    });
+    const editor = new TextareaJsonEditorModel(creator);
+    editor.text = JSON.stringify({ elements: [{ type: "text", name: "q1" }] }, null, 2);
+    editor.processErrors(editor.text);
+    const found = editor.linter.findings.filter(f => f.ruleId === "nesting/ignored-key");
+    expect(found).toHaveLength(1);
+    expect(found[0].text).toBe("The valueName \"addr\" of panel \"inner\" stores nothing: the panel is inside the" +
+      " composite question \"nestedaddress\", whose value stays flat - the panel's questions write into the question's" +
+      " value directly.");
+    expectFilled(found[0].text);
   });
   test("A generated name a by-name mode stores under, and the fix button that keeps the key", () => {
     const editor = createEditor(JSON.stringify({
