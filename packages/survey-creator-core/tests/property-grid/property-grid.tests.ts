@@ -3744,9 +3744,22 @@ test("Setup correct categories for dynamic properties in components", () => {
   const allowClearQuestion = propertyGrid.survey.getQuestionByName("allowClear");
   const showOtherItemQuestion = propertyGrid.survey.getQuestionByName("showOtherItem");
   expect(visibleQuestion.parent.name).toBe("general");
-  expect(allowClearQuestion.parent.name).toBe("choices");
+  expect(allowClearQuestion.parent.name).toBe("general");
   expect(showOtherItemQuestion.parent.name).toBe("choices");
   ComponentCollection.Instance.clear();
+});
+test("allowClear is in the General tab after showTitle for select-based questions", () => {
+  ["radiogroup", "dropdown", "tagbox", "checkbox"].forEach(type => {
+    const question = Serializer.createClass(type, { name: "q1" });
+    const propertyGrid = new PropertyGridModelTester(question);
+    const allowClearQuestion = propertyGrid.survey.getQuestionByName("allowClear");
+    expect(allowClearQuestion, type + ": allowClear is shown").toBeTruthy();
+    expect(allowClearQuestion.parent.name, type + ": tab").toBe("general");
+    const names = allowClearQuestion.parent.elements.map(el => el.name);
+    expect(names.indexOf("allowClear"), type + ": after showTitle").toBe(names.indexOf("showTitle") + 1);
+    const choicesPanel = propertyGrid.survey.getPanelByName("choices");
+    expect(choicesPanel.getQuestionByName("allowClear"), type + ": not in choices").toBeFalsy();
+  });
 });
 test("Setup correct categories for dynamic properties in components, #2", () => {
   ComponentCollection.Instance.add({

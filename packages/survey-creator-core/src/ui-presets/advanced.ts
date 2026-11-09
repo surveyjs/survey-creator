@@ -38,6 +38,7 @@ export const Advanced = {
               "isRequired",
               "requiredTrue",
               "showTitle",
+              "allowClear",
               "showCommentArea",
               { name: "page", tab: "layout" },
               { name: "startWithNewLine", tab: "layout" },
@@ -215,7 +216,6 @@ export const Advanced = {
           dropdown: {
             properties: [
               "autocomplete",
-              { name: "allowClear", tab: "choices" },
               { name: "searchMode", tab: "choices" },
             ]
           },
@@ -225,7 +225,6 @@ export const Advanced = {
               { name: "searchEnabled", tab: "choices" },
               { name: "searchMode", tab: "choices" },
               { name: "hideSelectedItems", tab: "choices" },
-              { name: "allowClear", tab: "choices" },
             ]
           },
           imagepicker: {
@@ -470,12 +469,12 @@ export const Advanced = {
           },
           "matrixdropdowncolumn@dropdown": {
             properties: [
+              "allowClear",
               { name: "choices", tab: "choices", index: 0 },
               { name: "choicesFromQuestion", tab: "choices" },
               { name: "choicesFromQuestionMode", tab: "choices" },
               { name: "showOtherItem", tab: "choices" },
               { name: "colCount", tab: "choices" },
-              { name: "allowClear", tab: "choices" },
             ],
             tabs: [
               { name: "choices", index: 10 },
@@ -484,12 +483,12 @@ export const Advanced = {
           },
           "matrixdropdowncolumn@tagbox": {
             properties: [
+              "allowClear",
               { name: "choices", tab: "choices", index: 0 },
               { name: "choicesFromQuestion", tab: "choices" },
               { name: "choicesFromQuestionMode", tab: "choices" },
               { name: "showOtherItem", tab: "choices" },
               { name: "colCount", tab: "choices" },
-              { name: "allowClear", tab: "choices" },
             ],
             tabs: [
               { name: "choices", index: 10 },
