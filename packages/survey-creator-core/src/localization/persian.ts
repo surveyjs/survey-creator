@@ -1162,8 +1162,6 @@ export var persianStrings = {
     visible: "نمایش داده شود؟",
     // "Required"
     isRequired: "ضروری است؟",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "فقط یک پاسخ مثبت را بپذیرید",
     // [Auto-translated] "Mark as required"
     markRequired: "علامت گذاری به عنوان مورد نیاز",
     // [Auto-translated] "Remove the required mark"
@@ -3274,8 +3272,6 @@ export var persianStrings = {
     valueTrue: "ارزش برای صرفه جویی در نتایج نظرسنجی زمانی که پاسخ دهندگان پاسخ مثبت می دهند.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "ارزش برای صرفه جویی در نتایج نظرسنجی زمانی که پاسخ دهندگان پاسخ منفی می دهند.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "انتخاب کنید که پاسخ منفی به عنوان پاسخ بی پاسخ تلقی شود، بنابراین پاسخ دهندگان باید «بله» (یا تیک باکس) را انتخاب کنند تا ادامه دهند. برای مثال، از آن برای درخواست رضایت به شرایط و ضوابط استفاده کنید. فقط زمانی اعمال می شود که سوال لازم باشد.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "توصیه نمی شود که این گزینه را غیرفعال کنید زیرا تصویر پیش نمایش را لغو می کند و درک اینکه آیا فایل ها آپلود شده اند یا خیر را برای کاربر دشوار می کند.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3893,8 +3889,6 @@ export var persianStrings = {
         aliasDuplicate: "«{key}» و «{aliasKey}» از {ownerText} دو نام یک ویژگی هستند - زمان اجرا آن ها را به ترتیبی که JSON می نویسد اعمال می کند، بنابراین «{winner}» برنده است.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
         inertMinMax: "«{key}» روی «{name} تنظیم شده است، اما input Type «{inputType}» هیچ محدودیتی ندارد - زمان اجرا آن را نادیده می گیرد.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" روی \"{name}\" تنظیم شده، اما \"{name}\" نه isRequired است و نه requiredIf - زمان اجرا آن را نادیده می گیرد."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

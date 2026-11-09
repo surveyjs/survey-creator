@@ -1162,8 +1162,6 @@ export var frenchTranslation = {
     visible: "Est visible ?",
     // "Required"
     isRequired: "Est obligatoire ?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "N’acceptez qu’une réponse positive",
     // [Auto-translated] "Mark as required"
     markRequired: "Marquer au besoin",
     // [Auto-translated] "Remove the required mark"
@@ -3274,8 +3272,6 @@ export var frenchTranslation = {
     valueTrue: "Une valeur à enregistrer dans les résultats de l’enquête lorsque les répondants donnent une réponse positive.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Une valeur à enregistrer dans les résultats de l’enquête lorsque les personnes interrogées donnent une réponse négative.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Sélectionnez de considérer une réponse négative comme sans réponse, afin que les répondants doivent sélectionner « Oui » (ou cocher la case) pour continuer. Par exemple, utilisez-la pour exiger un consentement aux termes et conditions. Cela ne s’applique que lorsque la question est requise.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Il n’est pas recommandé de désactiver cette option, car elle remplace l’image d’aperçu et empêche l’utilisateur de comprendre si les fichiers ont été téléchargés.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3893,8 +3889,6 @@ export var frenchTranslation = {
         aliasDuplicate: "« {key} » et « {aliasKey} » de {ownerText} sont deux noms d’une même propriété – le temps d’exécution les applique dans l’ordre dans lequel le JSON les écrit, donc « {winner} » l’emporte.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
         inertMinMax: "« {key} » est réglé sur « {name} », mais inputType « {inputType} » n’a pas de limites – l’exécution l’ignore.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "« {key} » est défini sur « {name} », mais « {name} » n’a ni isRequired ni requiredIf – l’exécution l’ignore."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

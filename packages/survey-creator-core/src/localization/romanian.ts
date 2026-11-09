@@ -1162,8 +1162,6 @@ export const roStrings = {
     visible: "Vizibil",
     // "Required"
     isRequired: "Obligatoriu",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Acceptă doar un răspuns pozitiv",
     // "Mark as required"
     markRequired: "Marchează ca obligatoriu",
     // "Remove the required mark"
@@ -3274,8 +3272,6 @@ export const roStrings = {
     valueTrue: "O valoare de salvat în rezultatele chestionarului atunci când respondenții oferă un răspuns pozitiv.",
     // "A value to save in survey results when respondents give a negative answer."
     valueFalse: "O valoare de salvat în rezultatele chestionarului atunci când respondenții oferă un răspuns negativ.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Selectați să tratați un răspuns negativ ca nerăspuns, astfel încât respondenții trebuie să selecteze \"Da\" (sau să bifeze căsuța) pentru a continua. De exemplu, folosiți-o pentru a solicita consimțământul pentru termeni și condiții. Se aplică doar când întrebarea este obligatorie.",
     // "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Nu este recomandat să dezactivați această opțiune, deoarece suprascrie Previzualizarea imaginii și face dificilă pentru utilizator înțelegerea dacă fișierele au fost încărcate.",
     // "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3893,8 +3889,6 @@ export const roStrings = {
         aliasDuplicate: "\"{key}\" și \"{aliasKey}\" din {ownerText} sunt două nume ale unei proprietăți – timpul de rulare le aplică în ordinea în care JSON-ul le scrie, deci \"{winner}\" câștigă.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
         inertMinMax: "\"{key}\" este setat pe \"{name}\", dar inputType \"{inputType}\" nu are limite - timpul de execuție îl ignoră.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{cheia}\" este setată pe \"{name}\", dar \"{name}\" nu are nici isRequired, nici requiredIf - timpul de rulare îl ignoră."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

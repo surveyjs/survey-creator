@@ -40,7 +40,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "readOnly",
       "readOnlyMode",
       "isRequired",
-      "requiredTrue",
+      "requireTrue",
       "allowClear",
       "showTitle",
       "showCommentArea",
@@ -83,7 +83,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "defaultDisplayValue", tab: "data" },
       { name: "clearIfInvisible", tab: "data" },
       { name: "validators", tab: "validation" },
-      { name: "requiredErrorText", tab: "validation" }
+      { name: "requiredErrorText", tab: "validation" },
+      { name: "requireTrueErrorText", tab: "validation" }
     ],
     tabs: [
       { name: "layout", index: 100 },
@@ -485,7 +486,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "readOnly",
       "readOnlyMode",
       "isRequired",
-      "requiredTrue",
+      "requireTrue",
       "isUnique",
       "showInMultipleColumns",
       "allowSort",
@@ -505,6 +506,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "totalExpression", tab: "totals" },
       { name: "validators", tab: "validation" },
       { name: "requiredErrorText", tab: "validation" },
+      { name: "requireTrueErrorText", tab: "validation" },
       { name: "defaultDisplayValue", tab: "data" }
     ],
     tabs: [

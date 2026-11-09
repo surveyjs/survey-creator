@@ -1162,8 +1162,6 @@ export var fiStrings = {
     visible: "Näkyvissä",
     // "Required"
     isRequired: "Pakollinen",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Hyväksy vain myönteinen vastaus",
     // [Auto-translated] "Mark as required"
     markRequired: "Merkitse pakollisesti",
     // [Auto-translated] "Remove the required mark"
@@ -3274,8 +3272,6 @@ export var fiStrings = {
     valueTrue: "Arvo, joka tallennetaan kyselyn tuloksiin, kun vastaajat antavat myönteisen vastauksen.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Arvo, joka tallennetaan kyselyn tuloksiin, kun vastaajat antavat kielteisen vastauksen.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Valitse käsitellä kielteisen vastauksen vastaamattomana, joten vastaajien on valittava \"Kyllä\" (tai rastittava valintaruutu) jatkaakseen. Esimerkiksi käytä sitä vaatiaksesi suostumusta ehtoihin. Koskee vain, kun kysymys vaaditaan.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Tätä asetusta ei suositella poistettavaksi käytöstä, koska se ohittaa esikatselukuvan ja vaikeuttaa käyttäjän ymmärtämistä, onko tiedostot ladattu.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3893,8 +3889,6 @@ export var fiStrings = {
         aliasDuplicate: "\"{key}\" ja \"{aliasKey}\" {ownerText} ovat yhden ominaisuuden kaksi nimeä – suoritusaika soveltaa niitä siinä järjestyksessä kuin JSON ne kirjoittaa, joten \"{winner}\" voittaa.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
         inertMinMax: "\"{key}\" on asetettu \"{name}\", mutta inputType \"{inputType}\" ei rajoita – suoritusaika ei huomioi sitä.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" on asetettu \"{name}\", mutta \"{name}\" ei ole isRequired eikä required If - suoritusaika ei ohita sitä."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

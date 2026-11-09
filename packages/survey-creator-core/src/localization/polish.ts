@@ -1163,8 +1163,6 @@ export var polishStrings = {
     visible: "Czy widoczne?",
     // "Required"
     isRequired: "Czy wymagalne?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Akceptuj tylko pozytywną odpowiedź",
     // [Auto-translated] "Mark as required"
     markRequired: "Oznacz jako wymagane",
     // [Auto-translated] "Remove the required mark"
@@ -3275,8 +3273,6 @@ export var polishStrings = {
     valueTrue: "Wartość, którą należy zapisać w wynikach ankiety, gdy respondenci udzielą pozytywnej odpowiedzi.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Wartość, która ma zostać zapisana w wynikach ankiety, gdy respondenci udzielą odpowiedzi negatywnej.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Wybierz, aby odpowiedź negatywna była traktowana jako nieodpowiedziana, więc respondenci muszą zaznaczyć \"Tak\" (lub zaznaczyć pole zaznaczenia), aby kontynuować. Na przykład użyj go, aby wymagać zgody na warunki i zasady. Dotyczy tylko wtedy, gdy pytanie jest wymagane.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Nie zaleca się wyłączania tej opcji, ponieważ zastępuje ona obraz podglądu i utrudnia użytkownikowi zrozumienie, czy pliki zostały przekazane.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3894,8 +3890,6 @@ export var polishStrings = {
         aliasDuplicate: "\"{key}\" i \"{aliasKey}\" z {ownerText} to dwie nazwy jednej właściwości – czas wykonania stosuje je w kolejności, w jakiej zapisuje je JSON, więc \"{winner}\" wygrywa.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
         inertMinMax: "\"{key}\" jest ustawione na \"{name}\", ale input Type \"{inputType}\" nie ma żadnych ograniczeń – czas działania go ignoruje.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" jest ustawione na \"{name}\", ale \"{name}\" nie ma ani isRequired, ani requiredIf - czas wykonania go ignoruje."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
