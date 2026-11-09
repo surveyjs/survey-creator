@@ -159,7 +159,7 @@ export class PageNavigatorViewModel extends Base {
       const doc = rootNode instanceof Document || rootNode instanceof ShadowRoot ? rootNode : document;
       const el: any = doc.getElementById(page.renderedId);
       if (!!el) {
-        (this.pagesController.creator as any as CreatorBase).scrollToElement(page, el, el);
+        (this.pagesController.creator as any as CreatorBase).scrollToElement(page, page, el);
         this.patchContainerOffset(el);
       }
     }, 50);

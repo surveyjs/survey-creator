@@ -80,8 +80,9 @@ test("Page navigator finds a page by its renderedId", (): void => {
   expect(visiblePages.map(p => p.page.name)).toEqual(["page2"]);
   expect(model.currentPage?.name).toBe("page2");
 
+  // Check the id the survey gets: it looks the page element up by it
   const scrolled: Array<string> = [];
-  creator.scrollToElement = (page: any, selEl: any, el: HTMLElement) => { scrolled.push(page.name + ":" + el.id); };
+  creator.survey.scrollElementToTop = (options: any) => { scrolled.push(options.page.name + ":" + options.id); };
   model.scrollToPage(page2);
   vi.advanceTimersByTime(100);
   expect(scrolled).toEqual(["page2:" + page2.renderedId]);
