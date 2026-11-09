@@ -2008,13 +2008,14 @@ export class TranslationElementStrings extends TranslationBase {
     const item = this.getMatrixItem(options.row);
     cellQuestion.autoGrow = true;
     cellQuestion.allowResize = false;
-    cellQuestion.placeholder = !!item ? item.getPlaceholder(options.columnName) : "";
+    cellQuestion.placeholder = !!item ? this.plainRichPlaceholder(item.getPlaceholder(options.columnName), item) : "";
     let isMultiLine = false;
     if (!!item) {
       cellQuestion.maxLength = item.maxLength;
       const loc = item.locString;
       isMultiLine = loc.getIsMultiple();
       cellQuestion.acceptCarriageReturn = isMultiLine || (<LocalizableString>loc).allowLineBreaks;
+      this.configureRichTranslationCell(cellQuestion, item);
     }
     if (!isMultiLine) {
       cellQuestion.rows = 1;

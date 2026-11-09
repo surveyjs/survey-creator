@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { ActionContainer, QuestionTextModel, Serializer } from "survey-core";
+import { ActionContainer, QuestionCommentModel, QuestionMatrixDropdownModel, QuestionTextModel, Serializer } from "survey-core";
+import { Translation } from "../src/components/tabs/translation";
 import { PropertyGridEditorHtml, PropertyGridEditorString, PropertyGridEditorText } from "../src/property-grid";
 import { CreatorTester } from "./creator-tester";
 import { ICreatorRichTextEditor } from "../src/rich-text";
@@ -369,4 +370,109 @@ describe("rich text registration", () => {
       prop.visible = previous;
     }
   });
+
+  test("translation cells follow the edit mode, keep plain placeholders, and store HTML unchanged", () => {
+    const creator = new CreatorTester();
+    creator.registerRichTextEditor(createModeEditor().editor);
+    creator.JSON = {
+      elements: [
+        {
+          type: "text",
+          name: "q",
+          title: { default: "Title <em>i</em>" },
+          description: { default: "Desc <strong>d</strong>", de: "Beschreibung" }
+        },
+        {
+          type: "radiogroup",
+          name: "colors",
+          choices: [{ value: "a", text: "<strong>A</strong>" }]
+        }
+      ]
+    };
+    creator.survey.onTextMarkdown.add(() => { });
+    const translation = new Translation(creator.survey, creator);
+    translation.reset();
+    const title = commentCells(translation, "title");
+    const description = commentCells(translation, "description");
+    const choice = commentCells(translation, "a");
+    expect(title.length).toBeGreaterThan(0);
+    expect(title[0].allowRichText).toBe(true);
+    expect(title[0].acceptCarriageReturn).toBe(true);
+    expect(description[0].acceptCarriageReturn).toBe(true);
+    expect(choice[0].allowRichText).toBe(true);
+    expect(choice[0].acceptCarriageReturn).toBe(false);
+    const emptyTitle = title.filter(cell => !cell.value)[0] || title[0];
+    expect(emptyTitle.placeholder.indexOf("<")).toBe(-1);
+    expect(emptyTitle.placeholder).toContain("Title");
+
+    const question = creator.survey.getQuestionByName("q");
+    const deCell = description.filter(cell => cell.value === "Beschreibung")[0];
+    expect(deCell).toBeTruthy();
+    deCell.value = "<em>Hallo</em>";
+    expect(question.locDescription.getLocaleText("de")).toBe("<em>Hallo</em>");
+
+    const csv = translation.exportToCSV();
+    expect(csv).toContain("<em>Hallo</em>");
+    translation.importFromNestedArray(parseCsv(csv));
+    expect(creator.survey.getQuestionByName("q").locDescription.getLocaleText("de")).toBe("<em>Hallo</em>");
+
+    translation.readOnly = true;
+    translation.reset();
+    const readOnlyTitle = commentCells(translation, "title")[0];
+    expect(readOnlyTitle.allowRichText).toBe(true);
+    expect(readOnlyTitle.isReadOnly).toBe(true);
+  });
 });
+
+function commentCells(translation: Translation, rowName: string): QuestionCommentModel[] {
+  const found: QuestionCommentModel[] = [];
+  translation.stringsSurvey.getAllQuestions().forEach(question => {
+    if (!(question instanceof QuestionMatrixDropdownModel)) return;
+    question.visibleRows.forEach(row => {
+      const name = (<any>row).rowName || (row as any).value || ((<any>row).item && (<any>row).item.value);
+      if (name !== rowName) return;
+      row.cells.forEach(cell => {
+        if (cell.question instanceof QuestionCommentModel) found.push(cell.question);
+      });
+    });
+  });
+  return found;
+}
+
+function parseCsv(csv: string): string[][] {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let value = "";
+  let quoted = false;
+  const text = csv.replace(/^\uFEFF/, "");
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    if (quoted) {
+      if (char === "\"" && text[i + 1] === "\"") {
+        value += "\"";
+        i++;
+      } else if (char === "\"") {
+        quoted = false;
+      } else {
+        value += char;
+      }
+    } else if (char === "\"") {
+      quoted = true;
+    } else if (char === ",") {
+      row.push(value);
+      value = "";
+    } else if (char === "\n") {
+      row.push(value);
+      rows.push(row);
+      row = [];
+      value = "";
+    } else if (char !== "\r") {
+      value += char;
+    }
+  }
+  if (value.length > 0 || row.length > 0) {
+    row.push(value);
+    rows.push(row);
+  }
+  return rows;
+}
