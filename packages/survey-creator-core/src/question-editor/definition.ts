@@ -98,6 +98,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "rows", tab: "layout" },
       { name: "autoGrow", tab: "layout" },
       { name: "allowResize", tab: "layout" },
+      { name: "allowRichText", tab: "layout" },
       { name: "textUpdateMode", tab: "data" },
       { name: "maxLength", tab: "validation" },
     ]

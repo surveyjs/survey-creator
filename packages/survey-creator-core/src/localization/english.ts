@@ -1919,6 +1919,7 @@ export var enStrings = {
     longTap: "Long tap", // Auto-generated string
     autoGrow: "Expand input field dynamically",
     allowResize: "Enable resize handle",
+    allowRichText: "Enable rich text formatting",
     acceptCarriageReturn: "Accept carriage return", // Auto-generated string
     displayMode: "Display mode",
     rateType: "Rate type", // Auto-generated string

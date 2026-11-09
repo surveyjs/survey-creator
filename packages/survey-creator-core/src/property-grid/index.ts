@@ -1841,6 +1841,33 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
     });
   }
 }
+function localizableStringForProperty(obj: Base, prop: JsonObjectProperty): any {
+  if (typeof obj.getLocalizableString === "function") {
+    const existing = obj.getLocalizableString(prop.name);
+    if (existing) return existing;
+  }
+  const key = prop.serializationProperty;
+  const created = key ? obj[key] : undefined;
+  if (created && typeof created.getLocaleText === "function") return created;
+  return typeof obj.getLocalizableString === "function" ? obj.getLocalizableString(prop.name) : undefined;
+}
+function applyRichTextPropertyEditor(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions, json: any): any {
+  const creator = options as any;
+  if (!creator || typeof creator.isRichStringsEnabled !== "function" || !creator.isRichStringsEnabled()) return json;
+  const editor = creator.richTextEditor;
+  if (!editor) return json;
+  const locStr = localizableStringForProperty(obj, prop);
+  const mode = editor.getStringEditMode(obj, prop.name, locStr);
+  if (!mode || mode === "none") return json;
+  json.type = "comment";
+  json.allowRichText = true;
+  json.acceptCarriageReturn = mode === "block";
+  if (mode === "inline") {
+    json.rows = 1;
+    json.allowResize = false;
+  }
+  return json;
+}
 export class PropertyGridEditorString extends PropertyGridEditorStringBase {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "string";
@@ -1860,7 +1887,7 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
     if (!!prop.dataList) {
       json.dataList = prop.dataList;
     }
-    return json;
+    return applyRichTextPropertyEditor(obj, prop, options, json);
   }
   public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
     return validateImageItemValueProperty(obj, prop, val);
@@ -2027,10 +2054,10 @@ export class PropertyGridEditorText extends PropertyGridEditorStringBase {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return this.updateMaxLength(prop, {
+    return applyRichTextPropertyEditor(obj, prop, options, this.updateMaxLength(prop, {
       type: "comment",
       rows: 2
-    });
+    }));
   }
 }
 export class PropertyGridEditorHtml extends PropertyGridEditorStringBase {

@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { ActionContainer, Serializer } from "survey-core";
+import { ActionContainer, QuestionTextModel, Serializer } from "survey-core";
+import { PropertyGridEditorHtml, PropertyGridEditorString, PropertyGridEditorText } from "../src/property-grid";
 import { CreatorTester } from "./creator-tester";
 import { ICreatorRichTextEditor } from "../src/rich-text";
 import { StringEditorViewModelBase } from "../src/components/string-editor";
@@ -301,5 +302,71 @@ describe("rich text registration", () => {
     expect(creator.survey.locTitle.hasHtml).toBe(false);
     expect(creator.survey.getQuestionByName("q").locTitle.hasHtml).toBe(false);
     expect(creator.survey.locTitle.renderedHtml).not.toContain("RICH:");
+  });
+
+  test("property grid string editors become rich comments, and html editors stay plain", () => {
+    const { editor } = createModeEditor();
+    const creator = new CreatorTester();
+    creator.registerRichTextEditor(editor);
+    creator.JSON = { elements: [{ type: "text", name: "q" }] };
+    creator.survey.onTextMarkdown.add(() => { });
+    const question = creator.survey.getQuestionByName("q");
+    const textEditor = new PropertyGridEditorText();
+    const stringEditor = new PropertyGridEditorString();
+    const htmlEditor = new PropertyGridEditorHtml();
+
+    const title = textEditor.getJSON(question, Serializer.findProperty("question", "title"), creator);
+    expect(title.type).toBe("comment");
+    expect(title.allowRichText).toBe(true);
+    expect(title.acceptCarriageReturn).toBe(true);
+    expect(title.textFormat).toBeUndefined();
+
+    const description = textEditor.getJSON(question, Serializer.findProperty("question", "description"), creator);
+    expect(description.allowRichText).toBe(true);
+    expect(description.acceptCarriageReturn).toBe(true);
+
+    const surveyTitle = stringEditor.getJSON(creator.survey, Serializer.findProperty("survey", "title"), creator);
+    expect(surveyTitle.type).toBe("comment");
+    expect(surveyTitle.allowRichText).toBe(true);
+    expect(surveyTitle.acceptCarriageReturn).toBe(false);
+    expect(surveyTitle.rows).toBe(1);
+    expect(surveyTitle.allowResize).toBe(false);
+    expect(surveyTitle.textFormat).toBeUndefined();
+
+    const required = textEditor.getJSON(question, Serializer.findProperty("question", "requiredErrorText"), creator);
+    expect(required.allowRichText).toBeUndefined();
+    expect(required.type).toBe("comment");
+
+    const completed = htmlEditor.getJSON(creator.survey, Serializer.findProperty("survey", "completedHtml"), creator);
+    expect(completed.allowRichText).toBeUndefined();
+    expect(completed.type).toBe("comment");
+
+    const plain = new CreatorTester();
+    const plainTitle = textEditor.getJSON(new QuestionTextModel("q"), Serializer.findProperty("question", "title"), plain);
+    expect(plainTitle.allowRichText).toBeUndefined();
+    expect(plainTitle.type).toBe("comment");
+    expect(plainTitle.rows).toBe(2);
+  });
+
+  test("allowRichText is listed on a comment only when the property is visible", () => {
+    const prop = Serializer.findProperty("comment", "allowRichText");
+    const previous = prop.visible;
+    try {
+      prop.visible = true;
+      const creator = new CreatorTester();
+      creator.JSON = { elements: [{ type: "comment", name: "c" }] };
+      creator.selectElement(creator.survey.getQuestionByName("c"));
+      const editorQuestion = creator.propertyGrid.getQuestionByName("allowRichText");
+      expect(editorQuestion).toBeTruthy();
+      expect(editorQuestion.title).toBe("Enable rich text formatting");
+
+      prop.visible = false;
+      const hidden = new CreatorTester();
+      hidden.JSON = { elements: [{ type: "comment", name: "c" }] };
+      hidden.selectElement(hidden.survey.getQuestionByName("c"));
+      expect(hidden.propertyGrid.getQuestionByName("allowRichText")).toBeFalsy();
+    } finally {
+      prop.visible = previous;
+    }
   });
 });
