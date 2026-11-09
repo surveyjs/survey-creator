@@ -56,6 +56,7 @@
     <div class="plugin-only">
       <label><input type="checkbox" id="registerEditor" checked /> registerRichTextEditor</label>
       <label><input type="checkbox" id="designerHandler" checked /> onTextMarkdown on the designer survey</label>
+      <label><input type="checkbox" id="htmlToMarkdown" /> onHtmlToMarkdown stores uppercase HTML</label>
       <p>Rich strings: <strong id="richState"></strong></p>
       <p>The handler is also attached to preview, theme, translation source and target, and the matrix cell popup. The property grid, dialogs and the translation grid are not wired.</p>
     </div>
@@ -138,6 +139,11 @@
       if (registerEditor) {
         creator.registerRichTextEditor(SurveyRichText.RichText);
       }
+      if (pluginOn && document.getElementById("htmlToMarkdown").checked) {
+        creator.onHtmlToMarkdown.add(function (_sender, options) {
+          options.text = String(options.html || "").toUpperCase();
+        });
+      }
       if (pluginOn) {
         creator.onSurveyInstanceCreated.add(function (_sender, options) {
           if (richTextAreas.indexOf(options.area) < 0) return;
@@ -165,6 +171,9 @@
       renderCreator(creator ? creator.JSON : demoJson);
     });
     document.getElementById("designerHandler").addEventListener("change", function () {
+      renderCreator(creator ? creator.JSON : demoJson);
+    });
+    document.getElementById("htmlToMarkdown").addEventListener("change", function () {
       renderCreator(creator ? creator.JSON : demoJson);
     });
     renderCreator(demoJson);

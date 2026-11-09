@@ -1,6 +1,6 @@
 <template>
   <span :class="className">
-    <span class="svc-string-editor__content">
+    <span class="svc-string-editor__content" :class="{ 'sd-rich-text': baseModel.richTextMode !== 'none' }">
       <div
         class="svc-string-editor__border svc-string-editor__border--hover"
       ></div>
@@ -8,36 +8,41 @@
         class="svc-string-editor__border svc-string-editor__border--focus"
       ></div>
       <span class="svc-string-editor__input">
-        <span
+        <div
           role="textbox"
-          v-if="!locString.hasHtml"
-          class="sv-string-editor"
+          v-if="baseModel.richTextMode === 'block'"
+          class="sv-string-editor sv-string-editor--html"
           spellcheck="false"
           @focus="onFocus"
           @paste="onPaste"
           @blur="onBlur"
           @input="baseModel?.onInput"
           @beforeinput="baseModel?.onBeforeInput"
+          @keydown.capture="baseModel?.onKeyDownCapture"
           @keydown="baseModel?.onKeyDown"
           @keyup="baseModel?.onKeyUp"
           @compositionstart="baseModel?.onCompositionStart"
           @compositionend="baseModel?.onCompositionEnd"
           @mouseup="baseModel?.onMouseUp"
           @click="edit"
-          :textContent="renderedHtml"
           :aria-placeholder="placeholder"
           :aria-label="placeholder || 'content editable'"
           :contenteditable="contentEditable"
           :tabindex="baseModel.tabIndex"
+          v-html="renderedHtml"
           ref="root"
-        ></span>
+        ></div>
         <span
           role="textbox"
-          v-if="locString.hasHtml"
+          v-else-if="locString.hasHtml || baseModel.richTextMode === 'inline'"
           class="sv-string-editor sv-string-editor--html"
           spellcheck="false"
           @focus="onFocus"
+          @paste="onPaste"
           @blur="onBlur"
+          @input="baseModel?.onInput"
+          @beforeinput="baseModel?.onBeforeInput"
+          @keydown.capture="baseModel?.onKeyDownCapture"
           @keydown="baseModel?.onKeyDown"
           @keyup="baseModel?.onKeyUp"
           @compositionstart="baseModel?.onCompositionStart"
@@ -51,6 +56,30 @@
           v-html="renderedHtml"
           ref="root"
         ></span>
+        <span
+          role="textbox"
+          v-else
+          class="sv-string-editor"
+          spellcheck="false"
+          @focus="onFocus"
+          @paste="onPaste"
+          @blur="onBlur"
+          @input="baseModel?.onInput"
+          @beforeinput="baseModel?.onBeforeInput"
+          @keydown.capture="baseModel?.onKeyDownCapture"
+          @keydown="baseModel?.onKeyDown"
+          @keyup="baseModel?.onKeyUp"
+          @compositionstart="baseModel?.onCompositionStart"
+          @compositionend="baseModel?.onCompositionEnd"
+          @mouseup="baseModel?.onMouseUp"
+          @click="edit"
+          :textContent="renderedHtml"
+          :aria-placeholder="placeholder"
+          :aria-label="placeholder || 'content editable'"
+          :contenteditable="contentEditable"
+          :tabindex="baseModel.tabIndex"
+          ref="root"
+        ></span>
         <SvComponent
           :is="'sv-character-counter'"
           v-if="showCharacterCounter"
@@ -58,6 +87,9 @@
           :remainingCharacterCounter="getCharacterCounterClass"
         ></SvComponent>
       </span>
+      <div v-if="baseModel.richTextToolbar" class="sd-rich-text__toolbar" role="toolbar">
+        <SvComponent :is="'sv-action-bar'" :model="baseModel.richTextToolbar"></SvComponent>
+      </div>
     </span>
     <span v-if="errorText" class="svc-string-editor__error">{{
       errorText

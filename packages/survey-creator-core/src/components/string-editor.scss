@@ -10,6 +10,11 @@
 .svc-string-editor {
   position: static;
 
+  &:focus-within {
+    position: relative;
+    z-index: 30;
+  }
+
   [contenteditable="true"] {
     user-select: text;
     -webkit-user-select: text;

@@ -1,4 +1,4 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter, toCssClasses } from "survey-core";
+import { ActionContainer, Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter, toCssClasses } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines } from "../utils/utils";
@@ -256,12 +256,15 @@ export class StringEditorViewModelBase extends Base {
   @property() errorText: string;
   @property() focused: boolean;
   @property({ defaultValue: true }) editAsText: boolean;
+  @property({ defaultValue: "none" }) richTextMode: "none" | "inline" | "block";
+  @property() richTextToolbar: ActionContainer;
+  private richTextDetach: () => void;
   compostionInProgress: boolean;
 
   constructor(private locString: LocalizableString, private creator?: SurveyCreatorModel) {
     super();
     this.locString = locString;
-    this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
+    this.updateRichTextMode();
     this.addCreatorEvents();
   }
   private onLocaleChanged = () => {
@@ -274,6 +277,7 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public detachFromUI() {
+    this.detachRichTextEditor();
     this.removeCreatorEvents();
     this.connector?.onDoActivate.remove(this.activate);
     this.getEditorElement = undefined;
@@ -312,6 +316,7 @@ export class StringEditorViewModelBase extends Base {
     this.connector = StringEditorConnector.get(locString);
     this.connector.onDoActivate.add(this.activate);
     this.addCreatorEvents();
+    this.updateRichTextMode();
   }
   public checkConstraints(event: any) {
     if (event.keyCode == 13 && !this.locString.allowLineBreaks) {
@@ -319,7 +324,10 @@ export class StringEditorViewModelBase extends Base {
     }
 
     if (event.ctrlKey || event.metaKey) {
-      if ([89, 90, 66, 73].indexOf(event.keyCode) !== -1) {
+      // Ctrl+Z/Ctrl+Y stay blocked: Creator undo applies to the committed value.
+      // In rich mode Ctrl+B/Ctrl+I are left for the registered editor.
+      const blocked = this.richTextMode === "none" ? [89, 90, 66, 73] : [89, 90];
+      if (blocked.indexOf(event.keyCode) !== -1) {
         event.stopImmediatePropagation();
         event.preventDefault();
       }
@@ -356,8 +364,80 @@ export class StringEditorViewModelBase extends Base {
     event.target.spellcheck = true;
     this.focused = true;
     this.justFocused = true;
+    this.attachRichTextEditor(event.target);
   }
 
+  private updateRichTextMode(): void {
+    const mode = this.resolveRichTextMode();
+    if (mode !== this.richTextMode) {
+      this.detachRichTextEditor();
+      this.richTextMode = mode;
+    }
+    if (mode !== "none") {
+      this.editAsText = false;
+    } else {
+      this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
+    }
+  }
+  private resolveRichTextMode(): "none" | "inline" | "block" {
+    const editor = this.creator?.richTextEditor;
+    if (!editor || !this.creator.isRichStringsEnabled() || this.isInplaceForEditValues) return "none";
+    return editor.getStringEditMode(this.locString.owner as unknown as Base, this.locString.name, this.locString);
+  }
+  private attachRichTextEditor(element: HTMLElement): void {
+    if (this.richTextMode === "none" || this.richTextDetach || !element || !this.creator?.richTextEditor) return;
+    const handle = this.creator.richTextEditor.attachEditor(element, { mode: this.richTextMode });
+    this.richTextToolbar = handle.toolbar;
+    this.richTextDetach = () => handle.detach();
+  }
+  private detachRichTextEditor(): void {
+    const detach = this.richTextDetach;
+    this.richTextDetach = undefined;
+    if (detach) detach();
+    if (this.richTextToolbar)this.richTextToolbar = undefined;
+  }
+  private isFocusWithinRichText(event: any): boolean {
+    const next = event?.relatedTarget as HTMLElement;
+    const current = event?.target as HTMLElement;
+    if (!next || !current || typeof current.closest !== "function" || typeof next.closest !== "function") return false;
+    const box = current.closest(".sd-rich-text");
+    return !!box && box.contains(next);
+  }
+  private isCaretInListItem(root: HTMLElement): boolean {
+    const selection = DomWindowHelper.getWindow()?.getSelection();
+    if (!selection || selection.rangeCount === 0 || !root) return false;
+    let node: Node = selection.anchorNode;
+    while(node && node !== root) {
+      if (node.nodeType === 1 && (node as HTMLElement).tagName === "LI") return true;
+      node = node.parentNode;
+    }
+    return false;
+  }
+  private getRichClearedText(target: HTMLElement): string {
+    const html = target.innerHTML;
+    const options = {
+      element: <Base><any>this.locString.owner,
+      text: <any>null,
+      name: this.locString.name,
+      html: html
+    };
+    this.creator.onHtmlToMarkdown.fire(this.creator, options);
+    let clearedText: string;
+    if (options.text !== null) {
+      clearedText = options.text;
+    } else {
+      clearedText = this.creator.richTextEditor.sanitizeHtml(html, { inline: this.richTextMode === "inline" }) || "";
+    }
+    const changingOptions = {
+      obj: this.locString.owner as any,
+      propertyName: this.locString.name,
+      value: this.locString.text,
+      newValue: clearedText,
+      doValidation: false
+    };
+    this.creator.onValueChangingCallback(changingOptions);
+    return changingOptions.newValue;
+  }
   private checkMarkdownToTextConversion(element, name): void {
     if (!this.creator) return;
     const options = {
@@ -405,6 +485,8 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public onBlur(event: any): void {
+    if (this.isFocusWithinRichText(event)) return;
+    this.detachRichTextEditor();
     const window = DomWindowHelper.getWindow();
     if (this.blurredByEscape) {
       this.blurredByEscape = false;
@@ -446,6 +528,9 @@ export class StringEditorViewModelBase extends Base {
   }
 
   private getClearedText(target: HTMLElement): string {
+    if (this.richTextMode !== "none" && this.creator?.richTextEditor) {
+      return this.getRichClearedText(target);
+    }
     let html = target.innerHTML;
     // innerText depends on layout: on blur a single-line editor loses "white-space: pre-wrap" (it is set on :focus-within only)
     // and the browser drops trailing spaces from innerText. Line breaks are removed from single-line strings anyway,
@@ -558,8 +643,19 @@ export class StringEditorViewModelBase extends Base {
       this.getEditorElement().dispatchEvent(new Event("input", { bubbles: true }));
     }
   }
+  public onKeyDownCapture(event: KeyboardEvent): void {
+    if (this.richTextMode === "none" || event.keyCode !== 13 || event.shiftKey) return;
+    // The editor's own keydown turns Enter into a new paragraph. Creator commits
+    // instead, except inside a list item, where the editor adds or leaves an item.
+    if (this.richTextMode === "block" && this.isCaretInListItem(event.target as HTMLElement)) return;
+    event.stopImmediatePropagation();
+    this.onKeyDown(event);
+  }
   public onKeyDown(event: KeyboardEvent): boolean {
     if (event.keyCode === 13 && !event.shiftKey) {
+      if (this.richTextMode === "block" && this.isCaretInListItem(event.target as HTMLElement)) {
+        return true;
+      }
       this.blurEditor();
       if (!event.ctrlKey && !event.metaKey) {
         this.connector.onEditComplete.fire(this, {});

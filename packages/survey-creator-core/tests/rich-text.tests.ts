@@ -1,7 +1,8 @@
 import { describe, expect, test } from "vitest";
-import { ActionContainer } from "survey-core";
+import { ActionContainer, Serializer } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { ICreatorRichTextEditor } from "../src/rich-text";
+import { StringEditorViewModelBase } from "../src/components/string-editor";
 
 const richTextAreas = [
   "designer-tab", "preview-tab", "theme-tab", "translation-tab:source-survey",
@@ -14,6 +15,46 @@ function createFakeEditor(): ICreatorRichTextEditor {
     attachEditor: () => ({ toolbar: new ActionContainer(), detach: () => { } }),
     sanitizeHtml: (html: string) => html
   };
+}
+
+function createModeEditor(): { editor: ICreatorRichTextEditor, sanitized: Array<{ html: string, inline?: boolean }>, attached: string[] } {
+  const sanitized: Array<{ html: string, inline?: boolean }> = [];
+  const attached: string[] = [];
+  const editor: ICreatorRichTextEditor = {
+    getStringEditMode: (owner, name, locStr) => {
+      if (!locStr || !locStr.useMarkdown) return "none";
+      const type = Serializer.findProperty(owner.getType?.(), name)?.type;
+      if (type === "html") return "none";
+      return type === "text" ? "block" : "inline";
+    },
+    attachEditor: (_element, options) => {
+      attached.push(options.mode);
+      return { toolbar: new ActionContainer(), detach: () => { attached.push("detach-" + options.mode); } };
+    },
+    sanitizeHtml: (html, options) => {
+      sanitized.push({ html: html, inline: options?.inline });
+      const text = String(html || "").replace(/<[^>]*>/g, "");
+      if (!text.trim()) return "";
+      if (String(html).indexOf("<") < 0) return html;
+      return "SAN:" + html;
+    }
+  };
+  return { editor, sanitized, attached };
+}
+
+function keyEvent(keyCode: number, extra: { ctrlKey?: boolean, target: HTMLElement }): any {
+  const event = {
+    keyCode: keyCode,
+    ctrlKey: !!extra.ctrlKey,
+    metaKey: false,
+    shiftKey: false,
+    target: extra.target,
+    prevented: false,
+    stopped: false,
+    preventDefault: () => { event.prevented = true; },
+    stopImmediatePropagation: () => { event.stopped = true; }
+  };
+  return event;
 }
 
 // The setup sample: the customer attaches rendering only to the listed areas.
@@ -117,6 +158,139 @@ describe("rich text registration", () => {
     expect(titleEditor.locTitle.renderedHtml).not.toContain("RICH:");
     expect(propertyGrid.getSurveyMarkdownHtml(titleEditor, "<strong>x</strong>", "title", undefined)).toBeNull();
     expect(propertyGrid.getSurveyMarkdownHtml(titleEditor, "**bold**", "description", undefined)).toContain("spg-bold");
+  });
+
+  test("string editor mode follows the registered editor when rich strings are enabled", () => {
+    const creator = new CreatorTester();
+    creator.JSON = {
+      elements: [
+        { type: "text", name: "q", title: "Tom & Jerry" },
+        { type: "radiogroup", name: "colors", choices: ["red"] }
+      ]
+    };
+    const { editor } = createModeEditor();
+    creator.registerRichTextEditor(editor);
+    creator.survey.onTextMarkdown.add(() => { });
+    const question = creator.survey.getQuestionByName("q");
+    expect(question.locTitle.hasHtml).toBe(false);
+
+    const title = new StringEditorViewModelBase(question.locTitle, creator);
+    expect(title.richTextMode).toBe("block");
+    expect(title.editAsText).toBe(false);
+    const description = new StringEditorViewModelBase(question.locDescription, creator);
+    expect(description.richTextMode).toBe("block");
+    const surveyTitle = new StringEditorViewModelBase(creator.survey.locTitle, creator);
+    expect(surveyTitle.richTextMode).toBe(Serializer.findProperty("survey", "title").type === "text" ? "block" : "inline");
+
+    creator.inplaceEditChoiceValues = true;
+    const choice = creator.survey.getQuestionByName("colors").choices[0];
+    const inplace = new StringEditorViewModelBase(choice.locText, creator);
+    expect(inplace.richTextMode).toBe("none");
+
+    (creator.survey as any).isTranslationSurface = true;
+    const translated = new StringEditorViewModelBase(choice.locText, creator);
+    expect(translated.richTextMode).not.toBe("none");
+
+    const plain = new CreatorTester();
+    plain.JSON = { elements: [{ type: "text", name: "q", title: "Plain" }] };
+    plain.registerRichTextEditor(editor);
+    const withoutHandler = new StringEditorViewModelBase(plain.survey.getQuestionByName("q").locTitle, plain);
+    expect(withoutHandler.richTextMode).toBe("none");
+    expect(withoutHandler.editAsText).toBe(true);
+  });
+
+  test("rich string editor saves sanitizeHtml, and an onHtmlToMarkdown handler overrides it", () => {
+    const creator = new CreatorTester();
+    creator.JSON = { elements: [{ type: "text", name: "q", title: "old" }] };
+    const { editor, sanitized } = createModeEditor();
+    creator.registerRichTextEditor(editor);
+    creator.survey.onTextMarkdown.add(() => { });
+    const question = creator.survey.getQuestionByName("q");
+    const editorModel = new StringEditorViewModelBase(question.locTitle, creator);
+    editorModel.setLocString(question.locTitle);
+
+    editorModel.onBlur({ target: { innerHTML: "<em>word</em>", innerText: "word", textContent: "word" } });
+    expect(question.title).toBe("SAN:<em>word</em>");
+    expect(sanitized[0]).toEqual({ html: "<em>word</em>", inline: false });
+
+    editorModel.onBlur({ target: { innerHTML: "Tom & Jerry", innerText: "Tom & Jerry", textContent: "Tom & Jerry" } });
+    expect(question.title).toBe("Tom & Jerry");
+
+    editorModel.onBlur({ target: { innerHTML: "<br>", innerText: "", textContent: "" } });
+    expect(question.locTitle.text).toBe("");
+
+    const surveyTitle = new StringEditorViewModelBase(creator.survey.locTitle, creator);
+    surveyTitle.onBlur({ target: { innerHTML: "<em>t</em>", innerText: "t", textContent: "t" } });
+    expect(sanitized[sanitized.length - 1].inline).toBe(surveyTitle.richTextMode === "inline");
+
+    creator.onHtmlToMarkdown.add((_sender, options) => {
+      options.text = String(options.html).toUpperCase();
+    });
+    const before = sanitized.length;
+    const overridden = new StringEditorViewModelBase(question.locTitle, creator);
+    overridden.setLocString(question.locTitle);
+    overridden.onBlur({ target: { innerHTML: "<em>word</em>", innerText: "word", textContent: "word" } });
+    expect(question.title).toBe("<EM>WORD</EM>");
+    expect(sanitized.length).toBe(before);
+
+    const untouched = new CreatorTester();
+    untouched.JSON = { elements: [{ type: "text", name: "q", title: "keep" }] };
+    const plain = new StringEditorViewModelBase(untouched.survey.getQuestionByName("q").locTitle, untouched);
+    plain.onBlur({ target: { innerHTML: "<em>word</em>", innerText: "word", textContent: "word" } });
+    expect(untouched.survey.getQuestionByName("q").title).toBe("word");
+  });
+
+  test("rich string editor allows Ctrl+B/Ctrl+I, still blocks Ctrl+Z, and Enter commits outside a list item", () => {
+    const creator = new CreatorTester();
+    creator.JSON = { elements: [{ type: "text", name: "q", title: "Title" }] };
+    const { editor, attached } = createModeEditor();
+    creator.registerRichTextEditor(editor);
+    creator.survey.onTextMarkdown.add(() => { });
+    const question = creator.survey.getQuestionByName("q");
+    const model = new StringEditorViewModelBase(question.locTitle, creator);
+    model.setLocString(question.locTitle);
+    const element = document.createElement("div");
+    let blurred = false;
+    model.blurEditor = () => { blurred = true; };
+
+    const bold = keyEvent(66, { ctrlKey: true, target: element });
+    model.onKeyDown(bold);
+    expect(bold.prevented).toBe(false);
+    const undo = keyEvent(90, { ctrlKey: true, target: element });
+    model.onKeyDown(undo);
+    expect(undo.prevented).toBe(true);
+
+    const plainCreator = new CreatorTester();
+    plainCreator.JSON = { elements: [{ type: "text", name: "q", title: "Title" }] };
+    const plain = new StringEditorViewModelBase(plainCreator.survey.getQuestionByName("q").locTitle, plainCreator);
+    plain.setLocString(plainCreator.survey.getQuestionByName("q").locTitle);
+    const plainBold = keyEvent(66, { ctrlKey: true, target: element });
+    plain.onKeyDown(plainBold);
+    expect(plainBold.prevented).toBe(true);
+
+    element.innerHTML = "<ul><li>item</li></ul>";
+    document.body.appendChild(element);
+    const range = document.createRange();
+    range.selectNodeContents(element.querySelector("li"));
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    const enter = keyEvent(13, { target: element });
+    model.onKeyDown(enter);
+    model.onKeyDownCapture(enter);
+    expect(blurred).toBe(false);
+
+    selection.removeAllRanges();
+    const commit = keyEvent(13, { target: element });
+    model.onKeyDownCapture(commit);
+    expect(blurred).toBe(true);
+    expect(commit.stopped).toBe(true);
+
+    model.onFocus({ target: element });
+    expect(attached).toContain("block");
+    model.onBlur({ target: element, relatedTarget: null });
+    expect(attached).toContain("detach-block");
+    element.remove();
   });
 
   test("without the sample handler, registering an editor does not render HTML strings", () => {

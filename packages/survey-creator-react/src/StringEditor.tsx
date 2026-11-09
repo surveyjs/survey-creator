@@ -104,8 +104,11 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     this.baseModel.onFocus(event.nativeEvent);
     this.justFocused = true;
   };
-  private onKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
+  private onKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
     return this.baseModel.onKeyDown(event.nativeEvent);
+  };
+  private onKeyDownCapture = (event: React.KeyboardEvent<HTMLElement>) => {
+    this.baseModel.onKeyDownCapture(event.nativeEvent);
   };
   private onKeyUp = (event: React.KeyboardEvent<HTMLSpanElement>) => {
     return this.baseModel.onKeyUp(event.nativeEvent);
@@ -134,12 +137,15 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
       return null;
     }
     let control = null;
-    if (this.locString.hasHtml) {
+    const richMode = this.baseModel.richTextMode;
+    const editHtml = this.locString.hasHtml || richMode !== "none";
+    if (editHtml) {
       if (this.htmlValue.__html !== this.locString.renderedHtml) {
         this.htmlValue = { __html: this.locString.renderedHtml };
       }
+      const EditorTag = richMode === "block" ? "div" : "span";
       control = (
-        <span
+        <EditorTag
           role="textbox"
           ref={this.svStringEditorRef}
           className="sv-string-editor sv-string-editor--html"
@@ -154,9 +160,16 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           onBlur={this.onBlur}
           onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
+          onKeyDownCapture={this.onKeyDownCapture}
+          onKeyUp={this.onKeyUp}
           onMouseUp={this.onMouseUp}
+          onBeforeInput={this.onBeforeInput}
+          onInput={this.onInput}
+          onPaste={this.onPaste}
+          onCompositionStart={this.onCompositionStart}
+          onCompositionEnd={this.onCompositionEnd}
           onClick={this.edit}
-        ></span>
+        ></EditorTag>
       );
     } else {
       control = (
@@ -180,6 +193,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           onCompositionEnd={this.onCompositionEnd}
           onFocus={this.onFocus}
           onKeyDown={this.onKeyDown}
+          onKeyDownCapture={this.onKeyDownCapture}
           onKeyUp={this.onKeyUp}
           onMouseUp={this.onMouseUp}
           onClick={this.edit}
@@ -187,9 +201,13 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
       );
     }
     const counter = this.baseModel.showCharacterCounter ? (<CharacterCounterComponent counter={this.baseModel.characterCounter} remainingCharacterCounter={this.baseModel.getCharacterCounterClass}></CharacterCounterComponent>) : null;
+    const toolbar = this.baseModel.richTextToolbar
+      ? <div className="sd-rich-text__toolbar" role="toolbar">{ReactElementFactory.Instance.createElement("sv-action-bar", { model: this.baseModel.richTextToolbar })}</div>
+      : null;
+    const contentClassName = "svc-string-editor__content" + (richMode !== "none" ? " sd-rich-text" : "");
     return (
       <span className={this.className}>
-        <span className="svc-string-editor__content">
+        <span className={contentClassName}>
           <div className="svc-string-editor__border svc-string-editor__border--hover"
             onClick={this.edit}
           >
@@ -207,6 +225,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
             </div>
             {counter}
           </span>
+          {toolbar}
         </span>
         {this.errorText ? <span className="svc-string-editor__error">{this.errorText}</span> : ""}
       </span>
