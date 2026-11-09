@@ -91,6 +91,7 @@ import { ICreatorTheme } from "./creator-theme/creator-themes";
 import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
 import { doMachineStringsTranslation } from "./utils/creator-locstrings";
+import type { ICreatorRichTextEditor } from "./rich-text";
 
 import { iconsV1, iconsV2 } from "./svgbundle";
 
@@ -749,6 +750,20 @@ export class SurveyCreatorModel extends Base
    */
   public onGetObjectDisplayName: EventBase<SurveyCreatorModel, ElementGetDisplayNameEvent> = this.onElementGetDisplayName;
   public onHtmlToMarkdown: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+  private richTextEditorValue: ICreatorRichTextEditor;
+  public registerRichTextEditor(editor: ICreatorRichTextEditor | undefined): void {
+    this.richTextEditorValue = editor;
+  }
+  public get richTextEditor(): ICreatorRichTextEditor {
+    return this.richTextEditorValue;
+  }
+  // Rich strings are enabled when an editor is registered and the designed survey
+  // (creator.survey, area "designer-tab") has an onTextMarkdown handler. Creator only
+  // reads that event; it does not attach or change handlers. onHtmlToMarkdown is not
+  // part of the condition: it still decides editAsText for strings whose mode is "none".
+  public isRichStringsEnabled(): boolean {
+    return !!this.richTextEditorValue && !!this.surveyValue && !this.surveyValue.onTextMarkdown.isEmpty;
+  }
 
   /**
    * An event that is raised when Survey Creator obtains the expand/collapse state of a survey element on the design surface. Handle this event to set a required state.
