@@ -1,4 +1,4 @@
-import { PanelModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionTagboxModel, SurveyModel } from "survey-core";
+import { PanelModel, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionPanelDynamicModel, QuestionTagboxModel, SurveyModel } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { CreatorTester } from "../creator-tester";
 import { QuestionAdornerViewModel } from "../../src/components/question";
@@ -55,13 +55,16 @@ describe("Property grid: the Filter Control", () => {
     expect(editor.choices.map(item => item.value), "#2: two tags, not two 'city'").toEqual(["home.city", "work.city"]);
   });
   test("filter operators are a tag box with operator names", () => {
-    const survey = new SurveyModel({ elements: [{ type: "text", name: "q1" }] });
-    const propertyGrid = new PropertyGridModelTester(survey.getQuestionByName("q1"));
+    // A question in a Dynamic Panel's template: only there a Filter Control reaches it as a field
+    const survey = new SurveyModel({ elements: [{ type: "paneldynamic", name: "p", templateElements: [{ type: "text", name: "q1" }] }] });
+    const question = (<QuestionPanelDynamicModel>survey.getQuestionByName("p")).template.getQuestionByName("q1");
+    const propertyGrid = new PropertyGridModelTester(question);
     const editor = <QuestionTagboxModel>propertyGrid.survey.getQuestionByName("filterOperators");
     expect(editor.getType(), "#1").toBe("tagbox");
-    expect(editor.choices.length, "#2").toBe(13);
+    expect(editor.choices.length, "#2: a text field - anyof, noneof and allof are for choice questions").toBe(10);
     expect(editor.choices[2].value, "#3").toBe("equal");
     expect(editor.choices[2].text, "#4").toBe("Equals");
+    expect(editor.isVisible, "#5").toBe(true);
   });
   test("dataList stays a text area", () => {
     const survey = new SurveyModel({ elements: [{ type: "text", name: "q1" }] });
