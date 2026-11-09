@@ -571,7 +571,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   "matrixdropdowncolumn@dropdown": {
     properties: [
       "placeholder",
-      "allowClear",
       { name: "choices", tab: "choices", index: 0 },
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
@@ -590,6 +589,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choicesMin", tab: "choices" },
       { name: "choicesMax", tab: "choices" },
       { name: "choicesStep", tab: "choices" },
+      { name: "allowClear", tab: "choices" },
       { name: "choicesVisibleIf", tab: "logic" },
       { name: "choicesEnableIf", tab: "logic" },
       { name: "choicesByUrl", tab: "choicesByUrl" },
@@ -602,7 +602,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   "matrixdropdowncolumn@tagbox": {
     properties: [
       "placeholder",
-      "allowClear",
       { name: "choices", tab: "choices", index: 0 },
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
@@ -621,6 +620,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choicesMin", tab: "choices" },
       { name: "choicesMax", tab: "choices" },
       { name: "choicesStep", tab: "choices" },
+      { name: "allowClear", tab: "choices" },
       { name: "choicesVisibleIf", tab: "logic" },
       { name: "choicesEnableIf", tab: "logic" },
       { name: "choicesByUrl", tab: "choicesByUrl" },

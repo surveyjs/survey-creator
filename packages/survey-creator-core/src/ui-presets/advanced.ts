@@ -171,7 +171,6 @@ export const Advanced = {
               { name: "showLabels", tab: "sliderSettings" },
               { name: "tooltipVisibility", tab: "sliderSettings" },
               { name: "allowSwap", tab: "sliderSettings" },
-              { name: "allowClear", tab: "sliderSettings" },
             ],
             tabs: [{ name: "sliderSettings", index: 10 }]
           },
@@ -469,12 +468,12 @@ export const Advanced = {
           },
           "matrixdropdowncolumn@dropdown": {
             properties: [
-              "allowClear",
               { name: "choices", tab: "choices", index: 0 },
               { name: "choicesFromQuestion", tab: "choices" },
               { name: "choicesFromQuestionMode", tab: "choices" },
               { name: "showOtherItem", tab: "choices" },
               { name: "colCount", tab: "choices" },
+              { name: "allowClear", tab: "choices" },
             ],
             tabs: [
               { name: "choices", index: 10 },
@@ -483,12 +482,12 @@ export const Advanced = {
           },
           "matrixdropdowncolumn@tagbox": {
             properties: [
-              "allowClear",
               { name: "choices", tab: "choices", index: 0 },
               { name: "choicesFromQuestion", tab: "choices" },
               { name: "choicesFromQuestionMode", tab: "choices" },
               { name: "showOtherItem", tab: "choices" },
               { name: "colCount", tab: "choices" },
+              { name: "allowClear", tab: "choices" },
             ],
             tabs: [
               { name: "choices", index: 10 },
@@ -547,7 +546,6 @@ export const Advanced = {
               { name: "showLabels", tab: "sliderSettings" },
               { name: "tooltipVisibility", tab: "sliderSettings" },
               { name: "allowSwap", tab: "sliderSettings" },
-              { name: "allowClear", tab: "sliderSettings" },
             ],
             tabs: [{ name: "sliderSettings", index: 10 }]
           },

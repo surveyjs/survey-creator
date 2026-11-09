@@ -60,6 +60,8 @@ import { PropertyGridModelTester, findSetupAction } from "./property-grid.base";
 import { enStrings } from "../../src/localization/english";
 import { CreatorTester } from "../creator-tester";
 import { setupLocale } from "../../src/editorLocalization";
+import { UIPreset } from "../../src/ui-presets-creator/presets";
+import { Advanced } from "../../src/ui-presets";
 
 test("Check property grid survey options", () => {
   const oldValue = Serializer.findProperty(
@@ -3759,6 +3761,32 @@ test("allowClear is in the General tab after showTitle for select-based question
     expect(names.indexOf("allowClear"), type + ": after showTitle").toBe(names.indexOf("showTitle") + 1);
     const choicesPanel = propertyGrid.survey.getPanelByName("choices");
     expect(choicesPanel.getQuestionByName("allowClear"), type + ": not in choices").toBeFalsy();
+  });
+});
+test("allowClear in the advanced preset: General after showTitle, including slider", () => {
+  const creator = new CreatorTester();
+  new UIPreset(Advanced as any).apply(creator);
+  creator.JSON = { elements: [{ type: "dropdown", name: "q1" }, { type: "slider", name: "q2" }] };
+  ["q1", "q2"].forEach(name => {
+    creator.selectElement(creator.survey.getQuestionByName(name));
+    const allowClearQuestion = creator.propertyGrid.getQuestionByName("allowClear");
+    expect(allowClearQuestion, name + ": allowClear is shown").toBeTruthy();
+    expect(allowClearQuestion.parent.name, name + ": tab").toBe("general");
+    const names = allowClearQuestion.parent.elements.map(el => el.name);
+    expect(names.indexOf("allowClear"), name + ": after showTitle").toBe(names.indexOf("showTitle") + 1);
+  });
+});
+test("allowClear stays the last property in the Choices tab for dropdown and tagbox matrix columns", () => {
+  ["dropdown", "tagbox"].forEach(cellType => {
+    const matrix = new QuestionMatrixDynamicModel("m1");
+    const column = matrix.addColumn("c1");
+    column.cellType = cellType;
+    const propertyGrid = new PropertyGridModelTester(column);
+    const allowClearQuestion = propertyGrid.survey.getQuestionByName("allowClear");
+    expect(allowClearQuestion, cellType + ": allowClear is shown").toBeTruthy();
+    expect(allowClearQuestion.parent.name, cellType + ": tab").toBe("choices");
+    const elements = allowClearQuestion.parent.elements;
+    expect(elements[elements.length - 1].name, cellType + ": last in choices").toBe("allowClear");
   });
 });
 test("Setup correct categories for dynamic properties in components, #2", () => {
