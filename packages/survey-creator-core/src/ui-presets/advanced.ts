@@ -38,6 +38,7 @@ export const Advanced = {
               "isRequired",
               "requiredTrue",
               "showTitle",
+              "allowClear",
               "showCommentArea",
               { name: "page", tab: "layout" },
               { name: "startWithNewLine", tab: "layout" },
@@ -170,7 +171,6 @@ export const Advanced = {
               { name: "showLabels", tab: "sliderSettings" },
               { name: "tooltipVisibility", tab: "sliderSettings" },
               { name: "allowSwap", tab: "sliderSettings" },
-              { name: "allowClear", tab: "sliderSettings" },
             ],
             tabs: [{ name: "sliderSettings", index: 10 }]
           },
@@ -215,7 +215,6 @@ export const Advanced = {
           dropdown: {
             properties: [
               "autocomplete",
-              { name: "allowClear", tab: "choices" },
               { name: "searchMode", tab: "choices" },
             ]
           },
@@ -225,7 +224,6 @@ export const Advanced = {
               { name: "searchEnabled", tab: "choices" },
               { name: "searchMode", tab: "choices" },
               { name: "hideSelectedItems", tab: "choices" },
-              { name: "allowClear", tab: "choices" },
             ]
           },
           imagepicker: {
@@ -548,7 +546,6 @@ export const Advanced = {
               { name: "showLabels", tab: "sliderSettings" },
               { name: "tooltipVisibility", tab: "sliderSettings" },
               { name: "allowSwap", tab: "sliderSettings" },
-              { name: "allowClear", tab: "sliderSettings" },
             ],
             tabs: [{ name: "sliderSettings", index: 10 }]
           },

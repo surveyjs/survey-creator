@@ -41,8 +41,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "readOnlyMode",
       "isRequired",
       "requiredTrue",
-      "allowClear",
       "showTitle",
+      "allowClear",
       "showCommentArea",
       "commentText",
       "commentPlaceholder",
@@ -164,7 +164,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "rows", tab: "rows" },
       { name: "alternateRows", tab: "rows" },
       { name: "transposeData", tab: "rows" },
-      { name: "allowClear", tab: "choices" },
       { name: "choices", tab: "choices" },
       { name: "columnColCount", tab: "choices" }
     ],
@@ -297,7 +296,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   selectbase: {
     properties: [
-      { name: "allowClear", tab: "choices" },
       { name: "choices", tab: "choices" },
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
@@ -353,7 +351,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   radiogroup: {
     properties: [
-      { name: "allowClear", tab: "choices" },
       { name: "separateSpecialChoices", tab: "choices" },
       { name: "choiceShortcutsEnabled", tab: "choices" },
     ]
@@ -365,7 +362,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choicesMin", tab: "choices" },
       { name: "choicesMax", tab: "choices" },
       { name: "choicesStep", tab: "choices" },
-      { name: "allowClear", tab: "choices" },
       { name: "searchMode", tab: "choices" },
     ]
   },
@@ -376,7 +372,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "searchEnabled", tab: "choices" },
       { name: "searchMode", tab: "choices" },
       { name: "hideSelectedItems", tab: "choices" },
-      { name: "allowClear", tab: "choices" },
     ]
   },
   imagepicker: {
