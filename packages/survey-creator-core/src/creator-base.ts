@@ -38,6 +38,7 @@ import { ICreatorSelectionOwner } from "./selection-owner";
 import { SelectionHistory } from "./selection-history";
 
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
+import { TabJsonEditorMonacoPlugin } from "./components/tabs/json-editor-monaco";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 import { TabTestPlugin } from "./components/tabs/test-plugin";
 import { SurveyLogic } from "./components/tabs/logic";
@@ -2287,7 +2288,9 @@ export class SurveyCreatorModel extends Base
     this.addTab({ name: "preview", pluginCreator: () => new TabTestPlugin(this), iconName: TabTestPlugin.iconName });
     this.addTab({ name: "theme", pluginCreator: () => new ThemeTabPlugin(this), iconName: ThemeTabPlugin.iconName });
     this.addTab({ name: "logic", pluginCreator: () => new TabLogicPlugin(this), iconName: TabLogicPlugin.iconName });
-    if (TabJsonEditorAcePlugin.hasAceEditor()) {
+    if (TabJsonEditorMonacoPlugin.hasMonacoEditor()) {
+      this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorMonacoPlugin(this), iconName: TabJsonEditorMonacoPlugin.iconName, componentName: "svc-tab-json-editor-monaco" });
+    } else if (TabJsonEditorAcePlugin.hasAceEditor()) {
       this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorAcePlugin(this), iconName: TabJsonEditorAcePlugin.iconName, componentName: "svc-tab-json-editor-ace" });
     } else {
       this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorTextareaPlugin(this), iconName: TabJsonEditorTextareaPlugin.iconName, componentName: "svc-tab-json-editor-textarea" });
