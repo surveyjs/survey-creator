@@ -1,5 +1,5 @@
 import {
-  settings as surveySettings
+  settings as surveySettings, Serializer
 } from "survey-core";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { CreatorTester } from "./creator-tester";
@@ -479,4 +479,24 @@ test("Clear undo/redo transactions on settings creator.JSON, bug#6208", (): any 
   creator.JSON = {};
   expect(creator.undoRedoManager.canUndo()).toBeFalsy();
   expect(undoAction.enabled).toBeFalsy();
+});
+
+test("Undo a pop of null from a live array property", (): any => {
+  Serializer.addProperty("question", { name: "tags:multiplevalues", choices: ["a", "b"] });
+  try {
+    const creator = new CreatorTester();
+    creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+    const question = creator.survey.getQuestionByName("q1");
+    const tags = question.tags;
+    expect(Object.prototype.hasOwnProperty.call(tags, "pop"), "#1: a live array").toBeTruthy();
+    tags.push(null);
+    tags.pop();
+    expect(question.tags.slice(), "#2").toEqual([]);
+    expect(() => creator.undo(), "#3: undo").not.toThrow();
+    expect(question.tags.slice(), "#4: after undo").toEqual([null]);
+    expect(() => creator.redo(), "#5: redo").not.toThrow();
+    expect(question.tags.slice(), "#6: after redo").toEqual([]);
+  } finally {
+    Serializer.removeProperty("question", "tags");
+  }
 });
