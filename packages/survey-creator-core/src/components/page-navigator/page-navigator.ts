@@ -1,5 +1,5 @@
 import { PagesController } from "../../pages-controller";
-import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action, ComputedUpdater, menuListCss, classesToSelector } from "survey-core";
+import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action, ComputedUpdater, menuListCss, classesToSelector, getIdSelector } from "survey-core";
 import { getLocString } from "../../editorLocalization";
 import { DomDocumentHelper } from "survey-core";
 import { CreatorBase } from "src/creator-base";
@@ -157,7 +157,7 @@ export class PageNavigatorViewModel extends Base {
       const document = DomDocumentHelper.getDocument();
       const rootNode = this._itemsContainer?.getRootNode();
       const doc = rootNode instanceof Document || rootNode instanceof ShadowRoot ? rootNode : document;
-      const el: any = doc.getElementById(page.id);
+      const el: any = doc.getElementById(page.renderedId);
       if (!!el) {
         (this.pagesController.creator as any as CreatorBase).scrollToElement(page, el, el);
         this.patchContainerOffset(el);
@@ -181,7 +181,7 @@ export class PageNavigatorViewModel extends Base {
     this.pagesController.pages.forEach(page => {
       const root = viewPort?.getRootNode() || DomDocumentHelper.getDocument();
       if (!(root instanceof Document || root instanceof ShadowRoot)) return;
-      const pageElement = <HTMLElement>root.querySelector("#" + page.id);
+      const pageElement = <HTMLElement>root.querySelector(getIdSelector(page.renderedId));
       if (!!pageElement) {
         const pageTop = pageElement.offsetTop;
         const pageBottom = pageTop + pageElement.clientHeight;
