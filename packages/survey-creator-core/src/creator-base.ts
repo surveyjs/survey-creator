@@ -24,7 +24,7 @@ import {
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
-import { getContainerDataKey, isInnerQuestion } from "./utils/data-path";
+import { isInnerQuestion } from "./utils/data-path";
 import { DragDropChoices } from "survey-core";
 import { IsTouch } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
@@ -2799,8 +2799,8 @@ export class SurveyCreatorModel extends Base
   // path through the key follows. A key that stays the same (a panel with its own valueName renamed), or a
   // container that starts or stops nesting, rewrites nothing.
   private updateConditionsOnContainerKeyChanged(panel: PanelModelBase, propertyName: string, oldValue: any): void {
-    const oldKey = propertyName === "name" ? getContainerDataKey(panel, panel.valueName, oldValue) : getContainerDataKey(panel, oldValue, panel.name);
-    const newKey = getContainerDataKey(panel, panel.valueName, panel.name);
+    const oldKey = propertyName === "name" ? panel.getDataNestingKeyFor(panel.valueName, oldValue) : panel.getDataNestingKeyFor(oldValue, panel.name);
+    const newKey = panel.getDataNestingKeyFor(panel.valueName, panel.name);
     if (!oldKey || !newKey || !panel.isDataNesting) return;
     this.updateLogicOnDataKeyChanged(panel.getDataPath(), oldKey, newKey);
   }

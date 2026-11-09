@@ -525,7 +525,7 @@ export class SurveyLogicItem {
   public renameDataKey(oldPath: Array<string>, newKey: string, keepName?: string): boolean {
     if (!this.expression || this.actions.length === 0 || oldPath.length === 0 || !newKey) return false;
     const texts = this.actions.map(action => {
-      const renames = getDataKeyRenames(oldPath, newKey, keepName, getExpressionScopePaths(action.parentElement || action.element));
+      const renames = getDataKeyRenames(oldPath, newKey, keepName, getExpressionScopePaths(this.survey, action.parentElement || action.element));
       action.renameDataKeyInNames(renames);
       let res = this.expression;
       renames.forEach(item => res = this.renameVariablePrefix(res, item.oldName, item.newName));

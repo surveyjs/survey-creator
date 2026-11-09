@@ -23,6 +23,8 @@ import {
 // survey-core doesn't add the "-unwrapped" postfix (settings.expressionVariables.unwrapPostfix) into
 // question names any more - the plain {name} resolves to the unwrapped value. The postfix is still
 // supported in existing expressions, so the editor has to find a question by the postfixed name.
+// survey-core's getQuestionByVariable flags the postfix only on the question's own segment (isUnwrapped), not
+// one after a records question or a matrix ({pd[0].cb-unwrapped}, {m.r1.c1-unwrapped}), so the text is scanned.
 function removeUnwrapPostfix(name: string): string {
   const postfix = surveyCoreSettings.expressionVariables.unwrapPostfix;
   if (!name || !postfix) return name;
@@ -155,15 +157,6 @@ function renameInnerQuestionEntries(res: Array<any>, start: number, question: Qu
     const nextCh = name[valueName.length];
     if (nextCh !== undefined && nextCh !== "." && nextCh !== "[") continue;
     res[i].name = question.name + name.substring(valueName.length);
-  }
-}
-// survey-core writes a row that names a question with its own valueName by the value name ({city} -> {town}).
-// An inner question's value name is no key of the survey data, so its row keeps the name.
-class CreatorConditionEditorItem extends SurveyConditionEditorItem {
-  protected getVariableName(): string {
-    const question = <Question><any>this.survey.getQuestionByName(this.questionName);
-    if (!!question && isInnerQuestion(question)) return this.questionName;
-    return super.getVariableName();
   }
 }
 function isItemValue(object: Base): boolean {
@@ -732,7 +725,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     return res;
   }
   private createEditorItemFromPanel(panel: PanelModel): SurveyConditionEditorItem {
-    const item = new CreatorConditionEditorItem(this.survey);
+    const item = new SurveyConditionEditorItem(this.survey);
     item.conjunction = panel.getQuestionByName("conjunction").value;
     item.questionName = this.getQuestionNameFromPanel(panel.getQuestionByName("questionName").value);
     item.operator = panel.getQuestionByName("operator").value;

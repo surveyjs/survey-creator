@@ -1,4 +1,4 @@
-import { SurveyModel, Question, QuestionDropdownModel } from "survey-core";
+import { SurveyModel, Question, QuestionDropdownModel, settings } from "survey-core";
 import { ConditionEditor } from "../../src/property-grid/condition-survey";
 import { EmptySurveyCreatorOptions } from "../../src/creator-settings";
 import { SurveyLogic } from "../../src/components/tabs/logic";
@@ -347,5 +347,79 @@ describe("findInnerQuestion (nested data, survey-library #12233)", () => {
     const survey = new SurveyModel({ elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2", valueName: "v2" }] });
     expect(findInnerQuestion(survey, "q1")).toBeNull();
     expect(findInnerQuestion(survey, "q2")).toBeNull();
+  });
+});
+
+describe("the Creator uses survey-core's variable lookup (nested data, survey-library #12233)", () => {
+  test("{address.kind-unwrapped} and {kind-unwrapped} open as rows on kind and round-trip", () => {
+    const json = surveyJson();
+    json.elements[1].visibleIf = "{address.kind-unwrapped} = 'home' and {kind-unwrapped} = 'work'";
+    const survey = new SurveyModel(json);
+    const q1 = survey.getQuestionByName("q1");
+    const editor = new ConditionEditor(survey, q1, new EmptySurveyCreatorOptions(), "visibleIf");
+    expect(editor.panel.panels).toHaveLength(2);
+    for (let i = 0; i < 2; i++) {
+      const valueQuestion = <QuestionDropdownModel>getRow(editor, i).getQuestionByName("questionValue");
+      expect(valueQuestion.getType()).toBe("dropdown");
+      expect(valueQuestion.choices.map(c => c.value)).toEqual(["home", "work"]);
+    }
+    // the path opens on the listed entry ("kind"), the name form stays as written, as for {q1-unwrapped}
+    expect((<QuestionDropdownModel>getRow(editor, 0).getQuestionByName("questionName")).selectedItem?.text).toBe("kind");
+    expect(getRow(editor, 0).getQuestionByName("questionName").value).toBe("address.kind-unwrapped");
+    expect(getRow(editor, 1).getQuestionByName("questionName").value).toBe("kind-unwrapped");
+    expect(editor.text).toBe("{address.kind-unwrapped} = 'home' and {kind-unwrapped} = 'work'");
+  });
+  test("an inner question captured at the root by a top-level valueName is written by its data path", () => {
+    const survey = new SurveyModel({ elements: [addressPanel(), { type: "text", name: "q1" }, { type: "text", name: "q2", valueName: "city" }] });
+    const q1 = survey.getQuestionByName("q1");
+    const editor = new ConditionEditor(survey, q1, new EmptySurveyCreatorOptions(), "visibleIf");
+    const row = getRow(editor);
+    row.getQuestionByName("questionName").value = "city";
+    row.getQuestionByName("questionValue").value = "x";
+    // {city} would read q2 at runtime; {address.town} reads the inner question
+    expect(editor.text).toBe("{address.town} = 'x'");
+  });
+  test("findInnerQuestion keeps today's answers for comment keys, postfixes and top-level questions", () => {
+    const survey = new SurveyModel(surveyJson({}, { elements: [{ type: "radiogroup", name: "kind", choices: ["home"], showOtherItem: true }] }));
+    expect(survey.getQuestionByVariable("kind-Comment").isComment).toBe(true);
+    expect(findInnerQuestion(survey, "kind-Comment")).toBeNull();
+    expect(findInnerQuestion(survey, "kind-unwrapped")).toBeNull();
+    expect(findInnerQuestion(survey, "q1")).toBeNull();
+    expect(findInnerQuestion(survey, "address")).toBeNull();
+    expect(findInnerQuestion(survey, "kind").question.name).toBe("kind");
+  });
+  test("findInnerQuestion with an empty unwrap postfix", () => {
+    const postfix = settings.expressionVariables.unwrapPostfix;
+    settings.expressionVariables.unwrapPostfix = "";
+    try {
+      const survey = new SurveyModel(surveyJson());
+      expect(findInnerQuestion(survey, "street").question.name).toBe("street");
+      expect(findInnerQuestion(survey, "address.street").question.name).toBe("street");
+    } finally {
+      settings.expressionVariables.unwrapPostfix = postfix;
+    }
+  });
+  test("findInnerQuestion resolves from the root for a context the core cannot start from", () => {
+    const survey = new SurveyModel(surveyJson({ triggers: [{ type: "setvalue", expression: "{street} = 'a'", setToName: "q1", setValue: "b" }] }));
+    expect(findInnerQuestion(survey, "address.street", survey.triggers[0]).question.name).toBe("street");
+  });
+});
+describe("the unwrap postfix after a records question (nested data, survey-library #12233)", () => {
+  test("{pd[0].cb-unwrapped} and {panel.cb-unwrapped} open as rows on cb and round-trip", () => {
+    const creator = new CreatorTester();
+    creator.JSON = { elements: [
+      { type: "paneldynamic", name: "pd", templateElements: [
+        { type: "checkbox", name: "cb", choices: ["a"], valuePropertyName: "v" },
+        { type: "text", name: "t1", visibleIf: "{panel.cb-unwrapped} allof ['a']" }] },
+      { type: "text", name: "t2", visibleIf: "{pd[0].cb-unwrapped} allof ['a']" }] };
+    const survey = creator.survey;
+    const pd: any = survey.getQuestionByName("pd");
+    const t1 = pd.template.getQuestionByName("t1");
+    [[survey.getQuestionByName("t2"), "{pd[0].cb-unwrapped} allof ['a']"], [t1, "{panel.cb-unwrapped} allof ['a']"]].forEach(([q, text]: any) => {
+      const editor = new ConditionEditor(survey, q, new EmptySurveyCreatorOptions(), "visibleIf");
+      expect(getRow(editor).getQuestionByName("questionValue").getType()).toBe("checkbox");
+      expect(editor.isReady).toBe(true);
+      expect(editor.text).toBe(text);
+    });
   });
 });
