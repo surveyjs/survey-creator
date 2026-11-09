@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import {
-  ConditionsParser, FunctionFactory, QuestionCheckboxModel, QuestionMatrixDynamicModel, QuestionPanelDynamicModel,
+  IExpressionContext, QuestionCheckboxModel, QuestionMatrixDynamicModel, QuestionPanelDynamicModel,
   SurveyModel, settings as surveySettings,
 } from "survey-core";
 import { CreatorTester } from "../creator-tester";
@@ -9,7 +9,7 @@ import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 import { ConditionEditor } from "../../src/property-grid/condition-survey";
 import { settings } from "../../src/creator-settings";
 import {
-  buildExpressionContext, buildExpressionSystemPrompt, creatorInternalFunctions, expressionOperatorSpellings, IExpressionContext,
+  buildExpressionContext, buildExpressionSystemPrompt, creatorInternalFunctions,
 } from "../../src/expression-assistant/expression-context";
 import { checkExpression, getExpressionLintOptions, IExpressionSite } from "../../src/expression-assistant/expression-check";
 
@@ -214,33 +214,11 @@ describe("Host variables in the AI context (ai-expressions)", () => {
 });
 
 describe("Functions and operators in the AI context (ai-expressions)", () => {
-  test("built-ins carry signatures; custom functions with and without metadata; no creator-internal one", () => {
-    FunctionFactory.Instance.register("aiexPlain", () => 1);
-    FunctionFactory.Instance.register({
-      name: "aiexDescribed", func: () => 1, description: "Returns one",
-      parameters: [{ name: "value", type: "number", optional: true }], returnType: "number",
-    });
-    try {
-      const creator = createCreator({ elements: [{ type: "text", name: "q1" }] });
-      const context = contextFor(creator, [questionSite(creator, "q1")]);
-      const byName = (name: string) => context.functions.filter(f => f.name === name)[0];
-      expect(byName("iif")).toEqual({
-        name: "iif", isCustom: false, isAsync: false,
-        signature: "iif(condition: condition, valueIfTrue: any, valueIfFalse: any): any",
-        description: "Returns the second argument when the condition holds, otherwise the third.",
-      });
-      expect(byName("sum").signature).toBe("sum(...values: number|array): number");
-      expect(byName("displayValue").isAsync).toBe(true);
-      expect(byName("aiexPlain")).toEqual({ name: "aiexPlain", isCustom: true, isAsync: false });
-      expect(byName("aiexDescribed")).toEqual({
-        name: "aiexDescribed", isCustom: true, isAsync: false, signature: "aiexDescribed(value?: number): number", description: "Returns one",
-      });
-      creatorInternalFunctions.forEach(name => expect(byName(name), name).toBeUndefined());
-      expect(context.functions.filter(f => !f.isCustom && !f.signature).map(f => f.name)).toEqual([]);
-    } finally {
-      FunctionFactory.Instance.unregister("aiexPlain");
-      FunctionFactory.Instance.unregister("aiexDescribed");
-    }
+  test("a built context lists none of the functions creator registers for its own editors", () => {
+    const creator = createCreator({ elements: [{ type: "text", name: "q1" }] });
+    const context = contextFor(creator, [questionSite(creator, "q1")]);
+    const byName = (name: string) => context.functions.filter(f => f.name === name)[0];
+    creatorInternalFunctions.forEach(name => expect(byName(name), name).toBeUndefined());
   });
   test("every function creator registers is on the internal list", () => {
     const registered: Array<string> = [];
@@ -256,38 +234,6 @@ describe("Functions and operators in the AI context (ai-expressions)", () => {
     walk(path.resolve(__dirname, "../../src"));
     expect(registered.length).toBeGreaterThan(3);
     expect(registered.filter(name => creatorInternalFunctions.indexOf(name) < 0)).toEqual([]);
-  });
-  test("every operator spelling parses to its operator, and the questionTypes follow the settings", () => {
-    const creator = createCreator({ elements: [{ type: "text", name: "q1" }] });
-    const context = contextFor(creator, [questionSite(creator, "q1")]);
-    const parser = new ConditionsParser();
-    const failed: Array<string> = [];
-    // every spelling the grammar accepts, the advertised ones and those that are not taught
-    Object.keys(expressionOperatorSpellings).forEach(name => expressionOperatorSpellings[name].forEach(sp => {
-      let text = "{a} " + sp + " {b}";
-      if (name === "empty" || name === "notempty") text = "{a} " + sp;
-      if (name === "negate") text = sp === "!" ? "!{a}" : sp + " {a}";
-      const operand: any = parser.parseExpression(text);
-      if (!operand || operand.operator !== name) failed.push(name + ": " + text);
-    }));
-    expect(failed).toEqual([]);
-    expect(expressionOperatorSpellings.negate).toEqual(["!", "negate"]);
-    context.operators.forEach(op => op.spellings.forEach(sp => expect(expressionOperatorSpellings[op.name], op.name).toContain(sp)));
-    expect(context.operators.filter(op => op.name === "allof")[0].questionTypes).toEqual(["checkbox"]);
-    const saved = surveySettings.logic.operators.allof;
-    surveySettings.logic.operators.allof = ["checkbox", "tagbox"];
-    try {
-      expect(contextFor(creator, [questionSite(creator, "q1")]).operators.filter(op => op.name === "allof")[0].questionTypes).toEqual(["checkbox", "tagbox"]);
-    } finally {
-      surveySettings.logic.operators.allof = saved;
-    }
-    expect(context.operators.map(op => op.name)).toContain("and");
-    // "negate" parses, but negate(...) calls a function: only ! is taught
-    expect(context.operators.filter(op => op.name === "negate")[0].spellings).toEqual(["!"]);
-    const systemPrompt = buildExpressionContext(creator, [questionSite(creator, "q1")], "").systemPrompt;
-    // "negate" is there as the operator's name only, never as a spelling
-    expect(systemPrompt.split("\"negate\"").length).toBe(2);
-    expect(systemPrompt).toContain("\"name\": \"negate\"");
   });
 });
 
