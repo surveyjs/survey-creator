@@ -1162,8 +1162,6 @@ export var turkishStrings = {
     visible: "Görünür?",
     // "Required"
     isRequired: "Zorunlu?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Sadece olumlu bir cevabı kabul et",
     // [Auto-translated] "Mark as required"
     markRequired: "Gerektiği gibi işaretleyin",
     // [Auto-translated] "Remove the required mark"
@@ -3274,8 +3272,6 @@ export var turkishStrings = {
     valueTrue: "Yanıtlayanlar olumlu yanıt verdiğinde anket sonuçlarına kaydedilecek bir değer.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Yanıtlayanlar olumsuz yanıt verdiğinde anket sonuçlarına kaydedilecek bir değer.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Olumsuz cevabı cevapsız olarak değerlendirmeyi seçin, böylece yanıtlayanlar ilerlemek için \"Evet\" seçeneğini seçmelidir (veya işaret kutusunu işaretlemelidir). Örneğin, şartlara onay talep etmek için kullanın. Yalnızca soru gerekli olduğunda geçerlidir.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Önizleme görüntüsünü geçersiz kıldığı ve kullanıcının dosyaların karşıya yüklenip yüklenmediğini anlamasını zorlaştırdığı için bu seçeneği devre dışı bırakmanız önerilmez.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3893,8 +3889,6 @@ export var turkishStrings = {
         aliasDuplicate: "{ownerText}'in \"{key}\" ve \"{aliasKey}\" bir özelliğin iki adıdır - çalışma süresi bunları JSON'un yazdığı sırayla uygular, yani \"{winner}\" kazanır.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
         inertMinMax: "\"{key}\" \"{name}\" üzerinde ayarlanır, ancak inputType \"{inputType}\" sınırı yoktur - çalışma zamanı bunu görmezden gelir.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" \"{name}\" olarak ayarlanmış, ancak \"{name}\" ne isRequired ne de requiredIf — çalışma süresi bunu görmezden gelmiştir."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

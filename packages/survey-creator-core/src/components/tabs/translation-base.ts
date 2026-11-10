@@ -20,12 +20,13 @@ import { CreatorDomHelper } from "../../dom-helper";
 
 // The library localizes a few strings outside their localizable string: the property itself stays
 // empty and the text the survey renders comes from the error class that falls back to it (see
-// error.ts in survey-core). Their survey-core string names are listed here, keyed by the property
-// name, so the grid can show them like any other string the library localizes itself. Entries take
-// precedence over the string's own localizationName - otherErrorText carries one that names no
-// string at all.
+// error.ts in survey-core, and the boolean's getRequiredErrorText for requireTrueErrorText). Their
+// survey-core string names are listed here, keyed by the property name, so the grid can show them
+// like any other string the library localizes itself. Entries take precedence over the string's own
+// localizationName - otherErrorText carries one that names no string at all.
 const localizationNameByProperty: { [key: string]: string | ((obj: any) => string) } = {
   requiredErrorText: (obj: any): string => !!obj && (obj.isPanel || obj.isPage) ? "requiredErrorInPanel" : "requiredError",
+  requireTrueErrorText: "requireTrueError",
   otherErrorText: "otherRequiredError"
 };
 

@@ -1162,8 +1162,6 @@ export var catalanTranslation = {
     visible: "¿Es visible?",
     // "Required"
     isRequired: "¿Se requiere?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Accepta només una resposta positiva",
     // [Auto-translated] "Mark as required"
     markRequired: "Marcar según sea necesario",
     // [Auto-translated] "Remove the required mark"
@@ -3274,8 +3272,6 @@ export var catalanTranslation = {
     valueTrue: "Un valor que se debe desar en los resultados de la enquesta cuando los encuestados dan una respuesta positiva.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Un valor que se debe desar en los resultados de la enquesta cuando los encuestados dan una respuesta negativa.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Selecciona per tractar una resposta negativa com a sense resposta, de manera que els enquestats han de seleccionar \"Sí\" (o marcar la casella) per continuar. Per exemple, utilitza-ho per requerir consentiment als termes i condicions. S'aplica només quan la pregunta és necessària.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "No se recomienda deshabilitar esta opción, ya que invalida la imatge de vista prèvia y dificulta que un usuario comprenda si los fitxers se han cargado.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3893,8 +3889,6 @@ export var catalanTranslation = {
         aliasDuplicate: "\"{key}\" i \"{aliasKey}\" de {ownerText} són dos noms d'una propietat: el temps d'execució els aplica en l'ordre en què el JSON els escriu, així que \"{winner}\" guanya.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
         inertMinMax: "\"{clau}\" està posat a \"{name}\", però inputType \"{inputType}\" no té límits: el temps d'execució l'ignora.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{clau}\" està configurat a \"{name}\", però \"{name}\" no té ni isRequired ni requiredIf - el temps d'execució l'ignora."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
