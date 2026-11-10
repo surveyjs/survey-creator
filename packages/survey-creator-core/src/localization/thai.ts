@@ -1162,6 +1162,8 @@ export const thStrings = {
     visible: "มองเห็นได้",
     // "Required"
     isRequired: "จำเป็น",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "ต้องการคําตอบในเชิงบวก",
     // "Mark as required"
     markRequired: "ทำเครื่องหมายว่าจำเป็น",
     // "Remove the required mark"
@@ -1172,6 +1174,8 @@ export const thStrings = {
     eachRowUnique: "ป้องกันการตอบซ้ำในแถว",
     // "Error message for required questions"
     requiredErrorText: "ข้อความข้อผิดพลาดสำหรับคำถามที่จำเป็น",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "ข้อความแสดงข้อผิดพลาดเมื่อจําเป็นต้องใช้ Yes",
     // "Display the question on a new line"
     startWithNewLine: "แสดงคำถามในบรรทัดใหม่",
     // "Rows"
@@ -3888,7 +3892,7 @@ export const thStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" และ \"{aliasKey}\" ของ {ownerText} เป็นชื่อสองชื่อของคุณสมบัติเดียวกัน - เวลาทํางานจะนําไปใช้ตามลําดับที่ JSON เขียน ดังนั้น \"{winner}\" จึงชนะ",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" ถูกตั้งค่าเป็น \"{name}\" แต่ inputType \"{inputType}\" ไม่มีขอบเขต - เวลารันจะไม่สนใจ",
+        inertMinMax: "\"{key}\" ถูกตั้งค่าเป็น \"{name}\" แต่ inputType \"{inputType}\" ไม่มีขอบเขต - เวลารันจะไม่สนใจ"
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

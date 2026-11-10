@@ -1163,6 +1163,8 @@ export let svStrings = {
     visible: "Synlig?",
     // "Required"
     isRequired: "Nödvändig?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Kräv ett positivt svar",
     // [Auto-translated] "Mark as required"
     markRequired: "Markera efter behov",
     // [Auto-translated] "Remove the required mark"
@@ -1173,6 +1175,8 @@ export let svStrings = {
     eachRowUnique: "Förhindra dubbletter av svar i rader",
     // "Error message for required questions"
     requiredErrorText: "Felmeddelandet \"Obligatoriskt\"",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Felmeddelande när Ja krävs",
     // "Display the question on a new line"
     startWithNewLine: "Starta på en ny rad?",
     // "Rows"
@@ -3889,7 +3893,7 @@ export let svStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" och \"{aliasKey}\" i {ownerText} är två namn på en och samma egenskap – körtiden tillämpar dem i den ordning JSON skriver dem, så \"{winner}\" vinner.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" är satt på \"{name}\", men inputType \"{inputType}\" har inga begränsningar – körtiden ignorerar det.",
+        inertMinMax: "\"{key}\" är satt på \"{name}\", men inputType \"{inputType}\" har inga begränsningar – körtiden ignorerar det."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

@@ -1163,6 +1163,8 @@ export var koreanStrings = {
     visible: "보입니까??",
     // "Required"
     isRequired: "필수입니까?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "긍정적인 답변을 요구하세요",
     // [Auto-translated] "Mark as required"
     markRequired: "필요에 따라 표시",
     // [Auto-translated] "Remove the required mark"
@@ -1173,6 +1175,8 @@ export var koreanStrings = {
     eachRowUnique: "행의 중복 응답 방지",
     // "Error message for required questions"
     requiredErrorText: "\"필수\" 오류 메시지",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "예 입력이 필요할 때 오류 메시지",
     // "Display the question on a new line"
     startWithNewLine: "새 줄로 시작하겠습니까?",
     // "Rows"
@@ -3889,7 +3893,7 @@ export var koreanStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "{ownerText}의 \"{key}\"와 \"{aliasKey}\"는 하나의 속성에 대한 두 이름이며, 실행 시간이 JSON이 작성하는 순서대로 적용되므로 \"{winner}\"가 승리합니다.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\"는 \"{name}\" 위에 설정되어 있지만, inputType \"{inputType}\"는 경계가 없어 런타임이 이를 무시합니다.",
+        inertMinMax: "\"{key}\"는 \"{name}\" 위에 설정되어 있지만, inputType \"{inputType}\"는 경계가 없어 런타임이 이를 무시합니다."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

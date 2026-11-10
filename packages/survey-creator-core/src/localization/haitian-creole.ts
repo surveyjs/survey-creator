@@ -1162,6 +1162,8 @@ export var htStrings = {
     visible: "Vizib",
     // "Required"
     isRequired: "Obligatwa",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Mande pou yon repons pozitif",
     // "Mark as required"
     markRequired: "Make jan sa nesesè",
     // "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var htStrings = {
     eachRowUnique: "Anpeche repons doub nan ranje",
     // "Error message for required questions"
     requiredErrorText: "Mesaj erè pou kesyon obligatwa yo",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Mesaj erè lè Wi mande",
     // "Display the question on a new line"
     startWithNewLine: "Montre kesyon an sou yon nouvo liy",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var htStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{kle}\" ak \"{aliasKey}\" nan {ownerText} se de non yon sèl pwopriyete - tan an kouri aplike yo nan lòd la JSON ekri yo, se konsa \"{gayan}\" ranport.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" se mete sou \"{non}\", men inputType \"{inputType}\" pa gen okenn limit - tan an kouri inyore li.",
+        inertMinMax: "\"{key}\" se mete sou \"{non}\", men inputType \"{inputType}\" pa gen okenn limit - tan an kouri inyore li."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

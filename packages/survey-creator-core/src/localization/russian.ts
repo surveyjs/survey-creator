@@ -1162,6 +1162,8 @@ export var ruStrings = {
     visible: "Отображать?",
     // "Required"
     isRequired: "Обязательный?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Требуйте положительного ответа",
     // [Auto-translated] "Mark as required"
     markRequired: "Отметьте как обязательный",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var ruStrings = {
     eachRowUnique: "Предотвращение дублирования ответов в строках",
     // "Error message for required questions"
     requiredErrorText: "Это поле обязательное для заполнения",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Сообщение об ошибке, когда требуется ответ «Да»",
     // "Display the question on a new line"
     startWithNewLine: "Начинать с новой строки?",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var ruStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" и \"{aliasKey}\" из {ownerText} — два названия одного свойства — время выполнения применяет их в порядке записи JSON, поэтому побеждает \"{winner}\".",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" установлен на \"{name}\", но inputType \"{inputType}\" не имеет ограничений — время выполнения игнорирует его.",
+        inertMinMax: "\"{key}\" установлен на \"{name}\", но inputType \"{inputType}\" не имеет ограничений — время выполнения игнорирует его."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

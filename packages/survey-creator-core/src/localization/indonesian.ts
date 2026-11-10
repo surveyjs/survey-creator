@@ -1162,6 +1162,8 @@ export var indonesianStrings = {
     visible: "Terlihat?",
     // "Required"
     isRequired: "Wajib?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Membutuhkan jawaban positif",
     // [Auto-translated] "Mark as required"
     markRequired: "Tandai sesuai kebutuhan",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var indonesianStrings = {
     eachRowUnique: "Mencegah respons duplikat dalam baris",
     // "Error message for required questions"
     requiredErrorText: "Pesan kesalahan \"Wajib\"",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Pesan kesalahan saat Ya diperlukan",
     // "Display the question on a new line"
     startWithNewLine: "Mulai dengan baris baru?",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var indonesianStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" dan \"{aliasKey}\" dari {ownerText} adalah dua nama dari satu properti - waktu eksekusi menerapkannya sesuai urutan JSON menulisnya, sehingga \"{winner}\" menang.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" diatur pada \"{name}\", tetapi inputType \"{inputType}\" tidak memiliki batasan - waktu eksekusi mengabaikannya.",
+        inertMinMax: "\"{key}\" diatur pada \"{name}\", tetapi inputType \"{inputType}\" tidak memiliki batasan - waktu eksekusi mengabaikannya."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

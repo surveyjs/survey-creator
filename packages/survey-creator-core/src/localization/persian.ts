@@ -1162,6 +1162,8 @@ export var persianStrings = {
     visible: "نمایش داده شود؟",
     // "Required"
     isRequired: "ضروری است؟",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "نیاز به پاسخ مثبت",
     // [Auto-translated] "Mark as required"
     markRequired: "علامت گذاری به عنوان مورد نیاز",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var persianStrings = {
     eachRowUnique: "جلوگیری از پاسخ های تکراری در ردیف ها",
     // "Error message for required questions"
     requiredErrorText: "متن خطای موردنیاز",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "پیام خطا زمانی که نیاز به پاسخ بله است",
     // "Display the question on a new line"
     startWithNewLine: "با سطر جدید شروع شود؟",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var persianStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "«{key}» و «{aliasKey}» از {ownerText} دو نام یک ویژگی هستند - زمان اجرا آن ها را به ترتیبی که JSON می نویسد اعمال می کند، بنابراین «{winner}» برنده است.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "«{key}» روی «{name} تنظیم شده است، اما input Type «{inputType}» هیچ محدودیتی ندارد - زمان اجرا آن را نادیده می گیرد.",
+        inertMinMax: "«{key}» روی «{name} تنظیم شده است، اما input Type «{inputType}» هیچ محدودیتی ندارد - زمان اجرا آن را نادیده می گیرد."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

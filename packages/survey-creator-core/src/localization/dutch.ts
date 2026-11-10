@@ -1162,6 +1162,8 @@ export var nlStrings = {
     visible: "Is zichtbaar?",
     // "Required"
     isRequired: "Is verplicht?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Vraag naar een positief antwoord",
     // [Auto-translated] "Mark as required"
     markRequired: "Markeren zoals vereist",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var nlStrings = {
     eachRowUnique: "Voorkom dubbele antwoorden in rijen",
     // "Error message for required questions"
     requiredErrorText: "Tekst bij niet-ingevulde verplichte vraag",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Foutmelding wanneer Ja vereist is",
     // "Display the question on a new line"
     startWithNewLine: "Beginnen met een nieuwe regel?",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var nlStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" en \"{aliasKey}\" van {ownerText} zijn twee namen van één eigenschap - de runtime past ze toe in de volgorde waarin de JSON ze schrijft, dus \"{winner}\" wint.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" is ingesteld op \"{name}\", maar inputType \"{inputType}\" kent geen grenzen - de looptijd negeert het.",
+        inertMinMax: "\"{key}\" is ingesteld op \"{name}\", maar inputType \"{inputType}\" kent geen grenzen - de looptijd negeert het."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

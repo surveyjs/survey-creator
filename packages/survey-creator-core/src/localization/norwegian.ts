@@ -1162,6 +1162,8 @@ export var nbStrings = {
     visible: "Er synlig?",
     // "Required"
     isRequired: "Er nødvendig?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Krever et positivt svar",
     // [Auto-translated] "Mark as required"
     markRequired: "Merk etter behov",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var nbStrings = {
     eachRowUnique: "Forhindre dupliserte svar i rader",
     // "Error message for required questions"
     requiredErrorText: "Nødvendig feilmelding",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Feilmelding når Ja kreves",
     // "Display the question on a new line"
     startWithNewLine: "Må starte med ny linje?",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var nbStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" og \"{aliasKey}\" i {ownerText} er to navn på én egenskap – kjøretiden bruker dem i den rekkefølgen JSON-en skriver dem, så \"{winner}\" vinner.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" settes på \"{name}\", men inputType \"{inputType}\" har ingen begrensninger – kjøretiden ignorerer det.",
+        inertMinMax: "\"{key}\" settes på \"{name}\", men inputType \"{inputType}\" har ingen begrensninger – kjøretiden ignorerer det."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

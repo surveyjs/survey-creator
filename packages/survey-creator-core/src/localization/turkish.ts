@@ -1162,6 +1162,8 @@ export var turkishStrings = {
     visible: "Görünür?",
     // "Required"
     isRequired: "Zorunlu?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Olumlu bir cevap talep ediyorum",
     // [Auto-translated] "Mark as required"
     markRequired: "Gerektiği gibi işaretleyin",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var turkishStrings = {
     eachRowUnique: "Satırlarda yinelenen yanıtları önleme",
     // "Error message for required questions"
     requiredErrorText: "Zorunlu hata yazısı",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Evet gerektiğinde hata mesajı",
     // "Display the question on a new line"
     startWithNewLine: "Yeni satırla başla?",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var turkishStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "{ownerText}'in \"{key}\" ve \"{aliasKey}\" bir özelliğin iki adıdır - çalışma süresi bunları JSON'un yazdığı sırayla uygular, yani \"{winner}\" kazanır.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" \"{name}\" üzerinde ayarlanır, ancak inputType \"{inputType}\" sınırı yoktur - çalışma zamanı bunu görmezden gelir.",
+        inertMinMax: "\"{key}\" \"{name}\" üzerinde ayarlanır, ancak inputType \"{inputType}\" sınırı yoktur - çalışma zamanı bunu görmezden gelir."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

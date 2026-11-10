@@ -1162,6 +1162,8 @@ export var huStrings = {
     visible: "Látható?",
     // "Required"
     isRequired: "Kötelező?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Pozitív választ kell kérni",
     // [Auto-translated] "Mark as required"
     markRequired: "Megjelölés kötelezőként",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var huStrings = {
     eachRowUnique: "A sorokban ismétlődő válaszok megakadályozása",
     // "Error message for required questions"
     requiredErrorText: "\"Kötelező\" hibaüzenet",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Hibaüzenet, ha igen szükséges",
     // "Display the question on a new line"
     startWithNewLine: "Új sorban kezdődik?",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var huStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "A {ownerText} \"{key}\" és \"{aliasKey}\" két neve egy tulajdonságnak – a futási idő a JSON írási sorrendjében alkalmazza őket, így a \"{winner}\" nyer.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "a \"{key}\" a \"{name}\"-re van beállítva, de az inputType \"{inputType}\" korlátlanul rendelkezik – a futási idő figyelmen kívül hagyja azt.",
+        inertMinMax: "a \"{key}\" a \"{name}\"-re van beállítva, de az inputType \"{inputType}\" korlátlanul rendelkezik – a futási idő figyelmen kívül hagyja azt."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

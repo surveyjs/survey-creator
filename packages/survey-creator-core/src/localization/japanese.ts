@@ -1162,6 +1162,8 @@ export var jaStrings = {
     visible: "表示",
     // "Required"
     isRequired: "必須",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "肯定的な答えを求める",
     // [Auto-translated] "Mark as required"
     markRequired: "必須としてマーク",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var jaStrings = {
     eachRowUnique: "行での回答の重複を防ぐ",
     // "Error message for required questions"
     requiredErrorText: "必要なエラーテキスト",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "「はい」が必要な場合のエラーメッセージ",
     // "Display the question on a new line"
     startWithNewLine: "ニューラインで開始",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var jaStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "{ownerText}の「{key}」と「{aliasKey}」は1つのプロパティの名前であり、実行時間はJSONが書く順に適用されるため、「{winner}」が勝ちます。",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "「{key}」は「{name}」に設定されていますが、inputType「{inputType}」には境界がなく、実行時間上は無視されます。",
+        inertMinMax: "「{key}」は「{name}」に設定されていますが、inputType「{inputType}」には境界がなく、実行時間上は無視されます。"
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

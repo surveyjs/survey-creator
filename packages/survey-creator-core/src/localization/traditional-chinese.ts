@@ -1163,6 +1163,8 @@ export var traditionalChineseTranslation = {
     visible: "是否可見?",
     // "Required"
     isRequired: "是否為必填項?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "要求一個正面的答案",
     // [Auto-translated] "Mark as required"
     markRequired: "標記為必填",
     // [Auto-translated] "Remove the required mark"
@@ -1173,6 +1175,8 @@ export var traditionalChineseTranslation = {
     eachRowUnique: "防止行中出現重複回應",
     // "Error message for required questions"
     requiredErrorText: "“必需”錯誤消息",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "需要「是」時出現錯誤訊息",
     // "Display the question on a new line"
     startWithNewLine: "問題是否新起一行?",
     // "Rows"
@@ -3889,7 +3893,7 @@ export var traditionalChineseTranslation = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "{ownerText} 的「{key}」和「{aliasKey}」是同一個屬性的兩個名稱——執行時間會依照 JSON 寫入的順序套用它們，因此「{winner}」勝出。",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "「{key}」設在「{name}」上，但 inputType「{inputType}」沒有界限——執行時間會忽略它。",
+        inertMinMax: "「{key}」設在「{name}」上，但 inputType「{inputType}」沒有界限——執行時間會忽略它。"
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

@@ -1162,6 +1162,8 @@ export const roStrings = {
     visible: "Vizibil",
     // "Required"
     isRequired: "Obligatoriu",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Cer un răspuns pozitiv",
     // "Mark as required"
     markRequired: "Marchează ca obligatoriu",
     // "Remove the required mark"
@@ -1172,6 +1174,8 @@ export const roStrings = {
     eachRowUnique: "Prevenirea răspunsurilor duplicate în rânduri",
     // "Error message for required questions"
     requiredErrorText: "Mesaj de eroare pentru întrebările obligatorii",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Mesaj de eroare când Da este necesar",
     // "Display the question on a new line"
     startWithNewLine: "Afișează întrebarea pe un rând nou",
     // "Rows"
@@ -3888,7 +3892,7 @@ export const roStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" și \"{aliasKey}\" din {ownerText} sunt două nume ale unei proprietăți – timpul de rulare le aplică în ordinea în care JSON-ul le scrie, deci \"{winner}\" câștigă.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" este setat pe \"{name}\", dar inputType \"{inputType}\" nu are limite - timpul de execuție îl ignoră.",
+        inertMinMax: "\"{key}\" este setat pe \"{name}\", dar inputType \"{inputType}\" nu are limite - timpul de execuție îl ignoră."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

@@ -1162,6 +1162,8 @@ export var skStrings = {
     visible: "Je viditeľné?",
     // "Required"
     isRequired: "Vyžaduje sa?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Vyžadujte pozitívnu odpoveď",
     // [Auto-translated] "Mark as required"
     markRequired: "Označiť podľa potreby",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var skStrings = {
     eachRowUnique: "Zabráňte duplicitným odpovediam v riadkoch",
     // "Error message for required questions"
     requiredErrorText: "Text chyby pri povinných položkách",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Chybová správa, keď je potrebné Áno",
     // "Display the question on a new line"
     startWithNewLine: "Začína sa novým riadkom?",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var skStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" a \"{aliasKey}\" z {ownerText} sú dva názvy jednej vlastnosti – za behu ich aplikuje v poradí, v akom ich JSON zapisuje, takže \"{winner}\" vyhráva.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" je nastavený na \"{name}\", ale inputType \"{inputType}\" nemá žiadne hranice – čas behu ho ignoruje.",
+        inertMinMax: "\"{key}\" je nastavený na \"{name}\", ale inputType \"{inputType}\" nemá žiadne hranice – čas behu ho ignoruje."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

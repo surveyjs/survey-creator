@@ -1162,6 +1162,8 @@ export var arStrings = {
     visible: "مرئي؟",
     // "Required"
     isRequired: "مطلوب؟",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "أطلب إجابة إيجابية",
     // [Auto-translated] "Mark as required"
     markRequired: "وضع علامة كمطلوب",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var arStrings = {
     eachRowUnique: "منع تكرار الاستجابات في الصفوف",
     // "Error message for required questions"
     requiredErrorText: "نص خطأ إلزامي السؤال",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "رسالة خطأ عندما يكون مطلوبا خيار نعم",
     // "Display the question on a new line"
     startWithNewLine: "إظهار السؤال في صف جديد",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var arStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" و \"{aliasKey}\" من {ownerText} هما اسمان لخاصية واحدة - حيث يتم تطبيق وقت التشغيل عليهما بالترتيب الذي يكتبه JSON، لذا \"{winner}\" هو الفائز.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" مضبوط على \"{name}\"، لكن نوع inputType \"{inputType}\" لا حدود له - وقت التشغيل يتجاهله.",
+        inertMinMax: "\"{key}\" مضبوط على \"{name}\"، لكن نوع inputType \"{inputType}\" لا حدود له - وقت التشغيل يتجاهله."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

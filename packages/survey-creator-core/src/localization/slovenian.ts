@@ -1162,6 +1162,8 @@ export var slStrings = {
     visible: "Vidno",
     // "Required"
     isRequired: "Obvezno",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Zahtevajte pozitiven odgovor",
     // "Mark as required"
     markRequired: "Označi kot obvezno",
     // "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var slStrings = {
     eachRowUnique: "Prepreči podvojene odgovore v vrsticah",
     // "Error message for required questions"
     requiredErrorText: "Sporočilo o napaki za obvezna vprašanja",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Sporočilo o napaki, ko je zahtevano Da",
     // "Display the question on a new line"
     startWithNewLine: "Prikaz vprašanja na novi vrstici",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var slStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" in \"{aliasKey}\" iz {ownerText} sta dve imeni ene lastnosti – čas izvajanja ju uporabi v vrstnem redu, v katerem ju JSON zapiše, zato zmaga \"{winner}\".",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" je nastavljen na \"{name}\", vendar inputType \"{inputType}\" nima meja – čas izvajanja ga ignorira.",
+        inertMinMax: "\"{key}\" je nastavljen na \"{name}\", vendar inputType \"{inputType}\" nima meja – čas izvajanja ga ignorira."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

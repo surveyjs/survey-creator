@@ -1162,6 +1162,8 @@ export var bgStrings = {
     visible: "Видим",
     // "Required"
     isRequired: "Задължителен",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Изисква положителен отговор",
     // [Auto-translated] "Mark as required"
     markRequired: "Маркирай както се изисква",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var bgStrings = {
     eachRowUnique: "Предотвратяване на дублиращи се отговори в редове",
     // "Error message for required questions"
     requiredErrorText: "\"Задължително\" съобщение за грешка",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Съобщение за грешка, когато е необходим отговор \"Да\"",
     // "Display the question on a new line"
     startWithNewLine: "Показване на въпроса на нов ред",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var bgStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" и \"{aliasKey}\" от {ownerText} са две имена на едно свойство – времето на изпълнение ги прилага в реда, в който JSON ги записва, така че \"{winner}\" печели.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" е зададен на \"{name}\", но inputType \"{inputType}\" няма граници – времето за изпълнение го игнорира.",
+        inertMinMax: "\"{key}\" е зададен на \"{name}\", но inputType \"{inputType}\" няма граници – времето за изпълнение го игнорира."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

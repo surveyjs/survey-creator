@@ -1162,6 +1162,8 @@ export var msStrings = {
     visible: "Boleh dilihat?",
     // "Required"
     isRequired: "Diperlukan?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Memerlukan jawapan positif",
     // [Auto-translated] "Mark as required"
     markRequired: "Tandakan mengikut keperluan",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var msStrings = {
     eachRowUnique: "Mengelakkan respons pendua dalam baris",
     // "Error message for required questions"
     requiredErrorText: "Teks ralat diperlukan",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Mesej ralat apabila Ya diperlukan",
     // "Display the question on a new line"
     startWithNewLine: "Mulakan dengan baris baharu?",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var msStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" dan \"{aliasKey}\" dalam {ownerText} adalah dua nama bagi satu sifat - masa jalan menggunakannya mengikut susunan JSON menulisnya, jadi \"{winner}\" menang.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" ditetapkan pada \"{name}\", tetapi inputType \"{inputType}\" tiada batasan - masa jalan mengabaikannya.",
+        inertMinMax: "\"{key}\" ditetapkan pada \"{name}\", tetapi inputType \"{inputType}\" tiada batasan - masa jalan mengabaikannya."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

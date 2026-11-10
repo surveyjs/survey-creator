@@ -1162,6 +1162,8 @@ export var catalanTranslation = {
     visible: "¿Es visible?",
     // "Required"
     isRequired: "¿Se requiere?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Cal una resposta positiva",
     // [Auto-translated] "Mark as required"
     markRequired: "Marcar según sea necesario",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var catalanTranslation = {
     eachRowUnique: "Evitar respuestas duplicadas en files",
     // "Error message for required questions"
     requiredErrorText: "Text de error requerit",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Missatge d'error quan es requereix Sí",
     // "Display the question on a new line"
     startWithNewLine: "¿Empieza con la nova línea?",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var catalanTranslation = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" i \"{aliasKey}\" de {ownerText} són dos noms d'una propietat: el temps d'execució els aplica en l'ordre en què el JSON els escriu, així que \"{winner}\" guanya.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{clau}\" està posat a \"{name}\", però inputType \"{inputType}\" no té límits: el temps d'execució l'ignora.",
+        inertMinMax: "\"{clau}\" està posat a \"{name}\", però inputType \"{inputType}\" no té límits: el temps d'execució l'ignora."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

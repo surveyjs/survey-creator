@@ -1162,6 +1162,8 @@ export var mnStrings = {
     visible: "Харагдана",
     // "Required"
     isRequired: "Заавал бөглөх",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Эерэг хариулт шаардаарай",
     // [Auto-translated] "Mark as required"
     markRequired: "Шаардлагын дагуу тэмдэглэгээ хийх",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var mnStrings = {
     eachRowUnique: "Дараалалд хувилж хариу үйлдэл үзүүлэхээс сэргийлнэ",
     // "Error message for required questions"
     requiredErrorText: "Заавал бөглөх талбарыг бөглөөгүй байна",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Шаардлагатай үед алдааны мессеж гарах",
     // "Display the question on a new line"
     startWithNewLine: "Асуултыг шинэ мөрөнд харуулах",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var mnStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "{ownerText}-ийн \"{key}\" ба \"{aliasKey}\" нь нэг шинж чанарын хоёр нэр бөгөөд гүйцэтгэлийн хугацаа нь JSON-ийн бичдэг дарааллаар ашиглагддаг тул \"{winner}\" ялна.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" нь \"{name}\" дээр тавигдсан боловч inputType \"{inputType}\" нь хязгааргүй - гүйцэтгэлийн хугацаа үүнийг үл тоомсорлодог.",
+        inertMinMax: "\"{key}\" нь \"{name}\" дээр тавигдсан боловч inputType \"{inputType}\" нь хязгааргүй - гүйцэтгэлийн хугацаа үүнийг үл тоомсорлодог."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

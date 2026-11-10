@@ -1162,6 +1162,8 @@ export var hrStrings = {
     visible: "Je li vidljivo?",
     // "Required"
     isRequired: "Je potrebno?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Zahtijevajte pozitivan odgovor",
     // [Auto-translated] "Mark as required"
     markRequired: "Označi kao obavezno",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var hrStrings = {
     eachRowUnique: "Sprječavanje dvostrukih odgovora u recima",
     // "Error message for required questions"
     requiredErrorText: "Potreban tekst pogreške",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Poruka o pogrešci kada je potreban 'da'",
     // "Display the question on a new line"
     startWithNewLine: "Počinje li s novom linijom?",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var hrStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" i \"{aliasKey}\" iz {ownerText} su dva imena jednog svojstva – vrijeme izvršavanja ih primjenjuje redoslijedom kojim ih JSON piše, pa \"{winner}\" pobjeđuje.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" je postavljen na \"{name}\", ali inputType \"{inputType}\" nema granica – vrijeme izvršavanja ga ignorira.",
+        inertMinMax: "\"{key}\" je postavljen na \"{name}\", ali inputType \"{inputType}\" nema granica – vrijeme izvršavanja ga ignorira."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

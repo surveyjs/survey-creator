@@ -1162,6 +1162,8 @@ export var fiStrings = {
     visible: "Näkyvissä",
     // "Required"
     isRequired: "Pakollinen",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Vaadi myönteinen vastaus",
     // [Auto-translated] "Mark as required"
     markRequired: "Merkitse pakollisesti",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var fiStrings = {
     eachRowUnique: "Estä päällekkäiset vastaukset riveillä",
     // "Error message for required questions"
     requiredErrorText: "Vaadittu virheteksti",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Virheilmoitus, kun Kyllä vaaditaan",
     // "Display the question on a new line"
     startWithNewLine: "Onko aloitus uudella rivillä?",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var fiStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" ja \"{aliasKey}\" {ownerText} ovat yhden ominaisuuden kaksi nimeä – suoritusaika soveltaa niitä siinä järjestyksessä kuin JSON ne kirjoittaa, joten \"{winner}\" voittaa.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" on asetettu \"{name}\", mutta inputType \"{inputType}\" ei rajoita – suoritusaika ei huomioi sitä.",
+        inertMinMax: "\"{key}\" on asetettu \"{name}\", mutta inputType \"{inputType}\" ei rajoita – suoritusaika ei huomioi sitä."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

@@ -1162,6 +1162,8 @@ export var hebrewStrings = {
     visible: "נראה",
     // "Required"
     isRequired: "נדרש",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "דרוש תשובה חיובית",
     // "Mark as required"
     markRequired: "סמן כשדה חובה",
     // "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var hebrewStrings = {
     eachRowUnique: "מניעת תגובות כפולות בשורות",
     // "Error message for required questions"
     requiredErrorText: "הודעת שגיאה לשדה חובה",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "הודעת שגיאה כאשר נדרש כן",
     // "Display the question on a new line"
     startWithNewLine: "הצג את השאלה בשורה חדשה",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var hebrewStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" ו-\"{aliasKey}\" של {ownerText} הם שני שמות של תכונה אחת - זמן הריצה מיישם אותם לפי הסדר שבו JSON כותב אותם, כך ש\"{winner}\" מנצח.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" מוגדר על \"{name}\", אבל ל-inputType \"{inputType}\" אין גבולות - זמן הריצה מתעלם ממנו.",
+        inertMinMax: "\"{key}\" מוגדר על \"{name}\", אבל ל-inputType \"{inputType}\" אין גבולות - זמן הריצה מתעלם ממנו."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

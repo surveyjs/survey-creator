@@ -1162,6 +1162,8 @@ export var portugueseTranslation = {
     visible: "É visível?",
     // "Required"
     isRequired: "É obrigatório?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Exigir uma resposta positiva",
     // [Auto-translated] "Mark as required"
     markRequired: "Marcar conforme necessário",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var portugueseTranslation = {
     eachRowUnique: "Impedir respostas duplicadas em linhas",
     // "Error message for required questions"
     requiredErrorText: "\"Obrigatório\" mensagem de erro",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Mensagem de erro quando sim é necessário",
     // "Display the question on a new line"
     startWithNewLine: "Começa com uma nova linha?",
     // "Rows"
@@ -3888,7 +3892,7 @@ export var portugueseTranslation = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{chave}\" e \"{aliasKey}\" de {ownerText} são dois nomes de uma propriedade – o tempo de execução os aplica na ordem em que o JSON os escreve, então \"{winner}\" vence.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" está definido em \"{name}\", mas inputType \"{inputType}\" não tem limites - o tempo de execução ignora isso.",
+        inertMinMax: "\"{key}\" está definido em \"{name}\", mas inputType \"{inputType}\" não tem limites - o tempo de execução ignora isso."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
