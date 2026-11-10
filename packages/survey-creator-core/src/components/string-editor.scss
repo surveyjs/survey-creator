@@ -204,6 +204,10 @@
       left: calc(var(--sjs2-base-unit-spacing) * -0.7);
       right: calc(var(--sjs2-base-unit-spacing) * -0.7);
     }
+
+    .sd-rich-text__toolbar {
+      inset-inline-start: calc(var(--sjs2-base-unit-spacing) * -0.7 - var(--sjs2-border-width-x200));
+    }
   }
 }
 
@@ -221,6 +225,14 @@
 // .sv-title {
 //   position: relative;
 // }
+.svc-string-editor__content .sd-rich-text__toolbar {
+  // Outer edge of the focus ring: border inset plus the box-shadow spread.
+  margin-top: 0;
+  left: auto;
+  inset-inline-start: calc(var(--sjs2-spacing-negative-x100) - var(--sjs2-border-width-x200));
+  top: calc(100% - var(--sjs2-spacing-negative-x050) + var(--sjs2-border-width-x200) + 2px);
+}
+
 .svc-string-editor--multiline .sv-string-editor {
   white-space: pre-wrap;
 }
