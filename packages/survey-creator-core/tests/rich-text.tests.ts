@@ -359,6 +359,7 @@ describe("rich text registration", () => {
       creator.selectElement(creator.survey.getQuestionByName("c"));
       const editorQuestion = creator.propertyGrid.getQuestionByName("allowRichText");
       expect(editorQuestion).toBeTruthy();
+      expect(editorQuestion.parent.name).toBe("general");
       expect(editorQuestion.title).toBe("Enable rich text formatting");
 
       prop.visible = false;
