@@ -20,7 +20,8 @@ import {
   SurveyVariablePresets,
   isAnimationEnabled,
   isReducedMotionPreferred,
-  subscribeReducedMotionChange
+  subscribeReducedMotionChange,
+  getIdSelector
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
@@ -3769,7 +3770,7 @@ export class SurveyCreatorModel extends Base
         element: selEl,
         question: undefined,
         page: elementPage,
-        id: selEl.id,
+        id: selEl.renderedId,
         scrollIfVisible: true,
         scrollIntoViewOptions: scrollIntoViewOptions,
         passedRootElement: this.rootElement,
@@ -3789,8 +3790,8 @@ export class SurveyCreatorModel extends Base
   }
 
   private getHtmlElementForScroll(element: any): HTMLElement {
-    const id = element.getType() === "matrixdropdowncolumn" ? element.colOwner.id : element.id;
-    return this.rootElement?.querySelector(`#${id}`);
+    const id = element.getType() === "matrixdropdowncolumn" ? element.colOwner.renderedId : element.renderedId;
+    return this.rootElement?.querySelector(getIdSelector(id));
   }
 
   private getSelectedSurveyElement(): IElement {

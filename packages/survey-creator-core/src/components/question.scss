@@ -130,6 +130,9 @@ svc-question {
     margin-right: var(--sjs2-spacing-negative-x500, -40px);
     overflow-x: auto;
   }
+  .sd-selectbase:has(.sd-dropdown) {
+    overflow-x: visible;
+  }
 
   .sd-table-wrapper {
     padding: 0;
