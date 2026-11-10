@@ -38,7 +38,7 @@ export class SearchManagerPropertyGrid extends SearchManager {
       this.expandAllParents(this.currentMatch);
       const newPanelExpanded = this.lastCollapsedElement != lastCollapsedElement;
       setTimeout(() => {
-        const elementId = this.currentMatch?.id;
+        const elementId = this.currentMatch?.renderedId;
         scrollElementIntoView(elementId, this.survey.rootElement);
       }, newPanelExpanded ? 400 : 10);
     }

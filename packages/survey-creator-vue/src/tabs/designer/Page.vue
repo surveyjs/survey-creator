@@ -2,7 +2,7 @@
   <div
     :key="model.page.id"
     v-if="model.page"
-    :id="model.page.id"
+    :id="model.page.renderedId"
     class="svc-page__content"
     :class="model.css"
     :data-sv-drop-target-survey-page="model.dropTargetName"
