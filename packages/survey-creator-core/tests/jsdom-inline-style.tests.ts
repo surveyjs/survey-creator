@@ -281,7 +281,7 @@ describe("jsdom inline style: the patch", () => {
   test("is active", () => {
     const isPatched = !!ElementStyleClass[patchMarker] && ElementStyleClass !== OriginalCSSStyleDeclaration;
     expect(isPatched, `Element styles are not patched by tests/jsdom-inline-style.ts (${getCssstyleVersion()}). ` +
-      "The patch applies only to cssstyle 4.6.0. Recheck it against the CSSStyleDeclaration that jsdom now uses: " +
+      "The patch applies only to cssstyle 4.6.0. If an older cssstyle is installed, run npm install: package.json pins 4.6.0. Otherwise, recheck it against the CSSStyleDeclaration that jsdom now uses: " +
       "if setProperty is still quadratic, update the patch and its version check; if it is linear now, remove the patch.").toBe(true);
   });
 

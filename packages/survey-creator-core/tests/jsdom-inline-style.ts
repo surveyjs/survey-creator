@@ -18,7 +18,8 @@
 //
 // It applies only to cssstyle 4.6.0, because it depends on cssstyle's internals. On any other
 // version, or without cssstyle, it does nothing and tests/jsdom-inline-style.tests.ts fails. Revisit this file whenever
-// jsdom or cssstyle changes. jsdom 30.1.3 (checked on 2026-11-04) has its own
+// jsdom or cssstyle changes. package.json pins cssstyle 4.6.0 so that jsdom resolves that copy: jsdom
+// asks for ^4.1.0, and npm keeps an older install that satisfies it. jsdom 30.1.3 (checked on 2026-11-04) has its own
 // CSSStyleDeclaration in place of cssstyle and is still quadratic, as is cssstyle 6.2.0.
 import { createRequire } from "node:module";
 
