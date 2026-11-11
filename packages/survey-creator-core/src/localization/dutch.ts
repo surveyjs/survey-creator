@@ -1162,6 +1162,8 @@ export var nlStrings = {
     visible: "Is zichtbaar?",
     // "Required"
     isRequired: "Is verplicht?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Vraag naar een positief antwoord",
     // [Auto-translated] "Mark as required"
     markRequired: "Markeren zoals vereist",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var nlStrings = {
     eachRowUnique: "Voorkom dubbele antwoorden in rijen",
     // "Error message for required questions"
     requiredErrorText: "Tekst bij niet-ingevulde verplichte vraag",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Foutmelding wanneer Ja vereist is",
     // "Display the question on a new line"
     startWithNewLine: "Beginnen met een nieuwe regel?",
     // "Rows"

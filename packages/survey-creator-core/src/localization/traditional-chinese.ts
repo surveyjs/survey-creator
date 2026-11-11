@@ -1163,6 +1163,8 @@ export var traditionalChineseTranslation = {
     visible: "是否可見?",
     // "Required"
     isRequired: "是否為必填項?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "要求一個正面的答案",
     // [Auto-translated] "Mark as required"
     markRequired: "標記為必填",
     // [Auto-translated] "Remove the required mark"
@@ -1173,6 +1175,8 @@ export var traditionalChineseTranslation = {
     eachRowUnique: "防止行中出現重複回應",
     // "Error message for required questions"
     requiredErrorText: "“必需”錯誤消息",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "需要「是」時出現錯誤訊息",
     // "Display the question on a new line"
     startWithNewLine: "問題是否新起一行?",
     // "Rows"

@@ -1162,6 +1162,8 @@ export const roStrings = {
     visible: "Vizibil",
     // "Required"
     isRequired: "Obligatoriu",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Cer un răspuns pozitiv",
     // "Mark as required"
     markRequired: "Marchează ca obligatoriu",
     // "Remove the required mark"
@@ -1172,6 +1174,8 @@ export const roStrings = {
     eachRowUnique: "Prevenirea răspunsurilor duplicate în rânduri",
     // "Error message for required questions"
     requiredErrorText: "Mesaj de eroare pentru întrebările obligatorii",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Mesaj de eroare când Da este necesar",
     // "Display the question on a new line"
     startWithNewLine: "Afișează întrebarea pe un rând nou",
     // "Rows"

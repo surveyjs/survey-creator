@@ -1162,6 +1162,8 @@ export var bgStrings = {
     visible: "Видим",
     // "Required"
     isRequired: "Задължителен",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Изисква положителен отговор",
     // [Auto-translated] "Mark as required"
     markRequired: "Маркирай както се изисква",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var bgStrings = {
     eachRowUnique: "Предотвратяване на дублиращи се отговори в редове",
     // "Error message for required questions"
     requiredErrorText: "\"Задължително\" съобщение за грешка",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Съобщение за грешка, когато е необходим отговор \"Да\"",
     // "Display the question on a new line"
     startWithNewLine: "Показване на въпроса на нов ред",
     // "Rows"

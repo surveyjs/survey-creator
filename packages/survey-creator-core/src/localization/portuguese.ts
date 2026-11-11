@@ -1162,6 +1162,8 @@ export var portugueseTranslation = {
     visible: "É visível?",
     // "Required"
     isRequired: "É obrigatório?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Exigir uma resposta positiva",
     // [Auto-translated] "Mark as required"
     markRequired: "Marcar conforme necessário",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var portugueseTranslation = {
     eachRowUnique: "Impedir respostas duplicadas em linhas",
     // "Error message for required questions"
     requiredErrorText: "\"Obrigatório\" mensagem de erro",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Mensagem de erro quando sim é necessário",
     // "Display the question on a new line"
     startWithNewLine: "Começa com uma nova linha?",
     // "Rows"

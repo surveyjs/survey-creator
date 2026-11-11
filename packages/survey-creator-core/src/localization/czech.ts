@@ -1162,6 +1162,8 @@ export var czStrings = {
     visible: "Viditelná?",
     // "Required"
     isRequired: "Povinná?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Vyžadujte kladnou odpověď",
     // [Auto-translated] "Mark as required"
     markRequired: "Označit podle potřeby",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var czStrings = {
     eachRowUnique: "Zabránění duplicitním odpovědím v řádcích",
     // "Error message for required questions"
     requiredErrorText: "Text chyby pro povinnou otázku",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Chybová zpráva, když je vyžadováno ano",
     // "Display the question on a new line"
     startWithNewLine: "Začátek s novým řádkem?",
     // "Rows"

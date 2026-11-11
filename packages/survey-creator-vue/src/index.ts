@@ -33,6 +33,7 @@ import SurveyResults from "./tabs/preview/SurveyResults.vue";
 import SurveyResultsRow from "./tabs/preview/SurveyResultsRow.vue";
 
 import JsonEditorAce from "./tabs/json/JsonEditorAce.vue";
+import JsonEditorMonaco from "./tabs/json/JsonEditorMonaco.vue";
 import JsonEditorTextArea from "./tabs/json/JsonEditorTextArea.vue";
 import JsonEditorErrorItem from "./tabs/json/JsonEditorErrorItem.vue";
 
@@ -148,6 +149,7 @@ function registerComponents(
   registerComponent("json-error-item", JsonEditorErrorItem);
   registerComponent("svc-tab-json-editor-textarea", JsonEditorTextArea);
   registerComponent("svc-tab-json-editor-ace", JsonEditorAce);
+  registerComponent("svc-tab-json-editor-monaco", JsonEditorMonaco);
 
   registerComponent("svc-tab-translation", Translation);
   registerComponent("sd-translation-line-skeleton", TranslationLineSkeleton);

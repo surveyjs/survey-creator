@@ -1162,6 +1162,8 @@ export var persianStrings = {
     visible: "نمایش داده شود؟",
     // "Required"
     isRequired: "ضروری است؟",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "نیاز به پاسخ مثبت",
     // [Auto-translated] "Mark as required"
     markRequired: "علامت گذاری به عنوان مورد نیاز",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var persianStrings = {
     eachRowUnique: "جلوگیری از پاسخ های تکراری در ردیف ها",
     // "Error message for required questions"
     requiredErrorText: "متن خطای موردنیاز",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "پیام خطا زمانی که نیاز به پاسخ بله است",
     // "Display the question on a new line"
     startWithNewLine: "با سطر جدید شروع شود؟",
     // "Rows"

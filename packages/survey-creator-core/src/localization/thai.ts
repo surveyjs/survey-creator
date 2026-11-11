@@ -1162,6 +1162,8 @@ export const thStrings = {
     visible: "มองเห็นได้",
     // "Required"
     isRequired: "จำเป็น",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "ต้องการคําตอบในเชิงบวก",
     // "Mark as required"
     markRequired: "ทำเครื่องหมายว่าจำเป็น",
     // "Remove the required mark"
@@ -1172,6 +1174,8 @@ export const thStrings = {
     eachRowUnique: "ป้องกันการตอบซ้ำในแถว",
     // "Error message for required questions"
     requiredErrorText: "ข้อความข้อผิดพลาดสำหรับคำถามที่จำเป็น",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "ข้อความแสดงข้อผิดพลาดเมื่อจําเป็นต้องใช้ Yes",
     // "Display the question on a new line"
     startWithNewLine: "แสดงคำถามในบรรทัดใหม่",
     // "Rows"

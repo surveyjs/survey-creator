@@ -1162,6 +1162,8 @@ export var ruStrings = {
     visible: "Отображать?",
     // "Required"
     isRequired: "Обязательный?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Требуйте положительного ответа",
     // [Auto-translated] "Mark as required"
     markRequired: "Отметьте как обязательный",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var ruStrings = {
     eachRowUnique: "Предотвращение дублирования ответов в строках",
     // "Error message for required questions"
     requiredErrorText: "Это поле обязательное для заполнения",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Сообщение об ошибке, когда требуется ответ «Да»",
     // "Display the question on a new line"
     startWithNewLine: "Начинать с новой строки?",
     // "Rows"

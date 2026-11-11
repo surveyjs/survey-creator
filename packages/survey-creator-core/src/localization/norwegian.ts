@@ -1162,6 +1162,8 @@ export var nbStrings = {
     visible: "Er synlig?",
     // "Required"
     isRequired: "Er nødvendig?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Krever et positivt svar",
     // [Auto-translated] "Mark as required"
     markRequired: "Merk etter behov",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var nbStrings = {
     eachRowUnique: "Forhindre dupliserte svar i rader",
     // "Error message for required questions"
     requiredErrorText: "Nødvendig feilmelding",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Feilmelding når Ja kreves",
     // "Display the question on a new line"
     startWithNewLine: "Må starte med ny linje?",
     // "Rows"

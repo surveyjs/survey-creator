@@ -1163,6 +1163,8 @@ export let svStrings = {
     visible: "Synlig?",
     // "Required"
     isRequired: "Nödvändig?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Kräv ett positivt svar",
     // [Auto-translated] "Mark as required"
     markRequired: "Markera efter behov",
     // [Auto-translated] "Remove the required mark"
@@ -1173,6 +1175,8 @@ export let svStrings = {
     eachRowUnique: "Förhindra dubbletter av svar i rader",
     // "Error message for required questions"
     requiredErrorText: "Felmeddelandet \"Obligatoriskt\"",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Felmeddelande när Ja krävs",
     // "Display the question on a new line"
     startWithNewLine: "Starta på en ny rad?",
     // "Rows"

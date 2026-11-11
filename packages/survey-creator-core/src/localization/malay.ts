@@ -1162,6 +1162,8 @@ export var msStrings = {
     visible: "Boleh dilihat?",
     // "Required"
     isRequired: "Diperlukan?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Memerlukan jawapan positif",
     // [Auto-translated] "Mark as required"
     markRequired: "Tandakan mengikut keperluan",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var msStrings = {
     eachRowUnique: "Mengelakkan respons pendua dalam baris",
     // "Error message for required questions"
     requiredErrorText: "Teks ralat diperlukan",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Mesej ralat apabila Ya diperlukan",
     // "Display the question on a new line"
     startWithNewLine: "Mulakan dengan baris baharu?",
     // "Rows"

@@ -1162,6 +1162,8 @@ export var jaStrings = {
     visible: "表示",
     // "Required"
     isRequired: "必須",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "肯定的な答えを求める",
     // [Auto-translated] "Mark as required"
     markRequired: "必須としてマーク",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var jaStrings = {
     eachRowUnique: "行での回答の重複を防ぐ",
     // "Error message for required questions"
     requiredErrorText: "必要なエラーテキスト",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "「はい」が必要な場合のエラーメッセージ",
     // "Display the question on a new line"
     startWithNewLine: "ニューラインで開始",
     // "Rows"

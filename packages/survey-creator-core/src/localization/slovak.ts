@@ -1162,6 +1162,8 @@ export var skStrings = {
     visible: "Je viditeľné?",
     // "Required"
     isRequired: "Vyžaduje sa?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Vyžadujte pozitívnu odpoveď",
     // [Auto-translated] "Mark as required"
     markRequired: "Označiť podľa potreby",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var skStrings = {
     eachRowUnique: "Zabráňte duplicitným odpovediam v riadkoch",
     // "Error message for required questions"
     requiredErrorText: "Text chyby pri povinných položkách",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Chybová správa, keď je potrebné Áno",
     // "Display the question on a new line"
     startWithNewLine: "Začína sa novým riadkom?",
     // "Rows"

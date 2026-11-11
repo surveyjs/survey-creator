@@ -1162,6 +1162,8 @@ export var turkishStrings = {
     visible: "Görünür?",
     // "Required"
     isRequired: "Zorunlu?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Olumlu bir cevap talep ediyorum",
     // [Auto-translated] "Mark as required"
     markRequired: "Gerektiği gibi işaretleyin",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var turkishStrings = {
     eachRowUnique: "Satırlarda yinelenen yanıtları önleme",
     // "Error message for required questions"
     requiredErrorText: "Zorunlu hata yazısı",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Evet gerektiğinde hata mesajı",
     // "Display the question on a new line"
     startWithNewLine: "Yeni satırla başla?",
     // "Rows"

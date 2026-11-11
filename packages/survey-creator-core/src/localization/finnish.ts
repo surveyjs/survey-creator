@@ -1162,6 +1162,8 @@ export var fiStrings = {
     visible: "Näkyvissä",
     // "Required"
     isRequired: "Pakollinen",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Vaadi myönteinen vastaus",
     // [Auto-translated] "Mark as required"
     markRequired: "Merkitse pakollisesti",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var fiStrings = {
     eachRowUnique: "Estä päällekkäiset vastaukset riveillä",
     // "Error message for required questions"
     requiredErrorText: "Vaadittu virheteksti",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Virheilmoitus, kun Kyllä vaaditaan",
     // "Display the question on a new line"
     startWithNewLine: "Onko aloitus uudella rivillä?",
     // "Rows"

@@ -1162,6 +1162,8 @@ export var frenchTranslation = {
     visible: "Est visible ?",
     // "Required"
     isRequired: "Est obligatoire ?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Exigez une réponse positive",
     // [Auto-translated] "Mark as required"
     markRequired: "Marquer au besoin",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var frenchTranslation = {
     eachRowUnique: "Éviter les réponses dupliquées dans les lignes",
     // "Error message for required questions"
     requiredErrorText: "Message d'erreur lorsque obligatoire",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Message d’erreur lorsque le Oui est requis",
     // "Display the question on a new line"
     startWithNewLine: "Afficher la question sur une nouvelle ligne",
     // "Rows"

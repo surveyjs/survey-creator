@@ -1162,6 +1162,8 @@ export var catalanTranslation = {
     visible: "¿Es visible?",
     // "Required"
     isRequired: "¿Se requiere?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Cal una resposta positiva",
     // [Auto-translated] "Mark as required"
     markRequired: "Marcar según sea necesario",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var catalanTranslation = {
     eachRowUnique: "Evitar respuestas duplicadas en files",
     // "Error message for required questions"
     requiredErrorText: "Text de error requerit",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Missatge d'error quan es requereix Sí",
     // "Display the question on a new line"
     startWithNewLine: "¿Empieza con la nova línea?",
     // "Rows"

@@ -26,6 +26,7 @@ export * from "./side-bar/side-bar-launch-card.component";
 export * from "./components/search.component";
 export * from "./tabs/json/json-editor-textarea.component";
 export * from "./tabs/json/json-editor-ace.component";
+export * from "./tabs/json/json-editor-monaco.component";
 export * from "./tabs/logic/logic.component";
 export * from "./components/action-button.component";
 export * from "./components/question-error.component";

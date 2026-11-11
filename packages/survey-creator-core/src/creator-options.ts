@@ -609,8 +609,8 @@ export interface ICreatorOptions {
    * @since 2.5.7
    */
   expressionsValidateSemantics?: boolean;
-  // how many times the expression assistant asks the AI to correct a result with errors (default: 1)
-  expressionAssistantFixAttempts?: number;
+  // how many times an AI feature sends back an answer with errors (default: 1)
+  aiFixAttempts?: number;
   /**
    * Specifies whether to display language names in English rather than in their native form.
    *

@@ -1162,6 +1162,8 @@ export var huStrings = {
     visible: "Látható?",
     // "Required"
     isRequired: "Kötelező?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Pozitív választ kell kérni",
     // [Auto-translated] "Mark as required"
     markRequired: "Megjelölés kötelezőként",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var huStrings = {
     eachRowUnique: "A sorokban ismétlődő válaszok megakadályozása",
     // "Error message for required questions"
     requiredErrorText: "\"Kötelező\" hibaüzenet",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Hibaüzenet, ha igen szükséges",
     // "Display the question on a new line"
     startWithNewLine: "Új sorban kezdődik?",
     // "Rows"

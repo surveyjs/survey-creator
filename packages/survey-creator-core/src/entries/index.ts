@@ -19,6 +19,7 @@ export * from "../creator-responsivity-manager";
 
 export * from "../dom-helper";
 export * from "../components/tabs/json-editor-ace";
+export * from "../components/tabs/json-editor-monaco";
 export * from "../components/tabs/json-editor-linter";
 export * from "../components/tabs/json-editor-plugin";
 export * from "../components/tabs/json-editor-textarea";
@@ -95,16 +96,16 @@ export type {
   IExpressionSite, IExpressionCheckPending, IExpressionCheckFinding, IExpressionCheckResult,
 } from "../expression-assistant/expression-check";
 export { getLintPath } from "../expression-assistant/lint-paths";
-export { buildExpressionContext, buildExpressionInstruction, buildExpressionSystemPrompt } from "../expression-assistant/expression-context";
+// Creator's own buildExpressionSystemPrompt(context), with Creator's texts; survey-core exports one with the same name
+export { buildExpressionContext, buildExpressionSystemPrompt } from "../expression-assistant/expression-context";
+// shipped from survey-creator-core before they moved to survey-core
+export { buildExpressionInstruction, parseExpressionResponse, expressionGuideVersion, expressionGuideSections, getExpressionGuideText } from "survey-core";
 export type {
   IExpressionContext, IExpressionVariable, IExpressionContextFunction, IExpressionContextOperator, IExpressionContextChoice,
-} from "../expression-assistant/expression-context";
-export { parseExpressionResponse } from "../expression-assistant/expression-response";
+  IExpressionResponse, IExpressionGuideSection, IExpressionGuideExample,
+} from "survey-core";
 export { ExpressionAssistant, showExpressionAssistant } from "../expression-assistant/expression-assistant";
 export type { IExpressionAssistantOptions, IExpressionAssistantInput, ExpressionAssistantStatus } from "../expression-assistant/expression-assistant";
-export type { IExpressionResponse } from "../expression-assistant/expression-response";
-export { expressionGuideVersion, expressionGuideSections, getExpressionGuideText } from "../expression-assistant/expression-guide";
-export type { IExpressionGuideSection, IExpressionGuideExample } from "../expression-assistant/expression-guide";
 export * from "../questionconverter";
 export * from "../svgbundle";
 export * from "../textWorker";

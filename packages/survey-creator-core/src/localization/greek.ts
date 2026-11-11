@@ -1162,6 +1162,8 @@ export var grStrings = {
     visible: "Ορατό",
     // "Required"
     isRequired: "Υποχρεωτικό",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Απαιτήστε μια θετική απάντηση",
     // "Mark as required"
     markRequired: "Σήμανση ως υποχρεωτικό",
     // "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var grStrings = {
     eachRowUnique: "Αποτροπή διπλών απαντήσεων σε γραμμές",
     // "Error message for required questions"
     requiredErrorText: "Μήνυμα σφάλματος για υποχρεωτικές ερωτήσεις",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Μήνυμα λάθους όταν απαιτείται Ναι",
     // "Display the question on a new line"
     startWithNewLine: "Εμφάνιση ερώτησης σε νέα γραμμή",
     // "Rows"

@@ -10,6 +10,7 @@ import {
   addIconsToThemeSet,
   SvgThemeSets,
   QuestionPanelDynamicModel,
+  ExpressionAIRequestEvent,
   ChoiceItem,
   patchLegacyCSSVariables,
   ensureBaseThemeStyles,
@@ -19,7 +20,8 @@ import {
   SurveyVariablePresets,
   isAnimationEnabled,
   isReducedMotionPreferred,
-  subscribeReducedMotionChange
+  subscribeReducedMotionChange,
+  getIdSelector
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
@@ -37,6 +39,7 @@ import { ICreatorSelectionOwner } from "./selection-owner";
 import { SelectionHistory } from "./selection-history";
 
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
+import { TabJsonEditorMonacoPlugin } from "./components/tabs/json-editor-monaco";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 import { TabTestPlugin } from "./components/tabs/test-plugin";
 import { SurveyLogic } from "./components/tabs/logic";
@@ -64,7 +67,6 @@ import {
   PageGetFooterActionsEvent, SurveyInstanceCreatedEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
   ElementFocusedEvent, OpenFileChooserEvent, UploadFileEvent, TranslationStringVisibilityEvent, TranslationImportItemEvent,
   TranslationImportedEvent, TranslationExportItemEvent, MachineTranslateEvent, TranslationItemChangingEvent, DragDropAllowEvent,
-  ExpressionAssistantRequestEvent,
   CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent, LintSurveyEvent,
   PageAddingEvent, DragStartEndEvent,
   ElementGetExpandCollapseStateEvent,
@@ -436,9 +438,9 @@ export class SurveyCreatorModel extends Base
    * @since 2.5.7
    */
   public expressionsValidateSemantics: boolean = true;
-  // How many times the expression assistant asks the AI to correct a result the check reports errors
-  // for, before it shows the result with Accept disabled.
-  public expressionAssistantFixAttempts: number = 1;
+  // How many times an AI feature sends back an answer its check reports errors for, before it shows
+  // the answer with the errors.
+  public aiFixAttempts: number = 1;
   @property({ defaultValue: "" }) _currentAddQuestionType: string;
   /**
    * Specifies whether the "Add Question" button remembers the type of the most recently added question and uses it for subsequent questions.
@@ -1147,41 +1149,51 @@ export class SurveyCreatorModel extends Base
    * @see startMachineTranslationTo
    */
   public onMachineTranslate: EventBase<SurveyCreatorModel, MachineTranslateEvent> = this.addCreatorEvent<SurveyCreatorModel, MachineTranslateEvent>();
-  /*
-   * An event that is raised when the expression assistant requests an expression to be generated, modified, corrected, or explained. Handle this event to enable the assistant in the Survey Creator UI.
-   *
-   * For information on event handler parameters, refer to descriptions within the interface.
-   *
-   * The example below uses an application endpoint that returns the AI response as `{ text: "..." }`:
-   *
-   * ```ts
-   * import { SurveyCreatorModel } from "survey-creator-core";
-   * const creatorOptions = { ... };
-   * const creator = new SurveyCreatorModel(creatorOptions);
-   *
-   * creator.onExpressionAssistantRequest.add(async (_, options) => {
-   *   try {
-   *     const response = await fetch("/api/ai", {
-   *       method: "POST",
-   *       headers: { "Content-Type": "application/json" },
-   *       signal: options.signal,
-   *       body: JSON.stringify({
-   *         system: options.systemPrompt,
-   *         messages: options.messages
-   *       })
-   *     });
-   *     if (!response.ok) throw new Error(response.statusText);
-   *     const { text } = await response.json();
-   *     options.callback({ text });
-   *   } catch (error) {
-   *     if (!options.signal.aborted) {
-   *       options.callback({ error: error.message });
-   *     }
-   *   }
-   * });
-   * ```
-   */
-  public onExpressionAssistantRequest: EventBase<SurveyCreatorModel, ExpressionAssistantRequestEvent> = this.addCreatorEvent<SurveyCreatorModel, ExpressionAssistantRequestEvent>();
+  // The expression assistant's event. The assistant shows its UI only when this event has a handler;
+  // no option is needed. The payload, ExpressionAIRequestEvent, extends survey-core's AIRequestEvent,
+  // which also defines the shared types (AIMessage, AIResponseFormat, AIRequestIssue, AIResponse).
+  // Every AI feature has its own event with the same payload base. The handler sends
+  // options.systemPrompt and options.messages to a model and passes the answer to
+  // options.callback({ text }), ({ data }) or ({ error }). Creator never calls a model: it checks the
+  // answer and - while aiFixAttempts allow - sends a rejected answer back with the problems it found
+  // (attempt > 0, issues).
+  //
+  // The doccomment of onExpressionAssistantRequest (v3.2.3), which onAIExpressionRequest replaces, kept
+  // for the technical writer; only the event name in the example is changed:
+  //
+  // An event that is raised when the expression assistant requests an expression to be generated, modified, corrected, or explained. Handle this event to enable the assistant in the Survey Creator UI.
+  //
+  // For information on event handler parameters, refer to descriptions within the interface.
+  //
+  // The example below uses an application endpoint that returns the AI response as `{ text: "..." }`:
+  //
+  // ```ts
+  // import { SurveyCreatorModel } from "survey-creator-core";
+  // const creatorOptions = { ... };
+  // const creator = new SurveyCreatorModel(creatorOptions);
+  //
+  // creator.onAIExpressionRequest.add(async (_, options) => {
+  //   try {
+  //     const response = await fetch("/api/ai", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       signal: options.signal,
+  //       body: JSON.stringify({
+  //         system: options.systemPrompt,
+  //         messages: options.messages
+  //       })
+  //     });
+  //     if (!response.ok) throw new Error(response.statusText);
+  //     const { text } = await response.json();
+  //     options.callback({ text });
+  //   } catch (error) {
+  //     if (!options.signal.aborted) {
+  //       options.callback({ error: error.message });
+  //     }
+  //   }
+  // });
+  // ```
+  public onAIExpressionRequest: EventBase<SurveyCreatorModel, ExpressionAIRequestEvent> = this.addCreatorEvent<SurveyCreatorModel, ExpressionAIRequestEvent>();
 
   /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.
@@ -2277,7 +2289,9 @@ export class SurveyCreatorModel extends Base
     this.addTab({ name: "preview", pluginCreator: () => new TabTestPlugin(this), iconName: TabTestPlugin.iconName });
     this.addTab({ name: "theme", pluginCreator: () => new ThemeTabPlugin(this), iconName: ThemeTabPlugin.iconName });
     this.addTab({ name: "logic", pluginCreator: () => new TabLogicPlugin(this), iconName: TabLogicPlugin.iconName });
-    if (TabJsonEditorAcePlugin.hasAceEditor()) {
+    if (TabJsonEditorMonacoPlugin.hasMonacoEditor()) {
+      this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorMonacoPlugin(this), iconName: TabJsonEditorMonacoPlugin.iconName, componentName: "svc-tab-json-editor-monaco" });
+    } else if (TabJsonEditorAcePlugin.hasAceEditor()) {
       this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorAcePlugin(this), iconName: TabJsonEditorAcePlugin.iconName, componentName: "svc-tab-json-editor-ace" });
     } else {
       this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorTextareaPlugin(this), iconName: TabJsonEditorTextareaPlugin.iconName, componentName: "svc-tab-json-editor-textarea" });
@@ -3779,7 +3793,7 @@ export class SurveyCreatorModel extends Base
         element: selEl,
         question: undefined,
         page: elementPage,
-        id: selEl.id,
+        id: selEl.renderedId,
         scrollIfVisible: true,
         scrollIntoViewOptions: scrollIntoViewOptions,
         passedRootElement: this.rootElement,
@@ -3799,8 +3813,8 @@ export class SurveyCreatorModel extends Base
   }
 
   private getHtmlElementForScroll(element: any): HTMLElement {
-    const id = element.getType() === "matrixdropdowncolumn" ? element.colOwner.id : element.id;
-    return this.rootElement?.querySelector(`#${id}`);
+    const id = element.getType() === "matrixdropdowncolumn" ? element.colOwner.renderedId : element.renderedId;
+    return this.rootElement?.querySelector(getIdSelector(id));
   }
 
   private getSelectedSurveyElement(): IElement {

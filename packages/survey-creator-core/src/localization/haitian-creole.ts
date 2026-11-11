@@ -1162,6 +1162,8 @@ export var htStrings = {
     visible: "Vizib",
     // "Required"
     isRequired: "Obligatwa",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Mande pou yon repons pozitif",
     // "Mark as required"
     markRequired: "Make jan sa nesesè",
     // "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var htStrings = {
     eachRowUnique: "Anpeche repons doub nan ranje",
     // "Error message for required questions"
     requiredErrorText: "Mesaj erè pou kesyon obligatwa yo",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Mesaj erè lè Wi mande",
     // "Display the question on a new line"
     startWithNewLine: "Montre kesyon an sou yon nouvo liy",
     // "Rows"

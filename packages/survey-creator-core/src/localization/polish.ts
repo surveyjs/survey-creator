@@ -1163,6 +1163,8 @@ export var polishStrings = {
     visible: "Czy widoczne?",
     // "Required"
     isRequired: "Czy wymagalne?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Wymagaj odpowiedzi pozytywnej",
     // [Auto-translated] "Mark as required"
     markRequired: "Oznacz jako wymagane",
     // [Auto-translated] "Remove the required mark"
@@ -1173,6 +1175,8 @@ export var polishStrings = {
     eachRowUnique: "Zapobieganie zduplikowanym odpowiedziom w wierszach",
     // "Error message for required questions"
     requiredErrorText: "Komunikat o błędzie \"Wymagane\"",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Komunikat o błędzie, gdy wymagane jest \"Tak\"",
     // "Display the question on a new line"
     startWithNewLine: "Czy rozpoczyna się nową linią?",
     // "Rows"

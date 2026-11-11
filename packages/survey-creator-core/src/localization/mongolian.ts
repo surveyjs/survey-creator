@@ -1162,6 +1162,8 @@ export var mnStrings = {
     visible: "Харагдана",
     // "Required"
     isRequired: "Заавал бөглөх",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Эерэг хариулт шаардаарай",
     // [Auto-translated] "Mark as required"
     markRequired: "Шаардлагын дагуу тэмдэглэгээ хийх",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var mnStrings = {
     eachRowUnique: "Дараалалд хувилж хариу үйлдэл үзүүлэхээс сэргийлнэ",
     // "Error message for required questions"
     requiredErrorText: "Заавал бөглөх талбарыг бөглөөгүй байна",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Шаардлагатай үед алдааны мессеж гарах",
     // "Display the question on a new line"
     startWithNewLine: "Асуултыг шинэ мөрөнд харуулах",
     // "Rows"

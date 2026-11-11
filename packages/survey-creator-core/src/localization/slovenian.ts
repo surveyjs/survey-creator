@@ -1162,6 +1162,8 @@ export var slStrings = {
     visible: "Vidno",
     // "Required"
     isRequired: "Obvezno",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Zahtevajte pozitiven odgovor",
     // "Mark as required"
     markRequired: "Označi kot obvezno",
     // "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var slStrings = {
     eachRowUnique: "Prepreči podvojene odgovore v vrsticah",
     // "Error message for required questions"
     requiredErrorText: "Sporočilo o napaki za obvezna vprašanja",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Sporočilo o napaki, ko je zahtevano Da",
     // "Display the question on a new line"
     startWithNewLine: "Prikaz vprašanja na novi vrstici",
     // "Rows"

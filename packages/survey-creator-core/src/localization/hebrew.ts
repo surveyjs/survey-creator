@@ -1162,6 +1162,8 @@ export var hebrewStrings = {
     visible: "נראה",
     // "Required"
     isRequired: "נדרש",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "דרוש תשובה חיובית",
     // "Mark as required"
     markRequired: "סמן כשדה חובה",
     // "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var hebrewStrings = {
     eachRowUnique: "מניעת תגובות כפולות בשורות",
     // "Error message for required questions"
     requiredErrorText: "הודעת שגיאה לשדה חובה",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "הודעת שגיאה כאשר נדרש כן",
     // "Display the question on a new line"
     startWithNewLine: "הצג את השאלה בשורה חדשה",
     // "Rows"

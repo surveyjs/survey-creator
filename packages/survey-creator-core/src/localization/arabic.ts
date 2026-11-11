@@ -1162,6 +1162,8 @@ export var arStrings = {
     visible: "مرئي؟",
     // "Required"
     isRequired: "مطلوب؟",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "أطلب إجابة إيجابية",
     // [Auto-translated] "Mark as required"
     markRequired: "وضع علامة كمطلوب",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var arStrings = {
     eachRowUnique: "منع تكرار الاستجابات في الصفوف",
     // "Error message for required questions"
     requiredErrorText: "نص خطأ إلزامي السؤال",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "رسالة خطأ عندما يكون مطلوبا خيار نعم",
     // "Display the question on a new line"
     startWithNewLine: "إظهار السؤال في صف جديد",
     // "Rows"

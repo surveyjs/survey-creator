@@ -1162,6 +1162,8 @@ export var hrStrings = {
     visible: "Je li vidljivo?",
     // "Required"
     isRequired: "Je potrebno?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Zahtijevajte pozitivan odgovor",
     // [Auto-translated] "Mark as required"
     markRequired: "Označi kao obavezno",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var hrStrings = {
     eachRowUnique: "Sprječavanje dvostrukih odgovora u recima",
     // "Error message for required questions"
     requiredErrorText: "Potreban tekst pogreške",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Poruka o pogrešci kada je potreban 'da'",
     // "Display the question on a new line"
     startWithNewLine: "Počinje li s novom linijom?",
     // "Rows"

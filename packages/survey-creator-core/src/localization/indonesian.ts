@@ -1162,6 +1162,8 @@ export var indonesianStrings = {
     visible: "Terlihat?",
     // "Required"
     isRequired: "Wajib?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Membutuhkan jawaban positif",
     // [Auto-translated] "Mark as required"
     markRequired: "Tandai sesuai kebutuhan",
     // [Auto-translated] "Remove the required mark"
@@ -1172,6 +1174,8 @@ export var indonesianStrings = {
     eachRowUnique: "Mencegah respons duplikat dalam baris",
     // "Error message for required questions"
     requiredErrorText: "Pesan kesalahan \"Wajib\"",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Pesan kesalahan saat Ya diperlukan",
     // "Display the question on a new line"
     startWithNewLine: "Mulai dengan baris baru?",
     // "Rows"
