@@ -700,6 +700,8 @@ export var polishStrings = {
       templateDescription: "Wzorzec opisu wpisu",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Wzorzec tytułu wpisu",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Tytuł wpisu tymczasowy",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Pusty tekst w panelu",
       // [Auto-translated] "Tab title pattern"
@@ -2871,6 +2873,8 @@ export var polishStrings = {
       width: "Ustawia szerokość panelu proporcjonalnie do innych elementów pomiarowych w tej samej linii. Akceptuje wartości CSS (px, %, in, pt itp.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Wpisz szablon dynamicznych tytułów paneli. Użyj {panelIndex} dla ogólnego położenia panelu i {visiblePanelIndex} dla jego kolejności wśród widocznych paneli. Wstaw te symbole zastępcze do wzoru, aby dodać automatyczną numerację.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Tekst awaryjny dla tytułów wpisów, który ma zastosowanie, gdy wzór tytułu wpisu nie generuje znaczącej wartości. Użyj {panelIndex} dla ogólnej pozycji wpisu oraz {visiblePanelIndex} dla kolejności wśród widocznych wpisów.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Wpisz szablon tytułów kart. Użyj {panelIndex} dla ogólnego położenia panelu i {visiblePanelIndex} dla jego kolejności wśród widocznych paneli. Wstaw te symbole zastępcze do wzoru, aby dodać automatyczną numerację.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

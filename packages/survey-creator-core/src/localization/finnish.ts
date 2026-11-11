@@ -700,6 +700,8 @@ export var fiStrings = {
       templateDescription: "Merkinnän kuvausmalli",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Merkinnän otsikon malli",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Entry title -paikkamerkki",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Tyhjä paneeliteksti",
       // [Auto-translated] "Tab title pattern"
@@ -2870,6 +2872,8 @@ export var fiStrings = {
       width: "Asettaa paneelin leveyden suhteessa muihin saman rivin mittauselementteihin. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Kirjoita malli dynaamisten paneelien otsikoille. Käytä {panelIndex} paneelin yleistä sijaintia ja {visiblePanelIndex} sen järjestystä näkyvien paneelien joukossa. Lisää nämä paikkamerkit kuvioon lisätäksesi automaattisen numeroinnin.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Varateksti merkintäotsikoille, joka koskee silloin, kun merkintäotsikon malli ei tuota merkityksellistä arvoa. Käytä {panelIndex} merkinnän yleiseen sijaintiin ja {visiblePanelIndex} sen järjestykseen näkyvien merkintöjen välillä.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Kirjoita välilehtien otsikoiden malli. Käytä {panelIndex} paneelin yleistä sijaintia ja {visiblePanelIndex} sen järjestystä näkyvien paneelien joukossa. Lisää nämä paikkamerkit kuvioon lisätäksesi automaattisen numeroinnin.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

@@ -700,6 +700,8 @@ export var slStrings = {
       templateDescription: "Vzorec opisa plošče",
       // "Entry title pattern"
       templateTitle: "Vzorec naslova plošče",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Naslov vnosa kot nadomestek",
       // "Empty panel text"
       noEntriesText: "Prazno besedilo plošče",
       // "Tab title pattern"
@@ -2870,6 +2872,8 @@ export var slStrings = {
       width: "Določi širino panela v razmerju z drugimi elementi ankete v isti vrstici. Sprejema CSS vrednosti (px, %, in, pt, itd.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Vnesite predlogo za dinamične naslove panelov. Uporabite {panelIndex} za splošno pozicijo panela in {visiblePanelIndex} za njegov vrstni red med vidnimi paneli. Vstavite te označevalce v vzorec za dodajanje samodejnega številčenja.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Rezervno besedilo za naslove vnosov, ki se uporabi, kadar vzorec naslova vnosa ne daje smiselne vrednosti. Uporabite {panelIndex} za splošno pozicijo vnosa in {visiblePanelIndex} za vrstni red med vidnimi vnosi.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Vnesite predlogo za naslove zavihkov. Uporabite {panelIndex} za splošno pozicijo panela in {visiblePanelIndex} za njegov vrstni red med vidnimi paneli. Vstavite te označevalce v vzorec za dodajanje samodejnega številčenja.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

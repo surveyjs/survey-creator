@@ -700,6 +700,8 @@ export var germanTranslation = {
       templateDescription: "Muster für die Eintragsbeschreibung",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Muster für den Titeleintrag",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Platzhalter für den Eintrittstitel",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Text für leeres Panel",
       // [Auto-translated] "Tab title pattern"
@@ -2870,6 +2872,8 @@ export var germanTranslation = {
       width: "Legt die Breite des Fensters im Verhältnis zu anderen Vermessungselementen in derselben Linie fest. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Geben Sie eine Vorlage für die Titeln von dynamischen Panele. Verwenden Sie {panelIndex} für die allgemeine Position des Panels und {visiblePanelIndex} für die Reihenfolge der sichtbaren Panele. Fügen Sie diese Platzhalter in das Muster ein, um eine automatische Nummerierung hinzuzufügen.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Ein Notfalltext für Eintragstitel, der gilt, wenn das Eintragstitelmuster keinen sinnvollen Wert erzeugt. Verwenden Sie {panelIndex} für die allgemeine Position des Eintrags und {visiblePanelIndex} für die Reihenfolge unter den sichtbaren Einträgen.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Geben Sie eine Vorlage für Tab-titel ein. Verwenden Sie {panelIndex} für die allgemeine Position eines Panels und {visiblePanelIndex} für die Reihenfolge der sichtbaren Panele. Fügen Sie diese Platzhalter in das Muster ein, um eine automatische Nummerierung hinzuzufügen.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

@@ -700,6 +700,8 @@ export var catalanTranslation = {
       templateDescription: "Patrón de descripció de la entrada",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Patrón de títol de entrada",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Títol d'entrada provisional",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Text de vinyeta buit",
       // [Auto-translated] "Tab title pattern"
@@ -2870,6 +2872,8 @@ export var catalanTranslation = {
       width: "Define la anchura del panell en proporción a otros elementos topográficos de la misma línea. Acepta valors CSS (px, %, in, pt, etc.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Escriba una plantilla para los títols de los paneles dinámicos. Utilice {panelIndex} para la posición general del panell y {visiblePanelIndex} para su orden entre los panells visibles. Inserte estos marcadores de posición en el patrón para agregar numeración automàtica.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Un text de reserva per als títols d'entrada que s'aplica quan el patró de títol d'entrada no produeix un valor significatiu. Utilitzeu {panelIndex} per a la posició general de l'entrada i {visiblePanelIndex} per a l'ordre entre les entrades visibles.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Escriba una plantilla para los títols de las pestañas. Utilice {panelIndex} para la posición general de un panell y {visiblePanelIndex} para su orden entre los panells visibles. Inserte estos marcadores de posición en el patrón para agregar numeración automàtica.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
