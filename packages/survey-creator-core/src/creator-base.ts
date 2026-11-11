@@ -11,6 +11,7 @@ import {
   SvgThemeSets,
   QuestionPanelDynamicModel,
   ExpressionAIRequestEvent,
+  FilterAIRequestEvent,
   ChoiceItem,
   patchLegacyCSSVariables,
   ensureBaseThemeStyles,
@@ -1156,7 +1157,10 @@ export class SurveyCreatorModel extends Base
   // options.systemPrompt and options.messages to a model and passes the answer to
   // options.callback({ text }), ({ data }) or ({ error }). Creator never calls a model: it checks the
   // answer and - while aiFixAttempts allow - sends a rejected answer back with the problems it found
-  // (attempt > 0, issues).
+  // (attempt > 0, issues). A Filter Control preset's expression is written through this event too,
+  // with survey-core's filter payload (FilterAIRequestEvent: responseFormat.name "survey_filter",
+  // question - the control); a handler that only forwards systemPrompt, messages and responseFormat
+  // serves both.
   //
   // The doccomment of onExpressionAssistantRequest (v3.2.3), which onAIExpressionRequest replaces, kept
   // for the technical writer; only the event name in the example is changed:
@@ -1193,7 +1197,8 @@ export class SurveyCreatorModel extends Base
   //   }
   // });
   // ```
-  public onAIExpressionRequest: EventBase<SurveyCreatorModel, ExpressionAIRequestEvent> = this.addCreatorEvent<SurveyCreatorModel, ExpressionAIRequestEvent>();
+  public onAIExpressionRequest: EventBase<SurveyCreatorModel, ExpressionAIRequestEvent | FilterAIRequestEvent> =
+    this.addCreatorEvent<SurveyCreatorModel, ExpressionAIRequestEvent | FilterAIRequestEvent>();
 
   /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.
