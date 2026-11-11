@@ -1,7 +1,7 @@
 import {
-  Action, AIRequestResult, AIRequestSession, Base, ExpressionAIFeature, ExpressionAIRequestEvent, IAction, IDialogOptions,
-  IExpressionAIIssue as ICoreExpressionAIIssue, IExpressionResponse, PanelModel, Question, Serializer, SurveyModel,
-  buildExpressionInstruction, property, settings as surveySettings,
+  Action, AIRequestIssue, AIRequestResult, AIRequestSession, Base, ExpressionAIFeature, ExpressionAIRequestEvent, FilterAIRequestEvent,
+  IAction, IAIFeature, IDialogOptions, IExpressionAIIssue as ICoreExpressionAIIssue, IExpressionResponse, PanelModel, Question, Serializer,
+  SurveyModel, buildExpressionInstruction, property, settings as surveySettings,
 } from "survey-core";
 import { ISurveyLintOptions } from "survey-core/linter";
 import { SurveyCreatorModel } from "../creator-base";
@@ -35,7 +35,32 @@ export interface IExpressionAssistantOptions {
   // the independent rendering of an expression shown in the review
   getDisplayText?: (expression: string) => string;
   prompt?: string;
+  // a target that is no survey expression brings its own AI part; without it the request is built
+  // from the survey's questions and every answer is checked by the survey linter
+  aiFeature?: IExpressionAssistantFeature;
 }
+
+// What a request of an IExpressionAssistantFeature sends: the session's request without the parts
+// the assistant fills in (action, prompt, retries).
+export interface IExpressionAssistantFeatureRequest {
+  feature: IAIFeature<IExpressionResponse, AIRequestIssue>;
+  instruction: string;
+  context: any;
+  systemPrompt: string;
+  buildSystemPrompt: (context: any) => string;
+  getFields: (retryOf?: IExpressionResponse) => { [name: string]: any };
+}
+// The AI part of a target that is no survey expression (a Filter Control preset's): its own context,
+// prompt and answer check instead of the survey's questions and the survey linter. It writes and
+// changes an expression; there is nothing to explain.
+export interface IExpressionAssistantFeature {
+  createRequest(action: "generate" | "modify", prompt: string, expression: string): IExpressionAssistantFeatureRequest;
+  // the problems of an expression, by the check the feature validates answers with
+  check(expression: string): Array<AIRequestIssue>;
+}
+// The payload of creator.onAIExpressionRequest: a survey expression's, or a filter preset's
+// (responseFormat.name "survey_filter", question - the Filter Control).
+export type AIExpressionRequestEvent = ExpressionAIRequestEvent | FilterAIRequestEvent;
 
 export type ExpressionAssistantStatus = "ready" | "loading" | "review" | "explained" | "cancelled" | "error" | "empty" | "accepted";
 
@@ -83,14 +108,14 @@ export class ExpressionAssistant extends Base {
   @property({ defaultValue: "" }) errorText: string;
   @property({ defaultValue: 0 }) fixCount: number;
   public checkResult: IExpressionCheckResult;
-  private session: AIRequestSession<IExpressionResponse, IExpressionAIIssue, ExpressionAIRequestEvent>;
+  private session: AIRequestSession<IExpressionResponse, IExpressionAIIssue, AIExpressionRequestEvent>;
   private request: IAssistantRequest;
   private surveyValue: SurveyModel;
 
   constructor(public readonly options: IExpressionAssistantOptions) {
     super();
     const creator = options.creator;
-    this.session = new AIRequestSession<IExpressionResponse, IExpressionAIIssue, ExpressionAIRequestEvent>({
+    this.session = new AIRequestSession<IExpressionResponse, IExpressionAIIssue, AIExpressionRequestEvent>({
       fire: options => creator.onAIExpressionRequest.fire(creator, options),
       getFixAttempts: () => creator.aiFixAttempts,
     });
@@ -105,7 +130,7 @@ export class ExpressionAssistant extends Base {
     return this.hasResult && !!this.expression && this.checkResult.isComplete && this.checkResult.errorCount === 0;
   }
   public get canGenerate(): boolean { return !this.isLoading && !!(this.prompt || "").trim(); }
-  public get canExplain(): boolean { return !this.isLoading && !!this.currentExpression; }
+  public get canExplain(): boolean { return !this.options.aiFeature && !this.isLoading && !!this.currentExpression; }
 
   // "generate" for an empty target, "modify" for one with an expression; after a result, a new
   // prompt refines that result
@@ -123,6 +148,7 @@ export class ExpressionAssistant extends Base {
     this.startRequest("modify", prompt, this.expression || this.currentExpression);
   }
   public explain(): void {
+    if (!!this.options.aiFeature) return;
     this.startRequest("explain", "", this.currentExpression);
   }
   // a one-click fix of the check: applied here and checked again, no request
@@ -158,6 +184,10 @@ export class ExpressionAssistant extends Base {
   }
   private startRequest(action: ExpressionAction, prompt: string, expression: string): void {
     this.abort();
+    if (!!this.options.aiFeature && action !== "explain") {
+      this.startFeatureRequest(action, prompt, expression);
+      return;
+    }
     const input = this.options.getInput() || { sites: [] };
     // one onLintSurvey per request: the same options build the context and every check of it, so
     // the AI is never told a name the check rejects
@@ -204,6 +234,47 @@ export class ExpressionAssistant extends Base {
       if (!this.isDisposed)this.onResult(action, result, answerCheckResult);
     });
   }
+  // A request of the target's own AI part: its context, prompt and check; the conversation, the
+  // retries and the review are the assistant's as for any expression.
+  private startFeatureRequest(action: "generate" | "modify", prompt: string, expression: string): void {
+    const built = this.options.aiFeature.createRequest(action, prompt, expression);
+    this.request = { input: { sites: [] }, lintOptions: undefined };
+    this.fixCount = 0;
+    this.errorText = "";
+    this.checkResult = undefined;
+    this.status = "loading";
+    this.session.send(<any>{
+      feature: built.feature,
+      action: action,
+      userPrompt: prompt,
+      instruction: built.instruction,
+      context: built.context,
+      systemPrompt: built.systemPrompt,
+      buildSystemPrompt: built.buildSystemPrompt,
+      getFields: built.getFields,
+      onRetry: (answer: IExpressionResponse, _: Array<AIRequestIssue>, attempt: number) => {
+        this.fixCount = attempt;
+        this.setResult(answer.expression, answer.explanation, true);
+      },
+    }, (result: AIRequestResult<IExpressionResponse, IExpressionAIIssue>) => {
+      if (!this.isDisposed)this.onResult(action, result, undefined);
+    });
+  }
+  // The check of an expression: the target's own (every issue a finding, nothing left unchecked), or
+  // the survey linter at the request's sites.
+  private checkExpression(expression: string): IExpressionCheckResult {
+    const aiFeature = this.options.aiFeature;
+    if (!aiFeature) {
+      const input = this.request.input;
+      return checkExpression(this.creator, expression, input.sites, input.pending, this.request.lintOptions);
+    }
+    const findings: Array<IExpressionCheckFinding> = aiFeature.check(expression).map(issue => ({
+      ruleId: issue.code || "", reason: "", severity: issue.severity, path: "", text: issue.message, englishText: issue.message
+    }));
+    const count = (severity: string): number => findings.filter(f => f.severity === severity).length;
+    return { expression: expression, findings: findings, errorCount: count("error"), warningCount: count("warning"), infoCount: count("info"),
+      unaddressedSites: [], isComplete: true };
+  }
   private onResult(action: ExpressionAction, result: AIRequestResult<IExpressionResponse, IExpressionAIIssue>,
     checkResult: IExpressionCheckResult): void {
     if (result.status === "error") {
@@ -226,10 +297,9 @@ export class ExpressionAssistant extends Base {
     this.status = "review";
   }
   private setResult(expression: string, explanation: string, isPending?: boolean, checkResult?: IExpressionCheckResult): IExpressionCheckResult {
-    const input = this.request.input;
     this.expression = expression;
     this.explanation = explanation;
-    this.checkResult = checkResult || checkExpression(this.creator, expression, input.sites, input.pending, this.request.lintOptions);
+    this.checkResult = checkResult || this.checkExpression(expression);
     if (!isPending) {
       this.status = "review";
       this.updateSurvey();
@@ -388,7 +458,9 @@ export class ExpressionAssistant extends Base {
     } as IAction);
     const toolbar = !!popupModel ? popupModel.footerToolbar : undefined;
     if (!!toolbar) {
-      toolbar.actions.splice(0, 0, this.explainAction, this.generateAction, this.stopAction);
+      // a target's own AI part only writes and changes an expression: no Explain
+      const actions = !!this.options.aiFeature ? [this.generateAction, this.stopAction] : [this.explainAction, this.generateAction, this.stopAction];
+      toolbar.actions.splice(0, 0, ...actions);
       const apply = toolbar.getActionById("apply");
       if (!!apply) apply.title = getLocString("aiex.accept");
       const cancel = toolbar.getActionById("cancel");
@@ -431,8 +503,10 @@ export function showExpressionAssistant(options: IExpressionAssistantOptions): E
   return assistant;
 }
 
-// The property grid entry point: the title action of an expression or condition property.
-export function createExpressionAssistantTitleAction(obj: Base, question: Question, getDisplayText?: (expression: string) => string): IAction {
+// The property grid entry point: the title action of an expression or condition property - or of a
+// property whose expression is no survey expression, with that target's own AI part (aiFeature).
+export function createExpressionAssistantTitleAction(obj: Base, question: Question, getDisplayText?: (expression: string) => string,
+  aiFeature?: IExpressionAssistantFeature): IAction {
   const creator = getExpressionAssistantCreator(obj);
   if (!isExpressionAssistantAvailable(creator)) return undefined;
   const propertyName = (<any>question).property?.name;
@@ -454,6 +528,7 @@ export function createExpressionAssistantTitleAction(obj: Base, question: Questi
         // typed value, and the property setter fires once - one undo step
         accept: (expression: string) => { question.value = expression; },
         getDisplayText: getDisplayText,
+        aiFeature: aiFeature,
       });
     }
   };

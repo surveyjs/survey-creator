@@ -445,7 +445,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   protected getShowDetailPanelOnAdding(): boolean {
     return false;
   }
-  private getAddRowText(prop: JsonObjectProperty): string {
+  protected getAddRowText(prop: JsonObjectProperty): string {
     var customLocStrName = "pe.addNew@" + prop.name;
     if (editorLocalization.hasString(customLocStrName)) {
       return editorLocalization.getString(customLocStrName);
@@ -766,6 +766,44 @@ export class PropertyGridEditorMatrixCalculatedValues extends PropertyGridEditor
     prop: JsonObjectProperty, propGridDefinition: ISurveyPropertyGridDefinition): void {
     super.setupMatrixQuestion(obj, matrix, prop, propGridDefinition);
     matrix.useCaseSensitiveComparison = false;
+  }
+}
+// The Filter Control's presets: name and title in the row (definition "filter@items"), the rest in the
+// detail panel ("filteritem@items"). The order of the rows is the order of the chips.
+export class PropertyGridEditorMatrixFilterItems extends PropertyGridEditorMatrix {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type === "filteritem[]";
+  }
+  protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
+    return obj.getType() + "@" + prop.name;
+  }
+  protected getDefaulColumnNames(): Array<string> {
+    return ["name", "title"];
+  }
+  protected getKeyValue(): string {
+    return "name";
+  }
+  protected getBaseValue(prop: JsonObjectProperty): string {
+    return "preset";
+  }
+  protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean {
+    return true;
+  }
+  // Not pe.addNew@items / pe.listIsEmpty@items: the items of a multiple text question use those.
+  protected getAddRowText(prop: JsonObjectProperty): string {
+    return editorLocalization.getString("pe.addNew@filterItems");
+  }
+  protected getnoRowsText(prop: JsonObjectProperty): string {
+    return editorLocalization.getString("pe.listIsEmpty@filterItems");
+  }
+  // A preset renamed or retitled in its row: the Default preset list names it anew. The grid updates
+  // the editors that depend on "items" when the array changes, not when a row of it does.
+  public onMatrixCellValueChanged(obj: Base, options: any): void {
+    const grid = !!options.question ? options.question.survey : undefined;
+    const editor: any = !!grid ? grid.getQuestionByName("defaultItem") : undefined;
+    if (!!editor && !!editor.property) {
+      PropertyGridEditorCollection.onMasterValueChanged(obj, editor.property, editor);
+    }
   }
 }
 export class PropertyGridEditorMatrixHtmlConditions extends PropertyGridEditorMatrix {
@@ -1100,6 +1138,7 @@ PropertyGridEditorCollection.register(
   new PropertyGridEditorMatrixMutlipleTextItems()
 );
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixSortCriteria());
+PropertyGridEditorCollection.register(new PropertyGridEditorMatrixFilterItems());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixValidators());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixTriggers());
 

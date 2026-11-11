@@ -11,6 +11,7 @@ import {
   SvgThemeSets,
   QuestionPanelDynamicModel,
   ExpressionAIRequestEvent,
+  FilterAIRequestEvent,
   ChoiceItem,
   patchLegacyCSSVariables,
   ensureBaseThemeStyles,
@@ -1156,7 +1157,10 @@ export class SurveyCreatorModel extends Base
   // options.systemPrompt and options.messages to a model and passes the answer to
   // options.callback({ text }), ({ data }) or ({ error }). Creator never calls a model: it checks the
   // answer and - while aiFixAttempts allow - sends a rejected answer back with the problems it found
-  // (attempt > 0, issues).
+  // (attempt > 0, issues). A Filter Control preset's expression is written through this event too,
+  // with survey-core's filter payload (FilterAIRequestEvent: responseFormat.name "survey_filter",
+  // question - the control); a handler that only forwards systemPrompt, messages and responseFormat
+  // serves both.
   //
   // The doccomment of onExpressionAssistantRequest (v3.2.3), which onAIExpressionRequest replaces, kept
   // for the technical writer; only the event name in the example is changed:
@@ -1193,7 +1197,8 @@ export class SurveyCreatorModel extends Base
   //   }
   // });
   // ```
-  public onAIExpressionRequest: EventBase<SurveyCreatorModel, ExpressionAIRequestEvent> = this.addCreatorEvent<SurveyCreatorModel, ExpressionAIRequestEvent>();
+  public onAIExpressionRequest: EventBase<SurveyCreatorModel, ExpressionAIRequestEvent | FilterAIRequestEvent> =
+    this.addCreatorEvent<SurveyCreatorModel, ExpressionAIRequestEvent | FilterAIRequestEvent>();
 
   /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.
@@ -2783,9 +2788,21 @@ export class SurveyCreatorModel extends Base
       if (propertyName === "name" && obj.isDescendantOf("selectbase")) {
         this.updateChoicesFromQuestionOnColumnNameChanged(oldValue, obj["name"]);
       }
+      // A question a Filter Control can filter (survey-core finds the source by the same duck typing)
+      if (propertyName === "name" && typeof obj["setControlFilter"] === "function") {
+        this.updateFilterSourceOnQuestionNameChanged(oldValue, obj["name"]);
+      }
     }
     if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
       this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
+    }
+    // A Filter Control's defaultItem names a preset: a renamed default preset stays the default one,
+    // in the same undo step as the rename.
+    if (propertyName === "name" && obj.getType() === "filteritem") {
+      const owner = obj["itemOwner"];
+      if (!!oldValue && !!owner && owner["defaultItem"] === oldValue) {
+        owner["defaultItem"] = obj["name"];
+      }
     }
   }
   private surveyLogicForUpdate: SurveyLogic;
@@ -2850,6 +2867,14 @@ export class SurveyCreatorModel extends Base
     questions.forEach(q => {
       if (q.choicesFromQuestion === oldName) {
         q.choicesFromQuestion = newName;
+      }
+    });
+  }
+  private updateFilterSourceOnQuestionNameChanged(oldName: string, newName: string) {
+    if (!oldName || oldName === newName) return;
+    this.getAllQuestions().forEach(q => {
+      if (q.isDescendantOf("filter") && q["source"] === oldName) {
+        q["source"] = newName;
       }
     });
   }

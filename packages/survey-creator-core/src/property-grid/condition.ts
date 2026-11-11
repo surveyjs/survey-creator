@@ -2,13 +2,15 @@ import { Base, ConditionsParser, JsonObjectProperty, Operand, Question, Expressi
 import {
   PropertyGridEditorCollection,
   IPropertyEditorSetup,
-  PropertyGridEditor
+  PropertyGridEditor,
+  PropertyGridEditorText
 } from "./index";
 import { ConditionEditor } from "./condition-survey";
 import { ISurveyCreatorOptions } from "../creator-settings";
 import { getLocString } from "../editorLocalization";
 import { ExpressionToDisplayText } from "../expressionToDisplayText";
 import { createExpressionAssistantTitleAction, getExpressionAssistantCreator } from "../expression-assistant/expression-assistant";
+import { createFilterExpressionFeature } from "../expression-assistant/filter-expression-feature";
 
 export class PropertyGridEditorExpression extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
@@ -168,5 +170,22 @@ export class PropertyGridEditorCondition extends PropertyGridEditorExpression {
   }
 }
 
+// A Filter Control preset's expression (filteritem.expression): a plain text box the author types
+// the filter in, with the expression assistant's action over it - the filter's own AI part, since its
+// variables are the records' fields (createFilterExpressionFeature).
+export class PropertyGridEditorFilterItemExpression extends PropertyGridEditorText {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type === "text" && prop.name === "expression" && !!prop.classInfo && prop.classInfo.name === "filteritem";
+  }
+  public onGetQuestionTitleActions(obj: Base, options: any, creatorOptions: ISurveyCreatorOptions): void {
+    // obj is the grid's object (the control); the preset is the object of the matrix detail panel's question
+    const item: any = options.question.obj;
+    if (!item || !item.itemOwner) return;
+    const action = createExpressionAssistantTitleAction(item, options.question, undefined, createFilterExpressionFeature(item.itemOwner));
+    if (!!action) options.actions.push(action);
+  }
+}
+
 PropertyGridEditorCollection.register(new PropertyGridEditorExpression());
 PropertyGridEditorCollection.register(new PropertyGridEditorCondition());
+PropertyGridEditorCollection.register(new PropertyGridEditorFilterItemExpression());
