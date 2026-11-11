@@ -1,11 +1,12 @@
 import { ThemeTabViewModel } from "survey-creator-core";
 import { Component, Input } from "@angular/core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 
 @Component({
   selector: "svc-tab-theme",
   templateUrl: "./theme.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class ThemeTabComponent extends BaseAngular<ThemeTabViewModel> {
   @Input() model!: ThemeTabViewModel;

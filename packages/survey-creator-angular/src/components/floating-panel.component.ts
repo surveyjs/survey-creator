@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from "@angular/core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 
 // See the React FloatingPanel for what this renders. Markup only: the root node
 // is handed to the model and the header's raw pointerdown is forwarded from the
@@ -7,7 +7,8 @@ import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 @Component({
   selector: "svc-floating-panel",
   templateUrl: "./floating-panel.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class FloatingPanelComponent extends BaseAngular {
   @Input() model: any;

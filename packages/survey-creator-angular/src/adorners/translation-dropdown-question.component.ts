@@ -1,6 +1,6 @@
 import { Component, Input, TemplateRef } from "@angular/core";
 import { CreatorModelComponent } from "../creator-model.component";
-import { AngularComponentFactory } from "survey-angular-ui";
+import { AngularComponentFactory, SurveyBaseProviders } from "survey-angular-ui";
 import { TranslationDropdownViewModel } from "survey-creator-core";
 import { QuestionSelectBase } from "survey-core";
 
@@ -10,7 +10,8 @@ import { QuestionSelectBase } from "survey-core";
 @Component({
   selector: "svc-translation-dropdown-question",
   templateUrl: "./translation-dropdown-question.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class TranslationDropdownQuestionComponent extends CreatorModelComponent<TranslationDropdownViewModel> {
   @Input() componentName!: string;

@@ -1,6 +1,6 @@
 
 import { Component, ElementRef, Input, ViewChild } from "@angular/core";
-import { AngularComponentFactory } from "survey-angular-ui";
+import { AngularComponentFactory, SurveyBaseProviders } from "survey-angular-ui";
 import { ImageItemValue, QuestionImagePickerModel } from "survey-core";
 import { SurveyCreatorModel, ImageItemValueWrapperViewModel } from "survey-creator-core";
 import { CreatorModelComponent } from "../creator-model.component";
@@ -8,7 +8,8 @@ import { CreatorModelComponent } from "../creator-model.component";
 @Component({
   selector: "svc-image-item-value",
   templateUrl: "./image-item-value.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class ImageItemValueDesignerComponent extends CreatorModelComponent<ImageItemValueWrapperViewModel> {
   @Input() componentName!: string;

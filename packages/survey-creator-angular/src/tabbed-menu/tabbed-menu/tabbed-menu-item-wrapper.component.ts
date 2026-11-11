@@ -1,11 +1,12 @@
 import { Component, Input, AfterViewInit, ViewChild, ElementRef } from "@angular/core";
-import { BaseAngular } from "survey-angular-ui";
+import { BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { TabbedMenuItem } from "survey-creator-core";
 
 @Component({
   selector: "svc-tabbed-menu-item-wrapper",
   templateUrl: "./tabbed-menu-item-wrapper.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class TabbedMenuItemWrapperComponent extends BaseAngular<TabbedMenuItem> implements AfterViewInit {
   @Input() model!: TabbedMenuItem;

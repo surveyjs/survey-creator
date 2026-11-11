@@ -2,12 +2,13 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, NgZone,
 import { LocalizableString, CharacterCounter } from "survey-core";
 import { StringEditorViewModelBase, SurveyCreatorModel, editableStringRendererName } from "survey-creator-core";
 import { CreatorModelComponent } from "./creator-model.component";
-import { AngularComponentFactory } from "survey-angular-ui";
+import { AngularComponentFactory, SurveyBaseProviders } from "survey-angular-ui";
 
 @Component({
   selector: "svc-string-editor",
   templateUrl: "./string-editor.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class StringEditorComponent extends CreatorModelComponent<StringEditorViewModelBase> implements AfterViewInit {
   public baseModel!: StringEditorViewModelBase;

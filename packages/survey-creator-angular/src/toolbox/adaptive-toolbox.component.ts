@@ -1,12 +1,13 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { SurveyCreatorModel, QuestionToolbox, QuestionToolboxItem } from "survey-creator-core";
 import { Action } from "survey-core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 
 @Component({
   selector: "svc-toolbox",
   templateUrl: "./adaptive-toolbox.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> implements AfterViewInit {
   @Input() model!: SurveyCreatorModel;
@@ -26,10 +27,6 @@ export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> imple
     }
   }
   ngAfterViewInit() {
-    this.afterRender();
-  }
-  override ngAfterViewChecked(): void {
-    super.ngAfterViewChecked();
     this.afterRender();
   }
   protected override afterUpdate(isSync?: boolean): void {

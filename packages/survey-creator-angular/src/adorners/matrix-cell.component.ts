@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, TemplateRef, ViewContainerRef } from "@angular/core";
-import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent, SurveyBaseProviders } from "survey-angular-ui";
 import { ItemValue, PageModel, PanelModel, Question, QuestionSelectBase, SurveyModel } from "survey-core";
 import { SurveyCreatorModel, ItemValueWrapperViewModel, MatrixCellWrapperViewModel, QuestionAdornerViewModel } from "survey-creator-core";
 import { CreatorModelComponent } from "../creator-model.component";
@@ -7,7 +7,8 @@ import { CreatorModelComponent } from "../creator-model.component";
 @Component({
   selector: "svc-matrix-cell",
   templateUrl: "./matrix-cell.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class MatrixCellComponent extends CreatorModelComponent<MatrixCellWrapperViewModel> {
   @Input() componentName!: string;

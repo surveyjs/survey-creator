@@ -1,11 +1,12 @@
 import { SidebarModel } from "survey-creator-core";
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
-import { BaseAngular } from "survey-angular-ui";
+import { BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 
 @Component({
   selector: "svc-side-bar",
   templateUrl: "./side-bar.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class SidebarComponent extends BaseAngular<SidebarModel> implements AfterViewInit {
   @Input() model!: SidebarModel;

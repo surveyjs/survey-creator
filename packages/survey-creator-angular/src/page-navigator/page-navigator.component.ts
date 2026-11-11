@@ -2,10 +2,12 @@ import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular
 import { PageNavigatorViewModel, PagesController } from "survey-creator-core";
 import { CreatorModelComponent } from "../creator-model.component";
 
+import { SurveyBaseProviders } from "survey-angular-ui";
 @Component({
   selector: "svc-page-navigator",
   templateUrl: "./page-navigator.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class PageNavigatorComponent extends CreatorModelComponent<PageNavigatorViewModel> implements AfterViewInit {
   public model!: PageNavigatorViewModel;

@@ -1,6 +1,6 @@
 
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild, ViewContainerRef } from "@angular/core";
-import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent, SurveyBaseProviders } from "survey-angular-ui";
 import { ItemValue, PageModel, PanelModel, Question, QuestionSelectBase, SurveyModel } from "survey-core";
 import { SurveyCreatorModel, ItemValueWrapperViewModel, QuestionAdornerViewModel } from "survey-creator-core";
 import { CreatorModelComponent } from "../creator-model.component";
@@ -8,7 +8,8 @@ import { CreatorModelComponent } from "../creator-model.component";
 @Component({
   selector: "svc-item-value",
   templateUrl: "./item-value.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueWrapperViewModel> implements AfterViewInit {
   @Input() componentName!: string;

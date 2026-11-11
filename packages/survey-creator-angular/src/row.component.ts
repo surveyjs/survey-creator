@@ -2,12 +2,13 @@ import { Component, Input } from "@angular/core";
 import { QuestionRowModel } from "survey-core";
 import { SurveyCreatorModel, RowViewModel } from "survey-creator-core";
 import { CreatorModelComponent } from "./creator-model.component";
-import { AngularComponentFactory } from "survey-angular-ui";
+import { AngularComponentFactory, SurveyBaseProviders } from "survey-angular-ui";
 
 @Component({
   selector: "svc-row",
   templateUrl: "./row.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class CreatorRowComponent extends CreatorModelComponent<RowViewModel> {
   @Input() componentData!: { creator: SurveyCreatorModel, row: QuestionRowModel };

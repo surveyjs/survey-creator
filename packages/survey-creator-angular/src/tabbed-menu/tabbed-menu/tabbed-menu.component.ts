@@ -1,11 +1,12 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { TabbedMenuContainer, TabbedMenuItem } from "survey-creator-core";
 
 @Component({
   selector: "svc-tabbed-menu",
   templateUrl: "./tabbed-menu.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class TabbledMenuComponent extends BaseAngular<TabbedMenuContainer> implements AfterViewInit {
   @Input() model!: TabbedMenuContainer;
@@ -23,10 +24,6 @@ export class TabbledMenuComponent extends BaseAngular<TabbedMenuContainer> imple
   }
   protected override afterUpdate(isSync?: boolean): void {
     super.afterUpdate(isSync);
-    this.initResponsivityManager();
-  }
-  override ngAfterViewChecked(): void {
-    super.ngAfterViewChecked();
     this.initResponsivityManager();
   }
   override ngOnDestroy(): void {

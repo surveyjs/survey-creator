@@ -1,11 +1,12 @@
 import { TabJsonEditorTextareaPlugin, TextareaJsonEditorModel } from "survey-creator-core";
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 
 @Component({
   selector: "svc-tab-json-editor-textarea",
   templateUrl: "./json-editor-textarea.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class TextareaJsonEditorComponent extends BaseAngular<TextareaJsonEditorModel> implements OnInit {
   @Input() model!: TextareaJsonEditorModel;

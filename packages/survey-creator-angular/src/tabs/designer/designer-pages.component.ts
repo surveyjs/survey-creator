@@ -1,11 +1,12 @@
 import { Component, Input } from "@angular/core";
 import { PagesController, TabDesignerViewModel } from "survey-creator-core";
-import { BaseAngular } from "survey-angular-ui";
+import { BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 
 @Component({
   selector: "svc-designer-pages",
   templateUrl: "./designer-pages.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class DesignerPagesComponent extends BaseAngular<PagesController> {
   @Input() model!: TabDesignerViewModel;

@@ -1,10 +1,11 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from "@angular/core";
-import { AngularComponentFactory, BaseAngular, SurveyContentComponent } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyContentComponent, SurveyBaseProviders } from "survey-angular-ui";
 import { SurveyCreatorModel, TabbedMenuItem, cssVariablesToString } from "survey-creator-core";
 
 @Component({
   selector: "survey-creator",
-  templateUrl: "./creator.component.html"
+  templateUrl: "./creator.component.html",
+  providers: SurveyBaseProviders
 })
 export class CreatorComponent extends BaseAngular<SurveyCreatorModel> implements AfterViewInit {
   @Input() model!: SurveyCreatorModel;
@@ -26,9 +27,6 @@ export class CreatorComponent extends BaseAngular<SurveyCreatorModel> implements
   public get collabBarContainer(): any {
     const bar: any = this.model.collabBar;
     return !!bar ? bar.container : undefined;
-  }
-  protected override getShouldReattachChangeDetector(): boolean {
-    return false;
   }
   protected override onModelChanged(): void {
     this.changeDetectorRef.detectChanges();

@@ -3,10 +3,12 @@ import { CreatorModelComponent } from "../creator-model.component";
 import { SurveyCreatorModel, ToolboxToolViewModel, QuestionToolboxItem } from "survey-creator-core";
 import { Action, ActionContainer } from "survey-core";
 
+import { SurveyBaseProviders } from "survey-angular-ui";
 @Component({
   selector: "svc-toolbox-tool",
   templateUrl: "./toolbox-tool.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class ToolboxToolComponent extends CreatorModelComponent<Action> implements AfterViewInit {
   @Input() creator!: SurveyCreatorModel;

@@ -1,11 +1,12 @@
 import { Component, Input } from "@angular/core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { TabDesignerViewModel } from "survey-creator-core";
 
 @Component({
   selector: "svc-tab-designer",
   templateUrl: "./designer.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class DesignerTabComponent extends BaseAngular<TabDesignerViewModel> {
   @Input() model!: TabDesignerViewModel;

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, TemplateRef, ViewChild } from "@angular/core";
 import { CreatorModelComponent } from "../creator-model.component";
-import { AngularComponentFactory, EmbeddedViewContentComponent } from "survey-angular-ui";
+import { AngularComponentFactory, EmbeddedViewContentComponent, SurveyBaseProviders } from "survey-angular-ui";
 import { SurveyCreatorModel, QuestionRatingAdornerViewModel } from "survey-creator-core";
 import { QuestionDesignerComponent } from "../question.component";
 import { QuestionRatingModel } from "survey-core";
@@ -8,7 +8,8 @@ import { QuestionRatingModel } from "survey-core";
 @Component({
   selector: "svc-rating-question",
   templateUrl: "../question.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class QuestionRatingDesignerComponent extends QuestionDesignerComponent {
   public override adornerComponent = "";
@@ -19,7 +20,8 @@ AngularComponentFactory.Instance.registerComponent("svc-rating-question", Questi
 @Component({
   selector: "svc-rating-question-content",
   templateUrl: "./question-rating.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class QuestionRatingAdornerDesignerComponent extends CreatorModelComponent<QuestionRatingAdornerViewModel> {
   @Input() componentName!: string;
