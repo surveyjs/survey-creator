@@ -1163,8 +1163,8 @@ export let svStrings = {
     visible: "Synlig?",
     // "Required"
     isRequired: "Nödvändig?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Acceptera endast ett positivt svar",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Kräv ett positivt svar",
     // [Auto-translated] "Mark as required"
     markRequired: "Markera efter behov",
     // [Auto-translated] "Remove the required mark"
@@ -1175,6 +1175,8 @@ export let svStrings = {
     eachRowUnique: "Förhindra dubbletter av svar i rader",
     // "Error message for required questions"
     requiredErrorText: "Felmeddelandet \"Obligatoriskt\"",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Felmeddelande när Ja krävs",
     // "Display the question on a new line"
     startWithNewLine: "Starta på en ny rad?",
     // "Rows"
@@ -3275,8 +3277,6 @@ export let svStrings = {
     valueTrue: "Ett värde att spara i undersökningsresultaten när respondenterna ger ett positivt svar.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Ett värde att spara i undersökningsresultaten när respondenterna ger ett negativt svar.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Välj att behandla ett negativt svar som obesvarat, så respondenterna måste välja \"Ja\" (eller kryssa i rutan) för att gå vidare. Använd det till exempel för att kräva samtycke till villkoren. Gäller endast när frågan är nödvändig.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Vi rekommenderar inte att du inaktiverar det här alternativet eftersom det åsidosätter förhandsgranskningsbilden och gör det svårt för en användare att förstå om filerna har laddats upp.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3893,9 +3893,7 @@ export let svStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" och \"{aliasKey}\" i {ownerText} är två namn på en och samma egenskap – körtiden tillämpar dem i den ordning JSON skriver dem, så \"{winner}\" vinner.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" är satt på \"{name}\", men inputType \"{inputType}\" har inga begränsningar – körtiden ignorerar det.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" är satt på \"{name}\", men \"{name}\" har varken isRequired eller requiredIf – körtiden ignorerar det."
+        inertMinMax: "\"{key}\" är satt på \"{name}\", men inputType \"{inputType}\" har inga begränsningar – körtiden ignorerar det."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

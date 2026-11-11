@@ -1162,8 +1162,8 @@ export var grStrings = {
     visible: "Ορατό",
     // "Required"
     isRequired: "Υποχρεωτικό",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Αποδεχτείτε μόνο μια θετική απάντηση",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Απαιτήστε μια θετική απάντηση",
     // "Mark as required"
     markRequired: "Σήμανση ως υποχρεωτικό",
     // "Remove the required mark"
@@ -1174,6 +1174,8 @@ export var grStrings = {
     eachRowUnique: "Αποτροπή διπλών απαντήσεων σε γραμμές",
     // "Error message for required questions"
     requiredErrorText: "Μήνυμα σφάλματος για υποχρεωτικές ερωτήσεις",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Μήνυμα λάθους όταν απαιτείται Ναι",
     // "Display the question on a new line"
     startWithNewLine: "Εμφάνιση ερώτησης σε νέα γραμμή",
     // "Rows"
@@ -3274,8 +3276,6 @@ export var grStrings = {
     valueTrue: "Μια τιμή που αποθηκεύεται στα αποτελέσματα της έρευνας όταν οι συμμετέχοντες δίνουν θετική απάντηση.",
     // "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Μια τιμή που αποθηκεύεται στα αποτελέσματα της έρευνας όταν οι συμμετέχοντες δίνουν αρνητική απάντηση.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Επιλέξτε για να αντιμετωπίσετε μια αρνητική απάντηση ως αναπάντητη, επομένως οι ερωτηθέντες πρέπει να επιλέξουν \"Ναι\" (ή να επιλέξουν το πλαίσιο ελέγχου) για να συνεχίσουν. Για παράδειγμα, χρησιμοποιήστε το για να απαιτήσετε συναίνεση στους όρους και τις προϋποθέσεις. Ισχύει μόνο όταν απαιτείται η ερώτηση.",
     // "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Δεν συνιστάται να απενεργοποιήσετε αυτήν την επιλογή, καθώς παρακάμπτει την εικόνα προεπισκόπησης και καθιστά δύσκολο για έναν χρήστη να καταλάβει αν τα αρχεία έχουν ανέβει.",
     // "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3892,7 @@ export var grStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "Τα \"{key}\" και \"{aliasKey}\" του {ownerText} είναι δύο ονόματα μιας ιδιότητας - ο χρόνος εκτέλεσης τα εφαρμόζει με τη σειρά που τα γράφει το JSON, οπότε το \"{winner}\" κερδίζει.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "Το \"{key}\" έχει οριστεί στο \"{name}\", αλλά το inputType \"{inputType}\" δεν έχει όρια - ο χρόνος εκτέλεσης το αγνοεί.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "Το \"{key}\" έχει οριστεί στο \"{name}\", αλλά το \"{name}\" δεν έχει ούτε isRequired ούτε requiredIf - ο χρόνος εκτέλεσης το αγνοεί."
+        inertMinMax: "Το \"{key}\" έχει οριστεί στο \"{name}\", αλλά το inputType \"{inputType}\" δεν έχει όρια - ο χρόνος εκτέλεσης το αγνοεί."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

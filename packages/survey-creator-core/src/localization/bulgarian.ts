@@ -1162,8 +1162,8 @@ export var bgStrings = {
     visible: "Видим",
     // "Required"
     isRequired: "Задължителен",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Приеми само положителен отговор",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Изисква положителен отговор",
     // [Auto-translated] "Mark as required"
     markRequired: "Маркирай както се изисква",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1174,8 @@ export var bgStrings = {
     eachRowUnique: "Предотвратяване на дублиращи се отговори в редове",
     // "Error message for required questions"
     requiredErrorText: "\"Задължително\" съобщение за грешка",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Съобщение за грешка, когато е необходим отговор \"Да\"",
     // "Display the question on a new line"
     startWithNewLine: "Показване на въпроса на нов ред",
     // "Rows"
@@ -3274,8 +3276,6 @@ export var bgStrings = {
     valueTrue: "Стойност, която трябва да се спести в резултатите от проучването, когато респондентите дадат положителен отговор.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Стойност, която трябва да се спести в резултатите от проучването, когато респондентите дадат отрицателен отговор.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Изберете да третирате отрицателен отговор като неотговорен, така че респондентите трябва да изберат \"Да\" (или да отбележат полето), за да продължат. Например, използвайте го за да изискате съгласие за условия. Важи само когато въпросът е изискван.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Не се препоръчва да деактивирате тази опция, тъй като тя игнорира изображението за визуализация и затруднява потребителя да разбере дали файловете са качени.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3892,7 @@ export var bgStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" и \"{aliasKey}\" от {ownerText} са две имена на едно свойство – времето на изпълнение ги прилага в реда, в който JSON ги записва, така че \"{winner}\" печели.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" е зададен на \"{name}\", но inputType \"{inputType}\" няма граници – времето за изпълнение го игнорира.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" е зададен на \"{name}\", но \"{name}\" няма нито isRequired, нито requiredIf – времето за изпълнение го игнорира."
+        inertMinMax: "\"{key}\" е зададен на \"{name}\", но inputType \"{inputType}\" няма граници – времето за изпълнение го игнорира."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

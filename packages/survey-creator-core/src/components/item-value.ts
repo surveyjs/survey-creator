@@ -15,7 +15,8 @@ import {
   ChoiceItem,
   isAnimationEnabled,
   prepareElementForVerticalAnimation,
-  cleanHtmlElementAfterAnimation
+  cleanHtmlElementAfterAnimation,
+  getIdSelector
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { DragDropChoices } from "survey-core";
@@ -248,7 +249,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     setTimeout(() => {
       const root = this.creator.rootElement?.getRootNode() || DomDocumentHelper.getDocument();
       if (!(root instanceof Document || root instanceof ShadowRoot)) return;
-      const el = root.querySelector("#" + this.question.id);
+      const el = root.querySelector(getIdSelector(this.question.renderedId));
       if (!el) return;
       const buttons = el.querySelectorAll(".svc-item-value-controls__remove");
       (buttons[index] as HTMLElement)?.focus();
@@ -407,7 +408,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
           return { cssClass: cssClasses.onLeave, ...baseOptions };
         },
         getAnimatedElement: () => {
-          return this.question.getWrapperElement()?.querySelector(`#${this.item.panel.id}`).parentElement.parentElement as HTMLElement;
+          return this.question.getWrapperElement()?.querySelector(getIdSelector(this.item.panel.renderedId))?.parentElement?.parentElement as HTMLElement;
         },
         isAnimationEnabled: () => {
           return isAnimationEnabled() && this.creator.animationAllowed;

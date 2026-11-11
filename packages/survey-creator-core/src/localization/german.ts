@@ -1162,8 +1162,8 @@ export var germanTranslation = {
     visible: "Sichtbar?",
     // "Required"
     isRequired: "Erforderlich?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Akzeptiere nur eine positive Antwort",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Fordern Sie eine positive Antwort",
     // [Auto-translated] "Mark as required"
     markRequired: "Als erforderlich markieren",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1174,8 @@ export var germanTranslation = {
     eachRowUnique: "Doppelte Beantwortungen in Zeilen verhindern",
     // "Error message for required questions"
     requiredErrorText: "Fehlermeldung bei nicht beantworteten erforderlichen Fragen",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Fehlermeldung, wenn Ja erforderlich ist",
     // "Display the question on a new line"
     startWithNewLine: "Mit einer neuen Zeile starten",
     // "Rows"
@@ -3274,8 +3276,6 @@ export var germanTranslation = {
     valueTrue: "Ein Wert, der in den Umfrageergebnissen gespeichert werden soll, wenn die Befragten eine positive Antwort geben.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Ein Wert, der in den Umfrageergebnissen gespeichert werden soll, wenn die Befragten eine negative Antwort geben.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Wählen Sie aus, eine negative Antwort als unbeantwortet zu behandeln, sodass die Befragten \"Ja\" (oder das Kontrollkästchen ankreuzen) wählen müssen, um fortzufahren. Verwenden Sie es zum Beispiel, um die Zustimmung zu den Bedingungen zu verlangen. Gilt nur, wenn die Frage erforderlich ist.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Es wird nicht empfohlen, diese Option zu deaktivieren, da sie das Vorschaubild überschreibt und es für einen Benutzer schwierig macht, zu verstehen, ob die Dateien hochgeladen wurden.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3892,7 @@ export var germanTranslation = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" und \"{aliasKey}\" von {ownerText} sind zwei Namen einer Eigenschaft – die Laufzeit verwendet sie in der Reihenfolge, in der das JSON sie schreibt, also gewinnt \"{winner}\".",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" ist auf \"{name}\" gesetzt, aber inputType \"{inputType}\" hat keine Grenzen – die Laufzeit ignoriert es.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" ist auf \"{name}\" gesetzt, aber \"{name}\" hat weder isRequired noch RequiredIf – die Laufzeit ignoriert es."
+        inertMinMax: "\"{key}\" ist auf \"{name}\" gesetzt, aber inputType \"{inputType}\" hat keine Grenzen – die Laufzeit ignoriert es."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

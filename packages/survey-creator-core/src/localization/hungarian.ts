@@ -1162,8 +1162,8 @@ export var huStrings = {
     visible: "Látható?",
     // "Required"
     isRequired: "Kötelező?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Csak pozitív választ fogadj el",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Pozitív választ kell kérni",
     // [Auto-translated] "Mark as required"
     markRequired: "Megjelölés kötelezőként",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1174,8 @@ export var huStrings = {
     eachRowUnique: "A sorokban ismétlődő válaszok megakadályozása",
     // "Error message for required questions"
     requiredErrorText: "\"Kötelező\" hibaüzenet",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Hibaüzenet, ha igen szükséges",
     // "Display the question on a new line"
     startWithNewLine: "Új sorban kezdődik?",
     // "Rows"
@@ -3274,8 +3276,6 @@ export var huStrings = {
     valueTrue: "Olyan érték, amelyet meg kell menteni a felmérés eredményeiben, amikor a válaszadók pozitív választ adnak.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "A felmérés eredményeiben mentendő érték, ha a válaszadók negatív választ adnak.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Válaszd ki, hogy a negatív választ válasz nem válaszoltnak kezeli, így a válaszadóknak a \"Igen\" (vagy a jelölőnégyzetet) kell választaniuk a továbblépéshez. Például használhatjuk arra, hogy beleegyezést kérjen a feltételekhez. Csak akkor érvényes, ha a kérdés szükséges.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Nem ajánlott letiltani ezt a beállítást, mivel felülbírálja az előnézeti képet, és megnehezíti a felhasználó számára annak megértését, hogy a fájlok fel vannak-e töltve.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3892,7 @@ export var huStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "A {ownerText} \"{key}\" és \"{aliasKey}\" két neve egy tulajdonságnak – a futási idő a JSON írási sorrendjében alkalmazza őket, így a \"{winner}\" nyer.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "a \"{key}\" a \"{name}\"-re van beállítva, de az inputType \"{inputType}\" korlátlanul rendelkezik – a futási idő figyelmen kívül hagyja azt.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" be van állítva a \"{name}\"-re, de a \"{name}\" sem isRequired, sem required If - a futási idő figyelmen kívül hagyja azt."
+        inertMinMax: "a \"{key}\" a \"{name}\"-re van beállítva, de az inputType \"{inputType}\" korlátlanul rendelkezik – a futási idő figyelmen kívül hagyja azt."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

@@ -4,8 +4,14 @@ import { wrapTextByCurlyBraces } from "./utils/creator-utils";
 import { findInnerQuestion } from "./utils/data-path";
 
 export class ExpressionToDisplayText {
-  private currentQuestion: Survey.Question;
   private showTitles: boolean;
+  // survey-core renders the expression, these hooks only change the texts of variables, constants and operators
+  private toStringContext: Survey.IOperandToStringContext = {
+    variableToString: (op: Survey.Variable): string => this.getQuestionText(op),
+    constToString: (op: Survey.Const, comparedWith: Survey.Variable): string => this.getDisplayText(op, comparedWith),
+    operatorToString: (operatorName: string): string => this.getDisplayOperator(operatorName),
+    skipRootBrackets: true
+  };
   constructor(public survey: Survey.SurveyModel, private options: any = null) { }
   public toDisplayText(expression: string): string {
     if (!this.survey) return expression;
@@ -14,42 +20,14 @@ export class ExpressionToDisplayText {
     var parser = new Survey.ConditionsParser();
     var node = parser.parseExpression(expression);
     if (!node) return expression;
-    if (!!node["getType"]) return this.toDisplayTextCore(node);
+    if (!!node["getType"]) return this.toExpression(node);
     if (!this.showTitles) return expression;
     var variables = [];
     node.setVariables(variables);
     return this.replaceVariables(expression, variables);
   }
   public toExpression(node: Survey.Operand): string {
-    return this.toDisplayTextCore(node);
-  }
-  private toDisplayTextCore(node: Survey.Operand): string {
-    this.currentQuestion = null;
-    var self = this;
-    var isRoot = true;
-    var strFunc = function (op: Survey.Operand): string {
-      var locIsRoot = isRoot;
-      isRoot = false;
-      if (op.getType() == "variable") {
-        return self.getQuestionText(<Survey.Variable>op);
-      }
-      if (self.showTitles && op.getType() == "const") {
-        return self.getDisplayText(<Survey.Const>op);
-      }
-      if (op.getType() == "binary") {
-        self.proceedBinary(<Survey.BinaryOperand>op);
-        return self.getDisplayBinary(
-          <Survey.BinaryOperand>op,
-          locIsRoot,
-          strFunc
-        );
-      }
-      if (op.getType() == "unary") {
-        return self.getDisplayUnary(<Survey.UnaryOperand>op, strFunc);
-      }
-      return undefined;
-    };
-    return node.toString(strFunc);
+    return node.toString(this.toStringContext);
   }
   private getQuestionText(op: Survey.Variable): string {
     const question = this.getQuestionByName(op.variable);
@@ -65,16 +43,15 @@ export class ExpressionToDisplayText {
     if (text === op.variable) return undefined;
     return wrapTextByCurlyBraces(text);
   }
-  private getDisplayText(op: Survey.Const): string {
-    if (!this.currentQuestion) return undefined;
-    var res = this.currentQuestion.getDisplayValue(true, op.correctValue);
+  //A constant compared with a question shows the question's display value (a choice text, for example).
+  //survey-core passes comparedWith only for a direct operand of a comparison or an item of a direct array,
+  //so a constant inside a function keeps its own text
+  private getDisplayText(op: Survey.Const, comparedWith: Survey.Variable): string {
+    if (!this.showTitles || !comparedWith) return undefined;
+    const question = this.getQuestionByName(comparedWith.variable);
+    if (!question) return undefined;
+    var res = question.getDisplayValue(true, op.correctValue);
     return !!res ? new Survey.Const(res).toString() : undefined;
-  }
-  private getDisplayOperand(
-    op: any,
-    func: (op: Survey.Operand) => string
-  ): string {
-    return !!op ? op.toString(func) : "";
   }
   static operatorText = {
     less: "<",
@@ -96,55 +73,6 @@ export class ExpressionToDisplayText {
     var res = ExpressionToDisplayText.operatorText[operator];
     if (!!res) return res;
     return editorLocalization.getString("op." + operator);
-  }
-  private getDisplayBinary(
-    op: Survey.BinaryOperand,
-    isRoot: boolean,
-    func: (op: Survey.Operand) => string
-  ): string {
-    return (
-      (isRoot ? "" : "(") +
-      this.getDisplayOperand(op.leftOperand, func) +
-      " " +
-      this.getDisplayOperator(op.operator) +
-      " " +
-      this.getDisplayOperand(op.rightOperand, func) +
-      (isRoot ? "" : ")")
-    );
-  }
-  private getDisplayUnary(
-    op: Survey.UnaryOperand,
-    func: (op: Survey.Operand) => string
-  ): string {
-    var exp = op.expression.toString(func);
-    var operator = this.getDisplayOperator(op.operator);
-    if (op.operator == "empty" || op.operator == "notempty")
-      return exp + " " + operator;
-    return operator + " " + exp;
-  }
-  private proceedBinary(op: Survey.BinaryOperand) {
-    if (op.isArithmetic || op.isConjunction) {
-      this.currentQuestion = null;
-      return;
-    }
-    this.currentQuestion = this.getQuestionFromOperands(
-      op.leftOperand,
-      op.rightOperand
-    );
-    if (!this.currentQuestion) {
-      this.currentQuestion = this.getQuestionFromOperands(
-        op.rightOperand,
-        op.leftOperand
-      );
-    }
-  }
-  private getQuestionFromOperands(op1: Survey.Operand, op2: Survey.Operand) {
-    if (!op1 || !op2) return null;
-    if (op1.getType() != "variable") return null;
-    var op2Type = op2.getType();
-    if (op2Type != "const" && op2Type != "function" && op2Type != "array")
-      return null;
-    return this.getQuestionByName((<Survey.Variable>op1).variable);
   }
   private replaceVariables(
     expression: string,

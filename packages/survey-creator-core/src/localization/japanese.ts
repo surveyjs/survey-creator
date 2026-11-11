@@ -1162,8 +1162,8 @@ export var jaStrings = {
     visible: "表示",
     // "Required"
     isRequired: "必須",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "肯定的な答えだけを受け入れてください",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "肯定的な答えを求める",
     // [Auto-translated] "Mark as required"
     markRequired: "必須としてマーク",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1174,8 @@ export var jaStrings = {
     eachRowUnique: "行での回答の重複を防ぐ",
     // "Error message for required questions"
     requiredErrorText: "必要なエラーテキスト",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "「はい」が必要な場合のエラーメッセージ",
     // "Display the question on a new line"
     startWithNewLine: "ニューラインで開始",
     // "Rows"
@@ -3274,8 +3276,6 @@ export var jaStrings = {
     valueTrue: "回答者が肯定的な回答をした場合にアンケート結果に保存する値。",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "回答者が否定的な回答をした場合にアンケート結果に保存する値。",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "否定的な回答を未回答とみなすように選択し、回答者は「はい」を選択するか(チェックボックスにチェックを入れる)必要があります。例えば、利用規約への同意を求めるために使用してください。質問が必要な場合にのみ適用されます。",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "このオプションはプレビュー画像を上書きし、ファイルがアップロードされたかどうかをユーザーが理解しにくくなるため、無効にすることはお勧めしません。",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3892,7 @@ export var jaStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "{ownerText}の「{key}」と「{aliasKey}」は1つのプロパティの名前であり、実行時間はJSONが書く順に適用されるため、「{winner}」が勝ちます。",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "「{key}」は「{name}」に設定されていますが、inputType「{inputType}」には境界がなく、実行時間上は無視されます。",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "「{key}」は「{name}」に設定されていますが、「{name}」はisRequiredもRequiredもなければ、実行時間上は無視されます。"
+        inertMinMax: "「{key}」は「{name}」に設定されていますが、inputType「{inputType}」には境界がなく、実行時間上は無視されます。"
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

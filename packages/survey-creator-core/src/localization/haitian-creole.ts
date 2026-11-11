@@ -1162,8 +1162,8 @@ export var htStrings = {
     visible: "Vizib",
     // "Required"
     isRequired: "Obligatwa",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Aksepte sèlman yon repons pozitif",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Mande pou yon repons pozitif",
     // "Mark as required"
     markRequired: "Make jan sa nesesè",
     // "Remove the required mark"
@@ -1174,6 +1174,8 @@ export var htStrings = {
     eachRowUnique: "Anpeche repons doub nan ranje",
     // "Error message for required questions"
     requiredErrorText: "Mesaj erè pou kesyon obligatwa yo",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Mesaj erè lè Wi mande",
     // "Display the question on a new line"
     startWithNewLine: "Montre kesyon an sou yon nouvo liy",
     // "Rows"
@@ -3274,8 +3276,6 @@ export var htStrings = {
     valueTrue: "Yon valè pou sove nan rezilta sondaj yo lè moun ki repond bay yon repons pozitif.",
     // "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Yon valè pou sove nan rezilta sondaj yo lè moun ki repond bay yon repons negatif.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Chwazi pou trete yon repons negatif kòm san repons, kidonk moun ki repond yo dwe chwazi \"Wi\" (oswa tcheke kazye a) pou kontinye. Pa egzanp, sèvi ak li pou mande konsantman pou tèm ak kondisyon yo. Aplike sèlman lè kesyon an egzije.",
     // "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Li pa rekòmande pou ou enfim opsyon sa a paske li depase imaj Preview la epi li fè li difisil pou yon itilizatè konprann si wi ou non dosye yo te Uploaded.",
     // "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3892,7 @@ export var htStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{kle}\" ak \"{aliasKey}\" nan {ownerText} se de non yon sèl pwopriyete - tan an kouri aplike yo nan lòd la JSON ekri yo, se konsa \"{gayan}\" ranport.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" se mete sou \"{non}\", men inputType \"{inputType}\" pa gen okenn limit - tan an kouri inyore li.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{kle}\" se mete sou \"{non}\", men \"{non}\" pa gen ni isRequired ni obligatwaSi - tan an kouri inyore li."
+        inertMinMax: "\"{key}\" se mete sou \"{non}\", men inputType \"{inputType}\" pa gen okenn limit - tan an kouri inyore li."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

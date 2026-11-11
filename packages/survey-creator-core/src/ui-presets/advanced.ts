@@ -36,8 +36,9 @@ export const Advanced = {
               "readOnly",
               "readOnlyMode",
               "isRequired",
-              "requiredTrue",
+              "requireTrue",
               "showTitle",
+              "allowClear",
               "showCommentArea",
               { name: "page", tab: "layout" },
               { name: "startWithNewLine", tab: "layout" },
@@ -170,7 +171,6 @@ export const Advanced = {
               { name: "showLabels", tab: "sliderSettings" },
               { name: "tooltipVisibility", tab: "sliderSettings" },
               { name: "allowSwap", tab: "sliderSettings" },
-              { name: "allowClear", tab: "sliderSettings" },
             ],
             tabs: [{ name: "sliderSettings", index: 10 }]
           },
@@ -215,7 +215,6 @@ export const Advanced = {
           dropdown: {
             properties: [
               "autocomplete",
-              { name: "allowClear", tab: "choices" },
               { name: "searchMode", tab: "choices" },
             ]
           },
@@ -225,7 +224,6 @@ export const Advanced = {
               { name: "searchEnabled", tab: "choices" },
               { name: "searchMode", tab: "choices" },
               { name: "hideSelectedItems", tab: "choices" },
-              { name: "allowClear", tab: "choices" },
             ]
           },
           imagepicker: {
@@ -307,6 +305,7 @@ export const Advanced = {
               { name: "confirmDelete", tab: "entries" },
               { name: "displayMode", tab: "entries" },
               { name: "templateTitle", tab: "entries" },
+              { name: "templateTitlePlaceholder", tab: "entries" },
               { name: "templateDescription", tab: "entries" },
               { name: "templateTabTitle", tab: "entries" },
               { name: "tabAlign", tab: "entries" },
@@ -429,7 +428,7 @@ export const Advanced = {
               "title",
               "cellType",
               "isRequired",
-              "requiredTrue",
+              "requireTrue",
               "isUnique",
               { name: "requiredIf", tab: "logic" },
               { name: "validators", tab: "validation" },
@@ -549,7 +548,6 @@ export const Advanced = {
               { name: "showLabels", tab: "sliderSettings" },
               { name: "tooltipVisibility", tab: "sliderSettings" },
               { name: "allowSwap", tab: "sliderSettings" },
-              { name: "allowClear", tab: "sliderSettings" },
             ],
             tabs: [{ name: "sliderSettings", index: 10 }]
           },

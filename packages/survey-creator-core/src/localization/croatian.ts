@@ -1162,8 +1162,8 @@ export var hrStrings = {
     visible: "Je li vidljivo?",
     // "Required"
     isRequired: "Je potrebno?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Prihvatite samo pozitivan odgovor",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Zahtijevajte pozitivan odgovor",
     // [Auto-translated] "Mark as required"
     markRequired: "Označi kao obavezno",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1174,8 @@ export var hrStrings = {
     eachRowUnique: "Sprječavanje dvostrukih odgovora u recima",
     // "Error message for required questions"
     requiredErrorText: "Potreban tekst pogreške",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Poruka o pogrešci kada je potreban 'da'",
     // "Display the question on a new line"
     startWithNewLine: "Počinje li s novom linijom?",
     // "Rows"
@@ -3274,8 +3276,6 @@ export var hrStrings = {
     valueTrue: "Vrijednost koju treba uštedjeti u rezultatima ankete kada ispitanici daju pozitivan odgovor.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Vrijednost koju treba spremiti u rezultatima ankete kada ispitanici daju negativan odgovor.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Odaberite da se negativan odgovor tretira kao neodgovoren, pa ispitanici moraju odabrati \"Da\" (ili označiti kućicu) da bi nastavili. Na primjer, koristite ga za zahtjev za pristanak na uvjete korištenja. Primjenjuje se samo kada je pitanje obavezno.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Ne preporučuje se da onemogućite ovu opciju jer ona nadjačava sliku pretpregleda i otežava korisniku da shvati jesu li datoteke prenesene.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3892,7 @@ export var hrStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" i \"{aliasKey}\" iz {ownerText} su dva imena jednog svojstva – vrijeme izvršavanja ih primjenjuje redoslijedom kojim ih JSON piše, pa \"{winner}\" pobjeđuje.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" je postavljen na \"{name}\", ali inputType \"{inputType}\" nema granica – vrijeme izvršavanja ga ignorira.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" je postavljen na \"{name}\", ali \"{name}\" nema ni isRequired ni requiredAko - vrijeme izvršavanja ga ignorira."
+        inertMinMax: "\"{key}\" je postavljen na \"{name}\", ali inputType \"{inputType}\" nema granica – vrijeme izvršavanja ga ignorira."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

@@ -1162,8 +1162,8 @@ export var mnStrings = {
     visible: "Харагдана",
     // "Required"
     isRequired: "Заавал бөглөх",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Зөвхөн эерэг хариултыг хүлээн аваарай",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Эерэг хариулт шаардаарай",
     // [Auto-translated] "Mark as required"
     markRequired: "Шаардлагын дагуу тэмдэглэгээ хийх",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1174,8 @@ export var mnStrings = {
     eachRowUnique: "Дараалалд хувилж хариу үйлдэл үзүүлэхээс сэргийлнэ",
     // "Error message for required questions"
     requiredErrorText: "Заавал бөглөх талбарыг бөглөөгүй байна",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Шаардлагатай үед алдааны мессеж гарах",
     // "Display the question on a new line"
     startWithNewLine: "Асуултыг шинэ мөрөнд харуулах",
     // "Rows"
@@ -3274,8 +3276,6 @@ export var mnStrings = {
     valueTrue: "Асуултад хариулсан хүмүүс эерэг хариулт өгөхөд судалгааны үр дүнг хадгалах нь үнэ цэнэтэй.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Судалгаанд оролцогчдын сөрөг хариулт өгөхөд судалгааны үр дүнг хадгалах үнэ цэнэ.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Сөрөг хариултыг хариулаагүй гэж үзэхээр сонгоно тул хариуцагчид \"Тийм\" (эсвэл шалгах хайрцгийг тэмдэглэх) сонгох ёстой. Жишээ нь, үүнийг нөхцөлд зөвшөөрөл шаардахад ашиглана. Зөвхөн асуулт шаардлагатай үед хамаарна.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Энэ сонголтыг унтраахыг зөвлөхгүй. Учир нь энэ нь Preview зургийг давамгайлж, файлуудыг оруулсан эсэхийг ойлгоход хэрэглэгчдэд хэцүү болгодог.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3892,7 @@ export var mnStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "{ownerText}-ийн \"{key}\" ба \"{aliasKey}\" нь нэг шинж чанарын хоёр нэр бөгөөд гүйцэтгэлийн хугацаа нь JSON-ийн бичдэг дарааллаар ашиглагддаг тул \"{winner}\" ялна.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" нь \"{name}\" дээр тавигдсан боловч inputType \"{inputType}\" нь хязгааргүй - гүйцэтгэлийн хугацаа үүнийг үл тоомсорлодог.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" нь \"{name}\" дээр тавигдсан боловч \"{name}\" нь isRequired эсвэл requiredIf гэсэн утгатай - гүйцэтгэлийн цаг үүнийг үл тоомсорлодог."
+        inertMinMax: "\"{key}\" нь \"{name}\" дээр тавигдсан боловч inputType \"{inputType}\" нь хязгааргүй - гүйцэтгэлийн хугацаа үүнийг үл тоомсорлодог."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

@@ -40,9 +40,9 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "readOnly",
       "readOnlyMode",
       "isRequired",
-      "requiredTrue",
-      "allowClear",
+      "requireTrue",
       "showTitle",
+      "allowClear",
       "showCommentArea",
       "commentText",
       "commentPlaceholder",
@@ -83,7 +83,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "defaultDisplayValue", tab: "data" },
       { name: "clearIfInvisible", tab: "data" },
       { name: "validators", tab: "validation" },
-      { name: "requiredErrorText", tab: "validation" }
+      { name: "requiredErrorText", tab: "validation" },
+      { name: "requireTrueErrorText", tab: "validation" }
     ],
     tabs: [
       { name: "layout", index: 100 },
@@ -164,7 +165,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "rows", tab: "rows" },
       { name: "alternateRows", tab: "rows" },
       { name: "transposeData", tab: "rows" },
-      { name: "allowClear", tab: "choices" },
       { name: "choices", tab: "choices" },
       { name: "columnColCount", tab: "choices" }
     ],
@@ -297,7 +297,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   selectbase: {
     properties: [
-      { name: "allowClear", tab: "choices" },
       { name: "choices", tab: "choices" },
       { name: "choicesFromQuestion", tab: "choices" },
       { name: "choicesFromQuestionMode", tab: "choices" },
@@ -353,7 +352,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   radiogroup: {
     properties: [
-      { name: "allowClear", tab: "choices" },
       { name: "separateSpecialChoices", tab: "choices" },
       { name: "choiceShortcutsEnabled", tab: "choices" },
     ]
@@ -365,7 +363,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choicesMin", tab: "choices" },
       { name: "choicesMax", tab: "choices" },
       { name: "choicesStep", tab: "choices" },
-      { name: "allowClear", tab: "choices" },
       { name: "searchMode", tab: "choices" },
     ]
   },
@@ -376,7 +373,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "searchEnabled", tab: "choices" },
       { name: "searchMode", tab: "choices" },
       { name: "hideSelectedItems", tab: "choices" },
-      { name: "allowClear", tab: "choices" },
     ]
   },
   imagepicker: {
@@ -485,7 +481,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "readOnly",
       "readOnlyMode",
       "isRequired",
-      "requiredTrue",
+      "requireTrue",
       "isUnique",
       "showInMultipleColumns",
       "allowSort",
@@ -505,6 +501,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "totalExpression", tab: "totals" },
       { name: "validators", tab: "validation" },
       { name: "requiredErrorText", tab: "validation" },
+      { name: "requireTrueErrorText", tab: "validation" },
       { name: "defaultDisplayValue", tab: "data" }
     ],
     tabs: [
@@ -762,6 +759,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "maxSortLevel", tab: "entries" },
       { name: "displayMode", tab: "entries" },
       { name: "templateTitle", tab: "entries" },
+      { name: "templateTitlePlaceholder", tab: "entries" },
       { name: "templateDescription", tab: "entries" },
       { name: "panelsState", tab: "entries" },
       { name: "templateTabTitle", tab: "entries" },

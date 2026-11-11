@@ -1162,8 +1162,8 @@ export const thStrings = {
     visible: "มองเห็นได้",
     // "Required"
     isRequired: "จำเป็น",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "ยอมรับเฉพาะคําตอบในเชิงบวกเท่านั้น",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "ต้องการคําตอบในเชิงบวก",
     // "Mark as required"
     markRequired: "ทำเครื่องหมายว่าจำเป็น",
     // "Remove the required mark"
@@ -1174,6 +1174,8 @@ export const thStrings = {
     eachRowUnique: "ป้องกันการตอบซ้ำในแถว",
     // "Error message for required questions"
     requiredErrorText: "ข้อความข้อผิดพลาดสำหรับคำถามที่จำเป็น",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "ข้อความแสดงข้อผิดพลาดเมื่อจําเป็นต้องใช้ Yes",
     // "Display the question on a new line"
     startWithNewLine: "แสดงคำถามในบรรทัดใหม่",
     // "Rows"
@@ -3274,8 +3276,6 @@ export const thStrings = {
     valueTrue: "ค่าที่จะบันทึกในผลลัพธ์แบบสำรวจเมื่อผู้ตอบให้คำตอบที่บวก",
     // "A value to save in survey results when respondents give a negative answer."
     valueFalse: "ค่าที่จะบันทึกในผลลัพธ์แบบสำรวจเมื่อผู้ตอบให้คำตอบที่ลบ",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "เลือกที่จะถือว่าคําตอบเชิงลบเป็นคําตอบที่ยังไม่ได้รับคําตอบ ดังนั้นผู้ตอบแบบสอบถามต้องเลือก \"ใช่\" (หรือติ๊กถูกช่องทําเครื่องหมาย) เพื่อดําเนินการต่อตัวอย่างเช่น ใช้เพื่อขอความยินยอมต่อข้อกําหนดและเงื่อนไขใช้ได้เฉพาะเมื่อคําถามนั้นจําเป็นเท่านั้น",
     // "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "ไม่แนะนำให้คุณปิดใช้งานตัวเลือกนี้เนื่องจากจะยกเลิกการพรีวิวภาพและทำให้ผู้ใช้เข้าใจได้ยากว่าไฟล์ได้ถูกอัปโหลดหรือไม่",
     // "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3892,7 @@ export const thStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" และ \"{aliasKey}\" ของ {ownerText} เป็นชื่อสองชื่อของคุณสมบัติเดียวกัน - เวลาทํางานจะนําไปใช้ตามลําดับที่ JSON เขียน ดังนั้น \"{winner}\" จึงชนะ",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" ถูกตั้งค่าเป็น \"{name}\" แต่ inputType \"{inputType}\" ไม่มีขอบเขต - เวลารันจะไม่สนใจ",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" ถูกตั้งค่าไว้ที่ \"{name}\" แต่ \"{name}\" ไม่มีทั้ง isRequired หรือ nrequired If - เวลารันจะไม่สนใจ"
+        inertMinMax: "\"{key}\" ถูกตั้งค่าเป็น \"{name}\" แต่ inputType \"{inputType}\" ไม่มีขอบเขต - เวลารันจะไม่สนใจ"
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

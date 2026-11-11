@@ -20,7 +20,8 @@ import {
   SurveyVariablePresets,
   isAnimationEnabled,
   isReducedMotionPreferred,
-  subscribeReducedMotionChange
+  subscribeReducedMotionChange,
+  getIdSelector
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
@@ -39,6 +40,7 @@ import { ICreatorSelectionOwner } from "./selection-owner";
 import { SelectionHistory } from "./selection-history";
 
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
+import { TabJsonEditorMonacoPlugin } from "./components/tabs/json-editor-monaco";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 import { TabTestPlugin } from "./components/tabs/test-plugin";
 import { SurveyLogic } from "./components/tabs/logic";
@@ -2288,7 +2290,9 @@ export class SurveyCreatorModel extends Base
     this.addTab({ name: "preview", pluginCreator: () => new TabTestPlugin(this), iconName: TabTestPlugin.iconName });
     this.addTab({ name: "theme", pluginCreator: () => new ThemeTabPlugin(this), iconName: ThemeTabPlugin.iconName });
     this.addTab({ name: "logic", pluginCreator: () => new TabLogicPlugin(this), iconName: TabLogicPlugin.iconName });
-    if (TabJsonEditorAcePlugin.hasAceEditor()) {
+    if (TabJsonEditorMonacoPlugin.hasMonacoEditor()) {
+      this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorMonacoPlugin(this), iconName: TabJsonEditorMonacoPlugin.iconName, componentName: "svc-tab-json-editor-monaco" });
+    } else if (TabJsonEditorAcePlugin.hasAceEditor()) {
       this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorAcePlugin(this), iconName: TabJsonEditorAcePlugin.iconName, componentName: "svc-tab-json-editor-ace" });
     } else {
       this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorTextareaPlugin(this), iconName: TabJsonEditorTextareaPlugin.iconName, componentName: "svc-tab-json-editor-textarea" });
@@ -3809,7 +3813,7 @@ export class SurveyCreatorModel extends Base
         element: selEl,
         question: undefined,
         page: elementPage,
-        id: selEl.id,
+        id: selEl.renderedId,
         scrollIfVisible: true,
         scrollIntoViewOptions: scrollIntoViewOptions,
         passedRootElement: this.rootElement,
@@ -3829,8 +3833,8 @@ export class SurveyCreatorModel extends Base
   }
 
   private getHtmlElementForScroll(element: any): HTMLElement {
-    const id = element.getType() === "matrixdropdowncolumn" ? element.colOwner.id : element.id;
-    return this.rootElement?.querySelector(`#${id}`);
+    const id = element.getType() === "matrixdropdowncolumn" ? element.colOwner.renderedId : element.renderedId;
+    return this.rootElement?.querySelector(getIdSelector(id));
   }
 
   private getSelectedSurveyElement(): IElement {

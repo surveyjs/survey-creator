@@ -90,7 +90,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     return (
       attachKey2click(<div
         ref={this.rootRef}
-        id={this.props.page.id}
+        id={this.props.page.renderedId}
         data-sv-drop-target-survey-page={this.model.dropTargetName}
         className={"svc-page__content " + this.model.css}
         onClick={(e) => {
