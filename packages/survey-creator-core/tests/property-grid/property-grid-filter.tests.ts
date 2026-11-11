@@ -90,10 +90,8 @@ describe("Property grid: the Filter Control presets", () => {
     const row = matrix.visibleRows[0];
     row.showDetailPanel();
     const visibleNames = (): Array<string> => row.detailPanel.questions.filter(q => q.isVisible).map(q => q.name);
-    expect(visibleNames(), "#6").toEqual(["kind", "expression", "allowEdit", "allowDelete"]);
+    expect(visibleNames(), "#6").toEqual(["expression", "allowEdit", "allowDelete"]);
     expect(row.detailPanel.getQuestionByName("expression").value, "#7").toBe("{x} > 1");
-    row.detailPanel.getQuestionByName("kind").value = "ai";
-    expect(visibleNames(), "#8").toEqual(["kind", "expression", "prompt", "allowEdit", "allowDelete"]);
   });
   test("adding a preset", () => {
     const { filter, matrix } = createGrid({});

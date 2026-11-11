@@ -446,9 +446,7 @@ export var enStrings = {
     filteritem: {
       name: "Preset name",
       title: "Preset title",
-      kind: "Preset type",
       expression: "Filter expression",
-      prompt: "AI prompt",
       allowEdit: "Allow editing",
       allowDelete: "Allow deleting"
     },
@@ -1154,10 +1152,6 @@ export var enStrings = {
     sliderType: {
       single: "Single-Value",
       range: "Range"
-    },
-    type: {
-      fields: "Conditions",
-      ai: "AI"
     },
     tooltipVisibility: {
       auto: "Auto",
