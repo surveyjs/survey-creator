@@ -30,6 +30,7 @@ import { PropertyGridTriggerValueInLogicEditor } from "../../src/property-grid/v
 import { QuestionEmbeddedSurveyModel } from "../../src/components/embedded-survey";
 import { SurveyLogicAction } from "../../src/components/tabs/logic-items";
 import { CreatorTester } from "../creator-tester";
+import { setEditorLocaleStrings } from "../editor-locale-stub";
 import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 import { wrapTextByCurlyBraces } from "../../src/utils/creator-utils";
 import { settings } from "../../src/creator-settings";
@@ -1829,15 +1830,20 @@ test("LogicPlugin: actions titles support localization", () => {
   logicPlugin.model.questionFilter = "";
   expect(filterActionQuestion.title).toEqual("All Questions");
 
+  let restoreDe = () => { };
   if (!editorLocalization.locales["de"]) {
-    editorLocalization.locales["de"] = {
+    restoreDe = setEditorLocaleStrings("de", {
       ed: { lg: { trigger_copyvalueName: "Fragenwert kopieren", showAllQuestions: "Alle Fragen anzeigen" } }
-    };
+    });
   }
-  creator.locale = "de";
-  expect(filterActionType.title).toEqual("Fragenwert kopieren");
-  expect(filterActionQuestion.title).toEqual("Alle Fragen anzeigen");
-  creator.locale = "";
+  try {
+    creator.locale = "de";
+    expect(filterActionType.title).toEqual("Fragenwert kopieren");
+    expect(filterActionQuestion.title).toEqual("Alle Fragen anzeigen");
+    creator.locale = "";
+  } finally {
+    restoreDe();
+  }
 });
 
 test("LogicPlugin: creator.readOnly", () => {
@@ -4046,13 +4052,17 @@ test("Limit the number of trigger types, #6031", () => {
   expect(hasType(logic.logicTypes, "trigger_skip")).toBeTruthy();
   expect(hasType(logic.logicTypes, "trigger_complete")).toBeTruthy();
 
+  const savedInvisibleTriggers = settings.logic.invisibleTriggers;
   settings.logic.invisibleTriggers = ["skip", "complete"];
+  try {
+    logic = new SurveyLogic(survey);
+    expect(hasType(logic.logicTypes, "trigger_skip")).toBeFalsy();
+    expect(hasType(logic.logicTypes, "trigger_complete")).toBeFalsy();
 
-  logic = new SurveyLogic(survey);
-  expect(hasType(logic.logicTypes, "trigger_skip")).toBeFalsy();
-  expect(hasType(logic.logicTypes, "trigger_complete")).toBeFalsy();
-
-  expect(logic.logicTypes.length > 4).toBeTruthy();
+    expect(logic.logicTypes.length > 4).toBeTruthy();
+  } finally {
+    settings.logic.invisibleTriggers = savedInvisibleTriggers;
+  }
 });
 test("SurveyLogic: Delete completedHtmlOnCondition item instead of removing expression only, Bug#6657", () => {
   var survey = new SurveyModel({
