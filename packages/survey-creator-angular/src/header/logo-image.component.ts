@@ -20,7 +20,7 @@ export class CreatorLogoImageComponent extends CreatorModelComponent<LogoImageVi
   protected getModel(): LogoImageViewModel {
     return this.model;
   }
-  protected getPropertiesToTrack(): string[] {
+  protected override getPropertiesToTrack(): string[] {
     return ["data"];
   }
   public get creator(): SurveyCreatorModel {
@@ -28,6 +28,17 @@ export class CreatorLogoImageComponent extends CreatorModelComponent<LogoImageVi
   }
   public get survey(): SurveyModel {
     return this.creator.survey;
+  }
+  onChangeHandler = (): void => {
+    this.detectChanges();
+  };
+  override ngOnInit() {
+    super.ngOnInit();
+    this.survey.locLogo.onStringChanged.add(this.onChangeHandler);
+  }
+  override ngOnDestroy() {
+    super.ngOnDestroy();
+    this.survey.locLogo.onStringChanged.remove(this.onChangeHandler);
   }
   ngAfterViewInit(): void {
     this.model.root = this.container.nativeElement;

@@ -20,7 +20,7 @@ export class ToolboxToolComponent extends CreatorModelComponent<Action> implemen
   createModel() {
     this.model = new ToolboxToolViewModel(<any>this.item, this.creator, this.parentModel);
   }
-  protected getPropertiesToTrack(): string[] {
+  protected override getPropertiesToTrack(): string[] {
     return ["creator", "item"];
   }
   protected getModel(): Action {

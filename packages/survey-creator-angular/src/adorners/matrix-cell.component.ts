@@ -1,8 +1,9 @@
+import { SimpleChanges } from "@angular/core";
 import { ChangeDetectorRef, Component, Input, TemplateRef, ViewContainerRef } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent, SurveyBaseProviders } from "survey-angular-ui";
 import { ItemValue, PageModel, PanelModel, Question, QuestionSelectBase, SurveyModel } from "survey-core";
 import { SurveyCreatorModel, ItemValueWrapperViewModel, MatrixCellWrapperViewModel, QuestionAdornerViewModel } from "survey-creator-core";
-import { CreatorModelComponent } from "../creator-model.component";
+import { CreatorModelComponent, compareComponentData } from "../creator-model.component";
 
 @Component({
   selector: "svc-matrix-cell",
@@ -42,8 +43,8 @@ export class MatrixCellComponent extends CreatorModelComponent<MatrixCellWrapper
       this.adorner = new MatrixCellWrapperViewModel(this.creator, this.element, this.question, this.row, this.column || this.element.cell?.column);
     }
   }
-  protected getPropertiesToTrack(): string[] {
-    return ["creator", "row", "column", "question"];
+  protected override shouldUpdateModel(changes: SimpleChanges) {
+    return compareComponentData(changes, ["creator", "row", "column", "question", "element"], "componentData");
   }
   protected getModel(): MatrixCellWrapperViewModel {
     return this.adorner;

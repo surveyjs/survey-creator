@@ -33,7 +33,7 @@ export class TranslationDropdownQuestionComponent extends CreatorModelComponent<
       );
     }
   }
-  protected getPropertiesToTrack(): string[] {
+  protected override getPropertiesToTrack(): string[] {
     return ["componentData"];
   }
   protected getModel(): TranslationDropdownViewModel {

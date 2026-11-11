@@ -35,7 +35,7 @@ export class PageDesignerComponent extends CreatorModelComponent<PageAdorner> {
   protected getModel(): PageAdorner {
     return this.adorner;
   }
-  protected getPropertiesToTrack(): string[] {
+  protected override getPropertiesToTrack(): string[] {
     return ["creator", "model"];
   }
   public override afterUpdate() {

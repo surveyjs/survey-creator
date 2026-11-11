@@ -22,7 +22,7 @@ export class SurveyResultsComponent extends CreatorModelComponent<SurveyResultsM
   protected getModel(): SurveyResultsModel {
     return this.model;
   }
-  protected getPropertiesToTrack(): string[] {
+  protected override getPropertiesToTrack(): string[] {
     return ["survey"];
   }
 }

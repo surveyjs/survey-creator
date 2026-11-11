@@ -1,9 +1,10 @@
 
+import { SimpleChanges } from "@angular/core";
 import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { AngularComponentFactory, SurveyBaseProviders } from "survey-angular-ui";
 import { ImageItemValue, QuestionImagePickerModel } from "survey-core";
 import { SurveyCreatorModel, ImageItemValueWrapperViewModel } from "survey-creator-core";
-import { CreatorModelComponent } from "../creator-model.component";
+import { CreatorModelComponent, compareComponentData } from "../creator-model.component";
 
 @Component({
   selector: "svc-image-item-value",
@@ -31,8 +32,8 @@ export class ImageItemValueDesignerComponent extends CreatorModelComponent<Image
       this.adorner = new ImageItemValueWrapperViewModel(this.creator, this.question, this.item, <any>null, <any>null);
     }
   }
-  protected getPropertiesToTrack(): string[] {
-    return ["creator", "question", "item"];
+  protected override shouldUpdateModel(changes: SimpleChanges) {
+    return compareComponentData(changes, ["creator", "question", "model"], "componentData");
   }
   protected getModel(): ImageItemValueWrapperViewModel {
     return this.adorner;

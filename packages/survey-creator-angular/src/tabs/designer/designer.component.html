@@ -20,7 +20,28 @@
           </div>
         </ng-container>
         <ng-container *ngIf="!model.showPlaceholder">
-          <svc-designer-survey [model]="model"></svc-designer-survey>
+          <div [class]="model.designerCss" [attr.style]="surfaceCssVariablesString">
+            <div *ngIf="creator.showSurveyHeader" class="svc-designer-header">
+              <div *ngIf="survey.renderedHasHeader" [class]="survey.css.header" [survey]="survey" sv-ng-survey-header></div>
+            </div>
+            <ng-container *ngIf="creator.pageEditMode !== 'bypage'">
+              <ng-container *ngFor="let page of model.pages; trackBy: trackPageBy ">
+                <svc-page-wrapper [page]="page" [creator]="creator" [isGhost]="model.newPage == page" [className]="'svc-page'"></svc-page-wrapper>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="model.pagesController.page2Display && creator.pageEditMode === 'bypage'">
+              <svc-page-wrapper [page]="model.pagesController.page2Display" [creator]="creator" [isGhost]="model.pagesController.page2Display == model.newPage" [className]="'svc-page'"></svc-page-wrapper>
+            </ng-container>
+          </div>
+          <div *ngIf="model.showSurfaceTools" class="svc-tab-designer__tools">
+            <div *ngIf="creator.showPageNavigator" class="svc-tab-designer__page-navigator">
+              <svc-page-navigator [pagesController]="model.pagesController" [pageEditMode]="creator.pageEditMode">
+              </svc-page-navigator>
+            </div>
+            <div *ngIf="model.showSurfaceToolbar" class="svc-tab-designer__toolbar">
+              <sv-action-bar [model]="model.surfaceToolbar"></sv-action-bar>
+            </div>
+          </div>
         </ng-container>
       </div>
     </sv-scroll>

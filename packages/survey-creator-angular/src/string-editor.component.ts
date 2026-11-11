@@ -1,8 +1,10 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, NgZone, ViewChild, ViewContainerRef } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, NgZone, SimpleChanges, ViewChild, ViewContainerRef } from "@angular/core";
 import { LocalizableString, CharacterCounter } from "survey-core";
 import { StringEditorViewModelBase, SurveyCreatorModel, editableStringRendererName } from "survey-creator-core";
-import { CreatorModelComponent } from "./creator-model.component";
-import { AngularComponentFactory, SurveyBaseProviders } from "survey-angular-ui";
+import { CreatorModelComponent, compareComponentData } from "./creator-model.component";
+import { AngularComponentFactory, COMPONENT_DEPTH, SurveyBaseProviders } from "survey-angular-ui";
+import { Inject } from "@angular/core";
+import { Optional } from "@angular/core";
 
 @Component({
   selector: "svc-string-editor",
@@ -15,8 +17,8 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   private justFocused: boolean = false;
   @Input() model!: any;
   @ViewChild("container") container!: ElementRef<HTMLElement>;
-  constructor(cdr: ChangeDetectorRef, vcr: ViewContainerRef, private ngZone: NgZone) {
-    super(cdr, vcr);
+  constructor(cdr: ChangeDetectorRef, vcr: ViewContainerRef, private ngZone: NgZone, @Optional() @Inject(COMPONENT_DEPTH) depth?: number | null) {
+    super(cdr, vcr, depth);
   }
   public createModel(): void {
     this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
@@ -39,8 +41,8 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   protected getModel(): StringEditorViewModelBase {
     return this.baseModel;
   }
-  protected getPropertiesToTrack(): string[] {
-    return ["creator", "locString"];
+  protected override shouldUpdateModel(changes: SimpleChanges) {
+    return compareComponentData(changes, ["locStr", "creator"], "model");
   }
   public get placeholder(): string {
     return this.baseModel.placeholder;

@@ -23,7 +23,7 @@ export class PageNavigatorComponent extends CreatorModelComponent<PageNavigatorV
   protected getModel(): PageNavigatorViewModel {
     return this.model;
   }
-  protected getPropertiesToTrack(): string[] {
+  protected override getPropertiesToTrack(): string[] {
     return ["pagesController", "pageEditMode"];
   }
   public ngAfterViewInit(): void {

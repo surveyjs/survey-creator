@@ -1,9 +1,10 @@
 
+import { SimpleChanges } from "@angular/core";
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild, ViewContainerRef } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent, SurveyBaseProviders } from "survey-angular-ui";
 import { ItemValue, PageModel, PanelModel, Question, QuestionSelectBase, SurveyModel } from "survey-core";
 import { SurveyCreatorModel, ItemValueWrapperViewModel, QuestionAdornerViewModel } from "survey-creator-core";
-import { CreatorModelComponent } from "../creator-model.component";
+import { CreatorModelComponent, compareComponentData } from "../creator-model.component";
 
 @Component({
   selector: "svc-item-value",
@@ -76,8 +77,8 @@ export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueW
       }
     }
   }
-  protected getPropertiesToTrack(): string[] {
-    return ["creator", "question", "item"];
+  protected override shouldUpdateModel(changes: SimpleChanges) {
+    return compareComponentData(changes, ["creator", "question", "model"], "componentData");
   }
   protected getModel(): ItemValueWrapperViewModel {
     return this.adorner;
