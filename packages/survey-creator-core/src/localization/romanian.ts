@@ -700,6 +700,8 @@ export const roStrings = {
       templateDescription: "Model de descriere a panoului",
       // "Entry title pattern"
       templateTitle: "Model de titlu a panoului",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Titlu de intrare provizoriu",
       // "Empty panel text"
       noEntriesText: "Text panou gol",
       // "Tab title pattern"
@@ -2870,6 +2872,8 @@ export const roStrings = {
       width: "Setează lățimea panoului în proporție cu alte elemente ale chestionarului de pe același rând. Acceptă valori CSS (px, %, in, pt etc.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Introduceți un șablon pentru titlurile panourilor dinamice. Utilizați {panelIndex} pentru poziția generală a panoului și {visiblePanelIndex} pentru ordinea acestuia printre panourile vizibile. Introduceți aceste substituenți în model pentru a adăuga numerotare automată.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Un text de rezervă pentru titlurile intrărilor care se aplică atunci când tiparul titlului nu produce o valoare semnificativă. Folosiți {panelIndex} pentru poziția generală a intrării și {visiblePanelIndex} pentru ordinea sa dintre intrările vizibile.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Introduceți un șablon pentru titlurile filelor. Utilizați {panelIndex} pentru poziția generală a unui panou și {visiblePanelIndex} pentru ordinea acestuia printre panourile vizibile. Introduceți aceste substituenți în model pentru a adăuga numerotare automată.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

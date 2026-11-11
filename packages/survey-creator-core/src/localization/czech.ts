@@ -700,6 +700,8 @@ export var czStrings = {
       templateDescription: "Vzor popisu položky",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Vzor názvu položky",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Zástupce názvu příspěvku",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Prázdný text panelu",
       // [Auto-translated] "Tab title pattern"
@@ -2870,6 +2872,8 @@ export var czStrings = {
       width: "Nastaví šířku panelu v poměru k ostatním prvkům zaměření ve stejném řádku. Přijímá hodnoty CSS (px, %, in, pt atd.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Zadejte šablonu pro dynamické názvy panelů. Použijte {panelIndex} pro obecnou pozici panelu a {visiblePanelIndex} pro jeho pořadí mezi viditelnými panely. Vložením těchto zástupných symbolů do vzorku přidáte automatické číslování.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Záložní text pro názvy záznamů, který se uplatní, když vzor názvu záznamu nevytváří smysluplnou hodnotu. Použijte {panelIndex} pro obecnou pozici záznamu a {visiblePanelIndex} pro pořadí mezi viditelnými položkami.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Zadejte šablonu pro názvy karet. Použijte {panelIndex} pro obecnou pozici panelu a {visiblePanelIndex} pro jeho pořadí mezi viditelnými panely. Vložením těchto zástupných symbolů do vzorku přidáte automatické číslování.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
