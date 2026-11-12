@@ -33,6 +33,7 @@ export class MonacoJsonEditorModel extends JsonEditorBaseModel {
   }
 
   public init(element: HTMLElement): void {
+    this.disposeEditor();
     const monaco = getMonaco();
     this.monacoEditor = monaco.editor.create(element, this.getEditorOptions());
     this.changeSubscription = this.monacoEditor.onDidChangeModelContent(() => {
@@ -89,6 +90,9 @@ export class MonacoJsonEditorModel extends JsonEditorBaseModel {
   }
   public dispose(): void {
     super.dispose();
+    this.disposeEditor();
+  }
+  private disposeEditor(): void {
     if (this.changeSubscription) {
       this.changeSubscription.dispose();
       this.changeSubscription = undefined;

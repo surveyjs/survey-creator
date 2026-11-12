@@ -176,3 +176,21 @@ test("Monaco: leaving the tab applies the text and disposes the editor", () => {
   expect(editor.isDisposed).toBeTruthy();
   expect(plugin.model).toBeUndefined();
 });
+
+test("Monaco: init on a remounted element disposes the editor created before", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  const model = new MonacoJsonEditorModel(creator);
+  const element = document.createElement("div");
+  model.init(element);
+  const create = monaco.editor.create;
+  let disposedBeforeCreate: boolean | undefined;
+  monaco.editor.create = (el: HTMLElement, options: any) => {
+    disposedBeforeCreate = monaco.instance.isDisposed;
+    return create(el, options);
+  };
+  model.init(element);
+  expect(disposedBeforeCreate).toBeTruthy();
+  expect(JSON.parse(model.text)).toEqual({ pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] });
+  model.dispose();
+});
