@@ -529,9 +529,13 @@ export var enStrings = {
     addNew: "Add item",
     addItem: "Click to add an item...",
     removeItem: "Click to remove the item...",
+    addItemAriaLabel: "Add {0}", // {0} is the choice text
+    removeItemAriaLabel: "Remove {0}", // {0} is the choice text
     dragItem: "Drag the item",
     expandNestedChoices: "Expand nested choices",
     collapseNestedChoices: "Collapse nested choices",
+    expandNestedChoicesAriaLabel: "Expand nested choices of {0}", // {0} is the choice text
+    collapseNestedChoicesAriaLabel: "Collapse nested choices of {0}", // {0} is the choice text
     showDescription: "Show description",
     hideDescription: "Hide description",
     edit: "Edit",

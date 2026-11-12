@@ -16,7 +16,8 @@ import {
   isAnimationEnabled,
   prepareElementForVerticalAnimation,
   cleanHtmlElementAfterAnimation,
-  getIdSelector
+  getIdSelector,
+  LocalizableString
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { DragDropChoices } from "survey-core";
@@ -152,6 +153,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
   }
   public dispose(): void {
     this.creator.onPermissionsChanged.remove(this.onPermissionsChangedHandler);
+    this.unsubscribeFromItemText();
     super.dispose();
     this.dragDropHelper.onGhostPositionChanged.remove(
       this.handleDragDropGhostPositionChanged
@@ -282,6 +284,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
         showTitle: false,
         appearance: { size: "x-small", style: "brand", mode: "tertiary" },
         title: new ComputedUpdater(() => this.tooltip) as unknown as string,
+        ariaLabel: new ComputedUpdater(() => this.actionAriaLabel) as unknown as string,
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
         },
@@ -303,6 +306,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
         appearance: { size: "x-small", style: "alert", mode: "tertiary" },
         iconSize: "auto",
         title: new ComputedUpdater(() => this.tooltip) as unknown as string,
+        ariaLabel: new ComputedUpdater(() => this.actionAriaLabel) as unknown as string,
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
           event.currentTarget.removeEventListener("focusout", this.onFocusOut);
@@ -326,6 +330,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
         appearance: { style: "brand", size: "x-small", mode: "tertiary" },
         iconSize: "auto",
         title: new ComputedUpdater(() => this.expandPanelTooltip) as unknown as string,
+        ariaLabel: new ComputedUpdater(() => this.expandPanelAriaLabel) as unknown as string,
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
         },
@@ -347,11 +352,47 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
   get tooltip() {
     return getLocString(this.isNew ? "pe.addItem" : "pe.removeItem");
   }
+  // Screen readers announce aria-label instead of title, so the label names the choice the button acts on
+  get actionAriaLabel(): string {
+    return this.getAriaLabelWithText(this.isNew ? "pe.addItemAriaLabel" : "pe.removeItemAriaLabel");
+  }
   get dragTooltip() {
     return getLocString("pe.dragItem");
   }
   get expandPanelTooltip() {
     return getLocString(this.showPanel ? "pe.collapseNestedChoices" : "pe.expandNestedChoices");
+  }
+  get expandPanelAriaLabel(): string {
+    return this.getAriaLabelWithText(this.showPanel ? "pe.collapseNestedChoicesAriaLabel" : "pe.expandNestedChoicesAriaLabel");
+  }
+  // The text of None, Other, Select All, etc. is the question's property, not the item's,
+  // so the aria-labels follow the item's localizable string instead
+  @property({ defaultValue: 0 }) private itemTextVersion: number;
+  private itemLocText: LocalizableString;
+  private onItemTextChanged = (): void => {
+    this.itemTextVersion = this.itemTextVersion + 1;
+  };
+  private subscribeToItemText(): void {
+    const locText = this.item?.locText;
+    if (this.itemLocText === locText) return;
+    this.unsubscribeFromItemText();
+    this.itemLocText = locText;
+    if (locText) {
+      locText.onStringChanged.add(this.onItemTextChanged);
+    }
+  }
+  private unsubscribeFromItemText(): void {
+    if (this.itemLocText) {
+      this.itemLocText.onStringChanged.remove(this.onItemTextChanged);
+      this.itemLocText = undefined;
+    }
+  }
+  private getAriaLabelWithText(strName: string): string {
+    this.subscribeToItemText();
+    this.itemTextVersion;
+    const text = this.item.text;
+    if (!text) return undefined;
+    return getLocString(strName)["format"](text);
   }
   get allowAdd() {
     const isNew = !this.question.isItemInList(this.item);
