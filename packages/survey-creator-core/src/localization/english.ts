@@ -2122,7 +2122,7 @@ export var enStrings = {
         unnamed: "This {kind} has no name: dataNesting \"{dataNesting}\" stores its questions' values under \"{key}\", the name the survey generates for it in load order - adding or moving {kind}s changes it. Give it a name or a valueName.",
       },
       "nesting/ignored-key": {
-        insideRecord: "The valueName \"{valueName}\" of panel \"{name}\" stores nothing: the panel is inside the composite question \"{recordName}\", whose value stays flat - the panel's questions write into the question's value directly.",
+        insideComposite: "The valueName \"{valueName}\" of panel \"{name}\" stores nothing: the panel is inside the composite question \"{recordName}\", whose value stays flat - the panel's questions write into the question's value directly.",
       },
       "nesting/key-conflict": {
         questionKey: "\"{name}\" stores its questions' values in an object under \"{key}\", which is also the data key of the {questionType} question \"{questionName}\" - one key cannot hold both: an answer to \"{questionName}\" replaces the object, and the question shows it.",
@@ -2154,6 +2154,10 @@ export var enStrings = {
       "variable/collision": {
         questionShadowed: "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on.",
         calculatedValueShadowed: "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins.",
+      },
+      "variable/dotted-key": {
+        questionKey: "The variable definition question \"{name}\" has the data key \"{key}\", which holds a dot. A variable key cannot hold one, so the question declares no variable.",
+        containerKey: "The variable definition {elementType} \"{name}\" has the data key \"{key}\", which holds a dot. A variable key cannot hold one, so the {elementType} declares no object variable and none of its questions is a variable.",
       },
       "variable/preset": {
         definitionNotAnObject: "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked.",
