@@ -2084,7 +2084,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     }
     return jsonItem;
   }
-  private setChoices(obj: Base, question: Question, prop: JsonObjectProperty) {
+  protected setChoices(obj: Base, question: Question, prop: JsonObjectProperty) {
     var propChoices = prop.getChoices(obj, (choices: any) => {
       this.setChoicesCore(question, prop, choices);
     });
@@ -2119,6 +2119,17 @@ export class PropertyGridEditorSet extends PropertyGridEditorDropdown {
     json.type = hasTagbox ? "tagbox" : "checkbox";
     json.showSelectAllItem = !hasTagbox;
     return json;
+  }
+  onMasterValueChanged(obj: Base, prop: JsonObjectProperty, question: Question): void {
+    // The value is an array: keep the items that are still offered instead of matching the whole array against the choices
+    this.setChoices(obj, question, prop);
+    const val = question.value;
+    if (!Array.isArray(val) || val.length === 0) return;
+    const choices = (<QuestionSelectBase>question).choices;
+    const newVal = val.filter(item => !!ItemValue.getItemByValue(choices, item));
+    if (newVal.length !== val.length) {
+      question.value = newVal;
+    }
   }
 }
 export class PropertyGridEditorPage extends PropertyGridEditorDropdown {
