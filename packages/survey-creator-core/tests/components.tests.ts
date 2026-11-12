@@ -553,6 +553,21 @@ test("item value add/remove actions have aria-label with the item text, Bug#8154
   noneAdorner.dispose();
   question.noneText = "Disposed";
   expect(noneAdorner.removeAction.ariaLabel).toBe("Remove Nothing");
+
+  const otherAdorner = new ItemValueWrapperViewModel(creator, question, question.otherItem);
+  const selectAllAdorner = new ItemValueWrapperViewModel(creator, question, question.selectAllItem);
+  expect(otherAdorner.addAction.ariaLabel).toBe("Add Other (describe)");
+  expect(selectAllAdorner.addAction.ariaLabel).toBe("Add Select All");
+  question.otherText = "Something else";
+  question.selectAllText = "Everything";
+  expect(otherAdorner.addAction.ariaLabel).toBe("Add Something else");
+  expect(selectAllAdorner.addAction.ariaLabel).toBe("Add Everything");
+
+  const emptyItem = new ChoiceItem("");
+  question.choices.push(emptyItem);
+  const emptyItemAdorner = new ItemValueWrapperViewModel(creator, question, emptyItem);
+  expect(emptyItemAdorner.removeAction.ariaLabel).toBeFalsy();
+  expect(emptyItemAdorner.removeAction.title).toBe("Click to remove the item...");
 });
 test("item value expand panel action has aria-label with the item text, Bug#8154", () => {
   const creator = new CreatorTester();
