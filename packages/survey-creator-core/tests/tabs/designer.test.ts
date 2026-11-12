@@ -2,6 +2,7 @@ import { SurveyModel, ILocalizableOwner, LocalizableString, Serializer, JsonObje
 import { editorLocalization } from "../../src/editorLocalization";
 import { StringEditorViewModelBase } from "../../src/components/string-editor";
 import { CreatorTester } from "../creator-tester";
+import { setEditorLocaleStrings } from "../editor-locale-stub";
 import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
 import { LogoImageViewModel } from "../../src/components/header/logo-image";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
@@ -150,20 +151,24 @@ test("StringEditorViewModelBase page title placeholder and changing creator loca
       surveyTitlePlaceholder: "Umfragetitel eingeben"
     }
   };
-  editorLocalization.locales["de"] = deutschStrings;
-  const creator = new CreatorTester();
-  creator.JSON = {
-    pages: [
-      { elements: [{ type: "text" }] },
-      { elements: [{ type: "text" }] }
-    ]
-  };
-  const survey = creator.survey;
-  const page1 = survey.pages[0];
-  const surveyTitleEdtor: StringEditorViewModelBase = new StringEditorViewModelBase(survey.locTitle, creator);
-  expect(surveyTitleEdtor.placeholder).toBe("Survey Title");
-  creator.locale = "de";
-  expect(surveyTitleEdtor.placeholder).toBe("Umfragetitel eingeben");
+  const restoreDe = setEditorLocaleStrings("de", deutschStrings);
+  try {
+    const creator = new CreatorTester();
+    creator.JSON = {
+      pages: [
+        { elements: [{ type: "text" }] },
+        { elements: [{ type: "text" }] }
+      ]
+    };
+    const survey = creator.survey;
+    const page1 = survey.pages[0];
+    const surveyTitleEdtor: StringEditorViewModelBase = new StringEditorViewModelBase(survey.locTitle, creator);
+    expect(surveyTitleEdtor.placeholder).toBe("Survey Title");
+    creator.locale = "de";
+    expect(surveyTitleEdtor.placeholder).toBe("Umfragetitel eingeben");
+  } finally {
+    restoreDe();
+  }
 });
 
 test("Logo css", () => {

@@ -59,6 +59,7 @@ import { SurveyQuestionEditorDefinition, defaultPropertyGridDefinition } from ".
 import { PropertyGridModelTester, findSetupAction } from "./property-grid.base";
 import { enStrings } from "../../src/localization/english";
 import { CreatorTester } from "../creator-tester";
+import { setEditorLocaleStrings } from "../editor-locale-stub";
 import { setupLocale } from "../../src/editorLocalization";
 import { UIPreset } from "../../src/ui-presets-creator/presets";
 import { Advanced } from "../../src/ui-presets";
@@ -749,30 +750,33 @@ test("Using html question in property grid", (): any => {
 });
 test("Use validation in custom property editor", (): any => {
   Serializer.addProperty("survey", { name: "sentTo", type: "email" });
-  const propEditor: IPropertyGridEditor = {
-    fit: function (prop) {
-      return prop.type === "email";
-    },
-    getJSON: function (obj, prop, options) {
-      return { type: "text", textUpdateMode: "onBlur" };
-    },
-    validateValue: function (obj, question, prop, value: any): string {
-      if (!value) return "";
-      const valid = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
-      return !valid ? "Incorrect email" : "";
-    }
-  };
-  PropertyGridEditorCollection.register(propEditor);
-  const survey = new SurveyModel();
-  const propertyGrid = new PropertyGridModelTester(survey);
-  const emailQuestion = propertyGrid.survey.getQuestionByName("sentTo");
-  expect(emailQuestion.errors).toHaveLength(0);
-  emailQuestion.value = "incorrect@";
-  expect(emailQuestion.errors).toHaveLength(1);
-  expect(emailQuestion.errors[0].text).toEqual("Incorrect email");
-  emailQuestion.value = "abc@abc.com";
-  expect(emailQuestion.errors).toHaveLength(0);
-  Serializer.removeProperty("email", "sentTo");
+  try {
+    const propEditor: IPropertyGridEditor = {
+      fit: function (prop) {
+        return prop.type === "email";
+      },
+      getJSON: function (obj, prop, options) {
+        return { type: "text", textUpdateMode: "onBlur" };
+      },
+      validateValue: function (obj, question, prop, value: any): string {
+        if (!value) return "";
+        const valid = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+        return !valid ? "Incorrect email" : "";
+      }
+    };
+    PropertyGridEditorCollection.register(propEditor);
+    const survey = new SurveyModel();
+    const propertyGrid = new PropertyGridModelTester(survey);
+    const emailQuestion = propertyGrid.survey.getQuestionByName("sentTo");
+    expect(emailQuestion.errors).toHaveLength(0);
+    emailQuestion.value = "incorrect@";
+    expect(emailQuestion.errors).toHaveLength(1);
+    expect(emailQuestion.errors[0].text).toEqual("Incorrect email");
+    emailQuestion.value = "abc@abc.com";
+    expect(emailQuestion.errors).toHaveLength(0);
+  } finally {
+    Serializer.removeProperty("survey", "sentTo");
+  }
 });
 test("autoComplate property", () => {
   const question = new QuestionTextModel("q1");
@@ -1390,24 +1394,28 @@ test("Localication and survey.pages property, Bug#6687", () => {
       newPageName: "Seite"
     }
   };
-  editorLocalization.locales["de"] = deutschStrings;
-  const creator = new CreatorTester();
-  creator.locale = "de";
-  creator.JSON = {};
-  const propertyGrid = new PropertyGridModelTester(creator.survey);
-  const pagesQuestion = <QuestionMatrixDynamicModel>(
-    propertyGrid.survey.getQuestionByName("pages")
-  );
-  const propertyEditor = new PropertyGridEditorMatrixPages();
-  const options = { actions: [], question: pagesQuestion };
-  propertyEditor.onGetQuestionTitleActions(creator.survey, options, creator);
-  const addNewPageAction = options.actions[0] as IAction;
+  const restoreDe = setEditorLocaleStrings("de", deutschStrings);
+  try {
+    const creator = new CreatorTester();
+    creator.locale = "de";
+    creator.JSON = {};
+    const propertyGrid = new PropertyGridModelTester(creator.survey);
+    const pagesQuestion = <QuestionMatrixDynamicModel>(
+      propertyGrid.survey.getQuestionByName("pages")
+    );
+    const propertyEditor = new PropertyGridEditorMatrixPages();
+    const options = { actions: [], question: pagesQuestion };
+    propertyEditor.onGetQuestionTitleActions(creator.survey, options, creator);
+    const addNewPageAction = options.actions[0] as IAction;
 
-  expect(creator.survey.pages.length).toBe(0);
-  addNewPageAction.action!();
+    expect(creator.survey.pages.length).toBe(0);
+    addNewPageAction.action!();
 
-  expect(creator.survey.pages.length).toBe(1);
-  expect(creator.survey.pages[0].name).toBe("Seite1");
+    expect(creator.survey.pages.length).toBe(1);
+    expect(creator.survey.pages[0].name).toBe("Seite1");
+  } finally {
+    restoreDe();
+  }
 });
 test("Localication and different locales, Bug#6717", () => {
   const creator = new CreatorTester();
