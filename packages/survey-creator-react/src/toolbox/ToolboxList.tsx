@@ -29,7 +29,7 @@ export class ToolboxList extends SurveyElementBase<IListProps, any> {
 
     const items = this.renderItems();
     return (
-      <div className={this.model.cssClasses.root}>
+      <div className={this.model.cssClasses.root} role="list">
         {items}
       </div>
     );

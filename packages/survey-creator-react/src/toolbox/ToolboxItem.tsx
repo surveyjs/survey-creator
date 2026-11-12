@@ -78,7 +78,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
       }
     );
     return (
-      <div className={item.css} key={item.id} ref={this.rootRef}>
+      <div className={item.css} key={item.id} ref={this.rootRef} role={this.model.ariaRole}>
         {(item.needSeparator && !this.creator.toolbox.showCategoryTitles) ? (
           <div className="svc-toolbox__category-separator"></div>
         ) : null}
