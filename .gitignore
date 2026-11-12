@@ -62,3 +62,5 @@ packages/survey-creator-core/junit.presets.xml
 packages/survey-creator-core/.claude/
 packages/survey-creator-core/promts/
 promts/
+perf/results/
+perf/react19/node_modules/
