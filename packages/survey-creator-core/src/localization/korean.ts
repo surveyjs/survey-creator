@@ -700,6 +700,8 @@ export var koreanStrings = {
       templateDescription: "항목 설명 패턴",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "항목 제목 패턴",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "항목 제목 자리표",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "빈 패널 텍스트",
       // [Auto-translated] "Tab title pattern"
@@ -2871,6 +2873,8 @@ export var koreanStrings = {
       width: "패널의 폭을 같은 줄에 있는 다른 측량 요소에 비례하여 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "동적 패널 제목에 대한 템플릿을 입력합니다. 패널의 일반 위치에는 {panelIndex}를 사용하고 표시되는 패널 간의 순서에는 {visiblePanelIndex}를 사용합니다. 이러한 자리 표시자를 패턴에 삽입하여 자동 번호 매기기를 추가합니다.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "항목 제목 패턴이 의미 있는 값을 생성하지 못할 때 적용되는 대체 텍스트입니다. 항목의 일반적인 위치는 {panelIndex}를, 보이는 항목들 사이에서의 순서는 {visiblePanelIndex}를 사용하세요.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "탭 제목에 대한 템플릿을 입력합니다. 패널의 일반적인 위치에는 {panelIndex}를 사용하고 표시되는 패널 간의 순서에는 {visiblePanelIndex}를 사용합니다. 이러한 자리 표시자를 패턴에 삽입하여 자동 번호 매기기를 추가합니다.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

@@ -700,6 +700,8 @@ export var danishStrings = {
       templateDescription: "Indgangsbeskrivelse mønster",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Mønster for indgangstitel",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Pladsholder for deltagertitlen",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Tom paneltekst",
       // [Auto-translated] "Tab title pattern"
@@ -2871,6 +2873,8 @@ export var danishStrings = {
       width: "Indstiller panelets bredde i forhold til andre undersøgelseselementer på samme linje. Accepterer CSS-værdier (px, %, in, pt osv.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Indtast en skabelon til dynamiske paneltitler. Brug {panelIndex} til panelets generelle placering og {visiblePanelIndex} til dets rækkefølge blandt synlige paneler. Indsæt disse pladsholdere i mønsteret for at tilføje automatisk nummerering.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "En fallback-tekst for indgangstitler, der gælder, når indgangstitelmønstret ikke giver en meningsfuld værdi. Brug {panelIndex} til postens generelle position og {visiblePanelIndex} til dens rækkefølge blandt synlige poster.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Indtast en skabelon til fanetitler. Brug {panelIndex} til et panels generelle placering og {visiblePanelIndex} til dets rækkefølge blandt synlige paneler. Indsæt disse pladsholdere i mønsteret for at tilføje automatisk nummerering.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

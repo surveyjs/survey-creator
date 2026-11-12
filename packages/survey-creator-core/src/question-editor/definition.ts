@@ -759,6 +759,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "maxSortLevel", tab: "entries" },
       { name: "displayMode", tab: "entries" },
       { name: "templateTitle", tab: "entries" },
+      { name: "templateTitlePlaceholder", tab: "entries" },
       { name: "templateDescription", tab: "entries" },
       { name: "panelsState", tab: "entries" },
       { name: "templateTabTitle", tab: "entries" },

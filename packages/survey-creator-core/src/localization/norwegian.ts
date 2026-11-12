@@ -700,6 +700,8 @@ export var nbStrings = {
       templateDescription: "Mønster for oppføringsbeskrivelse",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Mønster for oppføringstittel",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Plassholder for påmeldingstittel",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Tom paneltekst",
       // [Auto-translated] "Tab title pattern"
@@ -2870,6 +2872,8 @@ export var nbStrings = {
       width: "Angir bredden på panelet i forhold til andre undersøkelseselementer på samme linje. Godtar CSS-verdier (px, %, i, pt osv.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Skriv inn en mal for dynamiske paneltitler. Bruk {panelIndex} for panelets generelle posisjon og {visiblePanelIndex} for rekkefølgen blant synlige paneler. Sett inn disse plassholderne i mønsteret for å legge til automatisk nummerering.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "En reservetekst for oppføringstitler som gjelder når oppføringstittelmønsteret ikke gir en meningsfull verdi. Bruk {panelIndex} for oppføringens generelle posisjon og {visiblePanelIndex} for rekkefølgen blant synlige oppføringer.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Skriv inn en mal for fanetitler. Bruk {panelIndex} for panelets generelle posisjon og {visiblePanelIndex} for rekkefølgen blant synlige paneler. Sett inn disse plassholderne i mønsteret for å legge til automatisk nummerering.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

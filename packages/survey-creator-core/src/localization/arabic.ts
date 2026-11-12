@@ -700,6 +700,8 @@ export var arStrings = {
       templateDescription: "نمط وصف الإدخال",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "نمط عنوان الإدخال",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "عنوان المدخل مؤقت",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "نص اللوحة الفارغ",
       // [Auto-translated] "Tab title pattern"
@@ -2870,6 +2872,8 @@ export var arStrings = {
       width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "اكتب قالبا لعناوين اللوحات الديناميكية. استخدم {panelIndex} للموضع العام لللوحة و {visiblePanelIndex} لترتيبها بين اللوحات المرئية. قم بإدراج هذه العناصر النائبة في النموذج لإضافة ترقيم تلقائي.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "نص احتياطي لعناوين المدخلات ينطبق عندما لا ينتج نمط عنوان المدخل قيمة ذات معنى. استخدم {panelIndex} للموقع العام للمدخل و{visiblePanelIndex} لترتيبه بين المدخلات المرئية.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "اكتب قالبا لعناوين علامات التبويب. استخدم {panelIndex} للموضع العام للوحة و {visiblePanelIndex} لترتيبها بين اللوحات المرئية. قم بإدراج هذه العناصر النائبة في النموذج لإضافة ترقيم تلقائي.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

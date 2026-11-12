@@ -700,6 +700,8 @@ export var nlStrings = {
       templateDescription: "Patroon invoerbeschrijving",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Patroon voor de titel van het item",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Plaatshouder voor de inschrijftitel",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Lege paneeltekst",
       // [Auto-translated] "Tab title pattern"
@@ -2870,6 +2872,8 @@ export var nlStrings = {
       width: "Hiermee stelt u de breedte van het paneel in verhouding tot andere enquête-elementen in dezelfde lijn. Accepteert CSS-waarden (px, %, in, pt, enz.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Typ een sjabloon voor dynamische paneeltitels. Gebruik {panelIndex} voor de algemene positie van het paneel en {visiblePanelIndex} voor de volgorde tussen de zichtbare panelen. Voeg deze tijdelijke aanduidingen toe aan het patroon om automatische nummering toe te voegen.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Een fallback-tekst voor invoertitels die van toepassing is wanneer het invoertitelpatroon geen betekenisvolle waarde oplevert. Gebruik {panelIndex} voor de algemene positie van de entry en {visiblePanelIndex} voor de volgorde tussen zichtbare items.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Typ een sjabloon voor tabbladtitels. Gebruik {panelIndex} voor de algemene positie van een paneel en {visiblePanelIndex} voor de volgorde tussen zichtbare panelen. Voeg deze tijdelijke aanduidingen toe aan het patroon om automatische nummering toe te voegen.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

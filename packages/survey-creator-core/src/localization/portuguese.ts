@@ -700,6 +700,8 @@ export var portugueseTranslation = {
       templateDescription: "Padrão de descrição de entrada",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Padrão de título de entrada",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Título de entrada provisório",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Texto vazio do painel",
       // [Auto-translated] "Tab title pattern"
@@ -2870,6 +2872,8 @@ export var portugueseTranslation = {
       width: "Define a largura do painel proporcionalmente a outros elementos de pesquisa na mesma linha. Aceita valores CSS (px, %, in, pt, etc.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Digite um modelo para títulos de painel dinâmico. Use {panelIndex} para a posição geral do painel e {visiblePanelIndex} para sua ordem entre os painéis visíveis. Insira esses espaços reservados no padrão para adicionar numeração automática.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Um texto de reserva para títulos de entradas que se aplica quando o padrão de título de entrada não produz um valor significativo. Use {panelIndex} para a posição geral da entrada e {visiblePanelIndex} para sua ordem entre as entradas visíveis.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Digite um modelo para títulos de guias. Use {panelIndex} para a posição geral de um painel e {visiblePanelIndex} para sua ordem entre os painéis visíveis. Insira esses espaços reservados no padrão para adicionar numeração automática.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

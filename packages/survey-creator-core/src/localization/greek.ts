@@ -700,6 +700,8 @@ export var grStrings = {
       templateDescription: "Πρότυπο περιγραφής πλαισίου",
       // "Entry title pattern"
       templateTitle: "Πρότυπο τίτλου πλαισίου",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Σύμβολο κράτησης θέσης τίτλου καταχώρισης",
       // "Empty panel text"
       noEntriesText: "Κείμενο κενού πλαισίου",
       // "Tab title pattern"
@@ -2870,6 +2872,8 @@ export var grStrings = {
       width: "Ορίζει το πλάτος του πάνελ σε σχέση με άλλα στοιχεία έρευνας στην ίδια γραμμή. Δέχεται τιμές CSS (px, %, in, pt, κλπ).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Πληκτρολογήστε ένα πρότυπο για τους τίτλους των δυναμικών πάνελ. Χρησιμοποιήστε {panelIndex} για τη γενική θέση του πάνελ και {visiblePanelIndex} για τη σειρά του μεταξύ των ορατών πάνελ. Εισαγάγετε αυτούς τους χώρους κράτησης στο μοτίβο για αυτόματη αρίθμηση.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Ένα εναλλακτικό κείμενο για τίτλους καταχωρήσεων που εφαρμόζεται όταν το μοτίβο τίτλου καταχώρισης δεν παράγει μια σημαντική τιμή. Χρησιμοποιήστε το {panelIndex} για τη γενική θέση της καταχώρισης και το {visiblePanelIndex} για τη σειρά της μεταξύ των ορατών καταχωρήσεων.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Πληκτρολογήστε ένα πρότυπο για τους τίτλους των καρτελών. Χρησιμοποιήστε {panelIndex} για τη γενική θέση του πάνελ και {visiblePanelIndex} για τη σειρά του μεταξύ των ορατών πάνελ. Εισαγάγετε αυτούς τους χώρους κράτησης στο μοτίβο για αυτόματη αρίθμηση.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

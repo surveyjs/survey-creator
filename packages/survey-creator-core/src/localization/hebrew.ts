@@ -700,6 +700,8 @@ export var hebrewStrings = {
       templateDescription: "תבנית תיאור הערך",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "תבנית כות��ת ערך",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "מקום לכותרת הכניסה",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "טקסט ריק בחלונית",
       // [Auto-translated] "Tab title pattern"
@@ -2870,6 +2872,8 @@ export var hebrewStrings = {
       width: "קובע את רוחב החלונית ביחס לרכיבי סקר אחרים באותה שורה. מקבל ערכי CSS (px, %, in, pt וכו').",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "הקלד תבנית לכותרות חלוניות דינמיות. השתמש ב- {panelIndex} למיקום הכללי של החלונית וב- {visiblePanelIndex} לסדר שלה בין חלוניות גלויות. הוסף מצייני מיקום אלה לתבנית כדי להוסיף מספור אוטומטי.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "טקסט גיבוי לכותרות הערכים שמתאים כאשר תבנית כותרת הכניסה אינה מייצרת ערך משמעותי. השתמש ב-{panelIndex} למיקום הכללי של הערך וב-{visiblePanelIndex} לסדר בין הערכים הנראים.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "הקלד תבנית עבור כותרות כרטיסיות. השתמש ב- {panelIndex} למיקום הכללי של חלונית וב- {visiblePanelIndex} לסדר שלה בין חלוניות גלויות. הוסף מצייני מיקום אלה לתבנית כדי להוסיף מספור אוטומטי.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

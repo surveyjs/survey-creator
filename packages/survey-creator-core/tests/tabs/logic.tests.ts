@@ -2920,6 +2920,23 @@ test("Rename the name for matrices", () => {
   logic.renameQuestion("q3", "question3");
   expect(q1.visibleIf).toEqual("{question2.row1.col1} > 2 and {question3[0].col1} < 2");
 });
+test("Rename the matrix name in matrix total expressions, bug#8158", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "matrixdynamic", name: "split", rowCount: 2,
+        columns: [{ name: "share", cellType: "text", inputType: "number", totalType: "sum" }] },
+      { type: "text", name: "other", visibleIf: "{split-total.share} = 100 and {split} notempty",
+        validators: [{ type: "expression", expression: "{split-total.share} <= 100", text: "At most 100" }] },
+      { type: "text", name: "other2", visibleIf: "{split-totals.share} = 100" }
+    ]
+  };
+  creator.survey.getQuestionByName("split").name = "pie";
+  const other = creator.survey.getQuestionByName("other");
+  expect(other.visibleIf).toBe("{pie-total.share} = 100 and {pie} notempty");
+  expect(other.validators[0].expression).toBe("{pie-total.share} <= 100");
+  expect(creator.survey.getQuestionByName("other2").visibleIf).toBe("{split-totals.share} = 100");
+});
 test("Rename the name for panel dynamic", () => {
   var survey = new SurveyModel({
     elements: [

@@ -700,6 +700,8 @@ export var hrStrings = {
       templateDescription: "Uzorak opisa unosa",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Uzorak naslova unosa",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Privremeni naslov unosa",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Prazan tekst na ploči",
       // [Auto-translated] "Tab title pattern"
@@ -2870,6 +2872,8 @@ export var hrStrings = {
       width: "Postavlja širinu ploče proporcionalno ostalim elementima istraživanja u istoj liniji. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Upišite predložak za dinamičke naslove ploča. Koristite {panelIndex} za opći položaj panela i {visiblePanelIndex} za njegov redoslijed među vidljivim pločama. Umetnite ova rezervirana mjesta u uzorak da biste dodali automatsko numeriranje.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Rezervni tekst za naslove unosa koji se primjenjuje kada obrazac naslova unosa ne daje smislenu vrijednost. Koristite {panelIndex} za opći položaj unosa i {visiblePanelIndex} za njegov redoslijed među vidljivim unosima.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Upišite predložak za naslove kartica. Koristite {panelIndex} za opći položaj panela i {visiblePanelIndex} za njegov redoslijed među vidljivim pločama. Umetnite ova rezervirana mjesta u uzorak da biste dodali automatsko numeriranje.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

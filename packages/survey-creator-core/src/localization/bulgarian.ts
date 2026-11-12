@@ -700,6 +700,8 @@ export var bgStrings = {
       templateDescription: "Модел на описание на записа",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Модел на заглавие на записа",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Място за заглавие на участниците",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Празен текст на панел",
       // [Auto-translated] "Tab title pattern"
@@ -2870,6 +2872,8 @@ export var bgStrings = {
       width: "Задава ширината на панела пропорционално на другите елементи на изследването в същия ред. Приема CSS стойности (px, %, in, pt и т.н.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Въведете шаблон за динамични заглавия на панели. Използвайте {panelIndex} за общата позиция на панела и {visiblePanelIndex} за реда му сред видимите панели. Вмъкнете тези контейнери в шаблона, за да добавите автоматично номериране.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Резервен текст за заглавия на записи, който се прилага, когато шаблонът на заглавието не произвежда значима стойност. Използвайте {panelIndex} за общата позиция на записа и {visiblePanelIndex} за реда му сред видимите записи.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Въведете шаблон за заглавията на разделите. Използвайте {panelIndex} за общата позиция на панела и {visiblePanelIndex} за реда му между видимите панели. Вмъкнете тези контейнери в шаблона, за да добавите автоматично номериране.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

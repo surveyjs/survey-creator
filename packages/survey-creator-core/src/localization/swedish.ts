@@ -700,6 +700,8 @@ export let svStrings = {
       templateDescription: "Mönster för postbeskrivning",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Mönster för posttitel",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Platshållare för deltagartiteln",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Tomma paneltext",
       // [Auto-translated] "Tab title pattern"
@@ -2871,6 +2873,8 @@ export let svStrings = {
       width: "Ställer in panelens bredd i proportion till andra undersökningselement på samma rad. Accepterar CSS-värden (px, %, in, pt, etc.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Skriv in en mall för dynamiska panelrubriker. Använd {panelIndex} för panelens allmänna position och {visiblePanelIndex} för dess ordning bland de synliga panelerna. Infoga dessa platshållare i mönstret för att lägga till automatisk numrering.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "En reservtext för posttitlar som gäller när posttitelmönstret inte ger ett meningsfullt värde. Använd {panelIndex} för postens allmänna position och {visiblePanelIndex} för dess ordning bland synliga poster.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Skriv in en mall för flikrubriker. Använd {panelIndex} för en panels allmänna position och {visiblePanelIndex} för dess ordning bland synliga paneler. Infoga dessa platshållare i mönstret för att lägga till automatisk numrering.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
