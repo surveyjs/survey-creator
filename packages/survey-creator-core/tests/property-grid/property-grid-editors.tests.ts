@@ -2650,3 +2650,52 @@ test("Support property availableInMatrixColumn attribute && correct category, #5
   Serializer.removeProperty("question", "prop2");
   Serializer.removeProperty("question", "prop3");
 });
+test("multiplevalues property with dependsOn keeps the values that are still offered, Bug#8157", () => {
+  Serializer.addProperty("question", { name: "mode", choices: ["a", "b"], default: "a", category: "general" });
+  Serializer.addProperty("question", {
+    name: "tags:multiplevalues",
+    dependsOn: ["mode"],
+    choices: (obj: any) => (obj && obj.mode === "b" ? ["x", "y", "z", "w"] : ["x", "y", "z"]),
+    category: "general"
+  });
+  const survey = new SurveyModel({ elements: [{ type: "text", name: "q1", mode: "a", tags: ["x", "y"] }] });
+  const q1 = survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q1);
+  const modeQuestion = propertyGrid.survey.getQuestionByName("mode");
+  const tagsQuestion = propertyGrid.survey.getQuestionByName("tags");
+  expect([...tagsQuestion.value]).toEqual(["x", "y"]);
+
+  modeQuestion.value = "b";
+  expect(tagsQuestion.choices.map((item: ItemValue) => item.value)).toEqual(["x", "y", "z", "w"]);
+  expect([...tagsQuestion.value]).toEqual(["x", "y"]);
+  expect([...q1.tags]).toEqual(["x", "y"]);
+
+  Serializer.removeProperty("question", "tags");
+  Serializer.removeProperty("question", "mode");
+});
+test("multiplevalues property with dependsOn drops only the values that are no longer offered, Bug#8157", () => {
+  Serializer.addProperty("question", { name: "mode", choices: ["a", "b"], default: "a", category: "general" });
+  Serializer.addProperty("question", {
+    name: "tags:multiplevalues",
+    dependsOn: ["mode"],
+    choices: (obj: any) => (obj && obj.mode === "b" ? ["x", "y"] : ["x", "y", "z"]),
+    category: "general"
+  });
+  const survey = new SurveyModel({ elements: [{ type: "text", name: "q1", mode: "a", tags: ["x", "z"] }] });
+  const q1 = survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q1);
+  const modeQuestion = propertyGrid.survey.getQuestionByName("mode");
+  const tagsQuestion = propertyGrid.survey.getQuestionByName("tags");
+  expect([...tagsQuestion.value]).toEqual(["x", "z"]);
+
+  modeQuestion.value = "b";
+  expect([...tagsQuestion.value]).toEqual(["x"]);
+  expect([...q1.tags]).toEqual(["x"]);
+
+  modeQuestion.value = "a";
+  expect([...tagsQuestion.value]).toEqual(["x"]);
+  expect([...q1.tags]).toEqual(["x"]);
+
+  Serializer.removeProperty("question", "tags");
+  Serializer.removeProperty("question", "mode");
+});
