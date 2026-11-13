@@ -1,6 +1,6 @@
 <template>
   <span :class="className">
-    <span class="svc-string-editor__content" :class="{ 'sd-rich-text': baseModel.richTextMode !== 'none' }">
+    <span class="svc-string-editor__content" :class="baseModel.richTextContentClass">
       <div
         class="svc-string-editor__border svc-string-editor__border--hover"
       ></div>

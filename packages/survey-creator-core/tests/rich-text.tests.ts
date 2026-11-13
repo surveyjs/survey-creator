@@ -318,6 +318,51 @@ describe("rich text registration", () => {
     element.remove();
   });
 
+  test("string editor keeps the rich toolbar closed until text is selected", () => {
+    const creator = new CreatorTester();
+    creator.JSON = { completedHtml: "Hello world" };
+    let open = false;
+    let notify: (() => void) | undefined;
+    const editor: ICreatorRichTextEditor = {
+      attachEditor: (_element, options) => {
+        notify = options.onState;
+        return {
+          toolbar: new ActionContainer(),
+          get toolbarOpen() { return open; },
+          detach: () => { notify = undefined; }
+        };
+      },
+      sanitizeHtml: (html: string) => html
+    };
+    creator.registerRichTextEditor(editor);
+    const model = new StringEditorViewModelBase(creator.survey.locCompletedHtml, creator);
+    model.setLocString(creator.survey.locCompletedHtml);
+    const element = document.createElement("div");
+    element.innerHTML = "Hello world";
+    document.body.appendChild(element);
+    model.onFocus({ target: element });
+    expect(model.richTextToolbar).toBeTruthy();
+    expect(model.richTextToolbarOpen).toBe(false);
+    expect(model.richTextContentClass).toBe("sd-rich-text sd-rich-text--toolbar-on-selection");
+
+    open = true;
+    notify();
+    expect(model.richTextToolbarOpen).toBe(true);
+    expect(model.richTextContentClass).toBe("sd-rich-text sd-rich-text--toolbar-on-selection sd-rich-text--toolbar-open");
+
+    open = false;
+    notify();
+    expect(model.richTextToolbarOpen).toBe(false);
+    expect(model.richTextContentClass).toBe("sd-rich-text sd-rich-text--toolbar-on-selection");
+
+    model.onBlur({ target: element, relatedTarget: null });
+    expect(model.richTextToolbar).toBeUndefined();
+    expect(model.richTextToolbarOpen).toBe(false);
+    open = true;
+    if (notify) notify();
+    expect(model.richTextToolbarOpen).toBe(false);
+  });
+
   test("without the sample handler, registering an editor does not render HTML strings", () => {
     const creator = new CreatorTester();
     creator.registerRichTextEditor(createFakeEditor());

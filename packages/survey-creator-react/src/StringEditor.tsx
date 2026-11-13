@@ -204,7 +204,8 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     const toolbar = this.baseModel.richTextToolbar
       ? <div className="sd-rich-text__toolbar" role="toolbar">{ReactElementFactory.Instance.createElement("sv-action-bar", { model: this.baseModel.richTextToolbar })}</div>
       : null;
-    const contentClassName = "svc-string-editor__content" + (richMode !== "none" ? " sd-rich-text" : "");
+    const richClass = this.baseModel.richTextContentClass;
+    const contentClassName = "svc-string-editor__content" + (richClass ? " " + richClass : "");
     return (
       <span className={this.className}>
         <span className={contentClassName}>

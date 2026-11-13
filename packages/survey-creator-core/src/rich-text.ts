@@ -3,8 +3,16 @@ import type { ActionContainer } from "survey-core";
 
 // Satisfied structurally by the RichText facade of survey-core/rich-text.
 // Creator never imports that plugin; the customer passes it to registerRichTextEditor.
+// toolbarOpen is the on-selection toolbar: true while text is selected, the toolbar has focus,
+// or the link dialog is open. onState runs when that changes.
+export interface IRichTextEditorHandle {
+  toolbar: ActionContainer;
+  detach(): void;
+  readonly toolbarOpen?: boolean;
+}
+
 export interface ICreatorRichTextEditor {
-  attachEditor(element: HTMLElement, options: { mode: "inline" | "block", onInput?: () => void }): { toolbar: ActionContainer, detach(): void };
+  attachEditor(element: HTMLElement, options: { mode: "inline" | "block", onInput?: () => void, onState?: () => void }): IRichTextEditorHandle;
   sanitizeHtml(html: string, options?: { inline?: boolean }): string;
 }
 

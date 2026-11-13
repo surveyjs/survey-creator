@@ -4,7 +4,7 @@ import { editorLocalization } from "../editorLocalization";
 import { clearNewLines } from "../utils/utils";
 import { getNextColumnTitle, getNextItemText, getNextItemValue, getNextValue } from "../utils/creator-utils";
 import { select } from "../utils/html-element-utils";
-import { richTextModeForProperty } from "../rich-text";
+import { IRichTextEditorHandle, richTextModeForProperty } from "../rich-text";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { QuestionAdornerViewModel } from "./question";
 import { QuestionRatingAdornerViewModel } from "./question-rating";
@@ -259,6 +259,7 @@ export class StringEditorViewModelBase extends Base {
   @property({ defaultValue: true }) editAsText: boolean;
   @property({ defaultValue: "none" }) richTextMode: "none" | "inline" | "block";
   @property() richTextToolbar: ActionContainer;
+  @property({ defaultValue: false }) richTextToolbarOpen: boolean;
   private richTextDetach: () => void;
   compostionInProgress: boolean;
 
@@ -386,15 +387,29 @@ export class StringEditorViewModelBase extends Base {
   }
   private attachRichTextEditor(element: HTMLElement): void {
     if (this.richTextMode === "none" || this.richTextDetach || !element || !this.creator?.richTextEditor) return;
-    const handle = this.creator.richTextEditor.attachEditor(element, { mode: this.richTextMode });
+    // Focus attaches the editor. The toolbar stays hidden until text is selected.
+    let handle: IRichTextEditorHandle;
+    handle = this.creator.richTextEditor.attachEditor(element, {
+      mode: this.richTextMode,
+      onState: () => {
+        if (!this.richTextDetach) return;
+        this.richTextToolbarOpen = !!handle.toolbarOpen;
+      }
+    });
     this.richTextToolbar = handle.toolbar;
+    this.richTextToolbarOpen = !!handle.toolbarOpen;
     this.richTextDetach = () => handle.detach();
+  }
+  public get richTextContentClass(): string {
+    if (this.richTextMode === "none") return "";
+    return "sd-rich-text sd-rich-text--toolbar-on-selection" + (this.richTextToolbarOpen ? " sd-rich-text--toolbar-open" : "");
   }
   private detachRichTextEditor(): void {
     const detach = this.richTextDetach;
     this.richTextDetach = undefined;
     if (detach) detach();
     if (this.richTextToolbar)this.richTextToolbar = undefined;
+    if (this.richTextToolbarOpen)this.richTextToolbarOpen = false;
   }
   private isFocusWithinRichText(event: any): boolean {
     const next = event?.relatedTarget as HTMLElement;
