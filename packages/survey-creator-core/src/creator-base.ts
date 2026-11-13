@@ -3143,12 +3143,16 @@ export class SurveyCreatorModel extends Base
     if (words.length === 0) return "";
     return words.map(word => word[0]).join("").toLowerCase() + "-";
   }
-  // The property defaults of the surveys that show the user's survey: the designer and Preview. They are passed to
-  // these surveys when they are created, before their JSON loads. Changing the property later applies to the surveys
-  // created after the change: the designer survey is rebuilt when JSON is set again, Preview's when the tab is shown.
+  // The property defaults of the surveys that show the user's survey: the designer, Preview, the Themes tab and the
+  // two panes of the side-by-side Translation tab. They are passed to these surveys when they are created, before
+  // their JSON loads (the JSON omits values equal to the designer's defaults, so a survey loading it without them
+  // would show the library defaults instead). Changing the property later applies to the surveys created after the
+  // change: the designer survey is rebuilt when JSON is set again, the others when their tab is shown.
   public propertyDefaults: IPropertyDefaults;
+  private static userSurveyAreas = ["designer-tab", "preview-tab", "theme-tab",
+    "translation-tab:source-survey", "translation-tab:target-survey"];
   private getSurveyOptionsByArea(area: string): ISurveyOptions {
-    if (!this.propertyDefaults || (area !== "designer-tab" && area !== "preview-tab")) return undefined;
+    if (!this.propertyDefaults || SurveyCreatorModel.userSurveyAreas.indexOf(area) < 0) return undefined;
     return { propertyDefaults: this.propertyDefaults };
   }
   protected createSurveyCore(json: any = {}, area: string, element: Base): SurveyModel {

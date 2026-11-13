@@ -3,6 +3,9 @@ import { CreatorTester } from "./creator-tester";
 import { TabTestPlugin } from "../src/components/tabs/test-plugin";
 import { PropertyGridEditorBoolean } from "../src/property-grid";
 import { PropertyGridModelTester } from "./property-grid/property-grid.base";
+import { ThemeTabPlugin } from "../src/components/tabs/theme-plugin";
+import { TabTranslationPlugin } from "../src/components/tabs/translation-plugin";
+import { TranslationSideBySide } from "../src/components/tabs/translation-side-by-side";
 
 const leftTitles = { classes: { question: { titleLocation: "left" } } };
 const twoQuestionsJSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }, { type: "radiogroup", name: "q2", choices: [1, 2] }] }] };
@@ -267,6 +270,54 @@ describe("Creator: survey property defaults", () => {
     expect(ownAreas.indexOf("property-grid") > -1).toBeTruthy();
     expect(ownAreas.length > 3).toBeTruthy();
     ownAreas.forEach(area => expect({ area: area, hasDefaults: areas[area] }).toEqual({ area: area, hasDefaults: false }));
+    creator.dispose();
+  });
+  test("The Themes tab survey gets the defaults, its own property grid does not", () => {
+    const creator = new CreatorTester({ showThemeTab: true, propertyDefaults: leftTitles });
+    const areas: { [area: string]: boolean } = {};
+    creator.onSurveyInstanceSetupHandlers.add((_, options) => {
+      areas[options.area] = areas[options.area] || !!options.survey.getOwnPropertyDefaults();
+    });
+    creator.JSON = { elements: [{ type: "text", name: "q1", titleLocation: "default" }, { type: "text", name: "q2" }] };
+    creator.switchTab("theme");
+    const themeSurvey = (<ThemeTabPlugin>creator.getPlugin("theme")).model.survey;
+    expect(themeSurvey).not.toBe(creator.survey);
+    expect(themeSurvey.getOwnPropertyDefaults().classes).toEqual(leftTitles.classes);
+    expect(themeSurvey.getQuestionByName("q1").titleLocation).toBe("default");
+    expect(themeSurvey.getQuestionByName("q2").titleLocation).toBe("left");
+    expect(areas["theme-tab"]).toBe(true);
+    const ownAreas = Object.keys(areas).filter(area => area.indexOf("theme-tab:") === 0);
+    expect(ownAreas.length > 0).toBeTruthy();
+    ownAreas.forEach(area => expect({ area: area, hasDefaults: areas[area] }).toEqual({ area: area, hasDefaults: false }));
+    creator.dispose();
+  });
+  test("The side-by-side Translation panes get the defaults, the tab's settings survey does not", () => {
+    const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide", propertyDefaults: leftTitles });
+    const areas: { [area: string]: boolean } = {};
+    creator.onSurveyInstanceSetupHandlers.add((_, options) => {
+      areas[options.area] = areas[options.area] || !!options.survey.getOwnPropertyDefaults();
+    });
+    creator.JSON = {
+      locale: "de",
+      elements: [{ type: "text", name: "q1", titleLocation: "default", title: { default: "Q1", de: "F1" } }, { type: "text", name: "q2" }]
+    };
+    creator.switchTab("translation");
+    const model = <TranslationSideBySide>(<TabTranslationPlugin>creator.getPlugin("translation")).model;
+    expect(model.targetSurvey).toBeTruthy();
+    [model.sourceSurvey, model.targetSurvey].forEach(survey => {
+      expect(survey).not.toBe(creator.survey);
+      expect(survey.getOwnPropertyDefaults().classes).toEqual(leftTitles.classes);
+      expect(survey.getQuestionByName("q1").titleLocation).toBe("default");
+      expect(survey.getQuestionByName("q2").titleLocation).toBe("left");
+    });
+    expect(areas["translation-tab:source-survey"]).toBe(true);
+    expect(areas["translation-tab:target-survey"]).toBe(true);
+    expect(areas["translation-tab:language-list"]).toBe(false);
+    // Translating in a pane changes the designer survey only, the JSON keeps following the designer's defaults
+    model.targetSurvey.getQuestionByName("q2").locTitle.text = "F2";
+    expect(creator.survey.getQuestionByName("q2").locTitle.getLocaleText("de")).toBe("F2");
+    expect(creator.JSON.pages[0].elements[1].titleLocation).toBeUndefined();
+    expect(creator.JSON.pages[0].elements[0].titleLocation).toBe("default");
     creator.dispose();
   });
   test("creator.dispose() releases the designer survey's defaults, creator.JSON stays readable", () => {

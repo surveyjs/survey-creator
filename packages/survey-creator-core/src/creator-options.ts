@@ -705,8 +705,9 @@ export interface ICreatorOptions {
    * @since 3.1.1
    */
   variablePresets?: ISurveyVariablePresets;
-  // Property defaults of the surveys that show the user's survey: the designer and Preview. The same type as the
-  // library's ISurveyOptions.propertyDefaults. Set them here instead of changing Serializer defaults globally:
-  // the Creator's own surveys (property grid, pop-up editors, Logic, Translations) keep the library defaults.
+  // Property defaults of the surveys that show the user's survey: the designer, Preview, the Themes tab and the panes
+  // of the side-by-side Translation tab. The same type as the library's ISurveyOptions.propertyDefaults. Set them here
+  // instead of changing Serializer defaults globally: the Creator's own surveys (property grid, pop-up editors, Logic,
+  // the Translation tab's tables and settings) keep the library defaults.
   propertyDefaults?: IPropertyDefaults;
 }
