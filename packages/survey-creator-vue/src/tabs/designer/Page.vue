@@ -6,7 +6,9 @@
     class="svc-page__content"
     :class="model.css"
     :data-sv-drop-target-survey-page="model.dropTargetName"
-    v-key2click
+    :role="model.ariaRole"
+    :aria-label="model.ariaLabel"
+    v-key2click="{ disableTabStop: true }"
     @click="
       (e) => {
         model.select(model, e);

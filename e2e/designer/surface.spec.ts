@@ -544,4 +544,57 @@ test.describe(title, () => {
     await page.getByRole("button", { name: "General" }).click();
     await expect(settingsButton).toHaveClass(/sd-action--active/);
   });
+
+  test("Page container is not a tab stop and is a named group", async ({ page }) => {
+    await page.setViewportSize({ width: 1600, height: 1000 });
+    const json = {
+      "title": "Contact Form",
+      "description": "Enter your details below",
+      "pages": [
+        {
+          "name": "page1",
+          "title": "User Info",
+          "description": "User Info Details",
+          "elements": [
+            { "type": "text", "name": "question1", "isRequired": true },
+            { "type": "text", "name": "question2", "visibleIf": "{question1} = 1" },
+            {
+              "type": "panel",
+              "name": "panel1",
+              "title": "This is a panel",
+              "elements": [
+                { "type": "text", "name": "question3" },
+                { "type": "boolean", "name": "question4" }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(page, json);
+    await page.mouse.move(0, 0);
+
+    const pageContent = page.locator(".svc-page__content:not(.svc-page__content--new)");
+    await expect(pageContent).toHaveAttribute("tabindex", "-1");
+    await expect(pageContent).toHaveAttribute("role", "group");
+    await expect(pageContent).toHaveAttribute("aria-label", "User Info");
+    const ghostPageContent = page.locator(".svc-page__content--new");
+    await expect(ghostPageContent).toHaveAttribute("tabindex", "-1");
+    await expect(ghostPageContent).not.toHaveAttribute("role");
+    await expect(ghostPageContent).not.toHaveAttribute("aria-label");
+
+    await page.locator(".svc-tab-designer .sd-description .sv-string-editor").first().focus();
+    await page.keyboard.press("Tab");
+    await page.keyboard.press("Tab");
+    await expect(page.getByRole("textbox", { name: "Page 1" })).toBeFocused();
+    await expect(pageContent).toHaveClass(/svc-page__content--selected/);
+
+    await page.evaluate(() => { (window as any).creator.selectElement((window as any).creator.survey, undefined, false); });
+    await expect(pageContent).not.toHaveClass(/svc-page__content--selected/);
+    await page.locator(".svc-tab-designer .svc-question__content-actions").getByRole("button", { name: "Delete" }).last().focus();
+    await page.keyboard.press("Tab");
+    const pageDuplicate = pageContent.locator(".svc-page__content-actions").getByRole("button", { name: "Duplicate" });
+    await expect(pageDuplicate).toBeFocused();
+    await expect(pageContent.locator(".svc-page__content-actions")).toHaveCSS("opacity", "1");
+  });
 });
