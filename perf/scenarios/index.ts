@@ -7,16 +7,19 @@ import * as select from "./select.ts";
 import * as edit from "./edit.ts";
 import * as tabs from "./tabs.ts";
 import * as output from "./output.ts";
+import * as browser from "./browser.ts";
+import * as selectors from "./selectors.ts";
 
-// Every scenario of perf/scenarios, one factory file per group; ids.ts says which suites run each. 03 adds the
-// browser-only ones (load/paint, designer/*, edit/title-type).
+// Every scenario of perf/scenarios, one factory file per group, plus the react suite's own (browser.ts: load/paint,
+// edit/title-type, designer/*); ids.ts says which suites run each.
 export function allScenarios(): Array<PerfScenario> {
   return defineScenarios(([] as Array<PerfScenario>).concat(
     load.loadScenarios(),
     select.selectScenarios(),
     edit.editScenarios(),
     tabs.tabScenarios(),
-    output.outputScenarios()
+    output.outputScenarios(),
+    browser.browserScenarios()
   ));
 }
 
@@ -28,7 +31,7 @@ export function scenarioById(id: string): PerfScenario | undefined {
 // perf/scenarios.
 export function helperFunctions(): { [name: string]: any } {
   const res: { [name: string]: any } = {};
-  [options, helpers, load, select, edit, tabs, output].forEach((mod: any) => {
+  [options, helpers, load, select, edit, tabs, output, browser, selectors].forEach((mod: any) => {
     for (const key of Object.keys(mod)) res[key] = mod[key];
   });
   return res;

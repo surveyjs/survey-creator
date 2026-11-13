@@ -13,7 +13,9 @@ export const notificationLifetimeMs = 1;
 export function createCreator(ctx: PerfContext): any {
   const notifications = ctx.Survey.settings && ctx.Survey.settings.notifications;
   if (notifications) notifications.lifetime = notificationLifetimeMs;
-  const creator = new ctx.Creator.SurveyCreatorModel(Object.assign({}, creatorOptions));
+  // The browser renders the React creator (SurveyCreator.SurveyCreator of survey-creator-react), core the model.
+  const Creator = ctx.CreatorUI ? ctx.CreatorUI.SurveyCreator : ctx.Creator.SurveyCreatorModel;
+  const creator = new Creator(Object.assign({}, creatorOptions));
   // A @property of master; a build without it keeps its own default.
   if ("expandCollapseButtonVisibility" in creator) creator.expandCollapseButtonVisibility = "always";
   creator.autoSaveDelay = 0;

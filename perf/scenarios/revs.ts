@@ -16,10 +16,11 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const fileArg = process.argv.indexOf("--file");
 const revsFile = fileArg > -1 ? path.resolve(process.argv[fileArg + 1]) : path.join(here, "revs.json");
 
-// A browser sample's time also depends on the page helpers (03 adds perf/browser/page-helpers.ts).
-const pageHelpersFile = path.join(here, "..", "browser", "page-helpers.ts");
-const pageHelpersSource = fs.existsSync(pageHelpersFile) ? fs.readFileSync(pageHelpersFile, "utf8") : "";
-const sourceOf = (value: any): string => (typeof value === "function" ? String(value) : JSON.stringify(value));
+// A browser sample's time also depends on the page helpers (perf/browser/page-helpers.ts).
+const pageHelpersSource = fs.readFileSync(path.join(here, "..", "browser", "page-helpers.ts"), "utf8");
+// An object's function members (selectors.tab, ...) are hashed by their source: JSON.stringify alone drops them (R03-F5).
+export const sourceOf = (value: any): string => (typeof value === "function" ? String(value) :
+  JSON.stringify(value, (key: string, v: any) => (typeof v === "function" ? String(v) : v)));
 
 // The names of perf/scenarios exports a source reads: a call for a function, any mention for a constant. A method
 // call of the same name (creator.selectElement) is not a helper call.

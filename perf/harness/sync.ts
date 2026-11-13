@@ -31,7 +31,16 @@ export const VENDORED: ReadonlyArray<Vendored> = [
   { file: "harness/node/build.ts", mode: "adapted" },
   { file: "fixtures/random.ts", mode: "verbatim" },
   { file: "scenarios/revs.ts", mode: "adapted" },
-  { file: "core/run.ts", mode: "adapted" }
+  { file: "core/run.ts", mode: "adapted" },
+  { file: "react19/package.json", mode: "adapted" },
+  { file: "browser/paths.ts", mode: "adapted" },
+  { file: "browser/global-setup.ts", mode: "adapted" },
+  { file: "browser/page-helpers.ts", mode: "adapted" },
+  { file: "browser/page-entry.ts", mode: "adapted" },
+  { file: "browser/suite.perf.spec.ts", mode: "adapted" },
+  { file: "browser/perf-reporter.ts", mode: "adapted" },
+  { file: "browser/playwright.perf.base.cjs", mode: "adapted" },
+  { file: "browser/pages/react.html", mode: "adapted" }
 ];
 
 // Line endings are not a difference: a Windows checkout has CRLF, the server LF.

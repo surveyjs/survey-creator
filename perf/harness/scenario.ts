@@ -6,6 +6,7 @@ import type { FixtureKey } from "./ids.ts";
 // perf/harness/scenario.ts. A scenario never imports survey-core or the creator: it gets the target's modules as
 // ctx.Survey and ctx.Creator, so the same scenario runs against any target build.
 export type ScenarioKind = "load" | "action";
+export type BrowserReset = "restore" | "creator" | "page";
 export type PhaseTimes = { [phase: string]: number };
 
 export interface PerfFixture {
@@ -16,16 +17,32 @@ export interface PerfFixture {
   meta: any;
 }
 
-// The page side of the browser suite (03); element arguments are DOM elements, typed loosely so the harness stays
-// platform-neutral. 03 fills in the details.
+// The page side of the react suite (03, perf/browser/page-helpers.ts); element arguments are DOM elements, typed
+// loosely so the harness stays platform-neutral.
 export interface PerfPage {
   framework: "react";
+  // Mounts the creator in #root (the creator shown before is unmounted and disposed), then updated() and settle().
+  showCreator(creator: any): Promise<void>;
+  unmountCreator(): Promise<void>;
   // The end of the framework update (03, the clock).
   updated(): Promise<void>;
-  // element.click() on the first match, then updated().
-  click(selector: string): Promise<void>;
+  // Untimed: until the DOM is stable and no deferred work is due; throws when capped (03, settle).
+  settle(): Promise<{ ms: number, frames: number }>;
+  // Until condition() holds, checked after every hop and frame: the end of a timed part the update does not reach.
+  until(condition: () => boolean, what: string): Promise<void>;
+  inViewport(element: any): boolean;
+  // "" when no lazy render is due in the viewport (a page placeholder or a row skeleton in view), else what is due.
+  lazyRenderDue(): string;
+  // element.click() on the element or the first match of a selector, then updated().
+  click(target: any): Promise<void>;
+  // The value set at once, with input and change, then updated().
+  commit(element: any, value: string): Promise<void>;
   // Characters one by one, then updated() after the last one.
   type(element: any, text: string): Promise<void>;
+  // Focus with the caret at the end; blur; one key pressed. Each ends with updated().
+  focusEnd(element: any): Promise<void>;
+  blur(element: any): Promise<void>;
+  press(element: any, key: string): Promise<void>;
   query(selector: string): any;
   queryAll(selector: string): Array<any>;
 }
@@ -63,7 +80,7 @@ export interface PerfScenario<S = any> {
   uses?: Array<string>;
   setup(ctx: PerfContext): S | Promise<S>;
   run(ctx: PerfContext, state: S): void | PhaseTimes | Promise<void | PhaseTimes>;
-  // Untimed, right after the timed run, before check: the page reads the DOM fact the action changed (03).
+  // Untimed, after the timed run and its settle, before check (core and browser settle first).
   record?(ctx: PerfContext, state: S): void | Promise<void>;
   // After every sample, warm-ups too: throws if the action did not happen.
   check(ctx: PerfContext, state: S): void | Promise<void>;
@@ -76,8 +93,10 @@ export interface PerfScenario<S = any> {
   warmup?: number;
   maxMs?: number;
   tolerance?: number;
-  // What differs in the browser suite (03).
-  browser?: { counterOnly?: boolean, repeat?: number, samples?: number, warmup?: number, maxMs?: number };
+  // What differs in the browser suite (03). reset is what a sample starts from: "restore" (the default for an action:
+  // the creator shown once, and setup restores its state), "creator" (a new creator in the same page per sample, for a
+  // tab's first visit) or "page" (a fresh page per sample, as for a load).
+  browser?: { counterOnly?: boolean, repeat?: number, samples?: number, warmup?: number, maxMs?: number, reset?: BrowserReset };
 }
 
 const escape = (text: string): string => text.replace(/[.*+?^${}()|[\]\\-]/g, "\\$&");

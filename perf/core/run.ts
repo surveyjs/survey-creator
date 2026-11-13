@@ -8,7 +8,8 @@ import { getFixture } from "../fixtures/index.ts";
 import { readEnv } from "../harness/node/env.ts";
 import { resolveTargetDir, checkBuildFresh, checkBuildExists, runnerRoot, coreMain, creatorCoreMain, creatorCoreSrc, creatorCoreBuildHint,
   coreBuildHint } from "../harness/node/build.ts";
-import { git, headCommit } from "../harness/node/git.ts";
+import { headCommit } from "../harness/node/git.ts";
+import { libraryCheckoutCommit } from "../harness/node/library-commit.ts";
 import { machineInfo } from "../harness/node/machine.ts";
 import { dependencyInfo } from "../harness/node/deps.ts";
 import { buildPart, resultFilePath, writeJsonAtomic, readVersion } from "../harness/node/result.ts";
@@ -55,34 +56,7 @@ Array.from(new Set(ids.map(fixtureOfId))).sort().forEach((key: string) => {
 });
 
 const runnerCommit = headCommit(runnerRoot);
-// The library build's commit: PERF_LIB_COMMIT, else the survey-library checkout the build sits in
-// (<checkout>/packages/survey-core/...); an npm folder has none, even inside some other git worktree. The checkout's
-// HEAD names the build only while it has not moved since the build was made and survey-core's src is clean: otherwise
-// the commit is null, with the reason printed (during step 02 the checkout moved to another branch and was rebuilt).
-function libraryCheckoutCommit(dir: string, buildFile: string): string | null {
-  let top: string;
-  try {
-    top = git(dir, ["rev-parse", "--show-toplevel"]);
-  } catch(e) {
-    return null;
-  }
-  const own = path.resolve(top, "packages", "survey-core") + path.sep;
-  const inside = (path.resolve(dir) + path.sep).toLowerCase().indexOf(own.toLowerCase()) === 0;
-  if (!inside) return null;
-  const why = (reason: string): null => {
-    console.log("build.core.commit is null: " + reason + "; set PERF_LIB_COMMIT to name the build's commit");
-    return null;
-  };
-  try {
-    if (git(top, ["status", "--porcelain", "--", "packages/survey-core/src", "packages/survey-core/entries"])) return why("survey-core src has uncommitted changes");
-    // The reflog entry's own time (HEAD@{<unix>}), not the commit's: a checkout or pull after the build moves it.
-    const moved = /\{(\d+)\}/.exec(git(top, ["log", "-g", "-1", "--format=%gd", "--date=unix", "HEAD"]));
-    if (moved && Number(moved[1]) * 1000 > fs.statSync(buildFile).mtimeMs) return why("HEAD moved after the build was made");
-  } catch(e) {
-    return why("git could not tell whether HEAD moved");
-  }
-  return headCommit(dir);
-}
+// The library build's commit: PERF_LIB_COMMIT, else the survey-library checkout the build sits in (library-commit.ts).
 const coreCommit = env.libCommit || libraryCheckoutCommit(core.dir, coreFile);
 const creatorCommit = env.targetCommit || (creatorCore.isRunnerBuild ? runnerCommit : null);
 // The deps fingerprint: the runner's root and creator-core folders, whose node_modules hold jsdom.

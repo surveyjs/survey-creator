@@ -1,9 +1,15 @@
 import type { PerfContext, PerfScenario } from "../harness/scenario.ts";
 import type { FixtureKey } from "../harness/ids.ts";
 import { expectThat, expectEqual } from "../harness/scenario.ts";
-import { loadCreator, releaseCreator, findElement, clickElement, addFromToolbox, setGridValue, questionCount, expectSelected } from "./helpers.ts";
+import { loadCreator, releaseCreator, findElement, clickElement, addFromToolbox, setGridValue, questionCount, expectSelected, startCreator,
+  restoreDesignerTab, undoUntil, showElement, adornerOf, toolboxElement } from "./helpers.ts";
+import { selectors } from "./selectors.ts";
 
 // edit: one designer edit on a fresh creator (00, The scenarios). Each sample loads the fixture again in setup.
+//
+// Browser (03): the creator is shown once; setup undoes the previous sample's edit and brings the edited element
+// into view (showElement: selected with focus on, which scrolls it in), as a person does before editing it. The
+// timed part ends with the update.
 
 // The page a question is added to, and the question the other edits change: on huge the page and the question of
 // huge/select (q3978 is on page 106 of 109); on typical the first page and its first text question.
@@ -17,22 +23,33 @@ export const editTargets: { [fixture: string]: { page: string, question: string 
 export function addQuestion(fixture: FixtureKey): PerfScenario {
   return {
     id: fixture + "/edit/add-question", rev: 1, fixture: fixture, kind: "action",
-    uses: ["createCreator", "loadCreator", "releaseCreator", "findElement", "clickElement", "addFromToolbox", "questionCount", "editTargets"],
-    setup: (ctx: PerfContext): any => {
-      const creator = loadCreator(ctx);
+    uses: ["createCreator", "loadCreator", "startCreator", "releaseCreator", "findElement", "clickElement", "addFromToolbox", "questionCount", "editTargets",
+      "restoreDesignerTab", "undoUntil", "showElement", "toolboxElement", "adornerOf", "selectors"],
+    setup: async(ctx: PerfContext): Promise<any> => {
+      const { creator, restored } = await startCreator(ctx);
       const page = findElement(creator, editTargets[fixture].page);
-      clickElement(creator, page);
+      if (ctx.page) {
+        restoreDesignerTab(creator);
+        if (restored) undoUntil(creator, () => questionCount(creator) === ctx.cache.questions, "the question count");
+        else ctx.cache.questions = questionCount(creator);
+        // From the survey selected, so selecting the page scrolls it to the top of the view in every sample.
+        clickElement(creator, creator.survey);
+      }
+      await showElement(ctx, creator, page);
       expectThat(creator.selectedElement === page, "the page is selected");
-      return { creator: creator, page: page, count: questionCount(creator), pageCount: page.questions.length };
+      const tool = ctx.page ? toolboxElement(ctx, creator, "text") : undefined;
+      return { creator: creator, page: page, count: questionCount(creator), pageCount: page.questions.length, tool: tool };
     },
-    run: (ctx: PerfContext, state: any): void => {
-      addFromToolbox(state.creator, "text");
+    run: async(ctx: PerfContext, state: any): Promise<void> => {
+      if (ctx.page) await ctx.page.click(state.tool);
+      else addFromToolbox(state.creator, "text");
     },
     check: (ctx: PerfContext, state: any): void => {
       expectEqual(questionCount(state.creator), state.count + 1, "questions");
       expectEqual(state.page.questions.length, state.pageCount + 1, "questions on the page");
       const added = state.creator.selectedElement;
       expectThat(!!added && added.getType() === "text" && added.page === state.page, "the new text question is selected, on the page");
+      if (ctx.page) expectThat(!!adornerOf(ctx, added.name), "the new question " + added.name + " is rendered");
     },
     teardown: (ctx: PerfContext, state: any): void => releaseCreator(ctx, state.creator)
   };
@@ -43,19 +60,29 @@ export function addQuestion(fixture: FixtureKey): PerfScenario {
 export function deleteQuestion(fixture: FixtureKey): PerfScenario {
   return {
     id: fixture + "/edit/delete", rev: 1, fixture: fixture, kind: "action",
-    uses: ["createCreator", "loadCreator", "releaseCreator", "findElement", "clickElement", "questionCount", "editTargets"],
-    setup: (ctx: PerfContext): any => {
-      const creator = loadCreator(ctx);
-      const q = findElement(creator, editTargets[fixture].question);
-      clickElement(creator, q);
+    uses: ["createCreator", "loadCreator", "startCreator", "releaseCreator", "findElement", "clickElement", "questionCount", "editTargets",
+      "restoreDesignerTab", "undoUntil", "showElement", "adornerOf", "selectors"],
+    setup: async(ctx: PerfContext): Promise<any> => {
+      const { creator, restored } = await startCreator(ctx);
+      const name = editTargets[fixture].question;
+      if (ctx.page) {
+        restoreDesignerTab(creator);
+        if (restored) undoUntil(creator, () => !!creator.survey.getQuestionByName(name), name + " is back");
+        clickElement(creator, creator.survey);
+      }
+      const q = findElement(creator, name);
+      await showElement(ctx, creator, q);
+      if (ctx.page) expectThat(!!adornerOf(ctx, name), name + " is rendered before the sample");
       return { creator: creator, q: q, count: questionCount(creator) };
     },
-    run: (ctx: PerfContext, state: any): void => {
+    run: async(ctx: PerfContext, state: any): Promise<void> => {
       state.creator.deleteElement(state.q);
+      if (ctx.page) await ctx.page.updated();
     },
     check: (ctx: PerfContext, state: any): void => {
       expectEqual(questionCount(state.creator), state.count - 1, "questions");
       expectThat(!state.creator.survey.getQuestionByName(state.q.name), state.q.name + " is gone");
+      if (ctx.page) expectThat(!adornerOf(ctx, state.q.name), state.q.name + "'s adorner is gone");
     },
     teardown: (ctx: PerfContext, state: any): void => releaseCreator(ctx, state.creator)
   };
@@ -95,30 +122,50 @@ export function convertQuestion(fixture: FixtureKey, target: string): PerfScenar
 // requiredToggles clicks (repeat), an odd number: the question ends required. Each click is counted on the question,
 // so a run that changes nothing fails the check.
 export const requiredToggles = 5;
+// The browser renders each toggle: 5 take about 30 ms on typical, under the 40 ms minimum, so a sample is 9 there.
+export const browserRequiredToggles = 9;
 
 export function toggleRequired(fixture: FixtureKey): PerfScenario {
   return {
     id: fixture + "/edit/property", rev: 1, fixture: fixture, kind: "action",
-    uses: ["createCreator", "loadCreator", "releaseCreator", "findElement", "clickElement", "setGridValue", "editTargets", "requiredToggles"],
+    uses: ["createCreator", "loadCreator", "startCreator", "releaseCreator", "findElement", "clickElement", "setGridValue", "editTargets", "requiredToggles",
+      "browserRequiredToggles", "restoreDesignerTab", "showElement", "selectors"],
     repeat: requiredToggles,
-    setup: (ctx: PerfContext): any => {
-      const creator = loadCreator(ctx);
+    browser: { repeat: browserRequiredToggles },
+    setup: async(ctx: PerfContext): Promise<any> => {
+      const { creator, restored } = await startCreator(ctx);
       const q = findElement(creator, editTargets[fixture].question);
-      clickElement(creator, q);
+      if (ctx.page) {
+        restoreDesignerTab(creator);
+        // Set back on the question rather than undone nine times: one change (the undo stack still grows by ten
+        // transactions per sample).
+        if (restored) q.isRequired = false;
+        clickElement(creator, creator.survey);
+      }
+      await showElement(ctx, creator, q);
       expectThat(q.isRequired === false, q.name + " is not required before the sample");
+      if (ctx.page) {
+        expectThat(!!ctx.page.query(selectors.elementAdorner(q.name)), q.name + " is rendered before the sample");
+        expectThat(!ctx.page.query(selectors.requiredTitle(q.name)), q.name + "'s title is not shown as required before the sample");
+      }
       const state = { creator: creator, q: q, changes: 0 };
       q.registerFunctionOnPropertyValueChanged("isRequired", () => { state.changes++; }, "perf-edit-property");
       return state;
     },
-    run: (ctx: PerfContext, state: any): void => {
+    run: async(ctx: PerfContext, state: any): Promise<void> => {
       setGridValue(state.creator, "isRequired", !state.q.isRequired);
+      if (ctx.page) await ctx.page.updated();
     },
     check: (ctx: PerfContext, state: any): void => {
-      expectEqual(state.changes, requiredToggles, "isRequired changes");
+      expectEqual(state.changes, ctx.page ? browserRequiredToggles : requiredToggles, "isRequired changes");
       expectThat(state.q.isRequired === true, state.q.name + " is required");
       expectThat(state.creator.state === "modified" || state.creator.state === "saved", "the creator saw the change");
+      if (ctx.page) expectThat(!!ctx.page.query(selectors.requiredTitle(state.q.name)), state.q.name + "'s title is shown as required");
     },
-    teardown: (ctx: PerfContext, state: any): void => releaseCreator(ctx, state.creator)
+    teardown: (ctx: PerfContext, state: any): void => {
+      state.q.unRegisterFunctionOnPropertyValueChanged("isRequired", "perf-edit-property");
+      releaseCreator(ctx, state.creator);
+    }
   };
 }
 

@@ -1,118 +1,142 @@
 {
+  "huge/designer/collapse-all": {
+    "rev": 1,
+    "hash": "9d0f71fc6158c3d6c8036e89ea71e22dc1af5a9f"
+  },
+  "huge/designer/expand-all": {
+    "rev": 1,
+    "hash": "9d0f71fc6158c3d6c8036e89ea71e22dc1af5a9f"
+  },
+  "huge/designer/object-selector": {
+    "rev": 1,
+    "hash": "862ece71e4ea908571c802870c67f11db4bacb90"
+  },
   "huge/edit/add-question": {
     "rev": 1,
-    "hash": "ae013d81b08a9654ce04a9441e9926e549ab61b4"
+    "hash": "ad546b823c1abd48ff1fe4064843b78535328304"
   },
   "huge/edit/property": {
     "rev": 1,
-    "hash": "678ddd3fa73ba533533a6391d1a33c494bf775de"
+    "hash": "60b2b34cd99771340abce997b052f0cdb5ee3950"
   },
   "huge/load/json": {
     "rev": 1,
-    "hash": "a008fed69aa23f30693dbe5004ba634cc87bb111"
+    "hash": "6e5030a59269702ea696ca17af0f95bdc798ec18"
+  },
+  "huge/load/paint": {
+    "rev": 1,
+    "hash": "4bbf4bbc95c1d12f9a2e50892364d9ecbc468f5d"
   },
   "huge/output/dispose": {
     "rev": 1,
-    "hash": "560e291430c794e97430db978459af3944a4d37f"
+    "hash": "d26bcfcd0b508df2fcf7bc7ddc54fa63920befcc"
   },
   "huge/output/text": {
     "rev": 1,
-    "hash": "f4957d0dcf4af1f4b1ffdd5b00c0e8d0c61cb8c6"
+    "hash": "ea071758b3601aef2ada9140a646eeaf2b80d1b7"
   },
   "huge/select/element@q3978": {
     "rev": 1,
-    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+    "hash": "4011e570d84f8e4426f8b6d13aa17a0bc0bfe0e9"
   },
   "huge/tabs/designer": {
     "rev": 1,
-    "hash": "75772437b3aa0377f199a06ceb5bbcd6d3a00205"
+    "hash": "95467b358c6ff61467d1f16c4ad63d2e1726f14f"
   },
   "huge/tabs/json": {
     "rev": 1,
-    "hash": "3cea7f788950a7fb5925b63d99697575b354e880"
+    "hash": "59cc22a238f843a7ff18f4ef1df107df95a353a8"
   },
   "huge/tabs/logic": {
     "rev": 1,
-    "hash": "3cea7f788950a7fb5925b63d99697575b354e880"
+    "hash": "59cc22a238f843a7ff18f4ef1df107df95a353a8"
   },
   "huge/tabs/preview": {
     "rev": 1,
-    "hash": "3cea7f788950a7fb5925b63d99697575b354e880"
+    "hash": "59cc22a238f843a7ff18f4ef1df107df95a353a8"
   },
   "huge/tabs/roundtrip": {
     "rev": 1,
-    "hash": "db81211ed14adf8689e2e25e558381cd45ee9f7f"
+    "hash": "b3fec6b84c373859518ee86a99718f8d160ebf2e"
   },
   "huge/tabs/translation": {
     "rev": 1,
-    "hash": "3cea7f788950a7fb5925b63d99697575b354e880"
+    "hash": "59cc22a238f843a7ff18f4ef1df107df95a353a8"
   },
   "locales/load/json": {
     "rev": 1,
-    "hash": "a008fed69aa23f30693dbe5004ba634cc87bb111"
+    "hash": "6e5030a59269702ea696ca17af0f95bdc798ec18"
   },
   "locales/tabs/translation": {
     "rev": 1,
-    "hash": "3cea7f788950a7fb5925b63d99697575b354e880"
+    "hash": "59cc22a238f843a7ff18f4ef1df107df95a353a8"
   },
   "typical/edit/add-question": {
     "rev": 1,
-    "hash": "ae013d81b08a9654ce04a9441e9926e549ab61b4"
+    "hash": "ad546b823c1abd48ff1fe4064843b78535328304"
   },
   "typical/edit/convert@dropdown1": {
     "rev": 1,
-    "hash": "27aed2e85dfc4990e42f77baaa7664acf37e3e48"
+    "hash": "292af92a3f6d56379e61b3c7473080b7b8bbfeca"
   },
   "typical/edit/delete": {
     "rev": 1,
-    "hash": "2b94cb4394bd80f605cb7cd37c2e6a5f2762f80a"
+    "hash": "186f1bf77e25a51540f67d075ef45257288e9408"
   },
   "typical/edit/property": {
     "rev": 1,
-    "hash": "678ddd3fa73ba533533a6391d1a33c494bf775de"
+    "hash": "60b2b34cd99771340abce997b052f0cdb5ee3950"
+  },
+  "typical/edit/title-type": {
+    "rev": 1,
+    "hash": "811058046dc568fb60d8d20940be3088ae507b66"
   },
   "typical/edit/undo-redo": {
     "rev": 1,
-    "hash": "878bf68a432b9e52833c4c845252c298666f6e62"
+    "hash": "d6741d868e76c1d8dae9b38bb23f67a2daaa1680"
   },
   "typical/load/json": {
     "rev": 1,
-    "hash": "a008fed69aa23f30693dbe5004ba634cc87bb111"
+    "hash": "6e5030a59269702ea696ca17af0f95bdc798ec18"
+  },
+  "typical/load/paint": {
+    "rev": 1,
+    "hash": "4bbf4bbc95c1d12f9a2e50892364d9ecbc468f5d"
   },
   "typical/select/element@checkbox1": {
     "rev": 1,
-    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+    "hash": "0aaab753b23fddfcdc1306c1b02fd82d9426cd2d"
   },
   "typical/select/element@dropdown1": {
     "rev": 1,
-    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+    "hash": "0aaab753b23fddfcdc1306c1b02fd82d9426cd2d"
   },
   "typical/select/element@matrixdynamic1": {
     "rev": 1,
-    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+    "hash": "4011e570d84f8e4426f8b6d13aa17a0bc0bfe0e9"
   },
   "typical/select/element@page1": {
     "rev": 1,
-    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+    "hash": "0aaab753b23fddfcdc1306c1b02fd82d9426cd2d"
   },
   "typical/select/element@panel1": {
     "rev": 1,
-    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+    "hash": "0aaab753b23fddfcdc1306c1b02fd82d9426cd2d"
   },
   "typical/select/element@paneldynamic1": {
     "rev": 1,
-    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+    "hash": "0aaab753b23fddfcdc1306c1b02fd82d9426cd2d"
   },
   "typical/select/element@survey": {
     "rev": 1,
-    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+    "hash": "4011e570d84f8e4426f8b6d13aa17a0bc0bfe0e9"
   },
   "typical/select/element@text1": {
     "rev": 1,
-    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+    "hash": "4011e570d84f8e4426f8b6d13aa17a0bc0bfe0e9"
   },
   "typical/tabs/theme": {
     "rev": 1,
-    "hash": "ff2883ca8be9f70b0625b3f40068d081a87f80ac"
+    "hash": "c303e9e168ffa29d900c9434a4cfa9881e8d8cfa"
   }
 }

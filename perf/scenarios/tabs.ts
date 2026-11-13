@@ -2,10 +2,27 @@ import type { PerfContext, PerfScenario } from "../harness/scenario.ts";
 import type { FixtureKey } from "../harness/ids.ts";
 import { expectThat, expectEqual } from "../harness/scenario.ts";
 import { median } from "../harness/stats.ts";
-import { loadCreator, releaseCreator, clickTab } from "./helpers.ts";
+import { startCreator, releaseCreator, clickTab } from "./helpers.ts";
+import { selectors } from "./selectors.ts";
 
 // tabs: a click on a tab of the tab strip (clickTab). A tab is timed on its first visit, so each sample loads the
 // fixture into a new creator in setup.
+//
+// Browser (03): a click on the tab's button (clickTabButton), to the end of the update. A tab keeps its model after
+// its first visit, so a first visit cannot be restored. A new creator in the same page per sample (reset "creator")
+// differed from a fresh page by +6 to +12 % on huge/tabs/logic (step-03 report, R03-F6). Each first visit gets a fresh
+// page per sample, as a load does (reset "page"; Andrew, 2026-11-13), for stability: on the development laptop a
+// renderer drops to a mode about 2.4x slower after its first seconds, and a fresh page per sample stays out of it. The round trip keeps "creator": its time is
+// not judged, and its heap growth is read across the samples of one page.
+
+// Core: clickTab. Browser: a click on the tab's button in the tab strip.
+export async function clickTabButton(ctx: PerfContext, creator: any, tab: string): Promise<void> {
+  if (!ctx.page) {
+    clickTab(creator, tab);
+    return;
+  }
+  await ctx.page.click(selectors.tab(tab));
+}
 
 // What shows that a tab was built: its plugin's model, made in the plugin's activate(), holds the fixture. activeTab
 // alone is not enough: it can be set without activating the plugin.
@@ -35,39 +52,53 @@ export function expectTabShown(ctx: PerfContext, creator: any, tab: string): voi
     expectThat(!!plugin && !!model, "the theme tab has its model");
     expectThat(!!plugin.propertyGrid && plugin.propertyGrid.obj === plugin.themeModel, "the theme property grid edits the theme");
   }
+  if (ctx.page) {
+    const button = ctx.page.query(selectors.tab(tab));
+    expectThat(!!button && button.getAttribute("aria-selected") === "true", "the " + tab + " tab button is selected");
+    const content = ctx.page.query(selectors.tabContent(tab));
+    expectThat(!!content && content.querySelectorAll("*").length > 0, "the " + tab + " tab content is rendered");
+  }
 }
 
 export function firstVisit(fixture: FixtureKey, tab: string): PerfScenario {
   return {
     id: fixture + "/tabs/" + tab, rev: 1, fixture: fixture, kind: "action",
-    uses: ["createCreator", "loadCreator", "releaseCreator", "clickTab", "expectTabShown"],
+    uses: ["createCreator", "loadCreator", "startCreator", "releaseCreator", "clickTab", "clickTabButton", "expectTabShown", "selectors"],
     requires: tab === "theme" ? ["SurveyCreatorModel.showThemeTab"] : undefined,
-    setup: (ctx: PerfContext): any => {
-      const creator = loadCreator(ctx);
+    browser: { reset: "page" },
+    setup: async(ctx: PerfContext): Promise<any> => {
+      const { creator } = await startCreator(ctx);
       expectEqual(creator.activeTab, "designer", "the start tab");
+      if (ctx.page) expectThat(!!ctx.page.query(selectors.tab(tab)), "the tab strip shows " + tab);
       return { creator: creator };
     },
-    run: (ctx: PerfContext, state: any): void => {
-      clickTab(state.creator, tab);
+    run: async(ctx: PerfContext, state: any): Promise<void> => {
+      await clickTabButton(ctx, state.creator, tab);
     },
     check: (ctx: PerfContext, state: any): void => expectTabShown(ctx, state.creator, tab),
     teardown: (ctx: PerfContext, state: any): void => releaseCreator(ctx, state.creator)
   };
 }
 
-// tabs/designer: back to Designer from Preview (Preview visited in setup).
+// tabs/designer: back to Designer from Preview (Preview visited in setup). The browser keeps its creator: every
+// sample returns to the Designer, and setup opens Preview again (untimed). The browser's timed part ends when no page
+// placeholder or row skeleton is in the viewport (Andrew, 2026-11-13, R03-F1): the Designer mounts its pages as
+// placeholders and their content comes a frame and a 1 ms timer later.
 export function backToDesigner(fixture: FixtureKey): PerfScenario {
   return {
     id: fixture + "/tabs/designer", rev: 1, fixture: fixture, kind: "action",
-    uses: ["createCreator", "loadCreator", "releaseCreator", "clickTab", "expectTabShown"],
-    setup: (ctx: PerfContext): any => {
-      const creator = loadCreator(ctx);
+    uses: ["createCreator", "loadCreator", "startCreator", "releaseCreator", "clickTab", "clickTabButton", "expectTabShown", "selectors"],
+    setup: async(ctx: PerfContext): Promise<any> => {
+      const { creator } = await startCreator(ctx);
       clickTab(creator, "preview");
+      if (ctx.page) await ctx.page.settle();
       expectTabShown(ctx, creator, "preview");
       return { creator: creator };
     },
-    run: (ctx: PerfContext, state: any): void => {
-      clickTab(state.creator, "designer");
+    run: async(ctx: PerfContext, state: any): Promise<void> => {
+      await clickTabButton(ctx, state.creator, "designer");
+      const page = ctx.page;
+      if (page) await page.until(() => !page.lazyRenderDue(), "the pages in view rendered");
     },
     check: (ctx: PerfContext, state: any): void => expectTabShown(ctx, state.creator, "designer"),
     teardown: (ctx: PerfContext, state: any): void => releaseCreator(ctx, state.creator)
@@ -79,18 +110,21 @@ export function backToDesigner(fixture: FixtureKey): PerfScenario {
 // 3, minus the heap after a GC following round trip 1, divided by 2: the median over every run of the process (the
 // samples and the counter run; heapGrowthKBRuns lists them). The GCs are inside the run, which is why its time is not
 // judged. The check reads the creator's onActiveTabChanged, so a switch the creator refuses or ignores fails it.
+// Browser: tab button clicks, a new creator per sample (reset "creator"), and the settle before each heap reading.
 export const roundTrips = 3;
 export const roundTripTabs = ["preview", "designer", "logic", "designer"];
 
 export function roundTrip(fixture: FixtureKey): PerfScenario {
   return {
     id: fixture + "/tabs/roundtrip", rev: 1, fixture: fixture, kind: "action",
-    uses: ["createCreator", "loadCreator", "releaseCreator", "clickTab", "expectTabShown", "roundTrips", "roundTripTabs"],
+    uses: ["createCreator", "loadCreator", "startCreator", "releaseCreator", "clickTab", "clickTabButton", "expectTabShown", "roundTrips", "roundTripTabs",
+      "selectors"],
     counterOnly: true,
     // Each run takes seconds on huge and its time is not judged: no warm-ups.
     warmup: 0,
-    setup: (ctx: PerfContext): any => {
-      const creator = loadCreator(ctx);
+    browser: { reset: "creator" },
+    setup: async(ctx: PerfContext): Promise<any> => {
+      const { creator } = await startCreator(ctx);
       const state = { creator: creator, heap: [] as Array<number>, shown: [] as Array<string> };
       // The tab and whether its plugin made a model, as the creator reports each switch (switchViewType).
       creator.onActiveTabChanged.add((sender: any, options: any) => { state.shown.push(options.tabName + (options.model ? "" : " (no model)")); });
@@ -99,9 +133,10 @@ export function roundTrip(fixture: FixtureKey): PerfScenario {
     run: async(ctx: PerfContext, state: any): Promise<void> => {
       for (let i = 0; i < roundTrips; i++) {
         for (const tab of roundTripTabs) {
-          clickTab(state.creator, tab);
+          await clickTabButton(ctx, state.creator, tab);
         }
         if (ctx.heap && (i === 0 || i === roundTrips - 1)) {
+          if (ctx.page) await ctx.page.settle();
           await ctx.heap.collect();
           state.heap.push(ctx.heap.usedBytes());
         }
