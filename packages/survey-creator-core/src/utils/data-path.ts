@@ -45,6 +45,15 @@ export function findInnerQuestion(survey: SurveyModel, name: string, el?: Base):
   if (!info || info.isComment || info.isUnwrapped || !isInnerQuestion(info.question)) return null;
   return { question: info.question, entryName: info.question.name + info.rest, rest: info.rest };
 }
+// The question whose whole value an expression variable of el names: an inner question as findInnerQuestion
+// resolves it (first, so a name inside a container reads its own question, as at runtime), else a top-level
+// question by its value name. null for a sub-entry ({m.r1}) and for any other name.
+export function getQuestionByVariableName(survey: SurveyModel, name: string, el?: Base): Question {
+  if (!survey || !name) return null;
+  const info = findInnerQuestion(survey, name, el);
+  if (!!info) return !info.rest ? info.question : null;
+  return <Question>survey.getQuestionByValueName(name) || null;
+}
 // The data paths an expression of el resolves names in, innermost first, ending with the root ([]). The paths
 // relative to a record (a template element, a column) are left out: a rename rewrites paths from the survey data.
 export function getExpressionScopePaths(survey: SurveyModel, el: Base): Array<Array<string>> {

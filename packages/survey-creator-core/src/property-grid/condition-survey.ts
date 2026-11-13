@@ -13,7 +13,7 @@ import { assignDefaultClasses } from "../utils/creator-utils";
 import { logicCss } from "../components/tabs/logic-theme";
 import { getLogicString } from "../components/tabs/logic-types";
 import { CreatorBase } from "../creator-base";
-import { findInnerQuestion, getConditionQuestionKey, isInnerQuestion } from "../utils/data-path";
+import { findInnerQuestion, getConditionQuestionKey, getQuestionByVariableName, isInnerQuestion } from "../utils/data-path";
 import { ExpressionToDisplayText } from "../expressionToDisplayText";
 import {
   ExpressionAssistant, expressionAssistantIconName, getExpressionAssistantCreator, IExpressionAssistantInput,
@@ -785,12 +785,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (!name) return null;
     const indexInfo = this.getContextIndexInfo(name, ".");
     if (!indexInfo) return null;
-    name = name.substring(0, indexInfo.index);
-    const res = <Question>this.survey.getQuestionByValueName(name);
-    if (!!res) return res;
-    // an inner matrix or dynamic panel: the prefix is its name (getConditionQuestionKey)
-    const info = findInnerQuestion(this.survey, name);
-    return !!info && !info.rest ? info.question : null;
+    // the prefix is the context's key (getConditionQuestionKey): an inner matrix or dynamic panel by its name
+    return getQuestionByVariableName(this.survey, name.substring(0, indexInfo.index));
   }
   private createAllConditionQuestions(): Array<ItemValue> {
     return buildConditionQuestionList(this.survey, this.object, this.propertyName, this.context, this.options, this,

@@ -7,7 +7,7 @@ import { TextareaJsonEditorModel } from "../../src/components/tabs/json-editor-t
 import { CreatorTester } from "../creator-tester";
 import { buildExpressionContext } from "../../src/expression-assistant/expression-context";
 import { getExpressionLintOptions } from "../../src/expression-assistant/expression-check";
-import { findInnerQuestion } from "../../src/utils/data-path";
+import { findInnerQuestion, getQuestionByVariableName } from "../../src/utils/data-path";
 
 const addressPanel = (extra?: any): any => Object.assign({
   type: "panel", name: "panel1", valueName: "address", elements: [
@@ -202,6 +202,12 @@ describe("logic tab: inner questions (nested data, survey-library #12233)", () =
     expect(getSuitable("street")).toEqual(["{address.street} = 'x'", "{street} = 'y'"]);
     expect(getSuitable("city")).toEqual(["{address.town} = 'z'"]);
   });
+  test("the question filter lists a top-level question its rule reads by its value name", () => {
+    const survey = new SurveyModel({ elements: [
+      { type: "text", name: "q1", valueName: "val1" }, { type: "text", name: "q2", visibleIf: "{val1} = 1" }] });
+    const logic = new SurveyLogic(survey, new EmptySurveyCreatorOptions());
+    expect(logic.getUsedQuestions().map(q => q.name).sort()).toEqual(["q1", "q2"]);
+  });
   test("the display text shows the inner question's title", () => {
     const survey = createSurvey();
     const options = new EmptySurveyCreatorOptions();
@@ -354,6 +360,27 @@ describe("findInnerQuestion (nested data, survey-library #12233)", () => {
     expect(findInnerQuestion(survey, "addr.rd").question.name).toBe("road");
     survey.dataNesting = "none";
     expect(findInnerQuestion(survey, "street")).toBeNull();
+  });
+  test("getQuestionByVariableName: the question whose whole value a variable names", () => {
+    const survey = new SurveyModel({ elements: [
+      addressPanel({ elements: [
+        { type: "text", name: "street" }, { type: "text", name: "city", valueName: "town" },
+        { type: "matrix", name: "m", rows: ["r1"], columns: ["c1"] }] }),
+      { type: "text", name: "q1", valueName: "val1" }, { type: "text", name: "q2", valueName: "street" }
+    ] });
+    const nameOf = (name: string, el?: any): string => getQuestionByVariableName(survey, name, el)?.name || null;
+    expect(nameOf("val1"), "#1: a top-level question by its value name").toBe("q1");
+    expect(nameOf("q1"), "#2: not by its name").toBe(null);
+    expect(nameOf("city"), "#3: an inner question by its name").toBe("city");
+    expect(nameOf("address.town"), "#4: by its data path").toBe("city");
+    expect(nameOf("m.r1"), "#5: a sub-entry names no whole value").toBe(null);
+    expect(nameOf("m"), "#6").toBe("m");
+    expect(nameOf("street"), "#7: at the root a top-level value name takes the name").toBe("q2");
+    expect(nameOf("address.street"), "#8").toBe("street");
+    expect(nameOf("street", survey.getQuestionByName("city")), "#9: inside the container, its own question").toBe("street");
+    expect(nameOf("nosuchname"), "#10").toBe(null);
+    expect(getQuestionByVariableName(survey, ""), "#11").toBe(null);
+    expect(getQuestionByVariableName(null, "val1"), "#12").toBe(null);
   });
   test("a survey without nested data finds nothing", () => {
     const survey = new SurveyModel({ elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2", valueName: "v2" }] });

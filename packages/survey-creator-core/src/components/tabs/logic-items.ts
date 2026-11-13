@@ -18,7 +18,7 @@ import { updateLogicExpression } from "./logic-expression";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 import { wrapTextByCurlyBraces } from "../../utils/creator-utils";
 import { SurveyHelper } from "../../survey-helper";
-import { findInnerQuestion, getConditionQuestionKey, getExpressionScopePaths, isInnerQuestion } from "../../utils/data-path";
+import { getConditionQuestionKey, getExpressionScopePaths, getQuestionByVariableName, isInnerQuestion } from "../../utils/data-path";
 
 // The variable prefixes a data key change rewrites for an element resolved in the given data scopes: for every
 // scope above the changed key, the relative path down to it ("page1.address" from the root, "address" from
@@ -504,16 +504,17 @@ export class SurveyLogicItem {
     return names.some(name => {
       // a name of a question is the name form, which the check above has already looked for
       if (!!this.survey.getQuestionByName(name)) return false;
-      return this.findInnerQuestion(name) === question;
+      return this.getQuestionByVariableName(name) === question;
     });
   }
-  // Nested data: the inner question a variable of this rule names, by its name or by a data path
-  // ({address.street}) resolved in the data scopes of the rule's elements.
-  public findInnerQuestion(name: string): Question {
+  // The question a variable of this rule names (getQuestionByVariableName): an inner one by its name or by a
+  // data path ({address.street}) resolved in the data scopes of the rule's elements, a top-level one by its
+  // value name.
+  public getQuestionByVariableName(name: string): Question {
     const owners: Array<Base> = this.actions.length > 0 ? this.actions.map(action => action.parentElement || action.element) : [null];
     for (let i = 0; i < owners.length; i++) {
-      const info = findInnerQuestion(this.survey, name, owners[i]);
-      if (!!info && !info.rest) return info.question;
+      const question = getQuestionByVariableName(this.survey, name, owners[i]);
+      if (!!question) return question;
     }
     return null;
   }

@@ -1,7 +1,7 @@
 import * as Survey from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 import { wrapTextByCurlyBraces } from "./utils/creator-utils";
-import { findInnerQuestion } from "./utils/data-path";
+import { getQuestionByVariableName } from "./utils/data-path";
 
 export class ExpressionToDisplayText {
   private showTitles: boolean;
@@ -89,12 +89,7 @@ export class ExpressionToDisplayText {
     return expression.replace(wrapTextByCurlyBraces(variable), wrapTextByCurlyBraces(question.title));
   }
   private getQuestionByName(name: string): Survey.Question {
-    if (!this.survey) return null;
-    const res = <Survey.Question>this.survey.getQuestionByValueName(name);
-    if (!!res) return res;
-    // nested data: an inner question by its name or by a data path from the root ({address.street})
-    const info = findInnerQuestion(this.survey, name);
-    return !!info && !info.rest ? info.question : null;
+    return getQuestionByVariableName(this.survey, name);
   }
 }
 
