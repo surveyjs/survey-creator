@@ -1,4 +1,4 @@
-import { Serializer } from "survey-core";
+import { Serializer, settings, surveyLocalization } from "survey-core";
 import { editorLocalization } from "survey-creator-core";
 import { getCollabString } from "../collaboration-strings";
 import { JournalOp } from "./journal-record";
@@ -6,16 +6,22 @@ import { splitPointer } from "./journal-locator";
 
 // Produces a short human-readable description of a journal record for
 // history/timeline UIs, e.g. `Question "question2" added`,
-// `Property "title" changed on "q1"`, `Question "q1" changed to Radio Button
-// Group`. The parameter is structural (`op` + `payload`) so both
-// `IJournalRecord` and transport mirrors of it (e.g. the collab bar's
-// `ICollabChange`) can be passed directly.
+// `Question "Question1" renamed to "userName"`,
+// `Title of "userName" changed to "User Name"`. The parameter is structural
+// (`op` + `payload`) so both `IJournalRecord` and transport mirrors of it
+// (e.g. the collab bar's `ICollabChange`) can be passed directly.
+//
+// A property change names the property the way the property grid does
+// ("Title", "Required"), its owner by name and the new value IN FULL - never
+// truncated, the timeline wraps instead. Booleans read "turned on/off", an empty
+// value "cleared", and a value too complex for a sentence (an object, an array)
+// or file content (a `data:` URL) just "changed". Payloads carry no old value,
+// so only a rename - whose old name is the locator's owner segment - says what
+// something changed from.
 //
 // Known approximations (the payload carries no more detail):
-// - a non-default-locale edit (`.../title/de`) reads the locale code as the
-//   property name;
-// - `ElementRemoved` payloads carry no element type, so a removed panel is
-//   described as a question;
+// - neither `ElementRemoved` payloads nor property locators carry an element
+//   type, so a panel is described as a question;
 // - the sentences are whole frames with the element noun substituted into them
 //   (`{0} "{1}" added`). Verb-by-verb concatenation would not survive
 //   translation into inflected languages once these strings are localized, and
@@ -41,11 +47,8 @@ function describeCore(op: number, payload: any): string {
   }
   if (!payload) return fmt("journalEdited");
   switch(op) {
-    case JournalOp.PropertyChanged: {
-      const [owner, prop] = tailSegments(payload.target, 2);
-      if (!prop) return fmt("journalEdited");
-      return propertyChanged(prop, owner);
-    }
+    case JournalOp.PropertyChanged:
+      return describePropertyChanged(payload.target, payload.value);
     case JournalOp.ArrayChanged: {
       const [owner, arrayProp] = tailSegments(payload.target, 2);
       if (!arrayProp) return fmt("journalEdited");
@@ -60,7 +63,7 @@ function describeCore(op: number, payload: any): string {
         const name = key !== undefined && key !== null ? String(key) : "";
         return withName(elementNoun(arrayProp), name, "Removed");
       }
-      return propertyChanged(arrayProp, owner);
+      return propertySentence("Changed", propertyLabel(arrayProp), owner);
     }
     case JournalOp.ElementRemoved: {
       const [arrayProp, name] = tailSegments(payload.target, 2);
@@ -93,6 +96,99 @@ function describeCore(op: number, payload: any): string {
   }
 }
 
+// Arrays whose items carry a renamable identity: element and page `name`,
+// item `value`, column `name`.
+const RENAMABLE_CONTAINERS = ["pages", "elements", "templateElements", "choices", "columns", "rows", "rateValues", "calculatedValues"];
+
+function describePropertyChanged(target: any, value: any): string {
+  const segments = tailSegments(target, 4);
+  if (!segments[3]) return fmt("journalEdited");
+  // `.../title/de`: one locale of a localizable property. `.../title/default`
+  // is the default text written per locale - how the Translation tab commits
+  // its default column - and is the same edit as the designer's `.../title`,
+  // so it reads the same, without a language.
+  if (isLocaleOf(segments[2], segments[3]) && isLocaleText(value)) {
+    const label = isDefaultLocaleKey(segments[3])
+      ? propertyLabel(segments[2])
+      : fmt("journalPropertyLocale", propertyLabel(segments[2]), editorLocalization.getLocaleName(segments[3]));
+    return describeValue(label, segments[1], value);
+  }
+  const [, container, owner, prop] = segments;
+  // The recorder addresses a renamed object by its OLD identity (see
+  // JournalRecorder.useOldIdentityInLocator): the owner segment is the old
+  // name and `value` the new one.
+  if (isRename(container, owner, prop, value)) {
+    return fmt("journalElementRenamed", elementNoun(container), owner, String(value));
+  }
+  return describeValue(propertyLabel(prop), owner, value);
+}
+
+function isRename(container: string, owner: string, prop: string, value: any): boolean {
+  if (prop !== "name" && prop !== "value") return false;
+  if (RENAMABLE_CONTAINERS.indexOf(container) < 0) return false;
+  if (typeof value !== "string" && typeof value !== "number") return false;
+  const name = String(value);
+  // An equal owner means the recorder fell back to the new identity: there is
+  // no old name to report.
+  return name !== "" && name !== owner;
+}
+
+// Both halves are required, so a question named "title" whose property happens
+// to look like a locale code is not misread as a translation.
+function isLocaleOf(prop: string, loc: string): boolean {
+  if (!prop || !loc) return false;
+  if (!isDefaultLocaleKey(loc) && !surveyLocalization.localeNames[loc] && !surveyLocalization.locales[loc]) return false;
+  return Serializer.getAllPropertiesByName(prop).some((p) => p.isLocalizable);
+}
+
+// The key a localizable string keeps its default text under ("default").
+function isDefaultLocaleKey(loc: string): boolean {
+  return loc === settings.localization.defaultLocaleName;
+}
+
+function isLocaleText(value: any): boolean {
+  return typeof value === "string" || value === null || value === undefined;
+}
+
+// `Title of "q1" changed to "x"` and its on / off / cleared / changed variants.
+function describeValue(label: string, owner: string, value: any): string {
+  const shown = displayValue(value);
+  if (shown === null) return propertySentence("Changed", label, owner);
+  if (shown === true) return propertySentence("On", label, owner);
+  if (shown === false) return propertySentence("Off", label, owner);
+  if (shown === "") return propertySentence("Cleared", label, owner);
+  return propertySentence("Set", label, owner, shown);
+}
+
+// The value as a sentence shows it, in full: whitespace runs (line breaks
+// included) become one space. A localizable value written as a whole
+// dictionary reads as its default-locale text. null: too complex to quote.
+function displayValue(value: any): string | boolean | null {
+  if (value === null || value === undefined) return "";
+  if (typeof value === "boolean") return value;
+  if (typeof value === "number") return isFinite(value) ? String(value) : null;
+  // A data: URL is a file, not text - an uploaded logo or image is stored as one,
+  // often hundreds of KB of base64 (survey-library's history skips file content
+  // for the same reason). A plain URL is short and says something, so it stays.
+  if (typeof value === "string" && /^\s*data:/i.test(value)) return null;
+  if (typeof value === "string") return value.replace(/\s+/g, " ").trim();
+  if (typeof value === "object" && !Array.isArray(value) && typeof value.default === "string") return displayValue(value.default);
+  return null;
+}
+
+// An empty owner means the survey itself.
+function propertySentence(kind: string, label: string, owner: string, value: string = ""): string {
+  return owner
+    ? fmt("journalProperty" + kind, label, owner, value)
+    : fmt("journalSurveyProperty" + kind, label, value);
+}
+
+// The property's name as the property grid shows it ("isRequired" -> "Required").
+function propertyLabel(prop: string): string {
+  const label: any = editorLocalization.getPropertyNameInEditor("", prop);
+  return typeof label === "string" && label !== "" ? label : prop;
+}
+
 // The last `count` unescaped segments of a locator path, left-padded with "".
 function tailSegments(path: any, count: number): Array<string> {
   const res: Array<string> = [];
@@ -104,13 +200,6 @@ function tailSegments(path: any, count: number): Array<string> {
   }
   while(res.length < count) res.unshift("");
   return res;
-}
-
-// `Property "title" changed on "q1"`; an empty owner means the survey itself.
-function propertyChanged(prop: string, owner: string): string {
-  return owner
-    ? fmt("journalPropertyChanged", prop, owner)
-    : fmt("journalSurveyPropertyChanged", prop);
 }
 
 // `verb` is the capitalized key suffix ("Added" -> journalElementAdded /

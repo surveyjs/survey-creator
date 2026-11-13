@@ -1,4 +1,4 @@
-import { url, compareScreenshot, test, expect, setJSON, setOptions, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator, resetFocusToBody, hideContentBehindPopup, showContentBehindPopup } from "./helper";
+import { url, compareScreenshot, test, expect, setJSON, setOptions, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator, resetFocusToBody, hideContentBehindPopup, showContentBehindPopup, mockChoicesByUrl } from "./helper";
 
 const title = "Design Surface Screenshot";
 
@@ -942,6 +942,24 @@ test.describe(title, () => {
     await compareScreenshot(page, rootSelector, "carry-forward-panel-ranking.png");
   });
 
+  test("Check expression question banner", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1920 });
+    await setJSON(page, {
+      showQuestionNumbers: true,
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            { "type": "expression", "name": "question1", "expression": "{price} * {quantity}" },
+            { "type": "expression", "name": "question2" }
+          ]
+        }
+      ]
+    });
+    await compareScreenshot(page, page.locator(".svc-question__adorner").nth(0), "expression-question-banner.png");
+    await compareScreenshot(page, page.locator(".svc-question__adorner").nth(1), "expression-question-banner-empty.png");
+  });
+
   test("Check carry forward panel ranking: selectToRank", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await setJSON(page, {
@@ -1013,6 +1031,9 @@ test.describe(title, () => {
 
   test("Restful service banner", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
+    // The url is rendered into the restful-properties.png baseline, so it stays as is and is served by the mock instead.
+    const countriesUrl = "https://surveyjs.io/api/CountriesExample";
+    await mockChoicesByUrl(page, countriesUrl, [{ name: "France" }, { name: "Germany" }, { name: "Italy" }, { name: "Spain" }]);
     await setJSON(page, {
       showQuestionNumbers: true,
       "pages": [
@@ -1025,7 +1046,7 @@ test.describe(title, () => {
               "title": "Select a country",
               "description": "A full list of countries is queried from a RESTful web service.",
               "choicesByUrl": {
-                "url": "https://surveyjs.io/api/CountriesExample",
+                "url": countriesUrl,
                 "valueName": "name"
               }
             }
@@ -1455,6 +1476,38 @@ test.describe(title, () => {
     });
     await page.locator(".svc-question__content--fullname").hover();
     await compareScreenshot(page, page.locator(".svc-question__adorner"), "composite-question-no-scroll.png");
+  });
+
+  test("Composite question - spacing between questions", async ({ page }) => {
+    await page.evaluate(() => {
+      window["Survey"].ComponentCollection.Instance.add({
+        name: "fullname",
+        title: "Full Name",
+        elementsJSON: [
+          {
+            type: "text",
+            name: "firstName",
+            title: "First Name",
+            isRequired: true,
+            minWidth: 200
+          },
+          {
+            type: "text",
+            name: "lastName",
+            title: "Last Name",
+            isRequired: true,
+            minWidth: 200,
+          }
+        ],
+      });
+    });
+    await page.setViewportSize({ width: 1151, height: 900 });
+    await setJSON(page, {
+      showQuestionNumbers: true,
+      "pages": [{ "name": "page1", "elements": [{ "type": "fullname", "name": "question1" }] }]
+    });
+    await page.locator(".svc-question__content--fullname").hover();
+    await compareScreenshot(page, page.locator(".svc-question__adorner"), "composite-question-spacing-between-questions.png");
   });
 
   test("Check adorner actions responsivity after convert", async ({ page }) => {

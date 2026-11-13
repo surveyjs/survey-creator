@@ -196,14 +196,14 @@ test.describe(title, () => {
     await page.evaluate(() => {
       (window as any).creator.toolbox.isCompact = true;
     });
-
-    const qContent = page.locator("[data-name=question1]");
+    const qTitle = page.locator("[data-name=question1] .sd-question__title .svc-string-editor");
     const pageContent = page.locator(".svc-page__content:not(.svc-page__content--new)");
     await compareScreenshot(page, pageContent, "question-panel-content-matrix.png");
-    await qContent.hover({ position: { x: 5, y: 5 } });
+    await qTitle.hover({ position: { x: 5, y: 5 } });
     await page.waitForTimeout(300);
     await compareScreenshot(page, pageContent, "question-panel-content-matrix-hover.png");
-    await qContent.click({ position: { x: 5, y: 5 } });
+    await qTitle.click({ position: { x: 5, y: 5 } });
+    await qTitle.click({ position: { x: 5, y: 5 } });
     await page.waitForTimeout(300);
     await compareScreenshot(page, pageContent, "question-panel-content-matrix-selected.png");
   });

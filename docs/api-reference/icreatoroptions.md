@@ -641,3 +641,92 @@ Default value: `true`
 > Disabling property validation may be useful if you add custom properties that accept complex or hierarchical objects. However, this also allows invalid values to be assigned in the JSON Editor tab. Use with caution.
 
 Available since: v2.5.2
+
+### `variablePresets`
+
+**Type**: `ISurveyVariablePresets`
+
+Defines custom survey variables and named presets that assign values to them.
+
+Survey Creator makes the variables available in condition editors. In the Preview tab, users can select a preset to test the survey with the corresponding variable values. If the configuration includes a variable definition, users can also view and edit presets in a structured UI.
+
+The `variablePresets` object can include the following properties:
+
+- `definition`: `object`\
+A survey JSON definition whose questions describe the variables. Question names identify variables, while question types, choices, and validators configure the preset editor. If omitted, users can only view the active preset as a raw JSON object.
+
+- `presets`: `Array<{ name: string, description?: string, variables: object }>`\
+An array of named variable presets. Presets can be hard-coded in the application or stored on a server and loaded on the client.
+
+The following example configures `variablePresets` with two variables&mdash;`customerTier` and `isAccountAdmin`&mdash;and three presets&mdash;"Basic member", "Premium member", and "Premium administrator". In the preset editor UI, `customerTier` is displayed as a dropdown with two choice options, and `isAccountAdmin` is displayed as a Boolean editor.
+
+```js
+import { SurveyCreatorModel } from "survey-creator-core";
+
+const variablePresets = {
+  "definition": {
+    "elements": [
+      {
+        "type": "dropdown",
+        "name": "customerTier",
+        "title": "Customer plan",
+        "isRequired": true,
+        "choices": [
+          {
+            "value": "basic",
+            "text": "Basic"
+          },
+          {
+            "value": "premium",
+            "text": "Premium"
+          }
+        ]
+      },
+      {
+        "type": "boolean",
+        "name": "isAccountAdmin",
+        "title": "Account administrator",
+        "isRequired": true
+      }
+    ]
+  },
+  "presets": [
+    {
+      "name": "Basic member",
+      "description": "A Basic customer without access to account billing.",
+      "variables": {
+        "customerTier": "basic",
+        "isAccountAdmin": false
+      }
+    },
+    {
+      "name": "Premium member",
+      "description": "A Premium customer with priority support, but no access to account billing.",
+      "variables": {
+        "customerTier": "premium",
+        "isAccountAdmin": false
+      }
+    },
+    {
+      "name": "Premium administrator",
+      "description": "A Premium customer with priority support and access to account billing.",
+      "variables": {
+        "customerTier": "premium",
+        "isAccountAdmin": true
+      }
+    }
+  ]
+};
+
+const creatorOptions = {
+  // ...
+  variablePresets: variablePresets
+};
+const creator = new SurveyCreatorModel(creatorOptions);
+```
+
+[Demo: Preview Surveys with Runtime Variables](/survey-creator/examples/test-runtime-dependent-survey-logic/ (linkStyle))
+
+Available since: v3.1.1
+
+**Related APIs:** [`SurveyCreatorModel.onVariablePresetsChanged`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onVariablePresetsChanged), [`SurveyCreatorModel.onVariablePresetEditing`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onVariablePresetEditing)

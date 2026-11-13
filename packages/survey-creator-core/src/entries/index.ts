@@ -11,12 +11,16 @@ export * from "../localizable-json";
 export type { ICreatorOptions } from "../creator-options";
 
 export * from "../creator-events-api";
+export * from "../variable-presets";
+export * from "../variable-presets-editor";
 export * from "../creator-base";
 export * from "../tabbed-menu";
 export * from "../creator-responsivity-manager";
 
 export * from "../dom-helper";
 export * from "../components/tabs/json-editor-ace";
+export * from "../components/tabs/json-editor-monaco";
+export * from "../components/tabs/json-editor-linter";
 export * from "../components/tabs/json-editor-plugin";
 export * from "../components/tabs/json-editor-textarea";
 export * from "../components/tabs/test";
@@ -79,6 +83,7 @@ export * from "../property-grid/bindings";
 export * from "../property-grid/property-grid-view-model";
 export * from "../property-grid/object-selector";
 export * from "../property-grid/restfull";
+export * from "../property-grid/regional-format";
 export * from "../property-grid/theme-settings";
 export * from "../property-grid/values";
 export * from "../property-grid/search-manager";
@@ -86,6 +91,21 @@ export * from "../property-grid/maskSettings";
 export * from "../property-grid/header-settings";
 export * from "../property-grid/boolean-display-mode";
 export { propertyGridCss } from "../property-grid-theme/property-grid";
+export { checkExpression, getExpressionLintOptions } from "../expression-assistant/expression-check";
+export type {
+  IExpressionSite, IExpressionCheckPending, IExpressionCheckFinding, IExpressionCheckResult,
+} from "../expression-assistant/expression-check";
+export { getLintPath } from "../expression-assistant/lint-paths";
+// Creator's own buildExpressionSystemPrompt(context), with Creator's texts; survey-core exports one with the same name
+export { buildExpressionContext, buildExpressionSystemPrompt } from "../expression-assistant/expression-context";
+// shipped from survey-creator-core before they moved to survey-core
+export { buildExpressionInstruction, parseExpressionResponse, expressionGuideVersion, expressionGuideSections, getExpressionGuideText } from "survey-core";
+export type {
+  IExpressionContext, IExpressionVariable, IExpressionContextFunction, IExpressionContextOperator, IExpressionContextChoice,
+  IExpressionResponse, IExpressionGuideSection, IExpressionGuideExample,
+} from "survey-core";
+export { ExpressionAssistant, showExpressionAssistant } from "../expression-assistant/expression-assistant";
+export type { IExpressionAssistantOptions, IExpressionAssistantInput, ExpressionAssistantStatus } from "../expression-assistant/expression-assistant";
 export * from "../questionconverter";
 export * from "../svgbundle";
 export * from "../textWorker";
@@ -96,6 +116,7 @@ export * from "../components/side-bar/side-bar-page-model";
 export * from "../components/side-bar/tab-control-model";
 export * from "../components/switcher/switcher";
 export * from "../components/component-container/component-container";
+export * from "../components/variables-viewer/variables-viewer";
 export * from "../utils/events";
 export * from "../utils/utils";
 export * from "../utils/html-element-utils";
@@ -142,6 +163,7 @@ import "../utils/layout.scss";
 import "../utils/confirmation.scss";
 
 import "../presets-theme/presets.scss";
+import "../reduced-motion.scss";
 
 import { settings, checkLibraryVersion } from "survey-core";
 

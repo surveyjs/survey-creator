@@ -18,7 +18,11 @@ This article describes how to localize the Survey Creator UI and give users the 
 
 ### Available Languages
 
-Survey Creator UI is translated into over 30 languages. We ship translated strings as [dictionary files](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization). They are supported by the community and may contain untranslated strings. To fill the gap, these strings are translated by <a href="https://learn.microsoft.com/en-us/azure/ai-services/translator/" target="_blank">Azure AI Translator by Microsoft</a>. Each dictionary file contains a log of machine translations at the end. You can use it to find individual machine-translated strings and revise them if required. Delete revised strings from the log to exclude them from machine translation. You can also [create new dictionaries](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization#add-a-new-dictionary) for unsupported languages.
+Survey Creator UI is translated into over 30 languages. We ship these translations as [dictionary files](https://github.com/surveyjs/survey-creator/tree/90de47d2c9da49b06a7f97414026d70f7acf05c6/packages/survey-creator-core/src/localization) maintained by the community. Some strings are marked `[Auto-translated]`, which means they were translated from English using <a href="https://learn.microsoft.com/en-us/azure/ai-services/translator/" target="_blank">Azure AI Translator by Microsoft</a>. You can [override individual translations](#override-individual-translations) to change their wording.
+
+If your language is not included, use the [English dictionary](https://github.com/surveyjs/survey-creator/blob/master/packages/survey-creator-core/src/localization/english.ts) as a starting point. Copy its keys, provide translated strings, and [register a custom locale](#create-a-custom-locale) in your application.
+
+You can share new dictionaries or improvements to existing translations by submitting a pull request to the [`survey-creator` repository](https://github.com/surveyjs/survey-creator). Follow the [dictionary contribution instructions](https://github.com/surveyjs/survey-creator/blob/master/packages/survey-creator-core/src/localization/readme.md) to add your translations to the library.
 
 ### Enable Localization and Switch Between Locales
 
@@ -32,7 +36,7 @@ The localization engine that works with dictionaries is available as a separate 
 import "survey-creator-core/survey-creator-core.i18n";
 ```
 
-Since Survey Creator v1.9.112, you may reference or import only the languages you need, as shown below:
+Alternatively, you can reference or import only the languages you need, as shown below:
 
 ```html
 <script src="https://unpkg.com/survey-creator-core/i18n/french.min.js"></script>

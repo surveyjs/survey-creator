@@ -9,6 +9,9 @@ export class QuestionRatingAdornerComponent extends CreatorModelElement<Question
   private modelValue: QuestionRatingAdornerViewModel;
 
   protected createModel(props: any): void {
+    if (this.modelValue && !this.modelValue.isDisposed) {
+      this.modelValue.dispose();
+    }
     this.modelValue = this.createQuestionViewModel(props);
   }
   protected createQuestionViewModel(props: any): QuestionRatingAdornerViewModel {
@@ -29,6 +32,19 @@ export class QuestionRatingAdornerComponent extends CreatorModelElement<Question
   }
   protected getStateElement(): Base {
     return this.model;
+  }
+  componentDidMount(): void {
+    // React StrictMode mounts the same component again after
+    // componentWillUnmount disposed its model.
+    if (this.modelValue.isDisposed) {
+      this.createModel(this.props);
+      this.forceUpdate();
+    }
+    super.componentDidMount();
+  }
+  componentWillUnmount(): void {
+    super.componentWillUnmount();
+    this.modelValue.dispose();
   }
   protected renderElement(): React.JSX.Element {
     const model = this.ratingModel;

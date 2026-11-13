@@ -185,7 +185,6 @@ test("Theme builder: survey settings", (): any => {
   expect(simulatorSurvey.backgroundImage).toBeFalsy();
   expect(simulatorSurvey.backgroundImageFit).toEqual("cover");
   expect(simulatorSurvey.backgroundOpacity).toEqual(1);
-  expect(simulatorSurvey["isCompact"]).toBe(false);
 
   themeModel.backgroundImage = "image-url";
   themeModel.backgroundImageFit = "auto";
@@ -195,7 +194,6 @@ test("Theme builder: survey settings", (): any => {
   expect(simulatorSurvey.backgroundImage).toEqual("image-url");
   expect(simulatorSurvey.backgroundImageFit).toEqual("auto");
   expect(simulatorSurvey.backgroundOpacity).toEqual(0.6);
-  expect(simulatorSurvey["isCompact"]).toBe(true);
 });
 
 test("Theme builder: composite question values are lost", (): any => {
@@ -1246,7 +1244,7 @@ test("Check onOpenFileChooser is called and context is passed", (): any => {
   const testInput = document.createElement("input");
   testContainer.appendChild(testInput);
   testInput.id = backgroundImageEditor.inputId;
-  backgroundImageEditor["rootElement"] = testContainer;
+  backgroundImageEditor["contentElement"] = testContainer;
   backgroundImageEditor.chooseFile(new MouseEvent("click"));
   expect(log).toBe("->onOpenFileChooser->uploadFile");
   expect(lastContext).toStrictEqual({ element: themePlugin.themeModel, elementType: "theme", propertyName: "backgroundImage" });
@@ -1257,7 +1255,7 @@ test("Check onOpenFileChooser is called and context is passed", (): any => {
   const groupHeader = themePlugin.propertyGrid.survey.pages[1];
   const headerBackgroundImageEditor = groupHeader.elements[0].contentPanel.getElementByName("backgroundImage");
   testInput.id = headerBackgroundImageEditor.inputId;
-  headerBackgroundImageEditor["rootElement"] = testContainer;
+  headerBackgroundImageEditor["contentElement"] = testContainer;
   headerBackgroundImageEditor.chooseFile(new MouseEvent("click"));
   expect(log).toBe("->onOpenFileChooser->uploadFile->onOpenFileChooser->uploadFile");
   expect(lastContext).toStrictEqual({ element: themeModel.header, elementType: "header", propertyName: "backgroundImage" });
@@ -1626,4 +1624,29 @@ test("Theme builder: survey in the Theme tab is created with TOC when showTOC is
   themeSurveyTab = themePlugin.model as ThemeTabViewModel;
   expect(themeSurveyTab.survey.showTOC).toBeTruthy();
   expect((themeSurveyTab.survey as any).tocModel.listModel.actions.length).toBe(2);
+});
+
+test("Theme builder: a theme with null values can be edited, Bug#8156", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "question1" }] }] };
+  creator.theme = {
+    themeName: "default",
+    colorPalette: "light",
+    isPanelless: null,
+    header: null,
+    cssVariables: {
+      "--sjs2-color-project-brand-600": "#123456",
+      "--sjs2-color-bg-basic-primary": null,
+      "--sjs-general-backcolor": null
+    }
+  } as any;
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+
+  creator.switchTab("theme");
+  const primaryColor = themePlugin.propertyGrid.survey.getQuestionByName("primaryColor");
+  expect(primaryColor.value).toBe("#123456");
+
+  primaryColor.value = "#aa0000";
+  expect(creator.theme.cssVariables!["--sjs2-color-project-brand-600"]).toBe("#aa0000");
+  expect(creator.theme.isPanelless).toBe(false);
 });

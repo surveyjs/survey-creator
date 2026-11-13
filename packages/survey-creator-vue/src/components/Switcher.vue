@@ -14,6 +14,7 @@
     "
     v-bind:disabled="item.disabled"
     v-bind:title="item.tooltip || item.title"
+    v-bind:data-sv-tooltip="item.tooltip || item.title"
     v-bind:aria-checked="item.ariaChecked"
     v-bind:aria-expanded="item.ariaExpanded"
     v-bind:role="item.ariaRole"

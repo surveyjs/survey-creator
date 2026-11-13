@@ -142,6 +142,10 @@ export var nlStrings = {
     jsonHideErrors: "Fouten verbergen",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "Toon fouten",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Fixfout",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "De survey JSON moet een object zijn.",
     // "Undo"
     undo: "Ongedaan maken",
     // "Redo"
@@ -246,6 +250,8 @@ export var nlStrings = {
     translateUsigAI: "Alles automatisch vertalen",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Vertalen van: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Vertaal de resterende snaren",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Onvertaalde tekenreeksen",
     // "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var nlStrings = {
     translationSource: "Bron: ",
     // [Auto-translated] "Target: "
     translationTarget: "Doel: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Brontaal",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Doeltaal",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} van {1} snaren vertaald",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Weet je zeker dat je alle vertaalde strings voor de geselecteerde taal wilt verwijderen?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Formulierweergave",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Rasterweergave",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Vertaal snaren",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Surveystrings",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Geen verplichtingen om te vertalen",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Alle snaren worden vertaald",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} snaren worden niet vertaald",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube-links worden niet ondersteund.",
     // [Auto-translated] "Export"
@@ -286,6 +314,10 @@ export var nlStrings = {
     choicesLoadedFromWebLinkText: "Ga naar instellingen",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Voorbeeld van geladen keuzeopties",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Geen expressieset",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Bewerkingsuitdrukking",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML-inhoud zal hier zijn.",
     // [Auto-translated] "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var nlStrings = {
       uncompletedRule_cancel: "Nee, ik wil de regels invullen"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Variabele preset",
+    // [Auto-translated] "None"
+    noPreset: "Geen enkele",
+    // [Auto-translated] "View variable values"
+    view: "Bekijk variabelewaarden",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Variabele waarden",
+    // [Auto-translated] "Manage presets"
+    edit: "Beheer presets",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Variabele voorinstellingen",
+    // [Auto-translated] "Preset"
+    presetName: "Preset",
+    // [Auto-translated] "Description"
+    presetDescription: "Beschrijving",
+    // [Auto-translated] "Add preset"
+    addPreset: "Voeg preset toe",
+    // [Auto-translated] "New preset"
+    newPresetName: "Nieuwe preset",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Verwijder de preset",
+    // [Auto-translated] "Back"
+    back: "Achteruit",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Er bestaat al een preset met deze naam",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Voer een vooraf ingestelde naam in",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Preset",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Beschrijving"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Expressieassistent",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Schrijf met AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Beschrijf wat de uitdrukking moet doen",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Bijvoorbeeld: toon deze vraag wanneer de respondent 18 jaar of ouder is",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Beschrijf de aandoening in woorden",
+    // [Auto-translated] "Generate"
+    generate: "Genereren",
+    // [Auto-translated] "Refine"
+    refine: "Verfijnen",
+    // [Auto-translated] "Explain"
+    explain: "Leg het uit",
+    // [Auto-translated] "Stop"
+    stop: "Stop",
+    // [Auto-translated] "Accept"
+    accept: "Accepteer",
+    // [Auto-translated] "Reject"
+    reject: "Weiger",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Apply fix: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Huidige uitdrukking",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Voorgestelde uitdrukking",
+    // [Auto-translated] "Reads as"
+    readsAs: "Luidt als volgt",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "De uitleg van de assistent",
+    // [Auto-translated] "Check results"
+    findings: "Controleer de resultaten",
+    // [Auto-translated] "Error"
+    severityError: "Fout",
+    // [Auto-translated] "Warning"
+    severityWarning: "Waarschuwing",
+    // [Auto-translated] "Info"
+    severityInfo: "Info",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "In \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Beschrijf de expressie en selecteer Genereren.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Wachten op de assistent...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Het verzoek werd geannuleerd.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "De assistent meldde: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "De assistent maakte geen uitdrukking.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Bekijk de voorgestelde uitdrukking.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "De assistent legde de huidige uitdrukking uit.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "De voorgestelde uitdrukking bevat fouten en kan niet worden geaccepteerd.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "De voorgestelde uitdrukking kon niet voor elke plek worden gecontroleerd waar deze naartoe geschreven is, dus deze kan niet worden geaccepteerd.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Voeg een actie toe aan de regel voordat je het aan de assistent vraagt.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "De eerste suggestie bevatte fouten en werd automatisch gecorrigeerd."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var nlStrings = {
       templateDescription: "Patroon invoerbeschrijving",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Patroon voor de titel van het item",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Plaatshouder voor de inschrijftitel",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Lege paneeltekst",
       // [Auto-translated] "Tab title pattern"
@@ -588,6 +724,10 @@ export var nlStrings = {
       templateErrorLocation: "Uitlijning van foutmeldingen",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nieuwe ingangslocatie",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Vermeldingen per pagina",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Laat gebruikers de vermeldingen sorteren",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Voorkom dubbele antwoorden op de volgende vraag"
     },
@@ -675,6 +815,12 @@ export var nlStrings = {
       // [Auto-translated] "Expression"
       expression: "Uitdrukking"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sorteer op",
+      // [Auto-translated] "Order"
+      direction: "Orde"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Uitdrukking"
@@ -690,7 +836,9 @@ export var nlStrings = {
       // [Auto-translated] "Survey description"
       description: "Beschrijving van de enquête",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "De enquête alleen-lezen maken"
+      readOnly: "De enquête alleen-lezen maken",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Regionale formats"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -726,7 +874,9 @@ export var nlStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Maak de kolom verplicht als",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Elke optie in een aparte kolom"
+      showInMultipleColumns: "Elke optie in een aparte kolom",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Sta sortering toe op deze kolom"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export var nlStrings = {
     masksettings: {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Gemaskeerde waarde opslaan in enquêteresultaten"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Regio",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Datumpatroon",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Tijdpatroon",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Decimale scheider",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Duizenden scheider",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Valutasymbool",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valutapatroon"
     },
     patternmask: {
       // [Auto-translated] "Value pattern"
@@ -761,16 +927,18 @@ export var nlStrings = {
       decimalSeparator: "Decimaalteken",
       // [Auto-translated] "Value precision"
       precision: "Waarde precisie",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Laat achterliggende nullen zien",
       // [Auto-translated] "Minimum value"
       min: "Minimumwaarde",
       // [Auto-translated] "Maximum value"
       max: "Maximale waarde"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Valuta voorvoegsel",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Valuta achtervoegsel"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Valutasymbool",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valutapatroon"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Anderen wissen wanneer geselecteerd",
@@ -812,8 +980,24 @@ export var nlStrings = {
     addItem: "Klik om een item toe te voegen...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klik om het item te verwijderen...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Voeg {0} toe",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Verwijder {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Sleep het item",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Breid geneste keuzes uit",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Collapse geneste keuzes",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Breid geneste keuzes uit {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Collapse geneste keuzes van {0}",
+    // [Auto-translated] "Show description"
+    showDescription: "Beschrijving van de show",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Beschrijving verbergen",
     // "Edit"
     edit: "Bewerk",
     // [Auto-translated] "Done"
@@ -856,40 +1040,60 @@ export var nlStrings = {
     propertyNameIsIncorrect: "Gebruik geen gereserveerde woorden: \"item\", \"keuze\", \"paneel\", \"rij\".",
     // "You don't have any items yet"
     listIsEmpty: "Voeg een nieuw item toe",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Je hebt nog geen keuze",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Je hebt nog geen kolommen",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Je hebt nog geen lay-outkolommen",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Je hebt nog geen rijen",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Je hebt nog geen validatieregels",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Je hebt nog geen aangepaste variabelen",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Je hebt nog geen triggers",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Je hebt nog geen links",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Je hebt nog geen pagina's",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Nieuwe keuze toevoegen",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Nieuwe kolom toevoegen",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Nieuwe rij toevoegen",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Nieuwe regel toevoegen",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Nieuwe variabele toevoegen",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Nieuwe trigger toevoegen",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Nieuwe URL toevoegen",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Nieuwe pagina toevoegen",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Geen keuzes",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Geen aangepaste beoordelingswaarden",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Geen aangepaste labels",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Geen gebieden",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Geen kolommen",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Geen layoutkolommen",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Geen rijen",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Geen validatieregels",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Geen aangepaste variabelen",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Geen triggers",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Geen voorwaardelijke markup",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Geen links",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Geen pagina's",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Geen sort-levels",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Voeg keuze toe",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Waarde toevoegen",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Label toevoegen",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Voeg gebied toe",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Voeg kolom toe",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Voeg rij toe",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Regel toevoegen",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Variabele toevoegen",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Voeg trigger toe",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Voeg markup toe",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Link toevoegen",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Pagina toevoegen",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Voeg sorteerniveau toe",
     // "Value"
     value: "Waarde",
     // "Text"
@@ -916,6 +1120,8 @@ export var nlStrings = {
     surveyTitlePlaceholder: "Voer de enquêtetitel hier in",
     // "Page {num}"
     pageTitlePlaceholder: "Voer hier de paginatitel in",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Paneltitel",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Startpagina",
     // "Description"
@@ -966,6 +1172,8 @@ export var nlStrings = {
     visible: "Is zichtbaar?",
     // "Required"
     isRequired: "Is verplicht?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Vraag naar een positief antwoord",
     // [Auto-translated] "Mark as required"
     markRequired: "Markeren zoals vereist",
     // [Auto-translated] "Remove the required mark"
@@ -976,6 +1184,8 @@ export var nlStrings = {
     eachRowUnique: "Voorkom dubbele antwoorden in rijen",
     // "Error message for required questions"
     requiredErrorText: "Tekst bij niet-ingevulde verplichte vraag",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Foutmelding wanneer Ja vereist is",
     // "Display the question on a new line"
     startWithNewLine: "Beginnen met een nieuwe regel?",
     // "Rows"
@@ -994,6 +1204,16 @@ export var nlStrings = {
     maxFiles: "Maximaal aantal bestanden",
     // "Row count"
     rowCount: "Aantal rijen",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Rijen per pagina",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Laat gebruikers rijen sorteren",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maximale sorteerniveaus",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Standaard sorteervolgorde",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Showsorteerbalk",
     // "Columns layout"
     columnLayout: "Kolommen layout",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export var nlStrings = {
     questionErrorLocation: "Plek vraagfoutmelding",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Op volgende pagina focus op de eerste vraag zetten",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Schakel keuzesnelkoppelingen in",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Toon toetsenbordhints",
     // "Question order"
     questionOrder: "Volgorde elementen op pagina",
     // "Time limit to complete the survey"
@@ -1264,10 +1488,12 @@ export var nlStrings = {
     waitForUpload: "Wacht tot het uploaden is voltooid",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Uitlijning van rijdetails",
-    // [Auto-translated] "Minimum row count"
-    minRowCount: "Minimaal aantal rijen",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Minimum number of rows"
+    minRowCount: "Minimum aantal rijen",
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Maximaal aantal rijen",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Rijtelling-expressie",
     // "Confirm row removal"
     confirmDelete: "Rijverwijdering bevestigen",
     // [Auto-translated] "Confirmation message"
@@ -1278,6 +1504,8 @@ export var nlStrings = {
     minPanelCount: "Minimum aantal inzendingen",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Maximaal aantal inzendingen",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Invoertelling-expressie",
     // [Auto-translated] "Initial entry state"
     panelsState: "Status van eerste binnenkomst",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export var nlStrings = {
     logoHeight: "Hoogte logo",
     // "Read-only"
     readOnly: "Alleen-lezen",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Alleen-lezen modus",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Schakel de alleen-lezen modus uit als",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export var nlStrings = {
       columns: "Kolommen",
       // "Rows"
       rows: "Rijen",
+      // [Auto-translated] "Entries"
+      entries: "Inschrijvingen",
       // "Choice Options"
       choices: "Keuzes",
       // "Items"
@@ -1544,6 +1776,8 @@ export var nlStrings = {
       question: "Vraag",
       // "Pages"
       pages: "Pagina's",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Regionale formaten",
       // "Quiz Mode"
       timer: "Timer/Quiz",
       // "Calculated Values"
@@ -1862,6 +2096,12 @@ export var nlStrings = {
       // [Auto-translated] "Never"
       none: "Nooit"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Alleen-lezen",
+      // [Auto-translated] "View"
+      view: "Uitzicht"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "Radioknoppen",
     inputType: {
@@ -1913,6 +2153,12 @@ export var nlStrings = {
       warning: "Waarschuwing",
       // [Auto-translated] "Informational"
       info: "Informatieve"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Voorkant",
+      // [Auto-translated] "Rear"
+      environment: "Achterste"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export var nlStrings = {
     underRowSingle: "Geef onder de rij slechts één sectie weer",
     // [Auto-translated] "Auto"
     auto: "Auto",
+    // [Auto-translated] "Always"
+    always: "Altijd",
     timerInfoMode: {
       // "Both"
       combined: "Beide"
@@ -2321,7 +2569,148 @@ export var nlStrings = {
       survey: "Zelfde als enquête",
       // [Auto-translated] "Same as container"
       container: "Zelfde als container"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Erven",
+      // [Auto-translated] "Hide"
+      "false": "Verstop",
+      // [Auto-translated] "Show"
+      "true": "Show"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arabisch",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bulgaars",
+    // [Auto-translated] "Catalan"
+    ca: "Catalaans",
+    // [Auto-translated] "Czech"
+    cs: "Tsjechisch",
+    // [Auto-translated] "Welsh"
+    cy: "Welsh",
+    // [Auto-translated] "Danish"
+    da: "Deens",
+    // [Auto-translated] "German"
+    de: "Duits",
+    // [Auto-translated] "Greek"
+    el: "Grieks",
+    // [Auto-translated] "English"
+    en: "Engels",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Engels (Australië)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Engels (Canada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Engels (Verenigd Koninkrijk)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Engels (Ierland)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Engels (India)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Engels (Nieuw-Zeeland)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Engels (Zuid-Afrika)",
+    // [Auto-translated] "Spanish"
+    es: "Spaans",
+    // [Auto-translated] "Estonian"
+    et: "Ests",
+    // [Auto-translated] "Basque"
+    eu: "Baskisch",
+    // [Auto-translated] "Persian"
+    fa: "Perzisch",
+    // [Auto-translated] "Finnish"
+    fi: "Fins",
+    // [Auto-translated] "Filipino"
+    fil: "Filipijns",
+    // [Auto-translated] "French"
+    fr: "Frans",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Frans (Canada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Frans (Zwitserland)",
+    // [Auto-translated] "Hebrew"
+    he: "Hebreeuws",
+    // [Auto-translated] "Hindi"
+    hi: "Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Kroatisch",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Haïtiaans",
+    // [Auto-translated] "Hungarian"
+    hu: "Hongaars",
+    // [Auto-translated] "Indonesian"
+    id: "Indonesisch",
+    // [Auto-translated] "Icelandic"
+    is: "IJslands",
+    // [Auto-translated] "Italian"
+    it: "Italiaans",
+    // [Auto-translated] "Japanese"
+    ja: "Japans",
+    // [Auto-translated] "Georgian"
+    ka: "Georgisch",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazachs",
+    // [Auto-translated] "Korean"
+    ko: "Koreaans",
+    // [Auto-translated] "Lithuanian"
+    lt: "Litouws",
+    // [Auto-translated] "Latvian"
+    lv: "Lets",
+    // [Auto-translated] "Macedonian"
+    mk: "Macedonisch",
+    // [Auto-translated] "Burmese"
+    mm: "Birmaans",
+    // [Auto-translated] "Malay"
+    ms: "Maleis",
+    // [Auto-translated] "Dutch"
+    nl: "Nederlands",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Nederlands (België)",
+    // [Auto-translated] "Norwegian"
+    no: "Noors",
+    // [Auto-translated] "Polish"
+    pl: "Pools",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugees",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugees (Brazilië)",
+    // [Auto-translated] "Romanian"
+    ro: "Roemeens",
+    // [Auto-translated] "Russian"
+    ru: "Russisch",
+    // [Auto-translated] "Slovak"
+    sk: "Slowaaks",
+    // [Auto-translated] "Slovenian"
+    sl: "Sloveens",
+    // [Auto-translated] "Serbian"
+    sr: "Servisch",
+    // [Auto-translated] "Swedish"
+    sv: "Zweeds",
+    // [Auto-translated] "Swahili"
+    sw: "Swahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tadzjieks",
+    // [Auto-translated] "Thai"
+    th: "Thais",
+    // [Auto-translated] "Turkish"
+    tr: "Turks",
+    // [Auto-translated] "Ukrainian"
+    uk: "Oekraïens",
+    // [Auto-translated] "Urdu"
+    ur: "Urdu",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnamees",
+    // [Auto-translated] "Chinese"
+    zh: "Chinees",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Chinees (vereenvoudigd)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Chinees (Traditioneel)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export var nlStrings = {
     visibletrigger: "Zichtbaarheid wijzigen (verouderd)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Hetzelfde als de enquêtetaal"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Vb.: +1(999)-999-99-99"
@@ -2405,12 +2798,6 @@ export var nlStrings = {
     datetimemask: {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Bijv.: mm/dd/jjjj"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Bijv.: $",
-      // "Ex.: USD"
-      suffix: "Bijv.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export var nlStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Hiermee geeft u aan hoeveel kolommen dit deelvenster beslaat binnen de rasterlay-out.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Met deze tabel kunt u elke rasterkolom in het deelvenster configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."
+      gridLayoutColumns: "Met deze tabel kunt u elke rasterkolom in het deelvenster configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Geeft aan hoe vragen in dit paneel verschijnen wanneer ze alleen-lezen zijn. \"Alleen-lezen\" toont de vragen met hun gebruikelijke invoerbesturing, maar uitgeschakeld voor bewerking. \"Weergave\" toont antwoorden als tekst of andere niet-interactieve elementen. \"Inherit\" gebruikt de modus die is ingesteld voor het ouderpaneel, pagina of enquête (\"Alleen-lezen\" standaard)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export var nlStrings = {
       width: "Hiermee stelt u de breedte van het paneel in verhouding tot andere enquête-elementen in dezelfde lijn. Accepteert CSS-waarden (px, %, in, pt, enz.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Typ een sjabloon voor dynamische paneeltitels. Gebruik {panelIndex} voor de algemene positie van het paneel en {visiblePanelIndex} voor de volgorde tussen de zichtbare panelen. Voeg deze tijdelijke aanduidingen toe aan het patroon om automatische nummering toe te voegen.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Een fallback-tekst voor invoertitels die van toepassing is wanneer het invoertitelpatroon geen betekenisvolle waarde oplevert. Gebruik {panelIndex} voor de algemene positie van de entry en {visiblePanelIndex} voor de volgorde tussen zichtbare items.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Typ een sjabloon voor tabbladtitels. Gebruik {panelIndex} voor de algemene positie van een paneel en {visiblePanelIndex} voor de volgorde tussen zichtbare panelen. Voeg deze tijdelijke aanduidingen toe aan het patroon om automatische nummering toe te voegen.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export var nlStrings = {
       keyName: "Verwijs naar een vraagnaam om te vereisen dat een gebruiker in elk deelvenster een uniek antwoord geeft op deze vraag.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Activeert een bevestigingsprompt voordat een item wordt verwijderd.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Specificeer een expressie die het aantal vermeldingen berekent. Deze uitdrukking overschrijft de instelling \"Initiële aanstellingen\" en wordt opnieuw geëvalueerd telkens wanneer de waarden die hij verwijst veranderen. Het resultaat wordt beperkt door de instellingen \"Minimum aantal vermeldingen\" en \"Maximaal aantal vermeldingen\". Terwijl deze uitdrukking is ingesteld, kunnen respondenten geen vermeldingen handmatig toevoegen of verwijderen.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Specificeert het aantal vermeldingen dat op elke pagina van het paneel wordt weergegeven. '0' schakelt de paginering uit en toont alle vermeldingen.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Stelt respondenten in staat om vermeldingen te sorteren met behulp van de sorteerbalk.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definieert de initiële invoervolgorde. Respondenten kunnen deze wijzigen als sorteren is toegestaan. Bij sorteren op meerdere vragen sorteert elke vraag de vermeldingen binnen de volgorde die door de voorgaande vraag is vastgesteld. Sleep vragen om hun prioriteit te veranderen.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Wijst nummers toe aan vragen die zijn genest in het dynamische paneel."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Stelt respondenten in staat om rijen te sorteren door op kolomkoppen te klikken of de sorteerbalk te gebruiken.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definieert de initiële rijvolgorde. Respondenten kunnen deze wijzigen als sorteren is toegestaan. Bij sorteren op meerdere kolommen sorteert elke kolom rijen binnen de volgorde die door de voorgaande kolom is vastgesteld. Sleep kolommen om hun prioriteit te wijzigen.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" toont de sorteerbalk alleen wanneer de matrix geen sorteerbare kolomkoppen heeft: de kopstukken zijn verborgen, de matrix gebruikt de mobiele indeling, of rijen worden omgezet naar kolommen. \"Altijd\" toont de sorteerbalk zelfs wanneer sorteerbare kolomkoppen zichtbaar zijn.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Specificeer een expressie die het aantal rijen berekent. Deze uitdrukking overschrijft de instelling \"Initiële aantal rijen\" en wordt opnieuw geëvalueerd telkens wanneer de waarden die hij verwijst veranderen. Het resultaat wordt beperkt door de instellingen \"Minimum aantal rijen\" en \"Maximaal aantal rijen\". Zolang deze uitdrukking is ingesteld, kunnen respondenten geen rijen handmatig toevoegen of verwijderen.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Activeert een bevestigingsprompt voordat een rij wordt verwijderd.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Breidt de detailsectie automatisch uit wanneer een nieuwe rij aan de matrix wordt toegevoegd."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Specificeert het aantal rijen dat op elke pagina van de matrix wordt weergegeven. '0' schakelt de paginering uit en toont alle rijen.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Geeft aan hoeveel velden een respondent tegelijk kan sorteren.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Dupliceert antwoorden uit de laatste rij en wijst ze toe aan de volgende toegevoegde dynamische rij.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export var nlStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Lange teksten in keuze-opties genereren automatisch regeleinden die in het vervolgkeuzemenu passen. Schakel de selectie uit als u wilt dat de teksten worden afgekapt.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Hiermee geeft u aan hoeveel kolommen deze vraag beslaat binnen de rasterlay-out."
+      effectiveColSpan: "Hiermee geeft u aan hoeveel kolommen deze vraag beslaat binnen de rasterlay-out.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Geeft aan hoe de vraag eruitziet wanneer deze alleen-lezen is. \"Alleen-lezen\" toont de vraag met de gebruikelijke invoerbesturing, maar uitgeschakeld voor bewerking. \"Weergave\" toont antwoorden als tekst of andere niet-interactieve elementen. \"Inherit\" gebruikt de modus die is ingesteld voor het ouderpaneel, de pagina of de enquête (\"Alleen-lezen\" standaard).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Toont hints voor beschikbare toetsenbordacties onder deze vraag. De optie \"Inherit\" past de instelling op surveyniveau toe."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export var nlStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Selecteer deze optie als u wilt voorkomen dat respondenten uw enquête invullen.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Specificeert hoe alleen-lezen-vragen verschijnen, ook op de previewpagina. \"Alleen-lezen\" (standaard) toont vragen met hun gebruikelijke invoerbesturing, maar uitgeschakeld voor bewerking. \"Bekijken\" toont antwoorden als tekst of andere niet-interactieve elementen.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Hiermee stelt u de locatie van de voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer."
     },
@@ -2633,7 +3050,9 @@ export var nlStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Als deze optie is geselecteerd, wordt er een afzonderlijke kolom gemaakt voor elke keuzeoptie.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Wanneer deze is ingesteld op 0, worden de opties op één regel weergegeven. Wanneer deze instelling is ingesteld op -1, wordt de werkelijke waarde overgenomen van de eigenschap 'Aantal geneste kolommen' van de bovenliggende matrix."
+      colCount: "Rangschikt keuzeopties in een lay-out met meerdere kolommen. Wanneer deze is ingesteld op 0, worden de opties op één regel weergegeven. Wanneer deze instelling is ingesteld op -1, wordt de werkelijke waarde overgenomen van de eigenschap 'Aantal geneste kolommen' van de bovenliggende matrix.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Geeft aan hoe cellen in deze kolom verschijnen wanneer ze alleen-lezen zijn. \"Alleen-lezen\" toont de cellen met hun gebruikelijke invoerbesturing, maar uitgeschakeld voor bewerking. \"View\" toont antwoorden als tekst of andere niet-interactieve elementen. \"Inherit\" gebruikt de modus die is ingesteld voor de matrix of survey (\"Alleen-lezen\" standaard)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export var nlStrings = {
     questionErrorLocation: "Hiermee stelt u de locatie van een foutmelding in ten opzichte van de vraag met ongeldige invoer. Kies tussen: \"Top\" - er wordt een fouttekst bovenaan het vraagvak geplaatst; \"Onderaan\" - er wordt een fouttekst onderaan het vraagvak geplaatst.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Selecteer of u het eerste invoerveld op elke pagina klaar wilt maken voor tekstinvoer.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Toont letters (A, B, C, ...) naast keuzes in Radio Button Group, selectievakjes en vragen in de Image Picker. Respondenten kunnen keuzes selecteren door op de bijbehorende lettertoetsen te drukken. Je kunt deze instelling overschrijven voor individuele vragen.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Toont letters (A, B, C, ...) naast keuzes en laat respondenten deze selecteren door op de bijbehorende lettertoetsen te drukken. De optie \"Inherit\" gebruikt de instelling op enquêteniveau."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Toont hints voor beschikbare toetsenbordacties onder de vragen. Je kunt deze instelling overschrijven voor individuele vragen.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Behoudt de oorspronkelijke volgorde van vragen of maakt ze willekeurig. Het effect van deze instelling is alleen zichtbaar op het tabblad Voorbeeld.",
     // [Auto-translated] "For text entry questions only."
@@ -2793,7 +3220,9 @@ export var nlStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Hiermee stelt u de zichtbaarheid van navigatieknoppen op de pagina in. De optie \"Overerven\" past de instelling op enquêteniveau toe, die standaard op \"Zichtbaar\" staat.",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Met deze tabel kunt u elke rasterkolom op de pagina configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom."
+      gridLayoutColumns: "Met deze tabel kunt u elke rasterkolom op de pagina configureren. Het stelt automatisch het breedtepercentage voor elke kolom in op basis van het maximale aantal elementen in een rij. Als u de rasterlay-out wilt aanpassen, past u deze waarden handmatig aan en definieert u de titelbreedte voor alle vragen in elke kolom.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Geeft aan hoe vragen op deze pagina verschijnen wanneer ze alleen-lezen zijn. \"Alleen-lezen\" toont de vragen met hun gebruikelijke invoerbesturing, maar uitgeschakeld voor bewerking. \"Bekijken\" toont antwoorden als tekst of andere niet-interactieve elementen. \"Inherit\" gebruikt de modus die voor de enquête is ingesteld (\"Alleen-lezen\" standaard)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Hiermee stelt u de locatie van een timer op een pagina in.",
@@ -2911,6 +3340,22 @@ export var nlStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Selecteer of u de vraagwaarde met een toegepast masker wilt opslaan in enquêteresultaten."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Een regio waarvan de formaten van toepassing zijn op datum-, tijd-, numerieke en valuta-invoermaskers. Indien niet gespecificeerd, wordt de surveytaal gebruikt.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Overschrijft het datumformaat van de regio dat in invoermaskers wordt gebruikt. Het patroon kan scheidingstekens en de volgende tijdelijke aanduidingen bevatten: <br>'m' - Maandnummer.<br> 'mm' - Maandnummer, met een voorpunt nul voor enkelcijferige waarden. <br>'d' - Dag van de maand. <br>'dd' - Dag van de maand, met een leidende nul voor enkelcijferige waarden. <br>'yy' - De laatste twee cijfers van het jaar. <br>'yyyy' - Viercijferig jaar.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Overschrijft het tijdsformaat van de regio dat in invoermaskers wordt gebruikt. Het patroon kan scheidingstekens en de volgende tijdelijke aanduidingen bevatten: <br>'H' - Uren in 24-uursformaat.<br> 'HH' - Uren in 24-uursformaat, met een voorste nul voor enkelcijferige waarden. <br>'h' - Uren in 12-uursformaat. <br>'hh' - Uren in 12-uursformaat, met een vooraanstaande nul voor enkelcijferige waarden. <br>'MM' - Minuten. <br>'ss' - Seconden. <br>'TT' - 12-uurs klokperiode in hoofdletters (AM/PM). <br>'tt' - 12-uurs klokperiode in kleine letters (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Overschrijft het symbool dat de regio gebruikt om het fractiedeel te scheiden van het gehele deel van een weergegeven getal in invoermaskers.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Overschrijft het symbool dat de regio gebruikt om de cijfers van een groot getal in groepen van drie te scheiden in invoermaskers.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Overschrijft het muntsymbool of de code van de regio die in invoermaskers wordt gebruikt.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Overschrijft het muntpatroon van de regio dat in invoermaskers wordt gebruikt. Het patroon kan de volgende tijdelijke aanduidingen bevatten: <br>'@' - Valutasymbool of -code.<br> '#' - Nummer. <br>'-' - Positie van het minteken in negatieve waarden (als het wordt weggelaten, wordt het minteken aan het begin geplaatst)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Het patroon kan letterlijke tekenreeksen en de volgende tijdelijke aanduidingen bevatten: '9' - voor een cijfer; \"a\" - voor een hoofdletter of kleine letter; '#' - voor een cijfer of een hoofdletter of kleine letter. Gebruik backslash '\\' om een teken te escapen."
@@ -2925,13 +3370,15 @@ export var nlStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Een symbool dat wordt gebruikt om de cijfers van een groot getal in groepen van drie te scheiden.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Hiermee beperkt u het aantal cijfers dat moet worden behouden na de komma voor een weergegeven getal."
+      precision: "Hiermee beperkt u het aantal cijfers dat moet worden behouden na de komma voor een weergegeven getal.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Toont achterliggende nullen in het fractiedeel tot aan de gespecificeerde precisie. Bijvoorbeeld, met een precisie van 2 wordt een invoerwaarde van 1,2 weergegeven als 1,20."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Een of meer symbolen die vóór de waarde moeten worden weergegeven.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Een of meer symbolen die na de waarde moeten worden weergegeven."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Een valutasymbool of -code weergegeven met de waarde. Het symbool van de regio wordt standaard gebruikt. Maak deze eigenschap schoon om geen symbool weer te geven.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Specificeert de posities van het getal, het valutasymbool en het minteken. Het patroon kan de volgende tijdelijke aanduidingen bevatten: <br>'@' - Valutasymbool of -code.<br> '#' - Nummer. <br>'-' - Positie van het minteken in negatieve waarden (als het wordt weggelaten, staat het minteken aan het begin)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2982,6 +3429,8 @@ export var nlStrings = {
     tabAlign: "Uitlijning van tabbladen",
     // [Auto-translated] "File source type"
     sourceType: "Type bestandsbron",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Standaardcamera",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Aanpassen aan container",
     // [Auto-translated] "Set value expression"
@@ -3302,12 +3751,702 @@ export var nlStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Preset toegepast"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Lijn: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Gebruik de voorgestelde naam"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Verwijder het herhaalde item"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Gebruik het voorgestelde type"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Gebruik de voorgestelde functie"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Gebruik het voorgestelde masker"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Geef het element een vrije naam"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Geef het element een vrije naam"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Verwijder het eigendom"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Gebruik de dichtstbijzijnde toegestane waarde",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Verwijder het eigendom",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Gebruik de voorgestelde waarde"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Zet de waarde om in een lijst"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Geef het element een naam"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Verwijder het eigendom",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Hernoem het pand"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Gebruik de voorgestelde naam",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Gebruik de voorgestelde naam"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Gebruik de voorgestelde naam"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Gebruik het voorgestelde type"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Gebruik het voorgestelde type"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "De uitdrukking \"{expressie}\" kan niet worden ontleed."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{naam}\" wordt niet gevonden - er bestaat geen vraag, paneel, pagina, berekende waarde of variabele met die naam.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" wordt niet gevonden in {containerType} \"{root}\" (referentie: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" wordt niet gevonden in het \"{scopePrefix}\"-scope (referentie: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "De keyName van \"{name}\" noemt \"{key}\" - \"{name}\" heeft geen {keyNoun} bij die naam, dus validatie van dubbele sleutels wordt nooit uitgevoerd.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{naam}\" wordt niet gevonden."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "De {prop} van \"{name}\" verwijst naar het element zelf (referentie: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "De naam \"{naam}\" wordt gedupliceerd.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "De berekende waarde naam \"{name}\" wordt al gebruikt door een andere berekende waarde.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "De berekende waarde \"{naam}\" deelt zijn naam met een ander element, dus het ene element schaduwt het andere."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "De {nameKindText} \"{name}\" van deze {ownerText} is ook de ingebouwde surveyvariabele {{builtIn}} - de survey beantwoordt eerst {{name}}, dus deze is niet bereikbaar in expressies.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "De valueName \"{valueName}\" van \"{name}\" deelt de waarde van {otherType} \"{otherName}\", die geen eigen waarde heeft - \"{otherName}\" behandelt de velden die \"{name}\" toevoegt als onbekend, en clearIncorrectValues() verwijdert ze. Stel ook de valueName in op \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "De rij \"{key}\" van het matrixdropdown \"{otherName}\" is ook {sharedKeyText} \"{name}\" en deelt zijn waarde - een celobject en één enkele waarde kunnen niet allebei onder één sleutel staan; de runtime behoudt de ene en verwijdert de andere.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "De {type} \"{name}\" deelt de datasleutel \"{dataKey}\" met {otherType} \"{otherName}\" - het houdt {shapeText} daar, terwijl \"{otherName}\" {otherShapeText} behoudt; de ene kan de waarde van de ander niet vasthouden, dus clearIncorrectValues() verwijdert deze.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "De datasleutel \"{dataName}\" is ook de commentaarsleutel van \"{base}\" (de datasleutel plus \"{suffix}\") - de ene schrijfwijze overschrijft stilletjes de andere.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "De datasleutel \"{dataName}\" is ook de totalensleutel van \"{base}\" (de datasleutel plus \"{suffix}\") - de ene schrijfstijl overschrijft stilletjes de andere.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "De {trigger}-trigger stelt de variabele \"{name}\" in, die ook de datasleutel is van vraag \"{questionName}\" - de variabele antwoordt vanaf dat moment {{name}}, niet de vraag."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "De naam \"{name}\" is gereserveerd - een lid van Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "De valueName \"{valueName}\" van \"{name}\" is gereserveerd - een lid van Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "De kolom \"{name}\" van \"{matrixName}\" is gereserveerd - een lid van Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Het item \"{name}\" van \"{questionName}\" is gereserveerd - een lid van Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "De rij \"{rowValue}\" van \"{name}\" is gereserveerd - een lid van Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "De berekende waarde \"{name}\" is gereserveerd - een lid van Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" heeft een onbekend type \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{naam}\" heeft geen type - een element zonder type wordt weggelaten."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" is geen eigenschap van {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" van {ownerText} is niet serialiseerbaar - het wordt van kracht bij het laden en wordt uit de JSON verwijderd telkens wanneer de survey opnieuw wordt opgeslagen.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" en \"{aliasKey}\" van {ownerText} zijn twee namen van één eigenschap - de runtime past ze toe in de volgorde waarin de JSON ze schrijft, dus \"{winner}\" wint.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" is ingesteld op \"{name}\", maar inputType \"{inputType}\" kent geen grenzen - de looptijd negeert het."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "De {key} van {ownerText} is {valueText} - niet een van de toegestane waarden ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "De {key} van {ownerText} is {value}, buiten het toegestane bereik {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "De valueName \"{valueName}\" van \"{name}\" bevat een \".\" - expressies lezen {{valueName}} als een pad naar \"{rootKey}\", dus de datasleutel zelf kan nooit worden geadresseerd."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} heeft geen \"{key}\" - de eigenschap is vereist voor een {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "De naam van de {className} is {valueText}, geen string - de survey kan deze niet laden."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "De \"{key}\" van {ownerText} is geen array - de eigenschap bevat een lijst, en de runtime verpakt de waarde in een array met één item."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "De variabeledefinitie verklaart \"{variabele}\", wat ook de datasleutel is van vraag \"{name}\" - het instellen van de variabele verwijdert het antwoord dat onder die sleutel is opgeslagen, en {{name}} beantwoordt vanaf dat moment de hostwaarde.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "De variabeledefinitie geeft \"{variabele}\" aan, wat ook de naam is van de berekende waarde \"{name}\" - beide schrijven dezelfde slot, en degene die het laatst draait wint."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition is geen survey JSON-object, dus er wordt geen variabele gedeclareerd en geen presetwaarde kan worden gecontroleerd.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets is geen array, dus er wordt geen preset gedeclareerd.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Preset #{index} is geen object.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Preset #{index} heeft geen naam, dus niets kan ernaar verwijzen.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Preset \"{preset}\" draagt geen variabelenobject, dus het stelt niets in.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Preset \"{preset}\" wordt twee keer gedeclareerd - een zoekopdracht met die naam beantwoordt de eerste.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Preset \"{preset}\" stelt \"{variabele}\", wat de variabeledefinitie niet declareert.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Preset \"{preset}\" zet \"{variabel}\" op een waarde die de variabeledefinitie afwijst: {error}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "De functie \"{functionName}\" wordt niet geregistreerd."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "De berekende waarde \"{names}\" verwijst naar zichzelf in een eigen uitdrukking.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Berekende waarden {namen} hangen van elkaar af."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "De trigger reageert op de waarde die hij zelf zet (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Triggers vormen een lus via de waarden die ze instellen: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "Het {label} leest de waarde die het zelf schrijft - het draait alleen wanneer een andere waarde verandert, dus het draait helemaal niet.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Waarden worden geschreven in een lus: {chain}. Elke schrijving voert de expressies die het lezen opnieuw uit, dus de uiteindelijke waarden hangen af van de volgorde waarin de vragen worden beantwoord."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "De voorwaarde vergelijkt \"{naam}\" met {waarden} - niet onder zijn keuzes. Beschikbaar: {beschikbaar}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "De voorwaarde vergelijkt \"{naam}\" met {waarden} - geen keuzewaarde bevat het. Beschikbaar: {beschikbaar}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "De voorwaarde past \"{operator}\" toe op \"{name}\": \"{recordName}\" ({questionType}) heeft geen waarde om te vergelijken.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "De voorwaarde past \"{operator}\" toe op \"{name}\": \"{recordName}\" geldt {valueShapeText} - ordening en rekenkundige operatoren zijn niet van toepassing.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "De voorwaarde geldt voor \"{operator}\" op \"{name}\": \"{recordName}\" is een booleaanse vraag - ordeningsoperatoren zijn daar niet op van toepassing.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "De voorwaarde past \"{operator}\" toe op \"{name}\": \"{recordName}\" is een tekstvraag - de waarde is een string, dus numerieke vergelijking is gebaseerd op impliciete conversie.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "De voorwaarde past \"{operator}\" toe op \"{name}\": \"{recordName}\" bevat een datumstring - vergelijking met het getal {constValue} kan niet gelden.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "De voorwaarde geldt voor \"{operator}\" op \"{name}\": \"{recordName}\" is numeriek - vergelijken met de string \"{constValue}\" kan niet gelden.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "De voorwaarde past \"{operator}\" toe op \"{name}\": \"{recordName}\" bevat een array van geselecteerde waarden, dus \"=\" vergelijkt de hele array.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "De voorwaarde past \"{operator}\" toe op \"{name}\": \"{recordName}\" is een booleaanse vraag - vergelijken met {constValue} kan niet gelden."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "De {prop} \"{expressie}\" is altijd onwaar, dus \"{naam}\" wordt nooit getoond.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "De {prop} \"{uitdrukking}\" geldt nooit, omdat {feiten}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "De {prop} \"{expressie}\" geldt nooit - geen toegestane waarde voldoet hieraan: {feiten}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "De {prop} \"{expressie}\" spreekt zichzelf tegen: {feiten}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "De {prop} \"{expressie}\" is altijd waar, dus beslist hij niets.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "De {prop} \"{expressie}\" is rekenkunde, geen vergelijking, dus het geeft nooit een ja of nee.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Een deel van de {prop} \"{expressie}\" heeft een resultaat dat vooraf bekend is.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "De {prop} \"{expressie}\" geldt altijd, omdat {feiten} - het beslist niets."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "De {prop} \"{expressie}\" leest geen vraag of variabele."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "De standaardwaarde van \"{naam}\" is {valuesText}, die het nooit kan vasthouden. Toegestaan: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Het juiste antwoord van \"{naam}\" is {valuesText}, wat het nooit kan vasthouden. Toegestaan: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "De trigger zet \"{name}\" op {valuesText}, wat hij nooit kan vasthouden. Toegestaan: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "De standaard rijwaarde zet \"{name}\" op {valuesText}, wat het nooit kan vasthouden. Toegestaan: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "De standaard paneelwaarde zet \"{name}\" op {valuesText}, wat het nooit kan vasthouden. Toegestaan: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "De {prop} van \"{name}\" noemt \"{key}\" - zo'n reeks is er niet. Beschikbaar: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "De {prop} van \"{name}\" noemt \"{key}\" - geen dergelijke kolom. Beschikbaar: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "De {prop} van \"{naam}\" noemt \"{key}\" - geen vraag over zo'n sjabloon. Beschikbaar: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "De copyvalue-trigger kopieert \"{fromName}\" naar \"{setToName}\", maar \"{fromName}\" houdt {sourceShapeText} en \"{setToName}\" houdt {targetShapeText} vast.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "De kopieerwaarde-trigger kopieert \"{fromName}\" naar \"{setToName}\", maar geen waarde van \"{fromName}\" behoort tot de waarden die \"{setToName}\" kan bevatten. Toegestaan: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" kopieert zijn keuzes van \"{source}\", maar er bestaat geen twijfel over die naam.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{naam}\" kopieert zijn keuzes van zichzelf.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" kopieert zijn keuzes van \"{source}\" ({sourceType}), dat noch keuzes noch een array van waarden bevat.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" leest {prop} \"{field}\" van \"{source}\", maar {sourceType} \"{source}\" heeft zo'n {fieldNoun} niet."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Een ander item van de {prop} van \"{name}\" heeft al de waarde {valueText} - de runtime houdt beide items behouden.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "De keuzes \"{name}\" bevatten {valueText} terwijl {toggleProp} aan staat - het botst met het ingebouwde {specialItemText}-item."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "De {trigger}-trigger richt zich op pagina \"{name}\", die niet bestaat.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "De {trigger}-trigger richt zich op \"{name}\", maar {containerType} \"{root}\" heeft geen {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "De {trigger} trigger {werkwoord} \"{name}\", maar er bestaat geen {kindText} met die naam."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Het triggertype \"{type}\" is niet bekend.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "De trekker heeft geen type."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Het validatortype \"{type}\" van \"{name}\" is niet bekend.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Een validator van \"{naam}\" heeft geen type."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "De {validatorType} validator van \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "De {validatorType}-validator van \"{name}\" vereist minstens {min} en hooguit {max} - geen enkel antwoord voldoet eraan.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "De answercount-validator van \"{name}\" vereist minstens {minCount}-antwoorden, boven de {selectable} keuzes die samen kunnen worden geselecteerd.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "De regex-validator van \"{naam}\" heeft een patroon dat de engine afwijst: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "De expressievalidator van \"{naam}\" heeft geen expressie, dus hij wordt altijd goedgekeurd."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "De {minProp} van \"{name}\" is {min}, boven zijn {maxProp} van {max} - de looptijd past er stilletjes een van aan.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "De {countProp} van \"{name}\" is {count}, {direction} is {boundProp} van {bound} - de run time klemt het.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "De {stepProp} van \"{name}\" is {step}, maar het bereik waar het doorheen stapt ({minProp}.. {maxProp}) bestrijkt alleen {range} - de run time klemt het aan.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "De minSelectedChoices van \"{name}\" is {min}, boven de {selectable} keuzes die samen geselecteerd kunnen worden - de vraag kan nooit beantwoord worden."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{naam}\" kan nooit zichtbaar worden: het is zichtbaarIf leest {reads}, wat {deadClause} is, dus de voorwaarde geldt nooit."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "Het maskType \"{maskType}\" van \"{name}\" is geen bekend masker - de looptijd valt terug naar helemaal geen masker.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "De maskSettings van \"{name}\" stellen \"{key}\" in, wat geen eigenschap is van het \"{maskType}\"-masker - de run time laat het geruisloos vallen.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "De maskSettings van \"{name}\" worden ingesteld zonder maskType - de runtime behoudt alleen \"saveMaskedValue\" en laat de rest vallen.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Het {maskType}-masker van \"{name}\" geldt voor geen invoer: inputType \"{inputType}\" wordt alleen gemaskeerd voor tekst en tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Het datetime-masker van \"{name}\" stelt min/max zonder patroon - de grenzen gelden voor de datumdelen van het patroon, dus zonder patroon doen ze niets.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Het {maskType}-masker van \"{name}\" staat ten minste {min} en maximaal {max} toe - geen enkele waarde voldoet eraan."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Het dynamische paneel \"{naam}\" heeft een leeg sjabloon - de panelen hebben niets om te renderen.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "De {kindText} \"{name}\" bevat geen elementen.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "De {kindText} \"{name}\" heeft geen elementen die ooit kunnen worden weergegeven - elk element is verborgen, bewaakt door een voorwaarde die nooit geldt, of leeg.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "De detailelementen van \"{name}\" worden nooit getoond: de detailPanelMode is \"none\", wat de standaard is."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Positie: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Het is opgebouwd uit de legacy naam, operator en waarde-eigenschappen van de trigger.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Binnen: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Bedoelde je \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Als het een aangepaste component is, geef dan de definitie door aan de linter om volledige analyse mogelijk te maken.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Registreer de functie voordat je lint, of vermeld deze in de linteropties.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Een verkeerd gespeld type wordt stilletjes weggelaten tijdens runtime, en een aangepaste trigger wordt niet gedekt door de doel- en cycluscontroles.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Als het een variabele is die tijdens de run is ingesteld, vermeld deze dan in de linteropties.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "De lus kan onbereikbaar zijn als de triggervoorwaarden nooit samenwerken - verifieer de expressies.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "Een defaultValueExpression geldt alleen totdat de vraag is beantwoord.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "In uitdrukking: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Vermeld in bindingen.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Genoemd in de keuzes ByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Vermeld in de tekst \"{0}\".", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () leest die naam uit elke vermelding van {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Het {0}()-argument noemt geen vraag, paneel of pagina.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "De deserializer laat een sleutel vallen die hij niet kent.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "De deserializer laat een validator vallen die hij niet kan oplossen, dus niets valideert.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "Het inputType is \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Het is de datasleutel van \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "en",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} is altijd {waarde}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} is {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "Tenminste {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "hooguit {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} kan niet beide {waarden} zijn",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} kan niet {waarde} zijn en niet zijn",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} kan niet leeg zijn en {waarde} zijn",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} kan niet leeg zijn en niet leeg",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} kan niet boven {min} en onder {max} liggen",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} wordt gevraagd er een te zijn zonder enige waarde"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "\"{0}.\"-referenties zijn alleen beschikbaar binnen een matrixcel of een matrixdetailpaneel.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" is alleen beschikbaar in een matrixcel of een matrixdetailpaneel.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "\"{0}.\"-referenties zijn alleen beschikbaar binnen een dynamisch paneel of een paneelcontainer.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "\"{0}.\"-referenties zijn alleen beschikbaar binnen een dynamisch paneel.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" is alleen beschikbaar in een dynamisch paneel.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" is alleen beschikbaar binnen keuze-, rij- en kolomcondities.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\"-referenties zijn alleen beschikbaar binnen een samengestelde kwestie.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" is niet beschikbaar binnen een inArray-filter, dat zowel tegen het item als de enquête draait.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" is een kolom van deze matrix - verwijs ernaar met het rijvoorvoegsel.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" is een kwestie van dit dynamische paneel - verwijs ernaar met het paneelprefix."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Stel inputType: \"number\" in op \"{0}\" als het nummers verzamelt.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Gebruik \"contains\" of \"anyof\" voor multi-select waarden."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "pagina",
+        // [Auto-translated] "panel"
+        panel: "Paneel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Naam",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "Naam"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "Berekende waarde",
+        // [Auto-translated] "element"
+        default: "Element"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "De Survey",
+        // [Auto-translated] "the {0}"
+        className: "De {0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Overig",
+        // [Auto-translated] "None"
+        none: "Geen enkele",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Weiger te antwoorden",
+        // [Auto-translated] "Don't know"
+        dontknow: "Weet het niet"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "Nooit vuren",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "Wijst elk antwoord af",
+        // [Auto-translated] "cannot validate"
+        default: "kan niet valideren"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "De vraag bevat geen antwoord om te valideren",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "Een lengte wordt van een tekstwaarde afgelezen, en dit antwoord bevat geen enkele",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Het antwoord is geen getal en kan dat ook nooit zijn",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Een nummer komt nooit overeen met een e-mailadres",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Het antwoord is geen lijst met waarden",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Het antwoord is geen waarde die het kan controleren"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "een array",
+        // [Auto-translated] "an object"
+        object: "een object"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "een rij matrix",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "een item van meervoudige tekst",
+        // [Auto-translated] "a row or item of a question"
+        default: "een rij of item van een vraag"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "een array van objecten",
+        // [Auto-translated] "an object"
+        object: "een object",
+        // [Auto-translated] "a plain value"
+        plain: "een gewone waarde",
+        // [Auto-translated] "a value"
+        default: "Een waarde"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "een array van geselecteerde waarden",
+        // [Auto-translated] "a single value"
+        scalar: "één enkele waarde",
+        // [Auto-translated] "a value"
+        default: "Een waarde"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "Hieronder",
+        // [Auto-translated] "above"
+        above: "Boven"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "nooit zichtbaar is en nooit een waarde ontvangt",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "nooit zichtbaar zijn en nooit een waarde ontvangen"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Vraag",
+        // [Auto-translated] "question or variable"
+        questionvalue: "Vraag of variabele",
+        // [Auto-translated] "page"
+        page: "pagina"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "Leest",
+        // [Auto-translated] "navigates to"
+        gotoName: "navigeert naar",
+        // [Auto-translated] "sets"
+        default: "Verzamelingen"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Sjabloonvraag",
+        // [Auto-translated] "column"
+        default: "Kolom"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Sjabloonvraag",
+        // [Auto-translated] "column"
+        matrixdynamic: "Kolom",
+        // [Auto-translated] "item"
+        multipletext: "Item",
+        // [Auto-translated] "row"
+        matrix: "Rij",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Rij",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Kolom",
+        // [Auto-translated] "field"
+        default: "Veld"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Item 1" }, { value: "item2", text: "Item 2" }, { value: "item3", text: "Item 3" }],
-    columns: [{ value: "column1", text: "Kolom 1" }, { value: "column2", text: "Kolom 2" }, { value: "column3", text: "Kolom 3" }],
-    rows: [{ value: "row1", text: "Rij 1" }, { value: "row2", text: "Rij 2" }],
-    matrixColumns: [{ name: "column1", title: "Kolom 1" }, { name: "column2", title: "Kolom 2" }, { name: "column3", title: "Kolom 3" }]
+    choices: [
+      {
+        value: "item1",
+        // [Auto-translated] "Item 1"
+        text: "Punt 1"
+      },
+      {
+        value: "item2",
+        // [Auto-translated] "Item 2"
+        text: "Punt 2"
+      },
+      {
+        value: "item3",
+        // [Auto-translated] "Item 3"
+        text: "Punt 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Kolom 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Kolom 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Kolom 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Rij 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Rij 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Kolom 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Kolom 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Kolom 3"
+      }
+    ]
   }
 };
 setupLocale({ localeCode: "nl", strings: nlStrings });

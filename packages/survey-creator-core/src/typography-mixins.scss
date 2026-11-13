@@ -1,74 +1,89 @@
+$font-family-fallbacks:
+  Inter,
+  system-ui,
+  -apple-system,
+  BlinkMacSystemFont,
+  Roboto,
+  "Noto Sans",
+  "Helvetica Neue",
+  Ubuntu,
+  "Segoe UI",
+  Arial,
+  sans-serif;
+
+$font-family: var(--sjs2-typography-font-family-text), $font-family-fallbacks;
+
 @mixin sjs2--typography--large {
-  font-family: var(--sjs2-typography-font-family-text);
+  font-family: $font-family;
   font-weight: var(--sjs2-typography-font-weight-basic);
   font-size: var(--sjs2-typography-font-size-large);
   line-height: var(--sjs2-typography-line-height-large);
 }
 
 @mixin sjs2--typography--large-strong {
-  font-family: var(--sjs2-typography-font-family-text);
+  font-family: $font-family;
   font-weight: var(--sjs2-typography-font-weight-strong);
   font-size: var(--sjs2-typography-font-size-large);
   line-height: var(--sjs2-typography-line-height-large);
 }
 
 @mixin sjs2--typography--medium {
-  font-family: var(--sjs2-typography-font-family-text);
+  font-family: $font-family;
   font-weight: var(--sjs2-typography-font-weight-basic);
   font-size: var(--sjs2-typography-font-size-medium);
   line-height: var(--sjs2-typography-line-height-medium);
 }
 
 @mixin sjs2--typography--medium-strong {
-  font-family: var(--sjs2-typography-font-family-text);
+  font-family: $font-family;
   font-weight: var(--sjs2-typography-font-weight-strong);
   font-size: var(--sjs2-typography-font-size-medium);
   line-height: var(--sjs2-typography-line-height-medium);
 }
 
 @mixin sjs2--typography--default {
-  font-family: var(--sjs2-typography-font-family-text);
+  font-family: $font-family;
   font-weight: var(--sjs2-typography-font-weight-basic);
   font-size: var(--sjs2-typography-font-size-default);
   line-height: var(--sjs2-typography-line-height-default);
 }
 
 @mixin sjs2--typography--default-strong {
-  font-family: var(--sjs2-typography-font-family-text);
+  font-family: $font-family;
   font-weight: var(--sjs2-typography-font-weight-strong);
   font-size: var(--sjs2-typography-font-size-default);
   line-height: var(--sjs2-typography-line-height-default);
 }
 
 @mixin sjs2--typography--default-code {
-  font-family: var(--sjs2-typography-font-family-code);
+  font-family: var(--sjs2-typography-font-family-code), $font-family-fallbacks;
   font-weight: var(--sjs2-typography-font-weight-basic);
   font-size: var(--sjs2-typography-font-size-default);
   line-height: var(--sjs2-typography-line-height-default);
 }
 
 @mixin sjs2--typography--small {
-  font-family: var(--sjs2-typography-font-family-text);
+  font-family: $font-family;
   font-weight: var(--sjs2-typography-font-weight-basic);
   font-size: var(--sjs2-typography-font-size-small);
   line-height: var(--sjs2-typography-line-height-small);
 }
 
 @mixin sjs2--typography--small-strong {
-  font-family: var(--sjs2-typography-font-family-text);
+  font-family: $font-family;
   font-weight: var(--sjs2-typography-font-weight-strong);
   font-size: var(--sjs2-typography-font-size-small);
   line-height: var(--sjs2-typography-line-height-small);
 }
 
 @mixin sjs2--typography--component-caption-content {
-  font-family: var(--sjs2-typography-font-family-component-caption-content);
+  font-family: var(--sjs2-typography-font-family-component-caption-content), $font-family-fallbacks;
   font-size: var(--sjs2-typography-font-size-component-caption-content);
   font-weight: var(--sjs2-typography-font-weight-component-caption-content);
   line-height: var(--sjs2-typography-line-height-component-caption-content);
 }
 @mixin sjs2--typography--component-caption-hint {
-  font-family: var(--sjs2-typography-font-family-component-caption-hint);
+  font-family: var(--sjs2-typography-font-family-component-caption-hint), $font-family-fallbacks;
   font-size: var(--sjs2-typography-font-size-component-caption-hint);
   font-weight: var(--sjs2-typography-font-weight-component-caption-hint);
   line-height: var(--sjs2-typography-line-height-component-caption-hint);

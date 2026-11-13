@@ -142,6 +142,10 @@ export var czStrings = {
     jsonHideErrors: "Skrýt chyby",
     // "Show errors"
     jsonShowErrors: "Zobrazit chyby",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Oprava chyby",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "Průzkumný JSON musí být objektem.",
     // "Undo"
     undo: "Zrušit",
     // "Redo"
@@ -246,6 +250,8 @@ export var czStrings = {
     translateUsigAI: "Automatický překlad Vše",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Přeložit z: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Přeložte zbývající řetězce",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Nepřeložené řetězce",
     // "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var czStrings = {
     translationSource: "Zdroj: ",
     // [Auto-translated] "Target: "
     translationTarget: "Cíl: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Zdrojový jazyk",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Cílový jazyk",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} přeložených strun",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Jste si jistý, že chcete smazat všechny přeložené řetězce pro vybraný jazyk?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Zobrazení formuláře",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Pohled na mřížku",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Překlad řetězců",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Průzkumné řetězce",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Žádné závazky k překladu",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Všechny řetězce jsou přeloženy",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} řetězce nejsou překládány",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "Odkazy na YouTube nejsou podporovány.",
     // [Auto-translated] "Export"
@@ -286,6 +314,10 @@ export var czStrings = {
     choicesLoadedFromWebLinkText: "Přejděte do nastavení",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Náhled načtených voleb",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Žádná množina výrazů",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Edit expression",
     // "HTML content will be here."
     htmlPlaceHolder: "Zde bude HTML obsah.",
     // "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var czStrings = {
       uncompletedRule_cancel: "Ne, chci pravidla dokončit"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Přednastavení proměnných",
+    // [Auto-translated] "None"
+    noPreset: "Žádné",
+    // [Auto-translated] "View variable values"
+    view: "Zobrazit hodnoty proměnných",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Hodnoty proměnných",
+    // [Auto-translated] "Manage presets"
+    edit: "Správa přednastavení",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Přednastavení proměnných",
+    // [Auto-translated] "Preset"
+    presetName: "Přednastavení",
+    // [Auto-translated] "Description"
+    presetDescription: "Popis",
+    // [Auto-translated] "Add preset"
+    addPreset: "Přidat přednastavení",
+    // [Auto-translated] "New preset"
+    newPresetName: "Nový přednastavení",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Odstranit přednastavení",
+    // [Auto-translated] "Back"
+    back: "Zpět",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Přednastavení s tímto názvem již existuje",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Zadejte přednastavený název",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Přednastavení",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Popis"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Asistent výrazů",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Pište s AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Popište, co by měl výraz dělat",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Například: uveďte tuto otázku, když je respondentovi 18 let nebo více",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Popište stav slovy",
+    // [Auto-translated] "Generate"
+    generate: "Generuj",
+    // [Auto-translated] "Refine"
+    refine: "Zdokonalit",
+    // [Auto-translated] "Explain"
+    explain: "Vysvětlete",
+    // [Auto-translated] "Stop"
+    stop: "Zastav",
+    // [Auto-translated] "Accept"
+    accept: "Přijmout",
+    // [Auto-translated] "Reject"
+    reject: "Odmítnout",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Aplikujte opravu: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Současný výraz",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Navrhovaný výraz",
+    // [Auto-translated] "Reads as"
+    readsAs: "Čte se takto",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Vysvětlení asistenta",
+    // [Auto-translated] "Check results"
+    findings: "Zkontrolujte výsledky",
+    // [Auto-translated] "Error"
+    severityError: "Chyba",
+    // [Auto-translated] "Warning"
+    severityWarning: "Varování",
+    // [Auto-translated] "Info"
+    severityInfo: "Informace",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "v \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Popište výraz a vyberte Generovat.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Čekám na asistenta...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Žádost byla zrušena.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Asistent uvedl: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Asistent nenaznačil žádný výraz.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Zkontrolujte navrhovaný výraz.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asistent vysvětlil současný výraz.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Navrhovaný výraz obsahuje chyby a nelze jej přijmout.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Navrhovaný výraz nelze ověřit na každém místě, kam je napsán, takže jej nelze přijmout.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Přidejte k pravidlu akci před tím, než se zeptáte asistenta.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "První návrh obsahoval chyby a byl automaticky opraven."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var czStrings = {
       templateDescription: "Vzor popisu položky",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Vzor názvu položky",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Zástupce názvu příspěvku",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Prázdný text panelu",
       // [Auto-translated] "Tab title pattern"
@@ -588,6 +724,10 @@ export var czStrings = {
       templateErrorLocation: "Zarovnání chybové zprávy",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nová vstupní lokace",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Záznamy na stránce",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Umožnit uživatelům třídit položky",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Zabraňte duplicitním odpovědím v následující otázce"
     },
@@ -675,6 +815,12 @@ export var czStrings = {
       // [Auto-translated] "Expression"
       expression: "Výraz"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Seřadit podle",
+      // [Auto-translated] "Order"
+      direction: "Řád"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Vyjádření"
@@ -690,7 +836,9 @@ export var czStrings = {
       // [Auto-translated] "Survey description"
       description: "Popis průzkumu",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Nastavení průzkumu pouze ke čtení"
+      readOnly: "Nastavení průzkumu pouze ke čtení",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Regionální formáty"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -726,7 +874,9 @@ export var czStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Vytvořte sloupec jako povinný, pokud",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Každá možnost v samostatném sloupci"
+      showInMultipleColumns: "Každá možnost v samostatném sloupci",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Povolit třídění podle tohoto sloupce"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export var czStrings = {
     masksettings: {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Uložit maskovanou hodnotu ve výsledcích průzkumu"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Region",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Vzor dat",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Časový vzor",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Desetinný oddělovač",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Tisícový oddělovač",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Měnový symbol",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Měnový vzor"
     },
     patternmask: {
       // [Auto-translated] "Value pattern"
@@ -761,16 +927,18 @@ export var czStrings = {
       decimalSeparator: "Oddělovač desetinných míst",
       // [Auto-translated] "Value precision"
       precision: "Přesnost hodnoty",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Zobrazit koncové nuly",
       // [Auto-translated] "Minimum value"
       min: "Minimální hodnota",
       // [Auto-translated] "Maximum value"
       max: "Maximální hodnota"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Předpona měny",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Přípona měny"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Měnový symbol",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Měnový vzor"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Vymazat ostatní při výběru",
@@ -812,8 +980,24 @@ export var czStrings = {
     addItem: "Kliknutím přidáte položku...",
     // "Click to remove the item..."
     removeItem: "Kliknutím odstraníte položku...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Přidejte {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Odstraňte {0}",
     // "Drag the item"
     dragItem: "Přetáhněte položku",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Rozšiřte vnořené volby",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Kolaps vnořených voleb",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Rozšiřte vnořené volby {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Kolaps vnořených voleb {0}",
+    // [Auto-translated] "Show description"
+    showDescription: "Popis pořadu",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Popis skrýť",
     // "Edit"
     edit: "Upravit",
     // "Done"
@@ -858,38 +1042,58 @@ export var czStrings = {
     listIsEmpty: "Přidat novou položku",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Zatím nebyly přidány žádné volby",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Zatím nemáte žádné sloupce.",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Sloupce rozložení ještě nemáte",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Zatím nemáte žádné řádky",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Zatím nemáte žádná ověřovací pravidla.",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Zatím nemáte žádné vlastní proměnné.",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Zatím nemáte žádné spouštěče",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Zatím nemáte žádné odkazy",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Zatím nemáte žádné stránky",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Žádné vlastní hodnoty hodnocení",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Žádné vlastní štítky",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Žádné oblasti",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Žádné sloupce",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Žádné sloupce pro rozložení",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Žádné hádky",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Žádná validační pravidla",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Žádné vlastní proměnné",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Žádné spouštěče",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Žádné podmíněné značkování",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Žádné odkazy",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Žádné stránky",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Žádné úrovně třídění",
     // "Add new choice"
     "addNew@choices": "Přidat volbu",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Přidat nový sloupec",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Přidat nový řádek",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Přidat nové pravidlo",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Přidat novou proměnnou",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Přidání nového triggeru",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Přidat novou adresu URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Přidat novou stránku",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Přidejte hodnotu hodnocení",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Přidat štítek",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Přidat oblast",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Přidat sloupec",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Přidat řádek",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Pravidlo přidat",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Přidat proměnnou",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Přidat trigger",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Přidejte značkování",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Přidat odkaz",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Přidat stránku",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Přidat úroveň třídění",
     // "Value"
     value: "Hodnota",
     // [Auto-translated] "Text"
@@ -916,6 +1120,8 @@ export var czStrings = {
     surveyTitlePlaceholder: "Sem zadejte název průzkumu",
     // "Page {num}"
     pageTitlePlaceholder: "Sem zadejte název stránky",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Název panelu",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Úvodní stránka",
     // "Description"
@@ -966,6 +1172,8 @@ export var czStrings = {
     visible: "Viditelná?",
     // "Required"
     isRequired: "Povinná?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Vyžadujte kladnou odpověď",
     // [Auto-translated] "Mark as required"
     markRequired: "Označit podle potřeby",
     // [Auto-translated] "Remove the required mark"
@@ -976,6 +1184,8 @@ export var czStrings = {
     eachRowUnique: "Zabránění duplicitním odpovědím v řádcích",
     // "Error message for required questions"
     requiredErrorText: "Text chyby pro povinnou otázku",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Chybová zpráva, když je vyžadováno ano",
     // "Display the question on a new line"
     startWithNewLine: "Začátek s novým řádkem?",
     // "Rows"
@@ -994,6 +1204,16 @@ export var czStrings = {
     maxFiles: "Maximální počet souborů",
     // "Row count"
     rowCount: "Počet řádků",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Řádky na stránku",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Umožnit uživatelům třídit řádky",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maximální úrovně třídění",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Výchozí pořadí třídění",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Zobrazit řazení",
     // "Columns layout"
     columnLayout: "Rozložení sloupců",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export var czStrings = {
     questionErrorLocation: "Umístění chyby v otázce",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Zaměřte se na první otázku týkající se změny stránky",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Povolit zkratky volby",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Zobrazit tipy na klávesnici",
     // "Question order"
     questionOrder: "Pořadí prvků na stránce",
     // "Time limit to complete the survey"
@@ -1268,6 +1492,8 @@ export var czStrings = {
     minRowCount: "Minimální počet řádků",
     // "Maximum row count"
     maxRowCount: "Maximální počet řádků",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Výraz pro počet řádků",
     // "Confirm row removal"
     confirmDelete: "Potvrdit smazání řádku",
     // "Confirmation message"
@@ -1278,6 +1504,8 @@ export var czStrings = {
     minPanelCount: "Minimální počet panelů",
     // "Maximum number of entries"
     maxPanelCount: "Maximální počet panelů",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Výraz počtu vstupů",
     // "Initial entry state"
     panelsState: "Stav rozbalení vnitřního panelu",
     // "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export var czStrings = {
     logoHeight: "Výška loga (v hodnotách akceptovaných CSS)",
     // "Read-only"
     readOnly: "Pouze pro čtení",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Režim pouze pro čtení",
     // "Disable the read-only mode if"
     enableIf: "Upravitelná pokud",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export var czStrings = {
       columns: "Sloupce",
       // "Rows"
       rows: "Řádky",
+      // [Auto-translated] "Entries"
+      entries: "Příspěvky",
       // "Choice Options"
       choices: "Volby",
       // "Items"
@@ -1544,6 +1776,8 @@ export var czStrings = {
       question: "Otázka",
       // "Pages"
       pages: "Stránky",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Regionální formáty",
       // "Quiz Mode"
       timer: "Časovač/kvíz",
       // "Calculated Values"
@@ -1862,6 +2096,12 @@ export var czStrings = {
       // [Auto-translated] "Never"
       none: "Nikdy"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Pouze pro čtení",
+      // [Auto-translated] "View"
+      view: "Zobrazit"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "Tlačítka rádia",
     inputType: {
@@ -1913,6 +2153,12 @@ export var czStrings = {
       warning: "Varování",
       // [Auto-translated] "Informational"
       info: "Informační"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Přední část",
+      // [Auto-translated] "Rear"
+      environment: "Zadní část"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export var czStrings = {
     underRowSingle: "Pod řádkem, pouze jeden panel je viditelný",
     // [Auto-translated] "Auto"
     auto: "Auto",
+    // [Auto-translated] "Always"
+    always: "Vždy",
     timerInfoMode: {
       // "Both"
       combined: "Obě"
@@ -2321,7 +2569,148 @@ export var czStrings = {
       survey: "Stejné jako v průzkumu",
       // [Auto-translated] "Same as container"
       container: "Stejné jako u kontejneru"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Dědit",
+      // [Auto-translated] "Hide"
+      "false": "Schovej se",
+      // [Auto-translated] "Show"
+      "true": "Pořad"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arabština",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bulharsky",
+    // [Auto-translated] "Catalan"
+    ca: "Katalánština",
+    // [Auto-translated] "Czech"
+    cs: "Čeština",
+    // [Auto-translated] "Welsh"
+    cy: "Velšština",
+    // [Auto-translated] "Danish"
+    da: "Dánsky",
+    // [Auto-translated] "German"
+    de: "Němčina",
+    // [Auto-translated] "Greek"
+    el: "Řecky",
+    // [Auto-translated] "English"
+    en: "Angličtina",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Angličtina (Austrálie)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Angličtina (Kanada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Angličtina (Spojené království)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Angličtina (Irsko)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Angličtina (Indie)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Angličtina (Nový Zéland)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Angličtina (Jihoafrická republika)",
+    // [Auto-translated] "Spanish"
+    es: "Španělština",
+    // [Auto-translated] "Estonian"
+    et: "Estonština",
+    // [Auto-translated] "Basque"
+    eu: "Baskicko",
+    // [Auto-translated] "Persian"
+    fa: "Perština",
+    // [Auto-translated] "Finnish"
+    fi: "Finsko",
+    // [Auto-translated] "Filipino"
+    fil: "Filipínština",
+    // [Auto-translated] "French"
+    fr: "Francouzština",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Francouzština (Kanada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Francouzština (Švýcarsko)",
+    // [Auto-translated] "Hebrew"
+    he: "Hebrejsky",
+    // [Auto-translated] "Hindi"
+    hi: "Hindština",
+    // [Auto-translated] "Croatian"
+    hr: "Chorvatština",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Haitská kreolština",
+    // [Auto-translated] "Hungarian"
+    hu: "Maďarština",
+    // [Auto-translated] "Indonesian"
+    id: "Indonéština",
+    // [Auto-translated] "Icelandic"
+    is: "Islandština",
+    // [Auto-translated] "Italian"
+    it: "Italsky",
+    // [Auto-translated] "Japanese"
+    ja: "Japonština",
+    // [Auto-translated] "Georgian"
+    ka: "Gruzínština",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazachština",
+    // [Auto-translated] "Korean"
+    ko: "Korejština",
+    // [Auto-translated] "Lithuanian"
+    lt: "Litevština",
+    // [Auto-translated] "Latvian"
+    lv: "Lotyšština",
+    // [Auto-translated] "Macedonian"
+    mk: "Makedonci",
+    // [Auto-translated] "Burmese"
+    mm: "Barmská",
+    // [Auto-translated] "Malay"
+    ms: "Malajština",
+    // [Auto-translated] "Dutch"
+    nl: "Holandština",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Nizozemština (Belgie)",
+    // [Auto-translated] "Norwegian"
+    no: "Norská",
+    // [Auto-translated] "Polish"
+    pl: "Polština",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugalština",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugalština (Brazílie)",
+    // [Auto-translated] "Romanian"
+    ro: "Rumunština",
+    // [Auto-translated] "Russian"
+    ru: "Rusky",
+    // [Auto-translated] "Slovak"
+    sk: "Slovenský",
+    // [Auto-translated] "Slovenian"
+    sl: "Slovinský",
+    // [Auto-translated] "Serbian"
+    sr: "Srbština",
+    // [Auto-translated] "Swedish"
+    sv: "Švédština",
+    // [Auto-translated] "Swahili"
+    sw: "Svahilština",
+    // [Auto-translated] "Telugu"
+    tel: "Telugština",
+    // [Auto-translated] "Tajik"
+    tg: "Tádžik",
+    // [Auto-translated] "Thai"
+    th: "Thajská",
+    // [Auto-translated] "Turkish"
+    tr: "Turecky",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ukrajinsky",
+    // [Auto-translated] "Urdu"
+    ur: "Urdština",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnamci",
+    // [Auto-translated] "Chinese"
+    zh: "Čínština",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Čínština (zjednodušeně)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Čínština (tradiční)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export var czStrings = {
     visibletrigger: "změnit viditelnost (zastaralé)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Stejně jako jazyk průzkumu"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Př.: +1(999)-999-99-99"
@@ -2405,12 +2798,6 @@ export var czStrings = {
     datetimemask: {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Př.: dd/mm/rrrr"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Př.: $",
-      // "Ex.: USD"
-      suffix: "Př.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export var czStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Určuje, kolik sloupců se tento panel rozprostírá v rozvržení mřížky.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Tato tabulka umožňuje konfigurovat jednotlivé sloupce mřížky v panelu. Automaticky nastaví procentuální šířku pro každý sloupec na základě maximálního počtu prvků v řádku. Chcete-li přizpůsobit rozvržení mřížky, upravte tyto hodnoty ručně a definujte šířku nadpisu pro všechny otázky v každém sloupci."
+      gridLayoutColumns: "Tato tabulka umožňuje konfigurovat jednotlivé sloupce mřížky v panelu. Automaticky nastaví procentuální šířku pro každý sloupec na základě maximálního počtu prvků v řádku. Chcete-li přizpůsobit rozvržení mřížky, upravte tyto hodnoty ručně a definujte šířku nadpisu pro všechny otázky v každém sloupci.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifikuje, jak se otázky uvnitř tohoto panelu objevují, když jsou pouze pro čtení. \"Pouze pro čtení\" zobrazuje otázky s jejich obvyklými ovládacími prvky, ale je deaktivováno pro úpravy. \"Zobrazení\" zobrazuje odpovědi jako text nebo jiné neinteraktivní prvky. \"Dědit\" používá režim nastavený pro rodičovský panel, stránku nebo průzkum (\"Pouze pro čtení\" ve výchozím nastavení)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export var czStrings = {
       width: "Nastaví šířku panelu v poměru k ostatním prvkům zaměření ve stejném řádku. Přijímá hodnoty CSS (px, %, in, pt atd.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Zadejte šablonu pro dynamické názvy panelů. Použijte {panelIndex} pro obecnou pozici panelu a {visiblePanelIndex} pro jeho pořadí mezi viditelnými panely. Vložením těchto zástupných symbolů do vzorku přidáte automatické číslování.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Záložní text pro názvy záznamů, který se uplatní, když vzor názvu záznamu nevytváří smysluplnou hodnotu. Použijte {panelIndex} pro obecnou pozici záznamu a {visiblePanelIndex} pro pořadí mezi viditelnými položkami.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Zadejte šablonu pro názvy karet. Použijte {panelIndex} pro obecnou pozici panelu a {visiblePanelIndex} pro jeho pořadí mezi viditelnými panely. Vložením těchto zástupných symbolů do vzorku přidáte automatické číslování.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export var czStrings = {
       keyName: "Odkazujte na název otázky, chcete-li vyžadovat, aby uživatel na tuto otázku v každém panelu poskytl jedinečnou odpověď.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Spustí výzvu k potvrzení před odstraněním položky.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Zadejte výraz, který počítá počet záznamů. Tento výraz přepisuje nastavení \"Počáteční počet záznamů\" a je znovu vyhodnocován pokaždé, když se změní hodnoty, na které odkazuje. Výsledek je omezen nastavením \"Minimální počet záznamů\" a \"Maximální počet položek\". Dokud je tento výraz nastaven, respondenti nemohou položky ručně přidávat ani odebírat.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Určuje počet položek zobrazených na každé stránce panelu. '0' deaktivuje stránkování a zobrazuje všechny položky.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Umožňuje respondentům třídit položky pomocí řazovacího panelu.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definuje pořadí počátečních příspěvků. Respondenti jej mohou změnit, pokud je třídění povoleno. Při třídění podle více otázek každá otázka třídí položky v pořadí stanoveném předchozí otázkou. Dotazy přetáhněte, abyste změnili jejich prioritu.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Přiřadí čísla otázkám vnořeným v dynamickém panelu."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Umožňuje respondentům třídit řádky kliknutím na záhlaví sloupců nebo použitím řazovacího panelu.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definuje pořadí počátečních řádků. Respondenti jej mohou změnit, pokud je třídění povoleno. Při třídění podle více sloupců každý sloupec třídí řádky v pořadí stanoveném předchozím sloupcem. Táhněte sloupce pro změnu jejich priority.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" zobrazuje řazovací lištu pouze tehdy, když matice nemá žádné tříditelné hlavičky sloupců: hlavičky jsou skryté, matice používá mobilní rozložení nebo jsou řádky převedeny do sloupců. \"Alright\" zobrazuje řazovací lištu i tehdy, když jsou viditelné seřazitelné hlavičky sloupců.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Zadejte výraz, který počítá počet řádků. Tento výraz přepisuje nastavení \"Počáteční počet řádků\" a je znovu vyhodnocován vždy, když se změní hodnoty, na které odkazuje. Výsledek je omezen nastavením \"Minimální počet řádků\" a \"Maximální počet řádků\". Dokud je tento výraz nastaven, respondenti nemohou řádky přidávat ani odebírat ručně.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Spustí výzvu k potvrzení před odstraněním řádku.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Automaticky rozbalí podrobnou část, když je do matice přidán nový řádek."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Určuje počet řádků zobrazených na každé stránce matice. '0' deaktivuje stránkování a zobrazuje všechny řádky.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Specifikuje, podle kolika polí může respondent třídit najednou.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplikuje odpovědi z posledního řádku a přiřadí je k dalšímu přidanému dynamickému řádku.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export var czStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Dlouhé texty v možnostech volby automaticky vygenerují zalomení řádků, aby se vešly do rozbalovací nabídky. Odznačte, pokud chcete, aby se texty ořízly.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Určuje, kolik sloupců tato otázka zabírá v rozvržení mřížky."
+      effectiveColSpan: "Určuje, kolik sloupců tato otázka zabírá v rozvržení mřížky.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifikuje, jak se otázka zobrazí, když je pouze pro čtení. \"Pouze pro čtení\" zobrazuje otázku s obvyklými ovládacími prvky, ale je deaktivována pro úpravy. \"Zobrazení\" zobrazuje odpovědi jako text nebo jiné neinteraktivní prvky. \"Dědit\" používá režim nastavený pro rodičovský panel, stránku nebo průzkum (\"Pouze pro čtení\" ve výchozím nastavení).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Pod touto otázkou se zobrazí nápovědy k dostupným klávesovým akcím. Možnost \"Dědit\" aplikuje nastavení na úrovni průzkumu."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export var czStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Vyberte, zda chcete respondentům zabránit ve vyplnění průzkumu.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Specifikuje, jak se otázky pouze pro čtení zobrazují, včetně na stránce náhledu. \"Pouze pro čtení\" (výchozí) zobrazuje otázky s jejich obvyklými ovládacími prvky, ale je deaktivováno pro úpravy. \"Zobrazení\" zobrazuje odpovědi jako text nebo jiné neinteraktivní prvky.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Nastaví umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu."
     },
@@ -2633,7 +3050,9 @@ export var czStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Pokud je tato možnost vybraná, vytvoří samostatný sloupec pro každou možnost volby.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Uspořádá volby voleb ve vícesloupcovém rozvržení. Když je nastavená hodnota 0, volby se zobrazí na jednom řádku. Pokud je nastavena hodnota -1, skutečná hodnota je zděděna z vlastnosti \"Počet vnořených sloupců\" nadřazené matice."
+      colCount: "Uspořádá volby voleb ve vícesloupcovém rozvržení. Když je nastavená hodnota 0, volby se zobrazí na jednom řádku. Pokud je nastavena hodnota -1, skutečná hodnota je zděděna z vlastnosti \"Počet vnořených sloupců\" nadřazené matice.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifikuje, jak se buňky v tomto sloupci zobrazují, když jsou pouze pro čtení. \"Pouze pro čtení\" zobrazuje buňky s jejich obvyklými vstupními ovládacími prvky, ale je deaktivováno pro úpravy. \"Zobrazení\" zobrazuje odpovědi jako text nebo jiné neinteraktivní prvky. \"Dědit\" používá režim nastavený pro matici nebo průzkum (\"Pouze pro čtení\" ve výchozím nastavení)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export var czStrings = {
     questionErrorLocation: "Nastaví umístění chybové zprávy ve vztahu k otázce s neplatným vstupem. Vyberte si mezi: \"Nahoře\" - text chyby je umístěn v horní části pole s otázkou; \"Bottom\" - text chyby je umístěn ve spodní části pole s otázkou.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Vyberte, zda chcete, aby první vstupní pole na každé stránce bylo připraveno pro zadání textu.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Zobrazuje písmena (A, B, C, ...) vedle možností v otázkách Radio Button Group, Checkboxes a Image Picker. Respondenti mohou vybírat volby stisknutím příslušných písmen. Toto nastavení můžete přepsat pro jednotlivé otázky.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Zobrazuje písmena (A, B, C, ...) vedle možností a umožňuje respondentům je vybrat stisknutím příslušných písmen. Možnost \"Dědit\" používá nastavení na úrovni průzkumu."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Níže se zobrazí nápovědy k dostupným klávesovým akcím. Toto nastavení můžete přepsat pro jednotlivé otázky.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Zachová původní pořadí otázek nebo je náhodně vybere. Účinek tohoto nastavení je viditelný pouze na kartě Náhled.",
     // [Auto-translated] "For text entry questions only."
@@ -2793,7 +3220,9 @@ export var czStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Nastaví viditelnost navigačních tlačítek na stránce. Možnost \"Zdědit\" použije nastavení na úrovni průzkumu, které je ve výchozím nastavení \"Viditelné\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Tato tabulka umožňuje konfigurovat jednotlivé sloupce mřížky na stránce. Automaticky nastaví procentuální šířku pro každý sloupec na základě maximálního počtu prvků v řádku. Chcete-li přizpůsobit rozvržení mřížky, upravte tyto hodnoty ručně a definujte šířku nadpisu pro všechny otázky v každém sloupci."
+      gridLayoutColumns: "Tato tabulka umožňuje konfigurovat jednotlivé sloupce mřížky na stránce. Automaticky nastaví procentuální šířku pro každý sloupec na základě maximálního počtu prvků v řádku. Chcete-li přizpůsobit rozvržení mřížky, upravte tyto hodnoty ručně a definujte šířku nadpisu pro všechny otázky v každém sloupci.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifikuje, jak se otázky na této stránce zobrazují, když jsou pouze pro čtení. \"Pouze pro čtení\" zobrazuje otázky s jejich obvyklými vstupními ovládacími prvky, ale je deaktivováno pro úpravy. \"Zobrazení\" zobrazuje odpovědi jako text nebo jiné neinteraktivní prvky. \"Dědit\" používá režim nastavený pro průzkum (\"Pouze pro čtení\" ve výchozím nastavení)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Nastaví umístění časovače na stránce.",
@@ -2911,6 +3340,22 @@ export var czStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Vyberte, zda chcete uložit hodnotu otázky s použitou maskou do výsledků průzkumu."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Region, jehož formáty se vztahují na vstupní masky dat-čas, čísel a měn. Pokud není specifikováno, používá se jazyk průzkumu.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Přepisuje formát data daného regionu používaný v vstupních maskách. Vzor může obsahovat oddělovací znaky a následující zástupné znaky: <br>'m' - číslo měsíce.<br> 'mm' - číslo měsíce, s úvodní nulou pro jednociferné hodnoty. <br>'d' - den měsíce. <br>'dd' - den měsíce, s úvodní nulou pro jednociferné hodnoty. <br>'yy' - poslední dvě číslice roku. <br>'yyyy' - čtyřmístný rok.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Přepisuje časový formát regionu používaný v vstupních maskách. Vzor může obsahovat oddělovací znaky a následující zástupce: <br>'H' - Hodiny ve formátu 24 hodin.<br> 'HH' - Hodiny ve formátu 24 hodin, s úvodní nulou pro jednociferné hodnoty. <br>'H' - Hodiny ve formátu 12 hodin. <br>'HH' - Hodiny ve formátu 12 hodin, s úvodní nulou pro jednociferné hodnoty. <br>'MM' - Minuty. <br>'ss' - Sekundy. <br>'TT' - 12hodinové hodiny ve velkém (AM/PM). <br>'TT' - 12hodinové hodinové období malými písmeny (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Přepisuje symbol, který oblast používá k oddělení zlomkové části od celočíselné části zobrazeného čísla ve vstupních maskách.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Přepisuje symbol, který oblast používá k rozdělení číslic velkého čísla do skupin po třech ve vstupních maskách.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Přepisuje měnový symbol nebo kód regionu používaný v vstupních maskách.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Přepisuje měnový vzor regionu používaný v vstupních maskách. Vzor může obsahovat následující zástupce: <br>'@' - Měnový symbol nebo kód.<br> '#' - Číslo. <br>'-' - Pozice záporného znaku v záporných hodnotách (pokud je vynecháno, záporné znaménko je umístěno na začátek)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Vzor může obsahovat řetězcové literály a následující zástupné symboly: \"9\" - pro číslici; \"a\" - pro velké nebo malé písmeno; '#' - pro číslici nebo velké či malé písmeno. Pomocí zpětného lomítka \\ můžete znak uvozovat."
@@ -2925,13 +3370,15 @@ export var czStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Symbol používaný k oddělení číslic velkého čísla do skupin po třech.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Omezuje, kolik číslic se má zachovat za desetinnou čárkou zobrazeného čísla."
+      precision: "Omezuje, kolik číslic se má zachovat za desetinnou čárkou zobrazeného čísla.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Zobrazuje koncové nuly v zlomkové části až do zadané přesnosti. Například s přesností 2 je vstupní hodnota 1.2 zobrazena jako 1.20."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Jeden nebo více symbolů, které mají být zobrazeny před hodnotou.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Jeden nebo více symbolů, které se zobrazí za hodnotou."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Symbol měny nebo kód zobrazený s hodnotou. Symbol regionu se používá ve výchozím nastavení. Tuto vlastnost vymažte pro zobrazení bez symbolu.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Specifikuje pozice čísla, měnového symbolu a záporného znaku. Vzor může obsahovat následující zástupce: <br>'@' - měnový symbol nebo kód.<br> '#' - číslo. <br>'-' - Pozice záporného znaku v záporných hodnotách (pokud je vynechán, záporný znak je umístěn na začátek)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2982,6 +3429,8 @@ export var czStrings = {
     tabAlign: "Zarovnání záložek",
     // [Auto-translated] "File source type"
     sourceType: "Typ zdroje souboru",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Výchozí fotoaparát",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Vhodné pro kontejner",
     // [Auto-translated] "Set value expression"
@@ -3302,12 +3751,702 @@ export var czStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Použito přednastavení"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Replika: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Použijte navrhovaný název"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Odstraňte opakovanou položku"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Použijte doporučený typ"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Použijte navrhovanou funkci"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Použijte doporučenou masku"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Dejte prvku volné jméno"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Dejte prvku volné jméno"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Odstraňte nemovitost"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Použijte nejbližší povolenou hodnotu",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Odstraňte nemovitost",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Použijte navrhovanou hodnotu"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Přeměňte hodnotu na seznam"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Dej prvku jméno"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Odstraňte nemovitost",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Přejmenovat nemovitost"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Použijte navrhovaný název",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Použijte navrhovaný název"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Použijte navrhovaný název"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Použijte doporučený typ"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Použijte doporučený typ"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Výraz \"{expression}\" nelze rozčlenit."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" není nalezeno – neexistuje žádná otázka, panel, stránka, vypočítaná hodnota ani proměnná s tímto názvem.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" se nenachází v {containerType} \"{root}\" (reference: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" se nenachází v rozsahu \"{scopePrefix}\" (reference: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "KeyName pro \"{name}\" nazývá \"{key}\" - \"{name}\" nemá {keyNoun} s tímto jménem, takže validace duplikátních klíčů nikdy neběží.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" není nalezeno."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "Heslo {prop} \"{name}\" odkazuje na samotný prvek (reference: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Název \"{name}\" je zdvojený.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Název vypočítané hodnoty \"{name}\" je již použit u jiné vypočítané hodnoty.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Vypočítaná hodnota \"{name}\" sdílí své jméno s jiným prvkem, takže jeden z nich stíní druhý."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} \"{name}\" této {ownerText} je také vestavěnou proměnnou průzkumu {{builtIn}} – průzkum odpovídá jako první, takže tato je v výrazech nedosažitelná.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" z \"{name}\" sdílí hodnotu {otherType} \"{otherName}\", která nemá vlastní valueName – \"{otherName}\" považuje pole \"{name}\" za neznámá a clearIncorrectValues() je maže. Nastavte také jeho valueName na \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Řádek \"{key}\" v maticovém rozbalovacím menu \"{otherName}\" je také {sharedKeyText} \"{name}\" sdílející svou hodnotu – objekt buňky a jedna hodnota nemohou být zároveň pod jedním klíčem; runtime si jeden zachová a druhý smaže.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" sdílí datový klíč \"{dataKey}\" s {otherType} \"{otherName}\" – {shapeText} tam ponechává, zatímco \"{otherName}\" si ponechává {otherShapeText}; jeden nemůže držet hodnotu druhého, takže clearIncorrectValues() jej maže.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Datový klíč \"{dataName}\" je také komentářovým klíčem \"{base}\" (jeho datový klíč plus \"{suffix}\") – jeden zápis tiše přepisuje druhý.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Datový klíč \"{dataName}\" je také souhrnným klíčem \"{base}\" (jeho datový klíč plus \"{suffix}\") – jeden zápis tiše přepisuje druhý.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "Spouštěč {trigger} nastavuje proměnnou \"{name}\", která je zároveň datovým klíčem otázky \"{questionName}\" – proměnná odpovídá od té chvíle {{name}}, nikoli samotná otázka."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Název \"{name}\" je vyhrazen – je členem Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "ValueName \"{valueName}\" z \"{name}\" je vyhrazen – člen Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Sloupec \"{name}\" v \"{matrixName}\" je vyhrazen – člen Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Položka \"{name}\" v \"{questionName}\" je vyhrazena – je členem Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Řádek \"{rowValue}\" v \"{name}\" je vyhrazen – je členem Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Vypočítaná hodnota \"{name}\" je rezervována – člen Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" má neznámý typ \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" nemá typ – prvek bez typu je vynechán."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" není vlastností {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" v {ownerText} není serializovatelný – při načtení se aktivuje a je odstraněn z JSON pokaždé, když se průzkum znovu uloží.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" a \"{aliasKey}\" z {ownerText} jsou dvě jména jedné vlastnosti – během běhu je aplikuje v pořadí, v jakém je JSON zapisuje, takže \"{winner}\" vyhrává.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" je nastaveno na \"{name}\", ale inputType \"{inputType}\" nemá žádné mezí – běh jej ignoruje."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{key} {ownerText} je {valueText} – není to jedna z povolených hodnot ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{key} {ownerText} je {value}, mimo povolený rozsah {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "ValueName \"{valueName}\" nebo \"{name}\" obsahuje \".\" - výrazy čtou {{valueName}} jako cestu do \"{rootKey}\", takže samotný datový klíč nelze nikdy adresovat."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} nemá \"{key}\" – vlastnost je vyžadována pro {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Název {className} je {valueText}, není to řetězec – dotazník jej nemůže načíst."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "\"{key}\" v {ownerText} není pole – vlastnost uchovává seznam a běh za běhu zabalí hodnotu do pole s jednou položkou."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Definice proměnné deklaruje \"{variable}\", což je zároveň datový klíč otázky \"{name}\" – nastavení proměnné maže odpověď uloženou pod tímto klíčem a {{name}} odpovídá na hodnotu hostitele od té chvíle.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Definice proměnné deklaruje \"{variable}\", což je zároveň název vypočítané hodnoty \"{name}\" – obě funkce zapisují stejný slot a ten, kdo běží poslední, vyhrává."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition není objekt JSON průzkumu, takže není deklarována žádná proměnná a nelze kontrolovat žádnou přednastavenou hodnotu.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets není pole, takže žádné přednastavení není deklarováno.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Předvolba #{index} není objekt.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Přednastavení #{index} nemá jméno, takže na něj nic nemůže odkazovat.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Přednastavení \"{preset}\" nenese objekt bez proměnných, takže nic nenastavuje.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Přednastavení \"{preset}\" je deklarováno dvakrát – vyhledávání pod tímto názvem odpovídá prvním.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Předvolba \"{preset}\" nastavuje \"{variable}\", což definice proměnné nedeklaruje.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Předvolba \"{preset}\" nastaví \"{variable}\" na hodnotu, kterou definice proměnné odmítá: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Funkce \"{functionName}\" není registrována."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Vypočítaná hodnota \"{names}\" odkazuje sama na sebe ve svém vlastním výrazu.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Vypočítané hodnoty {názvy} na sobě vzájemně závisí."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Spouštěč reaguje na nastavenou hodnotu (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Triggery tvoří smyčku prostřednictvím nastavených hodnot: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} čte hodnotu, kterou si sám napíše – spustí se pouze tehdy, když se změní jiná hodnota, takže se vůbec nespustí.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Hodnoty se zapisují v smyčce: {chain}. Každý zápis znovu spustí výrazy, které ho čtou, takže konečné hodnoty závisí na pořadí, v jakém jsou otázky zodpovězeny."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Podmínka porovnává \"{name}\" s {values} – není mezi jejími volbami. Dostupné: {available}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Podmínka porovnává \"{name}\" s {values} – žádná volba jej neobsahuje. Dostupné: {available}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Podmínka aplikuje \"{operator}\" na \"{name}\": \"{recordName}\" ({questionType}) nemá hodnotu k porovnání.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Podmínka se vztahuje na \"{operator}\" na \"{name}\": \"{recordName}\" platí {valueShapeText} – uspořádání a aritmetické operátory na něj neplatí.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Podmínka se vztahuje na \"{operator}\" na \"{name}\": \"{recordName}\" je booleovská otázka – na ni se nevztahují operátory pořadí.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Podmínka aplikuje \"{operator}\" na \"{name}\": \"{recordName}\" je textová otázka – její hodnota je řetězec, takže numerické srovnání závisí na implicitní konverzi.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Podmínka aplikuje \"{operator}\" na \"{name}\": \"{recordName}\" obsahuje řetězec dat – porovnáním s číslem, které {constValue} nemůže obsahovat.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Podmínka aplikuje \"{operator}\" na \"{name}\": \"{recordName}\" je číselné – porovnání s řetězcem \"{constValue}\" nemůže platit.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Podmínka aplikuje \"{operator}\" na \"{name}\": \"{recordName}\" obsahuje pole vybraných hodnot, takže \"=\" porovnává celé pole.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Podmínka aplikuje \"{operator}\" na \"{name}\": \"{recordName}\" je booleovská otázka – porovnání s {constValue} nemůže platit."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{expression}\" je vždy nepravdivé, takže \"{name}\" se nikdy nezobrazí.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "Heslo {prop} \"{expression}\" nikdy neplatí, protože {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{expression}\" nikdy neplatí – žádná povolená hodnota ji nespĺní: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "Heslo {prop} \"{expression}\" si odporuje: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "To {prop} \"{expression}\" je vždy pravdivé, takže nic nerozhoduje.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{expression}\" je aritmetický, nikoli srovnání, takže nikdy nedává ano nebo ne.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Část {prop} \"{expression}\" má výsledek, který je znám předem.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "Heslo {prop} \"{expression}\" vždy platí, protože {facts} - nic nerozhoduje."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" nečte žádnou otázku ani proměnnou."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "Výchozí hodnota \"{name}\" je {valuesText}, kterou nikdy nemůže držet. Povoleno: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Správná odpověď na \"{name}\" je {valuesText}, kterou nikdy nemůže držet. Povoleno: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Spouštěč nastaví \"{name}\" na {valuesText}, což nikdy nemůže držet. Povoleno: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Výchozí hodnota řádku nastaví \"{name}\" na {valuesText}, kterou nikdy nemůže udržet. Povoleno: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Výchozí hodnota panelu nastaví \"{name}\" na {valuesText}, kterou nikdy nemůže udržet. Povoleno: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} \"{name}\" jmenuje \"{key}\" – takový řádek neexistuje. Dostupné: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop} \"{name}\" jmenuje \"{key}\" – takový sloupec neexistuje. Dostupné: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} \"{name}\" jmenuje \"{key}\" – taková šablona neexistuje. Dostupné: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Spouštěč copyvalue zkopíruje \"{fromName}\" do \"{setToName}\", ale \"{fromName}\" obsahuje {sourceShapeText} a \"{setToName}\" {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Spouštěč copyvalue se zkopíruje \"{fromName}\" do \"{setToName}\", ale žádná hodnota \"{fromName}\" není mezi hodnotami, které \"{setToName}\" může obsahovat. Povoleno: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" kopíruje své volby z \"{source}\", ale o tomto názvu není pochyb.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" kopíruje své volby od sebe sama.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" kopíruje své volby z \"{source}\" ({sourceType}), která neposkytuje ani volby, ani pole hodnot.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" čte {prop} \"{field}\" z \"{source}\", ale {sourceType} \"{source}\" takové {fieldNoun} nemá."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Další položka {prop} \"{name}\" už má hodnotu {valueText} – běh si zachovává obě položky.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Volba \"{name}\" obsahuje {valueText}, zatímco {toggleProp} je zapnutá – koliduje se s vestavěnou položkou {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "Spouštěč {trigger} cílí na stránku \"{name}\", která neexistuje.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "Spouštěč {trigger} cílí na \"{name}\", ale {containerType} \"{root}\" nemá {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "Spouštěč {trigger} {verb} \"{name}\", ale žádný {kindText} s tímto názvem neexistuje."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Typ spouště \"{type}\" není znám.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Spoušť nemá žádný typ."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Typ validátoru \"{type}\" v \"{name}\" není znám.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Validátor \"{name}\" nemá typ."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "{validatorType} validátor \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "{validatorType} validátor \"{name}\" vyžaduje alespoň {min} a maximálně {max} – žádná odpověď jej neuspokojí.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Validátor počtu odpovědí \"{name}\" vyžaduje alespoň {minCount} odpovědí, nad {selectable} volbami, které lze vybrat společně.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Regex validátor \"{name}\" má vzor, který engine odmítá: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Validátor výrazu \"{name}\" nemá žádný výraz, takže vždy projde."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} \"{name}\" je {min}, nad {maxProp} {max} – běh tiše upravuje jeden z nich.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} z \"{name}\" je {count}, {direction} jeho {boundProp} z {bound} – běh jej sevře.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} \"{name}\" je {step}, ale rozsah, kterým prochází ({minProp}.. {maxProp}) pokrývá pouze {rozsah} – během běhu jej svírá.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "minSelectedChoices \"{name}\" je {min}, nad {selectable} výběrem, které lze vybrat společně – na otázku nikdy neodpověděli."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" se nikdy nemůže stát viditelným: je viditelné Pokud čte {čte}, což {deadClause}, takže podmínka nikdy neplatí."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "MaskType \"{maskType}\" v \"{name}\" není známá maska – doba běhu se opět vrací k nule masky vůbec.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "MaskSettings, \"{name}\", nastaví \"{key}\", což není vlastnost masky \"{maskType}\" – běh ji tiše vyřadí.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "Nastavení masky \"{name}\" je nastaveno bez maskType – běh si ponechá pouze \"saveMaskedValue\" a zbytek vynechá.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Maska {maskType} pro \"{name}\" se vztahuje na žádný vstup: inputType \"{inputType}\" je maskován pouze pro text a tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Maska datového času \"{name}\" nastavuje min/max bez vzoru – omezení platí pro datové části vzoru, takže bez něj se nic neděje.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Maska {maskType} s \"{name}\" umožňuje alespoň {min} a maximálně {max} - žádná hodnota ji neuspokojuje."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Dynamický panel \"{name}\" má prázdnou šablonu – jeho panely nemají co vykreslovat.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\" nemá žádné prvky.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\" nemá žádné prvky, které by se kdy mohly vykreslit – každý prvek je skrytý, chráněn podmínkou, která nikdy neplatí, nebo prázdný.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Detailní prvky \"{name}\" nejsou nikdy zobrazeny: jeho detailPanelMode je \"none\", což je výchozí nastavení."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Pozice: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Byl postaven z legacy jména, operátoru a hodnotových vlastností spouštěče.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Uvnitř: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Myslel jsi \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Pokud jde o vlastní komponentu, předejte její definici linterovi, aby bylo možné plnou analýzu.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Zaregistrujte funkci před lintingem, nebo ji uveďte v možnostech linteru.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Špatně napsaný typ je tiše vyhozen za běhu a vlastní spouštěč není pokryt kontrolami cíle a cyklu.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Pokud je proměnná nastavená za běhu, uveďte ji v možnostech linteru.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Smyčka může být nedosažitelná, pokud spouštěcí podmínky nikdy nebudou dodržet – ověřte výrazy.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "DefaultValueExpression platí pouze do doby, než je zodpovězena jeho otázka.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "Vyjádřením: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Zmíněno v bindings.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Zmíněno v choicesByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Zmíněno v textu \"{0}\".", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () čte toto jméno z každého zápisu {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Argument {0}() neuvádí žádnou otázku, panel ani stránku.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Deserializátor přinese klíč, který nezná.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Deserializátor vyřadí validátor, který nemůže vyřešit, takže nic se neověří.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "Vstupní typ je \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Je to datový klíč pro \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "a",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} je vždy {value}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} je {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "Aspoň {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "maximálně {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} nemůže být obě {hodnoty}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} nemůže být {value} a zároveň nebýt",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} nemůže být prázdný a být {value}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} nemůže být prázdné a nemůže být prázdné",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} nemůže být nad {min} a pod {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} je žádán, aby byl bezcenný"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "Odkazy na \"{0}.\" jsou dostupné pouze uvnitř matrixové buňky nebo matrix detailního panelu.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" je dostupný pouze uvnitř matrixové buňky nebo matrix detailního panelu.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "Odkazy na \"{0}.\" jsou dostupné pouze uvnitř dynamického panelu nebo kontejneru panelu.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "Odkazy na \"{0}.\" jsou dostupné pouze v dynamickém panelu.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" je dostupný pouze uvnitř dynamického panelu.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" je dostupná pouze uvnitř podmínek volby, řádku a sloupce.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "Odkazy na \"{0}.\" jsou dostupné pouze v kompozitní otázce.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" není dostupné uvnitř filtru inArray, který běží proti položce a poté dotazníku.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" je sloupec této matice – odkazujte na něj pomocí předpony řádku.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" je otázka tohoto dynamického panelu – odkazujte na něj pomocí předpony panel."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Nastavte vstupType: \"number\" na \"{0}\", pokud sbírá čísla.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Pro vícenásobné výběrové hodnoty použijte \"obsahuje\" nebo \"anyof\"."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "Stránka",
+        // [Auto-translated] "panel"
+        panel: "Panel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Jméno",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "Jméno"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "Vypočítaná hodnota",
+        // [Auto-translated] "element"
+        default: "prvek"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Průzkum",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Ostatní",
+        // [Auto-translated] "None"
+        none: "Žádné",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Odmítněte odpovědět",
+        // [Auto-translated] "Don't know"
+        dontknow: "Nevím"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "nikdy nevystřelí",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "odmítá každou odpověď",
+        // [Auto-translated] "cannot validate"
+        default: "nelze validovat"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Otázka nemá žádnou odpověď, kterou by bylo možné potvrdit",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "délka se čte z textové hodnoty a tato odpověď nemá žádnou",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Odpověď není číslo a nikdy nemůže být",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Číslo nikdy neodpovídá e-mailové adrese",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Odpověď není seznam hodnot",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Odpověď není hodnota, kterou může ověřit"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "pole",
+        // [Auto-translated] "an object"
+        object: "objekt"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "řádek matice",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "položka s více texty",
+        // [Auto-translated] "a row or item of a question"
+        default: "řádek nebo položka otázky"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "pole objektů",
+        // [Auto-translated] "an object"
+        object: "objekt",
+        // [Auto-translated] "a plain value"
+        plain: "čistá hodnota",
+        // [Auto-translated] "a value"
+        default: "Hodnota"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "pole vybraných hodnot",
+        // [Auto-translated] "a single value"
+        scalar: "jediná hodnota",
+        // [Auto-translated] "a value"
+        default: "Hodnota"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "níže",
+        // [Auto-translated] "above"
+        above: "výše"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "nikdy není viditelná a nikdy nedostává hodnotu",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "nikdy nejsou viditelné a nikdy nedostávají hodnotu"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Otázka",
+        // [Auto-translated] "question or variable"
+        questionvalue: "Otázka nebo proměnná",
+        // [Auto-translated] "page"
+        page: "Stránka"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "čte",
+        // [Auto-translated] "navigates to"
+        gotoName: "naviguje k",
+        // [Auto-translated] "sets"
+        default: "Sady"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Otázka na šablonu",
+        // [Auto-translated] "column"
+        default: "sloupec"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Otázka na šablonu",
+        // [Auto-translated] "column"
+        matrixdynamic: "sloupec",
+        // [Auto-translated] "item"
+        multipletext: "Položka",
+        // [Auto-translated] "row"
+        matrix: "Řada",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Řada",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "sloupec",
+        // [Auto-translated] "field"
+        default: "Pole"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Položka 1" }, { value: "item2", text: "Položka 2" }, { value: "item3", text: "Položka 3" }],
-    columns: [{ value: "column1", text: "Sloupec 1" }, { value: "column2", text: "Sloupec 2" }, { value: "column3", text: "Sloupec 3" }],
-    rows: [{ value: "row1", text: "Řádek 1" }, { value: "row2", text: "Řádek 2" }],
-    matrixColumns: [{ name: "column1", title: "Sloupec 1" }, { name: "column2", title: "Sloupec 2" }, { name: "column3", title: "Sloupec 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Položka 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Položka 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Položka 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Sloupec 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Sloupec 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Sloupec 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Řádek 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Řádek 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Sloupec 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Sloupec 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Sloupec 3"
+      }
+    ]
   }
 };
 

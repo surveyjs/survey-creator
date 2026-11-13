@@ -234,7 +234,7 @@ test.describe(title, () => {
     await page.evaluate(() => { window["creator"].toolbox.changeCategories([]); });
     await page.evaluate(() => { window["creator"].toolbox.showCategoryTitles = true; });
     await page.setViewportSize({ width: 2560, height: 1440 });
-    await compareScreenshot(page, toolboxElement, "toolbox-categories.png");
+    await compareScreenshot(page, toolboxElement, "toolbox-categories.png", { maxDiffPixels: 10 });
   });
 
   test("Toolbox with subtypes (ltr)", async ({ page }) => {

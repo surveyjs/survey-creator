@@ -1,4 +1,4 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter, CssClassBuilder } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter, toCssClasses } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines } from "../utils/utils";
@@ -447,7 +447,10 @@ export class StringEditorViewModelBase extends Base {
 
   private getClearedText(target: HTMLElement): string {
     let html = target.innerHTML;
-    let text = target.innerText;
+    // innerText depends on layout: on blur a single-line editor loses "white-space: pre-wrap" (it is set on :focus-within only)
+    // and the browser drops trailing spaces from innerText. Line breaks are removed from single-line strings anyway,
+    // so read the layout-independent textContent for them.
+    let text = !this.locString.allowLineBreaks && typeof target.textContent === "string" ? target.textContent : target.innerText;
     let mdText = null;
     if (this.creator && this.creator.trimValues && this.isInplaceForEditValues) {
       html = html.trim();
@@ -652,12 +655,12 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public className(text: any): string {
-    return new CssClassBuilder()
-      .append("svc-string-editor")
-      .append("svc-string-editor--hidden", text == "" && this.placeholder == "")
-      .append("svc-string-editor--readonly", !this.contentEditable)
-      .append("svc-string-editor--error", !!this.errorText)
-      .append("svc-string-editor--multiline", !!this.locString.allowLineBreaks)
-      .toString();
+    return toCssClasses(
+      "svc-string-editor",
+      text == "" && this.placeholder == "" && "svc-string-editor--hidden",
+      !this.contentEditable && "svc-string-editor--readonly",
+      !!this.errorText && "svc-string-editor--error",
+      !!this.locString.allowLineBreaks && "svc-string-editor--multiline"
+    );
   }
 }

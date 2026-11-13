@@ -7,7 +7,8 @@ import {
   QuestionImagePickerModel,
   QuestionSliderModel,
   ActionContainer,
-  QuestionRadiogroupModel
+  QuestionRadiogroupModel,
+  QuestionPanelDynamicModel
 } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
@@ -641,6 +642,61 @@ test("Hide text column in itemvalue (rateValues) if inplaceEditChoiceValues is t
   expect(qProperty.columns[0].name).toBe("icon");
   expect(qProperty.columns[1].name).toBe("value");
 });
+test("itemvalue.icon: items do not get an own icon accessor", () => {
+  const item = new ItemValue(1);
+  expect(Object.prototype.hasOwnProperty.call(item, "icon")).toBe(false);
+  expect(item.icon).toBe("");
+
+  const q = new QuestionCheckboxModel("q1");
+  q.choices = [1];
+  expect(Object.prototype.hasOwnProperty.call(q.choices[0], "icon")).toBe(false);
+  expect(q.choices[0].icon).toBe("");
+});
+test("itemvalue.icon: one regular property shared by the item classes", () => {
+  const prop = Serializer.findProperty("itemvalue", "icon");
+  expect(prop.isCustom).toBe(false);
+  expect(prop.visible).toBe(true);
+  expect(prop.readOnly).toBe(true);
+  expect(prop.isSerializable).toBe(false);
+  expect(prop.visibleIndex).toBe(0);
+  expect(prop.classInfo.name).toBe("itemvalue");
+
+  expect(Serializer.findProperty("choiceitem", "icon")).toBe(prop);
+  expect(Serializer.findProperty("ratingitem", "icon")).toBe(prop);
+  expect(Serializer.findClass("itemvalue").properties.filter(p => p.name === "icon")).toHaveLength(1);
+});
+test("itemvalue.icon: rateValues grid shows the smiley column for smileys only", () => {
+  const getGrid = (q: QuestionRatingModel) =>
+    <QuestionMatrixDynamicModel>new PropertyGridModelTester(q).survey.getQuestionByName("rateValues");
+
+  const smileys = new QuestionRatingModel("q1");
+  smileys.rateType = "smileys";
+  smileys.rateValues = [1, 2, 3];
+  const smileysGrid = getGrid(smileys);
+  expect(smileysGrid.columns.map(c => c.name)).toEqual(["icon", "value", "text"]);
+  expect(smileysGrid.columns[0].cellType).toBe("html");
+  const rows = smileysGrid.visibleRows;
+  expect(rows[0].cells[0].question.isVisible).toBe(true);
+  expect(rows[0].cells[0].question.html).toBe("<div class=\"spg-smiley-icon\"><svg><use xlink:href=\"#icon-smiley-rate4-24x24\"></use></svg></div>");
+  expect(rows[1].cells[0].question.html).toBe("<div class=\"spg-smiley-icon\"><svg><use xlink:href=\"#icon-smiley-rate6-24x24\"></use></svg></div>");
+
+  const labels = new QuestionRatingModel("q2");
+  labels.rateType = "labels";
+  labels.rateValues = [1, 2, 3];
+  const labelsGrid = getGrid(labels);
+  expect(labelsGrid.columns[0].name).toBe("icon");
+  expect(labelsGrid.visibleRows[0].cells[0].question.isVisible).toBe(false);
+  expect(labelsGrid.columns[0].hasVisibleCell).toBe(false);
+});
+test("itemvalue.icon: other item matrices do not list the icon column", () => {
+  const getColumns = (q: any, propName: string) =>
+    (<QuestionMatrixDynamicModel>new PropertyGridModelTester(q).survey.getQuestionByName(propName)).columns.map(c => c.name);
+
+  expect(getColumns(new QuestionCheckboxModel("q1"), "choices")).toEqual(["value", "text"]);
+  expect(getColumns(new QuestionMatrixModel("q2"), "rows")).toEqual(["value", "text"]);
+  expect(getColumns(new QuestionMatrixModel("q3"), "columns")).toEqual(["value", "text"]);
+  expect(getColumns(new QuestionImagePickerModel("q4"), "choices")).toEqual(["value", "text", "imageLink"]);
+});
 test("Hide text column in itemvalue (matrixdropdown.rows) if inplaceEditChoiceValues is true", () => {
   const q = new QuestionMatrixDropdownModel("q1");
   q.rows = ["item1", "item2", "item3"];
@@ -810,4 +866,57 @@ test("choices options.minChoices, Bug#7374, Bug#7375", () => {
   expect(choicesQuestion.visibleRows).toHaveLength(3);
   expect(isRowHasRemoveButton(0)).toBe(true);
   expect(isRowHasRemoveButton(2)).toBe(true);
+});
+
+function showDetailAndGetDetailRow(matrix: QuestionMatrixDynamicModel) {
+  const renderedRow = matrix.renderedTable.rows[0];
+  const container = <ActionContainer>renderedRow.cells[renderedRow.cells.length - 1].item.value;
+  container.getActionById("show-detail").action();
+  const detailRows = matrix.renderedTable.rows.filter(r => r.isDetailRow);
+  expect(detailRows).toHaveLength(1);
+  return { rowColSpans: renderedRow.cells.reduce((sum, cell) => sum + cell.colSpans, 0), detailRow: detailRows[0] };
+}
+test("Validators property editor: the detail row renders the detail panel, #8029", () => {
+  const question = new QuestionCheckboxModel("q1");
+  question.fromJSON({ validators: [{ type: "answercount", maxCount: 3 }] });
+  const propertyGrid = new PropertyGridModelTester(question);
+  const matrix = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("validators");
+  expect(matrix.allowRowReorder).toBe(false);
+  const { rowColSpans, detailRow } = showDetailAndGetDetailRow(matrix);
+  const row = matrix.visibleRows[0];
+  expect(row.detailPanel.getQuestionByName("maxCount").value).toBe(3);
+  expect(detailRow.cells).toHaveLength(1);
+  expect(detailRow.cells[0].panel).toBe(row.detailPanel);
+  expect(detailRow.cells[0].colSpans).toBe(rowColSpans);
+});
+test("Choices property editor: the detail row renders the detail panel, #8029", () => {
+  const question = new QuestionCheckboxModel("q1");
+  question.choices = [1, 2];
+  const propertyGrid = new PropertyGridModelTester(question);
+  const matrix = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("choices");
+  expect(matrix.allowRowReorder).toBe(true);
+  const { rowColSpans, detailRow } = showDetailAndGetDetailRow(matrix);
+  expect(detailRow.cells).toHaveLength(1);
+  expect(detailRow.cells[0].panel).toBe(matrix.visibleRows[0].detailPanel);
+  expect(detailRow.cells[0].colSpans).toBe(rowColSpans);
+});
+test("pageSize property editor category for matrices and dynamic panel", () => {
+  // pageSize is hidden in survey-core's Serializer until the pager UI ships
+  const props = [Serializer.findProperty("matrixdropdownbase", "pageSize"), Serializer.findProperty("paneldynamic", "pageSize")];
+  props.forEach(prop => prop.visible = true);
+  const checkPageSize = (obj: any, title: string, description: string, category: string = "general") => {
+    const propertyGrid = new PropertyGridModelTester(obj);
+    const pageSizeQuestion = propertyGrid.survey.getPanelByName(category).getQuestionByName("pageSize");
+    expect(pageSizeQuestion, obj.getType()).toBeTruthy();
+    expect(pageSizeQuestion.title, obj.getType()).toBe(title);
+    expect(pageSizeQuestion.description, obj.getType()).toBe(description);
+    pageSizeQuestion.value = 5;
+    expect(obj.pageSize, obj.getType()).toBe(5);
+  };
+  const rowsHelp = "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows.";
+  checkPageSize(new QuestionMatrixDynamicModel("q1"), "Rows per page", rowsHelp, "rows");
+  checkPageSize(new QuestionMatrixDropdownModel("q1"), "Rows per page", rowsHelp, "rows");
+  checkPageSize(new QuestionPanelDynamicModel("q1"), "Entries per page",
+    "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries.", "entries");
+  props.forEach(prop => prop.visible = false);
 });

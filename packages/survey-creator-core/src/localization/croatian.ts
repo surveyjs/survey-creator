@@ -142,6 +142,10 @@ export var hrStrings = {
     jsonHideErrors: "Sakrij pogreške",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "Pokaži pogreške",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Ispravak pogreške",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "Survey JSON mora biti objekt.",
     // "Undo"
     undo: "Poništiti",
     // "Redo"
@@ -246,6 +250,8 @@ export var hrStrings = {
     translateUsigAI: "Automatski prevedi sve",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Prevedi iz: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Prevedite preostale stringove",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Neprevedeni nizovi",
     // "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var hrStrings = {
     translationSource: "Izvor: ",
     // [Auto-translated] "Target: "
     translationTarget: "Cilj: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Izvorni jezik",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Ciljani jezik",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} prevedenih žica",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Jeste li sigurni da želite izbrisati sve prevedene nizove za odabrani jezik?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Prikaz forme",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Prikaz mreže",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Prevedite stringove",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Nizovi pregleda",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Nema niza za prevođenje",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Svi nizovi su prevedeni",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} stringovi se ne prevode",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube veze nisu podržane.",
     // [Auto-translated] "Export"
@@ -286,6 +314,10 @@ export var hrStrings = {
     choicesLoadedFromWebLinkText: "Idi na postavke",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Pretpregled učitanih mogućnosti izbora",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Skup izraza bez izraza",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Izraz uređivanja",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML sadržaj će biti ovdje.",
     // [Auto-translated] "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var hrStrings = {
       uncompletedRule_cancel: "Ne, želim ispuniti pravila."
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Predskup varijabli",
+    // [Auto-translated] "None"
+    noPreset: "Nema",
+    // [Auto-translated] "View variable values"
+    view: "Prikaži vrijednosti varijabli",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Vrijednosti varijabli",
+    // [Auto-translated] "Manage presets"
+    edit: "Upravljanje presetima",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Predpostavke varijabli",
+    // [Auto-translated] "Preset"
+    presetName: "Preset",
+    // [Auto-translated] "Description"
+    presetDescription: "Opis",
+    // [Auto-translated] "Add preset"
+    addPreset: "Dodaj preset",
+    // [Auto-translated] "New preset"
+    newPresetName: "Novi preset",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Izbriši preset",
+    // [Auto-translated] "Back"
+    back: "Natrag",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Preset s ovim imenom već postoji",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Unesite unaprijed postavljeno ime",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Preset",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Opis"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Asistent za izraze",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Pišite s umjetnom inteligencijom",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Opišite što izraz treba učiniti",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Na primjer: pokažite ovo pitanje kada je ispitanik stariji od 18 godina",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Opišite stanje riječima",
+    // [Auto-translated] "Generate"
+    generate: "Generirajte",
+    // [Auto-translated] "Refine"
+    refine: "Rafinirati",
+    // [Auto-translated] "Explain"
+    explain: "Objasnite",
+    // [Auto-translated] "Stop"
+    stop: "Stani",
+    // [Auto-translated] "Accept"
+    accept: "Prihvati",
+    // [Auto-translated] "Reject"
+    reject: "Odbij",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Primijeni popravak: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Trenutni izraz",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Predloženi izraz",
+    // [Auto-translated] "Reads as"
+    readsAs: "Čita se kao",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Objašnjenje asistenta",
+    // [Auto-translated] "Check results"
+    findings: "Provjerite rezultate",
+    // [Auto-translated] "Error"
+    severityError: "Pogreška",
+    // [Auto-translated] "Warning"
+    severityWarning: "Upozorenje",
+    // [Auto-translated] "Info"
+    severityInfo: "Informacije",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "u \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Opišite izraz i odaberite Generiraj.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Čekam asistenta...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Zahtjev je otkazan.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Pomoćnik je izvijestio: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Asistent nije predložio izraz lica.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Pregledajte predloženi izraz.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asistent je objasnio trenutni izraz.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Predloženi izraz sadrži pogreške i ne može se prihvatiti.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Predloženi izraz nije se mogao provjeriti na svakom mjestu na koje je napisan, pa se ne može prihvatiti.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Dodajte radnju pravilu prije nego što pitate asistenta.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Prvi prijedlog imao je pogreške i automatski je ispravljen."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var hrStrings = {
       templateDescription: "Uzorak opisa unosa",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Uzorak naslova unosa",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Privremeni naslov unosa",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Prazan tekst na ploči",
       // [Auto-translated] "Tab title pattern"
@@ -588,6 +724,10 @@ export var hrStrings = {
       templateErrorLocation: "Poravnanje poruke o pogrešci",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nova lokacija ulaska",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Unosi po stranici",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Dopustite korisnicima sortiranje unosa",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Sprječavanje dupliciranih odgovora u sljedećem pitanju"
     },
@@ -675,6 +815,12 @@ export var hrStrings = {
       // [Auto-translated] "Expression"
       expression: "Izraz"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sortiraj po",
+      // [Auto-translated] "Order"
+      direction: "Red"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Izražavanje"
@@ -690,7 +836,9 @@ export var hrStrings = {
       // [Auto-translated] "Survey description"
       description: "Opis upitnika",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Neka anketa bude samo za čitanje"
+      readOnly: "Neka anketa bude samo za čitanje",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Regionalni formati"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -726,7 +874,9 @@ export var hrStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Učinite stupac potrebnim ako",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Svaka mogućnost u zasebnom stupcu"
+      showInMultipleColumns: "Svaka mogućnost u zasebnom stupcu",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Dopustite sortiranje po ovom stupcu"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export var hrStrings = {
     masksettings: {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Spremanje maskirane vrijednosti u rezultate upitnika"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Regija",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Uzorak datuma",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Vremenski obrazac",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Decimalni separator",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Separator tisuća",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Simbol valute",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valutni obrazac"
     },
     patternmask: {
       // [Auto-translated] "Value pattern"
@@ -761,16 +927,18 @@ export var hrStrings = {
       decimalSeparator: "Decimalni razdjelnik",
       // [Auto-translated] "Value precision"
       precision: "Preciznost vrijednosti",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Prikaži zaostale nule",
       // [Auto-translated] "Minimum value"
       min: "Minimalna vrijednost",
       // [Auto-translated] "Maximum value"
       max: "Maksimalna vrijednost"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Prefiks valute",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Sufiks valute"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Simbol valute",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valutni obrazac"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Brisanje drugih kada je odabrano",
@@ -812,8 +980,24 @@ export var hrStrings = {
     addItem: "Kliknite da biste dodali stavku...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Kliknite da biste uklonili stavku...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Dodaj {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Uklonite {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Vucite stavku",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Proširi ugniježđene izbore",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Collapse ugnježđeni izbori",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Proširite ugniježđene izbore {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Kolaps ugniježđenih izbora {0}",
+    // [Auto-translated] "Show description"
+    showDescription: "Opis serije",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Opis skrivanja",
     // "Edit"
     edit: "Uređivanje",
     // [Auto-translated] "Done"
@@ -856,40 +1040,60 @@ export var hrStrings = {
     propertyNameIsIncorrect: "Nemojte koristiti rezervirane riječi: \"stavka\", \"izbor\", \"ploča\", \"red\".",
     // "You don't have any items yet"
     listIsEmpty: "Dodavanje nove stavke",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Još nemate izbora",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Još nemate kolumne",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Još nemate stupce izgleda",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Još nemate redaka",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Još nemate pravila provjere valjanosti",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Još nemate prilagođene varijable",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Još nemaš okidača",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Još nemate poveznice",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Još nemate stranice",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Dodavanje novog izbora",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Dodaj novi stupac",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Dodaj novi redak",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Dodaj novo pravilo",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Dodaj novu varijablu",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Dodaj novi okidač",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Dodaj novi URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Dodaj novu stranicu",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Nema izbora",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Nema prilagođenih ocjena",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Nema prilagođenih etiketa",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Nema područja",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Nema stupaca",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Bez stupaca za raspored",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Nema svađa",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Nema pravila validacije",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Nema prilagođenih varijabli",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Nema okidača",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Nema uvjetnog označavanja",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Nema poveznica",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Nema stranica",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Nema razina sortiranja",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Dodaj izbor",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Dodajte vrijednost ocjene",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Dodaj oznaku",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Dodaj površinu",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Dodaj stupac",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Dodaj red",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Pravilo dodavanja",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Dodaj varijablu",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Dodaj okidač",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Dodaj oznake",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Dodaj poveznicu",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Dodaj stranicu",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Dodaj razinu sortiranja",
     // "Value"
     value: "Vrijednost",
     // "Text"
@@ -916,6 +1120,8 @@ export var hrStrings = {
     surveyTitlePlaceholder: "Naslov ulazne ankete ovdje",
     // "Page {num}"
     pageTitlePlaceholder: "Naslov ulazne stranice ovdje",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Naslov panela",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Početna stranica",
     // "Description"
@@ -966,6 +1172,8 @@ export var hrStrings = {
     visible: "Je li vidljivo?",
     // "Required"
     isRequired: "Je potrebno?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Zahtijevajte pozitivan odgovor",
     // [Auto-translated] "Mark as required"
     markRequired: "Označi kao obavezno",
     // [Auto-translated] "Remove the required mark"
@@ -976,6 +1184,8 @@ export var hrStrings = {
     eachRowUnique: "Sprječavanje dvostrukih odgovora u recima",
     // "Error message for required questions"
     requiredErrorText: "Potreban tekst pogreške",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Poruka o pogrešci kada je potreban 'da'",
     // "Display the question on a new line"
     startWithNewLine: "Počinje li s novom linijom?",
     // "Rows"
@@ -994,6 +1204,16 @@ export var hrStrings = {
     maxFiles: "Maksimalan broj datoteka",
     // "Row count"
     rowCount: "Broj redaka",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Redovi po stranici",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Dopustite korisnicima sortiranje redaka",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maksimalne razine sortiranja",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Zadani redoslijed sortiranja",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Prikaži traku sortiranja",
     // "Columns layout"
     columnLayout: "Raspored stupaca",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export var hrStrings = {
     questionErrorLocation: "Mjesto pogreške u pitanju",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Usredotočite prvo pitanje na promjenu stranice",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Omogući prečace za odabir",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Prikaži savjete za tipkovnicu",
     // "Question order"
     questionOrder: "Redoslijed elemenata na stranici",
     // "Time limit to complete the survey"
@@ -1264,10 +1488,12 @@ export var hrStrings = {
     waitForUpload: "Pričekajte da se prijenos dovrši",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Poravnanje pojedinosti retka",
-    // [Auto-translated] "Minimum row count"
-    minRowCount: "Najmanji broj redaka",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Minimum number of rows"
+    minRowCount: "Minimalan broj redova",
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Maksimalan broj redaka",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Izraz broja redaka",
     // "Confirm row removal"
     confirmDelete: "Potvrda brisanja retka",
     // [Auto-translated] "Confirmation message"
@@ -1278,6 +1504,8 @@ export var hrStrings = {
     minPanelCount: "Najmanji broj unosa",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Maksimalan broj unosa",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Izraz broja unosa",
     // [Auto-translated] "Initial entry state"
     panelsState: "Početno stanje unosa",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export var hrStrings = {
     logoHeight: "Visina logotipa",
     // "Read-only"
     readOnly: "Samo za čitanje",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Način samo za čitanje",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Onemogućite način rada samo za čitanje ako",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export var hrStrings = {
       columns: "Stupce",
       // "Rows"
       rows: "Redaka",
+      // [Auto-translated] "Entries"
+      entries: "Prijave",
       // "Choice Options"
       choices: "Izbora",
       // "Items"
@@ -1544,6 +1776,8 @@ export var hrStrings = {
       question: "Pitanje",
       // "Pages"
       pages: "Stranice",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Regionalni formati",
       // "Quiz Mode"
       timer: "Timer/Kviz",
       // "Calculated Values"
@@ -1862,6 +2096,12 @@ export var hrStrings = {
       // [Auto-translated] "Never"
       none: "Nikada"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Samo za čitanje",
+      // [Auto-translated] "View"
+      view: "Pogled"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "Radio tipke",
     inputType: {
@@ -1913,6 +2153,12 @@ export var hrStrings = {
       warning: "Upozorenje",
       // [Auto-translated] "Informational"
       info: "Informativan"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Prednji dio",
+      // [Auto-translated] "Rear"
+      environment: "Stražnji dio"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export var hrStrings = {
     underRowSingle: "Ispod retka prikažite samo jedan odjeljak",
     // "Auto"
     auto: "Automobil",
+    // [Auto-translated] "Always"
+    always: "Uvijek",
     timerInfoMode: {
       // "Both"
       combined: "Oba"
@@ -2321,7 +2569,148 @@ export var hrStrings = {
       survey: "Isto kao i anketa",
       // [Auto-translated] "Same as container"
       container: "Isto kao spremnik"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Naslijedi",
+      // [Auto-translated] "Hide"
+      "false": "Sakrij se",
+      // [Auto-translated] "Show"
+      "true": "Emisija"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arapski",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bugarski",
+    // [Auto-translated] "Catalan"
+    ca: "Katalonski",
+    // [Auto-translated] "Czech"
+    cs: "Češki",
+    // [Auto-translated] "Welsh"
+    cy: "Velški",
+    // [Auto-translated] "Danish"
+    da: "Danski",
+    // [Auto-translated] "German"
+    de: "Njemački",
+    // [Auto-translated] "Greek"
+    el: "Grčki",
+    // [Auto-translated] "English"
+    en: "Engleski",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Engleski (Australija)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Engleski (Kanada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Engleski (Ujedinjeno Kraljevstvo)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Engleski (Irska)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Engleski (Indija)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Engleski (Novi Zeland)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Engleski (Južna Afrika)",
+    // [Auto-translated] "Spanish"
+    es: "Španjolski",
+    // [Auto-translated] "Estonian"
+    et: "Estonski",
+    // [Auto-translated] "Basque"
+    eu: "Baskijski",
+    // [Auto-translated] "Persian"
+    fa: "Perzijski",
+    // [Auto-translated] "Finnish"
+    fi: "Finski",
+    // [Auto-translated] "Filipino"
+    fil: "Filipinac",
+    // [Auto-translated] "French"
+    fr: "Francuski",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Francuski (Kanada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Francuski (Švicarska)",
+    // [Auto-translated] "Hebrew"
+    he: "Hebrejski",
+    // [Auto-translated] "Hindi"
+    hi: "Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Hrvatski",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Haićanski kreolski",
+    // [Auto-translated] "Hungarian"
+    hu: "Mađarski",
+    // [Auto-translated] "Indonesian"
+    id: "Indonezijski",
+    // [Auto-translated] "Icelandic"
+    is: "Islandski",
+    // [Auto-translated] "Italian"
+    it: "Talijanski",
+    // [Auto-translated] "Japanese"
+    ja: "Japanski",
+    // [Auto-translated] "Georgian"
+    ka: "Gruzijski",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazahstanski",
+    // [Auto-translated] "Korean"
+    ko: "Korejski",
+    // [Auto-translated] "Lithuanian"
+    lt: "Litvanski",
+    // [Auto-translated] "Latvian"
+    lv: "Latvijski",
+    // [Auto-translated] "Macedonian"
+    mk: "Makedonac",
+    // [Auto-translated] "Burmese"
+    mm: "Burmanski",
+    // [Auto-translated] "Malay"
+    ms: "Malajski",
+    // [Auto-translated] "Dutch"
+    nl: "Nizozemski",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Nizozemski (Belgija)",
+    // [Auto-translated] "Norwegian"
+    no: "Norveški",
+    // [Auto-translated] "Polish"
+    pl: "Poljski",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugalski",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugalski (Brazil)",
+    // [Auto-translated] "Romanian"
+    ro: "Rumunjski",
+    // [Auto-translated] "Russian"
+    ru: "Ruski",
+    // [Auto-translated] "Slovak"
+    sk: "Slovački",
+    // [Auto-translated] "Slovenian"
+    sl: "Slovenski",
+    // [Auto-translated] "Serbian"
+    sr: "Srpski",
+    // [Auto-translated] "Swedish"
+    sv: "Švedski",
+    // [Auto-translated] "Swahili"
+    sw: "Svahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tadžik",
+    // [Auto-translated] "Thai"
+    th: "Tajlandski",
+    // [Auto-translated] "Turkish"
+    tr: "Turski",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ukrajinski",
+    // [Auto-translated] "Urdu"
+    ur: "Urdu",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vijetnamski",
+    // [Auto-translated] "Chinese"
+    zh: "Kineski",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Kineski (pojednostavljeno)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Kineski (tradicionalni)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export var hrStrings = {
     visibletrigger: "promjena vidljivosti (amortizirati)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Isto kao i geodetski jezik"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Npr.: +1(999)-999-99-99"
@@ -2405,12 +2798,6 @@ export var hrStrings = {
     datetimemask: {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Npr.: mm/dd/gggg"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Npr.: $",
-      // "Ex.: USD"
-      suffix: "Npr.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export var hrStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Određuje koliko stupaca ova ploča obuhvaća unutar rasporeda rešetke.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Ova tablica omogućuje konfiguriranje svakog stupca rešetke unutar ploče. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu."
+      gridLayoutColumns: "Ova tablica omogućuje konfiguriranje svakog stupca rešetke unutar ploče. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificira kako se pitanja unutar ovog panela pojavljuju kada su samo za čitanje. \"Samo za čitanje\" prikazuje pitanja s njihovim uobičajenim kontrolama unosa, ali je onemogućeno za uređivanje. \"Prikaz\" prikazuje odgovore kao tekst ili druge neinteraktivne elemente. \"Naslijedi\" koristi način rada postavljen za roditeljsku ploču, stranicu ili anketu (\"Samo za čitanje\" po defaultu)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export var hrStrings = {
       width: "Postavlja širinu ploče proporcionalno ostalim elementima istraživanja u istoj liniji. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Upišite predložak za dinamičke naslove ploča. Koristite {panelIndex} za opći položaj panela i {visiblePanelIndex} za njegov redoslijed među vidljivim pločama. Umetnite ova rezervirana mjesta u uzorak da biste dodali automatsko numeriranje.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Rezervni tekst za naslove unosa koji se primjenjuje kada obrazac naslova unosa ne daje smislenu vrijednost. Koristite {panelIndex} za opći položaj unosa i {visiblePanelIndex} za njegov redoslijed među vidljivim unosima.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Upišite predložak za naslove kartica. Koristite {panelIndex} za opći položaj panela i {visiblePanelIndex} za njegov redoslijed među vidljivim pločama. Umetnite ova rezervirana mjesta u uzorak da biste dodali automatsko numeriranje.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export var hrStrings = {
       keyName: "Pogledajte naziv pitanja kako biste od korisnika zahtijevali da pruži jedinstven odgovor za ovo pitanje na svakoj ploči.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Aktivira upit za potvrdu prije uklanjanja unosa.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Specificirajte izraz koji izračunava broj unosa. Ovaj izraz nadjačava postavku \"Početni broj unosa\" i ponovno se procjenjuje kad god se vrijednosti na koje se odnosi promijene. Rezultat je ograničen postavkama \"Minimalan broj unosa\" i \"Maksimalan broj unosa\". Dok je ovaj izraz postavljen, ispitanici ne mogu ručno dodavati ili uklanjati unose.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Specificira broj unosa prikazanih na svakoj stranici panela. '0' onemogućuje paginaciju i prikazuje sve unose.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Omogućuje ispitanicima sortiranje unosa pomoću trake za sortiranje.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definira početni redoslijed unosa. Ispitanici ga mogu promijeniti ako je dopušteno sortiranje. Kod sortiranja po više pitanja, svako pitanje sortira unose unutar redoslijeda utvrđenog prethodnim pitanjem. Povlačite pitanja kako biste promijenili prioritet.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Dodjeljuje brojeve pitanjima ugniježđenim unutar dinamičke ploče."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Omogućuje ispitanicima sortiranje redaka klikom na zaglavlje stupaca ili korištenjem trake za sortiranje.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definira početni redoslijed redaka. Ispitanici ga mogu promijeniti ako je dopušteno sortiranje. Kod sortiranja po više stupaca, svaki stupac sortira retke unutar redoslijeda koji je uspostavio prethodni stupac. Prevucite stupce kako biste promijenili njihov prioritet.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" prikazuje traku za sortiranje samo kada matrica nema zaglavlja stupaca koja se mogu sortirati: zaglavlja su skrivena, matrica koristi mobilni raspored ili su retki prebačeni u stupce. \"Uvijek\" prikazuje traku za sortiranje čak i kada su vidljivi naslovi stupaca koji se mogu sortirati.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Specificirajte izraz koji izračunava broj redaka. Ovaj izraz nadjačava postavku \"Početni broj redaka\" i ponovno se procjenjuje svaki put kad se vrijednosti na koje se poziva promijene. Rezultat je ograničen postavkama \"Minimalan broj redaka\" i \"Maksimalan broj redaka\". Dok je ovaj izraz postavljen, ispitanici ne mogu ručno dodavati ili uklanjati retke.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Aktivira upit za potvrdu prije uklanjanja retka.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Automatski proširuje odjeljak s detaljima kada se u matricu doda novi redak."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Specificira broj redaka prikazanih na svakoj stranici matrice. '0' onemogućuje paginaciju i prikazuje sve retke.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Specificira po koliko polja ispitanik može sortirati istovremeno.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplicira odgovore iz posljednjeg retka i dodjeljuje ih sljedećem dodanom dinamičkom retku.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export var hrStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Dugi tekstovi u mogućnostima izbora automatski će generirati prijelome redaka kako bi stali unutar padajućeg izbornika. Poništite odabir ako želite da se tekstovi izrežu.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Određuje koliko stupaca ovo pitanje obuhvaća unutar rasporeda rešetke."
+      effectiveColSpan: "Određuje koliko stupaca ovo pitanje obuhvaća unutar rasporeda rešetke.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificira kako se pitanje pojavljuje kada je samo za čitanje. \"Samo za čitanje\" prikazuje pitanje s uobičajenim kontrolama unosa, ali je isključeno za uređivanje. \"Prikaz\" prikazuje odgovore kao tekst ili druge neinteraktivne elemente. \"Naslijedi\" koristi način rada postavljen za roditeljsku ploču, stranicu ili anketu (\"Samo za čitanje\" po defaultu).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Ispod ovog pitanja prikazuje savjete za dostupne radnje tipkovnice. Opcija \"Naslijedi\" primjenjuje postavku na razini ankete."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export var hrStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Odaberite želite li ispitanicima onemogućiti ispunjavanje upitnika.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Specificira kako se pojavljuju pitanja samo za čitanje, uključujući i na stranici za pregled. \"Samo za čitanje\" (zadano) prikazuje pitanja s uobičajenim kontrolama unosa, ali je onemogućeno za uređivanje. \"Prikaz\" prikazuje odgovore kao tekst ili druge neinteraktivne elemente.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Postavlja lokaciju trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja ankete."
     },
@@ -2633,7 +3050,9 @@ export var hrStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Kada je odabrano, stvara pojedinačni stupac za svaku mogućnost izbora.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice."
+      colCount: "Raspoređuje opcije izbora u rasporedu s više stupaca. Kada je postavljena na 0, opcije se prikazuju u jednom retku. Kada je postavljena na -1, stvarna vrijednost nasljeđuje se iz svojstva \"Broj ugniježđenih stupaca\" nadređene matrice.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificira kako se ćelije u ovom stupcu pojavljuju kada su samo za čitanje. \"Samo za čitanje\" prikazuje ćelije s njihovim uobičajenim kontrolama unosa, ali onemogućeno za uređivanje. \"Prikaz\" prikazuje odgovore kao tekst ili druge neinteraktivne elemente. \"Naslijedi\" koristi način rada postavljen za matricu ili anketu (\"Samo za čitanje\" po defaultu)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export var hrStrings = {
     questionErrorLocation: "Postavlja mjesto poruke o pogrešci u odnosu na pitanje s unosom koji nije valjan. Odaberite između: \"Vrh\" - tekst pogreške nalazi se na vrhu okvira pitanja; \"Dno\" - tekst pogreške nalazi se na dnu okvira pitanja.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Odaberite želite li da prvo polje za unos na svakoj stranici bude spremno za unos teksta.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Prikazuje slova (A, B, C, ...) pored opcija u pitanjima Radio Button Group, Checkboxs i Image Picker. Ispitanici mogu odabrati opcije pritiskom na odgovarajuće tipke za slova. Ovu postavku možete nadjačati za pojedinačna pitanja.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Prikazuje slova (A, B, C, ...) pored izbora i omogućuje ispitanicima da ih odaberu pritiskom na odgovarajuće tipke. Opcija \"Naslijedi\" koristi postavku na razini ankete."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Ispod pitanja prikazuje savjete za dostupne radnje na tipkovnici. Ovu postavku možete nadjačati za pojedinačna pitanja.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Zadržava izvorni redoslijed pitanja ili ih randomizira. Efekt ove postavke vidljiv je samo na kartici Pretpregled.",
     // [Auto-translated] "For text entry questions only."
@@ -2793,7 +3220,9 @@ export var hrStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Postavlja vidljivost navigacijskih gumba na stranici. Opcija \"Naslijedi\" primjenjuje postavku na razini upitnika, koja je zadana kao \"Vidljivo\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Ova tablica omogućuje konfiguriranje svakog stupca rešetke na stranici. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu."
+      gridLayoutColumns: "Ova tablica omogućuje konfiguriranje svakog stupca rešetke na stranici. Automatski postavlja postotak širine za svaki stupac na temelju maksimalnog broja elemenata u redu. Da biste prilagodili izgled rešetke, ručno prilagodite te vrijednosti i definirajte širinu naslova za sva pitanja u svakom stupcu.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specificira kako se pitanja na ovoj stranici pojavljuju kada su samo za čitanje. \"Samo za čitanje\" prikazuje pitanja s njihovim uobičajenim kontrolama unosa, ali je isključeno za uređivanje. \"Prikaz\" prikazuje odgovore kao tekst ili druge neinteraktivne elemente. \"Naslijedi\" koristi način rada postavljen za anketu (\"Samo za čitanje\" po zadanim postavkama)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Postavlja lokaciju mjerača vremena na stranici.",
@@ -2911,6 +3340,22 @@ export var hrStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Odaberite želite li spremiti vrijednost pitanja s primijenjenom maskom u rezultatima upitnika."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Regija čiji se formati primjenjuju na maske za ulaz datuma, vremena, brojeva i valute. Ako nije specificirano, koristi se jezik ankete.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Nadjačava format datuma regije koji se koristi u ulaznim maskama. Uzorak može sadržavati znakove razdjelnika i sljedeće privremene oznake: <br>'m' - Broj mjeseca.<br> 'mm' - Broj mjeseca, s vodećom nulom za jednoznamenkaste vrijednosti. <br>'d' - Dan u mjesecu. <br>'dd' - Dan u mjesecu, s vodećom nulom za jednoznamenkaste vrijednosti. <br>'yy' - Posljednje dvije znamenke godine. <br>'yyyy' - Četveroznamenkasta godina.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Nadjačava vremenski format regije koji se koristi u ulaznim maskama. Obrazac može sadržavati znakove razdjelnika i sljedeće privremene oznake: <br>'H' - Sati u 24-satnom formatu.<br> 'HH' - Sati u 24-satnom formatu, s vodećom nulom za jednoznamenkaste vrijednosti. <br>'h' - Sati u 12-satnom formatu. <br>'HH' - Sati u 12-satnom formatu, s vodećom nulom za jednoznamenkaste vrijednosti. <br>'MM' - Minute. <br>'ss' - Sekunde. <br>'TT' - 12-satni sat velikim slovima (AM/PM). <br>'TT' - 12-satni sat malim slovima (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Nadjačava simbol koji regija koristi za odvajanje razlomka od cjelobrojnog dijela prikazanog broja u ulaznim maskama.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Nadjačava simbol koji regija koristi za razdvajanje znamenki velikog broja u skupine od tri u ulaznim maskama.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Nadjačava valutni simbol ili kod regije koji se koristi u ulaznim maskama.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Nadjačava valutni obrazac regije koji se koristi u ulaznim maskama. Obrazac može sadržavati sljedeće privremene oznake: <br>'@' - Simbol valute ili kod.<br> '#' - Broj. <br>'-' - Položaj minus znaka u negativnim vrijednostima (ako se izostavi, minus znak se stavlja na početak)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Uzorak može sadržavati slovne dijelove niza i sljedeća rezervirana mjesta: '9' - za znamenku; \"a\" – za veliko ili malo slovo; '#' - za znamenku ili veliko ili malo slovo. Koristite obrnutu kosu crtu '\\' da biste izbjegli znak."
@@ -2925,13 +3370,15 @@ export var hrStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Simbol koji se koristi za odvajanje znamenki velikog broja u grupe od tri.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Ograničava broj znamenki koje treba zadržati nakon decimalnog zareza za prikazani broj."
+      precision: "Ograničava broj znamenki koje treba zadržati nakon decimalnog zareza za prikazani broj.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Prikazuje zaostale nule u frakcijskom dijelu do zadane preciznosti. Na primjer, s preciznošću 2, ulazna vrijednost 1.2 prikazuje se kao 1.20."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Jedan ili više simbola koji će se prikazati prije vrijednosti.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Jedan ili više simbola koji će se prikazati nakon vrijednosti."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Simbol valute ili kod prikazan s vrijednošću. Simbol regije koristi se po zadanim postavkama. Obrišite ovo svojstvo da ne prikazuje simbol.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Specificira položaje broja, simbola valute i minus znaka. Uzorak može sadržavati sljedeće privremene oznake: <br>'@' - Simbol valute ili kod.<br> '#' - Broj. <br>'-' - Položaj minus znaka u negativnim vrijednostima (ako se izostavi, minus znak se stavlja na početak)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2982,6 +3429,8 @@ export var hrStrings = {
     tabAlign: "Poravnanje tabulatora",
     // [Auto-translated] "File source type"
     sourceType: "Vrsta izvora datoteke",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Zadana kamera",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Prilagodi spremniku",
     // [Auto-translated] "Set value expression"
@@ -3302,12 +3751,702 @@ export var hrStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Primijenjen predpostavka"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Linija: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Koristite predloženi naziv"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Ukloni ponovljenu stavku"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Koristite preporučeni tip"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Koristite predloženu funkciju"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Koristi predloženu masku"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Dajte elementu slobodno ime"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Dajte elementu slobodno ime"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Uklonite nekretninu"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Koristite najbližu dopuštenu vrijednost",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Uklonite nekretninu",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Iskoristite predloženu vrijednost"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Pretvorite vrijednost u popis"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Dajte elementu ime"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Uklonite nekretninu",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Preimenovati nekretninu"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Koristite predloženi naziv",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Koristite predloženi naziv"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Koristite predloženi naziv"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Koristite preporučeni tip"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Koristite preporučeni tip"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Izraz \"{expression}\" ne može se parsirati."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" nije pronađen – ne postoji pitanje, panel, stranica, izračunata vrijednost ili varijabla s tim imenom.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" se ne nalazi u {containerType} \"{root}\" (referenca: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" se ne nalazi u opsegu \"{scopePrefix}\" (referenca: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "KeyName od \"{name}\" naziva \"{key}\" - \"{name}\" nema {keyNoun} s tim imenom, pa se validacija duplikata ključa nikada ne izvršava.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" nije pronađen."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop} u \"{name}\" referira se na sam element (referenca: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Ime \"{name}\" je duplicirano.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Izračunato ime vrijednosti \"{name}\" već koristi druga izračunata vrijednost.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Izračunata vrijednost \"{name}\" dijeli ime s drugim elementom, pa jedan od njih sjenjuje drugi."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} \"{name}\" ovog {ownerText} također je ugrađena varijabla ankete {{builtIn}} - anketa odgovara prva {{name}}, pa je ova nedostupna u izrazima.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" od \"{name}\" dijeli vrijednost {otherType} \"{otherName}\", koja nema vlastitu valueName - \"{otherName}\" tretira polja koja se dodaje \"{name}\" kao nepoznata, a clearIncorrectValues() ih briše. Postavi i njegovu valueName na \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Redak \"{key}\" u matrici padajućeg izbornika \"{otherName}\" također je {sharedKeyText} \"{name}\" koji dijeli svoju vrijednost – objekt ćelije i jedna vrijednost ne mogu istovremeno postojati pod istim ključem; runtime zadržava jedan i briše drugi.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" dijeli podatkovni ključ \"{dataKey}\" s {otherType} \"{otherName}\" - zadržava {shapeText} tamo, dok \"{otherName}\" zadržava {otherShapeText}; jedan ne može držati vrijednost drugog, pa clearIncorrectValues() briše taj ključ.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Podatkovni ključ \"{dataName}\" je također komentarni ključ za \"{base}\" (njegov podatkovni ključ plus \"{suffix}\") – jedan zapis tiho prepisuje drugog.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Podatkovni ključ \"{dataName}\" je također ukupni ključ za \"{base}\" (njegov podatkovni ključ plus \"{sufiks}\") – jedan zapis tiho prepisuje drugi.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "Okidač {trigger} postavlja varijablu \"{name}\", koja je također podatkovni ključ pitanja \"{questionName}\" – varijabla odgovori {{name}} od tada nadalje, a ne samo pitanje."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Naziv \"{name}\" je rezerviran - član Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "ValueName \"{valueName}\" od \"{name}\" je rezerviran - član Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Stupac \"{name}\" u \"{matrixName}\" je rezerviran - član Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Stavka \"{name}\" iz \"{questionName}\" je rezervirana - član Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Redak \"{rowValue}\" od \"{name}\" je rezerviran - član Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Izračunata vrijednost \"{name}\" je rezervirana - član Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" ima nepoznati tip \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" nema tip – element bez tipa se izbacuje."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" nije svojstvo {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" iz {ownerText} nije serijalizirajući – aktivira se pri učitavanju i uklanja se iz JSON-a svaki put kad se anketa ponovno sprema.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" i \"{aliasKey}\" iz {ownerText} su dva imena jednog svojstva – vrijeme izvršavanja ih primjenjuje redoslijedom kojim ih JSON piše, pa \"{winner}\" pobjeđuje.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" je postavljen na \"{name}\", ali inputType \"{inputType}\" nema granica – vrijeme izvršavanja ga ignorira."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{key} od {ownerText} je {valueText} - nije jedna od dopuštenih vrijednosti ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{key} od {ownerText} je {value}, izvan dopuštenog raspona {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "ValueName \"{valueName}\" od \"{name}\" sadrži \".\" - izraz čita {{valueName}} kao put u \"{rootKey}\", tako da se sam podatkovni ključ nikada ne može adresirati."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} nema \"{key}\" - svojstvo je potrebno za {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Naziv {className} je {valueText}, a ne string - anketa ga ne može učitati."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "\"{key}\" u {ownerText} nije niz - svojstvo drži listu, a vrijeme izvršavanja umotava vrijednost u niz od jedne stavke."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Definicija varijable deklarira \"{variable}\", što je također podatkovni ključ pitanja \"{name}\" - postavljanje varijable briše odgovor pohranjen pod tim ključem, a {{name}} od tada odgovara na vrijednost domaćina.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Definicija varijable deklarira \"{varijabla}\", što je također naziv izračunate vrijednosti \"{name}\" – oba upisuju isti slot, a onaj koji se zadnji pokrene pobjeđuje."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition nije Survey JSON objekt, pa se ne deklarira varijabla niti se može provjeriti unaprijed postavljena vrijednost.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets nije niz, pa se preset ne deklarira.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Preset #{index} nije objekt.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Preset #{index} nema ime, pa ga ništa ne može referencirati.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Preset \"{preset}\" ne nosi objekt bez varijabli, pa ne postavlja ništa.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Preset \"{preset}\" se deklarira dvaput – pretraga s tim imenom odgovara prvom.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Preset \"{preset}\" postavlja \"{varijabla}\", što definicija varijable ne deklarira.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Preset \"{preset}\" postavlja \"{varijabla}\" na vrijednost koju definicija varijable odbacuje: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Funkcija \"{functionName}\" nije registrirana."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Izračunata vrijednost \"{names}\" referira se sama na sebe u vlastitom izrazu.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Izračunate vrijednosti {imena} ovise jedna o drugoj."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Okidač reagira na vrijednost koju sam sebi postavi (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Okidači tvore petlju kroz vrijednosti koje postave: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} čita vrijednost koju sam zapisuje – pokreće se samo kad se druga vrijednost promijeni, pa se uopće ne pokreće.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Vrijednosti se zapisuju u petlji: {chain}. Svaki zapis ponovno pokreće izraze koji ga čitaju, pa konačne vrijednosti ovise o redoslijedu u kojem se pitanja odgovaraju."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Uvjet uspoređuje \"{name}\" s {values} - nije među njegovim izborima. Dostupno: {available}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Uvjet uspoređuje \"{name}\" s {values} - nijedna vrijednost izbora ga ne sadrži. Dostupno: {available}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" ({questionType}) nema vrijednost za usporedbu.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" drži {valueShapeText} - redoslijed i aritmetički operatori se na njega ne primjenjuju.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" je booleovo pitanje – operatori redoslijeda se na njega ne primjenjuju.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" je tekstualno pitanje - njegova vrijednost je string, pa se numerička usporedba oslanja na implicitnu konverziju.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" sadrži niz datuma – uspoređujući ga s brojem koji {constValue} ne može držati.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" je numerički - usporedba s nizom \"{constValue}\" ne može vrijediti.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" sadrži niz odabranih vrijednosti, pa \"=\" uspoređuje cijeli niz.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Uvjet primjenjuje \"{operator}\" na \"{name}\": \"{recordName}\" je booleovo pitanje – usporedba s {constValue} ne može vrijediti."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{expression}\" je uvijek lažan, pa se \"{name}\" nikada ne prikazuje.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} \"{expression}\" nikada ne vrijedi, jer {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{expression}\" nikada ne vrijedi – nijedna dopuštena vrijednost ga ne zadovoljava: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{expression}\" proturječi sam sebi: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{expression}\" je uvijek istinit, pa ne odlučuje o ničemu.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{izraz}\" je aritmetika, a ne usporedba, pa nikad ne daje da ili ne.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Dio {prop} \"{expression}\" ima rezultat koji je poznat unaprijed.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} \"{expression}\" uvijek vrijedi, jer {facts} - ne odlučuje ništa."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" ne čita nijedno pitanje ili varijablu."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "Zadana vrijednost \"{name}\" je {valuesText}, koju nikada ne može zadržati. Dopušteno: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Točan odgovor na \"{name}\" je {valuesText}, koji nikada ne može zadržati. Dopušteno: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Okidač postavlja \"{name}\" na {valuesText}, što nikada ne može zadržati. Dopušteno: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Zadana vrijednost retka postavlja \"{name}\" na {valuesText}, što nikada ne može zadržati. Dopušteno: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Zadana vrijednost panela postavlja \"{name}\" na {valuesText}, što nikada ne može zadržati. Dopušteno: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} \"{name}\" naziva \"{key}\" - nema takvog retka. Dostupno: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop} u \"{name}\" naziva \"{key}\" - nema takvog stupca. Dostupno: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} \"{name}\" naziva \"{key}\" - nema takvog pitanja o predlošku. Dostupno: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Copyvalue okidač kopira \"{fromName}\" u \"{setToName}\", ali \"{fromName}\" drži {sourceShapeText}, a \"{setToName}\" drži {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Copyvalue okidač kopira \"{fromName}\" u \"{setToName}\", ali nijedna vrijednost \"{fromName}\" nije među vrijednostima koje \"{setToName}\" može imati. Dopušteno: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" kopira svoje odluke iz \"{source}\", ali s tim imenom nema dileme.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" kopira svoje izbore od sebe.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" kopira svoje izbore iz \"{source}\" ({sourceType}), koja ne pruža ni izbore ni niz vrijednosti.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" čita {prop} \"{field}\" iz \"{source}\", ali {sourceType} \"{source}\" nema takav {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Još jedan element {prop} \"{name}\" već ima vrijednost {valueText} - vrijeme izvršavanja zadržava oba elementa.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Izbori \"{name}\" sadrže {valueText} dok je {toggleProp} uključen - to se sudara s ugrađenom stavkom {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "Okidač {trigger} cilja stranicu \"{name}\", koja ne postoji.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "Okidač {trigger} cilja \"{name}\", ali {containerType} \"{root}\" nema {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "Okidač {verb} \"{name}\", ali ne postoji {kindText} s tim imenom."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Tip okidača \"{tip}\" nije poznat.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Okidač nema tip."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Tip validatora \"{type}\" od \"{name}\" nije poznat.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Validator \"{name}\" nema tip."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "{validatorType} validator za \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "{validatorType} validator za \"{name}\" zahtijeva barem {min} i najviše {max} - nijedan odgovor ga ne zadovoljava.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Validator broja odgovora za \"{name}\" zahtijeva barem {minCount} odgovora, iznad {selectable} opcija koje se mogu odabrati zajedno.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Regex validator za \"{name}\" ima obrazac koji engine odbacuje: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Izraz validator \"{name}\" nema izraz, pa uvijek prolazi."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} od \"{name}\" je {min}, iznad {maxProp} od {max} - vrijeme izvršavanja tiho prilagođava jedan od njih.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} od \"{name}\" je {count}, {direction} njegov {boundProp} od {bound} - vrijeme izvršavanja ga ograničava.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} od \"{name}\" je {step}, ali raspon kroz koji prolazi ({minProp}.. {maxProp}) obuhvaća samo {range} - vrijeme izvođenja ga ograničava.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "minSelectedChoices za \"{name}\" je {min}, iznad {selectable} izbora koji se mogu odabrati zajedno – pitanje se nikada ne može odgovoriti."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" nikada ne može postati vidljivo: vidljivo je Ako čita {reads}, što {deadClause}, pa uvjet nikada ne vrijedi."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "MaskType \"{maskType}\" u \"{name}\" nije poznata maska – vrijeme izvođenja se vraća na potpuni nedostatak maske.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "maskPostavke \"{name}\" postavljaju \"{key}\", što nije svojstvo maske \"{maskType}\" - vrijeme izvođenja je tiho odbacuje.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "maskPostavke \"{name}\" su postavljene bez maskType - vrijeme izvršavanja zadržava samo \"saveMaskedValue\" i odbacuje ostatak.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Maska {maskType} za \"{name}\" primjenjuje se bez ulaza: inputType \"{inputType}\" je maskiran samo za tekst i tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Maska datuma \"{name}\" postavlja minimum/maksimum bez obrasca – granice se primjenjuju na dijelove datuma uzorka, pa bez nje ne rade ništa.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Maska {maskType} od \"{name}\" dopušta barem {min}, a najviše {max} - nijedna vrijednost ne zadovoljava tu vrijednost."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Dinamički panel \"{name}\" ima prazan predložak - njegovi paneli nemaju što renderirati.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\" nema elemenata.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\" nema elemente koji se mogu prikazati – svaki element je skriven, zaštićen uvjetom koji nikada ne vrijedi ili prazan.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Detalji u \"{name}\" nikada nisu prikazani: njegov detailPanelMode je \"none\", što je zadani dio."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Pozicija: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Izgrađen je na temelju naslijeđenog imena, operatora i svojstava vrijednosti okidača.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Unutra: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Jesi li mislio \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Ako je riječ o prilagođenoj komponenti, proslijedite njezinu definiciju linteru kako biste omogućili potpunu analizu.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Registrirajte funkciju prije lintinga ili je navedite u opcijama lintera.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Pogrešno napisana vrsta tiho se odbacuje tijekom izvođenja, a prilagođeni okidač nije pokriven provjerama cilja i ciklusa.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Ako je varijabla postavljena u vrijeme izvođenja, navedite je u linter opcijama.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Petlja može biti nedostižna ako se okidački uvjeti nikada ne podrže - provjerite izraze.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "DefaultValueExpression vrijedi samo dok se ne odgovori na njegovo pitanje.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "U izrazu: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Spomenuto u vezama.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Referencirano u choicesByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Spominje se u tekstu \"{0}\".", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () to ime čita iz svakog unosa {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Argument {0}() ne navodi pitanje, panel ni stranicu.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Deserializator ispušta ključ koji ne poznaje.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Deserializator ispušta validator koji ne može riješiti, pa se ništa ne validira.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "Ulazni tip je \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "To je podatkovni ključ za \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "i",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} je uvijek {value}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} je {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "barem {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "najviše {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} ne može biti i {vrijednosti}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} ne može biti {value} a ne biti to",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} ne može biti prazan i biti {value}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} ne može biti prazno i ne prazno",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} ne može biti iznad {min} i ispod {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} se traži da bude osoba bez ikakve vrijednosti"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "\"{0}.\" reference dostupne su samo unutar matrične ćelije ili matričnog detaljskog panela.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" je dostupan samo unutar matrične ćelije ili matričnog detaljskog panela.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "\"{0}.\" reference dostupne su samo unutar dinamičkog panela ili panel kontejnera.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "\"{0}.\" reference dostupne su samo unutar dinamičkog panela.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" je dostupan samo unutar dinamičkog panela.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" je dostupan samo unutar uvjeta izbora, retka i stupca.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\" reference dostupne su samo unutar složenog pitanja.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" nije dostupan unutar inArray filtra, koji se pokreće protiv predmeta, a zatim i ankete.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" je stupac ove matrice – referencirajte je prefiksom retka.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" je pitanje ovog dinamičkog panela – referencirajte ga prefiksom panel."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Postavi inputType: \"number\" na \"{0}\" ako skuplja brojeve.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Koristite \"contains\" ili \"anyof\" za višestruke odabire vrijednosti."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "stranica",
+        // [Auto-translated] "panel"
+        panel: "panel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Ime",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "Ime"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "izračunata vrijednost",
+        // [Auto-translated] "element"
+        default: "element"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Popis",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Ostalo",
+        // [Auto-translated] "None"
+        none: "Nema",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Odbij odgovoriti",
+        // [Auto-translated] "Don't know"
+        dontknow: "Ne znam"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "Nikad ne puca",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "odbija svaki odgovor",
+        // [Auto-translated] "cannot validate"
+        default: "ne može validirati"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Pitanje ne sadrži odgovor koji bi potvrdio",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "Duljina se očitava s tekstualne vrijednosti, a ovaj odgovor nema nijednu",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Odgovor nije broj i nikada ne može biti",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Broj nikada ne odgovara e-mail adresi",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Odgovor nije popis vrijednosti",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Odgovor nije vrijednost koju može provjeriti"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "niz",
+        // [Auto-translated] "an object"
+        object: "objekt"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "Redak matrice",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "stavka višestrukog teksta",
+        // [Auto-translated] "a row or item of a question"
+        default: "Redak ili stavka pitanja"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "niz objekata",
+        // [Auto-translated] "an object"
+        object: "objekt",
+        // [Auto-translated] "a plain value"
+        plain: "Čista vrijednost",
+        // [Auto-translated] "a value"
+        default: "vrijednost"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "niz odabranih vrijednosti",
+        // [Auto-translated] "a single value"
+        scalar: "Jedna vrijednost",
+        // [Auto-translated] "a value"
+        default: "vrijednost"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "dolje",
+        // [Auto-translated] "above"
+        above: "gore"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "nikada nije vidljiv i nikada ne prima vrijednost",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "nikada nisu vidljivi i nikada ne primaju vrijednost"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Pitanje",
+        // [Auto-translated] "question or variable"
+        questionvalue: "Pitanje ili varijabla",
+        // [Auto-translated] "page"
+        page: "stranica"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "čita",
+        // [Auto-translated] "navigates to"
+        gotoName: "navigira prema",
+        // [Auto-translated] "sets"
+        default: "Setovi"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Pitanje o predlošku",
+        // [Auto-translated] "column"
+        default: "stupac"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Pitanje o predlošku",
+        // [Auto-translated] "column"
+        matrixdynamic: "stupac",
+        // [Auto-translated] "item"
+        multipletext: "Predmet",
+        // [Auto-translated] "row"
+        matrix: "Veslajte",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Veslajte",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "stupac",
+        // [Auto-translated] "field"
+        default: "Polje"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Stavka 1" }, { value: "item2", text: "Stavka 2" }, { value: "item3", text: "Stavka 3" }],
-    columns: [{ value: "column1", text: "Stupca 1" }, { value: "column2", text: "Stupca 2" }, { value: "column3", text: "Stupca 3" }],
-    rows: [{ value: "row1", text: "Redak 1" }, { value: "row2", text: "Redak 2" }],
-    matrixColumns: [{ name: "column1", title: "Stupca 1" }, { name: "column2", title: "Stupca 2" }, { name: "column3", title: "Stupca 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Stavka 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Stavka 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Stavka 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Stupca 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Stupca 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Stupca 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Redak 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Redak 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Stupca 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Stupca 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Stupca 3"
+      }
+    ]
   }
 };
 setupLocale({ localeCode: "hr", strings: hrStrings });

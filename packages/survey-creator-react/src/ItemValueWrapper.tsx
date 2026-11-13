@@ -27,6 +27,9 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
     this.rootRef = React.createRef();
   }
   protected createModel(props: any): void {
+    if (this.model && !this.model.isDisposed) {
+      this.model.dispose();
+    }
     this.model = new ItemValueWrapperViewModel(
       props.componentData.creator,
       props.question,
@@ -52,12 +55,19 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
   }
 
   componentDidMount(): void {
+    // React StrictMode mounts the same component again after
+    // componentWillUnmount disposed its model.
+    if (this.model.isDisposed) {
+      this.createModel(this.props);
+      this.forceUpdate();
+    }
     super.componentDidMount();
     this.props.item.setRootElement(this.rootRef.current);
   }
   componentWillUnmount(): void {
     super.componentWillUnmount();
     this.props.item.setRootElement(undefined);
+    this.model.dispose();
   }
 
   renderButton(action: Action) {
@@ -66,7 +76,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
     });
   }
 
-  render(): React.JSX.Element {
+  renderElement(): React.JSX.Element {
     this.model.item = this.props.item;
     const button = this.model.allowAdd ? (
       this.renderButton(this.model.addAction)
@@ -76,6 +86,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
         {this.model.isDraggable ? (
           <span
             className="svc-item-value-controls__drag"
+            data-sv-tooltip={this.model.dragTooltip}
           >
             <SvgIcon className="svc-item-value-controls__drag-icon" size={"auto"} iconName={"icon-drag-24x24"} title={this.model.dragTooltip}></SvgIcon>
           </span>

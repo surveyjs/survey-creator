@@ -142,6 +142,10 @@ export var germanTranslation = {
     jsonHideErrors: "Fehler verstecken",
     // "Show errors"
     jsonShowErrors: "Fehler anzeigen",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Korrekturfehler",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "Das Survey-JSON muss ein Objekt sein.",
     // "Undo"
     undo: "Rückgängig",
     // "Redo"
@@ -246,6 +250,8 @@ export var germanTranslation = {
     translateUsigAI: "Alle automatisch übersetzen",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Sprachrichtung: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Übersetze verbleibende Strings",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Nicht übersetzte Texte",
     // "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var germanTranslation = {
     translationSource: "Quelle: ",
     // [Auto-translated] "Target: "
     translationTarget: "Ziel: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Quellsprache",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Zielsprache",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} Strings übersetzt",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Bist du sicher, dass du alle übersetzten Zeichenketten für die ausgewählte Sprache löschen möchtest?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Formularansicht",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Gitteransicht",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Strings übersetzen",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Survey-Strings",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Keine Verpflichtungen zum Übersetzen",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Alle Zeichenketten werden übersetzt",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} Zeichenketten werden nicht übersetzt",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube-Links werden nicht unterstützt.",
     // "Export"
@@ -286,6 +314,10 @@ export var germanTranslation = {
     choicesLoadedFromWebLinkText: "Gehen Sie zu den Einstellungen",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Vorschau der geladenen Auswahloptionen",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Keine Ausdrucksmenge",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Bearbeitungsausdruck",
     // "HTML content will be here."
     htmlPlaceHolder: "HTML wird hier dargestellt werden.",
     // "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var germanTranslation = {
       uncompletedRule_cancel: "Nein, ich möchte die Regeln vervollständigen"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Variablenvoreinstellung",
+    // [Auto-translated] "None"
+    noPreset: "Keine",
+    // [Auto-translated] "View variable values"
+    view: "Variable Werte anzeigen",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Variable Werte",
+    // [Auto-translated] "Manage presets"
+    edit: "Presets verwalten",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Variable Presets",
+    // [Auto-translated] "Preset"
+    presetName: "Preset",
+    // [Auto-translated] "Description"
+    presetDescription: "Beschreibung",
+    // [Auto-translated] "Add preset"
+    addPreset: "Preset hinzufügen",
+    // [Auto-translated] "New preset"
+    newPresetName: "Neues Preset",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Preset löschen",
+    // [Auto-translated] "Back"
+    back: "Zurück",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Ein Preset mit diesem Namen existiert bereits",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Geben Sie einen voreingestellten Namen ein",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Preset",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Beschreibung"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Ausdrucksassistent",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Schreibe mit KI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Beschreiben Sie, was der Ausdruck tun soll",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Zum Beispiel: Zeigen Sie diese Frage, wenn der Befragte 18 Jahre oder älter ist",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Beschreiben Sie die Bedingung in Worten",
+    // [Auto-translated] "Generate"
+    generate: "Generieren",
+    // [Auto-translated] "Refine"
+    refine: "Verfeinern",
+    // [Auto-translated] "Explain"
+    explain: "Erklären Sie",
+    // [Auto-translated] "Stop"
+    stop: "Stopp",
+    // [Auto-translated] "Accept"
+    accept: "Akzeptieren",
+    // [Auto-translated] "Reject"
+    reject: "Ablehnen",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Anwenden-Korrektur: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Aktueller Ausdruck",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Vorgeschlagener Ausdruck",
+    // [Auto-translated] "Reads as"
+    readsAs: "Liest sich wie folgt",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Die Erklärung des Assistenten",
+    // [Auto-translated] "Check results"
+    findings: "Ergebnisse überprüfen",
+    // [Auto-translated] "Error"
+    severityError: "Fehler",
+    // [Auto-translated] "Warning"
+    severityWarning: "Warnung",
+    // [Auto-translated] "Info"
+    severityInfo: "Informationen",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "in \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Beschreiben Sie den Ausdruck und wählen Sie Generieren.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Warten auf den Assistenten...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Der Antrag wurde storniert.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Die Assistentin berichtete: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Der Assistent zeigte keinen Gesichtsausdruck.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Überprüfen Sie den vorgeschlagenen Ausdruck.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Die Assistentin erklärte den aktuellen Gesichtsausdruck.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Der vorgeschlagene Ausdruck enthält Fehler und kann nicht akzeptiert werden.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Der vorgeschlagene Ausdruck konnte nicht für jede Stelle überprüft werden, an die er geschrieben wurde, daher kann er nicht akzeptiert werden.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Füge der Regel eine Aktion hinzu, bevor du den Assistenten fragst.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Der erste Vorschlag hatte Fehler und wurde automatisch korrigiert."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var germanTranslation = {
       templateDescription: "Muster für die Eintragsbeschreibung",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Muster für den Titeleintrag",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Platzhalter für den Eintrittstitel",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Text für leeres Panel",
       // [Auto-translated] "Tab title pattern"
@@ -588,6 +724,10 @@ export var germanTranslation = {
       templateErrorLocation: "Ausrichtung von Fehlermeldungen",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Neuer Einstiegsort",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Einträge pro Seite",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Erlauben Sie Benutzern, Einträge zu sortieren",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Doppelte Antworten in der folgenden Frage verhindern"
     },
@@ -675,6 +815,12 @@ export var germanTranslation = {
       // [Auto-translated] "Expression"
       expression: "Ausdruck"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sortieren nach",
+      // [Auto-translated] "Order"
+      direction: "Bestellung"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Ausdruck"
@@ -690,7 +836,9 @@ export var germanTranslation = {
       // [Auto-translated] "Survey description"
       description: "Beschreibung der Umfrage",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Machen Sie die Umfrage schreibgeschützt"
+      readOnly: "Machen Sie die Umfrage schreibgeschützt",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Regionale Formate"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -726,7 +874,9 @@ export var germanTranslation = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Spalte erforderlich machen, wenn",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Jede Option in einer separaten Spalte"
+      showInMultipleColumns: "Jede Option in einer separaten Spalte",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Sortierung nach dieser Spalte erlauben"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export var germanTranslation = {
     masksettings: {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Maskierte Werte in Umfrageergebnissen speichern"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Region",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Datumsmuster",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Zeitmuster",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Dezimaltrenner",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Tausende-Trenner",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Währungssymbol",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Währungsmuster"
     },
     patternmask: {
       // [Auto-translated] "Value pattern"
@@ -761,16 +927,18 @@ export var germanTranslation = {
       decimalSeparator: "Dezimaltrennzeichen",
       // [Auto-translated] "Value precision"
       precision: "Wertgenauigkeit",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Zeigen Sie nachlaufende Nullen",
       // [Auto-translated] "Minimum value"
       min: "Mindestwert",
       // [Auto-translated] "Maximum value"
       max: "Maximalwert"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Währungs-Präfix",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Währungs-Suffix"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Währungssymbol",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Währungsmuster"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Andere löschen, wenn ausgewählt",
@@ -812,8 +980,24 @@ export var germanTranslation = {
     addItem: "Klicken, um ein Element hinzuzufügen ...",
     // "Click to remove the item..."
     removeItem: "Klicken, um ein Element zu entfernen ...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Fügen Sie {0} hinzu",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Entfernen Sie {0}",
     // "Drag the item"
     dragItem: "Element ziehen",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Verschachtelte Optionen erweitern",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Collapse verschachtelte Entscheidungen",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Erweitern Sie verschachtelte Optionen von {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Kollaps, verschachtelte Entscheidungen von {0}",
+    // [Auto-translated] "Show description"
+    showDescription: "Serienbeschreibung",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Beschreibung ausfliegen",
     // "Edit"
     edit: "Bearbeiten",
     // "Done"
@@ -858,38 +1042,58 @@ export var germanTranslation = {
     listIsEmpty: "Neues Element hinzufügen",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Bisher wurden noch keine Auswahlmöglichkeiten hinzugefügt",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Sie haben noch keine Spalten",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Sie haben noch keine Layoutspalten",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Sie haben noch keine Zeilen",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Sie haben noch keine Validierungsregeln",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Sie haben noch keine benutzerdefinierten Variablen",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Sie haben noch keine Auslöser",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Sie haben noch keine Links",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Sie haben noch keine Seiten",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Keine benutzerdefinierten Bewertungswerte",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Keine eigenen Etiketten",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Keine Bereiche",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Keine Säulen",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Keine Layout-Spalten",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Keine Reihen",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Keine Validierungsregeln",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Keine benutzerdefinierten Variablen",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Keine Auslöser",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Kein bedingtes Markup",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Keine Links",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Keine Seiten",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Keine Sortier-Level",
     // "Add new choice"
     "addNew@choices": "Auswahlmöglichkeit hinzufügen",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Neue Spalte hinzufügen",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Neue Zeile hinzufügen",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Neue Regel hinzufügen",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Neue Variable hinzufügen",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Neuen Auslöser hinzufügen",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Neue URL hinzufügen",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Neue Seite hinzufügen",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Wertungswert hinzufügen",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Beschriftung hinzufügen",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Fläche hinzufügen",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Spalte hinzufügen",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Reihe hinzufügen",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Regel hinzufügen",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Variable hinzufügen",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Trigger hinzufügen",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Fügen Sie Markup hinzu",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Link hinzufügen",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Seite hinzufügen",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Sortierebene hinzufügen",
     // "Value"
     value: "Wert",
     // [Auto-translated] "Text"
@@ -916,6 +1120,8 @@ export var germanTranslation = {
     surveyTitlePlaceholder: "Umfragetitel eingeben",
     // "Page {num}"
     pageTitlePlaceholder: "Seitenbeschreibung eingeben",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Paneltitel",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Startseite",
     // "Description"
@@ -966,6 +1172,8 @@ export var germanTranslation = {
     visible: "Sichtbar?",
     // "Required"
     isRequired: "Erforderlich?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Fordern Sie eine positive Antwort",
     // [Auto-translated] "Mark as required"
     markRequired: "Als erforderlich markieren",
     // [Auto-translated] "Remove the required mark"
@@ -976,6 +1184,8 @@ export var germanTranslation = {
     eachRowUnique: "Doppelte Beantwortungen in Zeilen verhindern",
     // "Error message for required questions"
     requiredErrorText: "Fehlermeldung bei nicht beantworteten erforderlichen Fragen",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Fehlermeldung, wenn Ja erforderlich ist",
     // "Display the question on a new line"
     startWithNewLine: "Mit einer neuen Zeile starten",
     // "Rows"
@@ -994,6 +1204,16 @@ export var germanTranslation = {
     maxFiles: "Maximale Anzahl von Dateien",
     // "Row count"
     rowCount: "Zeilenanzahl",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Zeilen pro Seite",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Erlauben Sie Benutzern, Zeilen zu sortieren",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maximale Sortierstufen",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Standard-Sortierreihenfolge",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Anzeigen-Sortierleiste",
     // "Columns layout"
     columnLayout: "Spaltenlayout",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export var germanTranslation = {
     questionErrorLocation: "Position der Fehlermeldungen",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Erste Frage auf einer neuen Seite fokussieren",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Wahlkürzeln aktivieren",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Tastaturhinweise anzeigen",
     // "Question order"
     questionOrder: "Reihenfolge der Fragen auf der Seite",
     // "Time limit to complete the survey"
@@ -1268,6 +1492,8 @@ export var germanTranslation = {
     minRowCount: "Mindestzeilenanzahl",
     // "Maximum row count"
     maxRowCount: "Maximale Zeilenanzahl",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Zeilenanzahl-Ausdruck",
     // "Confirm row removal"
     confirmDelete: "Zeilenlöschung bestätigen",
     // "Confirmation message"
@@ -1278,6 +1504,8 @@ export var germanTranslation = {
     minPanelCount: "Minimale Panelanzahl",
     // "Maximum number of entries"
     maxPanelCount: "Maximale Panelanzahl",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Eingabezahl-Ausdruck",
     // "Initial entry state"
     panelsState: "Erweiterungszustand des inneren Bereichs",
     // "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export var germanTranslation = {
     logoHeight: "Höhe des Logos",
     // "Read-only"
     readOnly: "Schreibgeschützt",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Schreib-nur-Modus",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Deaktivieren Sie den schreibgeschützten Modus, wenn",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export var germanTranslation = {
       columns: "Spalten",
       // "Rows"
       rows: "Zeilen",
+      // [Auto-translated] "Entries"
+      entries: "Einträge",
       // "Choice Options"
       choices: "Auswahlmöglichkeiten",
       // "Items"
@@ -1544,6 +1776,8 @@ export var germanTranslation = {
       question: "Fragen",
       // "Pages"
       pages: "Seiten",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Regionale Formate",
       // "Quiz Mode"
       timer: "Timer",
       // "Calculated Values"
@@ -1862,6 +2096,12 @@ export var germanTranslation = {
       // [Auto-translated] "Never"
       none: "Nie"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Schreibgeschützt",
+      // [Auto-translated] "View"
+      view: "Ansicht"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "Funktasten",
     inputType: {
@@ -1913,6 +2153,12 @@ export var germanTranslation = {
       warning: "Warnung",
       // [Auto-translated] "Informational"
       info: "Mitteilsam"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Vorderseite",
+      // [Auto-translated] "Rear"
+      environment: "Heck"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export var germanTranslation = {
     underRowSingle: "Unter der Zeile wird nur ein Abschnitt angezeigt",
     // [Auto-translated] "Auto"
     auto: "Auto",
+    // [Auto-translated] "Always"
+    always: "Immer",
     timerInfoMode: {
       // "Both"
       combined: "Beide"
@@ -2321,7 +2569,148 @@ export var germanTranslation = {
       survey: "Wie bei der Umfrage",
       // [Auto-translated] "Same as container"
       container: "Identisch mit Container"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Erben",
+      // [Auto-translated] "Hide"
+      "false": "Versteck dich",
+      // [Auto-translated] "Show"
+      "true": "Show"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arabisch",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bulgarisch",
+    // [Auto-translated] "Catalan"
+    ca: "Katalanisch",
+    // [Auto-translated] "Czech"
+    cs: "Tschechisch",
+    // [Auto-translated] "Welsh"
+    cy: "Walisisch",
+    // [Auto-translated] "Danish"
+    da: "Dänisch",
+    // [Auto-translated] "German"
+    de: "Deutsch",
+    // [Auto-translated] "Greek"
+    el: "Griechisch",
+    // [Auto-translated] "English"
+    en: "Englisch",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Englisch (Australien)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Englisch (Kanada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Englisch (Vereinigtes Königreich)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Englisch (Irland)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Englisch (Indien)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Englisch (Neuseeland)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Englisch (Südafrika)",
+    // [Auto-translated] "Spanish"
+    es: "Spanisch",
+    // [Auto-translated] "Estonian"
+    et: "Estnisch",
+    // [Auto-translated] "Basque"
+    eu: "Baskisch",
+    // [Auto-translated] "Persian"
+    fa: "Persisch",
+    // [Auto-translated] "Finnish"
+    fi: "Finnisch",
+    // [Auto-translated] "Filipino"
+    fil: "Philippinisch",
+    // [Auto-translated] "French"
+    fr: "Französisch",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Französisch (Kanada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Französisch (Schweiz)",
+    // [Auto-translated] "Hebrew"
+    he: "Hebräisch",
+    // [Auto-translated] "Hindi"
+    hi: "Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Kroatisch",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Haitianisches Kreolisch",
+    // [Auto-translated] "Hungarian"
+    hu: "Ungarisch",
+    // [Auto-translated] "Indonesian"
+    id: "Indonesisch",
+    // [Auto-translated] "Icelandic"
+    is: "Isländisch",
+    // [Auto-translated] "Italian"
+    it: "Italienisch",
+    // [Auto-translated] "Japanese"
+    ja: "Japanisch",
+    // [Auto-translated] "Georgian"
+    ka: "Georgisch",
+    // [Auto-translated] "Kazakh"
+    kk: "Kasachisch",
+    // [Auto-translated] "Korean"
+    ko: "Koreanisch",
+    // [Auto-translated] "Lithuanian"
+    lt: "Litauisch",
+    // [Auto-translated] "Latvian"
+    lv: "Lettisch",
+    // [Auto-translated] "Macedonian"
+    mk: "Mazedonisch",
+    // [Auto-translated] "Burmese"
+    mm: "Birmanisch",
+    // [Auto-translated] "Malay"
+    ms: "Malaiisch",
+    // [Auto-translated] "Dutch"
+    nl: "Niederländisch",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Niederländisch (Belgien)",
+    // [Auto-translated] "Norwegian"
+    no: "Norwegisch",
+    // [Auto-translated] "Polish"
+    pl: "Polnisch",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugiesisch",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugiesisch (Brasilien)",
+    // [Auto-translated] "Romanian"
+    ro: "Rumänisch",
+    // [Auto-translated] "Russian"
+    ru: "Russisch",
+    // [Auto-translated] "Slovak"
+    sk: "Slowakisch",
+    // [Auto-translated] "Slovenian"
+    sl: "Slowenisch",
+    // [Auto-translated] "Serbian"
+    sr: "Serbisch",
+    // [Auto-translated] "Swedish"
+    sv: "Schwedisch",
+    // [Auto-translated] "Swahili"
+    sw: "Swahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tadschikik",
+    // [Auto-translated] "Thai"
+    th: "Thai",
+    // [Auto-translated] "Turkish"
+    tr: "Türkisch",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ukrainisch",
+    // [Auto-translated] "Urdu"
+    ur: "Urdu",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnamesen",
+    // [Auto-translated] "Chinese"
+    zh: "Chinesisch",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Chinesisch (vereinfacht)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Chinesisch (Traditionell)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export var germanTranslation = {
     visibletrigger: "Sichtbarkeit ändern (deprecated)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Dasselbe wie die Umfragesprache"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Bsp.: +1(999)-999-99-99"
@@ -2405,12 +2798,6 @@ export var germanTranslation = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Bsp.: mm/dd/yyyy HH:MM:ss"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Bsp.: $",
-      // "Ex.: USD"
-      suffix: "Bsp.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export var germanTranslation = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Gibt an, über wie viele Spalten sich dieser Bereich innerhalb des Rasterlayouts erstreckt.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "In dieser Tabelle können Sie jede Rasterspalte innerhalb des Bereichs konfigurieren. Der Breitenprozentsatz für jede Spalte wird automatisch basierend auf der maximalen Anzahl von Elementen in einer Zeile festgelegt. Um das Rasterlayout anzupassen, passen Sie diese Werte manuell an und definieren Sie die Titelbreite für alle Fragen in jeder Spalte."
+      gridLayoutColumns: "In dieser Tabelle können Sie jede Rasterspalte innerhalb des Bereichs konfigurieren. Der Breitenprozentsatz für jede Spalte wird automatisch basierend auf der maximalen Anzahl von Elementen in einer Zeile festgelegt. Um das Rasterlayout anzupassen, passen Sie diese Werte manuell an und definieren Sie die Titelbreite für alle Fragen in jeder Spalte.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Spezifiziert, wie Fragen in diesem Panel erscheinen, wenn sie nur lesbar sind. \"Nur lesen\" zeigt die Fragen mit ihren üblichen Eingabesteuerungen an, ist jedoch für die Bearbeitung deaktiviert. \"Ansicht\" zeigt die Antworten als Text oder andere nicht-interaktive Elemente an. \"Inherit\" verwendet den Modus, der für das Elternpanel, die Seite oder den Überblick eingestellt ist (\"standardmäßig Nur-Lesen\")."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export var germanTranslation = {
       width: "Legt die Breite des Fensters im Verhältnis zu anderen Vermessungselementen in derselben Linie fest. Akzeptiert CSS-Werte (px, %, in, pt usw.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Geben Sie eine Vorlage für die Titeln von dynamischen Panele. Verwenden Sie {panelIndex} für die allgemeine Position des Panels und {visiblePanelIndex} für die Reihenfolge der sichtbaren Panele. Fügen Sie diese Platzhalter in das Muster ein, um eine automatische Nummerierung hinzuzufügen.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Ein Notfalltext für Eintragstitel, der gilt, wenn das Eintragstitelmuster keinen sinnvollen Wert erzeugt. Verwenden Sie {panelIndex} für die allgemeine Position des Eintrags und {visiblePanelIndex} für die Reihenfolge unter den sichtbaren Einträgen.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Geben Sie eine Vorlage für Tab-titel ein. Verwenden Sie {panelIndex} für die allgemeine Position eines Panels und {visiblePanelIndex} für die Reihenfolge der sichtbaren Panele. Fügen Sie diese Platzhalter in das Muster ein, um eine automatische Nummerierung hinzuzufügen.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export var germanTranslation = {
       keyName: "Verweisen Sie auf einen Fragenamen, um einen Benutzer aufzufordern, in jedem Bereich eine eindeutige Antwort auf diese Frage zu geben.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Löst eine Bestätigungsaufforderung aus, bevor ein Eintrag entfernt wird.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Spezifizieren Sie einen Ausdruck, der die Anzahl der Einträge berechnet. Dieser Ausdruck überschreibt die Einstellung \"Anfangszahl der Einträge\" und wird neu bewertet, sobald sich die auf ihn bezogenen Werte ändern. Das Ergebnis ist durch die Einstellungen \"Mindestanzahl der Einträge\" und \"Maximale Anzahl von Einträgen\" begrenzt. Während dieser Ausdruck gesetzt ist, können Befragte Einträge nicht manuell hinzufügen oder entfernen.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Gibt die Anzahl der Einträge an, die auf jeder Seite des Panels angezeigt werden. '0' deaktiviert die Paginierung und zeigt alle Einträge an.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Ermöglicht es den Befragten, Einträge mit der Sortierleiste zu sortieren.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definiert die anfängliche Eintragsreihenfolge. Die Befragten können sie ändern, wenn Sortieren erlaubt ist. Beim Sortieren nach mehreren Fragen sortiert jede Frage Einträge innerhalb der von der vorherigen Frage festgelegten Reihenfolge. Ziehe die Fragen, um ihre Priorität zu ändern.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Weist Fragen, die im dynamischen Bereich verschachtelt sind, Nummern zu."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Ermöglicht es den Befragten, Zeilen zu sortieren, indem sie auf Spaltenüberschriften klicken oder die Sortierleiste verwenden.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definiert die anfängliche Zeilenreihenfolge. Die Befragten können sie ändern, wenn Sortieren erlaubt ist. Beim Sortieren nach mehreren Spalten sortiert jede Spalte Zeilen innerhalb der von der vorhergehenden Spalte festgelegten Reihenfolge. Ziehen Sie Spalten, um deren Priorität zu ändern.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" zeigt die Sortierleiste nur an, wenn die Matrix keine sortierbaren Spaltenkopfzeilen hat: Die Kopfzeilen sind versteckt, die Matrix verwendet das mobile Layout oder Zeilen werden in Spalten übertragen. \"Immer\" zeigt die Sortierleiste auch dann an, wenn sortierbare Spaltenkopfzeilen sichtbar sind.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Spezifizieren Sie einen Ausdruck, der die Anzahl der Zeilen berechnet. Dieser Ausdruck überschreibt die Einstellung \"Anfangszahl der Zeilen\" und wird neu bewertet, sobald sich die von ihm referenzierten Werte ändern. Das Ergebnis ist durch die Einstellungen \"Mindeste Anzahl an Zeilen\" und \"Maximale Anzahl an Zeilen\" begrenzt. Während dieser Ausdruck gesetzt ist, können Befragte keine Zeilen manuell hinzufügen oder entfernen.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Löst eine Bestätigungsaufforderung aus, bevor eine Zeile entfernt wird.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Erweitert den Detailabschnitt automatisch, wenn der Matrix eine neue Zeile hinzugefügt wird."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Spezifiziert die Anzahl der auf jeder Seite der Matrix angezeigten Zeilen. '0' deaktiviert die Paginierung und zeigt alle Zeilen an.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Gibt an, nach wie vielen Feldern ein Befragter gleichzeitig sortieren kann.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Dupliziert Antworten aus der letzten Zeile und weist sie der nächsten hinzugefügten dynamischen Zeile zu.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export var germanTranslation = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Lange Texte in Auswahloptionen generieren automatisch Zeilenumbrüche, die in das Dropdown-Menü passen. Deaktivieren Sie diese Option, wenn die Texte abgeschnitten werden sollen.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Gibt an, über wie viele Spalten sich diese Frage innerhalb des Rasterlayouts erstreckt."
+      effectiveColSpan: "Gibt an, über wie viele Spalten sich diese Frage innerhalb des Rasterlayouts erstreckt.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Spezifiziert, wie die Frage angezeigt wird, wenn sie nur lesbar ist. \"Nur lesen\" zeigt die Frage mit den üblichen Eingabesteuerungen an, ist jedoch für die Bearbeitung deaktiviert. \"Ansicht\" zeigt die Antworten als Text oder andere nicht-interaktive Elemente an. \"Inherit\" verwendet den Modus, der für das Elternpanel, die Seite oder die Umfrage eingestellt ist (\"standardmäßig Nur-Lesen\").",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Zeigt Hinweise für verfügbare Tastaturaktionen unter dieser Frage an. Die Option \"Inherit\" verwendet die Einstellung auf Umfrageebene."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export var germanTranslation = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Wählen Sie diese Option aus, wenn Sie verhindern möchten, dass die Befragten Ihre Umfrage ausfüllen.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Spezifiziert, wie schreibgeschützte Fragen angezeigt werden, auch auf der Vorschauseite. \"Nur lesen\" (Standard) zeigt Fragen mit den üblichen Eingabesteuerungen an, sind jedoch für die Bearbeitung deaktiviert. \"Anzeigen\" zeigt Antworten als Text oder andere nicht-interaktive Elemente an.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Legt die Position des Fortschrittsbalkens fest. Der Wert \"Auto\" zeigt den Fortschrittsbalken über oder unter der Kopfzeile der Umfrage an."
     },
@@ -2633,7 +3050,9 @@ export var germanTranslation = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Wenn diese Option aktiviert ist, wird für jede Auswahloption eine eigene Spalte erstellt.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Ordnet die Auswahloptionen in einem mehrspaltigen Layout an. Wenn der Wert auf 0 gesetzt ist, werden die Optionen in einer einzigen Zeile angezeigt. Wenn dieser Wert auf -1 festgelegt ist, wird der tatsächliche Wert von der Eigenschaft \"Anzahl der geschachtelten Spalten\" der übergeordneten Matrix geerbt."
+      colCount: "Ordnet die Auswahloptionen in einem mehrspaltigen Layout an. Wenn der Wert auf 0 gesetzt ist, werden die Optionen in einer einzigen Zeile angezeigt. Wenn dieser Wert auf -1 festgelegt ist, wird der tatsächliche Wert von der Eigenschaft \"Anzahl der geschachtelten Spalten\" der übergeordneten Matrix geerbt.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Spezifiziert, wie Zellen in dieser Spalte erscheinen, wenn sie nur lesbar sind. \"Nur lesen\" zeigt die Zellen mit ihren üblichen Eingabesteuerungen an, aber für die Bearbeitung deaktiviert. \"Ansicht\" zeigt Antworten als Text oder andere nicht-interaktive Elemente an. \"Inherit\" verwendet den für die Matrix oder den Überblick eingestellten Modus (\"standardmäßig Nur-Lesen\")."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export var germanTranslation = {
     questionErrorLocation: "Legt die Position einer Fehlermeldung in Bezug auf die Frage mit ungültiger Eingabe fest. Wählen Sie zwischen: \"Oben\" - ein Fehlertext wird am oberen Rand des Fragefelds platziert; \"Unten\" - ein Fehlertext wird am unteren Rand des Fragefelds platziert.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Wählen Sie diese Option aus, wenn das erste Eingabefeld auf jeder Seite für die Texteingabe bereit sein soll.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Zeigt Buchstaben (A, B, C, ...) neben Auswahlmöglichkeiten in der Radio-Tasten-Gruppe, Kontrollkästchen und Bildauswähler-Fragen an. Befragte können Optionen auswählen, indem sie die entsprechenden Buchstabentasten drücken. Diese Einstellung können Sie für einzelne Fragen überschreiben.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Zeigt Buchstaben (A, B, C, ...) neben den Auswahlmöglichkeiten an und ermöglicht es den Befragten, diese durch Drücken der entsprechenden Buchstabentasten auszuwählen. Die Option \"Inherit\" verwendet die Einstellung auf Umfrageebene."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Zeigt Hinweise für verfügbare Tastaturaktionen unter den Fragen. Sie können diese Einstellung für einzelne Fragen überschreiben.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Behält die ursprüngliche Reihenfolge der Fragen bei oder randomisiert sie. Die Auswirkungen dieser Einstellung sind nur auf dem Tab \"Vorschau\" sichtbar.",
     // [Auto-translated] "For text entry questions only."
@@ -2793,7 +3220,9 @@ export var germanTranslation = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Legt die Sichtbarkeit von Navigationsschaltflächen auf der Seite fest. Mit der Option \"Vererben\" wird die Einstellung auf Umfrageebene angewendet, die standardmäßig auf \"Sichtbar\" eingestellt ist.",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "In dieser Tabelle können Sie jede Rasterspalte auf der Seite konfigurieren. Der Breitenprozentsatz für jede Spalte wird automatisch basierend auf der maximalen Anzahl von Elementen in einer Zeile festgelegt. Um das Rasterlayout anzupassen, passen Sie diese Werte manuell an und definieren Sie die Titelbreite für alle Fragen in jeder Spalte."
+      gridLayoutColumns: "In dieser Tabelle können Sie jede Rasterspalte auf der Seite konfigurieren. Der Breitenprozentsatz für jede Spalte wird automatisch basierend auf der maximalen Anzahl von Elementen in einer Zeile festgelegt. Um das Rasterlayout anzupassen, passen Sie diese Werte manuell an und definieren Sie die Titelbreite für alle Fragen in jeder Spalte.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Spezifiziert, wie Fragen auf dieser Seite erscheinen, wenn sie nur lesbar sind. \"Nur lesen\" zeigt die Fragen mit den üblichen Eingabesteuerungen an, aber für die Bearbeitung deaktiviert. \"Anzeigen\" zeigt die Antworten als Text oder andere nicht-interaktive Elemente an. \"Inherit\" verwendet den für die Umfrage eingestellten Modus (\"Nur lesen\" standardmäßig)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Legt die Position eines Timers auf einer Seite fest.",
@@ -2911,6 +3340,22 @@ export var germanTranslation = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Wählen Sie diese Option aus, wenn Sie den Fragewert mit einer angewendeten Maske in den Umfrageergebnissen speichern möchten."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Eine Region, deren Formate für Datum-, Zeit-, Zahlen- und Währungseingabemasken gelten. Sofern nicht angegeben, wird die Vermessungssprache verwendet.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Überschreibt das Datumsformat der Region, das in Eingabemasken verwendet wird. Das Muster kann Trennzeichen und folgende Platzhalter enthalten: <br>'m' – Monatsnummer.<br> 'mm' – Monatsnummer, mit einer führenden Null für einstellige Werte. <br>'d' – Tag des Monats. <br>'dd' – Tag des Monats, mit einer führenden Null für einstellige Werte. <br>'yy' – Die letzten zwei Ziffern des Jahres. <br>'yyyy' – Vierstelliges Jahr.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Überschreibt das Zeitformat der Region, das in Eingabemasken verwendet wird. Das Muster kann Trennzeichen und folgende Platzhalter enthalten: <br>'H' – Stunden im 24-Stunden-Format.<br> 'HH' – Stunden im 24-Stunden-Format, mit einer führenden Null für einstellige Werte. <br>'h' – Stunden im 12-Stunden-Format. <br>'hh' – Stunden im 12-Stunden-Format, mit einer führenden Null für einstellige Werte. <br>'MM' – Minuten. <br>'ss' – Sekunden. <br>'TT' – 12-Stunden-Taktperiode in Großbuchstaben (AM/PM). <br>'tt' – 12-Stunden-Taktperiode in Kleinbuchstaben (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Überschreibt das Symbol, das der Bereich verwendet, um den Bruchteil vom ganzzahligen Teil einer angezeigten Zahl in Eingabemasken zu trennen.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Überschreibt das Symbol, das die Region verwendet, um die Ziffern einer großen Zahl in Gruppen zu je drei in Eingabemasken zu trennen.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Überschreibt das Währungssymbol oder den Code der Region, der in Eingabemasken verwendet wird.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Überschreibt das Währungsmuster der Region, das in Eingabemasken verwendet wird. Das Muster kann folgende Platzhalter enthalten: <br>'@' – Währungssymbol oder -code.<br> '#' – Zahl. <br>'-' – Position des Minuszeichens bei negativen Werten (wenn weggelassen, steht das Minuszeichen am Anfang)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Das Muster kann Zeichenfolgenliterale und die folgenden Platzhalter enthalten: '9' - für eine Ziffer; \"a\" - für einen Groß- oder Kleinbuchstaben; '#' - für eine Ziffer oder einen Groß- oder Kleinbuchstaben. Verwenden Sie den umgekehrten Schrägstrich '\\', um ein Zeichen mit Escapezeichen zu versehen."
@@ -2925,13 +3370,15 @@ export var germanTranslation = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Ein Symbol, das verwendet wird, um die Ziffern einer großen Zahl in Dreiergruppen zu unterteilen.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Schränkt die Anzahl der Nachkommastellen für eine angezeigte Zahl ein."
+      precision: "Schränkt die Anzahl der Nachkommastellen für eine angezeigte Zahl ein.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Zeigt nachlaufende Nullen im Bruchteil bis zur angegebenen Genauigkeit an. Zum Beispiel wird bei einer Genauigkeit von 2 ein Eingabewert von 1,2 als 1,20 angezeigt."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Ein oder mehrere Symbole, die vor dem Wert angezeigt werden sollen.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Ein oder mehrere Symbole, die nach dem Wert angezeigt werden sollen."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Ein Währungssymbol oder -code, der mit dem Wert angezeigt wird. Das Symbol der Region wird standardmäßig verwendet. Löschen Sie diese Eigenschaft, um kein Symbol anzuzeigen.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Spezifiziert die Positionen der Zahl, des Währungssymbols und des Minuszeichens. Das Muster kann folgende Platzhalter enthalten: <br>'@' – Währungssymbol oder -Code.<br> '#' – Zahl. <br>'-' – Position des Minuszeichens in negativen Werten (bei Weglassen wird das Minuszeichen am Anfang platziert)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2982,6 +3429,8 @@ export var germanTranslation = {
     tabAlign: "Ausrichtung der Tabs",
     // [Auto-translated] "File source type"
     sourceType: "Typ der Dateiquelle",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Standardkamera",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Passend zum Behälter",
     // "Set value expression"
@@ -3302,12 +3751,702 @@ export var germanTranslation = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Preset angewendet"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Zeile: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Verwenden Sie den vorgeschlagenen Namen"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Entfernen Sie den wiederholten Gegenstand"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Verwenden Sie den vorgeschlagenen Typ"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Verwenden Sie die vorgeschlagene Funktion"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Verwende die empfohlene Maske"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Gib dem Element einen freien Namen"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Gib dem Element einen freien Namen"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Entfernen Sie das Grundstück"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Verwenden Sie den nächstgelegenen erlaubten Wert",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Entfernen Sie das Grundstück",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Verwenden Sie den vorgeschlagenen Wert"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Wandeln Sie den Wert in eine Liste um"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Gib dem Element einen Namen"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Entfernen Sie das Grundstück",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Umbenennung des Grundstücks"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Verwenden Sie den vorgeschlagenen Namen",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Verwenden Sie den vorgeschlagenen Namen"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Verwenden Sie den vorgeschlagenen Namen"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Verwenden Sie den vorgeschlagenen Typ"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Verwenden Sie den vorgeschlagenen Typ"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Der Ausdruck \"{Ausdruck}\" kann nicht parsiert werden."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" wird nicht gefunden – es existiert keine Frage, kein Panel, keine Seite, kein berechneter Wert oder eine Variable mit diesem Namen.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" findet sich nicht in {containerType} \"{root}\" (Referenz: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" ist im \"{scopePrefix}\"-Bereich (Referenz: {name}) nicht enthalten.",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "Der SchlüsselName von \"{name}\" nennt \"{key}\" – \"{name}\" hat keinen {keyNoun} mit diesem Namen, sodass die Validierung eines doppelten Schlüssels nie ausgeführt wird.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" wird nicht gefunden."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "Das {prop} von \"{name}\" bezieht sich auf das Element selbst (Referenz: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Der Name \"{name}\" wird dupliziert.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Der berechnete Wertname \"{name}\" wird bereits von einem anderen berechneten Wert verwendet.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Der berechnete Wert \"{name}\" teilt seinen Namen mit einem anderen Element, sodass eines davon das andere überlagert."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "Das {nameKindText} \"{name}\" dieses {ownerText} ist auch die eingebaute Survey-Variable {{builtIn}} – die Umfrage antwortet zuerst {{name}}, daher ist diese in Ausdrücken nicht erreichbar.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "Der valueName \"{valueName}\" von \"{name}\" teilt sich den Wert von {otherType} \"{otherName}\", der keinen eigenen Wert hat – \"{otherName}\" behandelt die Felder, die \"{name}\" hinzufügt, als unbekannt, und clearIncorrectValues() löscht sie. Setze auch seinen valueName auf \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Die Zeile \"{key}\" im Matrixdropdown \"{otherName}\" ist ebenfalls {sharedKeyText} \"{name}\" und teilt ihren Wert – ein Zellobjekt und ein einzelner Wert können nicht beide unter einem Schlüssel liegen; die Laufzeit behält einen und löscht den anderen.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "Der {type} \"{name}\" teilt sich den Datenschlüssel \"{dataKey}\" mit {otherType} \"{otherName}\" – er behält {shapeText} dort, während \"{otherName}\" {otherShapeText} beibehält; man kann den Wert des anderen nicht speichern, daher löscht clearIncorrectValues() ihn.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Der Datenschlüssel \"{dataName}\" ist auch der Kommentarschlüssel von \"{base}\" (sein Datenschlüssel plus \"{Suffix}\") – ein Schreib überschreibt den anderen stillschweigend.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Der Datenschlüssel \"{dataName}\" ist auch der Gesamtschlüssel von \"{base}\" (sein Datenschlüssel plus \"{Suffix}\") – ein Schreib überschreibt stillschweigend den anderen.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "Der {trigger}-Trigger setzt die Variable \"{name}\", die auch der Datenschlüssel der Frage \"{questionName}\" ist – die Variable beantwortet ab dann {{name}}, nicht mehr die Frage."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Der Name \"{name}\" ist reserviert – ein Mitglied von Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "Der valueName \"{valueName}\" von \"{name}\" ist reserviert – ein Mitglied von Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Die Spalte \"{name}\" von \"{matrixName}\" ist reserviert – ein Mitglied von Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Das Element \"{name}\" von \"{questionName}\" ist reserviert – ein Mitglied von Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Die Zeile \"{rowValue}\" von \"{name}\" ist reserviert – ein Mitglied von Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Der berechnete Wert \"{name}\" ist reserviert – ein Mitglied von Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" hat einen unbekannten Typ \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" hat keinen Typ – ein Element ohne Typ wird weggelassen."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" ist keine Eigenschaft von {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" von {ownerText} ist nicht serialisierbar – es wirkt sich beim Laden aus und wird aus dem JSON entfernt, sobald die Umfrage erneut gespeichert wird.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" und \"{aliasKey}\" von {ownerText} sind zwei Namen einer Eigenschaft – die Laufzeit verwendet sie in der Reihenfolge, in der das JSON sie schreibt, also gewinnt \"{winner}\".",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" ist auf \"{name}\" gesetzt, aber inputType \"{inputType}\" hat keine Grenzen – die Laufzeit ignoriert es."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "Der {key} von {ownerText} ist {valueText} – nicht einer der erlaubten Werte ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "Der {Schlüssel} von {ownerText} ist {value}, außerhalb seines erlaubten Bereichs {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "Der valueName \"{valueName}\" von \"{name}\" enthält ein \".\" – Ausdrücke lesen {{valueName}} als Pfad in \"{rootKey}\", sodass der Datenschlüssel selbst niemals adressiert werden kann."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} hat kein \"{key}\" – die Eigenschaft ist für ein {className} erforderlich.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Der Name des {className} ist {valueText}, kein String – die Umfrage kann ihn nicht laden."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "Das \"{key}\" von {ownerText} ist kein Array – die Eigenschaft hält eine Liste, und die Laufzeit packt den Wert in ein Array mit nur einem Item."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Die Variablendefinition deklariert \"{variable}\", das auch der Datenschlüssel der Frage \"{name}\" ist – das Setzen der Variablen löscht die unter diesem Schlüssel gespeicherte Antwort, und {{name}} beantwortet ab dann den Hostwert.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Die Definition der Variablen gibt \"{variable}\" an, was auch der Name des berechneten Wertes \"{name}\" ist – beide schreiben denselben Slot, und der letzte Lauf gewinnt."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition ist kein Survey-JSON-Objekt, daher ist keine Variable deklariert und kein Preset-Wert kann überprüft werden.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets ist kein Array, daher wird kein Preset deklariert.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Preset #{index} ist kein Objekt.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Das Preset #{index} hat keinen Namen, sodass nichts darauf verweisen kann.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Preset \"{preset}\" enthält kein variablen-Objekt, also setzt es nichts.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Preset \"{preset}\" wird zweimal deklariert – eine Abfrage mit diesem Namen antwortet mit der ersten.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Preset \"{preset}\" setzt \"{variable}\", das die Variablendefinition nicht deklariert.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Preset \"{preset}\" setzt \"{variable}\" auf einen Wert, den die Variablendefinition ablehnt: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Die Funktion \"{functionName}\" ist nicht registriert."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Der berechnete Wert \"{names}\" bezieht sich in seinem eigenen Ausdruck auf sich selbst.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Die berechneten Werte {Namen} hängen voneinander ab."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Der Trigger reagiert auf den Wert, den er selbst setzt (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Trigger bilden eine Schleife durch die von ihnen gesetzten Werte: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "Das {label} liest den Wert, den es schreibt, selbst – es läuft nur, wenn sich ein anderer Wert ändert, also wird es nie ausgeführt.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Werte werden in einer Schleife geschrieben: {chain}. Jeder Schreib führt die Ausdrücke, die ihn lesen, erneut aus, sodass die Endwerte von der Reihenfolge abhängen, in der die Fragen beantwortet werden."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Die Bedingung vergleicht \"{name}\" mit {values} – nicht unter ihren Optionen. Verfügbar: {verfügbar}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Die Bedingung vergleicht \"{name}\" mit {Werten} – kein Auswahlwert enthält ihn. Verfügbar: {verfügbar}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Die Bedingung wendet \"{operator}\" auf \"{name}\" an: \"{recordName}\" ({questionType}) hat keinen Wert zum Vergleich.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Die Bedingung gilt \"{operator}\" für \"{name}\": \"{recordName}\" gilt {valueShapeText} – Ordnung und arithmetische Operatoren gelten nicht dafür.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Die Bedingung setzt \"{operator}\" auf \"{name}\": \"{recordName}\" ist eine boolesche Frage – Ordnungsoperatoren gelten nicht dafür.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Die Bedingung setzt \"{operator}\" auf \"{name}\": \"{recordName}\" ist eine Textfrage – ihr Wert ist eine Zeichenkette, sodass der numerische Vergleich auf impliziter Umwandlung beruht.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Die Bedingung wendet \"{operator}\" auf \"{name}\": \"{recordName}\" enthält eine Datumszeichenkette – im Vergleich mit der Zahl, die {constValue} nicht halten kann.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Die Bedingung setzt \"{operator}\" auf \"{name}\": \"{recordName}\" ist numerisch – ein Vergleich mit der Zeichenkette \"{constValue}\" kann nicht zutreffen.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Die Bedingung verwendet \"{operator}\" auf \"{name}\": \"{recordName}\" enthält ein Array ausgewählter Werte, sodass \"=\" das gesamte Array vergleicht.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Die Bedingung setzt \"{operator}\" auf \"{name}\": \"{recordName}\" ist eine boolesche Frage – ein Vergleich mit {constValue} kann nicht zutreffen."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "Das {prop} \"{Ausdruck}\" ist immer falsch, daher wird \"{name}\" nie angezeigt.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "Der {prop} \"{Ausdruck}\" gilt nie, weil {fakten}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "Der {prop} \"{Ausdruck}\" gilt niemals – kein zulässiger Wert erfüllt ihn: {fakten}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "Das {prop} \"{Ausdruck}\" widerspricht sich selbst: {fakten}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "Der {prop} \"{Ausdruck}\" ist immer wahr, daher entscheidet er nichts.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "Das {prop} \"{Ausdruck}\" ist Arithmetik und kein Vergleich, daher gibt es weder ein Ja noch ein Nein.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Ein Teil des {prop} \"{expression}\" hat ein Ergebnis, das von Anfang an bekannt ist.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "Der {prop} \"{Ausdruck}\" gilt immer, weil {fakten} – er entscheidet nichts."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "Das {prop} \"{expression}\" liest keine Frage oder Variable."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "Der Standardwert von \"{name}\" ist {valuesText}, den er niemals halten kann. Erlaubt: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Die korrekte Antwort auf \"{name}\" ist {valuesText}, was es niemals halten kann. Erlaubt: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Der Trigger setzt \"{name}\" auf {valuesText}, was er niemals halten kann. Erlaubt: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Der Standardzeilenwert setzt \"{name}\" auf {valuesText}, was er niemals halten kann. Erlaubt: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Der Standard-Panelwert setzt \"{name}\" auf {valuesText}, was er niemals halten kann. Erlaubt: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "Das {prop} von \"{name}\" nennt \"{key}\" – keine solche Zeile. Verfügbar: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "Die {prop} von \"{name}\" nennt \"{key}\" – keine solche Spalte. Verfügbar: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "Die {prop} von \"{name}\" nennt \"{key}\" – keine solche Vorlagenfrage. Verfügbar: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Der copyvalue-Trigger kopiert \"{fromName}\" in \"{setToName}\", aber \"{fromName}\" hält {sourceShapeText} und \"{setToName}\" {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Der Copyvalue-Trigger kopiert \"{fromName}\" in \"{setToName}\", aber kein Wert von \"{fromName}\" gehört zu den Werten, die \"{setToName}\" halten kann. Erlaubt: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" kopiert seine Auswahl von \"{source}\", aber es besteht kein Zweifel an diesem Namen.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" kopiert seine Entscheidungen von sich selbst.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" kopiert seine Auswahlmöglichkeiten von \"{source}\" ({sourceType}), das weder Optionen noch ein Array von Werten liefert.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" liest {prop} \"{field}\" von \"{source}\", aber {sourceType} \"{source}\" hat kein solches {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Ein weiteres Element des {prop} von \"{name}\" hat bereits den Wert {valueText} – die Laufzeit behält beide Elemente.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Die Auswahl von \"{name}\" enthält {valueText}, während {toggleProp} aktiviert ist – es kollidiert mit dem eingebauten {specialItemText}-Objekt."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "Der {trigger}-Trigger zielt auf die Seite \"{name}\", die nicht existiert.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "Der {trigger}-Trigger zielt auf \"{name}\" ab, aber {containerType} \"{root}\" hat kein {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "Der {trigger} trigger {verb} \"{name}\", aber es existiert kein {kindText} mit diesem Namen."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Der Auslösertyp \"{type}\" ist nicht bekannt.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Der Abzug hat keinen Typ."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Der Validatortyp \"{type}\" von \"{name}\" ist nicht bekannt.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Ein Validator von \"{name}\" hat keinen Typ."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "Der {validatorType}-Validator von \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "Der {validatorType}-Validator von \"{name}\" benötigt mindestens {min} und höchstens {max} – keine Antwort erfüllt ihn.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Der AnswerCount-Validator von \"{name}\" benötigt mindestens {minCount}-Antworten, über den {auswählbaren} Optionen, die zusammen ausgewählt werden können.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Der Regex-Validator von \"{name}\" zeigt ein Muster, das die Engine ablehnt: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Der Ausdrucksvalidator von \"{name}\" hat keinen Ausdruck, daher besteht er immer."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "Das {minProp} von \"{name}\" ist {min}, über seinem {maxProp} von {max} – die Laufzeit passt stillschweigend eines davon an.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "Das {countProp} von \"{name}\" ist {count}, {direction} ist {boundProp} von {bound} – die Laufzeit klemmt es.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "Das {stepProp} von \"{name}\" ist {step}, aber der Bereich, durch den es tritt ({minProp}.. {maxProp}) umfasst nur {Bereich} – die Laufzeit klemmt es.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "Die minSelectedChoices von \"{name}\" ist {min}, über den {selectable} Choices, die zusammen ausgewählt werden können – die Frage kann nie beantwortet werden."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" kann niemals sichtbar werden: es ist visibleIf liest {reads}, was {deadClause} ist, sodass die Bedingung nie gilt."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "Der MaskType \"{maskType}\" von \"{name}\" ist keine bekannte Maske – die Laufzeit fällt auf gar keine Maske zurück.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "Die maskSettings von \"{name}\" setzen \"{key}\", was keine Eigenschaft der \"{maskType}\"-Maske ist – die Laufzeit lässt sie lautlos fallen.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "Die maskSettings von \"{name}\" werden ohne maskType gesetzt – die Laufzeit behält nur \"saveMaskedValue\" und lässt den Rest weg.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Die {maskType}-Maske von \"{name}\" gilt für keine Eingabe: inputType \"{inputType}\" wird nur für Text und Tel maskiert.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Die Datetime-Maske von \"{name}\" setzt Min/Max ohne Muster – die Begrenzungen gelten für die Datumsteile des Musters, ohne Muster bewirken sie also nichts.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Die {maskType}-Maske von \"{name}\" erlaubt mindestens {min} und höchstens {max} – kein Wert erfüllt sie."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Das dynamische Panel \"{name}\" hat eine leere Schablone – seine Panels haben nichts zu rendern.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "Das {kindText} \"{name}\" enthält keine Elemente.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "Das {kindText} \"{name}\" hat keine Elemente, die jemals rendern können – jedes Element ist verborgen, durch eine Bedingung geschützt, die nie gilt, oder leer.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Die Detailelemente von \"{name}\" werden nie angezeigt: Der detailPanelMode ist \"none\", was der Standard ist."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Position: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Es wurde aus den Altheitseigenschaften des Titels, des Operators und des Werts des Triggers aufgebaut.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Innen: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Hast du \"{0}\" gemeint?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Handelt es sich um eine benutzerdefinierte Komponente, gib die Definition an den Linter weiter, um eine vollständige Analyse zu ermöglichen.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Registrieren Sie die Funktion vor dem Linting oder listen Sie sie in den Linter-Optionen auf.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Ein falsch geschriebener Typ wird zur Laufzeit stillschweigend verworfen, und ein benutzerdefinierter Trigger wird nicht von den Ziel- und Zyklusprüfungen abgedeckt.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Wenn es sich um eine Variable handelt, die zur Laufzeit gesetzt ist, listen Sie sie in den Linter-Optionen auf.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Die Schleife kann unerreichbar sein, wenn die Auslöserbedingungen nie zusammenbleiben – überprüfen Sie die Ausdrücke.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "Ein defaultValueExpression gilt nur, bis seine Frage beantwortet ist.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "Ausgedrückt: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "In Bindungen erwähnt.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Erwähnt in den OptionsByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Im Text \"{0}\" erwähnt.", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () liest diesen Namen aus jedem Eintrag von {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Das {0}()-Argument nennt keine Frage, kein Panel oder eine Seite.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Der Deserialisierer lässt einen Schlüssel fallen, den er nicht kennt.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Der Deserializer lässt einen Validator fallen, den er nicht lösen kann, also validiert nichts.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "Der Eingabetyp ist \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Es ist der Datenschlüssel von \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "und",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} ist immer {wert}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} ist {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "Zumindest {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "höchstens {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} kann nicht beide {Werte} sein",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} kann nicht {wert} sein und nicht sein",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} kann nicht leer sein und {value} sein",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} kann weder leer noch nicht leer sein",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} kann nicht über {min} und unter {max} liegen",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} wird verlangt, einer zu sein, der überhaupt keinen Wert hat"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "\"{0}.\"-Referenzen sind nur in einer Matrixzelle oder einem Matrix-Detailpanel verfügbar.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" ist nur in einer Matrixzelle oder einem Matrix-Detailpanel verfügbar.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "\"{0}.\"-Referenzen sind nur innerhalb eines dynamischen Panels oder eines Panel-Containers verfügbar.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "\"{0}.\"-Referenzen sind nur innerhalb eines dynamischen Panels verfügbar.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" ist nur innerhalb eines dynamischen Panels verfügbar.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" ist nur innerhalb von Choice-, Zeilen- und Spaltenbedingungen verfügbar.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\"-Referenzen sind nur innerhalb einer zusammengesetzten Frage verfügbar.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" ist in einem inArray-Filter nicht verfügbar, der sowohl mit dem Artikel als auch mit der Umfrage abläuft.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" ist eine Spalte dieser Matrix – beziehe sie mit dem Zeilenpräfix.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" bezieht sich auf dieses dynamische Panel – vergleiche es mit dem Panelpräfix."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Setze inputType: \"number\" auf \"{0}\", wenn es Zahlen sammelt.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Verwenden Sie \"contains\" oder \"anyof\" für Multiselect-Werte."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "Seite",
+        // [Auto-translated] "panel"
+        panel: "Panel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Name",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "Name"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "berechneter Wert",
+        // [Auto-translated] "element"
+        default: "Element"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Die Vermessung",
+        // [Auto-translated] "the {0}"
+        className: "Die {0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Sonstiges",
+        // [Auto-translated] "None"
+        none: "Keine",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Weigere dich zu antworten",
+        // [Auto-translated] "Don't know"
+        dontknow: "Keine Ahnung"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "Feuert nie.",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "lehnt jede Antwort ab",
+        // [Auto-translated] "cannot validate"
+        default: "Validieren kann nicht"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Die Frage enthält keine Antwort, um zu bestätigen",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "Eine Länge wird von einem Textwert abgelesen, und diese Antwort enthält keine",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Die Antwort ist keine Zahl und kann es niemals sein",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Eine Nummer stimmt nie mit einer E-Mail-Adresse überein",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Die Antwort ist keine Liste von Werten",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Die Antwort ist kein Wert, den er überprüfen kann"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "Ein Array",
+        // [Auto-translated] "an object"
+        object: "ein Objekt"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "eine Matrixzeile",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "Ein Mehrfachtext",
+        // [Auto-translated] "a row or item of a question"
+        default: "Eine Zeile oder ein Punkt einer Frage"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "ein Array von Objekten",
+        // [Auto-translated] "an object"
+        object: "ein Objekt",
+        // [Auto-translated] "a plain value"
+        plain: "Ein einfacher Wert",
+        // [Auto-translated] "a value"
+        default: "Ein Wert"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "Ein Array ausgewählter Werte",
+        // [Auto-translated] "a single value"
+        scalar: "ein einziger Wert",
+        // [Auto-translated] "a value"
+        default: "Ein Wert"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "Unten",
+        // [Auto-translated] "above"
+        above: "oben"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "ist niemals sichtbar und erhält nie einen Wert",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "nie sichtbar sind und erhalten nie einen Wert"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Frage",
+        // [Auto-translated] "question or variable"
+        questionvalue: "Frage oder Variable",
+        // [Auto-translated] "page"
+        page: "Seite"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "liest",
+        // [Auto-translated] "navigates to"
+        gotoName: "navigiert zu",
+        // [Auto-translated] "sets"
+        default: "Mengen"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Vorlagenfrage",
+        // [Auto-translated] "column"
+        default: "Säule"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Vorlagenfrage",
+        // [Auto-translated] "column"
+        matrixdynamic: "Säule",
+        // [Auto-translated] "item"
+        multipletext: "Gegenstand",
+        // [Auto-translated] "row"
+        matrix: "Ruder",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Ruder",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Säule",
+        // [Auto-translated] "field"
+        default: "Feld"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Artikel 1" }, { value: "item2", text: "Artikel 2" }, { value: "item3", text: "Artikel 3" }],
-    columns: [{ value: "column1", text: "Spalte 1" }, { value: "column2", text: "Spalte 2" }, { value: "column3", text: "Spalte 3" }],
-    rows: [{ value: "row1", text: "Zeile 1" }, { value: "row2", text: "Zeile 2" }],
-    matrixColumns: [{ name: "column1", title: "Spalte 1" }, { name: "column2", title: "Spalte 2" }, { name: "column3", title: "Spalte 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Artikel 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Artikel 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Artikel 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Spalte 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Spalte 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Spalte 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Zeile 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Zeile 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Spalte 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Spalte 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Spalte 3"
+      }
+    ]
   }
 };
 

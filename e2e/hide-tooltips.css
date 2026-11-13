@@ -1,0 +1,5 @@
+/* Applied by compareScreenshot: action tooltips appear 200ms after hover, so whether a hover
+   screenshot catches one is a matter of timing. Tooltip behavior is covered by survey-library tests. */
+.sv-tooltip {
+  display: none !important;
+}

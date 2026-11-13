@@ -8,12 +8,13 @@ import {
   Question,
   ItemValue,
   Serializer,
+  JsonObject,
   IAction,
   ComputedUpdater,
   DragOrClickHelper,
   QuestionSelectBase,
   createDropdownActionModel,
-  CssClassBuilder,
+  toCssClasses,
   QuestionPanelDynamicModel,
   ListModel,
   Helpers,
@@ -24,7 +25,7 @@ import {
   QuestionCompositeModel,
   defaultActionBarCss
 } from "survey-core";
-import { SurveyCreatorModel } from "../creator-base";
+import { SurveyCreatorModel, isContentElement } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
 import { IPortableEvent } from "../utils/events";
@@ -37,12 +38,25 @@ import { DragDropSurveyElements } from "../dragdrop-survey-elements";
 import { DropIndicatorPosition } from "../drag-drop-enums";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
 import { SurveyHelper } from "../survey-helper";
+import type { TabDesignerPlugin } from "./tabs/designer-plugin";
 import { DomDocumentHelper } from "survey-core";
 
 export interface QuestionBannerParams {
   text: string;
   actionText: string;
   onClick: () => void;
+}
+
+const maxExpressionBannerTextLength = 100;
+
+interface IConvertToSelection {
+  item?: QuestionToolboxItem;
+  // The item whose subitems make the input type list; subitemsWithDefault: the list starts with its default subitem.
+  subitemsOwner?: QuestionToolboxItem;
+  subitemsWithDefault?: boolean;
+  // The selected subitem; the item itself when isDefaultSubitem is true.
+  subitem?: QuestionToolboxItem;
+  isDefaultSubitem?: boolean;
 }
 
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
@@ -96,13 +110,14 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   rootCss() {
     const isStartWithNewLine = this.surveyElement.isQuestion && !(<Question>this.surveyElement).startWithNewLine;
-    return new CssClassBuilder()
-      .append(super.getCss())
-      .append("svc-question__adorner")
-      .append("svc-question__adorner--selected", !!this.creator.isElementSelected(this.surveyElement))
-      .append("svc-question__adorner--collapsed", this.renderedCollapsed)
-      .append("svc-question__adorner--start-with-new-line", isStartWithNewLine)
-      .append("svc-question__adorner--collapse-" + this.creator.expandCollapseButtonVisibility, true).toString();
+    return toCssClasses(
+      super.getCss(),
+      "svc-question__adorner",
+      !!this.creator.isElementSelected(this.surveyElement) && "svc-question__adorner--selected",
+      this.renderedCollapsed && "svc-question__adorner--collapsed",
+      isStartWithNewLine && "svc-question__adorner--start-with-new-line",
+      "svc-question__adorner--collapse-" + this.creator.expandCollapseButtonVisibility
+    );
   }
 
   css() {
@@ -112,12 +127,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       // Non-interactive nested elements (e.g. a choice content panel) don't render the full
       // adorner chrome, but they still act as drop targets. Emit the drag-over classes so the
       // drop highlight appears when an element is dragged over them.
-      return new CssClassBuilder()
-        .append("svc-question__content--collapsed-drag-over-inside", isInsideCollapsed)
-        .append("svc-question__content--drag-over-inside", this.dropIndicatorPosition === DropIndicatorPosition.Inside && !this.collapsed)
-        .append("svc-question__content--drag-over-top", this.dropIndicatorPosition === DropIndicatorPosition.Top)
-        .append("svc-question__content--drag-over-bottom", this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
-        .toString();
+      return toCssClasses(
+        isInsideCollapsed && "svc-question__content--collapsed-drag-over-inside",
+        this.dropIndicatorPosition === DropIndicatorPosition.Inside && !this.collapsed && "svc-question__content--drag-over-inside",
+        this.dropIndicatorPosition === DropIndicatorPosition.Top && "svc-question__content--drag-over-top",
+        this.dropIndicatorPosition === DropIndicatorPosition.Bottom && "svc-question__content--drag-over-bottom"
+      );
     }
 
     if (isInsideCollapsed) {
@@ -126,24 +141,24 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       this.dragOut();
     }
 
-    let result: string = new CssClassBuilder()
-      .append("svc-question__content")
-      .append("svc-question__content--composite-question", this.surveyElement instanceof QuestionCompositeModel)
-      .append("svc-question__content--" + this.surveyElement.getType(), typeof this.surveyElement.getType === "function")
-      .append("svc-question__content--selected", !!this.creator.isElementSelected(this.surveyElement))
-      .append("svc-question__content--empty", this.isEmptyElement)
-      .append("svc-question__content--empty-template", this.isEmptyTemplate)
-      .append("svc-question__content--collapsed", this.renderedCollapsed)
-      .append("svc-question__content--title-hidden", !this.surveyElement.hasTitle || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden"))
-      .append("svc-question__content--title-bottom", !!(this.surveyElement as Question).hasTitleOnBottom)
-      .append("svc-question__content--dragged", this.isBeingDragged)
-      .append("svc-question__content--collapsed-drag-over-inside", isInsideCollapsed)
-      .append("svc-question__content--drag-over-inside", this.dropIndicatorPosition === DropIndicatorPosition.Inside && !this.collapsed)
-      .append("svc-question__content--drag-over-top", this.dropIndicatorPosition === DropIndicatorPosition.Top)
-      .append("svc-question__content--drag-over-bottom", this.dropIndicatorPosition === DropIndicatorPosition.Bottom)
-      .append("svc-question__content--drag-over-right", this.dropIndicatorPosition === DropIndicatorPosition.Right)
-      .append("svc-question__content--drag-over-left", this.dropIndicatorPosition === DropIndicatorPosition.Left)
-      .toString();
+    let result: string = toCssClasses(
+      "svc-question__content",
+      this.surveyElement instanceof QuestionCompositeModel && "svc-question__content--composite-question",
+      typeof this.surveyElement.getType === "function" && "svc-question__content--" + this.surveyElement.getType(),
+      !!this.creator.isElementSelected(this.surveyElement) && "svc-question__content--selected",
+      this.isEmptyElement && "svc-question__content--empty",
+      this.isEmptyTemplate && "svc-question__content--empty-template",
+      this.renderedCollapsed && "svc-question__content--collapsed",
+      (!this.surveyElement.hasTitle || (!this.surveyElement.isPanel && (this.surveyElement as Question).getTitleLocation() === "hidden")) && "svc-question__content--title-hidden",
+      !!(this.surveyElement as Question).hasTitleOnBottom && "svc-question__content--title-bottom",
+      this.isBeingDragged && "svc-question__content--dragged",
+      isInsideCollapsed && "svc-question__content--collapsed-drag-over-inside",
+      this.dropIndicatorPosition === DropIndicatorPosition.Inside && !this.collapsed && "svc-question__content--drag-over-inside",
+      this.dropIndicatorPosition === DropIndicatorPosition.Top && "svc-question__content--drag-over-top",
+      this.dropIndicatorPosition === DropIndicatorPosition.Bottom && "svc-question__content--drag-over-bottom",
+      this.dropIndicatorPosition === DropIndicatorPosition.Right && "svc-question__content--drag-over-right",
+      this.dropIndicatorPosition === DropIndicatorPosition.Left && "svc-question__content--drag-over-left"
+    );
 
     if (!isInsideCollapsed && this.creator) {
       result = this.creator.getElementAddornerCssCallback(this.surveyElement, result);
@@ -187,7 +202,26 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.creator.dragDropSurveyElements.dropTarget = null;
   }
   public get isBannerShowing(): boolean {
-    return this.isUsingCarryForward || this.isUsingRestfull || this.isMessagePanelVisible;
+    return !!(this.isUsingCarryForward || this.isUsingRestfull || this.isMessagePanelVisible || this.isExpressionQuestion);
+  }
+  // An Expression question renders nothing in the designer (its value is calculated at runtime),
+  // so its banner shows the expression instead.
+  private get isExpressionQuestion(): boolean {
+    const el: any = this.surveyElement;
+    return !!el && el.isQuestion && el.isDescendantOf("expression") && !isContentElement(el);
+  }
+  // Stored on the adorner: the renderers re-render on the adorner's property changes, not on the question's.
+  public get expressionBannerText(): string {
+    return this.getPropertyValue("expressionBannerText", undefined, () => this.getExpressionBannerText());
+  }
+  private updateExpressionBannerText(): void {
+    this.setPropertyValue("expressionBannerText", this.getExpressionBannerText());
+  }
+  private getExpressionBannerText(): string {
+    // JSON can store the expression as a number or a boolean
+    const expression: string = String((<any>this.surveyElement)?.expression ?? "").replace(/\s+/g, " ").trim();
+    if (expression.length <= maxExpressionBannerTextLength) return expression;
+    return expression.substring(0, maxExpressionBannerTextLength - 3) + "...";
   }
   private get isUsingCarryForward(): boolean {
     return (<any>this.element)?.isUsingCarryForward;
@@ -199,18 +233,43 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return (this.element)?.getPropertyValue("isMessagePanelVisible");
   }
   get cssCollapsedHiddenHeader(): string {
-    const css = new CssClassBuilder()
-      .append((this.element as PanelModel | Question).cssHeader)
-      .append("svc-element__header--hidden")
-      .append("svc-element__header--lazy", !this.needToRenderContent)
-      .toString();
+    const css = toCssClasses(
+      (this.element as PanelModel | Question).cssHeader,
+      "svc-element__header--hidden",
+      !this.needToRenderContent && "svc-element__header--lazy"
+    );
     return css;
   }
   get cssCollapsedHiddenTitle(): string {
     return this.element.cssTitle + " svc-element__title--hidden";
   }
   public createBannerParams(): QuestionBannerParams {
-    return this.createCarryForwardParams() || this.createUsingRestfulParams() || this.createCustomMessagePanel();
+    return this.createCarryForwardParams() || this.createUsingRestfulParams() || this.createCustomMessagePanel() || this.createExpressionParams();
+  }
+  private createExpressionParams(): QuestionBannerParams {
+    if (!this.isExpressionQuestion) return null;
+    return {
+      text: this.expressionBannerText || this.creator.getLocString("ed.expressionBannerPlaceholder"),
+      // An empty actionText renders the banner without a link.
+      actionText: this.canEditExpression() ? this.creator.getLocString("ed.expressionBannerLinkText") : "",
+      onClick: () => {
+        if (!this.canEditExpression()) return;
+        if (!this.creator.showSidebar) {
+          this.creator.setShowSidebar(true, true);
+        }
+        this.creator.selectElement(this.surveyElement, "expression");
+      }
+    };
+  }
+  private canEditExpression(): boolean {
+    const creator = this.creator;
+    const el = this.surveyElement;
+    if (!el || creator.readOnly || !creator.isSidebarVisible) return false;
+    // setSidebarEnabled(false) collapses the sidebar and keeps it closed: the link must not reopen it.
+    const designer = creator.getPlugin<TabDesignerPlugin>("designer", false);
+    if (!!designer && !designer.isSidebarEnabled) return false;
+    const prop = Serializer.findProperty(el.getType(), "expression");
+    return SurveyHelper.isPropertyVisible(el, prop, creator) && creator.isCanModifyProperty(el, "expression");
   }
   private createCarryForwardParams(): QuestionBannerParams {
     if (!this.isUsingCarryForward) return null;
@@ -246,6 +305,43 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     res.text = res.messageText;
     return res;
   }
+  // Whether the choices could change when the placeholder items were last
+  // evaluated - by the question itself (it recalculates them when its choices
+  // or its container change) or on a permissions change the creator reports.
+  private optionItemsModifiable: boolean;
+  // No initializer: attachElement runs in the base constructor, before the
+  // fields of this class are initialized. Created on the first subscription,
+  // kept so that remove() gets the same function.
+  private permissionsChangedHandler: () => void;
+  private canModifyChoices(): boolean {
+    return !this.creator.readOnly && this.creator.isCanModifyProperty(this.surveyElement, "choices");
+  }
+  private setCanShowOptionItemCallback(): void {
+    const question = <QuestionSelectBase>this.surveyElement;
+    question.setCanShowOptionItemCallback((item: ItemValue): boolean => {
+      // Placeholder items exist to add them: none while choices cannot change.
+      this.optionItemsModifiable = this.canModifyChoices();
+      if (!this.optionItemsModifiable) return false;
+      if (item !== question.newItem) return true;
+      return this.creator.maxChoices < 1 || question.choices.length < this.creator.maxChoices;
+    });
+  }
+  private updateOptionItems(): void {
+    // A newer adorner of the same element owns its callback.
+    const question: any = this.surveyElement;
+    if (!question || question.isDisposed || SurveyElementAdornerBase.GetAdorner(question) !== this) return;
+    const canModify = this.canModifyChoices();
+    if (canModify === this.optionItemsModifiable) return;
+    this.optionItemsModifiable = canModify;
+    // Setting the callback recalculates the visible choices.
+    this.setCanShowOptionItemCallback();
+  }
+  public detachFromUI(): void {
+    // detachElement is skipped for an element that is disposed or adorned by
+    // a newer adorner by now.
+    this.creator.onPermissionsChanged.remove(this.permissionsChangedHandler);
+    super.detachFromUI();
+  }
   protected detachElement(surveyElement: SurveyElement): void {
     if (surveyElement) {
       if (this.surveyElement instanceof QuestionHtmlModel) {
@@ -255,13 +351,16 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         surveyElement.unRegisterFunctionOnPropertiesValueChanged(["rows", "elements"], "isEmptyAdorner");
       }
       surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
+      surveyElement.unRegisterFunctionOnPropertyValueChanged("expression", "expressionBannerAdorner");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["inputType", "rateType"], "inputTypeAdorner");
       if (!!surveyElement["setCanShowOptionItemCallback"]) {
         (<any>surveyElement).setCanShowOptionItemCallback(undefined);
+        this.creator.onPermissionsChanged.remove(this.permissionsChangedHandler);
       }
       delete (<any>surveyElement.locDescription).placeholder;
     }
     this.resetPropertyValue("isEmptyElement");
+    this.resetPropertyValue("expressionBannerText");
     super.detachElement(this.element);
   }
   protected attachElement(surveyElement: SurveyElement): void {
@@ -271,15 +370,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         surveyElement.isQuestion &&
         !!surveyElement["setCanShowOptionItemCallback"]
       ) {
-        (<any>surveyElement).setCanShowOptionItemCallback(
-          (item: ItemValue): boolean => {
-            if (this.creator.readOnly) return false;
-            if (item !== (<QuestionSelectBase>this.surveyElement).newItem) return true;
-            return (
-              this.creator.maxChoices < 1 || surveyElement["choices"].length < this.creator.maxChoices
-            );
-          }
-        );
+        this.optionItemsModifiable = this.canModifyChoices();
+        this.setCanShowOptionItemCallback();
+        if (!this.permissionsChangedHandler) {
+          this.permissionsChangedHandler = () => this.updateOptionItems();
+        }
+        this.creator.onPermissionsChanged.add(this.permissionsChangedHandler);
       }
       if (this.surveyElement instanceof QuestionHtmlModel) {
         surveyElement.registerFunctionOnPropertyValueChanged("html", (newValue: any) => {
@@ -297,6 +393,13 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
           this.updateRequiredAction(requiredAction);
         }
       }, "isRequiredAdorner");
+      // The text cached for the previous element stays when its detach was skipped (a newer adorner owns it)
+      this.resetPropertyValue("expressionBannerText");
+      if (this.isExpressionQuestion) {
+        surveyElement.registerFunctionOnPropertyValueChanged("expression", () => {
+          this.updateExpressionBannerText();
+        }, "expressionBannerAdorner");
+      }
       (<any>surveyElement.locDescription).placeholder = "pe.descriptionPlaceholder";
     }
   }
@@ -523,6 +626,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   private static jsonsAreCompatible(element: SurveyElement, json: any): boolean {
     let question = element;
+    let jsonElement: SurveyElement;
     const keys = Object.keys(json);
     for (let i = 0; i < keys.length; i++) {
       const p = keys[i];
@@ -531,9 +635,29 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       if (propertyValue === undefined) {
         propertyValue = p === "type" ? question.getType() : question.getDefaultPropertyValue(p);
       }
-      if (!Helpers.isTwoValueEquals(json[p], propertyValue)) return false;
+      let jsonValue = json[p];
+      // Choices, rows, columns, etc. are stored as ItemValue/MatrixColumn objects while the json holds
+      // plain objects or strings, so compare both values serialized the same way.
+      if (Helpers.isValueObject(propertyValue)) {
+        if (!jsonElement) {
+          jsonElement = Serializer.createClass(question.getType());
+          jsonElement?.fromJSON(json);
+        }
+        if (jsonElement) {
+          propertyValue = QuestionAdornerViewModel.getPropertyJsonValue(question, p);
+          jsonValue = QuestionAdornerViewModel.getPropertyJsonValue(jsonElement, p);
+        }
+      }
+      if (!Helpers.isTwoValueEquals(jsonValue, propertyValue)) return false;
     }
     return true;
+  }
+  private static getPropertyJsonValue(element: SurveyElement, name: string): any {
+    const prop = Serializer.findProperty(element.getType(), name);
+    if (!prop) return element.getPropertyValue(name);
+    const res = {};
+    new JsonObject().valueToJson(element, res, prop);
+    return res[name];
   }
   private jsonIsCorresponded(json: any) {
     return QuestionAdornerViewModel.jsonsAreCompatible(this.element, json);
@@ -562,86 +686,124 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       element.closest(".sd-element__header") && !element.closest(".svc-string-editor");
   }
 
+  // Finds the toolbox item, subitem list and subitem that match the element, without creating actions.
+  // The order rules are those the lists have always used: the first item of the element type matches
+  // by type, later ones by json too; a later match keeps the earlier subitem and subitem list unless it
+  // has its own; with subitems shown, the last matching subitem wins and an item that needs a default
+  // subitem selects it (the item itself) when none of its subitems matches.
+  private findConvertToSelection(availableItems: Array<QuestionToolboxItem>): IConvertToSelection {
+    QuestionAdornerViewModel.checkForNeedDefaultSubitems(availableItems);
+    const showSubitems = this.creator.toolbox.showSubitems;
+    const res: IConvertToSelection = {};
+    availableItems.forEach((item: QuestionToolboxItem) => {
+      if (this.toolboxItemIsCorresponded(item, !!res.item)) {
+        res.item = item;
+        if (item.items) {
+          res.subitemsOwner = item;
+          res.subitemsWithDefault = false;
+        }
+      }
+      if (item.items?.length > 0 && showSubitems) {
+        let subitem: QuestionToolboxItem = undefined;
+        item.items.forEach(sub => {
+          if (this.toolboxItemIsCorresponded(sub, !!res.item)) subitem = sub;
+        });
+        const isDefaultSubitem = !subitem && !!item.needDefaultSubitem && res.item === item;
+        if (isDefaultSubitem) subitem = item;
+        if (subitem) {
+          res.item = item;
+          res.subitem = subitem;
+          res.isDefaultSubitem = isDefaultSubitem;
+          res.subitemsOwner = item;
+          res.subitemsWithDefault = !!item.needDefaultSubitem;
+        }
+      }
+    });
+    return res;
+  }
+  private getConvertInputTypeTitle(selection: IConvertToSelection, propName: string, propValue: any): string {
+    return selection.subitem?.title || editorLocalization.getPropertyValueInEditor(propName, propValue) || "SUBTYPE";
+  }
+
   protected updateQuestionTypeOrSubtypeListModel(listModel: ListModel, subtypeOnly: boolean) {
     const availableItems = this.getConvertToTypes();
-    QuestionAdornerViewModel.checkForNeedDefaultSubitems(availableItems);
+    const selection = this.findConvertToSelection(availableItems);
     const defaultJsons = this.buildDefaultJsonMap(availableItems);
-    const newItems: Array<IAction> = [];
-    let lastItem: QuestionToolboxItem;
-    let selectedAction: IAction;
-    let selectedSubaction: IAction = undefined;
-    let selectedSubactions = undefined;
 
     const toolboxItemToAction = (item, needSeparator = false) => {
       return this.creator.createIActionBarItemByClass(item, needSeparator, (questionType, json) => { this.convertQuestion(questionType, json, defaultJsons); });
     };
+    const createDefaultSubaction = (item: QuestionToolboxItem) => {
+      const defaultSubaction = toolboxItemToAction(item);
+      defaultSubaction.id = item.name + "-default";
+      defaultSubaction.iconName = undefined;
+      defaultSubaction.markerIconName = undefined;
+      defaultSubaction.items = [];
+      defaultSubaction.component = undefined;
+      return defaultSubaction;
+    };
+    // A matched subitem is selected as the toolbox item itself, the default one as its action.
+    const getSelectedSubaction = (defaultSubaction?: IAction): IAction => {
+      if (!selection.isDefaultSubitem) return selection.subitem;
+      return defaultSubaction || createDefaultSubaction(selection.subitem);
+    };
 
+    if (subtypeOnly) {
+      const owner = selection.subitemsOwner;
+      if (!owner) return;
+      const subactions: Array<IAction> = owner.items.map(subitem => toolboxItemToAction(subitem));
+      let defaultSubaction: IAction = undefined;
+      if (selection.subitemsWithDefault) {
+        defaultSubaction = createDefaultSubaction(owner);
+        subactions.unshift(defaultSubaction);
+      }
+      listModel.setItems(subactions);
+      listModel.selectedItem = getSelectedSubaction(selection.subitem === owner ? defaultSubaction : undefined);
+      return true;
+    }
+
+    const newItems: Array<IAction> = [];
+    let lastItem: QuestionToolboxItem;
+    let selectedAction: IAction;
+    let selectedSubaction: IAction;
     availableItems.forEach((item: QuestionToolboxItem) => {
       const needSeparator = lastItem && item.category != lastItem.category;
       const action = toolboxItemToAction(item, needSeparator);
-      if (this.toolboxItemIsCorresponded(item, !!selectedAction)) {
-        selectedAction = action;
-        if (item.items) {
-          selectedSubactions = item.items.map(subitem => toolboxItemToAction(subitem));
-        }
-      }
+      if (item === selection.item) selectedAction = action;
       if (item.items?.length > 0 && this.creator.toolbox.showSubitems) {
-        const subactions = [];
-        let selectedSubactionLocal: IAction = undefined;
-        item.items.forEach(subitem => {
-          const subaction = toolboxItemToAction(subitem,);
-          if (this.toolboxItemIsCorresponded(subitem, !!selectedAction)) selectedSubactionLocal = subitem;
-          subactions.push(subaction);
-        });
-        if (item.needDefaultSubitem && subactions.length > 0) {
-          const defaultSubaction = toolboxItemToAction(item);
-          defaultSubaction.id = action.id + "-default";
-          defaultSubaction.iconName = undefined;
-          defaultSubaction.markerIconName = undefined;
-          defaultSubaction.items = [];
-          defaultSubaction.component = undefined;
+        const subactions = item.items.map(subitem => toolboxItemToAction(subitem));
+        let defaultSubaction: IAction = undefined;
+        if (item.needDefaultSubitem) {
+          defaultSubaction = createDefaultSubaction(item);
           subactions.unshift(defaultSubaction);
-          if (selectedAction == action && !selectedSubactionLocal) selectedSubactionLocal = defaultSubaction;
         }
         action.setSubItems({ items: subactions });
-        if (selectedSubactionLocal) {
-          selectedAction = action;
-          selectedSubaction = selectedSubactionLocal;
-          selectedSubactions = subactions;
-        }
+        if (item === selection.subitem && selection.isDefaultSubitem) selectedSubaction = defaultSubaction;
       }
       lastItem = item;
       newItems.push(action);
     });
-
-    if (subtypeOnly) {
-      if (selectedSubactions) {
-        listModel.setItems(selectedSubactions);
-        listModel.selectedItem = selectedSubaction;
-        return !!selectedSubactions;
-      }
-    } else {
-      const _listModel = selectedAction?.popupModel?.contentComponentData.model;
-      if (_listModel) _listModel.selectedItem = selectedSubaction;
-      listModel.setItems(newItems);
-      listModel.selectedItem = selectedAction;
-    }
+    if (selection.subitem && !selection.isDefaultSubitem) selectedSubaction = getSelectedSubaction();
+    const _listModel = selectedAction?.popupModel?.contentComponentData.model;
+    if (_listModel) _listModel.selectedItem = selectedSubaction;
+    listModel.setItems(newItems);
+    listModel.selectedItem = selectedAction;
   }
 
   private createConvertInputType() {
     if (!this.surveyElement || this.surveyElement.isPanel) {
       return null;
     }
-    const listModel = new ListModel({
-      items: [],
-    });
-    this.updateQuestionTypeOrSubtypeListModel(listModel, true);
+    // The list is built when the popup opens; here only whether the action exists and its title.
+    const selection = this.findConvertToSelection(this.getConvertToTypes());
+    const owner = selection.subitemsOwner;
+    const subitemsCount = !owner ? 0 : owner.items.length + (selection.subitemsWithDefault ? 1 : 0);
     const propName = QuestionToolbox.getSubTypePropertyName(this.surveyElement.getType());
-    if (listModel.actions.length === 0 || (!listModel.selectedItem && !propName)) return null;
+    if (subitemsCount === 0 || (!selection.subitem && !propName)) return null;
     const actionData: IAction = {
       id: "convertInputType",
       visibleIndex: 1,
-      title: listModel.selectedItem?.title || editorLocalization.getPropertyValueInEditor(propName, this.surveyElement.getPropertyValue(propName)) || "SUBTYPE",
+      title: this.getConvertInputTypeTitle(selection, propName, this.surveyElement.getPropertyValue(propName)),
       disableShrink: true,
       iconName: "icon-chevron_16x16"
     };
@@ -656,9 +818,14 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       [propName],
       (newValue) => {
         const popup = newAction.popupModel;
-        const list = popup.contentComponentData.model;
-        this.updateQuestionTypeOrSubtypeListModel(list, true);
-        newAction.title = list.selectedItem?.title || editorLocalization.getPropertyValueInEditor(propName, newValue) || "SUBTYPE";
+        if (popup.isVisible) {
+          const list = popup.contentComponentData.model;
+          this.updateQuestionTypeOrSubtypeListModel(list, true);
+          newAction.title = list.selectedItem?.title || editorLocalization.getPropertyValueInEditor(propName, newValue) || "SUBTYPE";
+        } else {
+          // A closed popup rebuilds its list when it opens.
+          newAction.title = this.getConvertInputTypeTitle(this.findConvertToSelection(this.getConvertToTypes()), propName, newValue);
+        }
       },
       "inputTypeAdorner"
     );

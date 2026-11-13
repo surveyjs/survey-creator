@@ -142,6 +142,10 @@ export var catalanTranslation = {
     jsonHideErrors: "Ocultar errors",
     // "Show errors"
     jsonShowErrors: "Mostrar errors",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Error de correcció",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "El JSON de l'enquesta ha de ser un objecte.",
     // "Undo"
     undo: "Deshacer",
     // "Redo"
@@ -246,6 +250,8 @@ export var catalanTranslation = {
     translateUsigAI: "Traducir automáticamente todo",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Traducir de: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Traslladar les cadenes restants",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Cadenas sin traducir",
     // "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var catalanTranslation = {
     translationSource: "Fuente: ",
     // [Auto-translated] "Target: "
     translationTarget: "Blanco: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Llengua d'origen",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Llengua objectiu",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} de {1} cordes traduïdes",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Estàs segur que vols eliminar totes les cadenes traduïdes de l'idioma seleccionat?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Vista de formulari",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Vista de quadrícula",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Traducció de cadenes",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Cordes d'enquesta",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "No hi ha cadenes per traduir",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Totes les cordes es tradueixen",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} cadenes no es tradueixen",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "Los enlaces de YouTube no son compatibles.",
     // [Auto-translated] "Export"
@@ -286,6 +314,10 @@ export var catalanTranslation = {
     choicesLoadedFromWebLinkText: "Ir a la configuració",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Vista prèvia de las opcions de elección cargadas",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Sense conjunt d'expressions",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Expressió d'edició",
     // "HTML content will be here."
     htmlPlaceHolder: "Contenido HTML irá aquí.",
     // "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var catalanTranslation = {
       uncompletedRule_cancel: "No, quiero completar las regles"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Preset de variables",
+    // [Auto-translated] "None"
+    noPreset: "Cap",
+    // [Auto-translated] "View variable values"
+    view: "Veure valors de variables",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Valors variables",
+    // [Auto-translated] "Manage presets"
+    edit: "Gestionar presets",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Presets de variables",
+    // [Auto-translated] "Preset"
+    presetName: "Preset",
+    // [Auto-translated] "Description"
+    presetDescription: "Descripció",
+    // [Auto-translated] "Add preset"
+    addPreset: "Afegir preset",
+    // [Auto-translated] "New preset"
+    newPresetName: "Nou preset",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Delete preset",
+    // [Auto-translated] "Back"
+    back: "Enrere",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Ja existeix un preset amb aquest nom",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Introdueix un nom predefinit",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Preset",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Descripció"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Assistent d'expressió",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Escriu amb IA",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Descriu què hauria de fer l'expressió",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Per exemple: mostra aquesta pregunta quan el respondent tingui 18 anys o més",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Descriu la condició amb paraules",
+    // [Auto-translated] "Generate"
+    generate: "Generar",
+    // [Auto-translated] "Refine"
+    refine: "Refinar",
+    // [Auto-translated] "Explain"
+    explain: "Explica",
+    // [Auto-translated] "Stop"
+    stop: "Atura't",
+    // [Auto-translated] "Accept"
+    accept: "Accepta",
+    // [Auto-translated] "Reject"
+    reject: "Rebutjar",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Aplica la solució: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Expressió actual",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Expressió suggerida",
+    // [Auto-translated] "Reads as"
+    readsAs: "Es llegeix com",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "L'explicació de l'assistent",
+    // [Auto-translated] "Check results"
+    findings: "Comprova els resultats",
+    // [Auto-translated] "Error"
+    severityError: "Error",
+    // [Auto-translated] "Warning"
+    severityWarning: "Avís",
+    // [Auto-translated] "Info"
+    severityInfo: "Informació",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "a \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Descriu l'expressió i selecciona Genera.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Esperant l'assistent...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "La sol·licitud va ser cancel·lada.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "L'assistent va informar: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "L'assistent no va suggerir cap expressió.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Revisa l'expressió suggerida.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "L'assistent va explicar l'expressió actual.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "L'expressió suggerida té errors i no es pot acceptar.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "L'expressió suggerida no es podia comprovar a cada lloc on s'escrivia, així que no es pot acceptar.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Afegeix una acció a la norma abans de preguntar a l'assistent.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "La primera suggerència tenia errors i es corregia automàticament."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var catalanTranslation = {
       templateDescription: "Patrón de descripció de la entrada",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Patrón de títol de entrada",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Títol d'entrada provisional",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Text de vinyeta buit",
       // [Auto-translated] "Tab title pattern"
@@ -588,6 +724,10 @@ export var catalanTranslation = {
       templateErrorLocation: "Alineación de mensajes de error",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Nova ubicación de entrada",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Entrades per pàgina",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Permetre als usuaris ordenar les entrades",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Evitar respuestas duplicadas en la següent pregunta"
     },
@@ -675,6 +815,12 @@ export var catalanTranslation = {
       // [Auto-translated] "Expression"
       expression: "Expressió"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Ordenar per",
+      // [Auto-translated] "Order"
+      direction: "Ordre"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Expressió"
@@ -690,7 +836,9 @@ export var catalanTranslation = {
       // [Auto-translated] "Survey description"
       description: "Descripció de la enquesta",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Hacer que la enquesta sea de solo lectura"
+      readOnly: "Hacer que la enquesta sea de solo lectura",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Formats regionals"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -726,7 +874,9 @@ export var catalanTranslation = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Haga que la columna sea obligatòria si",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Cada opción en una columna separada"
+      showInMultipleColumns: "Cada opción en una columna separada",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Permet ordenar per aquesta columna"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export var catalanTranslation = {
     masksettings: {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Desar el valor enmascarado en los resultados de la enquesta"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Regió",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Patró de dates",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Patró horari",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Separador decimal",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Separador de milers",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Símbol de moneda",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Patró monetari"
     },
     patternmask: {
       // [Auto-translated] "Value pattern"
@@ -761,16 +927,18 @@ export var catalanTranslation = {
       decimalSeparator: "Separador decimal",
       // [Auto-translated] "Value precision"
       precision: "Precisión de valor",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Mostra zeros posteriors",
       // [Auto-translated] "Minimum value"
       min: "Valor mínimo",
       // [Auto-translated] "Maximum value"
       max: "Valor máximo"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Prefijo de moneda",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Sufijo de moneda"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Símbol de moneda",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Patró monetari"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Borrar otros cuando se selecciona",
@@ -812,8 +980,24 @@ export var catalanTranslation = {
     addItem: "Haga clic para agregar un artículo ...",
     // "Click to remove the item..."
     removeItem: "Haga click para eliminar el elemento...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Afegeix {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Elimina {0}",
     // "Drag the item"
     dragItem: "Arrastra el elemento",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Expandeix les opcions anidades",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Col·lapse de les eleccions nidades",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Expandeix les opcions nidades de {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Col·lapsa les eleccions nidades de {0}",
+    // [Auto-translated] "Show description"
+    showDescription: "Descripció de l'espectacle",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Descripció de l'amagatall",
     // "Edit"
     edit: "Editar",
     // "Done"
@@ -858,38 +1042,58 @@ export var catalanTranslation = {
     listIsEmpty: "Afegir un nou artículo",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "No se han añadido opcions todavía",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Todavía no tienes ninguna columna",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Todavía no tiene columnes de diseño",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Todavía no tienes ninguna fila",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Todavía no tiene ninguna regla de validació",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Todavía no tiene ninguna variable personalitzada",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Todavía no tienes ningún desencadenante",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Todavía no tienes ningún enlace",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Todavía no tienes ninguna pàgina",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "No hi ha valors de valoració personalitzats",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "No hi ha etiquetes personalitzades",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Sense zones",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Sense columnes",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "No hi ha columnes de disposició",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "No hi ha files",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "No hi ha regles de validació",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "No hi ha variables personalitzades",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Sense desencadenants",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Sense marcatge condicional",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Sense enllaços",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Sense pàgines",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "No hi ha nivells de sort",
     // "Add new choice"
     "addNew@choices": "Añade una opción",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Agregar nova columna",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Agregar nova fila",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Agregar nova regla",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Adición de una nova variable",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Agregar nou disparador",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Agregar nova URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Agregar nova pàgina",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Valor d'avaluació",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Afegir etiqueta",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Afegeix àrea",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Afegir columna",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Afegeix fila",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Regla d'afegir",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Suma la variable",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Afegir disparador",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Afegeix el marge",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Afegeix enllaç",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Afegeix pàgina",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Afegeix nivell d'ordenació",
     // "Value"
     value: "Valor",
     // [Auto-translated] "Text"
@@ -916,6 +1120,8 @@ export var catalanTranslation = {
     surveyTitlePlaceholder: "Títol de la enquesta de entrada aquí",
     // "Page {num}"
     pageTitlePlaceholder: "Títol de la pàgina de entrada aquí",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Títol del panell",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Pàgina de inicio",
     // "Description"
@@ -966,6 +1172,8 @@ export var catalanTranslation = {
     visible: "¿Es visible?",
     // "Required"
     isRequired: "¿Se requiere?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Cal una resposta positiva",
     // [Auto-translated] "Mark as required"
     markRequired: "Marcar según sea necesario",
     // [Auto-translated] "Remove the required mark"
@@ -976,6 +1184,8 @@ export var catalanTranslation = {
     eachRowUnique: "Evitar respuestas duplicadas en files",
     // "Error message for required questions"
     requiredErrorText: "Text de error requerit",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Missatge d'error quan es requereix Sí",
     // "Display the question on a new line"
     startWithNewLine: "¿Empieza con la nova línea?",
     // "Rows"
@@ -994,6 +1204,16 @@ export var catalanTranslation = {
     maxFiles: "Número máximo de fitxers",
     // "Row count"
     rowCount: "Número de files",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Files per pàgina",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Permetre als usuaris ordenar files",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Nivells màxims d'ordenació",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Ordre d'ordenació per defecte",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Barra d'ordenació de mostrar",
     // "Columns layout"
     columnLayout: "Diseño de columnes",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export var catalanTranslation = {
     questionErrorLocation: "Ubicación de error de la pregunta",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Enfoca la primera pregunta al cambiar la pàgina",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Activar dreceres d'elecció",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Mostra consells de teclat",
     // "Question order"
     questionOrder: "Orden de elementos en la pàgina",
     // "Time limit to complete the survey"
@@ -1268,6 +1492,8 @@ export var catalanTranslation = {
     minRowCount: "Mínimo número de files",
     // "Maximum row count"
     maxRowCount: "Máximo número de files",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Expressió del recompte de files",
     // "Confirm row removal"
     confirmDelete: "Confirmar borrado de fila",
     // "Confirmation message"
@@ -1278,6 +1504,8 @@ export var catalanTranslation = {
     minPanelCount: "Número mínimo de panells",
     // "Maximum number of entries"
     maxPanelCount: "Número máximo de panells",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Expressió del recompte d'entrades",
     // "Initial entry state"
     panelsState: "Estado de expansión del panell interno",
     // "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export var catalanTranslation = {
     logoHeight: "Alto de Logo (en valors aceptados CSS)",
     // "Read-only"
     readOnly: "Sólo-lectura",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Mode de només lectura",
     // "Disable the read-only mode if"
     enableIf: "Editable si",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export var catalanTranslation = {
       columns: "Columnas",
       // "Rows"
       rows: "Filas",
+      // [Auto-translated] "Entries"
+      entries: "Inscripcions",
       // "Choice Options"
       choices: "Opcions",
       // "Items"
@@ -1544,6 +1776,8 @@ export var catalanTranslation = {
       question: "Pregunta",
       // "Pages"
       pages: "Páginas",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Formats regionals",
       // "Quiz Mode"
       timer: "Horas / cuestionario",
       // "Calculated Values"
@@ -1862,6 +2096,12 @@ export var catalanTranslation = {
       // [Auto-translated] "Never"
       none: "Nunca"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Només lectura",
+      // [Auto-translated] "View"
+      view: "Vista"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "Botons de ràdio",
     inputType: {
@@ -1913,6 +2153,12 @@ export var catalanTranslation = {
       warning: "Advertencia",
       // [Auto-translated] "Informational"
       info: "Informativo"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Davant",
+      // [Auto-translated] "Rear"
+      environment: "Darrera"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export var catalanTranslation = {
     underRowSingle: "Debajo de la fila, sólo un panell es visible",
     // "Auto"
     auto: "Automàtic",
+    // [Auto-translated] "Always"
+    always: "Sempre",
     timerInfoMode: {
       // "Both"
       combined: "Ambos"
@@ -2321,7 +2569,148 @@ export var catalanTranslation = {
       survey: "Igual que la enquesta",
       // [Auto-translated] "Same as container"
       container: "Igual que el contenedor"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Heretar",
+      // [Auto-translated] "Hide"
+      "false": "Amaga't",
+      // [Auto-translated] "Show"
+      "true": "Espectacle"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Àrab",
+    // [Auto-translated] "Bulgarian"
+    bg: "Búlgar",
+    // [Auto-translated] "Catalan"
+    ca: "Català",
+    // [Auto-translated] "Czech"
+    cs: "Txec",
+    // [Auto-translated] "Welsh"
+    cy: "Gal·lès",
+    // [Auto-translated] "Danish"
+    da: "Danès",
+    // [Auto-translated] "German"
+    de: "Alemany",
+    // [Auto-translated] "Greek"
+    el: "Grec",
+    // [Auto-translated] "English"
+    en: "Anglès",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Anglès (Austràlia)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Anglès (Canadà)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Anglès (Regne Unit)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Anglès (Irlanda)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Anglès (Índia)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Anglès (Nova Zelanda)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Anglès (Sud-àfrica)",
+    // [Auto-translated] "Spanish"
+    es: "Espanyol",
+    // [Auto-translated] "Estonian"
+    et: "Estonià",
+    // [Auto-translated] "Basque"
+    eu: "Basc",
+    // [Auto-translated] "Persian"
+    fa: "Persa",
+    // [Auto-translated] "Finnish"
+    fi: "Finès",
+    // [Auto-translated] "Filipino"
+    fil: "Filipí",
+    // [Auto-translated] "French"
+    fr: "Francès",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Francès (Canadà)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Francès (Suïssa)",
+    // [Auto-translated] "Hebrew"
+    he: "Hebreu",
+    // [Auto-translated] "Hindi"
+    hi: "Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Croat",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Crioll d'Haití",
+    // [Auto-translated] "Hungarian"
+    hu: "Hongarès",
+    // [Auto-translated] "Indonesian"
+    id: "Indonèsi",
+    // [Auto-translated] "Icelandic"
+    is: "Islandès",
+    // [Auto-translated] "Italian"
+    it: "Italià",
+    // [Auto-translated] "Japanese"
+    ja: "Japonès",
+    // [Auto-translated] "Georgian"
+    ka: "Georgà",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazakh",
+    // [Auto-translated] "Korean"
+    ko: "Coreà",
+    // [Auto-translated] "Lithuanian"
+    lt: "Lituà",
+    // [Auto-translated] "Latvian"
+    lv: "Letó",
+    // [Auto-translated] "Macedonian"
+    mk: "Macedoni",
+    // [Auto-translated] "Burmese"
+    mm: "Birmans",
+    // [Auto-translated] "Malay"
+    ms: "Malai",
+    // [Auto-translated] "Dutch"
+    nl: "Neerlandès",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Neerlandès (Bèlgica)",
+    // [Auto-translated] "Norwegian"
+    no: "Noruega",
+    // [Auto-translated] "Polish"
+    pl: "Polonès",
+    // [Auto-translated] "Portuguese"
+    pt: "Portuguès",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portuguès (Brasil)",
+    // [Auto-translated] "Romanian"
+    ro: "Romanès",
+    // [Auto-translated] "Russian"
+    ru: "Rus",
+    // [Auto-translated] "Slovak"
+    sk: "Eslovac",
+    // [Auto-translated] "Slovenian"
+    sl: "Eslovè",
+    // [Auto-translated] "Serbian"
+    sr: "Serbi",
+    // [Auto-translated] "Swedish"
+    sv: "Suec",
+    // [Auto-translated] "Swahili"
+    sw: "Suahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tadjik",
+    // [Auto-translated] "Thai"
+    th: "Tailandès",
+    // [Auto-translated] "Turkish"
+    tr: "Turc",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ucraïnès",
+    // [Auto-translated] "Urdu"
+    ur: "Urdú",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnamita",
+    // [Auto-translated] "Chinese"
+    zh: "Xinès",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Xinès (Simplificat)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Xinès (Tradicional)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export var catalanTranslation = {
     visibletrigger: "Cambiar visibilidad"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "El mateix que el llenguatge de l'enquesta"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Ej.: +1(999)-999-99-99"
@@ -2405,12 +2798,6 @@ export var catalanTranslation = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Ej.: mm/dd/aaaa HH:MM:ss"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Ej.: $",
-      // "Ex.: USD"
-      suffix: "Ej.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export var catalanTranslation = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Especifica quantes columnes abasta aquest panell dins la disposició de la quadrícula.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Aquesta taula et permet configurar cada columna de la graella dins del panell. Estableix automàticament el percentatge d'amplada per a cada columna basant-se en el nombre màxim d'elements en una fila. Per personalitzar la disposició de la graella, ajusta manualment aquests valors i defineix l'amplada del títol per a totes les preguntes de cada columna."
+      gridLayoutColumns: "Aquesta taula et permet configurar cada columna de la graella dins del panell. Estableix automàticament el percentatge d'amplada per a cada columna basant-se en el nombre màxim d'elements en una fila. Per personalitzar la disposició de la graella, ajusta manualment aquests valors i defineix l'amplada del títol per a totes les preguntes de cada columna.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica com apareixen les preguntes dins d'aquest panell quan són de només lectura. \"Només lectura\" mostra les preguntes amb els seus controls d'entrada habituals, però desactivat per a l'edició. \"Veure\" mostra les respostes com a text o altres elements no interactius. \"Heretar\" utilitza el mode establert per al panell pare, la pàgina o l'enquesta (\"Només lectura\" per defecte)."
     },
     paneldynamic: {
       // "A panell ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export var catalanTranslation = {
       width: "Define la anchura del panell en proporción a otros elementos topográficos de la misma línea. Acepta valors CSS (px, %, in, pt, etc.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Escriba una plantilla para los títols de los paneles dinámicos. Utilice {panelIndex} para la posición general del panell y {visiblePanelIndex} para su orden entre los panells visibles. Inserte estos marcadores de posición en el patrón para agregar numeración automàtica.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Un text de reserva per als títols d'entrada que s'aplica quan el patró de títol d'entrada no produeix un valor significatiu. Utilitzeu {panelIndex} per a la posició general de l'entrada i {visiblePanelIndex} per a l'ordre entre les entrades visibles.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Escriba una plantilla para los títols de las pestañas. Utilice {panelIndex} para la posición general de un panell y {visiblePanelIndex} para su orden entre los panells visibles. Inserte estos marcadores de posición en el patrón para agregar numeración automàtica.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export var catalanTranslation = {
       keyName: "Haga referencia a un nom de pregunta para requerir que un usuario proporcione una respuesta única para esta pregunta en cada panell.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Activa un mensaje de confirmación antes de eliminar una entrada.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Especifica una expressió que calculi el nombre d'entrades. Aquesta expressió sobreescriu l'opció \"Nombre inicial d'entrades\" i es reavalua sempre que canviïn els valors que referencia. El resultat està limitat per les configuracions \"Nombre mínim d'entrades\" i \"Nombre màxim d'entrades\". Mentre aquesta expressió està establerta, els participants no poden afegir o eliminar entrades manualment.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Especifica el nombre d'entrades mostrades a cada pàgina del panell. El '0' desactiva la paginació i mostra totes les entrades.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Permet als participants ordenar les entrades utilitzant la barra d'ordenació.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Defineix l'ordre d'entrada inicial. Els enquestats poden canviar-lo si es permet ordenar. Quan ordenes per múltiples preguntes, cada pregunta ordena les entrades dins de l'ordre establert per la pregunta anterior. Arrossega les preguntes per canviar-ne la prioritat.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Assigna números a les preguntes anidades dins del panell dinàmic."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Permet als enquestats ordenar files fent clic a les capçaleres de columnes o utilitzant la barra d'ordenació.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Defineix l'ordre inicial de les files. Els enquestats poden canviar-lo si es permet ordenar. Quan ordenes per múltiples columnes, cada columna ordena les files dins de l'ordre establert per la columna anterior. Arrossega les columnes per canviar la seva prioritat.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" mostra la barra d'ordenació només quan la matriu no té capçaleres de columna ordenables: les capçaleres estan ocultes, la matriu utilitza la disposició mòbil, o les files es transposen a columnes. \"Sempre\" mostra la barra d'ordenació fins i tot quan hi ha capçaleres de columna ordenables visibles.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Especifica una expressió que calculi el nombre de files. Aquesta expressió sobreescriu l'opció \"Nombre inicial de files\" i es reavalua sempre que canviïn els valors que referencia. El resultat està limitat per les configuracions \"Nombre mínim de files\" i \"Nombre màxim de files\". Mentre aquesta expressió està establerta, els enquestats no poden afegir ni eliminar files manualment.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Desencadena un mensaje de confirmación antes de quitar una fila.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Expande automáticamente la sección de detalles cuando se agrega una nova fila a la matriz."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Especifica el nombre de files que es mostren a cada pàgina de la matriu. '0' desactiva la paginació i mostra totes les files.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Especifica quants camps pot ordenar un respondent alhora.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplica las respuestas de la última fila y las asigna a la següent fila dinámica agregada.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export var catalanTranslation = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Los textos largos en las opcions de elección generarán automáticamente saltos de línea para que se ajusten al menú desplegable. Anule la selección si desea que los textos se recorten.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Especifica el número de columnes que abarca esta pregunta dentro del diseño de cuadrícula."
+      effectiveColSpan: "Especifica el número de columnes que abarca esta pregunta dentro del diseño de cuadrícula.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica com apareix la pregunta quan és només lectura. \"Només lectura\" mostra la pregunta amb els seus controls d'entrada habituals, però desactivats per editar. \"Veure\" mostra les respostes com a text o altres elements no interactius. \"Heretar\" utilitza el mode establert per al panell pare, pàgina o enquesta (\"Només lectura\" per defecte).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Mostra pistes per a accions disponibles del teclat sota aquesta pregunta. L'opció \"Heretar\" aplica la configuració a nivell d'enquesta."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export var catalanTranslation = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Seleccione si desea evitar que los encuestados completen su enquesta.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Especifica com apareixen les preguntes de només lectura, incloent-hi la pàgina de previsualització. \"Només lectura\" (per defecte) mostra les preguntes amb els seus controls d'entrada habituals, però desactivats per editar. \"Veure\" mostra les respostes com a text o altres elements no interactius.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Establece la ubicación de la barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la enquesta."
     },
@@ -2633,7 +3050,9 @@ export var catalanTranslation = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Cuando se selecciona, crea una columna individual para cada opción de opción.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Organiza las opciones de elección en un diseño de varias columnes. Cuando se establece en 0, las opcions se muestran en una sola línea. Cuando se establece en -1, el valor real se hereda de la propiedad \"Recuento de columnas anidadas\" de la matriz primaria."
+      colCount: "Organiza las opciones de elección en un diseño de varias columnes. Cuando se establece en 0, las opcions se muestran en una sola línea. Cuando se establece en -1, el valor real se hereda de la propiedad \"Recuento de columnas anidadas\" de la matriz primaria.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica com apareixen les cel·les d'aquesta columna quan són de només lectura. \"Només lectura\" mostra les cel·les amb els seus controls d'entrada habituals, però desactivats per editar. \"Veure\" mostra les respostes com a text o altres elements no interactius. \"Heretar\" utilitza el mode establert per a la matriu o enquesta (\"Només lectura\" per defecte)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export var catalanTranslation = {
     questionErrorLocation: "Establece la ubicación de un mensaje de error en relación con la pregunta con entrada no válida. Elija entre: \"Arriba\": se coloca un text de error en la parte superior del cuadro de pregunta; \"Abajo\": se coloca un text de error en la parte inferior del cuadro de pregunta.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Seleccione si desea que el primer campo de entrada de cada pàgina esté listo para la entrada de text.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Mostra les lletres (A, B, C, ...) al costat de les opcions de les preguntes del Grup de Botons de Radio, Caselles de Verificació i Selector d'Imatges. Els participants poden seleccionar opcions prement les tecles corresponents de lletras. Pots sobreescriure aquesta configuració per a preguntes individuals.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Mostra les lletres (A, B, C, ...) al costat de les opcions i permet als enquestats seleccionar-les prement les tecles corresponents. L'opció \"Heretar\" utilitza la configuració a nivell d'enquesta."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Mostra pistes per a accions disponibles del teclat a sota de les preguntes. Pots sobreescriure aquesta configuració per a preguntes individuals.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Mantiene el orden original de las preguntes o las aleatoriza. El efecto de esta configuració solo es visible en la pestaña Vista prèvia.",
     // [Auto-translated] "For text entry questions only."
@@ -2793,7 +3220,9 @@ export var catalanTranslation = {
       // "Sets the visibility of navigation buttons on the page. The \"Heredar\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Establece la visibilidad de los botones de navegación en la pàgina. La opción \"Heredar\" aplica la configuració de nivel de enquesta, que por defecte es \"Visible\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Esta tabla le permite configurar cada columna de cuadrícula en la pàgina. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valors y defina el ancho del títol para todas las preguntes de cada columna."
+      gridLayoutColumns: "Esta tabla le permite configurar cada columna de cuadrícula en la pàgina. Establece automáticamente el porcentaje de ancho para cada columna en función del número máximo de elementos en una fila. Para personalizar el diseño de la cuadrícula, ajuste manualmente estos valors y defina el ancho del títol para todas las preguntes de cada columna.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Especifica com apareixen les preguntes d'aquesta pàgina quan són de només lectura. \"Només lectura\" mostra les preguntes amb els seus controls d'entrada habituals, però desactivats per editar. \"Veure\" mostra les respostes com a text o altres elements no interactius. \"Heretar\" utilitza el mode establert per a l'enquesta (\"Només lectura\" per defecte)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Establece la ubicación de un temporizador en una pàgina.",
@@ -2911,6 +3340,22 @@ export var catalanTranslation = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Seleccione si desea almacenar el valor de la pregunta con una máscara aplicada en los resultados de la enquesta."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Una regió els formats de la qual s'apliquen a màscares d'entrada de data, hora i moneda. Si no s'especifica, s'utilitza el llenguatge de l'enquesta.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Anul·la el format de data de la regió utilitzat en les màscares d'entrada. El patró pot contenir caràcters separadors i els següents marcadors: <br>'m' - Número de mes.<br> 'mm' - Número de mes, amb un zero inicial per a valors d'un sol dígit. <br>'d' - Dia del mes. <br>'dd' - Dia del mes, amb un zero inicial per als valors d'un sol dígit. <br>'yy' - Els dos últims dígits de l'any. <br>'yyy' - Any de quatre dígits.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Sobreescriu el format horari de la regió utilitzat en les màscares d'entrada. El patró pot contenir caràcters separadors i els següents marcadors de posició: <br>'H' - Hores en format de 24 hores.<br> 'HH' - Hores en format de 24 hores, amb un zero inicial per a valors d'un sol dígit. <br>'h' - Hores en format de 12 hores. <br>'hh' - Hores en format de 12 hores, amb un zero inicial per als valors d'un sol dígit. <br>'MM' - Minuts. <br>'ss' - Segons. <br>'TT' - Període de rellotge de 12 hores en majúscules (AM/PM). <br>'tt' - Període de rellotge de 12 hores en minúscules (am/pm).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Sobreescriu el símbol que la regió utilitza per separar la part fraccionària de la part entera d'un nombre mostrat en les màscares d'entrada.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Sobreescriu el símbol que la regió utilitza per separar els dígits d'un gran nombre en grups de tres en màscares d'entrada.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Anul·la el símbol o codi de moneda de la regió utilitzat en les màscares d'entrada.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Anul·la el patró monetari de la regió utilitzat en les màscares d'entrada. El patró pot contenir els següents marcadors de posició: <br>'@' - Símbol o codi de moneda.<br> '#' - Nombre. <br>'-' - Posició del signe menys en valors negatius (si s'omet, el signe menys es col·loca a l'inici)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "El patrón puede contener literales de cadena y los siguientes marcadores de posición: '9': para un dígito; 'a' - para una letra mayúscula o minúscula; '#' - para un dígito o una letra mayúscula o minúscula. Use la barra invertida '\\' para escapar de un carácter."
@@ -2925,13 +3370,15 @@ export var catalanTranslation = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Símbolo que se utiliza para separar los dígitos de un número grande en grupos de tres.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Limita el número de dígitos que se conservan después del punto decimal de un número mostrado."
+      precision: "Limita el número de dígitos que se conservan después del punto decimal de un número mostrado.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Mostra zeros posteriors a la part fraccionària fins a la precisió especificada. Per exemple, amb una precisió de 2, un valor d'entrada de 1,2 es mostra com a 1,20."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Uno o varios símbolos que se mostrarán antes del valor.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Uno o varios símbolos que se mostrarán después del valor."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Un símbol o codi de moneda mostrat amb el valor. El símbol de la regió s'utilitza per defecte. Esborra aquesta propietat per no mostrar cap símbol.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Especifica les posicions del número, símbol de moneda i signe de menys. El patró pot contenir els següents marcadors de posició: <br>'@' - Símbol o codi de moneda.<br> '#' - Nombre. <br>'-' - Posició del signe menys en valors negatius (si s'omet, el signe de menys es col·loca a l'inici)."
     },
     theme: {
       // "This setting applies only to questions outside of a panell."
@@ -2982,6 +3429,8 @@ export var catalanTranslation = {
     tabAlign: "Alineación de tabulaciones",
     // [Auto-translated] "File source type"
     sourceType: "Tipo de origen de fitxer",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Càmera per defecte",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Ajuste al contenedor",
     // [Auto-translated] "Set value expression"
@@ -3302,12 +3751,702 @@ export var catalanTranslation = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Preset aplicat"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Línia: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Utilitza el nom suggerit"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Elimina l'element repetit"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Fes servir el tipus suggerit"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Utilitza la funció suggerida"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Utilitza la màscara suggerida"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Dóna un nom lliure a l'element"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Dóna un nom lliure a l'element"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Retira la propietat"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Utilitza el valor permès més proper",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Retira la propietat",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Utilitza el valor suggerit"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Converteix el valor en una llista"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Dóna un nom a l'element"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Retira la propietat",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Canvi de nom a la propietat"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Utilitza el nom suggerit",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Utilitza el nom suggerit"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Utilitza el nom suggerit"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Fes servir el tipus suggerit"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Fes servir el tipus suggerit"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "L'expressió \"{expressió}\" no es pot analitzar."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" no es troba: no existeix cap pregunta, panell, pàgina, valor calculat o variable amb aquest nom.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" no es troba a {containerType} \"{root}\" (referència: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" no es troba a l'abast \"{scopePrefix}\" (referència: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "El nom clau de \"{name}\" anomena \"{clau}\" - \"{nom}\" no té cap {nom clau} amb aquest nom, així que la validació de claus duplicades mai s'executa.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" no s'ha trobat."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "La {prop} de \"{nom}\" fa referència a l'element mateix (referència: {referència})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "El nom \"{name}\" és duplicat.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "El nom del valor calculat \"{name}\" ja s'utilitza per un altre valor calculat.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "El valor calculat \"{name}\" comparteix el seu nom amb un altre element, així que un d'ells ombra l'altre."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "El {nameKindText} \"{name}\" d'aquest {ownerText} també és la variable d'enquesta incorporada {{builtIn}} - l'enquesta respon {{name}} primer, així que aquesta és inabastable en expressions.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "El valueName \"{valueName}\" de \"{name}\" comparteix el valor de {otherType} \"{otherName}\", que no té valorName propi - \"{otherName}\" tracta els camps que afegeix \"{name}\" com a desconeguts, i clearIncorrectValues() els elimina. Configura el seu valueName a \"{valueName}\" també.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "La fila \"{key}\" de matrixdropdown \"{otherName}\" també és {sharedKeyText} \"{name}\" compartint el seu valor: un objecte cel·la i un sol valor no poden viure tots dos sota una mateixa clau; el runtime manté un i elimina l'altre.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "El {tipus} \"{nom}\" comparteix la clau de dades \"{dataKey}\" amb {otherType} \"{otherName}\" - manté {shapeText} allà, mentre que \"{otherName}\" manté {otherShapeText}; un no pot retenir el valor de l'altre, així que clearIncorrectValues() l'elimina.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "La clau de dades \"{dataName}\" també és la clau de comentari de \"{base}\" (la seva clau de dades més \"{sufix}\") — una escriptura sobreescriu silenciosament l'altra.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "La clau de dades \"{dataName}\" també és la clau de totals de \"{base}\" (la seva clau de dades més \"{sufix}\") — una escriptura sobreescriu silenciosament l'altra.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "El trigger {trigger} estableix la variable \"{name}\", que també és la clau de dades de la pregunta \"{questionName}\" - la variable respon {{name}} a partir d'aquell moment, no la pregunta."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "El nom \"{name}\" està reservat: un membre d'Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "El valor \"{valueName}\" de \"{name}\" està reservat - un membre d'Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "La columna \"{name}\" de \"{matrixName}\" està reservada - un membre d'Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "L'element \"{name}\" de \"{questionName}\" està reservat: un membre d'Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "La fila \"{rowValue}\" de \"{name}\" està reservada - un membre d'Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "El valor calculat \"{name}\" està reservat: un membre d'Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" té un tipus desconegut \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" no té tipus: un element sense tipus s'elimina."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{clau}\" no és una propietat de {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" de {ownerText} no és serialitzable: entra en efecte en la càrrega i s'elimina del JSON cada vegada que l'enquesta es torna a desar.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" i \"{aliasKey}\" de {ownerText} són dos noms d'una propietat: el temps d'execució els aplica en l'ordre en què el JSON els escriu, així que \"{winner}\" guanya.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{clau}\" està posat a \"{name}\", però inputType \"{inputType}\" no té límits: el temps d'execució l'ignora."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "La {clau} de {ownerText} és {valueText} - no és un dels valors permesos ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "La {clau} de {ownerText} és {value}, fora del seu rang permès {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "El valueName \"{valueName}\" de \"{name}\" conté una expressió \".\" - - llegeix {{valueName}} com un camí cap a \"{rootKey}\", de manera que la clau de dades en si mai no es pot adreçar."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} no té cap \"{clau}\" - la propietat és necessària per a un {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "El nom de la {className} és {valueText}, no una cadena — l'enquesta no la pot carregar."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "La \"{clau}\" de {ownerText} no és un array: la propietat conté una llista, i el temps d'execució embolica el valor en un array d'un sol element."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "La definició de la variable declara \"{variable}\", que també és la clau de dades de la pregunta \"{name}\" — establir la variable elimina la resposta emmagatzemada sota aquesta clau, i {{name}} respon al valor host a partir d'aquell moment.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "La definició de la variable declara \"{variable}\", que també és el nom del valor calculat \"{name}\" — tots dos escriuen la mateixa ranura i guanya l'últim que s'executi."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition no és un objecte JSON d'enquesta, així que no es declara cap variable i no es pot comprovar cap valor predefinit.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets no és un array, així que no es declara cap preset.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "El preset #{index} no és un objecte.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "El preset #{index} no té nom, així que res no el pot referenciar.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "El preset \"{preset}\" no porta cap objecte de variables, així que no estableix res.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "El preset \"{preset}\" es declara dues vegades: una cerca amb aquest nom respon amb la primera.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "El preset \"{preset}\" estableix \"{variable}\", que la definició de variable no declara.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "El preset \"{preset}\" estableix \"{variable}\" a un valor que la definició de la variable rebutja: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "La funció \"{functionName}\" no està registrada."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "El valor calculat \"{name}\" es refereix a si mateix en la seva pròpia expressió.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Els valors calculats {noms} depenen els uns dels altres."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "El disparador reacciona al valor que s'assigna (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Els triggers formen un bucle a través dels valors que estableixen: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "La {etiqueta} llegeix el valor que escriu ella mateixa: només s'executa quan canvia un altre valor, així que mai s'executa.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Els valors s'escriuen en un bucle: {cadena}. Cada escriptura repeteix les expressions que la llegeixen, així que els valors finals depenen de l'ordre en què es responen les preguntes."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "La condició compara \"{name}\" amb {valors} - no entre les seves opcions. Disponible: {disponible}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "La condició compara \"{name}\" amb {valors} - cap valor d'elecció el conté. Disponible: {disponible}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "La condició aplica \"{operator}\" a \"{name}\": \"{recordName}\" ({questionType}) no té valor per comparar.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "La condició aplica \"{operator}\" a \"{name}\": \"{recordName}\" conté {valueShapeText} - els operadors d'ordenació i aritmètica no s'hi apliquen.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "La condició aplica \"{operator}\" a \"{name}\": \"{recordName}\" és una qüestió booleana: els operadors d'ordre no s'hi apliquen.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "La condició aplica \"{operator}\" a \"{name}\": \"{recordName}\" és una pregunta de text — el seu valor és una cadena, així que la comparació numèrica depèn de la conversió implícita.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "La condició aplica \"{operator}\" a \"{name}\": \"{recordName}\" conté una cadena de dates - comparar-la amb el nombre {constValue} no pot ser vàlid.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "La condició aplica \"{operator}\" a \"{name}\": \"{recordName}\" és numèrica: comparar-la amb la cadena \"{constValue}\" no pot ser vàlida.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "La condició aplica \"{operator}\" a \"{name}\": \"{recordName}\" conté una matriu de valors seleccionats, així que \"=\" compara tota la matriu.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "La condició aplica \"{operator}\" a \"{name}\": \"{recordName}\" és una pregunta booleana — comparar-la amb {constValue} no pot ser vàlida."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "El {prop} \"{expressió}\" sempre és fals, així que \"{name}\" mai es mostra.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "La {prop} \"{expressió}\" mai no es compleix, perquè {fets}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "La {prop} \"{expressió}\" mai no es compleix — cap valor permès la satisfà: {fets}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "El {prop} \"{expressió}\" es contradiu: {fets}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "La {prop} \"{expressió}\" sempre és certa, així que no decideix res.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "El {prop} \"{{expressió}\" és aritmètic, no una comparació, així que mai dona un sí o un no.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Part de la {prop} \"{expressió}\" té un resultat que es coneix d'entrada.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "El {prop} \"{expressió}\" sempre es compleix, perquè {facts} - no decideix res."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "El {prop} \"{expressió}\" no llegeix cap pregunta ni variable."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "El valor per defecte de \"{name}\" és {valuesText}, que mai podrà mantenir. Permès: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "La resposta correcta de \"{name}\" és {valuesText}, que mai no podrà ser complerta. Permès: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "El disparador estableix \"{name}\" a {valuesText}, que mai podrà mantenir. Permès: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "El valor de la fila per defecte estableix \"{name}\" com {valuesText}, que mai podrà mantenir. Permès: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "El valor per defecte del panell estableix \"{name}\" com {valuesText}, que mai podrà mantenir. Permès: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "El {prop} de \"{name}\" anomena \"{key}\" - no hi ha aquesta fila. Disponible: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "El {prop} de \"{name}\" anomena \"{clau}\" - no hi ha columna d'aquest tipus. Disponible: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "El {prop} de \"{name}\" anomena \"{clau}\" - no hi ha aquesta pregunta de plantilla. Disponible: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "El trigger copyvalue copia \"{fromName}\" en \"{setToName}\", però \"{fromName}\" conté {sourceShapeText} i \"{setToName}\" conté {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "El trigger copyvalue copia \"{fromName}\" en \"{setToName}\", però cap valor de \"{fromName}\" es troba entre els valors que \"{setToName}\" pot tenir. Permès: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" copia les seves opcions de \"{source}\", però no hi ha cap dubte sobre aquest nom.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" copia les seves eleccions d'ell mateix.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" copia les seves opcions de \"{source}\" ({sourceType}), que no proporciona ni eleccions ni un array de valors.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" llegeix {prop} \"{field}\" de \"{source}\", però {sourceType} \"{source}\" no té aquest {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Un altre element del {prop} de \"{name}\" ja té el valor {valueText} - el temps d'execució manté ambdós elements.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Les opcions de \"{name}\" contenen {valueText} mentre {toggleProp} està activat - col·lideix amb l'element integrat {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "El trigger {trigger} apunta a la pàgina \"{name}\", que no existeix.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "El trigger {trigger} té com a objectiu \"{name}\", però {containerType} \"{root}\" no té {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "El {trigger} desencadena {verb} \"{nom}\", però no existeix cap {kindText} amb aquest nom."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "El tipus de disparador \"{type}\" no es coneix.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "El disparador no té tipus."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "El tipus de validador \"{type}\" de \"{name}\" no és conegut.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Un validador de \"{name}\" no té tipus."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "El {validatorType} validador de \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "El {validatorType} validador de \"{name}\" requereix almenys {min} i com a màxim {max} - cap resposta el satisfà.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "El validador de recompte de respostes de \"{name}\" requereix almenys {minCount} respostes, per sobre de les opcions {seleccionables} que es poden seleccionar juntes.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "El validador regex de \"{name}\" té un patró que el motor rebutja: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "El validador d'expressió de \"{name}\" no té expressió, així que sempre passa."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "El {minProp} de \"{name}\" és {min}, per sobre del seu {maxProp} de {max} - el temps d'execució ajusta silenciosament un d'ells.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "El {countProp} de \"{name}\" és {count}, {direction} el seu {boundProp} de {bound} - el temps d'execució el limita.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "El {stepProp} de \"{name}\" és {step}, però el rang pel qual passa ({minProp}.. {maxProp}) només abasta {rang} - el temps d'execució el limita.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "El minSelectedChoices de \"{name}\" és {min}, per sobre de les {seleccionables} opcions que es poden seleccionar juntes — la pregunta mai no es pot respondre."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" mai pot esdevenir visible: és visible Si llegeix {reads}, que {deadClause}, així que la condició mai no es compleix."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "El maskType \"{maskType}\" de \"{name}\" no és una màscara coneguda: el temps d'execució torna a no tenir màscara en absolut.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "Les configuracions maskSettings de \"{name}\" estableixen \"{key}\", que no és una propietat de la màscara \"{masType}\" — el temps d'execució la perd silenciosament.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "Les configuracions maskSettings de \"{name}\" s'estableixen sense un maskType — el temps d'execució només manté \"saveMaskedValue\" i elimina la resta.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "La màscara {maskType} de \"{name}\" no s'aplica a cap entrada: inputType \"{inputType}\" només està emmascarada per a text i tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "La màscara de data-hora de \"{name}\" estableix el mínim/màxim sense patró: els límits s'apliquen a les parts de data del patró, així que sense un no fan res.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "La màscara {maskType} de \"{name}\" permet almenys {min} i com a màxim {max} - cap valor la satisfà."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "El panell dinàmic \"{name}\" té una plantilla buida: els seus panells no tenen res per renderitzar.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "El {kindText} \"{name}\" no té elements.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "El {kindText} \"{name}\" no té elements que mai es puguin renderitzar: cada element està amagat, protegit per una condició que mai no es compleix, o buit.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Els elements de detall de \"{name}\" mai no es mostren: el seu detallPanelMode és \"cap\", que és el valor per defecte."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Posició: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Es va construir a partir de les propietats antigues del nom, operador i valor del disparador.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "A dins: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Volies dir \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Si és un component personalitzat, passa la seva definició al linter per permetre una anàlisi completa.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Registra la funció abans de fer linting, o posa-la a les opcions de linter.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Un tipus mal escrit es deixa caure silenciosament en temps d'execució, i un disparador personalitzat no està cobert per les comprovacions de l'objectiu i del cicle.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Si és una variable establerta en temps d'execució, llista-la a les opcions de linter.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "El bucle pot ser inabastable si les condicions de disparador mai no es mantenen unides — verifica les expressions.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "Un defaultValueExpression s'aplica només fins que la seva pregunta sigui resposta.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "En expressió: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Referenciat en enquadernacions.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Referenciat a la {0} choicesByUrl.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Referenciat al text \"{0}\".", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () llegeix aquest nom de cada entrada de {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "L'argument {0}() no anomena cap pregunta, vinyeta ni pàgina.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "El desserialitzador deixa caure una clau que no coneix.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "El desserialitzador deixa caure un validador que no pot resoldre, així que res no valida.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "L'inputType és \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "És la clau de dades de \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "i",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} és sempre {valor}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} és {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "Almenys {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "com a molt {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} no pot ser ambdós {valors}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} no pot ser {value} i no ser",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} no pot ser buit i ser {value}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} no pot ser buit ni buit",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} no pot estar per sobre de {min} i per sota de {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} es demana que sigui un de no tenir cap valor"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "Les referències \"{0}.\" només estan disponibles dins d'una cel·la de matriu o d'un panell de detall de matriu.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" només està disponible dins d'una cel·la matricial o d'un panell de detall matricial.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "Les referències \"{0}.\" només estan disponibles dins d'un panell dinàmic o d'un contenidor de panell.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "Les referències \"{0}.\" només estan disponibles dins d'un panell dinàmic.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" només està disponible dins d'un panell dinàmic.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" només està disponible dins de les condicions de elecció, fila i columna.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\" referències només estan disponibles dins d'una pregunta composta.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" no està disponible dins d'un filtre inArray, que s'executa contra l'element i després contra l'enquesta.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" és una columna d'aquesta matriu: referencia-la amb el prefix de la fila.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" és una qüestió d'aquest panell dinàmic: refereix-lo amb el prefix del panell."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Configura inputType: \"number\" sobre \"{0}\" si recull números.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Utilitza \"contains\" o \"anyof\" per als valors de selecció múltiple."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "pàgina",
+        // [Auto-translated] "panel"
+        panel: "Panell"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Nom",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "Nom"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "Valor calculat",
+        // [Auto-translated] "element"
+        default: "element"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "L'enquesta",
+        // [Auto-translated] "the {0}"
+        className: "el {0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Altres",
+        // [Auto-translated] "None"
+        none: "Cap",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Negar-se a respondre",
+        // [Auto-translated] "Don't know"
+        dontknow: "No ho sé"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "mai dispara",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "rebutja totes les respostes",
+        // [Auto-translated] "cannot validate"
+        default: "no es pot validar"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "La pregunta no té resposta per validar",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "una longitud es llegeix d'un valor de text, i aquesta resposta no en té cap",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "La resposta no és un número i mai no podrà ser-ho",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Un número mai coincideix amb una adreça de correu electrònic",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "La resposta no és una llista de valors",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "La resposta no és un valor que pugui comprovar"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "una matriu",
+        // [Auto-translated] "an object"
+        object: "un objecte"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "una fila de matrius",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "un element de múltiples textos",
+        // [Auto-translated] "a row or item of a question"
+        default: "una fila o element d'una pregunta"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "una matriu d'objectes",
+        // [Auto-translated] "an object"
+        object: "un objecte",
+        // [Auto-translated] "a plain value"
+        plain: "un valor pla",
+        // [Auto-translated] "a value"
+        default: "un valor"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "un array de valors seleccionats",
+        // [Auto-translated] "a single value"
+        scalar: "un valor únic",
+        // [Auto-translated] "a value"
+        default: "un valor"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "a continuació",
+        // [Auto-translated] "above"
+        above: "a dalt"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "mai no és visible i mai rep un valor",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "mai no són visibles i mai reben un valor"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "pregunta",
+        // [Auto-translated] "question or variable"
+        questionvalue: "pregunta o variable",
+        // [Auto-translated] "page"
+        page: "pàgina"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "Llegeix",
+        // [Auto-translated] "navigates to"
+        gotoName: "navega cap a",
+        // [Auto-translated] "sets"
+        default: "Conjunts"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Pregunta sobre la plantilla",
+        // [Auto-translated] "column"
+        default: "Columna"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Pregunta sobre la plantilla",
+        // [Auto-translated] "column"
+        matrixdynamic: "Columna",
+        // [Auto-translated] "item"
+        multipletext: "Punt",
+        // [Auto-translated] "row"
+        matrix: "Fila",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Fila",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Columna",
+        // [Auto-translated] "field"
+        default: "Camp"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Artículo 1" }, { value: "item2", text: "Artículo 2" }, { value: "item3", text: "Artículo 3" }],
-    columns: [{ value: "column1", text: "Columna 1" }, { value: "column2", text: "Columna 2" }, { value: "column3", text: "Columna 3" }],
-    rows: [{ value: "row1", text: "Filera 1" }, { value: "row2", text: "Filera 2" }],
-    matrixColumns: [{ name: "column1", title: "Columna 1" }, { name: "column2", title: "Columna 2" }, { name: "column3", title: "Columna 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Artículo 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Artículo 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Artículo 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Columna 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Columna 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Columna 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Filera 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Filera 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Columna 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Columna 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Columna 3"
+      }
+    ]
   }
 };
 

@@ -63,6 +63,10 @@
       "Title": "Integration with Backend"
     },
     {
+      "Name": "multi-user-form-editing",
+      "Title": "Collaborative Form Editing"
+    },
+    {
       "Name": "customize-question-types",
       "Title": "Customize Question Types"
     },

@@ -104,10 +104,52 @@ test.describe(title, () => {
     await expect(page.locator(".svc-json-editor-tab__errros_list")).toBeVisible();
 
     await selectTextAreaContent(page, ".svc-json-editor-tab__content-area", 2, 2, 2, 2);
-    await page.locator("span").getByText("Line: ").click();
+    // the broken property is reported by the deserializer and by the linter alike, and it is
+    // the blocking error whose position Delete is meant to fix
+    await page.locator(".svc-json-errors__item:not(.svc-json-errors__item--warning) .sv-string-viewer").first().click();
     await page.keyboard.press("Delete");
     await page.waitForTimeout(1100);
     await expect(page.locator(".svc-json-editor-tab__errros_list")).not.toBeVisible();
+  });
+
+  test("Scroll the line of an error into the view", async ({ page }) => {
+    const elements = [];
+    for (let i = 0; i < 60; i++) {
+      const element: any = { type: "text", name: "q" + i };
+      // far below the visible part of the text, and an unknown property the deserializer reports
+      if (i === 55) element.nosuchprop = 1;
+      elements.push(element);
+    }
+    await setJSON(page, json);
+    await getTabbedMenuItemByText(page, creatorTabJsonEditorName).click();
+    await page.locator(".svc-json-editor-tab__content-area").fill(JSON.stringify({ elements: elements }, null, 2));
+    await page.waitForTimeout(1100);
+    await expect(page.locator(".svc-json-editor-tab__errros_list")).toBeVisible();
+
+    const contentArea = ".svc-json-editor-tab__content-area";
+    const readState = () => page.evaluate((sel) => {
+      const el = (window as any).creator.rootElement.getRootNode().querySelector(sel) as HTMLTextAreaElement;
+      const lineHeight = parseFloat(getComputedStyle(el).lineHeight);
+      return {
+        scrollTop: el.scrollTop,
+        clientHeight: el.clientHeight,
+        lineHeight: lineHeight,
+        caretLine: el.value.substring(0, el.selectionStart).split("\n").length - 1
+      };
+    }, contentArea);
+
+    await page.evaluate((sel) => {
+      const el = (window as any).creator.rootElement.getRootNode().querySelector(sel) as HTMLTextAreaElement;
+      el.scrollTop = 0;
+    }, contentArea);
+    await page.locator(".svc-json-error .sv-string-viewer").first().click();
+
+    const state = await readState();
+    expect(state.scrollTop).toBeGreaterThan(0);
+    // every line of this JSON is short enough not to wrap, so the caret's line is its own row
+    const caretTop = state.caretLine * state.lineHeight;
+    expect(caretTop).toBeGreaterThanOrEqual(state.scrollTop);
+    expect(caretTop + state.lineHeight).toBeLessThanOrEqual(state.scrollTop + state.clientHeight);
   });
 
   test("Check deactivating other tabs when json has errors", async ({ page }) => {
@@ -127,6 +169,44 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabJsonEditorName).click();
     await page.keyboard.press("ControlOrMeta+f"); // check if there will be no errors
     await expect(getTabbedMenuItemByText(page, creatorTabJsonEditorName)).toBeVisible();
+  });
+
+  test("Read creator.JSON without leaving the tab", async ({ page }) => {
+    await setJSON(page, json);
+    await getTabbedMenuItemByText(page, creatorTabJsonEditorName).click();
+
+    await selectTextAreaContent(page, ".svc-json-editor-tab__content-area", 9, 21, 9, 30);
+    await page.keyboard.press("Backspace");
+    await page.keyboard.type("I am changed");
+
+    const state = await page.evaluate(() => {
+      const creator = (window as any).creator;
+      return { title: creator.JSON.pages[0].elements[0].title, activeTab: creator.activeTab };
+    });
+    expect(state.title).toBe("I am changed");
+    expect(state.activeTab).toBe("json");
+  });
+
+  test("Auto-save the text typed into the tab", async ({ page }) => {
+    await setJSON(page, json);
+    await page.evaluate(() => {
+      const creator = (window as any).creator;
+      creator.autoSaveEnabled = true;
+      creator.autoSaveDelay = 200;
+      creator.saveSurveyFunc = (no: number, callback: (num: number, isSuccess: boolean) => void) => {
+        (window as any).savedJson = creator.JSON;
+        callback(no, true);
+      };
+    });
+    await getTabbedMenuItemByText(page, creatorTabJsonEditorName).click();
+
+    await selectTextAreaContent(page, ".svc-json-editor-tab__content-area", 9, 21, 9, 30);
+    await page.keyboard.press("Backspace");
+    await page.keyboard.type("I am saved");
+
+    // the editor waits out a second, then the auto-save delay
+    await expect.poll(() => page.evaluate(() => (window as any).savedJson?.pages[0].elements[0].title), { timeout: 2000 }).toBe("I am saved");
+    expect(await page.evaluate(() => (window as any).creator.activeTab)).toBe("json");
   });
 
   test("Check fix error", async ({ page }) => {

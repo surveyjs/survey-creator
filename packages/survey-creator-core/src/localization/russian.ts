@@ -142,6 +142,10 @@ export var ruStrings = {
     jsonHideErrors: "Скрыть ошибки",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "Показать ошибки",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Исправление ошибки",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "Обзор JSON должен быть объектом.",
     // "Undo"
     undo: "Отменить",
     // "Redo"
@@ -246,6 +250,8 @@ export var ruStrings = {
     translateUsigAI: "Автоматический перевод всех",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Перевести с: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Перевод оставшихся строк",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Непереведенные строки",
     // "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var ruStrings = {
     translationSource: "Источник: ",
     // [Auto-translated] "Target: "
     translationTarget: "Цель: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Исходный язык",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Целевой язык",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} переведённых струн",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Вы уверены, что хотите удалить все переведённые строки для выбранного языка?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Вид формы",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Вид сетки",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Перевод строк",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Обзорные струны",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Никаких строк для перевода",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Все строки переводятся",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} строки не переводятся",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "Ссылки на YouTube не поддерживаются.",
     // [Auto-translated] "Export"
@@ -286,6 +314,10 @@ export var ruStrings = {
     choicesLoadedFromWebLinkText: "Перейдите в настройки",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Предварительный просмотр загруженных вариантов выбора",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Нет множества выражений",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Редактировать выражение",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML-контент будет здесь.",
     // [Auto-translated] "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var ruStrings = {
       uncompletedRule_cancel: "Нет, я хочу дополнить правила"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Пресет переменных",
+    // [Auto-translated] "None"
+    noPreset: "Нет",
+    // [Auto-translated] "View variable values"
+    view: "Просмотр значений переменных",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Значения переменных",
+    // [Auto-translated] "Manage presets"
+    edit: "Управление пресетами",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Переменные пресеты",
+    // [Auto-translated] "Preset"
+    presetName: "Пресет",
+    // [Auto-translated] "Description"
+    presetDescription: "Описание",
+    // [Auto-translated] "Add preset"
+    addPreset: "Добавить пресет",
+    // [Auto-translated] "New preset"
+    newPresetName: "Новый пресет",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Удалить пресет",
+    // [Auto-translated] "Back"
+    back: "Назад",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Пресет с таким именем уже существует",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Введите предустановленное имя",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Пресет",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Описание"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Ассистент по выражению выражения",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Пишите с помощью ИИ",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Опишите, что должно делать это выражение",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Например: покажите этот вопрос, если респонденту 18 лет и старше",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Опишите состояние словами",
+    // [Auto-translated] "Generate"
+    generate: "Генерировать",
+    // [Auto-translated] "Refine"
+    refine: "Уточняйте",
+    // [Auto-translated] "Explain"
+    explain: "Объясните",
+    // [Auto-translated] "Stop"
+    stop: "Стой",
+    // [Auto-translated] "Accept"
+    accept: "Принимаю",
+    // [Auto-translated] "Reject"
+    reject: "Отклонить",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Применить исправление: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Текущее выражение",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Рекомендуемое выражение",
+    // [Auto-translated] "Reads as"
+    readsAs: "Читается как",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Объяснение ассистента",
+    // [Auto-translated] "Check results"
+    findings: "Проверьте результаты",
+    // [Auto-translated] "Error"
+    severityError: "Ошибка",
+    // [Auto-translated] "Warning"
+    severityWarning: "Предупреждение",
+    // [Auto-translated] "Info"
+    severityInfo: "Информация",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "в «{0}»",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Опишите выражение и выберите Генерировать.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Жду помощника...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Запрос был отменён.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Ассистент сообщил: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Ассистент не показал выражения лица.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Пересмотрите предложенное выражение.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Ассистент объяснил текущее выражение лица.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Предложенное выражение содержит ошибки и не может быть принято.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Предлагаемое выражение нельзя было проверять в каждом месте, куда оно было записано, поэтому его нельзя принять.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Добавьте действие в правило, прежде чем обращаться к ассистенту.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Первое предложение содержало ошибки и исправлялось автоматически."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var ruStrings = {
       templateDescription: "Шаблон описания входа",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Шаблон заголовка записи",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Заполнитель титула заявки",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Пустой текст на панели",
       // [Auto-translated] "Tab title pattern"
@@ -588,6 +724,10 @@ export var ruStrings = {
       templateErrorLocation: "Выравнивание сообщений об ошибках",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Новое место входа",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Количество записей на страницу",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Разрешить пользователям сортировать записи",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Избегайте дублирования ответов на следующий вопрос"
     },
@@ -675,6 +815,12 @@ export var ruStrings = {
       // [Auto-translated] "Expression"
       expression: "Выражение"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Сортировать по",
+      // [Auto-translated] "Order"
+      direction: "Порядок"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Выражение"
@@ -690,7 +836,9 @@ export var ruStrings = {
       // [Auto-translated] "Survey description"
       description: "Описание опроса",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Сделайте опрос доступным только для чтения"
+      readOnly: "Сделайте опрос доступным только для чтения",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Региональные форматы"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -726,7 +874,9 @@ export var ruStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Сделайте столбец обязательным, если",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Каждый вариант в отдельной колонке"
+      showInMultipleColumns: "Каждый вариант в отдельной колонке",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Разрешите сортировку по этому столбцу"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export var ruStrings = {
     masksettings: {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Сохранение замаскированного значения в результатах опроса"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Регион",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Схема дат",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Временной схема",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Десятичный сепаратор",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Сепаратор тысяч",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Символ валюты",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Валютный паттерн"
     },
     patternmask: {
       // [Auto-translated] "Value pattern"
@@ -761,16 +927,18 @@ export var ruStrings = {
       decimalSeparator: "Десятичный разделитель",
       // [Auto-translated] "Value precision"
       precision: "Точность значений",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Показывать заканчивающие нули",
       // [Auto-translated] "Minimum value"
       min: "Минимальное значение",
       // [Auto-translated] "Maximum value"
       max: "Максимальное значение"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Префикс валюты",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Суффикс валюты"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Символ валюты",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Валютный паттерн"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Удалить другие при выборе",
@@ -812,8 +980,24 @@ export var ruStrings = {
     addItem: "Нажмите, чтобы добавить элемент...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Нажмите, чтобы удалить элемент...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Добавить {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Удалите {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Перетащите элемент",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Расширение вложенных вариантов",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Варианты с вложением коллапса",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Расширяйте вложенные варианты {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Вложенные варианты {0}",
+    // [Auto-translated] "Show description"
+    showDescription: "Описание шоу",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Скрыть описание",
     // "Edit"
     edit: "Редактировать",
     // [Auto-translated] "Done"
@@ -856,40 +1040,60 @@ export var ruStrings = {
     propertyNameIsIncorrect: "Не используйте зарезервированные слова: «элемент», «выбор», «панель», «строка».",
     // "You don't have any items yet"
     listIsEmpty: "Добавьте новое условие",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "У вас пока нет выбора",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "У вас еще нет столбцов",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "У вас еще нет столбцов макета",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "У вас еще нет строк",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "У вас еще нет правил валидации",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "У вас еще нет пользовательских переменных",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "У вас еще нет триггеров",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "У вас еще нет ссылок",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "У вас еще нет страниц",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Добавить новый вариант",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Добавить новый столбец",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Добавить новую строку",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Добавить новое правило",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Добавить новую переменную",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Добавить новый триггер",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Добавить новый URL-адрес",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Добавить новую страницу",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Выбора нет",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Нет пользовательских рейтинговых значений",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Нет индивидуальных этикеток",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Нет зон",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Колонок нет",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Нет колонок для верстки",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Без рядов",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Нет правил валидации",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Нет пользовательских переменных",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Без триггеров",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Без условной наценки",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Нет ссылок",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Нет страниц",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Нет уровней сортировки",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Добавьте выбор",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Добавить рейтинговую ценность",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Добавить этикетку",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Добавить площадь",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Добавить колонку",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Добавить строку",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Добавьте правило",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Добавить переменную",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Добавить триггер",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Добавьте наценку",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Добавить ссылку",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Добавить страницу",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Добавить уровень сортировки",
     // "Value"
     value: "Значение",
     // "Text"
@@ -916,6 +1120,8 @@ export var ruStrings = {
     surveyTitlePlaceholder: "Введите заголовок опроса",
     // "Page {num}"
     pageTitlePlaceholder: "Введите заголовок страницы",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Название панели",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Стартовая страница",
     // "Description"
@@ -966,6 +1172,8 @@ export var ruStrings = {
     visible: "Отображать?",
     // "Required"
     isRequired: "Обязательный?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Требуйте положительного ответа",
     // [Auto-translated] "Mark as required"
     markRequired: "Отметьте как обязательный",
     // [Auto-translated] "Remove the required mark"
@@ -976,6 +1184,8 @@ export var ruStrings = {
     eachRowUnique: "Предотвращение дублирования ответов в строках",
     // "Error message for required questions"
     requiredErrorText: "Это поле обязательное для заполнения",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Сообщение об ошибке, когда требуется ответ «Да»",
     // "Display the question on a new line"
     startWithNewLine: "Начинать с новой строки?",
     // "Rows"
@@ -994,6 +1204,16 @@ export var ruStrings = {
     maxFiles: "Максимальное количество файлов",
     // "Row count"
     rowCount: "Количество строк",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Строки на странице",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Разрешить пользователям сортировать строки",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Максимальные уровни сортировки",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Порядок сортировки по умолчанию",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Панель сортировки показать",
     // "Columns layout"
     columnLayout: "Макет столбцов",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export var ruStrings = {
     questionErrorLocation: "Размещение ошибки опроса",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Фокусирование на первом вопросе при изменении страницы",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Включить ярлыки выбора",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Показать подсказки по клавиатуре",
     // "Question order"
     questionOrder: "Сортировка элементов на странице",
     // "Time limit to complete the survey"
@@ -1264,10 +1488,12 @@ export var ruStrings = {
     waitForUpload: "Дождитесь завершения загрузки",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Выравнивание сведений о строке",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "Минимальное количество строк",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Максимальное количество строк",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Выражение количества строк",
     // "Confirm row removal"
     confirmDelete: "Подтверждение удаления строки",
     // [Auto-translated] "Confirmation message"
@@ -1278,6 +1504,8 @@ export var ruStrings = {
     minPanelCount: "Минимальное количество входов",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Максимальное количество входов",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Выражение количества входов",
     // [Auto-translated] "Initial entry state"
     panelsState: "Начальное состояние входа",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export var ruStrings = {
     logoHeight: "Высота логотипа",
     // "Read-only"
     readOnly: "Только для чтения",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Режим только для чтения",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Отключите режим только для чтения, если",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export var ruStrings = {
       columns: "Столбцы",
       // "Rows"
       rows: "Строки",
+      // [Auto-translated] "Entries"
+      entries: "Участники",
       // "Choice Options"
       choices: "Выбор",
       // "Items"
@@ -1544,6 +1776,8 @@ export var ruStrings = {
       question: "Вопрос",
       // [Auto-translated] "Pages"
       pages: "Страниц",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Региональные форматы",
       // "Quiz Mode"
       timer: "Таймер/Викторина",
       // "Calculated Values"
@@ -1862,6 +2096,12 @@ export var ruStrings = {
       // [Auto-translated] "Never"
       none: "Никогда"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Только для чтения",
+      // [Auto-translated] "View"
+      view: "Вид"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "Кнопки радио",
     inputType: {
@@ -1913,6 +2153,12 @@ export var ruStrings = {
       warning: "Предупреждение",
       // [Auto-translated] "Informational"
       info: "Информационный"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Фронт",
+      // [Auto-translated] "Rear"
+      environment: "Задняя часть"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export var ruStrings = {
     underRowSingle: "Под строкой отображается только один раздел",
     // "Auto"
     auto: "Авто",
+    // [Auto-translated] "Always"
+    always: "Всегда",
     timerInfoMode: {
       // "Both"
       combined: "Оба"
@@ -2321,7 +2569,148 @@ export var ruStrings = {
       survey: "То же, что и опрос",
       // [Auto-translated] "Same as container"
       container: "То же, что и контейнер"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Наследование",
+      // [Auto-translated] "Hide"
+      "false": "Спрячься",
+      // [Auto-translated] "Show"
+      "true": "Шоу"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Арабский",
+    // [Auto-translated] "Bulgarian"
+    bg: "Болгарский",
+    // [Auto-translated] "Catalan"
+    ca: "Каталонский",
+    // [Auto-translated] "Czech"
+    cs: "Чешская",
+    // [Auto-translated] "Welsh"
+    cy: "Валлийский",
+    // [Auto-translated] "Danish"
+    da: "Датский",
+    // [Auto-translated] "German"
+    de: "Немецкий",
+    // [Auto-translated] "Greek"
+    el: "Греческая",
+    // [Auto-translated] "English"
+    en: "Английский",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Английский (Австралия)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Английский (Канада)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Английский (Великобритания)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Английский (Ирландия)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Английский (Индия)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Английский (Новая Зеландия)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Английский (Южная Африка)",
+    // [Auto-translated] "Spanish"
+    es: "Испанский",
+    // [Auto-translated] "Estonian"
+    et: "Эстонский",
+    // [Auto-translated] "Basque"
+    eu: "Баскский",
+    // [Auto-translated] "Persian"
+    fa: "Персидский",
+    // [Auto-translated] "Finnish"
+    fi: "Финский",
+    // [Auto-translated] "Filipino"
+    fil: "Филиппинцы",
+    // [Auto-translated] "French"
+    fr: "Французский",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Френч (Канада)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Французский (Швейцария)",
+    // [Auto-translated] "Hebrew"
+    he: "Иврит",
+    // [Auto-translated] "Hindi"
+    hi: "Хинди",
+    // [Auto-translated] "Croatian"
+    hr: "Хорватский",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Гаитянский креольский",
+    // [Auto-translated] "Hungarian"
+    hu: "Венгерский",
+    // [Auto-translated] "Indonesian"
+    id: "Индонезийский",
+    // [Auto-translated] "Icelandic"
+    is: "Исландский",
+    // [Auto-translated] "Italian"
+    it: "Итальянский",
+    // [Auto-translated] "Japanese"
+    ja: "Японская",
+    // [Auto-translated] "Georgian"
+    ka: "Грузинская",
+    // [Auto-translated] "Kazakh"
+    kk: "Казахский",
+    // [Auto-translated] "Korean"
+    ko: "Корейская",
+    // [Auto-translated] "Lithuanian"
+    lt: "Литовский",
+    // [Auto-translated] "Latvian"
+    lv: "Латышский",
+    // [Auto-translated] "Macedonian"
+    mk: "Македонец",
+    // [Auto-translated] "Burmese"
+    mm: "Бирманский",
+    // [Auto-translated] "Malay"
+    ms: "Малайский",
+    // [Auto-translated] "Dutch"
+    nl: "Голландский",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Голландцы (Бельгия)",
+    // [Auto-translated] "Norwegian"
+    no: "Норвежский",
+    // [Auto-translated] "Polish"
+    pl: "Польская",
+    // [Auto-translated] "Portuguese"
+    pt: "Португальский",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Португальский (Бразилия)",
+    // [Auto-translated] "Romanian"
+    ro: "Румынский",
+    // [Auto-translated] "Russian"
+    ru: "Русские",
+    // [Auto-translated] "Slovak"
+    sk: "Словацкий",
+    // [Auto-translated] "Slovenian"
+    sl: "словенский",
+    // [Auto-translated] "Serbian"
+    sr: "Сербская",
+    // [Auto-translated] "Swedish"
+    sv: "Шведский",
+    // [Auto-translated] "Swahili"
+    sw: "Суахили",
+    // [Auto-translated] "Telugu"
+    tel: "Телугу",
+    // [Auto-translated] "Tajik"
+    tg: "Таджикский",
+    // [Auto-translated] "Thai"
+    th: "Тайский",
+    // [Auto-translated] "Turkish"
+    tr: "Турецкий",
+    // [Auto-translated] "Ukrainian"
+    uk: "Украинские",
+    // [Auto-translated] "Urdu"
+    ur: "Урду",
+    // [Auto-translated] "Vietnamese"
+    vi: "Вьетнамский",
+    // [Auto-translated] "Chinese"
+    zh: "Китайский",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Китайский (упрощённый)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Китайский (традиционный)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export var ruStrings = {
     visibletrigger: "Изменить видимость (не рекомендуется)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "То же самое, что и язык для опросов"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Пример: +1(999)-999-99-99"
@@ -2405,12 +2798,6 @@ export var ruStrings = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Пример: мм/дд/гггг чч:мм:сс"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Пример: $",
-      // "Ex.: USD"
-      suffix: "Пример: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export var ruStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Указывает, сколько столбцов занимает эта панель в макете сетки.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "В этой таблице можно настроить каждый столбец сетки на панели. Он автоматически устанавливает процент ширины для каждого столбца в зависимости от максимального количества элементов в строке. Чтобы настроить макет сетки, вручную настройте эти значения и определите ширину заголовка для всех вопросов в каждом столбце."
+      gridLayoutColumns: "В этой таблице можно настроить каждый столбец сетки на панели. Он автоматически устанавливает процент ширины для каждого столбца в зависимости от максимального количества элементов в строке. Чтобы настроить макет сетки, вручную настройте эти значения и определите ширину заголовка для всех вопросов в каждом столбце.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Указывает, как вопросы внутри этой панели отображаются при их использовании только для чтения. «Только для чтения» отображает вопросы с обычными элементами ввода, но отключён для редактирования. «Просмотр» отображает ответы как текст или другие неинтерактивные элементы. «Наследование» использует режим, установленный для родительской панели, страницы или опроса («Только для чтения» по умолчанию)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export var ruStrings = {
       width: "Устанавливает ширину панели пропорционально другим элементам съемки в той же линии. Принимает значения CSS (px, %, in, pt и т. д.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Введите шаблон для динамических заголовков панелей. Используйте {panelIndex} для общего положения панели и {visiblePanelIndex} для ее порядка среди видимых панелей. Вставьте эти заполнители в шаблон, чтобы добавить автоматическую нумерацию.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Резервный текст для заголовков записей, который применяется, когда шаблон заголовков не даёт значимого значения. Используйте {panelIndex} для общего положения записи и {visiblePanelIndex} для её порядка среди видимых записей.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Введите шаблон для заголовков вкладок. Используйте {panelIndex} для общего положения панели и {visiblePanelIndex} для ее порядка среди видимых панелей. Вставьте эти заполнители в шаблон, чтобы добавить автоматическую нумерацию.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export var ruStrings = {
       keyName: "Укажите имя вопроса, чтобы пользователь мог предоставить уникальный ответ на этот вопрос на каждой панели.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Запускает запрос на подтверждение перед удалением записи.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Укажите выражение, которое вычисляет количество записей. Это выражение переопределяет параметры «Начальное количество записей» и пересчитывается при каждом изменении ссылающихся значений. Результат ограничен настройками «Минимальное количество записей» и «Максимальное количество записей». Пока это выражение установлено, респонденты не могут вручную добавлять или удалять записи.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Указывает количество записей, отображаемых на каждой странице панели. '0' отключает пагинацию и отображает все записи.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Позволяет респондентам сортировать записи с помощью панели сортировки.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Определяет первоначальный порядок входа. Респонденты могут изменить его, если разрешена сортировка. При сортировке по нескольким вопросам каждый вопрос сортирует записи в порядке, установленном предыдущим вопросом. Перетащите вопросы, чтобы изменить их приоритет.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Присваивает номера вопросам, вложенным в динамическую панель."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Позволяет респондентам сортировать строки, нажимая на заголовки столбцов или используя панель сортировки.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Определяет начальный порядок строк. Респонденты могут изменить его, если разрешена сортировка. При сортировке по нескольким столбцам каждый столбец сортирует строки в порядке, установленном предыдущим столбцом. Перетащите столбцы, чтобы изменить их приоритет.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "«Авто» отображает панель сортировки только тогда, когда в матрице нет сортируемых заголовков столбцов: заголовки скрыты, матрица использует мобильную структуру или строки переносятся в столбцы. «Всегда» отображает панель сортировки, даже когда видны сортируемые заголовки столбцов.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Закажите выражение, которое вычисляет количество строк. Это выражение переопределяет параметры «Начальное количество строк» и пересчитывается при изменении значений, на которые оно ссылается. Результат ограничен настройками «Минимальное количество строк» и «Максимальное количество строк». Пока это выражение зададено, респонденты не могут вручную добавлять или удалять строки.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Запускает запрос на подтверждение перед удалением строки.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Автоматически разворачивает раздел сведений при добавлении в матрицу новой строки."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Указывает количество строк, отображаемых на каждой странице матрицы. '0' отключает пагинацию и отображает все строки.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Указывает, по какому полям респондент может отсортировать одновременно.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Дублирует ответы из последней строки и присваивает их следующей добавленной динамической строке.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export var ruStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Длинные тексты в параметрах выбора будут автоматически создавать разрывы строк в соответствии с раскрывающимся меню. Снимите флажок, если вы хотите, чтобы тексты были обрезаны.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Указывает, сколько столбцов занимает этот вопрос в макете сетки."
+      effectiveColSpan: "Указывает, сколько столбцов занимает этот вопрос в макете сетки.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Указывает, как вопрос отображается при доступе только для чтения. «Только для чтения» отображает вопрос с обычными элементами ввода, но отключён для редактирования. «Просмотр» отображает ответы в виде текста или других неинтерактивных элементов. «Наследование» использует режим, установленный для родительской панели, страницы или опроса («Только для чтения» по умолчанию).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Под этим вопросом отображаются подсказки по доступным действиям клавиатуры. Опция «Наследить» применяет параметр на уровне опроса."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export var ruStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Выберите, хотите ли вы запретить респондентам заполнять ваш опрос.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Указывает, как отображаются вопросы только для чтения, включая страницу предварительного просмотра. «Только для чтения» (по умолчанию) отображает вопросы с обычными элементами ввода, но отключён для редактирования. «Просмотр» отображает ответы в виде текста или других неинтерактивных элементов.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Задает расположение индикатора выполнения. Значение \"Auto\" отображает индикатор выполнения над или под заголовком опроса."
     },
@@ -2633,7 +3050,9 @@ export var ruStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "При выборе этого параметра создается отдельный столбец для каждого варианта выбора.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. При значении -1 фактическое значение наследуется от свойства \"Количество вложенных столбцов\" родительской матрицы."
+      colCount: "Упорядочивает варианты выбора в макете с несколькими столбцами. Если установлено значение 0, параметры отображаются в одну строку. При значении -1 фактическое значение наследуется от свойства \"Количество вложенных столбцов\" родительской матрицы.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Указывает, как ячейки в этом столбце отображаются при использовании только для чтения. «Только для чтения» отображает ячейки с обычными элементами ввода, но отключён для редактирования. «Просмотр» отображает ответы в виде текста или других неинтерактивных элементов. «Наследование» использует режим, установленный для матрицы или опроса («Только для чтения» по умолчанию)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export var ruStrings = {
     questionErrorLocation: "Задает расположение сообщения об ошибке по отношению к вопросу с недопустимыми входными данными. Выберите между: «Сверху» - текст ошибки размещается в верхней части поля вопроса; «Внизу» - текст ошибки размещается в нижней части окна вопроса.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Выберите, если вы хотите, чтобы первое поле ввода на каждой странице было готово для ввода текста.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Отображается буквы (A, B, C, ...) рядом с вариантами в группе радиокнопок, галочках и вопросах выбора изображений. Респонденты могут выбрать варианты, нажав соответствующие буквенные клавиши. Вы можете переобойти эту настановку для отдельных вопросов.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Отображает буквы (A, B, C, ...) рядом с вариантами и позволяет респондентам выбирать их, нажимая соответствующие клавиши букв. Опция «Наследить» использует параметры на уровне опроса."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Отображается подсказка по доступным действиям клавиатуры ниже вопросов. Вы можете обработать эту настройку для отдельных вопросов.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Сохраняет исходный порядок вопросов или рандомизирует их. Эффект этого параметра виден только на вкладке «Предварительный просмотр».",
     // [Auto-translated] "For text entry questions only."
@@ -2793,7 +3220,9 @@ export var ruStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Задает видимость кнопок навигации на странице. Опция \"Наследовать\" применяет настройку уровня опроса, которая по умолчанию имеет значение \"Видимый\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "В этой таблице можно настроить каждый столбец сетки на странице. Он автоматически устанавливает процент ширины для каждого столбца в зависимости от максимального количества элементов в строке. Чтобы настроить макет сетки, вручную настройте эти значения и определите ширину заголовка для всех вопросов в каждом столбце."
+      gridLayoutColumns: "В этой таблице можно настроить каждый столбец сетки на странице. Он автоматически устанавливает процент ширины для каждого столбца в зависимости от максимального количества элементов в строке. Чтобы настроить макет сетки, вручную настройте эти значения и определите ширину заголовка для всех вопросов в каждом столбце.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Указывает, как вопросы на этой странице отображаются, когда они только для чтения. «Только для чтения» отображает вопросы с обычными элементами ввода, но отключён для редактирования. «Просмотр» отображает ответы как текст или другие неинтерактивные элементы. «Наследование» использует режим, установленный для опроса («Только для чтения» по умолчанию)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Задает расположение таймера на странице.",
@@ -2911,6 +3340,22 @@ export var ruStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Выберите, хотите ли вы сохранить значение вопроса с примененной маской в результатах опроса."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Регион, форматы которого применяются к маске ввода даты-времени, числовых и валютных данных. Если не указано, используется язык опроса.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Переопределяет формат даты региона, используемый в входных масках. Узор может содержать разделительные символы и следующие заполнятели: <br>'m' — номер месяца.<br> 'mm' — номер месяца, с началом нуля для однозначных значений. <br>'d' — день месяца. <br>'dd' — день месяца, с ведущим нулём для однозначных значений. <br>'yy' — последние две цифры года. <br>'yyy' — четырёхзначный год.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Переопределяет временной формат региона, используемый в входных масках. Шаблон может содержать разделительные символы и следующие заполняющие значения: <br>'H' — часы в формате 24 часа.<br> 'HH' — часы в формате 24 часа, с ведущим нулём для однозначных значений. <br>'h' — часы в формате 12 часов. <br>'hh' — часы в формате 12 часов, с ведущим нулём для однозначных значений. <br>'MM' — минуты. <br>'ss' — секунды. <br>'TT' — 12-часовой часовой период заглавной буквы (AM/PM). <br>'tt' — 12-часовой период в строчной букве (am/pm).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Переопределяет символ, который регион использует для отделения дробной части от целой части отображаемого числа в входных масках.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Переопределяет символ, который регион использует для разделения цифр большого числа на группы по три в входных масках.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Переопределяет символ валюты или код региона, используемый в входных масках.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Переопределяет валютный паттерн региона, используемый в входных масках. Паттерн может содержать следующие заполняющие элементы: <br>'@' — символ или код валюты.<br> '#' — число. <br>'-' — положение минуса в отрицательных значениях (если он опущен, минус размещается в начале)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Шаблон может содержать строковые литералы и следующие заполнители: '9' - для цифры; 'a' - для прописной или строчной буквы; '#' - для цифры или прописной или строчной буквы. Используйте обратную косую черту '\\' для экранирования символа."
@@ -2925,13 +3370,15 @@ export var ruStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Символ, используемый для разделения цифр большого числа на группы по три.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Ограничивает количество цифр, сохраняемых после десятичной запятой для отображаемого числа."
+      precision: "Ограничивает количество цифр, сохраняемых после десятичной запятой для отображаемого числа.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Отображает отставающие нули в дробной части с точностью до заданной точности. Например, при точности 2 входное значение 1.2 отображается как 1.20."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Один или несколько символов, которые будут отображаться перед значением.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Один или несколько символов, которые будут отображаться после значения."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Валютный символ или код, отображаемый с этим значением. Символ региона используется по умолчанию. Очистите это свойство, чтобы не отображаться символ.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Задаёт позиции числа, валютного символа и минуса. Шаблон может содержать следующие заполняющие элементы: <br>'@' — символ или код валюты.<br> '#' — число. <br>'-' — положение минуса в отрицательных значениях (если он опущен, минус размещается в начале)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2982,6 +3429,8 @@ export var ruStrings = {
     tabAlign: "Выравнивание табуляции",
     // [Auto-translated] "File source type"
     sourceType: "Тип источника файла",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Стандартная камера",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Подходит для контейнера",
     // [Auto-translated] "Set value expression"
@@ -3302,12 +3751,702 @@ export var ruStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Применённый пресет"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Реплика: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Используйте предложенное название"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Удалите повторяющийся элемент"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Используйте рекомендованный тип"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Используйте предложенную функцию"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Используйте рекомендованную маску"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Дайте элементу свободное имя"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Дайте элементу свободное имя"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Удалить имущество"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Используйте ближайшее разрешённое значение",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Удалить имущество",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Используйте рекомендуемое значение"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Преобразуйте значение в список"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Дайте элементу имя"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Удалить имущество",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Переименование объекта"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Используйте предложенное название",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Используйте предложенное название"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Используйте предложенное название"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Используйте рекомендованный тип"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Используйте рекомендованный тип"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Выражение «{expression}» невозможно разобрать."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "«{name}» не найдено — не существует ни одного вопроса, панели, страницы, вычислённого значения или переменной с таким именем.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" отсутствует в {containerType} \"{root}\" (ссылка: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "«{segment}» не встречается в области «{scopePrefix}» (ссылка: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "KeyName для \"{name}\" имен \"{key}\" - \"{name}\" не имеет {keyNoun} с этим именем, поэтому проверка дубликатов ключа никогда не запускается.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "«{name}» не найден."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop} из «{name}» ссылается на сам элемент (ссылка: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Название «{name}» дублируется.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Имя вычислённого значения «{name}» уже используется другим вычисленным значением.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Вычисленное значение «{name}» имеет своё имя с другим элементом, поэтому одно из них следует за другим."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} «{name}» этого {ownerText} также является встроенной переменной опроса {{builtIn}} — опрос отвечает первым на {{name}}, поэтому этот вариант недоступен в выражениях.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "ValueName \"{valueName}\" из \"{name}\" разделяет значение {otherType} \"{otherName}\", которое не имеет собственного valueName — \"{otherName}\" считает поля, добавленные \"{name}\", неизвестными, и clearIncorrectValues() удаляет их. Установите его valueName на \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Строка «{key}» в matrixdropdown «{otherName}» также является {sharedKeyText} «{name}», разделяющей своё значение — объект ячейки и одно значение не могут одновременно находиться под одним ключом; время выполнения сохраняет одно и удаляет другое.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} «{name}» разделяет ключ данных «{dataKey}» с {otherType} «{otherName}» — он сохраняет {shapeText}, а «{otherName}» — {otherShapeText}; один не может удерживать значение другого, поэтому clearIncorrectValues() удаляет его.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Ключ данных «{dataName}» также является ключом комментария к «{base}» (его ключ данных плюс «{suffix}») — одна запись тихо перезаписывает другую.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Ключ данных «{dataName}» также является ключом общего значения для «{base}» (его ключ данных плюс «{suffix}») — одна запись тихо перезаписывает другую.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "Триггер {trigger} задаёт переменную «{name}», которая также является ключом данных вопроса «{questionName}» — переменная отвечает на {{name}}, а не на вопрос."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Имя «{name}» зарезервировано — является членом Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "ValueName \"{valueName}\" от \"{name}\" зарезервировано — является членом Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Столбец «{name}» в «{matrixName}» зарезервирован — является членом Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Элемент «{name}» из «{questionName}» зарезервирован — является членом Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Строка «{rowValue}» из «{name}» зарезервирована — является членом Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Вычисляемое значение «{name}» зарезервировано — является членом Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "«{name}» имеет неизвестный тип «{type}».",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "«{name}» не имеет типа — элемент без типа отбрасывается."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" не является свойством {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "«{key}» из {ownerText} не сериализуется — он действует при загрузке и удаляется из JSON при повторном сохранении опроса.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" и \"{aliasKey}\" из {ownerText} — два названия одного свойства — время выполнения применяет их в порядке записи JSON, поэтому побеждает \"{winner}\".",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" установлен на \"{name}\", но inputType \"{inputType}\" не имеет ограничений — время выполнения игнорирует его."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{key} {ownerText} — это {valueText} — не одно из разрешённых значений ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{ключ} {ownerText} равен {value}, вне разрешённого диапазона {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "ValueName «{valueName}» из «{name}» содержит «.» — выражения читают {{valueName}} как путь к «{rootKey}», поэтому сам ключ данных никогда не может быть адресован."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} не имеет «{key}» — свойство требуется для {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Имя {className} — {valueText}, а не строка — опрос не может его загрузить."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "«{key}» {ownerText} не является массив — свойство содержит список, а время выполнения помещает значение в массив из одного элемента."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Определение переменной объявляет «{variable}», что также является ключом данных вопроса «{name}» — установка переменной удаляет ответ, хранящийся под этим ключом, и {{name}} отвечает на значение хоста.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Определение переменной объявляет «{variable}», что также является названием вычисленного значения «{name}» — обе записывают один и тот же слот, и побеждает тот, кто запущен последним."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition не является объектом обзора JSON, поэтому переменная не объявляется, и значение пресета не может быть проверено.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets не является массивом, поэтому пресет не объявляется.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Пресет #{index} не является объектом.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Пресет #{index} не имеет имени, поэтому ничто не может на него ссылаться.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Пресет «{preset}» не несёт объект переменных, поэтому он ничего не устанавливает.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Пресет «{preset}» объявляется дважды — поиск с таким названием отвечает на первый вариант.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Пресет «{preset}» устанавливает «{variable}», что определение переменной не объявляет.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Пресет «{preset}» устанавливает «{variable}» на значение, которое определение переменной отклоняет: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Функция «{functionName}» не регистрируется."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Вычисленное значение «{names}» ссылается на себя в собственном выражении.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Вычисленные значения {name} зависят друг от друга."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Триггер реагирует на установленное значение («{setToName}»).",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Триггеры образуют петлю через установленные ими значения: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} считывает то значение, которое записывает сам — он запускается только при изменении другого значения, поэтому вообще не запускается.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Значения записываются в цикле: {цепочка}. Каждая запись повторяет выражения, которые его читали, поэтому окончательные значения зависят от порядка ответов на вопросы."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Условие сравнивает «{name}» с {значения} — не входит в число своих вариантов. Доступно: {доступно}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Условие сравнивает «{name}» с {values} — значение выбора не содержит его. Доступно: {доступно}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Условие применяет «{operator}» к «{name}»: «{recordName}» ({questionType}) не имеет значения для сравнения.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Условие применяется как «{operator}» к «{name}»: «{recordName}» содержит {valueShapeText} — к нему не применяются операторы порядка и арифметики.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Условие применяется к «{operator}» к «{name}»: «{recordName}» — булев вопрос, к нему не применяются операторы порядка.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Условие применяется к «{operator}» к «{name}»: «{recordName}» — это текстовый вопрос, его значение является строкой, поэтому числовое сравнение основано на неявном преобразовании.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Условие применяется к «{operator}» к «{name}»: «{recordName}» содержит строку даты — сравнивая её с числом, которое {constValue} не может удержать.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Условие применяется к «{operator}» к «{name}»: «{recordName}» числовое — сравнивать его со строкой «{constValue}» невозможно.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Условие применяется к «{operator}» к «{name}»: «{recordName}» содержит массив выбранных значений, поэтому «=» сравнивает весь массив.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Условие применяется как \"{operator}\" к \"{name}\": \"{recordName}\" — булев вопрос, сравнивать его с {constValue} невозможно."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} «{expression}» всегда ложно, поэтому «{name}» никогда не отображается.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} «{expression}» никогда не выполняется, потому что {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} «{expression}» никогда не выполняется — ни одно допустимое значение его не удовлетворяет: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} «{expression} противоречит сам себе: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} «{expression}» всегда истинно, поэтому оно ничего не решает.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} «{expression}» — это арифметика, а не сравнение, поэтому оно никогда не даёт ни да, ни нет.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Часть {prop} «{expression}» имеет результат, известный заранее.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} «{expression}» всегда выполняется, потому что {facts} — он ничего не решает."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} «{expression}» не читает никакой вопрос или переменную."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "По умолчанию значение «{name}» — {valuesText}, которое оно никогда не может удержать. Разрешено: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Правильный ответ на «{name}» — {valuesText}, который он никогда не может удержать. Разрешено: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Триггер устанавливает «{name}» в {valuesText}, который он никогда не может удержать. Разрешено: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Значение строки по умолчанию устанавливает «{name}» в {valuesText}, которое никогда не мо��ет удержать. Разрешено: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Значение панели по умолчанию устанавливает «{name}» в {valuesText}, которое никогда не может удержать. Разрешено: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} из «{name}» называет «{key}» — такой строки нет. Доступно: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop} из «{name}» называет «{key}» — такой колонки нет. Доступно: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} из «{name}» называет «{key}» — такого шаблонного вопроса нет. Доступно: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Триггер copyvalue копирует «{fromName}» в «{setToName}», но «{fromName}» содержит {sourceShapeText}, а «{setToName}» — {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Триггер copyvalue копирует «{fromName}» в «{setToName}», но ни одно значение «{fromName}» не входит в число значений, которые может сохраняться «{setToName}». Разрешено: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "«{name}» копирует свои выборы из «{source}», но с этим именем нет никаких сомнений.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "«{name}» копирует свои выборы у самого себя.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "«{name}» копирует свои выборы из «{source}» ({sourceType}), который не предоставляет ни выбора, ни массив значений.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" читается как {prop} \"{field}\" от \"{source}\", но {sourceType} \"{source}\" не имеет такого {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Другой элемент {prop} из «{name}» уже имеет значение {valueText} — время выполнения сохраняет оба элемента.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Выбор «{name}» содержит {valueText}, пока {toggleProp} включен — он сталкивается с встроенным элементом {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "Триггер {trigger} нацелена на страницу «{name}», которая не существует.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "Триггер {trigger} нацелен на «{name}», но {containerType} «{root}» не имеет {segmentNoun} «{segment}».",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{триггер} триггер {глагол} «{name}», но {kindText} с таким именем не существует."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Тип спускового механизма «{type}» неизвестен.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Спусковой крючок не имеет типа."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Тип валидатора «{type}» из «{name}» неизвестен.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Валидатор «{name}» не имеет типа."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "Валидатор {validatorType} для \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "Валидатор {validatorType} для «{name}» требует как минимум {min} и максимум {max} — ни один ответ его не удовлетворяет.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Валидатор количества ответов для «{name}» требует как минимум {minCount} ответов, выше {selectable} вариантов, которые можно выбрать вместе.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Валидатор regex для «{name}» имеет шаблон, который движок отклоняет: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Выражение-валидатор «{name}» не имеет выражения, поэтому оно всегда проходит."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} в «{name}» равно {min}, выше {maxProp} от {max} — время выполнения бесшумно корректирует один из них.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} для «{name}» равен {count}, {направление} — {boundProp} от {bound} — время выполнения зажимает его.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} «{name}» равен {step}, но диапазон, через который он проходит ({minProp}.. {maxProp}) охватывает только {диапазон} — время выполнения фиксирует его.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "minSelectedChoices для «{name}» равен {min}, над {selectable} вариантами, которые можно выбрать вместе — вопрос никогда не может быть ответен."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" никогда не может стать видимым: он visibleIf читает {reads}, что {deadClause}, поэтому условие никогда не выполняется."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "MaskType \"{maskType}\" из \"{name}\" не является известной маской — время работы сокращается к отсутствию маски.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "MaskSettings в \"{name}\" устанавливает \"{key}\", что не является свойством маски \"{maskType}\" — время выполнения бесшумно сбрасывает её.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "Настройки maskSettings \"{name}\" устанавливаются без maskType — время выполнения сохраняет только \"saveMaskedValue\" и убирает остальное.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Маска {maskType} «{name}» применяется к отсутствию входа: inputType «{inputType}» маскируется только для текста и tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Маска datetime в «{name}» устанавливает min/max без паттерна — границы применяются к частям даты в шаблоне, так что без неё они ничего не делают.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Маска {maskType} «{name}» допускает как минимум {min} и максимум {max} — ни одно значение не удовлетворяет её."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Динамическая панель \"{name}\" имеет пустой шаблон — её панели не имеют чего рендерить.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} «{name}» не содержит элементов.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} «{name}» не содержит элементов, которые когда-либо могут отображаться — каждый элемент скрыт, охраняется условием, которое никогда не выполняется, или пуст.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Элементы детализации в «{name}» никогда не отображаются: его detailPanelMode — это «none», что является стандартом."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Позиция: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Он был построен на основе устаревших свойств имени, оператора и значения триггера.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Внутри: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Ты имел в виду «{0}»?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Если это пользовательский компонент, передайте его определение в линтер для полного анализа.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Зарегистрируйте функцию перед линтингом или укажите её в настройках линтера.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Ошибочно написанный тип отбрасывается во время запуска, а кастомный триггер не покрывается проверками цели и цикла.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Если это переменная, установленная во время выполнения, укажите её в настройках линтера.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Петля может быть недоступна, если условия триггера никогда не совпадают — проверьте выражения.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "defaultValueExpression применяется только до тех пор, пока не получит ответ на свой вопрос.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "В выражении: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Упоминается в переплетах.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Упоминается в выборахByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Упоминается в тексте «{0}».", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () читает это имя во всех записях {1} «{2}».",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Аргумент {0}() не называет ни одного вопроса, панели или страницы.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Десериалайзер роняет ключ, который не знает.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Десериалайзер сбрасывает валидатор, который не может разрешить, поэтому ничего не валидируется.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "InputType — «{0}».",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Это ключ данных «{0}»." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "и",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} всегда является {значение}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} — {границы}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "По крайней мере, {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "максимум {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} не могут быть обе {значения}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} не может быть {значение} и не быть им",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} не может быть пустым и быть {значением}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} не может быть пустым и не пустым",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} не может быть выше {min} и ниже {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} просят быть не имеющим никакой ценности"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "«{0}.» ссылки доступны только внутри матричной ячейки или панели деталей матрицы.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "«{0}» доступна только внутри матричной ячейки или панели деталей матрицы.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "«{0}.» Ссылки доступны только внутри динамической панели или панельного контейнера.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "«{0}.» Ссылки доступны только внутри динамической панели.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "«{0}» доступна только внутри динамической панели.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "«{0}» доступна только внутри условий выбора, строки и столбцов.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "«{0}.» Ссылки доступны только в составном вопросе.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "«{0}» недоступна внутри фильтра inArray, который работает с элементом и опросом.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "«{0}» — это столбец этой матрицы, ссылайтесь на неё с префиксом строки.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "«{0}» — это вопрос этой динамической панели — ссылайтесь на неё с префиксом панели."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Установите inputType: «число» на «{0}», если он собирает числа.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Используйте «contains» или «anyof» для множественных выборочных значений."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "страница",
+        // [Auto-translated] "panel"
+        panel: "Панель"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Название",
+        // [Auto-translated] "valueName"
+        valueName: "valueИмя",
+        // [Auto-translated] "name"
+        calculatedValue: "Название"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "Рассчитанное значение",
+        // [Auto-translated] "element"
+        default: "элемент"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Обследование",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Прочее",
+        // [Auto-translated] "None"
+        none: "Нет",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Отказывайтесь отвечать",
+        // [Auto-translated] "Don't know"
+        dontknow: "Не знаю"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "Никогда не стреляет",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "отвергает все ответы",
+        // [Auto-translated] "cannot validate"
+        default: "не может валидировать"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Вопрос не имеет ответа для подтверждения",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "длина считывается из значения текста, и в этом ответе нет",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Ответ — это не число и никогда не может быть",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Номер никогда не совпадает с адресом электронной почты",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Ответ — это не список значений",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Ответ — это не то значение, которое можно проверить"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "массив",
+        // [Auto-translated] "an object"
+        object: "объект"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "строка матрицы",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "элемент с множественным текстом",
+        // [Auto-translated] "a row or item of a question"
+        default: "Строка или пункт вопроса"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "массив объектов",
+        // [Auto-translated] "an object"
+        object: "объект",
+        // [Auto-translated] "a plain value"
+        plain: "простое значение",
+        // [Auto-translated] "a value"
+        default: "ценность"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "массив выбранных значений",
+        // [Auto-translated] "a single value"
+        scalar: "Одно значение",
+        // [Auto-translated] "a value"
+        default: "ценность"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "ниже",
+        // [Auto-translated] "above"
+        above: "выше"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "никогда не видим и не получает значения",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "никогда не видимы и не получают значения"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Вопрос",
+        // [Auto-translated] "question or variable"
+        questionvalue: "вопрос или переменная",
+        // [Auto-translated] "page"
+        page: "страница"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "Чтение",
+        // [Auto-translated] "navigates to"
+        gotoName: "навигация к",
+        // [Auto-translated] "sets"
+        default: "множества"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Шаблонный вопрос",
+        // [Auto-translated] "column"
+        default: "Колонка"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Шаблонный вопрос",
+        // [Auto-translated] "column"
+        matrixdynamic: "Колонка",
+        // [Auto-translated] "item"
+        multipletext: "Предмет",
+        // [Auto-translated] "row"
+        matrix: "Ряд",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Ряд",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Колонка",
+        // [Auto-translated] "field"
+        default: "Поле"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Пункт 1" }, { value: "item2", text: "Пункт 2" }, { value: "item3", text: "Пункт 3" }],
-    columns: [{ value: "column1", text: "Колонка 1" }, { value: "column2", text: "Колонка 2" }, { value: "column3", text: "Колонка 3" }],
-    rows: [{ value: "row1", text: "Строка 1" }, { value: "row2", text: "Строка 2" }],
-    matrixColumns: [{ name: "column1", title: "Колонка 1" }, { name: "column2", title: "Колонка 2" }, { name: "column3", title: "Колонка 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Пункт 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Пункт 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Пункт 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Колонка 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Колонка 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Колонка 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Строка 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Строка 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Колонка 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Колонка 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Колонка 3"
+      }
+    ]
   }
 };
 

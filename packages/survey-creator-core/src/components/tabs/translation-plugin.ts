@@ -1,4 +1,4 @@
-import { ListModel, Action, IAction, Base, createDropdownActionModel, PageModel, ComputedUpdater, surveyLocalization } from "survey-core";
+import { ListModel, Action, IAction, Base, createDropdownActionModel, PageModel, ComputedUpdater, surveyLocalization, LocalizableString } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
@@ -7,6 +7,7 @@ import { Translation, TranslationBase, createImportCSVAction, createExportCSVAct
 import { TranslationSideBySide } from "./translation-side-by-side";
 import { TabControlModel } from "../side-bar/tab-control-model";
 import { isDefaultLocale } from "../../survey-helper";
+import { createPageSelectorLocTitle, createReadOnlyLocString } from "../../utils/actions";
 
 export class TabTranslationPlugin implements ICreatorPlugin {
   private filterStringsAction: Action;
@@ -90,6 +91,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     }
     const model = new Translation(this.creator.survey, this.creator);
     this.model = model;
+    model.limitAllPagesOnLargeSurvey = true;
     this.wireModelCallbacks(model);
     this.updateSettingsSurvey();
     this.sidebarTab.componentData = model.settingsSurvey;
@@ -113,7 +115,9 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
     model.onPropertyChanged.add((sender, options) => {
       if (options.name === "filteredPage") {
-        this.updateFilterPageAction();
+        // The model can scope the grid itself (see TranslationBase.canShowAllPages) - the list's
+        // selection follows it as well.
+        this.updateFilterPageAction(true);
       }
       if (options.name === "showAllStrings") {
         this.updateFilterStrigsAction();
@@ -138,6 +142,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     const model = new TranslationSideBySide(this.creator.survey, this.creator,
       this.creator.translationSideBySideView, this.creator.translationFormViewOrientation);
     this.model = model;
+    model.limitAllPagesOnLargeSurvey = true;
     this.wireModelCallbacks(model);
     model.showAllElementStrings = this.showAllElementStrings;
     model.onShowAllElementStringsChanged = (value: boolean): void => {
@@ -196,7 +201,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
         this.updateSideBySidePagesAction();
       }
       if (options.name === "filteredPage") {
-        this.updateFilterPageAction();
+        this.updateFilterPageAction(true);
       }
       if (options.name === "showAllStrings") {
         this.updateFilterStrigsAction();
@@ -209,8 +214,8 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
   public update(): void {
     if (!this.model) return;
-    this.model.survey = this.creator.survey;
     if (this.isSideBySide && !this.isSideBySideGrid) {
+      this.model.survey = this.creator.survey;
       const model = <TranslationSideBySide>this.model;
       const pages = this.creator.survey.pages;
       model.selectedPageName = pages.length > 0 ? pages[0].name : "";
@@ -218,12 +223,14 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       this.updateSideBySidePagesAction();
       model.updateSettingsSurveyValues();
     } else if (this.isSideBySideGrid) {
-      this.model.filteredPage = null;
+      this.model.setSurveyAndClearPageFilter(this.creator.survey);
       this.setFilterPageActionItems();
       this.updateFilterPageAction(true);
       (<TranslationSideBySide>this.model).updateSettingsSurveyValues();
     } else {
-      this.model.filteredPage = null;
+      this.model.setSurveyAndClearPageFilter(this.creator.survey);
+      // The new survey has its own pages, and its size decides whether "All Pages" is offered.
+      this.setFilterPageActionItems();
       this.updateFilterPageAction(true);
       this.updateTabControl();
     }
@@ -365,7 +372,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private createFilterPageAction() {
     this.filterPageAction = createDropdownActionModel({
       id: "svc-translation-filter-page",
-      title: this.getFilterPageActionTitle(),
+      title: this.showAllPagesText,
       visible: false,
       mode: "small",
     }, {
@@ -426,24 +433,19 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private updateSideBySidePagesAction(): void {
     const model = <TranslationSideBySide>this.model;
     if (!model || !model.isSideBySideForm) return;
-    const items: Array<IAction> = this.creator.survey.pages.map((page) => (<IAction>{
-      id: page.name,
-      title: this.getPageDisplayText(page)
-    }));
+    const items: Array<IAction> = this.creator.survey.pages.map((page) => this.createPageItem(page));
     const list = <ListModel>this.filterPageAction.data;
     list.setItems(items, false);
     const selectedId = model.selectedPageName;
     const selectedItem = list.actions.filter((el: IAction) => el.id === selectedId)[0];
     list.selectedItem = selectedItem;
-    this.filterPageAction.title = !!selectedItem ? selectedItem.title : "";
+    this.updateFilterPageActionTitle(!!selectedItem ? this.creator.survey.getPageByName(selectedId) : null);
   }
   private setFilterPageActionItems(): void {
-    (<ListModel>this.filterPageAction.data).setItems([{ id: null, title: this.showAllPagesText }].concat(
-      this.creator.survey.pages.map((page) => ({
-        id: page.name,
-        title: this.getPageDisplayText(page)
-      }))
-    ), false);
+    const pageItems: Array<IAction> = this.creator.survey.pages.map((page) => this.createPageItem(page));
+    // A large survey is always shown page by page (see TranslationBase.canShowAllPages).
+    const canShowAllPages = !this.model || this.model.canShowAllPages;
+    (<ListModel>this.filterPageAction.data).setItems(canShowAllPages ? [<IAction>{ id: null, title: this.showAllPagesText }].concat(pageItems) : pageItems, false);
   }
   // The initial target language is taken from survey.locale, and only from it: the model does not
   // write the survey locale back and does not follow its later changes. An empty survey locale
@@ -474,21 +476,37 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     }
   }
   private updateFilterPageAction(updateSelectedItem: boolean = false) {
-    this.filterPageAction.title = this.getFilterPageActionTitle();
+    this.updateFilterPageActionTitle(this.model && this.model.filteredPage);
     if (updateSelectedItem) {
       const list = <ListModel>this.filterPageAction.data;
       const id = this.model.filteredPage ? this.model.filteredPage.name : null;
       list.selectedItem = list.actions.filter((el: IAction) => el.id === id)[0];
     }
   }
-  private getFilterPageActionTitle(): string {
-    const pageDisplayName = this.model && this.model.filteredPage && this.getPageDisplayText(this.model.filteredPage);
-    return pageDisplayName || this.showAllPagesText;
+  // The dropdown items and the selected title use the same page localizable strings as the
+  // page selector in the preview tab does.
+  private createPageItem(page: PageModel): IAction {
+    return <IAction>{
+      id: page.name,
+      locTitle: this.createPageLocTitle(page)
+    };
+  }
+  private createPageLocTitle(page: PageModel): LocalizableString {
+    return createPageSelectorLocTitle(page, (text: string) => this.getPageDisplayText(page, text));
+  }
+  private updateFilterPageActionTitle(page: PageModel): void {
+    this.filterPageAction.locTitle = !!page ? this.createPageLocTitle(page) : this.createAllPagesLocTitle();
+  }
+  private createAllPagesLocTitle(): LocalizableString {
+    const locTitle = createReadOnlyLocString(this.creator.survey);
+    locTitle.onGetTextCallback = (): string => this.showAllPagesText;
+    return locTitle;
   }
   private getFilterStringsActionTitle(): string {
     return (this.model && !this.model.showAllStrings) ? this.showUsedStringsOnlyText : this.showAllStringsText;
   }
-  private getPageDisplayText(page: PageModel): string {
-    return this.creator.getObjectDisplayName(page, "translation-tab", "survey-translation", page.title);
+  private getPageDisplayText(page: PageModel, text?: string): string {
+    const displayName = text !== undefined ? text : page.title;
+    return this.creator.getObjectDisplayName(page, "translation-tab", "survey-translation", displayName);
   }
 }

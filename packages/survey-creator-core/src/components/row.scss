@@ -136,12 +136,6 @@
     }
   }
 }
-.svc-creator--disable-animations {
-  .svc-row {
-    @include disableLibraryAnimations;
-  }
-}
-
 .sd-panel .svc-row > .sd-row.sd-row--multiple {
   width: calc(100% + var(--sjs2-spacing-x100));
   padding-left: 0;

@@ -1,7 +1,7 @@
 {
     "name": "survey-creator",
-    "homepage": "https://surveyjs.io/Overview/Survey-Creator",
-    "license": "https://surveyjs.io/Licenses#SurveyCreator",
+    "homepage": "https://surveyjs.io/survey-creator/documentation/overview",
+    "license": "https://surveyjs.io/licensing",
     "repository": {
         "type": "git",
         "url": "https://github.com/surveyjs/survey-creator.git"

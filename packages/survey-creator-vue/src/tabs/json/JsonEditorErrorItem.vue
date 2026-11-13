@@ -18,6 +18,7 @@
       @click="fixError"
       v-key2click
       :title="item.data.fixButtonTitle"
+      :data-sv-tooltip="item.data.fixButtonTitle"
       :aria-label="item.data.fixButtonTitle"
       class="svc-json-error__fix-button"
     >

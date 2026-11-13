@@ -6,6 +6,7 @@
     :aria-controls="'scrollableDiv-' + item.id"
     class="svc-tabbed-menu-item"
     :class="item.getRootCss()"
+    :data-sv-tooltip="item.hasIcon ? item.tooltip || item.title : undefined"
     @click="item.doAction"
     v-key2click
   >

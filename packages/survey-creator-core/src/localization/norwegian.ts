@@ -142,6 +142,10 @@ export var nbStrings = {
     jsonHideErrors: "Skjul feil",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "Vis feil",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Fiksefeil",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "Survey-JSON-en må være et objekt.",
     // "Undo"
     undo: "Angre",
     // "Redo"
@@ -246,6 +250,8 @@ export var nbStrings = {
     translateUsigAI: "Oversett alle automatisk",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Oversett fra: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Oversett gjenværende strenger",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Uoversatte strenger",
     // "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var nbStrings = {
     translationSource: "Kilde: ",
     // [Auto-translated] "Target: "
     translationTarget: "Mål: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Kildespråk",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Målspråk",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} av {1} strenger oversatt",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Er du sikker på at du ønsker å slette alle oversatte strenger for det valgte språket?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Skjemavisning",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Rutenettvisning",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Oversett strenger",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Undersøkelsesstrenger",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Ingen forpliktelser for å oversette",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Alle strenger oversettes",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} strengene blir ikke oversatt",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube-linker støttes ikke.",
     // [Auto-translated] "Export"
@@ -286,6 +314,10 @@ export var nbStrings = {
     choicesLoadedFromWebLinkText: "Gå til innstillinger",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Forhåndsvisning av alternativer for lastet valg",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Ingen uttrykksmengde",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Redigeringsuttrykk",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML-innhold vil være her.",
     // [Auto-translated] "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var nbStrings = {
       uncompletedRule_cancel: "Nei, jeg vil fullføre reglene"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Variabel forhåndsinnstilling",
+    // [Auto-translated] "None"
+    noPreset: "Ingen",
+    // [Auto-translated] "View variable values"
+    view: "Vis variableverdier",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Variable verdier",
+    // [Auto-translated] "Manage presets"
+    edit: "Administrer forhåndsinnstillinger",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Variable forhåndsinnstillinger",
+    // [Auto-translated] "Preset"
+    presetName: "Forhåndsinnstilt",
+    // [Auto-translated] "Description"
+    presetDescription: "Beskrivelse",
+    // [Auto-translated] "Add preset"
+    addPreset: "Legg til forhåndsinnstilling",
+    // [Auto-translated] "New preset"
+    newPresetName: "Ny forhåndsinnstilling",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Slett forhåndsinnstilling",
+    // [Auto-translated] "Back"
+    back: "Tilbake",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "En forhåndsinnstilling med dette navnet eksisterer allerede",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Skriv inn et forhåndsinnstilt navn",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Forhåndsinnstilt",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Beskrivelse"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Uttrykksassistent",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Skriv med AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Beskriv hva uttrykket skal gjøre",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "For eksempel: vis dette spørsmålet når respondenten er 18 år eller eldre",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Beskriv tilstanden med ord",
+    // [Auto-translated] "Generate"
+    generate: "Generer",
+    // [Auto-translated] "Refine"
+    refine: "Foredle",
+    // [Auto-translated] "Explain"
+    explain: "Forklar",
+    // [Auto-translated] "Stop"
+    stop: "Stopp",
+    // [Auto-translated] "Accept"
+    accept: "Godta",
+    // [Auto-translated] "Reject"
+    reject: "Avvis",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Påføringsretting: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Nåværende uttrykk",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Foreslått uttrykk",
+    // [Auto-translated] "Reads as"
+    readsAs: "Lyder som",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Assistentens forklaring",
+    // [Auto-translated] "Check results"
+    findings: "Sjekk resultatene",
+    // [Auto-translated] "Error"
+    severityError: "Feil",
+    // [Auto-translated] "Warning"
+    severityWarning: "Advarsel",
+    // [Auto-translated] "Info"
+    severityInfo: "Info",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "i \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Beskriv uttrykket og velg Generer.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Venter på assistenten...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Forespørselen ble kansellert.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Assistenten rapporterte: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Assistenten foreslo ikke noe uttrykk.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Gå gjennom det foreslåtte uttrykket.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Assistenten forklarte det nåværende uttrykket.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Det foreslåtte uttrykket har feil og kan ikke aksepteres.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Det foreslåtte uttrykket kunne ikke sjekkes for hvert sted det er skrevet til, så det kan ikke aksepteres.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Legg til en handling i regelen før du spør assistenten.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Det første forslaget hadde feil og ble rettet automatisk."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var nbStrings = {
       templateDescription: "Mønster for oppføringsbeskrivelse",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Mønster for oppføringstittel",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Plassholder for påmeldingstittel",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Tom paneltekst",
       // [Auto-translated] "Tab title pattern"
@@ -588,6 +724,10 @@ export var nbStrings = {
       templateErrorLocation: "Justering av feilmelding",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ny inngangsplassering",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Oppføringer per side",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "La brukere sortere oppføringer",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Forhindre dupliserte svar i følgende spørsmål"
     },
@@ -675,6 +815,12 @@ export var nbStrings = {
       // [Auto-translated] "Expression"
       expression: "Uttrykk"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sorter etter",
+      // [Auto-translated] "Order"
+      direction: "Rekkefølge"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Uttrykk"
@@ -690,7 +836,9 @@ export var nbStrings = {
       // [Auto-translated] "Survey description"
       description: "Beskrivelse av undersøkelsen",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Gjør undersøkelsen skrivebeskyttet"
+      readOnly: "Gjør undersøkelsen skrivebeskyttet",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Regionale formater"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -726,7 +874,9 @@ export var nbStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Gjør kolonnen obligatorisk hvis",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Hvert alternativ i en egen kolonne"
+      showInMultipleColumns: "Hvert alternativ i en egen kolonne",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Tillat sortering etter denne kolonnen"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export var nbStrings = {
     masksettings: {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Lagre maskert verdi i undersøkelsesresultater"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Region",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Datomønster",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Tidsmønster",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Desimalseparator",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Tusen-separator",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Valutasymbol",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valutamønster"
     },
     patternmask: {
       // [Auto-translated] "Value pattern"
@@ -761,16 +927,18 @@ export var nbStrings = {
       decimalSeparator: "Desimalskilletegn",
       // [Auto-translated] "Value precision"
       precision: "Prisgunstig presisjon",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Vis etterfølgende nuller",
       // [Auto-translated] "Minimum value"
       min: "Minimumsverdi",
       // [Auto-translated] "Maximum value"
       max: "Maksimumsverdi"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Prefiks for valuta",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Valutasuffiks"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Valutasymbol",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Valutamønster"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Fjern andre når det er valgt",
@@ -812,8 +980,24 @@ export var nbStrings = {
     addItem: "Klikk for å legge til...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klikk for å fjerne elementet...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Legg til {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Fjern {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Dra elementet",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Utvid nestede valg",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Kollaps-nestede valg",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Utvid nestede valg av {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Kollaps-nestede valg av {0}",
+    // [Auto-translated] "Show description"
+    showDescription: "Seriens beskrivelse",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Skjul beskrivelse",
     // "Edit"
     edit: "Rediger",
     // [Auto-translated] "Done"
@@ -856,40 +1040,60 @@ export var nbStrings = {
     propertyNameIsIncorrect: "Ikke bruk reserverte ord: \"element\", \"valg\", \"panel\", \"rad\".",
     // "You don't have any items yet"
     listIsEmpty: "Legg til nytt element",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Du har ingen valg ennå",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Du har ingen kolonner ennå",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Du har ikke oppsettkolonner ennå",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Du har ingen rader ennå",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Du har ingen valideringsregler ennå",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Du har ingen egendefinerte variabler ennå",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Du har ingen utløsere ennå",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Du har ingen koblinger ennå",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Du har ingen sider ennå",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Legg til nytt valg",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Legg til ny kolonne",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Legg til ny rad",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Legg til ny regel",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Legg til ny variabel",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Legg til ny utløser",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Legg til ny URL-adresse",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Legg til ny side",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Ingen valg",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Ingen egendefinerte vurderingsverdier",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Ingen egendefinerte etiketter",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Ingen områder",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Ingen søyler",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Ingen layoutkolonner",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Ingen rader",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Ingen valideringsregler",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Ingen egendefinerte variabler",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Ingen triggere",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Ingen betinget markering",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Ingen lenker",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Ingen sider",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Ingen sorteringsnivåer",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Legg til valg",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Legg til vurderingsverdi",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Legg til etikett",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Legg til areal",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Legg til kolonne",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Legg til rad",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Legg til regel",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Legg til variabel",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Legg til utløser",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Legg til pålegg",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Legg til lenke",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Legg til side",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Legg til sorteringsnivå",
     // "Value"
     value: "Verdi",
     // "Text"
@@ -916,6 +1120,8 @@ export var nbStrings = {
     surveyTitlePlaceholder: "Skriv skjematittel her",
     // "Page {num}"
     pageTitlePlaceholder: "Skriv sidetittel her",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Paneltittel",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Startside",
     // "Description"
@@ -966,6 +1172,8 @@ export var nbStrings = {
     visible: "Er synlig?",
     // "Required"
     isRequired: "Er nødvendig?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Krever et positivt svar",
     // [Auto-translated] "Mark as required"
     markRequired: "Merk etter behov",
     // [Auto-translated] "Remove the required mark"
@@ -976,6 +1184,8 @@ export var nbStrings = {
     eachRowUnique: "Forhindre dupliserte svar i rader",
     // "Error message for required questions"
     requiredErrorText: "Nødvendig feilmelding",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Feilmelding når Ja kreves",
     // "Display the question on a new line"
     startWithNewLine: "Må starte med ny linje?",
     // "Rows"
@@ -994,6 +1204,16 @@ export var nbStrings = {
     maxFiles: "Maksimalt antall filer",
     // "Row count"
     rowCount: "Antall rader",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Rader per side",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "La brukere sortere rader",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maksimale sorteringsnivåer",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Standard sorteringsrekkefølge",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Sorteringslinje for visning",
     // "Columns layout"
     columnLayout: "Antall kolonner",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export var nbStrings = {
     questionErrorLocation: "Spørsmål feil plassering",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Sett fokus på første spørsmål når en endrer side",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Aktiver snarveier til valg",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Show-tastaturtips",
     // "Question order"
     questionOrder: "Rekkefølge på elementer på siden",
     // "Time limit to complete the survey"
@@ -1264,10 +1488,12 @@ export var nbStrings = {
     waitForUpload: "Vent til opplastingen er fullført",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Justering av raddetaljer",
-    // [Auto-translated] "Minimum row count"
-    minRowCount: "Minimum radantall",
-    // [Auto-translated] "Maximum row count"
-    maxRowCount: "Maksimalt radantall",
+    // [Auto-translated] "Minimum number of rows"
+    minRowCount: "Minimum antall rader",
+    // [Auto-translated] "Maximum number of rows"
+    maxRowCount: "Maksimalt antall rader",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Radantallsuttrykk",
     // "Confirm row removal"
     confirmDelete: "Bekreft radsletting",
     // [Auto-translated] "Confirmation message"
@@ -1278,6 +1504,8 @@ export var nbStrings = {
     minPanelCount: "Minimum antall påmeldinger",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Maksimalt antall påmeldinger",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Uttrykk for antall oppføringer",
     // [Auto-translated] "Initial entry state"
     panelsState: "Opprinnelig oppføringstilstand",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export var nbStrings = {
     logoHeight: "Logo høyde",
     // "Read-only"
     readOnly: "Skrivebeskyttet",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Skrivebeskyttet modus",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Deaktiver skrivebeskyttet modus hvis",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export var nbStrings = {
       columns: "Kolonner",
       // "Rows"
       rows: "Rader",
+      // [Auto-translated] "Entries"
+      entries: "Påmeldinger",
       // "Choice Options"
       choices: "Valg",
       // "Items"
@@ -1544,6 +1776,8 @@ export var nbStrings = {
       question: "Spørsmål",
       // "Pages"
       pages: "Sider",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Regionale formater",
       // "Quiz Mode"
       timer: "Tidtaker/Quiz",
       // "Calculated Values"
@@ -1862,6 +2096,12 @@ export var nbStrings = {
       // [Auto-translated] "Never"
       none: "Aldri"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Skrivebeskyttet",
+      // [Auto-translated] "View"
+      view: "Utsikt"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "Radioknapper",
     inputType: {
@@ -1913,6 +2153,12 @@ export var nbStrings = {
       warning: "Advarsel",
       // [Auto-translated] "Informational"
       info: "Informativ"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Front",
+      // [Auto-translated] "Rear"
+      environment: "Bak"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export var nbStrings = {
     underRowSingle: "Under raden viser du bare én inndeling",
     // [Auto-translated] "Auto"
     auto: "Auto",
+    // [Auto-translated] "Always"
+    always: "Alltid",
     timerInfoMode: {
       // "Both"
       combined: "Begge"
@@ -2321,7 +2569,148 @@ export var nbStrings = {
       survey: "Samme som undersøkelse",
       // [Auto-translated] "Same as container"
       container: "Samme som container"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Arv",
+      // [Auto-translated] "Hide"
+      "false": "Gjem deg",
+      // [Auto-translated] "Show"
+      "true": "Show"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arabisk",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bulgarsk",
+    // [Auto-translated] "Catalan"
+    ca: "Katalansk",
+    // [Auto-translated] "Czech"
+    cs: "Tsjekkisk",
+    // [Auto-translated] "Welsh"
+    cy: "Walisisk",
+    // [Auto-translated] "Danish"
+    da: "Dansk",
+    // [Auto-translated] "German"
+    de: "Tysk",
+    // [Auto-translated] "Greek"
+    el: "Gresk",
+    // [Auto-translated] "English"
+    en: "Engelsk",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Engelsk (Australia)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Engelsk (Canada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Engelsk (Storbritannia)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Engelsk (Irland)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Engelsk (India)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Engelsk (New Zealand)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Engelsk (Sør-Afrika)",
+    // [Auto-translated] "Spanish"
+    es: "Spansk",
+    // [Auto-translated] "Estonian"
+    et: "Estisk",
+    // [Auto-translated] "Basque"
+    eu: "Baskisk",
+    // [Auto-translated] "Persian"
+    fa: "Persisk",
+    // [Auto-translated] "Finnish"
+    fi: "Finsk",
+    // [Auto-translated] "Filipino"
+    fil: "Filippiner",
+    // [Auto-translated] "French"
+    fr: "Fransk",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Fransk (Canada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Fransk (Sveits)",
+    // [Auto-translated] "Hebrew"
+    he: "Hebraisk",
+    // [Auto-translated] "Hindi"
+    hi: "Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Kroatisk",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Haitisk kreolsk",
+    // [Auto-translated] "Hungarian"
+    hu: "Ungarsk",
+    // [Auto-translated] "Indonesian"
+    id: "Indonesisk",
+    // [Auto-translated] "Icelandic"
+    is: "Islandsk",
+    // [Auto-translated] "Italian"
+    it: "Italiensk",
+    // [Auto-translated] "Japanese"
+    ja: "Japansk",
+    // [Auto-translated] "Georgian"
+    ka: "Georgisk",
+    // [Auto-translated] "Kazakh"
+    kk: "Kasakhisk",
+    // [Auto-translated] "Korean"
+    ko: "Koreansk",
+    // [Auto-translated] "Lithuanian"
+    lt: "Litauisk",
+    // [Auto-translated] "Latvian"
+    lv: "Latisk",
+    // [Auto-translated] "Macedonian"
+    mk: "Makedonsk",
+    // [Auto-translated] "Burmese"
+    mm: "Burmesisk",
+    // [Auto-translated] "Malay"
+    ms: "Malayisk",
+    // [Auto-translated] "Dutch"
+    nl: "Nederlandsk",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Nederlandsk (Belgia)",
+    // [Auto-translated] "Norwegian"
+    no: "Norsk",
+    // [Auto-translated] "Polish"
+    pl: "Polsk",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugisisk",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugisisk (Brasil)",
+    // [Auto-translated] "Romanian"
+    ro: "Rumensk",
+    // [Auto-translated] "Russian"
+    ru: "Russisk",
+    // [Auto-translated] "Slovak"
+    sk: "Slovakisk",
+    // [Auto-translated] "Slovenian"
+    sl: "Slovensk",
+    // [Auto-translated] "Serbian"
+    sr: "Serbisk",
+    // [Auto-translated] "Swedish"
+    sv: "Svensk",
+    // [Auto-translated] "Swahili"
+    sw: "Swahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tadsjikist",
+    // [Auto-translated] "Thai"
+    th: "Thai",
+    // [Auto-translated] "Turkish"
+    tr: "Tyrkisk",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ukrainsk",
+    // [Auto-translated] "Urdu"
+    ur: "Urdu",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnamesere",
+    // [Auto-translated] "Chinese"
+    zh: "Kinesisk",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Kinesisk (forenklet)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Kinesisk (tradisjonell)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export var nbStrings = {
     visibletrigger: "endre synlighet (deprecated)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Samme som undersøkelsesspråk"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Eks.: +1(999)-999-99-99"
@@ -2405,12 +2798,6 @@ export var nbStrings = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Eks.: mm/dd/åååå HH:MM:ss"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Eks.: $",
-      // "Ex.: USD"
-      suffix: "Eks.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export var nbStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Angir hvor mange kolonner dette panelet strekker seg over i rutenettoppsettet.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "I denne tabellen kan du konfigurere hver rutenettkolonne i panelet. Den angir automatisk breddeprosenten for hver kolonne basert på maksimalt antall elementer på rad. For å tilpasse rutenettoppsettet, juster disse verdiene manuelt og definer tittelbredden for alle spørsmålene i hver kolonne."
+      gridLayoutColumns: "I denne tabellen kan du konfigurere hver rutenettkolonne i panelet. Den angir automatisk breddeprosenten for hver kolonne basert på maksimalt antall elementer på rad. For å tilpasse rutenettoppsettet, juster disse verdiene manuelt og definer tittelbredden for alle spørsmålene i hver kolonne.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Spesifiserer hvordan spørsmål i dette panelet vises når de er skrivebeskyttet. \"Skrivebeskyttet\" viser spørsmålene med deres vanlige inndatakontroller, men deaktivert for redigering. \"Visning\" viser svar som tekst eller andre ikke-interaktive elementer. \"Inherit\" bruker modusen som er satt for foreldrepanelet, siden eller undersøkelsen (\"Read-Only\" som standard)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export var nbStrings = {
       width: "Angir bredden på panelet i forhold til andre undersøkelseselementer på samme linje. Godtar CSS-verdier (px, %, i, pt osv.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Skriv inn en mal for dynamiske paneltitler. Bruk {panelIndex} for panelets generelle posisjon og {visiblePanelIndex} for rekkefølgen blant synlige paneler. Sett inn disse plassholderne i mønsteret for å legge til automatisk nummerering.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "En reservetekst for oppføringstitler som gjelder når oppføringstittelmønsteret ikke gir en meningsfull verdi. Bruk {panelIndex} for oppføringens generelle posisjon og {visiblePanelIndex} for rekkefølgen blant synlige oppføringer.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Skriv inn en mal for fanetitler. Bruk {panelIndex} for panelets generelle posisjon og {visiblePanelIndex} for rekkefølgen blant synlige paneler. Sett inn disse plassholderne i mønsteret for å legge til automatisk nummerering.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export var nbStrings = {
       keyName: "Referer til et spørsmålsnavn for å kreve at en bruker gir et unikt svar på dette spørsmålet i hvert panel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Utløser en bekreftelsesmelding før du fjerner en oppføring.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Spesifiser et uttrykk som beregner antall oppføringer. Dette uttrykket overstyrer innstillingen \"Innledende antall oppføringer\" og revurderes hver gang verdiene det refererer til endres. Resultatet er begrenset av innstillingene \"Minimum antall oppføringer\" og \"Maksimalt antall oppføringer\". Mens dette uttrykket er satt, kan ikke respondenter legge til eller fjerne oppføringer manuelt.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Angir antall oppføringer som vises på hver side i panelet. '0' deaktiverer paginering og viser alle oppføringer.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Lar respondenter sortere oppføringer ved hjelp av sorteringslinjen.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definerer den opprinnelige oppslagsrekkefølgen. Respondentene kan endre den hvis sortering er tillatt. Når man sorterer etter flere spørsmål, sorterer hvert spørsmål oppføringer innenfor rekkefølgen som er fastsatt av det foregående spørsmålet. Dra spørsmål for å endre prioritet.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Tildeler numre til spørsmål som er nestet i det dynamiske panelet."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Lar respondenter sortere rader ved å klikke på kolonneoverskrifter eller bruke sorteringslinjen.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definerer den opprinnelige rekkefølgen. Respondenter kan endre den hvis sortering er tillatt. Når man sorterer etter flere kolonner, sorterer hver kolonne rader innenfor rekkefølgen som er fastsatt av den foregående kolonnen. Dra kolonnene for å endre prioriteten deres.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" viser sorteringslinjen bare når matrisen ikke har sorterbare kolonneoverskrifter: overskriftene er skjult, matrisen bruker det mobile oppsettet, eller rader overføres til kolonner. \"Alltid\" viser sorteringslinjen selv når sorterbare kolonneoverskrifter er synlige.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Spesifiser et uttrykk som beregner antall rader. Dette uttrykket overstyrer innstillingen «Startantall rader» og revurderes hver gang verdiene det refererer til endres. Resultatet er begrenset av innstillingene «Minimum antall rader» og «Maksimalt antall rader». Mens dette uttrykket er satt, kan ikke respondenter legge til eller fjerne rader manuelt.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Utløser en bekreftelsesmelding før du fjerner en rad.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Utvider automatisk detaljdelen når en ny rad legges til i matrisen."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Angir antall rader som vises på hver side i matrisen. '0' deaktiverer paginering og viser alle rader.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Spesifiserer hvor mange felt en respondent kan sortere etter samtidig.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Dupliserer svar fra den siste raden og tilordner dem til den neste dynamiske raden som er lagt til.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export var nbStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Lange tekster i valgalternativer genererer automatisk linjeskift slik at de passer inn i rullegardinmenyen. Fjern merket hvis du vil at tekstene skal klippes ut.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Angir hvor mange kolonner dette spørsmålet strekker seg over i rutenettoppsettet."
+      effectiveColSpan: "Angir hvor mange kolonner dette spørsmålet strekker seg over i rutenettoppsettet.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Spesifiserer hvordan spørsmålet vises når det er skrivebeskyttet. \"Skrivebeskyttet\" viser spørsmålet med vanlige inndatakontroller, men deaktivert for redigering. \"Visning\" viser svar som tekst eller andre ikke-interaktive elementer. \"Inherit\" bruker modusen som er satt for foreldrepanelet, siden eller undersøkelsen (\"Read-Only\" som standard).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Viser hint for tilgjengelige tastaturhandlinger under dette spørsmålet. Alternativet \"Inherit\" bruker undersøkelsesnivå-innstillingen."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export var nbStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Velg hvis du vil hindre respondenter i å fylle ut undersøkelsen.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Spesifiserer hvordan skrivebeskyttede spørsmål vises, inkludert på forhåndsvisningssiden. \"Skrivebeskyttet\" (standard) viser spørsmål med deres vanlige inndatakontroller, men deaktivert for redigering. \"Vis\" viser svar som tekst eller andre ikke-interaktive elementer.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Angir plasseringen av fremdriftslinjen. \"Auto\"-verdien viser fremdriftslinjen over eller under undersøkelsesoverskriften."
     },
@@ -2633,7 +3050,9 @@ export var nbStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Når dette alternativet er valgt, opprettes det én kolonne for hvert valgalternativ.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje. Når satt til -1, arves den faktiske verdien fra egenskapen \"Nestet kolonneantall\" for den overordnede matrisen."
+      colCount: "Ordner valgalternativer i et oppsett med flere kolonner. Når den er satt til 0, vises alternativene på én enkelt linje. Når satt til -1, arves den faktiske verdien fra egenskapen \"Nestet kolonneantall\" for den overordnede matrisen.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Spesifiserer hvordan cellene i denne kolonnen vises når de er skrivebeskyttet. \"Skrivebeskyttet\" viser cellene med deres vanlige inndatakontroller, men deaktivert for redigering. \"Visning\" viser svar som tekst eller andre ikke-interaktive elementer. \"Inherit\" bruker modusen som er satt for matrisen eller undersøkelsen (\"Skrivebeskyttet\" som standard)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export var nbStrings = {
     questionErrorLocation: "Angir plasseringen til en feilmelding i forhold til spørsmålet med ugyldige inndata. Velg mellom: \"Topp\" - en feiltekst plasseres øverst i spørsmålsboksen; \"Bunn\" - en feiltekst er plassert nederst i spørsmålsboksen.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Velg om du vil at det første inntastingsfeltet på hver side skal være klart for tekstinntasting.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Viser bokstaver (A, B, C, ...) ved siden av valg i Radio Button Group, avkrysningsbokser og spørsmål i Image Picker. Respondenter kan velge valg ved å trykke på de tilsvarende bokstavtastene. Du kan overstyre denne innstillingen for individuelle spørsmål.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Viser bokstaver (A, B, C, ...) ved siden av valgene og lar respondentene velge dem ved å trykke på de tilsvarende bokstavtastene. Alternativet \"Inherit\" bruker undersøkelsesnivå-innstillingen."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Viser hint for tilgjengelige tastaturhandlinger under spørsmålene. Du kan overstyre denne innstillingen for individuelle spørsmål.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Beholder den opprinnelige rekkefølgen på spørsmål eller randomiserer dem. Effekten av denne innstillingen er bare synlig i kategorien Forhåndsvisning.",
     // [Auto-translated] "For text entry questions only."
@@ -2793,7 +3220,9 @@ export var nbStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Angir synligheten til navigasjonsknapper på siden. Alternativet \"Arv\" bruker innstillingen på undersøkelsesnivå, som som standard er \"Synlig\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "I denne tabellen kan du konfigurere hver rutenettkolonne på siden. Den angir automatisk breddeprosenten for hver kolonne basert på maksimalt antall elementer på rad. For å tilpasse rutenettoppsettet, juster disse verdiene manuelt og definer tittelbredden for alle spørsmålene i hver kolonne."
+      gridLayoutColumns: "I denne tabellen kan du konfigurere hver rutenettkolonne på siden. Den angir automatisk breddeprosenten for hver kolonne basert på maksimalt antall elementer på rad. For å tilpasse rutenettoppsettet, juster disse verdiene manuelt og definer tittelbredden for alle spørsmålene i hver kolonne.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Spesifiserer hvordan spørsmålene på denne siden vises når de er skrivebeskyttet. \"Skrivebeskyttet\" viser spørsmålene med deres vanlige inndatakontroller, men deaktivert for redigering. \"Vis\" viser svarene som tekst eller andre ikke-interaktive elementer. \"Inherit\" bruker modusen som er satt for undersøkelsen (\"Skrivebeskyttet\" som standard)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Angir plasseringen av en tidtaker på en side.",
@@ -2911,6 +3340,22 @@ export var nbStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Velg om du vil lagre spørsmålsverdien med en brukt maske i evalueringsresultatene."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Et område hvis formater gjelder for dato-tid, numeriske og valuta-inndatamasker. Hvis ikke spesifisert, brukes undersøkelsesspråket.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Overstyrer regionens datoformat som brukes i inngangsmasker. Mønsteret kan inneholde separatortegn og følgende plassholdere: <br>'m' - Månedsnummer.<br> 'mm' - Månedsnummer, med en ledende null for ensifrede verdier. <br>'d' - Månedsdag. <br>'dd' - Månedsdag, med en innledende null for ensifrede verdier. <br>'yy' - De to siste sifrene i året. <br>'yyyy' - Firesifret år.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Overstyrer regionens tidsformat brukt i inngangsmasker. Mønsteret kan inneholde separatortegn og følgende plassholdere: <br>'H' - Timer i 24-timers format.<br> 'HH' - Timer i 24-timers format, med en ledende null for ensifrede verdier. <br>'h' - Timer i 12-timers format. <br>'hh' - Timer i 12-timers format, med en ledende null for ensifrede verdier. <br>'MM' - Minutter. <br>'ss' - Sekunder. <br>'TT' - 12-timers klokkeperiode i store bokstaver (AM/PM). <br>'tt' - 12-timers klokkeperiode med små bokstaver (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Overstyrer symbolet regionen bruker for å skille den brøkdelen fra heltallsdelen av et vist tall i inndatamasker.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Overstyrer symbolet regionen bruker for å dele sifrene til et stort tall i grupper på tre i inngangsmasker.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Overstyrer regionens valutasymbol eller kode brukt i input-masker.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Overstyrer regionens valutamønster brukt i inndata-masker. Mønsteret kan inneholde følgende plassholdere: <br>'@' - Valutasymbol eller kode.<br> '#' - Tall. <br>'-' - Posisjon for minustegnet i negative verdier (hvis det utelates, plasseres minustegnet i begynnelsen)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Mønsteret kan inneholde strenglitteraler og følgende plassholdere: '9' - for et siffer; 'a' - for en stor eller liten bokstav; '#' - for et siffer eller en stor eller liten bokstav. Bruk omvendt skråstrek '\\' for å unnslippe et tegn."
@@ -2925,13 +3370,15 @@ export var nbStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Et symbol som brukes til å skille sifrene i et stort tall i grupper på tre.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Begrenser hvor mange sifre som skal beholdes etter desimaltegnet for et tall som vises."
+      precision: "Begrenser hvor mange sifre som skal beholdes etter desimaltegnet for et tall som vises.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Viser etterfølgende nuller i den brøkdelen opp til spesifisert presisjon. For eksempel, med presisjon på 2, vises en inngangsverdi på 1,2 som 1,20."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Ett eller flere symboler som skal vises før verdien.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Ett eller flere symboler som skal vises etter verdien."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Et valutasymbol eller kode vises med verdien. Regionens symbol brukes som standard. Fjern denne egenskapen for å vise noe symbol.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Angir posisjonene til tallet, valutasymbolet og minustegnet. Mønsteret kan inneholde følgende plassholdere: <br>'@' - Valutasymbol eller kode.<br> '#' - Tall. <br>'-' - Posisjonen til minustegnet i negative verdier (hvis utelatt, plasseres minustegnet i begynnelsen)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2982,6 +3429,8 @@ export var nbStrings = {
     tabAlign: "Justering av tabulatorer",
     // [Auto-translated] "File source type"
     sourceType: "Type filkilde",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Standardkamera",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Tilpass til container",
     // [Auto-translated] "Set value expression"
@@ -3302,12 +3751,702 @@ export var nbStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Forhåndsinnstilling anvendt"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Linje: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Bruk det foreslåtte navnet"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Fjern det gjentatte elementet"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Bruk den foreslåtte typen"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Bruk den foreslåtte funksjonen"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Bruk den foreslåtte masken"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Gi elementet et fritt navn"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Gi elementet et fritt navn"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Fjern eiendommen"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Bruk nærmeste tillatte verdi",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Fjern eiendommen",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Bruk den foreslåtte verdien"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Gjør verdien om til en liste"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Gi grunnstoffet et navn"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Fjern eiendommen",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Gi eiendommen nytt navn"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Bruk det foreslåtte navnet",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Bruk det foreslåtte navnet"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Bruk det foreslåtte navnet"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Bruk den foreslåtte typen"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Bruk den foreslåtte typen"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Uttrykket \"{uttrykk}\" kan ikke tolkes."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" finnes ikke – ingen spørsmål, rute, side, beregnet verdi eller variabel med det navnet eksisterer.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" finnes ikke i {containerType} \"{root}\" (referanse: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" finnes ikke i \"{scopePrefix}\"-omfanget (referanse: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "Nøkkelnavnet til \"{name}\" nevner \"{key}\" - \"{name}\" har ingen {keyNoun} med det navnet, så validering av duplikatnøkkel kjører aldri.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" finnes ikke."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop} i \"{name}\" refererer til selve elementet (referanse: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Navnet \"{name}\" er duplisert.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Det beregnede verdinavnet \"{name}\" brukes allerede av en annen beregnet verdi.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Den beregnede verdien \"{navn}\" deler navn med et annet element, så ett av dem skygger det andre."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} \"{name}\" til denne {ownerText} er også den innebygde survey-variabelen {{builtIn}} – surveyen svarer først på {{name}}, så denne er utilgjengelig i uttrykk.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "ValueName \"{valueName}\" av \"{name}\" deler verdien {otherType} \"{otherName}\", som ikke har noen egen verdiName – \"{otherName}\" behandler feltene \"{name}\" legger til som ukjent, og clearIncorrectValues() sletter dem. Sett også valueName til \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Raden \"{key}\" i matrixdropdown-menyen \"{otherName}\" er også {sharedKeyText} \"{name}\" som deler sin verdi – et celleobjekt og en enkelt verdi kan ikke begge ligge under én nøkkel; kjøretiden beholder den ene og sletter den andre.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" deler datanøkkelen \"{dataKey}\" med {otherType} \"{otherName}\" – den beholder {shapeText} der, mens \"{otherName}\" beholder {otherShapeText}; én kan ikke holde den andres verdi, så clearIncorrectValues() sletter den.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Datanøkkelen \"{dataName}\" er også kommentarnøkkelen til \"{base}\" (dens datanøkkel pluss \"{suffix}\") – den ene skrivingen overskriver stille den andre.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Datanøkkelen \"{dataName}\" er også totalnøkkelen til \"{base}\" (dens datanøkkel pluss \"{suffiks}\") – én skriving overskriver stille den andre.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "{trigger}-triggeren setter variabelen «{name}», som også er datanøkkelen til spørsmålet «{questionName}» – variabelen svarer {{name}} fra da av, ikke spørsmålet."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Navnet \"{name}\" er reservert – et medlem av Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "valueName \"{valueName}\" til \"{name}\" er reservert – et medlem av Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Kolonnen \"{name}\" i \"{matrixName}\" er reservert – et medlem av Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Elementet \"{name}\" i \"{questionName}\" er reservert – et medlem av Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Raden \"{rowValue}\" i \"{name}\" er reservert – et medlem av Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Den beregnede verdien \"{name}\" er reservert – et medlem av Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" har en ukjent type \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{navn}\" har ingen type – et element uten type utelates."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" er ikke en egenskap til {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" i {ownerText} er ikke serialiserbar – den trer i kraft ved lasting, og fjernes fra JSON-filen hver gang undersøkelsen lagres igjen.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" og \"{aliasKey}\" i {ownerText} er to navn på én egenskap – kjøretiden bruker dem i den rekkefølgen JSON-en skriver dem, så \"{winner}\" vinner.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" settes på \"{name}\", men inputType \"{inputType}\" har ingen begrensninger – kjøretiden ignorerer det."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{nøkkel} i {ownerText} er {valueText} – ikke en av de tillatte verdiene ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{nøkkel} i {ownerText} er {value}, utenfor sitt tillatte område {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "valueName \"{valueName}\" av \"{name}\" inneholder en \".\" - uttrykk leses {{valueName}} som en sti inn i \"{rootKey}\", så datanøkkelen kan aldri adresseres."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} har ingen \"{key}\" – egenskapen kreves for en {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Navnet på {className} er {valueText}, ikke en streng – undersøkelsen kan ikke laste den."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "\"{key}\" i {ownerText} er ikke et array – egenskapen holder en liste, og kjøretiden pakker verdien inn i et array med ett element."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Variabeldefinisjonen erklærer \"{variabel}\", som også er datanøkkelen for spørsmålet \"{name}\" – å sette variabelen sletter svaret lagret under den nøkkelen, og {{name}} svarer på vertsverdien fra da av.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Variabeldefinisjonen erklærer \"{variabel}\", som også er navnet på den beregnede verdien \"{name}\" – begge skriver samme slot, og den som kjører sist vinner."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition er ikke et survey-JSON-objekt, så ingen variabel er deklarert og ingen preset-verdi kan sjekkes.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets er ikke et array, så ingen preset er deklarert.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Preset #{index} er ikke et objekt.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Preset #{index} har ikke noe navn, så ingenting kan referere til den.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Preset \"{preset}\" bærer ikke noe variabelobjekt, så det setter ingenting.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Preset \"{preset}\" erklæres to ganger – et oppslag med det navnet svarer med det første.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Preset \"{preset}\" setter \"{variabel}\", som variabeldefinisjonen ikke erklærer.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Preset \"{preset}\" setter \"{variable}\" til en verdi variabeldefinisjonen avviser: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Funksjonen \"{functionName}\" er ikke registrert."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Den beregnede verdien \"{names}\" refererer til seg selv i sitt eget uttrykk.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Beregnede verdier {navn} avhenger av hverandre."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Triggeren reagerer på verdien den setter (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Triggere danner en løkke gjennom verdiene de setter: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} leser verdien den skriver selv – den kjører bare når en annen verdi endres, så den kjører aldri i det hele tatt.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Verdiene skrives i en løkke: {chain}. Hver skriving kjører uttrykkene som leser den på nytt, så de endelige verdiene avhenger av rekkefølgen spørsmålene besvares i."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Betingelsen sammenligner \"{navn}\" med {verdier} – ikke blant dens valg. Tilgjengelig: {tilgjengelig}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Betingelsen sammenligner \"{navn}\" med {verdier} – ingen valgverdi inneholder den. Tilgjengelig: {tilgjengelig}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Betingelsen anvender \"{operator}\" på \"{name}\": \"{recordName}\" ({questionType}) har ingen verdi å sammenligne.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Betingelsen gjelder \"{operator}\" for \"{name}\": \"{recordName}\" gjelder {valueShapeText} – ordning og aritmetiske operatorer gjelder ikke for den.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Betingelsen gjelder \"{operator}\" for \"{name}\": \"{recordName}\" er et boolsk spørsmål – ordningsoperatorer gjelder ikke for den.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Betingelsen gjelder \"{operator}\" for \"{name}\": \"{recordName}\" er et tekstspørsmål – verdien er en streng, så numerisk sammenligning bygger på implisitt konvertering.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Betingelsen gjelder \"{operator}\" for \"{name}\": \"{recordName}\" holder en datostreng – sammenlignet med tallet {constValue} ikke kan holde.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Betingelsen gjelder \"{operator}\" for \"{name}\": \"{recordName}\" er numerisk – sammenligning med strengen \"{constValue}\" kan ikke gjelde.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Betingelsen gjelder \"{operator}\" for \"{name}\": \"{recordName}\" inneholder et array av valgte verdier, så \"=\" sammenligner hele arrayet.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Betingelsen gjelder \"{operator}\" for \"{name}\": \"{recordName}\" er et boolsk spørsmål – å sammenligne det med {constValue} kan ikke gjelde."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{uttrykk}\" er alltid falskt, så \"{name}\" vises aldri.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} \"{uttrykk}\" gjelder aldri, fordi {fakta}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{uttrykk}\" gjelder aldri – ingen tillatt verdi tilfredsstiller det: {fakta}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{uttrykk}\" motsier seg selv: {fakta}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{uttrykk}\" er alltid sann, så den avgjør ingenting.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{uttrykk}\" er aritmetikk, ikke en sammenligning, så det gir aldri et ja eller nei.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "En del av {prop} \"{uttrykk}\" har et resultat som er kjent på forhånd.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} \"{uttrykk}\" gjelder alltid, fordi {fakta} - det avgjør ingenting."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{uttrykk}\" leser ikke noe spørsmål eller variabel."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "Standardverdien for \"{name}\" er {valuesText}, som den aldri kan holde. Tillatt: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Det riktige svaret på \"{name}\" er {valuesText}, som den aldri kan holde. Tillatt: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Triggeren setter \"{name}\" til {valuesText}, som den aldri kan holde. Tillatt: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Standard radverdi setter \"{name}\" til {valuesText}, som den aldri kan holde. Tillatt: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Standard panelverdi setter \"{name}\" til {valuesText}, som den aldri kan holde. Tillatt: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} av \"{name}\" navngir \"{key}\" – ingen slik rad. Tilgjengelig: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop} i \"{name}\" navngir \"{key}\" – ingen slik kolonne. Tilgjengelig: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} av \"{name}\" navngir \"{key}\" – ingen slik mal-spørsmål. Tilgjengelig: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Copyvalue-triggeren kopierer \"{fromName}\" til \"{setToName}\", men \"{fromName}\" holder {sourceShapeText} og \"{setToName}\" holder {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Kopiverdi-triggeren kopierer \"{fromName}\" til \"{setToName}\", men ingen verdi av \"{fromName}\" er blant verdiene \"{setToName}\" kan holde. Tillatt: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" kopierer valgene sine fra \"{source}\", men det finnes ingen tvil om det navnet.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" kopierer valgene sine fra seg selv.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" kopierer sine valg fra \"{source}\" ({sourceType}), som verken gir valg eller et array av verdier.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" leser {prop} \"{field}\" fra \"{source}\", men {sourceType} \"{source}\" har ingen slik {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Et annet element i {prop} i \"{name}\" har allerede verdien {valueText} – kjøretiden beholder begge elementene.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Valgene \"{name}\" inneholder {valueText} mens {toggleProp} er på – den kolliderer med det innebygde {specialItemText}-elementet."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "{trigger}-triggeren sikter mot siden \"{name}\", som ikke eksisterer.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "{trigger}-triggeren retter seg mot \"{name}\", men {containerType} \"{root}\" har ingen {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{trigger} trigger {verb} \"{name}\", men det finnes ingen {kindText} med det navnet."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Triggertypen \"{type}\" er ikke kjent.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Avtrekkeren har ingen type."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Valideringstypen \"{type}\" til \"{name}\" er ikke kjent.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "En validator av \"{name}\" har ingen type."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "{validatorType}-validatoren til \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "{validatorType}-validatoren for \"{name}\" krever minst {min} og maksimalt {max} – ingen svar tilfredsstiller den.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Answercount-validatoren for «{name}» krever minst {minCount} svar, over de {selectable} valgene som kan velges sammen.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Regex-validatoren av \"{name}\" har et mønster motoren avviser: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Uttrykksvalidatoren for \"{name}\" har ikke noe uttrykk, så den går alltid gjennom."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} av \"{name}\" er {min}, over {maxProp} av {max} – kjøretiden justerer stille en av dem.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} av \"{name}\" er {count}, {retning} dens {boundProp} av {bound} – kjøretiden klemmer den.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} av \"{name}\" er {step}, men området det går gjennom ({minProp}.. {maxProp}) dekker kun {range} - kjøretiden klemmer det.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "minSelectedChoices i \"{name}\" er {min}, over de {selectable} valgene som kan velges sammen – spørsmålet kan aldri besvares."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" kan aldri bli synlig: det er synligIf leser {reads}, som {deadClause}, så betingelsen gjelder aldri."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "MaskType \"{maskType}\" av \"{name}\" er ikke en kjent maske – kjøretiden faller tilbake til ingen maske i det hele tatt.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "MaskSettings til \"{name}\" setter \"{key}\", som ikke er en egenskap ved \"{maskType}\"-masken – kjøretiden dropper den stille.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "MaskInnstillinger for \"{name}\" settes uten maskType – kjøretiden beholder bare \"saveMaskedValue\" og dropper resten.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "{maskType}-masken \"{name}\" gjelder ingen input: inputType \"{inputType}\" er kun maskert for tekst og tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Dato-tidsmasken \"{name}\" setter min/max uten mønster – grensene gjelder for mønsterets datodeler, så uten en gjør de ingenting.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "{maskType}-masken \"{name}\" tillater minst {min} og maksimalt {max} – ingen verdi tilfredsstiller den."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Det dynamiske panelet \"{name}\" har en tom mal – panelene har ingenting å gjengi.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\" har ingen elementer.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\" har ingen elementer som noen gang kan gjengi – hvert element er skjult, beskyttet av en betingelse som aldri gjelder, eller tomt.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Detaljelementene i \"{name}\" vises aldri: detailPanelMode er \"none\", som er standard."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Posisjon: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Den ble bygget ut fra de gamle navn-, operator- og verdiegenskapene til triggeren.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Inne: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Mente du \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Hvis det er en egendefinert komponent, send definisjonen til linteren for å muliggjøre full analyse.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Registrer funksjonen før du linter, eller oppfør den i linter-alternativene.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "En feilstavet type droppes stille under kjøring, og en tilpasset trigger dekkes ikke av mål- og syklussjekkene.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Hvis det er en variabel satt under kjøring, list den i linter-alternativene.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Løkken kan være utilgjengelig hvis triggerbetingelsene aldri holder sammen – verifiser uttrykkene.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "En defaultValueExpression gjelder kun inntil spørsmålet er besvart.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "I uttrykk: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Referert i bindinger.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Referert i valgene ByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Referert i \"{0}\"-teksten.", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () leser det navnet fra hver oppføring i {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Argumentet {0}() nevner verken spørsmål, panel eller side.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Deserializeren slipper en nøkkel den ikke kjenner.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Deserializeren dropper en validator den ikke kan løse, så ingenting validerer.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "InputType er \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Det er datanøkkelen til \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "og",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} er alltid {verdi}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} er {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "I det minste {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "Høyst {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} kan ikke være begge {verdier}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} kan ikke være {verdi} og ikke være det",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} kan ikke være tom og være {verdi}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} kan verken være tom eller tom",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} kan ikke være over {min} og under {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} blir bedt om å være en som ikke har noen verdi i det hele tatt"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "\"{0}.\"-referanser er kun tilgjengelige inne i en matrisecelle eller et matrisedetaljpanel.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" er kun tilgjengelig inne i en matrisecelle eller et matrisedetaljpanel.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "\"{0}.\"-referanser er kun tilgjengelige inne i et dynamisk panel eller en panelbeholder.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "\"{0}.\"-referanser er kun tilgjengelige inne i et dynamisk panel.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" er kun tilgjengelig inne i et dynamisk panel.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" er kun tilgjengelig innenfor valg-, rad- og kolonneforhold.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\" referanser er kun tilgjengelige i et sammensatt spørsmål.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" er ikke tilgjengelig i et inArray-filter, som kjører mot elementet og deretter undersøkelsen.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" er en kolonne i denne matrisen – referer til den med radprefikset.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" er et spørsmål om dette dynamiske panelet – referer til det med panelprefikset."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Sett inputType: \"number\" på \"{0}\" hvis den samler tall.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Bruk \"contains\" eller \"anyof\" for multi-select-verdier."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "Side",
+        // [Auto-translated] "panel"
+        panel: "Panel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Navn",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "Navn"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "beregnet verdi",
+        // [Auto-translated] "element"
+        default: "Element"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Undersøkelsen",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Annet",
+        // [Auto-translated] "None"
+        none: "Ingen",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Nekter å svare",
+        // [Auto-translated] "Don't know"
+        dontknow: "Vet ikke"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "Skyter aldri",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "avviser alle svar",
+        // [Auto-translated] "cannot validate"
+        default: "kan ikke validere"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Spørsmålet gir ikke noe svar som kan valideres",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "En lengde leses fra en tekstverdi, og dette svaret har ingen",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Svaret er ikke et tall og kan aldri bli det",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "et nummer stemmer aldri overens med en e-postadresse",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Svaret er ikke en liste over verdier",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Svaret er ikke en verdi den kan sjekke"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "et array",
+        // [Auto-translated] "an object"
+        object: "et objekt"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "en rad med matrise",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "et flertekstelement",
+        // [Auto-translated] "a row or item of a question"
+        default: "en rad eller et spørsmål"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "et array av objekter",
+        // [Auto-translated] "an object"
+        object: "et objekt",
+        // [Auto-translated] "a plain value"
+        plain: "en enkel verdi",
+        // [Auto-translated] "a value"
+        default: "en verdi"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "et array av valgte verdier",
+        // [Auto-translated] "a single value"
+        scalar: "en enkelt verdi",
+        // [Auto-translated] "a value"
+        default: "en verdi"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "Nedenfor",
+        // [Auto-translated] "above"
+        above: "Ovenfor"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "er aldri synlig og mottar aldri en verdi",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "aldri er synlige og mottar aldri en verdi"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Spørsmål",
+        // [Auto-translated] "question or variable"
+        questionvalue: "Spørsmål eller variabel",
+        // [Auto-translated] "page"
+        page: "Side"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "Leser",
+        // [Auto-translated] "navigates to"
+        gotoName: "navigerer til",
+        // [Auto-translated] "sets"
+        default: "Mengder"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Malspørsmål",
+        // [Auto-translated] "column"
+        default: "Kolonne"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Malspørsmål",
+        // [Auto-translated] "column"
+        matrixdynamic: "Kolonne",
+        // [Auto-translated] "item"
+        multipletext: "Gjenstand",
+        // [Auto-translated] "row"
+        matrix: "Rad",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Rad",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Kolonne",
+        // [Auto-translated] "field"
+        default: "Felt"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Vare 1" }, { value: "item2", text: "Vare 2" }, { value: "item3", text: "Vare 3" }],
-    columns: [{ value: "column1", text: "Kolonne 1" }, { value: "column2", text: "Kolonne 2" }, { value: "column3", text: "Kolonne 3" }],
-    rows: [{ value: "row1", text: "Rad 1" }, { value: "row2", text: "Rad 2" }],
-    matrixColumns: [{ name: "column1", title: "Kolonne 1" }, { name: "column2", title: "Kolonne 2" }, { name: "column3", title: "Kolonne 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Vare 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Vare 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Vare 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Kolonne 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Kolonne 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Kolonne 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Rad 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Rad 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Kolonne 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Kolonne 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Kolonne 3"
+      }
+    ]
   }
 };
 

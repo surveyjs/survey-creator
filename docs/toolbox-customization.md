@@ -1,5 +1,5 @@
 ---
-title: Customize Survey Creator Toolbox | Open-Source JavaScript Form Libraries 
+title: Customize Survey Creator Toolbox | JavaScript Form Builder Libraries 
 description: Learn to switch between full and compact modes, limit available question and panel types, group items by categories, customize predefined Toolbox items, and even add custom elements.
 ---
 
@@ -8,13 +8,6 @@ description: Learn to switch between full and compact modes, limit available que
 The Toolbox contains available question and panel types. Users can click questions and panels or drag and drop them onto the design surface to add them to the survey. This help topic describes how you can customize the Toolbox.
 
 <img src="images/survey-creator-toolbox-full.png" alt="Survey Creator - Toolbox in full mode" width="1544" height="772">
-
-- [Full and Compact Modes](#full-and-compact-modes)
-- [Limit Available Question and Panel Types](#limit-available-question-and-panel-types)
-- [Group Toolbox Items by Categories](#group-toolbox-items-by-categories)
-- [Customize Predefined Toolbox Items](#customize-predefined-toolbox-items)
-- [Manage Toolbox Subitems](#manage-toolbox-subitems)
-- [Add a Custom Toolbox Item](#add-a-custom-toolbox-item)
 
 ## Full and Compact Modes
 
@@ -37,7 +30,7 @@ You can also use the [`isCompact`](https://surveyjs.io/Documentation/Survey-Crea
 console.log(creator.toolbox.isCompact);
 ```
 
-[View Demo](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization (linkStyle))
+[Demo: Toolbox Customization](/survey-creator/examples/survey-toolbox-customization/ (linkStyle))
 
 ## Limit Available Question and Panel Types
 
@@ -58,7 +51,7 @@ import { SurveyCreatorModel } from "survey-creator-core";
 const creator = new SurveyCreatorModel(creatorOptions);
 ```
 
-[View Demo](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization (linkStyle))
+[Demo: Toolbox Customization](/survey-creator/examples/survey-toolbox-customization/ (linkStyle))
 
 ## Customize Predefined Toolbox Items
 
@@ -75,7 +68,7 @@ creator.toolbox
   ];
 ```
 
-[View Demo](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization (linkStyle))
+[Demo: Toolbox Customization](/survey-creator/examples/survey-toolbox-customization/ (linkStyle))
 
 ## Add a Custom Toolbox Item
 
@@ -198,7 +191,7 @@ translations.toolboxCategories["misc"] = "Other Questions";
 //
 ```
 
-[View Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-categories/ (linkStyle))
+[Demo: Toolbox Categories](/survey-creator/examples/survey-toolbox-categories/ (linkStyle))
 
 To change the category of one or several toolbox items without redefining the entire toolbox structure, use the [`changeCategory(itemName, categoryName)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#changeCategory) or [`changeCategories(items)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#changeCategories) method. The following code places the Dynamic Panel and Dynamic Matrix toolbox items into a new "Dynamic Elements" category:
 
@@ -217,7 +210,7 @@ Toolbox categories do not show their titles by default. Instead, the categories 
 creator.toolbox.showCategoryTitles = true;
 ```
 
-[View Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-categories/ (linkStyle))
+[Demo: Toolbox Categories](/survey-creator/examples/survey-toolbox-categories/ (linkStyle))
 
 ### Reorder Categories
 
@@ -281,7 +274,7 @@ longTextItem.addSubitem({
 });
 ```
 
-[View Demo](/survey-creator/examples/manage-toolbox-subitems/ (linkStyle))
+[Demo: Manage Toolbox Subitems](/survey-creator/examples/manage-toolbox-subitems/ (linkStyle))
 
 ### Customize Subitems
 
@@ -312,7 +305,7 @@ To remove a subitem, call the [`removeSubitem(subitem)`](/survey-creator/documen
   - `"password"`
   - `"range"`
   - `"tel"`
-  - `"text"`
+  - `"text-default"`
   - `"time"`
   - `"url"`
   - `"week"`
@@ -338,3 +331,5 @@ You can completely deactivate the subitems feature by disabling the Toolbox's [`
 ```js
 creator.toolbox.showSubitems = false;
 ```
+
+[Demo: Manage Toolbox Subitems](/survey-creator/examples/manage-toolbox-subitems/ (linkStyle))

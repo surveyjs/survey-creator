@@ -1,9 +1,12 @@
 import { SurveySimulatorModel } from "../simulator";
-import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultCss, createDropdownActionModel, surveyLocalization, ITheme, LocalizableString, CssClassBuilder } from "survey-core";
+import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultCss, createDropdownActionModel, surveyLocalization, ITheme, LocalizableString, toCssClasses, IDialogOptions, settings as surveySettings, Helpers, ListModel } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { notShortCircuitAnd } from "../../utils/utils";
+import { createPageSelectorLocTitle } from "../../utils/actions";
 import { findSuitableTheme, isThemeEmpty } from "./theme-model";
+import { VariablePresetsManager } from "../../variable-presets";
+import { VariablesViewerModel } from "../variables-viewer/variables-viewer";
 
 export class PreviewViewModel extends Base {
   public enableInvisiblePages: boolean = true;
@@ -12,6 +15,8 @@ export class PreviewViewModel extends Base {
   public prevPageAction: Action;
   public nextPageAction: Action;
   public selectPageAction: Action;
+  public selectVariablePresetAction: Action;
+  public viewVariablesAction: Action;
   public testAgainAction: Action;
   public simulator: SurveySimulatorModel;
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
@@ -19,7 +24,11 @@ export class PreviewViewModel extends Base {
   @property({
     defaultValue: false,
     onSet: (val: boolean, target: PreviewViewModel) => {
-      target.simulator.survey.showInvisibleElements = val;
+      // survey-core runs every condition again on each assignment, even of the same value, and show()
+      // assigns false to every new survey, which has it already
+      if (target.simulator.survey.showInvisibleElements !== val) {
+        target.simulator.survey.showInvisibleElements = val;
+      }
     }
   })
     showInvisibleElements;
@@ -70,7 +79,10 @@ export class PreviewViewModel extends Base {
   @property() isPageToolbarVisible: boolean;
   @property() tabContentAdditionalCss: string;
 
-  constructor(protected surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultCss) {
+  // variablePresets is the Preview plugin's manager of the active preset (issue #7982); it outlives
+  // this view model, which is rebuilt on every activation, so it is handed in rather than created.
+  constructor(protected surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultCss,
+    protected variablePresets?: VariablePresetsManager) {
     super();
     this.simulator = new SurveySimulatorModel(surveyProvider);
     this.pages.setActionsAppearance({ style: "neutral", mode: "tertiary", size: "x-small" });
@@ -81,12 +93,39 @@ export class PreviewViewModel extends Base {
       const self = this;
       const hasSimulatorFrame = self.simulator.hasFrame;
       const surveyIsEmpty = !!self.survey?.isEmpty;
-      return new CssClassBuilder()
-        .append("svc-test-tab--empty", surveyIsEmpty)
-        .append("svc-test-tab--with-simulator-frame", hasSimulatorFrame)
-        .append("svc-creator-tab__content--with-toolbar", !!self.isPageToolbarVisible)
-        .toString();
+      return toCssClasses(
+        surveyIsEmpty && "svc-test-tab--empty",
+        hasSimulatorFrame && "svc-test-tab--with-simulator-frame",
+        !!self.isPageToolbarVisible && "svc-creator-tab__content--with-toolbar"
+      );
     }) as any as string;
+    // The active preset can change from outside - a host assigning it, or the preset editor - and
+    // a host can replace the container; neither is reactive on its own, so the actions and the
+    // running survey follow the creator's event and the creator's property change.
+    this.variablePresetsChangedCallback = () => this.onVariablePresetsChanged();
+    surveyProvider.onVariablePresetsChanged.add(this.variablePresetsChangedCallback);
+    this.creatorPropertyChangedCallback = (sender: Base, options: any) => {
+      if (options.name === "variablePresets") {
+        this.onVariablePresetsChanged();
+      }
+    };
+    surveyProvider.onPropertyChanged.add(this.creatorPropertyChangedCallback);
+  }
+  private variablePresetsChangedCallback: () => void;
+  private creatorPropertyChangedCallback: (sender: Base, options: any) => void;
+  // The variables the running survey was built with; {} when none were applied.
+  private appliedVariables: { [name: string]: any } = {};
+  // One path for every change, wherever it came from: the switcher, a host assigning the active
+  // preset or the container, the preset editor. The survey restarts only when the values it would
+  // run with differ from the ones it runs with, so choosing a preset with the same values, or a
+  // change to an inactive preset, does not throw the answers away.
+  private onVariablePresetsChanged(): void {
+    this.updateVariablePresetActions();
+    if (!this.simulator?.survey || !this.json) return;
+    if (Helpers.isTwoValueEquals(this.appliedVariables, this.activeVariables)) return;
+    // a survey mid-run whose variables change underneath is not a state production has, and the
+    // answers already given belong to the branch the previous preset chose
+    this.testAgain();
   }
 
   public get isMobileView() {
@@ -131,9 +170,30 @@ export class PreviewViewModel extends Base {
         component: "sv-action-bar",
         data: this.contentActionsContainer
       });
+      // Only when a host configured variable presets and this tab runs them: a creator without the
+      // feature, and the Theme tab, must leave alone what a host set in
+      // onSurveyInstanceSetupHandlers, which has already run by now.
+      // Inside the callback, so that defaultValueExpression, a visibleIf on the first page and
+      // calculated values see the variables while the model is still being built - set after
+      // simulator.survey was assigned, the first page would render once without them.
+      // clearPrevious: a preset is a complete world and not a patch, so what it does not name is
+      // unset, a variable a setup handler set included.
+      // The shallow copy keeps a survey that writes to a variable out of the host's container.
+      // Nested object values stay shared by reference, exactly as they would be in a host that
+      // passed them to setVariable itself.
+      this.appliedVariables = {};
+      if (!!this.variablePresets && !!this.surveyProvider.variablePresets) {
+        this.appliedVariables = { ...this.activeVariables };
+        survey.setVariables({ ...this.activeVariables }, true);
+      }
     });
-    const hasSurveyBefore = !!this.simulator.survey;
+    const oldSurvey = this.simulator.survey;
+    const hasSurveyBefore = !!oldSurvey;
     this.simulator.survey = newSurvey;
+    // the survey of the previous run (Test Again, a theme, an update) is not shown anywhere any more
+    if (hasSurveyBefore) {
+      this.disposeSurvey(oldSurvey);
+    }
     if (this.onSurveyCreatedCallback)this.onSurveyCreatedCallback(this.survey);
     this.survey.onComplete.add((sender: SurveyModel) => {
       this.isRunning = false;
@@ -170,6 +230,13 @@ export class PreviewViewModel extends Base {
     }
   }
 
+  private disposeSurvey(survey: SurveyModel): void {
+    if (!survey || survey.isDisposed) return;
+    // SurveyModel.dispose disposes its layout elements' data, and this one's container outlives the
+    // survey: every new survey gets it, with the plugin's Test Again action in it
+    survey.removeLayoutElement("complete-customization");
+    survey.dispose();
+  }
   public setJSON(json: any, currTheme: any) {
     this.json = json;
     if (json != null) {
@@ -221,11 +288,7 @@ export class PreviewViewModel extends Base {
     const pages: Array<IAction> = [];
     for (let i: number = 0; i < this.survey.pages.length; i++) {
       const page: PageModel = this.survey.pages[i];
-      const locTitle = new LocalizableString(page, true);
-      locTitle.setJson(page.locTitle.getJson());
-      locTitle.onGetTextCallback = (text: string): string => {
-        return this.getPageTitle(text, page);
-      };
+      const locTitle = createPageSelectorLocTitle(page, (text: string) => this.getPageTitle(text, page));
       const pageItem: IAction = {
         id: page.name,
         data: page,
@@ -337,8 +400,114 @@ export class PreviewViewModel extends Base {
       this.nextPageAction.action = () => setNearPage(true);
       pageActions.push(this.nextPageAction);
     }
+    this.selectVariablePresetAction = createDropdownActionModel({
+      id: "variablePresetSelector",
+      css: "svc-variable-preset-selector",
+      title: getLocString("vp.selectorTitle") + ": " + getLocString("vp.noPreset"),
+      visible: false
+    }, {
+      items: [],
+      allowSelection: true,
+      onSelectionChanged: (item: IAction) => {
+        // the restart, when the values differ, follows through onVariablePresetsChanged
+        if (!!this.variablePresets) {
+          this.variablePresets.active = item.id;
+        }
+      },
+      cssClass: "svc-creator-popup",
+      verticalPosition: "top",
+      horizontalPosition: "center"
+    }, this.surveyProvider);
+    pageActions.push(this.selectVariablePresetAction);
+    // No icon: nothing in the creator's icon set reads as "variable", and drawing one is a design
+    // decision rather than an implementation one (issue #7982).
+    this.viewVariablesAction = new Action({
+      id: "variablePresetsView",
+      css: "svc-variable-presets-view",
+      title: getLocString("vp.view"),
+      action: () => this.showVariablesDialog()
+    });
+    pageActions.push(this.viewVariablesAction);
     this.pages.actions = pageActions;
+    this.updateVariablePresetActions();
     this.updatePrevNextPageActionState();
+  }
+  // A view model built without the plugin - older tests do that - has no manager and no variables.
+  private get activeVariables(): { [name: string]: any } {
+    return this.variablePresets?.activeVariables || {};
+  }
+  private get activeVariablePreset(): string {
+    return this.variablePresets?.active || "";
+  }
+  // The container is a plain host object and is not reactive, so the actions are recomputed on
+  // demand: when they are built, and whenever the creator says the presets or the selection changed.
+  private updateVariablePresetActions(): void {
+    if (!this.selectVariablePresetAction) return;
+    const presets = this.surveyProvider.variablePresetsModel;
+    const names = presets.getPresetNames();
+    const activeName = this.activeVariablePreset;
+    // Preset names are host data and not creator strings: they are shown as they were written, and
+    // the list holds nothing but them - no synthetic "no preset" entry.
+    const items: Array<IAction> = names.map(name => <IAction>{ id: name, title: name });
+    // setItems and not a write to a field named items: the list renders its actions, and a
+    // ListModel has no items property - the page selector gets away with that write only because
+    // it is created with its items already in place.
+    const listModel: ListModel = this.selectVariablePresetAction.popupModel.contentComponentData.model;
+    listModel.setItems(items);
+    listModel.selectedItem = items.filter(item => item.id === activeName)[0];
+    this.selectVariablePresetAction.title = getLocString("vp.selectorTitle") + ": " +
+      (!!activeName ? activeName : getLocString("vp.noPreset"));
+    // No manager - the Theme tab inherits this toolbar and does not run presets - means no
+    // controls, whatever the creator holds.
+    const hasVariables = !!this.variablePresets && (names.length > 0 || presets.hasDefinition);
+    this.selectVariablePresetAction.visible = <any>new ComputedUpdater<boolean>(() => {
+      // deliberately not pageListItems.length: a one-page survey has no page selector and still
+      // has variables. There is nothing to switch between with a single preset.
+      return notShortCircuitAnd(hasVariables, names.length > 1) && this.isSurveyRunning();
+    });
+    this.viewVariablesAction.visible = <any>new ComputedUpdater<boolean>(() => {
+      return notShortCircuitAnd(hasVariables, this.isSurveyRunning());
+    });
+    // One button, one id: with a definition it opens the preset editor and says Edit, or says View
+    // when nothing may be changed - even then the editor is the structured view, with the
+    // definition's titles and choices, and not raw JSON. Only canEdit picks the title; what the
+    // button opens is decided by the definition alone.
+    const canEditPresets = !!this.variablePresets && this.variablePresets.canEdit;
+    this.viewVariablesAction.title = getLocString(canEditPresets ? "vp.edit" : "vp.view");
+    // disabled rather than hidden, so that the bar does not reflow when a preset is chosen. With a
+    // definition the list is worth opening with nothing active - an empty list is exactly where Add
+    // is the next step - so that rule belongs to the JSON dialog alone.
+    this.viewVariablesAction.enabled = presets.hasDefinition || !!activeName;
+  }
+  // With a definition the button opens the preset editor; without one there is nothing to build a
+  // form from - no variable name, no type, no allowed values - and the read-only JSON below is the
+  // honest answer.
+  private showVariablesDialog(): void {
+    if (!!this.variablePresets && this.surveyProvider.variablePresetsModel.hasDefinition) {
+      this.variablePresets.showEditor();
+    } else {
+      this.showVariablesViewDialog();
+    }
+  }
+  // A plain read-only textarea that fills the dialog - neither a survey nor the Ace JSON editor:
+  // these values are not edited, not validated and never written back.
+  public showVariablesViewDialog(): void {
+    const creator = this.surveyProvider;
+    const title = getLocString("vp.viewTitle") + " - " + this.activeVariablePreset;
+    const model = new VariablesViewerModel(JSON.stringify(this.activeVariables, null, 2), title);
+    const popupModel = surveySettings.showDialog(<IDialogOptions>{
+      componentName: "svc-variables-viewer",
+      data: { model: model },
+      onApply: (): boolean => { return true; },
+      cssClass: "svc-creator-popup svc-variables-viewer-popup",
+      title: title,
+      displayMode: "popup"
+    }, creator.rootElement);
+    if (!!popupModel) {
+      const actions = popupModel.footerToolbar.actions;
+      actions.splice(1, actions.length - 1);
+      actions[0].title = "OK";
+    }
   }
   private setActivePageItem(page: PageModel, val: boolean) {
     const item: IAction = this.getPageItemByPage(page);
@@ -408,7 +577,17 @@ export class PreviewViewModel extends Base {
     if (this.selectPageAction) {
       this.selectPageAction.dispose();
     }
+    if (this.selectVariablePresetAction) {
+      this.selectVariablePresetAction.dispose();
+    }
+    if (this.viewVariablesAction) {
+      this.viewVariablesAction.dispose();
+    }
+    this.surveyProvider.onVariablePresetsChanged.remove(this.variablePresetsChangedCallback);
+    this.surveyProvider.onPropertyChanged.remove(this.creatorPropertyChangedCallback);
+    const survey = this.simulator.survey;
     this.simulator.dispose();
+    this.disposeSurvey(survey);
     super.dispose();
   }
 }

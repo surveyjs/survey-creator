@@ -24,6 +24,7 @@ import CollabRow from "./components/CollabRow.vue";
 import FloatingPanel from "./components/FloatingPanel.vue";
 import Simulator from "./tabs/preview/Simulator.vue";
 import ComponentContainer from "./components/ComponentContainer.vue";
+import VariablesViewer from "./components/VariablesViewer.vue";
 import SurveyWidget from "./components/SurveyWidget.vue";
 import Test from "./tabs/preview/Test.vue";
 import ContainerTab from "./tabs/ContainerTab.vue";
@@ -32,6 +33,7 @@ import SurveyResults from "./tabs/preview/SurveyResults.vue";
 import SurveyResultsRow from "./tabs/preview/SurveyResultsRow.vue";
 
 import JsonEditorAce from "./tabs/json/JsonEditorAce.vue";
+import JsonEditorMonaco from "./tabs/json/JsonEditorMonaco.vue";
 import JsonEditorTextArea from "./tabs/json/JsonEditorTextArea.vue";
 import JsonEditorErrorItem from "./tabs/json/JsonEditorErrorItem.vue";
 
@@ -147,6 +149,7 @@ function registerComponents(
   registerComponent("json-error-item", JsonEditorErrorItem);
   registerComponent("svc-tab-json-editor-textarea", JsonEditorTextArea);
   registerComponent("svc-tab-json-editor-ace", JsonEditorAce);
+  registerComponent("svc-tab-json-editor-monaco", JsonEditorMonaco);
 
   registerComponent("svc-tab-translation", Translation);
   registerComponent("sd-translation-line-skeleton", TranslationLineSkeleton);
@@ -158,6 +161,7 @@ function registerComponents(
   registerComponent("svc-tab-theme", Theme);
 
   registerComponent("svc-component-container", ComponentContainer);
+  registerComponent("svc-variables-viewer", VariablesViewer);
   registerComponent("svc-tab-container", ContainerTab);
 
   registerComponent("svc-toolbox", AdaptiveToolbox);

@@ -142,6 +142,10 @@ export var turkishStrings = {
     jsonHideErrors: "Hataları gizleme",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "Hataları göster",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Hata düzeltin",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "Anket JSON bir nesne olmalı.",
     // "Undo"
     undo: "Geri",
     // "Redo"
@@ -246,6 +250,8 @@ export var turkishStrings = {
     translateUsigAI: "Tümünü Otomatik Çevir",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Çeviri kaynağı: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Kalan dizileri dönüştürün",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Çevrilmemiş dizeler",
     // "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var turkishStrings = {
     translationSource: "Kaynak: ",
     // [Auto-translated] "Target: "
     translationTarget: "Hedef: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Kaynak dil",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Hedef dil",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} teller çevrildi",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Seçilen dil için tüm çevrilmiş dizeleri silmek istediğinizden emin misiniz?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Form Görünümü",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Şebeke Görünümü",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Çeviri dizeleri",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Anket Dizileri",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Çevirecek bir şart yok",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Tüm dizileri çeviriyor",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} dizeler çevrilmez",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube bağlantıları desteklenmemektedir.",
     // [Auto-translated] "Export"
@@ -286,6 +314,10 @@ export var turkishStrings = {
     choicesLoadedFromWebLinkText: "Ayarlara git",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Yüklenen seçim seçeneklerinin önizlemesi",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "İfade kümesi yok",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Düzenleme ifadesi",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML içeriği burada olacak.",
     // [Auto-translated] "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var turkishStrings = {
       uncompletedRule_cancel: "Hayır, kuralları tamamlamak istiyorum"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Değişken ön ayar",
+    // [Auto-translated] "None"
+    noPreset: "Hiçbiri yok",
+    // [Auto-translated] "View variable values"
+    view: "Değişken değerlerini görüntüleyin",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Değişken değerleri",
+    // [Auto-translated] "Manage presets"
+    edit: "Manage presetler",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Değişken Ön Ayarlar",
+    // [Auto-translated] "Preset"
+    presetName: "Ön ayar",
+    // [Auto-translated] "Description"
+    presetDescription: "Tanım",
+    // [Auto-translated] "Add preset"
+    addPreset: "Ön ayar ekle",
+    // [Auto-translated] "New preset"
+    newPresetName: "Yeni ön ayar",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Delete preset",
+    // [Auto-translated] "Back"
+    back: "Geri",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Bu isimle bir ön ayar zaten mevcuttur",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Bir ön ayar adı girin",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Ön ayar",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Tanım"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "İfade Asistanı",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Yapay Zeka ile Yaz",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "İfadenin ne yapması gerektiğini anlatın",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Örneğin: bu soruyu yanıtlayan 18 yaş veya üzerindeyken gösterin",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Durumu kelimelerle tanımlayın",
+    // [Auto-translated] "Generate"
+    generate: "Oluştur",
+    // [Auto-translated] "Refine"
+    refine: "Geliştirme",
+    // [Auto-translated] "Explain"
+    explain: "Açıklayın",
+    // [Auto-translated] "Stop"
+    stop: "Dur",
+    // [Auto-translated] "Accept"
+    accept: "Kabul et",
+    // [Auto-translated] "Reject"
+    reject: "Reddet",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Düzeltmeyi uygula: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Güncel ifade",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Önerilen ifade",
+    // [Auto-translated] "Reads as"
+    readsAs: "Şöyle okunur:",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Asistanın açıklaması",
+    // [Auto-translated] "Check results"
+    findings: "Sonuçları kontrol et",
+    // [Auto-translated] "Error"
+    severityError: "Hata",
+    // [Auto-translated] "Warning"
+    severityWarning: "Uyarı",
+    // [Auto-translated] "Info"
+    severityInfo: "Bilgi",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "\"{0}\"de",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "İfadeyi tanımlayın ve Oluştur'u seçin.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Asistanı bekliyorum...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Talep iptal edildi.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Asistan şöyle bildirdi: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Asistan bir ifade önermedi.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Önerilen ifadeyi gözden geçirin.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asistan mevcut ifadeyi açıkladı.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Önerilen ifadede hatalar vardır ve kabul edilemez.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Önerilen ifade, yazıldığı her yer için kontrol edilemez, bu yüzden kabul edilemez.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Kurala bir eylem ekleyin, sonra asistana sorun.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "İlk öneride hatalar vardı ve otomatik olarak düzeltildi."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var turkishStrings = {
       templateDescription: "Giriş açıklama deseni",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Giriş başlığı deseni",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Giriş başlığı yer tutucu",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Boş panel metni",
       // [Auto-translated] "Tab title pattern"
@@ -588,6 +724,10 @@ export var turkishStrings = {
       templateErrorLocation: "Hata iletisi hizalaması",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Yeni giriş konumu",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Sayfa başına başvuru sayısı",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Kullanıcıların girişleri sıralamasına izin verin",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Aşağıdaki soruda yinelenen yanıtları önleyin"
     },
@@ -675,6 +815,12 @@ export var turkishStrings = {
       // [Auto-translated] "Expression"
       expression: "İfade"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sıralayın",
+      // [Auto-translated] "Order"
+      direction: "Düzen"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "İfade"
@@ -690,7 +836,9 @@ export var turkishStrings = {
       // [Auto-translated] "Survey description"
       description: "Anket açıklaması",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Anketi salt okunur hale getirin"
+      readOnly: "Anketi salt okunur hale getirin",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Bölgesel formatlar"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -726,7 +874,9 @@ export var turkishStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Aşağıdaki durumlarda sütunu gerekli yap",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Her seçenek ayrı bir sütunda"
+      showInMultipleColumns: "Her seçenek ayrı bir sütunda",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Bu sütuna göre sıralamaya izin verin"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export var turkishStrings = {
     masksettings: {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Anket sonuçlarında maskelenmiş değeri kaydetme"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Bölge",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Tarih deseni",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Zaman deseni",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "ondalık ayırıcı",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Binlerce ayırıcı",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Para birimi sembolü",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Para birimi desenleri"
     },
     patternmask: {
       // [Auto-translated] "Value pattern"
@@ -761,16 +927,18 @@ export var turkishStrings = {
       decimalSeparator: "Ondalık ayırıcı",
       // [Auto-translated] "Value precision"
       precision: "Değer hassasiyeti",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Geride duran sıfırları göster",
       // [Auto-translated] "Minimum value"
       min: "Minimum değer",
       // [Auto-translated] "Maximum value"
       max: "Maksimum değer"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Para birimi öneki",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Para birimi son eki"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Para birimi sembolü",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Para birimi desenleri"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Seçildiğinde diğerlerini temizleme",
@@ -812,8 +980,24 @@ export var turkishStrings = {
     addItem: "Yeni nesne ekleme için tıklayınız...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Öğeyi kaldırmak için tıklayın...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Ekle {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Kaldır {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Öğeyi sürükleyin",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "İç içe seçenekleri genişlet",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Çöktü iç içe seçimler",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "İç içe seçeneklerini genişletmek {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Çöktü iç içe seçimler {0}",
+    // [Auto-translated] "Show description"
+    showDescription: "Gösteri açıklaması",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Gizle açıklaması",
     // "Edit"
     edit: "Düzenle",
     // [Auto-translated] "Done"
@@ -856,40 +1040,60 @@ export var turkishStrings = {
     propertyNameIsIncorrect: "Ayrılmış kelimeler kullanmayın: \"öğe\", \"seçim\", \"panel\", \"satır\".",
     // "You don't have any items yet"
     listIsEmpty: "Yeni eleman ekle",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Henüz başka seçeneğiniz yok",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Henüz sütununuz yok",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Henüz düzen sütunlarına sahip değilsiniz",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Henüz satırınız yok",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Henüz herhangi bir doğrulama kuralınız yok",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Henüz özelleştirilebilen değişkeniniz yok",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Henüz herhangi bir tetikleyiciniz yok",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Henüz bağlantınız yok",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Henüz hiç sayfanız yok",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Yeni seçim ekle",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Yeni sütun ekle",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Yeni satır ekle",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Yeni kural ekle",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Yeni değişken ekle",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Yeni tetikleyici ekle",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Yeni URL ekle",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Yeni sayfa ekle",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Seçenek yok",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Özel derecelendirme değerleri yok",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Özel etiket yok",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Bölge yok",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Sütun yok",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Yerleşim sütunları yok",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Sıralar yok",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Doğrulama kuralları yok",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Özel değişken yok",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Tetikleyici yok",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Koşullu işaretleme yok",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Bağlantı yok",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Sayfa yok",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Sıralama seviyeleri yok",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Seçenek ekle",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Puan değeri ekleyin",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Etiket ekleyin",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Alan ekle",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Sütun ekle",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Sıra ekle",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Ekle kuralı",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Değişken ekle",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Tetikleyici ekle",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Markup ekleyin",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Bağlantı ekle",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Sayfa ekle",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Sıralama seviyesi ekleyin",
     // "Value"
     value: "Değer",
     // "Text"
@@ -916,6 +1120,8 @@ export var turkishStrings = {
     surveyTitlePlaceholder: "Anket başlığı",
     // "Page {num}"
     pageTitlePlaceholder: "Sayfa başlığı",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Panel Başlığı",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Başlangıç Sayfası",
     // "Description"
@@ -966,6 +1172,8 @@ export var turkishStrings = {
     visible: "Görünür?",
     // "Required"
     isRequired: "Zorunlu?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Olumlu bir cevap talep ediyorum",
     // [Auto-translated] "Mark as required"
     markRequired: "Gerektiği gibi işaretleyin",
     // [Auto-translated] "Remove the required mark"
@@ -976,6 +1184,8 @@ export var turkishStrings = {
     eachRowUnique: "Satırlarda yinelenen yanıtları önleme",
     // "Error message for required questions"
     requiredErrorText: "Zorunlu hata yazısı",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Evet gerektiğinde hata mesajı",
     // "Display the question on a new line"
     startWithNewLine: "Yeni satırla başla?",
     // "Rows"
@@ -994,6 +1204,16 @@ export var turkishStrings = {
     maxFiles: "Maksimum dosya sayısı",
     // "Row count"
     rowCount: "Satır sayısı",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Sayfa başına satır sayısı",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Kullanıcıların satırları sıralamasına izin verin",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Maksimum sıralama seviyeleri",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Varsayılan sıralama sırası",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Gösteri sıralama çubuğu",
     // "Columns layout"
     columnLayout: "Kolon yerleşimi",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export var turkishStrings = {
     questionErrorLocation: "Soru hatası konumu",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "İlk soruyu sayfayı değiştirmeye odakla",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Seçim kısayollarını etkinleştir",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Klavye ipuçlarını göster",
     // "Question order"
     questionOrder: "Sayfadaki öğelerin sırası",
     // "Time limit to complete the survey"
@@ -1264,10 +1488,12 @@ export var turkishStrings = {
     waitForUpload: "Yüklemenin tamamlanmasını bekleyin",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Satır ayrıntıları hizalaması",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "Minimum satır sayısı",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Maksimum satır sayısı",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Satır sayısı ifadesi",
     // "Confirm row removal"
     confirmDelete: "Satır silme işlemini onaylama",
     // [Auto-translated] "Confirmation message"
@@ -1278,6 +1504,8 @@ export var turkishStrings = {
     minPanelCount: "Minimum giriş sayısı",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Maksimum giriş sayısı",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Giriş sayısı ifadesi",
     // [Auto-translated] "Initial entry state"
     panelsState: "İlk giriş durumu",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export var turkishStrings = {
     logoHeight: "Logo uzunluk",
     // "Read-only"
     readOnly: "Salt okunur",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Yalnızca okunma modu",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Aşağıdaki durumlarda salt okunur modunu devre dışı bırakın",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export var turkishStrings = {
       columns: "Kolonlar",
       // "Rows"
       rows: "Satırlar",
+      // [Auto-translated] "Entries"
+      entries: "Kayıtlar",
       // "Choice Options"
       choices: "Seçenekler",
       // "Items"
@@ -1544,6 +1776,8 @@ export var turkishStrings = {
       question: "Soru",
       // "Pages"
       pages: "Sayfalar",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Bölgesel Formatlar",
       // "Quiz Mode"
       timer: "Zamanlayıcı / Sınav",
       // "Calculated Values"
@@ -1862,6 +2096,12 @@ export var turkishStrings = {
       // [Auto-translated] "Never"
       none: "Hiç"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Sadece okuma",
+      // [Auto-translated] "View"
+      view: "Görünüm"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "Radyo düğmeleri",
     inputType: {
@@ -1913,6 +2153,12 @@ export var turkishStrings = {
       warning: "Uyarı",
       // [Auto-translated] "Informational"
       info: "Bilgi"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Ön Kısım",
+      // [Auto-translated] "Rear"
+      environment: "Arka"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export var turkishStrings = {
     underRowSingle: "Satırın altında yalnızca bir bölüm görüntüleyin",
     // "Auto"
     auto: "Otomatik",
+    // [Auto-translated] "Always"
+    always: "Her zaman",
     timerInfoMode: {
       // "Both"
       combined: "Her ikisi"
@@ -2321,7 +2569,148 @@ export var turkishStrings = {
       survey: "Anketle aynı",
       // [Auto-translated] "Same as container"
       container: "Konteyner ile aynı"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Miras Alma",
+      // [Auto-translated] "Hide"
+      "false": "Saklan",
+      // [Auto-translated] "Show"
+      "true": "Gösteri"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arapça",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bulgarca",
+    // [Auto-translated] "Catalan"
+    ca: "Katalanca",
+    // [Auto-translated] "Czech"
+    cs: "Çekçe",
+    // [Auto-translated] "Welsh"
+    cy: "Galce",
+    // [Auto-translated] "Danish"
+    da: "Danimarkaca",
+    // [Auto-translated] "German"
+    de: "Almanca",
+    // [Auto-translated] "Greek"
+    el: "Yunanca",
+    // [Auto-translated] "English"
+    en: "İngilizce",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "İngilizce (Avustralya)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "İngilizce (Kanada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "İngilizce (Birleşik Krallık)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "İngilizce (İrlanda)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "İngilizce (Hindistan)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "İngilizce (Yeni Zelanda)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "İngilizce (Güney Afrika)",
+    // [Auto-translated] "Spanish"
+    es: "İspanyolca",
+    // [Auto-translated] "Estonian"
+    et: "Estonca",
+    // [Auto-translated] "Basque"
+    eu: "Bask",
+    // [Auto-translated] "Persian"
+    fa: "Farsça",
+    // [Auto-translated] "Finnish"
+    fi: "Fince",
+    // [Auto-translated] "Filipino"
+    fil: "Filipinli",
+    // [Auto-translated] "French"
+    fr: "Fransızca",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Fransızca (Kanada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Fransızca (İsviçre)",
+    // [Auto-translated] "Hebrew"
+    he: "İbranice",
+    // [Auto-translated] "Hindi"
+    hi: "Hintçe",
+    // [Auto-translated] "Croatian"
+    hr: "Hırvatça",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Haiti Kreolu",
+    // [Auto-translated] "Hungarian"
+    hu: "Macarca",
+    // [Auto-translated] "Indonesian"
+    id: "Endonezya",
+    // [Auto-translated] "Icelandic"
+    is: "İzlanda",
+    // [Auto-translated] "Italian"
+    it: "İtalyanca",
+    // [Auto-translated] "Japanese"
+    ja: "Japonca",
+    // [Auto-translated] "Georgian"
+    ka: "Gürcüce",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazakça",
+    // [Auto-translated] "Korean"
+    ko: "Kore",
+    // [Auto-translated] "Lithuanian"
+    lt: "Litvanca",
+    // [Auto-translated] "Latvian"
+    lv: "Letonca",
+    // [Auto-translated] "Macedonian"
+    mk: "Makedonca",
+    // [Auto-translated] "Burmese"
+    mm: "Burma",
+    // [Auto-translated] "Malay"
+    ms: "Malay",
+    // [Auto-translated] "Dutch"
+    nl: "Hollandaca'yı",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Hollanda (Belçika)",
+    // [Auto-translated] "Norwegian"
+    no: "Norveççe",
+    // [Auto-translated] "Polish"
+    pl: "Lehçe",
+    // [Auto-translated] "Portuguese"
+    pt: "Portekizce",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portekizce (Brezilya)",
+    // [Auto-translated] "Romanian"
+    ro: "Romanca",
+    // [Auto-translated] "Russian"
+    ru: "Rusça",
+    // [Auto-translated] "Slovak"
+    sk: "Slovakça",
+    // [Auto-translated] "Slovenian"
+    sl: "Slovence",
+    // [Auto-translated] "Serbian"
+    sr: "Sırp",
+    // [Auto-translated] "Swedish"
+    sv: "İsveççe",
+    // [Auto-translated] "Swahili"
+    sw: "Svahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tacik",
+    // [Auto-translated] "Thai"
+    th: "Tay dili",
+    // [Auto-translated] "Turkish"
+    tr: "Türkçe",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ukraynaca",
+    // [Auto-translated] "Urdu"
+    ur: "Urduca",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnamca",
+    // [Auto-translated] "Chinese"
+    zh: "Çince",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Çince (Basitleştirilmiş)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Çince (Geleneksel)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export var turkishStrings = {
     visibletrigger: "görünürlüğü değiştir (kullanımdan kaldırıldı)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Anket dili ile aynı"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Ör.: +1(999)-999-99-99"
@@ -2405,12 +2798,6 @@ export var turkishStrings = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Ör.: aa/gg/yyyy HH:MM:ss"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Ör.: $",
-      // "Ex.: USD"
-      suffix: "Ör.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export var turkishStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Bu panelin ızgara mizanpajı içinde kaç sütuna yayılacağını belirtir.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Bu tablo, panel içindeki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın."
+      gridLayoutColumns: "Bu tablo, panel içindeki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Bu paneldeki soruların yalnızca okunabilir olduğunda nasıl göründüğünü belirtir. \"Sadece Okuyur\" soruları olağan giriş kontrolleriyle gösterir, ancak düzenleme için devre dışı bırakılır. \"Görüntü\" cevapları metin veya etkileşimsiz diğer öğeler olarak gösterir. \"Miras\" ana panel, sayfa veya anket için ayarlanmış modu kullanır (\"Varsayılan olarak \"Sadece Okuyur\")."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export var turkishStrings = {
       width: "Panelin genişliğini aynı satırdaki diğer anket öğeleriyle orantılı olarak ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Dinamik panel başlıkları için bir şablon yazın. Panelin genel konumu için {panelIndex} ve görünür paneller arasındaki sırası için {visiblePanelIndex} kullanın. Otomatik numaralandırma eklemek için bu yer tutucuları desene ekleyin.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Giriş başlıkları için bir yedek metin, giriş başlığı deseni anlamlı bir değer üretmediğinde uygulanır. Girişin genel konumu için {panelIndex}, görünür girişler arasındaki sırası için ise {visiblePanelIndex} kullanın.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Sekme başlıkları için bir şablon yazın. Panelin genel konumu için {panelIndex} ve görünür paneller arasındaki sırası için {visiblePanelIndex} kullanın. Otomatik numaralandırma eklemek için bu yer tutucuları desene ekleyin.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export var turkishStrings = {
       keyName: "Kullanıcının her panelde bu soruya benzersiz bir yanıt vermesini zorunlu kılmak için bir soru adına başvurun.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Bir girişi kaldırmadan önce bir onay istemini tetikler.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Giriş sayısını hesaplayan bir ifade belirtin. Bu ifade \"Başlangıç girdi sayısı\" ayarını geçersiz kılar ve referans verdiği değerler değiştiğinde yeniden değerlendirilir. Sonuç, \"Minimum giriş sayısı\" ve \"En fazla giriş sayısı\" ayarlarıyla sınırlıdır. Bu ifade ayarlanmışken, katılımcılar girişleri manuel olarak ekleyip çıkaramaz.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Panelin her sayfasında gösterilen giriş sayısını belirtir. '0' sayfa sayısını devre dışı bırakır ve tüm girişleri gösterir.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Katılımcıların sıralama çubuğu kullanarak girişleri sıralamasına olanak tanır.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "İlk giriş sırasını tanımlar. Yanıtlayanlar sıralamaya izin verilirse bunu değiştirebilir. Birden fazla soruya göre sıralarken, her soru girişleri önceki sorunun belirlediği sırayla sıralar. Soruları sürükleyerek önceliklerini değiştirin.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Dinamik panelde iç içe geçmiş sorulara numaralar atar."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Yanıtlayıcıların sütun başlıklarına tıklayarak veya sıralama çubuğunu kullanarak satır sıralamalarına olanak tanır.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "İlk satır sırasını tanımlar. Yanıtlayanlar sıralamaya izin verilirse bunu değiştirebilir. Birden fazla sütuna göre sıralarken, her sütun önceki sütunun belirlediği sırayla sıraları sıralar. Sütunları sürükleyerek önceliklerini değiştirin.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Otomatik\" sıralama çubuğunu yalnızca matrisin sıralanabilir sütun başlıkları olmadığında gösterir: başlıklar gizli, matris mobil düzeni kullanır veya satırlar sütunlara aktarılır. \"Her zaman\", sıralanabilir sütun başlıkları görünürken bile sıralama çubuğunu gösterir.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Satır sayısını hesaplayan bir ifade belirtin. Bu ifade \"İlk satır sayısı\" ayarını geçersiz kılar ve referans verdiği değerler değiştiğinde yeniden değerlendirilir. Sonuç, \"Minimum satır sayısı\" ve \"Maksimum satır sayısı\" ayarlarıyla sınırlıdır. Bu ifade ayarlanmışken, yanıtlayıcılar el ile satır ekleyemez veya çıkaramaz.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Bir satırı kaldırmadan önce bir onay istemini tetikler.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Matrise yeni bir satır eklendiğinde ayrıntı bölümünü otomatik olarak genişletir."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Matrisin her sayfasında gösterilen satır sayısını belirtir. '0' sayfa sayısını devre dışı bırakır ve tüm satırları gösterir.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Bir katılımcının aynı anda kaç alana göre sıralayabileceğini belirtir.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Son satırdaki yanıtları çoğaltır ve bunları bir sonraki eklenen dinamik satıra atar.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export var turkishStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Seçim seçeneklerindeki uzun metinler, açılır menüye sığacak şekilde otomatik olarak satır sonları oluşturur. Metinlerin kırpılmasını istiyorsanız seçimi kaldırın.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Bu sorunun ızgara düzeni içinde kaç sütuna yayılacağını belirtir."
+      effectiveColSpan: "Bu sorunun ızgara düzeni içinde kaç sütuna yayılacağını belirtir.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Sorunun sadece okunabilir olduğunda nasıl göründüğünü belirtir. \"Sadece Okuyur\" seçeneği, soruyu alışılmış giriş kontrolleriyle gösterir, ancak düzenleme için devre dışı bırakılır. \"Görüntü\" cevapları metin veya etkileşimsiz diğer öğeler olarak gösterir. \"Inherit\" ana panel, sayfa veya anket için ayarlanmış mod ayarını kullanır (\"Varsayılan olarak \"Sadece Oku\").",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Bu sorunun altında mevcut klavye işlemleri için ipuçları gösterilir. \"Inherit\" seçeneği anket seviyesi ayarını uygular."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export var turkishStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Yanıtlayanların anketinizi doldurmasını engellemek isteyip istemediğinizi seçin.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Önizleme sayfasında da dahil olmak üzere sadece okunabilir soruların nasıl göründüğünü belirtir. \"Sadece Okuyur\" (varsayılan) soruları alışılmış giriş kontrolleriyle gösterir, ancak düzenleme için devre dışı bırakılır. \"Görüntü\" cevapları metin veya etkileşimsiz diğer öğeler olarak gösterir.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "İlerleme çubuğunun konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."
     },
@@ -2633,7 +3050,9 @@ export var turkishStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Seçildiğinde, her seçim seçeneği için ayrı bir sütun oluşturur.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir. -1 olarak ayarlandığında, gerçek değer üst matrisin \"İç içe sütun sayısı\" özelliğinden devralınır."
+      colCount: "Seçim seçeneklerini çok sütunlu bir düzende düzenler. 0 olarak ayarlandığında, seçenekler tek bir satırda görüntülenir. -1 olarak ayarlandığında, gerçek değer üst matrisin \"İç içe sütun sayısı\" özelliğinden devralınır.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Bu sütundaki hücrelerin yalnızca okunabilir olduğunda nasıl göründüğünü belirtir. \"Sadece Okunan\" hücreleri alışılmış giriş kontrolleriyle gösterir, ancak düzenleme için devre dışı bırakılır. \"Görüntü\" cevapları metin veya etkileşimsiz diğer öğeler olarak gösterir. \"Miras\" matris veya anket için ayarlanmış mod kullanır (\"Varsayılan olarak \"Sadece Okunan\")."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export var turkishStrings = {
     questionErrorLocation: "Geçersiz girişi olan soruyla ilgili olarak bir hata mesajının konumunu ayarlar. Şunlar arasından seçim yapın: \"Üst\" - soru kutusunun en üstüne bir hata metni yerleştirilir; \"Alt\" - soru kutusunun altına bir hata metni yerleştirilir.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Her sayfadaki ilk giriş alanının metin girişi için hazır olmasını istiyorsanız seçin.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Radyo Düğme Grubu, Kontrol Kutuları ve Görsel Seçici sorularındaki seçeneklerin yanında harfler (A, B, C, ...) gösterilir. Katılımcılar, ilgili harf tuşlarına basarak seçenekleri seçebilirler. Bu ayarı bireysel sorular için geçersiz kılabilirsiniz.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Seçeneklerin yanında harfler (A, B, C, ...) gösterir ve yanıtıcıların ilgili harf tuşlarına basarak seçmelerine olanak tanır. \"Miras\" seçeneği, anket seviyesindeki ayarı kullanır."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Soruların altında mevcut klavye eylemleri için ipuçları gösterilir. Bu ayarı bireysel sorular için geçersiz kılabilirsiniz.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Soruların orijinal sırasını korur veya rastgele hale getirir. Bu ayarın etkisi yalnızca Önizleme sekmesinde görünür.",
     // [Auto-translated] "For text entry questions only."
@@ -2793,7 +3220,9 @@ export var turkishStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Sayfadaki gezinme düğmelerinin görünürlüğünü ayarlar. \"Devral\" seçeneği, varsayılan olarak \"Görünür\" olan anket düzeyi ayarını uygular.",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Bu tablo, sayfadaki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın."
+      gridLayoutColumns: "Bu tablo, sayfadaki her bir ızgara sütununu yapılandırmanıza olanak tanır. Bir satırdaki maksimum öğe sayısına bağlı olarak her sütun için genişlik yüzdesini otomatik olarak ayarlar. Tablo düzenini özelleştirmek için bu değerleri manuel olarak ayarlayın ve her sütundaki tüm sorular için başlık genişliğini tanımlayın.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Bu sayfadaki soruların yalnızca okunabilir olduğunda nasıl göründüğünü belirtir. \"Sadece Okuyur\" soruları alışılmış giriş kontrolleriyle gösterir, ancak düzenleme için devre dışı bırakılmıştır. \"Görüntü\" cevapları metin veya etkileşimsiz diğer öğeler olarak gösterir. \"Inherit\" anket için ayarlanmış modu kullanır (\"Varsayılan olarak \"Sadece Okudan\")."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Sayfadaki bir zamanlayıcının konumunu ayarlar.",
@@ -2911,6 +3340,22 @@ export var turkishStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Soru değerini, anket sonuçlarında uygulanan bir maske ile saklamak istiyorsanız seçin."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Tarih-saat, sayısal ve para birimi giriş maskeleri için formatları uygulanan bir bölge. Belirtilmediyse, anket dili kullanılır.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Giriş maskelerinde kullanılan bölgenin tarih formatını geçersiz kılar. Desen, ayırıcı karakterler ve şu yer tutucuları içerebilir: <br>'m' - Ay numarası.<br> 'mm' - Ay numarası, tek haneli değerler için önde sıfır var. <br>'d' - Ayın günü. <br>'dd' - Ayın günü, tek haneli değerler için önde sıfır ile. <br>'yy' - Yılın son iki rakamlı. <br>'yyyy' - Dört haneli yıl.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Giriş maskelerinde kullanılan bölgenin zaman formatını geçersiz kılar. Desen, ayırıcı karakterler ve aşağıdaki yer tutucuları içerebilir: <br>'H' - 24 saat formatında saatler.<br> 'HH' - 24 saat formatında saatler, tek haneli değerler için önde sıfır işareti var. <br>'h' - 12 saatlik formatta saatler. <br>'hh' - 12 saat formatında saatler, tek haneli değerler için önde sıfır ile gösterilir. <br>'MM' - Dakikalar. <br>'ss' - Saniyeler. <br>'TT' - 12 saatlik saat peridi büyük harfle (/PM). <br>'TT' - 12 saatlik saat peridi küçük harfle (/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Bölgenin giriş maskelerinde gösterilen bir sayının kesirli kısmını tam sayı kısmından ayırmak için kullandığı sembolü geçersiz kılar.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Bölgenin giriş maskelerinde büyük bir sayının rakamlarını üçlü gruplara ayırmak için kullandığı sembolü geçersiz kılar.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Bölgenin para birimi sembolünü veya giriş maskelerinde kullanılan kodunu geçersiz kılanır.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Giriş maskelerinde kullanılan bölgenin para birimi desenini geçersiz kılar. Desen aşağıdaki yer tutucuları içerebilir: <br>'@' - Para birimi sembolü veya kodu.<br> '#' - Sayı. <br>'-' - Eksisi işaretinin negatif değerlerdeki konumu (eksik işareti çıkarılırsa, en işareti başta yer alır)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Desen, dize değişmez değerlerini ve aşağıdaki yer tutucuları içerebilir: '9' - bir rakam için; 'a' - büyük veya küçük harf için; '#' - bir rakam veya büyük veya küçük harf için. Bir karakterden kaçmak için ters eğik çizgi '\\' kullanın."
@@ -2925,13 +3370,15 @@ export var turkishStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Büyük bir sayının rakamlarını üçlü gruplara ayırmak için kullanılan bir sembol.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Görüntülenen bir sayı için ondalık virgülden sonra kaç basamak tutulacağını sınırlar."
+      precision: "Görüntülenen bir sayı için ondalık virgülden sonra kaç basamak tutulacağını sınırlar.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Kesirli kısımdaki geride duran sıfırları belirtilen hassasiyete kadar gösterir. Örneğin, 2 hassasiyetle 1.2 giriş değeri 1.20 olarak gösterilir."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Değerden önce görüntülenecek bir veya birkaç sembol.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Değerden sonra görüntülenecek bir veya birkaç sembol."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Değerle birlikte gösterilen bir para birimi sembolü veya kodu. Bölgenin sembolü varsayılan olarak kullanılır. Bu özelliği sembol göstermemesi için temizleyin.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Numara, para birimi sembolü ve eksi işaretinin konumlarını belirtir. Desen aşağıdaki yer tutucuları içerebilir: <br>'@' - Para birimi sembolü veya kodu.<br> '#' - Sayı. <br>'-' - eksi işaretinin negatif değerlerdeki konumu (eksik işareti çıkarılırsa, en işareti başta yerleştirilir)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2982,6 +3429,8 @@ export var turkishStrings = {
     tabAlign: "Sekme hizalaması",
     // [Auto-translated] "File source type"
     sourceType: "Dosya kaynağı türü",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Varsayılan kamera",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Konteynere sığdır",
     // [Auto-translated] "Set value expression"
@@ -3302,12 +3751,702 @@ export var turkishStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Ön ayar uygulandı"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Hat: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Önerilen ismi kullanın"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Tekrarlanan öğeyi kaldır"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Önerilen tipi kullanın"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Önerilen fonksiyonu kullanın"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Önerilen maskeyi kullanın"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Elemana ücretsiz bir isim verin"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Elemana ücretsiz bir isim verin"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Mülkü kaldırın"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "En yakın izin verilen değeri kullanın",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Mülkü kaldırın",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Önerilen değeri kullanın"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Değeri bir listeye dönüştür"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Elemana bir isim verin"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Mülkü kaldırın",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Mülkün adını değiştirin"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Önerilen ismi kullanın",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Önerilen ismi kullanın"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Önerilen ismi kullanın"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Önerilen tipi kullanın"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Önerilen tipi kullanın"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "\"{expression}\" ifadesi ayrıştırılamaz."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" bulunmuyor - bu isimle ilgili hiçbir soru, panel, sayfa, hesaplanan değer veya değişken bulunmuyor.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" {containerType} \"{root}\" içinde bulunmuyor (referans: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" \"{scopePrefix}\" kapsamında bulunmuyor (referans: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "\"{name}\" anahtarının keyName \"{key}\" - \"{name}\" isimiyle {keyNoun} arasında bir {keyNoun} yoktur, bu yüzden tekrarlanan anahtar doğrulaması asla çalışmaz.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" bulunamadı."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "\"{name}\" kelimesinin {prop} öğesine atıfta bulunur (referans: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "\"{name}\" ismi tekrar edilir.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Hesaplanan değer adı \"{name}\" zaten başka bir hesaplanan değer tarafından kullanılmıştır.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Hesaplanan değer \"{name}\" başka bir elemanla aynı adı paylaşır, böylece biri diğerini gölgeler."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "Bu {ownerText}'in {nameKindText} \"{name}\" aynı zamanda yerleşik anket değişkeni {{builtIn}}'dir - anket önce {{name}}'e cevap verir, bu yüzden bu değişken ifadelerde erişilemez.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "\"{name}\"nin valueName \"{valueName}\" değerini paylaşan \"{name}\" değerini paylaşan {otherType} \"{otherName}\" değerini paylaşıyor; bunun kendi değeri olmayan - \"{otherName}\" \"{name}\" eklediği alanları bilinmeyen olarak kabul eder ve clearIncorrectValues() bunları siler. Değername'i de \"{valueName}\" olarak ayarlayın.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "\"{otherName}\" adlı matrix açılır menüsündeki \"{key}\" satırı da {sharedKeyText} \"{name}\" değerini paylaşır - bir hücre nesnesi ve tek bir değer aynı anahtar altında yaşayamaz; çalışma zamanı birini tutar ve diğerini siler.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\", veri anahtarı \"{dataKey}\"i {otherType} ile {otherType} \"{otherName}\" ile paylaşır - {shapeText} orada kalırken, \"{otherName}\" {otherShapeText} tutar; biri diğerinin değerini tutamaz, bu yüzden clearIncorrectValues() onu siler.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "\"{dataName}\" veri anahtarı aynı zamanda \"{base}\" (veri anahtarı artı \"{suffix}\") yorum anahtarıdır - bir yazı sessizce diğerinin üzerine yazar.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "\"{dataName}\" veri anahtarı aynı zamanda \"{base}\" (veri anahtarı artı \"{suffix}\") toplamları anahtarıdır - bir yazı sessizce diğerinin üzerine yazar.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "{tetikleyici} tetikleyicisi, \"{name}\" değişkenini ayar, bu aynı zamanda \"{questionName}\" sorusunun veri anahtarıdır - değişken bundan sonra {{name}} soruya cevap verir, soruya değil."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "\"{name}\" adı ayrılmıştır - Object.prototype üyesidir.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "\"{name}\" için \"{valueName}\" değernamesi ayrılmıştır - Object.prototype üyesidir.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "\"{matrixName}\" sütunu ayrılmıştır - Object.prototype üyesidir.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "\"{questionName}\" öğesi ayrılmıştır - Object.prototype üyesidir.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "\"{name}\" satırı \"{rowValue}\" ayrılmıştır - Object.prototype üyesidir.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Hesaplanan \"{name}\" değeri ayrılmıştır - Object.prototype üyesidir."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" bilinmeyen bir tipe sahiptir \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" tipi yoktur - tipi olmayan bir eleman düşürülür."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" {ownerText} ({className}) özelliği değildir."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "{ownerText}'in \"{key}\" dosyası serileştirilemez - yükleme sırasında etkisini gösterir ve anket tekrar kaydedildiğinde JSON'dan düşürülür.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "{ownerText}'in \"{key}\" ve \"{aliasKey}\" bir özelliğin iki adıdır - çalışma süresi bunları JSON'un yazdığı sırayla uygular, yani \"{winner}\" kazanır.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" \"{name}\" üzerinde ayarlanır, ancak inputType \"{inputType}\" sınırı yoktur - çalışma zamanı bunu görmezden gelir."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{ownerText}'in {anahtarı} {valueText}'dir - izin verilen değerlerden biri değildir ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{ownerText}'in {anahtarı} {value} olup, izin verilen aralığı {rangeText} dışındadır.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "\"{name}\"'nin valueName \"{valueName}\" ifadesi, \"{{valueName}}\" ifadesi \"{{rootKey}\"'e giden bir yol olarak okunur, bu nedenle veri anahtarının kendisi asla adreslenemez."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText}'in \"{key}\" yoktur - bu özellik {className} için gereklidir.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "{className}'in adı {valueText}'dir, bir dizi değildir - anket onu yükleyemez."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "{ownerText}'in \"{key}\" dizisi değildir - özellik bir liste tutar ve çalışma zamanı değeri tek öğeli bir diziye sarar."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Değişken tanımı \"{değişken}\" olarak belirtilir; bu aynı zamanda \"{name}\" sorusunun veri anahtarıdır - değişkeni ayarladığınızda anahtarın altında saklanan cevabı siler ve {{name}} bundan sonra ana değeri yanıtlar.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Değişken tanımı \"{değişken}\" olarak belirtilir; bu aynı zamanda hesaplanan değer \"{name}\"'nin adıdır - her ikisi de aynı slotu yazar ve en son koşan kazanır."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition bir anket JSON nesnesi değildir, bu yüzden hiçbir değişken ilan edilmez ve ön ayar değeri kontrol edilemez.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets bir dizi değildir, bu yüzden ön set ilan edilmez.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Ön ayar #{index} bir nesne değildir.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "#{index} ön ayarının adı yoktur, bu yüzden hiçbir şey ona referans veremez.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "\"{preset}\" ön ayarı değişken nesnesi taşımaz, yani hiçbir şey ayarlamaz.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "\"{preset}\" ön ayarı iki kez ilan edilir - bu isimle yapılan bir arama ilk ayarla yanıtlanır.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "\"{preset}\" ön ayarı, değişken tanımında belirtilmez olan \"{değişken}\"i ayarlar.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Ön ayar \"{preset}\" \"{değişken}\"i değişken tanımının reddettiği bir değere ayar: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "\"{functionName}\" fonksiyonu kayıtlı değildir."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Hesaplanan \"{names}\" değeri kendi ifadesinde kendine referans verir.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Hesaplanan değerler {isimler} birbirine bağlıdır."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Tetikleyici, kendisi belirlediği değere (\"{setToName}\") tepki verir.",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Tetikleyiciler, belirledikleri değerler üzerinden bir döngü oluşturur: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} kendi yazdığı değeri okur - sadece başka bir değer değiştiğinde çalışır, yani hiç çalışmaz.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Değerler bir döngü içinde yazılır: {chain}. Her yazı, onu okuyan ifadeleri tekrar çalıştırır, bu nedenle nihai değerler soruların cevaplandığı sıraya bağlıdır."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Bu koşul, \"{name}\" ile {values} karşılaştırır - seçenekler arasında değil. Erişilebilir: {available}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Bu koşul, \"{name}\" ile {values} karşılaştırır - hiçbir seçim değeri onu içermez. Erişilebilir: {available}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Bu koşul \"{operator}\" ile \"{name}\"'ye uygulanır: \"{recordName}\" ({questionType}) karşılaştırılacak bir değere sahip değildir.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Bu koşul \"{operator}\" için \"{name}\"'ye uygulanır: \"{recordName}\" {valueShapeText} tutar - sıralama ve aritmetik operatörler buna uygulanmaz.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Bu koşul \"{operatör}\" için \"{name}\"ye uygulanır: \"{recordName}\" bir boole sorusudur - sıralama operatörleri ona uygulanmaz.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Bu koşul, \"{operator}\" ile \"{name}\"' için geçerlidir: \"{recordName}\" bir metin sorusudur - değeri bir dizedir, bu yüzden sayısal karşılaştırma örtük dönüşüme dayanır.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Bu koşul \"{operator}\" ile \"{name}\"ye uygulanır: \"{recordName}\" bir tarih dizisi içerir - bunu {constValue} sayısıyla karşılaştırdığınızda geçerli olamaz.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Bu koşul \"{operator}\" ile \"{name}\"'ye uygulanır: \"{recordName}\" sayısaldır - \"{constValue}\" dizesine kıyasla geçerli değildir.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Bu koşul \"{operatör}\" ile \"{name}\"ye uygulanır: \"{recordName}\" seçilmiş değerlerden oluşan bir diziyi tutar, böylece \"=\" tüm diziyi karşılaştırır.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Bu koşul \"{operator}\" ile \"{name}\"'ye uygulanır: \"{recordName}\" bir boolean sorudur - {constValue} ile karşılaştırmak geçerli değildir."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{expression}\" her zaman yanlıştır, bu yüzden \"{name}\" hiç gösterilmez.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{Prop} \"{expression}\" asla geçerli olmaz, çünkü {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{expression}\" asla geçerli olmaz - izin verilen bir değer onu karşılamaz: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{ifade}\" kendisiyle çelişiyor: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{ifade}\" her zaman doğrudur, bu yüzden hiçbir şey karar vermez.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{Prop} \"{expression}\" aritmetiktir, karşılaştırma değildir, bu yüzden asla evet ya da hayır vermez.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "{Prop} \"{expression}\"in bir kısmı, önceden bilinen bir sonuca sahiptir.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{Prop} \"{expression}\" her zaman geçerli, çünkü {facts} - hiçbir şey karar vermez."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" herhangi bir soru veya değişkeni okumaz."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "\"{name}\" değerinin varsayılan değeri {valuesText}'dir ve bu değeri asla tutamaz. İzin verilir: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "\"{name}\" kelimesinin doğru cevabı {valuesText}'dir ve asla tutamaz. İzin verilen: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Tetikleyici \"{name}\" ile {valuesText} ayarlar ve bu durum asla tutulamaz. İzin verilir: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Varsayılan satır değeri \"{name}\" olarak {valuesText} ayarlar ve bu değeri asla tutamaz. İzin verilir: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Varsayılan panel değeri \"{name}\" olarak {valuesText} olarak ayarlar ve bu değeri asla tutamaz. İzin verilir: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "\"{name}\"'nin {prop}'u \"{key}\" adını verir - böyle bir satır yoktur. Kullanılabilir: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "\"{name}\"nin {prop} kısmı \"{key}\" adını verir - böyle bir sütun yoktur. Erişilebilir: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "\"{name}\"nin {prop} adı \"{key}\" - böyle bir şablon sorusu yok. Erişilebilir: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Copyvalue tetikleyicisi \"{fromName}\" kelimesini \"{setToName}\"'ye kopyalar, ancak \"{fromName}\" {sourceShapeText} ve \"{setToName}\" {targetShapeText}'i tutar.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Copyvalue tetikleyicisi \"{fromName}\" dosyasını \"{setToName}\"'ye kopyalar, ancak \"{setToName}\" değeri arasında \"{setToName}\" değeri yoktur. İzin verilir: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" seçimlerini \"{source}\"'dan kopyalar, ancak bu isimle ilgili bir tartışma yoktur.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" seçimlerini kendisinden kopyalıyor.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" seçimlerini \"{source}\" ({sourceType}) üzerinden kopyalar; bu da ne seçenek ne de bir değer dizisi sunar.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" \"{source}\"'dan {prop} \"{field}\" okunur, ancak {sourceType} \"{source}\" böyle bir {fieldNoun}'a sahip değildir."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "\"{name}\"'nin {prop}'unun başka bir öğesi zaten {valueText} değerine sahiptir - çalışma zamanı her iki öğeyi de korur.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "\"{name}\" seçimleri {valueText} içerirken, {toggleProp} açıkken - dahili {specialItemText} öğesiyle çarpışır."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "{tetik} tetikleyici, var olmayan \"{name}\" sayfasını hedef alır.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "{tetikleyici} tetikleyicisi \"{name}\"'yi hedefliyor, ancak {containerType} \"{root}\" {segmentNoun} \"{segment}\" içermez.",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{tetikleyici} tetikleyici {fiil} \"{name}\", ancak bu isimle {kindText} yoktur."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "\"{type}\" tetikleme tipi bilinmemektedir.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Tetikleyicinin bir türü yok."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "\"{name}\" doğrulayıcı tipi \"{type}\" bilinmemektedir.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "\"{name}\" doğrulayıcısının türü yoktur."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "\"{name}\" {effectText}: {causeText} ({questionType}) için {validatorType} doğrulayıcısı.",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "\"{name}\" için {validatorType} validatörü en az {min} ve en fazla {max} gerektirir - hiçbir cevap bunu karşılamaz.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "\"{name}\" için answercount validatoru, birlikte seçilebilen {seçilebilir} seçeneklerin üzerinde en az {minCount} cevap gerektirir.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "\"{name}\" için regex validatoru, motorun reddettiği bir desene sahiptir: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "\"{name}\" ifadesinin doğrulayıcısı bir ifade içermez, bu yüzden her zaman geçer."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "\"{name}\"'nin {minProp}'u {min}'dir, {max}'ın üzerinde olan {maxProp}'un üzerinde - çalışma süresi sessizce bunlardan birini ayarlar.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "\"{name}\"'nin {countProp}'ü {count}, {direction} ise {boundProp}'dır - çalışma zamanı onu sıkıştırır.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "\"{name}\"'nin {stepProp}'u {step}'dir, ancak geçtiği aralık ({minProp}.. {maxProp}) sadece {range} sınırlarını kaplar - çalışma zamanı onu sıkıştırır.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "\"{name}\"'nin minSelectedChoices (min}, birlikte seçilebilen {seçilebilir} seçeneklerin üstünde - soru asla cevaplanamaz."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" asla görünür olamaz: visible If {reads} okuyor ki {deadClause} bu da {deadClause} olarak geçerli, bu yüzden koşul asla geçerli olmaz."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "\"{name}\"nin mask tipi \"{maskType}\" bilinen bir maske değildir - çalışma süresi hiç maske olmadan geri döner.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "\"{name}\"'nin maskSettings'i \"{key}\" ayarlar, bu \"{maskType}\" maskesinin bir özelliği değildir - çalıştırma zamanı bunu sessizce bırakır.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "\"{name}\" mask ayarları maskTipi olmadan ayarlanır - çalışma zamanı sadece \"saveMaskedValue\" tutar ve geri kalanını düşürür.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "\"{name}\"nin {maskType} maskesi, girdi yok için geçerlidir: inputType \"{inputType}\" yalnızca metin ve tel için maskelenir.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "\"{name}\"'nin tarih saati maskesi, desen olmadan min/max'i ayarlar - sınırlar desenin tarih parçalarına uygulanır, yani desen olmadan hiçbir şey yapmazlar.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "\"{name}\"'nin {maskType} maskesi en az {min} ve en fazla {max} izin verir - hiçbir değer bunu karşılamaz."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Dinamik panel \"{name}\"de boş bir şablon var - panellerinde render edilecek hiçbir şey yok.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\" öğesi yoktur.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\" asla render edilebilecek hiçbir öğeye sahip değildir - her eleman gizlidir, asla geçerli olmayan bir koşulla korunur ya da boş.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "\"{name}\"nin detay öğeleri hiç gösterilmez: detay PanelMode varsayılan olan \"none\"dir."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Pozisyon: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Tetikleyicinin eski adı, operatörü ve değer özelliklerinden oluşturulmuştur.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "İçeride: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "\"{0}\" mi demek istediniz?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Eğer özel bir bileşense, tanımını linter'a ileterek tam analiz yapılmasını mümkün kılın.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Fonksiyonu linting'den önce kaydedin veya linter seçeneklerinde listeleyin.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Yanlış yazılmış bir tür çalışma zamanında sessizce bırakılır ve özel tetikleyici hedef ve döngü kontrolleri tarafından kapsanmaz.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Eğer çalışma zamanında değişken seti ise, linter seçeneklerinde listeleyin.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Tetikleme koşulları asla bir arada kalmazsa döngüye ulaşılamaz olabilir - ifadeleri doğrulayın.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "DefaultValueExpression yalnızca sorusu yanıtlanana kadar geçerlidir.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "İfadeyle: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Bağlarda referans gösteriliyor.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "ChoicesByUrl {0}'de referans alındı.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "\"{0}\" metninde referans gösterilmiştir.", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () bu ismi {1} \"{2}\" maddesinin her maddesinden okuyordu.",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "{0}() argümanı hiçbir soru, panel veya sayfa olarak adlandırılmıyor.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Deseriizer bilmediği bir anahtarı düşürüyor.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Deseriizer, çözemediği bir validatörü düşürüyor, yani hiçbir şey doğrulama yapmıyor.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "Giriş tipi \"{0}\"dir.",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Bu, \"{0}\"in veri anahtarıdır." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "ve",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} her zaman {value}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} {sınır}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "En azından {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "en fazla {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} her iki {değer} de olamaz",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} {value} olabilir ve o olmayabilir",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} boş olup {value} olamaz",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} boş ve boş olamaz",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref}, {min} üzerinde ve {max} altında olamaz",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} hiç değeri olmayan bir kişi olması istenir"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "\"{0}.\" referansları yalnızca bir matris hücresi veya matris detay paneli içinde bulunabilir.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" yalnızca bir matris hücresi veya matris detay paneli içinde bulunabilir.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "\"{0}.\" referansları yalnızca dinamik bir panel veya panel konteyneri içinde bulunabilir.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "\"{0}.\" referansları yalnızca dinamik bir panel içinde bulunabilir.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" sadece dinamik bir panel içinde bulunabilir.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" yalnızca seçim, satır ve sütun koşulları içinde kullanılabilir.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\" referansları yalnızca bileşik soru içinde bulunabilir.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" inArray filtresinde bulunmaz; filtre önce öğeye ve sonra ankete karşı çalışır.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" bu matrisin bir sütunudur - satır önekiyle referans verin.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" bu dinamik panelin bir sorusudur - panel ön ekiyle referans verin."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Eğer numara topluyorsa, inputType: \"number\" üzerinde \"{0}\" ayarlayın.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Çok seçmeli değerler için \"contains\" veya \"anyof\" kullanın."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "sayfa",
+        // [Auto-translated] "panel"
+        panel: "panel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "İsim",
+        // [Auto-translated] "valueName"
+        valueName: "değerName",
+        // [Auto-translated] "name"
+        calculatedValue: "İsim"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "hesaplanan değer",
+        // [Auto-translated] "element"
+        default: "element"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Anket",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Diğer",
+        // [Auto-translated] "None"
+        none: "Hiçbiri yok",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Cevap vermeyi reddet",
+        // [Auto-translated] "Don't know"
+        dontknow: "Bilmiyorum"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "Asla ateş etmez",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "her cevabı reddeder",
+        // [Auto-translated] "cannot validate"
+        default: "Doğrulayamaz"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Sorunun doğrulanacak bir cevabı yok",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "bir metin değerinden bir uzunluk okunur ve bu cevabın hiç uzunluğu yoktur",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "cevap bir sayı değildir ve asla olamaz.",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Bir numara asla bir e-posta adresiyle eşleşmez",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Cevap bir değer listesi değildir",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Cevap, kontrol edilebilen bir değer değildir"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "bir dizi",
+        // [Auto-translated] "an object"
+        object: "bir nesne"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "bir matris satırı",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "çoklu metnin bir öğesi",
+        // [Auto-translated] "a row or item of a question"
+        default: "bir soru satırı veya maddesi"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "bir nesne dizisi",
+        // [Auto-translated] "an object"
+        object: "bir nesne",
+        // [Auto-translated] "a plain value"
+        plain: "Bir düz değer",
+        // [Auto-translated] "a value"
+        default: "bir değer"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "seçilmiş değerlerden oluşan bir dizide",
+        // [Auto-translated] "a single value"
+        scalar: "tek bir değer",
+        // [Auto-translated] "a value"
+        default: "bir değer"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "aşağıda",
+        // [Auto-translated] "above"
+        above: "Yukarıda"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "asla görünmez ve değer almaz",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "asla görünmez ve değer almaz"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "soru",
+        // [Auto-translated] "question or variable"
+        questionvalue: "soru veya değişken",
+        // [Auto-translated] "page"
+        page: "sayfa"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "Okuyor",
+        // [Auto-translated] "navigates to"
+        gotoName: "Yönlendirir",
+        // [Auto-translated] "sets"
+        default: "setler"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Şablon sorusu",
+        // [Auto-translated] "column"
+        default: "Sütun"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Şablon sorusu",
+        // [Auto-translated] "column"
+        matrixdynamic: "Sütun",
+        // [Auto-translated] "item"
+        multipletext: "Madde",
+        // [Auto-translated] "row"
+        matrix: "Row",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Row",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Sütun",
+        // [Auto-translated] "field"
+        default: "Alan"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Madde 1" }, { value: "item2", text: "Madde 2" }, { value: "item3", text: "Madde 3" }],
-    columns: [{ value: "column1", text: "Sütun 1" }, { value: "column2", text: "Sütun 2" }, { value: "column3", text: "Sütun 3" }],
-    rows: [{ value: "row1", text: "Satır 1" }, { value: "row2", text: "Satır 2" }],
-    matrixColumns: [{ name: "column1", title: "Sütun 1" }, { name: "column2", title: "Sütun 2" }, { name: "column3", title: "Sütun 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Madde 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Madde 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Madde 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Sütun 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Sütun 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Sütun 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Satır 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Satır 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Sütun 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Sütun 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Sütun 3"
+      }
+    ]
   }
 };
 

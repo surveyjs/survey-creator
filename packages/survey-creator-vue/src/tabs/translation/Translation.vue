@@ -12,11 +12,13 @@
       </div>
     </div>
     <div v-if="!model.isEmpty && sideBySideModel" :class="sideBySideModel.sideBySideRootCss">
-      <div class="st-side-by-side__source" :key="sideBySideModel.sourceSurvey?.elementIdPrefix" :ref="setSourceScrollElement">
-        <SurveyComponent :model="sideBySideModel.sourceSurvey"></SurveyComponent>
-      </div>
-      <div v-if="sideBySideModel.targetSurvey" class="st-side-by-side__target" :key="sideBySideModel.targetSurvey?.elementIdPrefix" :ref="setTargetScrollElement">
-        <SurveyComponent :model="sideBySideModel.targetSurvey"></SurveyComponent>
+      <div class="st-side-by-side__panes">
+        <div class="st-side-by-side__source" :key="sideBySideModel.sourceSurvey?.elementIdPrefix" :ref="setSourceScrollElement">
+          <SurveyComponent :model="sideBySideModel.sourceSurvey"></SurveyComponent>
+        </div>
+        <div v-if="sideBySideModel.targetSurvey" class="st-side-by-side__target" :key="sideBySideModel.targetSurvey?.elementIdPrefix" :ref="setTargetScrollElement">
+          <SurveyComponent :model="sideBySideModel.targetSurvey"></SurveyComponent>
+        </div>
       </div>
     </div>
   </div>

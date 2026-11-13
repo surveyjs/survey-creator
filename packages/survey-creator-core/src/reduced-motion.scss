@@ -1,0 +1,12 @@
+@use "./variables" as *;
+
+// Loaded last so these rules win ties with the enter/leave declarations.
+.svc-creator--disable-animations {
+  @include disableCreatorAnimations;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-creator {
+    @include disableCreatorAnimations;
+  }
+}

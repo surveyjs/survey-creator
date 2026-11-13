@@ -142,6 +142,10 @@ export var bgStrings = {
     jsonHideErrors: "Скриване на грешки",
     // "Show errors"
     jsonShowErrors: "Показване на грешки",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Грешка при поправка",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "JSON на анкетата трябва да е обект.",
     // "Undo"
     undo: "Отмяна",
     // "Redo"
@@ -246,6 +250,8 @@ export var bgStrings = {
     translateUsigAI: "Автоматичен превод на всички",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Преведи от: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Превод на останалите низове",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Непреведени низове",
     // "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var bgStrings = {
     translationSource: "Източник: ",
     // [Auto-translated] "Target: "
     translationTarget: "Цел: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Изходен език",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Целеви език",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} от {1} струни преведени",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Сигурни ли сте, че искате да изтриете всички преведени низове за избрания език?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Изглед на формата",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Изглед на мрежата",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Превод на низове",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Survey Strings",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Няма струни за превод",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Всички струни са преведени",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} струни не се превеждат",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "Връзките в YouTube не се поддържат.",
     // [Auto-translated] "Export"
@@ -286,6 +314,10 @@ export var bgStrings = {
     choicesLoadedFromWebLinkText: "Отидете в настройките",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Визуализация на заредените опции за избор",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Без набор от изрази",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Редакция на израза",
     // "HTML content will be here."
     htmlPlaceHolder: "HTML съдържанието ще бъде тук.",
     // "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var bgStrings = {
       uncompletedRule_cancel: "Не, искам да попълня правилата."
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Пресет за променливи",
+    // [Auto-translated] "None"
+    noPreset: "Няма",
+    // [Auto-translated] "View variable values"
+    view: "Вижте стойностите на променливите",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Променливи стойности",
+    // [Auto-translated] "Manage presets"
+    edit: "Управление на предварителни настройки",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Променливи пресети",
+    // [Auto-translated] "Preset"
+    presetName: "Предварително зададен",
+    // [Auto-translated] "Description"
+    presetDescription: "Описание",
+    // [Auto-translated] "Add preset"
+    addPreset: "Добави предварително настроение",
+    // [Auto-translated] "New preset"
+    newPresetName: "Нов предварително сет",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Изтрий предварителния сет",
+    // [Auto-translated] "Back"
+    back: "Назад",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Вече съществува пресет с това име",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Въведете предварително зададено име",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Предварително зададен",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Описание"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Асистент по изразяване",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Пиши с изкуствен интелект",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Опишете какво трябва да прави изразът",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Например: покажете този въпрос, когато респондентът е на 18 или повече години",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Опишете състоянието с думи",
+    // [Auto-translated] "Generate"
+    generate: "Генерирай",
+    // [Auto-translated] "Refine"
+    refine: "Усъвършенствайте",
+    // [Auto-translated] "Explain"
+    explain: "Обяснете",
+    // [Auto-translated] "Stop"
+    stop: "Спри",
+    // [Auto-translated] "Accept"
+    accept: "Приемам",
+    // [Auto-translated] "Reject"
+    reject: "Отхвърли",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Прилагане на поправка: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Текущо изражение",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Предложено изразяване",
+    // [Auto-translated] "Reads as"
+    readsAs: "Звучи като",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Обяснението на асистентката",
+    // [Auto-translated] "Check results"
+    findings: "Проверете резултати",
+    // [Auto-translated] "Error"
+    severityError: "Грешка",
+    // [Auto-translated] "Warning"
+    severityWarning: "Предупреждение",
+    // [Auto-translated] "Info"
+    severityInfo: "Информация",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "в \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Опишете израза и изберете Генериране.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Чакам асистента...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Заявката беше отменена.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Асистентът докладва: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Асистентът не показа изражение.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Прегледайте предложеното изразяване.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Асистентът обясни настоящото изражение.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Предложеното изразяване съдържа грешки и не може да бъде прието.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Предложеното изразяване не може да бъде проверено на всяко място, където е написано, затова не може да бъде приет.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Добавете действие към правилото, преди да питате асистента.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Първото предложение имаше грешки и беше коригирано автоматично."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var bgStrings = {
       templateDescription: "Модел на описание на записа",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Модел на заглавие на записа",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Място за заглавие на участниците",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Празен текст на панел",
       // [Auto-translated] "Tab title pattern"
@@ -588,6 +724,10 @@ export var bgStrings = {
       templateErrorLocation: "Подравняване на съобщение за грешка",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Ново място за влизане",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Записи на страница",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Позволете на потребителите да сортират записи",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Предотвратяване на дублиращи се отговори в следния въпрос"
     },
@@ -675,6 +815,12 @@ export var bgStrings = {
       // [Auto-translated] "Expression"
       expression: "Изразяване"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Сортирайте по",
+      // [Auto-translated] "Order"
+      direction: "Ред"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Изразяване"
@@ -690,7 +836,9 @@ export var bgStrings = {
       // [Auto-translated] "Survey description"
       description: "Описание на проучването",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Направете проучването само за четене"
+      readOnly: "Направете проучването само за четене",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Регионални формати"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -726,7 +874,9 @@ export var bgStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Направете колоната задължителна, ако",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Всяка опция в отделна колона"
+      showInMultipleColumns: "Всяка опция в отделна колона",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Позволете сортиране по тази колона"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export var bgStrings = {
     masksettings: {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Запазване на маскирана стойност в резултатите от проучването"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Регион",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Модел на срещи",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Времеви модел",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Десетичен сепаратор",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Сепаратор хиляди",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Валутен символ",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Валутен модел"
     },
     patternmask: {
       // [Auto-translated] "Value pattern"
@@ -761,16 +927,18 @@ export var bgStrings = {
       decimalSeparator: "Десетичен разделител",
       // [Auto-translated] "Value precision"
       precision: "Точност на стойността",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Показване на следящи нули",
       // [Auto-translated] "Minimum value"
       min: "Минимална стойност",
       // [Auto-translated] "Maximum value"
       max: "Максимална стойност"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Валутен префикс",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Валутен суфикс"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Валутен символ",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Валутен модел"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Изчистване на другите, когато е избрано",
@@ -812,8 +980,24 @@ export var bgStrings = {
     addItem: "Кликни за добавяне на елемент...",
     // "Click to remove the item..."
     removeItem: "Кликни за изтриване на елемент...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Добави {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Премахни {0}",
     // "Drag the item"
     dragItem: "Плъзни елемента",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Разширете вложените избори",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Вложени избори с колапс",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Разширете вложените избори на {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Колапс вложени избори на {0}",
+    // [Auto-translated] "Show description"
+    showDescription: "Описание на шоуто",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Скрий описанието",
     // "Edit"
     edit: "Редактиране",
     // "Done"
@@ -858,38 +1042,58 @@ export var bgStrings = {
     listIsEmpty: "Все още няма добавени елементи.",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Все още няма добавени възможности за избор.",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Все още нямате колони",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Все още нямате графи за оформление",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Все още нямате никакви редове",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Все още нямате правила за валидиране",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Все още нямате никакви персонализирани променливи",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Все още нямате никакви тригери",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Все още нямате връзки",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Все още нямате страници",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Няма персонализирани стойности на рейтинга",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Без персонализирани етикети",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Няма зони",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Няма колони",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Няма колони за оформление",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Без редици",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Няма правила за валидиране",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Няма персонализирани променливи",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Без тригери",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Няма условна надценка",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Няма връзки",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Без страници",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Няма нива на сортиране",
     // "Add new choice"
     "addNew@choices": "Добавяне на възможност за избор",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Добавяне на нова колона",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Добавяне на нов ред",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Добавяне на ново правило",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Добавяне на нова променлива",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Добавяне на нов превключвател",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Добавяне на нов URL адрес",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Добавяне на нова страница",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Добави стойност на рейтинга",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Добави етикет",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Добави площ",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Добави колона",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Добави ред",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Добави правило",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Добави променлива",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Добави спусък",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Добавете надценка",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Добави линк",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Добави страница",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Добавете ниво на сортиране",
     // "Value"
     value: "Стойност",
     // "Text"
@@ -916,6 +1120,8 @@ export var bgStrings = {
     surveyTitlePlaceholder: "Заглавие на анкетата",
     // "Page {num}"
     pageTitlePlaceholder: "Страница {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Заглавие на панела",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Начална страница",
     // "Description"
@@ -966,6 +1172,8 @@ export var bgStrings = {
     visible: "Видим",
     // "Required"
     isRequired: "Задължителен",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Изисква положителен отговор",
     // [Auto-translated] "Mark as required"
     markRequired: "Маркирай както се изисква",
     // [Auto-translated] "Remove the required mark"
@@ -976,6 +1184,8 @@ export var bgStrings = {
     eachRowUnique: "Предотвратяване на дублиращи се отговори в редове",
     // "Error message for required questions"
     requiredErrorText: "\"Задължително\" съобщение за грешка",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Съобщение за грешка, когато е необходим отговор \"Да\"",
     // "Display the question on a new line"
     startWithNewLine: "Показване на въпроса на нов ред",
     // "Rows"
@@ -994,6 +1204,16 @@ export var bgStrings = {
     maxFiles: "Максимален брой файлове",
     // "Row count"
     rowCount: "Брой редове",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Редове на страница",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Позволете на потребителите да сортират редове",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Максимални нива на сортиране",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Подразбиращ се ред на сортиране",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Лента за сортиране на шоу",
     // "Columns layout"
     columnLayout: "Разположение на колоните",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export var bgStrings = {
     questionErrorLocation: "Местоположение на съобщението за грешка",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Постави първия въпрос на нова страница",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Активиране на преки пътища за избор",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Покажи подсказки за клавиатура",
     // "Question order"
     questionOrder: "Подреждане на елементите на страницата",
     // "Time limit to complete the survey"
@@ -1268,6 +1492,8 @@ export var bgStrings = {
     minRowCount: "Минимален брой редове",
     // "Maximum row count"
     maxRowCount: "Максимален брой редове",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Израз за брой редове",
     // "Confirm row removal"
     confirmDelete: "Потвърждаване изтриването на реда",
     // "Confirmation message"
@@ -1278,6 +1504,8 @@ export var bgStrings = {
     minPanelCount: "Минимален брой панели",
     // "Maximum number of entries"
     maxPanelCount: "Максимален брой панели",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Израз за брой записи",
     // "Initial entry state"
     panelsState: "Разширено състояние на вътрешния панел",
     // "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export var bgStrings = {
     logoHeight: "Височина на логото (в CSS-допустими стойности)",
     // "Read-only"
     readOnly: "Само за четене",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Режим само за четене",
     // "Disable the read-only mode if"
     enableIf: "Може да се редактира",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export var bgStrings = {
       columns: "Колони",
       // "Rows"
       rows: "редове",
+      // [Auto-translated] "Entries"
+      entries: "Участия",
       // "Choice Options"
       choices: "Избори",
       // "Items"
@@ -1544,6 +1776,8 @@ export var bgStrings = {
       question: "Въпрос",
       // "Pages"
       pages: "Страници",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Регионални формати",
       // "Quiz Mode"
       timer: "Таймер/Тест",
       // "Calculated Values"
@@ -1862,6 +2096,12 @@ export var bgStrings = {
       // [Auto-translated] "Never"
       none: "Никога"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Само за четене",
+      // [Auto-translated] "View"
+      view: "Изглед"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "Радио бутони",
     inputType: {
@@ -1913,6 +2153,12 @@ export var bgStrings = {
       warning: "Предупреждение",
       // [Auto-translated] "Informational"
       info: "Информационна"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Фронт",
+      // [Auto-translated] "Rear"
+      environment: "Задна част"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export var bgStrings = {
     underRowSingle: "Под реда се вижда само един панел.",
     // "Auto"
     auto: "Авто",
+    // [Auto-translated] "Always"
+    always: "Винаги",
     timerInfoMode: {
       // "Both"
       combined: "И двете"
@@ -2321,7 +2569,148 @@ export var bgStrings = {
       survey: "Същото като проучването",
       // [Auto-translated] "Same as container"
       container: "Същото като контейнера"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Наследи",
+      // [Auto-translated] "Hide"
+      "false": "Скрий се",
+      // [Auto-translated] "Show"
+      "true": "Шоу"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Арабски",
+    // [Auto-translated] "Bulgarian"
+    bg: "Български",
+    // [Auto-translated] "Catalan"
+    ca: "Каталонски",
+    // [Auto-translated] "Czech"
+    cs: "Чешки",
+    // [Auto-translated] "Welsh"
+    cy: "Уелски",
+    // [Auto-translated] "Danish"
+    da: "Датски",
+    // [Auto-translated] "German"
+    de: "Немски",
+    // [Auto-translated] "Greek"
+    el: "Гръцки",
+    // [Auto-translated] "English"
+    en: "Английски",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Английски (Австралия)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Английски (Канада)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Английски (Обединеното кралство)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Английски (Ирландия)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Английски (Индия)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Английски (Нова Зеландия)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Английски (Южна Африка)",
+    // [Auto-translated] "Spanish"
+    es: "Испански",
+    // [Auto-translated] "Estonian"
+    et: "Естонски",
+    // [Auto-translated] "Basque"
+    eu: "Баски",
+    // [Auto-translated] "Persian"
+    fa: "Персийски",
+    // [Auto-translated] "Finnish"
+    fi: "Финландски",
+    // [Auto-translated] "Filipino"
+    fil: "Филипински",
+    // [Auto-translated] "French"
+    fr: "Френски",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Френч (Канада)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Френски (Швейцария)",
+    // [Auto-translated] "Hebrew"
+    he: "Иврит",
+    // [Auto-translated] "Hindi"
+    hi: "Хинди",
+    // [Auto-translated] "Croatian"
+    hr: "Хърватски",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Хаитянски креол",
+    // [Auto-translated] "Hungarian"
+    hu: "Унгарски",
+    // [Auto-translated] "Indonesian"
+    id: "Индонезийски",
+    // [Auto-translated] "Icelandic"
+    is: "Исландски",
+    // [Auto-translated] "Italian"
+    it: "Италиански",
+    // [Auto-translated] "Japanese"
+    ja: "Японски",
+    // [Auto-translated] "Georgian"
+    ka: "Грузински",
+    // [Auto-translated] "Kazakh"
+    kk: "Казах",
+    // [Auto-translated] "Korean"
+    ko: "Корейски",
+    // [Auto-translated] "Lithuanian"
+    lt: "Литовски",
+    // [Auto-translated] "Latvian"
+    lv: "Латвийски",
+    // [Auto-translated] "Macedonian"
+    mk: "Македонски",
+    // [Auto-translated] "Burmese"
+    mm: "Бирмански",
+    // [Auto-translated] "Malay"
+    ms: "Малайски",
+    // [Auto-translated] "Dutch"
+    nl: "Холандски",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Холандия (Белгия)",
+    // [Auto-translated] "Norwegian"
+    no: "Норвежки",
+    // [Auto-translated] "Polish"
+    pl: "Полски",
+    // [Auto-translated] "Portuguese"
+    pt: "Португалски",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Португалски (Бразилия)",
+    // [Auto-translated] "Romanian"
+    ro: "Румънски",
+    // [Auto-translated] "Russian"
+    ru: "Руски",
+    // [Auto-translated] "Slovak"
+    sk: "Словашки",
+    // [Auto-translated] "Slovenian"
+    sl: "Словенски",
+    // [Auto-translated] "Serbian"
+    sr: "Сръбски",
+    // [Auto-translated] "Swedish"
+    sv: "Шведски",
+    // [Auto-translated] "Swahili"
+    sw: "Суахили",
+    // [Auto-translated] "Telugu"
+    tel: "Телугу",
+    // [Auto-translated] "Tajik"
+    tg: "Таджикски",
+    // [Auto-translated] "Thai"
+    th: "Тайландски",
+    // [Auto-translated] "Turkish"
+    tr: "Турски",
+    // [Auto-translated] "Ukrainian"
+    uk: "Украински",
+    // [Auto-translated] "Urdu"
+    ur: "Урду",
+    // [Auto-translated] "Vietnamese"
+    vi: "Виетнамски",
+    // [Auto-translated] "Chinese"
+    zh: "Китайски",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Китайски (опростено)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Китайски (традиционен)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export var bgStrings = {
     visibletrigger: "промяна на видимостта (отхвърлено)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Същото важи за езика на анкетите"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Пример: +1(999)-999-99-99"
@@ -2405,12 +2798,6 @@ export var bgStrings = {
     datetimemask: {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Пример: мм/дд/гггг"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Пример: $",
-      // "Ex.: USD"
-      suffix: "Пример: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export var bgStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Указва колко колони обхваща този панел в оформлението на мрежата.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Тази таблица ви позволява да конфигурирате всяка колона на мрежата в панела. Той автоматично задава процента на ширината за всяка колона въз основа на максималния брой елементи в реда. За да персонализирате оформлението на мрежата, ръчно коригирайте тези стойности и определете ширината на заглавието за всички въпроси във всяка колона."
+      gridLayoutColumns: "Тази таблица ви позволява да конфигурирате всяка колона на мрежата в панела. Той автоматично задава процента на ширината за всяка колона въз основа на максималния брой елементи в реда. За да персонализирате оформлението на мрежата, ръчно коригирайте тези стойности и определете ширината на заглавието за всички въпроси във всяка колона.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Уточнява как се появяват въпросите в този панел, когато са само за четене. \"Само за четене\" показва въпросите с обичайните им входни контроли, но са изключени за редактиране. \"View\" показва отговорите като текст или други неинтерактивни елементи. \"Inherit\" използва режима, зададен за родителския панел, страница или анкета (\"Read-Only\" по подразбиране)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export var bgStrings = {
       width: "Задава ширината на панела пропорционално на другите елементи на изследването в същия ред. Приема CSS стойности (px, %, in, pt и т.н.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Въведете шаблон за динамични заглавия на панели. Използвайте {panelIndex} за общата позиция на панела и {visiblePanelIndex} за реда му сред видимите панели. Вмъкнете тези контейнери в шаблона, за да добавите автоматично номериране.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Резервен текст за заглавия на записи, който се прилага, когато шаблонът на заглавието не произвежда значима стойност. Използвайте {panelIndex} за общата позиция на записа и {visiblePanelIndex} за реда му сред видимите записи.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Въведете шаблон за заглавията на разделите. Използвайте {panelIndex} за общата позиция на панела и {visiblePanelIndex} за реда му между видимите панели. Вмъкнете тези контейнери в шаблона, за да добавите автоматично номериране.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export var bgStrings = {
       keyName: "Препратка към име на въпрос, за да се изисква от потребителя да предостави уникален отговор на този въпрос във всеки панел.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Задейства подкана за потвърждение, преди да премахне запис.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Задайте израз, който изчислява броя на записите. Този израз замества настройката \"Начален брой записи\" и се преоценява всеки път, когато стойностите, към които се позовава, се променят. Резултатът е ограничен от настройките \"Минимален брой записи\" и \"Максимален брой записи\". Докато този израз е зададен, респондентите не могат да добавят или премахват записи ръчно.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Определя броя на записите, показани на всяка страница от панела. '0' изключва пагинацията и показва всички записи.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Позволява на респондентите да сортират записи чрез лентата за сортиране.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Определя първоначалния ред на въвеждане. Респондентите могат да го променят, ако сортирането е разрешено. При сортиране по няколко въпроса всеки въпрос сортира записите в реда, установен от предходния въпрос. Плъзнете въпросите, за да промените техния приоритет.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Присвоява номера на въпроси, вложени в динамичния панел."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Позволява на респондентите да сортират редове чрез кликване върху заглавия на колони или чрез лентата за сортиране.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Определя началния ред на редовете. Респондентите могат да го променят, ако е позволено сортиране. При сортиране по няколко колони всяка колона сортира редове в реда, установен от предходната колона. Плъзнете колоните, за да промените приоритета им.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Автоматично\" показва лентата за сортиране само когато матрицата няма сортируеми заглавия на колони: заглавията са скрити, матрицата използва мобилното оформление или редовете се транспонират в колони. \"Винаги\" показва лентата за сортиране, дори когато са видими сортируеми заглавия на колони.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Задайте израз, който изчислява броя на редовете. Този израз замества настройката \"Начален брой редове\" и се преоценява всеки път, когато стойностите, към които се позовава, се променят. Резултатът е ограничен от настройките \"Минимален брой редове\" и \"Максимален брой редове\". Докато този израз е зададен, респондентите не могат ръчно да добавят или премахват редове.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Задейства подкана за потвърждение, преди да премахнете ред.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Автоматично разширява раздела с подробности, когато се добави нов ред към матрицата."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Определя броя на редовете, показани на всяка страница от матрицата. '0' изключва пагинацията и показва всички редове.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Определя колко полета може да сортира респондентът едновременно.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Дублира отговорите от последния ред и ги присвоява на следващия добавен динамичен ред.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export var bgStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Дългите текстове в опциите за избор автоматично ще генерират нови редове, за да се поберат в падащото меню. Премахнете отметката, ако искате текстовете да бъдат изрязани.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Указва колко колони обхваща този въпрос в оформлението на мрежата."
+      effectiveColSpan: "Указва колко колони обхваща този въпрос в оформлението на мрежата.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Уточнява как се появява въпросът, когато е само за четене. \"Само за четене\" показва въпроса с обичайните входни контроли, но е изключен за редактиране. \"Преглед\" показва отговорите като текст или други неинтерактивни елементи. \"Наследяване\" използва режима, зададен за родителския панел, страница или анкета (\"Само за четене\" по подразбиране).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Показва подсказки за налични действия на клавиатурата под този въпрос. Опцията \"Наследи\" прилага настройката на ниво проучване."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export var bgStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Изберете дали искате да попречите на респондентите да попълват анкетата ви.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Уточнява как изглеждат въпросите само за четене, включително на страницата за предварителен преглед. \"Само за четене\" (по подразбиране) показва въпроси с обичайните си контроли за въвеждане, но е изключен за редактиране. \"Преглед\" показва отговорите като текст или други неинтерактивни елементи.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Задава местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването."
     },
@@ -2633,7 +3050,9 @@ export var bgStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Когато е избрано, създава отделна колона за всяка опция за избор.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред. Когато е зададена на -1, действителната стойност се наследява от свойството \"Брой вложени колони\" на родителската матрица."
+      colCount: "Подрежда опциите за избор в оформление с няколко колони. Когато е зададено на 0, опциите се показват на един ред. Когато е зададена на -1, действителната стойност се наследява от свойството \"Брой вложени колони\" на родителската матрица.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Определя как изглеждат клетките в тази колона, когато са само за четене. \"Само за четене\" показва клетките с обичайните им входни контроли, но са изключени за редактиране. \"Преглед\" показва отговорите като текст или други неинтерактивни елементи. \"Наследяване\" използва режима, зададен за матрицата или анкетата (\"Само за четене\" по подразбиране)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export var bgStrings = {
     questionErrorLocation: "Задава местоположението на съобщение за грешка във връзка с въпроса с невалиден вход. Изберете между: \"Top\" - в горната част на полето за въпроси се поставя текст за грешка; \"Отдолу\" - в долната част на полето за въпроси се поставя текст за грешка.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Изберете дали искате първото поле за въвеждане на всяка страница да е готово за въвеждане на текст.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Показва букви (A, B, C, ...) до избори в Radio Button Group, Checkboxes и Image Picker въпроси. Респондентите могат да избират избори, като натиснат съответните буквени клавиши. Можете да презапишете тази настройка за отделни въпроси.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Показва букви (A, B, C, ...) до изборите и позволява на респондентите да ги изберат, като натиснат съответните буквени клавиши. Опцията \"Наследи\" използва настройката на ниво анкета."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Показва подсказки за налични действия на клавиатурата под въпросите. Можете да заобиколите тази настройка за отделни въпроси.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Запазва първоначалния ред на въпросите или ги рандомизира. Ефектът от тази настройка се вижда само в раздела Визуализация .",
     // [Auto-translated] "For text entry questions only."
@@ -2793,7 +3220,9 @@ export var bgStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Задава видимостта на бутоните за навигация на страницата. Опцията \"Наследяване\" прилага настройката на ниво проучване, която по подразбиране е \"Видима\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Тази таблица ви позволява да конфигурирате всяка колона на мрежата на страницата. Той автоматично задава процента на ширината за всяка колона въз основа на максималния брой елементи в реда. За да персонализирате оформлението на мрежата, ръчно коригирайте тези стойности и определете ширината на заглавието за всички въпроси във всяка колона."
+      gridLayoutColumns: "Тази таблица ви позволява да конфигурирате всяка колона на мрежата на страницата. Той автоматично задава процента на ширината за всяка колона въз основа на максималния брой елементи в реда. За да персонализирате оформлението на мрежата, ръчно коригирайте тези стойности и определете ширината на заглавието за всички въпроси във всяка колона.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Уточнява как изглеждат въпросите на тази страница, когато са само за четене. \"Само за четене\" показва въпросите с обичайните им входни контроли, но са изключени за редактиране. \"Преглед\" показва отговорите като текст или други неинтерактивни елементи. \"Наследяване\" използва режима, зададен за анкетата (\"Само за четене\" по подразбиране)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Задава местоположението на таймер на страница.",
@@ -2911,6 +3340,22 @@ export var bgStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Изберете дали искате да съхраните стойността на въпроса с приложена маска в резултатите от проучването."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Регион, чиито формати се прилагат за дата-време, числови и валутни входни маски. Ако не е посочено, се използва езикът на анкетата.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Замества формата на дата на региона, използван в входните маски. Моделът може да съдържа разделящи символи и следните заместители: <br>'m' - Номер на месеца.<br> 'mm' - Номер на месеца, с водеща нула за едноцифрени стойности. <br>'d' - Ден от месеца. <br>'dd' - Ден от месеца, с водеща нула за едноцифрени стойности. <br>'yy' - Последните две цифри от годината. <br>'yyyy' - Четирицифрена година.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Замества времевия формат на региона, използван в входните маски. Моделът може да съдържа разделящи символи и следните заместители: <br>'H' - Часове в 24-часов формат.<br> 'HH' - Часове в 24-часов формат, с водеща нула за едноцифрени стойности. <br>'h' - Часове в 12-часов формат. <br>'hh' - Часове в 12-часов формат, с водеща нула за едноцифрени стойности. <br>'MM' - Минути. <br>'ss' - Секунди. <br>'TT' - 12-часов часов период с главна буква (AM/PM). <br>'tt' - 12-часов часов период с малки букви (am/pm).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Презаписва символа, който регионът използва, за да отдели дробната част от цяло число на показано число в входните маски.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Презаписва символа, който регионът използва, за да раздели цифрите на голям брой на групи по три в входните маски.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Презаписва паричния символ или код на региона, използван в входните маски.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Презаписва валутния модел на региона, използван в входните маски. Моделът може да съдържа следните заместители: <br>'@' - Символ или код на валутата.<br> '#' - Число. <br>'-' - Позиция на минус в отрицателни стойности (ако се пропусне, минусът се поставя в началото)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Шаблонът може да съдържа низови литерали и следните контейнери: '9' - за цифра; \"а\" - за главна или малка буква; \"#\" - за цифра или главна или малка буква. Използвайте обратно наклонена черта \"\\\", за да избягате от знак."
@@ -2925,13 +3370,15 @@ export var bgStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Символ, използван за разделяне на цифрите на голямо число в групи от по три.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Ограничава колко цифри да се запазят след десетичната запетая за показваното число."
+      precision: "Ограничава колко цифри да се запазят след десетичната запетая за показваното число.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Показва следващи нули в дробната част до зададената прецизност. Например, с точност 2, входна стойност 1.2 се показва като 1.20."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Един или няколко символа, които трябва да бъдат показани преди стойността.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Един или няколко символа, които трябва да се покажат след стойността."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Символ или код на валута, показван със стойността. Символът на региона се използва по подразбиране. Изчистете това свойство, за да не се показва символ.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Определя позициите на числото, валутния символ и минуса. Моделът може да съдържа следните запълващи: <br>'@' - Символ или код на валутата.<br> '#' - Число. <br>'-' - Позиция на минус в отрицателни стойности (ако се пропусне, минусът се поставя в началото)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2982,6 +3429,8 @@ export var bgStrings = {
     tabAlign: "Подравняване на раздели",
     // [Auto-translated] "File source type"
     sourceType: "Тип източник на файлове",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Стандартна камера",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Побиране в контейнера",
     // [Auto-translated] "Set value expression"
@@ -3302,12 +3751,702 @@ export var bgStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Приложена предварителна настройка"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Линия: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Използвайте предложеното име"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Премахнете повтарящия се елемент"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Използвайте препоръчания тип"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Използвайте предложената функция"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Използвайте препоръчаната маска"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Дайте на елемента свободно име"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Дайте на елемента свободно име"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Премахнете имота"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Използвайте най-близката позволена стойност",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Премахнете имота",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Използвайте предложената стойност"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Превърнете стойността в списък"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Дайте име на елемента"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Премахнете имота",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Преименуване на имота"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Използвайте предложеното име",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Използвайте предложеното име"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Използвайте предложеното име"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Използвайте препоръчания тип"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Използвайте препоръчания тип"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Изразът \"{expression}\" не може да бъде анализиран."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" не се намира – не съществува въпрос, панел, страница, изчислена стойност или променлива с това име.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" не се намира в {containerType} \"{root}\" (източник: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" не се намира в обхвата на \"{scopePrefix}\" (референция: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "KeyName на \"{name}\" имена \"{key}\" - \"{name}\" няма {keyNoun} с това име, така че валидирането на дублиращ се ключ никога не се изпълнява.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" не е намерено."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop} на \"{name}\" се отнася до самия елемент (референция: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Името \"{name}\" се дублира.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Името на изчислената стойност \"{name}\" вече се използва от друга изчислена стойност.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Изчислената стойност \"{name}\" споделя името си с друг елемент, така че единият от тях засенчва другия."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} \"{name}\" на този {ownerText} също е вградената променлива {{builtIn}} – проучването отговаря първо на {{name}}, така че това е недостъпно в изразите.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "ValueName \"{valueName}\" на \"{name}\" споделя стойността на {otherType} \"{otherName}\", която няма собствено valueName - \"{otherName}\" третира полетата, които добавя \"{name}\", като неизвестни и clearIncorrectValues() ги изтрива. Задайте и неговото valueName на \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Редът \"{key}\" в матрицата надолу \"{otherName}\" също е {sharedKeyText} \"{name}\", споделяйки своята стойност – клетъчен обект и една стойност не могат едновременно да съществуват под един ключ; runtime запазва единия и изтрива другия.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" споделя ключа за данни \"{dataKey}\" с {otherType} \"{otherName}\" – той държи {shapeText} там, докато \"{otherName}\" запазва {otherShapeText}; единият не може да държи стойността на другия, затова clearIncorrectValues() я изтрива.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Ключът за данни \"{dataName}\" е също ключ за коментари на \"{base}\" (неговият ключов ключ плюс \"{suffix}\") – единият запис безшумно презаписва другия.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Ключът за данни \"{dataName}\" е също ключът за обща стойност на \"{base}\" (неговият ключов ключ плюс \"{suffix}\") – единият запис безшумно презаписва другия.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "Тригърът {trigger} задава променливата \"{name}\", която е и ключовият елемент на въпроса \"{questionName}\" – променливата отговаря на {{name}} оттам нататък, а не на въпроса."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Името \"{name}\" е запазено – член на Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "ValueName \"{valueName}\" на \"{name}\" е запазен – член на Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Колоната \"{name}\" на \"{matrixName}\" е запазена – член на Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Елементът \"{name}\" на \"{questionName}\" е запазен – член на Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Редът \"{rowValue}\" на \"{name}\" е запазен – член на Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Изчислената стойност \"{name}\" е запазена – член на Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" има неизвестен тип \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" няма тип – елемент без тип се премахва."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" не е свойство на {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" на {ownerText} не може да се сериализира – действа при зареждане и се премахва от JSON всеки път, когато анкетата се запази отново.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" и \"{aliasKey}\" от {ownerText} са две имена на едно свойство – времето на изпълнение ги прилага в реда, в който JSON ги записва, така че \"{winner}\" печели.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" е зададен на \"{name}\", но inputType \"{inputType}\" няма граници – времето за изпълнение го игнорира."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{key} на {ownerText} е {valueText} – не е една от позволените стойности ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{ключ} на {ownerText} е {стойност}, извън позволения му диапазон {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "ValueName \"{valueName}\" на \"{name}\" съдържа \".\" - изразите четат {{valueName}} като път към \"{rootKey}\", така че самият ключ за данни никога не може да бъде адресиран."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} няма \"{key}\" – свойството е необходимо за {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Името на {className} е {valueText}, а не низ – проучването не може да го зареди."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "\"{key}\" на {ownerText} не е масив – свойството съдържа списък, а времето за изпълнение увива стойността в масив от един елемент."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Дефиницията на променливата обявява \"{variable}\", което е и ключът за данни на въпроса \"{name}\" – задаването на променливата изтрива отговора, съхранен под този ключ, а {{name}} отговаря на стойността на хоста оттук нататък.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Дефиницията на променливата обявява \"{variable}\", което е и името на изчислената стойност \"{name}\" – и двете записват един и същ слот и който се изпълнява последен, печели."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition не е JSON обект за проучване, така че не се декларира променлива и не може да се провери предварително зададена стойност.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets не е масив, така че не се декларира пресет.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Пресет #{index} не е обект.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Пресет #{index} няма име, така че нищо не може да го реферира.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Пресет \"{preset}\" не носи обект без променливи, така че не задава нищо.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Пресетът \"{preset}\" се декларира два пъти – търсене с това име отговаря на първото.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Пресет \"{preset}\" задава \"{variable}\", което дефиницията на променливата не декларира.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Пресет \"{preset}\" задава \"{variable}\" на стойност, която дефиницията на променливата отхвърля: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Функцията \"{functionName}\" не е регистрирана."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Изчислената стойност \"{names}\" се отнася до себе си в собствен израз.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Изчислените стойности {имена} зависят една от друга."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Тригерът реагира на стойността, която сам си задава (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Тригерите образуват цикъл чрез стойностите, които задават: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} чете стойността, която сам записва – работи само когато друга стойност се промени, така че никога не се изпълнява.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Стойностите се записват в цикъл: {chain}. Всяко записване повтаря изразите, които го четат, така че крайните стойности зависят от реда, в който се отговарят въпросите."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Условието сравнява \"{name}\" с {values} – не е сред изборите си. Налично: {available}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Условието сравнява \"{name}\" с {стойности} – няма стойност на избора. Налично: {available}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Условието прилага \"{operator}\" към \"{name}\": \"{recordName}\" ({questionType}) няма стойност за сравнение.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Условието прилага \"{operator}\" към \"{name}\": \"{recordName}\" съдържа {valueShapeText} – операторите за подреждане и аритметика не се прилагат за него.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Условието прилага \"{operator}\" към \"{name}\": \"{recordName}\" е булев въпрос – операторите за подреждане не се прилагат за него.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Условието прилага \"{operator}\" към \"{name}\": \"{recordName}\" е текстов въпрос – стойността му е низ, така че численото сравнение разчита на имплицитно преобразуване.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Условието прилага \"{operator}\" към \"{name}\": \"{recordName}\" съдържа низ от дата – сравняването му с числото, което {constValue} не може да задържи.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Условието прилага \"{operator}\" към \"{name}\": \"{recordName}\" е числово – сравняването му със низа \"{constValue}\" не може да се приложи.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Условието прилага \"{operator}\" към \"{name}\": \"{recordName}\" съдържа масив от избрани стойности, така че \"=\" сравнява целия масив.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Условието прилага \"{operator}\" към \"{name}\": \"{recordName}\" е булев въпрос – сравнението му с {constValue} не може да се изпълни."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{expression}\" винаги е невярно, така че \"{name}\" никога не се показва.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} \"{expression}\" никога не важи, защото {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{expression}\" никога не важи – няма позволена стойност да я удовлетворява: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{expression}\" си противоречи: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{expression}\" винаги е вярно, така че не решава нищо.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{expression}\" е аритметика, не сравнение, така че никога не дава да или не.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Част от {prop} \"{expression}\" има резултат, който е известен предварително.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} \"{expression}\" винаги е валиден, защото {facts} - не решава нищо."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" не чете никакъв въпрос или променлива."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "По подразбиране стойността на \"{name}\" е {valuesText}, която никога не може да задържи. Позволено: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Правилният отговор на \"{name}\" е {valuesText}, който никога не може да задържи. Позволено: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Тригерът задава \"{name}\" на {valuesText}, което никога не може да задържи. Разрешено: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Стандартната стойност на реда задава \"{name}\" на {valuesText}, което никога не може да задържи. Позволено: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Стандартната стойност на панела задава \"{name}\" на {valuesText}, което никога не може да задържи. Позволено: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} на \"{name}\" нарича \"{key}\" – такъв ред няма. Налично: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop} на \"{name}\" нарича \"{key}\" – такава колона няма. Налично: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} на \"{name}\" нарича \"{key}\" – няма такъв шаблонен въпрос. Налично: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Тригерът copyvalue копира \"{fromName}\" в \"{setToName}\", но \"{fromName}\" държи {sourceShapeText}, а \"{setToName}\" държи {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Тригерът copyvalue копира \"{fromName}\" в \"{setToName}\", но нито една стойност на \"{fromName}\" не е сред стойностите, които \"{setToName}\" може да запази. Позволено: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" копира избора си от \"{source}\", но няма съмнение за това име.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" копира изборите си от себе си.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" копира изборите си от \"{source}\" ({sourceType}), който не предоставя нито избори, нито масив от стойности.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" чете {prop} \"{field}\" от \"{source}\", но {sourceType} \"{source}\" няма такъв {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Друг елемент от {prop} на \"{name}\" вече има стойността {valueText} – времето за изпълнение запазва и двата елемента.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Изборът на \"{name}\" съдържа {valueText}, докато {toggleProp} е включен – той се сблъсква с вградения елемент {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "Тригерът {trigger} таргетира страницата \"{name}\", която не съществува.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "Тригерът {trigger} таргетира \"{name}\", но {containerType} \"{root}\" няма {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{trigger} тригърът {глагол} \"{name}\", но не съществува {kindText} с това име."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Типът на спусъка \"{type}\" не е известен.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Спусъкът няма тип."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Типът валидатор \"{type}\" на \"{name}\" не е известен.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Валидатор на \"{name}\" няма тип."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "{validatorType} валидаторът на \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "Валидаторът {validatorType} на \"{name}\" изисква поне {min} и най-много {max} – нито един отговор не го удовлетворява.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Валидаторът за брой отговори на \"{name}\" изисква поне {minCount} отговори, над {selectable} опциите, които могат да се избират заедно.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Валидаторът на regex на \"{name}\" има модел, който двигателят отхвърля: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Валидаторът на израза на \"{name}\" няма израз, затова винаги минава."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} на \"{name}\" е {min}, над {maxProp} на {max} – времето за изпълнение тихо настройва един от тях.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} на \"{name}\" е {count}, {direction} е {boundProp} на {bound} - времето за изпълнение го затяга.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} на \"{name}\" е {step}, но обхватът, през който преминава ({minProp}.. {maxProp}) обхваща само {диапазон} - времето за изпълнение го стяга.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "minSelectedChoices на \"{name}\" е {min}, над {selectable} изборите, които могат да се изберат заедно – въпросът никога не може да бъде отговорен."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" никога не може да стане видим: то е visibleIf чете {reads}, което {deadClause}, така че условието никога не изпълнува."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "MaskType \"{maskType}\" на \"{name}\" не е известна маска – времето за изпълнение се връща до никаква липса на маска.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "maskSettings на \"{name}\" задава \"{key}\", което не е свойство на маската \"{maskType}\" – времето за изпълнение я прекъсва безшумно.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "Настройките на maskSettings на \"{name}\" се задават без maskType – времето за изпълнение запазва само \"saveMaskedValue\" и премахва останалите.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Маската {maskType} на \"{name}\" се прилага за никакъв вход: inputType \"{inputType}\" е маскиран само за текст и tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Маската datetime на \"{name}\" задава min/max без модел – границите важат за частите с дата в модела, така че без такава те не правят нищо.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Маската {maskType} на \"{name}\" позволява поне {min} и най-много {max} – нито една стойност не я удовлетворява."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Динамичният панел \"{name}\" има празен шаблон – панелите му нямат нищо за рендериране.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\" няма елементи.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\" няма елементи, които някога да могат да се рендерират – всеки елемент е скрит, защитен от условие, което никога не изпълнява, или празен.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Детайлните елементи на \"{name}\" никога не се показват: неговият detailPanelMode е \"none\", което е по подразбиране."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Позиция: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Той е изграден от наследените свойства на име, оператор и стойност на тригера.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Вътре: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Имаше предвид \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Ако е персонализиран компонент, предайте дефиницията му на линтера, за да се осигури пълен анализ.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Регистрирайте функцията преди linting или я включете в опциите за линтер.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Неправилно изписан тип се премахва тихо по време на изпълнение, а персонализираният тригер не се покрива от проверките на целта и цикъла.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Ако е променлива, зададена по време на изпълнение, посочете я в опциите за линтер.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Цикълът може да стане недостижим, ако условията за задействане никога не се съдържат заедно – проверете изразите.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "defaultValueExpression се прилага само докато не бъде отговорен въпросът му.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "В изразяване: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Цитирани в подвързванията.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Споменато в изборите ByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Споменато в текста \"{0}\".", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () чете това име от всеки запис на {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Аргументът {0}() не посочва нито един въпрос, панел или страница.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Десериализаторът пуска ключ, който не познава.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Десериализаторът изпуска валидатор, който не може да разреши, така че нищо не валидира.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "InputType е \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Това е ключът за данни на \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "и",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} винаги е {стойност}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} е {граници}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "поне {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "най-много {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} не могат да бъдат и двете {стойности}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} не може да бъде {стойност} и да не бъде тя",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} не може да бъде празно и да е {стойност}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} не може да бъде нито празно, нито празно",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} не може да бъде над {min} и под {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} се иска да бъде без никаква стойност"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "\"{0}.\" референции са достъпни само в матрична клетка или в панел с детайли на матрицата.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" е достъпна само в матрична клетка или в панел с детайл на матрица.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "\"{0}.\" референции са налични само в динамичен панел или панелен контейнер.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "\"{0}.\" референции са налични само в динамичен панел.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" е налична само в динамичен панел.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" е достъпна само в условията за избор, ред и колона.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\" препратки са достъпни само в рамките на композитен въпрос.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" не е налична в inArray филтъра, който се свързва с елемента, а след това и с анкетата.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" е колона от тази матрица – свържете се с префикса на реда.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" е въпрос на този динамичен панел – свържи го с префикса на панела."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Задайте inputType: \"число\" на \"{0}\", ако събира числа.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Използвайте \"contains\" или \"anyof\" за мултиселект стойности."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "страница",
+        // [Auto-translated] "panel"
+        panel: "Панел"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Име",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "Име"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "Изчислена стойност",
+        // [Auto-translated] "element"
+        default: "елемент"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Проучването",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Други",
+        // [Auto-translated] "None"
+        none: "Няма",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Отказвай да отговориш",
+        // [Auto-translated] "Don't know"
+        dontknow: "Не знам"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "никога не стреля",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "отхвърля всеки отговор",
+        // [Auto-translated] "cannot validate"
+        default: "не може да валидира"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Въпросът няма отговор, който да валидира",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "дължина се чете от стойност на текста, а този отговор няма",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "отговорът не е число и никога не може да бъде",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Номер никога не съвпада с имейл адрес",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Отговорът не е списък със стойности",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Отговорът не е стойност, която може да провери"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "масив",
+        // [Auto-translated] "an object"
+        object: "Обект"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "ред от матрица",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "елемент с мултитекст",
+        // [Auto-translated] "a row or item of a question"
+        default: "Ред или елемент от въпрос"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "масив от обекти",
+        // [Auto-translated] "an object"
+        object: "Обект",
+        // [Auto-translated] "a plain value"
+        plain: "Чиста стойност",
+        // [Auto-translated] "a value"
+        default: "Стойност"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "масив от избрани стойности",
+        // [Auto-translated] "a single value"
+        scalar: "една единствена стойност",
+        // [Auto-translated] "a value"
+        default: "Стойност"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "По-долу",
+        // [Auto-translated] "above"
+        above: "горе"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "никога не е видим и никога не получава стойност",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "никога не са видими и никога не получават стойност"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "въпрос",
+        // [Auto-translated] "question or variable"
+        questionvalue: "въпрос или променлива",
+        // [Auto-translated] "page"
+        page: "страница"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "Четене",
+        // [Auto-translated] "navigates to"
+        gotoName: "Навигация към",
+        // [Auto-translated] "sets"
+        default: "множества"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Въпрос за шаблона",
+        // [Auto-translated] "column"
+        default: "Колона"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Въпрос за шаблона",
+        // [Auto-translated] "column"
+        matrixdynamic: "Колона",
+        // [Auto-translated] "item"
+        multipletext: "Елемент",
+        // [Auto-translated] "row"
+        matrix: "Ред",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Ред",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Колона",
+        // [Auto-translated] "field"
+        default: "Поле"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Елемент 1" }, { value: "item2", text: "Елемент 2" }, { value: "item3", text: "Елемент 3" }],
-    columns: [{ value: "column1", text: "Колона 1" }, { value: "column2", text: "Колона 2" }, { value: "column3", text: "Колона 3" }],
-    rows: [{ value: "row1", text: "Ред 1" }, { value: "row2", text: "Ред 2" }],
-    matrixColumns: [{ name: "column1", title: "Колона 1" }, { name: "column2", title: "Колона 2" }, { name: "column3", title: "Колона 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Елемент 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Елемент 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Елемент 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Колона 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Колона 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Колона 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Ред 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Ред 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Колона 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Колона 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Колона 3"
+      }
+    ]
   }
 };
 

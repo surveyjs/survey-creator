@@ -142,6 +142,10 @@ export var traditionalChineseTranslation = {
     jsonHideErrors: "隱藏錯誤",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "顯示錯誤",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "修正錯誤",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "調查 JSON 必須是一個物件。",
     // "Undo"
     undo: "還原",
     // "Redo"
@@ -246,6 +250,8 @@ export var traditionalChineseTranslation = {
     translateUsigAI: "自動翻譯全部",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "翻譯語言組合：",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "翻譯剩餘字串",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "未翻譯的字串",
     // [Auto-translated] "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var traditionalChineseTranslation = {
     translationSource: "源：",
     // [Auto-translated] "Target: "
     translationTarget: "目標：",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "原始語言",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "目標語言",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0}{1}字串翻譯",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "你確定要刪除所選語言的所有翻譯字串嗎？",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "形態檢視",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "格狀視圖",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "翻譯字串",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "調查字串",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "無需翻譯任何附加條件",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "所有字串皆被翻譯",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0}字串不會被翻譯",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "不支援YouTube連結。",
     // [Auto-translated] "Export"
@@ -286,6 +314,10 @@ export var traditionalChineseTranslation = {
     choicesLoadedFromWebLinkText: "前往“設置”",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "載入選項的預覽",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "無表達式集合",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "編輯表達式",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML內容將在這裡。",
     // [Auto-translated] "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var traditionalChineseTranslation = {
       uncompletedRule_cancel: "不，我想完成規則"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "變數預設",
+    // [Auto-translated] "None"
+    noPreset: "沒有",
+    // [Auto-translated] "View variable values"
+    view: "查看變數值",
+    // [Auto-translated] "Variable values"
+    viewTitle: "變數值",
+    // [Auto-translated] "Manage presets"
+    edit: "管理預設",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "變數預設",
+    // [Auto-translated] "Preset"
+    presetName: "預設",
+    // [Auto-translated] "Description"
+    presetDescription: "描述",
+    // [Auto-translated] "Add preset"
+    addPreset: "新增預設",
+    // [Auto-translated] "New preset"
+    newPresetName: "新預設",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "刪除預設",
+    // [Auto-translated] "Back"
+    back: "返回",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "已有同名預設存在",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "輸入預設名稱",
+    // [Auto-translated] "Preset"
+    listNameColumn: "預設",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "描述"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "表達助理",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "用 AI 寫作",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "描述這個表達式應該做什麼",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "例如：當受訪者年滿18歲時，請出示此問題",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "用文字描述這個狀況",
+    // [Auto-translated] "Generate"
+    generate: "生成",
+    // [Auto-translated] "Refine"
+    refine: "精煉",
+    // [Auto-translated] "Explain"
+    explain: "請解釋",
+    // [Auto-translated] "Stop"
+    stop: "停下",
+    // [Auto-translated] "Accept"
+    accept: "接受",
+    // [Auto-translated] "Reject"
+    reject: "拒絕",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "應用修正：{0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "現行表達",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "建議表達方式",
+    // [Auto-translated] "Reads as"
+    readsAs: "讀作",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "助理的解釋",
+    // [Auto-translated] "Check results"
+    findings: "檢查結果",
+    // [Auto-translated] "Error"
+    severityError: "錯誤",
+    // [Auto-translated] "Warning"
+    severityWarning: "警告",
+    // [Auto-translated] "Info"
+    severityInfo: "資訊",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "在《{0}》中",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "描述表達式並選擇產生。",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "在等助理......",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "申請被取消了。",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "助理報告：{0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "助理沒有提出什麼表情。",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "檢視建議的表達方式。",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "助理解釋了當時的表情。",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "建議的表達式存在錯誤，無法接受。",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "建議表達式無法在每個寫入位置都被檢查，因此無法被接受。",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "在詢問助理之前，先在規則中加入一個動作。",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "第一個建議有錯誤，並自動被修正。"
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var traditionalChineseTranslation = {
       templateDescription: "條目描述模���",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "條目標題模式",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "條目標題佔位符",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "空面板文本",
       // [Auto-translated] "Tab title pattern"
@@ -588,6 +724,10 @@ export var traditionalChineseTranslation = {
       templateErrorLocation: "錯誤消息對齊",
       // [Auto-translated] "New entry location"
       newPanelPosition: "新入場地點",
+      // [Auto-translated] "Entries per page"
+      pageSize: "每頁條目",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "允許使用者排序條目",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "防止以下問題中的重複回答"
     },
@@ -676,6 +816,12 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Expression"
       expression: "表達"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "排序方式",
+      // [Auto-translated] "Order"
+      direction: "秩序"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "表達方式"
@@ -691,7 +837,9 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Survey description"
       description: "調查說明",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "將調查設為唯讀"
+      readOnly: "將調查設為唯讀",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "區域賽制"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -727,7 +875,9 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "如果滿足以下條件，則使該列為必填項",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "每個選項都在單獨的列中"
+      showInMultipleColumns: "每個選項都在單獨的列中",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "允許依此欄位排序"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -742,6 +892,22 @@ export var traditionalChineseTranslation = {
     masksettings: {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "在調查結果中保存掩碼值"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "區域",
+      // [Auto-translated] "Date pattern"
+      datePattern: "日期模式",
+      // [Auto-translated] "Time pattern"
+      timePattern: "時間模式",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "十進位分隔符",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "千分符",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "貨幣符號",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "貨幣模式"
     },
     patternmask: {
       // [Auto-translated] "Value pattern"
@@ -762,16 +928,18 @@ export var traditionalChineseTranslation = {
       decimalSeparator: "小數點分隔符",
       // [Auto-translated] "Value precision"
       precision: "值精度",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "顯示尾隨零點",
       // [Auto-translated] "Minimum value"
       min: "最小值",
       // [Auto-translated] "Maximum value"
       max: "最大值"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "貨幣前綴",
-      // [Auto-translated] "Currency suffix"
-      suffix: "貨幣後綴"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "貨幣符號",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "貨幣模式"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "選中時清除其他",
@@ -813,8 +981,24 @@ export var traditionalChineseTranslation = {
     addItem: "點選以新增專案...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "按下以刪除該專案...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "加入{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "移除{0}",
     // [Auto-translated] "Drag the item"
     dragItem: "拖動專案",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "擴展巢狀選擇",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "坍縮巢狀選擇",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "擴展巢狀{0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "摺疊巢狀選擇{0}",
+    // [Auto-translated] "Show description"
+    showDescription: "節目簡介",
+    // [Auto-translated] "Hide description"
+    hideDescription: "隱藏描述",
     // "Edit"
     edit: "編輯器",
     // [Auto-translated] "Done"
@@ -855,42 +1039,62 @@ export var traditionalChineseTranslation = {
     propertyNameIsNotUnique: "請輸入唯一名稱",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "不要使用保留字：「專案」、「選項」、「面板」、“行”。",
-    // [Auto-translated] "You don't have any items yet"
-    listIsEmpty: "您還沒有任何物品",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "你還沒有任何選擇",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "您還沒有任何列",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "您還沒有佈局列",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "您還沒有任何行",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "尚無任何驗證規則",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "您還沒有任何自訂變數",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "您還沒有任何觸發器",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "您還沒有任何連結",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "您還沒有任何頁面",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "添加新選擇",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "添加新列",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "添加新行",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "添加新規則",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "添加新變數",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "添加新觸發器",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "添加新 URL",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "添加新頁面",
+    // [Auto-translated] "No items"
+    listIsEmpty: "沒有物品",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "沒有選擇",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "沒有自訂分級值",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "沒有自訂標籤",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "沒有區域",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "無柱子",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "無版面欄",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "沒有排隊",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "沒有驗證規則",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "沒有自訂變數",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "沒有觸發點",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "無條件標記",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "無連結",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "沒有頁數",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "無分類等級",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "增加選擇",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "增加評分值",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "新增標籤",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "新增面積",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "新增欄位",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "新增列",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "新增規則",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "新增變數",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "新增觸發器",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "加上加價",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "新增連結",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "新增頁面",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "新增排序層級",
     // "Value"
     value: "值",
     // "Text"
@@ -917,6 +1121,8 @@ export var traditionalChineseTranslation = {
     surveyTitlePlaceholder: "調查標題",
     // [Auto-translated] "Page {num}"
     pageTitlePlaceholder: "頁數 {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "面板標題",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "起始頁",
     // [Auto-translated] "Description"
@@ -967,6 +1173,8 @@ export var traditionalChineseTranslation = {
     visible: "是否可見?",
     // "Required"
     isRequired: "是否為必填項?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "要求一個正面的答案",
     // [Auto-translated] "Mark as required"
     markRequired: "標記為必填",
     // [Auto-translated] "Remove the required mark"
@@ -977,6 +1185,8 @@ export var traditionalChineseTranslation = {
     eachRowUnique: "防止行中出現重複回應",
     // "Error message for required questions"
     requiredErrorText: "“必需”錯誤消息",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "需要「是」時出現錯誤訊息",
     // "Display the question on a new line"
     startWithNewLine: "問題是否新起一行?",
     // "Rows"
@@ -995,6 +1205,16 @@ export var traditionalChineseTranslation = {
     maxFiles: "最大檔案數量",
     // "Row count"
     rowCount: "默認行數",
+    // [Auto-translated] "Rows per page"
+    pageSize: "每頁行數",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "允許使用者排序資料列",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "最高排序等級",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "預設排序順序",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "顯示排序列",
     // [Auto-translated] "Columns layout"
     columnLayout: "列佈局",
     // [Auto-translated] "\"Add Row\" button alignment"
@@ -1113,6 +1333,10 @@ export var traditionalChineseTranslation = {
     questionErrorLocation: "問題錯誤定位",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "改變頁面時聚焦在第一個問題",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "啟用選擇捷徑",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "顯示鍵盤提示",
     // "Question order"
     questionOrder: "Elements order on the page",
     // "Time limit to complete the survey"
@@ -1265,10 +1489,12 @@ export var traditionalChineseTranslation = {
     waitForUpload: "等待上傳完成",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "行詳細資訊對齊方式",
-    // [Auto-translated] "Minimum row count"
-    minRowCount: "最小行數",
-    // [Auto-translated] "Maximum row count"
-    maxRowCount: "最大行數",
+    // [Auto-translated] "Minimum number of rows"
+    minRowCount: "最小列數",
+    // [Auto-translated] "Maximum number of rows"
+    maxRowCount: "最大列數",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "列數表達式",
     // "Confirm row removal"
     confirmDelete: "確認刪除行",
     // [Auto-translated] "Confirmation message"
@@ -1279,6 +1505,8 @@ export var traditionalChineseTranslation = {
     minPanelCount: "最少參賽作品數量",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "最大條目數",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "條目計數表達式",
     // [Auto-translated] "Initial entry state"
     panelsState: "初始進入狀態",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1439,6 +1667,8 @@ export var traditionalChineseTranslation = {
     logoHeight: "標誌高度",
     // "Read-only"
     readOnly: "唯讀",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "唯讀模式",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "在以下情況下禁用唯讀模式",
     // "\"No rows\" message"
@@ -1519,6 +1749,8 @@ export var traditionalChineseTranslation = {
       columns: "設置列",
       // "Rows"
       rows: "設置行",
+      // [Auto-translated] "Entries"
+      entries: "參賽作品",
       // "Choice Options"
       choices: "設置選項",
       // [Auto-translated] "Items"
@@ -1545,6 +1777,8 @@ export var traditionalChineseTranslation = {
       question: "問題",
       // [Auto-translated] "Pages"
       pages: "頁面",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "區域賽制",
       // "Quiz Mode"
       timer: "問卷計時器",
       // [Auto-translated] "Calculated Values"
@@ -1863,6 +2097,12 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Never"
       none: "從不"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "唯讀",
+      // [Auto-translated] "View"
+      view: "景觀"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "單選按鈕",
     inputType: {
@@ -1914,6 +2154,12 @@ export var traditionalChineseTranslation = {
       warning: "儆",
       // [Auto-translated] "Informational"
       info: "資訊"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "正面",
+      // [Auto-translated] "Rear"
+      environment: "後方"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2105,6 +2351,8 @@ export var traditionalChineseTranslation = {
     underRowSingle: "在行下，僅顯示一個部分",
     // "Auto"
     auto: "自動",
+    // [Auto-translated] "Always"
+    always: "永遠",
     timerInfoMode: {
       // "Both"
       combined: "雙"
@@ -2322,7 +2570,148 @@ export var traditionalChineseTranslation = {
       survey: "與調查相同",
       // [Auto-translated] "Same as container"
       container: "與容器相同"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "繼承",
+      // [Auto-translated] "Hide"
+      "false": "躲起來",
+      // [Auto-translated] "Show"
+      "true": "節目"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "阿拉伯語",
+    // [Auto-translated] "Bulgarian"
+    bg: "保加利亞",
+    // [Auto-translated] "Catalan"
+    ca: "加泰隆尼亞語",
+    // [Auto-translated] "Czech"
+    cs: "捷克語",
+    // [Auto-translated] "Welsh"
+    cy: "威爾斯語",
+    // [Auto-translated] "Danish"
+    da: "丹麥語",
+    // [Auto-translated] "German"
+    de: "德語",
+    // [Auto-translated] "Greek"
+    el: "希臘語",
+    // [Auto-translated] "English"
+    en: "英文",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "英語（澳洲）",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "英語（加拿大）",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "英語（英國）",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "英格蘭（愛爾蘭）",
+    // [Auto-translated] "English (India)"
+    "en-IN": "英語（印度）",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "英語（紐西蘭）",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "英語（南非）",
+    // [Auto-translated] "Spanish"
+    es: "西班牙語",
+    // [Auto-translated] "Estonian"
+    et: "愛沙尼亞語",
+    // [Auto-translated] "Basque"
+    eu: "巴斯克語",
+    // [Auto-translated] "Persian"
+    fa: "波斯語",
+    // [Auto-translated] "Finnish"
+    fi: "芬蘭語",
+    // [Auto-translated] "Filipino"
+    fil: "菲律賓人",
+    // [Auto-translated] "French"
+    fr: "法語",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "法語（加拿大）",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "法語（瑞士）",
+    // [Auto-translated] "Hebrew"
+    he: "希伯來語",
+    // [Auto-translated] "Hindi"
+    hi: "印地語",
+    // [Auto-translated] "Croatian"
+    hr: "克羅埃西亞語",
+    // [Auto-translated] "Haitian Creole"
+    ht: "海地克里奧爾語",
+    // [Auto-translated] "Hungarian"
+    hu: "匈牙利語",
+    // [Auto-translated] "Indonesian"
+    id: "印尼",
+    // [Auto-translated] "Icelandic"
+    is: "冰島語",
+    // [Auto-translated] "Italian"
+    it: "義大利語",
+    // [Auto-translated] "Japanese"
+    ja: "日本",
+    // [Auto-translated] "Georgian"
+    ka: "喬治亞",
+    // [Auto-translated] "Kazakh"
+    kk: "哈薩克語",
+    // [Auto-translated] "Korean"
+    ko: "韓語",
+    // [Auto-translated] "Lithuanian"
+    lt: "立陶宛語",
+    // [Auto-translated] "Latvian"
+    lv: "拉脫維亞語",
+    // [Auto-translated] "Macedonian"
+    mk: "馬其頓",
+    // [Auto-translated] "Burmese"
+    mm: "緬甸",
+    // [Auto-translated] "Malay"
+    ms: "馬來語",
+    // [Auto-translated] "Dutch"
+    nl: "荷蘭語",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "荷蘭（比利時）",
+    // [Auto-translated] "Norwegian"
+    no: "挪威語",
+    // [Auto-translated] "Polish"
+    pl: "波蘭語",
+    // [Auto-translated] "Portuguese"
+    pt: "葡萄牙語",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "葡萄牙語（巴西）",
+    // [Auto-translated] "Romanian"
+    ro: "羅馬尼亞語",
+    // [Auto-translated] "Russian"
+    ru: "俄語",
+    // [Auto-translated] "Slovak"
+    sk: "斯洛伐克語",
+    // [Auto-translated] "Slovenian"
+    sl: "斯洛維尼亞語",
+    // [Auto-translated] "Serbian"
+    sr: "塞爾維亞語",
+    // [Auto-translated] "Swedish"
+    sv: "瑞典語",
+    // [Auto-translated] "Swahili"
+    sw: "斯瓦希里語",
+    // [Auto-translated] "Telugu"
+    tel: "泰盧固語",
+    // [Auto-translated] "Tajik"
+    tg: "塔吉克",
+    // [Auto-translated] "Thai"
+    th: "泰語",
+    // [Auto-translated] "Turkish"
+    tr: "土耳其語",
+    // [Auto-translated] "Ukrainian"
+    uk: "烏克蘭語",
+    // [Auto-translated] "Urdu"
+    ur: "烏爾都語",
+    // [Auto-translated] "Vietnamese"
+    vi: "越南語",
+    // [Auto-translated] "Chinese"
+    zh: "中文",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "中文（簡體）",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "中文（繁體）"
   },
   // Operators
   op: {
@@ -2399,6 +2788,10 @@ export var traditionalChineseTranslation = {
     visibletrigger: "修改可見性"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "和調查用語一樣"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "例如：+1（999）-999-99-99"
@@ -2406,12 +2799,6 @@ export var traditionalChineseTranslation = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "例如：mm/dd/yyyy HH：MM：ss"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "例：$",
-      // "Ex.: USD"
-      suffix: "例如：美元"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2459,7 +2846,9 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "指定此面板在網格佈局中跨越的列數。",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "此表允許您設定面板中的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
+      gridLayoutColumns: "此表允許您設定面板中的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "指定此面板中問題在唯讀時的呈現方式。「唯讀」顯示問題及其常見輸入控制，但無法編輯。「檢視」以文字或其他非互動元素顯示答案。「繼承」則使用父面板、頁面或調查的模式（預設為「唯讀」）。"
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2492,6 +2881,8 @@ export var traditionalChineseTranslation = {
       width: "設置面板的寬度，使其與同一行中的其他測量圖元成比例。接受 CSS 值（px、%、in、pt 等）。",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "鍵入動態面板標題的範本。使用 {panelIndex} 作為面板的常規位置，使用 {visiblePanelIndex} 作為其在可見面板中的順序。將這些佔位元插入到圖案中以添加自動編號。",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "一個用於條目標題的備用文字，適用於條目標題模式未產生有意義的值。使用 {panelIndex} 表示條目的一般位置，{visiblePanelIndex} 表示其在可見條目中的順序。",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "鍵入選項卡標題的範本。使用 {panelIndex} 表示面板的大致位置，使用 {visiblePanelIndex} 表示其在可見面板中的順序。將這些佔位元插入到圖案中以添加自動編號。",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2510,15 +2901,35 @@ export var traditionalChineseTranslation = {
       keyName: "引用問題名稱以要求使用者在每個面板中為此問題提供唯一的答案。",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "在刪除條目之前觸發確認提示。",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "指定一個計算條目數量的表達式。此表達式覆蓋「初始條目數」設定，且每當參考值改變時會重新評估。結果受限於「最少條目數」與「最大條目數」設定。在此表達式設定期間，受訪者無法手動新增或移除條目。",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "指定面板每頁顯示的條目數量。「0」則停用分頁並顯示所有條目。",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "允許受訪者使用排序條來排序條目。",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "定義初始輸入順序。若允許排序，受訪者可更改排序。當依多個問題排序時，每個問題依前一題所建立的順序排序條目。拖曳問題以改變優先順序。",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "將編號指派給巢狀在動態面板中的問題。"
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "允許受訪者透過點擊欄頭或使用排序列來排序。",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "定義初始列順序。若允許排序，回應者可更改。以多欄排序時，每欄依前一欄所建立的順序排序。拖曳欄位以改變優先順序。",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "「自動」僅在矩陣沒有可排序欄標頭時顯示排序列：標頭隱藏、矩陣使用行動版面配置，或列被移置為欄時。「Always」即使在可排序欄標頭可見時仍顯示排序列。",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "指定一個計算列數的表達式。此表達式覆蓋「初始列數」設定，當參考值改變時會重新評估。結果受限於「最小列數」與「最大列數」設定。在此表達式設定期間，受訪者無法手動新增或移除列數。",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "在刪除行之前觸發確認提示。",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "在向矩陣添加新行時自動展開詳細資訊部分。"
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "指定矩陣每頁顯示的列數。「0」則停用分頁並顯示所有列。",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "指定受訪者一次可依據多少欄位排序。",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "複製最後一行的答案，並將其分配給下一個添加的動態行。",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2567,7 +2978,11 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "選項選項中的長文本將自動生成換行符以適合下拉功能表。如果要剪裁文字，請取消選擇。",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "指定此問題在網格佈局中跨越多少列。"
+      effectiveColSpan: "指定此問題在網格佈局中跨越多少列。",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "指定問題在唯讀時的呈現方式。「唯讀」顯示問題及其常見的輸入控制，但因編輯而被禁用。「檢視」以文字或其他非互動元素顯示答案。「繼承」則使用父面板、頁面或調查的模式（預設為「唯讀」模式）。",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "在此問題下方顯示可用鍵盤操作的提示。「繼承」選項會套用調查層級的設定。"
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2615,6 +3030,8 @@ export var traditionalChineseTranslation = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "選擇是否要阻止受訪者填寫您的調查。",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "指定唯讀題目如何呈現，包括預覽頁面。「唯讀」（預設）顯示帶有常見輸入控制但無法編輯的題目。「檢視」以文字或其他非互動元素顯示答案。",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "設置進度條的位置。“自動”值在調查標題的上方或下方顯示進度條。"
     },
@@ -2634,7 +3051,9 @@ export var traditionalChineseTranslation = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "選取後，為每個選項創建一個單獨的列。",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "在多列佈局中排列選擇選項。設置為 0 時，選項將顯示在一行中。當設置為 -1 時，實際值將繼承自父矩陣的“嵌套列計數”屬性。"
+      colCount: "在多列佈局中排列選擇選項。設置為 0 時，選項將顯示在一行中。當設置為 -1 時，實際值將繼承自父矩陣的“嵌套列計數”屬性。",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "指定本欄儲存格在唯讀時的呈現方式。「唯讀」顯示儲存格及其常用輸入控制，但無法編輯。「檢視」以文字或其他非互動元素顯示答案。「繼承」則使用矩陣或調查設定的模式（預設為「唯讀」）。"
     },
     slider: {
       // "The lowest number that users can select."
@@ -2704,6 +3123,14 @@ export var traditionalChineseTranslation = {
     questionErrorLocation: "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "選擇是否希望每個頁面上的第一個輸入字段準備好進行文本輸入。",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "在無線按鈕組、勾選框及圖片選擇器問題中，選項旁顯示字母（A、B、C、等）。受訪者可透過按對應字母鍵選擇選項。您可以針對個別問題覆蓋此設定。",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "選項旁顯示字母（A、B、C、...），讓受訪者透過按對應字母鍵選擇。「繼承」選項使用調查層級設定。"
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "在問題下方顯示可用鍵盤動作的提示。你可以針對個別問題覆蓋此設定。",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "保持問題的原始順序或隨機化問題。此設置的效果僅在「預覽」選項卡中可見。",
     // [Auto-translated] "For text entry questions only."
@@ -2794,7 +3221,9 @@ export var traditionalChineseTranslation = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "設置導航按鈕在頁面上的可見性。“繼承”選項應用調查級別設置，預設為“可見”。",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "此表允許您設定頁面上的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。"
+      gridLayoutColumns: "此表允許您設定頁面上的每個網格列。它根據行中的最大元素數自動設置每列的寬度百分比。要自定義網格佈局，請手動調整這些值並定義每列中所有問題的標題寬度。",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "指定本頁問題在唯讀時的呈現方式。「唯讀」顯示問題及其常見輸入控制，但無法編輯。「檢視」以文字或其他非互動元素顯示答案。「繼承」則使用調查模式（預設為「唯讀」）。"
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "設置計時器在頁面上的位置。",
@@ -2912,6 +3341,22 @@ export var traditionalChineseTranslation = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "選擇是否要在調查結果中存儲帶有應用掩碼的問題值。"
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "該區域格式適用於日期時間、數字及貨幣輸入遮罩。若未指定，則使用調查語言。",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "覆蓋輸入遮罩中使用的區域日期格式。該模式可包含分隔字元及以下佔位符：<br>'m' - 月份號碼。<br>'mm' - 月份號碼，單位數值前置零。<br>'d' - 月份日期。<br>'dd' - 月份日期，單位數值前置零。<br>'yy' - 年份的最後兩位數字。<br>'yyyy' - 四位數年份。",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "覆蓋輸入遮罩中區域時間格式。模式可包含分隔字元及以下佔位符：<br>'H' - 24 小時制的小時。<br>'HH' - 24 小時制的小時，單位數值前置零。<br>'h' - 12 小時制的小時。<br>'hh' - 12 小時格式，單位數值前置零。<br>'MM' - 分鐘。<br>'ss' - 秒。<br>'TT' - 大寫 12 小時制（AM/PM）。<br>'TT' - 12 小時制（小寫 AM/PM）。",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "覆蓋該區域用來分隔輸入遮罩中顯示數字的分數部分與整數部分的符號。",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "覆蓋區域用來將大量數字數字分成三組的符號，並置於輸入遮罩中。",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "覆蓋輸入遮罩中使用的區域貨幣符號或代碼。",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "覆蓋輸入遮罩中使用的區域貨幣模式。模式可包含以下佔位符：<br>'@' - 貨幣符號或代碼。<br>'#' - 數字。<br>'-' - 負號的位置（若省略，負號置於開頭）。"
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "該模式可以包含字串文字和以下佔位元： '9' - 表示數位;“a” - 表示大寫或小寫字母;'#' - 表示數位或大寫或小寫字母。使用反斜杠“\\”轉義字元。"
@@ -2926,13 +3371,15 @@ export var traditionalChineseTranslation = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "用於將大數的數位分成三組的符號。",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "限制顯示數位的小數點後要保留的位數。"
+      precision: "限制顯示數位的小數點後要保留的位數。",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "在小數部分顯示尾部零，直到指定精度。例如，當精度為 2 時，輸入值 1.2 會顯示為 1.20。"
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "要在值之前顯示的一個或多個符號。",
-      // "One or several symbols to be displayed after the value."
-      suffix: "要在值后顯示的一個或多個符號。"
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "以貨幣符號或代碼顯示該數值。預設使用該區域的符號。清除此屬性以顯示不顯示符號。",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "指定數字、貨幣符號及負號的位置。圖案可包含以下佔位符：<br>'@' - 貨幣符號或代碼。<br>'#' - 數字。<br>'-' - 負號在負值中的位置（若省略，負號置於開頭）。"
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2983,6 +3430,8 @@ export var traditionalChineseTranslation = {
     tabAlign: "製表元對齊方式",
     // [Auto-translated] "File source type"
     sourceType: "檔源類型",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "預設相機",
     // [Auto-translated] "Fit to container"
     fitToContainer: "適合容器",
     // [Auto-translated] "Set value expression"
@@ -3303,12 +3752,702 @@ export var traditionalChineseTranslation = {
     // [Auto-translated] "Preset applied"
     presetApplied: "已套用預設"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "線條：{0}。", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "使用建議名稱"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "移除重複出現的項目"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "請使用建議的類型"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "請使用建議的功能"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "使用建議的口罩"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "給元素一個自由名稱"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "給元素一個自由名稱"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "移除該財產"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "使用最接近的允許值",
+        // [Auto-translated] "Remove the property"
+        removeKey: "移除該財產",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "請使用建議值"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "將數值轉換成清單"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "給這個元素取個名字"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "移除該財產",
+        // [Auto-translated] "Rename the property"
+        renameKey: "更名該物業"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "使用建議名稱",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "使用建議名稱"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "使用建議名稱"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "請使用建議的類型"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "請使用建議的類型"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "「{expression}」這個表達式無法解析。"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "找不到「{name}」——沒有該名稱的問題、面板、頁面、計算值或變數。",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "「{segment}」在 {containerType} 中找不到「{root}」（參考資料：{name}）。",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "「{segment}」不在「{scopePrefix}」作用域（參考碼：{name}）中。",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "「{name}」的鍵名稱為「{key}」——「{name}」沒有該名稱的 {keyNoun}，因此重複金鑰驗證不會執行。",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "找不到「{name}」。"
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "「{name}」的 {prop} 參考元素本身（參考：{reference}）。"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "「{name}」這個名字是重複的。",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "計算出的值名稱「{name}」已被另一個計算值使用。",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "計算出來的值「{name}」與另一個元素共享名稱，因此其中一個元素會跟著另一個元素相連。"
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "這個 {ownerText} 的 {nameKindText} 「{name}」同時也是內建的調查變數 {{builtIn}}——調查先回答 {{name}}，因此這個變數在表達式中無法到達。",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "「{name}」的值名稱「{valueName}」與 {otherType} 「{otherName}」共享值，後者本身沒有 valueName——「{otherName}」會將「{name}」新增的欄位視為未知，且 clearIncorrectValues（） 會刪除它們。它的 valueName 也設為「{valueName}」。",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "矩陣下拉選單「{otherName}」的列「{key}」同時也是 {sharedKeyText} 「{name}」，兩者共享其值——一個儲存格物件與單一值不可能同時存在於同一鍵下;執行時會保留其中一個並刪除另一個。",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} “{name}” 與 {otherType} “{otherName}” 共享資料鍵 “{dataKey}” ——它保留 {shapeText}，而 “{otherName}” 則保留 {otherShapeText};其中一方無法持有另一方的值，因此 clearIncorrectValues（） 會刪除該值。",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "資料鍵「{dataName}」同時也是「{base}」的註解鍵（其資料鍵加上「{suffix}」）——一個寫入會靜默覆蓋另一個。",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "資料鍵「{dataName}」同時也是「{base}」（其資料鍵加上「{suffix}」）的總值鍵——一個寫入會靜默覆蓋另一個。",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "{trigger} 觸發器設定變數「{name}」，同時也是問題「{questionName}」的資料鍵——從此變數回答 {{name}}，而非問題。"
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "「{name}」這個名稱是保留的——是 Object.prototype 的成員。",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "「{name}」的值名稱「{valueName}」是保留的 - Object.prototype 的成員。",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "「{matrixName}」中的欄位「{name}」是保留的——是 Object.prototype 的成員。",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "「{questionName}」中的項目「{name}」是保留的——Object.prototype 的成員。",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "「{name}」的「{rowValue}」列是保留的 - Object.prototype 的成員。",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "計算出的值「{name}」被保留為 Object.prototype 的成員。"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "「{name}」的類型為未知型別「{type}」。",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "「{name}」沒有型別——沒有型別的元素會被刪除。"
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "「{key}」不是 {ownerText} （{className}） 的屬性。"
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "{ownerText} 中的「{key}」不可序列化——它會在載入時生效，且每次重新儲存調查時會從 JSON 中刪除。",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "{ownerText} 的「{key}」和「{aliasKey}」是同一個屬性的兩個名稱——執行時間會依照 JSON 寫入的順序套用它們，因此「{winner}」勝出。",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "「{key}」設在「{name}」上，但 inputType「{inputType}」沒有界限——執行時間會忽略它。"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{ownerText} 的 {key} 是 {valueText}，不是允許的值之一（{allowedText}）。",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{ownerText} 的 {key} 是 {value}，超出其允許的範圍 {rangeText}。",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "「{name}」的 valueName 「{valueName}」包含一個「.」——表達式會將 {{valueName}} 讀作進入「{rootKey}」的路徑，因此資料金鑰本身永遠無法被定位。"
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} 沒有「{key}」——這個屬性是 {className} 所必需的。",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "{className} 的名稱是 {valueText}，不是字串——調查無法載入它。"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "{ownerText} 的「{key}」不是陣列——該屬性儲存一個清單，執行時間會將該值包裝成一個單一項目的陣列。"
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "變數定義宣告「{variable}」，同時也是問題「{name}」的資料鍵——設定變數會刪除該鍵下儲存的答案，{{name}} 則從此回答主機值。",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "變數定義宣告「{variable}」，這也是計算出的值「{name}」的名稱——兩者寫入同一個欄位，最後執行者獲勝。"
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition 不是 survey JSON 物件，因此不會宣告變數，也無法檢查預設值。",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets 不是陣列，因此不會宣告預設。",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "預設 #{index} 不是物件。",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "預設 #{index} 沒有名稱，因此沒有人能參考它。",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "預設的「{preset}」沒有變數物件，因此它不會設定任何東西。",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "預設「{preset}」會宣告兩次——以該名稱查詢會以第一次為答案。",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "預設「{preset}」設定「{variable}」，變數定義未宣告此參數。",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "預設「{preset}」會將「{variable}」設為變數定義所拒絕的值：{errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "函式「{functionName}」未被註冊。"
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "計算出來的值「{names}」會以自己的運算式來參考自己。",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "計算出來的 {name} 會互相依賴。"
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "觸發器會對它設定的值（「{setToName}」）做出反應。",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "觸發器會依照它們設定的值形成一個迴圈：{setRoots}。"
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} 會讀取它自己寫入的值——只有當另一個值改變時才會執行，所以根本不會執行。",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "數值以迴圈形式寫入：{chain}。每次寫入都會重跑讀取該題目的表達式，因此最終值取決於問題的回答順序。"
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "條件會比較「{name}」與 {values}——不在其選項中。可用：{available}。",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "條件比較「{name}」與 {values}——沒有選擇值包含此值。可用：{available}。"
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "條件將「{operator}」套用到「{name}」：「{recordName}」（{questionType}）沒有可比較的值。",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "條件將「{operator}」套用到「{name}」：「{recordName}」保持 {valueShapeText} ——排序與算術運算子不適用於此。",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "條件將「{operator}」套用到「{name}」：「{recordName}」是一個布林問題，順序運算子不適用於它。",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "條件將「{operator}」套用到「{name}」：「{recordName}」是一個文字問題——它的值是一個字串，因此數值比較依賴隱式轉換。",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "條件將「{operator}」套用到「{name}」：「{recordName}」包含一個日期字串，與 {constValue} 無法持有的數字比較。",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "條件將「{operator}」套用到「{name}」：「{recordName}」是數值的，無法與字串「{constValue}」比較。",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "條件將「{operator}」套用到「{name}」：「{recordName}」包含一個選取值的陣列，因此「=」會比較整個陣列。",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "條件將「{operator}」套用到「{name}」：「{recordName}」是一個布林問題——無法將其與 {constValue} 比較。"
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} 「{expression}」 總是為假，因此「{name}」從未顯示。",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} 「{expression}」永遠不成立，因為 {facts}。",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} 「{expression}」從未成立——沒有任何允許的值能滿足它：{facts}。",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} 「{expression}」自相矛盾：{facts}。"
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} 「{expression}」永遠為真，因此它不決定任何事。",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} 「{expression}」是算術，不是比較，因此從不給出是或否。",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "{prop} 「{expression}」的一部分結果是事先已知的。",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} 「{expression}」總是成立，因為 {facts} - 它不會決定任何事。"
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} 「{expression}」不會讀取任何問題或變數。"
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "「{name}」的預設值是 {valuesText}，但它永遠無法保持。允許：{availableText}。",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "「{name}」的正確答案是{valuesText}，但它永遠無法保持。允許：{availableText}。",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "觸發器將「{name}」設為 {valuesText}，且永遠無法持有。允許：{availableText}。",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "預設列值將「{name}」設為 {valuesText}，且永遠無法保持。允許：{availableText}。",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "預設面板值會將「{name}」設為 {valuesText}，且永遠無法持有。允許：{availableText}。",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "「{name}」的 {prop} 命名為「{key}」——沒有這樣的列。可用：{availableText}。",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "「{name}」的 {prop} 標示為「{key}」——沒有此欄位。可用：{availableText}。",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "「{name}」的 {prop} 名稱為「{key}」——沒有這樣的範本問題。可用：{availableText}。",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "copyvalue 觸發條件會將「{fromName}」複製到「{setToName}」，但「{fromName}」會保留 {sourceShapeText}，而「{setToName}」則會保留 {targetShapeText}。",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "copyvalue 觸發器將「{fromName}」複製到「{setToName}」，但「{setToName}」可包含的值中沒有「{fromName}」的值。允許：{availableText}。"
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "「{name}」是從「{source}」複製選擇，但這個名稱本身沒有疑問。",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "「{name}」會複製自己的選擇。",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "「{name}」是從「{source}」複製選取，後者既不提供選項，也不提供值陣列。",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "「{name}」讀作 {prop} 「{field}」，來自「{source}」，但 {sourceType} 「{source}」沒有這樣的 {fieldNoun}。"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "{name} 的 {prop} 中另一個項目已經有 {valueText} 值——執行時間會保留兩個項目。",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "「{name}」的選項包含 {valueText}，而 {toggleProp} 開啟時，會與內建的 {specialItemText} 項目發生碰撞。"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "{trigger} 的觸發目標頁面是「{name}」，但該頁面不存在。",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "{trigger} 觸發器針對「{name}」，但 {containerType} 「{root}」沒有 {segmentNoun} 「{segment}」。",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{trigger} 觸發動詞 {{name}“”，但沒有該名稱的 {kindText}。"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "觸發類型「{type}」目前尚不清楚。",
+        // [Auto-translated] "The trigger has no type."
+        noType: "觸發器沒有類型。"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "驗證者類型「{type}」的「{name}」未知。",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "「{name}」的驗證器沒有型別。"
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "「{name}」{effectText} 的 {validatorType} 驗證子：{causeText} （{questionType}）。",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "{validatorType} 的「{name}」驗證子至少需要 {min}，最多 {max} ——沒有任何答案能滿足此條件。",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "「{name}」的答案數驗證器至少需要 {minCount} 個答案，超過可同時選擇的 {select} 選項。",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "「{name}」的正則表達式驗證器有一個模式，但引擎會拒絕：{error}。",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "「{name}」的表達式驗證子沒有表達式，因此總是通過。"
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "「{name}」的{minProp}是{min}，高於其{max}的{maxProp}——執行時間會靜默調整其中一個。",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "「{name}」的 {countProp} 是 {count}，{direction} 是它的 {boundProp} ——執行時間會限制它。",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "「{name}」的{stepProp}是{step}，但它所跨越的範圍（{minProp}..{maxProp}）只跨度{range}——執行時間限制了它。",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "「{name}」的 minSelectedChoices 是 {min}，高於可同時選擇的 {selectable} 選項——這個問題永遠無法被回答。"
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "「{name}」永遠不會變得可見：它的 visibleIf 讀作 {reads}，也就是 {deadClause}，因此該條件永遠不成立。"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "「{name}」的maskType「{maskType}」並非已知遮罩——執行時間會退回到完全沒有遮罩。",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "maskSettings 的「{name}」設定為「{key}」，這不是「{maskType}」遮罩的屬性——執行時間會靜默地丟棄它。",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "「{name}」的maskSettings設定時沒有maskType——執行時間只保留「saveMaskedValue」，其餘部分會被捨棄。",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "{maskType} 的「{name}」遮罩適用於任何輸入：inputType “{inputType}” 僅對文字和 tel 進行遮罩。",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "datetime mask 的「{name}」設定最小值/最大值，沒有模式——界限適用於模式的日期部分，沒有模式則什麼都不做。",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "{name} 的 {maskType} 遮罩至少允許 {min}，最多 {max}——沒有任何值能滿足此值。"
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "動態面板「{name}」的模板是空的——面板沒有可渲染的物件。",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} 「{name}」沒有元素。",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} 「{name}」沒有任何能渲染的元素——每個元素都被隱藏，並被一個永遠不成立的條件保護，或是空的。",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "「{name}」的細節元素從未顯示：其 detailPanelMode 為「none」，這是預設值。"
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "位置：{0}。", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "它是從觸發器的舊有名稱、運算子和值屬性建構而成。",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "內部：{0}。", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "你是說「{0}」嗎？",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "如果是自訂元件，請將其定義傳給 linter，以便進行完整分析。",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "在 linter 前先註冊這個功能，或在 linter 選項中列出。",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "拼錯的類型會在執行時無聲丟棄，且自訂觸發不被目標與循環檢定涵蓋。",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "如果執行時是變數，請在附加選項中列出。",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "如果觸發條件無法連貫，迴圈可能無法達成——請驗證表達式。",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "defaultValueExpression 僅在問題被回答為止。",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "表達方式：{0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "在裝訂書中有提及。",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "參考於 choicesByUrl {0}。", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "在「{0}」文本中有提及。", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0}（） 從每個「{2}」條目中讀出這個名字{1}。",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "{0}（）論證中沒有提及問題、面板或頁數。",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "解序器會丟棄一個它不認識的金鑰。",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "解序列器會丟棄一個無法解析的驗證器，因此什麼都不會被驗證。",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "inputType 是「{0}」。",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "它是「{0}」的資料鍵。" // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "以及",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} 永遠是 {value}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} 是 {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "至少{0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "最多{0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} 不可能同時是兩個 {value}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} 不可能是 {value} 但又不是它",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} 不可能是空且是 {value}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} 不可能同時是空的，也不可能是空的",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} 不能高於 {min} 且低於 {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} 被要求成為一個毫無價值的人"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "「{0}.」的參考資料僅在矩陣單元或矩陣細節面板中取得。",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "「{0}」只能在矩陣單元或矩陣細節面板中取得。",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "「{0}.」的參考僅能在動態面板或面板容器中取得。",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "「{0}。」的引用僅在動態面板中出現。",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "「{0}」只能在動態面板內使用。",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "「{0}」僅在選擇、列與列條件中提供。",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "「{0}.」的引用僅存在於綜合問題中。",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "「{0}」無法在 inArray 篩選器中使用，該篩選器會先對項目和調查結果計算。",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "「{0}」是該矩陣的一欄——請以列前綴作為參考。",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "「{0}」是這個動態面板的問題——用面板前綴來參考。"
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "如果 inputType： “number” 會收集數字，則在 “{0}” 上設定。",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "多重選擇的值請使用「contains」或「anyof」。"
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "頁",
+        // [Auto-translated] "panel"
+        panel: "小組"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "名稱",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "名稱"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "計算價值",
+        // [Auto-translated] "element"
+        default: "元素"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "調查",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "其他",
+        // [Auto-translated] "None"
+        none: "沒有",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "拒絕回答",
+        // [Auto-translated] "Don't know"
+        dontknow: "不知道"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "絕不開火",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "拒絕所有答案",
+        // [Auto-translated] "cannot validate"
+        default: "無法驗證"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "這個問題沒有答案可以驗證",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "長度是從文字值讀取，而這個答案沒有長度",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "答案不是數字，也永遠不可能",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "號碼永遠不會與電子郵件地址相符",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "答案不是一串價值清單",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "答案不是它能檢驗的數值"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "一個陣列",
+        // [Auto-translated] "an object"
+        object: "一個物件"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "一排矩陣",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "多重文本項目",
+        // [Auto-translated] "a row or item of a question"
+        default: "問題的一行或項目"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "一組物件",
+        // [Auto-translated] "an object"
+        object: "一個物件",
+        // [Auto-translated] "a plain value"
+        plain: "一個純值",
+        // [Auto-translated] "a value"
+        default: "一個價值"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "一組選取的值",
+        // [Auto-translated] "a single value"
+        scalar: "一個單一的值",
+        // [Auto-translated] "a value"
+        default: "一個價值"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "下圖",
+        // [Auto-translated] "above"
+        above: "上圖"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "永遠不會被看見，也不會獲得任何值",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "永遠不會被看見，也永遠不會獲得一個值"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "問題",
+        // [Auto-translated] "question or variable"
+        questionvalue: "問題或變數",
+        // [Auto-translated] "page"
+        page: "頁"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "閱讀次數",
+        // [Auto-translated] "navigates to"
+        gotoName: "導航至",
+        // [Auto-translated] "sets"
+        default: "集合"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "範本問題",
+        // [Auto-translated] "column"
+        default: "柱狀"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "範本問題",
+        // [Auto-translated] "column"
+        matrixdynamic: "柱狀",
+        // [Auto-translated] "item"
+        multipletext: "項目",
+        // [Auto-translated] "row"
+        matrix: "排隊",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "排隊",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "柱狀",
+        // [Auto-translated] "field"
+        default: "場地"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "專案1" }, { value: "item2", text: "專案2" }, { value: "item3", text: "專案3" }],
-    columns: [{ value: "column1", text: "列 1" }, { value: "column2", text: "列 2" }, { value: "column3", text: "列 3" }],
-    rows: [{ value: "row1", text: "行 1" }, { value: "row2", text: "行 2" }],
-    matrixColumns: [{ name: "column1", title: "列 1" }, { name: "column2", title: "列 2" }, { name: "column3", title: "列 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "專案1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "專案2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "專案3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "列 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "列 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "列 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "行 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "行 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "列 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "列 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "列 3"
+      }
+    ]
   }
 };
 

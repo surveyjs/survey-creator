@@ -850,6 +850,18 @@ Default value: `true`
 
 Available since: v2.5.2
 
+### `variablePresets`
+
+**Type**: `ISurveyVariablePresets`
+
+Gets or sets a configuration that defines custom survey variables and named presets of their values.
+
+For more information, refer to [`ICreatorOptions.variablePresets`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#variablePresets).
+
+Available since: v3.1.1
+
+**Related APIs:** [`onVariablePresetsChanged`](#onVariablePresetsChanged), [`onVariablePresetEditing`](#onVariablePresetEditing)
+
 ## Methods
 
 ### `activatePropertyGridCategory()`
@@ -937,6 +949,12 @@ Applies a specified UI theme to Survey Creator.
 | `theme` | `ICreatorTheme` | An `ICreatorTheme` object with theme settings. |
 
 **Related APIs:** [`creatorTheme`](#creatorTheme), [`showCreatorThemeSettings`](#showCreatorThemeSettings)
+
+### `applyPendingChanges()`
+
+**Return value:** `boolean` &ndash; `true` if there are no pending changes or if the changes are applied successfully; `false` if pending changes cannot be applied.
+
+Applies pending changes in the active tab to the survey configuration.
 
 ### `applyTheme()`
 
@@ -1114,7 +1132,7 @@ If you want to implement custom toast notification from scratch, handle the [`on
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `message` | `string` | A message to display. |
-| `type` | `"info" \| "error"` | A notification type: `"info"` (default) or `"error"`. |
+| `type` | `"error" \| "info"` | A notification type: `"info"` (default) or `"error"`. |
 
 ### `openCreatorThemeSettings()`
 
@@ -1832,6 +1850,34 @@ An array of collection items to which the target item belongs ([`columns`](https
 
 **Related APIs:** [`onFastEntryFinished`](#onFastEntryFinished), [`onCollectionItemAllowOperations`](#onCollectionItemAllowOperations)
 
+### `onLintSurvey`
+
+An event that is raised before the [JSON Editor tab](/survey-creator/documentation/end-user-guide/user-interface#json-editor-tab) lints the survey JSON schema.
+
+Use this event to customize linter options, for example, disable individual rules, change their severity, or declare known variables and functions.
+
+
+Parameters:
+
+ - `sender`: `SurveyCreatorModel`  
+A Survey Creator instance that raised the event.
+- `options.lintOptions`: `ISurveyLintOptions`  
+Linter options used to validate the survey JSON schema in the JSON Editor tab. This object is initialized with default settings. Modify its properties to [configure rules](/form-library/documentation/survey-json-validation#linter-rules), [declare known variables, functions, and custom components](/form-library/documentation/survey-json-validation#handle-custom-variables-functions-and-components), or [suppress findings](/form-library/documentation/survey-json-validation#configure-suppressed-rules).
+
+The following code overrides individual [linting rules](/form-library/documentation/survey-json-validation#linter-rules) to report unknown properties as warnings and disable checks for unknown references:
+
+```js
+import { SurveyCreatorModel } from "survey-creator-core";
+
+const creator = new SurveyCreatorModel();
+creator.onLintSurvey.add((_, options) => {
+  options.lintOptions.rules["property/unknown"] = "warning";
+  options.lintOptions.rules["reference/unknown"] = "off";
+});
+```
+
+[Documentation: Survey JSON Validation](/form-library/documentation/survey-json-validation (linkStyle))
+
 ### `onLogicRuleGetDisplayText`
 
 An event that is raised when the Logic tab constructs a user-friendly display text for a logic rule. Use this event to modify this display text.
@@ -2255,6 +2301,8 @@ A Survey Creator instance that raised the event.
 - `options.area`: `string`  
 A Survey Creator UI element for which a survey is instantiated. Contains one of the following values:
   - `"designer-tab"` - A preview survey in the Designer tab. [View Demo](https://surveyjs.io/survey-creator/examples/customize-form-builder-ui/)
+  - `"designer-tab:creator-settings:theme"` - A survey that allows users to configure the Survey Creator UI theme in the Designer tab's settings panel.
+  - `"designer-tab:creator-settings:preset"` - A survey that allows users to select a Survey Creator UI preset in the Designer tab's settings panel.
   - `"preview-tab"` - A preview survey in the Preview tab. [View Demo](https://surveyjs.io/survey-creator/examples/customize-form-builder-ui/)
   - `"property-grid"` - A survey that represents the Property Grid. [View Demo](https://surveyjs.io/survey-creator/examples/hide-category-from-property-grid/)
   - `"default-value-popup-editor"` - A survey that allows you to specify the default or correct value (for quizzes) in a pop-up window.
@@ -2295,6 +2343,8 @@ A Survey Creator instance that raised the event.
 - `options.area`: `string`  
 A Survey Creator UI element for which a survey is instantiated. Contains one of the following values:
   - `"designer-tab"` - A preview survey in the Designer tab. [View Demo](https://surveyjs.io/survey-creator/examples/customize-form-builder-ui/)
+  - `"designer-tab:creator-settings:theme"` - A survey that allows users to configure the Survey Creator UI theme in the Designer tab's settings panel.
+  - `"designer-tab:creator-settings:preset"` - A survey that allows users to select a Survey Creator UI preset in the Designer tab's settings panel.
   - `"preview-tab"` - A preview survey in the Preview tab. [View Demo](https://surveyjs.io/survey-creator/examples/customize-form-builder-ui/)
   - `"property-grid"` - A survey that represents the Property Grid. [View Demo](https://surveyjs.io/survey-creator/examples/hide-category-from-property-grid/)
   - `"default-value-popup-editor"` - A survey that allows you to specify the default or correct value (for quizzes) in a pop-up window.
@@ -2430,3 +2480,37 @@ A callback function that you should call when a file is uploaded successfully or
 [View Demo](https://surveyjs.io/survey-creator/examples/file-upload/ (linkStyle))
 
 **Related APIs:** [`uploadFiles`](#uploadFiles)
+
+### `onVariablePresetEditing`
+
+An event that is raised for each [preset](#variablePresets) displayed in the variable preset editor. Use this event to control whether users can edit or delete individual presets.
+
+Parameters:
+
+ - `sender`: `SurveyCreatorModel`  
+A Survey Creator instance that raised the event.
+- `options.preset`: `ISurveyVariablePreset`  
+A variable preset for which Survey Creator obtains permitted operations. The object contains `name`, `description`, and `variables`.
+- `options.allowEdit`: `boolean`  
+A Boolean property that you can set to `false` to prevent users from editing the preset.
+- `options.allowDelete`: `boolean`  
+A Boolean property that you can set to `false` to prevent users from deleting the preset.
+
+Available since: v3.1.1
+
+### `onVariablePresetsChanged`
+
+An event that is raised when the active [variable preset](#variablePresets) changes or when variable presets are edited. Handle this event to store the active preset selection and edited presets.
+
+Parameters:
+
+ - `sender`: `SurveyCreatorModel`  
+A Survey Creator instance that raised the event.
+- `options.reason`: `"select" | "edit"`  
+The reason the event was raised: `"select"` if the active preset changed or `"edit"` if the preset list or a preset's variable values changed.
+- `options.variablePresets`: `ISurveyVariablePresets`  
+The current [variable preset](#variablePresets) configuration.
+- `options.activePresetName`: `string`  
+The name of the active preset, or an empty string if no preset is active.
+
+Available since: v3.1.1

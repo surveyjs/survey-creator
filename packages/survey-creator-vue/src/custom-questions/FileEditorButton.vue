@@ -3,6 +3,7 @@
         <label
             :class="item.getActionBarItemCss()"
             :for="question.inputId"
+            :data-sv-tooltip="item.title"
             :aria-label="question.chooseButtonCaption"
             @click="question.chooseFiles"
             v-key2click

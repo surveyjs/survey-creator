@@ -24,7 +24,7 @@ export class SurveyResults extends CreatorModelElement<
   protected getStateElement(): Base {
     return this.model;
   }
-  render(): React.JSX.Element {
+  renderElement(): React.JSX.Element {
     if (!this.model) {
       return null;
     }
@@ -104,7 +104,7 @@ export class SurveyResultsByRow extends CreatorModelElement<any, any> {
     return this.row;
   }
 
-  render(): React.JSX.Element {
+  renderElement(): React.JSX.Element {
     return (
       <>
         {attachKey2click(<tr onClick={() => this.row.toggle()}>

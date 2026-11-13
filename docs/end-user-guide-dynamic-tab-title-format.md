@@ -15,7 +15,7 @@ Imagine a survey collecting data on projects that employees have worked on. Inst
 
 ## Tab View
 
-Dynamic Panel's **Entry display mode** property located under **General** allows you to choose how entries with nested fields are placed in relation to each other and how they are navigated by a respondent.
+Dynamic Panel's **Entry display mode** property located under **Entries** allows you to choose how entries with nested fields are placed in relation to each other and how they are navigated by a respondent.
 
 <img src="images/eud-dynamic-panel-display-mode.png" alt="Dynamic Panel: Entry display mode" width="1544" height="828">
 
@@ -45,7 +45,7 @@ As mentioned earlier, dynamic entries are navigated using tab titles. The **Tab 
 You can change the default entry title format by assigning each new entry a number. To do this, follow the steps below:
 
 1. Add a **Dynamic Panel** to the design surface.
-1. Under **General**, locate the **Entry display mode** property and set it to **Tabs**.
+1. Under **Entries**, locate the **Entry display mode** property and set it to **Tabs**.
 1. Locate the **Tab title pattern** field.
 1. Enter `{panelIndex}`.
 
@@ -66,7 +66,7 @@ To generate a dynamic entry title that uses a user's response to one of the entr
 
     <img src="images/eud-dynamic-panel-add-dynamic-tab-title-part1.png" alt="Dynamic Panel: How to specify a dynamic tab title, part 1" width="1544" height="826">
 5. Select the Dynamic Panel on the design surface.
-6. Under **General**, find the **Tab title pattern** property and enter the following sample value: `{panel.course-title}`, where `course-title` is the **Question name** value of the source question for the dynamic title.
+6. Under **Entries**, find the **Tab title pattern** property and enter the following sample value: `{panel.course-title}`, where `course-title` is the **Question name** value of the source question for the dynamic title.
 7. Set a static value for the **Tab title placeholder** property. This value will be used if the dynamic tab title pattern doesn't produce a meaningful result or if the source question has not yet been answered.
 
     <img src="images/eud-dynamic-panel-tab-title-placeholder.png" alt="Fallback tab title configuration" width="1544" height="944">

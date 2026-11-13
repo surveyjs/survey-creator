@@ -53,15 +53,17 @@ export class TabTranslationComponent extends SurveyElementBase<any, any> {
     const targetSurvey = model.targetSurvey;
     return (
       <div className={model.sideBySideRootCss}>
-        <div key={model.sourceSurvey?.elementIdPrefix} className="st-side-by-side__source"
-          ref={(el) => { model.setSourceScrollElement(el); }}>
-          <Survey model={model.sourceSurvey}></Survey>
+        <div className="st-side-by-side__panes">
+          <div key={model.sourceSurvey?.elementIdPrefix} className="st-side-by-side__source"
+            ref={(el) => { model.setSourceScrollElement(el); }}>
+            <Survey model={model.sourceSurvey}></Survey>
+          </div>
+          {!!targetSurvey ?
+            <div key={targetSurvey.elementIdPrefix} className="st-side-by-side__target"
+              ref={(el) => { model.setTargetScrollElement(el); }}>
+              <Survey model={targetSurvey}></Survey>
+            </div> : null}
         </div>
-        {!!targetSurvey ?
-          <div key={targetSurvey.elementIdPrefix} className="st-side-by-side__target"
-            ref={(el) => { model.setTargetScrollElement(el); }}>
-            <Survey model={targetSurvey}></Survey>
-          </div> : null}
       </div>
     );
   }

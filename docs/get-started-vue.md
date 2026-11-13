@@ -1,10 +1,10 @@
 ---
 title: Vue Form Builder | Generate dynamic JSON forms in your Vue.js application
-description: SurveyJS Form Builder for Vue is an open-source client-side component that fully integrates into your Vue application and generates form JSON definitions (schemas) behind the scenes. It offers a user-friendly drag-and-drop interface, GUI for form branching, and an integrated theme editor for customizing form design.
+description: SurveyJS Form Builder for Vue is a source-available client-side component that integrates seamlessly into your Vue application and generates form definitions as JSON schemas. It provides a user-friendly drag-and-drop interface and uses theme adapters for Bootstrap, MUI, and shadcn/ui to match the styling of your application.
 ---
 # Form Builder for Vue.js
 
-[SurveyJS Vue Form Builder](https://surveyjs.io/create-free-survey) is an open-source UI component that seamlessly integrates with any backend system and allows you to create and style multiple dynamic HTML forms in any Vue application. This component generates form definitions (schemas) in real-time and offers a no-code drag-and-drop interface that makes form creation accessible to anyone. The form builder features a dedicated GUI for conditional rules and form branching and an integrated CSS theme editor for custom form styling and branding. This step-by-step tutorial will help you get started with the Form Builder component in a Vue 3 application. To add the component to your application, follow the steps below:
+[SurveyJS Vue Form Builder](https://surveyjs.io/create-free-survey) is a source-available UI component that seamlessly integrates with any backend system and allows you to create and style multiple dynamic HTML forms in any Vue application. This component generates form definitions (schemas) in real-time and offers a no-code drag-and-drop interface that makes form creation accessible to anyone. The form builder features a dedicated GUI for conditional rules and form branching and an integrated CSS theme editor for custom form styling and branding. This step-by-step tutorial will help you get started with the Form Builder component in a Vue 3 application. To add the component to your application, follow the steps below:
 
 - [Install the `survey-creator-vue` npm Package](#install-the-survey-creator-vue-npm-package)
 - [Configure Styles](#configure-styles)
@@ -37,6 +37,8 @@ npm install survey-creator-vue
 
 ## Configure Styles
 
+### Add Themes
+
 Import Survey Creator and SurveyJS Form Library stylesheets in the Vue 3 component that will render Survey Creator:
 
 ```html
@@ -57,6 +59,25 @@ This configuration applies the Default Light theme. Survey Creator also supports
 In addition, Survey Creator allows users to switch between UI themes and customize them at runtime. To enable runtime UI customization, refer to the following help topic:
 
 [Runtime UI Theming](https://surveyjs.io/survey-creator/documentation/runtime-theme-customization (linkStyle))
+
+### Add Fonts
+
+Starting with SurveyJS v3.0.4, fonts are no longer included in SurveyJS packages. Load Open Sans separately to preserve the default appearance, unless your application already does so. If you use a custom font, load it instead. Otherwise, the browser uses a fallback font, which may affect spacing and layout.
+
+To add Open Sans using [Fontsource](https://fontsource.org/docs/getting-started/install), run the following command:
+
+```sh
+npm install @fontsource/open-sans
+```
+
+The following example imports font weights 400, 600, and 700. Place the font imports in your application's entry file to load them once for all SurveyJS components.
+
+```ts
+// main.ts
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+```
 
 ## Configure Survey Creator
 
@@ -93,6 +114,13 @@ const creator = new SurveyCreatorModel(creatorOptions);
 
 <details>
   <summary>View Full Code</summary>
+
+```ts
+// main.ts
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+```
 
 ```html
 <script setup lang="ts">
@@ -147,6 +175,13 @@ createApp(App)
 
 <details>
   <summary>View Full Code</summary>
+
+```ts
+// main.ts
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+```
 
 ```html
 <!-- components/SurveyCreator.vue -->
@@ -290,6 +325,13 @@ creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(defa
 <details>
   <summary>View Full Code</summary>
 
+```ts
+// main.ts
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+```
+
 ```html
 <!-- components/SurveyCreator.vue -->
 <script setup lang="ts">
@@ -402,6 +444,13 @@ To view the application, run `npm run dev` in a command line and open [http://lo
 
 <details>
   <summary>View Full Code</summary>
+
+```ts
+// main.ts
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+```
 
 ```html
 <!-- components/SurveyCreator.vue -->

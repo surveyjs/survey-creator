@@ -14,7 +14,7 @@ import {
   JournalOp,
   JournalSyncError
 } from "./journal-record";
-import { deserializeValue, findItemByIdentity, isSerializedSurveyObj, resolveLocator, splitPointer } from "./journal-locator";
+import { deserializeValue, findItemByIdentity, isSerializedSurveyObj, resolveElementContainer, resolveLocator, splitPointer } from "./journal-locator";
 import { JournalRecorder } from "./journal-recorder";
 import { JournalStackGuard } from "./journal-stack-guard";
 
@@ -183,6 +183,7 @@ export class JournalApplier {
         for (let i = 0; i < array.length; i++)this.guard.markRemoved(array[i]);
       }
       array.splice.apply(array, (<Array<any>>[0, array.length]).concat(items));
+      for (let i = 0; i < items.length; i++)this.ensureFirstRendering(items[i]);
       return;
     }
     for (let i = 0; i < payload.removed.length; i++) {
@@ -196,6 +197,7 @@ export class JournalApplier {
       if (this.tryMoveExistingElement(payload.target, array, added.item, index)) continue;
       const item = deserializeValue(added.item);
       array.splice(index, 0, item);
+      this.ensureFirstRendering(item);
     }
   }
   private applyElementMoved(payload: IJournalElementMovedPayload): void {
@@ -208,7 +210,7 @@ export class JournalApplier {
     if (!existing) {
       throw new JournalSyncError("Cannot apply element move: \"" + payload.key + "\" not found (from " + JSON.stringify(payload.from) + " to " + JSON.stringify(payload.to) + ")");
     }
-    const dest: any = resolveLocator(splitPointer(payload.to).container, this.survey);
+    const dest: any = resolveElementContainer(splitPointer(payload.to).container, this.survey);
     if (!dest || typeof dest.addElement !== "function") {
       throw new JournalSyncError("Cannot apply element move: destination container not found: " + JSON.stringify(payload.to));
     }
@@ -230,7 +232,7 @@ export class JournalApplier {
     if (!existing) return false;
     const parent: any = existing.parent;
     if (!parent || typeof parent.removeElement !== "function" || parent.elements === array) return false;
-    const dest: any = resolveLocator(splitPointer(target).container, this.survey);
+    const dest: any = resolveElementContainer(splitPointer(target).container, this.survey);
     if (!dest || typeof dest.addElement !== "function") return false;
     this.relocateElement(existing, dest, index, array.length);
     return true;
@@ -329,6 +331,7 @@ export class JournalApplier {
       const index = array.indexOf(existing);
       array.splice(index, 1);
       array.splice(index, 0, newElement);
+      this.ensureFirstRendering(newElement);
       return;
     }
     // The element is gone: insert into the array named by the target's container.
@@ -339,5 +342,19 @@ export class JournalApplier {
     }
     const index = payload.index >= 0 ? Math.min(payload.index, array.length) : array.length;
     array.splice(index, 0, newElement);
+    this.ensureFirstRendering(newElement);
+  }
+  // `Page/Panel.addElement()` calls `element.onFirstRendering()` when the
+  // container is already painted. We insert with a bare `elements.splice` (an
+  // exact index, and idempotency), which goes through `onAddElement`: that one
+  // builds the row but never fires the first rendering. A composite's
+  // `contentPanel` then keeps `rows === []` - the shell is there, the nested
+  // content is not, until some later `addElement`. Match what addElement does.
+  // A no-op for the non-element arrays (choices, columns, triggers, ...): their
+  // items have neither `parent` nor `onFirstRendering`.
+  private ensureFirstRendering(item: any): void {
+    const parent: any = !!item ? item.parent : undefined;
+    if (!parent || parent.wasRendered !== true) return;
+    if (typeof item.onFirstRendering === "function") item.onFirstRendering();
   }
 }

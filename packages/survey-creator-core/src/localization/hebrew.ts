@@ -142,6 +142,10 @@ export var hebrewStrings = {
     jsonHideErrors: "הסתר שגיאות",
     // "Show errors"
     jsonShowErrors: "הצג שגיאות",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "שגיאת תיקון",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "ה-JSON של הסקר חייב להיות אובייקט.",
     // "Undo"
     undo: "בטל",
     // "Redo"
@@ -246,6 +250,8 @@ export var hebrewStrings = {
     translateUsigAI: "תרגום אוטומטי של הכל",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "תרגם מ: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "תרגום מחרוזות שנותרו",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "מחרוזות לא מתורגמות",
     // "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var hebrewStrings = {
     translationSource: "מקור: ",
     // [Auto-translated] "Target: "
     translationTarget: "יעד: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "שפת המקור",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "שפת היעד",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} המיתרים {1} מתורגמים",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "האם אתה בטוח שאתה רוצה למחוק את כל המחרוזות המתורגמות לשפה שנבחרה?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "תצוגת טופס",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "תצוגת רשת",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "תרגם מחרוזות",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "מחרוזות סקר",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "אין מחרוזות לתרגום",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "כל המחרוזות מתורגמות",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "מחרוזות {0} אינן מתורגמות",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "קישורי YouTube אינם נתמכים.",
     // "Export"
@@ -286,6 +314,10 @@ export var hebrewStrings = {
     choicesLoadedFromWebLinkText: "עבור אל הגדרות",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "תצוגה מקדימה של אפשרויות בחירה שנטענו",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "אין קבוצת ביטויים",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "ביטוי עריכה",
     // "HTML content will be here."
     htmlPlaceHolder: "התוכן של HTML יופיע כאן.",
     // "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var hebrewStrings = {
       uncompletedRule_cancel: "לא, אני רוצה להשלים את הכללים"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "פריסט משתנה",
+    // [Auto-translated] "None"
+    noPreset: "אין",
+    // [Auto-translated] "View variable values"
+    view: "הצג ערכי משתנה",
+    // [Auto-translated] "Variable values"
+    viewTitle: "ערכי משתנים",
+    // [Auto-translated] "Manage presets"
+    edit: "ניהול פריסטים",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "פריסטים משתנים",
+    // [Auto-translated] "Preset"
+    presetName: "פריסט",
+    // [Auto-translated] "Description"
+    presetDescription: "תיאור",
+    // [Auto-translated] "Add preset"
+    addPreset: "הוספת פריסט",
+    // [Auto-translated] "New preset"
+    newPresetName: "פריסט חדש",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "מחיקת פריסט",
+    // [Auto-translated] "Back"
+    back: "חזרה",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "כבר קיימת פריסט בשם זה",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "הכנס שם מוגדר מראש",
+    // [Auto-translated] "Preset"
+    listNameColumn: "פריסט",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "תיאור"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "עוזר הבעה",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "כתוב עם בינה מלאכותית",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "תאר מה הביטוי אמור לעשות",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "לדוגמה: הצג את השאלה הזו כאשר המשיב בן 18 ומעלה",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "תאר את המצב במילים",
+    // [Auto-translated] "Generate"
+    generate: "Generate",
+    // [Auto-translated] "Refine"
+    refine: "ללטש",
+    // [Auto-translated] "Explain"
+    explain: "הסבר",
+    // [Auto-translated] "Stop"
+    stop: "עצור",
+    // [Auto-translated] "Accept"
+    accept: "קבל",
+    // [Auto-translated] "Reject"
+    reject: "דחו",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "החלו תיקון: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "ביטוי עכשווי",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "הצעה לביטוי",
+    // [Auto-translated] "Reads as"
+    readsAs: "קורא כ",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "ההסבר של העוזר",
+    // [Auto-translated] "Check results"
+    findings: "בדוק תוצאות",
+    // [Auto-translated] "Error"
+    severityError: "שגיאה",
+    // [Auto-translated] "Warning"
+    severityWarning: "אזהרה",
+    // [Auto-translated] "Info"
+    severityInfo: "מידע",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "ב\"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "תאר את הביטוי ובחר ייצור.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "מחכה לעוזרת...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "הבקשה בוטלה.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "העוזר דיווח: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "העוזרת לא הציעה הבעה.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "בדוק את הביטוי המוצע.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "העוזרת הסבירה את ההבעה הנוכחית.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "הביטוי המוצע מכיל שגיאות ואינו ניתן לקבל.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "הביטוי המוצע לא יכול היה להיבדק בכל מקום אליו הוא נכתב, ולכן לא ניתן לקבל אותו.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "הוסף פעולה לכלל לפני שתשאל את העוזר.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "ההצעה הראשונה כללה שגיאות ותוקנה אוטומטית."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var hebrewStrings = {
       templateDescription: "תבנית תיאור הערך",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "תבנית כות��ת ערך",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "מקום לכותרת הכניסה",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "טקסט ריק בחלונית",
       // [Auto-translated] "Tab title pattern"
@@ -588,6 +724,10 @@ export var hebrewStrings = {
       templateErrorLocation: "יישור הודעת שגיאה",
       // [Auto-translated] "New entry location"
       newPanelPosition: "מיקום כניסה חדש",
+      // [Auto-translated] "Entries per page"
+      pageSize: "רשומות בעמוד",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "אפשר למשתמשים למיין רשומות",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "מניעת תגובות כפולות בשאלה הבאה"
     },
@@ -675,6 +815,12 @@ export var hebrewStrings = {
       // [Auto-translated] "Expression"
       expression: "ביטוי"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "מיין לפי",
+      // [Auto-translated] "Order"
+      direction: "סדר"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "ביטוי"
@@ -690,7 +836,9 @@ export var hebrewStrings = {
       // [Auto-translated] "Survey description"
       description: "תיאור הסקר",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "הפוך את הסקר לקריאה בלבד"
+      readOnly: "הפוך את הסקר לקריאה בלבד",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "פורמטים אזוריים"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -726,7 +874,9 @@ export var hebrewStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "הפוך את העמודה לנדרשת אם",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "כל אפשרות בעמודה נפרדת"
+      showInMultipleColumns: "כל אפשרות בעמודה נפרדת",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "אפשר מיון לפי עמודה זו"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export var hebrewStrings = {
     masksettings: {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "שמירת ערך מוסווה בתוצאות הסקר"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "אזור",
+      // [Auto-translated] "Date pattern"
+      datePattern: "דפוס תאריך",
+      // [Auto-translated] "Time pattern"
+      timePattern: "תבנית זמן",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "מפריד עשרוני",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "מפריד אלפים",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "סמל מטבע",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "דפוס המטבע"
     },
     patternmask: {
       // [Auto-translated] "Value pattern"
@@ -761,16 +927,18 @@ export var hebrewStrings = {
       decimalSeparator: "מפריד עשרוני",
       // [Auto-translated] "Value precision"
       precision: "דיוק ערך",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "הצגת אפסים עוקבים",
       // [Auto-translated] "Minimum value"
       min: "ערך מינימלי",
       // [Auto-translated] "Maximum value"
       max: "ערך מרבי"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "קידומת מטבע",
-      // [Auto-translated] "Currency suffix"
-      suffix: "סיומת מטבע"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "סמל מטבע",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "דפוס המטבע"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "נקה אחרים כאשר בוחרים באפשרות זו",
@@ -812,8 +980,24 @@ export var hebrewStrings = {
     addItem: "לחץ להוספת פריט...",
     // "Click to remove the item..."
     removeItem: "לחץ להסרת הפריט...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "הוסף {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "הסר {0}",
     // "Drag the item"
     dragItem: "גרור את הפריט",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "הרחבת אפשרויות מקוננות",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "קריסת בחירות מקוננות",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "הרחיב את אפשרויות המקוננות של {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "קריסת בחירות מקוננות {0}",
+    // [Auto-translated] "Show description"
+    showDescription: "תיאור התוכנית",
+    // [Auto-translated] "Hide description"
+    hideDescription: "הסתרת תיאור",
     // "Edit"
     edit: "ערוך",
     // "Done"
@@ -858,38 +1042,58 @@ export var hebrewStrings = {
     listIsEmpty: "טרם הוספו פריטים",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "טרם הוספו ברירות בחירה",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "עדיין אין לך עמודות",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "עדיין אין לך עמודות פריסה",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "עדיין אין לך שורות",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "עדיין אין לך כללי אימות",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "עדיין אין לך משתנים מותאמים אישית",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "עדיין אין לך טריגרים",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "עדיין אין לך קישורים",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "עדיין אין לך דפים",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "אין ערכי דירוג מותאמים אישית",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "אין תוויות מותאמות אישית",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "אין אזורים",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "ללא עמודות",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "אין עמודות פריסה",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "אין שורות",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "אין כללי אימות",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "אין משתנים מותאמים אישית",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "אין טריגרים",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "אין סימון מותנה",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "אין קישורים",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "אין עמודים",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "אין רמות מיון",
     // "Add new choice"
     "addNew@choices": "הוסף ברירת בחירה",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "הוספת עמודה חדשה",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "הוספת שורה חדשה",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "הוספת כלל חדש",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "הוספת משתנה חדש",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "הוספת גורם מפעיל חדש",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "הוספת כתובת URL חדשה",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "הוספת עמוד חדש",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "הוספת ערך דירוג",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "הוספת תווית",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "הוספת שטח",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "עמודת הוספה",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "הוספת שורה",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "כלל הוספה",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "משתנה הוסף",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "הוסף טריגר",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "הוסף סימון",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "הוסף קישור",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "דף הוסף",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "הוספת רמת מיון",
     // "Value"
     value: "ערך",
     // "Text"
@@ -916,6 +1120,8 @@ export var hebrewStrings = {
     surveyTitlePlaceholder: "כותרת הסקר",
     // "Page {num}"
     pageTitlePlaceholder: "עמוד {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "כותרת הפאנל",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "דף פתיחה",
     // "Description"
@@ -966,6 +1172,8 @@ export var hebrewStrings = {
     visible: "נראה",
     // "Required"
     isRequired: "נדרש",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "דרוש תשובה חיובית",
     // "Mark as required"
     markRequired: "סמן כשדה חובה",
     // "Remove the required mark"
@@ -976,6 +1184,8 @@ export var hebrewStrings = {
     eachRowUnique: "מניעת תגובות כפולות בשורות",
     // "Error message for required questions"
     requiredErrorText: "הודעת שגיאה לשדה חובה",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "הודעת שגיאה כאשר נדרש כן",
     // "Display the question on a new line"
     startWithNewLine: "הצג את השאלה בשורה חדשה",
     // "Rows"
@@ -994,6 +1204,16 @@ export var hebrewStrings = {
     maxFiles: "מספר מקסימלי של קבצים",
     // "Row count"
     rowCount: "כמות השורות",
+    // [Auto-translated] "Rows per page"
+    pageSize: "שורות בעמוד",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "אפשר למשתמשים למיין שורות",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "רמות מיון מקסימליות",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "סדר מיון ברירת מחדל",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "סרגל מיון התוכנית",
     // "Columns layout"
     columnLayout: "סידור העמודות",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export var hebrewStrings = {
     questionErrorLocation: "מיקום הודעת השגיאה",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "התמקד על השאלה הראשונה בעמוד חדש",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "הפעלת קיצורי דרך לבחירה",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "רמזים למקלדת הצג",
     // "Question order"
     questionOrder: "סדר הרכיבים בעמוד",
     // "Time limit to complete the survey"
@@ -1268,6 +1492,8 @@ export var hebrewStrings = {
     minRowCount: "מספר שורות מינימלי",
     // "Maximum row count"
     maxRowCount: "מספר שורות מקסימלי",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "ביטוי ספירת שורות",
     // "Confirm row removal"
     confirmDelete: "אישור מחיקת שורה",
     // "Confirmation message"
@@ -1278,6 +1504,8 @@ export var hebrewStrings = {
     minPanelCount: "מספר פאנלים מינימלי",
     // "Maximum number of entries"
     maxPanelCount: "מספר פאנלים מקסימלי",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "ביטוי ספירת כניסות",
     // "Initial entry state"
     panelsState: "מצב הרחבת הפאנל הפנימי",
     // "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export var hebrewStrings = {
     logoHeight: "גובה הלוגו (בערכים שמקובלים ב- CSS)",
     // "Read-only"
     readOnly: "קריאה בלבד",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "מצב קריאה בלבד",
     // "Disable the read-only mode if"
     enableIf: "ניתן לעריכה אם",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export var hebrewStrings = {
       columns: "עמודות",
       // "Rows"
       rows: "שורות",
+      // [Auto-translated] "Entries"
+      entries: "רשומות",
       // "Choice Options"
       choices: "בחירות",
       // "Items"
@@ -1544,6 +1776,8 @@ export var hebrewStrings = {
       question: "שאלה",
       // "Pages"
       pages: "עמודים",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "פורמטים אזוריים",
       // "Quiz Mode"
       timer: "שעון/חידון",
       // "Calculated Values"
@@ -1862,6 +2096,12 @@ export var hebrewStrings = {
       // [Auto-translated] "Never"
       none: "אף פעם"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "קריאה בלבד",
+      // [Auto-translated] "View"
+      view: "תצפית"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "כפתורי רדיו",
     inputType: {
@@ -1913,6 +2153,12 @@ export var hebrewStrings = {
       warning: "אזהרה",
       // [Auto-translated] "Informational"
       info: "אינפורמטיבי"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "חזית",
+      // [Auto-translated] "Rear"
+      environment: "אחורי"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export var hebrewStrings = {
     underRowSingle: "מתחת לשורה, עם פאנל יחיד בלבד",
     // "Auto"
     auto: "אוטומטי",
+    // [Auto-translated] "Always"
+    always: "תמיד",
     timerInfoMode: {
       // "Both"
       combined: "שני הצדדים"
@@ -2321,7 +2569,148 @@ export var hebrewStrings = {
       survey: "זהה לסקר",
       // [Auto-translated] "Same as container"
       container: "זהה למיכל"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "יורש",
+      // [Auto-translated] "Hide"
+      "false": "הסתתר",
+      // [Auto-translated] "Show"
+      "true": "תוכנית"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "ערבית",
+    // [Auto-translated] "Bulgarian"
+    bg: "בולגרית",
+    // [Auto-translated] "Catalan"
+    ca: "קטלאנית",
+    // [Auto-translated] "Czech"
+    cs: "צ'כית",
+    // [Auto-translated] "Welsh"
+    cy: "וולשית",
+    // [Auto-translated] "Danish"
+    da: "דנית",
+    // [Auto-translated] "German"
+    de: "גרמנית",
+    // [Auto-translated] "Greek"
+    el: "יוונית",
+    // [Auto-translated] "English"
+    en: "אנגלית",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "אנגלית (אוסטרליה)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "אנגלית (קנדה)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "אנגלית (הממלכה המאוחדת)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "אנגלית (אירלנד)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "אנגלית (הודו)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "אנגלית (ניו זילנד)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "אנגלית (דרום אפריקה)",
+    // [Auto-translated] "Spanish"
+    es: "ספרדית",
+    // [Auto-translated] "Estonian"
+    et: "אסטונית",
+    // [Auto-translated] "Basque"
+    eu: "בסקית",
+    // [Auto-translated] "Persian"
+    fa: "פרסית",
+    // [Auto-translated] "Finnish"
+    fi: "פינית",
+    // [Auto-translated] "Filipino"
+    fil: "פיליפינית",
+    // [Auto-translated] "French"
+    fr: "צרפתית",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "צרפתית (קנדה)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "צרפתית (שווייץ)",
+    // [Auto-translated] "Hebrew"
+    he: "עברית",
+    // [Auto-translated] "Hindi"
+    hi: "הינדי",
+    // [Auto-translated] "Croatian"
+    hr: "קרואטית",
+    // [Auto-translated] "Haitian Creole"
+    ht: "קריאולית האיטית",
+    // [Auto-translated] "Hungarian"
+    hu: "הונגרית",
+    // [Auto-translated] "Indonesian"
+    id: "אינדונזי",
+    // [Auto-translated] "Icelandic"
+    is: "איסלנדית",
+    // [Auto-translated] "Italian"
+    it: "איטלקית",
+    // [Auto-translated] "Japanese"
+    ja: "יפנית",
+    // [Auto-translated] "Georgian"
+    ka: "גאורגית",
+    // [Auto-translated] "Kazakh"
+    kk: "קזחית",
+    // [Auto-translated] "Korean"
+    ko: "קוריאנית",
+    // [Auto-translated] "Lithuanian"
+    lt: "ליטאית",
+    // [Auto-translated] "Latvian"
+    lv: "לטבית",
+    // [Auto-translated] "Macedonian"
+    mk: "מקדוני",
+    // [Auto-translated] "Burmese"
+    mm: "בורמזית",
+    // [Auto-translated] "Malay"
+    ms: "מלאית",
+    // [Auto-translated] "Dutch"
+    nl: "הולנדי",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "הולנדית (בלגיה)",
+    // [Auto-translated] "Norwegian"
+    no: "נורווגית",
+    // [Auto-translated] "Polish"
+    pl: "פולנית",
+    // [Auto-translated] "Portuguese"
+    pt: "פורטוגזית",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "פורטוגזית (ברזיל)",
+    // [Auto-translated] "Romanian"
+    ro: "רומני",
+    // [Auto-translated] "Russian"
+    ru: "רוסית",
+    // [Auto-translated] "Slovak"
+    sk: "סלובקית",
+    // [Auto-translated] "Slovenian"
+    sl: "סלובנית",
+    // [Auto-translated] "Serbian"
+    sr: "סרבי",
+    // [Auto-translated] "Swedish"
+    sv: "שוודית",
+    // [Auto-translated] "Swahili"
+    sw: "סווהילית",
+    // [Auto-translated] "Telugu"
+    tel: "טלוגו",
+    // [Auto-translated] "Tajik"
+    tg: "טג'יקית",
+    // [Auto-translated] "Thai"
+    th: "תאילנדי",
+    // [Auto-translated] "Turkish"
+    tr: "טורקית",
+    // [Auto-translated] "Ukrainian"
+    uk: "אוקראינית",
+    // [Auto-translated] "Urdu"
+    ur: "אורדו",
+    // [Auto-translated] "Vietnamese"
+    vi: "וייטנאמים",
+    // [Auto-translated] "Chinese"
+    zh: "סינית",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "סינית (מפושטת)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "סינית (מסורתית)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export var hebrewStrings = {
     visibletrigger: "שנה נראות (לא מומלץ)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "אותו דבר כמו שפת הסקר"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "לדוגמה: +1(999)-999-99-99"
@@ -2405,12 +2798,6 @@ export var hebrewStrings = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "לדוגמה: mm/dd/yyyy HH:MM:ss"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "לדוגמה: $",
-      // "Ex.: USD"
-      suffix: "לדוגמה: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export var hebrewStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "מציין כמה עמודות תפרוס חלונית זו בפריסת הרשת.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "טבלה זו מאפשרת להגדיר כל עמודת רשת בחלונית. הוא מגדיר באופן אוטומטי את אחוז הרוחב עבור כל עמודה בהתבסס על המספר המרבי של רכיבים בשורה. כדי להתאים אישית את פריסת הרשת, התאם ערכים אלה באופן ידני והגדר את רוחב הכותרת עבור כל השאלות בכל עמודה."
+      gridLayoutColumns: "טבלה זו מאפשרת להגדיר כל עמודת רשת בחלונית. הוא מגדיר באופן אוטומטי את אחוז הרוחב עבור כל עמודה בהתבסס על המספר המרבי של רכיבים בשורה. כדי להתאים אישית את פריסת הרשת, התאם ערכים אלה באופן ידני והגדר את רוחב הכותרת עבור כל השאלות בכל עמודה.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "מגדיר כיצד נראות שאלות בתוך לוח זה כאשר הן לקריאה בלבד. \"קריאה בלבד\" מציג את השאלות עם בקרות הקלט הרגילות שלהן, אך כבוי לעריכה. \"תצוגה\" מציג תשובות כטקסט או אלמנטים לא אינטראקטיביים אחרים. \"ירושה\" משתמש בהגדרת המצב לפאנל האב, לעמוד או סקר (\"קריאה בלבד\" כברירת מחדל)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export var hebrewStrings = {
       width: "קובע את רוחב החלונית ביחס לרכיבי סקר אחרים באותה שורה. מקבל ערכי CSS (px, %, in, pt וכו').",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "הקלד תבנית לכותרות חלוניות דינמיות. השתמש ב- {panelIndex} למיקום הכללי של החלונית וב- {visiblePanelIndex} לסדר שלה בין חלוניות גלויות. הוסף מצייני מיקום אלה לתבנית כדי להוסיף מספור אוטומטי.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "טקסט גיבוי לכותרות הערכים שמתאים כאשר תבנית כותרת הכניסה אינה מייצרת ערך משמעותי. השתמש ב-{panelIndex} למיקום הכללי של הערך וב-{visiblePanelIndex} לסדר בין הערכים הנראים.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "הקלד תבנית עבור כותרות כרטיסיות. השתמש ב- {panelIndex} למיקום הכללי של חלונית וב- {visiblePanelIndex} לסדר שלה בין חלוניות גלויות. הוסף מצייני מיקום אלה לתבנית כדי להוסיף מספור אוטומטי.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export var hebrewStrings = {
       keyName: "הפנה לשם שאלה כדי לדרוש מהמשתמש לספק תשובה ייחודית לשאלה זו בכל חלונית.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "מפעיל בקשת אישור לפני הסרת ערך.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "יש לציין ביטוי שמחשב את מספר הערכים. ביטוי זה גובר על הגדרת \"מספר הרשומות ההתחלתי\" ומוערך מחדש בכל פעם שהערכים אליהם מתייחס משתנים. התוצאה מוגבלת על ידי הגדרות \"מספר מינימלי של רשומות\" ו\"מספר מקסימלי של כניסות\". בעוד שהביטוי הזה מוגדר, המשיבים אינם יכולים להוסיף או להסיר רשומות ידנית.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "מציין את מספר הערכים המוצגים בכל עמוד של הפאנל. '0' מבטל את העמוד ומציג את כל הערכים.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "מאפשר למשיבים למיין רשומות באמצעות שורת המיון.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "מגדיר את סדר ההגשה הראשוני. המשיבים יכולים לשנות אותו אם מותר מיון. בעת מיון לפי מספר שאלות, כל שאלה ממיינת את הרשומות בסדר שנקבע על ידי השאלה הקודמת. גררו שאלות כדי לשנות את סדר העדיפויות שלהן.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "מקצה מספרים לשאלות המקוננות בחלונית הדינמית."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "מאפשר למשיבים למיין שורות על ידי לחיצה על כותרות עמודות או שימוש בסרגל המיון.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "מגדיר את סדר השורות ההתחלתי. המשיבים יכולים לשנות אותו אם מותר מיון. בעת מיון לפי מספר עמודות, כל עמודה ממיין שורות בתוך הסדר שנקבע על ידי העמודה הקודמת. גרור עמודות כדי לשנות את העדיפות שלהן.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" מציג את סרגל המיון רק כאשר למטריצה אין כותרות עמודות שניתן למיין: הכותרות מוסתרות, המטריצה משתמשת בפריסת הנייד, או שהשורות מועברות לעמודות. \"תמיד\" מציג את סרגל המיון גם כאשר כותרות עמודות ניתנות למיון נראות.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "ציין ביטוי שמחשב את מספר השורות. ביטוי זה מחליף את הגדרת \"מספר שורות התחלתי\" ומוערך מחדש בכל פעם שהערכים אליהם מתייחס משתנים. התוצאה מוגבלת על ידי הגדרות \"מספר מינימלי של שורות\" ו\"מספר מקסימלי של שורות\". כאשר ביטוי זה מוגדר, המשיבים אינם יכולים להוסיף או להסיר שורות ידנית.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "מפעיל בקשת אישור לפני הסרת שורה.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "מרחיב אוטומטית את מקטע הפירוט בעת הוספת שורה חדשה למטריצה."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "מגדיר את מספר השורות המוצגות בכל עמוד במטריצה. '0' מבטל את העמוד ומציג את כל השורות.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "מגדיר כמה שדות יכול המשיב למיין בו זמנית.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "משכפל תשובות מהשורה האחרונה ומקצה אותן לשורה הדינמית הבאה שנוספה.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export var hebrewStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "טקסטים ארוכים באפשרויות בחירה ייצרו באופן אוטומטי מעברי שורה שיתאימו לתפריט הנפתח. בטל את הבחירה אם ברצונך שהטקסטים ייחתכו.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "מציין כמה עמודות שאלה זו משתרעת בתוך פריסת הרשת."
+      effectiveColSpan: "מציין כמה עמודות שאלה זו משתרעת בתוך פריסת הרשת.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "מגדיר כיצד השאלה מופיעה כאשר היא לקריאה בלבד. \"קריאה בלבד\" מציג את השאלה עם בקרות הקלט הרגילות שלה, אך מבוטל לעריכה. \"View\" מציג תשובות כטקסט או אלמנטים לא אינטראקטיביים אחרים. \"Inherit\" משתמש במצב שמוגדר עבור לוח האב, עמוד או סקר (\"Read-Only\" כברירת מחדל).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "מציג רמזים לפעולות מקלדת זמינות מתחת לשאלה זו. אפשרות \"ירושה\" מפעילה את הגדרת רמת הסקר."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export var hebrewStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "בחר אם ברצונך למנוע מהמשיבים למלא את הסקר שלך.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "מגדיר כיצד מופיעות שאלות לקריאה בלבד, כולל בדף התצוגה המקדימה. \"קריאה בלבד\" (ברירת מחדל) מציג שאלות עם בקרי הקלט הרגילים שלהן, אך כבוי לעריכה. \"View\" מציג תשובות כטקסט או אלמנטים לא אינטראקטיביים אחרים.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "מגדיר את המיקום של מד ההתקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר."
     },
@@ -2633,7 +3050,9 @@ export var hebrewStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "כשבוחרים באפשרות זו, יוצר עמודה נפרדת לכל אחת מאפשרויות הבחירה.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "סידור אפשרויות בחירה בפריסה מרובת עמודות. כאשר האפשרויות מוגדרות ל- 0, האפשרויות מוצגות בשורה אחת. כאשר הוא מוגדר ל- -1, הערך בפועל עובר בירושה מהמאפיין \"ספירת עמודות מקוננות\" של מטריצת האב."
+      colCount: "סידור אפשרויות בחירה בפריסה מרובת עמודות. כאשר האפשרויות מוגדרות ל- 0, האפשרויות מוצגות בשורה אחת. כאשר הוא מוגדר ל- -1, הערך בפועל עובר בירושה מהמאפיין \"ספירת עמודות מקוננות\" של מטריצת האב.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "מגדיר כיצד תאים בעמודה זו מופיעים כאשר הם קריאה בלבד. \"קריאה בלבד\" מציג את התאים עם בקרות הקלט הרגילות שלהם, אך כבוי לעריכה. \"View\" מציג תשובות כאלמנטים טקסטואליים או אחרים שאינם אינטראקטיביים. \"Inherit\" משתמש במצב שמוגדר עבור המטריצה או הסקר (\"Read-Only\" כברירת מחדל)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export var hebrewStrings = {
     questionErrorLocation: "הגדרת המיקום של הודעת שגיאה ביחס לשאלה עם קלט לא חוקי. בחר בין: \"למעלה\" - טקסט שגיאה ממוקם בחלק העליון של תיבת השאלה; \"תחתית\" - טקסט שגיאה ממוקם בחלק התחתון של תיבת השאלה.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "בחר אם ברצונך ששדה הקלט הראשון בכל עמוד יהיה מוכן להזנת טקסט.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "מציג אותיות (A, B, C, ...) לצד בחירות בקבוצת כפתורי הרדיו, תיבות סימון ושאלות ב-Image Picker. המשיבים יכולים לבחור בחירות על ידי לחיצה על מקשי האותיות המתאימים. ניתן לעקוף הגדרה זו עבור שאלות בודדות.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "מציג אותיות (A, B, C, ...) ליד הבחירות ומאפשר למשיבים לבחור אותן על ידי לחיצה על מקשי האותיות המתאימים. אפשרות \"ירושה\" משתמשת בהגדרת רמת הסקר."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "מציג רמזים לפעולות מקלדת זמינות מתחת לשאלות. ניתן לעקוף הגדרה זו עבור שאלות בודדות.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "שומר על הסדר המקורי של השאלות או מסדר אותן באופן אקראי. ההשפעה של הגדרה זו גלויה רק בכרטיסיה תצוגה מקדימה.",
     // [Auto-translated] "For text entry questions only."
@@ -2793,7 +3220,9 @@ export var hebrewStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "מגדיר את התצוגה של לחצני ניווט בעמוד. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר, המוגדרת כברירת מחדל ל\"גלוי\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "טבלה זו מאפשרת לך לקבוע את התצורה של כל עמודת רשת בעמוד. הוא מגדיר באופן אוטומטי את אחוז הרוחב עבור כל עמודה בהתבסס על המספר המרבי של רכיבים בשורה. כדי להתאים אישית את פריסת הרשת, התאם ערכים אלה באופן ידני והגדר את רוחב הכותרת עבור כל השאלות בכל עמודה."
+      gridLayoutColumns: "טבלה זו מאפשרת לך לקבוע את התצורה של כל עמודת רשת בעמוד. הוא מגדיר באופן אוטומטי את אחוז הרוחב עבור כל עמודה בהתבסס על המספר המרבי של רכיבים בשורה. כדי להתאים אישית את פריסת הרשת, התאם ערכים אלה באופן ידני והגדר את רוחב הכותרת עבור כל השאלות בכל עמודה.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "מגדיר כיצד השאלות בדף זה מופיעות כאשר הן לקריאה בלבד. \"קריאה בלבד\" מציג את השאלות עם בקרות הקלט הרגילות שלהן, אך כבוי לעריכה. \"תצוגה\" מציג תשובות כטקסט או אלמנטים לא אינטראקטיביים אחרים. \"ירושה\" משתמש במצב שמוגדר לסקר (\"קריאה בלבד\" כברירת מחדל)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "הגדרת המיקום של טיימר בעמוד.",
@@ -2911,6 +3340,22 @@ export var hebrewStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "בחר אם ברצונך לאחסן את ערך השאלה עם מסיכה שהוחלה בתוצאות הסקר."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "אזור שהפורמטים שלו חלים על מסכות קלט של זמן-תאריך, מספרי ומטבע. אם לא צוין, משתמשים בשפת הסקר.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "מחליף את פורמט התאריך של האזור המשמש במסכות קלט. התבנית יכולה להכיל תווי מפריד ואת המשאבים הבאים: <br>'m' - מספר חודש.<br> 'mm' - מספר חודש, עם אפס מוביל לערכים חד-ספרתיים. <br>'d' - יום החודש. <br>'dd' - יום החודש, עם אפס מוביל לערכים חד-ספרתיים. <br>'yy' - שתי הספרות האחרונות של השנה. <br>'yyyy' - שנה בת ארבע ספרות.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "מחליף את פורמט הזמן של האזור המשמש במסכות קלט. התבנית יכולה להכיל תווי מפריד ואת המקומות הבאים: <br>'H' - שעות בפורמט 24 שעות.<br> 'HH' - שעות בפורמט 24 שעות, עם אפס מוביל לערכים חד-ספרתיים. <br>'h' - שעות בפורמט של 12 שעות. <br>'hh' - שעות בפורמט של 12 שעות, עם אפס מוביל לערכים חד-ספרתיים. <br>'MM' - דקות. <br>'ss' - שניות. <br>'TT' - תקופת שעון של 12 שעות באותיות גדולות (AM/PM). <br>'tt' - תקופת שעון של 12 שעות באותיות קטנות (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "עוקף את הסמל שבו האזור משתמש כדי להפריד בין החלק השברירי לחלק השלם של מספר מוצג במסכות קלט.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "עוקף את הסמל שבו האזור משתמש כדי להפריד את הספרות של מספר גדול לקבוצות של שלושה במסכות קלט.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "עוקף את סמל המטבע או הקוד של האזור המשמש במסכות קלט.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "עוקף את דפוס המטבע של האזור המשמש במסכות קלט. התבנית יכולה להכיל את המשאבים הבאים: <br>'@' - סמל או קוד מטבע.<br> '#' - מספר. <br>'-' - מיקום סימן מינוס בערכים שליליים (אם מושמט, סימן מינוס ממוקם בתחילת הסימן)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "התבנית יכולה להכיל מילולי מחרוזת ואת מצייני המיקום הבאים: '9' - עבור ספרה; 'a' - עבור אות גדולה או קטנה; '#' - עבור ספרה או אות גדולה או קטנה. השתמש בקו נטוי הפוך '\\' כדי לברוח מתו."
@@ -2925,13 +3370,15 @@ export var hebrewStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "סמל המשמש להפרדת הספרות של מספר גדול לקבוצות של שלושה.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "מגביל את מספר הספרות שיש לשמור אחרי הנקודה העשרונית עבור מספר מוצג."
+      precision: "מגביל את מספר הספרות שיש לשמור אחרי הנקודה העשרונית עבור מספר מוצג.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "מציג אפסים עוקבים בחלק השברירי עד לדיוק שנקבע. לדוגמה, עם דיוק של 2, ערך קלט של 1.2 מוצג כ-1.20."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "סימן אחד או יותר שיוצגו לפני הערך.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "סימן אחד או יותר שיוצגו לאחר הערך."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "סמל מטבע או קוד שמוצג עם הערך. סמל האזור משמש כברירת מחדל. נקה תכונה זו כדי שלא יופיע סמל.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "מציין את מיקומי המספר, סמל המטבע וסימן המינוס. הדפוס יכול להכיל את המקומות הבאים: <br>'@' - סמל מטבע או קוד.<br> '#' - מספר. <br>'-' - מיקום סימן מינוס בערכים שליליים (אם מושמט, סימן מינוס ממוקם בתחילת הדרך)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2982,6 +3429,8 @@ export var hebrewStrings = {
     tabAlign: "יישור לשונית",
     // [Auto-translated] "File source type"
     sourceType: "סוג מקור הקובץ",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "מצלמה ברירת מחדל",
     // [Auto-translated] "Fit to container"
     fitToContainer: "התאמה למיכל",
     // [Auto-translated] "Set value expression"
@@ -3302,12 +3751,702 @@ export var hebrewStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "פריסט מוחל"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "שורה: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "השתמש בשם המומלץ"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "הסר את הפריט החוזר"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "השתמש בסוג המומלץ"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "השתמש בפונקציה המוצעת"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "השתמשו במסכה המומלצת"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "תן לאלמנט שם חופשי"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "תן לאלמנט שם חופשי"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "הסרת הנכס"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "השתמש בערך המותר הקרוב ביותר",
+        // [Auto-translated] "Remove the property"
+        removeKey: "הסרת הנכס",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "השתמש בערך המוצע"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "הפוך את הערך לרשימה"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "תן לאלמנט שם"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "הסרת הנכס",
+        // [Auto-translated] "Rename the property"
+        renameKey: "שינוי שם הנכס"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "השתמש בשם המומלץ",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "השתמש בשם המומלץ"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "השתמש בשם המומלץ"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "השתמש בסוג המומלץ"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "השתמש בסוג המומלץ"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "הביטוי \"{expression}\" אינו ניתן לניתוח."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" לא נמצא - אין שאלה, פאנל, עמוד, ערך מחושב או משתנה בשם הזה.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" אינו נמצא ב-{containerType} \"{root}\" (הפניה: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" אינו נמצא בטווח \"{scopePrefix}\" (הפניה: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "ה-keyName של \"{name}\" קורא ל-\"{key}\" - \"{name}\" אין {keyNoun} עם השם הזה, ולכן אימות מפתח כפול לעולם לא רץ.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" לא נמצא."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "ה-{prop} של \"{name}\" מתייחס לאלמנט עצמו (הפניה: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "השם \"{name}\" משוכפל.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "שם הערך המחושב \"{name}\" כבר משמש ערך מחושב אחר.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "הערך המחושב \"{name}\" חולק את שמו עם אלמנט אחר, כך שאחד מהם מצלל על השני."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "ה-{nameKindText} \"{name}\" של {ownerText} הזה הוא גם משתנה סקר מובנה {{builtIn}} - הסקר עונה ראשון על {{name}}, ולכן זה לא נגיש בביטויים.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "ה-valueName \"{valueName}\" של \"{name}\" משתף את הערך של {otherType} \"{otherName}\", שאין לו valueName משלו - \"{otherName}\" מתייחס לשדות \"{name}\" כלא ידועים, ו-clearIncorrectValues() מוחק אותם. הגדר גם את ה-valueName שלו ל-\"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "השורה \"{key}\" בתחתית המטריקס \"{otherName}\" היא גם {sharedKeyText} \"{name}\" החולקת את ערכה - אובייקט תא וערך אחד לא יכולים להיות שניהם תחת מפתח אחד; זמן הריצה שומר על אחד ומוחק את השני.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "ה-{type} \"{name}\" חולק את מפתח הנתונים \"{dataKey}\" עם {otherType} \"{otherName}\" - הוא שומר את {shapeText} שם, בעוד ש\"{otherName}\" שומר את {otherShapeText}; אחד לא יכול להחזיק את הערך של השני, ולכן clearIncorrectValues() מוחק אותו.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "מפתח הנתונים \"{dataName}\" הוא גם מפתח התגובה של \"{base}\" (מפתח הנתונים שלו בתוספת \"{סיומת}\") - כתיבה אחת מחליפה את השנייה בשקט.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "מפתח הנתונים \"{dataName}\" הוא גם מפתח הסכומים של \"{base}\" (מפתח הנתונים שלו בתוספת \"{סיומת}\") - כתיבה אחת מחליפה את השנייה בשקט.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "הטריגר {trigger} מגדיר את המשתנה \"{name}\", שהוא גם מפתח הנתונים של השאלה \"{questionName}\" - המשתנה עונה על {{name}} מאז, לא על השאלה."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "השם \"{name}\" שמור - חבר ב-Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "ה-valueName \"{valueName}\" של \"{name}\" שמור - חבר ב-Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "העמודה \"{name}\" של \"{matrixName}\" שמורה - חברה ב-Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "הפריט \"{name}\" של \"{questionName}\" שמור - חבר ב-Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "השורה \"{rowValue}\" של \"{name}\" שמורה - חברה ב-Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "הערך המחושב \"{name}\" שמור - חבר ב-Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "ל\"{name}\" יש סוג לא ידוע \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "ל\"{name}\" אין טיפוס - אלמנט ללא טיפוס נופל."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" אינה תכונה של {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" של {ownerText} אינו ניתן לסריאליזציה - הוא נכנס לתוקף בעת טעינה, ונמחק מה-JSON בכל פעם שהסקר נשמר שוב.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" ו-\"{aliasKey}\" של {ownerText} הם שני שמות של תכונה אחת - זמן הריצה מיישם אותם לפי הסדר שבו JSON כותב אותם, כך ש\"{winner}\" מנצח.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" מוגדר על \"{name}\", אבל ל-inputType \"{inputType}\" אין גבולות - זמן הריצה מתעלם ממנו."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "ה-{key} של {ownerText} הוא {valueText} - לא אחד מהערכים המותרים ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "ה-{key} של {ownerText} הוא {value}, מחוץ לטווח המותר שלו {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "ה-valueName \"{valueName}\" של \"{name}\" מכיל \".\" - ביטויים קוראים {{valueName}} כנתיב ל-\"{rootKey}\", כך שמפתח הנתונים עצמו לעולם לא יכול להיות מושפע."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "ל-{ownerText} אין \"{key}\" - התכונה נדרשת עבור {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "שם ה-{className} הוא {valueText}, לא מחרוזת - הסקר לא יכול לטעון אותו."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "ה\"{key}\" של {ownerText} אינו מערך - התכונה מחזיקה רשימה, וזמן הריצה עוטף את הערך למערך של פריט אחד."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "הגדרת המשתנה מכריזה על \"{variable}\", שהוא גם מפתח הנתונים של השאלה \"{name}\" - הגדרת המשתנה מוחקת את התשובה המאוחסנת תחת אותו מפתח, ו-{{name}} עונה על ערך המארח מאז.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "הגדרת המשתנה מכריזה על \"{variable}\", שהוא גם שם הערך המחושב \"{name}\" - שניהם כותבים את אותו חריץ, והמשתנה שרץ אחרון מנצח."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition אינו אובייקט JSON לסקר, ולכן לא מוכרז משתנה ואין ערך פריסט שניתן לבדוק.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets אינו מערך, ולכן לא מוכרז פריסט.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "פריסט #{index} אינו אובייקט.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "לפריסט #{index} אין שם, אז שום דבר לא יכול להתייחס אליו.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "הפריסט \"{preset}\" אינו נושא אובייקט משתנים, ולכן הוא לא קובע כלום.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "ההגדרה המוקדמת \"{preset}\" מוצהרת פעמיים - חיפוש בשם זה עונה עם הראשון.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "הגדרה מוקדמת \"{preset}\" אוספת \"{variable}\", שהגדרת המשתנה אינה מכריזה.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "פריסט \"{preset}\" מגדיר את \"{variable}\" לערך שההגדרה של המשתנה דוחה: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "הפונקציה \"{functionName}\" אינה רשומה."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "הערך המחושב \"{names}\" מתייחס לעצמו בביטוי משלו.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "ערכים מחושבים {שמות} תלויים זה בזה."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "הטריגר מגיב לערך שהוא מגדיר לעצמו (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "הטריגרים יוצרים לולאה דרך הערכים שהם מגדירים: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "ה-{label} קורא את הערך שהוא כותב בעצמו - הוא רץ רק כשערך אחר משתנה, כך שהוא אף פעם לא רץ בכלל.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "הערכים נכתבים בלולאה: {chain}. כל כתיבה מריצה מחדש את הביטויים שקוראים אותה, כך שהערכים הסופיים תלויים בסדר שבו נענות השאלות."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "התנאי משווה את \"{name}\" ל-{values} - לא בין הבחירות שלו. זמין: {available}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "התנאי משווה את \"{name}\" ל-{values} - אין ערך בחירה שמכיל אותו. זמין: {available}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "התנאי חל על \"{operator}\" על \"{name}\": \"{recordName}\" ({questionType}) אין לו ערך להשוואה.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "התנאי חל על \"{operator}\" על \"{name}\": \"{recordName}\" מחזיק את {valueShapeText} - אופרטורי סדר ואריתמטיקה אינם חלים עליו.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "התנאי חל על \"{operator}\" על \"{name}\": \"{recordName}\" היא שאלה בוליאנית - אופרטורי הסדר אינם חלים עליה.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "התנאי מתייחס ל\"{operator}\" על \"{name}\": \"{recordName}\" היא שאלה טקסטואלית - ערכה הוא מחרוזת, ולכן השוואה מספרית מתבססת על המרה מרומזת.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "התנאי חל את \"{operator}\" על \"{name}\": \"{recordName}\" מחזיק מחרוזת תאריך - בהשוואה למספר ש{constValue} לא יכול להחזיק.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "התנאי מתייחס ל-\"{operator}\" על \"{name}\": \"{recordName}\" הוא מספרי - השוואה למחרוזת \"{constValue}\" אינה מתאימה.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "התנאי מיישם \"{operator}\" על \"{name}\": \"{recordName}\" מחזיק מערך של ערכים נבחרים, ולכן \"=\" משווה את כל המערך.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "התנאי חל על \"{operator}\" על \"{name}\": \"{recordName}\" היא שאלה בוליאנית - השוואה ל-{constValue} אינה מתאימה."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "ה-{prop} \"{expression}\" תמיד שגוי, ולכן \"{name}\" לעולם לא מוצג.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "המונח {prop} \"{ביטוי} לעולם לא מתקיים, כי {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "ה-{prop} \"{expression}\" לעולם לא מתקיים - אין ערך מותר שמקיים אותו: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "ה-{prop} \"{ביטוי} סותר את עצמו: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "ה-{prop} \"{expression} תמיד נכון, ולכן הוא לא מחליט כלום.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "ה-{prop} '{expression} הוא אריתמטי, לא השוואה, ולכן הוא אף פעם לא נותן כן או לא.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "חלק מה-{prop} \"{expression}\" יש לו תוצאה שידועה מראש.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "ה-{prop} \"{expression} תמיד תקף, כי {facts} - הוא לא מחליט כלום."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "ה-{prop} \"{expression}\" אינו קורא שום שאלה או משתנה."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "הערך ברירת המחדל של \"{name}\" הוא {valuesText}, שהוא לעולם לא יכול להחזיק. מותר: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "התשובה הנכונה של \"{name}\" היא {valuesText}, שלעולם לא תוכל להחזיק. מותר: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "הטריגר מגדיר את \"{name}\" ל-{valuesText}, שהוא לעולם לא יכול להחזיק. מותר: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "ערך השורה ברירת המחדל מגדיר את \"{name}\" ל-{valuesText}, שהוא לעולם לא יכול להחזיק. מותר: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "ערך הפאנל ברירת המחדל מגדיר את \"{name}\" ל-{valuesText}, שלעולם לא יוכל להחזיק. מותר: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "ה-{prop} של \"{name}\" שמות \"{key}\" - אין שורה כזו. זמין: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "ה-{prop} של \"{name}\" שם \"{key}\" - אין עמודה כזו. זמין: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "ה-{prop} של \"{name}\" שמות \"{key}\" - אין שאלה כזו על תבנית. זמין: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "טריגר ה-copyvalue מעתיק את \"{fromName}\" ל-\"{setToName}\", אך \"{fromName}\" מחזיק את {sourceShapeText} ו-\"{setToName}\" מחזיק את {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "טריגר ערך ההעתקה מעתיק את \"{fromName}\" ל\"{setToName}\", אך אין ערך של \"{fromName}\" בין הערכים ש\"{setToName}\" יכול להחזיק. מותר: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" מעתיק את הבחירות שלו מ-\"{source}\", אבל אין ספק בשם הזה.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" מעתיק את הבחירות שלו מעצמו.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" מעתיק את הבחירות שלו מ-\"{source}\" ({sourceType}), שאינו מספק בחירות או מערך ערכים.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" קורא {prop} \"{field}\" מ-\"{source}\", אך {sourceType} \"{source}\" אין כזה {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "פריט נוסף ב-{prop} של \"{name}\" כבר מחזיק בערך {valueText} - זמן הריצה שומר על שני הפריטים.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "הבחירות של \"{name}\" מכילות את {valueText} בזמן ש-{toggleProp} מופעל – הוא מתנגש עם הפריט המובנה {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "הטריגר {טריגר} מכוון לעמוד \"{name}\", שאינו קיים.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "הטריגר {trigger} מכוון ל-\"{name}\", אך {containerType} \"{root}\" אינו מכיל {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "הטריגר {trigger} {verb} \"{name}\", אבל אין {kindText} עם השם הזה."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "סוג הטריגר \"{type}\" אינו ידוע.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "לטריגר אין סוג."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "סוג האימות \"{type}\" של \"{name}\" אינו ידוע.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "למאמת של \"{name}\" אין סוג."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "המאמת {validatorType} של \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "המאמת {validatorType} של \"{name}\" דורש לפחות {min} ולכל היותר {max} - אף תשובה לא עונה עליו.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "מאמת מספר התשובות של \"{name}\" דורש לפחות {minCount} תשובות, מעל הבחירות {הניתנות לבחירה} שניתן לבחור יחד.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "למאמת רגקס של \"{name}\" יש דפוס שהמנוע דוחה: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "לאימות הביטוי של \"{name}\" אין ביטוי, ולכן הוא תמיד עובר."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "ה-{minProp} של \"{name}\" הוא {min}, מעל ה-{maxProp} של {max} - זמן הריצה מתאים בשקט אחד מהם.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "ה-{countProp} של \"{name}\" הוא {count}, {direction} ה-{boundProp} של {bound} - זמן הריצה עוצר אותו.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "ה-{stepProp} של \"{name}\" הוא {step}, אבל הטווח שהוא עובר דרכו ({minProp}.. {maxProp}}) משתרע רק על {range} - זמן הריצה מגדיר אותו.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "ה-minSelectedChoices של \"{name}\" הוא {min}, מעל הבחירות {selectable} שניתן לבחור יחד – השאלה לעולם לא ניתנת לתשובה."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" לעולם לא יכול להפוך לגלוי: הוא visibleIf קורא {reads}, שזה {deadClause}, ולכן התנאי לעולם לא מתקיים."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "סוג המסכה \"{maskType}\" של \"{name}\" אינו מסכה ידועה - זמן הריצה חוזר ל-0 mask כלל.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "הגדרות ה-mask של \"{name}\" מגדירות את \"{key}\", שאינה תכונה של המסכה \"{maskType}\" - זמן הריצה יורד אותה בשקט.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "הגדרות ה-mask של \"{name}\" מוגדרות ללא סוג מסקה - זמן הריצה שומר רק על \"saveMaskedValue\" ומשאיר את השאר.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "המסכה {maskType} של \"{name}\" חלה על אף קלט: inputType \"{inputType}\" מוסווה רק לטקסט ו-tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "מסכת datetime של \"{name}\" קובעת מינימום/מקסימום ללא תבנית - הגבולות חלים על חלקי התאריך של התבנית, כך שבלעדיו הם לא עושים כלום.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "המסכה {maskType} של \"{name}\" מאפשרת לפחות {min} ולכל היותר {max} - אין ערך שמספק אותה."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "הפאנל הדינמי \"{name}\" כולל תבנית ריקה - הפאנלים שלו לא מציגים כלום.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "ל-{kindText} \"{name}\" אין אלמנטים.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "ה-{kindText} \"{name}\" אינו מכיל אלמנטים שיכולים להציג אי פעם – כל אלמנט מוסתר, מוגן על ידי תנאי שלעולם לא מתקיים, או ריק.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "אלמנטים של הפרטים ב-\"{name}\" לעולם לא מוצגים: ה-detailPanelMode שלו הוא \"none\", שהוא ברירת המחדל."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "מיקום: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "היא נבנתה על שם הישן, תכונות האופרטור והערך של הטריגר.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "בפנים: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "התכוונת ל\"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "אם מדובר ברכיב מותאם אישית, העבר את ההגדרה שלו לליינטר כדי לאפשר ניתוח מלא.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "רשמו את הפונקציה לפני הפיזור, או רשמו אותה באפשרויות הלינטר.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "סוג שנכון באיות נופל בשקט בזמן הריצה, וטריגר מותאם אישית לא מכוסה על ידי בדיקות המטרה והמחזור.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "אם זה משתנה שמוגדר בזמן ריצה, רשום אותו באפשרויות הלינט.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "הלולאה עלולה להיות בלתי ניתנת להשגה אם תנאי הטריגר לעולם לא יחזיקו יחד - בדוק את הביטויים.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "ValueExpression ברירת מחדל חל רק עד שהשאלה שלו נענתה.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "בביטוי: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "מוזכר ב-bindings.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "מוזכר ב-choicesByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "מוזכר בטקסט \"{0}\".", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () קורא את השם הזה מכל רשומה של {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "הטיעון {0}() אינו מזכיר שאלה, פאנל או עמוד.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "הדסריאלייזר מפיל מפתח שהוא לא מכיר.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "הדהסריאלייזר מפיל מאמת שהוא לא יכול לפתור, אז שום דבר לא מאמת.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "ה-inputType הוא \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "זהו מפתח הנתונים של \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "ו",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} הוא תמיד {value}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} הוא {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "לפחות {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "לכל היותר {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} לא יכולים להיות שני {ערכים}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} לא יכול להיות {value} ולא להיות זה",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} לא יכול להיות ריק ולהיות {value}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} לא יכול להיות ריק ולא ריק",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} לא יכול להיות מעל {min} ומתחת ל-{max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} מתבקש להיות אחד חסר ערך כלל"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "הפניות \"{0}.\" זמינות רק בתוך תא מטריצה או לוח פרטי מטריצה.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" זמין רק בתוך תא מטריצה או פאנל פרטי מטריצה.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "הפניות ל\"{0}.\" זמינות רק בתוך לוח דינמי או מיכל פאנל.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "הפניות \"{0}.\" זמינות רק בתוך פאנל דינמי.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" זמין רק בתוך לוח דינמי.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" זמין רק בתוך תנאי בחירה, שורה ועמודה.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "הפניות \"{0}.\" זמינות רק בתוך שאלה מורכבת.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" אינו זמין בתוך מסנן inArray שרץ מול הפריט ואז מול הסקר.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" היא עמודה במטריצה זו - יש להתייחס אליה עם קידומת השורה.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" היא שאלה של הפאנל הדינמי הזה - התייחס אליו עם קידומת הפאנל."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "הגדר סוג input: \"number\" על \"{0}\" אם הוא אוסף מספרים.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "השתמשו ב\"contains\" או \"anyof\" לערכים עם בחירה מרובה."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "עמוד",
+        // [Auto-translated] "panel"
+        panel: "פאנל"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "שם",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "שם"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "ערך מחושב",
+        // [Auto-translated] "element"
+        default: "יסוד"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "הסקר",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "אחר",
+        // [Auto-translated] "None"
+        none: "אין",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "לסרב לענות",
+        // [Auto-translated] "Don't know"
+        dontknow: "לא יודע"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "לעולם לא אש",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "דוחה כל תשובה",
+        // [Auto-translated] "cannot validate"
+        default: "לא ניתן לאמת"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "השאלה אינה נושאת תשובה כדי לאמת",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "אורך נקרא מתוך ערך טקסט, ולתשובה זו אין ערך",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "התשובה אינה מספר ולעולם לא יכולה להיות",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "מספר לעולם לא תואם כתובת דוא\"ל",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "התשובה אינה רשימת ערכים",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "התשובה אינה ערך שהוא יכול לבדוק"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "מערך",
+        // [Auto-translated] "an object"
+        object: "אובייקט"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "שורה של מטריצה",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "פריט של טקסט מרובה",
+        // [Auto-translated] "a row or item of a question"
+        default: "שורה או פריט בשאלה"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "מערך של אובייקטים",
+        // [Auto-translated] "an object"
+        object: "אובייקט",
+        // [Auto-translated] "a plain value"
+        plain: "ערך פשוט",
+        // [Auto-translated] "a value"
+        default: "ערך"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "מערך של ערכים נבחרים",
+        // [Auto-translated] "a single value"
+        scalar: "ערך יחיד",
+        // [Auto-translated] "a value"
+        default: "ערך"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "להלן",
+        // [Auto-translated] "above"
+        above: "למעלה"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "לעולם אינה נראית ואינה מקבלת ערך",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "לעולם לא נראים ואף פעם לא מקבלים ערך"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "שאלה",
+        // [Auto-translated] "question or variable"
+        questionvalue: "שאלה או משתנה",
+        // [Auto-translated] "page"
+        page: "עמוד"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "קריאה",
+        // [Auto-translated] "navigates to"
+        gotoName: "מנווט ל",
+        // [Auto-translated] "sets"
+        default: "קבוצות"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "שאלה על התבנית",
+        // [Auto-translated] "column"
+        default: "עמודה"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "שאלה על התבנית",
+        // [Auto-translated] "column"
+        matrixdynamic: "עמודה",
+        // [Auto-translated] "item"
+        multipletext: "פריט",
+        // [Auto-translated] "row"
+        matrix: "שורה",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "שורה",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "עמודה",
+        // [Auto-translated] "field"
+        default: "שדה"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "פריט 1" }, { value: "item2", text: "פריט 2" }, { value: "item3", text: "פריט 3" }],
-    columns: [{ value: "column1", text: "טור 1" }, { value: "column2", text: "טור 2" }, { value: "column3", text: "טור 3" }],
-    rows: [{ value: "row1", text: "שׁוּרָה 1" }, { value: "row2", text: "שׁוּרָה 2" }],
-    matrixColumns: [{ name: "column1", title: "טור 1" }, { name: "column2", title: "טור 2" }, { name: "column3", title: "טור 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "פריט 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "פריט 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "פריט 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "טור 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "טור 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "טור 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "שׁוּרָה 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "שׁוּרָה 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "טור 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "טור 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "טור 3"
+      }
+    ]
   }
 };
 

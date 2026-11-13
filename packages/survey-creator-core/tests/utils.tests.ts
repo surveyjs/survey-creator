@@ -1,4 +1,4 @@
-import { capitalize } from "../src/utils/utils";
+import { calculateThemeVariables, capitalize } from "../src/utils/utils";
 import { ColorCalculator, HSBToRGB, HueColorCalculator, RGBToHSB } from "../src/utils/color-utils";
 
 test("check capitalize function", () => {
@@ -78,4 +78,41 @@ test("HueColorCalculator hex", (): any => {
   colorCalculator.initialize(glowColor);
   expect(colorCalculator.calculateDependentColorValue(purpleColor)).toEqual("rgba(30, 0, 76, 0.1)");
   expect(colorCalculator.calculateDependentColorValue(tealColor)).toEqual("rgba(0, 76, 76, 0.1)");
+});
+
+test("calculateThemeVariables getPropertyValue call count", () => {
+  const cssVariables: { [key: string]: string } = {};
+  for (let i = 0; i < 20; i++) {
+    cssVariables["--sjs2-test-" + i] = "8px";
+  }
+  const requested = ["--sjs2-test-0", "--sjs2-test-1"];
+
+  const getComputedStyle = window.getComputedStyle;
+  let calls = 0;
+  window.getComputedStyle = ((element: Element) => {
+    const computed = getComputedStyle(element);
+    return new Proxy(computed, {
+      get(target, prop, receiver) {
+        if (prop === "getPropertyValue") {
+          return (property: string) => {
+            calls += 1;
+            return target.getPropertyValue(property);
+          };
+        }
+        const value = Reflect.get(target, prop, receiver);
+        return typeof value === "function" ? value.bind(target) : value;
+      }
+    });
+  }) as typeof window.getComputedStyle;
+
+  try {
+    calculateThemeVariables(cssVariables, requested);
+    expect(calls).toBe(requested.length);
+
+    calls = 0;
+    calculateThemeVariables(cssVariables, []);
+    expect(calls).toBe(Object.keys(cssVariables).length);
+  } finally {
+    window.getComputedStyle = getComputedStyle;
+  }
 });

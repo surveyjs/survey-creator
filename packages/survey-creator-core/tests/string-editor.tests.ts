@@ -388,6 +388,28 @@ test("Editing dynamic panel template title/description on the design surface upd
   expect(templateTitleQuestion.value).toBeFalsy();
   expect(templateDescriptionQuestion.value).toBeFalsy();
 });
+test("Keep trailing spaces in the survey title edited on the design surface, Bug#8004", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    title: "Survey",
+    pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }]
+  };
+  const survey = creator.survey;
+  let modifiedCounter = 0;
+  creator.onModified.add(() => { modifiedCounter++; });
+  const editor = new StringEditorViewModelBase(survey.locTitle, creator);
+  expect(survey.locTitle.allowLineBreaks).toBeFalsy();
+  const target = { innerText: "Survey", textContent: "Survey", innerHTML: "Survey", focus: () => { }, parentElement: { click: () => { } }, setAttribute: () => { }, removeAttribute: () => { } };
+  editor.onFocus({ target: target });
+  target.textContent = "Survey  ";
+  target.innerHTML = "Survey  ";
+  // A browser drops trailing spaces from innerText once the single-line editor is rendered with "white-space: normal" on blur
+  target.innerText = "Survey";
+  editor.onBlur({ target: target });
+  expect(survey.title).toEqual("Survey  ");
+  expect(creator.JSON.title).toEqual("Survey  ");
+  expect(modifiedCounter).toBe(1);
+});
 test("Test string editor inplaceEditChoiceValues + correct non-unique value", (): any => {
   let creator = new CreatorTester();
   creator.JSON = {

@@ -5,6 +5,7 @@
       class="svc-action-button svc-action-button--disabled"
       :class="classes"
       :title="title"
+      :data-sv-tooltip="title"
       >{{ text }}</span
     >
     <span
@@ -14,6 +15,7 @@
       v-key2click
       :class="getButtonCss()"
       :title="title"
+      :data-sv-tooltip="title"
       >{{ text }}</span
     >
   </template>
@@ -22,6 +24,7 @@
       v-if="disabled"
       :class="getButtonCss()"
       :title="title"
+      :data-sv-tooltip="title"
       ><SvComponent :is="'sv-svg-icon'" :iconName="iconName" :size="'auto'"></SvComponent
     ></span>
     <span
@@ -30,13 +33,14 @@
       v-key2click
       :class="getButtonCss()"
       :title="title"
+      :data-sv-tooltip="title"
       ><SvComponent :is="'sv-svg-icon'" :iconName="iconName" :size="'auto'"></SvComponent
     ></span>
   </template>
 </template>
 <script lang="ts" setup>
 import { key2ClickDirective as vKey2click, SvComponent } from "survey-vue3-ui";
-import { CssClassBuilder } from "survey-core";
+import { toCssClasses } from "survey-core";
 const props = defineProps<{
   classes?: string;
   selected?: boolean;
@@ -55,13 +59,13 @@ const onClick = (event: Event) => {
   }
 };
 const getButtonCss = () => {
-  const buttonClasses = new CssClassBuilder()
-      .append(props.classes || "")
-      .append("svc-action-button")
-      .append("svc-action-button--icon", !!props.iconName)
-      .append("svc-action-button--selected", !!props.selected)
-      .append("svc-action-button--disabled", !!props.disabled)
-      .toString();
+  const buttonClasses = toCssClasses(
+    props.classes,
+    "svc-action-button",
+    !!props.iconName && "svc-action-button--icon",
+    !!props.selected && "svc-action-button--selected",
+    !!props.disabled && "svc-action-button--disabled"
+  );
   return buttonClasses;
 };
 </script>

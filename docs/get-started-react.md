@@ -1,10 +1,10 @@
 ---
 title: React Form Builder | Generate dynamic HTML forms using JSON
-description: SurveyJS Form Builder for React is an open-source client-side component that fully integrates into your React application and generates form JSON definitions (schemas) behind the scenes. It offers a user-friendly drag-and-drop interface, GUI for form branching, and an integrated theme editor for customizing form design.
+description: SurveyJS Form Builder for React is a source-available client-side component that integrates seamlessly into your React application and generates form definitions as JSON schemas. It provides a user-friendly drag-and-drop interface and uses theme adapters for Bootstrap, MUI, and shadcn/ui to match the styling of your application.
 ---
 # React Form Builder
 
-[SurveyJS Form Builder](https://surveyjs.io/create-free-survey) is an open-source UI component in React that seamlessly integrates with any backend system and allows you to create and style multiple dynamic HTML forms right in your React application. This component generates form definitions (schemas) in real-time and offers a no-code drag-and-drop interface that makes form creation accessible to anyone. The form builder features a dedicated GUI for conditional rules and form branching and an integrated CSS theme editor for custom form styling and branding. This step-by-step tutorial will help you get started with the Form Builder component in a React application. To add the component to your application, follow the steps below:
+[SurveyJS Form Builder](https://surveyjs.io/create-free-survey) is a source-available UI component in React that seamlessly integrates with any backend system and allows you to create and style multiple dynamic HTML forms right in your React application. This component generates form definitions (schemas) in real-time and offers a no-code drag-and-drop interface that makes form creation accessible to anyone. The form builder features a dedicated GUI for conditional rules and form branching and an integrated CSS theme editor for custom form styling and branding. This step-by-step tutorial will help you get started with the Form Builder component in a React application. To add the component to your application, follow the steps below:
 
 - [Install the `survey-creator-react` npm Package](#install-the-survey-creator-react-npm-package)
 - [Configure Styles](#configure-styles)
@@ -34,6 +34,8 @@ npm install survey-creator-react
 
 ## Configure Styles
 
+### Add Themes
+
 Create a React component that will render Survey Creator and import Survey Creator and SurveyJS Form Library stylesheets as shown below:
 
 ```js
@@ -49,6 +51,25 @@ This configuration applies the Default Light theme. Survey Creator also supports
 In addition, Survey Creator allows users to switch between UI themes and customize them at runtime. To enable runtime UI customization, refer to the following help topic:
 
 [Runtime UI Theming](https://surveyjs.io/survey-creator/documentation/runtime-theme-customization (linkStyle))
+
+### Add Fonts
+
+Starting with SurveyJS v3.0.4, fonts are no longer included in SurveyJS packages. Load Open Sans separately to preserve the default appearance, unless your application already does so. If you use a custom font, load it instead. Otherwise, the browser uses a fallback font, which may affect spacing and layout.
+
+To add Open Sans using [Fontsource](https://fontsource.org/docs/getting-started/install), run the following command:
+
+```sh
+npm install @fontsource/open-sans
+```
+
+The following example imports font weights 400, 600, and 700. Place the font imports in your application's entry file or root layout to load them once for all SurveyJS components.
+
+```js
+// app/layout.tsx or pages/_app.tsx
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+```
 
 ## Configure Survey Creator
 
@@ -94,6 +115,13 @@ export default function SurveyCreatorWidget(props: { json?: Object, options?: IC
 
 <details>
   <summary>View Full Code</summary>
+
+```js
+// app/layout.tsx or pages/_app.tsx
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+```
 
 ```js
 // components/SurveyCreator.tsx
@@ -171,6 +199,13 @@ export default function SurveyCreator() {
 
 <details>
   <summary>View Full Code</summary>
+
+```js
+// app/layout.tsx or pages/_app.tsx
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+```
 
 ```js
 // components/SurveyCreator.tsx
@@ -337,6 +372,13 @@ export default function SurveyCreatorWidget(props: { json?: Object, options?: IC
   <summary>View Full Code</summary>
 
 ```js
+// app/layout.tsx or pages/_app.tsx
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+```
+
+```js
 // components/SurveyCreator.tsx
 'use client'
 
@@ -474,6 +516,13 @@ To view the application, run `npm run dev` in a command line and open [http://lo
 
 <details>
   <summary>View Full Code</summary>
+
+```js
+// app/layout.tsx or pages/_app.tsx
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+```
 
 ```js
 // components/SurveyCreator.tsx

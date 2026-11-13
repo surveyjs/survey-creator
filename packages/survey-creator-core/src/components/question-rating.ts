@@ -7,11 +7,12 @@ import {
   settings,
   ItemValue,
   Base,
-  CssClassBuilder,
+  toCssClasses,
   MatrixDropdownColumn,
   Action,
   ComputedUpdater,
-  ActionContainer
+  ActionContainer,
+  property
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { getLocString } from "../editorLocalization";
@@ -27,6 +28,17 @@ export class QuestionRatingAdornerViewModel extends Base {
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super();
+    this.creator.onPermissionsChanged.add(this.onPermissionsChangedHandler);
+  }
+  // Counts the creator's permissions notifications: the computed visibility of
+  // the +/- actions reads it, so it is recalculated on each one.
+  @property({ defaultValue: 0 }) private permissionsRevision: number;
+  private onPermissionsChangedHandler = (): void => {
+    this.permissionsRevision++;
+  };
+  public dispose(): void {
+    this.creator.onPermissionsChanged.remove(this.onPermissionsChangedHandler);
+    super.dispose();
   }
 
   get element(): QuestionRatingModel {
@@ -115,6 +127,9 @@ export class QuestionRatingAdornerViewModel extends Base {
   }
 
   private canAddOrRemove() {
+    // Read first: the computed action visibility then follows a permissions
+    // change the creator reports.
+    this.permissionsRevision;
     return this.creator.isCanModifyProperty(this.element, "rateValues") &&
       this.creator.isCanModifyProperty(this.element, "rateCount") &&
       (!this.element.autoGenerate || this.creator.isCanModifyProperty(this.element, "rateMax"));
@@ -187,10 +202,11 @@ export class QuestionRatingAdornerViewModel extends Base {
       !!this.element.minRateDescription;
   }
   public get controlsClassNames(): string {
-    return new CssClassBuilder()
-      .append("svc-rating-question-controls")
-      .append("svc-item-value-controls")
-      .append("svc-rating-question-controls--labels-top", this.hasTopLabel).toString();
+    return toCssClasses(
+      "svc-rating-question-controls",
+      "svc-item-value-controls",
+      this.hasTopLabel && "svc-rating-question-controls--labels-top"
+    );
   }
   get addTooltip() {
     return getLocString("pe.addItem");

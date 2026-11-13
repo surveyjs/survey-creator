@@ -103,6 +103,19 @@
   @include defaultActionButtonSettings;
 }
 
+// When the avatar is an action-bar button (a collab-bar chip, a Logic-tab rule
+// holder), the initials sit in the bar's own .sd-action__title, which declares
+// survey-core's action typography, title color and side padding - a
+// declaration on the element beats anything inherited from the button. Hand
+// all three back to the avatar. Three classes deep on purpose: collaboration.css
+// is a separate artifact that may load before survey-core.css, and the hover
+// rule (.sd-action:hover .sd-action__title) has two.
+.svc-collab-bar__avatar.sd-action .sd-action__title {
+  padding: 0;
+  color: inherit;
+  font: inherit;
+}
+
 @for $i from 0 through 9 {
   .svc-collab-bar__avatar--color-#{$i} {
     background: var(--sjs2-color-utility-user-bg-color-#{$i});
@@ -111,10 +124,12 @@
 }
 
 // Inside the roster popup the avatar is a plain marker: smaller, no ring, and
-// the surrounding list item owns the click.
+// the surrounding list item owns the click. The inline avatar size shared with
+// the Logic-tab holder chip and plate - any smaller and two bold initials
+// touch the circle.
 .svc-collab-bar__avatar--list {
-  width: var(--sjs2-size-x250);
-  height: var(--sjs2-size-x250);
+  width: var(--sjs2-size-x300);
+  height: var(--sjs2-size-x300);
   box-shadow: none;
   cursor: inherit;
 }

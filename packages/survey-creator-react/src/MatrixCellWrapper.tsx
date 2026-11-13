@@ -50,7 +50,7 @@ export class MatrixCellAdornerComponent extends CreatorModelElement<
     return this.model;
   }
 
-  render(): React.JSX.Element {
+  renderElement(): React.JSX.Element {
     let controls = null;
     if (!!this.model.isSupportCellEditor) {
       controls = <div className="svc-matrix-cell__question-controls">

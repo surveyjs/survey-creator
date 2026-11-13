@@ -4,10 +4,15 @@ import { IPresencePeer, IPresencePeerEntry, IPresenceState } from "./presence-st
 import { PresenceCapture } from "./presence-capture";
 import { PresenceOverlay } from "./presence-overlay";
 import { TranslationDeleteGuard } from "./translation-guard";
+import { ElementLockGuard } from "./element-lock";
+import { LogicLockGuard } from "./logic-lock";
 
 export { PresenceCapture } from "./presence-capture";
 export { PresenceOverlay } from "./presence-overlay";
 export { TranslationDeleteGuard } from "./translation-guard";
+export { ElementLockGuard } from "./element-lock";
+export { LogicLockGuard } from "./logic-lock";
+export * from "./logic-rules";
 export * from "./presence-state";
 
 // Tracks the local user's presence (active tab, selected element,
@@ -28,14 +33,22 @@ export class PresenceController {
   public overlay: PresenceOverlay;
   public onPeersChanged: EventBase<PresenceController, { peers: ReadonlyMap<string, IPresencePeer> }> = new EventBase();
   private peersMap = new Map<string, IPresencePeer>();
+  public lockGuard: ElementLockGuard;
+  public logicLockGuard: LogicLockGuard;
   private translationGuard: TranslationDeleteGuard;
 
   constructor(creator: SurveyCreatorModel) {
+    // The capture first: the lock guard installs its resolver on it and
+    // relies on the capture's selection handlers running before its own.
     this.capture = new PresenceCapture(creator);
-    this.overlay = new PresenceOverlay(creator, () => this.peersMap);
+    this.lockGuard = new ElementLockGuard(creator, this.capture, () => this.peersMap);
+    this.logicLockGuard = new LogicLockGuard(creator, this.capture, () => this.peersMap, this.lockGuard);
+    this.overlay = new PresenceOverlay(creator, () => this.peersMap, this.lockGuard);
     this.translationGuard = new TranslationDeleteGuard(creator, () => this.peersMap);
   }
   public dispose(): void {
+    this.logicLockGuard.dispose();
+    this.lockGuard.dispose();
     this.capture.dispose();
     this.overlay.dispose();
     this.translationGuard.dispose();
@@ -46,6 +59,23 @@ export class PresenceController {
   }
   public getState(): IPresenceState {
     return this.capture.getState();
+  }
+
+  // This participant's server-assigned id - the tie-breaker of editing locks.
+  public setClientId(clientId: string): void {
+    this.lockGuard.localClientId = clientId || "";
+    this.refreshAllLocks();
+  }
+  // Re-derive editing locks after the survey changed under them (a journal
+  // apply renames/moves/deletes elements the locators point at).
+  public refreshLocks(): void {
+    this.logicLockGuard.onApplied();
+    this.refreshAllLocks();
+  }
+  // Designer locks first: rule locks consult them.
+  private refreshAllLocks(): void {
+    this.lockGuard.refresh();
+    this.logicLockGuard.refresh();
   }
 
   public get peers(): ReadonlyMap<string, IPresencePeer> {
@@ -76,12 +106,13 @@ export class PresenceController {
     this.peersMap.set(entry.clientId, {
       clientId: entry.clientId,
       name: entry.name ?? "",
-      color: entry.color ?? "",
       state: entry.state
     });
     return true;
   }
   private peersChanged(): void {
+    // Locks first: the roster handlers and the overlay read them.
+    this.refreshAllLocks();
     this.onPeersChanged.fire(this, { peers: this.peersMap });
     this.overlay.refresh();
   }

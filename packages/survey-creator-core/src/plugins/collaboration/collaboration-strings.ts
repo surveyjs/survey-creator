@@ -1,4 +1,4 @@
-// Collaboration carries its own English strings instead of adding ~55 keys to
+// Collaboration carries its own English strings instead of adding ~70 keys to
 // src/localization/english.ts. Two reasons: the feature ships as a separate
 // bundle, so its text has no business sitting in the creator's default one; and
 // a key added to english.ts is a key 36 locale files are expected to follow.
@@ -32,6 +32,9 @@ export const collaborationStrings: { [index: string]: string } = {
   collabVersionDocumentCreated: "Document created",
   collabVersionAutosavedOne: "{0} autosaved version",
   collabVersionAutosaved: "{0} autosaved versions",
+  // Author and time joined by a middle dot: "Jane Doe <dot> Oct 7, 14:02".
+  collabVersionAuthorTime: "{0} · {1}", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  collabVersionAuthorYou: "You",
   floatingPanelMinimize: "Minimize",
   floatingPanelRestore: "Restore",
   floatingPanelClose: "Close",
@@ -40,10 +43,24 @@ export const collaborationStrings: { [index: string]: string } = {
   translationDeleteLanguageInUseMany: "{0} are translating to {1}. Deleting this language will also discard their work. Delete the language and all its strings anyway?",
   translationDeleteLanguageInUseConfirm: "Delete language",
   translationDeleteLanguageInUseCancel: "Cancel",
+  collabElementLocked: "{0} is editing",
+  collabUndoLocked: "Undo is unavailable while {0} is editing this element.",
+  collabRedoLocked: "Redo is unavailable while {0} is editing this element.",
+  collabRuleLocked: "{0} is editing this rule.",
   journalEdited: "Edited",
   journalSurveyEdited: "Survey edited",
-  journalPropertyChanged: "Property \"{0}\" changed on \"{1}\"",
-  journalSurveyPropertyChanged: "Survey property \"{0}\" changed",
+  journalPropertySet: "{0} of \"{1}\" changed to \"{2}\"",
+  journalPropertyOn: "{0} of \"{1}\" turned on",
+  journalPropertyOff: "{0} of \"{1}\" turned off",
+  journalPropertyCleared: "{0} of \"{1}\" cleared",
+  journalPropertyChanged: "{0} of \"{1}\" changed",
+  journalSurveyPropertySet: "{0} of the survey changed to \"{1}\"",
+  journalSurveyPropertyOn: "{0} of the survey turned on",
+  journalSurveyPropertyOff: "{0} of the survey turned off",
+  journalSurveyPropertyCleared: "{0} of the survey cleared",
+  journalSurveyPropertyChanged: "{0} of the survey changed",
+  journalPropertyLocale: "{0} ({1})",
+  journalElementRenamed: "{0} \"{1}\" renamed to \"{2}\"",
   journalItemsReordered: "Items reordered",
   journalElementAdded: "{0} \"{1}\" added",
   journalElementAddedNoName: "{0} added",

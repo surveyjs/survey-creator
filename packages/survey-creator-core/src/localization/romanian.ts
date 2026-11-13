@@ -142,6 +142,10 @@ export const roStrings = {
     jsonHideErrors: "Ascunde erorile",
     // "Show errors"
     jsonShowErrors: "Afișează erorile",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Eroare de corectare",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "JSON-ul sondajului trebuie să fie un obiect.",
     // "Undo"
     undo: "Anulează",
     // "Redo"
@@ -246,6 +250,8 @@ export const roStrings = {
     translateUsigAI: "Traducere automată a tuturor",
     // "Translate from: "
     translateUsigAIFrom: "Traducere din: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Translatează corzile rămase",
     // "Untranslated strings"
     translationDialogTitle: "Șiruri netraduse",
     // "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export const roStrings = {
     translationSource: "Sursă: ",
     // "Target: "
     translationTarget: "Țintă: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Limba sursă",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Limba țintă",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} corzi traduse",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Ești sigur că dorești să ștergi toate șirurile traduse pentru limba selectată?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Vizualizarea formularului",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Vizualizare în grilă",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Translatează corzile",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "String de sondaj",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Fără corzi de tradus",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Toate corzile sunt traduse",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} șirurile nu sunt traduse",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "Linkurile YouTube nu sunt acceptate.",
     // "Export"
@@ -286,6 +314,10 @@ export const roStrings = {
     choicesLoadedFromWebLinkText: "Mergeți la setări",
     // "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Previzualizare opțiuni încărcate",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Fără mulțime de expresii",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Editare expresie",
     // "HTML content will be here."
     htmlPlaceHolder: "Conținutul HTML va fi aici.",
     // "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export const roStrings = {
       uncompletedRule_cancel: "Nu, vreau să completez regulile"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Presetare variabilă",
+    // [Auto-translated] "None"
+    noPreset: "Niciuna",
+    // [Auto-translated] "View variable values"
+    view: "Vizualizarea valorilor variabilelor",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Valori ale variabilelor",
+    // [Auto-translated] "Manage presets"
+    edit: "Presetări de gestionare",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Presetări variabile",
+    // [Auto-translated] "Preset"
+    presetName: "Presetare",
+    // [Auto-translated] "Description"
+    presetDescription: "Descriere",
+    // [Auto-translated] "Add preset"
+    addPreset: "Adăugă preset",
+    // [Auto-translated] "New preset"
+    newPresetName: "Noua presetare",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Șterge preseta",
+    // [Auto-translated] "Back"
+    back: "Înapoi",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Există deja un preset cu acest nume",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Introduceți un nume presetat",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Presetare",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Descriere"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Asistent de expresie",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Scrie cu AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Descrie ce ar trebui să facă expresia",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "De exemplu: arată această întrebare când respondentul are 18 ani sau mai mult",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Descrie condiția în cuvinte",
+    // [Auto-translated] "Generate"
+    generate: "Generează",
+    // [Auto-translated] "Refine"
+    refine: "Rafinare",
+    // [Auto-translated] "Explain"
+    explain: "Explică",
+    // [Auto-translated] "Stop"
+    stop: "Stop",
+    // [Auto-translated] "Accept"
+    accept: "Acceptă",
+    // [Auto-translated] "Reject"
+    reject: "Respinge",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Aplică soluția: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Expresia curentă",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Expresie sugerată",
+    // [Auto-translated] "Reads as"
+    readsAs: "Se citește ca",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Explicația asistentului",
+    // [Auto-translated] "Check results"
+    findings: "Verifică rezultatele",
+    // [Auto-translated] "Error"
+    severityError: "Eroare",
+    // [Auto-translated] "Warning"
+    severityWarning: "Atenție",
+    // [Auto-translated] "Info"
+    severityInfo: "Informații",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "în \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Descrie expresia și selectează Generate.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Așteptând asistenta...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Cererea a fost anulată.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Asistentul a raportat: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Asistentul nu a sugerat nicio expresie.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Revizuiește expresia sugerată.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asistentul i-a explicat expresia curentă.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Expresia sugerată conține erori și nu poate fi acceptată.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Expresia sugerată nu putea fi verificată pentru fiecare loc în care este scrisă, deci nu poate fi acceptată.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Adaugă o acțiune la regulă înainte de a întreba asistentul.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Prima sugestie avea erori și a fost corectată automat."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export const roStrings = {
       templateDescription: "Model de descriere a panoului",
       // "Entry title pattern"
       templateTitle: "Model de titlu a panoului",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Titlu de intrare provizoriu",
       // "Empty panel text"
       noEntriesText: "Text panou gol",
       // "Tab title pattern"
@@ -588,6 +724,10 @@ export const roStrings = {
       templateErrorLocation: "Alinierea mesajului de eroare",
       // "New entry location"
       newPanelPosition: "Locația noului panou",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Înscrieri pe pagină",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Permite utilizatorilor să sorteze intrările",
       // "Prevent duplicate responses in the following question"
       keyName: "Prevenirea răspunsurilor duplicate în următoarea întrebare"
     },
@@ -675,6 +815,12 @@ export const roStrings = {
       // "Expression"
       expression: "Expresie"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Sortează după",
+      // [Auto-translated] "Order"
+      direction: "Ordinea"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Exprimare"
@@ -690,7 +836,9 @@ export const roStrings = {
       // "Survey description"
       description: "Descrierea chestionarului",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Faceți chestionarul doar în citire"
+      readOnly: "Faceți chestionarul doar în citire",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Formate regionale"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -726,7 +874,9 @@ export const roStrings = {
       // "Make the column required if"
       requiredIf: "Fă coloana obligatorie dacă",
       // "Each option in a separate column"
-      showInMultipleColumns: "Fiecare opțiune într-o coloană separată"
+      showInMultipleColumns: "Fiecare opțiune într-o coloană separată",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Permiteți sortarea după această coloană"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export const roStrings = {
     masksettings: {
       // "Save masked value in survey results"
       saveMaskedValue: "Salvați valoarea mascată în rezultatele chestionarului"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Regiune",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Modelul de date",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Tipar temporal",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Separator zecimal",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Separator de mii",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Simbol valutar",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Modelul monetar"
     },
     patternmask: {
       // "Value pattern"
@@ -761,16 +927,18 @@ export const roStrings = {
       decimalSeparator: "Separator zecimal",
       // "Value precision"
       precision: "Precizia valorii",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Afișează zerourile de la final",
       // "Minimum value"
       min: "Valoarea minimă",
       // "Maximum value"
       max: "Valoarea maximă"
     },
     currencymask: {
-      // "Currency prefix"
-      prefix: "Prefix valutar",
-      // "Currency suffix"
-      suffix: "Sufix valutar"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Simbol valutar",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Modelul monetar"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Ștergeți altele când este selectat",
@@ -812,8 +980,24 @@ export const roStrings = {
     addItem: "Faceți clic pentru a adăuga un element...",
     // "Click to remove the item..."
     removeItem: "Faceți clic pentru a elimina elementul...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Adaugă {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Scoate {0}",
     // "Drag the item"
     dragItem: "Trageți elementul",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Extinde alegerile imbricate",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Colapsul alegerilor imbricate",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Extinde opțiunile imbricate ale {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Colapsul alegerii imbriculate de {0}",
+    // [Auto-translated] "Show description"
+    showDescription: "Descrierea emisiunii",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Descrierea ascunsului",
     // "Edit"
     edit: "Editează",
     // "Done"
@@ -858,10 +1042,16 @@ export const roStrings = {
     listIsEmpty: "Nu aveți încă niciun element",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Nu aveți încă nicio alegere",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Fără valori de rating personalizate",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Fără etichete personalizate",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Nicio zonă",
     // "You don't have any columns yet"
     "listIsEmpty@columns": "Nu aveți încă nicio coloană",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Nu aveți încă coloane de aspect",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Fără coloane de layout",
     // "You don't have any rows yet"
     "listIsEmpty@rows": "Nu aveți încă niciun rând",
     // "You don't have any validation rules yet"
@@ -870,12 +1060,22 @@ export const roStrings = {
     "listIsEmpty@calculatedValues": "Nu aveți încă nicio variabilă personalizată",
     // "You don't have any triggers yet"
     "listIsEmpty@triggers": "Nu aveți încă niciun declanșator",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Fără marcare condiționată",
     // "You don't have any links yet"
     "listIsEmpty@navigateToUrlOnCondition": "Nu aveți încă niciun link",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Nu aveți încă nicio pagină",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Fără pagini",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Fără niveluri de sortare",
     // "Add new choice"
     "addNew@choices": "Adăugați o alegere nouă",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Valoare de rating adăugat",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Adaugă etichetă",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Adaugă arie",
     // "Add new column"
     "addNew@columns": "Adăugați o coloană nouă",
     // "Add new row"
@@ -886,10 +1086,14 @@ export const roStrings = {
     "addNew@calculatedValues": "Adăugați o variabilă nouă",
     // "Add new trigger"
     "addNew@triggers": "Adăugați un declanșator nou",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Adaugă marajul",
     // "Add new URL"
     "addNew@navigateToUrlOnCondition": "Adăugați un URL nou",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Adaugă o pagină nouă",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Adaugă pagină",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Adaugă nivelul de sortare",
     // "Value"
     value: "Valoare",
     // [Auto-translated] "Text"
@@ -916,6 +1120,8 @@ export const roStrings = {
     surveyTitlePlaceholder: "Titlul chestionarului",
     // "Page {num}"
     pageTitlePlaceholder: "Pagina {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Titlul panelului",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Pagina de pornire",
     // "Description"
@@ -966,6 +1172,8 @@ export const roStrings = {
     visible: "Vizibil",
     // "Required"
     isRequired: "Obligatoriu",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Cer un răspuns pozitiv",
     // "Mark as required"
     markRequired: "Marchează ca obligatoriu",
     // "Remove the required mark"
@@ -976,6 +1184,8 @@ export const roStrings = {
     eachRowUnique: "Prevenirea răspunsurilor duplicate în rânduri",
     // "Error message for required questions"
     requiredErrorText: "Mesaj de eroare pentru întrebările obligatorii",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Mesaj de eroare când Da este necesar",
     // "Display the question on a new line"
     startWithNewLine: "Afișează întrebarea pe un rând nou",
     // "Rows"
@@ -994,6 +1204,16 @@ export const roStrings = {
     maxFiles: "Numărul maxim de fișiere",
     // "Row count"
     rowCount: "Număr de rânduri",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Rânduri pe pagină",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Permite utilizatorilor să sorteze rândurile",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Niveluri maxime de sortare",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Ordinea implicită de sortare",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Afișează bara de sortare",
     // "Columns layout"
     columnLayout: "Aspect coloane",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export const roStrings = {
     questionErrorLocation: "Alinierea mesajului de eroare",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Focalizați pe prima întrebare la o pagină nouă",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Activează scurtăturile de alegere",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Arată indicii pentru tastatură",
     // "Question order"
     questionOrder: "Ordinea întrebărilor",
     // "Time limit to complete the survey"
@@ -1268,6 +1492,8 @@ export const roStrings = {
     minRowCount: "Număr minim de rânduri",
     // "Maximum row count"
     maxRowCount: "Număr maxim de rânduri",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Expresia numărului de rânduri",
     // "Confirm row removal"
     confirmDelete: "Confirmați ștergerea rândului",
     // "Confirmation message"
@@ -1278,6 +1504,8 @@ export const roStrings = {
     minPanelCount: "Număr minim de panouri",
     // "Maximum number of entries"
     maxPanelCount: "Număr maxim de panouri",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Expresia numărului de intrări",
     // "Initial entry state"
     panelsState: "Starea de colaps a panoului intern",
     // "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export const roStrings = {
     logoHeight: "Înălțimea logo-ului",
     // "Read-only"
     readOnly: "Doar citire",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Modul doar citire",
     // "Disable the read-only mode if"
     enableIf: "Dezactivează modul doar citire dacă",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export const roStrings = {
       columns: "Coloane",
       // "Rows"
       rows: "Rânduri",
+      // [Auto-translated] "Entries"
+      entries: "Înscrieri",
       // "Choice Options"
       choices: "Opțiuni de alegere",
       // "Items"
@@ -1544,6 +1776,8 @@ export const roStrings = {
       question: "Setări întrebare",
       // "Pages"
       pages: "Pagini",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Formate regionale",
       // "Quiz Mode"
       timer: "Modul chestionar",
       // "Calculated Values"
@@ -1862,6 +2096,12 @@ export const roStrings = {
       // "Never"
       none: "Niciodată"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Doar citire",
+      // [Auto-translated] "View"
+      view: "Vizualizare"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "Butoane radio",
     inputType: {
@@ -1913,6 +2153,12 @@ export const roStrings = {
       warning: "Avertisment",
       // [Auto-translated] "Informational"
       info: "Informaţionale"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Față",
+      // [Auto-translated] "Rear"
+      environment: "Partea din spate"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export const roStrings = {
     underRowSingle: "Sub rând, afișați doar o singură extindere de rând",
     // [Auto-translated] "Auto"
     auto: "Auto",
+    // [Auto-translated] "Always"
+    always: "Întotdeauna",
     timerInfoMode: {
       // "Both"
       combined: "Ambele"
@@ -2321,7 +2569,148 @@ export const roStrings = {
       survey: "La fel ca sondajul",
       // [Auto-translated] "Same as container"
       container: "La fel ca containerul"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Moștenire",
+      // [Auto-translated] "Hide"
+      "false": "Ascunde-te",
+      // [Auto-translated] "Show"
+      "true": "Emisiune"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arabă",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bulgară",
+    // [Auto-translated] "Catalan"
+    ca: "catalană",
+    // [Auto-translated] "Czech"
+    cs: "Cehă",
+    // [Auto-translated] "Welsh"
+    cy: "Galeză",
+    // [Auto-translated] "Danish"
+    da: "Daneza",
+    // [Auto-translated] "German"
+    de: "Germană",
+    // [Auto-translated] "Greek"
+    el: "Greacă",
+    // [Auto-translated] "English"
+    en: "Engleză",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Engleză (Australia)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Engleză (Canada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Engleză (Regatul Unit)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Engleză (Irlanda)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Engleză (India)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Engleză (Noua Zeelandă)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Engleză (Africa de Sud)",
+    // [Auto-translated] "Spanish"
+    es: "Spaniolă",
+    // [Auto-translated] "Estonian"
+    et: "Estoniană",
+    // [Auto-translated] "Basque"
+    eu: "Basca",
+    // [Auto-translated] "Persian"
+    fa: "Persană",
+    // [Auto-translated] "Finnish"
+    fi: "Finlandeză",
+    // [Auto-translated] "Filipino"
+    fil: "Filipino",
+    // [Auto-translated] "French"
+    fr: "Franceză",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Franceză (Canada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Franceză (Elveția)",
+    // [Auto-translated] "Hebrew"
+    he: "Ebraică",
+    // [Auto-translated] "Hindi"
+    hi: "Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Croată",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Creolă haitiană",
+    // [Auto-translated] "Hungarian"
+    hu: "Maghiară",
+    // [Auto-translated] "Indonesian"
+    id: "Indoneziană",
+    // [Auto-translated] "Icelandic"
+    is: "Islandeză",
+    // [Auto-translated] "Italian"
+    it: "Italiană",
+    // [Auto-translated] "Japanese"
+    ja: "Japoneză",
+    // [Auto-translated] "Georgian"
+    ka: "Gruzină",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazahă",
+    // [Auto-translated] "Korean"
+    ko: "Coreeană",
+    // [Auto-translated] "Lithuanian"
+    lt: "Lituaniană",
+    // [Auto-translated] "Latvian"
+    lv: "Letonă",
+    // [Auto-translated] "Macedonian"
+    mk: "Macedoneană",
+    // [Auto-translated] "Burmese"
+    mm: "Birmanez",
+    // [Auto-translated] "Malay"
+    ms: "Malay",
+    // [Auto-translated] "Dutch"
+    nl: "Olandeză",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Olandez (Belgia)",
+    // [Auto-translated] "Norwegian"
+    no: "Norvegiană",
+    // [Auto-translated] "Polish"
+    pl: "Poloneză",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugheză",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugheză (Brazilia)",
+    // [Auto-translated] "Romanian"
+    ro: "Româna",
+    // [Auto-translated] "Russian"
+    ru: "Rusă",
+    // [Auto-translated] "Slovak"
+    sk: "Slovaca",
+    // [Auto-translated] "Slovenian"
+    sl: "Slovenă",
+    // [Auto-translated] "Serbian"
+    sr: "Sârbă",
+    // [Auto-translated] "Swedish"
+    sv: "Suedeza",
+    // [Auto-translated] "Swahili"
+    sw: "Swahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tadjik",
+    // [Auto-translated] "Thai"
+    th: "Thai",
+    // [Auto-translated] "Turkish"
+    tr: "Turcă",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ucraineană",
+    // [Auto-translated] "Urdu"
+    ur: "Urdu",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnameză",
+    // [Auto-translated] "Chinese"
+    zh: "Chineză",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Chineză (Simplificat)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Chineză (tradițională)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export const roStrings = {
     visibletrigger: "schimbare vizibilitate (depreciat)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "La fel ca limbajul sondajului"
+    },
     patternmask: {
       // [Auto-translated] "Ex.: +1(999)-999-99-99"
       pattern: "Ex.: +1(999)-999-99-99"
@@ -2405,12 +2798,6 @@ export const roStrings = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Ex.: mm/dd/yyyy HH:MM:ss"
-    },
-    currencymask: {
-      // [Auto-translated] "Ex.: $"
-      prefix: "Ex.: $",
-      // [Auto-translated] "Ex.: USD"
-      suffix: "Ex.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export const roStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Specifică câte coloane se întinde acest panou în aspectul grilei.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Acest tabel vă permite să configurați fiecare coloană de grilă din panou. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană."
+      gridLayoutColumns: "Acest tabel vă permite să configurați fiecare coloană de grilă din panou. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifică cum apar întrebările din acest panou atunci când sunt doar citire. \"Read-Only\" afișează întrebările cu controalele lor obișnuite de intrare, dar dezactivate pentru editare. \"View\" afișează răspunsurile ca text sau alte elemente neinteractive. \"Inherit\" folosește modul setat pentru panoul părinte, pagina sau sondajul (\"Read-Only\" implicit)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export const roStrings = {
       width: "Setează lățimea panoului în proporție cu alte elemente ale chestionarului de pe același rând. Acceptă valori CSS (px, %, in, pt etc.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Introduceți un șablon pentru titlurile panourilor dinamice. Utilizați {panelIndex} pentru poziția generală a panoului și {visiblePanelIndex} pentru ordinea acestuia printre panourile vizibile. Introduceți aceste substituenți în model pentru a adăuga numerotare automată.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Un text de rezervă pentru titlurile intrărilor care se aplică atunci când tiparul titlului nu produce o valoare semnificativă. Folosiți {panelIndex} pentru poziția generală a intrării și {visiblePanelIndex} pentru ordinea sa dintre intrările vizibile.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Introduceți un șablon pentru titlurile filelor. Utilizați {panelIndex} pentru poziția generală a unui panou și {visiblePanelIndex} pentru ordinea acestuia printre panourile vizibile. Introduceți aceste substituenți în model pentru a adăuga numerotare automată.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export const roStrings = {
       keyName: "Faceți referire la un nume de întrebare pentru a solicita unui utilizator să furnizeze un răspuns unic pentru această întrebare în fiecare panou.",
       // "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Declanșează o solicitare de confirmare înainte de a elimina un panou.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Specifică o expresie care calculează numărul de intrări. Această expresie suprascrie setarea \"Număr inițial de intrări\" și este reevaluată ori de câte ori valorile la care face referire se schimbă. Rezultatul este limitat de setările \"Număr minim de intrări\" și \"Număr maxim de intrări\". Deși această expresie este setată, respondenții nu pot adăuga sau elimina manual elementele.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Specifică numărul de intrări afișate pe fiecare pagină a panoului. '0' dezactivează paginarea și afișează toate intrările.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Permite respondenților să sorteze intrările folosind bara de sortare.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Definește ordinea inițială a intrărilor. Respondenții o pot schimba dacă sortarea este permisă. Când sortezi după mai multe întrebări, fiecare întrebare sortează intrările în ordinea stabilită de întrebarea precedentă. Trage întrebările pentru a-și schimba prioritatea.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Atribuie numere întrebărilor imbricate în panoul dinamic."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Permite respondenților să sorteze rândurile făcând clic pe anteturile de coloană sau folosind bara de sortare.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Definește ordinea inițială a rândurilor. Respondenții o pot schimba dacă sortarea este permisă. Când sortezi după mai multe coloane, fiecare coloană sortează rândurile în ordinea stabilită de coloana precedentă. Trage coloanele pentru a le schimba prioritatea.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" afișează bara de sortare doar atunci când matricea nu are antete de coloană sortabile: antetele sunt ascunse, matricea folosește configurația mobilă sau rândurile sunt transpuse în coloane. \"Întotdeauna\" afișează bara de sortare chiar și atunci când sunt vizibile antete de coloane sortabile.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Specifică o expresie care calculează numărul de rânduri. Această expresie suprascrie setarea \"Număr inițial de rânduri\" și este reevaluată ori de câte ori valorile la care face referire se schimbă. Rezultatul este limitat de setările \"Număr minim de rânduri\" și \"Număr maxim de rânduri\". În timp ce această expresie este setată, respondenții nu pot adăuga sau elimina rânduri manual.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Declanșează o solicitare de confirmare înainte de a elimina un rând.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Extinde automat secțiunea de detalii atunci când se adaugă un rând nou la matrice."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Specifică numărul de rânduri afișate pe fiecare pagină a matricei. '0' dezactivează paginarea și afișează toate rândurile.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Specifică câte câmpuri poate sorta un respondent simultan.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Duplică răspunsurile din ultimul rând și le atribuie următorului rând dinamic adăugat.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export const roStrings = {
       // "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Textele lungi din opțiunile de alegere vor genera automat întreruperi de linie pentru a se încadra în meniul derulant. Deselectați dacă doriți ca textele să fie tăiate.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Specifică câte coloane se întinde această întrebare în aspectul grilei."
+      effectiveColSpan: "Specifică câte coloane se întinde această întrebare în aspectul grilei.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifică cum apare întrebarea când este doar citire. \"Doar citire\" afișează întrebarea cu controalele sale obișnuite de intrare, dar dezactivat pentru editare. \"Vizualizare\" afișează răspunsurile ca text sau alte elemente neinteractive. \"Inherit\" folosește modul setat pentru panoul părinte, pagina sau sondajul (\"Doar citire\" implicit).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Afișează indicii pentru acțiunile tastaturii disponibile sub această întrebare. Opțiunea \"Inherit\" aplică setarea la nivel de sondaj."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export const roStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Selectați dacă doriți să împiedicați respondenții să completeze chestionarul.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Specifică modul în care apar întrebările doar pentru citire, inclusiv pe pagina de previzualizare. \"Doar citire\" (implicit) afișează întrebările cu comenzile lor obișnuite de intrare, dar dezactivate pentru editare. \"Vizualizare\" afișează răspunsurile ca text sau alte elemente neinteractive.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Setează locația barei de progres. Valoarea \"Auto\" afișează bara de progres deasupra sau dedesubtul antetului sondajului."
     },
@@ -2633,7 +3050,9 @@ export const roStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Când este selectat, creează o coloană individuală pentru fiecare opțiune de alegere.",
       // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Aranjează opțiunile de alegere într-un aspect cu mai multe coloane. Când este setat la 0, opțiunile sunt afișate într-o singură linie. Când este setată la -1, valoarea reală este moștenită de la proprietatea \"Număr de coloane imbricate\" a matricei părinte."
+      colCount: "Aranjează opțiunile de alegere într-un aspect cu mai multe coloane. Când este setat la 0, opțiunile sunt afișate într-o singură linie. Când este setată la -1, valoarea reală este moștenită de la proprietatea \"Număr de coloane imbricate\" a matricei părinte.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifică cum apar celulele din această coloană când sunt doar citire. \"Doar citire\" afișează celulele cu controalele lor obișnuite de intrare, dar dezactivate pentru editare. \"Vizualizare\" afișează răspunsurile ca text sau alte elemente neinteractive. \"Inherit\" folosește modul setat pentru matrice sau sondaj (\"Read-Only\" implicit)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export const roStrings = {
     questionErrorLocation: "Setează locația unui mesaj de eroare în raport cu întrebarea cu intrare invalidă. Alegeți dintre: „Sus” - un text de eroare este plasat în partea de sus a casetei întrebării; „Jos” - un text de eroare este plasat în partea de jos a casetei întrebării.",
     // "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Selectați dacă doriți ca primul câmp de intrare de pe fiecare pagină să fie pregătit pentru introducerea textului.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Afișează literele (A, B, C, ...) lângă opțiunile din Grupul de butoane Radio, Casele de bifat și întrebările cu selectorul de imagini. Respondenții pot selecta opțiuni apăsând tastele corespunzătoare ale literelor. Poți suprascrie această setare pentru întrebările individuale.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Afișează literele (A, B, C, ...) lângă opțiuni și permite respondenților să le selecteze apăsând tastele corespunzătoare. Opțiunea \"Moștenește\" folosește setarea la nivel de sondaj."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Afișează indicii pentru acțiunile tastaturii disponibile sub întrebări. Poți suprascrie această setare pentru întrebările individuale.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Păstrează ordinea originală a întrebărilor sau le randomizează. Efectul acestei setări este vizibil doar în fila Previzualizare.",
     // "For text entry questions only."
@@ -2793,7 +3220,9 @@ export const roStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Setează vizibilitatea butoanelor de navigare pe pagină. Opțiunea „Moștenește” aplică setarea de la nivel de chestionar, care implicit este „Vizibilă”.",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Acest tabel vă permite să configurați fiecare coloană de grilă din pagină. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană."
+      gridLayoutColumns: "Acest tabel vă permite să configurați fiecare coloană de grilă din pagină. Setează automat procentul de lățime pentru fiecare coloană pe baza numărului maxim de elemente dintr-un rând. Pentru a particulariza aspectul grilei, ajustați manual aceste valori și definiți lățimea titlului pentru toate întrebările din fiecare coloană.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Specifică modul în care apar întrebările de pe această pagină atunci când sunt doar citire. \"Read-Only\" afișează întrebările cu comenzile lor obișnuite de intrare, dar dezactivate pentru editare. \"View\" afișează răspunsurile ca text sau alte elemente neinteractive. \"Inherit\" folosește modul setat pentru chestionar (\"Read-Only\" implicit)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Setează locația unui cronometru pe o pagină.",
@@ -2911,6 +3340,22 @@ export const roStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Selectați dacă doriți să stocați valoarea întrebării cu o mască aplicată în rezultatele chestionarului."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "O regiune ale cărei formate se aplică măștilor de intrare de date-oră, numerice și valutare. Dacă nu este specificat, se folosește limbajul sondajului.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Suprascrie formatul de dată al regiunii folosit în măștile de intrare. Modelul poate conține caractere separatoare și următoarele elemente de înlocuire: <br>'m' - Numărul lunii.<br> 'mm' - Numărul lunii, cu zero la început pentru valorile cu o singură cifră. <br>'d' - Ziua lunii. <br>'dd' - Ziua lunii, cu un zero la început pentru valorile cu o singură cifră. <br>'yy' - Ultimele două cifre ale anului. <br>'yyy' - Anul cu patru cifre.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Suprascrie formatul de timp al regiunii folosit în măștile de intrare. Modelul poate conține caractere separatoare și următoarele elemente provizorii: <br>'H' - Ore în format de 24 de ore.<br> 'HH' - Ore în format de 24 de ore, cu un zero la început pentru valorile de o singură cifră. <br>'h' - Ore în format de 12 ore. <br>'hh' - Ore în format de 12 ore, cu un zero la început pentru valorile de o singură cifră. <br>'MM' - Minute. <br>'ss' - Secunde. <br>'TT' - Perioadă de ceas de 12 ore cu majuscule (AM/PM). <br>'TT' - Perioadă de ceas de 12 ore cu litere mici (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Suprascrie simbolul folosit de regiune pentru a separa partea fracționară de partea întreagă a unui număr afișat în măștile de intrare.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Suprascrie simbolul pe care regiunea îl folosește pentru a separa cifrele unui număr mare în grupuri de trei în măștile de intrare.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Suprascrie simbolul sau codul valutar al regiunii folosit în măștile de intrare.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Suprascrie modelul valutar al regiunii folosit în măștile de intrare. Modelul poate conține următoarele poziții provizorii: <br>'@' - Simbol sau cod valutar.<br> '#' - Număr. <br>'-' - Poziția semnului minus în valori negative (dacă este omis, semnul minus este plasat la început)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Modelul poate conține litere de șir și următorii substituenți: `9` - pentru o cifră; `a` - pentru o literă mare sau mică; `#` - pentru o cifră sau o literă mare sau mică. Utilizați backslash `\\` pentru a scăpa un caracter."
@@ -2925,13 +3370,15 @@ export const roStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Un simbol folosit pentru a separa cifrele unui număr mare în grupuri de câte trei.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Limitează câte cifre să fie reținute după punctul zecimal pentru un număr afișat."
+      precision: "Limitează câte cifre să fie reținute după punctul zecimal pentru un număr afișat.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Afișează zerourile din urmă în partea fracționară până la precizia specificată. De exemplu, cu o precizie de 2, o valoare de intrare de 1,2 este afișată ca 1,20."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Unul sau mai multe simboluri care să fie afișate înaintea valorii.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Unul sau mai multe simboluri care să fie afișate după valoare."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Un simbol sau cod de monedă afișat împreună cu valoarea. Simbolul regiunii este folosit implicit. Șterge această proprietate pentru a nu afișa niciun simbol.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Specifică pozițiile numărului, simbolului monedei și semnului minus. Modelul poate conține următoarele poziții provizorii: <br>'@' - Simbol sau cod monetar.<br> '#' - Număr. <br>'-' - Poziția semnului minus în valori negative (dacă este omis, semnul minus este plasat la început)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2982,6 +3429,8 @@ export const roStrings = {
     tabAlign: "Alinierea tabului",
     // "File source type"
     sourceType: "Tipul sursei de fișier",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Cameră implicită",
     // "Fit to container"
     fitToContainer: "Potrivește în container",
     // "Set value expression"
@@ -3302,12 +3751,702 @@ export const roStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Presetare aplicată"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Replică: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Folosește numele sugerat"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Elimină obiectul repetat"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Folosește tipul sugerat"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Folosește funcția sugerată"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Folosește masca sugerată"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Dă elementului un nume liber"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Dă elementului un nume liber"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Îndepărtați proprietatea"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Folosește cea mai apropiată valoare permisă",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Îndepărtați proprietatea",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Folosește valoarea sugerată"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Transformă valoarea într-o listă"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Dă un nume elementului"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Îndepărtați proprietatea",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Redenumirea proprietății"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Folosește numele sugerat",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Folosește numele sugerat"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Folosește numele sugerat"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Folosește tipul sugerat"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Folosește tipul sugerat"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Expresia \"{expression}\" nu poate fi analizată."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" nu este găsit - nu există nicio întrebare, panou, pagină, valoare calculată sau variabilă cu acel nume.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" nu se găsește în {containerType} \"{root}\" (referință: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" nu se găsește în domeniul \"{scopePrefix}\" (referință: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "Numele cheie al \"{name}\" numește \"{key}\" - \"{name}\" nu are {keyNoun} cu acest nume, astfel încât validarea cheii duplicate nu rulează niciodată.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" nu a fost găsit."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop}-ul \"{name}\" face referire la elementul în sine (referință: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Numele \"{name}\" este duplicat.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Valoarea calculată \"{name}\" este deja folosită de o altă valoare calculată.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Valoarea calculată \"{name}\" își împărtășește numele cu un alt element, astfel încât unul dintre ele îl umbrește pe celălalt."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} \"{name}\" al acestui {ownerText} este și variabila de sondaj încorporată {{builtIn}} - sondajul răspunde mai întâi la {{name}}, deci aceasta este inaccesibilă în expresii.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "ValueName \"{valueName}\" din \"{name}\" împărtășește valoarea {otherType} \"{otherName}\", care nu are nicio valoare proprie - \"{otherName}\" tratează câmpurile adăugate de \"{name}\" ca necunoscute, iar clearIncorrectValues() le șterge. Setează valueName pe \"{valueName}\" de asemenea.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Rândul \"{key}\" din matrixdropdown \"{otherName}\" este, de asemenea, {sharedKeyText} \"{name}\" împărțind valoarea sa – un obiect celulă și o singură valoare nu pot trăi ambele sub aceeași cheie; runtime-ul păstrează una și șterge cealaltă.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{Type} \"{name}\" împarte cheia de date \"{dataKey}\" cu {otherType} \"{otherName}\" - păstrează {shapeText} acolo, în timp ce \"{otherName}\" păstrează {otherShapeText}; unul nu poate ține valoarea celuilalt, așa că clearIncorrectValues() o șterge.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Cheia de date \"{dataName}\" este de asemenea cheia de comentariu pentru \"{base}\" (cheia sa de date plus \"{sufix}\") – o scriere suprascrie silențios cealaltă.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Cheia de date \"{dataName}\" este și cheia totalurilor pentru \"{base}\" (cheia sa de date plus \"{sufix}\") – o scriere suprascrie silențios pe cealaltă.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "Declanșatorul {trigger} setează variabila \"{name}\", care este și cheia de date a întrebării \"{questionName}\" - variabila răspunde {{name}} de atunci înainte, nu la întrebare."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Numele \"{name}\" este rezervat - un membru al Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "ValueName \"{valueName}\" din \"{name}\" este rezervat - un membru al Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Coloana \"{name}\" din \"{matrixName}\" este rezervată - un membru al Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Elementul \"{name}\" din \"{questionName}\" este rezervat - un membru al Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Rândul \"{rowValue}\" din \"{name}\" este rezervat - un membru al Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Valoarea calculată \"{name}\" este rezervată - un membru al Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" are un tip necunoscut \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" nu are tip - un element fără tip este eliminat."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" nu este o proprietate a {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" din {ownerText} nu este serializabilă - are efect la încărcare și este eliminată din JSON ori de câte ori sondajul este salvat din nou.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" și \"{aliasKey}\" din {ownerText} sunt două nume ale unei proprietăți – timpul de rulare le aplică în ordinea în care JSON-ul le scrie, deci \"{winner}\" câștigă.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" este setat pe \"{name}\", dar inputType \"{inputType}\" nu are limite - timpul de execuție îl ignoră."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{Cheia} a {ownerText} este {valueText} - nu una dintre valorile permise ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{Cheia} a {ownerText} este {value}, în afara intervalului său permis {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "ValueName \"{valueName}\" din \"{name}\" conține o expresie \".\" - citită {{valueName}} ca o cale către \"{rootKey}\", astfel încât cheia de date în sine nu poate fi niciodată adresată."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} nu are \"{cheie}\" - proprietatea este necesară pentru un {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Numele {className} este {valueText}, nu un șir de șir - sondajul nu îl poate încărca."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "\"{cheia}\" a {ownerText} nu este un tablou - proprietatea conține o listă, iar timpul de execuție încapsulează valoarea într-un tablou de un singur element."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Definiția variabilei declară \"{variabilă}\", care este și cheia de date a întrebării \"{name}\" - setarea variabilei șterge răspunsul stocat sub acea cheie, iar {{name}} răspunde valorii gazdei de atunci înainte.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Definiția variabilei declară \"{variabilă}\", care este și numele valorii calculate \"{name}\" – ambele scriu același slot, iar cel care rulează ultimul câștigă."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition nu este un obiect JSON de sondaj, deci nicio variabilă nu este declarată și nicio valoare presetată nu poate fi verificată.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets nu este un tablou, deci nu este declarat niciun preset.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Presetarea #{index} nu este un obiect.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Presetul #{index} nu are nume, deci nimic nu poate face referință la el.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Presetul \"{preset}\" nu poartă obiectul variabilelor, deci nu setează nimic.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Presetul \"{preset}\" este declarat de două ori - o căutare cu acel nume răspunde cu prima.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Presetarea \"{preset}\" setează \"{variabilă}\", pe care definiția variabilei nu o declară.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Presetarea \"{preset}\" setează \"{variabila}\" la o valoare pe care definiția variabilei o respinge: {erori}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Funcția \"{functionName}\" nu este înregistrată."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Valoarea calculată \"{name}\" se referă la sine însăși în propria sa expresie.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Valorile calculate {names} depind una de cealaltă."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Declanșatorul reacționează la valoarea pe care și-o setează (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Declanșatoarele formează o buclă prin valorile pe care le setează: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{Label} citește valoarea pe care o scrie singură – rulează doar când o altă valoare se schimbă, deci nu rulează deloc.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Valorile sunt scrise într-o buclă: {chain}. Fiecare scriere rerulează expresiile care o citesc, astfel încât valorile finale depind de ordinea în care sunt răspunse la întrebări."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Condiția compară \"{name}\" cu {valori} - nu printre opțiunile sale. Disponibil: {disponibil}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Condiția compară \"{name}\" cu {value} - nicio valoare de alegere nu o conține. Disponibil: {disponibil}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Condiția se aplică \"{operator}\" la \"{name}\": \"{recordName}\" ({questionType}) nu are valoare de comparat.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Condiția aplică \"{operator}\" la \"{name}\": \"{recordName}\" este {valueShapeText} - operatorii de ordonare și aritmetică nu se aplică acesteia.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Condiția aplică \"{operator}\" la \"{name}\": \"{recordName}\" este o întrebare booleană - operatorii de ordine nu se aplică acesteia.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Condiția aplică \"{operator}\" la \"{name}\": \"{recordName}\" este o întrebare de text – valoarea ei este un șir, astfel încât comparația numerică se bazează pe conversia implicită.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Condiția aplică \"{operator}\" la \"{name}\": \"{recordName}\" deține un șir de date - compararea cu numărul {constValue} nu poate fi valabil.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Condiția aplică \"{operator}\" la \"{name}\": \"{recordName}\" este numeric - compararea cu șirul \"{constValue}\" nu poate fi valabilă.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Condiția aplică \"{operator}\" la \"{name}\": \"{recordName}\" conține un tablou de valori selectate, astfel încât \"=\" compară întregul tablou.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Condiția aplică \"{operator}\" la \"{name}\": \"{recordName}\" este o întrebare booleană - compararea ei cu {constValue} nu poate fi valabilă."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{expresie}\" este întotdeauna fals, astfel încât \"{name}\" nu este niciodată afișat.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} \"{expresie}\" nu este valabilă niciodată, pentru că {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "Valoarea {prop} \"{{expression}\" nu este niciodată valabilă – nicio valoare permisă nu o satisface: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{{expresie}\" se contrazice: {fapte}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{expresie}\" este întotdeauna adevărată, deci nu decide nimic.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{{expresie}\" este aritmetică, nu o comparație, deci nu oferă niciodată un da sau un nu.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "O parte din {prop} \"{expresie}\" are un rezultat cunoscut dinainte.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{Prop} \"{expresie}\" este întotdeauna valabilă, pentru că {faptele} - nu decide nimic."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expresie}\" nu citește nicio întrebare sau variabilă."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "Valoarea implicită a \"{name}\" este {valuesText}, pe care nu o poate menține niciodată. Permis: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Răspunsul corect la \"{name}\" este {valuesText}, pe care nu îl poate susține niciodată. Permis: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Declanșatorul setează \"{name}\" la {valuesText}, pe care nu îl poate ține niciodată. Permis: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Valoarea implicită a rândului setează \"{name}\" pe {valuesText}, pe care nu o poate menține niciodată. Permis: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Valoarea implicită a panoului setează \"{name}\" la {valuesText}, pe care nu îl poate menține niciodată. Permis: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop}-ul \"{name}\" numește \"{key}\" - nu există o astfel de linie. Disponibil: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop}-ul \"{name}\" denumește \"{cheia}\" - nu există o astfel de coloană. Disponibil: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} din \"{name}\" numește \"{cheie}\" - nu există o astfel de întrebare de șablon. Disponibil: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Declanșatorul copyvalue copiază \"{fromName}\" în \"{setToName}\", dar \"{fromName}\" conține {sourceShapeText}, iar \"{setToName}\" conține {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Declanșatorul copyvalue copiază \"{fromName}\" în \"{setToName}\", dar nicio valoare a \"{fromName}\" nu se numără printre valorile pe care \"{setToName}\" le poate ține. Permis: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" își copiază alegerile din \"{source}\", dar nu există nicio îndoială cu acest nume.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" își copiază alegerile de la sine.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" își copiază alegerile din \"{source}\" ({sourceType}), care nu oferă nici alegeri, nici un tablou de valori.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" citește {prop} \"{field}\" din \"{source}\", dar {sourceType} \"{source}\" nu are un astfel {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Un alt element din {prop} al \"{name}\" are deja valoarea {valueText} - timpul de execuție păstrează ambele elemente.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Alegerile \"{name}\" conțin {valueText} în timp ce {toggleProp} este activat – colizionează cu elementul încorporat {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "Declanșatorul {trigger} vizează pagina \"{name}\", care nu există.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "Declanșatorul {trigger} țintește \"{name}\", dar {containerType} \"{root}\" nu are {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{declanșator} declanșează {verbul} \"{nume}\", dar nu există niciun {kindText} cu acest nume."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Tipul de declanșator \"{type}\" nu este cunoscut.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Trăgaciul nu are tip."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Tipul de validator \"{type}\" al \"{name}\" nu este cunoscut.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Un validator al \"{name}\" nu are tip."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "Validatorul {validatorType} al \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "Validatorul {validatorType} al \"{name}\" necesită cel puțin {min} și cel mult {max} - niciun răspuns nu îl satisface.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Validatorul de număr de răspunsuri pentru \"{name}\" necesită cel puțin {minCount} răspunsuri, deasupra opțiunilor {selectable} care pot fi selectate împreună.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Validatorul regex al \"{name}\" are un tipar pe care motorul îl respinge: {eroare}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Validatorul expresiei \"{name}\" nu are nicio expresie, deci trece întotdeauna."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} al \"{name}\" este {min}, deasupra {maxProp} al său de {max} - timpul de rulare ajustează în tăcere unul dintre ele.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} al \"{name}\" este {count}, {direction} {boundProp} al {bound} - timpul de execuție îl fixează.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} al \"{name}\" este {step}, dar distanța prin care trece ({minProp}.. {maxProp}) acoperă doar {intervalul} - timpul de funcționare îl blochează.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "MinSelectedChoices din \"{name}\" este {min}, deasupra op��iunilor {selectable} care pot fi selectate împreună – întrebarea nu poate fi niciodată răspunsă."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" nu poate deveni niciodată vizibil: este vizibilIf citește {reads}, ceea ce {deadClause}, deci condiția nu este niciodată valabilă."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "Tipul mască \"{maskType}\" din \"{name}\" nu este o mască cunoscută – timpul de rulare scade la nicio mască deloc.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "Setările maskSettings ale \"{name}\" setează \"{key}\", care nu este o proprietate a măștii \"{maskType}\" – timpul de rulare îl întrerupe silențios.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "Setările maskSettings ale \"{name}\" sunt setate fără un maskType - timpul de execuție păstrează doar \"saveMaskedValue\" și elimină restul.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Masca {maskType} a \"{name}\" nu se aplică niciunui input: inputType \"{inputType}\" este mascată doar pentru text și tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Masca datetime \"{name}\" setează min/max fără un model - limitele se aplică părților de dată ale modelului, deci fără unul nu fac nimic.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Masca {maskType} a \"{name}\" permite cel puțin {min} și cel mult {max} - nicio valoare nu o satisface."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Panoul dinamic \"{name}\" are un șablon gol – panourile sale nu au nimic de randat.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\" nu are elemente.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\" nu are elemente care să poată fi redate vreodată – fiecare element este ascuns, păzit de o condiție care nu se respectă niciodată, sau gol.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Elementele de detaliu ale \"{name}\" nu sunt niciodată afișate: detaliulPanelMode este \"none\", care este implicit."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Poziție: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "A fost construit din proprietățile moștenite ale numelui, operatorului și valorii declanșatorului.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Înăuntru: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Ai vrut să spui \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Dacă este o componentă personalizată, transmiteți definiția acesteia linter-ului pentru a permite o analiză completă.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Înregistrează funcția înainte de linting sau listează-o în opțiunile linter.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Un tip scris greșit este eliminat silențios la rulare, iar un declanșator personalizat nu este acoperit de verificările țintă și ciclu.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Dacă este o variabilă setată la rulare, listează-o în opțiunile linter.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Bucla poate fi inaccesibilă dacă condițiile de declanșare nu se mențin niciodată – verifică expresiile.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "Un defaultValueExpression se aplică doar până când întrebarea sa este răspunsă.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "În exprimare: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Menționat în legături.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Menționat în opțiunile ByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Menționat în textul \"{0}\".", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () citește acest nume din fiecare intrare din {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Argumentul {0}() nu numește nicio întrebare, panou sau pagină.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Deserializatorul pierde o cheie pe care nu o cunoaște.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Deserializatorul renunță la un validator pe care nu îl poate rezolva, deci nimic nu validează.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "Tipul de intrare este \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Este cheia de date a \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "și",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} este întotdeauna {valoare}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} este {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "Cel puțin {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "cel mult {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} nu poate fi ambele {valori}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} nu poate fi {value} și să nu fie el",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} nu poate fi gol și nu poate fi {value}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} nu poate fi gol și nici gol",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} nu poate fi peste {min} și sub {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} este întrebat să fie unul fără valoare deloc"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "Referințele \"{0}.\" sunt disponibile doar în interiorul unei celule de matrice sau a unui panou de detaliu de matrice.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" este disponibil doar în interiorul unei celule de matrice sau a unui panou de detaliu de matrice.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "Referințele \"{0}.\" sunt disponibile doar în interiorul unui panou dinamic sau al unui container de panouri.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "Referințele \"{0}.\" sunt disponibile doar în interiorul unui panou dinamic.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" este disponibil doar în interiorul unui panou dinamic.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" este disponibil doar în interiorul condițiilor de alegere, rând și coloană.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "Referințele \"{0}.\" sunt disponibile doar în interiorul unei întrebări compozite.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" nu este disponibil în interiorul unui filtru inArray, care rulează atât pe element, cât și apoi pe sondaj.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" este o coloană a acestei matrice – refereți-o cu prefixul rândului.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" este o chestiune legată de acest panou dinamic – referă-te la el cu prefixul panoului."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Setează inputType: \"number\" pe \"{0}\" dacă colectează numere.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Folosește \"contains\" sau \"anyof\" pentru valori multi-select."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "Pagină",
+        // [Auto-translated] "panel"
+        panel: "Panel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Nume",
+        // [Auto-translated] "valueName"
+        valueName: "Numelevalorice",
+        // [Auto-translated] "name"
+        calculatedValue: "Nume"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "Valoare calculată",
+        // [Auto-translated] "element"
+        default: "element"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Sondajul",
+        // [Auto-translated] "the {0}"
+        className: "The {0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Altele",
+        // [Auto-translated] "None"
+        none: "Niciuna",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Refuză să răspundă",
+        // [Auto-translated] "Don't know"
+        dontknow: "Nu știu"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "nu trage niciodată",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "respinge orice răspuns",
+        // [Auto-translated] "cannot validate"
+        default: "nu se poate valida"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Întrebarea nu are răspuns pentru validare",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "O lungime este citită dintr-o valoare de text, iar acest răspuns nu are niciun răspuns",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Răspunsul nu este un număr și nu va putea fi niciodată",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Un număr nu corespunde niciodată unei adrese de e-mail",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Răspunsul nu este o listă de valori",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Răspunsul nu este o valoare pe care o poate verifica"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "Un tablou",
+        // [Auto-translated] "an object"
+        object: "un obiect"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "un rând de matrice",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "un element de multipletext",
+        // [Auto-translated] "a row or item of a question"
+        default: "un rând sau un element al unei întrebări"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "o matrice de obiecte",
+        // [Auto-translated] "an object"
+        object: "un obiect",
+        // [Auto-translated] "a plain value"
+        plain: "o valoare simplă",
+        // [Auto-translated] "a value"
+        default: "o valoare"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "un tablou de valori selectate",
+        // [Auto-translated] "a single value"
+        scalar: "o singură valoare",
+        // [Auto-translated] "a value"
+        default: "o valoare"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "mai jos",
+        // [Auto-translated] "above"
+        above: "mai sus"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "nu este niciodată vizibil și nu primește niciodată o valoare",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "nu sunt niciodată vizibile și nu primesc niciodată o valoare"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Întrebare",
+        // [Auto-translated] "question or variable"
+        questionvalue: "Întrebare sau variabilă",
+        // [Auto-translated] "page"
+        page: "Pagină"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "Citește",
+        // [Auto-translated] "navigates to"
+        gotoName: "navighează către",
+        // [Auto-translated] "sets"
+        default: "Seturi"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Întrebare despre șablon",
+        // [Auto-translated] "column"
+        default: "Coloană"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Întrebare despre șablon",
+        // [Auto-translated] "column"
+        matrixdynamic: "Coloană",
+        // [Auto-translated] "item"
+        multipletext: "Punct",
+        // [Auto-translated] "row"
+        matrix: "Rând",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Rând",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Coloană",
+        // [Auto-translated] "field"
+        default: "Teren"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Element 1" }, { value: "item2", text: "Element 2" }, { value: "item3", text: "Element 3" }],
-    columns: [{ value: "column1", text: "Coloană 1" }, { value: "column2", text: "Coloană 2" }, { value: "column3", text: "Coloană 3" }],
-    rows: [{ value: "row1", text: "Rând 1" }, { value: "row2", text: "Rând 2" }],
-    matrixColumns: [{ name: "column1", title: "Coloană 1" }, { name: "column2", title: "Coloană 2" }, { name: "column3", title: "Coloană 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Element 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Element 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Element 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Coloană 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Coloană 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Coloană 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Rând 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Rând 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Coloană 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Coloană 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Coloană 3"
+      }
+    ]
   }
 };
 

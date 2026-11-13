@@ -19,6 +19,7 @@ import { SidebarPropertyGridHeaderComponent } from "./side-bar/side-bar-property
 import { PropertyGridPlaceholderComponent } from "./side-bar/property-grid-placeholder.component";
 import { SidebarHeaderComponent } from "./side-bar/side-bar-header.component";
 import { ComponentContainerComponent } from "./components/component-container.component";
+import { VariablesViewerComponent } from "./components/variables-viewer.component";
 import { IconItemComponent } from "./components/icon-item.component";
 import { SideBarLaunchCardComponent } from "./side-bar/side-bar-launch-card.component";
 
@@ -27,6 +28,7 @@ import { PropertyGridComponent } from "./side-bar/property-grid.component";
 import { SearchComponent } from "./components/search.component";
 import { TextareaJsonEditorComponent } from "./tabs/json/json-editor-textarea.component";
 import { AceJsonEditorComponent } from "./tabs/json/json-editor-ace.component";
+import { MonacoJsonEditorComponent } from "./tabs/json/json-editor-monaco.component";
 import { LogicTabComponent } from "./tabs/logic/logic.component";
 import { ActionButtonComponent } from "./components/action-button.component";
 import { QuestionPgErrorComponent } from "./components/question-error.component";
@@ -90,23 +92,23 @@ import { ContainerTabComponent } from "./tabs/container/container-tab.component"
 import { ImageItemDragActionComponent } from "./adorners/image-item-drag-action.component";
 
 @NgModule({
-  declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarPageComponent, SidebarDefaultHeaderComponent, ObjectSelectorComponent, SidebarPropertyGridHeaderComponent, PropertyGridPlaceholderComponent, SidebarHeaderComponent, TabControlComponent, TabsComponent, TabButtonComponent, PropertyGridComponent, SearchComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, ActionButtonComponent, QuestionPgErrorComponent, SurfacePlaceholderComponent, SwitcherComponent, CollabRowComponent, FloatingPanelComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, SurveyResultsComponent, SurveyResultsTableRowComponent, ThemeTabComponent,
+  declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarPageComponent, SidebarDefaultHeaderComponent, ObjectSelectorComponent, SidebarPropertyGridHeaderComponent, PropertyGridPlaceholderComponent, SidebarHeaderComponent, TabControlComponent, TabsComponent, TabButtonComponent, PropertyGridComponent, SearchComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, MonacoJsonEditorComponent, LogicTabComponent, ActionButtonComponent, QuestionPgErrorComponent, SurfacePlaceholderComponent, SwitcherComponent, CollabRowComponent, FloatingPanelComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, SurveyResultsComponent, SurveyResultsTableRowComponent, ThemeTabComponent,
     AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxItemGroupComponent, ToolboxListComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent, TranslationDropdownQuestionComponent,
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, CreatorLogoImageComponent,
     QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, SpinEditorButtonComponent, ColorItemComponent, QuestionColorComponent, SwatchComponent, QuestionFileEditorComponent, FileEditorButtonComponent, AddQuestionButtonComponent, QuestionBannerComponent, JsonErrorItemComponent,
-    TranslateFromAction, TranslationLocaleItemComponent, QuestionElementContentComponent, PageElementContentComponent, PageWrapperComponent, ComponentContainerComponent,
+    TranslateFromAction, TranslationLocaleItemComponent, QuestionElementContentComponent, PageElementContentComponent, PageWrapperComponent, ComponentContainerComponent, VariablesViewerComponent,
     IconItemComponent, SideBarLaunchCardComponent, ContainerTabComponent, ImageItemDragActionComponent],
 
   imports: [
     CommonModule, FormsModule, SurveyModule
   ],
   exports: [
-    CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarPageComponent, SidebarDefaultHeaderComponent, SidebarPropertyGridHeaderComponent, PropertyGridPlaceholderComponent, SidebarHeaderComponent, TabControlComponent, TabsComponent, TabButtonComponent, ObjectSelectorComponent, PropertyGridComponent, SearchComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, ActionButtonComponent, QuestionPgErrorComponent, SurfacePlaceholderComponent, SwitcherComponent, CollabRowComponent, FloatingPanelComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, SurveyResultsComponent, SurveyResultsTableRowComponent, ThemeTabComponent,
+    CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarPageComponent, SidebarDefaultHeaderComponent, SidebarPropertyGridHeaderComponent, PropertyGridPlaceholderComponent, SidebarHeaderComponent, TabControlComponent, TabsComponent, TabButtonComponent, ObjectSelectorComponent, PropertyGridComponent, SearchComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, MonacoJsonEditorComponent, LogicTabComponent, ActionButtonComponent, QuestionPgErrorComponent, SurfacePlaceholderComponent, SwitcherComponent, CollabRowComponent, FloatingPanelComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, SurveyResultsComponent, SurveyResultsTableRowComponent, ThemeTabComponent,
     AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxItemGroupComponent, ToolboxListComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent, TranslationDropdownQuestionComponent,
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, CreatorLogoImageComponent,
-    QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, SpinEditorButtonComponent, ColorItemComponent, QuestionColorComponent, SwatchComponent, QuestionFileEditorComponent, FileEditorButtonComponent, AddQuestionButtonComponent, QuestionBannerComponent, JsonErrorItemComponent, TranslateFromAction, TranslationLocaleItemComponent, QuestionElementContentComponent, PageElementContentComponent, ComponentContainerComponent,
+    QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, SpinEditorButtonComponent, ColorItemComponent, QuestionColorComponent, SwatchComponent, QuestionFileEditorComponent, FileEditorButtonComponent, AddQuestionButtonComponent, QuestionBannerComponent, JsonErrorItemComponent, TranslateFromAction, TranslationLocaleItemComponent, QuestionElementContentComponent, PageElementContentComponent, ComponentContainerComponent, VariablesViewerComponent,
     IconItemComponent, SideBarLaunchCardComponent, ContainerTabComponent, ImageItemDragActionComponent],
   providers: [],
 })

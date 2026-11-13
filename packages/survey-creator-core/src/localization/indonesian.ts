@@ -142,6 +142,10 @@ export var indonesianStrings = {
     jsonHideErrors: "Menyembunyikan kesalahan",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "Tampilkan kesalahan",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Perbaiki kesalahan",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "JSON survei harus berupa objek.",
     // "Undo"
     undo: "Urungkan",
     // "Redo"
@@ -246,6 +250,8 @@ export var indonesianStrings = {
     translateUsigAI: "Terjemahkan otomatis Semua",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Terjemahkan dari: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Terjemahkan string yang tersisa",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "String yang tidak diterjemahkan",
     // "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var indonesianStrings = {
     translationSource: "Sumber: ",
     // [Auto-translated] "Target: "
     translationTarget: "Target: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Bahasa sumber",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Bahasa target",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} string {1} diterjemahkan",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Apakah Anda yakin ingin menghapus semua string terjemahan untuk bahasa yang dipilih?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Tampilan Formulir",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Tampilan Grid",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Terjemahkan string",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "String Survei",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Tidak ada string yang harus diterjemahkan",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Semua string diterjemahkan",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} string tidak diterjemahkan",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "Tautan YouTube tidak didukung.",
     // [Auto-translated] "Export"
@@ -286,6 +314,10 @@ export var indonesianStrings = {
     choicesLoadedFromWebLinkText: "Buka pengaturan",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Pratinjau opsi pilihan yang dimuat",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Tidak ada himpunan ekspresi",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Edit ekspresi",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "Konten HTML akan ada di sini.",
     // [Auto-translated] "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var indonesianStrings = {
       uncompletedRule_cancel: "Tidak, saya ingin menyelesaikan aturan"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Preset variabel",
+    // [Auto-translated] "None"
+    noPreset: "Tidak ada",
+    // [Auto-translated] "View variable values"
+    view: "Lihat nilai variabel",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Nilai variabel",
+    // [Auto-translated] "Manage presets"
+    edit: "Kelola preset",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Preset Variabel",
+    // [Auto-translated] "Preset"
+    presetName: "Prasetel",
+    // [Auto-translated] "Description"
+    presetDescription: "Deskripsi",
+    // [Auto-translated] "Add preset"
+    addPreset: "Tambahkan preset",
+    // [Auto-translated] "New preset"
+    newPresetName: "Preset baru",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Hapus preset",
+    // [Auto-translated] "Back"
+    back: "Kembali",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Preset dengan nama ini sudah ada",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Masukkan nama preset",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Prasetel",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Deskripsi"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Asisten Ekspresi",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Menulis dengan AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Jelaskan apa yang harus dilakukan ekspresi tersebut",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Misalnya: tampilkan pertanyaan ini saat responden berusia 18 tahun atau lebih",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Jelaskan kondisi dengan kata-kata",
+    // [Auto-translated] "Generate"
+    generate: "Menghasilkan",
+    // [Auto-translated] "Refine"
+    refine: "menyempurnakan",
+    // [Auto-translated] "Explain"
+    explain: "Jelaskan",
+    // [Auto-translated] "Stop"
+    stop: "Berhenti",
+    // [Auto-translated] "Accept"
+    accept: "Terima",
+    // [Auto-translated] "Reject"
+    reject: "Tolak",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Terapkan perbaikan: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Ekspresi saat ini",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Ekspresi yang disarankan",
+    // [Auto-translated] "Reads as"
+    readsAs: "Dibaca sebagai",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Penjelasan dari asisten",
+    // [Auto-translated] "Check results"
+    findings: "Periksa hasil",
+    // [Auto-translated] "Error"
+    severityError: "Kesalahan",
+    // [Auto-translated] "Warning"
+    severityWarning: "Peringatan",
+    // [Auto-translated] "Info"
+    severityInfo: "Info",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "dalam \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Jelaskan ekspresi dan pilih Generate.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Menunggu asisten...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Permintaan tersebut dibatalkan.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Asisten melaporkan: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Asisten itu tidak menyarankan ekspresi.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Tinjau ekspresi yang disarankan.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Asisten menjelaskan ekspresi saat itu.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Ekspresi yang disarankan memiliki kesalahan dan tidak dapat diterima.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Ekspresi yang disarankan tidak dapat diperiksa untuk setiap tempat penulisannya, sehingga tidak dapat diterima.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Tambahkan tindakan ke aturan sebelum meminta bantuan asisten.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Saran pertama memiliki kesalahan dan otomatis diperbaiki."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var indonesianStrings = {
       templateDescription: "Pola deskripsi entri",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Pola judul entri",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Penanda penanda judul entri",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Teks panel kosong",
       // [Auto-translated] "Tab title pattern"
@@ -588,6 +724,10 @@ export var indonesianStrings = {
       templateErrorLocation: "Perataan pesan kesalahan",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Lokasi entri baru",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Entri per halaman",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Izinkan pengguna mengurutkan entri",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Cegah respons duplikat dalam pertanyaan berikut"
     },
@@ -675,6 +815,12 @@ export var indonesianStrings = {
       // [Auto-translated] "Expression"
       expression: "Ekspresi"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Urutkan berdasarkan",
+      // [Auto-translated] "Order"
+      direction: "Pesanan"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Ekspresi"
@@ -690,7 +836,9 @@ export var indonesianStrings = {
       // [Auto-translated] "Survey description"
       description: "Deskripsi survei",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Jadikan survei baca-saja"
+      readOnly: "Jadikan survei baca-saja",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Format regional"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -726,7 +874,9 @@ export var indonesianStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Buat kolom diperlukan jika",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Setiap opsi dalam kolom terpisah"
+      showInMultipleColumns: "Setiap opsi dalam kolom terpisah",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Izinkan pengurutan berdasarkan kolom ini"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export var indonesianStrings = {
     masksettings: {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Simpan nilai terselubung dalam hasil survei"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Wilayah",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Pola tanggal",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Pola waktu",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Pemisah desimal",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Pemisah ribuan",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Simbol mata uang",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Pola mata uang"
     },
     patternmask: {
       // [Auto-translated] "Value pattern"
@@ -761,16 +927,18 @@ export var indonesianStrings = {
       decimalSeparator: "Pemisah desimal",
       // [Auto-translated] "Value precision"
       precision: "Presisi nilai",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Tampilkan nol terlambat",
       // [Auto-translated] "Minimum value"
       min: "Nilai minimum",
       // [Auto-translated] "Maximum value"
       max: "Nilai maksimum"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Awalan mata uang",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Akhiran mata uang"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Simbol mata uang",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Pola mata uang"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Hapus yang lain saat dipilih",
@@ -812,8 +980,24 @@ export var indonesianStrings = {
     addItem: "Klik untuk menambahkan sebuah item...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klik untuk menghapus item...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Tambahkan {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Hapus {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Seret item",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Perluas pilihan bersarang",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Menggabungkan pilihan bersarang",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Perluas pilihan bersarang {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Pilihan bertingkat {0}",
+    // [Auto-translated] "Show description"
+    showDescription: "Tampilkan deskripsi",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Sembunyikan deskripsi",
     // "Edit"
     edit: "Ubah",
     // [Auto-translated] "Done"
@@ -854,42 +1038,62 @@ export var indonesianStrings = {
     propertyNameIsNotUnique: "Silakan masukkan nama yang unik",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "Jangan gunakan kata-kata khusus: \"item\", \"pilihan\", \"panel\", \"baris\".",
-    // [Auto-translated] "You don't have any items yet"
-    listIsEmpty: "Anda belum memiliki item apa pun",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "Anda belum punya pilihan",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Anda belum memiliki kolom apa pun",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Anda belum memiliki kolom tata letak",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Anda belum memiliki baris",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Anda belum memiliki aturan validasi apa pun",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Anda belum memiliki variabel khusus",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Anda belum memiliki pemicu apa pun",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Anda belum memiliki tautan apa pun",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Anda belum memiliki halaman apa pun",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "Tambahkan pilihan baru",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Tambahkan kolom baru",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Menambahkan baris baru",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Tambahkan aturan baru",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Tambahkan variabel baru",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Tambahkan pemicu baru",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Tambahkan URL baru",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Tambahkan halaman baru",
+    // [Auto-translated] "No items"
+    listIsEmpty: "Tidak ada item",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "Tidak ada pilihan",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Tidak ada nilai penilaian khusus",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Tidak ada label khusus",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Tidak ada area",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Tidak ada kolom",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Tidak ada kolom tata letak",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Tidak ada baris",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Tidak ada aturan validasi",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Tidak ada variabel kustom",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Tidak ada pemicu",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Tidak ada markup bersyarat",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Tidak ada tautan",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Tidak ada halaman",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Tidak ada tingkat pengurutan",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "Tambahkan pilihan",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Tambahkan nilai penilaian",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Tambahkan label",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Tambah area",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Tambah kolom",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Tambah baris",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Tambah aturan",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Tambah variabel",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Tambah pemicu",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Tambahkan markup",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Tambahkan tautan",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Tambah halaman",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Tambahkan tingkat pengurutan",
     // "Value"
     value: "Nilai",
     // "Text"
@@ -916,6 +1120,8 @@ export var indonesianStrings = {
     surveyTitlePlaceholder: "Judul Survei",
     // [Auto-translated] "Page {num}"
     pageTitlePlaceholder: "Halaman {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Judul Panel",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Halaman Awal",
     // [Auto-translated] "Description"
@@ -966,6 +1172,8 @@ export var indonesianStrings = {
     visible: "Terlihat?",
     // "Required"
     isRequired: "Wajib?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Membutuhkan jawaban positif",
     // [Auto-translated] "Mark as required"
     markRequired: "Tandai sesuai kebutuhan",
     // [Auto-translated] "Remove the required mark"
@@ -976,6 +1184,8 @@ export var indonesianStrings = {
     eachRowUnique: "Mencegah respons duplikat dalam baris",
     // "Error message for required questions"
     requiredErrorText: "Pesan kesalahan \"Wajib\"",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Pesan kesalahan saat Ya diperlukan",
     // "Display the question on a new line"
     startWithNewLine: "Mulai dengan baris baru?",
     // "Rows"
@@ -994,6 +1204,16 @@ export var indonesianStrings = {
     maxFiles: "Jumlah file maksimum",
     // "Row count"
     rowCount: "Jumlah baris",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Baris per halaman",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Izinkan pengguna mengurutkan baris",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Tingkat pengurutan maksimum",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Urutan pengurutan default",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Tampilkan bilah pengurutan",
     // "Columns layout"
     columnLayout: "Tata letak kolom",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export var indonesianStrings = {
     questionErrorLocation: "Lokasi Pertanyaan Error",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Fokus ke pertanyaan pertama saat pergantian halaman",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Aktifkan pintasan pilihan",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Tampilkan petunjuk keyboard",
     // "Question order"
     questionOrder: "Urutakan elemen pada halaan",
     // "Time limit to complete the survey"
@@ -1264,10 +1488,12 @@ export var indonesianStrings = {
     waitForUpload: "Tunggu hingga upload selesai",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "Perataan detail baris",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "Jumlah baris minimum",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "Jumlah baris maksimum",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Ekspresi hitungan baris",
     // "Confirm row removal"
     confirmDelete: "Mengonfirmasi penghapusan baris",
     // [Auto-translated] "Confirmation message"
@@ -1278,6 +1504,8 @@ export var indonesianStrings = {
     minPanelCount: "Jumlah minimum entri",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "Jumlah maksimum entri",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Ekspresi jumlah entri",
     // [Auto-translated] "Initial entry state"
     panelsState: "Status entri awal",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export var indonesianStrings = {
     logoHeight: "Tinggi logo",
     // "Read-only"
     readOnly: "Baca-saja",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Mode hanya-baca",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "Nonaktifkan mode baca-saja jika",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export var indonesianStrings = {
       columns: "Kolom",
       // "Rows"
       rows: "Baris",
+      // [Auto-translated] "Entries"
+      entries: "Entri",
       // "Choice Options"
       choices: "Pilihan",
       // "Items"
@@ -1544,6 +1776,8 @@ export var indonesianStrings = {
       question: "Pertanyaan",
       // [Auto-translated] "Pages"
       pages: "Halaman",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Format Regional",
       // "Quiz Mode"
       timer: "Pengatur Waktu/Kuis",
       // [Auto-translated] "Calculated Values"
@@ -1862,6 +2096,12 @@ export var indonesianStrings = {
       // [Auto-translated] "Never"
       none: "Tidak pernah"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Hanya-baca",
+      // [Auto-translated] "View"
+      view: "Lihat"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "Tombol radio",
     inputType: {
@@ -1913,6 +2153,12 @@ export var indonesianStrings = {
       warning: "Peringatan",
       // [Auto-translated] "Informational"
       info: "Informasi"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Depan",
+      // [Auto-translated] "Rear"
+      environment: "Belakang"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export var indonesianStrings = {
     underRowSingle: "Di bawah baris, tampilkan satu bagian saja",
     // [Auto-translated] "Auto"
     auto: "Otomatis",
+    // [Auto-translated] "Always"
+    always: "Selalu",
     timerInfoMode: {
       // "Both"
       combined: "Keduanya"
@@ -2321,7 +2569,148 @@ export var indonesianStrings = {
       survey: "Sama seperti survei",
       // [Auto-translated] "Same as container"
       container: "Sama seperti wadah"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "mewarisi",
+      // [Auto-translated] "Hide"
+      "false": "sembunyikan",
+      // [Auto-translated] "Show"
+      "true": "Tampilkan"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Arab",
+    // [Auto-translated] "Bulgarian"
+    bg: "Bulgaria",
+    // [Auto-translated] "Catalan"
+    ca: "Catalan",
+    // [Auto-translated] "Czech"
+    cs: "Ceko",
+    // [Auto-translated] "Welsh"
+    cy: "Welsh",
+    // [Auto-translated] "Danish"
+    da: "Denmark",
+    // [Auto-translated] "German"
+    de: "Jerman",
+    // [Auto-translated] "Greek"
+    el: "Yunani",
+    // [Auto-translated] "English"
+    en: "Bahasa Inggris",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Bahasa Inggris (Australia)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Bahasa Inggris (Kanada)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Bahasa Inggris (Inggris Raya)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Bahasa Inggris (Irlandia)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Bahasa Inggris (India)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Bahasa Inggris (Selandia Baru)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Bahasa Inggris (Afrika Selatan)",
+    // [Auto-translated] "Spanish"
+    es: "Spanyol",
+    // [Auto-translated] "Estonian"
+    et: "Estonia",
+    // [Auto-translated] "Basque"
+    eu: "Basque",
+    // [Auto-translated] "Persian"
+    fa: "Farsi",
+    // [Auto-translated] "Finnish"
+    fi: "Finlandia",
+    // [Auto-translated] "Filipino"
+    fil: "Filipino",
+    // [Auto-translated] "French"
+    fr: "Prancis",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Prancis (Kanada)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Prancis (Swiss)",
+    // [Auto-translated] "Hebrew"
+    he: "Ibrani",
+    // [Auto-translated] "Hindi"
+    hi: "Hindi",
+    // [Auto-translated] "Croatian"
+    hr: "Kroasia",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Kreol Haiti",
+    // [Auto-translated] "Hungarian"
+    hu: "Hungaria",
+    // [Auto-translated] "Indonesian"
+    id: "Indonesia",
+    // [Auto-translated] "Icelandic"
+    is: "Islandia",
+    // [Auto-translated] "Italian"
+    it: "Italia",
+    // [Auto-translated] "Japanese"
+    ja: "Jepang",
+    // [Auto-translated] "Georgian"
+    ka: "Georgian",
+    // [Auto-translated] "Kazakh"
+    kk: "Kazakh",
+    // [Auto-translated] "Korean"
+    ko: "Korea",
+    // [Auto-translated] "Lithuanian"
+    lt: "Lithuania",
+    // [Auto-translated] "Latvian"
+    lv: "Latvia",
+    // [Auto-translated] "Macedonian"
+    mk: "Makedonia",
+    // [Auto-translated] "Burmese"
+    mm: "Burma",
+    // [Auto-translated] "Malay"
+    ms: "Melayu",
+    // [Auto-translated] "Dutch"
+    nl: "Belanda",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Belanda (Belgia)",
+    // [Auto-translated] "Norwegian"
+    no: "Norwegia",
+    // [Auto-translated] "Polish"
+    pl: "Polandia",
+    // [Auto-translated] "Portuguese"
+    pt: "Portugis",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Portugis (Brasil)",
+    // [Auto-translated] "Romanian"
+    ro: "Rumania",
+    // [Auto-translated] "Russian"
+    ru: "Rusia",
+    // [Auto-translated] "Slovak"
+    sk: "Slovakia",
+    // [Auto-translated] "Slovenian"
+    sl: "Slovenia",
+    // [Auto-translated] "Serbian"
+    sr: "Serbia",
+    // [Auto-translated] "Swedish"
+    sv: "Swedia",
+    // [Auto-translated] "Swahili"
+    sw: "Swahili",
+    // [Auto-translated] "Telugu"
+    tel: "Telugu",
+    // [Auto-translated] "Tajik"
+    tg: "Tajik",
+    // [Auto-translated] "Thai"
+    th: "Thai",
+    // [Auto-translated] "Turkish"
+    tr: "Turki",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ukraina",
+    // [Auto-translated] "Urdu"
+    ur: "Urdu",
+    // [Auto-translated] "Vietnamese"
+    vi: "Vietnam",
+    // [Auto-translated] "Chinese"
+    zh: "Mandarin",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Bahasa Cina (Disederhanakan)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Mandarin (Tradisional)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export var indonesianStrings = {
     visibletrigger: "ubah visibilitas"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Sama seperti bahasa survei"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Contoh: +1(999)-999-99-99"
@@ -2405,12 +2798,6 @@ export var indonesianStrings = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Contoh: mm / dd / yyyy HH: MM: ss"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Contoh.: $",
-      // "Ex.: USD"
-      suffix: "Contoh: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export var indonesianStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Menentukan berapa banyak kolom panel ini dalam tata letak kisi.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi dalam panel. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom."
+      gridLayoutColumns: "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi dalam panel. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Menentukan bagaimana pertanyaan di dalam panel ini muncul ketika hanya baca. \"Hanya-baca\" menampilkan pertanyaan dengan kontrol input biasa, tetapi dinonaktifkan untuk penyuntingan. \"Lihat\" menampilkan jawaban sebagai teks atau elemen non-interaktif lainnya. \"Mewarisi\" menggunakan mode yang diatur untuk panel induk, halaman, atau survei (\"Hanya-Baca\" secara default)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export var indonesianStrings = {
       width: "Mengatur lebar panel secara proporsional dengan elemen survei lainnya di baris yang sama. Menerima nilai CSS (px, %, in, pt, dll.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Ketik template untuk judul panel dinamis. Gunakan {panelIndex} untuk posisi umum panel dan {visiblePanelIndex} untuk urutannya di antara panel yang terlihat. Masukkan tempat penampung ini ke dalam pola untuk menambahkan penomoran otomatis.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Teks cadangan untuk judul entri yang berlaku ketika pola judul entri tidak menghasilkan nilai yang bermakna. Gunakan {panelIndex} untuk posisi umum entri dan {visiblePanelIndex} untuk urutannya di antara entri yang terlihat.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Ketik templat untuk judul tab. Gunakan {panelIndex} untuk posisi umum panel dan {visiblePanelIndex} untuk urutannya di antara panel yang terlihat. Masukkan tempat penampung ini ke dalam pola untuk menambahkan penomoran otomatis.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export var indonesianStrings = {
       keyName: "Rujuk nama pertanyaan untuk mengharuskan pengguna memberikan respons unik untuk pertanyaan ini di setiap panel.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Memicu prompt konfirmasi sebelum menghapus entri.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Tentukan ekspresi yang menghitung jumlah entri. Ekspresi ini menimpa pengaturan \"Jumlah awal entri\" dan dievaluasi ulang setiap kali nilai yang dirujuk berubah. Hasilnya dibatasi oleh pengaturan \"Jumlah minimum entri\" dan \"Jumlah maksimum entri\". Selama ekspresi ini diatur, responden tidak dapat menambahkan atau menghapus entri secara manual.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Menentukan jumlah entri yang ditampilkan di setiap halaman panel. '0' menonaktifkan paginasi dan menampilkan semua entri.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Memungkinkan responden mengurutkan entri menggunakan bilah pengurutan.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Mendefinisikan urutan entri awal. Responden dapat mengubahnya jika pengurutan diizinkan. Saat mengurutkan berdasarkan beberapa pertanyaan, setiap pertanyaan mengurutkan entri sesuai urutan yang ditetapkan oleh pertanyaan sebelumnya. Seret pertanyaan untuk mengubah prioritasnya.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Menetapkan nomor ke pertanyaan yang bersarang dalam panel dinamis."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Memungkinkan responden mengurutkan baris dengan mengklik header kolom atau menggunakan bilah pengurutan.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Mendefinisikan urutan baris awal. Responden dapat mengubahnya jika pengurutan diizinkan. Saat mengurutkan berdasarkan beberapa kolom, setiap kolom mengurutkan baris sesuai urutan yang ditetapkan oleh kolom sebelumnya. Seret kolom untuk mengubah prioritasnya.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" menampilkan bar pengurutan hanya ketika matriks tidak memiliki header kolom yang dapat diurutkan: header disembunyikan, matriks menggunakan tata letak mobile, atau baris ditransposisi ke kolom. \"Selalu\" menampilkan bar pengurutan meskipun header kolom yang dapat diurutkan terlihat.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Tentukan ekspresi yang menghitung jumlah baris. Ekspresi ini menggantikan pengaturan \"Jumlah baris awal\" dan dievaluasi ulang setiap kali nilai yang dirujuk berubah. Hasilnya dibatasi oleh pengaturan \"Jumlah minimum baris\" dan \"Jumlah maksimum baris\". Selama ekspresi ini diatur, responden tidak dapat menambahkan atau menghapus baris secara manual.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Memicu perintah konfirmasi sebelum menghapus baris.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Secara otomatis memperluas bagian detail saat baris baru ditambahkan ke matriks."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Menentukan jumlah baris yang ditampilkan di setiap halaman matriks. '0' menonaktifkan paginasi dan menampilkan semua baris.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Menentukan berapa banyak bidang yang dapat diurutkan oleh responden sekaligus.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Menduplikasi jawaban dari baris terakhir dan menetapkannya ke baris dinamis berikutnya yang ditambahkan.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export var indonesianStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Teks panjang dalam opsi pilihan akan secara otomatis menghasilkan jeda baris agar sesuai dengan menu tarik-turun. Batalkan pilihan jika Anda ingin teks dipotong.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Menentukan berapa banyak kolom yang mencakup pertanyaan ini dalam tata letak kisi."
+      effectiveColSpan: "Menentukan berapa banyak kolom yang mencakup pertanyaan ini dalam tata letak kisi.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Menentukan bagaimana pertanyaan muncul saat hanya baca. \"Hanya Baca\" menampilkan pertanyaan dengan kontrol input biasanya, tetapi dinonaktifkan untuk penyuntingan. \"Lihat\" menampilkan jawaban sebagai teks atau elemen non-interaktif lainnya. \"Mewarisi\" menggunakan mode yang diatur untuk panel induk, halaman, atau survei (\"Hanya-Baca\" secara default).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Menampilkan petunjuk untuk aksi keyboard yang tersedia di bawah pertanyaan ini. Opsi \"Inherit\" menerapkan pengaturan tingkat survei."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export var indonesianStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Pilih jika Anda ingin mencegah responden mengisi survei Anda.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Menentukan bagaimana pertanyaan hanya-baca muncul, termasuk di halaman pratinjau. \"Hanya-Baca\" (default) menampilkan pertanyaan dengan kontrol input biasanya, tetapi dinonaktifkan untuk penyuntingan. \"Lihat\" menampilkan jawaban sebagai teks atau elemen non-interaktif lainnya.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Mengatur lokasi bilah progres. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei."
     },
@@ -2633,7 +3050,9 @@ export var indonesianStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Saat dipilih, buat kolom individual untuk setiap opsi pilihan.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Mengatur opsi pilihan dalam tata letak multi-kolom. Saat diatur ke 0, opsi ditampilkan dalam satu baris. Saat diatur ke -1, nilai aktual diwarisi dari properti \"Jumlah kolom berlapis\" dari matriks induk."
+      colCount: "Mengatur opsi pilihan dalam tata letak multi-kolom. Saat diatur ke 0, opsi ditampilkan dalam satu baris. Saat diatur ke -1, nilai aktual diwarisi dari properti \"Jumlah kolom berlapis\" dari matriks induk.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Menentukan bagaimana sel di kolom ini muncul saat hanya baca. \"Hanya-baca\" menampilkan sel dengan kontrol input biasa, tetapi dinonaktifkan untuk penyuntingan. \"Tampilan\" menampilkan jawaban sebagai teks atau elemen non-interaktif lainnya. \"Warisi\" menggunakan mode yang diatur untuk matriks atau survei (\"Hanya-Baca\" secara default)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export var indonesianStrings = {
     questionErrorLocation: "Mengatur lokasi pesan kesalahan sehubungan dengan pertanyaan dengan input yang tidak valid. Pilih antara: \"Atas\" - teks kesalahan ditempatkan di bagian atas kotak pertanyaan; \"Bawah\" - teks kesalahan ditempatkan di bagian bawah kotak pertanyaan.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Pilih apakah Anda ingin bidang input pertama pada setiap halaman siap untuk entri teks.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Menampilkan huruf (A, B, C, ...) di samping pilihan dalam pertanyaan Grup Tombol Radio, kotak centang, dan Pemilih Gambar. Responden dapat memilih pilihan dengan menekan tombol huruf yang sesuai. Anda dapat menimpa pengaturan ini untuk pertanyaan individual.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Menampilkan huruf (A, B, C, ...) di samping pilihan dan memungkinkan responden memilihnya dengan menekan tombol huruf yang sesuai. Opsi \"Warisi\" menggunakan pengaturan tingkat survei."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Menampilkan petunjuk untuk aksi keyboard yang tersedia di bawah pertanyaan. Anda dapat menimpa pengaturan ini untuk pertanyaan individual.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Menyimpan urutan pertanyaan asli atau mengacaknya. Efek pengaturan ini hanya terlihat di tab Pratinjau.",
     // [Auto-translated] "For text entry questions only."
@@ -2793,7 +3220,9 @@ export var indonesianStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Mengatur visibilitas tombol navigasi di halaman. Opsi \"Warisi\" menerapkan pengaturan tingkat survei, yang defaultnya adalah \"Terlihat\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi pada halaman. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom."
+      gridLayoutColumns: "Tabel ini memungkinkan Anda mengonfigurasi setiap kolom kisi pada halaman. Ini secara otomatis mengatur persentase lebar untuk setiap kolom berdasarkan jumlah maksimum elemen dalam satu baris. Untuk menyesuaikan tata letak kisi, sesuaikan nilai ini secara manual dan tentukan lebar judul untuk semua pertanyaan di setiap kolom.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Menentukan bagaimana pertanyaan di halaman ini muncul ketika hanya baca. \"Hanya-Baca\" menampilkan pertanyaan dengan kontrol input biasa, tetapi dinonaktifkan untuk penyuntingan. \"Lihat\" menampilkan jawaban sebagai teks atau elemen non-interaktif lainnya. \"Mewarisi\" menggunakan mode yang diatur untuk survei (\"Hanya-Baca\" secara default)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Mengatur lokasi pengatur waktu pada halaman.",
@@ -2911,6 +3340,22 @@ export var indonesianStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Pilih apakah Anda ingin menyimpan nilai pertanyaan dengan masker yang diterapkan dalam hasil survei."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Wilayah yang formatnya berlaku untuk masker input tanggal-waktu, numerik, dan mata uang. Jika tidak ditentukan, bahasa survei digunakan.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Mengesampingkan format tanggal wilayah yang digunakan dalam masker input. Pola dapat berisi karakter pemisah dan placeholder berikut: <br>'m' - Nomor bulan.<br> 'mm' - Nomor bulan, dengan nol di awal untuk nilai satu digit. <br>'d' - Hari dalam bulan. <br>'dd' - Hari dalam bulan, dengan nol di awal untuk nilai satu digit. <br>'yy' - Dua digit terakhir dalam setahun. <br>'yyyy' - Tahun empat digit.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Mengesampingkan format waktu wilayah yang digunakan dalam masker input. Pola dapat berisi karakter pemisah dan placeholder berikut: <br>'H' - Jam dalam format 24 jam.<br> 'HH' - Jam dalam format 24 jam, dengan nol di awal untuk nilai satu digit. <br>'h' - Jam dalam format 12 jam. <br>'hh' - Jam dalam format 12 jam, dengan nol di awal untuk nilai satu digit. <br>'MM' - Menit. <br>'ss' - Detik. <br>'TT' - Periode jam 12 jam dalam huruf besar (AM/PM). <br>'tt' - Periode jam 12 jam dalam huruf kecil (AM/PM).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Mengatasi simbol yang digunakan region untuk memisahkan bagian fraksional dari bagian bilangan bulat dari angka yang ditampilkan dalam masker input.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Mengesampingkan simbol yang digunakan wilayah untuk memisahkan digit dari angka besar menjadi kelompok tiga pada masker input.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Mengesampingkan simbol mata uang wilayah atau kode yang digunakan dalam masker input.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Mengesampingkan pola mata uang wilayah yang digunakan dalam masker input. Pola dapat berisi placeholder berikut: <br>'@' - Simbol atau kode mata uang.<br> '#' - Angka. <br>'-' - Posisi tanda minus dalam nilai negatif (jika dihilangkan, tanda minus ditempatkan di awal)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Pola dapat berisi literal string dan placeholder berikut: '9' - untuk digit; 'a' - untuk huruf besar atau kecil; '#' - untuk digit atau huruf besar atau kecil. Gunakan garis miring terbalik '\\' untuk melarikan diri dari karakter."
@@ -2925,13 +3370,15 @@ export var indonesianStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Simbol yang digunakan untuk memisahkan digit angka besar menjadi kelompok tiga.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Membatasi jumlah digit yang akan dipertahankan setelah koma desimal untuk angka yang ditampilkan."
+      precision: "Membatasi jumlah digit yang akan dipertahankan setelah koma desimal untuk angka yang ditampilkan.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Menampilkan nol yang tertinggal pada bagian fraksional hingga presisi yang ditentukan. Misalnya, dengan presisi 2, nilai input 1.2 ditampilkan sebagai 1.20."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Satu atau beberapa simbol yang akan ditampilkan sebelum nilai.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Satu atau beberapa simbol yang akan ditampilkan setelah nilai."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Simbol mata uang atau kode yang ditampilkan bersama nilai. Simbol wilayah digunakan secara default. Hapus properti ini untuk tidak menampilkan simbol.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Menentukan posisi angka, simbol mata uang, dan tanda minus. Pola dapat berisi placeholder berikut: <br>'@' - Simbol atau kode mata uang.<br> '#' - Angka. <br>'-' - Posisi tanda minus dalam nilai negatif (jika dihilangkan, tanda minus ditempatkan di awal)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2982,6 +3429,8 @@ export var indonesianStrings = {
     tabAlign: "Perataan tab",
     // [Auto-translated] "File source type"
     sourceType: "Jenis sumber file",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Kamera default",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Sesuai dengan kontainer",
     // [Auto-translated] "Set value expression"
@@ -3302,12 +3751,702 @@ export var indonesianStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Preset diterapkan"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Line: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Gunakan nama yang disarankan"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Hapus item yang diulang"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Gunakan tipe yang disarankan"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Gunakan fungsi yang disarankan"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Gunakan masker yang disarankan"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Berikan elemen nama gratis"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Berikan elemen nama gratis"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Hapus properti"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Gunakan nilai terdekat yang diizinkan",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Hapus properti",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Gunakan nilai yang disarankan"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Ubah nilai menjadi daftar"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Berikan nama pada elemen tersebut"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Hapus properti",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Ganti nama properti"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Gunakan nama yang disarankan",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Gunakan nama yang disarankan"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Gunakan nama yang disarankan"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Gunakan tipe yang disarankan"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Gunakan tipe yang disarankan"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Ekspresi \"{expression}\" tidak dapat diurai."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" tidak ditemukan - tidak ada pertanyaan, panel, halaman, nilai terhitung, atau variabel dengan nama tersebut yang ada.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" tidak ditemukan di {containerType} \"{root}\" (referensi: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" tidak ditemukan dalam cakupan \"{scopePrefix}\" (referensi: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "KeyName dari \"{name}\" bernama \"{key}\" - \"{name}\" tidak memiliki {keyNoun} dengan nama tersebut, sehingga validasi duplicate-key tidak pernah berjalan.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" tidak ditemukan."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop} dari \"{name}\" merujuk pada elemen itu sendiri (referensi: {referensi})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Nama \"{name}\" diduplikasi.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Nama nilai terhitung \"{name}\" sudah digunakan oleh nilai terhitung lain.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Nilai yang dihitung \"{name}\" berbagi namanya dengan elemen lain, sehingga salah satu dari mereka mengbayangi elemen lain."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} \"{name}\" dari {ownerText} ini juga merupakan variabel survei bawaan {{builtIn}} - survei menjawab {{name}} terlebih dahulu, jadi yang ini tidak dapat diakses dalam ekspresi.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" dari \"{name}\" berbagi nilai {otherType} \"{otherName}\", yang tidak memiliki valueName sendiri - \"{otherName}\" memperlakukan kolom yang ditambahkan \"{name}\" sebagai tidak dikenal, dan clearIncorrectValues() menghapusnya. Atur valueName-nya juga ke \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Baris \"{key}\" dari dropdown matrix: \"{otherName}\" juga berbagi nilai {sharedKeyText} \"{name}\" - objek sel dan satu nilai tidak dapat keduanya berada di bawah satu kunci; runtime mempertahankan satu dan menghapus yang lain.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" berbagi kunci data \"{dataKey}\" dengan {otherType} \"{otherName}\" - ia mempertahankan {shapeText} di sana, sementara \"{otherName}\" menyimpan {otherShapeText}; satu tidak dapat menyimpan nilai yang lain, jadi clearIncorrectValues() menghapusnya.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Kunci data \"{dataName}\" juga merupakan kunci komentar dari \"{base}\" (kunci data ditambah \"{sufiks}\") - satu write secara diam-diam menimpa yang lain.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Kunci data \"{dataName}\" juga merupakan kunci total dari \"{base}\" (kunci data ditambah \"{suffix }\") - satu write secara diam-diam menimpa yang lain.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "Pemicu {trigger} mengatur variabel \"{name}\", yang juga merupakan kunci data dari pertanyaan \"{questionName}\" - variabel menjawab {{name}} mulai saat itu, bukan pertanyaannya."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Nama \"{name}\" dicadangkan - anggota Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "ValueName \"{valueName}\" dari \"{name}\" dicadangkan - anggota Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Kolom \"{name}\" dari \"{matrixName}\" dicadangkan - merupakan anggota Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Item \"{name}\" dari \"{questionName}\" dicadangkan - anggota Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Baris \"{rowValue}\" dari \"{name}\" dicadangkan - anggota Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Nilai terhitung \"{name}\" dicadangkan - anggota Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" memiliki tipe \"{type} yang tidak diketahui\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" tidak memiliki tipe - elemen tanpa tipe akan dihapus."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" bukan properti dari {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" dari {ownerText} tidak dapat diserialkan - efek saat dimuat, dan dihapus dari JSON setiap kali survei disimpan kembali.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" dan \"{aliasKey}\" dari {ownerText} adalah dua nama dari satu properti - waktu eksekusi menerapkannya sesuai urutan JSON menulisnya, sehingga \"{winner}\" menang.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" diatur pada \"{name}\", tetapi inputType \"{inputType}\" tidak memiliki batasan - waktu eksekusi mengabaikannya."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{key} dari {ownerText} adalah {valueText} - bukan salah satu nilai yang diizinkan ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{key} dari {ownerText} adalah {value}, di luar rentang yang diizinkan {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "ValueName \"{valueName}\" dari \"{name}\" berisi \".\" - ekspresi yang dibaca {{valueName}} sebagai jalur ke \"{rootKey}\", sehingga kunci data itu sendiri tidak pernah dapat dialamatkan."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} tidak memiliki \"{key}\" - properti ini diperlukan untuk {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Nama {className} adalah {valueText}, bukan string - survei tidak dapat memuatnya."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "\"{key}\" dari {ownerText} bukanlah array - properti ini menyimpan daftar, dan waktu eksekusi membungkus nilai tersebut menjadi array satu item."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Definisi variabel menyatakan \"{variable}\", yang juga merupakan kunci data dari pertanyaan \"{name}\" - mengatur variabel menghapus jawaban yang tersimpan di bawah kunci tersebut, dan {{name}} menjawab nilai host sejak saat itu.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Definisi variabel menyatakan \"{variable}\", yang juga merupakan nama nilai terhitung \"{name}\" - keduanya menulis slot yang sama, dan yang terakhir berjalan menang."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePreset.definition bukanlah objek JSON survei, sehingga tidak ada variabel yang dideklarasikan dan tidak ada nilai preset yang dapat diperiksa.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets bukanlah array, sehingga tidak ada preset yang dideklarasikan.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Preset #{index} bukanlah objek.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Preset #{index} tidak memiliki nama, jadi tidak ada yang bisa merujuknya.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Preset \"{preset}\" tidak membawa objek variabel, jadi tidak mengatur apa-apa.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Preset \"{preset}\" dideklarasikan dua kali - pencarian dengan nama tersebut menjawab dengan yang pertama.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Preset \"{preset}\" mengatur \"{variabel}\", yang tidak dideklarasikan oleh definisi variabel.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Preset \"{preset}\" mengatur \"{variable}\" ke nilai yang ditolak definisi variabel: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Fungsi \"{functionName}\" tidak terdaftar."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Nilai terhitung \"{names}\" merujuk pada dirinya sendiri dalam ekspresi tersendiri.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Nilai yang dihitung {nama} saling bergantung satu sama lain."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Pemicu bereaksi terhadap nilai yang ditetapkan sendiri (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Pemicu membentuk loop melalui nilai yang mereka tetapkan: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} membaca nilai yang ditulisnya sendiri - ia hanya berjalan ketika nilai lain berubah, jadi tidak pernah berjalan sama sekali.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Nilai-nilai ditulis dalam loop: {chain}. Setiap tulisan menjalankan ulang ekspresi yang membacanya, sehingga nilai akhir bergantung pada urutan menjawab pertanyaan."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Kondisi membandingkan \"{name}\" dengan {values} - bukan salah satu pilihannya. Tersedia: {tersedia}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Kondisi membandingkan \"{name}\" dengan {values} - tidak ada nilai pilihan yang memuatnya. Tersedia: {tersedia}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Kondisi ini menerapkan \"{operator}\" pada \"{name}\": \"{recordName}\" ({questionType}) tidak memiliki nilai untuk dibandingkan.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Kondisi ini menerapkan \"{operator}\" pada \"{name}\": \"{recordName}\" memuat {valueShapeText} - operator pengurutan dan aritmatika tidak berlaku padanya.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Kondisi ini menerapkan \"{operator}\" pada \"{name}\": \"{recordName}\" adalah pertanyaan boolean - operator pengurutan tidak berlaku untuknya.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Kondisi ini menerapkan \"{operator}\" pada \"{name}\": \"{recordName}\" adalah pertanyaan teks - nilainya adalah string, sehingga perbandingan numerik bergantung pada konversi implisit.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Kondisi ini menerapkan \"{operator}\" pada \"{name}\": \"{recordName}\" memegang string tanggal - membandingkannya dengan angka yang tidak dapat ditahan {constValue}.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Kondisi ini menerapkan \"{operator}\" pada \"{name}\": \"{recordName}\" bersifat numerik - jika dibandingkan dengan string \"{constValue}\" tidak dapat berlaku.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Kondisi ini menerapkan \"{operator}\" pada \"{name}\": \"{recordName}\" menyimpan array nilai yang dipilih, sehingga \"=\" membandingkan seluruh array.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Kondisi ini menerapkan \"{operator}\" pada \"{name}\": \"{recordName}\" adalah pertanyaan boolean - membandingkannya dengan {constValue} tidak dapat berlaku."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{expression}\" selalu salah, sehingga \"{name}\" tidak pernah ditampilkan.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} \"{ekspresi}\" tidak pernah berlaku, karena {fakta}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{ekspresi}\" tidak pernah berlaku - tidak ada nilai yang diizinkan yang memenuhinya: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{ekspresi}\" bertentangan dengan dirinya sendiri: {fakta}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{ekspresi}\" selalu benar, jadi tidak ada yang diputuskan.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{ekspresi}\" adalah aritmatika, bukan perbandingan, jadi tidak pernah memberikan jawaban ya atau tidak.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Sebagian dari {prop} \"{expression}\" memiliki hasil yang diketahui secara langsung.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} \"{ekspresi}\" selalu berlaku, karena {facts} - tidak menentukan apa pun."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" tidak membaca pertanyaan atau variabel apa pun."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "Nilai default \"{name}\" adalah {valuesText}, yang tidak pernah bisa ditahan. Diizinkan: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Jawaban yang benar untuk \"{name}\" adalah {valuesText}, yang tidak pernah bisa dipenuhi. Diizinkan: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Pemicu mengatur \"{name}\" ke {valuesText}, yang tidak pernah bisa ditahan. Diizinkan: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Nilai baris default menetapkan \"{name}\" menjadi {valuesText}, yang tidak pernah bisa dipegang. Diizinkan: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Nilai panel default mengatur \"{name}\" ke {valuesText}, yang tidak pernah bisa ditahan. Diizinkan: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} dari \"{name}\" menamai \"{key}\" - tidak ada baris seperti itu. Tersedia: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop} dari \"{name}\" menamai \"{key}\" - tidak ada kolom seperti itu. Tersedia: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} dari \"{name}\" menamai \"{key}\" - tidak ada pertanyaan template seperti itu. Tersedia: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Pemicu copyvalue menyalin \"{fromName}\" ke dalam \"{setToName}\", tetapi \"{fromName}\" memuat {sourceShapeText} dan \"{setToName}\" memuat {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Pemicu copyvalue menyalin \"{fromName}\" ke dalam \"{setToName}\", tetapi tidak ada nilai \"{fromName}\" yang termasuk dalam nilai yang dapat dipegang oleh \"{setToName}\". Diizinkan: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" menyalin pilihannya dari \"{source}\", tetapi tidak ada pertanyaan dengan nama tersebut.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" menyalin pilihannya dari dirinya sendiri.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" menyalin pilihannya dari \"{source}\" ({sourceType}), yang tidak menyediakan pilihan maupun array nilai.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" berbunyi {prop} \"{field}\" dari \"{source}\", tetapi {sourceType} \"{source}\" tidak memiliki {fieldNoun} seperti itu."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Item lain dari {prop} dari \"{name}\" sudah memiliki nilai {valueText} - waktu eksekusi mempertahankan kedua item tersebut.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Pilihan \"{name}\" berisi {valueText} saat {toggleProp} aktif - item tersebut bertabrakan dengan item bawaan {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "Pemicu {trigger} menargetkan halaman \"{name}\", yang tidak ada.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "Pemicu {trigger} menargetkan \"{name}\", tetapi {containerType} \"{root}\" tidak memiliki {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{trigger} trigger {verb} \"{name}\", tetapi tidak ada {kindText} dengan nama tersebut."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Tipe trigger \"{type}\" tidak diketahui.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Pemicunya tidak memiliki tipe."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Tipe validator \"{type}\" dari \"{name}\" tidak diketahui.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Validator \"{name}\" tidak memiliki tipe."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "Validator {validatorType} dari \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "Validator {validatorType} dari \"{name}\" membutuhkan setidaknya {min} dan paling banyak {max} - tidak ada jawaban yang memenuhinya.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Validator answercount dari \"{name}\" membutuhkan setidaknya jawaban {minCount}, di atas pilihan {selectable} yang dapat dipilih bersama-sama.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Validator regex dari \"{name}\" memiliki pola yang ditolak mesin: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Validator ekspresi dari \"{name}\" tidak memiliki ekspresi, sehingga selalu lolos."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} dari \"{name}\" adalah {min}, di atas {maxProp}-nya dari {max} - waktu run secara diam-diam mengatur salah satunya.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} dari \"{name}\" adalah {count}, {direction} {boundProp} dari {bound} - waktu run yang menjepitnya.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} dari \"{name}\" adalah {step}, tetapi rentang yang dilaluinya ({minProp}.. {maxProp}) hanya mencakup {rentang} - waktu eksekusi yang menjepitnya.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "MinSelectedChoices dari \"{name}\" adalah {min}, di atas pilihan {selectable} yang dapat dipilih bersama - pertanyaan ini tidak akan pernah bisa dijawab."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" tidak pernah bisa menjadi visible: visibleIf membacakan {reads}, yang mana {deadClause}, sehingga kondisi ini tidak pernah berlaku."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "MaskType \"{maskType}\" dari \"{name}\" bukanlah masker yang diketahui - waktu eksekusi kembali ke tidak ada mask sama sekali.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "Pengaturan masker dari \"{name}\" mengatur \"{key}\", yang bukan properti dari masker \"{maskType}\" - waktu eksekusi akan menghilangkannya secara diam-diam.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "Pengaturan masker pada \"{name}\" diatur tanpa maskType - waktu berjalan hanya mempertahankan \"saveMaskedValue\" dan menghilangkan sisanya.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Masker {maskType} dari \"{name}\" tidak berlaku untuk input apa pun: inputType \"{inputType}\" hanya disembunyikan untuk teks dan tel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Masker datetime dari \"{name}\" mengatur mini/max tanpa pola - batasannya berlaku untuk bagian tanggal pola, jadi tanpa itu batasan tidak melakukan apa-apa.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Masker {maskType} dari \"{name}\" memungkinkan setidaknya {min} dan paling banyak {max} - tidak ada nilai yang memenuhinya."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Panel dinamis \"{name}\" memiliki template kosong - panelnya tidak memiliki apa pun untuk dirender.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\" tidak memiliki elemen.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\" tidak memiliki elemen yang bisa dirender - setiap elemen tersembunyi, dijaga oleh kondisi yang tidak pernah berlaku, atau kosong.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Elemen detail dari \"{name}\" tidak pernah ditampilkan: detailPanelMode-nya adalah \"none\", yang merupakan default."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Posisi: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Perangkat ini dibangun dari nama lama, operator, dan properti nilai dari trigger.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Di dalam: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Maksudmu \"{0}\"?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Jika komponen tersebut adalah komponen kustom, teruskan definisinya ke linter untuk memungkinkan analisis penuh.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Daftarkan fungsi sebelum linting, atau cantumkan di opsi linter.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Tipe yang salah eja akan diam-diam dijatuhkan saat waktu jalan, dan pemicu khusus tidak tercakup oleh pemeriksaan target dan siklus.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Jika variabel tersebut diatur saat runtime, cantumkan di opsi linter.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Loop mungkin tidak dapat dijangkau jika kondisi trigger tidak pernah tetap bersama - verifikasi ekspresi-ekspresinya.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "DefaultValueExpression hanya berlaku sampai pertanyaannya terjawab.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "Dalam ungkapan: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Dirujuk dalam binding.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Direferensikan dalam {0} choicesByUrl.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Disebutkan dalam teks \"{0}\".", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () membacakan nama tersebut dari setiap entri {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Argumen {0}() tidak menamai pertanyaan, panel, atau halaman.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Deserializer menjatuhkan kunci yang tidak diketahuinya.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Deserializer menjatuhkan validator yang tidak bisa diselesaikan, jadi tidak ada yang validasi.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "InputType adalah \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Ini adalah kunci data dari \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "dan",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} selalu {value}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} adalah {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "setidaknya {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "paling banyak {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} tidak bisa menjadi kedua {nilai}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} tidak bisa menjadi {value} dan bukan menjadi itu",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} tidak boleh kosong dan menjadi {value}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} tidak boleh kosong dan tidak kosong",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} tidak boleh di atas {min} dan di bawah {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} diminta menjadi salah satu yang sama sekali tidak bernilai"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "Referensi \"{0}.\" hanya tersedia di dalam sel matriks atau panel detail matriks.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" hanya tersedia di dalam sel matriks atau panel detail matriks.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "Referensi \"{0}.\" hanya tersedia di dalam panel dinamis atau kontainer panel.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "Referensi \"{0}.\" hanya tersedia di dalam panel dinamis.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" hanya tersedia di dalam panel dinamis.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" hanya tersedia dalam kondisi pilihan, baris, dan kolom.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "Referensi \"{0}.\" hanya tersedia dalam pertanyaan komposit.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" tidak tersedia di dalam filter inArray, yang berjalan terhadap item dan kemudian survei.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" adalah kolom dari matriks ini - referensikan dengan awalan baris.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" adalah pertanyaan dari panel dinamis ini - referensikan dengan awalan panel."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Atur inputType: \"number\" pada \"{0}\" jika mengumpulkan angka.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Gunakan \"contains\" atau \"anyof\" untuk nilai multi-select."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "halaman",
+        // [Auto-translated] "panel"
+        panel: "panel"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "nama",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "nama"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "nilai terhitung",
+        // [Auto-translated] "element"
+        default: "elemen"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Survei",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Lainnya",
+        // [Auto-translated] "None"
+        none: "Tidak ada",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Tolak untuk menjawab",
+        // [Auto-translated] "Don't know"
+        dontknow: "Tidak tahu"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "tidak pernah memadamkan",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "menolak setiap jawaban",
+        // [Auto-translated] "cannot validate"
+        default: "tidak dapat memvalidasi"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Pertanyaan tidak memiliki jawaban untuk divalidasi",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "Sebuah panjang dibaca dari nilai teks, dan jawaban ini tidak memiliki",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "jawabannya bukan angka dan tidak pernah bisa menjadi",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "angka tidak pernah cocok dengan alamat email",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Jawabannya bukan daftar nilai",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Jawabannya bukan nilai yang bisa diperiksa"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "sebuah array",
+        // [Auto-translated] "an object"
+        object: "sebuah objek"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "baris matriks",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "sebuah item multitext",
+        // [Auto-translated] "a row or item of a question"
+        default: "baris atau item dalam sebuah pertanyaan"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "array objek",
+        // [Auto-translated] "an object"
+        object: "sebuah objek",
+        // [Auto-translated] "a plain value"
+        plain: "nilai biasa",
+        // [Auto-translated] "a value"
+        default: "sebuah nilai"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "array nilai yang dipilih",
+        // [Auto-translated] "a single value"
+        scalar: "satu nilai",
+        // [Auto-translated] "a value"
+        default: "sebuah nilai"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "di bawah",
+        // [Auto-translated] "above"
+        above: "di atas"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "tidak pernah terlihat dan tidak pernah menerima nilai",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "tidak pernah terlihat dan tidak pernah menerima nilai"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "pertanyaan",
+        // [Auto-translated] "question or variable"
+        questionvalue: "pertanyaan atau variabel",
+        // [Auto-translated] "page"
+        page: "halaman"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "membaca",
+        // [Auto-translated] "navigates to"
+        gotoName: "menavigasi ke",
+        // [Auto-translated] "sets"
+        default: "himpunan"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "pertanyaan template",
+        // [Auto-translated] "column"
+        default: "kolom"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "pertanyaan template",
+        // [Auto-translated] "column"
+        matrixdynamic: "kolom",
+        // [Auto-translated] "item"
+        multipletext: "item",
+        // [Auto-translated] "row"
+        matrix: "baris",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "baris",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "kolom",
+        // [Auto-translated] "field"
+        default: "ladang"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Benda 1" }, { value: "item2", text: "Benda 2" }, { value: "item3", text: "Benda 3" }],
-    columns: [{ value: "column1", text: "Kolom 1" }, { value: "column2", text: "Kolom 2" }, { value: "column3", text: "Kolom 3" }],
-    rows: [{ value: "row1", text: "Baris 1" }, { value: "row2", text: "Baris 2" }],
-    matrixColumns: [{ name: "column1", title: "Kolom 1" }, { name: "column2", title: "Kolom 2" }, { name: "column3", title: "Kolom 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Benda 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Benda 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Benda 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Kolom 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Kolom 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Kolom 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Baris 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Baris 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Kolom 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Kolom 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Kolom 3"
+      }
+    ]
   }
 };
 

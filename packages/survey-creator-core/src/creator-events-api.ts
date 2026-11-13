@@ -1,7 +1,8 @@
 import {
   Base, IAction, ItemValue, JsonObjectProperty, LocalizableString, MatrixDropdownColumn, PageModel, PanelModel,
-  PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement, IPanel, ITheme
+  PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement, IPanel, ITheme, ISurveyVariablePresets, ISurveyVariablePreset
 } from "survey-core";
+import { ISurveyLintOptions } from "survey-core/linter";
 import { SurveyLogicItem } from "./components/tabs/logic-items";
 import { ICreatorPlugin } from "./creator-settings";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
@@ -396,6 +397,8 @@ export interface CollectionItemAllowOperationsEvent {
    * A Boolean property that you can set to `false` if you want to prevent the target item from being edited.
    */
   allowEdit: boolean;
+  // Set to `false` to prevent the target item from being reordered by drag and drop on the design surface.
+  allowDrag?: boolean;
 }
 
 export interface CollectionItemDeletingEvent {
@@ -797,6 +800,8 @@ export interface SurveyInstanceCreatedEvent {
   /**
    * A Survey Creator UI element for which a survey is instantiated. Contains one of the following values:
    *   - `"designer-tab"` - A preview survey in the Designer tab. [View Demo](https://surveyjs.io/survey-creator/examples/customize-form-builder-ui/)
+   *   - `"designer-tab:creator-settings:theme"` - A survey that allows users to configure the Survey Creator UI theme in the Designer tab's settings panel.
+   *   - `"designer-tab:creator-settings:preset"` - A survey that allows users to select a Survey Creator UI preset in the Designer tab's settings panel.
    *   - `"preview-tab"` - A preview survey in the Preview tab. [View Demo](https://surveyjs.io/survey-creator/examples/customize-form-builder-ui/)
    *   - `"property-grid"` - A survey that represents the Property Grid. [View Demo](https://surveyjs.io/survey-creator/examples/hide-category-from-property-grid/)
    *   - `"default-value-popup-editor"` - A survey that allows you to specify the default or correct value (for quizzes) in a pop-up window.
@@ -1225,4 +1230,39 @@ export interface AllowInplaceEditEvent {
    * @since 2.3.7
    */
   allow: boolean;
+}
+export interface VariablePresetsChangedEvent {
+  /**
+   * The reason the event was raised: `"select"` if the active preset changed or `"edit"` if the preset list or a preset's variable values changed.
+   */
+  reason: "select" | "edit";
+  /**
+   * The current [variable preset](#variablePresets) configuration.
+   */
+  variablePresets: ISurveyVariablePresets;
+  /**
+   * The name of the active preset, or an empty string if no preset is active.
+   */
+  activePresetName: string;
+}
+export interface VariablePresetEditingEvent {
+  /**
+   * A variable preset for which Survey Creator obtains permitted operations. The object contains `name`, `description`, and `variables`.
+   */
+  preset: ISurveyVariablePreset;
+  /**
+   * A Boolean property that you can set to `false` to prevent users from editing the preset.
+   */
+  allowEdit: boolean;
+  /**
+   * A Boolean property that you can set to `false` to prevent users from deleting the preset.
+   */
+  allowDelete: boolean;
+}
+
+export interface LintSurveyEvent {
+  /**
+   * Linter options used to validate the survey JSON schema in the JSON Editor tab. This object is initialized with default settings. Modify its properties to [configure rules](/form-library/documentation/survey-json-validation#linter-rules), [declare known variables, functions, and custom components](/form-library/documentation/survey-json-validation#handle-custom-variables-functions-and-components), or [suppress findings](/form-library/documentation/survey-json-validation#configure-suppressed-rules).
+   */
+  lintOptions: ISurveyLintOptions;
 }

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CssClassBuilder } from "survey-core";
+import { toCssClasses } from "survey-core";
 import { attachKey2click, ReactElementFactory, SurveyElementBase, SvgIcon, } from "survey-react-ui";
 
 interface IActionButtonProps {
@@ -14,12 +14,12 @@ interface IActionButtonProps {
 }
 export class ActionButton extends SurveyElementBase<IActionButtonProps, any> {
   renderElement(): React.JSX.Element {
-    const classes = new CssClassBuilder()
-      .append(this.props.classes)
-      .append("svc-action-button")
-      .append("svc-action-button--selected", !!this.props.selected)
-      .append("svc-action-button--disabled", !!this.props.disabled)
-      .toString();
+    const classes = toCssClasses(
+      this.props.classes,
+      "svc-action-button",
+      !!this.props.selected && "svc-action-button--selected",
+      !!this.props.disabled && "svc-action-button--disabled"
+    );
     if (this.props.iconName) {
       return this.renderIcon(classes);
     }
@@ -43,6 +43,7 @@ export class ActionButton extends SurveyElementBase<IActionButtonProps, any> {
               this.props.click();
             }}
             title={this.props.title}
+            data-sv-tooltip={this.props.title}
           >
             {this.props.text}
           </span>
@@ -66,6 +67,7 @@ export class ActionButton extends SurveyElementBase<IActionButtonProps, any> {
               this.props.click();
             }}
             title={this.props.title}
+            data-sv-tooltip={this.props.title}
           >
             <SvgIcon size={"auto"} iconName={this.props.iconName}></SvgIcon>
           </span>

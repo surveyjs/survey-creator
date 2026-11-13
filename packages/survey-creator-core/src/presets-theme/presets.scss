@@ -175,7 +175,7 @@
 }
 
 .sps-page--options {
-  .sps-panel--with-frame > .sps-panel__content {
+  .sps-panel--with-frame > .sps-panel__expandable-content > .sps-panel__content {
     width: 50%;
     box-sizing: content-box;
   }

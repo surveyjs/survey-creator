@@ -350,10 +350,6 @@ export var tgStrings = {
       // min: "Minimum value",
       // max: "Maximum value"
     },
-    currencymask: {
-      // prefix: "Currency prefix",
-      // suffix: "Currency suffix"
-    },
     // isExclusive: "Clear others when selected",
     // imageHeight: "Display area height",
     // imageWidth: "Display area width",
@@ -1142,10 +1138,6 @@ export var tgStrings = {
     datetimemask: {
       pattern: "Ex.: mm/dd/yyyy"
     },
-    currencymask: {
-      prefix: "Ex.: $",
-      suffix: "Ex.: USD"
-    },
     panelbase: {
       // questionTitleWidth: "Ex.: 200px"
     },
@@ -1421,10 +1413,6 @@ export var tgStrings = {
       // decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number.",
       // thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three.",
       // precision: "Limits how many digits to retain after the decimal point for a displayed number."
-    },
-    currencymask: {
-      // prefix: "One or several symbols to be displayed before the value.",
-      // suffix: "One or several symbols to be displayed after the value."
     },
     theme: {
       // isPanelless: "This setting applies only to questions outside of a panel.",

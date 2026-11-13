@@ -144,6 +144,15 @@ export async function setShowAddQuestionButton(page, newVal: boolean) {
     window["creator"].showAddQuestionButton = newVal;
   }, newVal);
 }
+
+// click() scrolls its target into view and clicks within one frame, but the browser delivers the scroll
+// event on the next frame. A popup opened by that click receives the event and closes as if the user scrolled.
+export async function clickAfterScrollIntoView(target: Locator) {
+  await target.scrollIntoViewIfNeeded();
+  await target.page().evaluate(() => new Promise(resolve => requestAnimationFrame(resolve)));
+  await target.click();
+}
+
 export async function setExpandCollapseButtonVisibility(page, newVal: string) {
   await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((newVal) => {

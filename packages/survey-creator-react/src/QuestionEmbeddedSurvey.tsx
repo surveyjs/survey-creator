@@ -20,9 +20,11 @@ export class SurveyElementEmbeddedSurvey extends SurveyQuestionElementBase {
       this.embeddedSurvey.rootElement = this.rootRef.current;
     }
   }
-  public render(): React.JSX.Element {
+  protected canRender(): boolean {
+    return !!this.embeddedSurvey;
+  }
+  protected renderElement(): React.JSX.Element {
     const survey = this.embeddedSurvey;
-    if (!survey) return null;
     return <div style={{ display: "contents" }} ref={this.rootRef}>
       <SurveyPage
         survey={survey}

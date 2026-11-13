@@ -130,7 +130,13 @@ svc-question {
     margin-right: var(--sjs2-spacing-negative-x500, -40px);
     overflow-x: auto;
   }
+  .sd-selectbase:has(.sd-dropdown) {
+    overflow-x: visible;
+  }
 
+  .sd-table-wrapper {
+    padding: 0;
+  }
   .sd-table .sd-selectbase:not(.sd-imagepicker, .sd-boolean-fieldset) {
     overflow-x: visible;
     padding-left: 0;
@@ -154,10 +160,8 @@ svc-question {
     > .sd-question__container
     > .sd-question__header-and-content-container
     > .sd-question__content {
-    padding-left: var(--sd-base-padding);
-    padding-right: var(--sd-base-padding);
-    margin-left: calc(-1 * var(--sd-base-padding));
-    margin-right: calc(-1 * var(--sd-base-padding));
+    margin-left: calc(-1 * var(--sjs2-layout-component-matrix-cell-right-padding-right));
+    margin-right: calc(-1 * var(--sjs2-layout-component-matrix-cell-left-padding-left));
     padding-bottom: 0;
     padding-top: var(--sjs2-spacing-x200, 16px);
   }
@@ -226,13 +230,6 @@ svc-question {
 .svc-question--leave {
   &.svc-question__adorner {
     animation-delay: var(--move-animation-delay);
-  }
-}
-
-.svc-creator--disable-animations {
-  .svc-question--enter,
-  .svc-question--leave {
-    animation: none;
   }
 }
 
@@ -409,11 +406,6 @@ svc-question {
       &.svc-question--enter {
         animation-name: fadeIn, moveInWithOverflow;
       }
-    }
-  }
-  &.svc-creator--disable-animations {
-    .svc-question--enter {
-      animation: none;
     }
   }
 }
@@ -761,8 +753,13 @@ svc-question,
           & > * {
             display: none;
           }
-          .sd-question__header {
+          // Left title stays in the row next to the body. The collapsed card shows
+          // the overlay title instead, so the native one must stay hidden.
+          .sd-question__header:not(.sd-question__header--location--left) {
             display: flex;
+          }
+          .sd-question__header--location--left {
+            display: none;
           }
         }
       }
@@ -772,17 +769,19 @@ svc-question,
           display: none;
         }
       }
-
-      .sd-question__header--location--left {
-        display: none;
-      }
     }
   }
 
   .svc-question__content--collapsed {
     flex-grow: 0;
-    padding-bottom: var(--sjs2-spacing-x400, 32px);
     padding-top: var(--sjs2-spacing-x400, 32px);
+    // Content row-gap is removed with the question body after the height animation.
+    // Grow bottom padding by that gap so the card edge stays put. Default gap is spacing-x200,
+    // which keeps the previous spacing-x400 padding.
+    padding-bottom: calc(
+      var(--sjs2-spacing-x200, 16px) +
+        var(--sjs2-layout-component-question-box-gap-vertical, var(--sjs2-spacing-x200, 16px))
+    );
 
     .sd-element__header,
     .sd-element--complex > .sd-element__header {
@@ -864,7 +863,7 @@ svc-question,
       right: 0;
       outline: var(--sjs2-border-width-x100) dashed var(--sjs2-color-border-basic-secondary);
       outline-offset: calc(-1 * var(--sjs2-border-width-x100));
-      z-index: 10;
+      z-index: 12;
     }
   }
 
@@ -1034,8 +1033,12 @@ svc-question,
     > .sd-question__header
     ~ .sd-question__content
     > .sd-panel
+    > .sd-panel__expandable-content
     > .sd-panel__content {
-    padding: 0;
+    row-gap: var(--sd-panel-content-row-gap);
+    column-gap: var(--sd-panel-content-column-gap);
+    padding-block: var(--sd-panel-content-padding-block);
+    padding-block-end: 0;
   }
 }
 .svc-creator--mobile {
@@ -1072,6 +1075,9 @@ svc-question,
   //     }
   //   }
   // }
+  .sd-table-wrapper {
+    --sd-question-container-background: var(--sjs2-color-component-panel-default-bg);
+  }
 
   .sd-table__row-disabled > .sd-table__cell {
     opacity: var(--sjs2-opacity-visible);
@@ -1107,6 +1113,25 @@ svc-question,
       margin-right: 0;
       padding-left: 0;
       padding-right: 0;
+    }
+  }
+}
+
+// The expression banner shows the "Edit expression" link under the expression.
+// Inside the container query: a narrow container hides every banner (carry-forward-panel.scss).
+@container (min-width: #{$sd-panel-medium-min-width}) {
+  .svc-question__content--expression {
+    .svc-carry-forward-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--sjs2-spacing-x300, 24px);
+
+      // A long question name has no line break opportunities
+      & > span:first-child {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+      }
     }
   }
 }

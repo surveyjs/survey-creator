@@ -81,6 +81,8 @@ export var enStrings = {
     saveThemeTooltip: "Save Theme",
     jsonHideErrors: "Hide errors",
     jsonShowErrors: "Show errors",
+    jsonFixError: "Fix error",
+    jsonRootNotObject: "The survey JSON must be an object.",
     undo: "Undo",
     redo: "Redo",
     expandTooltip: "Expand",
@@ -165,6 +167,8 @@ export var enStrings = {
     choicesLoadedFromWebText: "Choices are loaded from a web service.",
     choicesLoadedFromWebLinkText: "Go to settings",
     choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options",
+    expressionBannerPlaceholder: "No expression set",
+    expressionBannerLinkText: "Edit expression",
     htmlPlaceHolder: "HTML content will be here.",
     panelPlaceHolder: "Drop a question from the toolbox here.",
     surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",
@@ -273,6 +277,60 @@ export var enStrings = {
       uncompletedRule_cancel: "No, I want to complete the rules"
     }
   },
+  // Host application variables
+  vp: {
+    selectorTitle: "Variable preset",
+    noPreset: "None",
+    view: "View variable values",
+    viewTitle: "Variable values",
+    edit: "Manage presets",
+    editorTitle: "Variable Presets",
+    presetName: "Preset",
+    presetDescription: "Description",
+    addPreset: "Add preset",
+    newPresetName: "New preset",
+    deletePreset: "Delete preset",
+    back: "Back",
+    presetNameIsNotUnique: "A preset with this name already exists",
+    presetNameIsEmpty: "Enter a preset name",
+    listNameColumn: "Preset",
+    listDescriptionColumn: "Description"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    title: "Expression Assistant",
+    actionTitle: "Write with AI",
+    promptTitle: "Describe what the expression should do",
+    promptPlaceholder: "For example: show this question when the respondent is 18 or older",
+    promptLineTitle: "Describe the condition in words",
+    generate: "Generate",
+    refine: "Refine",
+    explain: "Explain",
+    stop: "Stop",
+    accept: "Accept",
+    reject: "Reject",
+    applyFix: "Apply fix: {0}",
+    currentExpression: "Current expression",
+    newExpression: "Suggested expression",
+    readsAs: "Reads as",
+    explanation: "The assistant's explanation",
+    findings: "Check results",
+    severityError: "Error",
+    severityWarning: "Warning",
+    severityInfo: "Info",
+    inAction: "in \"{0}\"",
+    statusReady: "Describe the expression and select Generate.",
+    statusLoading: "Waiting for the assistant...",
+    statusCancelled: "The request was cancelled.",
+    statusError: "The assistant reported: {0}",
+    statusEmpty: "The assistant did not suggest an expression.",
+    statusReview: "Review the suggested expression.",
+    statusExplained: "The assistant explained the current expression.",
+    blockedByErrors: "The suggested expression has errors and cannot be accepted.",
+    notChecked: "The suggested expression could not be checked for every place it is written to, so it cannot be accepted.",
+    noActions: "Add an action to the rule before asking the assistant.",
+    fixedAutomatically: "The first suggestion had errors and was corrected automatically."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -310,6 +368,7 @@ export var enStrings = {
       confirmDelete: "Confirm entry removal",
       templateDescription: "Entry description pattern",
       templateTitle: "Entry title pattern",
+      templateTitlePlaceholder: "Entry title placeholder",
       noEntriesText: "Empty panel text",
       templateTabTitle: "Tab title pattern",
       tabTitlePlaceholder: "Tab title placeholder",
@@ -321,6 +380,8 @@ export var enStrings = {
       templateQuestionTitleWidth: "Question title width",
       templateErrorLocation: "Error message alignment",
       newPanelPosition: "New entry location",
+      pageSize: "Entries per page",
+      allowSort: "Allow users to sort entries",
       keyName: "Prevent duplicate responses in the following question"
     },
     question: {
@@ -371,6 +432,10 @@ export var enStrings = {
     calculatedvalue: {
       expression: "Expression"
     },
+    sortcriterion: {
+      field: "Sort by",
+      direction: "Order"
+    },
     urlconditionitem: {
       expression: "Expression"
     },
@@ -381,7 +446,8 @@ export var enStrings = {
     survey: {
       title: "Survey title",
       description: "Survey description",
-      readOnly: "Make the survey read-only"
+      readOnly: "Make the survey read-only",
+      regionalFormat: "Regional formats"
     },
     page: {
       name: "Page name",
@@ -401,7 +467,8 @@ export var enStrings = {
       rows: "Input field height (in lines)",
       visibleIf: "Make the column visible if",
       requiredIf: "Make the column required if",
-      showInMultipleColumns: "Each option in a separate column"
+      showInMultipleColumns: "Each option in a separate column",
+      allowSort: "Allow sorting by this column"
     },
     matrixcolumn: {
       isExclusive: "Clear others in the same row"
@@ -412,6 +479,15 @@ export var enStrings = {
     },
     masksettings: {
       saveMaskedValue: "Save masked value in survey results"
+    },
+    regionalformat: {
+      locale: "Region",
+      datePattern: "Date pattern",
+      timePattern: "Time pattern",
+      decimalSeparator: "Decimal separator",
+      thousandsSeparator: "Thousands separator",
+      currencySymbol: "Currency symbol",
+      currencyPattern: "Currency pattern"
     },
     patternmask: {
       pattern: "Value pattern"
@@ -425,12 +501,13 @@ export var enStrings = {
       thousandsSeparator: "Thousands separator",
       decimalSeparator: "Decimal separator",
       precision: "Value precision",
+      showTrailingZeros: "Show trailing zeros",
       min: "Minimum value",
       max: "Maximum value"
     },
     currencymask: {
-      prefix: "Currency prefix",
-      suffix: "Currency suffix"
+      currencySymbol: "Currency symbol",
+      currencyPattern: "Currency pattern"
     },
     isExclusive: "Clear others when selected",
     showValue: "Display both text and value",
@@ -449,12 +526,18 @@ export var enStrings = {
     change: "Change",
     close: "Close",
     delete: "Delete",
-    addNew: "Add New",
+    addNew: "Add item",
     addItem: "Click to add an item...",
     removeItem: "Click to remove the item...",
+    addItemAriaLabel: "Add {0}",
+    removeItemAriaLabel: "Remove {0}",
     dragItem: "Drag the item",
     expandNestedChoices: "Expand nested choices",
     collapseNestedChoices: "Collapse nested choices",
+    expandNestedChoicesAriaLabel: "Expand nested choices of {0}",
+    collapseNestedChoicesAriaLabel: "Collapse nested choices of {0}",
+    showDescription: "Show description",
+    hideDescription: "Hide description",
     edit: "Edit",
     doneEditing: "Done",
     emptyValue: "Value is empty",
@@ -475,24 +558,34 @@ export var enStrings = {
     propertyIsNoUnique: "Please enter a unique value",
     propertyNameIsNotUnique: "Please enter a unique name",
     propertyNameIsIncorrect: "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\".",
-    listIsEmpty: "You don't have any items yet",
-    "listIsEmpty@choices": "You don't have any choices yet",
-    "listIsEmpty@columns": "You don't have any columns yet",
-    "listIsEmpty@gridLayoutColumns": "You don't have layout columns yet",
-    "listIsEmpty@rows": "You don't have any rows yet",
-    "listIsEmpty@validators": "You don't have any validation rules yet",
-    "listIsEmpty@calculatedValues": "You don't have any custom variables yet",
-    "listIsEmpty@triggers": "You don't have any triggers yet",
-    "listIsEmpty@navigateToUrlOnCondition": "You don't have any links yet",
-    "listIsEmpty@pages": "You don't have any pages yet",
-    "addNew@choices": "Add new choice",
-    "addNew@columns": "Add new column",
-    "addNew@rows": "Add new row",
-    "addNew@validators": "Add new rule",
-    "addNew@calculatedValues": "Add new variable",
-    "addNew@triggers": "Add new trigger",
-    "addNew@navigateToUrlOnCondition": "Add new URL",
-    "addNew@pages": "Add new page",
+    listIsEmpty: "No items",
+    "listIsEmpty@choices": "No choices",
+    "listIsEmpty@rateValues": "No custom rating values",
+    "listIsEmpty@customLabels": "No custom labels",
+    "listIsEmpty@areas": "No areas",
+    "listIsEmpty@columns": "No columns",
+    "listIsEmpty@gridLayoutColumns": "No layout columns",
+    "listIsEmpty@rows": "No rows",
+    "listIsEmpty@validators": "No validation rules",
+    "listIsEmpty@calculatedValues": "No custom variables",
+    "listIsEmpty@triggers": "No triggers",
+    "listIsEmpty@completedHtmlOnCondition": "No conditional markup",
+    "listIsEmpty@navigateToUrlOnCondition": "No links",
+    "listIsEmpty@pages": "No pages",
+    "listIsEmpty@sortCriteria": "No sort levels",
+    "addNew@choices": "Add choice",
+    "addNew@rateValues": "Add rating value",
+    "addNew@customLabels": "Add label",
+    "addNew@areas": "Add area",
+    "addNew@columns": "Add column",
+    "addNew@rows": "Add row",
+    "addNew@validators": "Add rule",
+    "addNew@calculatedValues": "Add variable",
+    "addNew@triggers": "Add trigger",
+    "addNew@completedHtmlOnCondition": "Add markup",
+    "addNew@navigateToUrlOnCondition": "Add link",
+    "addNew@pages": "Add page",
+    "addNew@sortCriteria": "Add sort level",
     value: "Value",
     text: "Text",
     imageLink: "Image or video file URL",
@@ -533,11 +626,13 @@ export var enStrings = {
     createCustomChoiceText: "\"Create Custom Choice\" command text",
     visible: "Visible",
     isRequired: "Required",
+    requireTrue: "Require a positive answer",
     markRequired: "Mark as required",
     removeRequiredMark: "Remove the required mark",
     eachRowRequired: "Require an answer in each row",
     eachRowUnique: "Prevent duplicate responses in rows",
     requiredErrorText: "Error message for required questions",
+    requireTrueErrorText: "Error message when Yes is required",
     startWithNewLine: "Display the question on a new line",
     rows: "Rows",
     cols: "Columns",
@@ -546,7 +641,12 @@ export var enStrings = {
     storeDataAsText: "Store file content in JSON result as text",
     maxSize: "Maximum file size (in bytes)",
     maxFiles: "Maximum number of files",
-    rowCount: "Row count",
+    rowCount: "Initial number of rows",
+    pageSize: "Rows per page",
+    allowSort: "Allow users to sort rows",
+    maxSortLevel: "Maximum sort levels",
+    sortCriteria: "Default sort order",
+    showSortBar: "Show sort bar",
     columnLayout: "Columns layout",
     addRowButtonLocation: "\"Add Row\" button alignment",
     transposeData: "Transpose rows to columns",
@@ -606,6 +706,8 @@ export var enStrings = {
     questionTitleTemplate: "Question title template, default is: '{no}. {require} {title}'",
     questionErrorLocation: "Error message alignment",
     autoFocusFirstQuestion: "Focus first question on a new page",
+    choiceShortcutsEnabled: "Enable choice shortcuts",
+    showKeyboardHints: "Show keyboard hints",
     questionOrder: "Question order",
     timeLimit: "Time limit to complete the survey",
     timeLimitPerPage: "Time limit to complete one page",
@@ -683,13 +785,15 @@ export var enStrings = {
     acceptedTypes: "Additional file extensions",
     waitForUpload: "Wait for upload to complete",
     detailPanelMode: "Row details alignment",
-    minRowCount: "Minimum row count",
-    maxRowCount: "Maximum row count",
+    minRowCount: "Minimum number of rows",
+    maxRowCount: "Maximum number of rows",
+    rowCountExpression: "Row count expression",
     confirmDelete: "Confirm row removal",
     confirmDeleteText: "Confirmation message",
     panelCount: "Initial number of entries",
     minPanelCount: "Minimum number of entries",
     maxPanelCount: "Maximum number of entries",
+    panelCountExpression: "Entry count expression",
     panelsState: "Initial entry state",
     prevPanelText: "\"Previous Entry\" button text",
     nextPanelText: "\"Next Entry\" button text",
@@ -778,6 +882,7 @@ export var enStrings = {
     logoWidth: "Logo width",
     logoHeight: "Logo height",
     readOnly: "Read-only",
+    readOnlyMode: "Read-only mode",
     enableIf: "Disable the read-only mode if",
     noRowsText: "\"No rows\" message",
     separateSpecialChoices: "Separate special choices",
@@ -822,6 +927,7 @@ export var enStrings = {
       html: "HTML Editor",
       columns: "Columns",
       rows: "Rows",
+      entries: "Entries",
       choices: "Choice Options",
       items: "Items",
       visibleIf: "Visible If",
@@ -835,6 +941,7 @@ export var enStrings = {
       navigation: "Navigation",
       question: "Question Settings",
       pages: "Pages",
+      regionalFormat: "Regional Formats",
       timer: "Quiz Mode",
       calculatedValues: "Calculated Values",
       triggers: "Triggers",
@@ -1001,6 +1108,10 @@ export var enStrings = {
     clearIfInvisible: {
       none: "Never"
     },
+    readOnlyMode: {
+      readonly: "Read-only",
+      view: "View"
+    },
     radio: "Radio buttons",
     inputType: {
       color: "Color",
@@ -1135,6 +1246,7 @@ export var enStrings = {
     underRow: "Under the row",
     underRowSingle: "Under the row, display one section only",
     auto: "Auto",
+    always: "Always",
     timerInfoMode: {
       combined: "Both"
     },
@@ -1271,7 +1383,81 @@ export var enStrings = {
     progressBarInheritWidthFrom: {
       survey: "Same as survey",
       container: "Same as container"
+    },
+    showKeyboardHints: {
+      auto: "Inherit",
+      "false": "Hide",
+      "true": "Show"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  // country-specific ("en-GB"), so these names are defined here and not in the survey library.
+  regionLocales: {
+    ar: "Arabic",
+    bg: "Bulgarian",
+    ca: "Catalan",
+    cs: "Czech",
+    cy: "Welsh",
+    da: "Danish",
+    de: "German",
+    el: "Greek",
+    en: "English",
+    "en-AU": "English (Australia)",
+    "en-CA": "English (Canada)",
+    "en-GB": "English (United Kingdom)",
+    "en-IE": "English (Ireland)",
+    "en-IN": "English (India)",
+    "en-NZ": "English (New Zealand)",
+    "en-ZA": "English (South Africa)",
+    es: "Spanish",
+    et: "Estonian",
+    eu: "Basque",
+    fa: "Persian",
+    fi: "Finnish",
+    fil: "Filipino",
+    fr: "French",
+    "fr-CA": "French (Canada)",
+    "fr-CH": "French (Switzerland)",
+    he: "Hebrew",
+    hi: "Hindi",
+    hr: "Croatian",
+    ht: "Haitian Creole",
+    hu: "Hungarian",
+    id: "Indonesian",
+    is: "Icelandic",
+    it: "Italian",
+    ja: "Japanese",
+    ka: "Georgian",
+    kk: "Kazakh",
+    ko: "Korean",
+    lt: "Lithuanian",
+    lv: "Latvian",
+    mk: "Macedonian",
+    mm: "Burmese",
+    ms: "Malay",
+    nl: "Dutch",
+    "nl-BE": "Dutch (Belgium)",
+    no: "Norwegian",
+    pl: "Polish",
+    pt: "Portuguese",
+    "pt-BR": "Portuguese (Brazil)",
+    ro: "Romanian",
+    ru: "Russian",
+    sk: "Slovak",
+    sl: "Slovenian",
+    sr: "Serbian",
+    sv: "Swedish",
+    sw: "Swahili",
+    tel: "Telugu",
+    tg: "Tajik",
+    th: "Thai",
+    tr: "Turkish",
+    uk: "Ukrainian",
+    ur: "Urdu",
+    vi: "Vietnamese",
+    zh: "Chinese",
+    "zh-CN": "Chinese (Simplified)",
+    "zh-TW": "Chinese (Traditional)"
   },
   // Operators
   op: {
@@ -1316,15 +1502,14 @@ export var enStrings = {
     visibletrigger: "change visibility (deprecated)"
   },
   peplaceholder: {
+    regionalformat: {
+      locale: "Same as survey language"
+    },
     patternmask: {
       pattern: "Ex.: +1(999)-999-99-99"
     },
     datetimemask: {
       pattern: "Ex.: mm/dd/yyyy HH:MM:ss"
-    },
-    currencymask: {
-      prefix: "Ex.: $",
-      suffix: "Ex.: USD"
     },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"
@@ -1353,7 +1538,8 @@ export var enStrings = {
       width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.).",
       showQuestionNumbers: "Assigns numbers to questions nested within this panel.",
       effectiveColSpan: "Specifies how many columns this panel spans within the grid layout.",
-      gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
+      gridLayoutColumns: "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column.",
+      readOnlyMode: "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
     },
     paneldynamic: {
       name: "A panel ID that is not visible to respondents.",
@@ -1373,6 +1559,7 @@ export var enStrings = {
       state: "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed.",
       width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.).",
       templateTitle: "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering.",
+      templateTitlePlaceholder: "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries.",
       templateTabTitle: "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering.",
       tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value.",
       templateVisibleIf: "This setting allows you to control the visibility of individual entries within the dynamic panel. Use the `{panel}` placeholder to reference the current entry in your expression.",
@@ -1382,12 +1569,22 @@ export var enStrings = {
       copyDefaultValueFromLastEntry: "Duplicates answers from the last entry and assigns them to the next added entry.",
       keyName: "Reference a question name to require a user to provide a unique response for this question in each entry.",
       confirmDelete: "Triggers a confirmation prompt before removing an entry.",
+      panelCountExpression: "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually.",
+      pageSize: "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries.",
+      allowSort: "Allows respondents to sort entries using the sort bar.",
+      sortCriteria: "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority.",
       showQuestionNumbers: "Assigns numbers to questions nested within the dynamic panel."
     },
     matrixdynamic: {
+      allowSort: "Allows respondents to sort rows by clicking column headers or using the sort bar.",
+      sortCriteria: "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority.",
+      showSortBar: "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible.",
+      rowCountExpression: "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually.",
       confirmDelete: "Triggers a confirmation prompt before removing a row.",
       detailPanelShowOnAdding: "Automatically expands the detail section when a new row is added to the matrix."
     },
+    pageSize: "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows.",
+    maxSortLevel: "Specifies how many fields a respondent can sort by at once.",
     copyDefaultValueFromLastEntry: "Duplicates answers from the last row and assigns them to the next added dynamic row.",
     defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input.",
     resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set).",
@@ -1412,7 +1609,9 @@ export var enStrings = {
       url: "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data.",
       searchMode: "A comparison operation used to filter the drop-down list.",
       textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip.",
-      effectiveColSpan: "Specifies how many columns this question spans within the grid layout."
+      effectiveColSpan: "Specifies how many columns this question spans within the grid layout.",
+      readOnlyMode: "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default).",
+      showKeyboardHints: "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
     },
     surveyvalidator: {
       expression: "Use the magic wand icon to define when the question's value is considered valid.",
@@ -1444,6 +1643,7 @@ export var enStrings = {
     // survey templates
     survey: {
       readOnly: "Select if you want to prevent respondents from filling out your survey.",
+      readOnlyMode: "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements.",
       progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
     },
     matrixdropdowncolumn: {
@@ -1454,7 +1654,8 @@ export var enStrings = {
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the column.",
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
       showInMultipleColumns: "When selected, creates an individual column for each choice option.",
-      colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
+      colCount: "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix.",
+      readOnlyMode: "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
     },
     slider: {
       min: "The lowest number that users can select.",
@@ -1492,6 +1693,11 @@ export var enStrings = {
     questionStartIndex: "Enter a number or letter with which you want to start numbering.",
     questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box.",
     autoFocusFirstQuestion: "Select if you want the first input field on each page ready for text entry.",
+    choiceShortcutsEnabled: "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions.",
+    checkboxbase: {
+      choiceShortcutsEnabled: "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+    },
+    showKeyboardHints: "Displays hints for available keyboard actions below questions. You can override this setting for individual questions.",
     questionOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab.",
     maxTextLength: "For text entry questions only.",
     maxCommentLength: "For question comments only.",
@@ -1539,7 +1745,8 @@ export var enStrings = {
       questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
       questionOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab.",
       showNavigationButtons: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\".",
-      gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
+      gridLayoutColumns: "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column.",
+      readOnlyMode: "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
     },
     timerLocation: "Sets the location of a timer on a page.",
     panelsState: "Choose from: \"Locked\" - users cannot expand or collapse entries; \"Collapse all\" - all entries start in a collapsed state; \"Expand all\" - all entries start in an expanded state; \"First expanded\" - only the first entry is initially expanded. Applies if \"Entry display mode\" is set to \"List\" and the \"Entry title pattern\" property is specified.",
@@ -1604,20 +1811,30 @@ export var enStrings = {
     masksettings: {
       saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results."
     },
+    regionalformat: {
+      locale: "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used.",
+      datePattern: "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year.",
+      timePattern: "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm).",
+      decimalSeparator: "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks.",
+      thousandsSeparator: "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks.",
+      currencySymbol: "Overrides the region's currency symbol or code used in input masks.",
+      currencyPattern: "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+    },
     patternmask: {
-      pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
+      pattern: "The pattern can contain string literals and the following placeholders:<br>`9` - A digit.<br>`a` - An upper- or lowercase letter.<br>`#` - A digit or an upper- or lowercase letter.<br>Use backslash `\\` to escape a character."
     },
     datetimemask: {
-      pattern: "The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year.<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in upper case (AM/PM).<br>`tt` - 12-hour clock period in lower case (am/pm)."
+      pattern: "Overrides the region's date and time formats. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year.<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
     },
     numericmask: {
-      decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number.",
-      thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three.",
-      precision: "Limits how many digits to retain after the decimal point for a displayed number."
+      decimalSeparator: "A symbol that separates the fractional part from the integer part of a displayed number. The region's symbol is used by default.",
+      thousandsSeparator: "A symbol that separates the digits of a large number into groups of three. The region's symbol is used by default.",
+      precision: "Limits how many digits to retain after the decimal point for a displayed number.",
+      showTrailingZeros: "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
     },
     currencymask: {
-      prefix: "One or several symbols to be displayed before the value.",
-      suffix: "One or several symbols to be displayed after the value."
+      currencySymbol: "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol.",
+      currencyPattern: "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
     },
     theme: {
       isPanelless: "This setting applies only to questions outside of a panel.",
@@ -1814,6 +2031,388 @@ export var enStrings = {
       expert: "Expert",
     },
     presetApplied: "Preset applied",
+  },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  // linter.messages.<ruleId>.<reason> from the frozen tables the linter exports; the optional
+  // clauses under "suffixes" and "hints" are appended to a base message the same way the
+  // English of the linter itself does it. Placeholders are named after the keys of
+  // finding.messageData.
+  linter: {
+    lineNumber: "Line: {0}. ", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": { setName: "Use the suggested name" },
+      "choices/duplicate": { removeItem: "Remove the repeated item" },
+      "element/unknown-type": { setType: "Use the suggested type" },
+      "expression/unknown-function": { renameFunction: "Use the suggested function" },
+      "mask/mismatch": { setMaskType: "Use the suggested mask" },
+      "name/duplicate": { renameElement: "Give the element a free name" },
+      "name/reserved": { renameElement: "Give the element a free name" },
+      "property/dead": { removeKey: "Remove the property" },
+      "property/invalid-value": {
+        clampToRange: "Use the nearest allowed value",
+        removeKey: "Remove the property",
+        useAllowedValue: "Use the suggested value",
+      },
+      "property/not-an-array": { wrapInArray: "Turn the value into a list" },
+      "property/required": { setName: "Give the element a name" },
+      "property/unknown": {
+        removeKey: "Remove the property",
+        renameKey: "Rename the property",
+      },
+      "reference/unknown": {
+        renameReference: "Use the suggested name",
+        setKeyName: "Use the suggested name",
+      },
+      "trigger/unknown-target": { setName: "Use the suggested name" },
+      "trigger/unknown-type": { setType: "Use the suggested type" },
+      "validator/unknown-type": { setType: "Use the suggested type" },
+    },
+    messages: {
+      "expression/syntax": {
+        unparsable: "The expression \"{expression}\" cannot be parsed.",
+      },
+      "reference/unknown": {
+        notFound: "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists.",
+        inContainer: "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name}).",
+        scopedUnknown: "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name}).",
+        keyNameNotFound: "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs.",
+        functionArgNotFound: "\"{name}\" is not found.",
+      },
+      "reference/self": {
+        selfReference: "The {prop} of \"{name}\" references the element itself (reference: {reference}).",
+      },
+      "name/duplicate": {
+        elementNames: "The name \"{name}\" is duplicated.",
+        calculatedValueNames: "The calculated value name \"{name}\" is already used by another calculated value.",
+        calculatedValueShadowsElement: "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other.",
+      },
+      "name/shadowing": {
+        builtInVariable: "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions.",
+        valueNameShadowsElement: "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too.",
+        dropdownRowConflict: "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other.",
+        valueShapeConflict: "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it.",
+        commentKeyCollision: "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other.",
+        totalKeyCollision: "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other.",
+        variableShadowsQuestion: "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question.",
+      },
+      "name/reserved": {
+        questionName: "The name \"{name}\" is reserved - a member of Object.prototype.",
+        valueName: "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype.",
+        columnName: "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype.",
+        itemName: "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype.",
+        rowValue: "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype.",
+        calculatedValueName: "The calculated value \"{name}\" is reserved - a member of Object.prototype.",
+      },
+      "element/unknown-type": {
+        unknownType: "\"{name}\" has an unknown type \"{type}\".",
+        missingType: "\"{name}\" has no type - an element without a type is dropped.",
+      },
+      "property/unknown": {
+        unknownProperty: "\"{key}\" is not a property of {ownerText} ({className}).",
+      },
+      "property/dead": {
+        notSerializable: "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again.",
+        aliasDuplicate: "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins.",
+        inertMinMax: "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it.",
+      },
+      "property/invalid-value": {
+        notInChoices: "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText}).",
+        outOfRange: "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}.",
+        valueNameDotted: "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed.",
+      },
+      "property/required": {
+        missing: "{ownerText} has no \"{key}\" - the property is required for a {className}.",
+        notAString: "The name of the {className} is {valueText}, not a string - the survey cannot load it.",
+      },
+      "property/not-an-array": {
+        notAnArray: "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array.",
+      },
+      "variable/collision": {
+        questionShadowed: "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on.",
+        calculatedValueShadowed: "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins.",
+      },
+      "variable/preset": {
+        definitionNotAnObject: "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked.",
+        presetsNotAnArray: "variablePresets.presets is not an array, so no preset is declared.",
+        presetNotAnObject: "Preset #{index} is not an object.",
+        presetNameMissing: "Preset #{index} has no name, so nothing can reference it.",
+        presetVariablesNotAnObject: "Preset \"{preset}\" carries no variables object, so it sets nothing.",
+        duplicateName: "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one.",
+        unknownVariable: "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare.",
+        invalidValue: "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}",
+      },
+      "expression/unknown-function": {
+        notRegistered: "The function \"{functionName}\" is not registered.",
+      },
+      "cycle/calculated-value": {
+        self: "The calculated value \"{names}\" references itself in its own expression.",
+        loop: "Calculated values {names} depend on each other.",
+      },
+      "cycle/trigger": {
+        self: "The trigger reacts to the value it sets itself (\"{setToName}\").",
+        loop: "Triggers form a loop through the values they set: {setRoots}.",
+      },
+      "cycle/value-write": {
+        self: "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all.",
+        loop: "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in.",
+      },
+      "expression/unknown-choice": {
+        notAmongChoices: "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}.",
+        noChoiceContains: "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}.",
+      },
+      "expression/type-mismatch": {
+        "no-value": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare.",
+        "non-scalar": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it.",
+        "boolean-ordering": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it.",
+        "text-ordering": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion.",
+        "date-vs-number": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold.",
+        "number-vs-string": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold.",
+        "array-vs-scalar": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array.",
+        "boolean-vs-const": "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold.",
+      },
+      "expression/contradiction": {
+        alwaysFalse: "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown.",
+        alwaysFalseViaConstants: "The {prop} \"{expression}\" never holds, because {facts}.",
+        outOfRange: "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}.",
+        unsatisfiable: "The {prop} \"{expression}\" contradicts itself: {facts}.",
+      },
+      "expression/meaningless-condition": {
+        alwaysTrue: "The {prop} \"{expression}\" is always true, so it decides nothing.",
+        notABoolean: "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no.",
+        meaninglessFragment: "Part of the {prop} \"{expression}\" has a result that is known upfront.",
+        alwaysTrueViaConstants: "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing.",
+      },
+      "expression/no-reference": {
+        noReference: "The {prop} \"{expression}\" does not read any question or variable.",
+      },
+      "value/not-a-choice": {
+        defaultValue: "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}.",
+        correctAnswer: "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}.",
+        triggerSetValue: "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}.",
+        defaultRowValue: "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}.",
+        defaultPanelValue: "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}.",
+        unknownRowKey: "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}.",
+        unknownColumnKey: "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}.",
+        unknownQuestionKey: "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}.",
+        copyValueShape: "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}.",
+        copyValueNoOverlap: "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}.",
+      },
+      "choices/dead-source": {
+        missing: "\"{name}\" copies its choices from \"{source}\", but no question with that name exists.",
+        self: "\"{name}\" copies its choices from itself.",
+        "not-a-source": "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values.",
+        "missing-field": "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}.",
+      },
+      "choices/duplicate": {
+        duplicateValue: "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items.",
+        specialItemCollision: "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item.",
+      },
+      "trigger/unknown-target": {
+        pageNotFound: "The {trigger} trigger targets page \"{name}\", which does not exist.",
+        segmentNotFound: "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\".",
+        rootNotFound: "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists.",
+      },
+      "trigger/unknown-type": {
+        unknownType: "The trigger type \"{type}\" is not known.",
+        noType: "The trigger has no type.",
+      },
+      "validator/unknown-type": {
+        unknownType: "The validator type \"{type}\" of \"{name}\" is not known.",
+        noType: "A validator of \"{name}\" has no type.",
+      },
+      "validator/dead": {
+        wrongValueShape: "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType}).",
+        minAboveMax: "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it.",
+        minCountAboveChoices: "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together.",
+        invalidRegex: "The regex validator of \"{name}\" has a pattern the engine rejects: {error}.",
+        emptyExpression: "The expression validator of \"{name}\" has no expression, so it always passes.",
+      },
+      "element/count-contradiction": {
+        minAboveMax: "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them.",
+        countOutOfBounds: "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it.",
+        stepAboveRange: "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it.",
+        minAboveChoicesCount: "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered.",
+      },
+      "element/never-visible": {
+        dependsOnDeadValue: "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds.",
+      },
+      "mask/mismatch": {
+        unknownMaskType: "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all.",
+        unknownSettingsKey: "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently.",
+        settingsWithoutMask: "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest.",
+        maskInertForInputType: "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel.",
+        minMaxWithoutPattern: "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing.",
+        minAboveMax: "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it.",
+      },
+      "page/empty": {
+        emptyTemplate: "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render.",
+        noElements: "The {kindText} \"{name}\" has no elements.",
+        noRenderableElements: "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty.",
+        detailElementsHidden: "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default.",
+      },
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      atPosition: "Position: {0}.", // {0} character offset
+      fromLegacyTrigger: "It was built from the legacy name, operator and value properties of the trigger.",
+      inScope: "Inside: {0}.", // {0} name of the namespace
+      didYouMean: "Did you mean \"{0}\"?",
+      customComponentHint: "If it is a custom component, pass its definition to the linter to enable full analysis.",
+      registerFunctionHint: "Register the function before linting, or list it in the linter options.",
+      triggerTypeDroppedHint: "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks.",
+      knownVariablesHint: "If it is a variable set at run time, list it in the linter options.",
+      loopMayBeUnreachable: "The loop may be unreachable if the trigger conditions never hold together - verify the expressions.",
+      defaultValueExpressionNote: "A defaultValueExpression applies only until its question is answered.",
+      inExpression: "In expression: {0}", // {0} the expression the defect was found in
+      inBindings: "Referenced in bindings.",
+      inChoicesByUrl: "Referenced in the choicesByUrl {0}.", // {0} the url or the path property
+      inText: "Referenced in the \"{0}\" text.", // {0} the localizable property the text belongs to
+      // the two branches of reference/unknown.functionArgNotFound: a name read from every entry
+      // of a container, or one the function resolves against the survey
+      functionArgInContainer: "{0}() reads that name from every entry of {1} \"{2}\".",
+      functionArgStandalone: "The {0}() argument names no question, panel or page.",
+      deserializerDropsKey: "The deserializer drops a key it does not know.",
+      validatorDroppedHint: "The deserializer drops a validator it cannot resolve, so nothing validates.",
+      validatorInputType: "The inputType is \"{0}\".",
+      dataKeyOwner: "It is the data key of \"{0}\".", // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    // "{q1}", so that the reader finds it in the condition.
+    facts: {
+      separator: ", ",
+      and: " and ",
+      constant: "{ref} is always {value}",
+      range: "{ref} is {bounds}",
+      atLeast: "at least {0}",
+      atMost: "at most {0}",
+      conflict: {
+        equalValues: "{ref} cannot be both {values}",
+        equalAndNotEqual: "{ref} cannot be {value} and not be it",
+        emptyAndValue: "{ref} cannot be empty and be {value}",
+        emptyAndNotEmpty: "{ref} cannot be empty and not empty",
+        impossibleBounds: "{ref} cannot be above {min} and below {max}",
+        emptySet: "{ref} is asked to be one of no value at all",
+      },
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      rowScopePrefix: "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel.",
+      rowScopeStandalone: "\"{0}\" is only available inside a matrix cell or a matrix detail panel.",
+      panelScopePrefix: "\"{0}.\" references are only available inside a dynamic panel or a panel container.",
+      panelSiblingPrefix: "\"{0}.\" references are only available inside a dynamic panel.",
+      panelStandalone: "\"{0}\" is only available inside a dynamic panel.",
+      itemScope: "\"{0}\" is only available inside choice, row and column conditions.",
+      compositeScopePrefix: "\"{0}.\" references are only available inside a composite question.",
+      inArrayFilterScope: "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey.",
+      matrixColumn: "\"{0}\" is a column of this matrix - reference it with the row prefix.",
+      panelQuestion: "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix.",
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      setNumberInputType: "Set inputType: \"number\" on \"{0}\" if it collects numbers.",
+      useContainsOrAnyof: "Use \"contains\" or \"anyof\" for multi-select values.",
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        page: "page",
+        panel: "panel",
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        name: "name",
+        valueName: "valueName",
+        calculatedValue: "name",
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        calculatedValue: "calculated value",
+        default: "element",
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        survey: "the survey",
+        className: "the {0}",
+      },
+      specialItem: {
+        other: "Other",
+        none: "None",
+        refuse: "Refuse to answer",
+        dontknow: "Don't know",
+      },
+      deadValidatorEffect: {
+        neverFires: "never fires",
+        rejectsEveryAnswer: "rejects every answer",
+        default: "cannot validate",
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        noAnswer: "the question holds no answer to validate",
+        textLength: "a length is read off a text value, and this answer has none",
+        notANumber: "the answer is not a number and never can be",
+        numberVsEmail: "a number never matches an e-mail address",
+        notAList: "the answer is not a list of values",
+        default: "the answer is not a value it can check",
+      },
+      valueShape: {
+        array: "an array",
+        object: "an object",
+      },
+      dropdownRowSharer: {
+        matrix: "a row of matrix",
+        multipletext: "an item of multipletext",
+        default: "a row or item of a question",
+      },
+      sharedValueShape: {
+        records: "an array of objects",
+        object: "an object",
+        plain: "a plain value",
+        default: "a value",
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        array: "an array of selected values",
+        scalar: "a single value",
+        default: "a value",
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        below: "below",
+        above: "above",
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        one: "is never visible and never receives a value",
+        many: "are never visible and never receive a value",
+      },
+      targetKind: {
+        question: "question",
+        questionvalue: "question or variable",
+        page: "page",
+      },
+      triggerVerb: {
+        fromName: "reads",
+        gotoName: "navigates to",
+        default: "sets",
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      // which the author recognizes better than a translation of it
+      // the noun for the missing field of a carry-forward source
+      sourceField: {
+        paneldynamic: "template question",
+        default: "column",
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        paneldynamic: "template question",
+        matrixdynamic: "column",
+        multipletext: "item",
+        matrix: "row",
+        matrixdropdownRow: "row",
+        matrixdropdownColumn: "column",
+        default: "field",
+      },
+    },
   },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {

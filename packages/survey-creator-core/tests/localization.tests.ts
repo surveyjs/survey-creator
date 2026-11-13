@@ -1,5 +1,6 @@
 import { editorLocalization, defaultStrings, getLocaleStrings } from "../src/editorLocalization";
 import { CreatorTester } from "./creator-tester";
+import { setEditorLocaleStrings } from "./editor-locale-stub";
 import { Action, Serializer } from "survey-core";
 export * from "../src/localization/italian";
 export * from "../src/localization/french";
@@ -108,10 +109,17 @@ test("add de localization", () => {
       isRequired: "Wird benötigt", // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     },
   };
-  editorLocalization.locales["de"] = deutschStrings;
-  editorLocalization.currentLocale = "de";
-  expect(editorLocalization.getString("p.isRequired")).toEqual(deutschStrings.p.isRequired);
-  expect(editorLocalization.getString("op.empty")).toEqual(defaultStrings.op.empty);
+  const restoreDe = setEditorLocaleStrings("de", deutschStrings);
+  const savedCurrentLocale = editorLocalization.currentLocale;
+  try {
+    editorLocalization.currentLocale = "de";
+    expect(editorLocalization.getString("p.isRequired")).toEqual(deutschStrings.p.isRequired);
+    expect(editorLocalization.getString("op.empty")).toEqual(defaultStrings.op.empty);
+  } finally {
+    // getLocale() falls back to "en", not to defaultLocale, so a stale current "de" breaks tests that switch defaultLocale
+    editorLocalization.currentLocale = savedCurrentLocale;
+    restoreDe();
+  }
 });
 test("change default ('en') locale", () => {
   const enStrings = defaultStrings;
@@ -193,36 +201,40 @@ test("Change Creator locale property", (): any => {
       choice: "Choices de"
     }
   };
-  editorLocalization.locales["de"] = deutschStrings;
-  const creator = new CreatorTester({ showLogicTab: true, showTranslationTab: true });
-  creator.toolbox.showCategoryTitles = true;
-  creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }, { type: "expression", name: "q2" }] }] };
-  const tabButton = creator.tabs.filter(item => item.title === "Logic")[0];
-  const tabPreview = creator.tabs.filter(item => item.title === "Preview")[0];
-  const textQuestion = creator.toolbox.actions.filter(item => item.title === "Single-Line Input")[0];
-  const saveAction = creator.toolbar.actions.filter(item => item.title === "Save Survey")[0];
-  const choiceCategory = creator.toolbox.categories.filter(item => item.name === "choice")[0];
-  expect(tabPreview).toBeTruthy();
-  const surveyTitle = creator.propertyGrid.getQuestionByName("title").title;
+  const restoreDe = setEditorLocaleStrings("de", deutschStrings);
+  try {
+    const creator = new CreatorTester({ showLogicTab: true, showTranslationTab: true });
+    creator.toolbox.showCategoryTitles = true;
+    creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }, { type: "expression", name: "q2" }] }] };
+    const tabButton = creator.tabs.filter(item => item.title === "Logic")[0];
+    const tabPreview = creator.tabs.filter(item => item.title === "Preview")[0];
+    const textQuestion = creator.toolbox.actions.filter(item => item.title === "Single-Line Input")[0];
+    const saveAction = creator.toolbar.actions.filter(item => item.title === "Save Survey")[0];
+    const choiceCategory = creator.toolbox.categories.filter(item => item.name === "choice")[0];
+    expect(tabPreview).toBeTruthy();
+    const surveyTitle = creator.propertyGrid.getQuestionByName("title").title;
 
-  creator.locale = "de";
-  expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Survey titel");
-  expect(tabButton.title).toEqual("Logik");
-  expect(textQuestion.title).toEqual("Text");
-  expect(choiceCategory.title).toEqual("Choices de");
-  expect(textQuestion.locTitle.renderedHtml).toEqual("Text");
-  expect(saveAction.locTitle.text).toEqual("Umfrage speichern");
-  creator.selectElement(creator.survey.getQuestionByName("q2"));
-  expect(creator.propertyGrid.getQuestionByName("format").title).toEqual("Format de");
-  creator.selectElement(creator.survey);
+    creator.locale = "de";
+    expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Survey titel");
+    expect(tabButton.title).toEqual("Logik");
+    expect(textQuestion.title).toEqual("Text");
+    expect(choiceCategory.title).toEqual("Choices de");
+    expect(textQuestion.locTitle.renderedHtml).toEqual("Text");
+    expect(saveAction.locTitle.text).toEqual("Umfrage speichern");
+    creator.selectElement(creator.survey.getQuestionByName("q2"));
+    expect(creator.propertyGrid.getQuestionByName("format").title).toEqual("Format de");
+    creator.selectElement(creator.survey);
 
-  creator.locale = "";
-  expect(creator.propertyGrid.getQuestionByName("title").title).toEqual(surveyTitle);
-  expect(tabButton.title).toEqual("Logic");
-  expect(choiceCategory.title).toEqual("Choice Questions");
-  expect(textQuestion.title).toEqual("Single-Line Input");
-  expect(textQuestion.locTitle.renderedHtml).toEqual("Single-Line Input");
-  expect(saveAction.title).toEqual("Save Survey");
+    creator.locale = "";
+    expect(creator.propertyGrid.getQuestionByName("title").title).toEqual(surveyTitle);
+    expect(tabButton.title).toEqual("Logic");
+    expect(choiceCategory.title).toEqual("Choice Questions");
+    expect(textQuestion.title).toEqual("Single-Line Input");
+    expect(textQuestion.locTitle.renderedHtml).toEqual("Single-Line Input");
+    expect(saveAction.title).toEqual("Save Survey");
+  } finally {
+    restoreDe();
+  }
 });
 test("Check creator license localization", (): any => {
   const creator = new CreatorTester({});
@@ -239,11 +251,15 @@ test("getPropertyValue autoGenerate and boolean", () => {
       }
     }
   };
-  editorLocalization.locales["de"] = deutschStrings;
-  editorLocalization.currentLocale = "de";
-  expect(editorLocalization.getPropertyValueInEditor("autoGenerate", true)).toEqual("Generieren");
-  expect(editorLocalization.getPropertyValueInEditor("autoGenerate", false)).toEqual("Manuell Eintragen");
-  editorLocalization.currentLocale = "";
+  const restoreDe = setEditorLocaleStrings("de", deutschStrings);
+  try {
+    editorLocalization.currentLocale = "de";
+    expect(editorLocalization.getPropertyValueInEditor("autoGenerate", true)).toEqual("Generieren");
+    expect(editorLocalization.getPropertyValueInEditor("autoGenerate", false)).toEqual("Manuell Eintragen");
+    editorLocalization.currentLocale = "";
+  } finally {
+    restoreDe();
+  }
 });
 test("it and it-custom translation", () => {
   const customStrings: any = {
@@ -323,7 +339,7 @@ test("Support preset locale strings", () => {
   editorLocalization.defaultLocale = "";
 });
 test("All properties should be in English translation", () => {
-  const classes = ["survey", "matrixdropdown", "calculatedvalue", "choicesByUrl", "multipletextitem"];
+  const classes = ["survey", "matrixdropdown", "calculatedvalue", "choicesByUrl", "multipletextitem", "sortcriterion"];
   const addClasses = (baseClassName: string): void => {
     classes.push(baseClassName);
     Serializer.getChildrenClasses(baseClassName, true).forEach((qType) => {

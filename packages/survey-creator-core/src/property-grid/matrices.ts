@@ -1,8 +1,8 @@
 import {
   Base, ComputedUpdater, Helpers, IAction, GetMatrixRowActionsEvent, ItemValue,
   JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase,
-  MatrixDynamicRowModel, PanelModel, Question, QuestionMatrixDropdownModelBase,
-  QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel,
+  MatrixDynamicRowModel, PanelModel, Question, QuestionDropdownModel, QuestionMatrixDropdownModelBase,
+  QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, QuestionRecordsModel,
   renamedIcons, Serializer, surveyLocalization, SurveyElement
 } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
@@ -21,7 +21,10 @@ import { QuestionRatingAdornerViewModel } from "../components/question-rating";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { SurveyHelper } from "../survey-helper";
 
-Serializer.addProperty("itemvalue",
+// Not Serializer.addProperty: it makes a custom property, which defines an own accessor on every item.
+// The @property of ItemValue already serves "icon" on the prototype.
+const itemValueClass = Serializer.findClass("itemvalue");
+itemValueClass.createProperty(
   {
     name: "icon", isSerializable: false, readOnly: true, visibleIndex: 0, visibleIf: (obj: ItemValue): boolean => {
       return obj &&
@@ -30,6 +33,7 @@ Serializer.addProperty("itemvalue",
         obj.locOwner.rateType == "smileys";
     },
   });
+itemValueClass.resetAllProperties();
 export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   static getNewColumnName(
     objs: Array<any>,
@@ -305,8 +309,12 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     matrix.onCreateDetailPanelRenderedRowCallback = (
       renderedRow: QuestionMatrixDropdownRenderedRow
     ) => {
-      renderedRow.cells = [renderedRow.cells[1]];
-      renderedRow.cells[0].colSpans += 2;
+      // survey-core adds the empty leading cell only when rows have start actions (e.g. the drag handle),
+      // so the panel cell's index varies: find it and let it span the whole row
+      const panelCell = renderedRow.cells.filter(cell => cell.hasPanel)[0];
+      if (!panelCell) return;
+      panelCell.colSpans = renderedRow.cells.reduce((sum, cell) => sum + cell.colSpans, 0);
+      renderedRow.cells = [panelCell];
     };
     const q: any = matrix;
     matrix.onCreateDetailPanelCallback = (
@@ -829,6 +837,131 @@ export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEdito
   } 0;
 }
 
+const sortAllowAddByOptionsKey = "sortCriteriaAllowAddByOptions";
+const sortReleaseKey = "sortCriteriaRelease";
+
+// sortCriteria (dynamic matrix, dynamic panel): a row per sort level, top first, edited in place - a
+// row's editingObj is survey-core's SortCriterion from the question's array. The fields a level can sort
+// by come from the question (getDesignSortFields) and are not reactive: a column's cell type or a
+// template question added to a dynamic panel changes them without a property change the grid could
+// observe. So the field choices and the Add state are refreshed on every Creator modification (undo/redo
+// included), on a change of the array and after a cell edit.
+export class PropertyGridEditorMatrixSortCriteria extends PropertyGridEditorMatrix {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type === "sortcriteria";
+  }
+  protected getDefaulColumnNames(): Array<string> {
+    return ["field", "direction"];
+  }
+  protected hasDetailPanel(): boolean {
+    return false;
+  }
+  protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean {
+    return true;
+  }
+  // A cell is not set up by the dropdown editor, so the direction column gets its texts here
+  protected getColumnsJSON(obj: Base, prop: JsonObjectProperty, propNames: Array<string>,
+    options: ISurveyCreatorOptions, propGridDefinition: ISurveyPropertyGridDefinition) {
+    const res = super.getColumnsJSON(obj, prop, propNames, options, propGridDefinition);
+    res.filter(column => column.name === "direction" && Array.isArray(column.choices)).forEach(column => {
+      column.choices = column.choices.map(item => {
+        const value = item.value !== undefined ? item.value : item;
+        return { value: value, text: editorLocalization.getPropertyValueInEditor("direction", value) };
+      });
+    });
+    return res;
+  }
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty,
+    options?: ISurveyCreatorOptions, propGridDefinition?: ISurveyPropertyGridDefinition): void {
+    super.onCreated(obj, question, prop, options, propGridDefinition);
+    const matrix = <QuestionMatrixDynamicModel>question;
+    // onSetPropertyEditorOptions may have turned Add off: an unused field never turns it back on
+    matrix[sortAllowAddByOptionsKey] = matrix.allowAddRows;
+    this.updateAllowAddRows(obj, matrix, prop);
+    const update = (): void => { this.updateFields(obj, matrix, prop); };
+    obj.registerFunctionOnPropertyValueChanged(prop.name, update, this.getHandlerKey(matrix));
+    // The Creator; the grid of a standalone PropertyGridModel has no onModified
+    const onModified = !!options ? (<any>options).onModified : undefined;
+    if (!!onModified && typeof onModified.add === "function") {
+      onModified.add(update);
+      matrix[sortReleaseKey] = (): void => { onModified.remove(update); };
+    }
+  }
+  public onDisposing(obj: Base, question: Question, prop: JsonObjectProperty): void {
+    obj.unRegisterFunctionOnPropertyValueChanged(prop.name, this.getHandlerKey(question));
+    const release = question[sortReleaseKey];
+    if (typeof release === "function") {
+      release();
+    }
+    question[sortReleaseKey] = undefined;
+  }
+  public onMatrixCellCreated(obj: Base, options: any): void {
+    super.onMatrixCellCreated(obj, options);
+    if (!options.row.editingObj) return;
+    const q = options.cellQuestion;
+    // A cleared direction would show an empty cell while it sorts ascending
+    q.allowClear = false;
+    if (options.columnName === "field") {
+      this.updateFieldChoices(q, options.row.editingObj);
+    }
+  }
+  public onMatrixCellValueChanged(obj: Base, options: any): void {
+    this.updateFields(obj, options.question, options.question.property);
+  }
+  // Add takes the first field no level uses; Add is off while there is none (updateAllowAddRows), so
+  // the array never gets an item without a field from here.
+  protected createNewItem(matrix: QuestionMatrixDynamicModel, prop: JsonObjectProperty): Base {
+    const obj: Base = matrix.obj;
+    const field = this.getUnusedField(obj, prop);
+    if (!field) return null;
+    const item = Serializer.createClass(prop.className);
+    // Before the push: the push is the only change, one undo step
+    item.field = field;
+    const arr: Array<Base> = obj[prop.name];
+    arr.push(item);
+    if (arr != matrix.value) {
+      matrix.value = arr;
+    }
+    return arr[arr.length - 1];
+  }
+  private updateFields(obj: Base, matrix: QuestionMatrixDynamicModel, prop: JsonObjectProperty): void {
+    if (matrix.isDisposed) return;
+    this.updateAllowAddRows(obj, matrix, prop);
+    matrix.visibleRows.forEach(row => {
+      const q = row.getQuestionByName("field");
+      if (!!q && !!row.editingObj) {
+        this.updateFieldChoices(q, row.editingObj);
+      }
+    });
+  }
+  private updateAllowAddRows(obj: Base, matrix: QuestionMatrixDynamicModel, prop: JsonObjectProperty): void {
+    matrix.allowAddRows = matrix[sortAllowAddByOptionsKey] !== false && !!this.getUnusedField(obj, prop);
+  }
+  // A stored field that is not among the choices (stale or hand-written) is kept and shown as it is: it is
+  // a choice of its own row only. Without it the dropdown would treat the value as invalid and clear it.
+  private updateFieldChoices(q: Question, item: Base): void {
+    let choices: Array<{ value: string, text: string }> = Serializer.findProperty(item.getType(), "field").getChoices(item);
+    const field = item["field"];
+    if (!!field && !choices.some(choice => choice.value === field)) {
+      choices = choices.concat([{ value: field, text: field }]);
+    }
+    const current = (<QuestionDropdownModel>q).choices.map(choice => ({ value: choice.value, text: choice.text }));
+    if (!Helpers.isTwoValueEquals(current, choices)) {
+      (<QuestionDropdownModel>q).choices = choices;
+    }
+  }
+  private getUnusedField(obj: Base, prop: JsonObjectProperty): string {
+    const used = (obj[prop.name] || []).map((item: any) => item.field);
+    const fields = (<QuestionRecordsModel><any>obj).getDesignSortFields();
+    const unused = fields.filter(item => used.indexOf(item.field) < 0)[0];
+    return !!unused ? unused.field : undefined;
+  }
+  // Two grids may show the same object: each question keeps its own handler.
+  private getHandlerKey(question: Question): string {
+    return "sortCriteriaGrid_" + question.id;
+  }
+}
+
 export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGridEditorMatrix {
   protected abstract getChoices(obj: Base): Array<any>;
   protected getColumnsJSON(obj: Base, prop: JsonObjectProperty, propNames: Array<string>,
@@ -966,6 +1099,7 @@ PropertyGridEditorCollection.register(
 PropertyGridEditorCollection.register(
   new PropertyGridEditorMatrixMutlipleTextItems()
 );
+PropertyGridEditorCollection.register(new PropertyGridEditorMatrixSortCriteria());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixValidators());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixTriggers());
 

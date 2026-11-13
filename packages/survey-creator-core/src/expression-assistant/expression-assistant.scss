@@ -1,0 +1,46 @@
+// The dialog opens tall enough for the prompt and a review without a scrollbar and grows with a long
+// review up to a max-height; only then its content scrolls. Both heights are capped by the viewport
+// (minus the modal's outer padding). The size goes on the body: the popup renderers may write width
+// and height inline on the container. The extra .svc-creator-popup outranks popup.scss.
+.svc-creator-popup.sv-popup--modal-popup.svc-expression-assistant {
+  --svc-expression-assistant-viewport-height: calc(100vh - var(--sjs2-spacing-x400) - var(--sjs2-spacing-x800));
+
+  & > .sv-popup__container > .sv-popup__body-content {
+    min-height: min(calc(var(--sjs2-base-unit-size) * 75), var(--svc-expression-assistant-viewport-height));
+    max-height: min(calc(var(--sjs2-base-unit-size) * 110), var(--svc-expression-assistant-viewport-height));
+  }
+
+  // The content takes the space the min-height adds, so the footer stays at the bottom
+  .sv-popup__content {
+    flex-grow: 1;
+  }
+
+  .sv-popup__scrolling-content {
+    flex-grow: 1;
+    min-height: 0;
+  }
+}
+
+// The review in the expression assistant's dialog (expression-assistant.ts): rows of a label and a
+// value, rendered as text by an html question.
+.svc-expression-assistant {
+  .svc-expression-assistant__label {
+    font-weight: 600;
+  }
+
+  .svc-expression-assistant__current,
+  .svc-expression-assistant__suggested,
+  .svc-expression-assistant__display,
+  .svc-expression-assistant__explanation,
+  .svc-expression-assistant__note {
+    margin-bottom: var(--sjs2-spacing-x100, 8px);
+  }
+
+  .svc-expression-assistant__findings {
+    margin: var(--sjs2-spacing-x050, 4px) 0 0;
+  }
+
+  .svc-expression-assistant__finding--error strong {
+    color: var(--sjs2-color-fg-state-danger-default, #e50a3e);
+  }
+}

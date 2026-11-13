@@ -1,5 +1,5 @@
 import {
-  Action, Base, EventBase, ItemValue, QuestionSelectBase, property
+  Action, Base, EventBase, ItemValue, Question, QuestionSelectBase, property
 } from "survey-core";
 import { DropdownChoicesViewModel, IDropdownChoicesHost } from "../dropdown-choices";
 
@@ -23,19 +23,16 @@ export class TranslationDropdownViewModel extends Base implements IDropdownChoic
   @property({ defaultValue: true }) private isCollapsedValue: boolean;
   private visibleCount: number;
   private choicesModel: DropdownChoicesViewModel;
+  private questionValue: QuestionSelectBase;
+  private owner?: ITranslationDropdownOwner;
   private onCollapsedChanged = (_: Base, options: any): void => {
     if (options.questionName === this.question.name) {
       this.isCollapsedValue = options.collapsed;
     }
   };
-
-  constructor(private questionValue: QuestionSelectBase, private owner?: ITranslationDropdownOwner) {
+  constructor(questionValue: QuestionSelectBase, owner: ITranslationDropdownOwner) {
     super();
-    this.visibleCount = !!this.owner ? this.owner.maxVisibleChoices : 10;
-    if (!!this.owner) {
-      this.isCollapsedValue = this.owner.isChoicesCollapsed(this.question.name);
-      this.owner.onChoicesCollapsedChanged.add(this.onCollapsedChanged);
-    }
+    this.attachToUI(questionValue, owner);
     this.choicesModel = new DropdownChoicesViewModel(this);
   }
   public get question(): QuestionSelectBase {
@@ -86,10 +83,23 @@ export class TranslationDropdownViewModel extends Base implements IDropdownChoic
     return this.choicesModel.collapseAction;
   }
   public dispose(): void {
+    this.detachFromUI();
+    this.choicesModel.dispose();
+    super.dispose();
+  }
+  public attachToUI(question: QuestionSelectBase, owner?: ITranslationDropdownOwner) {
+    this.detachFromUI();
+    this.questionValue = question;
+    this.owner = owner;
+    this.visibleCount = !!owner ? owner.maxVisibleChoices : 10;
+    if (!!this.owner) {
+      this.isCollapsedValue = owner.isChoicesCollapsed(question.name);
+      owner.onChoicesCollapsedChanged.add(this.onCollapsedChanged);
+    }
+  }
+  public detachFromUI() {
     if (!!this.owner) {
       this.owner.onChoicesCollapsedChanged.remove(this.onCollapsedChanged);
     }
-    this.choicesModel.dispose();
-    super.dispose();
   }
 }

@@ -1,9 +1,17 @@
-import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, IAction, IsTouch, ItemValue, ListModel, LocalizableString, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
+import { Action, ActionContainer, ComputedUpdater, toCssClasses, IAction, IsTouch, ItemValue, ListModel, LocalizableString, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray, getIdSelector } from "survey-core";
 import { parseColor } from "../utils/color-utils";
 
 const DEFAULT_COLOR: string = "#000000";
 export class QuestionColorModel extends QuestionTextModel {
   @property() allowEmptyValue: boolean = false;
+
+  private getPopupWidthTarget(container: HTMLElement): HTMLElement {
+    if (!container) return undefined;
+    const root = container.closest(getIdSelector(this.renderedId)) as HTMLElement;
+    if (!root?.classList.contains("sd-formbox")) return undefined;
+    return root;
+  }
+
   constructor(name: string) {
     super(name);
     this.createItemValues("choices");
@@ -76,10 +84,7 @@ export class QuestionColorModel extends QuestionTextModel {
     return this._renderedValue.toUpperCase();
   }
   public getSwatchCss() {
-    return new CssClassBuilder()
-      .append(this.cssClasses.swatch)
-      .append(this.cssClasses.swatchDisabled, this.isInputReadOnly)
-      .toString();
+    return toCssClasses(this.cssClasses.swatch, this.isInputReadOnly && this.cssClasses.swatchDisabled);
   }
   public getSwatchStyle(): { [index: string]: string } {
     return { backgroundColor: this.renderedValue };
@@ -151,16 +156,16 @@ export class QuestionColorModel extends QuestionTextModel {
     popupModel.displayMode = IsTouch ? "overlay" : "popup";
     popupModel.setWidthByTarget = true;
     popupModel.positionMode = "fixed";
-    popupModel.getTargetCallback = () => this.rootElement;
+    popupModel.getTargetCallback = () => this.contentElement;
+    popupModel.getWidthTargetCallback = (container: HTMLElement) => this.getPopupWidthTarget(container);
     listModel.isItemSelected = (itemValue: ItemValue) => itemValue.value == this.value;
     return action;
   }
-  private rootElement: HTMLElement;
   public afterRenderQuestionElement(el: HTMLElement): void {
     super.afterRenderQuestionElement(el);
-    this.rootElement = el;
-    if (el.tagName === "INPUT") {
-      this.rootElement = el.parentElement;
+    this.contentElement = el;
+    if (this.contentElement.tagName === "INPUT") {
+      this.contentElement = this.contentElement.parentElement;
     }
   }
   private updateChoices() {

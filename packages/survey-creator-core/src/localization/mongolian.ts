@@ -142,6 +142,10 @@ export var mnStrings = {
     jsonHideErrors: "Алдааг нуух",
     // "Show errors"
     jsonShowErrors: "Алдааг харуулах",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Засах алдаа",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "Судалгааны JSON нь объект байх ёстой.",
     // "Undo"
     undo: "Буцаах",
     // "Redo"
@@ -246,6 +250,8 @@ export var mnStrings = {
     translateUsigAI: "Авто-орчуулга Бүгд",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "Аас орчуул: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Үлдсэн мөрүүдийг орчуулах",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "Огт орчуулагдаагүй уяанууд",
     // "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var mnStrings = {
     translationSource: "Эх сурвалж: ",
     // [Auto-translated] "Target: "
     translationTarget: "Зорилго: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Эх хэл",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Зорилтот хэл",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} утсыг орчуулсан",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Та сонгосон хэлний бүх орчуулсан мөрүүдийг устгахыг хүсэж байгаа гэдэгтээ итгэлтэй байна уу?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Хэлбэрийн үзэмж",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Сүлжээний харагдац",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Strings-ийг орчуулах",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Судалгааны утасны утаснууд",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Орчуулах уяаг байхгүй",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Бүх утсыг орчуулсан",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} утсыг орчуулдаггүй",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube-ийн холбоосууд дэмжигдээгүй.",
     // [Auto-translated] "Export"
@@ -286,6 +314,10 @@ export var mnStrings = {
     choicesLoadedFromWebLinkText: "Тохиргоо руу явах",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Ачаалагдсан сонголтын урьдчилсан үзүүлэлт",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Илэрхийллийн багц байхгүй",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Илэрхийллийг засварлах",
     // "HTML content will be here."
     htmlPlaceHolder: "HTML агуулга энд байрлана.",
     // "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var mnStrings = {
       uncompletedRule_cancel: "Үгүй, дүрмийг үргэлжлүүлж бичиж дуусгах."
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Хувьсах урьдчилсан тохиргоо",
+    // [Auto-translated] "None"
+    noPreset: "Байхгүй",
+    // [Auto-translated] "View variable values"
+    view: "Хувьсагчийн утгуудыг үзэх",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Хувьсах утгууд",
+    // [Auto-translated] "Manage presets"
+    edit: "Урьдчилсан тохиргоог удирдах",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Хувьсах урьдчилсан төхөөрөмжүүд",
+    // [Auto-translated] "Preset"
+    presetName: "Урьдчилсан тохиргоо",
+    // [Auto-translated] "Description"
+    presetDescription: "Тайлбар",
+    // [Auto-translated] "Add preset"
+    addPreset: "Урьдчилсан тохиргоо нэмэх",
+    // [Auto-translated] "New preset"
+    newPresetName: "Шинэ preset",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Устгах урьдчилсан төзийг устгах",
+    // [Auto-translated] "Back"
+    back: "Буцах",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Энэ нэртэй урьдчилсан тохиргоо аль хэдийн байдаг",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Урьдчилан тохируулсан нэрийг оруулна",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Урьдчилсан тохиргоо",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Тайлбар"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Илэрхийллийн туслах",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "AI-ээр бичих",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Энэ хэллэг юу хийх ёстойг тодорхойл",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Жишээ нь: хариуцагч 18 ба түүнээс дээш насны үед энэ асуултыг харуулна уу",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Энэ нөхцөл байдлыг үгээр тодорхойл",
+    // [Auto-translated] "Generate"
+    generate: "Үүсгэх",
+    // [Auto-translated] "Refine"
+    refine: "Сайжруулна",
+    // [Auto-translated] "Explain"
+    explain: "Тайлбарла",
+    // [Auto-translated] "Stop"
+    stop: "Зогс",
+    // [Auto-translated] "Accept"
+    accept: "Хүлээн авна",
+    // [Auto-translated] "Reject"
+    reject: "Татгалзах",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Засвар хэрэглэх: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Одоогийн илэрхийлэл",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Санал болгосон илэрхийлэл",
+    // [Auto-translated] "Reads as"
+    readsAs: "Дараах байдлаар уншигддаг",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Туслахын тайлбар",
+    // [Auto-translated] "Check results"
+    findings: "Үр дүнг шалгах",
+    // [Auto-translated] "Error"
+    severityError: "Алдаа",
+    // [Auto-translated] "Warning"
+    severityWarning: "Анхааруулга",
+    // [Auto-translated] "Info"
+    severityInfo: "Мэдээлэл",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "\"{0}\" ангид.",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Илэрхийллийг тодорхойлж, Generate гэж сонгоорой.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Туслахыг хүлээж байна...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Хүсэлтийг цуцалсан.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Туслах ажилтан мэдээлсэн: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Туслах нь ямар нэгэн илэрхийлэл илэрхийлээгүй.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Санал болгосон илэрхийллийг дахин шалгаарай.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Туслах нь одоогийн илэрхийллийг тайлбарлав.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Санал болгосон илэрхийлэл нь алдаатай тул хүлээн зөвшөөрөгдөхгүй.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Санал болгосон илэрхийллийг бичигдсэн бүх газарт шалгаж болохгүй тул хүлээн авах боломжгүй.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Туслахаас асуухаасаа өмнө дүрэмд үйлдэл нэмээрэй.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Эхний санал алдаатай байсан бөгөөд автоматаар засагдсан."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var mnStrings = {
       templateDescription: "Оролтын тодорхойлолтын загвар",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Оролт гарчгийн загвар",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Оролцогчийн цолны оролцоо",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Хоосон хавтан текст",
       // [Auto-translated] "Tab title pattern"
@@ -588,6 +724,10 @@ export var mnStrings = {
       templateErrorLocation: "Алдааны мессежийн зохицуулалт",
       // [Auto-translated] "New entry location"
       newPanelPosition: "Шинэ оролцооны байршил",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Хуудас бүрт бичлэг тоо",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Хэрэглэгчдэд бичлэгүүдийг эрэмбэлэх боломж олгох",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "Дараах асуултад хувилж хариулахаас сэргийлье"
     },
@@ -675,6 +815,12 @@ export var mnStrings = {
       // [Auto-translated] "Expression"
       expression: "Өгүүлбэр"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Эрэмбэл",
+      // [Auto-translated] "Order"
+      direction: "Дараалал"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Илэрхийлэл"
@@ -690,7 +836,9 @@ export var mnStrings = {
       // [Auto-translated] "Survey description"
       description: "Судалгааны тодорхойлолт",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "Судалгааг зөвхөн унших хэлбэртэй болго"
+      readOnly: "Судалгааг зөвхөн унших хэлбэртэй болго",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Бүс нутгийн форматууд"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -726,7 +874,9 @@ export var mnStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "Шаардлагатай баганыг хий",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "Тус тусдаа баганад байгаа сонголт бүр"
+      showInMultipleColumns: "Тус тусдаа баганад байгаа сонголт бүр",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Энэ баганаар эрэмбэлэхийг зөвшөөрнө"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export var mnStrings = {
     masksettings: {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "Судалгааны үр дүнд багласан үнэ цэнийг хэмнэх"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Бүс нутаг",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Огнооны хэв маяг",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Цагийн хэв маяг",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Арвантын хуваагч",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Мянга салгагч",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Валютын тэмдэг",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Валютын хэв маяг"
     },
     patternmask: {
       // [Auto-translated] "Value pattern"
@@ -761,16 +927,18 @@ export var mnStrings = {
       decimalSeparator: "Decimal тусгаарлагч",
       // [Auto-translated] "Value precision"
       precision: "Үнэ цэнийн нарийвчлал",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Үзүүлэлтийн ард байгаа тэгүүд",
       // [Auto-translated] "Minimum value"
       min: "Хамгийн бага үнэ цэнэ",
       // [Auto-translated] "Maximum value"
       max: "Хамгийн их үнэ цэнэ"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "Валютын ханш",
-      // [Auto-translated] "Currency suffix"
-      suffix: "Валютын suffix"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Валютын тэмдэг",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Валютын хэв маяг"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Сонгогдсон үедээ бусдыг цэвэрлэ",
@@ -812,8 +980,24 @@ export var mnStrings = {
     addItem: "Хэсэг нэмэх бол дарах...",
     // "Click to remove the item..."
     removeItem: "Хэсэг устгах бол дарах...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Нэмэх {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Устгах {0}",
     // "Drag the item"
     dragItem: "Хэсгийг чирэх",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Nested сонголтуудыг өргөжүүлэх",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Уналтад орсон сонголтууд",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Үргэлжилсэн сонголтуудыг өргөтгөх {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Уналтад орсон сонголтууд {0}",
+    // [Auto-translated] "Show description"
+    showDescription: "Нэвтрүүлгийн тайлбар",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Тайлбарыг нуух",
     // "Edit"
     edit: "Засах",
     // "Done"
@@ -858,38 +1042,58 @@ export var mnStrings = {
     listIsEmpty: "Одоогоор ямар ч зүйл ороогүй байна",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Одоогор ямар ч сонголт ороогүй байна",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "Танд ямар ч багана байхгүй",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "Танд загварын багана хараахан байхгүй байна",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "Чамд ямар ч мөр байхгүй",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "Танд ямар нэгэн баталгаажуулалтын дүрэм байхгүй байна",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "Танд ямар ч хувийн хувьсагч байхгүй",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "Танд ямар ч өдөөгч байхгүй",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "Танд ямар ч холбоос байхгүй",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "Танд одоохондоо хуудас байхгүй байна",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Захиалгат үнэлгээний утга байхгүй",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Захиалгат шошго байхгүй",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Бүс нутаг байхгүй",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "Баганагүй",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "Зохион байгуулалтын баганууд байхгүй",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "Маргаангүй",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "Баталгаажуулалтын дүрэмгүй",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "Захиалгат хувьсагч байхгүй",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "Триггергүй",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Нөхцөлт тэмдэглэгээ байхгүй",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "Холбоос байхгүй",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "Хуудас байхгүй",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Сортлох түвшин байхгүй",
     // "Add new choice"
     "addNew@choices": "Сонголт оруулах",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "Шинэ багана нэмэх",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "Шинэ мөр нэмэх",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "Шинэ дүрэм нэмэх",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "Шинэ хувьсагч нэмэх",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "Шинэ триггер нэмэх",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "Шинэ URL нэмэх",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "Шинэ хуудас нэмж",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Үнэлгээний үнэ цэнийг нэмэх",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Шошго нэмэх",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Талбай нэмэх",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "Багана нэмэх",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "Мөр нэмэх",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "Дүрэм нэмэх",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "Хувьсагч нэмэх",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "Триггер нэмэх",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Тэмдэглэгээ нэмэх",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "Холбоос нэмэх",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "Хуудас нэмэх",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Сорт түвшин нэмэх",
     // "Value"
     value: "Утга",
     // "Text"
@@ -916,6 +1120,8 @@ export var mnStrings = {
     surveyTitlePlaceholder: "Санал асуулгын гарчиг",
     // "Page {num}"
     pageTitlePlaceholder: "Хуудас {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Панелийн гарчиг",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "Эхлэх хуудас",
     // "Description"
@@ -966,6 +1172,8 @@ export var mnStrings = {
     visible: "Харагдана",
     // "Required"
     isRequired: "Заавал бөглөх",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Эерэг хариулт шаардаарай",
     // [Auto-translated] "Mark as required"
     markRequired: "Шаардлагын дагуу тэмдэглэгээ хийх",
     // [Auto-translated] "Remove the required mark"
@@ -976,6 +1184,8 @@ export var mnStrings = {
     eachRowUnique: "Дараалалд хувилж хариу үйлдэл үзүүлэхээс сэргийлнэ",
     // "Error message for required questions"
     requiredErrorText: "Заавал бөглөх талбарыг бөглөөгүй байна",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Шаардлагатай үед алдааны мессеж гарах",
     // "Display the question on a new line"
     startWithNewLine: "Асуултыг шинэ мөрөнд харуулах",
     // "Rows"
@@ -994,6 +1204,16 @@ export var mnStrings = {
     maxFiles: "Файлын хамгийн их тоо",
     // "Row count"
     rowCount: "Мөрний тоо",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Хуудас тутамд мөр",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Хэрэглэгчдэд мөрүүдийг эрэмбэлэх боломж олгох",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Хамгийн их ангиллын түвшин",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Анхдагч эрэмбэрийн дараалал",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Шоу ангиллын бар",
     // "Columns layout"
     columnLayout: "Баганы зохион байгуулалт",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export var mnStrings = {
     questionErrorLocation: "Алдааны мэдэгдлийн байршил",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Эхний асуултыг шинэ хуудсанд төвлөрүүлэх",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Сонголтын богино замыг идэвхжүүлэх",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Гарын таавар үзүүл",
     // "Question order"
     questionOrder: "Хуудас дээрх элементийн дараалал",
     // "Time limit to complete the survey"
@@ -1268,6 +1492,8 @@ export var mnStrings = {
     minRowCount: "Хамгийн бага мөрний тоо",
     // "Maximum row count"
     maxRowCount: "Хамгийн их мөрний тоо",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Мөрийн тооны илэрхийлэл",
     // "Confirm row removal"
     confirmDelete: "Мөр устгахыг батлах",
     // "Confirmation message"
@@ -1278,6 +1504,8 @@ export var mnStrings = {
     minPanelCount: "Хамгийн бага панелийн тоо",
     // "Maximum number of entries"
     maxPanelCount: "Хамгийн их панелийн тоо",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Оролт тооны илэрхийлэл",
     // "Initial entry state"
     panelsState: "Дотоод панелийн өргөссөн төлөв",
     // "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export var mnStrings = {
     logoHeight: "Логөны өндөр (CSS хүлээн зөвшөөрсөн утга)",
     // "Read-only"
     readOnly: "Зөвхөн унших",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Зөвхөн унших горим",
     // "Disable the read-only mode if"
     enableIf: "Засах боломжтой хэрэв",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export var mnStrings = {
       columns: "Багана",
       // "Rows"
       rows: "Мөр",
+      // [Auto-translated] "Entries"
+      entries: "Оролцогчид",
       // "Choice Options"
       choices: "Сонголт",
       // "Items"
@@ -1544,6 +1776,8 @@ export var mnStrings = {
       question: "Асуулт",
       // "Pages"
       pages: "Хуудас",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Бүс нутгийн форматууд",
       // "Quiz Mode"
       timer: "Тоолуур/Асуулт хариулт",
       // "Calculated Values"
@@ -1862,6 +2096,12 @@ export var mnStrings = {
       // [Auto-translated] "Never"
       none: "Хэзээ ч"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Зөвхөн унших зориулалттай",
+      // [Auto-translated] "View"
+      view: "Үзэмж"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "Радио товчлуурууд",
     inputType: {
@@ -1913,6 +2153,12 @@ export var mnStrings = {
       warning: "Анхааруулга",
       // [Auto-translated] "Informational"
       info: "Мэдээлэл"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Урд тал",
+      // [Auto-translated] "Rear"
+      environment: "Ар тал"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export var mnStrings = {
     underRowSingle: "Мөрийн доор, зөвхөн ганц панел харагдана",
     // "Auto"
     auto: "Авто",
+    // [Auto-translated] "Always"
+    always: "Үргэлж",
     timerInfoMode: {
       // "Both"
       combined: "Аль аль нь"
@@ -2321,7 +2569,148 @@ export var mnStrings = {
       survey: "Судалгаатай адил",
       // [Auto-translated] "Same as container"
       container: "Савтай адил"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Өв залгамжлах",
+      // [Auto-translated] "Hide"
+      "false": "Нуух",
+      // [Auto-translated] "Show"
+      "true": "Шоу"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Араб хэл",
+    // [Auto-translated] "Bulgarian"
+    bg: "Болгар хэл",
+    // [Auto-translated] "Catalan"
+    ca: "Каталан хэл",
+    // [Auto-translated] "Czech"
+    cs: "Чех хэл",
+    // [Auto-translated] "Welsh"
+    cy: "Уэлс хэл",
+    // [Auto-translated] "Danish"
+    da: "Дани хэл",
+    // [Auto-translated] "German"
+    de: "Герман хэл",
+    // [Auto-translated] "Greek"
+    el: "Грек хэл",
+    // [Auto-translated] "English"
+    en: "Англи хэл",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Англи (Австрали)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Англи (Канад)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Англи (Их Британи)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Англи (Ирланд)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Англи (Энэтхэг)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Англи (Шинэ Зеланд)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Англи (Өмнөд Африк)",
+    // [Auto-translated] "Spanish"
+    es: "Испани хэл",
+    // [Auto-translated] "Estonian"
+    et: "Эстон хэл",
+    // [Auto-translated] "Basque"
+    eu: "Бахрейн хэл",
+    // [Auto-translated] "Persian"
+    fa: "Перс",
+    // [Auto-translated] "Finnish"
+    fi: "Финланд хүн",
+    // [Auto-translated] "Filipino"
+    fil: "Филиппин хэл",
+    // [Auto-translated] "French"
+    fr: "Франц хэл",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Франц (Канад)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Франц хэл (Швейцарь)",
+    // [Auto-translated] "Hebrew"
+    he: "Хебри хэл",
+    // [Auto-translated] "Hindi"
+    hi: "Энэтхэг хэл",
+    // [Auto-translated] "Croatian"
+    hr: "Хорват хэл",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Гайтийн Креол хэл",
+    // [Auto-translated] "Hungarian"
+    hu: "Унгар хэл",
+    // [Auto-translated] "Indonesian"
+    id: "Индонез хэл",
+    // [Auto-translated] "Icelandic"
+    is: "Исланд хэл",
+    // [Auto-translated] "Italian"
+    it: "Итали хэл",
+    // [Auto-translated] "Japanese"
+    ja: "Япон хэл",
+    // [Auto-translated] "Georgian"
+    ka: "Гүрж хэл",
+    // [Auto-translated] "Kazakh"
+    kk: "Казах хэл",
+    // [Auto-translated] "Korean"
+    ko: "Солонгос хэл",
+    // [Auto-translated] "Lithuanian"
+    lt: "Литв хэл",
+    // [Auto-translated] "Latvian"
+    lv: "Латви хэл",
+    // [Auto-translated] "Macedonian"
+    mk: "Македони хэл",
+    // [Auto-translated] "Burmese"
+    mm: "Бирмийн хэл",
+    // [Auto-translated] "Malay"
+    ms: "Малай хэл",
+    // [Auto-translated] "Dutch"
+    nl: "Герман хэл",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Датч (Бельги)",
+    // [Auto-translated] "Norwegian"
+    no: "Норвеги хэл",
+    // [Auto-translated] "Polish"
+    pl: "Польш хэл",
+    // [Auto-translated] "Portuguese"
+    pt: "Португали хэл",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Португал хэл (Бразил)",
+    // [Auto-translated] "Romanian"
+    ro: "Румын хэл",
+    // [Auto-translated] "Russian"
+    ru: "Орос хэл",
+    // [Auto-translated] "Slovak"
+    sk: "Словак хэл",
+    // [Auto-translated] "Slovenian"
+    sl: "Словени хэл",
+    // [Auto-translated] "Serbian"
+    sr: "Серби хэл",
+    // [Auto-translated] "Swedish"
+    sv: "Швед хэл",
+    // [Auto-translated] "Swahili"
+    sw: "Свахили",
+    // [Auto-translated] "Telugu"
+    tel: "Телугу хэл",
+    // [Auto-translated] "Tajik"
+    tg: "Тажик хэл",
+    // [Auto-translated] "Thai"
+    th: "Тай хэл",
+    // [Auto-translated] "Turkish"
+    tr: "Турк хэл",
+    // [Auto-translated] "Ukrainian"
+    uk: "Украйн хэл",
+    // [Auto-translated] "Urdu"
+    ur: "Урду хэл",
+    // [Auto-translated] "Vietnamese"
+    vi: "Вьетнам хэл",
+    // [Auto-translated] "Chinese"
+    zh: "Хятад хэл",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Хятад хэл (Хялбаршуулсан)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Хятад (уламжлалт)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export var mnStrings = {
     visibletrigger: "Харагдах байдлыг өөрчлөх"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Судалгааны хэлтэй адил"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "Экс.: +1(999)-999-99-99"
@@ -2405,12 +2798,6 @@ export var mnStrings = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "Жишээ нь: мм/дд/гггг ХХ:ММ:сс"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "Экс.: $",
-      // "Ex.: USD"
-      suffix: "Экс.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export var mnStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Энэ панел grid загварт хэдэн багана багтаахыг тодорхойлно.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Энэ хүснэгт нь панел доторх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл."
+      gridLayoutColumns: "Энэ хүснэгт нь панел доторх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Энэ самбар доторх асуултууд зөвхөн унших боломжтой үед хэрхэн харагдахыг тодорхойлдог. \"Зөвхөн унших\" нь асуултуудыг ердийн оролтын удирдлагуудтай харуулдаг боловч засварлах үед идэвхгүй болгодог. \"View\" нь хариултыг текст эсвэл бусад харилцан үйлчлэлгүй элементээр харуулдаг. \"Inherit\" нь эцэг самбар, хуудас эсвэл судалгааны горимыг ашигладаг (\"Зөвхөн унших\" нь анхдагчаар)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export var mnStrings = {
       width: "Панелийн өргөнийг ижил шугамаар бусад судалгааны элементүүдтэй тэнцүү тогтооно. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Динамик панел цолны темплэйтэд бичнэ. Харагдах панелуудын дунд түүний дарааллыг {panelIndex} болон {visiblePanelIndex} -ийг ашиглана уу. Автомат дугаар нэмэхийн тулд эдгээр байрлагчдыг загварт оруул.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Бичлэгийн гарчгийн хэв маяг утга утга гаргахгүй үед хэрэглэгддэг нөөц текст. Бичлэгийн ерөнхий байрлалыг {panelIndex}, харагдах бичлэгүүдийн дарааллыг {visiblePanelIndex} гэж ашиглана.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Таб нэрний темплэйтэд бичнэ. {panelIndex} нь панелийн ерөнхий байрлал болон {visiblePanelIndex} -ийг ил харагдах панелуудын дунд эмх цэгцтэй байлгахад ашиглана. Автомат дугаар нэмэхийн тулд эдгээр байрлагчдыг загварт оруул.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export var mnStrings = {
       keyName: "Энэ асуултад хэрэглэгчээс панел бүрт өвөрмөц хариулт өгөхийг шаардахын тулд асуултын нэрийг эш тат.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Тайлбарыг арилгахаас өмнө баталгааны өдөөлт үүсгэнэ.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Бичлэгийн тоог тооцоолдог илэрхийллийг тодорхойл. Энэ илэрхийлэл нь \"Эхний оролтын тоо\" тохиргоог давж, хамаарах утгууд өөрчлөгдөхөд дахин үнэлэгддэг. Үр дүн нь \"Хамгийн бага оруулалтын тоо\" болон \"Хамгийн их оруулалтын тоо\" тохиргоогоор хязгаарлагддаг. Энэ илэрхийлэл тохируулсан үед хариуцагчид гараар нэмэх эсвэл хасах боломжгүй.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Панелийн хуудас бүрт харагдах бичлэгийн тоог заадаг. '0' нь хуудаслалыг идэвхгүй болгож, бүх бичлэгийг харуулдаг.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Хариуцалд оролцогчдыг sort bar ашиглан эрэмбэлэх боломж олгодог.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Эхний оруулалтын дарааллыг тодорхойлно. Хэрэв эрэмбэлэх зөвшөөрөгдсөн бол хариулагчид үүнийг өөрчилж болно. Олон асуултаар эрэмбэлэхэд асуулт бүр өмнөх асуултын дарааллын дагуу бичлэгүүдийг эрэмбэлдэг. Асуултыг чирж тэргүүлж тэргүүлэхийг нь өөрчилнө.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Динамик панел дотор байрласан асуултуудад дугаар онооно."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Хариуцагчдад баганын толгойг дарж эсвэл sort bar ашиглан мөрүүдийг эрэмбэлэх боломж олгодог.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Эхний мөрийн дарааллыг тодорхойлно. Хэрэв эрэмбэл хариуцагчид үүнийг өөрчилж болно. Олон баганаар эрэмбэлэхэд багана бүр мөрүүдийг өмнөх баганын дарааллаар эрэмбэлдэг. Багануудыг чирж тэргүүлэн тэдгээрийн давуу талаа өөрчилнө.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" нь зөвхөн матриц дээр эрэглэх боломжтой баганын толгойгүй үед л сортлох самбарыг харуулдаг: толгой нь нуугдсан, матриц нь гар утасны зохион байгуулалтыг ашигладаг, эсвэл мөрүүдийг багана руу шилжүүлдэг. \"Always\" нь эргэж ангилах баганын толгой харагдаж байхад ч сортлох самбарыг харуулдаг.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Мөрийн тоог тооцох илэрхийллийг тодорхойлно. Энэ илэрхийлэл нь \"Эхний мөрийн тоо\" тохиргоог даван туулж, иш татсан утгууд өөрчлөгдөхөд дахин үнэлэгддэг. Үр дүн нь \"Хамгийн бага мөрийн тоо\" болон \"Хамгийн их мөрийн тоо\" тохиргоогоор хязгаарлагддаг. Энэ илэрхийллийг тохируулсан үед хариу өгөх хүмүүс мөрүүдийг гараар нэмэх эсвэл хасах боломжгүй.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Мөрийг арилгахаас өмнө баталгааны хүсэлтийг өдөөнө.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Матрицад шинэ мөр нэмэх үед нарийвчилсан хэсгийг автоматаар өргөжүүлнэ."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Матрицын хуудас бүрт харагдах мөрийн тоог заана. '0' нь хуудаслалыг идэвхгүй болгож, бүх мөрүүдийг харуулдаг.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Хариулагч нэг дор хэдэн талбараар эрэмбэлж болохыг заана.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Сүүлийн мөрнөөс хариултуудыг хуулбарлаж, дараагийн нэмэлт динамик мөрөнд хуваарилна.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export var mnStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Сонголтын сонголтуудын урт текстүүд нь дусал цэсний дотор багтахын тулд автоматаар шугамын завсар үүсгэх болно. Хэрэв та бичвэрүүдийг хайчлахыг хүсвэл сонгогдоогүй.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Энэ асуулт хүснэгтийн загварт хэдэн багана багтаахыг тодорхойлно."
+      effectiveColSpan: "Энэ асуулт хүснэгтийн загварт хэдэн багана багтаахыг тодорхойлно.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Зөвхөн унших боломжтой үед асуулт хэрхэн харагдахыг зааж өгдөг. \"Зөвхөн унших\" нь асуултыг ердийн оролтын удирдлагуудтай харуулдаг боловч засварлах үед идэвхгүй болгодог. \"View\" нь хариултыг текст эсвэл бусад харилцан үйлчлэлгүй элементээр харуулдаг. \"Inherit\" нь эцэг самбар, хуудас эсвэл судалгааны горимыг ашигладаг (\"Зөвхөн унших\" нь анхдагчаар).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Энэ асуултын доор гарын үйлдлүүдийн зөвлөмжийг харуулна. \"Inherit\" сонголт нь судалгааны түвшний тохиргоог хэрэгжүүлдэг."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export var mnStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Хэрэв та хариулагчдыг таны судалгааг бөглөхөд саад болохыг хүсвэл сонго.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Зөвхөн унших асуултууд хэрхэн харагдахыг заасан, урьдчилсан үзэх хуудсанд ч багтана. \"Зөвхөн унших\" (анхдагч) нь асуултыг ердийн оролтын удирдлагуудтай харуулдаг боловч засварлах үед идэвхгүй болгодог. \"Харах\" нь хариултыг текст эсвэл бусад харилцан үйлчлэлгүй элементээр харуулдаг.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Явцын барын байршлыг тогтооно. \"Auto\" value нь судалгааны гарчгийн дээр эсвэл доод тал дахь явцын барыг харуулна."
     },
@@ -2633,7 +3050,9 @@ export var mnStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Сонгогдсон тохиолдолд сонголт бүрд зориулж багана үүсгэнэ.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Сонголтын хувилбаруудыг олон баганатай загвараар байрлуулна. 0 болговол сонголтууд нэг мөр хэлбэрээр харагдана. -1 болговол бодит үнэ нь эцэг матрицын \"Nested column count\" шинж чанараас өвлөгдэнэ."
+      colCount: "Сонголтын хувилбаруудыг олон баганатай загвараар байрлуулна. 0 болговол сонголтууд нэг мөр хэлбэрээр харагдана. -1 болговол бодит үнэ нь эцэг матрицын \"Nested column count\" шинж чанараас өвлөгдэнэ.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Энэ баганын эсүүд зөвхөн унших үед хэрхэн харагдахыг заадаг. \"Зөвхөн унших\" нь эсүүдийг ердийн оролтын удирдлагуудтай харуулдаг боловч засварлах үед идэвхгүй болгодог. \"View\" нь хариултыг текст эсвэл бусад харилцан үйлчлэлгүй элементээр харуулдаг. \"Inherit\" нь матриц эсвэл судалгааны горимыг ашигладаг (\"Зөвхөн унших\" нь анхдагчаар)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export var mnStrings = {
     questionErrorLocation: "Асуулттай холбоотой алдааны мессежийн байршлыг хүчингүй оруулсан байдлаар тогтооно. Аль нэгийг сонгоно уу: \"Топ\" - асуултын хайрцагны дээд хэсэгт алдаа текст байрлуулсан байна; \"Bottom\" - асуултын хайрцагны доод хэсэгт алдаа текст байрлуулна.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Текст оруулахад бэлэн болсон хуудас бүр дээрх эхний оролтын талбарыг хүсвэл сонгоно уу.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Radio Button Group, Checkboxes, Image Picker асуултуудын сонголтуудын хажууд (A, B, C, ...) үсгийг харуулдаг. Хариулагчид тохирох үсгийн товчлуурыг дарж сонголтоо сонгож болно. Та энэ тохиргоог тус бүрийн асуултад давж болно.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Сонголтын хажууд үсгүүдийг (A, B, C, ...) харуулж, хариулагчид тохирох үсгийн товчийг дарж сонгох боломж олгодог. \"Inherit\" сонголт нь судалгааны түвшний тохиргоог ашигладаг."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Асуултын доор гарын үйлдлийн боломжит зөвлөмжүүдийг харуулна. Та энэ тохиргоог хувь хүний асуултад өөрчилж болно.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Асуултуудын анхны дарааллыг хадгалах эсвэл санамсаргүйгээр авч явдаг. Энэ тохиргооны үр нөлөө нь зөвхөн Preview таб-д харагдана.",
     // [Auto-translated] "For text entry questions only."
@@ -2793,7 +3220,9 @@ export var mnStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Хуудсан дээр навигацийн товчны харагдах байдлыг тогтоо. \"Өв залгамжлах\" хувилбар нь \"Үзэгдэх\" гэсэн сонголт бүхий судалгааны түвшний тохиргоог хэрэгжүүлдэг.",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Энэ хүснэгт нь хуудас дээрх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл."
+      gridLayoutColumns: "Энэ хүснэгт нь хуудас дээрх grid багана бүрийг тохируулах боломжийг олгодог. Энэ нь нэг мөр дэх элементүүдийн хамгийн их тооноос шалтгаалан багана бүрийн өргөнийн хувийг автоматаар тогтоодог. Хүснэгтийн байрлалыг тохируулахын тулд эдгээр үнэ цэнийг гараар тохируулж, багана бүр дэх бүх асуултын гарчгийн өргөнийг тодорхойл.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Энэ хуудсан дээрх асуултууд зөвхөн унших үед хэрхэн харагдахыг заана. \"Зөвхөн унших\" нь асуултуудыг ердийн оролтын удирдлагуудтай харуулдаг боловч засварлах үед идэвхгүй болгодог. \"View\" нь хариултыг текст эсвэл бусад харилцан үйлчлэлгүй элементээр харуулдаг. \"Inherit\" нь судалгааны горимыг ашигладаг (\"Зөвхөн унших\" нь анхдагчаар)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "Хуудас дээрх цаг хэмжигчийн байрлалыг тогтооно.",
@@ -2911,6 +3340,22 @@ export var mnStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Асуултын үнэ цэнийг судалгааны үр дүнд хэрэгжүүлсэн багаар хадгалахыг хүсэж байгаа эсэхээ сонго."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Формат нь огноо-цаг, тоон болон валютын оролт маскад хамаарах бүс. Хэрэв заагдаагүй бол судалгааны хэл ашиглагддаг.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Оролт масканд ашиглагддаг бүс нутгийн огнооны форматыг өөрчилнө. Хээ нь салгагч тэмдэгтүүд болон дараах түргэн тэмдэглэгчдийг агуулж болно: <br>'m' - Сарын дугаар.<br> 'mm' - Сарын дугаар, нэг оронтой утгуудыг эхлүүлсэн тэг. <br>'d' - Сарын өдөр. <br>'dd' - Сарын өдөр, нэг оронтой утгуудыг тэргүүлэгч тэг. <br>'yy' - Жилийн сүүлийн хоёр оронтой. <br>'yyyy' - Дөрвөн оронтой жил.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Оролт масканд ашиглагддаг бүс нутгийн цагийн форматыг давхарладаг. Хээ нь салгагч тэмдэгтүүд болон дараах түргэн тэмдэглэгээтэй байж болно: <br>'H' - 24 цагийн формат дахь цагууд.<br> 'HH' - 24 цагийн формат дахь цагууд, нэг оронтой утгуудыг эхлүүлсэн тэг. <br>'h' - 12 цагийн форматын цагууд. <br>'hh' - 12 цагийн форматын цагууд, нэг оронтой утгуудыг эхлүүлсэн тэг. <br>'MM' - Минутууд. <br>'ss' - Секундууд. <br>'TT' - 12 цагийн цагийн хугацаа том үсгээр (AM/PM). <br>'tt' - жижиг үсгээр 12 цагийн хугацаа (am/pm).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Оролт маск дахь тооны хуваархай хэсгийг бүхэл тооны бүхэл хэсгээс тусгаарлахад ашигладаг тэмдэгтийг даван туулна.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Оролт маск дахь олон тооны цифруудыг гурван бүлэглэлд хуваахад бүс нутгийн хэрэглэдэг тэмдэгтийг өөрчилдөг.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Оролт масканд ашиглагддаг бүс нутгийн валютын тэмдэг эсвэл кодыг өөрчилдөг.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Оролт масканд ашиглагддаг бүс нутгийн валютын хэв маягийг даван туулна. Загвар дараах товчлолуудыг агуулж болно: <br>'@' - Валютын тэмдэг эсвэл код.<br> '#' - Тоо. <br>'-' - Минус тэмдэгийн сөрөг утгууд дахь байрлал (хассан бол минус тэмдэгийг эхэнд байрлуулна)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Загвар нь уянгын шууд болон дараах байрлагчийг агуулж болно: '9' - тоон хувьд; 'a' - дээд буюу доод талын үсгийн хувьд; '#' - цифр эсвэл дээд, эсвэл доод кейс үсгийн хувьд. Дүрээс зугтахын тулд backslash '\\' ашигла."
@@ -2925,13 +3370,15 @@ export var mnStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Том тооны тоонуудыг 3 бүлэг болгон салгахад хэрэглэгддэг бэлгэдэл.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Үзүүлсэн дугаарын хувьд decimal цэгийн дараа хэдэн цифрийг хадгалахыг хязгаарлана."
+      precision: "Үзүүлсэн дугаарын хувьд decimal цэгийн дараа хэдэн цифрийг хадгалахыг хязгаарлана.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Хуваарьтай хэсэгт заасан нарийвчлалд хүрсэн тэгүүдийг харуулна. Жишээ нь, 2 нарийвчлалтай үед 1.2 оролтын утга 1.20 гэж харагдана."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Үнэ цэнийн өмнө үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Үнэ цэнийн дараа үзүүлэх нэг эсвэл хэд хэдэн бэлгэдлүүдийг."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Валютын тэмдэг эсвэл код, утгаараа илэрхийлэгдсэн. Бүс нутгийн тэмдэг анхдагчаар ашиглагддаг. Энэ шинж чанарыг устгаж, тэмдэг харагдахгүй болно.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Дугаар, валютын тэмдэг, минус тэмдэгний байрлалыг заана. Загвар дараах орлуулалтуудыг агуулж болно: <br>'@' - Валютын тэмдэг эсвэл код.<br> '#' - Тоо. <br>'-' - Минус тэмдэгтийн сөрөг утгууд дахь байрлал (хассан бол минус тэмдэгийг эхэнд байрлуулна)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2982,6 +3429,8 @@ export var mnStrings = {
     tabAlign: "Хавтас байрлуулах",
     // [Auto-translated] "File source type"
     sourceType: "Файлын эх сурвалжийн төрөл",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Анхдагч камер",
     // [Auto-translated] "Fit to container"
     fitToContainer: "Сав баглаа боодолд тохирно",
     // [Auto-translated] "Set value expression"
@@ -3302,12 +3751,702 @@ export var mnStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Урьдчилсан тохируулга хэрэглээ"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Шугам: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Санал болгосон нэрийг ашигла"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Давтагдсан элементийг устга"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Санал болгосон төрлийг ашигла"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Санал болгосон функцийг ашигла"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Санал болгосон маск ашигла"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Элементэд үнэгүй нэр өгнө"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Элементэд үнэгүй нэр өгнө"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Эд хөрөнгөө устгах"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Хамгийн ойрын зөвшөөрөгдсөн утгыг ашигла",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Эд хөрөнгөө устгах",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Санал болгосон утгыг ашигла"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Утгыг жагсаалт болгох"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Элементэд нэр өг"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Эд хөрөнгөө устгах",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Үл хөдлөх хөрөнгийг дахин нэрлэх"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Санал болгосон нэрийг ашигла",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Санал болгосон нэрийг ашигла"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Санал болгосон нэрийг ашигла"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Санал болгосон төрлийг ашигла"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Санал болгосон төрлийг ашигла"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "\"{expression}\" илэрхийллийг задлах боломжгүй."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" олдохгүй - энэ нэртэй асуулт, самбар, хуудас, тооцоолсон утга эсвэл хувьсагч байхгүй.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" нь {containerType} \"{root}\" (эх сурвалж: {name}) дээр байдаггүй.",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" нь \"{scopePrefix}\" хүрээнд (эх сурвалж: {name}) байхгүй.",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "\"{name}\" нэрсийн keyName нь \"{key}\" - \"{name}\" нэртэй {keyNoun} байдаггүй тул давхар түлхүүрийн баталгаажуулалт хэзээ ч явагддаггүй.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" олдсонгүй."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "\"{name}\"-ийн {prop} нь элементийг өөрөө илэрхийлнэ (лататлага: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "\"{name}\" нэр давхарддаг.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Тооцоолсон утгын нэр \"{name}\" аль хэдийн өөр тооцоолсон утгаар ашиглагдаж байна.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Тооцоолсон утга \"{name}\" нь өөр элементтэй нэрээ хуваалцдаг тул нэг нь нөгөөгөө сүүдэрлүүлдэг."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "Энэ {ownerText}-ийн {nameKindText} \"{name}\" нь мөн {{builtIn}} суурилуулсан судалгааны хувьсагч бөгөөд судалгаа нь {{name}}-д эхэлж хариулдаг тул энэ нь илэрхийлэлд хүрч чадахгүй.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "\"{name}\"-ийн valueName \"{valueName}\" нь {otherType} \"{otherName}-ийн утгыг хуваалцдаг бөгөөд энэ нь өөрийн гэсэн valueName-гүй - \"{otherName}\" нь \"{name}\" нэмэх талбаруудыг үл мэдэгддэг гэж үзэж, clearIncorrectValues() устгана. ValueName-г мөн \"{valueName}\" болгож тохируулна.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Matrixdropdown-ийн \"{otherName}\" мөр нь мөн {sharedKeyText} \"{name}\" гэсэн утгатай бөгөөд үүний утгыг хуваалцдаг - эсийн объект болон нэг утга нэг түлхүүр дор хоёулаа орших боломжгүй; runtime нь нэгийг нь хадгалж, нөгөөг устгадаг.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name} нь өгөгдлийн түлхүүр \"{dataKey}\"-ийг {otherType} \"{otherName}\"-тэй хуваалцдаг - энэ нь {shapeText}-ийг хадгалдаг, харин \"{otherName}\" нь {otherShapeText}-ийг хадгалдаг; нэг нь нөгөө утгыг хадгалж чадахгүй тул clearIncorrectValues() нь устгана.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Өгөгдлийн түлхүүр \"{dataName}\" нь мөн \"{base}\" (өгөгдлийн түлхүүр болон \"{suffix}\") сэтгэгдлийн түлхүүр бөгөөд нэг бичлэг нөгөөг чимээгүй давтдаг.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Өгөгдлийн түлхүүр \"{dataName}\" нь мөн \"{base}\" (өгөгдлийн түлхүүр болон \"{suffix}\") нийт тооны түлхүүр юм - нэг бичлэг нөгөөг чимээгүйхэн давтдаг.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "{trigger} триггер нь \"{name}\" хувьсагчийг тохируулдаг бөгөөд энэ нь мөн \"{questionName}\" асуултын өгөгдлийн түлхүүр юм - тэр хувьсагч нь {{name}} гэж хариулдаг, асуулт биш."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "\"{name}\" нэр нь Object.prototype-ийн гишүүн хэвээр хадгалагдсан.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "\"{name}\"-ийн valueName \"{valueName}\" нь Object.prototype-ийн гишүүн нь захиалагдсан.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "\"{matrixName}\"-ийн \"{name}\" багана нь Object.prototype-ийн гишүүн хэвээр хадгалагдсан.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "\"{questionName}\"-ийн \"{name}\" зүйл нь Object.prototype-ийн гишүүн гэсэн захиалгатай байдаг.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "\"{name}\"-ийн \"{rowValue}\" мөр нь Object.prototype-ийн гишүүн хэвээр хадгалагдсан.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Тооцоолсон \"{name}\" утга нь Object.prototype-ийн гишүүн болох захиалгатай байдаг."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{нэр}\" нь тодорхойгүй \"{type}\" гэсэн утгатай.",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" нь төрөлгүй - төрөлгүй элементийг хасдаг."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" нь {ownerText} ({className})-ийн шинж чанар биш."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "{ownerText}-ийн \"{key}\" нь сериалжих боломжгүй бөгөөд ачаалах үед хүчин үзүүлэх бөгөөд судалгааг дахин хадгалах бүрт JSON-оос хасдаг.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "{ownerText}-ийн \"{key}\" ба \"{aliasKey}\" нь нэг шинж чанарын хоёр нэр бөгөөд гүйцэтгэлийн хугацаа нь JSON-ийн бичдэг дарааллаар ашиглагддаг тул \"{winner}\" ялна.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" нь \"{name}\" дээр тавигдсан боловч inputType \"{inputType}\" нь хязгааргүй - гүйцэтгэлийн хугацаа үүнийг үл тоомсорлодог."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{ownerText}-ийн {key} нь {valueText} бөгөөд зөвшөөрөгдсөн утгуудын нэг биш ({allowedText}.",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{ownerText}-ийн {key} нь {value} бөгөөд зөвшөөрөгдсөн {rangeText} хүрээнээс гадуур байна.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "\"{name}\"-ийн valueName \"{valueName}\" нь \".\" агуулдаг - илэрхийлэлүүд {{valueName}} нь \"{rootKey} руу орох зам гэж уншдаг тул өгөгдлийн түлхүүр өөрөө хэзээ ч хаяглахгүй."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} нь \"{key}\" гэж байхгүй - энэ шинж чанар нь {className}-д шаардлагатай.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "{className}-ийн нэр нь {valueText} бөгөөд мөр биш - судалгаа үүнийг ачаалах боломжгүй."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "{ownerText}-ийн \"{key}\" нь массив биш - шинж чанар нь жагсаалтыг агуулдаг бөгөөд гүйцэтгэх хугацаа нь утгыг нэг элементтэй массив руу боодог."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Хувьсагчийн тодорхойлолт нь \"{variable}\" гэж зарладаг бөгөөд энэ нь мөн \"{name}\" асуултын өгөгдлийн түлхүүр бөгөөд хувьсагчийг тохируулахад тухайн түлхүүр доор хадгалагдсан хариултыг устгана, тэгээд {{name}} нь хостын утгыг хариулдаг.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Хувьсагчийн тодорхойлолт нь \"{variable}\" гэж зарладаг бөгөөд энэ нь тооцоолсон утга \"{name}\"-ийн нэр бөгөөд хоёулаа ижил оролтыг бичиж, хамгийн сүүлд гүйсэн нь ялна."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition нь судалгааны JSON объект биш тул хувьсагчийг зарлахгүй, урьдчилсан тохиргооны утгыг шалгах боломжгүй.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets нь массив биш тул урьдчилсан сет зарлагдахгүй.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "#{index} preset нь объект биш юм.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "#{index} урьдчилсан тохируулгад нэр байхгүй тул ямар ч зүйл үүнийг иш татаж чадахгүй.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Урьдчилсан \"{preset}\" нь хувьсагч объектгүй тул юу ч тохируулахгүй.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "\"{preset}\" preset-ийг хоёр удаа зарладаг - энэ нэртэй хайлт эхний хэсэгт хариулна.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "\"{preset}\" урьдчилсан тохиргоог \"{variable} гэж тогтоодог бөгөөд хувьсагчийн тодорхойлолт үүнийг зарладаггүй.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Preset \"{preset}\" нь \"{variable}\"-ийг хувьсагчийн тодорхойлолт татгалздаг утга болгон тогтоодог: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "\"{functionName}\" функц бүртгэгдээгүй."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Тооцоолсон утга \"{names}\" нь өөрийн илэрхийллээр өөрийгөө илэрхийлдэг.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Тооцоолсон утгууд {нэрс} хоорондоо хамаардаг."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Триггер өөрөө тогтоосон утгаараа хариу үйлдэл үзүүлдэг (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Триггерүүд өөрсдийн тогтоосон утгуудаар дамжуулан давталт үүсгэдэг: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} өөрөө бичдэг утгыг уншдаг - зөвхөн өөр утга өөрчлөгдөхөд ажилладаг тул огт ажилладаггүй.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Утгуудыг дараах давталтад бичдэг: {chain}. Бичих бүрт уншсан илэрхийлэлүүдийг дахин давтан гүйцэтгэдэг тул эцсийн утгууд нь асуултын хариултын дарааллаар хамаарна."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Энэ нөхцөл нь \"{нэр}\"-ийг {утга}-тай харьцуулдаг - сонголтуудын дунд байхгүй. Боломжтой: {available}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Энэ нөхцөл нь \"{нэр}\"-ийг {утга}-тай харьцуулдаг - сонголтын утга агуулахгүй. Боломжтой: {боломжтой}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Энэхүү нөхцөл нь \"{operator}\"-ийг \"{name}\"-д хамаарна: \"{recordName}\" ({questionType}) нь харьцуулах үнэ цэнгүй.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Энэхүү нөхцөл нь \"{operator}\"-ийг \"{name}\"-д хамаарна: \"{recordName}\" нь {valueShapeText}-ийг агуулдаг - дараалал болон арифметик операторууд үүнд хамаарахгүй.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Энэ нөхцөл нь \"{operator}\"-д \"{name}\"-д хамаарна: \"{recordName}\" нь boolean асуулт бөгөөд дарааллын операторууд үүнд хамаарахгүй.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Энэ нөхцөл нь \"{operator}\"-д \"{operator}\" хэрэглэдэг: \"{recordName}\" нь текстийн асуулт бөгөөд утга нь мөр тул тоон харьцуулалт нь далд хөрвүүлэлт дээр тулгуурладаг.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Энэ нөхцөл нь \"{operator}\"-д \"{name}\"-д хамаарна: \"{recordName}\" нь огнооны мөртэй бөгөөд үүнийг {constValue} хадгалж чадахгүй тоотой харьцуулахад болно.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Энэ нөхцөл нь \"{operator}\"-д \"{name}\"-д хамаарна: \"{recordName}\" нь тоон бөгөөд \"{constValue}\" мөртэй харьцуулахад нийтлэхгүй.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Энэ нөхцөл нь \"{operator}\"-ийг \"{name}\"-д хамаарна: \"{recordName}\" нь сонгосон утгуудын массив агуулдаг тул \"=\" нь бүх массивыг харьцуулдаг.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Энэхүү нөхцөл нь \"{operator}\"-ийг \"{name}\"-д хамаарна: \"{recordName}\" нь булийн асуулт бөгөөд {constValue}-тай харьцуулахад үр дүнгүй."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{expression}\" үргэлж худал тул \"{name}\" хэзээ ч харуулдаггүй.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} \"{expression}\" хэзээ ч ажилладаггүй, учир нь {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{expression}\" хэзээ ч ажилладаггүй - ямар ч зөвшөөрөгдсөн утга түүнийг хангахгүй: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{expression} нь өөртэйгөө зөрчилдөж байна: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{expression}\" нь үргэлж үнэн тул юу ч шийдэхгүй.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{expression} нь арифметик бөгөөд харьцуулалт биш, тиймээс тийм эсвэл үгүй гэж хэзээ ч хариулдаггүй.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "{prop} \"{expression}-ийн нэг хэсэг нь урьдчилан мэдэгдэж буй үр дүнтэй.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} \"{expression}\" үргэлж хүчинтэй, учир нь {facts} - юу ч шийдэхгүй."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" нь ямар ч асуулт эсвэл хувьсагчийг уншдаггүй."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "\"{name}\"-ийн анхдагч утга нь {valuesText} бөгөөд үүнийг хэзээ ч барьж чадахгүй. Зөвшөөрсөн: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "\"{name}\"-ийн зөв хариулт нь {valuesText} бөгөөд үүнийг хэзээ ч барьж чадахгүй. Зөвшөөрөгдсөн: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Триггер нь \"{name}\"-ийг {valuesText} болгон тохируулдаг боловч хэзээ ч барьж чадахгүй. Зөвшөөрөгдсөн: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Анхдагч мөрийн утга нь \"{name}\"-ийг {valuesText} болгон тохируулдаг боловч үүнийг хэзээ ч барьж чадахгүй. Зөвшөөрөгдсөн: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Анхдагч панелийн утга нь \"{name}\"-ийг {valuesText} болгон тохируулдаг бөгөөд үүнийг хэзээ ч барьж чадахгүй. Зөвшөөрөгдсөн: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "\"{name}\"-ийн {prop} нь \"{key}\" гэж нэрлэгддэг - ийм мөр байхгүй. Боломжтой: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "\"{name}\"-ийн {prop} нь \"{key}\" гэж нэрлэгддэг - ийм багана байхгүй. Боломжтой: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "\"{name}\"-ийн {prop} нь \"{key}\" гэж нэрлэгдсэн - ийм загварын асуулт байхгүй. Боломжтой: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Copyvalue нь \"{fromName}\"-ийг \"{setToName} руу хуулбарладаг боловч \"{fromName}\" нь {sourceShapeText}, \"{setToName}\" нь {targetShapeText} гэсэн утгатай.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Copyvalue trigger нь \"{fromName}\"-ийг \"{setToName}\" руу хуулбарладаг боловч \"{setToName}\" утгуудын дунд \"{fromName}\"-ийн утга байхгүй. Зөвшөөрөгдсөн: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" нь \"{source}\"-оос сонголтоо хуулбарладаг боловч энэ нэрэнд ямар ч эргэлзээ байхгүй.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" өөрийн сонголтоо өөрөөсөө хуулбарладаг.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" нь сонголтоо \"{source}\" ({sourceType})-оос хуулбарладаг бөгөөд энэ нь сонголт эсвэл утгуудын массив өгдөггүй.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" нь {prop} \"{field}\" гэж \"{source}\" гэж уншигддаг боловч {sourceType} \"{source}\" нь ийм {fieldNoun} гэж байдаггүй."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "\"{name}\"-ийн {prop}-ийн өөр нэг элемент аль хэдийн {valueText} утгыг агуулдаг - гүйцэтгэлийн хугацаа хоёуланг нь хадгалдаг.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "\"{name}\" сонголтууд {valueText} агуулдаг бөгөөд {toggleProp} нь асаалттай байдаг - энэ нь дотоод {specialItemText} элементтэй мөргөлдөж байна."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "{trigger} триггер нь \"{name} хуудсанд чиглүүлдэг бөгөөд энэ нь байхгүй.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "{trigger} триггер нь \"{name}\"-ийг чиглүүлдэг боловч {containerType} \"{root}\" нь {segmentNoun} \"{segment}\" гэж байхгүй.",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{trigger} триггер {verb} \"{name}\" гэсэн утгатай боловч тэр нэртэй {kindText} байхгүй."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "\"{type}\" гэх триггерийн төрөл тодорхойгүй.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Гохны төрөл байхгүй."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "\"{name}\"-ийн баталгаажуулалтын төрөл \"{type}\" тодорхойгүй.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "\"{name}\"-ийн баталгаажуулагч төрөлгүй."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "\"{name}\" {effectText}-ийн {validatorType} баталгаажуулагч: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "\"{name}\"-ийн {validatorType} баталгаажуулагч нь дор хаяж {min}, хамгийн ихдээ {max} шаарддаг - ямар ч хариулт хангалтгүй.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "\"{name}\"-ийн хариултын тооны баталгаажуулагч нь дор хаяж {minCount} хариултыг шаарддаг бөгөөд эдгээр нь хамтдаа сонгож болох {selectable} сонголтуудаас дээш.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "\"{name}\"-ийн regex validator нь хөдөлгүүр үүнийг хаадаг: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "\"{name}\"-ийн илэрхийллийн баталгаажуулагч нь илэрхийлэлгүй тул үргэлж дамждаг."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "\"{name}\"-ийн {minProp} нь {min} бөгөөд {maxProp}-ийн {max}-оос дээгүүр - гүйцэтгэх хугацаа нь нэг нь чимээгүй тохируулдаг.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "\"{name}\"-ийн {countProp} нь {count}, {direction} нь {boundProp} нь {bound} нь {bound} гэсэн утгатай бөгөөд гүйцэтгэлийн хугацаа нь түүнийг хязгаарладаг.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "\"{name}\"-ийн {stepProp} нь {step} боловч дамжин өнгөрдөг хүрээ нь ({minProp}.. {maxProp}) зөвхөн {хүрээ} хамардаг - гүйцэтгэх хугацаа нь үүнийг хязгаарладаг.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "\"{name}\"-ийн minSelectedChoices нь {min} бөгөөд хамтдаа сонгож болох {selectable} сонголтуудын дээр байрладаг - асуултад хэзээ ч хариулт авах боломжгүй."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" хэзээ ч харагдах ёсгүй: түүний visibleIf нь {reads} уншдаг, энэ {deadClause} тул нөхцөл хэзээ ч үргэлжлэхгүй."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "\"{name}\"-ийн maskType \"{maskType}\" маск нь мэдэгдсэн маск биш бөгөөд гүйцэтгэх хугацаа нь маскгүй болдог.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "\"{name}\"-ийн maskSettings нь \"{key} тохируулдаг бөгөөд энэ нь \"{maskType}\" маскны шинж чанар биш - гүйцэтгэх хугацаа нь чимээгүй ундаг.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "\"{name}\"-ийн maskSettings-ийг maskType-гүйгээр тохируулдаг - гүйцэтгэлийн хугацаа зөвхөн \"saveMaskedValue\"-г хадгалж, бусдыг хасдаг.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "\"{name}\"-ийн {maskType} маск оролтод хэрэглэгддэггүй: inputType \"{inputType}\" нь зөвхөн текст болон tel-д масклагддаг.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "\"{name}\"-ийн datetime маск нь min/max-ийг хээгүйгээр тогтоодог - хязгаар нь хээний огнооны хэсэгт хамаарна, тиймээс хээгүйгээр ямар ч үйлдэл хийхгүй.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "\"{name}\"-ийн {maskType} маск нь дор хаяж {min}, хамгийн ихдээ {max} боломж олгодог - ямар ч утга хангахгүй."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Динамик панел \"{name}\" нь хоосон загвартай бөгөөд түүний самбарууд дүрслэх ямар ч зүйлгүй.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\" нь ямар ч элементгүй.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\" нь хэзээ ч дүрслэх боломжгүй элементтэй - бүх элементүүд нуугдсан, хэзээ ч үргэлжлэхгүй нөхцөлөөр хамгаалагдсан, эсвэл хоосон.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "\"{name}\"-ийн дэлгэрэнгүй элементүүд хэзээ ч харагддаггүй: түүний detailPanelMode нь анхдагч \"none\" буюу анхдагч байдаг."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Байрлал: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Энэ нь триггерийн хуучин нэр, оператор болон утгын шинж чанаруудаас бүтээгдсэн.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Дотор: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Чи \"{0}\" гэж хэлсэн үү?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Хэрвээ энэ нь өөрийн бүрэлдэхүүн хэсэг бол түүний тодорхойлолтыг линтер рүү дамжуулж, бүрэн шинжилгээг боломжтой болгоно.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Функцийг линтингээс өмнө бүртгээрэй, эсвэл linter сонголтуудад жагсаана.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Буруу бичигдсэн төрөл нь гүйцэтгэлийн үед чимээгүй хаягддаг бөгөөд тусгай триггерийг зорилтот болон цикл шалгалтууд хамардаггүй.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Хэрвээ энэ нь ажиллах үед хувьсагч багтсан бол linter options-д жагсаана.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Хэрвээ триггерийн нөхцөлүүд хэзээ ч нийцэж болохгүй бол давталт хүрч чадахгүй байж магадгүй - илэрхийлэлүүдийг шалгаарай.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "defaultValueExpression нь зөвхөн асуултаа хариулт авах хүртэл хэрэглэгддэг.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "Илэрхийлэлээр: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Хавтас дээр дурдагдсан.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Сонголтуудын ByUrl {0}-д иш татагдсан.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "\"{0}\" текстэд дурдагдсан.", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () энэ нэрийг {1} \"{2}\" гэсэн бүх бичлэгээс уншдаг.",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "{0}() аргумент нь асуулт, панел эсвэл хуудас гэж нэрлэдэггүй.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Десериализатор мэдэхгүй түлхүүрээ унагадаг.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Deserializer нь шийдэж чадахгүй валидаторыг хаядаг тул юу ч баталгаажуулдаггүй.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "InputType нь \"{0}\" юм.",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Энэ нь \"{0}\"-ийн өгөгдлийн түлхүүр юм." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "мөн",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} нь үргэлж {утга}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} нь {хязгаар}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "Ядаж {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "хамгийн ихдээ {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} нь аль аль {утгууд} байж чадахгүй.",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} {утга} байж чадахгүй байж чадахгүй",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} хоосон байж {утга} байж болохгүй.",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} хоосон байж болохгүй",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} нь {min}-ээс дээш, {max}-ээс доош байж болохгүй",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} нь огт үнэ цэнгүй байх ёстой гэж хүсдэг"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "\"{0}.\" ишлэлүүд зөвхөн матриц эс эсвэл матриц дэлгэрэнгүй хавтангийн дотор байдаг.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" нь зөвхөн матриц эс эсвэл матриц дэлгэрэнгүй самбар дотор байдаг.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "\"{0}.\" лавлагаа нь зөвхөн динамик самбар эсвэл панелийн контейнер дотор байдаг.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "\"{0}.\" лавлагаа зөвхөн динамик самбар дотор байдаг.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" нь зөвхөн динамик самбар дотор байдаг.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" нь зөвхөн сонголт, мөр болон баганын нөхцөлд л байдаг.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\" лавлагаа зөвхөн нийлмэл асуултын дотор байдаг.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" нь inArray шүүлтүүр дотор байхгүй бөгөөд энэ шүүлтүүр нь тухайн зүйл болон судалгаатай холбогддог.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" нь энэ матрицын багана бөгөөд мөрийн урьдчилсан хуудсаар иш тат.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" гэдэг нь энэ динамик самбарын асуулт бөгөөд үүнийг самбарын урьдчилсан хэсгээр илэрхийлнэ."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "\"{0}\" дээр inputType: \"number\" гэж тохируулаад тоог цуглуулахгүй бол.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Олон сонголтын утгуудыг \"contains\" эсвэл \"anyof\" ашигла."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "Хуудас",
+        // [Auto-translated] "panel"
+        panel: "Самбар"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Нэр",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "Нэр"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "Тооцоолсон утга",
+        // [Auto-translated] "element"
+        default: "элемент"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Судалгаа",
+        // [Auto-translated] "the {0}"
+        className: "The {0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Бусад",
+        // [Auto-translated] "None"
+        none: "Байхгүй",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Хариу өгөхөөс татгалзаарай",
+        // [Auto-translated] "Don't know"
+        dontknow: "Мэдэхгүй"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "Хэзээ ч бууддаггүй",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "бүх хариултыг татгалзаж байна",
+        // [Auto-translated] "cannot validate"
+        default: "баталгаажуулж чадахгүй"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Энэ асуултад баталгаажуулах хариулт байхгүй",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "урт нь текстийн утгаас уншигддаг бөгөөд энэ хариулт нь ямар ч утга байхгүй",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Хариулт нь тоо биш бөгөөд хэзээ ч байж болохгүй",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "дугаар хэзээ ч и-мэйл хаягтай таарахгүй",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Хариулт нь утгуудын жагсаалт биш",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Хариулт нь шалгаж чадах утга биш"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "массив",
+        // [Auto-translated] "an object"
+        object: "объект"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "матрицын мөр",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "Олон тексттэй элемент",
+        // [Auto-translated] "a row or item of a question"
+        default: "Асуултын мөр эсвэл зүйл"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "объектуудын массив",
+        // [Auto-translated] "an object"
+        object: "объект",
+        // [Auto-translated] "a plain value"
+        plain: "энгийн үнэ цэн",
+        // [Auto-translated] "a value"
+        default: "a үнэ цэн"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "сонгогдсон утгуудын массив",
+        // [Auto-translated] "a single value"
+        scalar: "Нэг утга",
+        // [Auto-translated] "a value"
+        default: "a үнэ цэн"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "доор",
+        // [Auto-translated] "above"
+        above: "дээр"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "хэзээ ч харагдахгүй бөгөөд утга хүлээн авдаггүй",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "хэзээ ч харагдахгүй, утга хүлээн авдаггүй"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Асуулт",
+        // [Auto-translated] "question or variable"
+        questionvalue: "Асуулт эсвэл хувьсагч",
+        // [Auto-translated] "page"
+        page: "Хуудас"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "Уншлага",
+        // [Auto-translated] "navigates to"
+        gotoName: "чиглэл рүү чиглүүлэх",
+        // [Auto-translated] "sets"
+        default: "Багцууд"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Загварын асуулт",
+        // [Auto-translated] "column"
+        default: "Багана"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Загварын асуулт",
+        // [Auto-translated] "column"
+        matrixdynamic: "Багана",
+        // [Auto-translated] "item"
+        multipletext: "Эд зүйл",
+        // [Auto-translated] "row"
+        matrix: "Сэлүүр",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Сэлүүр",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "Багана",
+        // [Auto-translated] "field"
+        default: "Талбай"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Хэсэг 1" }, { value: "item2", text: "Хэсэг 2" }, { value: "item3", text: "Хэсэг 3" }],
-    columns: [{ value: "column1", text: "Column 1" }, { value: "column2", text: "Column 2" }, { value: "column3", text: "Column 3" }],
-    rows: [{ value: "row1", text: "Row 1" }, { value: "row2", text: "Row 2" }],
-    matrixColumns: [{ name: "column1", title: "Column 1" }, { name: "column2", title: "Column 2" }, { name: "column3", title: "Column 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Хэсэг 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Хэсэг 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Хэсэг 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // [Auto-translated] "Column 1"
+        text: "1-р багана"
+      },
+      {
+        value: "column2",
+        // [Auto-translated] "Column 2"
+        text: "2-р багана"
+      },
+      {
+        value: "column3",
+        // [Auto-translated] "Column 3"
+        text: "3-р багана"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // [Auto-translated] "Row 1"
+        text: "1-р эгнээ"
+      },
+      {
+        value: "row2",
+        // [Auto-translated] "Row 2"
+        text: "2-р мөр"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // [Auto-translated] "Column 1"
+        title: "1-р багана"
+      },
+      {
+        name: "column2",
+        // [Auto-translated] "Column 2"
+        title: "2-р багана"
+      },
+      {
+        name: "column3",
+        // [Auto-translated] "Column 3"
+        title: "3-р багана"
+      }
+    ]
   }
 };
 

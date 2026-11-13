@@ -1,5 +1,9 @@
 import { defaultCss } from "survey-core";
 
+// The content classes a composite property editor renders its inner panel with: the paddings
+// around it belong to the property grid row, not to the panel nested in it.
+const nopaddingContent = "spg-question__content spg-question__nopadding";
+
 export var propertyGridCss = {
   root: "spg-root-modern",
   rootTheme: "",
@@ -38,6 +42,7 @@ export var propertyGridCss = {
     description: "spg-description spg-panel__description",
     container: "spg-panel spg-row__panel",
     content: "spg-panel__content",
+    expandableContent: "spg-panel__expandable-content",
     icon: "spg-panel__icon",
     iconExpanded: "spg-panel__icon--expanded",
     footer: "spg-panel__footer",
@@ -67,8 +72,8 @@ export var propertyGridCss = {
     progressText: "spg-paneldynamic__progress-text",
     panelFooter: "spg-panel__footer",
     separator: "spg-paneldynamic__separator",
-    footer: "spg-paneldynamic__footer",
-    footerButtonsContainer: "spg-paneldynamic__buttons-container",
+    footerBar: "spg-paneldynamic__footer",
+    toolbar: "spg-paneldynamic__toolbar",
   },
   progress: "spg-progress spg-body__progress",
   progressBar: "spg-progress__bar",
@@ -232,13 +237,14 @@ export var propertyGridCss = {
     detailPanelCell: "spg-table__cell spg-table__cell--detail-panel",
     actionsCell: "spg-table__cell spg-table__cell--actions",
     buttonAdd: "spg-matrixdynamic__add-btn",
+    footerBar: "spg-matrixdynamic__footer",
     buttonRemove: "spg-matrixdynamic__remove-btn",
     iconAdd: "",
     iconRemove: "",
     dragElementDecorator: "spg-drag-element__svg",
-    iconDragElement: "#icon-drag-24x24",
+    iconDragElement: "icon-drag-24x24",
     iconDrag: "spg-matrixdynamic__drag-element",
-    footer: "",
+    toolbar: "",
     dragDropGhostPositionTop: "spg-matrixdynamic__drag-drop-ghost-position-top",
     dragDropGhostPositionBottom: "spg-matrixdynamic__drag-drop-ghost-position-bottom",
     noRowsSection: "spg-matrixdynamic__placeholder",
@@ -288,26 +294,29 @@ export var propertyGridCss = {
     clearButton: "sjs_sp_clear"
   },
   propertygrid_bindings: {
-    content: "spg-question__content spg-question__nopadding spg-question-group"
+    content: `${nopaddingContent} spg-question-group`
   },
   propertygrid_restfull: {
-    content: "spg-question__content spg-question__nopadding spg-restfull"
+    content: `${nopaddingContent} spg-restfull`
   },
   propertygrid_masksettings: {
-    content: "spg-question__content spg-question__nopadding spg-masksettings"
+    content: `${nopaddingContent} spg-masksettings`
+  },
+  propertygrid_regionalformat: {
+    content: `${nopaddingContent} spg-regionalformat`
   },
   propertygrid_header: {
     mainRoot: "spg-header",
-    content: "spg-question__content spg-question__nopadding"
+    content: nopaddingContent
   },
   coloralpha: {
-    content: "spg-question__content spg-question__nopadding spg-question__content-coloralpha"
+    content: `${nopaddingContent} spg-question__content-coloralpha`
   },
   font: {
-    content: "spg-question__content spg-question__nopadding spg-question-composite__content"
+    content: `${nopaddingContent} spg-question-composite__content`
   },
   backgroundcornerradius: {
-    content: "spg-question__content spg-question__nopadding spg-question-composite__content"
+    content: `${nopaddingContent} spg-question-composite__content`
   },
   saveData: {
     root: "",
@@ -361,5 +370,8 @@ export var propertyGridCss = {
   },
   linkvalue: {
     content: "spg-link"
-  }
+  },
+  variables: {
+    mobileWidth: "",
+  },
 };

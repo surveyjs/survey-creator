@@ -1,4 +1,4 @@
-import { Action, ActionContainer, Base, CssClassBuilder, DomDocumentHelper, DomWindowHelper, EventBase, property } from "survey-core";
+import { Action, ActionContainer, Base, toCssClasses, DomDocumentHelper, DomWindowHelper, EventBase, property } from "survey-core";
 import { getCollabString } from "../../collaboration-strings";
 import { clampToViewport, dragPosition, grabOffset, IPanelBox, IPanelPoint, IPanelSize, restoreHeight, undockBox } from "./floating-panel-geometry";
 
@@ -112,19 +112,16 @@ export class FloatingPanelModel extends Base {
   }
 
   public get rootCss(): string {
-    return new CssClassBuilder()
-      .append("svc-floating-panel")
-      .append("svc-floating-panel--docked", this.isDocked)
-      .append("svc-floating-panel--floating", !this.isDocked)
-      .append("svc-floating-panel--minimized", this.isMinimized)
-      .append("svc-floating-panel--dragging", this.isDragging)
-      .toString();
+    return toCssClasses(
+      "svc-floating-panel",
+      this.isDocked && "svc-floating-panel--docked",
+      !this.isDocked && "svc-floating-panel--floating",
+      this.isMinimized && "svc-floating-panel--minimized",
+      this.isDragging && "svc-floating-panel--dragging"
+    );
   }
   public get headerCss(): string {
-    return new CssClassBuilder()
-      .append("svc-floating-panel__header")
-      .append("svc-floating-panel__header--dragging", this.isDragging)
-      .toString();
+    return toCssClasses("svc-floating-panel__header", this.isDragging && "svc-floating-panel__header--dragging");
   }
   public get bodyCss(): string {
     return "svc-floating-panel__body";

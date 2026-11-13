@@ -27,7 +27,7 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
     return (this.category as any);
   }
 
-  render(): React.JSX.Element {
+  renderElement(): React.JSX.Element {
     const header = this.renderCategoryHeader();
     const items = this.renderCategoryContent();
     return (

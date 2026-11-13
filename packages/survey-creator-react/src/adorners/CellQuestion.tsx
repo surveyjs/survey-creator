@@ -27,7 +27,7 @@ export class CellQuestionAdornerComponent extends CreatorModelElement<
   protected getUpdatedModelProps(): string[] {
     return ["question", "componentData"];
   }
-  render(): React.JSX.Element {
+  renderElement(): React.JSX.Element {
     return (
       <React.Fragment>
         <div

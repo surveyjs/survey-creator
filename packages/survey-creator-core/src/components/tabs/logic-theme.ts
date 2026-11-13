@@ -58,7 +58,7 @@ export var logicCss = {
     separator: "sv-hidden",
     panelWrapper: "sl-panel-wrapper",
     content: "sl-paneldynamic__content",
-    footer: "sl-paneldynamic__footer",
+    footerBar: "sl-paneldynamic__footer",
     panelsContainer: "",
     panelWrapperList: "sl-panel-wrapper--list",
     panelWrapperInRow: "sl-panel-wrapper--in-row",
@@ -338,5 +338,8 @@ export var logicCss = {
   embeddedsurvey: {
     mainRoot: "sl-embedded-survey"
   },
-  actionBar: defaultActionBarCss
+  actionBar: defaultActionBarCss,
+  variables: {
+    mobileWidth: "",
+  },
 };

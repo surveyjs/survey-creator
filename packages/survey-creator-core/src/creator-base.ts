@@ -5,16 +5,23 @@ import {
   EventBase, hasLicense, slk, glc, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles, createDropdownActionModel,
-  CssClassBuilder,
+  toCssClasses,
   SvgRegistry,
   addIconsToThemeSet,
   SvgThemeSets,
   QuestionPanelDynamicModel,
+  ExpressionAIRequestEvent,
   ChoiceItem,
   patchLegacyCSSVariables,
   ensureBaseThemeStyles,
   createBoxShadowResetVariables,
-  IConfirmDialogOptions
+  IConfirmDialogOptions,
+  ISurveyVariablePresets,
+  SurveyVariablePresets,
+  isAnimationEnabled,
+  isReducedMotionPreferred,
+  subscribeReducedMotionChange,
+  getIdSelector
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
@@ -32,6 +39,7 @@ import { ICreatorSelectionOwner } from "./selection-owner";
 import { SelectionHistory } from "./selection-history";
 
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
+import { TabJsonEditorMonacoPlugin } from "./components/tabs/json-editor-monaco";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 import { TabTestPlugin } from "./components/tabs/test-plugin";
 import { SurveyLogic } from "./components/tabs/logic";
@@ -59,7 +67,7 @@ import {
   PageGetFooterActionsEvent, SurveyInstanceCreatedEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
   ElementFocusedEvent, OpenFileChooserEvent, UploadFileEvent, TranslationStringVisibilityEvent, TranslationImportItemEvent,
   TranslationImportedEvent, TranslationExportItemEvent, MachineTranslateEvent, TranslationItemChangingEvent, DragDropAllowEvent,
-  CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
+  CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent, LintSurveyEvent,
   PageAddingEvent, DragStartEndEvent,
   ElementGetExpandCollapseStateEvent,
   ElementGetExpandCollapseStateEventReason,
@@ -76,7 +84,9 @@ import {
   CreatorThemeSelectedEvent,
   AllowInplaceEditEvent,
   AllowAddElementEvent,
-  CollectionItemDeletingEvent
+  CollectionItemDeletingEvent,
+  VariablePresetsChangedEvent,
+  VariablePresetEditingEvent
 } from "./creator-events-api";
 import { ExpandCollapseManager } from "./expand-collapse-manager";
 import { ICreatorTheme } from "./creator-theme/creator-themes";
@@ -89,7 +99,7 @@ import { iconsV1, iconsV2 } from "./svgbundle";
 import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
-import { DomDocumentHelper } from "survey-core";
+import { DomDocumentHelper, initTooltips } from "survey-core";
 import { TabJsonEditorBasePlugin } from "./components/tabs/json-editor-plugin";
 import { DefaultLight } from "survey-core/themes";
 import { legacyCssVariables } from "./themes/legacy-vars";
@@ -428,6 +438,9 @@ export class SurveyCreatorModel extends Base
    * @since 2.5.7
    */
   public expressionsValidateSemantics: boolean = true;
+  // How many times an AI feature sends back an answer its check reports errors for, before it shows
+  // the answer with the errors.
+  public aiFixAttempts: number = 1;
   @property({ defaultValue: "" }) _currentAddQuestionType: string;
   /**
    * Specifies whether the "Add Question" button remembers the type of the most recently added question and uses it for subsequent questions.
@@ -1136,6 +1149,51 @@ export class SurveyCreatorModel extends Base
    * @see startMachineTranslationTo
    */
   public onMachineTranslate: EventBase<SurveyCreatorModel, MachineTranslateEvent> = this.addCreatorEvent<SurveyCreatorModel, MachineTranslateEvent>();
+  // The expression assistant's event. The assistant shows its UI only when this event has a handler;
+  // no option is needed. The payload, ExpressionAIRequestEvent, extends survey-core's AIRequestEvent,
+  // which also defines the shared types (AIMessage, AIResponseFormat, AIRequestIssue, AIResponse).
+  // Every AI feature has its own event with the same payload base. The handler sends
+  // options.systemPrompt and options.messages to a model and passes the answer to
+  // options.callback({ text }), ({ data }) or ({ error }). Creator never calls a model: it checks the
+  // answer and - while aiFixAttempts allow - sends a rejected answer back with the problems it found
+  // (attempt > 0, issues).
+  //
+  // The doccomment of onExpressionAssistantRequest (v3.2.3), which onAIExpressionRequest replaces, kept
+  // for the technical writer; only the event name in the example is changed:
+  //
+  // An event that is raised when the expression assistant requests an expression to be generated, modified, corrected, or explained. Handle this event to enable the assistant in the Survey Creator UI.
+  //
+  // For information on event handler parameters, refer to descriptions within the interface.
+  //
+  // The example below uses an application endpoint that returns the AI response as `{ text: "..." }`:
+  //
+  // ```ts
+  // import { SurveyCreatorModel } from "survey-creator-core";
+  // const creatorOptions = { ... };
+  // const creator = new SurveyCreatorModel(creatorOptions);
+  //
+  // creator.onAIExpressionRequest.add(async (_, options) => {
+  //   try {
+  //     const response = await fetch("/api/ai", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       signal: options.signal,
+  //       body: JSON.stringify({
+  //         system: options.systemPrompt,
+  //         messages: options.messages
+  //       })
+  //     });
+  //     if (!response.ok) throw new Error(response.statusText);
+  //     const { text } = await response.json();
+  //     options.callback({ text });
+  //   } catch (error) {
+  //     if (!options.signal.aborted) {
+  //       options.callback({ error: error.message });
+  //     }
+  //   }
+  // });
+  // ```
+  public onAIExpressionRequest: EventBase<SurveyCreatorModel, ExpressionAIRequestEvent> = this.addCreatorEvent<SurveyCreatorModel, ExpressionAIRequestEvent>();
 
   /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.
@@ -1776,6 +1834,28 @@ export class SurveyCreatorModel extends Base
    */
   public onActiveTabChanged: EventBase<SurveyCreatorModel, ActiveTabChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, ActiveTabChangedEvent>();
   /**
+   * An event that is raised before the [JSON Editor tab](/survey-creator/documentation/end-user-guide/user-interface#json-editor-tab) lints the survey JSON schema.
+   *
+   * Use this event to customize linter options, for example, disable individual rules, change their severity, or declare known variables and functions.
+   *
+   * For information on event handler parameters, refer to descriptions within the interface.
+   *
+   * The following code overrides individual [linting rules](/form-library/documentation/survey-json-validation#linter-rules) to report unknown properties as warnings and disable checks for unknown references:
+   *
+   * ```js
+   * import { SurveyCreatorModel } from "survey-creator-core";
+   *
+   * const creator = new SurveyCreatorModel();
+   * creator.onLintSurvey.add((_, options) => {
+   *   options.lintOptions.rules["property/unknown"] = "warning";
+   *   options.lintOptions.rules["reference/unknown"] = "off";
+   * });
+   * ```
+   *
+   * [Documentation: Survey JSON Validation](/form-library/documentation/survey-json-validation (linkStyle))
+   */
+  public onLintSurvey: EventBase<SurveyCreatorModel, LintSurveyEvent> = this.addCreatorEvent<SurveyCreatorModel, LintSurveyEvent>();
+  /**
    * Gets or sets the currently displayed tab.
    *
    * Accepted values:
@@ -1851,6 +1931,14 @@ export class SurveyCreatorModel extends Base
   private get currentPlugin(): ICreatorPlugin {
     return this.getPlugin(this.activeTab);
   }
+  /**
+   * Applies pending changes in the active tab to the survey configuration.
+   * @returns `true` if there are no pending changes or if the changes are applied successfully;  `false` if pending changes cannot be applied.
+   */
+  public applyPendingChanges(): boolean {
+    const plugin = this.currentPlugin;
+    return !plugin || !plugin.applyPendingChanges ? true : plugin.applyPendingChanges();
+  }
 
   /**
    * Provides access to the [Toolbox API](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox).
@@ -1918,7 +2006,11 @@ export class SurveyCreatorModel extends Base
   public updateToolboxIsCompact(newVal?: boolean) {
     if (!this.toolbox) return;
     const hasValue = newVal != undefined && newVal != null;
-    if (this.toolbox.forceCompact !== undefined) {
+    // Compact mode is the left/right rail (icon column + flyout). The sidebar
+    // hosts the full toolbox; the rail's 100vw scroller stretches that panel.
+    if (this.toolboxLocation == "sidebar") {
+      this.toolbox.isCompact = false;
+    } else if (this.toolbox.forceCompact !== undefined) {
       this.toolbox.isCompact = this.toolbox.forceCompact;
     } else if (this.toolboxLocation == "right") {
       this.toolbox.isCompact = this.showSidebar || (hasValue && newVal);
@@ -2197,7 +2289,9 @@ export class SurveyCreatorModel extends Base
     this.addTab({ name: "preview", pluginCreator: () => new TabTestPlugin(this), iconName: TabTestPlugin.iconName });
     this.addTab({ name: "theme", pluginCreator: () => new ThemeTabPlugin(this), iconName: ThemeTabPlugin.iconName });
     this.addTab({ name: "logic", pluginCreator: () => new TabLogicPlugin(this), iconName: TabLogicPlugin.iconName });
-    if (TabJsonEditorAcePlugin.hasAceEditor()) {
+    if (TabJsonEditorMonacoPlugin.hasMonacoEditor()) {
+      this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorMonacoPlugin(this), iconName: TabJsonEditorMonacoPlugin.iconName, componentName: "svc-tab-json-editor-monaco" });
+    } else if (TabJsonEditorAcePlugin.hasAceEditor()) {
       this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorAcePlugin(this), iconName: TabJsonEditorAcePlugin.iconName, componentName: "svc-tab-json-editor-ace" });
     } else {
       this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorTextareaPlugin(this), iconName: TabJsonEditorTextareaPlugin.iconName, componentName: "svc-tab-json-editor-textarea" });
@@ -2486,9 +2580,6 @@ export class SurveyCreatorModel extends Base
    */
   protected initSurveyWithJSON(json: any, clearState: boolean): void {
     this.expandCollapseManager.clearExpandChoicesStates();
-    if (!json) {
-      json = { "headerView": "advanced" };
-    }
     this.existingPages = {};
     const survey = this.createSurvey({}, "designer", undefined, (survey: SurveyModel) => {
       survey.skeletonHeight = 188;
@@ -2901,11 +2992,10 @@ export class SurveyCreatorModel extends Base
     } else {
       let jsonValue = trustJSON ? this.parseJSON(value) : undefined;
       if (!trustJSON) {
-        const textWorker = new SurveyTextWorker(value);
+        // parse only: the text is applied whenever it is a JSON object, whatever the linter says
+        const textWorker = new SurveyTextWorker(value, { lint: false });
         if (textWorker.isJsonCorrect) {
           jsonValue = this.parseJSON(value);
-        } else if (!!textWorker.survey) {
-          jsonValue = textWorker.survey.toJSON();
         }
       }
       if (!!jsonValue) {
@@ -2927,6 +3017,7 @@ export class SurveyCreatorModel extends Base
     if (!!this.getSurveyJSONTextCallback) {
       return this.getSurveyJSONTextCallback().text;
     }
+    this.applyPendingChanges();
     return this.getSurveyTextFromDesigner();
   }
   public set text(value: string) {
@@ -2937,12 +3028,16 @@ export class SurveyCreatorModel extends Base
     if (this.viewType != "json") {
       return new JsonObject().toJsonObject(this.survey);
     }
-    var surveyJsonText = this.text;
-    var textWorker = new SurveyTextWorker(surveyJsonText);
-    if (textWorker.isJsonCorrect) {
-      return new JsonObject().toJsonObject(textWorker.survey);
-    }
-    return null;
+    const textWorker = new SurveyTextWorker(this.text, { lint: false });
+    if (!textWorker.isJsonCorrect) return null;
+    // the text normalized the way the survey saves it - through a model in design mode, so
+    // that loading it runs no expressions and no choicesByUrl requests
+    const survey = new SurveyModel();
+    survey.setDesignMode(true);
+    survey.fromJSON(this.parseJSON(this.text));
+    const res = new JsonObject().toJsonObject(survey);
+    survey.dispose();
+    return res;
   }
 
   public getObjectDisplayName(
@@ -3227,6 +3322,9 @@ export class SurveyCreatorModel extends Base
    * This property allows you to get or set the JSON schema of a survey being configured. Alternatively, you can use the [`text`](#text) property.
    */
   public get JSON(): any {
+    // the JSON tab may hold text the survey does not have yet: whoever reads the schema while
+    // that tab is open gets the latest text that applies, the way leaving the tab would give it
+    this.applyPendingChanges();
     const json = (<any>this.survey).toJSON();
     return this.singlePageJSON(json);
   }
@@ -3669,13 +3767,13 @@ export class SurveyCreatorModel extends Base
     }, 50);
   }
   public scrollToElement(elementPage: PageModel, selEl: any, el: HTMLElement) {
-    const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled ? "smooth" : undefined };
+    const scrollIntoViewOptions: ScrollIntoViewOptions = { block: "start", behavior: this.animationEnabled && isAnimationEnabled() ? "smooth" : undefined };
     if (!!elementPage) {
       this.survey.scrollElementToTop({
         element: selEl,
         question: undefined,
         page: elementPage,
-        id: selEl.id,
+        id: selEl.renderedId,
         scrollIfVisible: true,
         scrollIntoViewOptions: scrollIntoViewOptions,
         passedRootElement: this.rootElement,
@@ -3695,8 +3793,8 @@ export class SurveyCreatorModel extends Base
   }
 
   private getHtmlElementForScroll(element: any): HTMLElement {
-    const id = element.getType() === "matrixdropdowncolumn" ? element.colOwner.id : element.id;
-    return this.rootElement?.querySelector(`#${id}`);
+    const id = element.getType() === "matrixdropdowncolumn" ? element.colOwner.renderedId : element.renderedId;
+    return this.rootElement?.querySelector(getIdSelector(id));
   }
 
   private getSelectedSurveyElement(): IElement {
@@ -3992,11 +4090,37 @@ export class SurveyCreatorModel extends Base
     this._rootElementValue = element;
     ensureBaseThemeStyles(element);
     this.initKeyboardShortcuts(element);
+    // Creator's own controls (tabs, switchers, action buttons) carry `data-sv-tooltip` too;
+    // install the tooltip here so it does not depend on a survey action being rendered first.
+    // Passing the root (not its document) also covers the shadow root the creator is rendered in.
+    if (!!element) initTooltips(element);
     this.initResponsivityManager(element as HTMLDivElement);
+    this.subscribeToReducedMotion();
   }
   public unsubscribeRootElement() {
     this.removeKeyboardShortcuts(this._rootElementValue);
     this.resetResponsivityManager();
+    this.unsubscribeFromReducedMotion();
+  }
+  // Read only after mount: a class derived from the OS preference before the root exists
+  // would disagree with the CSS media query that covers the first paint.
+  @property({ defaultValue: false }) private isReducedMotion: boolean;
+  private reducedMotionUnsubscribe: () => void;
+  private updateReducedMotion(): void {
+    this.isReducedMotion = isReducedMotionPreferred();
+  }
+  private subscribeToReducedMotion(): void {
+    this.unsubscribeFromReducedMotion();
+    this.updateReducedMotion();
+    this.reducedMotionUnsubscribe = subscribeReducedMotionChange(() => {
+      if (this.isCreatorDisposed) return;
+      this.updateReducedMotion();
+    });
+  }
+  private unsubscribeFromReducedMotion(): void {
+    if (!this.reducedMotionUnsubscribe) return;
+    this.reducedMotionUnsubscribe();
+    this.reducedMotionUnsubscribe = undefined;
   }
   public initKeyboardShortcuts(rootNode: HTMLElement) {
     if (!!rootNode) {
@@ -4263,12 +4387,14 @@ export class SurveyCreatorModel extends Base
       item: item,
       allowEdit: itemOptions.allowEdit,
       allowDelete: itemOptions.allowDelete,
-      allowAdd: itemOptions.allowAdd
+      allowAdd: itemOptions.allowAdd,
+      allowDrag: itemOptions.allowDrag
     };
     this.onCollectionItemAllowOperations.fire(this, options);
     itemOptions.allowEdit = options.allowEdit;
     itemOptions.allowDelete = options.allowDelete;
     itemOptions.allowAdd = options.allowAdd;
+    itemOptions.allowDrag = options.allowDrag;
   }
   onItemValueAddedCallback(
     obj: Base,
@@ -4476,6 +4602,11 @@ export class SurveyCreatorModel extends Base
   }
   saveNo: number = 0;
   private _doSaveCore(onSaveComplete?: () => void) {
+    // the save that runs now carries everything the armed auto-save would have carried
+    if (!!this.autoSaveTimerId) {
+      clearTimeout(this.autoSaveTimerId);
+      this.autoSaveTimerId = null;
+    }
     this.setState("saving");
     if (this.saveSurveyFunc) {
       this.saveNo++;
@@ -4499,9 +4630,11 @@ export class SurveyCreatorModel extends Base
    * @see save
    */
   public saveSurvey() {
+    this.applyPendingChanges();
     this._doSaveCore();
   }
   public doSave() {
+    this.applyPendingChanges();
     this._doSaveCore();
   }
   public saveSurveyActionHandler() {
@@ -4533,6 +4666,8 @@ export class SurveyCreatorModel extends Base
    * @see saveTheme
    */
   public save() {
+    // before the state is read: the active tab may hold the very edit that makes it "modified"
+    this.applyPendingChanges();
     const themeSaveHandler = () => {
       if (this.hasPendingThemeChanges) {
         this._doSaveThemeCore(() => {
@@ -4826,6 +4961,16 @@ export class SurveyCreatorModel extends Base
     return options;
   }
 
+  // Rendered adorners compute the allowed operations (onElementAllowOperations,
+  // onPropertyGetReadOnly, onCollectionItemAllowOperations) when they are
+  // created. A host whose answers change while the designer is shown calls
+  // notifyPermissionsChanged(): the adorners listening to
+  // onPermissionsChanged recompute them.
+  public onPermissionsChanged: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+  public notifyPermissionsChanged(): void {
+    this.onPermissionsChanged.fire(this, {});
+  }
+
   public getChoicesItemBaseTitle() {
     return this.getLocString("ed.choices_Item") || surveyLocalization.getString("choices_Item");
   }
@@ -5001,8 +5146,55 @@ export class SurveyCreatorModel extends Base
     }
   }) isCreatorDisposed: boolean;
 
+  private variablePresetsValue: ISurveyVariablePresets;
+  private variablePresetsModelValue: SurveyVariablePresets;
+  /**
+   * Gets or sets a configuration that defines custom survey variables and named presets of their values.
+   *
+   * For more information, refer to [`ICreatorOptions.variablePresets`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#variablePresets).
+   * @see onVariablePresetsChanged
+   * @see onVariablePresetEditing
+   * @since 3.1.1
+   */
+  public get variablePresets(): ISurveyVariablePresets {
+    return this.variablePresetsValue;
+  }
+  public set variablePresets(val: ISurveyVariablePresets) {
+    const oldValue = this.variablePresetsValue;
+    if (val === oldValue) return;
+    this.variablePresetsValue = val;
+    this.variablePresetsModelValue?.dispose();
+    this.variablePresetsModelValue = undefined;
+    // Raised by hand rather than through @property: setPropertyValue skips a value that is
+    // deep-equal to the old one, and the companion would then keep reading the old object while
+    // the Preview tab, which follows this notification, would not know the container changed.
+    this.propertyValueChanged("variablePresets", oldValue, val);
+  }
+  // The survey-core companion over the container: variable names, the definition's questions and
+  // the preset lookup. It is cheap to construct - the definition survey is built inside it on the
+  // first call that needs one - so it is created on demand and thrown away with the container.
+  public get variablePresetsModel(): SurveyVariablePresets {
+    if (!this.variablePresetsModelValue) {
+      this.variablePresetsModelValue = new SurveyVariablePresets(this.variablePresetsValue);
+    }
+    return this.variablePresetsModelValue;
+  }
+  /**
+   * An event that is raised when the active [variable preset](#variablePresets) changes or when variable presets are edited. Handle this event to store the active preset selection and edited presets.
+   * @since 3.1.1
+   */
+  public onVariablePresetsChanged: EventBase<SurveyCreatorModel, VariablePresetsChangedEvent> = this.addCreatorEvent<SurveyCreatorModel, VariablePresetsChangedEvent>();
+  /**
+   * An event that is raised for each [preset](#variablePresets) displayed in the variable preset editor. Use this event to control whether users can edit or delete individual presets.
+   * @since 3.1.1
+   */
+  public onVariablePresetEditing: EventBase<SurveyCreatorModel, VariablePresetEditingEvent> = this.addCreatorEvent<SurveyCreatorModel, VariablePresetEditingEvent>();
+
   public dispose(): void {
     this.isCreatorDisposed = true;
+    this.unsubscribeFromReducedMotion();
+    this.variablePresetsModelValue?.dispose();
+    this.variablePresetsModelValue = undefined;
     this.tabs = [];
     Object.keys(this.plugins).forEach(pluginName => {
       const plugin = this.plugins[pluginName];
@@ -5017,14 +5209,17 @@ export class SurveyCreatorModel extends Base
   }
   @property({ defaultValue: true }) enableLinkFileEditor: boolean;
   public getRootCss() {
-    return new CssClassBuilder()
-      .append("svc-creator")
-      .append("sd-theme-root")
-      .append("sjs-theme-overrides")
-      .append("svc-creator--mobile", this.isMobileView)
-      .append("svc-creator--touch", this.isTouch)
-      .append("svc-creator--disable-animations", !this.animationEnabled)
-      .toString();
+    // Read up front. Skipping the property while animations are off would leave Vue
+    // unaware of it, so a later OS preference change would not re-render the root.
+    const reducedMotion = this.isReducedMotion;
+    return toCssClasses(
+      "svc-creator",
+      "sd-theme-root",
+      "sjs-theme-overrides",
+      this.isMobileView && "svc-creator--mobile",
+      this.isTouch && "svc-creator--touch",
+      (reducedMotion || !this.animationEnabled) && "svc-creator--disable-animations"
+    );
   }
 
   @property({ defaultValue: {} }) private creatorCssVariables: { [index: string]: string } = {};

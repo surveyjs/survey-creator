@@ -68,6 +68,8 @@ test.describe(title, () => {
         }
       ]
     }, null, 2));
+    // the textarea is linted a second after the last keystroke
+    await expect(page.locator(".svc-json-editor-tab__errros_list")).toBeVisible();
     const tabContent = page.locator(".svc-creator-tab__content");
     await compareScreenshot(page, tabContent, "json-tab-with-errors.png");
   });

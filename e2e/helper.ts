@@ -1,5 +1,6 @@
 import type { Locator, Page } from "@playwright/test";
 import { expect, test as baseTest } from "@playwright/test";
+import * as path from "path";
 
 export const url = "http://127.0.0.1:8080/test-pages/default";
 export const urlByPage = "http://127.0.0.1:8080/test-pages/by-page";
@@ -12,6 +13,17 @@ export const urlWidget = "http://127.0.0.1:8080/test-pages/widget";
 export const urlThemeTab = "http://127.0.0.1:8080/test-pages/theme-tab";
 export const urlCreatorThemes = "http://127.0.0.1:8080/test-pages/creator-themes";
 export const urlPresets = "http://127.0.0.1:8080/test-pages/presets";
+
+// Serves a choicesByUrl request from the test itself, so no real web service is contacted.
+// Call it before setJSON. The url does not have to exist: the request never leaves the browser.
+export async function mockChoicesByUrl(page: Page, requestUrl: string, response: any): Promise<void> {
+  await page.route(requestUrl, route => route.fulfill({
+    status: 200,
+    contentType: "application/json",
+    headers: { "Access-Control-Allow-Origin": "*" },
+    body: JSON.stringify(response)
+  }));
+}
 
 export async function compareScreenshot(
   page: Page,
@@ -38,7 +50,8 @@ export async function compareScreenshot(
   const pwOptions: {timeout: number, maxDiffPixels?: number} = {
     timeout: 10000,
     maskColor: "#000000",
-    ...options
+    ...options,
+    stylePath: [path.join(__dirname, "hide-tooltips.css")].concat(options.stylePath || [])
   };
 
   // Web fonts (Open Sans, several weights) load lazily over the network; a screenshot taken

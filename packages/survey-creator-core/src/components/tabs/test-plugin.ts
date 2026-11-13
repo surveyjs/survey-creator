@@ -5,8 +5,12 @@ import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { simulatorDevices } from "../simulator";
 import { TestSurveyTabViewModel } from "./test";
+import { VariablePresetsManager } from "../../variable-presets";
 
 export class TabTestPlugin implements ICreatorPlugin {
+  // The active variable preset (issue #7982). It lives with the plugin and not with the view model
+  // because the view model is rebuilt on every activation and the choice has to survive that.
+  public readonly variablePresets: VariablePresetsManager;
   private languageSelectorAction: Action;
   protected changeThemeAction: Action;
   private deviceSelectorAction: Action;
@@ -90,14 +94,25 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
 
   constructor(private creator: SurveyCreatorModel) {
+    this.variablePresets = new VariablePresetsManager(creator);
     this.setPreviewTheme(this.creator.previewTheme);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
+  public dispose(): void {
+    this.variablePresets.dispose();
+  }
   public activate(): void {
-    const tabModel = new TestSurveyTabViewModel(this.creator, this.simulatorTheme);
+    const tabModel = new TestSurveyTabViewModel(this.creator, this.simulatorTheme, this.variablePresets);
     tabModel.simulator.device = this.previewDevice || this.creator.previewDevice || "desktop";
     tabModel.simulator.landscape = this.creator.previewOrientation != "portrait";
     this.model = tabModel;
+    // once per model: update() runs again on the same model (a theme applied, a survey loaded)
+    tabModel.onPropertyChanged.add((sender, options) => {
+      if (options.name === "isRunning") {
+        this.invisibleToggleAction && (this.invisibleToggleAction.visible = tabModel.isRunning);
+        this.testAgainAction.visible = !tabModel.isRunning;
+      }
+    });
     this.update();
   }
   public update(): void {
@@ -114,12 +129,6 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.updateActions();
 
     this.model.show();
-    this.model.onPropertyChanged.add((sender, options) => {
-      if (options.name === "isRunning") {
-        this.invisibleToggleAction && (this.invisibleToggleAction.visible = this.model.isRunning);
-        this.testAgainAction.visible = !this.model.isRunning;
-      }
-    });
   }
   public deactivate(): boolean {
     if (this.model) {

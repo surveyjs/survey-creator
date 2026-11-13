@@ -2,7 +2,7 @@ import {
   Base, IAction, ItemValue,
   JsonObjectProperty, MatrixDropdownColumn, Question,
   SurveyModel, ILocalizableString, PopupBaseViewModel, PageModel, ILocalizableOwner, LocalizableString,
-  settings as surveyLibSettings
+  settings as surveyLibSettings, SurveyVariablePresets
 } from "survey-core";
 import { localizableJSON } from "./localizable-json";
 import { SurveyHelper } from "./survey-helper";
@@ -28,27 +28,22 @@ export var settings = {
     /*
      * The name of the translation export file in csv format
      */
-    exportFileName: "survey_translation.csv"
+    exportFileName: "survey_translation.csv",
+    /*
+     * On a multi-page survey with more elements (questions and panels, nested ones included) the
+     * Translation tab offers no "All Pages" choice and always shows a single page: the strings grid
+     * of the whole survey takes about 1 ms per element to build and render. 0 removes the limit.
+     */
+    maxElementsForAllPages: 500
   },
   themeEditor: {
     exportFileName: "survey_theme.json",
     defaultFontFamily: "Open Sans",
   },
-  operators: {
-    empty: [],
-    notempty: [],
-    equal: ["!file"],
-    notequal: ["!file"],
-    contains: ["checkbox", "text", "comment"],
-    notcontains: ["checkbox", "text", "comment"],
-    anyof: ["selectbase"],
-    noneof: ["selectbase"],
-    allof: ["checkbox"],
-    greater: ["!checkbox", "!imagepicker", "!boolean", "!file"],
-    less: ["!checkbox", "!imagepicker", "!boolean", "!file"],
-    greaterorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"],
-    lessorequal: ["!checkbox", "!imagepicker", "!boolean", "!file"]
-  },
+  // The operator table lives in survey-core now (settings.logic.operators), shared with the Filter
+  // Control. The name stays for existing code and customizations.
+  get operators(): { [operator: string]: Array<string> } { return surveyLibSettings.logic.operators; },
+  set operators(val: { [operator: string]: Array<string> }) { surveyLibSettings.logic.operators = val; },
   defaultNewSurveyJSON: {},
   designer: {
     /*
@@ -62,13 +57,11 @@ export var settings = {
   },
   logic: {
     questionSortOrder: "asc",
-    get defaultOperator(): string { return settings.logic.defaultOperators.default; },
-    set defaultOperator(val: string) { settings.logic.defaultOperators.default = val; },
-    defaultOperators: {
-      default: "equal",
-      checkbox: "allof",
-      tagbox: "allof"
-    },
+    // The defaults live in survey-core now (settings.logic.defaultOperators).
+    get defaultOperator(): string { return surveyLibSettings.logic.defaultOperators.default; },
+    set defaultOperator(val: string) { surveyLibSettings.logic.defaultOperators.default = val; },
+    get defaultOperators(): { [questionType: string]: string } { return surveyLibSettings.logic.defaultOperators; },
+    set defaultOperators(val: { [questionType: string]: string }) { surveyLibSettings.logic.defaultOperators = val; },
     includeComplexQuestions: false,
     visibleActions: new Array<string>(),
     invisibleTriggers: new Array<string>(),
@@ -91,6 +84,14 @@ export var settings = {
     updateExpressionsOnDeleting: {
       question: true
     }
+  },
+  // How much of a large survey the AI context of the expression assistant describes. Questions the
+  // current expression reads are never cut; the rest is cut in the order: the target's page, then
+  // calculated values and variables, then the other questions.
+  expressionAssistant: {
+    maxVariables: 150,
+    maxChoicesPerQuestion: 30,
+    maxExamples: 8,
   },
   /*
    * Determines which types of questions the conversion will be available for.
@@ -200,6 +201,7 @@ export interface ICollectionItemAllowOperations {
   allowDelete: boolean;
   allowEdit: boolean;
   allowAdd: boolean;
+  allowDrag?: boolean;
 }
 
 export interface ICreatorPlugin {
@@ -207,6 +209,7 @@ export interface ICreatorPlugin {
   update?: () => void;
   deactivate?: () => boolean;
   canDeactivateAsync?: (onSuccess: () => void) => void;
+  applyPendingChanges?: () => boolean;
   defaultAllowingDeactivate?: () => boolean | undefined;
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
@@ -337,6 +340,9 @@ export interface ISurveyCreatorOptions {
     list: any[],
     variables: string[]
   ): string;
+  // The read side of the host variables (issue #7982), so that the condition editor can list them.
+  // Optional: only the creator model has a container to read.
+  variablePresetsModel?: SurveyVariablePresets;
   isConditionOperatorEnabled(questionName: string, question: Question, operator: string, isEnabled: boolean): boolean;
   onLogicGetTitleCallback(
     expression: string,

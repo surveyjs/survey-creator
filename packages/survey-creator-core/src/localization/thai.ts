@@ -142,6 +142,10 @@ export const thStrings = {
     jsonHideErrors: "ซ่อนข้อผิดพลาด",
     // "Show errors"
     jsonShowErrors: "แสดงข้อผิดพลาด",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "แก้ไขข้อผิดพลาด",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "JSON แบบสํารวจต้องเป็นวัตถุ",
     // "Undo"
     undo: "เลิกทำ",
     // "Redo"
@@ -246,6 +250,8 @@ export const thStrings = {
     translateUsigAI: "แปลทั้งหมดอัตโนมัติ",
     // "Translate from: "
     translateUsigAIFrom: "แปลจาก: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "แปลงสตริงที่เหลือ",
     // "Untranslated strings"
     translationDialogTitle: "สตริงที่ยังไม่ได้แปล",
     // "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export const thStrings = {
     translationSource: "ต้นทาง: ",
     // "Target: "
     translationTarget: "ปลายทาง: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "ภาษาต้นทาง",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "ภาษาปลายทาง",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0}สตริง{1}ที่แปลแล้ว",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "คุณแน่ใจหรือไม่ว่าต้องการลบสตริงที่แปลทั้งหมดสําหรับภาษาที่เลือก?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "มุมมองฟอร์ม",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "มุมมองกริด",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "แปลสตริง",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "สายสํารวจ",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "ไม่มีสตริงให้แปล",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "สตริงทั้งหมดจะถูกแปล",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "สตริง{0}ไม่ได้รับการแปล",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "ไม่รองรับลิงก์ YouTube",
     // "Export"
@@ -286,6 +314,10 @@ export const thStrings = {
     choicesLoadedFromWebLinkText: "ไปที่การตั้งค่า",
     // "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "ดูตัวอย่างตัวเลือกที่โหลด",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "ไม่มีชุดนิพจน์",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "แก้ไขนิพจน์",
     // "HTML content will be here."
     htmlPlaceHolder: "เนื้อหา HTML จะอยู่ที่นี่",
     // "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export const thStrings = {
       uncompletedRule_cancel: "ไม่ ฉันต้องการเสร็จสิ้นกฎ"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "การตั้งค่าตัวแปรล่วงหน้า",
+    // [Auto-translated] "None"
+    noPreset: "ไม่มี",
+    // [Auto-translated] "View variable values"
+    view: "ดูค่าตัวแปร",
+    // [Auto-translated] "Variable values"
+    viewTitle: "ค่าตัวแปร",
+    // [Auto-translated] "Manage presets"
+    edit: "จัดการพรีเซ็ต",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "การตั้งค่าล่วงหน้าแบบแปรผัน",
+    // [Auto-translated] "Preset"
+    presetName: "พรีเซ็ต",
+    // [Auto-translated] "Description"
+    presetDescription: "คําอธิบาย",
+    // [Auto-translated] "Add preset"
+    addPreset: "เพิ่มการตั้งค่าล่วงหน้า",
+    // [Auto-translated] "New preset"
+    newPresetName: "พรีเซ็ตใหม่",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "ลบการตั้งค่าล่วงหน้า",
+    // [Auto-translated] "Back"
+    back: "ย้อนกลับ",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "มีพรีเซ็ตที่ใช้ชื่อนี้อยู่แล้ว",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "ป้อนชื่อที่ตั้งไว้ล่วงหน้า",
+    // [Auto-translated] "Preset"
+    listNameColumn: "พรีเซ็ต",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "คําอธิบาย"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "ผู้ช่วยแสดงออก",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "เขียนด้วย AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "อธิบายว่านิพจน์ควรทําอะไร",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "ตัวอย่างเช่น: แสดงคําถามนี้เมื่อผู้ตอบมีอายุ 18 ปีขึ้นไป",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "อธิบายเงื่อนไขด้วยคําพูด",
+    // [Auto-translated] "Generate"
+    generate: "สร้าง",
+    // [Auto-translated] "Refine"
+    refine: "ปรับแต่ง",
+    // [Auto-translated] "Explain"
+    explain: "อธิบายหน่อย",
+    // [Auto-translated] "Stop"
+    stop: "หยุด",
+    // [Auto-translated] "Accept"
+    accept: "ยอมรับ",
+    // [Auto-translated] "Reject"
+    reject: "ปฏิเสธ",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "แก้ไข: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "นิพจน์ปัจจุบัน",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "นิพจน์ที่แนะนํา",
+    // [Auto-translated] "Reads as"
+    readsAs: "อ่านเป็น",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "คําอธิบายของผู้ช่วย",
+    // [Auto-translated] "Check results"
+    findings: "ตรวจสอบผลลัพธ์",
+    // [Auto-translated] "Error"
+    severityError: "ข้อผิดพลาด",
+    // [Auto-translated] "Warning"
+    severityWarning: "คําเตือน",
+    // [Auto-translated] "Info"
+    severityInfo: "ข้อมูล",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "ใน \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "อธิบายนิพจน์และเลือก สร้าง",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "รอผู้ช่วย...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "คําขอถูกยกเลิก",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "ผู้ช่วยรายงานว่า: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "ผู้ช่วยไม่ได้แสดงสีหน้าใด ๆ",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "ตรวจสอบนิพจน์ที่แนะนํา",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "ผู้ช่วยอธิบายสีหน้าปัจจุบัน",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "นิพจน์ที่แนะนํามีข้อผิดพลาดและไม่สามารถยอมรับได้",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "นิพจน์ที่แนะนําไม่สามารถตรวจสอบได้ทุกที่ที่เขียน จึงไม่สามารถยอมรับได้",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "เพิ่มการกระทําในกฎก่อนถามผู้ช่วย",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "ข้อเสนอแรกมีข้อผิดพลาดและได้รับการแก้ไขโดยอัตโนมัติ"
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export const thStrings = {
       templateDescription: "รูปแบบคำอธิบายแผง",
       // "Entry title pattern"
       templateTitle: "รูปแบบชื่อแผง",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "ตัวแทนตําแหน่งชื่อรายการ",
       // "Empty panel text"
       noEntriesText: "ข้อความแผงว่าง",
       // "Tab title pattern"
@@ -588,6 +724,10 @@ export const thStrings = {
       templateErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
       // "New entry location"
       newPanelPosition: "ตำแหน่งแผงใหม่",
+      // [Auto-translated] "Entries per page"
+      pageSize: "จํานวนรายการต่อหน้า",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "อนุญาตให้ผู้ใช้จัดเรียงรายการ",
       // "Prevent duplicate responses in the following question"
       keyName: "ป้องกันการตอบซ้ำในคำถามต่อไปนี้"
     },
@@ -675,6 +815,12 @@ export const thStrings = {
       // "Expression"
       expression: "นิพจน์"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "เรียงตาม",
+      // [Auto-translated] "Order"
+      direction: "ลําดับ"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "การแสดงออก"
@@ -690,7 +836,9 @@ export const thStrings = {
       // "Survey description"
       description: "คำอธิบายแบบสำรวจ",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "ทําให้แบบสํารวจเป็นแบบอ่านอย่างเดียว"
+      readOnly: "ทําให้แบบสํารวจเป็นแบบอ่านอย่างเดียว",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "รูปแบบภูมิภาค"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -726,7 +874,9 @@ export const thStrings = {
       // "Make the column required if"
       requiredIf: "ทำให้คอลัมน์จำเป็นถ้า",
       // "Each option in a separate column"
-      showInMultipleColumns: "แต่ละตัวเลือกในคอลัมน์แยกต่างหาก"
+      showInMultipleColumns: "แต่ละตัวเลือกในคอลัมน์แยกต่างหาก",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "อนุญาตให้จัดเรียงตามคอลัมน์นี้"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export const thStrings = {
     masksettings: {
       // "Save masked value in survey results"
       saveMaskedValue: "บันทึกค่าที่ปิดบังในผลลัพธ์แบบสำรวจ"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "ภูมิภาค",
+      // [Auto-translated] "Date pattern"
+      datePattern: "รูปแบบวันที่",
+      // [Auto-translated] "Time pattern"
+      timePattern: "รูปแบบเวลา",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "ตัวคั่นทศนิยม",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "เครื่องแยกพัน",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "สัญลักษณ์สกุลเงิน",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "รูปแบบสกุลเงิน"
     },
     patternmask: {
       // "Value pattern"
@@ -761,16 +927,18 @@ export const thStrings = {
       decimalSeparator: "ตัวคั่นทศนิยม",
       // "Value precision"
       precision: "ความแม่นยำของค่า",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "แสดงเลขศูนย์ท้ายสุด",
       // "Minimum value"
       min: "ค่าขั้นต่ำ",
       // "Maximum value"
       max: "ค่าสูงสุด"
     },
     currencymask: {
-      // "Currency prefix"
-      prefix: "คำนำหน้าสกุลเงิน",
-      // "Currency suffix"
-      suffix: "คำต่อท้ายสกุลเงิน"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "สัญลักษณ์สกุลเงิน",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "รูปแบบสกุลเงิน"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "ล้างรายการอื่นเมื่อเลือก",
@@ -812,8 +980,24 @@ export const thStrings = {
     addItem: "คลิกเพื่อเพิ่มรายการ...",
     // "Click to remove the item..."
     removeItem: "คลิกเพื่อลบรายการ...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "เพิ่ม{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "ลบ{0}",
     // "Drag the item"
     dragItem: "ลากรายการ",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "ขยายตัวเลือกซ้อน",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "ยุบตัวเลือกซ้อน",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "ขยายตัวเลือกซ้อนของ{0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "ยุบตัวเลือกซ้อนของ{0}",
+    // [Auto-translated] "Show description"
+    showDescription: "แสดงรายละเอียด",
+    // [Auto-translated] "Hide description"
+    hideDescription: "ซ่อนคําอธิบาย",
     // "Edit"
     edit: "แก้ไข",
     // "Done"
@@ -858,10 +1042,16 @@ export const thStrings = {
     listIsEmpty: "คุณยังไม่มีรายการใดๆ",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "คุณยังไม่มีตัวเลือกใดๆ",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "ไม่มีค่าการให้คะแนนแบบกําหนดเอง",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "ไม่มีป้ายกํากับแบบกําหนดเอง",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "ไม่มีพื้นที่",
     // "You don't have any columns yet"
     "listIsEmpty@columns": "คุณยังไม่มีคอลัมน์ใดๆ",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "คุณยังไม่มีคอลัมน์เค้าโครง",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "ไม่มีคอลัมน์จัดวาง",
     // "You don't have any rows yet"
     "listIsEmpty@rows": "คุณยังไม่มีแถวใดๆ",
     // "You don't have any validation rules yet"
@@ -870,12 +1060,22 @@ export const thStrings = {
     "listIsEmpty@calculatedValues": "คุณยังไม่มีตัวแปรใดๆ",
     // "You don't have any triggers yet"
     "listIsEmpty@triggers": "คุณยังไม่มีทริกเกอร์ใดๆ",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "ไม่มีการทําเครื่องหมายเงื่อนไข",
     // "You don't have any links yet"
     "listIsEmpty@navigateToUrlOnCondition": "คุณยังไม่มีลิงก์ใดๆ",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "คุณยังไม่มีหน้าใด ๆ",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "ไม่มีหน้า",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "ไม่มีระดับการจัดเรียง",
     // "Add new choice"
     "addNew@choices": "เพิ่มตัวเลือกใหม่",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "เพิ่มมูลค่าการให้คะแนน",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "เพิ่มป้ายกํากับ",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "เพิ่มพื้นที่",
     // "Add new column"
     "addNew@columns": "เพิ่มคอลัมน์ใหม่",
     // "Add new row"
@@ -886,10 +1086,14 @@ export const thStrings = {
     "addNew@calculatedValues": "เพิ่มตัวแปรใหม่",
     // "Add new trigger"
     "addNew@triggers": "เพิ่มทริกเกอร์ใหม่",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "เพิ่มมาร์กอัป",
     // "Add new URL"
     "addNew@navigateToUrlOnCondition": "เพิ่ม URL ใหม่",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "เพิ่มหน้าใหม่",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "เพิ่มหน้า",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "เพิ่มระดับการจัดเรียง",
     // "Value"
     value: "ค่า",
     // "Text"
@@ -916,6 +1120,8 @@ export const thStrings = {
     surveyTitlePlaceholder: "ชื่อเรื่องแบบสำรวจ",
     // "Page {num}"
     pageTitlePlaceholder: "หน้า {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "ชื่อแผง",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "หน้าเริ่มต้น",
     // "Description"
@@ -966,6 +1172,8 @@ export const thStrings = {
     visible: "มองเห็นได้",
     // "Required"
     isRequired: "จำเป็น",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "ต้องการคําตอบในเชิงบวก",
     // "Mark as required"
     markRequired: "ทำเครื่องหมายว่าจำเป็น",
     // "Remove the required mark"
@@ -976,6 +1184,8 @@ export const thStrings = {
     eachRowUnique: "ป้องกันการตอบซ้ำในแถว",
     // "Error message for required questions"
     requiredErrorText: "ข้อความข้อผิดพลาดสำหรับคำถามที่จำเป็น",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "ข้อความแสดงข้อผิดพลาดเมื่อจําเป็นต้องใช้ Yes",
     // "Display the question on a new line"
     startWithNewLine: "แสดงคำถามในบรรทัดใหม่",
     // "Rows"
@@ -994,6 +1204,16 @@ export const thStrings = {
     maxFiles: "จํานวนไฟล์สูงสุด",
     // "Row count"
     rowCount: "จำนวนแถว",
+    // [Auto-translated] "Rows per page"
+    pageSize: "จํานวนแถวต่อหน้า",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "อนุญาตให้ผู้ใช้จัดเรียงแถว",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "ระดับการจัดเรียงสูงสุด",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "ลําดับการจัดเรียงเริ่มต้น",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "แสดงแถบจัดเรียง",
     // "Columns layout"
     columnLayout: "เค้าโครงคอลัมน์",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export const thStrings = {
     questionErrorLocation: "การจัดตำแหน่งข้อความข้อผิดพลาด",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "โฟกัสคำถามแรกในหน้าใหม่",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "เปิดใช้งานทางลัดตัวเลือก",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "แสดงคําแนะนําแป้นพิมพ์",
     // "Question order"
     questionOrder: "ลำดับคำถาม",
     // "Time limit to complete the survey"
@@ -1268,6 +1492,8 @@ export const thStrings = {
     minRowCount: "จำนวนแถวขั้นต่ำ",
     // "Maximum row count"
     maxRowCount: "จำนวนแถวสูงสุด",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "นิพจน์จํานวนแถว",
     // "Confirm row removal"
     confirmDelete: "ยืนยันการลบแถว",
     // "Confirmation message"
@@ -1278,6 +1504,8 @@ export const thStrings = {
     minPanelCount: "จำนวนแผงขั้นต่ำ",
     // "Maximum number of entries"
     maxPanelCount: "จำนวนแผงสูงสุด",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "นิพจน์จํานวนรายการ",
     // "Initial entry state"
     panelsState: "สถานะแผงภายใน",
     // "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export const thStrings = {
     logoHeight: "ความสูงของโลโก้",
     // "Read-only"
     readOnly: "อ่านอย่างเดียว",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "โหมดอ่านอย่างเดียว",
     // "Disable the read-only mode if"
     enableIf: "ปิดโหมดอ่านอย่างเดียวถ้า",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export const thStrings = {
       columns: "คอลัมน์",
       // "Rows"
       rows: "แถว",
+      // [Auto-translated] "Entries"
+      entries: "ผลงาน",
       // "Choice Options"
       choices: "ตัวเลือก",
       // "Items"
@@ -1544,6 +1776,8 @@ export const thStrings = {
       question: "การตั้งค่าคำถาม",
       // "Pages"
       pages: "หน้า",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "รูปแบบภูมิภาค",
       // "Quiz Mode"
       timer: "โหมดควิซ",
       // "Calculated Values"
@@ -1862,6 +2096,12 @@ export const thStrings = {
       // "Never"
       none: "ไม่เคย"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "อ่านอย่างเดียว",
+      // [Auto-translated] "View"
+      view: "ดู"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "ปุ่มวิทยุ",
     inputType: {
@@ -1913,6 +2153,12 @@ export const thStrings = {
       warning: "คำเตือน",
       // [Auto-translated] "Informational"
       info: "ข้อมูล"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "ด้านหน้า",
+      // [Auto-translated] "Rear"
+      environment: "ด้านหลัง"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export const thStrings = {
     underRowSingle: "ใต้แถว แสดงการขยายแถวเดียว",
     // "Auto"
     auto: "อัตโนมัติ",
+    // [Auto-translated] "Always"
+    always: "เสมอ",
     timerInfoMode: {
       // "Both"
       combined: "ทั้งสอง"
@@ -2321,7 +2569,148 @@ export const thStrings = {
       survey: "เช่นเดียวกับแบบสํารวจ",
       // [Auto-translated] "Same as container"
       container: "เหมือนกับคอนเทนเนอร์"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "สืบทอด",
+      // [Auto-translated] "Hide"
+      "false": "ซ่อน",
+      // [Auto-translated] "Show"
+      "true": "การแสดง"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "ภาษาอาหรับ",
+    // [Auto-translated] "Bulgarian"
+    bg: "บัลแกเรีย",
+    // [Auto-translated] "Catalan"
+    ca: "คาตาลัน",
+    // [Auto-translated] "Czech"
+    cs: "เช็ก",
+    // [Auto-translated] "Welsh"
+    cy: "เวลส์",
+    // [Auto-translated] "Danish"
+    da: "ภาษาเดนมาร์ก",
+    // [Auto-translated] "German"
+    de: "เยอรมัน",
+    // [Auto-translated] "Greek"
+    el: "กรีก",
+    // [Auto-translated] "English"
+    en: "อังกฤษ",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "ภาษาอังกฤษ (ออสเตรเลีย)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "ภาษาอังกฤษ (แคนาดา)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "ภาษาอังกฤษ (สหราชอาณาจักร)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "ภาษาอังกฤษ (ไอร์แลนด์)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "ภาษาอังกฤษ (อินเดีย)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "ภาษาอังกฤษ (นิวซีแลนด์)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "ภาษาอังกฤษ (แอฟริกาใต้)",
+    // [Auto-translated] "Spanish"
+    es: "ภาษาสเปน",
+    // [Auto-translated] "Estonian"
+    et: "ชาวเอสโตเนีย",
+    // [Auto-translated] "Basque"
+    eu: "บาสก์",
+    // [Auto-translated] "Persian"
+    fa: "เปอร์เซีย",
+    // [Auto-translated] "Finnish"
+    fi: "ฟินแลนด์",
+    // [Auto-translated] "Filipino"
+    fil: "ฟิลิปปินส์",
+    // [Auto-translated] "French"
+    fr: "ภาษาฝรั่งเศส",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "ภาษาฝรั่งเศส (แคนาดา)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "ภาษาฝรั่งเศส (สวิตเซอร์แลนด์)",
+    // [Auto-translated] "Hebrew"
+    he: "ภาษาฮีบรู",
+    // [Auto-translated] "Hindi"
+    hi: "ภาษาฮินดี",
+    // [Auto-translated] "Croatian"
+    hr: "โครเอเชีย",
+    // [Auto-translated] "Haitian Creole"
+    ht: "ชาวเฮติ",
+    // [Auto-translated] "Hungarian"
+    hu: "ฮังการี",
+    // [Auto-translated] "Indonesian"
+    id: "อินโดนีเซีย",
+    // [Auto-translated] "Icelandic"
+    is: "ไอซ์แลนด์",
+    // [Auto-translated] "Italian"
+    it: "อิตาลี",
+    // [Auto-translated] "Japanese"
+    ja: "ภาษาญี่ปุ่น",
+    // [Auto-translated] "Georgian"
+    ka: "จอร์เจีย",
+    // [Auto-translated] "Kazakh"
+    kk: "คาซัค",
+    // [Auto-translated] "Korean"
+    ko: "เกาหลี",
+    // [Auto-translated] "Lithuanian"
+    lt: "ลิทัวเนีย",
+    // [Auto-translated] "Latvian"
+    lv: "ลัตเวีย",
+    // [Auto-translated] "Macedonian"
+    mk: "มาซิโดเนีย",
+    // [Auto-translated] "Burmese"
+    mm: "ชาวพม่า",
+    // [Auto-translated] "Malay"
+    ms: "มลายู",
+    // [Auto-translated] "Dutch"
+    nl: "ดัตช์",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "ดัตช์ (เบลเยียม)",
+    // [Auto-translated] "Norwegian"
+    no: "นอร์เวย์",
+    // [Auto-translated] "Polish"
+    pl: "โปแลนด์",
+    // [Auto-translated] "Portuguese"
+    pt: "โปรตุเกส",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "โปรตุเกส (บราซิล)",
+    // [Auto-translated] "Romanian"
+    ro: "โรมาเนีย",
+    // [Auto-translated] "Russian"
+    ru: "รัสเซีย",
+    // [Auto-translated] "Slovak"
+    sk: "สโลวัก",
+    // [Auto-translated] "Slovenian"
+    sl: "ชาวสโลวีเนีย",
+    // [Auto-translated] "Serbian"
+    sr: "เซอร์เบีย",
+    // [Auto-translated] "Swedish"
+    sv: "ภาษาสวีเดน",
+    // [Auto-translated] "Swahili"
+    sw: "สวาฮิลี",
+    // [Auto-translated] "Telugu"
+    tel: "เตลูกู",
+    // [Auto-translated] "Tajik"
+    tg: "ทาจิก",
+    // [Auto-translated] "Thai"
+    th: "ภาษาไทย",
+    // [Auto-translated] "Turkish"
+    tr: "ตุรกี",
+    // [Auto-translated] "Ukrainian"
+    uk: "ยูเครน",
+    // [Auto-translated] "Urdu"
+    ur: "อูรดู",
+    // [Auto-translated] "Vietnamese"
+    vi: "เวียดนาม",
+    // [Auto-translated] "Chinese"
+    zh: "ภาษาจีน",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "ภาษาจีน (ตัวย่อ)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "ภาษาจีน (ตัวเต็ม)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export const thStrings = {
     visibletrigger: "เปลี่ยนการมองเห็น (เลิกใช้แล้ว)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "เหมือนกับภาษาสํารวจ"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "ตัวอย่าง: +1(999)-999-99-99"
@@ -2405,12 +2798,6 @@ export const thStrings = {
     datetimemask: {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "ตัวอย่าง: mm/dd/yyyy HH:MM:ss"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "ตัวอย่าง: $",
-      // "Ex.: USD"
-      suffix: "ตัวอย่าง: USD"
     },
     panelbase: {
       // "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export const thStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "ระบุจํานวนคอลัมน์ที่แผงนี้ครอบคลุมภายในเค้าโครงกริด",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "ตารางนี้ให้คุณกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์ภายในแผงควบคุม โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์"
+      gridLayoutColumns: "ตารางนี้ให้คุณกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์ภายในแผงควบคุม โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "ระบุว่าคําถามภายในแผงนี้จะปรากฏอย่างไรเมื่อเป็นแบบอ่านอย่างเดียว\"อ่านอย่างเดียว\" จะแสดงคําถามพร้อมปุ่มป้อนข้อมูลปกติ แต่ปิดใช้งานสําหรับการแก้ไข\"View\" จะแสดงคําตอบในรูปแบบข้อความหรือองค์ประกอบที่ไม่โต้ตอบอื่น ๆ\"Inherit\" ใช้โหมดที่ตั้งไว้สําหรับแผงหลัก หน้า หรือแบบสํารวจ (\"Read-Only\" โดยค่าเริ่มต้น)"
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export const thStrings = {
       width: "ตั้งความกว้างของแผงให้สัมพันธ์กับองค์ประกอบแบบสำรวจอื่นๆ ในบรรทัดเดียวกัน รับค่าของ CSS (px, %, in, pt, ฯลฯ)",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "พิมพ์ในเทมเพลตสำหรับชื่อแผงไดนามิก ใช้ {panelIndex} สำหรับตำแหน่งทั่วไปของแผงและ {visiblePanelIndex} สำหรับลำดับของแผงที่มองเห็นได้แทรกแทนที่ลงในเทมเพลตเพื่อเพิ่มการนับอัตโนมัติ",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "ข้อความสํารองสําหรับชื่อรายการที่ใช้เมื่อรูปแบบชื่อรายการไม่ให้ค่าที่มีความหมายใช้ {panelIndex} สําหรับตําแหน่งทั่วไปของรายการ และ {visiblePanelIndex} สําหรับลําดับระหว่างรายการที่มองเห็น",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "พิมพ์ในเทมเพลตสำหรับชื่อแท็บ ใช้ {panelIndex} สำหรับตำแหน่งทั่วไปของแผงและ {visiblePanelIndex} สำหรับลำดับของแผงที่มองเห็นได้แทรกแทนที่ลงในเทมเพลตเพื่อเพิ่มการนับอัตโนมัติ",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export const thStrings = {
       keyName: "อ้างอิงชื่อคำถามเพื่อต้องการให้ผู้ใช้ตอบคำถามนี้ที่ไม่ซ้ำกันในแต่ละแผง",
       // "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนลบแผง",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "ระบุนิพจน์ที่คํานวณจํานวนรายการนิพจน์นี้จะมีผลเหนือการตั้งค่า \"จํานวนรายการเริ่มต้น\" และจะถูกประเมินใหม่ทุกครั้งที่ค่าที่อ้างอิงเปลี่ยนแปลงผลลัพธ์จะถูกจํากัดด้วยการตั้งค่า \"จํานวนรายการขั้นต่ํา\" และ \"จํานวนรายการสูงสุด\"ในขณะที่นิพจน์นี้ถูกตั้งค่า ผู้ตอบไม่สามารถเพิ่มหรือลบรายการด้วยตนเองได้",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "ระบุจํานวนรายการที่แสดงในแต่ละหน้าของแผง'0' จะปิดการแบ่งหน้าและแสดงรายการทั้งหมด",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "อนุญาตให้ผู้ตอบแบบสอบถามจัดเรียงรายการโดยใช้แถบเรียงลําดับ",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "กําหนดลําดับการป้อนข้อมูลเริ่มต้นผู้ตอบสามารถเปลี่ยนลําดับได้หากอนุญาตให้จัดเรียงเมื่อจัดเรียงตามคําถามหลายข้อ แต่ละคําถามจะจัดเรียงรายการภายในลําดับที่กําหนดโดยคําถามก่อนหน้าลากคําถามเพื่อเปลี่ยนลําดับความสําคัญ",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "กําหนดตัวเลขให้กับคําถามที่ซ้อนกันภายในแผงแบบไดนามิก"
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "อนุญาตให้ผู้ตอบแบบสอบถามจัดเรียงแถวโดยคลิกที่หัวคอลัมน์หรือใช้แถบจัดเรียง",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "กําหนดลําดับแถวเริ่มต้นผู้ตอบแบบสอบถามสามารถเปลี่ยนได้หากอนุญาตให้จัดเรียงเมื่อจัดเรียงตามหลายคอลัมน์ แต่ละคอลัมน์จะจัดเรียงแถวภายในลําดับที่กําหนดโดยคอลัมน์ก่อนหน้าลากคอลัมน์เพื่อเปลี่ยนลําดับความสําคัญ",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\" จะแสดงแถบเรียงลําดับเฉพาะเมื่อเมทริกซ์ไม่มีหัวคอลัมน์ที่เรียงได้: หัวคอลัมน์ถูกซ่อน, เมทริกซ์ใช้รูปแบบเคลื่อนที่ หรือแถวถูกสลับไปยังคอลัมน์\"เสมอ\" จะแสดงแถบเรียงลําดับแม้จะมีหัวคอลัมน์ที่เรียงลําดับได้แสดงอยู่",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "ระบุนิพจน์ที่คํานวณจํานวนแถวนิพจน์นี้จะมีผลเหนือการตั้งค่า \"จํานวนแถวเริ่มต้น\" และจะถูกประเมินใหม่ทุกครั้งที่ค่าที่อ้างอิงเปลี่ยนแปลงผลลัพธ์จะถูกจํากัดด้วยการตั้งค่า \"จํานวนแถวขั้นต่ํา\" และ \"จํานวนแถวสูงสุด\"ในขณะที่นิพจน์นี้ถูกตั้งค่า ผู้ตอบแบบสอบถามไม่สามารถเพิ่มหรือลบแถวด้วยตนเองได้",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "ทริกเกอร์ข้อความแจ้งการยืนยันก่อนที่จะลบแถว",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "ขยายส่วนรายละเอียดโดยอัตโนมัติเมื่อมีการเพิ่มแถวใหม่ลงในเมทริส"
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "ระบุจํานวนแถวที่แสดงในแต่ละหน้าของเมทริกซ์'0' ปิดการแบ่งหน้าและแสดงแถวทั้งหมด",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "ระบุจํานวนฟิลด์ที่ผู้ตอบสามารถเรียงลําดับได้พร้อมกัน",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "คัดลอกคำตอบจากแถวสุดท้ายและตั้งเป็นค่าเริ่มต้นสำหรับแถวไดนามิกถัดไป",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export const thStrings = {
       // "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "ข้อความยาวในตัวเลือกจะสร้างการตัดบรรทัดอัตโนมัติเพื่อให้พอดีกับเมนูดรอปดาวน์ ยกเลิกการเลือกถ้าคุณต้องการให้ข้อความถูกตัด",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "ระบุจํานวนคอลัมน์ที่คําถามนี้ครอบคลุมภายในเค้าโครงกริด"
+      effectiveColSpan: "ระบุจํานวนคอลัมน์ที่คําถามนี้ครอบคลุมภายในเค้าโครงกริด",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "ระบุว่าคําถามจะแสดงผลอย่างไรเมื่อเป็นแบบอ่านอย่างเดียว\"อ่านอย่างเดียว\" จะแสดงคําถามพร้อมตัวควบคุมการป้อนข้อมูลตามปกติ แต่ปิดใช้งานสําหรับการแก้ไข\"View\" จะแสดงคําตอบในรูปแบบข้อความหรือองค์ประกอบที่ไม่โต้ตอบอื่น ๆ\"Inherit\" ใช้โหมดที่ตั้งไว้สําหรับแผงหลัก หน้า หรือแบบสํารวจ (\"Read-Only\" โดยค่าเริ่มต้น)",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "แสดงคําแนะนําสําหรับการดําเนินการบนแป้นพิมพ์ที่มีอยู่ด้านล่างคําถามนี้ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสํารวจ"
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export const thStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "เลือกว่าคุณต้องการป้องกันไม่ให้ผู้ตอบแบบสอบถามกรอกแบบสํารวจหรือไม่",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "ระบุว่าคําถามแบบอ่านอย่างเดียวจะแสดงอย่างไร รวมถึงในหน้าตัวอย่าง\"อ่านอย่างเดียว\" (ค่าเริ่มต้น) จะแสดงคําถามพร้อมปุ่มป้อนข้อมูลปกติ แต่ปิดการแก้ไข\"View\" จะแสดงคําตอบในรูปแบบข้อความหรือองค์ประกอบที่ไม่โต้ตอบอื่น ๆ",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "ตั้งค่าตําแหน่งของแถบความคืบหน้า ค่า \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าด้านบนหรือด้านล่างส่วนหัวของแบบสํารวจ"
     },
@@ -2633,7 +3050,9 @@ export const thStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "เมื่อเลือก จะสร้างคอลัมน์แยกสำหรับตัวเลือกแต่ละตัว",
       // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "จัดเรียงตัวเลือกตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งค่าเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว เมื่อตั้งค่าเป็น -1 ค่าจริงจะถูกสืบทอดมาจากคุณสมบัติ \"จํานวนคอลัมน์ที่ซ้อนกัน\" ของเมทริกซ์หลัก"
+      colCount: "จัดเรียงตัวเลือกตัวเลือกในรูปแบบหลายคอลัมน์ เมื่อตั้งค่าเป็น 0 ตัวเลือกจะแสดงในบรรทัดเดียว เมื่อตั้งค่าเป็น -1 ค่าจริงจะถูกสืบทอดมาจากคุณสมบัติ \"จํานวนคอลัมน์ที่ซ้อนกัน\" ของเมทริกซ์หลัก",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "ระบุว่าเซลล์ในคอลัมน์นี้จะปรากฏอย่างไรเมื่อเป็นแบบอ่านอย่างเดียว\"อ่านอย่างเดียว\" จะแสดงเซลล์ที่มีการควบคุมอินพุตตามปกติ แต่ปิดใช้งานสําหรับการแก้ไข\"View\" จะแสดงคําตอบในรูปแบบข้อความหรือองค์ประกอบที่ไม่โต้ตอบ\"Inherit\" ใช้โหมดที่ตั้งไว้สําหรับเมทริกซ์หรือแบบสํารวจ (\"Read-Only\" โดยค่าเริ่มต้น)"
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export const thStrings = {
     questionErrorLocation: "ตั้งตำแหน่งของข้อความข้อผิดพลาดเมื่อเทียบกับคำถามที่มีอินพุตที่ไม่ถูกต้อง เลือกระหว่าง: \"ด้านบน\" - ข้อความข้อผิดพลาดจะวางที่ด้านบนของกล่องคำถาม; \"ด้านล่าง\" - ข้อความข้อผิดพลาดจะวางที่ด้านล่างของกล่องคำถาม",
     // "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "เลือกถ้าคุณต้องการให้ช่องป้อนข้อมูลแรกในแต่ละหน้าเตรียมพร้อมสำหรับการป้อนข้อความ",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "แสดงตัวอักษร (A, B, C, ...) ถัดจากตัวเลือกในคําถามกลุ่มปุ่มวิทยุ, ช่องทําเครื่องหมาย และตัวเลือกรูปภาพผู้ตอบสามารถเลือกตัวเลือกได้โดยกดปุ่มตัวอักษรที่เกี่ยวข้องคุณสามารถแทนที่การตั้งค่านี้สําหรับคําถามแต่ละข้อได้",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "แสดงตัวอักษร (A, B, C, ...) ข้างตัวเลือก และให้ผู้ตอบแบบสอบถามเลือกได้โดยกดปุ่มตัวอักษรที่เกี่ยวข้องตัวเลือก \"สืบทอด\" ใช้การตั้งค่าระดับแบบสํารวจ"
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "แสดงคําแนะนําสําหรับการดําเนินการบนแป้นพิมพ์ที่มีอยู่ด้านล่างคําถามคุณสามารถแทนที่การตั้งค่านี้สําหรับคําถามแต่ละข้อได้",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "รักษาลำดับดั้งเดิมของคำถามหรือตั้งค่าให้สุ่ม ผลของการตั้งค่านี้จะแสดงในแท็บพรีวิวเท่านั้น",
     // "For text entry questions only."
@@ -2793,7 +3220,9 @@ export const thStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "ตั้งการมองเห็นของปุ่มนำทางในหน้า ตัวเลือก \"สืบทอด\" จะใช้การตั้งค่าระดับแบบสำรวจซึ่งค่าเริ่มต้นคือ \"มองเห็นได้\"",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "ตารางนี้ช่วยให้คุณสามารถกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์บนหน้า โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์"
+      gridLayoutColumns: "ตารางนี้ช่วยให้คุณสามารถกําหนดค่าคอลัมน์กริดแต่ละคอลัมน์บนหน้า โดยจะกําหนดเปอร์เซ็นต์ความกว้างสําหรับแต่ละคอลัมน์โดยอัตโนมัติตามจํานวนองค์ประกอบสูงสุดในแถว เมื่อต้องการปรับแต่งเค้าโครงกริด ให้ปรับค่าเหล่านี้ด้วยตนเอง และกําหนดความกว้างของชื่อเรื่องสําหรับคําถามทั้งหมดในแต่ละคอลัมน์",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "ระบุว่าคําถามในหน้านี้จะแสดงผลอย่างไรเมื่อเป็นแบบอ่านอย่างเดียว\"อ่านอย่างเดียว\" จะแสดงคําถามพร้อมปุ่มป้อนข้อมูลปกติ แต่ปิดการใช้งานสําหรับการแก้ไข\"ดู\" จะแสดงคําตอบเป็นข้อความหรือองค์ประกอบที่ไม่โต้ตอบอื่น ๆ\"สืบทอด\" ใช้โหมดที่ตั้งไว้สําหรับแบบสํารวจ (\"อ่านอย่างเดียว\" โดยค่าเริ่มต้น)"
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "ตั้งค่าตําแหน่งของตัวจับเวลาบนหน้า",
@@ -2911,6 +3340,22 @@ export const thStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "เลือกถ้าคุณต้องการบันทึกค่าคำถามพร้อมหน้ากากในผลลัพธ์แบบสำรวจ"
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "ภูมิภาคที่รูปแบบใช้กับหน้ากากป้อนข้อมูลวันที่-เวลา ตัวเลข และสกุลเงินหากไม่ได้ระบุ จะใช้ภาษาสํารวจ",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "แทนที่รูปแบบวันที่ของภูมิภาคที่ใช้ในหน้ากากอินพุตรูปแบบนี้สามารถประกอบด้วยอักขระคั่นและตัวแทนดังนี้:<br>'m' - หมายเลขเดือน<br>'mm' - หมายเลขเดือน โดยมีเลขศูนย์นําหน้าสําหรับค่าหลักเดียว<br>'d' - วันของเดือน<br>'dd' - วันของเดือน โดยมีเลขศูนย์นําหน้าสําหรับค่าเลขหลักเดียว<br>'yy' - สองหลักสุดท้ายของปี<br>'yyyy' - ปีสี่หลัก",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "แทนที่รูปแบบเวลาของภูมิภาคที่ใช้ในหน้ากากอินพุตรูปแบบนี้สามารถประกอบด้วยตัวคั่นและตัวแทนดังนี้:<br>'H' - ชั่วโมงในรูปแบบ 24 ชั่วโมง<br>'HH' - ชั่วโมงในรูปแบบ 24 ชั่วโมง โดยมีศูนย์นําหน้าสําหรับค่าหลักเดียว<br>'h' - ชั่วโมงในรูปแบบ 12 ชั่วโมง<br>'hh' - ชั่วโมงในรูปแบบ 12 ชั่วโมง โดยมีศูนย์นําหน้าสําหรับค่าหลักเดียว<br>'MM' - นาที<br>'ss' - วินาที<br>'TT' - รอบนาฬิกา 12 ชั่วโมงในตัวพิมพ์ใหญ่ (AM/PM)<br>'tt' - ช่วงเวลานาฬิกา 12 ชั่วโมงในตัวพิมพ์เล็ก (am/pm)",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "แทนที่สัญลักษณ์ที่ภูมิภาคใช้แยกส่วนเศษส่วนออกจากส่วนจํานวนเต็มของตัวเลขที่แสดงในหน้ากากอินพุต",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "แทนที่สัญลักษณ์ที่ภูมิภาคใช้แยกตัวเลขจํานวนมากออกเป็นกลุ่มละสามตัวในหน้ากากอินพุต",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "แทนที่สัญลักษณ์สกุลเงินหรือรหัสของภูมิภาคที่ใช้ในหน้ากากอินพุต",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "แทนที่รูปแบบสกุลเงินของภูมิภาคที่ใช้ในหน้ากากอินพุตรูปแบบนี้สามารถมีตัวแทนดังนี้:<br>'@' - สัญลักษณ์สกุลเงินหรือรหัส<br>'#' - ตัวเลข<br>'-' - ตําแหน่งของเครื่องหมายลบในค่าลบ (ถ้าไม่ใส่ เครื่องหมายลบจะวางไว้ที่จุดเริ่มต้น)"
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "รูปแบบสามารถประกอบด้วยอักษรสตริงและตัวแทนต่อไปนี้: 9 - สำหรับตัวเลข; a - สำหรับตัวอักษรตัวใหญ่หรือตัวเล็ก; # - สำหรับตัวเลขหรือตัวอักษรตัวใหญ่หรือตัวเล็ก ใช้ backslash \\ เพื่อหนีตัวอักษร"
@@ -2925,13 +3370,15 @@ export const thStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "สัญลักษณ์ที่ใช้แยกหลักของจำนวนมากเป็นกลุ่มของสาม",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "จำกัดจำนวนหลักที่คงอยู่หลังจุดทศนิยมสำหรับตัวเลขที่แสดง"
+      precision: "จำกัดจำนวนหลักที่คงอยู่หลังจุดทศนิยมสำหรับตัวเลขที่แสดง",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "แสดงศูนย์ท้ายในส่วนเศษส่วนจนถึงความแม่นยําที่กําหนดตัวอย่างเช่น ด้วยความแม่นยํา 2 ค่าอินพุต 1.2 จะแสดงเป็น 1.20"
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "หนึ่งหรือหลายสัญลักษณ์ที่จะปรากฏก่อนค่า",
-      // "One or several symbols to be displayed after the value."
-      suffix: "หนึ่งหรือหลายสัญลักษณ์ที่จะปรากฏหลังค่า"
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "สัญลักษณ์สกุลเงินหรือรหัสที่แสดงพร้อมค่าดังกล่าวสัญลักษณ์ของภูมิภาคจะถูกใช้โดยค่าเริ่มต้นล้างคุณสมบัตินี้เพื่อไม่ให้แสดงสัญลักษณ์",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "ระบุตําแหน่งของตัวเลข สัญลักษณ์สกุลเงิน และเครื่องหมายลบรูปแบบนี้สามารถมีตัวแทนตําแหน่งดังนี้:<br>'@' - สัญลักษณ์สกุลเงินหรือรหัส<br>'#' - ตัวเลข<br>'-' - ตําแหน่งของเครื่องหมายลบในค่าลบ (ถ้าไม่ใส่ เครื่องหมายลบจะวางไว้ที่จุดเริ่มต้น)"
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2982,6 +3429,8 @@ export const thStrings = {
     tabAlign: "การจัดเรียงแท็บ",
     // "File source type"
     sourceType: "ประเภทแหล่งไฟล์",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "กล้องเริ่มต้น",
     // "Fit to container"
     fitToContainer: "พอดีกับคอนเทนเนอร์",
     // "Set value expression"
@@ -3302,12 +3751,702 @@ export const thStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "ใช้ค่าที่ตั้งไว้ล่วงหน้า"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "สาย: {0}", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "ใช้ชื่อที่แนะนํา"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "ลบรายการซ้ํา"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "ใช้ประเภทที่แนะนํา"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "ใช้ฟังก์ชันที่แนะนํา"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "ใช้หน้ากากที่แนะนํา"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "ตั้งชื่อให้ธาตุฟรี"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "ตั้งชื่อให้ธาตุฟรี"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "ลบคุณสมบัติ"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "ใช้ค่าที่ใกล้เคียงที่สุดที่อนุญาต",
+        // [Auto-translated] "Remove the property"
+        removeKey: "ลบคุณสมบัติ",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "ใช้ค่าที่แนะนํา"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "เปลี่ยนค่าเป็นรายการ"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "ตั้งชื่อให้กับองค์ประกอบ"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "ลบคุณสมบัติ",
+        // [Auto-translated] "Rename the property"
+        renameKey: "เปลี่ยนชื่อคุณสมบัติ"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "ใช้ชื่อที่แนะนํา",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "ใช้ชื่อที่แนะนํา"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "ใช้ชื่อที่แนะนํา"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "ใช้ประเภทที่แนะนํา"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "ใช้ประเภทที่แนะนํา"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "ไม่สามารถแยกวิเคราะห์นิพจน์ \"{expression}\" ได้"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "ไม่พบ \"{name}\" - ไม่มีคําถาม แผง หน้า ค่าคํานวณ หรือตัวแปรที่มีชื่อเดียวกัน",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" ไม่พบใน {containerType} \"{root}\" (อ้างอิง: {name})",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" ไม่พบในขอบเขต \"{scopePrefix}\" (อ้างอิง: {name})",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "keyName ของ \"{name}\" ชื่อ \"{key}\" - \"{name}\" ไม่มี {keyNoun} กับชื่อนั้น ดังนั้นการตรวจสอบ duplicate-key จึงไม่ทํางาน",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "ไม่พบ \"{name}\""
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "{prop} ของ \"{name}\" อ้างอิงถึงองค์ประกอบเอง (อ้างอิง: {reference})"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "ชื่อ \"{name}\" ถูกซ้ําซ้อน",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "ชื่อค่าที่คํานวณได้ \"{name}\" ถูกใช้โดยค่าที่คํานวณได้อีกค่าหนึ่งแล้ว",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "ค่าที่คํานวณได้ \"{name}\" จะใช้ชื่อเดียวกันกับองค์ประกอบอื่น ดังนั้นหนึ่งในนั้นจะเงาอีกองค์ประกอบหนึ่ง"
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "{nameKindText} \"{name}\" ของ {ownerText} นี้ก็เป็นตัวแปรสํารวจในตัว {{builtIn}} เช่นกัน - แบบสํารวจจะตอบ {{name}} ก่อน ดังนั้นแบบสํารวจนี้จึงไม่สามารถเข้าถึงได้ในนิพจน์",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" ของ \"{name}\" มีค่าเดียวกับ {otherType} \"{otherName}\" ซึ่งไม่มี valueName ของตัวเอง - \"{otherName}\" จะถือว่าฟิลด์ที่ \"{name}\" เพิ่มเป็นไม่ทราบ และ clearIncorrectValues() จะลบฟิลด์เหล่านั้นตั้งค่า valueName เป็น \"{valueName}\" ด้วย",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "แถว \"{key}\" ในเมทริกซ์ดรอปดาวน์ \"{otherName}\" ก็เป็น {sharedKeyText} \"{name}\" ที่มีค่าร่วมกัน - วัตถุเซลล์และค่าเดียวไม่สามารถอยู่ใต้คีย์เดียวกันพร้อมกัน;รันไทม์จะเก็บกุญแจหนึ่งไว้และลบอีกกุญแจหนึ่ง",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\" ใช้คีย์ข้อมูล \"{dataKey}\" ร่วมกับ {otherType} \"{otherName}\" - มันจะเก็บ {shapeText} ไว้ ในขณะที่ \"{otherName}\" จะเก็บ {otherShapeText};ตัวหนึ่งไม่สามารถเก็บค่าของอีกตัวได้ ดังนั้น clearIncorrectValues() จะลบมันออก",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "คีย์ข้อมูล \"{dataName}\" ยังเป็นคีย์ความคิดเห็นของ \"{base}\" (คีย์ข้อมูลของมันบวกกับ \"{suffix}\") - การเขียนหนึ่งจะเขียนทับอีกอันโดยไม่เขียน",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "คีย์ข้อมูล \"{dataName}\" ยังเป็นคีย์รวมของ \"{base}\" (คีย์ข้อมูลของมันบวกกับ \"{suffix}\") - การเขียนหนึ่งจะเขียนทับอีกอันแบบเงียบ ๆ",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "ทริกเกอร์ {trigger} จะตั้งค่าตัวแปร \"{name}\" ซึ่งเป็นคีย์ข้อมูลของคําถาม \"{questionName}\" ด้วย - ตัวแปรจะตอบ {{name}} หลังจากนั้น ไม่ใช่คําถาม"
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "ชื่อ \"{name}\" ถูกสงวนไว้ - เป็นสมาชิกของ Object.prototype",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "valueName \"{valueName}\" ของ \"{name}\" ถูกสงวนไว้ - เป็นสมาชิกของ Object.prototype",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "คอลัมน์ \"{name}\" ของ \"{matrixName}\" ถูกสงวนไว้ - เป็นสมาชิกของ Object.prototype",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "รายการ \"{name}\" ของ \"{questionName}\" ถูกสงวนไว้ - เป็นสมาชิกของ Object.prototype",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "แถว \"{rowValue}\" ของ \"{name}\" ถูกสงวนไว้ - เป็นสมาชิกของ Object.prototype",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "ค่าที่คํานวณได้ \"{name}\" ถูกสงวนไว้ - สมาชิกของ Object.prototype"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" มีชนิดที่ไม่ทราบชื่อ \"{type}\"",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" ไม่มีชนิดข้อมูล - องค์ประกอบที่ไม่มีชนิดจะถูกทิ้ง"
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" ไม่ใช่คุณสมบัติของ {ownerText} ({className})"
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" ของ {ownerText} ไม่สามารถ serializable ได้ - จะมีผลเมื่อโหลด และจะถูกลบออกจาก JSON ทุกครั้งที่สํารวจถูกบันทึกอีกครั้ง",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" และ \"{aliasKey}\" ของ {ownerText} เป็นชื่อสองชื่อของคุณสมบัติเดียวกัน - เวลาทํางานจะนําไปใช้ตามลําดับที่ JSON เขียน ดังนั้น \"{winner}\" จึงชนะ",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" ถูกตั้งค่าเป็น \"{name}\" แต่ inputType \"{inputType}\" ไม่มีขอบเขต - เวลารันจะไม่สนใจ"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{key} ของ {ownerText} คือ {valueText} - ไม่ใช่หนึ่งในค่าที่อนุญาต ({allowedText})",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{key} ของ {ownerText} คือ {value} อยู่นอกช่วงที่อนุญาต {rangeText}",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "valueName \"{valueName}\" ของ \"{name}\" มี \".\" - expressions จะอ่าน {{valueName}} เป็นเส้นทางเข้าสู่ \"{rootKey}\" ดังนั้นคีย์ข้อมูลเองจึงไม่สามารถระบุที่อยู่ได้"
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} ไม่มี \"{key}\" - คุณสมบัตินี้จําเป็นสําหรับ {className}",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "ชื่อของ {className} คือ {valueText} ไม่ใช่สตริง - แบบสํารวจไม่สามารถโหลดได้"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "\"{key}\" ของ {ownerText} ไม่ใช่อาร์เรย์ - คุณสมบัตินี้จะเก็บรายการไว้ และเวลารันจะห่อค่านั้นเป็นอาร์เรย์แบบรายการเดียว"
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "คํานิยามตัวแปรจะประกาศ \"{variable}\" ซึ่งเป็นคีย์ข้อมูลของคําถาม \"{name}\" ด้วย - การตั้งค่าตัวแปรจะลบคําตอบที่เก็บไว้ในคีย์นั้น และ {{name}} จะตอบค่าโฮสต์ตั้งแต่นั้นเป็นต้นไป",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "คํานิยามตัวแปรประกาศ \"{variable}\" ซึ่งเป็นชื่อของค่าที่คํานวณได้ \"{name}\" — ทั้งสองจะเขียนช่องเดียวกัน และใครรันสุดท้ายจะชนะ"
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition ไม่ใช่วัตถุ JSON แบบสํารวจ ดังนั้นจึงไม่มีการประกาศตัวแปรและไม่สามารถตรวจสอบค่าที่ตั้งไว้ล่วงหน้าได้",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets ไม่ใช่อาร์เรย์ ดังนั้นจึงไม่มีการประกาศพรีเซ็ต",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "การตั้งค่าล่วงหน้า #{index} ไม่ใช่วัตถุ",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "preset #{index} ไม่มีชื่อ ดังนั้นไม่มีอะไรสามารถอ้างอิงได้",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "preset \"{preset}\" ไม่มีอ็อบเจ็กต์ variables ดังนั้นมันจึงไม่ตั้งค่าอะไรเลย",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "พรีเซ็ต \"{preset}\" จะถูกประกาศสองครั้ง - การค้นหาด้วยชื่อนี้จะตอบด้วยตัวแรก",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "ค่าพรีเซ็ต \"{preset}\" กําหนด \"{variable}\" ซึ่งคําจํากัดความของตัวแปรไม่ได้ประกาศ",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "พรีเซ็ต \"{preset}\" ตั้งค่า \"{variable}\" เป็นค่าที่คําจํากัดความตัวแปรปฏิเสธ: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "ฟังก์ชัน \"{functionName}\" ไม่ได้ลงทะเบียน"
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "ค่าที่คํานวณได้ \"{names}\" จะอ้างอิงตัวเองในนิพจน์ของตัวเอง",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "ค่าที่คํานวณได้ {names} ขึ้นอยู่กับกันและกัน"
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "ทริกเกอร์จะตอบสนองต่อค่าที่ตั้งไว้เอง (\"{setToName}\")",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "ทริกเกอร์จะสร้างลูปผ่านค่าที่ตั้งไว้: {setRoots}"
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} จะอ่านค่าที่มันเขียนเอง - มันจะทํางานเฉพาะเมื่อมีค่าอื่นเปลี่ยนเท่านั้น ดังนั้นมันจึงไม่ทํางานเลย",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "ค่าจะถูกเขียนเป็นลูป: {chain}แต่ละครั้งที่เขียนจะรันนิพจน์ที่อ่านค่านั้นซ้ํา ดังนั้นค่าสุดท้ายจะขึ้นอยู่กับลําดับการตอบคําถาม"
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "เงื่อนไขเปรียบเทียบ \"{name}\" กับ {values} - ไม่อยู่ในตัวเลือกของเงื่อนไขนี้พร้อมใช้งาน: {available}",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "เงื่อนไขเปรียบเทียบ \"{name}\" กับ {values} - ไม่มีค่าตัวเลือกใดที่มีเงื่อนไขนี้พร้อมใช้งาน: {available}"
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "เงื่อนไขนี้นํา \"{operator}\" มาใช้กับ \"{name}\": \"{recordName}\" ({questionType}) ไม่มีค่าให้เปรียบเทียบ",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "เงื่อนไขนี้ใช้ \"{operator}\" กับ \"{name}\": \"{recordName}\" ถือเป็น {valueShapeText} - โอเปอเรเตอร์การจัดลําดับและเลขคณิตไม่สามารถใช้กับเงื่อนไขนี้ได้",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "เงื่อนไขนี้นํา \"{operator}\" มาใช้กับ \"{name}\": \"{recordName}\" เป็นคําถามแบบบูลีน - ตัวดําเนินการลําดับจะไม่ใช้กับเงื่อนไขนี้",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "เงื่อนไขนี้นํา \"{operator}\" มาใช้กับ \"{name}\": \"{recordName}\" เป็นคําถามแบบข้อความ - ค่าของมันเป็นสตริง ดังนั้นการเปรียบเทียบเชิงตัวเลขจึงขึ้นอยู่กับการแปลงโดยนัย",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "เงื่อนไขนี้ใช้ \"{operator}\" กับ \"{name}\": \"{recordName}\" จะเก็บสตริงวันที่ - เมื่อเปรียบเทียบกับตัวเลข {constValue} ที่ไม่สามารถใช้ได้",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "เงื่อนไขนี้ใช้ \"{operator}\" กับ \"{name}\": \"{recordName}\" เป็นตัวเลข - การเปรียบเทียบกับสตริง \"{constValue}\" จะไม่เป็นจริง",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "เงื่อนไขนี้ใช้ \"{operator}\" กับ \"{name}\": \"{recordName}\" จะเก็บค่าที่เลือกไว้เป็นอาร์เรย์ ดังนั้น \"=\" จะเปรียบเทียบทั้งอาร์เรย์",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "เงื่อนไขนี้นํา \"{operator}\" มาใช้กับ \"{name}\": \"{recordName}\" เป็นคําถามบูลีน - การเปรียบเทียบกับ {constValue} ไม่สามารถใช้ได้"
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{expression}\" จะเป็นเท็จเสมอ ดังนั้น \"{name}\" จะไม่ปรากฏ",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} \"{expression}\" ไม่เคยเป็นจริง เพราะ {facts}",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{expression}\" ไม่เคยเป็นจริง - ไม่มีค่าที่อนุญาตใดที่เป็นไปตามมัน: {facts}",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{expression}\" ขัดแย้งกับตัวเอง: {facts}"
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{expression}\" เป็นจริงเสมอ ดังนั้นจึงไม่ตัดสินใจอะไร",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{expression}\" เป็นคณิตศาสตร์ ไม่ใช่การเปรียบเทียบ ดังนั้นจึงไม่เคยให้คําตอบว่าใช่หรือไม่ใช่",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "ส่วนหนึ่งของ {prop} \"{expression}\" มีผลลัพธ์ที่ทราบล่วงหน้า",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} \"{expression}\" เป็นจริงเสมอ เพราะ {facts} - มันไม่ได้ตัดสินใจอะไรเลย"
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\" จะไม่อ่านคําถามหรือตัวแปรใด ๆ"
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "ค่าเริ่มต้นของ \"{name}\" คือ {valuesText} ซึ่งไม่สามารถถือไว้ได้อนุญาต: {availableText}",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "คําตอบที่ถูกต้องของ \"{name}\" คือ {valuesText} ซึ่งไม่สามารถถือไว้ได้อนุญาต: {availableText}",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "ทริกเกอร์จะตั้งค่า \"{name}\" เป็น {valuesText} ซึ่งไม่สามารถถือไว้ได้เลยอนุญาต: {availableText}",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "ค่าแถวเริ่มต้นจะตั้งค่า \"{name}\" เป็น {valuesText} ซึ่งไม่สามารถถือไว้ได้อนุญาต: {availableText}",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "ค่าแผงเริ่มต้นตั้งค่า \"{name}\" เป็น {valuesText} ซึ่งไม่สามารถถือไว้ได้อนุญาต: {availableText}",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} ของ \"{name}\" จะตั้งชื่อว่า \"{key}\" - ไม่มีแถวดังกล่าวพร้อมใช้งาน: {availableText}",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "{prop} ของ \"{name}\" ตั้งชื่อว่า \"{key}\" - ไม่มีคอลัมน์ดังกล่าวพร้อมใช้งาน: {availableText}",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "{prop} ของ \"{name}\" หมายถึง \"{key}\" - ไม่มีคําถามในเทมเพลตดังกล่าวมีให้ใช้งาน: {availableText}",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "ทริกเกอร์ copyvalue จะคัดลอก \"{fromName}\" ไปยัง \"{setToName}\" แต่ \"{fromName}\" จะเก็บ {sourceShapeText} และ \"{setToName}\" จะเก็บ {targetShapeText}",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "ทริกเกอร์ copyvalue จะคัดลอก \"{fromName}\" ไปยัง \"{setToName}\" แต่ไม่มีค่าใด ๆ ของ \"{fromName}\" อยู่ในค่าที่ \"{setToName}\" สามารถถือได้อนุญาต: {availableText}"
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" คัดลอกตัวเลือกจาก \"{source}\" แต่ไม่มีคําถามที่มีชื่อนั้นอยู่จริง",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" คัดลอกตัวเลือกของมันจากตัวเอง",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" คัดลอกตัวเลือกจาก \"{source}\" ({sourceType}) ซึ่งไม่มีตัวเลือกหรืออาร์เรย์ของค่า",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" อ่านเป็น {prop} \"{field}\" จาก \"{source}\" แต่ {sourceType} \"{source}\" ไม่มี {fieldNoun} แบบนั้น"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "อีกรายการหนึ่งของ {prop} ใน \"{name}\" มีค่า {valueText} อยู่แล้ว - เวลารันจะเก็บทั้งสองรายการไว้",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "ตัวเลือกของ \"{name}\" จะมี {valueText} ขณะที่ {toggleProp} เปิดอยู่ - มันจะชนกับรายการ {specialItemText} ที่มีอยู่ในตัว"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "หน้าเป้าหมายทริกเกอร์ {ทริกเกอร์} \"{name}\" ซึ่งไม่มีอยู่จริง",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "ทริกเกอร์ {trigger} จะเลือก \"{name}\" แต่ {containerType} \"{root}\" ไม่มี {segmentNoun} \"{segment}\"",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "ทริกเกอร์ {trigger} คือ {verb} \"{name}\" แต่ไม่มี {kindText} ที่มีชื่อดังกล่าว"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "ประเภททริกเกอร์ \"{type}\" ไม่เป็นที่ทราบแน่ชัด",
+        // [Auto-translated] "The trigger has no type."
+        noType: "ทริกเกอร์ไม่มีชนิด"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "ประเภทตัวตรวจสอบ \"{type}\" ของ \"{name}\" ไม่เป็นที่ทราบแน่ชัด",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "ตัวตรวจสอบของ \"{name}\" ไม่มีชนิดข้อมูล"
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "ตัวตรวจสอบ {validatorType} ของ \"{name}\" {effectText}: {causeText} ({questionType})",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "ตัวตรวจสอบ {validatorType} ของ \"{name}\" ต้องการอย่างน้อย {min} และสูงสุด {max} - ไม่มีคําตอบใดที่ตรงตามเงื่อนไขนี้",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "ตัวตรวจสอบจํานวนคําตอบของ \"{name}\" ต้องการคําตอบอย่างน้อย {minCount} มากกว่าตัวเลือก {selectable} ที่สามารถเลือกพร้อมกันได้",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "ตัวตรวจสอบ regex ของ \"{name}\" มีรูปแบบที่เอนจินปฏิเสธ: {error}",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "ตัวตรวจสอบนิพจน์ของ \"{name}\" ไม่มีนิพจน์ ดังนั้นมันจึงถูกส่งผ่านเสมอ"
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} ของ \"{name}\" คือ {min} เหนือ {maxProp} ของ {max} - เวลารันจะปรับค่าใดค่าหนึ่งอย่างเงียบ ๆ",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} ของ \"{name}\" คือ {count}, {direction} เป็น {boundProp} ของ {bound} - เวลารันจะจํากัดมันไว้",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} ของ \"{name}\" คือ {step} แต่ช่วงที่มันก้าวผ่าน ({minProp}..{maxProp})ครอบคลุมเฉพาะ {range} เท่านั้น - เวลารันจะจํากัดมันไว้",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "minSelectedChoices ของ \"{name}\" คือ {min} อยู่เหนือตัวเลือก {selectable} ที่สามารถเลือกพร้อมกันได้ - คําถามนี้ไม่มีวันได้รับคําตอบ"
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" จะไม่มีวันปรากฏ: มันมองเห็นได้ถ้าอ่าน {reads} ซึ่ง {deadClause} ดังนั้นเงื่อนไขนี้จึงไม่เป็นจริง"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "maskType \"{maskType}\" ของ \"{name}\" ไม่ใช่ mask ที่รู้จัก - เวลารันจะกลับไปที่ไม่มี mask เลย",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "การตั้งค่าหน้ากากของ \"{name}\" ตั้งค่า \"{key}\" ซึ่งไม่ใช่คุณสมบัติของหน้ากาก \"{maskType}\" - เวลารันจะตัดมันออกอย่างเงียบ ๆ",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "การตั้งค่า mask ของ \"{name}\" ถูกตั้งค่าโดยไม่มี maskType - เวลารันจะเก็บไว้เฉพาะ \"saveMaskedValue\" และตัดส่วนที่เหลือออก",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "หน้ากาก {maskType} ของ \"{name}\" ใช้กับการไม่มีอินพุต: inputType \"{inputType}\" จะถูกปิดเฉพาะข้อความและโทรศัพท์เท่านั้น",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "หน้ากาก datetime ของ \"{name}\" ตั้งค่า min/max โดยไม่มีแพทเทิร์น - ขอบเขตนี้ใช้กับส่วนวันที่ของแพทเทิร์น ดังนั้นถ้าไม่มีก็จะไม่ทําอะไร",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "หน้ากาก {maskType} ของ \"{name}\" อนุญาตให้มีค่าอย่างน้อย {min} และสูงสุด {max} - ไม่มีค่าใดที่ตรงตามเงื่อนไขนี้"
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "แผงไดนามิก \"{name}\" มีเทมเพลตว่างเปล่า - แผงของมันไม่มีอะไรให้แสดงผล",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{name} ของ {kindText} ไม่มีองค์ประกอบใด ๆ",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{name}\" ของ {kindText} ไม่มีองค์ประกอบใดที่สามารถแสดงผลได้เลย - ทุกองค์ประกอบถูกซ่อนไว้ ถูกปกป้องด้วยเงื่อนไขที่ไม่เคยเป็นจริง หรือว่างเปล่า",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "องค์ประกอบรายละเอียดของ \"{name}\" จะไม่แสดง: detailPanelMode ของมันคือ \"none\" ซึ่งเป็นค่าเริ่มต้น"
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "ตําแหน่ง: {0}", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "มันถูกสร้างขึ้นจากชื่อเดิม โอเปอเรเตอร์ และคุณสมบัติค่าของทริกเกอร์",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "ข้างใน: {0}", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "คุณหมายถึง \"{0}\" ใช่ไหม?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "ถ้าเป็นคอมโพเนนต์แบบกําหนดเอง ให้ส่งนิยามของมันไปยัง linter เพื่อให้สามารถวิเคราะห์ได้เต็มรูปแบบ",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "ลงทะเบียนฟังก์ชันก่อน linting หรือแสดงรายการในตัวเลือก linter",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "ประเภทที่สะกดผิดจะถูกตัดออกอย่างเงียบ ๆ ขณะรัน และทริกเกอร์แบบกําหนดเองจะไม่ถูกครอบคลุมโดยการตรวจสอบเป้าหมายและรอบ",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "ถ้าเป็นชุดตัวแปรขณะรันไทม์ ให้แสดงในตัวเลือก linter",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "ลูปอาจไม่สามารถเข้าถึงได้หากเงื่อนไขทริกเกอร์ไม่ตรงกัน - ตรวจสอบนิพจน์",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "defaultValueExpression จะใช้ได้เฉพาะจนกว่าคําถามของมันจะได้รับคําตอบ",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "ในการแสดงออก: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "อ้างอิงในชุดผูก",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "อ้างอิงใน {0} choicesByUrl", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "อ้างอิงในข้อความ \"{0}\"", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0}() อ่านชื่อนั้นจากทุกรายการของ{1} \"{2}\"",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "อาร์กิวเมนต์ {0}() จะไม่ระบุคําถาม แผง หรือหน้า",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "ตัวถอดรหัสจะดรอปกุญแจที่ไม่รู้จัก",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "ตัว deserializer จะทิ้งตัวตรวจสอบที่ไม่สามารถแก้ไขได้ ดังนั้นจึงไม่มีอะไรตรวจสอบได้",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "inputType คือ \"{0}\"",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "มันคือคีย์ข้อมูลของ \"{0}\"" // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "และ",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} จะเป็น {value} เสมอ",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} คือ {bounds}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "อย่างน้อยก็{0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "อย่างมาก{0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} ไม่สามารถเป็นทั้งสอง {values} ได้",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} ไม่สามารถเป็น {value} และไม่ใช่ it ได้",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} ไม่สามารถเป็น empty และเป็น {value} ได้",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} ไม่สามารถเป็น empty แ���ะไม่ empty ได้",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} ไม่สามารถอยู่เหนือ {min} และต่ํากว่า {max} ได้",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} ถูกขอให้เป็นหนึ่งที่ไม่มีค่าเลย"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "การอ้างอิง \"{0}.\" มีให้เฉพาะภายในเซลล์เมทริกซ์หรือแผงรายละเอียดเมทริกซ์เท่านั้น",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" มีให้เฉพาะในเซลล์เมทริกซ์หรือแผงรายละเอียดเมทริกซ์เท่านั้น",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "การอ้างอิง \"{0}.\" มีให้เฉพาะภายในแผงไดนามิกหรือภาชนะแผงเท่านั้น",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "การอ้างอิง \"{0}.\" จะมีให้เฉพาะภายในแผงไดนามิกเท่านั้น",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" มีให้ใช้งานเฉพาะในแผงไดนามิกเท่านั้น",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" มีให้เฉพาะในเงื่อนไขเลือก แถว และคอลัมน์เท่านั้น",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\" อ้างอิงจะมีเฉพาะในคําถามประกอบเท่านั้น",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" ไม่สามารถใช้งานได้ภายในตัวกรอง inArray ซึ่งจะทํางานกับรายการและจากนั้นกับการสํารวจ",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" คือคอลัมน์ของเมทริกซ์นี้ - อ้างอิงด้วยคํานําหน้าแถว",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" เป็นคําถามเกี่ยวกับแผงไดนามิกนี้ - อ้างอิงด้วยคํานําหน้าแผง"
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "ตั้งค่า inputType: \"number\" บน \"{0}\" หากมันเก็บตัวเลข",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "ใช้ \"contains\" หรือ \"anyof\" สําหรับค่าที่เลือกหลายครั้ง"
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "หน้า",
+        // [Auto-translated] "panel"
+        panel: "แผง"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "ชื่อ",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "ชื่อ"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "ค่าที่คํานวณได้",
+        // [Auto-translated] "element"
+        default: "ธาตุ"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "การสํารวจ",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "อื่น ๆ",
+        // [Auto-translated] "None"
+        none: "ไม่มี",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "ปฏิเสธที่จะตอบ",
+        // [Auto-translated] "Don't know"
+        dontknow: "ไม่รู้"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "ไม่เคยยิง",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "ปฏิเสธทุกคําตอบ",
+        // [Auto-translated] "cannot validate"
+        default: "ไม่สามารถตรวจสอบความถูกต้องได้"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "คําถามนี้ไม่มีคําตอบเพื่อยืนยัน",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "ความยาวจะถูกอ่านจากค่าข้อความ และคําตอบนี้ไม่มีความยาว",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "คําตอบไม่ใช่ตัวเลขและไม่มีวันเป็นได้",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "ตัวเลขไม่เคยตรงกับที่อยู่อีเมล",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "คําตอบไม่ใช่รายการค่า",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "คําตอบไม่ใช่ค่าที่มันสามารถตรวจสอบได้"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "อาร์เรย์",
+        // [Auto-translated] "an object"
+        object: "วัตถุ"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "แถวของเมทริกซ์",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "รายการข้อความหลายข้อความ",
+        // [Auto-translated] "a row or item of a question"
+        default: "แถวหรือรายการของคําถาม"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "อาร์เรย์ของวัตถุ",
+        // [Auto-translated] "an object"
+        object: "วัตถุ",
+        // [Auto-translated] "a plain value"
+        plain: "ค่าธรรมดา",
+        // [Auto-translated] "a value"
+        default: "ค่า"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "อาร์เรย์ของค่าที่เลือก",
+        // [Auto-translated] "a single value"
+        scalar: "ค่าหนึ่งเดียว",
+        // [Auto-translated] "a value"
+        default: "ค่า"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "ด้านล่าง",
+        // [Auto-translated] "above"
+        above: "เหนือ"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "ไม่เคยแสดงผลและไม่ได้รับค่าใด ๆ",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "ไม่เคยแสดงผลและไม่ได้รับค่าใด ๆ"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "คําถาม",
+        // [Auto-translated] "question or variable"
+        questionvalue: "คําถามหรือตัวแปร",
+        // [Auto-translated] "page"
+        page: "หน้า"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "อ่าน",
+        // [Auto-translated] "navigates to"
+        gotoName: "นําทางไปยัง",
+        // [Auto-translated] "sets"
+        default: "ชุด"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "คําถามแบบแม่แบบ",
+        // [Auto-translated] "column"
+        default: "เสา"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "คําถามแบบแม่แบบ",
+        // [Auto-translated] "column"
+        matrixdynamic: "เสา",
+        // [Auto-translated] "item"
+        multipletext: "รายการ",
+        // [Auto-translated] "row"
+        matrix: "แถว",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "แถว",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "เสา",
+        // [Auto-translated] "field"
+        default: "ทุ่ง"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "รายการ 1" }, { value: "item2", text: "รายการ 2" }, { value: "item3", text: "รายการ 3" }],
-    columns: [{ value: "column1", text: "คอลัมน์ 1" }, { value: "column2", text: "คอลัมน์ 2" }, { value: "column3", text: "คอลัมน์ 3" }],
-    rows: [{ value: "row1", text: "แถว 1" }, { value: "row2", text: "แถว 2" }],
-    matrixColumns: [{ name: "column1", title: "คอลัมน์ 1" }, { name: "column2", title: "คอลัมน์ 2" }, { name: "column3", title: "คอลัมน์ 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "รายการ 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "รายการ 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "รายการ 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "คอลัมน์ 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "คอลัมน์ 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "คอลัมน์ 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "แถว 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "แถว 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "คอลัมน์ 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "คอลัมน์ 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "คอลัมน์ 3"
+      }
+    ]
   }
 };
 

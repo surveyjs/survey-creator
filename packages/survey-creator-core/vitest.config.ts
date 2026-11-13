@@ -99,6 +99,9 @@ const oxcLegacyDecorators = {
   typescript: { removeClassFieldsWithoutInitializer: true },
 };
 
+// PLACEHOLDER
+const sharedPool = { pool: "threads" as const };
+
 export default defineConfig({
   plugins: [stubAssets],
   test: {
@@ -130,6 +133,7 @@ export default defineConfig({
         oxc: oxcLegacyDecorators,
         resolve: { alias: coreSuiteAliases },
         test: {
+          ...sharedPool,
           name: "core",
           include: ["tests/**/*.{test,tests,spec}.{ts,tsx}"],
           environment: "jsdom",
@@ -142,7 +146,7 @@ export default defineConfig({
           // Vitest surfaces them as "unhandled errors" and fails the run.
           // Treat them as benign timer leaks until source-side cleanup lands.
           dangerouslyIgnoreUnhandledErrors: true,
-          setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
+          setupFiles: ["./tests/jsdom-inline-style.ts", "./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
         },
       },
       {
@@ -150,6 +154,7 @@ export default defineConfig({
         oxc: oxcLegacyDecorators,
         resolve: { alias: collaborationSuiteAliases },
         test: {
+          ...sharedPool,
           name: "collaboration",
           include: ["tests-collaboration/**/*.{test,tests,spec}.{ts,tsx}"],
           environment: "jsdom",
@@ -157,7 +162,7 @@ export default defineConfig({
           testTimeout: 30000,
           hookTimeout: 30000,
           dangerouslyIgnoreUnhandledErrors: true,
-          setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
+          setupFiles: ["./tests/jsdom-inline-style.ts", "./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
         },
       },
       {
@@ -165,6 +170,7 @@ export default defineConfig({
         oxc: oxcLegacyDecorators,
         resolve: { alias: presetsSuiteAliases },
         test: {
+          ...sharedPool,
           name: "presets",
           include: ["tests-presets/**/*.{test,tests,spec}.{ts,tsx}"],
           environment: "jsdom",
@@ -172,7 +178,7 @@ export default defineConfig({
           testTimeout: 30000,
           hookTimeout: 30000,
           dangerouslyIgnoreUnhandledErrors: true,
-          setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
+          setupFiles: ["./tests/jsdom-inline-style.ts", "./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
         },
       },
       // The Tests widget (src/tester). It is a bundle of its own that imports survey-core and

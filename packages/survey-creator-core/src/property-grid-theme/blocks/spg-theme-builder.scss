@@ -10,12 +10,7 @@
     margin: 0;
     height: var(--sjs2-size-x200);
   }
-  .spg-paneldynamic__footer {
-    .spg-paneldynamic__separator {
-      display: none;
-    }
-  }
-  .spg-paneldynamic__buttons-container {
+  .spg-paneldynamic__toolbar {
     display: flex;
     justify-content: center;
     .spg-action-bar {

@@ -70,14 +70,16 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
       .getUndoManager();
     this.aceCanUndo = undoManager.hasUndo();
     this.aceCanRedo = undoManager.hasRedo();
-    const isFocused = this.aceEditor.isFocused() === true;
-    const isSearchBoxActive = this.aceEditor?.searchBox?.active === true;
-    if (isFocused || isSearchBoxActive) {
-      this.isJSONChanged = !undoManager.isClean();
-    }
   }
   protected onTextChanged(): void {
     this.updateUndoRedoState();
+    // Every change of the document counts, the way the textarea counts it; the activation resets
+    // the flag itself. It is not read from undoManager.isClean(): Ace syncs its revision after the
+    // "change" of an undo or a redo has fired, so at that moment the manager still describes the
+    // step before, and a redone edit read as clean. Nor does it wait for the focus: the Fix button
+    // activated from the keyboard and a replace from the search box change the text while the
+    // editor is not focused.
+    this.isJSONChanged = true;
     super.onTextChanged();
   }
   private createAnnotations(errors: any[]): any[] {
@@ -96,13 +98,17 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
   }
   protected setErrors(errors: any[]): void {
     super.setErrors(errors);
-    this.aceEditor.getSession().setAnnotations(this.createAnnotations(errors));
+    // only the blocking errors are annotated in the gutter - a warning is advice, not a mark
+    this.aceEditor.getSession().setAnnotations(this.createAnnotations(errors.filter(error => error.isBlocking)));
     setTimeout(() => this.aceEditor.resize());
   }
   protected gotoError(at: number, row: number, column: number): void {
     this.aceEditor.focus();
-    this.aceEditor.renderer.scrollCursorIntoView({ row: row + 1, column: column + 1 }, 0.5);
-    this.aceEditor.gotoLine(row + 1, column + 1);
+    // gotoLine takes a 1-based line and a 0-based column, and centres the line itself when it
+    // is not fully visible. scrollCursorIntoView reads a 0-based position, and null means the
+    // current cursor - the one gotoLine has just moved, so it runs after it and not before.
+    this.aceEditor.gotoLine(row + 1, column);
+    this.aceEditor.renderer.scrollCursorIntoView(null, 0.5);
   }
   public onEditorActivated(): void {
     this.aceEditor.getSession().getUndoManager().markClean();

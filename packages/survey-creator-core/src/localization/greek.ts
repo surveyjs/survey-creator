@@ -142,6 +142,10 @@ export var grStrings = {
     jsonHideErrors: "Απόκρυψη σφαλμάτων",
     // "Show errors"
     jsonShowErrors: "Εμφάνιση σφαλμάτων",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "Διόρθωση σφάλματος",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "Το JSON της έρευνας πρέπει να είναι αντικείμενο.",
     // "Undo"
     undo: "Αναίρεση",
     // "Redo"
@@ -246,6 +250,8 @@ export var grStrings = {
     translateUsigAI: "Αυτόματη μετάφραση όλων",
     // "Translate from: "
     translateUsigAIFrom: "Μετάφραση από: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "Μετάφραση υπόλοιπων συμβολοσειρών",
     // "Untranslated strings"
     translationDialogTitle: "Αμετάφραστες συμβολοσειρές",
     // "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var grStrings = {
     translationSource: "Πηγή: ",
     // "Target: "
     translationTarget: "Προορισμός: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "Γλώσσα-πηγή",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "Γλώσσα-στόχος",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} μεταφρασμένων συμβολοσειρών {1}",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "Είστε βέβαιοι ότι θέλετε να διαγράψετε όλες τις μεταφρασμένες συμβολοσειρές για την επιλεγμένη γλώσσα;",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "Προβολή φόρμας",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "Προβολή πλέγματος",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "Μετάφραση συμβολοσειρών",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "Συμβολοσειρές έρευνας",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "Δεν υπάρχουν συμβολοσειρές για μετάφραση",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "Όλες οι συμβολοσειρές μεταφράζονται",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} συμβολοσειρές δεν μεταφράζονται",
     // "YouTube links are not supported."
     translationYouTubeNotSupported: "Οι συνδέσεις YouTube δεν υποστηρίζονται.",
     // "Export"
@@ -286,6 +314,10 @@ export var grStrings = {
     choicesLoadedFromWebLinkText: "Μετάβαση στις ρυθμίσεις",
     // "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "Προεπισκόπηση επιλογών",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "Δεν έχει οριστεί καμία έκφραση",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "Επεξεργασία έκφρασης",
     // "HTML content will be here."
     htmlPlaceHolder: "Το περιεχόμενο HTML θα εμφανιστεί εδώ.",
     // "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var grStrings = {
       uncompletedRule_cancel: "Όχι, θέλω να ολοκληρώσω τους κανόνες"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "Μεταβλητή προεπιλογή",
+    // [Auto-translated] "None"
+    noPreset: "Κανένας",
+    // [Auto-translated] "View variable values"
+    view: "Προβολή τιμών μεταβλητών",
+    // [Auto-translated] "Variable values"
+    viewTitle: "Μεταβλητές τιμές",
+    // [Auto-translated] "Manage presets"
+    edit: "Διαχείριση προεπιλογών",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "Μεταβλητές προεπιλογές",
+    // [Auto-translated] "Preset"
+    presetName: "Προεπιλογή",
+    // [Auto-translated] "Description"
+    presetDescription: "Περιγραφή",
+    // [Auto-translated] "Add preset"
+    addPreset: "Προσθήκη προεπιλογής",
+    // [Auto-translated] "New preset"
+    newPresetName: "Νέα προεπιλογή",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "Διαγραφή προεπιλογής",
+    // [Auto-translated] "Back"
+    back: "Πίσω",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "Υπάρχει ήδη μια προεπιλογή με αυτό το όνομα",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "Εισαγάγετε ένα προκαθορισμένο όνομα",
+    // [Auto-translated] "Preset"
+    listNameColumn: "Προεπιλογή",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "Περιγραφή"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "Βοηθός έκφρασης",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "Γράψτε με AI",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "Περιγράψτε τι πρέπει να κάνει η έκφραση",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "Για παράδειγμα: εμφάνιση αυτής της ερώτησης όταν ο ερωτώμενος είναι 18 ετών και άνω",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "Περιγράψτε την κατάσταση με λέξεις",
+    // [Auto-translated] "Generate"
+    generate: "Δημιουργία",
+    // [Auto-translated] "Refine"
+    refine: "Βελτιώστε",
+    // [Auto-translated] "Explain"
+    explain: "Εξηγήστε",
+    // [Auto-translated] "Stop"
+    stop: "Σταμάτα",
+    // [Auto-translated] "Accept"
+    accept: "Αποδοχή",
+    // [Auto-translated] "Reject"
+    reject: "Απόρριψη",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "Εφαρμογή διόρθωσης: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "Τρέχουσα έκφραση",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "Προτεινόμενη έκφραση",
+    // [Auto-translated] "Reads as"
+    readsAs: "Διαβάζεται ως",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "Η εξήγηση του βοηθού",
+    // [Auto-translated] "Check results"
+    findings: "Ελέγξτε τα αποτελέσματα",
+    // [Auto-translated] "Error"
+    severityError: "Λάθος",
+    // [Auto-translated] "Warning"
+    severityWarning: "Προειδοποίηση",
+    // [Auto-translated] "Info"
+    severityInfo: "Πληροφορίες",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "στο \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "Περιγράψτε την έκφραση και επιλέξτε Δημιουργία.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "Περιμένοντας τον βοηθό...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "Το αίτημα ακυρώθηκε.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "Ο βοηθός ανέφερε: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "Ο βοηθός δεν πρότεινε έκφραση.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "Εξετάστε την προτεινόμενη έκφραση.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "Ο βοηθός εξήγησε την τρέχουσα έκφραση.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "Η προτεινόμενη έκφραση έχει λάθη και δεν μπορεί να γίνει αποδεκτή.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "Η προτεινόμενη έκφραση δεν μπορούσε να ελεγχθεί για κάθε μέρος στο οποίο γράφτηκε, επομένως δεν μπορεί να γίνει αποδεκτή.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "Προσθέστε μια ενέργεια στον κανόνα πριν ρωτήσετε τον βοηθό.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "Η πρώτη πρόταση είχε λάθη και διορθώθηκε αυτόματα."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var grStrings = {
       templateDescription: "Πρότυπο περιγραφής πλαισίου",
       // "Entry title pattern"
       templateTitle: "Πρότυπο τίτλου πλαισίου",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Σύμβολο κράτησης θέσης τίτλου καταχώρισης",
       // "Empty panel text"
       noEntriesText: "Κείμενο κενού πλαισίου",
       // "Tab title pattern"
@@ -588,6 +724,10 @@ export var grStrings = {
       templateErrorLocation: "Στοίχιση μηνύματος σφάλματος",
       // "New entry location"
       newPanelPosition: "Θέση νέου πλαισίου",
+      // [Auto-translated] "Entries per page"
+      pageSize: "Καταχωρήσεις ανά σελίδα",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "Να επιτρέπεται στους χρήστες να ταξινομούν καταχωρήσεις",
       // "Prevent duplicate responses in the following question"
       keyName: "Αποτροπή διπλών απαντήσεων στην εξής ερώτηση"
     },
@@ -675,6 +815,12 @@ export var grStrings = {
       // "Expression"
       expression: "Έκφραση"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "Ταξινόμηση ανά",
+      // [Auto-translated] "Order"
+      direction: "Παραγγελία"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "Έκφραση"
@@ -690,7 +836,9 @@ export var grStrings = {
       // "Survey description"
       description: "Περιγραφή ερωτηματολογίου",
       // "Make the survey read-only"
-      readOnly: "Κάνε το ερωτηματολόγιο μόνο για ανάγνωση"
+      readOnly: "Κάνε το ερωτηματολόγιο μόνο για ανάγνωση",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "Τοπικές μορφές"
     },
     page: {
       // "Page name"
@@ -726,7 +874,9 @@ export var grStrings = {
       // "Make the column required if"
       requiredIf: "Υποχρεωτική στήλη εάν",
       // "Each option in a separate column"
-      showInMultipleColumns: "Κάθε επιλογή σε ξεχωριστή στήλη"
+      showInMultipleColumns: "Κάθε επιλογή σε ξεχωριστή στήλη",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "Να επιτρέπεται η ταξινόμηση κατά αυτήν τη στήλη"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export var grStrings = {
     masksettings: {
       // "Save masked value in survey results"
       saveMaskedValue: "Αποθήκευση τιμής με μάσκα στα αποτελέσματα του ερωτηματολογίου"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "Περιοχή",
+      // [Auto-translated] "Date pattern"
+      datePattern: "Μοτίβο ημερομηνίας",
+      // [Auto-translated] "Time pattern"
+      timePattern: "Μοτίβο χρόνου",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "Διαχωριστικό δεκαδικών ψηφίων",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "Διαχωριστικό χιλιάδων",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Σύμβολο νομίσματος",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Μοτίβο νομίσματος"
     },
     patternmask: {
       // "Value pattern"
@@ -761,16 +927,18 @@ export var grStrings = {
       decimalSeparator: "Διαχωριστικό δεκαδικών",
       // "Value precision"
       precision: "Ακρίβεια τιμής",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "Εμφάνιση μηδενικών στο τέλος",
       // "Minimum value"
       min: "Ελάχιστη τιμή",
       // "Maximum value"
       max: "Μέγιστη τιμή"
     },
     currencymask: {
-      // "Currency prefix"
-      prefix: "Πρόθεμα νομίσματος",
-      // "Currency suffix"
-      suffix: "Επίθεμα νομίσματος"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "Σύμβολο νομίσματος",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "Μοτίβο νομίσματος"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "Απαλοιφή άλλων όταν είναι επιλεγμένο",
@@ -812,8 +980,24 @@ export var grStrings = {
     addItem: "Κλικ για προσθήκη στοιχείου...",
     // "Click to remove the item..."
     removeItem: "Κλικ για διαγραφή του στοιχείου...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Προσθέστε {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Αφαιρέστε {0}",
     // "Drag the item"
     dragItem: "Σύρετε το στοιχείο",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "Ανάπτυξη ένθετων επιλογών",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "Σύμπτυξη ένθετων επιλογών",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Επέκταση ένθετων επιλογών {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Σύμπτυξη ένθετων επιλογών {0}",
+    // [Auto-translated] "Show description"
+    showDescription: "Εμφάνιση περιγραφής",
+    // [Auto-translated] "Hide description"
+    hideDescription: "Απόκρυψη περιγραφής",
     // "Edit"
     edit: "Επεξεργασία",
     // "Done"
@@ -858,6 +1042,12 @@ export var grStrings = {
     listIsEmpty: "Δεν έχετε προσθέσει ακόμα στοιχεία",
     // "You don't have any choices yet"
     "listIsEmpty@choices": "Δεν έχετε προσθέσει επιλογές",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "Δεν υπάρχουν προσαρμοσμένες τιμές αξιολόγησης",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "Χωρίς προσαρμοσμένες ετικέτες",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "Δεν υπάρχουν περιοχές",
     // "You don't have any columns yet"
     "listIsEmpty@columns": "Δεν έχετε προσθέσει στήλες",
     // "You don't have layout columns yet"
@@ -870,12 +1060,22 @@ export var grStrings = {
     "listIsEmpty@calculatedValues": "Δεν έχετε προσθέσει μεταβλητές",
     // "You don't have any triggers yet"
     "listIsEmpty@triggers": "Δεν έχετε προσθέσει triggers",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "Χωρίς σήμανση υπό όρους",
     // "You don't have any links yet"
     "listIsEmpty@navigateToUrlOnCondition": "Δεν έχετε προσθέσει συνδέσμους",
     // "You don't have any pages yet"
     "listIsEmpty@pages": "Δεν έχετε προσθέσει σελίδες",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "Χωρίς επίπεδα ταξινόμησης",
     // "Add new choice"
     "addNew@choices": "Προσθήκη νέας επιλογής",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "Προσθήκη τιμής αξιολόγησης",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "Προσθήκη ετικέτας",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "Προσθήκη περιοχής",
     // "Add new column"
     "addNew@columns": "Προσθήκη νέας στήλης",
     // "Add new row"
@@ -886,10 +1086,14 @@ export var grStrings = {
     "addNew@calculatedValues": "Προσθήκη νέας μεταβλητής",
     // "Add new trigger"
     "addNew@triggers": "Προσθήκη νέου trigger",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "Προσθήκη σήμανσης",
     // "Add new URL"
     "addNew@navigateToUrlOnCondition": "Προσθήκη νέου URL",
     // "Add new page"
     "addNew@pages": "Προσθήκη νέας σελίδας",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "Προσθήκη επιπέδου ταξινόμησης",
     // "Value"
     value: "Τιμή",
     // "Text"
@@ -916,6 +1120,8 @@ export var grStrings = {
     surveyTitlePlaceholder: "Τίτλος Ερωτηματολογίου",
     // "Page {num}"
     pageTitlePlaceholder: "Σελίδα {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "Τίτλος Πάνελ",
     // "Start Page"
     startPageTitlePlaceholder: "Αρχική Σελίδα",
     // "Description"
@@ -966,6 +1172,8 @@ export var grStrings = {
     visible: "Ορατό",
     // "Required"
     isRequired: "Υποχρεωτικό",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Απαιτήστε μια θετική απάντηση",
     // "Mark as required"
     markRequired: "Σήμανση ως υποχρεωτικό",
     // "Remove the required mark"
@@ -976,6 +1184,8 @@ export var grStrings = {
     eachRowUnique: "Αποτροπή διπλών απαντήσεων σε γραμμές",
     // "Error message for required questions"
     requiredErrorText: "Μήνυμα σφάλματος για υποχρεωτικές ερωτήσεις",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Μήνυμα λάθους όταν απαιτείται Ναι",
     // "Display the question on a new line"
     startWithNewLine: "Εμφάνιση ερώτησης σε νέα γραμμή",
     // "Rows"
@@ -994,6 +1204,16 @@ export var grStrings = {
     maxFiles: "Μέγιστος αριθμός αρχείων",
     // "Row count"
     rowCount: "Αριθμός γραμμών",
+    // [Auto-translated] "Rows per page"
+    pageSize: "Σειρές ανά σελίδα",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "Να επιτρέπεται στους χρήστες η ταξινόμηση γραμμών",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "Μέγιστα επίπεδα ταξινόμησης",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "Προεπιλεγμένη σειρά ταξινόμησης",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "Εμφάνιση γραμμής ταξινόμησης",
     // "Columns layout"
     columnLayout: "Διάταξη στηλών",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export var grStrings = {
     questionErrorLocation: "Στοίχιση μηνύματος σφάλματος",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "Εστίαση στην πρώτη ερώτηση της νέας σελίδας",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "Ενεργοποίηση συντομεύσεων επιλογής",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "Εμφάνιση υποδείξεων πληκτρολογίου",
     // "Question order"
     questionOrder: "Σειρά ερωτήσεων",
     // "Time limit to complete the survey"
@@ -1268,6 +1492,8 @@ export var grStrings = {
     minRowCount: "Ελάχιστος αριθμός σειρών",
     // "Maximum row count"
     maxRowCount: "Μέγιστος αριθμός σειρών",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "Παράσταση πλήθους γραμμών",
     // "Confirm row removal"
     confirmDelete: "Επιβεβαίωση διαγραφής σειράς",
     // "Confirmation message"
@@ -1278,6 +1504,8 @@ export var grStrings = {
     minPanelCount: "Ελάχιστος αριθμός πάνελ",
     // "Maximum number of entries"
     maxPanelCount: "Μέγιστος αριθμός πάνελ",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "Παράσταση πλήθους καταχωρήσεων",
     // "Initial entry state"
     panelsState: "Κατάσταση κατάρρευσης εσωτερικών πάνελ",
     // "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export var grStrings = {
     logoHeight: "Ύψος λογότυπου",
     // "Read-only"
     readOnly: "Μόνο ανάγνωση",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "Λειτουργία μόνο για ανάγνωση",
     // "Disable the read-only mode if"
     enableIf: "Απενεργοποίηση λειτουργίας μόνο για ανάγνωση αν",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export var grStrings = {
       columns: "Στήλες",
       // "Rows"
       rows: "Σειρές",
+      // [Auto-translated] "Entries"
+      entries: "Συμμετοχές",
       // "Choice Options"
       choices: "Επιλογές Επιλογής",
       // "Items"
@@ -1544,6 +1776,8 @@ export var grStrings = {
       question: "Ρυθμίσεις Ερώτησης",
       // "Pages"
       pages: "Σελίδες",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "Τοπικές μορφές",
       // "Quiz Mode"
       timer: "Λειτουργία Κουίζ",
       // "Calculated Values"
@@ -1862,6 +2096,12 @@ export var grStrings = {
       // "Never"
       none: "Ποτέ"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "Μόνο για ανάγνωση",
+      // [Auto-translated] "View"
+      view: "Προβολή"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "Κουμπιά επιλογής",
     inputType: {
@@ -1913,6 +2153,12 @@ export var grStrings = {
       warning: "Προειδοποίηση",
       // [Auto-translated] "Informational"
       info: "Ενημερωτικό"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "Εμπρός",
+      // [Auto-translated] "Rear"
+      environment: "Πίσω"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export var grStrings = {
     underRowSingle: "Κάτω από τη σειρά, εμφάνιση μόνο μίας επέκτασης σειράς",
     // "Auto"
     auto: "Αυτόματο",
+    // [Auto-translated] "Always"
+    always: "Πάντα",
     timerInfoMode: {
       // "Both"
       combined: "Και τα δύο"
@@ -2321,7 +2569,148 @@ export var grStrings = {
       survey: "Ίδιο με την έρευνα",
       // "Same as container"
       container: "Ίδιο με το κοντέινερ"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "Κληρονομώ",
+      // [Auto-translated] "Hide"
+      "false": "Απόκρυψη",
+      // [Auto-translated] "Show"
+      "true": "Προβολή"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "Αραβικά",
+    // [Auto-translated] "Bulgarian"
+    bg: "Βουλγαρικά",
+    // [Auto-translated] "Catalan"
+    ca: "Καταλανικά",
+    // [Auto-translated] "Czech"
+    cs: "Τσεχικά",
+    // [Auto-translated] "Welsh"
+    cy: "Ουαλικά",
+    // [Auto-translated] "Danish"
+    da: "Δανέζικα",
+    // [Auto-translated] "German"
+    de: "Γερμανικά",
+    // [Auto-translated] "Greek"
+    el: "Ελληνικά",
+    // [Auto-translated] "English"
+    en: "Αγγλικά",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "Αγγλικά (Αυστραλίας)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "Αγγλικά (Καναδάς)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "Ελληνικά",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "Αγγλικά (Ιρλανδία)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "Αγγλικά (Ινδίας)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "Αγγλικά (Νέας Ζηλανδίας)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "Αγγλικά (Νότια Αφρική)",
+    // [Auto-translated] "Spanish"
+    es: "Ισπανικά",
+    // [Auto-translated] "Estonian"
+    et: "Εσθονικά",
+    // [Auto-translated] "Basque"
+    eu: "Βασκικά",
+    // [Auto-translated] "Persian"
+    fa: "Περσικά",
+    // [Auto-translated] "Finnish"
+    fi: "Φινλανδικός",
+    // [Auto-translated] "Filipino"
+    fil: "Φιλιππινέζικα",
+    // [Auto-translated] "French"
+    fr: "γαλλική γλώσσα",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "Γαλλικά (Καναδάς)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "Γαλλικά (Ελβετίας)",
+    // [Auto-translated] "Hebrew"
+    he: "Εβραϊκά",
+    // [Auto-translated] "Hindi"
+    hi: "Χίντι",
+    // [Auto-translated] "Croatian"
+    hr: "Κροατικά",
+    // [Auto-translated] "Haitian Creole"
+    ht: "Κρεολή της Αϊτής",
+    // [Auto-translated] "Hungarian"
+    hu: "Ουγγρικά",
+    // [Auto-translated] "Indonesian"
+    id: "Ινδονησιακά",
+    // [Auto-translated] "Icelandic"
+    is: "Ισλανδικά",
+    // [Auto-translated] "Italian"
+    it: "ιταλικός",
+    // [Auto-translated] "Japanese"
+    ja: "Ιαπωνικά",
+    // [Auto-translated] "Georgian"
+    ka: "Γεωργιανά",
+    // [Auto-translated] "Kazakh"
+    kk: "Καζακστάν",
+    // [Auto-translated] "Korean"
+    ko: "Κορεάτικα",
+    // [Auto-translated] "Lithuanian"
+    lt: "Λιθουανικά",
+    // [Auto-translated] "Latvian"
+    lv: "Λετονικά",
+    // [Auto-translated] "Macedonian"
+    mk: "Μακεδονικά",
+    // [Auto-translated] "Burmese"
+    mm: "Βιρμανικά",
+    // [Auto-translated] "Malay"
+    ms: "Μαλαϊκά",
+    // [Auto-translated] "Dutch"
+    nl: "Ολλανδικά",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "Ολλανδικά (Βέλγιο)",
+    // [Auto-translated] "Norwegian"
+    no: "Νορβηγ",
+    // [Auto-translated] "Polish"
+    pl: "Πολωνικά",
+    // [Auto-translated] "Portuguese"
+    pt: "Πορτογαλικά",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "Πορτογαλικά (Βραζιλίας)",
+    // [Auto-translated] "Romanian"
+    ro: "Ρουμανικά",
+    // [Auto-translated] "Russian"
+    ru: "Ρωσικά",
+    // [Auto-translated] "Slovak"
+    sk: "Σλοβακικά",
+    // [Auto-translated] "Slovenian"
+    sl: "Σλοβενικά",
+    // [Auto-translated] "Serbian"
+    sr: "Σερβικά",
+    // [Auto-translated] "Swedish"
+    sv: "Σουηδικά",
+    // [Auto-translated] "Swahili"
+    sw: "Σουαχίλι",
+    // [Auto-translated] "Telugu"
+    tel: "Τελούγκου",
+    // [Auto-translated] "Tajik"
+    tg: "Τατζικιστάν",
+    // [Auto-translated] "Thai"
+    th: "Ταϊλανδικά",
+    // [Auto-translated] "Turkish"
+    tr: "Τούρκικος",
+    // [Auto-translated] "Ukrainian"
+    uk: "Ουκρανικά",
+    // [Auto-translated] "Urdu"
+    ur: "Ουρντού",
+    // [Auto-translated] "Vietnamese"
+    vi: "Βιετναμέζικα",
+    // [Auto-translated] "Chinese"
+    zh: "κινέζικα",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "Κινέζικα (Απλοποιημένα)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "Κινέζικα (Παραδοσιακά)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export var grStrings = {
     visibletrigger: "Αλλαγή ορατότητας (παρωχημένο)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "Το ίδιο με τη γλώσσα της έρευνας"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "π.χ.: +1(999)-999-99-99"
@@ -2405,12 +2798,6 @@ export var grStrings = {
     datetimemask: {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "π.χ.: mm/dd/yyyy HH:MM:ss"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "π.χ.: $",
-      // "Ex.: USD"
-      suffix: "π.χ.: USD"
     },
     panelbase: {
       // "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export var grStrings = {
       // "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "Καθορίζει πόσες στήλες καλύπτει αυτό το πάνελ στη διάταξη πλέγματος.",
       // "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Αυτός ο πίνακας σας επιτρέπει να ρυθμίσετε κάθε στήλη πλέγματος εντός του πάνελ. Ορίζει αυτόματα το ποσοστό πλάτους για κάθε στήλη με βάση τον μέγιστο αριθμό στοιχείων σε μια σειρά. Για να προσαρμόσετε τη διάταξη πλέγματος, ρυθμίστε χειροκίνητα αυτές τις τιμές και ορίστε το πλάτος τίτλου για όλες τις ερωτήσεις σε κάθε στήλη."
+      gridLayoutColumns: "Αυτός ο πίνακας σας επιτρέπει να ρυθμίσετε κάθε στήλη πλέγματος εντός του πάνελ. Ορίζει αυτόματα το ποσοστό πλάτους για κάθε στήλη με βάση τον μέγιστο αριθμό στοιχείων σε μια σειρά. Για να προσαρμόσετε τη διάταξη πλέγματος, ρυθμίστε χειροκίνητα αυτές τις τιμές και ορίστε το πλάτος τίτλου για όλες τις ερωτήσεις σε κάθε στήλη.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Καθορίζει τον τρόπο εμφάνισης των ερωτήσεων μέσα σε αυτόν τον πίνακα όταν είναι μόνο για ανάγνωση. Το \"Μόνο για ανάγνωση\" εμφανίζει τις ερωτήσεις με τα συνηθισμένα στοιχεία ελέγχου εισαγωγής, αλλά απενεργοποιημένο για επεξεργασία. Το \"Προβολή\" εμφανίζει τις απαντήσεις ως κείμενο ή άλλα μη αλληλεπιδραστικά στοιχεία. Το \"Μεταβίβαση\" χρησιμοποιεί τη λειτουργία που έχει οριστεί για τον γονικό πίνακα, τη σελίδα ή την έρευνα (\"Μόνο για ανάγνωση\" από προεπιλογή)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export var grStrings = {
       width: "Ορίζει το πλάτος του πάνελ σε σχέση με άλλα στοιχεία έρευνας στην ίδια γραμμή. Δέχεται τιμές CSS (px, %, in, pt, κλπ).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Πληκτρολογήστε ένα πρότυπο για τους τίτλους των δυναμικών πάνελ. Χρησιμοποιήστε {panelIndex} για τη γενική θέση του πάνελ και {visiblePanelIndex} για τη σειρά του μεταξύ των ορατών πάνελ. Εισαγάγετε αυτούς τους χώρους κράτησης στο μοτίβο για αυτόματη αρίθμηση.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Ένα εναλλακτικό κείμενο για τίτλους καταχωρήσεων που εφαρμόζεται όταν το μοτίβο τίτλου καταχώρισης δεν παράγει μια σημαντική τιμή. Χρησιμοποιήστε το {panelIndex} για τη γενική θέση της καταχώρισης και το {visiblePanelIndex} για τη σειρά της μεταξύ των ορατών καταχωρήσεων.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Πληκτρολογήστε ένα πρότυπο για τους τίτλους των καρτελών. Χρησιμοποιήστε {panelIndex} για τη γενική θέση του πάνελ και {visiblePanelIndex} για τη σειρά του μεταξύ των ορατών πάνελ. Εισαγάγετε αυτούς τους χώρους κράτησης στο μοτίβο για αυτόματη αρίθμηση.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export var grStrings = {
       keyName: "Αναφέρετε το όνομα της ερώτησης για να απαιτηθεί από τον χρήστη να παράσχει μοναδική απάντηση για αυτήν την ερώτηση σε κάθε πάνελ.",
       // "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "Ενεργοποιεί μια προτροπή επιβεβαίωσης πριν από την κατάργηση ενός πίνακα.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "Καθορίστε μια παράσταση που υπολογίζει τον αριθμό των καταχωρήσεων. Αυτή η έκφραση παρακάμπτει τη ρύθμιση \"Αρχικός αριθμός καταχωρήσεων\" και επαναξιολογείται κάθε φορά που αλλάζουν οι τιμές στις οποίες αναφέρεται. Το αποτέλεσμα περιορίζεται από τις ρυθμίσεις \"Ελάχιστος αριθμός καταχωρήσεων\" και \"Μέγιστος αριθμός καταχωρήσεων\". Ενώ έχει οριστεί αυτή η έκφραση, οι ερωτηθέντες δεν μπορούν να προσθέσουν ή να αφαιρέσουν καταχωρήσεις με μη αυτόματο τρόπο.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "Καθορίζει τον αριθμό των καταχωρήσεων που εμφανίζονται σε κάθε σελίδα του πίνακα. Το '0' απενεργοποιεί τη σελιδοποίηση και εμφανίζει όλες τις καταχωρήσεις.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "Επιτρέπει στους ερωτηθέντες να ταξινομούν τις καταχωρήσεις χρησιμοποιώντας τη γραμμή ταξινόμησης.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "Καθορίζει την αρχική σειρά καταχώρισης. Οι ερωτηθέντες μπορούν να την αλλάξουν εάν επιτρέπεται η ταξινόμηση. Κατά την ταξινόμηση κατά πολλές ερωτήσεις, κάθε ερώτηση ταξινομεί τις καταχωρήσεις με τη σειρά που καθορίζεται από την προηγούμενη ερώτηση. Σύρετε τις ερωτήσεις για να αλλάξετε την προτεραιότητά τους.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "Αντιστοιχίζει αριθμούς σε ερωτήσεις που είναι ένθετες στον δυναμικό πίνακα."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "Επιτρέπει στους ερωτηθέντες να ταξινομούν σειρές κάνοντας κλικ στις κεφαλίδες στηλών ή χρησιμοποιώντας τη γραμμή ταξινόμησης.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "Καθορίζει την αρχική σειρά γραμμών. Οι ερωτηθέντες μπορούν να την αλλάξουν εάν επιτρέπεται η ταξινόμηση. Κατά την ταξινόμηση κατά πολλές στήλες, κάθε στήλη ταξινομεί τις σειρές με τη σειρά που καθορίζεται από την προηγούμενη στήλη. Σύρετε στήλες για να αλλάξετε την προτεραιότητά τους.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "Το \"Auto\" εμφανίζει τη γραμμή ταξινόμησης μόνο όταν ο πίνακας δεν έχει κεφαλίδες στηλών με δυνατότητα ταξινόμησης: οι κεφαλίδες είναι κρυφές, ο πίνακας χρησιμοποιεί τη διάταξη για κινητά ή οι γραμμές μεταφέρονται σε στήλες. Το \"Always\" εμφανίζει τη γραμμή ταξινόμησης ακόμα και όταν είναι ορατές οι κεφαλίδες στηλών με δυνατότητα ταξινόμησης.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "Καθορίστε μια παράσταση που υπολογίζει τον αριθμό των σειρών. Αυτή η έκφραση παρακάμπτει τη ρύθμιση \"Αρχικός αριθμός γραμμών\" και επαναξιολογείται κάθε φορά που αλλάζουν οι τιμές στις οποίες αναφέρεται. Το αποτέλεσμα περιορίζεται από τις ρυθμίσεις \"Ελάχιστος αριθμός γραμμών\" και \"Μέγιστος αριθμός γραμμών\". Ενώ έχει οριστεί αυτή η έκφραση, οι ερωτηθέντες δεν μπορούν να προσθέσουν ή να αφαιρέσουν σειρές με μη αυτόματο τρόπο.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "Ενεργοποιεί ένα μήνυμα επιβεβαίωσης πριν από την κατάργηση μιας σειράς.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "Επεκτείνει αυτόματα την ενότητα λεπτομερειών όταν προστίθεται μια νέα γραμμή στον πίνακα."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "Καθορίζει τον αριθμό των γραμμών που εμφανίζονται σε κάθε σελίδα του πίνακα. Το '0' απενεργοποιεί τη σελιδοποίηση και εμφανίζει όλες τις γραμμές.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "Καθορίζει τον αριθμό των πεδίων που μπορεί να ταξινομήσει ένας ερωτώμενος ταυτόχρονα.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "Δημιουργεί αντίγραφο των απαντήσεων από την τελευταία γραμμή και τις αναθέτει στη επόμενη προστιθέμενη δυναμική γραμμή.",
     // "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export var grStrings = {
       // "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "Τα μεγάλα κείμενα στις επιλογές θα δημιουργούν αυτόματα αλλαγές γραμμής για να προσαρμοστούν στο αναπτυσσόμενο μενού. Αποεπιλέξτε αν θέλετε τα κείμενα να κόβονται.",
       // "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "Καθορίζει πόσες στήλες καλύπτει αυτή η ερώτηση στη διάταξη πλέγματος."
+      effectiveColSpan: "Καθορίζει πόσες στήλες καλύπτει αυτή η ερώτηση στη διάταξη πλέγματος.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Καθορίζει τον τρόπο εμφάνισης της ερώτησης όταν είναι μόνο για ανάγνωση. Η επιλογή \"Μόνο για ανάγνωση\" εμφανίζει την ερώτηση με τους συνήθεις ελέγχους εισαγωγής, αλλά απενεργοποιημένη για επεξεργασία. Η \"Προβολή\" εμφανίζει τις απαντήσεις ως κείμενο ή άλλα μη αλληλεπιδραστικά στοιχεία. Η \"Μεταβίβαση\" χρησιμοποιεί τη λειτουργία που έχει οριστεί για τον γονικό πίνακα, τη σελίδα ή την έρευνα (\"Μόνο για ανάγνωση\" από προεπιλογή).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "Εμφανίζει υποδείξεις για τις διαθέσιμες ενέργειες πληκτρολογίου κάτω από αυτήν την ερώτηση. Η επιλογή \"Μεταβίβαση\" εφαρμόζει τη ρύθμιση επιπέδου έρευνας."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export var grStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "Επιλέξτε αν θέλετε να αποτρέψετε τους συμμετέχοντες από το να συμπληρώσουν την έρευνά σας.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "Καθορίζει τον τρόπο εμφάνισης των ερωτήσεων μόνο για ανάγνωση, συμπεριλαμβανομένης της σελίδας προεπισκόπησης. Η επιλογή \"Μόνο για ανάγνωση\" (προεπιλογή) εμφανίζει ερωτήσεις με τα συνήθη στοιχεία ελέγχου εισαγωγής, αλλά απενεργοποιημένες για επεξεργασία. Η \"Προβολή\" εμφανίζει τις απαντήσεις ως κείμενο ή άλλα μη αλληλεπιδραστικά στοιχεία.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Ορίζει την τοποθεσία της γραμμής προόδου. Η τιμή \"Αυτόματα\" εμφανίζει τη γραμμή προόδου πάνω ή κάτω από την κεφαλίδα της έρευνας."
     },
@@ -2633,7 +3050,9 @@ export var grStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "Όταν επιλεγεί, δημιουργεί μια ατομική στήλη για κάθε επιλογή.",
       // "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "Διατάσσει τις επιλογές επιλογής σε διάταξη πολλαπλών στηλών. Όταν οριστεί σε 0, οι επιλογές εμφανίζονται σε μία γραμμή. Όταν οριστεί σε -1, η πραγματική τιμή κληρονομείται από την ιδιότητα \"Αριθμός εισχωρημένων στηλών\" του γονικού πίνακα."
+      colCount: "Διατάσσει τις επιλογές επιλογής σε διάταξη πολλαπλών στηλών. Όταν οριστεί σε 0, οι επιλογές εμφανίζονται σε μία γραμμή. Όταν οριστεί σε -1, η πραγματική τιμή κληρονομείται από την ιδιότητα \"Αριθμός εισχωρημένων στηλών\" του γονικού πίνακα.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "Καθορίζει τον τρόπο εμφάνισης των κελιών σε αυτήν τη στήλη όταν είναι μόνο για ανάγνωση. Το \"Μόνο για ανάγνωση\" εμφανίζει τα κελιά με τα συνηθισμένα στοιχεία ελέγχου εισόδου, αλλά απενεργοποιημένα για επεξεργασία. Το \"Προβολή\" εμφανίζει τις απαντήσεις ως κείμενο ή άλλα μη αλληλεπιδραστικά στοιχεία. Το \"Μεταβίβαση\" χρησιμοποιεί τη λειτουργία που έχει οριστεί για τη μήτρα ή την έρευνα (\"Μόνο για ανάγνωση\" από προεπιλογή)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export var grStrings = {
     questionErrorLocation: "Ορίζει την τοποθεσία ενός μηνύματος σφάλματος σε σχέση με την ερώτηση με μη έγκυρη είσοδο. Επιλέξτε μεταξύ: \"Πάνω\" - το κείμενο σφάλματος τοποθετείται στην κορυφή του κουτιού ερώτησης; \"Κάτω\" - το κείμενο σφάλματος τοποθετείται στο κάτω μέρος του κουτιού ερώτησης.",
     // "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "Επιλέξτε αν θέλετε το πρώτο πεδίο εισαγωγής σε κάθε σελίδα να είναι έτοιμο για είσοδο κειμένου.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "Εμφανίζει γράμματα (A, B, C, ...) δίπλα στις επιλογές στην ομάδα κουμπιών επιλογής, στα πλαίσια ελέγχου και στις ερωτήσεις επιλογής εικόνας. Οι ερωτηθέντες μπορούν να επιλέξουν επιλογές πατώντας τα αντίστοιχα πλήκτρα γραμμάτων. Μπορείτε να παρακάμψετε αυτήν τη ρύθμιση για μεμονωμένες ερωτήσεις.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "Εμφανίζει γράμματα (A, B, C, ...) δίπλα στις επιλογές και επιτρέπει στους ερωτηθέντες να τα επιλέξουν πατώντας τα αντίστοιχα πλήκτρα γραμμάτων. Η επιλογή \"Μεταβίβαση\" χρησιμοποιεί τη ρύθμιση σε επίπεδο έρευνας."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "Εμφανίζει υποδείξεις για τις διαθέσιμες ενέργειες πληκτρολογίου κάτω από τις ερωτήσεις. Μπορείτε να παρακάμψετε αυτήν τη ρύθμιση για μεμονωμένες ερωτήσεις.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "Διατηρεί την αρχική σειρά των ερωτήσεων ή τις τυχαία ανακατεύει. Η επίδραση αυτής της ρύθμισης είναι ορατή μόνο στην καρτέλα Προεπισκόπηση.",
     // "For text entry questions only."
@@ -2793,7 +3220,9 @@ export var grStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "Ορίζει την ορατότητα των κουμπιών πλοήγησης στη σελίδα. Η επιλογή \"Κληρονομία\" εφαρμόζει τη ρύθμιση σε επίπεδο έρευνας, η οποία είναι \"Ορατή\" από προεπιλογή.",
       // "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "Αυτός ο πίνακας σας επιτρέπει να ρυθμίσετε κάθε στήλη πλέγματος στη σελίδα. Ορίζει αυτόματα το ποσοστό πλάτους για κάθε στήλη με βάση τον μέγιστο αριθμό στοιχείων σε μια σειρά. Για να προσαρμόσετε τη διάταξη πλέγματος, ρυθμίστε χειροκίνητα αυτές τις τιμές και ορίστε το πλάτος τίτλου για όλες τις ερωτήσεις σε κάθε στήλη."
+      gridLayoutColumns: "Αυτός ο πίνακας σας επιτρέπει να ρυθμίσετε κάθε στήλη πλέγματος στη σελίδα. Ορίζει αυτόματα το ποσοστό πλάτους για κάθε στήλη με βάση τον μέγιστο αριθμό στοιχείων σε μια σειρά. Για να προσαρμόσετε τη διάταξη πλέγματος, ρυθμίστε χειροκίνητα αυτές τις τιμές και ορίστε το πλάτος τίτλου για όλες τις ερωτήσεις σε κάθε στήλη.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "Καθορίζει τον τρόπο εμφάνισης των ερωτήσεων σε αυτή τη σελίδα όταν είναι μόνο για ανάγνωση. Η επιλογή \"Μόνο για ανάγνωση\" εμφανίζει τις ερωτήσεις με τα συνήθη στοιχεία ελέγχου εισαγωγής, αλλά απενεργοποιημένες για επεξεργασία. Η \"Προβολή\" εμφανίζει τις απαντήσεις ως κείμενο ή άλλα μη αλληλεπιδραστικά στοιχεία. Η \"Μεταβίβαση\" χρησιμοποιεί τη λειτουργία που έχει οριστεί για την έρευνα (\"Μόνο για ανάγνωση\" από προεπιλογή)."
     },
     // "Sets the location of a timer on a page."
     timerLocation: "Ορίζει την τοποθεσία ενός χρονομετρητή στη σελίδα.",
@@ -2911,6 +3340,22 @@ export var grStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "Επιλέξτε αν θέλετε να αποθηκεύσετε την τιμή της ερώτησης με την εφαρμοσμένη μάσκα στα αποτελέσματα της έρευνας."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "Μια περιοχή της οποίας οι μορφές ισχύουν για μάσκες εισαγωγής ημερομηνίας-ώρας, αριθμητικών και νομισματικών μονάδων. Εάν δεν καθορίζεται, χρησιμοποιείται η γλώσσα της έρευνας.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "Παρακάμπτει τη μορφή ημερομηνίας της περιοχής που χρησιμοποιείται στις μάσκες εισαγωγής. Το μοτίβο μπορεί να περιέχει διαχωριστικούς χαρακτήρες και τα ακόλουθα σύμβολα κράτησης θέσης: <br>'m' - Αριθμός μήνα.<br> 'mm' - Αριθμός μήνα, με μηδενικό στην αρχή για μονοψήφιες τιμές. <br>'d' - Ημέρα του μήνα. <br>'dd' - Ημέρα του μήνα, με μηδενικό στην αρχή για μονοψήφιες τιμές. <br>'yy' - Τα δύο τελευταία ψηφία του έτους. <br>'yyy' - Τετραψήφιο έτος.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "Παρακάμπτει τη μορφή ώρας της περιοχής που χρησιμοποιείται στις μάσκες εισαγωγής. Το μοτίβο μπορεί να περιέχει διαχωριστικούς χαρακτήρες και τα ακόλουθα σύμβολα κράτησης θέσης: <br>'H' - Ώρες σε 24ωρη μορφή.<br> 'HH' - Ώρες σε 24ωρη μορφή, με μηδενικό στην αρχή για μονοψήφιες τιμές. <br>'h' - Ώρες σε 12ωρη μορφή. <br>'hh' - Ώρες σε 12ωρη μορφή, με μηδενικό στην αρχή για μονοψήφιες τιμές. <br>'MM' - Λεπτά. <br>'ss' - Δευτερόλεπτα. <br>'TT' - Περίοδος ρολογιού 12 ωρών με κεφαλαία (ΠΜ/ΜΜ). <br>'TT' - Περίοδος ρολογιού 12 ωρών με πεζά (ΠΜ/ΜΜ).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "Παρακάμπτει το σύμβολο που χρησιμοποιεί η περιοχή για να διαχωρίσει το κλασματικό μέρος από το ακέραιο μέρος ενός εμφανιζόμενου αριθμού στις μάσκες εισαγωγής.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "Παρακάμπτει το σύμβολο που χρησιμοποιεί η περιοχή για να διαχωρίσει τα ψηφία ενός μεγάλου αριθμού σε ομάδες των τριών στις μάσκες εισαγωγής.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "Παρακάμπτει το σύμβολο νομίσματος ή τον κωδικό της περιοχής που χρησιμοποιείται στις μάσκες εισαγωγής.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Παρακάμπτει το μοτίβο νομισματικής μονάδας της περιοχής που χρησιμοποιείται στις μάσκες εισαγωγής. Το μοτίβο μπορεί να περιέχει τα ακόλουθα σύμβολα κράτησης θέσης: <br>'@' - Σύμβολο ή κωδικός νομισματικής μονάδας.<br> '#' - Αριθμός. <br>'-' - Θέση του συμβόλου μείον σε αρνητικές τιμές (εάν παραλειφθεί, το σύμβολο μείον τοποθετείται στην αρχή)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "Το μοτίβο μπορεί να περιλαμβάνει κυριολεκτικές συμβολοσειρές και τους ακόλουθους χώρους κράτησης: `9` - για έναν αριθμό; `a` - για ένα γράμμα πεζό ή κεφαλαίο; `#` - για έναν αριθμό ή ένα γράμμα πεζό ή κεφαλαίο. Χρησιμοποιήστε την απόστροφο `\\` για να διαφύγετε ένα χαρακτήρα."
@@ -2925,13 +3370,15 @@ export var grStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "Ένα σύμβολο που χρησιμοποιείται για να χωρίσει τα ψηφία ενός μεγάλου αριθμού σε ομάδες των τριών.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "Περιορίζει πόσα ψηφία θα διατηρηθούν μετά την υποδιαστολή για έναν αριθμό που εμφανίζεται."
+      precision: "Περιορίζει πόσα ψηφία θα διατηρηθούν μετά την υποδιαστολή για έναν αριθμό που εμφανίζεται.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "Εμφανίζει μηδενικά στο κλασματικό τμήμα μέχρι την καθορισμένη ακρίβεια. Για παράδειγμα, με ακρίβεια 2, μια τιμή εισόδου 1.2 εμφανίζεται ως 1.20."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "Ένα ή περισσότερα σύμβολα που θα εμφανιστούν πριν την τιμή.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "Ένα ή περισσότερα σύμβολα που θα εμφανιστούν μετά την τιμή."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "Ένα σύμβολο νομισματικής μονάδας ή ένας κωδικός που εμφανίζεται με την τιμή. Το σύμβολο της περιοχής χρησιμοποιείται από προεπιλογή. Καταργήστε αυτήν την ιδιότητα για να μην εμφανίζεται κανένα σύμβολο.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "Καθορίζει τις θέσεις του αριθμού, του συμβόλου νομίσματος και του συμβόλου μείον. Το μοτίβο μπορεί να περιέχει τα ακόλουθα σύμβολα κράτησης θέσης:<br>'@' - Σύμβολο ή κωδικός νομίσματος.<br> '#' - Αριθμός. <br>'-' - Θέση του συμβόλου μείον σε αρνητικές τιμές (εάν παραλειφθεί, το σύμβολο μείον τοποθετείται στην αρχή)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2982,6 +3429,8 @@ export var grStrings = {
     tabAlign: "Στοίχιση καρτελών",
     // "File source type"
     sourceType: "Τύπος πηγής αρχείου",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "Προεπιλεγμένη κάμερα",
     // "Fit to container"
     fitToContainer: "Προσαρμογή στο κοντέινερ",
     // "Set value expression"
@@ -3302,12 +3751,702 @@ export var grStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "Εφαρμόστηκε προεπιλογή"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "Σειρά: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Χρησιμοποιήστε το προτεινόμενο όνομα"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "Αφαιρέστε το επαναλαμβανόμενο στοιχείο"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Χρησιμοποιήστε τον προτεινόμενο τύπο"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "Χρησιμοποιήστε την προτεινόμενη λειτουργία"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "Χρησιμοποιήστε την προτεινόμενη μάσκα"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Δώστε στο στοιχείο ένα ελεύθερο όνομα"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "Δώστε στο στοιχείο ένα ελεύθερο όνομα"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Κατάργηση της ιδιοκτησίας"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "Χρήση της πλησιέστερης επιτρεπόμενης τιμής",
+        // [Auto-translated] "Remove the property"
+        removeKey: "Κατάργηση της ιδιοκτησίας",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "Χρήση της προτεινόμενης τιμής"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "Μετατροπή της τιμής σε λίστα"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "Δώστε ένα όνομα στο στοιχείο"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "Κατάργηση της ιδιοκτησίας",
+        // [Auto-translated] "Rename the property"
+        renameKey: "Μετονομασία της ιδιοκτησίας"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "Χρησιμοποιήστε το προτεινόμενο όνομα",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "Χρησιμοποιήστε το προτεινόμενο όνομα"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "Χρησιμοποιήστε το προτεινόμενο όνομα"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Χρησιμοποιήστε τον προτεινόμενο τύπο"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "Χρησιμοποιήστε τον προτεινόμενο τύπο"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "Η έκφραση \"{έκφραση}\" δεν μπορεί να αναλυθεί."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "Το \"{name}\" δεν βρέθηκε - δεν υπάρχει ερώτηση, πίνακας, σελίδα, υπολογισμένη τιμή ή μεταβλητή με αυτό το όνομα.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "Το \"{segment}\" δεν βρίσκεται στο {containerType} Το \"{root}\" (αναφορά: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "Το \"{segment}\" δεν βρίσκεται στο πεδίο \"{scopePrefix}\" (αναφορά: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "Το keyName του \"{name}\" ονομάζει \"{key}\" - Το \"{name}\" δεν έχει {keyNoun} με αυτό το όνομα, επομένως η επικύρωση διπλού κλειδιού δεν εκτελείται ποτέ.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "Το \"{name}\" δεν βρέθηκε."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "Το {prop} του \"{name}\" αναφέρεται στο ίδιο το στοιχείο (αναφορά: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "Το όνομα \"{name}\" είναι διπλότυπο.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "Το όνομα της υπολογιζόμενης τιμής \"{name}\" χρησιμοποιείται ήδη από μια άλλη υπολογιζόμενη τιμή.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "Η υπολογιζόμενη τιμή \"{name}\" μοιράζεται το όνομά της με ένα άλλο στοιχείο, επομένως το ένα από αυτά επισκιάζει το άλλο."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "Το {nameKindText} \"{name}\" αυτού του {ownerText} είναι επίσης η ενσωματωμένη μεταβλητή έρευνας {{builtIn}} - η έρευνα απαντά πρώτα στο {{name}}, επομένως αυτή δεν είναι προσβάσιμη σε εκφράσεις.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "Το valueName \"{valueName}\" του \"{name}\" μοιράζεται την τιμή του {otherType} \"{otherName}\", το οποίο δεν έχει δικό του valueName - το \"{otherName}\" αντιμετωπίζει τα πεδία που προσθέτει το \"{name}\" ως άγνωστα και το clearIncorrectValues() τα διαγράφει. Ορίστε επίσης το valueName του σε \"{valueName}\".",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "Η σειρά \"{key}\" του matrixdropdown \"{otherName}\" είναι επίσης {sharedKeyText} \"{name}\" που μοιράζεται την τιμή του - ένα αντικείμενο κελιού και μια μεμονωμένη τιμή δεν μπορούν να ζουν και τα δύο κάτω από ένα κλειδί. ο χρόνος εκτέλεσης διατηρεί το ένα και διαγράφει το άλλο.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "Το {type} \"{name}\" μοιράζεται το κλειδί δεδομένων \"{dataKey}\" με το {otherType} \"{otherName}\" - διατηρεί το {shapeText} εκεί, ενώ το \"{otherName}\" διατηρεί το {otherShapeText}. Το ένα δεν μπορεί να κρατήσει την τιμή του άλλου, οπότε το clearIncorrectValues() το διαγράφει.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "Το κλειδί δεδομένων \"{dataName}\" είναι επίσης το κλειδί σχολίου του \"{base}\" (το κλειδί δεδομένων του συν το \"{επίθημα}\") - η μία εγγραφή αντικαθιστά σιωπηλά την άλλη.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "Το κλειδί δεδομένων \"{dataName}\" είναι επίσης το κλειδί συνόλων του \"{base}\" (το κλειδί δεδομένων του συν το \"{suffix}\") - η μία εγγραφή αντικαθιστά σιωπηλά την άλλη.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "Ο κανόνας ετικέτας {trigger} ορίζει τη μεταβλητή \"{name}\", η οποία είναι επίσης το κλειδί δεδομένων της ερώτησης \"{questionName}\" - η μεταβλητή απαντά {{name}} από εκεί και πέρα, όχι η ερώτηση."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "Το όνομα \"{name}\" είναι δεσμευμένο - μέλος του Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "Το valueName \"{valueName}\" του \"{name}\" είναι δεσμευμένο - μέλος του Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "Η στήλη \"{name}\" του \"{matrixName}\" είναι δεσμευμένη - μέλος του Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "Το στοιχείο \"{name}\" του \"{questionName}\" είναι δεσμευμένο - μέλος του Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "Η σειρά \"{rowValue}\" του \"{name}\" είναι δεσμευμένη - μέλος του Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "Η υπολογισμένη τιμή \"{name}\" είναι δεσμευμένη - μέλος του Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "Το \"{name}\" έχει άγνωστο τύπο \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "Το \"{name}\" δεν έχει τύπο - ένα στοιχείο χωρίς τύπο απορρίπτεται."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "Το \"{key}\" δεν είναι ιδιότητα του {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "Το \"{key}\" του {ownerText} δεν είναι σειριοποιήσιμο - τίθεται σε ισχύ κατά τη φόρτωση και απορρίπτεται από το JSON κάθε φορά που η έρευνα αποθηκεύεται ξανά.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "Τα \"{key}\" και \"{aliasKey}\" του {ownerText} είναι δύο ονόματα μιας ιδιότητας - ο χρόνος εκτέλεσης τα εφαρμόζει με τη σειρά που τα γράφει το JSON, οπότε το \"{winner}\" κερδίζει.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "Το \"{key}\" έχει οριστεί στο \"{name}\", αλλά το inputType \"{inputType}\" δεν έχει όρια - ο χρόνος εκτέλεσης το αγνοεί."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "Το {key} του {ownerText} είναι {valueText} - δεν είναι μία από τις επιτρεπόμενες τιμές ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "Το {key} του {ownerText} είναι {value}, εκτός του επιτρεπόμενου εύρους {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "Το valueName \"{valueName}\" του \"{name}\" περιέχει ένα \".\" - οι εκφράσεις διαβάζουν το {{valueName}} ως διαδρομή στο \"{rootKey}\", επομένως το ίδιο το κλειδί δεδομένων δεν μπορεί ποτέ να αντιμετωπιστεί."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "Το {ownerText} δεν έχει \"{key}\" - η ιδιότητα απαιτείται για ένα {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "Το όνομα του {className} είναι {valueText}, όχι συμβολοσειρά - η έρευνα δεν μπορεί να το φορτώσει."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "Το \"{key}\" του {ownerText} δεν είναι πίνακας - η ιδιότητα περιέχει μια λίστα και ο χρόνος εκτέλεσης αναδιπλώνει την τιμή σε έναν πίνακα ενός στοιχείου."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "Ο ορισμός της μεταβλητής δηλώνει \"{variable}\", το οποίο είναι επίσης το κλειδί δεδομένων της ερώτησης \"{name}\" - η ρύθμιση της μεταβλητής διαγράφει την απάντηση που είναι αποθηκευμένη κάτω από αυτό το κλειδί και το {{name}} απαντά στην τιμή κεντρικού υπολογιστή από εκεί και πέρα.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "Ο ορισμός της μεταβλητής δηλώνει \"{variable}\", που είναι επίσης το όνομα της υπολογιζόμενης τιμής \"{name}\" - και οι δύο γράφουν την ίδια υποδοχή και όποιος τρέξει τελευταίος κερδίζει."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition δεν είναι αντικείμενο JSON έρευνας, επομένως δεν δηλώνεται καμία μεταβλητή και δεν μπορεί να ελεγχθεί καμία προκαθορισμένη τιμή.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets δεν είναι πίνακας, επομένως δεν δηλώνεται καμία προεπιλογή.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "Η προεπιλογή #{index} δεν είναι αντικείμενο.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "Η προεπιλογή #{index} δεν έχει όνομα, επομένως τίποτα δεν μπορεί να την αναφέρει.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "Η προεπιλογή \"{preset}\" δεν φέρει αντικείμενο μεταβλητών, επομένως δεν ορίζει τίποτα.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "Η προεπιλογή \"{preset}\" δηλώνεται δύο φορές - μια αναζήτηση με αυτό το όνομα απαντά με το πρώτο.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "Το προκαθορισμένο \"{preset}\" ορίζει το \"{variable}\", το οποίο δεν δηλώνει ο ορισμός της μεταβλητής.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "Η προεπιλογή \"{preset}\" ορίζει το \"{variable}\" σε μια τιμή που απορρίπτει ο ορισμός της μεταβλητής: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "Η συνάρτηση \"{functionName}\" δεν έχει καταχωρηθεί."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "Η υπολογιζόμενη τιμή \"{names}\" αναφέρεται στη δική της έκφραση.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "Οι υπολογισμένες τιμές {names} εξαρτώνται η μία από την άλλη."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "Το έναυσμα αντιδρά στην τιμή που ορίζει το ίδιο (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "Τα εναύσματα σχηματίζουν έναν βρόχο μέσω των τιμών που ορίζουν: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "Η {label} διαβάζει την τιμή που γράφει μόνη της - εκτελείται μόνο όταν αλλάζει μια άλλη τιμή, επομένως δεν εκτελείται ποτέ.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "Οι τιμές γράφονται σε βρόχο: {chain}. Κάθε εγγραφή εκτελεί ξανά τις εκφράσεις που τη διαβάζουν, επομένως οι τελικές τιμές εξαρτώνται από τη σειρά με την οποία απαντώνται οι ερωτήσεις."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "Η συνθήκη συγκρίνει το \"{name}\" με το {values} - δεν είναι μεταξύ των επιλογών της. Διαθέσιμο: {διαθέσιμο}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "Η συνθήκη συγκρίνει το \"{name}\" με το {values} - καμία τιμή επιλογής δεν το περιέχει. Διαθέσιμο: {available}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "Η συνθήκη εφαρμόζει το \"{operator}\" στο \"{name}\": Το \"{recordName}\" ({questionType}) δεν έχει τιμή για σύγκριση.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "Η συνθήκη εφαρμόζει το \"{operator}\" στο \"{name}\": Το \"{recordName}\" διατηρεί το {valueShapeText} - οι τελεστές ταξινόμησης και αριθμητικής δεν ισχύουν για αυτό.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "Η συνθήκη εφαρμόζει το \"{operator}\" στο \"{name}\": Το \"{recordName}\" είναι μια δυαδική ερώτηση - οι τελεστές ταξινόμησης δεν ισχύουν για αυτό.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "Η συνθήκη εφαρμόζει το \"{operator}\" στο \"{name}\": Το \"{recordName}\" είναι μια ερώτηση κειμένου - η τιμή του είναι μια συμβολοσειρά, επομένως η αριθμητική σύγκριση βασίζεται στην έμμεση μετατροπή.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "Η συνθήκη εφαρμόζει το \"{operator}\" στο \"{name}\": Το \"{recordName}\" περιέχει μια συμβολοσειρά ημερομηνίας - συγκρίνοντάς την με τον αριθμό που δεν μπορεί να κρατήσει το {constValue}.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "Η συνθήκη ισχύει για το \"{operator}\" στο \"{name}\": Το \"{recordName}\" είναι αριθμητικό - η σύγκρισή του με τη συμβολοσειρά \"{constValue}\" δεν μπορεί να διατηρηθεί.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "Η συνθήκη εφαρμόζει το \"{operator}\" στο \"{name}\": Το \"{recordName}\" περιέχει έναν πίνακα επιλεγμένων τιμών, οπότε το \"=\" συγκρίνει ολόκληρο τον πίνακα.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "Η συνθήκη εφαρμόζει το \"{operator}\" στο \"{name}\": Το \"{recordName}\" είναι μια δυαδική ερώτηση - η σύγκριση με το {constValue} δεν μπορεί να ισχύει."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "Το {prop} \"{expression}\" είναι πάντα ψευδές, επομένως το \"{name}\" δεν εμφανίζεται ποτέ.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "Το {prop} \"{έκφραση}\" δεν ισχύει ποτέ, επειδή {γεγονότα}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "Το {prop} \"{expression}\" δεν ισχύει ποτέ - καμία επιτρεπόμενη τιμή δεν το ικανοποιεί: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "Το {prop} \"{έκφραση}\" αντιφάσκει με τον εαυτό του: {γεγονότα}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "Το {prop} \"{expression}\" είναι πάντα αληθές, οπότε δεν αποφασίζει τίποτα.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "Το {prop} \"{έκφραση}\" είναι αριθμητική, όχι σύγκριση, επομένως δεν δίνει ποτέ ναι ή όχι.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "Μέρος του {prop} \"{expression}\" έχει ένα αποτέλεσμα που είναι γνωστό εκ των προτέρων.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "Το {prop} \"{expression}\" ισχύει πάντα, επειδή {facts} - δεν αποφασίζει τίποτα."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "Το {prop} \"{expression}\" δεν διαβάζει καμία ερώτηση ή μεταβλητή."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "Η προεπιλεγμένη τιμή του \"{name}\" είναι {valuesText}, την οποία δεν μπορεί ποτέ να κρατήσει. Επιτρέπεται: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "Η σωστή απάντηση του \"{name}\" είναι {valuesText}, την οποία δεν μπορεί ποτέ να κρατήσει. Επιτρέπεται: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "Το έναυσμα ορίζει το \"{name}\" σε {valuesText}, το οποίο δεν μπορεί ποτέ να κρατήσει. Επιτρέπεται: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "Η προεπιλεγμένη τιμή γραμμής ορίζει το \"{name}\" σε {valuesText}, το οποίο δεν μπορεί ποτέ να διατηρήσει. Επιτρέπεται: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "Η προεπιλεγμένη τιμή του πίνακα ορίζει το \"{name}\" σε {valuesText}, το οποίο δεν μπορεί ποτέ να κρατήσει. Επιτρέπεται: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "Το {prop} του \"{name}\" ονομάζει \"{key}\" - δεν υπάρχει τέτοια σειρά. Διαθέσιμο: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "Το {prop} του \"{name}\" ονομάζει \"{key}\" - δεν υπάρχει τέτοια στήλη. Διαθέσιμο: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "Το {prop} του \"{name}\" ονομάζει \"{key}\" - δεν υπάρχει τέτοια ερώτηση προτύπου. Διαθέσιμο: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "Η σκανδάλη copyvalue αντιγράφει το \"{fromName}\" στο \"{setToName}\", αλλά το \"{fromName}\" διατηρεί το {sourceShapeText} και το \"{setToName}\" το {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "Το έναυσμα copyvalue αντιγράφει το \"{fromName}\" στο \"{setToName}\", αλλά καμία τιμή του \"{fromName}\" δεν είναι μεταξύ των τιμών που μπορεί να περιέχει το \"{setToName}\". Επιτρέπεται: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "Το \"{name}\" αντιγράφει τις επιλογές του από το \"{source}\", αλλά δεν υπάρχει καμία ερώτηση με αυτό το όνομα.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "Το \"{name}\" αντιγράφει τις επιλογές του από τον εαυτό του.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "Το \"{name}\" αντιγράφει τις επιλογές του από το \"{source}\" ({sourceType}), το οποίο δεν παρέχει ούτε επιλογές ούτε πίνακα τιμών.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "Το \"{name}\" διαβάζει {prop} \"{field}\" από το \"{source}\", αλλά το {sourceType} \"{source}\" δεν έχει τέτοιο {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "Ένα άλλο στοιχείο του {prop} του \"{name}\" έχει ήδη την τιμή {valueText} - ο χρόνος εκτέλεσης διατηρεί και τα δύο στοιχεία.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "Οι επιλογές του \"{name}\" περιέχουν {valueText} ενώ το {toggleProp} είναι ενεργοποιημένο - συγκρούεται με το ενσωματωμένο στοιχείο {specialItemText}."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "Ο κανόνας ετικέτας {trigger} στοχεύει τη σελίδα \"{name}\", η οποία δεν υπάρχει.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "Ο κανόνας ετικέτας {trigger} στοχεύει το \"{name}\", αλλά το {containerType} \"{root}\" δεν έχει {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "Το {trigger} ενεργοποιεί {verb} \"{name}\", αλλά δεν υπάρχει {kindText} με αυτό το όνομα."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "Ο τύπος ενεργοποίησης \"{type}\" δεν είναι γνωστός.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "Η σκανδάλη δεν έχει τύπο."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "Ο τύπος επικύρωσης \"{type}\" του \"{name}\" δεν είναι γνωστός.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "Ένας επικυρωτής του \"{name}\" δεν έχει τύπο."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "Ο επικυρωτής {validatorType} του \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "Ο επικυρωτής {validatorType} του \"{name}\" απαιτεί τουλάχιστον {min} και το πολύ {max} - καμία απάντηση δεν το ικανοποιεί.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "Ο επικυρωτής καταμέτρησης απαντήσεων του \"{name}\" απαιτεί τουλάχιστον {minCount} απαντήσεις, πάνω από τις {επιλέξιμες} επιλογές που μπορούν να επιλεγούν μαζί.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "Ο επικυρωτής regex του \"{name}\" έχει ένα μοτίβο που απορρίπτει ο κινητήρας: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "Ο επικυρωτής έκφρασης του \"{name}\" δεν έχει έκφραση, επομένως περνά πάντα."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "Το {minProp} του \"{name}\" είναι {min}, πάνω από το {maxProp} του {max} - ο χρόνος εκτέλεσης προσαρμόζει σιωπηλά ένα από αυτά.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "Το {countProp} του \"{name}\" είναι {count}, {direction} το {boundProp} του {bound} - ο χρόνος εκτέλεσης το σφίγγει.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "Το {stepProp} του \"{name}\" είναι {step}, αλλά το εύρος από το οποίο περνά ({minProp}.. {maxProp}) εκτείνεται μόνο στο {range} - ο χρόνος εκτέλεσης το περιορίζει.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "Το minSelectedChoices του \"{name}\" είναι {min}, πάνω από τις {επιλέξιμες} επιλογές που μπορούν να επιλεγούν μαζί - η ερώτηση δεν μπορεί ποτέ να απαντηθεί."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "Το \"{name}\" δεν μπορεί ποτέ να γίνει ορατό: είναι ορατόΑν διαβάζει {reads}, το οποίο {deadClause}, οπότε η συνθήκη δεν ισχύει ποτέ."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "Το maskType \"{maskType}\" του \"{name}\" δεν είναι γνωστή μάσκα - ο χρόνος εκτέλεσης πέφτει στο να μην υπάρχει καθόλου μάσκα.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "Οι maskSettings του \"{name}\" ορίζουν το \"{key}\", το οποίο δεν είναι ιδιότητα της μάσκας \"{maskType}\" - ο χρόνος εκτέλεσης το ρίχνει σιωπηλά.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "Οι maskSettings του \"{name}\" ορίζονται χωρίς maskType - ο χρόνος εκτέλεσης διατηρεί μόνο το \"saveMaskedValue\" και απορρίπτει τα υπόλοιπα.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "Η μάσκα {maskType} του \"{name}\" δεν ισχύει για καμία είσοδο: inputType Το \"{inputType}\" καλύπτεται μόνο για κείμενο και τηλ.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "Η μάσκα ημερομηνίας/ώρας του \"{name}\" ορίζει min/max χωρίς μοτίβο - τα όρια ισχύουν για τα τμήματα ημερομηνίας του μοτίβου, οπότε χωρίς ένα δεν κάνουν τίποτα.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "Η μάσκα {maskType} του \"{name}\" επιτρέπει τουλάχιστον {min} και το πολύ {max} - καμία τιμή δεν την ικανοποιεί."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "Ο δυναμικός πίνακας \"{name}\" έχει ένα κενό πρότυπο - οι πίνακές του δεν έχουν τίποτα να αποδώσουν.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "Το {kindText} \"{name}\" δεν έχει στοιχεία.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "Το {kindText} \"{name}\" δεν έχει στοιχεία που μπορούν ποτέ να αποδοθούν - κάθε στοιχείο είναι κρυμμένο, φυλάσσεται από μια συνθήκη που δεν ισχύει ποτέ ή είναι κενό.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "Τα στοιχεία λεπτομέρειας του \"{name}\" δεν εμφανίζονται ποτέ: το detailPanelMode του είναι \"none\", το οποίο είναι η προεπιλογή."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "Θέση: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "Δημιουργήθηκε από το παλαιού τύπου όνομα, τον τελεστή και τις ιδιότητες τιμής του εναύσματος.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "Μέσα: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "Εννοούσες «{0}»;",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "Εάν πρόκειται για προσαρμοσμένο στοιχείο, περάστε τον ορισμό του στο linter για να ενεργοποιήσετε την πλήρη ανάλυση.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "Καταχωρίστε τη συνάρτηση πριν από το linting ή καταχωρίστε την στις επιλογές linter.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "Ένας τύπος με ορθογραφικά λάθη απορρίπτεται σιωπηλά κατά το χρόνο εκτέλεσης και ένα προσαρμοσμένο έναυσμα δεν καλύπτεται από τους ελέγχους προορισμού και κύκλου.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "Εάν πρόκειται για μεταβλητή που έχει οριστεί κατά το χρόνο εκτέλεσης, καταχωρίστε την στις επιλογές linter.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "Ο βρόχος ενδέχεται να μην είναι προσβάσιμος εάν οι συνθήκες ενεργοποίησης δεν διατηρούνται ποτέ μαζί - επαληθεύστε τις εκφράσεις.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "Μια προεπιλεγμένη παράσταση τιμής ισχύει μόνο μέχρι να απαντηθεί η ερώτησή της.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "Στην έκφραση: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "Αναφέρεται σε βιβλιοδεσίες.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "Αναφέρεται στην {0} choicesByUrl.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "Αναφέρεται στο κείμενο \"{0}\".", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} Το () διαβάζει αυτό το όνομα σε κάθε καταχώριση του {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "Το όρισμα {0}() δεν ονομάζει καμία ερώτηση, πίνακα ή σελίδα.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "Ο αποσειριοποιητής ρίχνει ένα κλειδί που δεν γνωρίζει.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "Ο αποσειριοποιητής ρίχνει έναν επικυρωτή που δεν μπορεί να επιλύσει, επομένως τίποτα δεν επικυρώνεται.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "Ο τύπος εισόδου είναι \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "Είναι το κλειδί δεδομένων του \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "και",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "Το {ref} είναι πάντα {value}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "Το {ref} είναι {όρια}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "τουλάχιστον {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "το πολύ {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "Το {ref} δεν μπορεί να είναι και τα δύο {τιμές}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "Το {ref} δεν μπορεί να είναι {value} και να μην είναι",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "Το {ref} δεν μπορεί να είναι κενό και να είναι {value}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "Το {ref} δεν μπορεί να είναι κενό και να μην είναι κενό",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "Το {ref} δεν μπορεί να είναι πάνω από {min} και κάτω από {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "Το {ref} ζητείται να είναι ένα χωρίς καμία αξία"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "Οι αναφορές \"{0}.\" είναι διαθέσιμες μόνο μέσα σε ένα κελί μήτρας ή σε ένα πλαίσιο λεπτομερειών μήτρας.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "Το \"{0}\" είναι διαθέσιμο μόνο μέσα σε ένα κελί μήτρας ή σε ένα πλαίσιο λεπτομερειών μήτρας.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "Οι αναφορές \"{0}.\" είναι διαθέσιμες μόνο μέσα σε ένα δυναμικό πλαίσιο ή ένα κοντέινερ πίνακα.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "Οι αναφορές \"{0}.\" είναι διαθέσιμες μόνο μέσα σε ένα δυναμικό πλαίσιο.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "Το \"{0}\" είναι διαθέσιμο μόνο μέσα σε ένα δυναμικό πάνελ.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "Το \"{0}\" είναι διαθέσιμο μόνο μέσα σε συνθήκες επιλογής, γραμμής και στήλης.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "Οι αναφορές \"{0}.\" είναι διαθέσιμες μόνο μέσα σε μια σύνθετη ερώτηση.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "Το \"{0}\" δεν είναι διαθέσιμο μέσα σε ένα φίλτρο inArray, το οποίο εκτελείται στο στοιχείο και στη συνέχεια στην έρευνα.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "Το \"{0}\" είναι μια στήλη αυτού του πίνακα - αναφέρετέ το με το πρόθεμα σειράς.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "Το \"{0}\" είναι μια ερώτηση αυτού του δυναμικού πίνακα - ανατρέξτε σε αυτό με το πρόθεμα του πίνακα."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "Ορίστε inputType: \"number\" στο \"{0}\" εάν συλλέγει αριθμούς.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "Χρησιμοποιήστε το \"contains\" ή το \"anyof\" για τιμές πολλαπλής επιλογής."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "σελίδα",
+        // [Auto-translated] "panel"
+        panel: "πάνελ"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "Όνομα",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "Όνομα"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "υπολογιζόμενη τιμή",
+        // [Auto-translated] "element"
+        default: "στοιχείο"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "Η έρευνα",
+        // [Auto-translated] "the {0}"
+        className: "Το {0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "Άλλα",
+        // [Auto-translated] "None"
+        none: "Κανένας",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "Αρνηθείτε να απαντήσετε",
+        // [Auto-translated] "Don't know"
+        dontknow: "Δεν γνωρίζω"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "Δεν πυροβολεί ποτέ",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "απορρίπτει κάθε απάντηση",
+        // [Auto-translated] "cannot validate"
+        default: "δεν είναι δυνατή η επικύρωση"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "Η ερώτηση δεν έχει απάντηση για επικύρωση",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "Ένα μήκος διαβάζεται από μια τιμή κειμένου και αυτή η απάντηση δεν έχει καμία",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "Η απάντηση δεν είναι ένας αριθμός και ποτέ δεν μπορεί να είναι",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "Ένας αριθμός δεν ταιριάζει ποτέ με μια διεύθυνση e-mail",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "Η απάντηση δεν είναι μια λίστα αξιών",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "Η απάντηση δεν είναι μια τιμή που μπορεί να ελέγξει"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "μια συστοιχία",
+        // [Auto-translated] "an object"
+        object: "ένα αντικείμενο"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "μια σειρά από μήτρα",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "ένα στοιχείο πολλαπλού κειμένου",
+        // [Auto-translated] "a row or item of a question"
+        default: "μια γραμμή ή ένα στοιχείο μιας ερώτησης"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "μια σειρά αντικειμένων",
+        // [Auto-translated] "an object"
+        object: "ένα αντικείμενο",
+        // [Auto-translated] "a plain value"
+        plain: "μια απλή τιμή",
+        // [Auto-translated] "a value"
+        default: "μια τιμή"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "έναν πίνακα επιλεγμένων τιμών",
+        // [Auto-translated] "a single value"
+        scalar: "μία μόνο τιμή",
+        // [Auto-translated] "a value"
+        default: "μια τιμή"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "παρακάτω",
+        // [Auto-translated] "above"
+        above: "παραπάνω"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "δεν είναι ποτέ ορατό και δεν λαμβάνει ποτέ τιμή",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "δεν είναι ποτέ ορατά και δεν λαμβάνουν ποτέ τιμή"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "Ερώτηση",
+        // [Auto-translated] "question or variable"
+        questionvalue: "ερώτηση ή μεταβλητή",
+        // [Auto-translated] "page"
+        page: "σελίδα"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "διαβάζει",
+        // [Auto-translated] "navigates to"
+        gotoName: "πλοηγείται σε",
+        // [Auto-translated] "sets"
+        default: "Σετ"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Ερώτηση προτύπου",
+        // [Auto-translated] "column"
+        default: "στήλη"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "Ερώτηση προτύπου",
+        // [Auto-translated] "column"
+        matrixdynamic: "στήλη",
+        // [Auto-translated] "item"
+        multipletext: "Είδος",
+        // [Auto-translated] "row"
+        matrix: "Σειρά",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "Σειρά",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "στήλη",
+        // [Auto-translated] "field"
+        default: "Πεδίο"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "Στοιχείο 1" }, { value: "item2", text: "Στοιχείο 2" }, { value: "item3", text: "Στοιχείο 3" }],
-    columns: [{ value: "column1", text: "Στήλη 1" }, { value: "column2", text: "Στήλη 2" }, { value: "column3", text: "Στήλη 3" }],
-    rows: [{ value: "row1", text: "Γραμμή 1" }, { value: "row2", text: "Γραμμή 2" }],
-    matrixColumns: [{ name: "column1", title: "Στήλη 1" }, { name: "column2", title: "Στήλη 2" }, { name: "column3", title: "Στήλη 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "Στοιχείο 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "Στοιχείο 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "Στοιχείο 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "Στήλη 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "Στήλη 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "Στήλη 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "Γραμμή 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "Γραμμή 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "Στήλη 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "Στήλη 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "Στήλη 3"
+      }
+    ]
   }
 };
 

@@ -2,7 +2,7 @@
   <div class="svc-creator-tab__content">
     <div class="svc-json-editor-tab__content">
       <textarea class="svc-json-editor-tab__content-area" [attr.aria-label]="model.ariaLabel"
-        [disabled]="model.readOnly" [(ngModel)]="model.text" (keydown)="model.checkKey(model, $event)" #inputEl>
+        [disabled]="model.readOnly" [ngModel]="model.text" (ngModelChange)="model.onTextInput($event)" (keydown)="model.checkKey(model, $event)" #inputEl>
       </textarea>
       <div class="svc-json-editor-tab__errros_list" [visible]="model.hasErrors">
         <sv-ng-list [model]="model.errorList"></sv-ng-list>

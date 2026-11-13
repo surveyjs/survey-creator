@@ -26,18 +26,18 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     this.denyComponentUpdate();
   };
 
-  private allowUpdate = () => {
+  private allowUpdateHandler = () => {
     this.allowComponentUpdate();
   };
 
   private addDragDropEvents = () => {
     this.creator.onDragStart.add(this.denyUpdate);
-    this.creator.onDragClear.add(this.allowUpdate);
+    this.creator.onDragClear.add(this.allowUpdateHandler);
   };
 
   private clearDragDropEvents = () => {
     this.creator.onDragStart.remove(this.denyUpdate);
-    this.creator.onDragClear.remove(this.allowUpdate);
+    this.creator.onDragClear.remove(this.allowUpdateHandler);
   };
 
   componentDidMount(): void {
@@ -48,7 +48,6 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   componentWillUnmount(): void {
     super.componentWillUnmount();
     this.clearDragDropEvents();
-    super.componentWillUnmount();
   }
 
   protected getStateElements(): Array<Base> {
@@ -199,7 +198,7 @@ class PageWrapperComponent extends React.Component<IPageWrapperComponentProps, a
   }
   clearCallback(page?: PageModel) {
     if (!page) return;
-    page.unRegisterFunctionOnPropertyValueChanged("name");
+    page.unRegisterFunctionOnPropertyValueChanged("name", this.id);
   }
   componentDidUpdate(prevProps: IPageWrapperComponentProps, prevState: any): void {
     if (prevProps.page !== this.props.page) {

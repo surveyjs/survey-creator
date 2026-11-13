@@ -1,5 +1,5 @@
 
-import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, QuestionFileModel, Base, Serializer, CssClassBuilder, classesToSelector, ActionContainer, Action, ComputedUpdater } from "survey-core";
+import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, QuestionFileModel, Base, Serializer, toCssClasses, classesToSelector, ActionContainer, Action, ComputedUpdater } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
@@ -50,6 +50,14 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   ) {
     super(creator, surveyElement, templateData);
     this.initFilePresentationModel();
+  }
+
+  protected updateElementAllowOptions(options: any, operationsAllow: boolean): void {
+    super.updateElementAllowOptions(options, operationsAllow);
+    // The first call comes from the base constructor, before the model exists.
+    if (this.filePresentationModel) {
+      this.filePresentationModel.forceIsInputReadOnly = !this.creator.isCanModifyProperty(this.question, "imageLink");
+    }
   }
 
   protected detachElement(surveyElement: SurveyElement): void {
@@ -145,8 +153,6 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     return this.imageActionsContainerValue;
   }
   public css() {
-    return new CssClassBuilder()
-      .append(super.css())
-      .append("svc-question__content--loading", this.isUploading).toString();
+    return toCssClasses(super.css(), this.isUploading && "svc-question__content--loading");
   }
 }

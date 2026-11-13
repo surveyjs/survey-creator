@@ -568,6 +568,26 @@ test("Toolbox forceCompact property", (): any => {
   expect(creator.toolbox.isCompact).toEqual(false);
 });
 
+test("Sidebar toolbox stays full when forceCompact or a narrow width would compact the rail, Bug#7551", (): any => {
+  const creator = new CreatorTester();
+  creator.toolboxLocation = "sidebar";
+  creator.toolbox.forceCompact = true;
+  creator.updateToolboxIsCompact(true);
+  expect(creator.toolbox.isCompact).toEqual(false);
+
+  creator.toolbox.forceCompact = undefined;
+  creator.updateToolboxIsCompact(true);
+  expect(creator.toolbox.isCompact).toEqual(false);
+
+  creator.toolboxLocation = "left";
+  creator.toolbox.forceCompact = true;
+  creator.updateToolboxIsCompact(false);
+  expect(creator.toolbox.isCompact).toEqual(true);
+
+  creator.toolboxLocation = "sidebar";
+  expect(creator.toolbox.isCompact).toEqual(false);
+});
+
 test("the toolbox gets compact after the sidebar was collapsed/expanded ", (): any => {
   const creator = new CreatorTester();
   expect(creator.toolbox.isCompact).toEqual(false);
@@ -866,6 +886,25 @@ test("Toolbox showSubitems property", (): any => {
 
   creator.toolbox.showSubitems = false;
   expect(toolboxTool.itemComponent).toBe("svc-toolbox-item");
+});
+
+test("Toolbox tools are list items only inside a list, Bug#8155", (): any => {
+  const creator = new CreatorTester();
+  const toolbox = creator.toolbox;
+  const textItem = toolbox.getItemByName("text") as QuestionToolboxItem;
+  const textTool = new ToolboxToolViewModel(textItem, creator, toolbox);
+  expect(toolbox.showInSingleCategory).toBeTruthy();
+  expect(toolbox.toolboxAriaLabel).toBe("Toolbox");
+  expect(textTool.ariaRole).toBe("listitem");
+  expect(new ToolboxToolViewModel(toolbox.dotsItem as any, creator, toolbox).ariaRole).toBe("listitem");
+  expect(new ToolboxToolViewModel(toolbox.searchItem as any, creator, toolbox).ariaRole).toBeUndefined();
+
+  const subitemsList = textItem.popupModel.contentComponentData.model;
+  expect(new ToolboxToolViewModel(textItem.items[0], creator, subitemsList).ariaRole).toBe("listitem");
+
+  toolbox.showCategoryTitles = true;
+  expect(toolbox.showInSingleCategory).toBeFalsy();
+  expect(textTool.ariaRole).toBeUndefined();
 });
 
 test("Toolbox item clearSubitems function", (): any => {

@@ -142,6 +142,10 @@ export var koreanStrings = {
     jsonHideErrors: "오류 숨기기",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "오류 표시",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "오류 수정",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "설문조사 JSON은 객체여야 합니다.",
     // "Undo"
     undo: "실행 취소",
     // "Redo"
@@ -246,6 +250,8 @@ export var koreanStrings = {
     translateUsigAI: "모두 자동 번역",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "언어 선택(원문-번역): ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "남은 문자열을 번역하기",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "번역되지 않은 문자열",
     // [Auto-translated] "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var koreanStrings = {
     translationSource: "근원: ",
     // [Auto-translated] "Target: "
     translationTarget: "과녁: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "원천 언어",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "목표 언어",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "번역된 {1} 줄의 {0}",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "선택한 언어에 대해 모든 번역된 문자열을 삭제하고 싶으신가요?",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "폼 뷰",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "격자 뷰",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "문자열 번역",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "조사 연합",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "번역할 조건 없어",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "모든 문자열은 번역됩니다",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} 스트링은 번역되지 않습니다",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "YouTube 링크는 지원되지 않습니다.",
     // [Auto-translated] "Export"
@@ -286,6 +314,10 @@ export var koreanStrings = {
     choicesLoadedFromWebLinkText: "설정으로 바로 가기",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "로드된 선택 옵션 미리보기",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "표현식 집합이 없습니다",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "편집 표현",
     // [Auto-translated] "HTML content will be here."
     htmlPlaceHolder: "HTML 콘텐츠가 여기에 있습니다.",
     // [Auto-translated] "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var koreanStrings = {
       uncompletedRule_cancel: "아니요, 규칙을 완료하고 싶습니다."
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "변수 프리셋",
+    // [Auto-translated] "None"
+    noPreset: "전혀 없습니다",
+    // [Auto-translated] "View variable values"
+    view: "변수 값 보기",
+    // [Auto-translated] "Variable values"
+    viewTitle: "변수 값",
+    // [Auto-translated] "Manage presets"
+    edit: "프리셋 관리",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "가변 프리셋",
+    // [Auto-translated] "Preset"
+    presetName: "프리셋",
+    // [Auto-translated] "Description"
+    presetDescription: "설명",
+    // [Auto-translated] "Add preset"
+    addPreset: "프리셋 추가",
+    // [Auto-translated] "New preset"
+    newPresetName: "새로운 프리셋",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "프리셋 삭제",
+    // [Auto-translated] "Back"
+    back: "뒤로",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "이미 이 이름을 가진 프리셋이 존재합니다",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "미리 설정된 이름을 입력하세요",
+    // [Auto-translated] "Preset"
+    listNameColumn: "프리셋",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "설명"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "표현 어시스턴트",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "AI로 글쓰기",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "표현이 무엇을 해야 하는지 설명해 주세요",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "예를 들어: 응답자가 18세 이상일 때 이 질문을 보여주세요",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "상태를 말로 설명하세요",
+    // [Auto-translated] "Generate"
+    generate: "생성",
+    // [Auto-translated] "Refine"
+    refine: "정제",
+    // [Auto-translated] "Explain"
+    explain: "설명해 주세요",
+    // [Auto-translated] "Stop"
+    stop: "멈춰",
+    // [Auto-translated] "Accept"
+    accept: "수락하세요",
+    // [Auto-translated] "Reject"
+    reject: "거부",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "수정 적용: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "현재 표현",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "제안 표현",
+    // [Auto-translated] "Reads as"
+    readsAs: "읽기:",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "조수의 설명",
+    // [Auto-translated] "Check results"
+    findings: "결과 확인",
+    // [Auto-translated] "Error"
+    severityError: "오류",
+    // [Auto-translated] "Warning"
+    severityWarning: "경고",
+    // [Auto-translated] "Info"
+    severityInfo: "정보",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "\"{0}\"에서",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "표현식을 설명하고 생성을 선택하세요.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "조수 기다리는 중...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "요청은 취소되었습니다.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "조수는 다음과 같이 보고했다: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "조수는 어떤 표현도 제안하지 않았다.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "제안된 표현을 검토해 보세요.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "조수가 현재 표정을 설명했다.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "제안된 표현에는 오류가 있어 받아들일 수 없습니다.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "제안된 표현식은 쓰여진 모든 위치에 대해 검증할 수 없으므로 받아들일 수 없습니다.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "조수에게 요청하기 전에 규칙에 액션을 추가하세요.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "첫 번째 제안에는 오류가 있었고 자동으로 수정되었습니다."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var koreanStrings = {
       templateDescription: "항목 설명 패턴",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "항목 제목 패턴",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "항목 제목 자리표",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "빈 패널 텍스트",
       // [Auto-translated] "Tab title pattern"
@@ -588,6 +724,10 @@ export var koreanStrings = {
       templateErrorLocation: "오류 메시지 맞춤",
       // [Auto-translated] "New entry location"
       newPanelPosition: "새로운 진입 위치",
+      // [Auto-translated] "Entries per page"
+      pageSize: "페이지당 항목 수",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "사용자가 항목을 정렬할 수 있게 합니다",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "다음 질문에서 중복 응답 방지"
     },
@@ -676,6 +816,12 @@ export var koreanStrings = {
       // [Auto-translated] "Expression"
       expression: "식"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "정렬",
+      // [Auto-translated] "Order"
+      direction: "순서"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "표현"
@@ -691,7 +837,9 @@ export var koreanStrings = {
       // [Auto-translated] "Survey description"
       description: "설문조사 설명",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "설문조사를 읽기 전용으로 설정"
+      readOnly: "설문조사를 읽기 전용으로 설정",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "지역 포맷"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -727,7 +875,9 @@ export var koreanStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "다음과 같은 경우 열을 필수로 만듭니다.",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "별도의 열에 있는 각 옵션"
+      showInMultipleColumns: "별도의 열에 있는 각 옵션",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "이 열에 따라 정렬 허용"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -742,6 +892,22 @@ export var koreanStrings = {
     masksettings: {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "설문조사 결과에 마스킹된 값 저장"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "지역",
+      // [Auto-translated] "Date pattern"
+      datePattern: "날짜 패턴",
+      // [Auto-translated] "Time pattern"
+      timePattern: "시간 패턴",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "십진법 구분자",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "천 구분자",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "통화 기호",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "통화 패턴"
     },
     patternmask: {
       // [Auto-translated] "Value pattern"
@@ -762,16 +928,18 @@ export var koreanStrings = {
       decimalSeparator: "소수 구분 기호",
       // [Auto-translated] "Value precision"
       precision: "값 정밀도",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "0 뒤에 있는 것을 보여줘",
       // [Auto-translated] "Minimum value"
       min: "최솟값",
       // [Auto-translated] "Maximum value"
       max: "최대값"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "통화 접두사",
-      // [Auto-translated] "Currency suffix"
-      suffix: "통화 접미사"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "통화 기호",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "통화 패턴"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "선택하면 다른 항목 지우기",
@@ -813,8 +981,24 @@ export var koreanStrings = {
     addItem: "항목을 추가하려면 클립하십시오.",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "항목을 제거하려면 클릭하세요...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "추가{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "제거{0}",
     // [Auto-translated] "Drag the item"
     dragItem: "항목을 드래그합니다",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "중첩 선택 확장",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "붕괴 중첩 선택",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "중첩된 선택지를 확장{0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "중첩된 선택지 붕괴{0}",
+    // [Auto-translated] "Show description"
+    showDescription: "쇼 설명",
+    // [Auto-translated] "Hide description"
+    hideDescription: "숨기기 설명",
     // "Edit"
     edit: "편집",
     // [Auto-translated] "Done"
@@ -855,42 +1039,62 @@ export var koreanStrings = {
     propertyNameIsNotUnique: "고유한 이름을 입력하십시오.",
     // "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"."
     propertyNameIsIncorrect: "예약어를 사용하지 마십시오: \"item\", \"choice\", \"panel\", \"row\".",
-    // [Auto-translated] "You don't have any items yet"
-    listIsEmpty: "아직 항목이 없습니다.",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "아직 선택의 여지가 없습니다",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "아직 열이 없습니다.",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "레이아웃 열이 아직 없습니다.",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "아직 행이 없습니다.",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "아직 유효성 검사 규칙이 없습니다.",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "아직 맞춤 변수가 없습니다.",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "아직 트리거가 없습니다.",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "아직 링크가 없습니다.",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "아직 페이지가 없습니다.",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "새 선택 항목 추가",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "새 열 추가",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "새 행 추가",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "새 규칙 추가",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "새 변수 추가",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "새 트리거 추가",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "새 URL 추가",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "새 페이지 추가",
+    // [Auto-translated] "No items"
+    listIsEmpty: "아이템 없음",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "선택의 여지가 없다",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "사용자 지정 등급 값은 없습니다",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "커스텀 라벨은 없습니다",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "구역 없음",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "기둥은 없습니다",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "레이아웃 칼럼은 없습니다",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "다툼 금지",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "검증 규칙은 없습니다",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "사용자 지정 변수 없음",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "트리거가 없어요",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "조건부 마크업 없음",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "링크 없음",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "부지 없어",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "분류 없는 레벨",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "선택권 추가로",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "평가 가치 추가",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "라벨 추가하기",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "면적 추가",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "열 추가",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "행 추가하기",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "규칙 추가",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "변수 추가",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "트리거 추가하세요",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "마크업 추가하기",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "링크 추가하기",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "페이지 추가",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "정렬 단계 추가",
     // "Value"
     value: "값",
     // "Text"
@@ -917,6 +1121,8 @@ export var koreanStrings = {
     surveyTitlePlaceholder: "설문조사 제목",
     // [Auto-translated] "Page {num}"
     pageTitlePlaceholder: "페이지 {num}",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "패널 제목",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "시작 페이지",
     // [Auto-translated] "Description"
@@ -967,6 +1173,8 @@ export var koreanStrings = {
     visible: "보입니까??",
     // "Required"
     isRequired: "필수입니까?",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "긍정적인 답변을 요구하세요",
     // [Auto-translated] "Mark as required"
     markRequired: "필요에 따라 표시",
     // [Auto-translated] "Remove the required mark"
@@ -977,6 +1185,8 @@ export var koreanStrings = {
     eachRowUnique: "행의 중복 응답 방지",
     // "Error message for required questions"
     requiredErrorText: "\"필수\" 오류 메시지",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "예 입력이 필요할 때 오류 메시지",
     // "Display the question on a new line"
     startWithNewLine: "새 줄로 시작하겠습니까?",
     // "Rows"
@@ -995,6 +1205,16 @@ export var koreanStrings = {
     maxFiles: "최대 파일 수",
     // "Row count"
     rowCount: "행 수",
+    // [Auto-translated] "Rows per page"
+    pageSize: "페이지당 행 수",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "사용자가 행을 정렬할 수 있게 합니다",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "최대 정렬 단계",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "기본 정렬 순서",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "쇼 정렬 바",
     // "Columns layout"
     columnLayout: "열 위치",
     // "\"Add Row\" button alignment"
@@ -1113,6 +1333,10 @@ export var koreanStrings = {
     questionErrorLocation: "질문 위치 오류",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "페이지 변경시 첫 번째 질문에 초점",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "선택 단축키를 활성화하세요",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "키보드 힌트 보여주기",
     // "Question order"
     questionOrder: "페이지의 요소 순서",
     // "Time limit to complete the survey"
@@ -1265,10 +1489,12 @@ export var koreanStrings = {
     waitForUpload: "업로드가 완료될 때까지 기다리십시오.",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "행 세부 정보 정렬",
-    // [Auto-translated] "Minimum row count"
-    minRowCount: "최소 행 개수",
-    // [Auto-translated] "Maximum row count"
-    maxRowCount: "최대 행 개수",
+    // [Auto-translated] "Minimum number of rows"
+    minRowCount: "최소 행 수",
+    // [Auto-translated] "Maximum number of rows"
+    maxRowCount: "최대 행 수",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "행 수 표현식",
     // "Confirm row removal"
     confirmDelete: "행 삭제 확인",
     // [Auto-translated] "Confirmation message"
@@ -1279,6 +1505,8 @@ export var koreanStrings = {
     minPanelCount: "최소 참가 작가",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "최대 출품작 수",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "항목 수 표현식",
     // [Auto-translated] "Initial entry state"
     panelsState: "초기 진입 상태",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1439,6 +1667,8 @@ export var koreanStrings = {
     logoHeight: "로고 높이",
     // "Read-only"
     readOnly: "읽기 전용",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "읽기 전용 모드",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "다음과 같은 경우 읽기 전용 모드를 비활성화합니다.",
     // "\"No rows\" message"
@@ -1519,6 +1749,8 @@ export var koreanStrings = {
       columns: "열",
       // "Rows"
       rows: "행",
+      // [Auto-translated] "Entries"
+      entries: "출전",
       // "Choice Options"
       choices: "선택",
       // "Items"
@@ -1545,6 +1777,8 @@ export var koreanStrings = {
       question: "질문",
       // [Auto-translated] "Pages"
       pages: "페이지",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "지역 포맷",
       // "Quiz Mode"
       timer: "타이머 / 퀴즈",
       // [Auto-translated] "Calculated Values"
@@ -1863,6 +2097,12 @@ export var koreanStrings = {
       // [Auto-translated] "Never"
       none: "결코"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "읽기 전용",
+      // [Auto-translated] "View"
+      view: "전망"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "라디오 버튼",
     inputType: {
@@ -1914,6 +2154,12 @@ export var koreanStrings = {
       warning: "경고",
       // [Auto-translated] "Informational"
       info: "정보"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "전면",
+      // [Auto-translated] "Rear"
+      environment: "후면"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2105,6 +2351,8 @@ export var koreanStrings = {
     underRowSingle: "행 아래에 하나의 섹션만 표시합니다.",
     // "Auto"
     auto: "자동",
+    // [Auto-translated] "Always"
+    always: "항상",
     timerInfoMode: {
       // "Both"
       combined: "둘다"
@@ -2322,7 +2570,148 @@ export var koreanStrings = {
       survey: "설문 조사와 동일",
       // [Auto-translated] "Same as container"
       container: "컨테이너와 동일"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "상속",
+      // [Auto-translated] "Hide"
+      "false": "숨어",
+      // [Auto-translated] "Show"
+      "true": "쇼"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "아랍어",
+    // [Auto-translated] "Bulgarian"
+    bg: "불가리아어",
+    // [Auto-translated] "Catalan"
+    ca: "카탈루냐어",
+    // [Auto-translated] "Czech"
+    cs: "체코어",
+    // [Auto-translated] "Welsh"
+    cy: "웨일스어",
+    // [Auto-translated] "Danish"
+    da: "덴마크어",
+    // [Auto-translated] "German"
+    de: "독일어",
+    // [Auto-translated] "Greek"
+    el: "그리스어",
+    // [Auto-translated] "English"
+    en: "영어",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "영어 (호주)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "영어 (캐나다)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "영어 (영국)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "잉글랜드 (아일랜드)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "영어 (인도)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "영어 (뉴질랜드)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "영어 (남아프리카)",
+    // [Auto-translated] "Spanish"
+    es: "스페인어",
+    // [Auto-translated] "Estonian"
+    et: "에스토니아어",
+    // [Auto-translated] "Basque"
+    eu: "바스크어",
+    // [Auto-translated] "Persian"
+    fa: "페르시아어",
+    // [Auto-translated] "Finnish"
+    fi: "핀란드어",
+    // [Auto-translated] "Filipino"
+    fil: "필리핀어",
+    // [Auto-translated] "French"
+    fr: "프랑스어",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "프랑스어 (캐나다)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "프랑스 (스위스)",
+    // [Auto-translated] "Hebrew"
+    he: "히브리어",
+    // [Auto-translated] "Hindi"
+    hi: "힌디어",
+    // [Auto-translated] "Croatian"
+    hr: "크로아티아어",
+    // [Auto-translated] "Haitian Creole"
+    ht: "아이티 크리올",
+    // [Auto-translated] "Hungarian"
+    hu: "헝가리어",
+    // [Auto-translated] "Indonesian"
+    id: "인도네시아",
+    // [Auto-translated] "Icelandic"
+    is: "아이슬란드어",
+    // [Auto-translated] "Italian"
+    it: "이탈리아어",
+    // [Auto-translated] "Japanese"
+    ja: "일본어",
+    // [Auto-translated] "Georgian"
+    ka: "그루지야어",
+    // [Auto-translated] "Kazakh"
+    kk: "카자흐",
+    // [Auto-translated] "Korean"
+    ko: "한국어",
+    // [Auto-translated] "Lithuanian"
+    lt: "리투아니아어",
+    // [Auto-translated] "Latvian"
+    lv: "라트비아어",
+    // [Auto-translated] "Macedonian"
+    mk: "마케도니아인",
+    // [Auto-translated] "Burmese"
+    mm: "버마어",
+    // [Auto-translated] "Malay"
+    ms: "말레이어",
+    // [Auto-translated] "Dutch"
+    nl: "네덜란드어",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "네덜란드어 (벨기에)",
+    // [Auto-translated] "Norwegian"
+    no: "노르웨이어",
+    // [Auto-translated] "Polish"
+    pl: "폴란드어",
+    // [Auto-translated] "Portuguese"
+    pt: "포르투갈어",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "포르투갈어 (브라질)",
+    // [Auto-translated] "Romanian"
+    ro: "루마니아어",
+    // [Auto-translated] "Russian"
+    ru: "러시아어",
+    // [Auto-translated] "Slovak"
+    sk: "슬로바키아",
+    // [Auto-translated] "Slovenian"
+    sl: "슬로베니아어",
+    // [Auto-translated] "Serbian"
+    sr: "세르비아어",
+    // [Auto-translated] "Swedish"
+    sv: "스웨덴어",
+    // [Auto-translated] "Swahili"
+    sw: "스와힐리어",
+    // [Auto-translated] "Telugu"
+    tel: "텔루구",
+    // [Auto-translated] "Tajik"
+    tg: "타지크",
+    // [Auto-translated] "Thai"
+    th: "태국어",
+    // [Auto-translated] "Turkish"
+    tr: "터키어",
+    // [Auto-translated] "Ukrainian"
+    uk: "우크라이나어",
+    // [Auto-translated] "Urdu"
+    ur: "우르두어",
+    // [Auto-translated] "Vietnamese"
+    vi: "베트남어",
+    // [Auto-translated] "Chinese"
+    zh: "중국어",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "중국어 (간체)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "중국어 (전통)"
   },
   // Operators
   op: {
@@ -2399,6 +2788,10 @@ export var koreanStrings = {
     visibletrigger: "선명도 변경"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "설문조사 언어와 동일합니다"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "예: +1(999)-999-99-99"
@@ -2406,12 +2799,6 @@ export var koreanStrings = {
     datetimemask: {
       // [Auto-translated] "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "예: mm/dd/yyyy HH:MM:ss"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "예: $",
-      // "Ex.: USD"
-      suffix: "예.: USD"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2459,7 +2846,9 @@ export var koreanStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "이 패널이 그리드 레이아웃 내에서 확장되는 열의 수를 지정합니다.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "이 테이블에서는 패널 내의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오."
+      gridLayoutColumns: "이 테이블에서는 패널 내의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "이 패널 내에서 질문이 읽기 전용일 때 어떻게 보이는지 지정합니다. \"읽기 전용\"은 일반적인 입력 컨트롤이 있는 질문을 표시하지만, 편집은 비활성화되어 있습니다. \"보기\"는 답변을 텍스트 또는 기타 비인터랙티브 요소로 표시합니다. \"상속\"은 부모 패널, 페이지 또는 설문조사에서 설정된 모드를 사용합니다(\"기본적으로 읽기 전용\")."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2492,6 +2881,8 @@ export var koreanStrings = {
       width: "패널의 폭을 같은 줄에 있는 다른 측량 요소에 비례하여 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "동적 패널 제목에 대한 템플릿을 입력합니다. 패널의 일반 위치에는 {panelIndex}를 사용하고 표시되는 패널 간의 순서에는 {visiblePanelIndex}를 사용합니다. 이러한 자리 표시자를 패턴에 삽입하여 자동 번호 매기기를 추가합니다.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "항목 제목 패턴이 의미 있는 값을 생성하지 못할 때 적용되는 대체 텍스트입니다. 항목의 일반적인 위치는 {panelIndex}를, 보이는 항목들 사이에서의 순서는 {visiblePanelIndex}를 사용하세요.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "탭 제목에 대한 템플릿을 입력합니다. 패널의 일반적인 위치에는 {panelIndex}를 사용하고 표시되는 패널 간의 순서에는 {visiblePanelIndex}를 사용합니다. 이러한 자리 표시자를 패턴에 삽입하여 자동 번호 매기기를 추가합니다.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2510,15 +2901,35 @@ export var koreanStrings = {
       keyName: "사용자가 각 패널에서 이 질문에 대해 고유한 응답을 제공하도록 요구하려면 질문 이름을 참조합니다.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "항목을 제거하기 전에 확인 프롬프트를 트리거합니다.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "항목 수를 계산하는 표현식을 지정하세요. 이 표현식은 \"초기 항목 수\" 설정을 덮어쓰며, 참조하는 값이 바뀔 때마다 재평가됩니다. 결과는 \"최소 항목 수\"와 \"최대 항목 수\" 설정에 의해 제한됩니다. 이 표현식이 설정된 동안, 응답자는 수동으로 항목을 추가하거나 제거할 수 없습니다.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "패널의 각 페이지에 표시되는 항목 수를 지정합니다. '0'은 페이지 지정을 비활성화하고 모든 항목을 표시합니다.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "응답자가 정렬 바를 사용해 항목을 정렬할 수 있게 합니다.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "초기 입력 순서를 정의합니다. 정렬이 허용된다면 응답자는 이를 변경할 수 있습니다. 여러 질문으로 정렬할 때, 각 질문은 이전 질문이 정한 순서로 항목을 정렬합니다. 질문을 드래그하여 우선순위를 변경합니다.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "동적 패널 내에 중첩된 질문에 번호를 할당합니다."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "응답자가 열 헤더를 클릭하거나 정렬 바를 사용하여 행을 정렬할 수 있게 합니다.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "초기 행 순서를 정의합니다. 정렬이 허용되면 응답자가 변경할 수 있습니다. 여러 열로 정렬할 때, 각 열은 앞선 열이 정한 순서 내에서 행을 정렬합니다. 열을 드래그하면 우선순위를 변경할 수 있습니다.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"Auto\"는 정렬 가능한 열 헤더가 없을 때만 정렬 바를 표시합니다: 헤더가 숨겨져 있거나, 매트릭스가 모바일 레이아웃을 사용하거나, 행이 열로 옮겨졌을 때입니다. \"Always\"는 정렬 가능한 열 헤더가 보여도 정렬 바를 표시합니다.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "행 수를 계산하는 식을 지정하세요. 이 표현식은 \"초기 행 수\" 설정을 덮어쓰며, 참조하는 값이 바뀔 때마다 재평가됩니다. 결과는 \"최소 행 수\"와 \"최대 행 수\" 설정에 의해 제한됩니다. 이 표현식이 설정된 동안, 응답자는 수동으로 행을 추가하거나 제거할 수 없습니다.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "행을 제거하기 전에 확인 프롬프트를 트리거합니다.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "행렬에 새 행이 추가될 때 세부 정보 섹션을 자동으로 확장합니다."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "매트릭스의 각 페이지에 표시되는 행 수를 지정합니다. '0'은 페이지네이션을 비활성화하고 모든 행을 표시합니다.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "응답자가 한 번에 정렬할 수 있는 필드 수를 지정합니다.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "마지막 행의 답변을 복제하여 다음에 추가된 동적 행에 할당합니다.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2567,7 +2978,11 @@ export var koreanStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "선택 옵션의 긴 텍스트는 드롭다운 메뉴에 맞게 줄 바꿈을 자동으로 생성합니다. 텍스트를 자르려면 선택을 취소합니다.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "이 질문이 그리드 레이아웃 내에서 얼마나 많은 열에 걸쳐 있는지 지정합니다."
+      effectiveColSpan: "이 질문이 그리드 레이아웃 내에서 얼마나 많은 열에 걸쳐 있는지 지정합니다.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "읽기 전용일 때 질문이 어떻게 나타나는지 지정합니다. \"읽기 전용\"은 일반적인 입력 제어와 함께 질문을 표시하지만, 편집은 비활성화되어 있습니다. \"보기\"는 답변을 텍스트나 기타 비상호작용 요소로 표시합니다. \"상속\"은 부모 패널, 페이지 또는 설문조사 모드(\"기본적으로 읽기 전용\")를 사용합니다.",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "이 질문 아래에 사용 가능한 키보드 동작에 대한 힌트가 표시됩니다. \"상속\" 옵션은 설문조사 수준 설정을 적용합니다."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2615,6 +3030,8 @@ export var koreanStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "응답자가 설문조사를 작성하지 못하도록 하려면 선택합니다.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "읽기 전용 질문이 미리보기 페이지 포함 어떻게 나타나는지 지정합니다. \"읽기 전용\"(기본값)은 일반적인 입력 제어가 있는 질문을 표시하지만 편집 시 비활성화되어 있습니다. \"보기\"는 답변을 텍스트 또는 기타 비인터랙티브 요소로 표시합니다.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "진행률 표시줄의 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
     },
@@ -2634,7 +3051,9 @@ export var koreanStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "이 옵션을 선택하면 각 선택 옵션에 대한 개별 열이 만들어집니다.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "선택 옵션을 다중 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩된 열 수\" 속성에서 상속됩니다."
+      colCount: "선택 옵션을 다중 열 레이아웃으로 정렬합니다. 0으로 설정하면 옵션이 한 줄로 표시됩니다. -1로 설정하면 실제 값이 부모 행렬의 \"중첩된 열 수\" 속성에서 상속됩니다.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "이 열의 셀이 읽기 전용일 때 어떻게 나타나는지 지정합니다. \"읽기 전용\"은 일반적인 입력 제어가 있는 셀을 표시하지만, 편집은 비활성화되어 있습니다. \"보기\"는 답변을 텍스트나 기타 비인터랙티브 요소로 표시합니다. \"상속\"은 매트릭스 또는 설문조사 모드(\"기본적으로 읽기 전용\")를 사용합니다."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2704,6 +3123,14 @@ export var koreanStrings = {
     questionErrorLocation: "잘못된 입력이 있는 질문과 관련된 오류 메시지의 위치를 설정합니다. 다음 중 하나를 선택합니다. \"상단\" - 오류 텍스트가 질문 상자 상단에 배치됩니다. \"하단\" - 오류 텍스트가 질문 상자 하단에 배치됩니다.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "각 페이지의 첫 번째 입력 필드를 텍스트 입력에 사용할 수 있도록 준비하려면 선택합니다.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "라디오 버튼 그룹, 체크박스, 이미지 선택기 질문의 선택 옆에 문자(A, B, C, ...)가 표시됩니다. 응답자는 해당 문자 키를 눌러 선택지를 선택할 수 있습니다. 개별 질문에 대해서는 이 설정을 무시할 수 있습니다.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "선택지 옆에 문자(A, B, C, ...)를 표시하며, 응답자가 해당 문자 키를 눌러 선택할 수 있습니다. \"상속\" 옵션은 설문 수준 설정을 사용합니다."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "질문 아래에 사용 가능한 키보드 동작에 대한 힌트를 표시합니다. 개별 질문에 대해서는 이 설정을 덮어쓸 수 있습니다.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "질문의 원래 순서를 유지하거나 무작위화합니다. 이 설정의 효과는 미리보기 탭에서만 볼 수 있습니다.",
     // [Auto-translated] "For text entry questions only."
@@ -2794,7 +3221,9 @@ export var koreanStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "페이지에서 탐색 단추의 표시 여부를 설정합니다. \"상속\" 옵션은 설문조사 수준 설정을 적용하며, 기본값은 \"표시\"입니다.",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "이 테이블을 사용하면 페이지의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오."
+      gridLayoutColumns: "이 테이블을 사용하면 페이지의 각 그리드 열을 구성할 수 있습니다. 행의 최대 요소 수를 기준으로 각 열의 너비 백분율을 자동으로 설정합니다. 그리드 레이아웃을 사용자 지정하려면 이러한 값을 수동으로 조정하고 각 열의 모든 질문에 대한 제목 너비를 정의하십시오.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "이 페이지의 질문이 읽기 전용일 때 어떻게 나타나는지 명시합니다. \"읽기 전용\"은 질문을 평소 입력 컨트롤로 표시하지만 편집 시 비활성화되어 있습니다. \"보기\"는 답변을 텍스트나 기타 비인터라믹 요소로 표시합니다. \"상속\"은 설문조사 모드(\"기본적으로 읽기 전용\")를 사용합니다."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "페이지에서 타이머의 위치를 설정합니다.",
@@ -2912,6 +3341,22 @@ export var koreanStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "마스크가 적용된 질문 값을 현장조사 결과에 저장하려면 선택합니다."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "날짜-시간, 숫자, 통화 입력 마스크에 적용되는 형식의 지역입니다. 명시되지 않은 경우, 설문 언어가 사용됩니다.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "입력 마스크에 사용되는 지역의 날짜 형식을 덮어씁니다. 패턴은 구분자 문자와 다음 자리 표시자를 포함할 수 있습니다: <br>'m' - 월 번호.<br> 'mm' - 월 번호, 1자리 값은 0이 있는 월. <br>'d' - 월의 요일<br>. 'dd' - 월의 요일, 1자리 숫자는 0이 있는 날짜. <br>'yy' - 연도의 마지막 두 자리. <br>'yyyy' - 4자리 연도.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "입력 마스크에서 사용되는 지역 시간 형식을 덮어쓴다. 패턴에는 구분자 문자와 다음 자리 표시자가 포함될 수 있다: <br>'H' - 24시간 형식의 시간.<br> 'HH' - 24시간 형식의 시간, 1자리 숫자는 0이 있는 경우. <br>'h' - 12시간 형식의 시간. <br>'hh' - 12시간 형식의 시간, 1자리 숫자는 0이 앞에 붙는 경우. <br>'MM' - 분. <br>'ss' - 초. <br>'TT' - 대문자 12시간 시계 주기 (AM/<br>PM). 'tt' - 소문자 12시간 시계 주기 (am/pm).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "입력 마스크에서 표시된 숫자의 소수 부분과 정수 부분을 구분하는 영역의 기호를 덮어씁니다.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "입력 마스크에서 많은 숫자의 숫자를 세 개의 그룹으로 분리하는 영역의 기호를 덮어씁니다.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "입력 마스크에 사용되는 지역의 통화 기호나 코드를 덮어씁니다.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "입력 마스크에서 사용되는 지역의 통화 패턴을 덮어씁니다. 패턴에는 다음과 같은 자리 표시자가 포함될 수 있습니다: <br>'@' - 통화 기호 또는 코드.<br> '#' - 숫자. <br>'-' - 음수 값에서 마이너스 부호의 위치(생략 시 마이너스 부호는 처음에 배치됨)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "패턴에는 문자열 리터럴과 다음 자리 표시자가 포함될 수 있습니다. '9' - 숫자의 경우; 'a' - 대문자 또는 소문자의 경우; '#' - 숫자 또는 대문자 또는 소문자의 경우. 백슬래시 '\\'를 사용하여 문자를 이스케이프합니다."
@@ -2926,13 +3371,15 @@ export var koreanStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "큰 숫자의 숫자를 3개의 그룹으로 구분하는 데 사용되는 기호입니다.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "표시된 숫자의 소수점 뒤에 유지할 자릿수를 제한합니다."
+      precision: "표시된 숫자의 소수점 뒤에 유지할 자릿수를 제한합니다.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "명시된 정밀도까지 분수 부분의 뒤쪽 0을 표시합니다. 예를 들어, 정밀도가 2일 때는 입력값 1.2를 1.20으로 표시합니다."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "값 앞에 표시할 하나 또는 여러 개의 기호입니다.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "값 뒤에 표시할 하나 또는 여러 개의 기호입니다."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "값과 함께 표시되는 화폐 기호 또는 코드. 기본적으로 해당 지역의 기호가 사용됩니다. 이 속성을 지우면 기호가 표시되지 않습니다.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "숫자, 통화 기호, 마이너스 기호의 위치를 지정합니다. 패턴에는 다음과 같은 자리 표시자를 포함할 수 있습니다: <br>'@' - 통화 기호 또는 코드.<br> '#' - 숫자. <br>'-' - 음수 값에서의 마이너스 부호 위치(생략 시 마이너스 부호는 맨 앞에 위치)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2983,6 +3430,8 @@ export var koreanStrings = {
     tabAlign: "탭 정렬",
     // [Auto-translated] "File source type"
     sourceType: "파일 소스 유형",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "기본 카메라",
     // [Auto-translated] "Fit to container"
     fitToContainer: "컨테이너에 맞추기",
     // [Auto-translated] "Set value expression"
@@ -3303,12 +3752,702 @@ export var koreanStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "프리셋 적용"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "라인: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "제안된 이름을 사용하세요"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "반복되는 항목을 제거하세요"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "추천된 유형을 사용하세요"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "제안된 기능을 사용하세요"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "추천된 마스크를 사용하세요"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "원소에 자유로운 이름을 붙이세요"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "원소에 자유로운 이름을 붙이세요"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "부동산을 제거하세요"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "가장 가까운 허용 값을 사용하세요",
+        // [Auto-translated] "Remove the property"
+        removeKey: "부동산을 제거하세요",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "권장 값을 사용하세요"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "값을 리스트로 변환하세요"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "원소에 이름을 붙이세요"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "부동산을 제거하세요",
+        // [Auto-translated] "Rename the property"
+        renameKey: "부동산 이름 변경"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "제안된 이름을 사용하세요",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "제안된 이름을 사용하세요"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "제안된 이름을 사용하세요"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "추천된 유형을 사용하세요"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "추천된 유형을 사용하세요"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "\"{expression}\"이라는 표현은 구식 해석이 불가능합니다."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\"는 찾지 못했으며, 해당 이름으로 질문, 패널, 페이지, 계산된 값, 변수가 존재하지 않습니다.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\"는 {containerType} \"{root}\" (참고: {name})에서 찾을 수 없습니다.",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\"는 \"{scopePrefix}\" 범위(참조: {name})에는 존재하지 않습니다.",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "\"{name}\"의 키이름은 \"{key}\"라고 명명되며, \"{name}\"에는 해당 이름이 붙은 {keyNoun}이 없으므로 중복 키 검증은 실행되지 않습니다.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\"는 찾지 못했습니다."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "\"{name}\"의 {prop}는 해당 요소 자체를 참조합니다 (참조: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "\"{name}\"이라는 이름이 중복되어 있습니다.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "계산된 값 이름 \"{name}\"은 이미 다른 계산 값에 의해 사용되고 있습니다.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "계산된 값 \"{name}\"은 다른 원소와 이름을 공유하므로 한 원소가 다른 원소를 그림자처럼 감추게 됩니다."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "이 {ownerText}의 {nameKindText} \"{name}\"은 내장된 설문조사 변수 {{builtIn}}이기도 합니다 - 설문조사가 먼저 {{name}}에 답하기 때문에 이 변수는 표현식에서 접근할 수 없습니다.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "\"{name}\"의 valueName \"{valueName}\"는 {otherType} \"{otherName}\"의 값을 공유하며, {otherName}은 자체 값Name이 없습니다. \"{otherName}\"은 \"{name}\"이 추가된 필드를 미확인으로 처리하며, clearIncorrectValues()가 이를 삭제합니다. 값Name도 \"{valueName}\"로 설정하세요.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "matrix dropdown의 \"{key}\" 행은 {sharedKeyText} \"{name}\"도 값을 공유합니다 - 셀 객체와 단일 값이 모두 하나의 키 아래에 존재할 수 없습니다; 런타임은 한 값을 유지하고 다른 하나를 삭제합니다.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "{type} \"{name}\"는 {otherType} \"{otherName}\"과 데이터 키 \"{dataKey}\"를 공유하며, {shapeText}를 유지하고, \"{otherName}\"은 {otherShapeText}를 유지합니다; 한 가지 값은 다른 쪽의 값을 유지할 수 없으므로 clearIncorrectValues()가 이를 삭제합니다.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "데이터 키 \"{dataName}\"은 또한 \"{base}\"의 주석 키이기도 하며(데이터 키와 \"{suffix}\"\") - 한 쓰기가 다른 것을 조용히 덮어씁니다.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "데이터 키 \"{dataName}\"은 또한 \"{base}\"의 전체 키이기도 하며(데이터 키와 \"{suffix}\"\") - 한 쓰기가 다른 쓰기를 조용히 덮어씁니다.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "{trigger} 트리거는 변수 \"{name}\"을 설정하는데, 이는 질문 \"{questionName}\"의 데이터 키이기도 합니다. - 이제부터는 변수가 질문이 아니라 {{name}}에 응답합니다."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "\"{name}\"라는 이름은 Object.prototype의 멤버로 예약되어 있습니다.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "\"{name}\"의 valueName \"{valueName}\"은 Object.prototype의 멤버로 예약되어 있습니다.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "\"{matrixName}\"의 \"{name}\" 열은 Object.prototype의 멤버로 예약되어 있습니다.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "\"{questionName}\"의 항목 \"{name}\"은 Object.prototype의 멤버로 예약되어 있습니다.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "\"{name}\"의 \"{rowValue}\" 행은 Object.prototype의 멤버로 예약되어 있습니다.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "계산된 값 \"{name}\"은 Object.prototype의 멤버로 예약되어 있습니다."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\"은 알 수 없는 타입 \"{type}\"을 가집니다.",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\"은 타입이 없으며, 타입이 없는 요소는 제외됩니다."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\"는 {ownerText} ({className})의 속성이 아닙니다."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "{ownerText}의 \"{key}\"는 직렬화가 불가능하며, 불러오면 작동하며, 설문조사가 다시 저장될 때마다 JSON에서 삭제됩니다.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "{ownerText}의 \"{key}\"와 \"{aliasKey}\"는 하나의 속성에 대한 두 이름이며, 실행 시간이 JSON이 작성하는 순서대로 적용되므로 \"{winner}\"가 승리합니다.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\"는 \"{name}\" 위에 설정되어 있지만, inputType \"{inputType}\"는 경계가 없어 런타임이 이를 무시합니다."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "{ownerText}의 {key}는 {valueText}이며, 허용된 값({allowedText}) 중 하나가 아닙니다.",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "{ownerText}의 {key}는 {value}이며, 허용된 범위 {rangeText}를 벗어납니다.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "\"{name}\"의 valueName \"{valueName}\"은 \".\"를 포함합니다. - 표현식은 {{valueName}}을 \"{rootKey}\"로 가는 경로로 읽기 때문에 데이터 키 자체는 절대 주소 지정할 수 없습니다."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText}에는 \"{key}\"가 없으며, {className}에 필요한 속성입니다.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "{className}의 이름은 문자열이 아니라 {valueText}이며, 설문조사에서 불러올 수 없습니다."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "{ownerText}의 \"{key}\"는 배열이 아니며, 이 속성은 리스트를 담고 실행 시간이 값을 하나의 항목 배열로 감싸줍니다."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "변수 정의는 \"{variable}\"을 선언하며, 이는 질문 \"{name}\"의 데이터 키이기도 합니다. 변수를 설정하면 해당 키에 저장된 답변이 삭제되고, {{name}}는 이후 호스트 값에 응답합니다.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "변수 정의는 \"{variable}\"을 선언하며, 이는 계산된 값 \"{name}\"의 이름이기도 합니다. 두 변수는 같은 슬롯을 쓰고, 마지막에 나온 사람이 승리합니다."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition은 설문조사 JSON 객체가 아니므로 변수가 선언되지 않고 프리셋 값을 확인할 수 없습니다.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets는 배열이 아니므로 프리셋이 선언되지 않습니다.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "프리셋 #{index}는 객체가 아닙니다.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "프리셋 #{index}에는 이름이 없어서 아무것도 참조할 수 없습니다.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "프리셋 \"{preset}\"은 변수 객체를 포함하지 않으므로 아무것도 설정하지 않습니다.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "프리셋 \"{preset}\"은 두 번 선언되며, 해당 이름으로 조회하면 첫 번째 선언으로 응답합니다.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "프리셋 \"{preset}\"은 변수 정의에서 선언하지 않는 \"{variable}\"을 설정합니다.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "프리셋 \"{preset}\"은 변수 정의가 거부하는 값으로 \"{변수}를 설정합니다: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "함수 \"{functionName}\"은 등록되지 않습니다."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "계산된 값 \"{names}\"는 자체 표현식에서 자신을 참조합니다.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "계산된 값 {names}은 서로 다릅니다."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "트리거는 자신이 설정한 값(\"{setToName}\")에 반응합니다.",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "트리거는 설정한 값들에 대해 루프를 형성합니다: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label}은 자신이 직접 쓴 값을 읽으며, 다른 값이 바뀔 때만 실행되므로 아예 실행되지 않습니다.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "값은 {chain} 루프 형식으로 작성됩니다. 각 쓰기는 읽은 표현식을 다시 실행하므로 최종 값은 질문에 대한 답변 순서에 따라 달라집니다."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "이 조건은 \"{name}\"과 {values}를 비교하며, 선택지에 포함되지 않습니다. 이용 가능: {available}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "조건은 \"{name}\"과 {values}를 비교하며, 선택 값에는 이 조건이 포함되어 있지 않습니다. 이용 가능: {available}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "조건은 \"{operator}\"를 \"{name}\"에 적용합니다: \"{recordName}\" ({questionType})는 비교할 값이 없습니다.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "조건은 \"{operator}\"를 \"{name}\"에 적용합니다: \"{recordName}\"은 {valueShapeText}를 가지며, 순서 및 산술 연산자는 적용되지 않습니다.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "조건은 \"{operator}\"를 \"{name}\"에 적용합니다: \"{recordName}\"은 불리언 질문이며, 순서 연산자는 적용되지 않습니다.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "조건은 \"{operator}\"를 \"{name}\"에 적용합니다: \"{recordName}\"은 텍스트 질문이며, 그 값은 문자열이므로 수치 비교는 암묵적 변환에 의존합니다.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "조건은 \"{operator}\"를 \"{name}\"에 적용합니다: \"{recordName}\"은 날짜 문자열을 저장하며, {constValue}와 비교할 수 없습니다.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "조건은 \"{operator}\"를 \"{name}\"에 적용합니다: \"{recordName}\"은 숫자 형식이며, 문자열 \"{constValue}\"와 비교하면 성립할 수 없습니다.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "조건은 \"{operator}\"를 \"{name}\"에 적용합니다: \"{recordName}\"은 선택된 값들의 배열을 가지므로, \"=\"는 전체 배열을 비교합니다.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "조건은 \"{operator}\"를 \"{name}\"에 적용합니다: \"{recordName}\"은 불리언 질문으로, {constValue}와 비교하는 것은 성립할 수 없습니다."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "{prop} \"{expression}\"는 항상 거짓이므로 \"{name}\"은 절대 표시되지 않습니다.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "{prop} \"{expression}\"은 {facts} 때문에 절대 성립하지 않습니다.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "{prop} \"{expression}\"은 절대 성립하지 않으며, 허용된 값은 이를 만족하지 못합니다: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "{prop} \"{expression}\"는 스스로와 모순됩니다: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "{prop} \"{expression}\"은 항상 참이므로 아무것도 결정하지 않습니다.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "{prop} \"{expression}\"은 비교가 아니라 산술이므로 예 또는 아니오를 주지 않습니다.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "{prop} \"{expression}\"의 일부는 사전에 알려진 결과를 가지고 있습니다.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "{prop} \"{expression}\"은 항상 성립합니다. 왜냐하면 {facts} - 아무것도 결정하지 않기 때문입니다."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "{prop} \"{expression}\"은 어떤 질문이나 변수도 읽지 않습니다."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "\"{name}\"의 기본 값은 {valuesText}이며, 절대 유지할 수 없습니다. 허용: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "\"{name}\"의 정답은 {valuesText}이며, 절대 유지할 수 없습니다. 허용: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "트리거는 \"{name}\"을 {valuesText}로 설정하며, 이 값을 유지할 수 없습니다. 허용: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "기본 행 값은 \"{name}\"을 {valuesText}로 설정하며, 절대 유지할 수 없습니다. 허용: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "기본 패널 값은 \"{name}\"을 {valuesText}로 설정하며, 이 값을 유지할 수 없습니다. 허용: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "\"{name}\"의 {prop}은 \"{key}\"라고 명명되어 있는데, 그런 행은 없습니다. 사용 가능: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "\"{name}\"의 {prop}은 \"{key}\"를 명명하며, 그런 열은 없습니다. 이용 가능: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "\"{name}\"의 {prop}은 \"{key}\"를 명명합니다 - 그런 템플릿 질문은 없습니다. 이용 가능: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "copyvalue 트리거는 \"{fromName}\"을 \"{setToName}\"으로 복사하지만, \"{fromName}\"은 {sourceShapeText}를, \"{setToName}\"은 {targetShapeText}를 유지합니다.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "copyvalue 트리거는 \"{fromName}\"을 \"{setToName}\"으로 복사하지만, \"{fromName}\"의 값을 가질 수 있는 값에는 포함되지 않습니다. 허용: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\"은 \"{source}\"에서 선택지를 복사한 것이지만, 그 이름에 의문이 없습니다.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\"은 자신의 선택지를 복사합니다.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\"은 선택지도 값 배열도 제공하지 않는 \"{source}\"에서 선택지를 복사합니다.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\"는 \"{source}\"에서 {prop} \"{field}\"로 읽지만, {sourceType} \"{source}\"에는 그런 {fieldNoun}이 없습니다."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "\"{name}\"의 {prop} 항목은 이미 {valueText} 값을 가지고 있으며, 런타임이 두 항목을 모두 유지합니다.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "\"{name}\" 선택지에는 {valueText}가 포함되어 있고 {toggleProp}이 켜져 있어 내장된 {specialItemText} 항목과 충돌합니다."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "{trigger} 트리거는 존재하지 않는 페이지 \"{name}\"을 대상으로 합니다.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "{trigger} 트리거는 \"{name}\"을 목표로 하지만, {containerType} \"{root}\"는 {segmentNoun} \"{segment}\"를 포함하지 않습니다.",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "{trigger}는 {동사} \"{name}\"을 트리거하지만, 그 이름을 가진 {kindText}는 존재하지 않습니다."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "트리거 유형 \"{type}\"은 알려져 있지 않습니다.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "트리거에는 타입이 없습니다."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "\"{name}\"의 검증자 타입 \"{type}\"은 알려져 있지 않습니다.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "\"{name}\"의 검증기는 타입이 없습니다."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "{validatorType} \"{name}\" {effectText}: {causeText} ({questionType})의 검증자입니다.",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "\"{name}\"의 {validatorType} 검증기는 최소 {min}, 최대 {max}를 요구하며, 어떤 답변도 이를 만족하지 못합니다.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "\"{name}\"의 답변 개수 검증기는 {selectable} 선택지보다 최소 {minCount} 이��의 답변을 요구합니다.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "\"{name}\"의 정규 표현식 검증기는 엔진이 거부하는 패턴을 가집니다: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "\"{name}\"의 표현식 검증기는 표현식이 없으므로 항상 통과됩니다."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "\"{name}\"의 {minProp}은 {min}이며, {max}의 {maxProp} 위에 있습니다 - 실행 시간이 조용히 한 개를 조정합니다.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "\"{name}\"의 {countProp}은 {count}, {direction} 즉 {bound}의 {boundProp} - 런타임이 이를 고정합니다.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "\"{name}\"의 {stepProp}은 {step}이지만, 그가 스텝하는 범위 ({minProp}.. {maxProp}) {range}만 스팬 - 런타임이 이를 제한합니다.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "\"{name}\"의 minSelectedChoices는 {min}이며, {selectable} 선택지들 위에 위치해 있어 질문에 답할 수 없습니다."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\"은 결코 가시적이 될 수 없습니다: visibleIf는 {reads}를 읽고, {deadClause}이므로 이 조건은 성립하지 않습니다."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "\"{name}\"의 maskType \"{maskType}\"은 알려진 마스크가 아니며, 실행 시간은 마스크가 전혀 없는 상태로 되돌아갑니다.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "\"{name}\"의 maskSettings는 \"{key}\"를 설정하는데, 이는 \"{maskType}\" 마스크의 속성이 아닙니다 - 런타임이 조용히 삭제합니다.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "\"{name}\"의 maskSettings는 maskType 없이 설정되어 있습니다. 런타임은 \"saveMaskedValue\"만 유지하고 나머지는 버립니다.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "\"{name}\"의 {maskType} 마스크는 입력이 없는 경우에 적용됩니다: inputType \"{inputType}\"은 텍스트와 tel에만 마스크가 적용됩니다.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "\"{name}\"의 datetime 마스크는 패턴 없이 최소/최대 값을 설정합니다 - 경계는 패턴의 날짜 부분에 적용되므로, 하나가 없으면 아무 일도 하지 않습니다.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "\"{name}\"의 {maskType} 마스크는 최소 {min}, 최대 {max} - 어떤 값도 이를 만족하지 못합니다."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "동적 패널 \"{name}\"은 비어 있는 템플릿을 가지고 있는데, 패널들은 렌더링할 것이 없습니다.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "{kindText} \"{name}\"에는 요소가 없습니다.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "{kindText} \"{name}\"에는 렌더링할 수 있는 요소가 전혀 없으며, 모든 요소는 숨겨져 있고, 결코 성립하지 않는 조건으로 보호되며, 빈 상태입니다.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "\"{name}\"의 세부 요소는 절대 표시되지 않습니다: 그 detailPanelMode는 기본값인 \"none\"입니다."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "위치: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "트리거의 레거시 이름, 연산자, 값 속성에서 빌드되었습니다.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "내부: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "\"{0}\"을 말한 거야?",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "커스텀 컴포넌트라면 정의를 린터에 전달하여 완전한 분석을 가능하게 하세요.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "린팅 전에 함수를 등록하거나 린터 옵션에 기재하세요.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "오타 유형은 실행 시 조용히 삭제되며, 커스텀 트리거는 대상 및 사이클 체크에서 제외됩니다.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "런타임에 변수가 설정되어 있다면, 린터 옵션에 명시하세요.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "트리거 조건이 맞지 않으면 루프에 도달할 수 없을 수 있습니다 - 표현식을 확인하세요.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "defaultValueExpression은 질문에 답할 때까지만 적용됩니다.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "표현: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "제본에서 언급됨.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "choicesByURL {0}에서 언급됨.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "\"{0}\" 텍스트에 언급됨.", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () {1} \"{2}\"의 모든 항목에서 그 이름을 읽습니다.",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "{0}() 주장은 질문, 패널, 페이지 이름을 포함하지 않는다.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "디직렬라이저가 모르는 키를 떨어뜨립니다.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "디직렬라이저는 해결할 수 없는 검증기를 버리기 때문에 아무것도 검증되지 않습니다.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "inputType은 \"{0}\"입니다.",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "이는 \"{0}\"의 데이터 키입니다." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "그리고",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref}는 항상 {value}입니다.",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref}는 {경계}입니다",
+      // [Auto-translated] "at least {0}"
+      atLeast: "적어도 {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "최대 {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref}는 둘 다 {값}일 수 없습니다.",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref}는 {value}가 될 수 없고 또 'it'이 될 수 없다",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref}는 비어 있고 {value}일 수 없습니다.",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} 는 비어 있을 수 없고 비어 있지 않을 수 없다",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref}는 {min} 위에서 {max} 이하일 수 없습니다",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref}는 전혀 가치 없는 존재가 되길 바란다"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "\"{0}.\" 참조는 매트릭스 셀 또는 매트릭스 세부 패널 내에서만 제공됩니다.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\"은 매트릭스 셀 또는 매트릭스 디테일 패널 안에서만 사용할 수 있습니다.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "\"{0}.\" 참조는 동적 패널이나 패널 컨테이너 내에서만 제공됩니다.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "\"{0}.\" 참조는 동적 패널 내에서만 가능합니다.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\"은 다이내믹 패널 내부에서만 제공됩니다.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\"은 선택, 행, 열의 조건 내에서만 사용할 수 있습니다.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "\"{0}.\" 참조는 합성 질문 안에서만 사용할 수 있습니다.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\"은 inArray 필터 내에서 제공되지 않으며, 이 필터는 아이템과 설문조사를 비교해 실행됩니다.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\"는 이 행렬의 열이며, 행 접두사로 참조하세요.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\"는 이 동적 패널의 질문으로, 패널 접두사로 참조합니다."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "숫자를 수집하는 경우 입력 유형을 \"{0}\"에 설정하세요.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "다중 선택 값에는 \"contains\" 또는 \"anyof\"를 사용하세요."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "페이지",
+        // [Auto-translated] "panel"
+        panel: "패널"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "이름",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "이름"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "계산된 가치",
+        // [Auto-translated] "element"
+        default: "원소"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "조사",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "기타",
+        // [Auto-translated] "None"
+        none: "전혀 없습니다",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "대답하지 마세요",
+        // [Auto-translated] "Don't know"
+        dontknow: "모르겠어"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "절대 발사되지 않습니다",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "모든 답변을 거부한다",
+        // [Auto-translated] "cannot validate"
+        default: "검증할 수 없습니다"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "이 질문에는 검증할 답이 없습니다",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "텍스트 값에서 길이가 읽히는데, 이 답변에는 길이가 없습니다",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "답은 숫자가 아니며, 결코 숫자일 수 없습니다",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "번호는 이메일 주소와 일치하지 않습니다",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "답은 가치 목록이 아닙니다",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "답은 확인할 수 있는 값이 아닙니다"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "배열",
+        // [Auto-translated] "an object"
+        object: "객체"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "매트릭스의 한 줄로",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "다중 텍스트 항목",
+        // [Auto-translated] "a row or item of a question"
+        default: "질문의 한 행이나 항목"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "객체들의 배열입니다",
+        // [Auto-translated] "an object"
+        object: "객체",
+        // [Auto-translated] "a plain value"
+        plain: "평범한 값",
+        // [Auto-translated] "a value"
+        default: "가치"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "선택된 값들의 배열입니다",
+        // [Auto-translated] "a single value"
+        scalar: "단일 값",
+        // [Auto-translated] "a value"
+        default: "가치"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "아래",
+        // [Auto-translated] "above"
+        above: "위"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "절대 보이지 않으며 값을 받지 않습니다",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "절대 보이지 않으며 값을 받지 않습니다"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "질문",
+        // [Auto-translated] "question or variable"
+        questionvalue: "질문 또는 변수",
+        // [Auto-translated] "page"
+        page: "페이지"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "읽는 내용",
+        // [Auto-translated] "navigates to"
+        gotoName: "내비게이션",
+        // [Auto-translated] "sets"
+        default: "집합"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "템플릿 질문",
+        // [Auto-translated] "column"
+        default: "기둥"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "템플릿 질문",
+        // [Auto-translated] "column"
+        matrixdynamic: "기둥",
+        // [Auto-translated] "item"
+        multipletext: "항목",
+        // [Auto-translated] "row"
+        matrix: "로우",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "로우",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "기둥",
+        // [Auto-translated] "field"
+        default: "필드"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "항목 1" }, { value: "item2", text: "항목 2" }, { value: "item3", text: "항목 3" }],
-    columns: [{ value: "column1", text: "열 1" }, { value: "column2", text: "열 2" }, { value: "column3", text: "열 3" }],
-    rows: [{ value: "row1", text: "행 1" }, { value: "row2", text: "행 2" }],
-    matrixColumns: [{ name: "column1", title: "열 1" }, { name: "column2", title: "열 2" }, { name: "column3", title: "열 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "항목 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "항목 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "항목 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "열 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "열 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "열 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "행 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "행 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "열 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "열 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "열 3"
+      }
+    ]
   }
 };
 setupLocale({ localeCode: "ko", strings: koreanStrings });

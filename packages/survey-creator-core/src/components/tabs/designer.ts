@@ -1,4 +1,4 @@
-import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation, IAction, activateLazyRenderingChecks, CssClassBuilder, ITheme } from "survey-core";
+import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage, ActionContainer, propertyArray, IAnimationGroupConsumer, AnimationGroup, prepareElementForVerticalAnimation, cleanHtmlElementAfterAnimation, IAction, activateLazyRenderingChecks, toCssClasses, ITheme, getIdSelector } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
@@ -202,7 +202,7 @@ export class TabDesignerViewModel extends Base {
     this.surfaceToolbar.setItems(surfaceToolbarItems);
   }
   private forceLazyRendering() {
-    this.creator.survey.pages.forEach(page => activateLazyRenderingChecks(this.creator.rootElement?.querySelector(`#${page.id}`)));
+    this.creator.survey.pages.forEach(page => activateLazyRenderingChecks(this.creator.rootElement?.querySelector(getIdSelector(page.renderedId))));
   }
 
   private scaleSurface(scaleFactor: number): void {
@@ -269,12 +269,12 @@ export class TabDesignerViewModel extends Base {
     this.isUpdatingNewPage = false;
   }
   private calculateDesignerCss() {
-    return new CssClassBuilder()
-      .append("svc-designer-surface")
-      .append(this.survey.css.rootTheme)
-      .append(this.survey.css.container)
-      .append(this.survey.css.container + "--" + this.survey.calculatedWidthMode)
-      .toString();
+    return toCssClasses(
+      "svc-designer-surface",
+      this.survey.css.rootTheme,
+      this.survey.css.container,
+      this.survey.css.container + "--" + this.survey.calculatedWidthMode
+    );
   }
   public initSurvey() {
     if (!this.survey) return;

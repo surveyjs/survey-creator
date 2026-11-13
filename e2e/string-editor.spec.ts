@@ -79,4 +79,41 @@ test.describe(title, () => {
     await expect(await page.getByRole("textbox", { name: "Survey Title" }).textContent()).toBe("123496");
 
   });
+  test("Keep trailing spaces in titles edited on the design surface, Bug#8004", async ({ page }) => {
+    await page.setViewportSize({ width: 1000, height: 800 });
+    const testJson = {
+      "title": "Survey",
+      "pages": [
+        {
+          "name": "page1",
+          "title": "Page",
+          "elements": [{ "type": "text", "name": "q1", "title": "Question" }]
+        }
+      ]
+    };
+    await page.evaluate((json) => {
+      window["creator"].JSON = json;
+      window["modifiedCounter"] = 0;
+      window["creator"].onModified.add(() => { window["modifiedCounter"]++; });
+    }, testJson);
+    const addTrailingSpaces = async (editor) => {
+      await editor.click();
+      await page.keyboard.press("End");
+      await page.keyboard.type("  ");
+      await page.locator(".svc-tab-designer_content").click({ position: { x: 5, y: 5 } });
+    };
+    const getValues = async () => await page.evaluate(() => {
+      const survey = window["creator"].survey;
+      return { survey: survey.title, page: survey.pages[0].title, question: survey.getQuestionByName("q1").title, modified: window["modifiedCounter"] };
+    });
+
+    await addTrailingSpaces(page.getByRole("textbox", { name: "Survey Title" }));
+    expect(await getValues()).toEqual({ survey: "Survey  ", page: "Page", question: "Question", modified: 1 });
+
+    await addTrailingSpaces(page.getByRole("textbox", { name: "Page 1" }));
+    expect(await getValues()).toEqual({ survey: "Survey  ", page: "Page  ", question: "Question", modified: 2 });
+
+    await addTrailingSpaces(page.locator(".sd-question__title .sv-string-editor"));
+    expect(await getValues()).toEqual({ survey: "Survey  ", page: "Page  ", question: "Question  ", modified: 3 });
+  });
 });

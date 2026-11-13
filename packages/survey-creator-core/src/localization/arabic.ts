@@ -142,6 +142,10 @@ export var arStrings = {
     jsonHideErrors: "إخفاء الأخطاء",
     // [Auto-translated] "Show errors"
     jsonShowErrors: "أخطاء العرض",
+    // [Auto-translated] "Fix error"
+    jsonFixError: "خطأ في الإصلاح",
+    // [Auto-translated] "The survey JSON must be an object."
+    jsonRootNotObject: "يجب أن يكون JSON الخاص بالمسح كائنا.",
     // [Auto-translated] "Undo"
     undo: "التراجع",
     // [Auto-translated] "Redo"
@@ -246,6 +250,8 @@ export var arStrings = {
     translateUsigAI: "ترجمة تلقائية للكل",
     // [Auto-translated] "Translate from: "
     translateUsigAIFrom: "ترجمة من: ",
+    // [Auto-translated] "Translate remaining strings"
+    translateRemainingStrings: "ترجمة السلاسل المتبقية",
     // [Auto-translated] "Untranslated strings"
     translationDialogTitle: "النصوص غير المترجمة",
     // [Auto-translated] "Merge {0} with default locale"
@@ -256,6 +262,28 @@ export var arStrings = {
     translationSource: "مصدر: ",
     // [Auto-translated] "Target: "
     translationTarget: "هدف: ",
+    // [Auto-translated] "Source language"
+    translationSourceLanguage: "لغة المصدر",
+    // [Auto-translated] "Target language"
+    translationTargetLanguage: "اللغة المستهدفة",
+    // [Auto-translated] "{0} of {1} strings translated"
+    translationProgress: "{0} {1} الوترية المترجمة",
+    // [Auto-translated] "Are you certain you wish to delete all translated strings for the selected language?"
+    translationClearProgress: "هل أنت متأكد أنك ترغب في حذف جميع السلاسل المترجمة للغة المحددة؟",
+    // [Auto-translated] "Form View"
+    translationSideBySideViewForm: "عرض النموذج",
+    // [Auto-translated] "Grid View"
+    translationSideBySideViewGrid: "عرض الشبكة",
+    // [Auto-translated] "Translate strings"
+    translateStrings: "ترجمة السلاسل النصية",
+    // [Auto-translated] "Survey Strings"
+    translationSurveyStrings: "سلاسل المسح",
+    // [Auto-translated] "No strings to translate"
+    translationStateNothingToTranslate: "لا توجد شرائط للترجمة",
+    // [Auto-translated] "All strings are translated"
+    translationStateAllTranslated: "جميع السلاسل النصية مترجمة",
+    // [Auto-translated] "{0} strings are not translated"
+    translationStateUntranslated: "{0} السلاسل النصية لا تترجم",
     // [Auto-translated] "YouTube links are not supported."
     translationYouTubeNotSupported: "روابط يوتيوب غير مدعومة.",
     // [Auto-translated] "Export"
@@ -286,6 +314,10 @@ export var arStrings = {
     choicesLoadedFromWebLinkText: "انتقل إلى الإعدادات",
     // [Auto-translated] "Preview of loaded choice options"
     choicesLoadedFromWebPreviewTitle: "معاينة خيارات الاختيار المحملة",
+    // [Auto-translated] "No expression set"
+    expressionBannerPlaceholder: "لا توجد مجموعة تعبيرات",
+    // [Auto-translated] "Edit expression"
+    expressionBannerLinkText: "تعبير تعديل",
     // "HTML content will be here."
     htmlPlaceHolder: "محتوى HTML سيكون هنا",
     // "Drop a question from the toolbox here."
@@ -499,6 +531,108 @@ export var arStrings = {
       uncompletedRule_cancel: "لا، أريد إكمال القواعد"
     }
   },
+  // Host application variables
+  vp: {
+    // [Auto-translated] "Variable preset"
+    selectorTitle: "إعداد المتغيرات",
+    // [Auto-translated] "None"
+    noPreset: "لا شيء",
+    // [Auto-translated] "View variable values"
+    view: "عرض قيم المتغيرات",
+    // [Auto-translated] "Variable values"
+    viewTitle: "قيم المتغيرات",
+    // [Auto-translated] "Manage presets"
+    edit: "إدارة الإعدادات المسبقة",
+    // [Auto-translated] "Variable Presets"
+    editorTitle: "الإعدادات المسبقة للمتغيرات",
+    // [Auto-translated] "Preset"
+    presetName: "إعداد مسبق",
+    // [Auto-translated] "Description"
+    presetDescription: "الوصف",
+    // [Auto-translated] "Add preset"
+    addPreset: "إضافة إعداد مسبق",
+    // [Auto-translated] "New preset"
+    newPresetName: "إعداد جديد",
+    // [Auto-translated] "Delete preset"
+    deletePreset: "حذف الإعدادات المسبقة",
+    // [Auto-translated] "Back"
+    back: "العودة",
+    // [Auto-translated] "A preset with this name already exists"
+    presetNameIsNotUnique: "يوجد بالفعل إعداد مسبق يحمل هذا الاسم",
+    // [Auto-translated] "Enter a preset name"
+    presetNameIsEmpty: "أدخل اسما محددا مسبقا",
+    // [Auto-translated] "Preset"
+    listNameColumn: "إعداد مسبق",
+    // [Auto-translated] "Description"
+    listDescriptionColumn: "الوصف"
+  },
+  // AI assistant for expressions and conditions
+  aiex: {
+    // [Auto-translated] "Expression Assistant"
+    title: "مساعد التعبير",
+    // [Auto-translated] "Write with AI"
+    actionTitle: "اكتب بالذكاء الاصطناعي",
+    // [Auto-translated] "Describe what the expression should do"
+    promptTitle: "صف ما يجب أن يفعله التعبير",
+    // [Auto-translated] "For example: show this question when the respondent is 18 or older"
+    promptPlaceholder: "على سبيل المثال: عرض هذا السؤال عندما يكون المدعى عليه في الثامنة عشرة أو أكثر",
+    // [Auto-translated] "Describe the condition in words"
+    promptLineTitle: "وصف الحالة بالكلمات",
+    // [Auto-translated] "Generate"
+    generate: "توليد",
+    // [Auto-translated] "Refine"
+    refine: "التنقية",
+    // [Auto-translated] "Explain"
+    explain: "اشرح",
+    // [Auto-translated] "Stop"
+    stop: "توقف",
+    // [Auto-translated] "Accept"
+    accept: "قبول",
+    // [Auto-translated] "Reject"
+    reject: "رفض",
+    // [Auto-translated] "Apply fix: {0}"
+    applyFix: "تطبيق الإصلاح: {0}",
+    // [Auto-translated] "Current expression"
+    currentExpression: "التعبير الحالي",
+    // [Auto-translated] "Suggested expression"
+    newExpression: "تعبير مقترح",
+    // [Auto-translated] "Reads as"
+    readsAs: "تقرأ ك",
+    // [Auto-translated] "The assistant's explanation"
+    explanation: "شرح المساعد",
+    // [Auto-translated] "Check results"
+    findings: "تحقق من النتائج",
+    // [Auto-translated] "Error"
+    severityError: "خطأ",
+    // [Auto-translated] "Warning"
+    severityWarning: "تحذير",
+    // [Auto-translated] "Info"
+    severityInfo: "معلومات",
+    // [Auto-translated] "in \"{0}\""
+    inAction: "في \"{0}\"",
+    // [Auto-translated] "Describe the expression and select Generate."
+    statusReady: "صف التعبير واختر التوليد.",
+    // [Auto-translated] "Waiting for the assistant..."
+    statusLoading: "ينتظر المساعد...",
+    // [Auto-translated] "The request was cancelled."
+    statusCancelled: "تم إلغاء الطلب.",
+    // [Auto-translated] "The assistant reported: {0}"
+    statusError: "أبلغ المساعد: {0}",
+    // [Auto-translated] "The assistant did not suggest an expression."
+    statusEmpty: "لم يقترح المساعد تعبيرا.",
+    // [Auto-translated] "Review the suggested expression."
+    statusReview: "راجع التعبير المقترح.",
+    // [Auto-translated] "The assistant explained the current expression."
+    statusExplained: "شرح المساعد التعبير الحالي.",
+    // [Auto-translated] "The suggested expression has errors and cannot be accepted."
+    blockedByErrors: "التعبير المقترح يحتوي على أخطاء ولا يمكن قبوله.",
+    // [Auto-translated] "The suggested expression could not be checked for every place it is written to, so it cannot be accepted."
+    notChecked: "لا يمكن التحقق من التعبير المقترح في كل مكان يكتب فيه، لذا لا يمكن قبوله.",
+    // [Auto-translated] "Add an action to the rule before asking the assistant."
+    noActions: "أضف إجراء إلى القاعدة قبل أن تسأل المساعد.",
+    // [Auto-translated] "The first suggestion had errors and was corrected automatically."
+    fixedAutomatically: "الاقتراح الأول كان فيه أخطاء وتم تصحيحه تلقائيا."
+  },
   // Property Editors
   pe: {
     panel: {
@@ -566,6 +700,8 @@ export var arStrings = {
       templateDescription: "نمط وصف الإدخال",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "نمط عنوان الإدخال",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "عنوان المدخل مؤقت",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "نص اللوحة الفارغ",
       // [Auto-translated] "Tab title pattern"
@@ -588,6 +724,10 @@ export var arStrings = {
       templateErrorLocation: "محاذاة رسالة الخطأ",
       // [Auto-translated] "New entry location"
       newPanelPosition: "موقع دخول جديد",
+      // [Auto-translated] "Entries per page"
+      pageSize: "الإدخالات في الصفحة",
+      // [Auto-translated] "Allow users to sort entries"
+      allowSort: "السماح للمستخدمين بفرز الإدخالات",
       // [Auto-translated] "Prevent duplicate responses in the following question"
       keyName: "منع الردود المكررة في السؤال التالي"
     },
@@ -675,6 +815,12 @@ export var arStrings = {
       // [Auto-translated] "Expression"
       expression: "تعبير"
     },
+    sortcriterion: {
+      // [Auto-translated] "Sort by"
+      field: "الترتيب حسب",
+      // [Auto-translated] "Order"
+      direction: "الترتيب"
+    },
     urlconditionitem: {
       // [Auto-translated] "Expression"
       expression: "التعبير"
@@ -690,7 +836,9 @@ export var arStrings = {
       // [Auto-translated] "Survey description"
       description: "وصف المسح",
       // [Auto-translated] "Make the survey read-only"
-      readOnly: "جعل الاستطلاع للقراءة فقط"
+      readOnly: "جعل الاستطلاع للقراءة فقط",
+      // [Auto-translated] "Regional formats"
+      regionalFormat: "الصيغ الإقليمية"
     },
     page: {
       // [Auto-translated] "Page name"
@@ -726,7 +874,9 @@ export var arStrings = {
       // [Auto-translated] "Make the column required if"
       requiredIf: "اجعل العمود مطلوبا إذا",
       // [Auto-translated] "Each option in a separate column"
-      showInMultipleColumns: "كل خيار في عمود منفصل"
+      showInMultipleColumns: "كل خيار في عمود منفصل",
+      // [Auto-translated] "Allow sorting by this column"
+      allowSort: "السماح بالترتيب حسب هذا العمود"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -741,6 +891,22 @@ export var arStrings = {
     masksettings: {
       // [Auto-translated] "Save masked value in survey results"
       saveMaskedValue: "حفظ القيمة المقنعة في نتائج الاستطلاع"
+    },
+    regionalformat: {
+      // [Auto-translated] "Region"
+      locale: "المنطقة",
+      // [Auto-translated] "Date pattern"
+      datePattern: "نمط التاريخ",
+      // [Auto-translated] "Time pattern"
+      timePattern: "نمط الزمن",
+      // [Auto-translated] "Decimal separator"
+      decimalSeparator: "الفاصلة العشرية",
+      // [Auto-translated] "Thousands separator"
+      thousandsSeparator: "فاصل آلاف",
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "رمز العملة",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "نمط العملة"
     },
     patternmask: {
       // [Auto-translated] "Value pattern"
@@ -761,16 +927,18 @@ export var arStrings = {
       decimalSeparator: "فاصل عشري",
       // [Auto-translated] "Value precision"
       precision: "دقة القيمة",
+      // [Auto-translated] "Show trailing zeros"
+      showTrailingZeros: "الأصفار اللاحقة للعرض",
       // [Auto-translated] "Minimum value"
       min: "الحد الأدنى للقيمة",
       // [Auto-translated] "Maximum value"
       max: "القيمة القصوى"
     },
     currencymask: {
-      // [Auto-translated] "Currency prefix"
-      prefix: "بادئة العملة",
-      // [Auto-translated] "Currency suffix"
-      suffix: "لاحقة العملة"
+      // [Auto-translated] "Currency symbol"
+      currencySymbol: "رمز العملة",
+      // [Auto-translated] "Currency pattern"
+      currencyPattern: "نمط العملة"
     },
     // [Auto-translated] "Clear others when selected"
     isExclusive: "مسح الآخرين عند تحديده",
@@ -812,8 +980,24 @@ export var arStrings = {
     addItem: "انقر لإضافة عنصر...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "انقر لإزالة العنصر...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "أضف {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "إزالة {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "سحب العنصر",
+    // [Auto-translated] "Expand nested choices"
+    expandNestedChoices: "توسيع الخيارات المتداخلة",
+    // [Auto-translated] "Collapse nested choices"
+    collapseNestedChoices: "انهيار الخيارات المتداخلة",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "وسع الخيارات المتداخلة {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "خيارات الانهيار المتداخلة {0}",
+    // [Auto-translated] "Show description"
+    showDescription: "وصف العرض",
+    // [Auto-translated] "Hide description"
+    hideDescription: "إخفاء الوصف",
     // "Edit"
     edit: "التعديل",
     // "Done"
@@ -856,40 +1040,60 @@ export var arStrings = {
     propertyNameIsIncorrect: "لا تستخدم الكلمات المحجوزة: \"عنصر\" ، \"اختيار\" ، \"لوحة\" ، \"صف\".",
     // "You don't have any items yet"
     listIsEmpty: "No items have been added yet",
-    // [Auto-translated] "You don't have any choices yet"
-    "listIsEmpty@choices": "ليس لديك أي خيارات حتى الآن",
-    // [Auto-translated] "You don't have any columns yet"
-    "listIsEmpty@columns": "ليس لديك أي أعمدة حتى الآن",
-    // [Auto-translated] "You don't have layout columns yet"
-    "listIsEmpty@gridLayoutColumns": "ليس لديك أعمدة تخطيط حتى الآن",
-    // [Auto-translated] "You don't have any rows yet"
-    "listIsEmpty@rows": "ليس لديك أي صفوف حتى الآن",
-    // [Auto-translated] "You don't have any validation rules yet"
-    "listIsEmpty@validators": "ليس لديك أي قواعد تحقق حتى الآن",
-    // [Auto-translated] "You don't have any custom variables yet"
-    "listIsEmpty@calculatedValues": "ليس لديك أي متغيرات مخصصة حتى الآن",
-    // [Auto-translated] "You don't have any triggers yet"
-    "listIsEmpty@triggers": "ليس لديك أي محفزات حتى الآن",
-    // [Auto-translated] "You don't have any links yet"
-    "listIsEmpty@navigateToUrlOnCondition": "ليس لديك أي روابط حتى الآن",
-    // [Auto-translated] "You don't have any pages yet"
-    "listIsEmpty@pages": "ليس لديك أي صفحات حتى الآن",
-    // [Auto-translated] "Add new choice"
-    "addNew@choices": "إضافة خيار جديد",
-    // [Auto-translated] "Add new column"
-    "addNew@columns": "إضافة عمود جديد",
-    // [Auto-translated] "Add new row"
-    "addNew@rows": "إضافة صف جديد",
-    // [Auto-translated] "Add new rule"
-    "addNew@validators": "إضافة قاعدة جديدة",
-    // [Auto-translated] "Add new variable"
-    "addNew@calculatedValues": "إضافة متغير جديد",
-    // [Auto-translated] "Add new trigger"
-    "addNew@triggers": "إضافة مشغل جديد",
-    // [Auto-translated] "Add new URL"
-    "addNew@navigateToUrlOnCondition": "إضافة عنوان URL جديد",
-    // [Auto-translated] "Add new page"
-    "addNew@pages": "إضافة صفحة جديدة",
+    // [Auto-translated] "No choices"
+    "listIsEmpty@choices": "لا خيارات",
+    // [Auto-translated] "No custom rating values"
+    "listIsEmpty@rateValues": "لا توجد قيم تقييم مخصصة",
+    // [Auto-translated] "No custom labels"
+    "listIsEmpty@customLabels": "لا توجد ملصقات مخصصة",
+    // [Auto-translated] "No areas"
+    "listIsEmpty@areas": "لا توجد مناطق",
+    // [Auto-translated] "No columns"
+    "listIsEmpty@columns": "لا توجد أعمدة",
+    // [Auto-translated] "No layout columns"
+    "listIsEmpty@gridLayoutColumns": "لا توجد أعمدة تخطيط",
+    // [Auto-translated] "No rows"
+    "listIsEmpty@rows": "لا صفوف",
+    // [Auto-translated] "No validation rules"
+    "listIsEmpty@validators": "لا توجد قواعد تحقق",
+    // [Auto-translated] "No custom variables"
+    "listIsEmpty@calculatedValues": "لا توجد متغيرات مخصصة",
+    // [Auto-translated] "No triggers"
+    "listIsEmpty@triggers": "لا محفزات",
+    // [Auto-translated] "No conditional markup"
+    "listIsEmpty@completedHtmlOnCondition": "لا يوجد ترميز شرطي",
+    // [Auto-translated] "No links"
+    "listIsEmpty@navigateToUrlOnCondition": "لا روابط",
+    // [Auto-translated] "No pages"
+    "listIsEmpty@pages": "لا صفحات",
+    // [Auto-translated] "No sort levels"
+    "listIsEmpty@sortCriteria": "لا توجد مستويات فرز",
+    // [Auto-translated] "Add choice"
+    "addNew@choices": "إضافة الاختيار",
+    // [Auto-translated] "Add rating value"
+    "addNew@rateValues": "إضافة قيمة التقييم",
+    // [Auto-translated] "Add label"
+    "addNew@customLabels": "إضافة تسمية",
+    // [Auto-translated] "Add area"
+    "addNew@areas": "إضافة المساحة",
+    // [Auto-translated] "Add column"
+    "addNew@columns": "إضافة عمود",
+    // [Auto-translated] "Add row"
+    "addNew@rows": "إضافة صف",
+    // [Auto-translated] "Add rule"
+    "addNew@validators": "قاعدة الإضافة",
+    // [Auto-translated] "Add variable"
+    "addNew@calculatedValues": "إضافة المتغير",
+    // [Auto-translated] "Add trigger"
+    "addNew@triggers": "إضافة الزناد",
+    // [Auto-translated] "Add markup"
+    "addNew@completedHtmlOnCondition": "أضف الترميز",
+    // [Auto-translated] "Add link"
+    "addNew@navigateToUrlOnCondition": "أضف رابط",
+    // [Auto-translated] "Add page"
+    "addNew@pages": "إضافة صفحة",
+    // [Auto-translated] "Add sort level"
+    "addNew@sortCriteria": "أضف مستوى الفرز",
     // "Value"
     value: "القيمة",
     // "Text"
@@ -916,6 +1120,8 @@ export var arStrings = {
     surveyTitlePlaceholder: "أدخل عنوان الإستبيان هنا",
     // "Page {num}"
     pageTitlePlaceholder: "أدخل عنوان الصفحة هنا",
+    // [Auto-translated] "Panel Title"
+    panelTitlePlaceholder: "عنوان اللجنة",
     // [Auto-translated] "Start Page"
     startPageTitlePlaceholder: "الصفحة الرئيسية",
     // "Description"
@@ -966,6 +1172,8 @@ export var arStrings = {
     visible: "مرئي؟",
     // "Required"
     isRequired: "مطلوب؟",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "أطلب إجابة إيجابية",
     // [Auto-translated] "Mark as required"
     markRequired: "وضع علامة كمطلوب",
     // [Auto-translated] "Remove the required mark"
@@ -976,6 +1184,8 @@ export var arStrings = {
     eachRowUnique: "منع تكرار الاستجابات في الصفوف",
     // "Error message for required questions"
     requiredErrorText: "نص خطأ إلزامي السؤال",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "رسالة خطأ عندما يكون مطلوبا خيار نعم",
     // "Display the question on a new line"
     startWithNewLine: "إظهار السؤال في صف جديد",
     // "Rows"
@@ -994,6 +1204,16 @@ export var arStrings = {
     maxFiles: "الحد الأقصى لعدد الملفات",
     // "Row count"
     rowCount: "عدد الصفوف",
+    // [Auto-translated] "Rows per page"
+    pageSize: "الصفوف في الصفحة",
+    // [Auto-translated] "Allow users to sort rows"
+    allowSort: "السماح للمستخدمين بفرز الصفوف",
+    // [Auto-translated] "Maximum sort levels"
+    maxSortLevel: "أقصى مستويات الفرز",
+    // [Auto-translated] "Default sort order"
+    sortCriteria: "ترتيب الفرز الافتراضي",
+    // [Auto-translated] "Show sort bar"
+    showSortBar: "شريط فرز العرض",
     // "Columns layout"
     columnLayout: "تخطيط الأعمدة",
     // "\"Add Row\" button alignment"
@@ -1112,6 +1332,10 @@ export var arStrings = {
     questionErrorLocation: "موقع خطأ في السؤال",
     // "Focus first question on a new page"
     autoFocusFirstQuestion: "ركز المؤشر على السؤال الأول عند تغير الصفحة",
+    // [Auto-translated] "Enable choice shortcuts"
+    choiceShortcutsEnabled: "تمكين اختصارات الاختيار",
+    // [Auto-translated] "Show keyboard hints"
+    showKeyboardHints: "تلميحات لوحة المفاتيح",
     // "Question order"
     questionOrder: "ترتيب العناصر على الصفحة",
     // "Time limit to complete the survey"
@@ -1264,10 +1488,12 @@ export var arStrings = {
     waitForUpload: "انتظر حتى يكتمل التحميل",
     // [Auto-translated] "Row details alignment"
     detailPanelMode: "محاذاة تفاصيل الصف",
-    // [Auto-translated] "Minimum row count"
+    // [Auto-translated] "Minimum number of rows"
     minRowCount: "الحد الأدنى لعدد الصفوف",
-    // [Auto-translated] "Maximum row count"
+    // [Auto-translated] "Maximum number of rows"
     maxRowCount: "الحد الأقصى لعدد الصفوف",
+    // [Auto-translated] "Row count expression"
+    rowCountExpression: "تعبير عدد الصفوف",
     // "Confirm row removal"
     confirmDelete: "تأكيد حذف الصف",
     // [Auto-translated] "Confirmation message"
@@ -1278,6 +1504,8 @@ export var arStrings = {
     minPanelCount: "الحد الأدنى لعدد الإدخالات",
     // [Auto-translated] "Maximum number of entries"
     maxPanelCount: "الحد الأقصى لعدد الإدخالات",
+    // [Auto-translated] "Entry count expression"
+    panelCountExpression: "تعبير عدد المدخلات",
     // [Auto-translated] "Initial entry state"
     panelsState: "حالة الدخول الأولية",
     // [Auto-translated] "\"Previous Entry\" button text"
@@ -1438,6 +1666,8 @@ export var arStrings = {
     logoHeight: "ارتفاع الشعار",
     // "Read-only"
     readOnly: "للقراءة فقط",
+    // [Auto-translated] "Read-only mode"
+    readOnlyMode: "وضع القراءة فقط",
     // [Auto-translated] "Disable the read-only mode if"
     enableIf: "قم بتعطيل وضع القراءة فقط إذا",
     // "\"No rows\" message"
@@ -1518,6 +1748,8 @@ export var arStrings = {
       columns: "الأعمدة",
       // "Rows"
       rows: "الصفوف",
+      // [Auto-translated] "Entries"
+      entries: "المشاركات",
       // "Choice Options"
       choices: "الخيارات",
       // "Items"
@@ -1544,6 +1776,8 @@ export var arStrings = {
       question: "السؤال",
       // "Pages"
       pages: "الصفحات",
+      // [Auto-translated] "Regional Formats"
+      regionalFormat: "الصيغ الإقليمية",
       // "Quiz Mode"
       timer: "مؤقت/إختبار قصير",
       // [Auto-translated] "Calculated Values"
@@ -1862,6 +2096,12 @@ export var arStrings = {
       // [Auto-translated] "Never"
       none: "أبدا"
     },
+    readOnlyMode: {
+      // [Auto-translated] "Read-only"
+      readonly: "قراءة فقط",
+      // [Auto-translated] "View"
+      view: "منظر"
+    },
     // [Auto-translated] "Radio buttons"
     radio: "أزرار الراديو",
     inputType: {
@@ -1913,6 +2153,12 @@ export var arStrings = {
       warning: "تحذير",
       // [Auto-translated] "Informational"
       info: "اعلاميه"
+    },
+    cameraFacingMode: {
+      // [Auto-translated] "Front"
+      user: "الواجهة",
+      // [Auto-translated] "Rear"
+      environment: "الخلف"
     },
     acceptedCategories: {
       // [Auto-translated] "Images"
@@ -2104,6 +2350,8 @@ export var arStrings = {
     underRowSingle: "أسفل الصف، اعرض قسما واحدا فقط",
     // "Auto"
     auto: "تلقائي",
+    // [Auto-translated] "Always"
+    always: "دائما",
     timerInfoMode: {
       // "Both"
       combined: "كلا"
@@ -2321,7 +2569,148 @@ export var arStrings = {
       survey: "نفس المسح",
       // [Auto-translated] "Same as container"
       container: "نفس الحاوية"
+    },
+    showKeyboardHints: {
+      // [Auto-translated] "Inherit"
+      auto: "الوراثة",
+      // [Auto-translated] "Hide"
+      "false": "اختبئ",
+      // [Auto-translated] "Show"
+      "true": "العرض"
     }
+  },
+  // Regions of the "Regional Formats" category. Unlike survey languages, a region can be
+  regionLocales: {
+    // [Auto-translated] "Arabic"
+    ar: "العربية",
+    // [Auto-translated] "Bulgarian"
+    bg: "البلغارية",
+    // [Auto-translated] "Catalan"
+    ca: "الكتالونية",
+    // [Auto-translated] "Czech"
+    cs: "التشيك",
+    // [Auto-translated] "Welsh"
+    cy: "الويلزية",
+    // [Auto-translated] "Danish"
+    da: "الدنماركية",
+    // [Auto-translated] "German"
+    de: "الألمانية",
+    // [Auto-translated] "Greek"
+    el: "اليونانية",
+    // [Auto-translated] "English"
+    en: "الإنجليزية",
+    // [Auto-translated] "English (Australia)"
+    "en-AU": "الإنجليزية (أستراليا)",
+    // [Auto-translated] "English (Canada)"
+    "en-CA": "الإنجليزية (كندا)",
+    // [Auto-translated] "English (United Kingdom)"
+    "en-GB": "الإنجليزية (المملكة المتحدة)",
+    // [Auto-translated] "English (Ireland)"
+    "en-IE": "الإنجليزية (أيرلندا)",
+    // [Auto-translated] "English (India)"
+    "en-IN": "الإنجليزية (الهند)",
+    // [Auto-translated] "English (New Zealand)"
+    "en-NZ": "الإنجليزية (نيوزيلندا)",
+    // [Auto-translated] "English (South Africa)"
+    "en-ZA": "النسخة الإنجليزية (جنوب أفريقيا)",
+    // [Auto-translated] "Spanish"
+    es: "الإسبانية",
+    // [Auto-translated] "Estonian"
+    et: "الإستونية",
+    // [Auto-translated] "Basque"
+    eu: "الباسكية",
+    // [Auto-translated] "Persian"
+    fa: "الفارسية",
+    // [Auto-translated] "Finnish"
+    fi: "الفنلندية",
+    // [Auto-translated] "Filipino"
+    fil: "الفلبيني",
+    // [Auto-translated] "French"
+    fr: "الفرنسية",
+    // [Auto-translated] "French (Canada)"
+    "fr-CA": "الفرنسية (كندا)",
+    // [Auto-translated] "French (Switzerland)"
+    "fr-CH": "الفرنسية (سويسرا)",
+    // [Auto-translated] "Hebrew"
+    he: "العبرية",
+    // [Auto-translated] "Hindi"
+    hi: "الهندية",
+    // [Auto-translated] "Croatian"
+    hr: "الكرواتية",
+    // [Auto-translated] "Haitian Creole"
+    ht: "الكريول الهايتي",
+    // [Auto-translated] "Hungarian"
+    hu: "المجرية",
+    // [Auto-translated] "Indonesian"
+    id: "الإندونيسية",
+    // [Auto-translated] "Icelandic"
+    is: "الآيسلندية",
+    // [Auto-translated] "Italian"
+    it: "الإيطالية",
+    // [Auto-translated] "Japanese"
+    ja: "ياباني",
+    // [Auto-translated] "Georgian"
+    ka: "الجورجي",
+    // [Auto-translated] "Kazakh"
+    kk: "الكازاخية",
+    // [Auto-translated] "Korean"
+    ko: "الكورية",
+    // [Auto-translated] "Lithuanian"
+    lt: "الليتوانية",
+    // [Auto-translated] "Latvian"
+    lv: "اللاتفية",
+    // [Auto-translated] "Macedonian"
+    mk: "مقدوني",
+    // [Auto-translated] "Burmese"
+    mm: "البورميون",
+    // [Auto-translated] "Malay"
+    ms: "الماليزية",
+    // [Auto-translated] "Dutch"
+    nl: "هولندية",
+    // [Auto-translated] "Dutch (Belgium)"
+    "nl-BE": "هولندا (بلجيكا)",
+    // [Auto-translated] "Norwegian"
+    no: "النرويجية",
+    // [Auto-translated] "Polish"
+    pl: "البولندية",
+    // [Auto-translated] "Portuguese"
+    pt: "البرتغالية",
+    // [Auto-translated] "Portuguese (Brazil)"
+    "pt-BR": "البرتغالية (البرازيل)",
+    // [Auto-translated] "Romanian"
+    ro: "روماني",
+    // [Auto-translated] "Russian"
+    ru: "الروسية",
+    // [Auto-translated] "Slovak"
+    sk: "السلوفاكية",
+    // [Auto-translated] "Slovenian"
+    sl: "السلوفيني",
+    // [Auto-translated] "Serbian"
+    sr: "صربي",
+    // [Auto-translated] "Swedish"
+    sv: "السويدية",
+    // [Auto-translated] "Swahili"
+    sw: "السواحيلية",
+    // [Auto-translated] "Telugu"
+    tel: "التيلجو",
+    // [Auto-translated] "Tajik"
+    tg: "الطاجيكية",
+    // [Auto-translated] "Thai"
+    th: "تايلاندية",
+    // [Auto-translated] "Turkish"
+    tr: "تركية",
+    // [Auto-translated] "Ukrainian"
+    uk: "الأوكرانية",
+    // [Auto-translated] "Urdu"
+    ur: "الأردية",
+    // [Auto-translated] "Vietnamese"
+    vi: "الفيتناميون",
+    // [Auto-translated] "Chinese"
+    zh: "الصينية",
+    // [Auto-translated] "Chinese (Simplified)"
+    "zh-CN": "الصينية (مبسطة)",
+    // [Auto-translated] "Chinese (Traditional)"
+    "zh-TW": "الصينية (التقليدية)"
   },
   // Operators
   op: {
@@ -2398,6 +2787,10 @@ export var arStrings = {
     visibletrigger: "تغيير الرؤية (مهمل)"
   },
   peplaceholder: {
+    regionalformat: {
+      // [Auto-translated] "Same as survey language"
+      locale: "نفس لغة المسح"
+    },
     patternmask: {
       // "Ex.: +1(999)-999-99-99"
       pattern: "مثال: +1 (999) -999-99-99"
@@ -2405,12 +2798,6 @@ export var arStrings = {
     datetimemask: {
       // "Ex.: mm/dd/yyyy HH:MM:ss"
       pattern: "مثال: مم / يوم / سنة"
-    },
-    currencymask: {
-      // "Ex.: $"
-      prefix: "مثال: $",
-      // "Ex.: USD"
-      suffix: "مثال: الدولار الأمريكي"
     },
     panelbase: {
       // [Auto-translated] "Ex.: 200px"
@@ -2458,7 +2845,9 @@ export var arStrings = {
       // [Auto-translated] "Specifies how many columns this panel spans within the grid layout."
       effectiveColSpan: "يحدد عدد الأعمدة التي تمتد إليها هذه اللوحة داخل تخطيط الشبكة.",
       // [Auto-translated] "This table lets you configure each grid column within the panel. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "يتيح لك هذا الجدول تكوين كل عمود شبكة داخل اللوحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
+      gridLayoutColumns: "يتيح لك هذا الجدول تكوين كل عمود شبكة داخل اللوحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود.",
+      // [Auto-translated] "Specifies how questions inside this panel appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "يحدد كيف تظهر الأسئلة داخل هذه اللوحة عندما تكون للقراءة فقط. يعرض \"القراءة فقط\" الأسئلة باستخدام أدوات التحكم المعتادة في الإدخال، ولكن معطلة للتحرير. \"العرض\" يعرض الإجابات كنص أو عناصر غير تفاعلية أخرى. \"الوراثة\" يستخدم الوضع المعين للوحة الأب أو الصفحة أو الاستبيان (\"للقراءة فقط\" افتراضيا)."
     },
     paneldynamic: {
       // "A panel ID that is not visible to respondents."
@@ -2491,6 +2880,8 @@ export var arStrings = {
       width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "اكتب قالبا لعناوين اللوحات الديناميكية. استخدم {panelIndex} للموضع العام لللوحة و {visiblePanelIndex} لترتيبها بين اللوحات المرئية. قم بإدراج هذه العناصر النائبة في النموذج لإضافة ترقيم تلقائي.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "نص احتياطي لعناوين المدخلات ينطبق عندما لا ينتج نمط عنوان المدخل قيمة ذات معنى. استخدم {panelIndex} للموقع العام للمدخل و{visiblePanelIndex} لترتيبه بين المدخلات المرئية.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "اكتب قالبا لعناوين علامات التبويب. استخدم {panelIndex} للموضع العام للوحة و {visiblePanelIndex} لترتيبها بين اللوحات المرئية. قم بإدراج هذه العناصر النائبة في النموذج لإضافة ترقيم تلقائي.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -2509,15 +2900,35 @@ export var arStrings = {
       keyName: "قم بالإشارة إلى اسم سؤال لمطالبة المستخدم بتقديم إجابة فريدة لهذا السؤال في كل لوحة.",
       // [Auto-translated] "Triggers a confirmation prompt before removing an entry."
       confirmDelete: "لتشغيل مطالبة تأكيد قبل إزالة إدخال.",
+      // [Auto-translated] "Specify an expression that calculates the number of entries. This expression overrides the \"Initial number of entries\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of entries\" and \"Maximum number of entries\" settings. While this expression is set, respondents cannot add or remove entries manually."
+      panelCountExpression: "حدد تعبيرا يحسب عدد الإدخالات. هذا التعبير يتجاوز إعداد \"العدد الأولي للإدخالات\" ويعاد تقييمه كلما تغيرت القيم التي يشير إليها. النتيجة محدودة بإعدادات \"الحد الأدنى لعدد الإدخالات\" و\"الحد الأقصى لعدد الإدخالات\". أثناء تعيين هذا التعبير، لا يمكن للمشاركين إضافة أو إزالة الإدخالات يدويا.",
+      // [Auto-translated] "Specifies the number of entries displayed on each page of the panel. `0` disables pagination and displays all entries."
+      pageSize: "يحدد عدد الإدخالات المعروضة في كل صفحة من اللوحة. '0' يعطل تقسيم الصفحات ويعرض جميع الإدخالات.",
+      // [Auto-translated] "Allows respondents to sort entries using the sort bar."
+      allowSort: "يسمح للمشاركين بفرز الإدخالات باستخدام شريط الفرز.",
+      // [Auto-translated] "Defines the initial entry order. Respondents can change it if sorting is allowed. When sorting by multiple questions, each question sorts entries within the order established by the preceding question. Drag questions to change their priority."
+      sortCriteria: "يحدد ترتيب الإدخال الأولي. يمكن للمشاركين تغييره إذا كان الفرز مسموحا. عند الفرز حسب عدة أسئلة، يقوم كل سؤال بفرز المدخلات ضمن الترتيب الذي حدده السؤال السابق. اسحب الأسئلة لتغيير أولويتها.",
       // [Auto-translated] "Assigns numbers to questions nested within the dynamic panel."
       showQuestionNumbers: "تعيين أرقام للأسئلة المتداخلة داخل اللوحة الديناميكية."
     },
     matrixdynamic: {
+      // [Auto-translated] "Allows respondents to sort rows by clicking column headers or using the sort bar."
+      allowSort: "يسمح للمشاركين بفرز الصفوف بالنقر على رؤوس الأعمدة أو باستخدام شريط الفرز.",
+      // [Auto-translated] "Defines the initial row order. Respondents can change it if sorting is allowed. When sorting by multiple columns, each column sorts rows within the order established by the preceding column. Drag columns to change their priority."
+      sortCriteria: "يحدد ترتيب الصفوف الأولي. يمكن للمشاركين تغييره إذا كان الفرز مسموحا. عند الفرز حسب عدة أعمدة، يقوم كل عمود بفرز الصفوف ضمن الترتيب الذي حدده العمود السابق. اسحب الأعمدة لتغيير أولويتها.",
+      // [Auto-translated] "\"Auto\" displays the sort bar only when the matrix has no sortable column headers: the headers are hidden, the matrix uses the mobile layout, or rows are transposed to columns. \"Always\" displays the sort bar even when sortable column headers are visible."
+      showSortBar: "\"تلقائي\" يعرض شريط الفرز فقط عندما لا تحتوي المصفوفة على رؤوس أعمدة قابلة للفرز: تكون الرؤوس مخفية، أو تستخدم المصفوفة تخطيط المتحرك، أو تنقل الصفوف إلى أعمدة. \"دائما\" يعرض شريط الفرز حتى عندما تكون رؤوس الأعمدة القابلة للفرز مرئية.",
+      // [Auto-translated] "Specify an expression that calculates the number of rows. This expression overrides the \"Initial number of rows\" setting and is reevaluated whenever the values it references change. The result is limited by the \"Minimum number of rows\" and \"Maximum number of rows\" settings. While this expression is set, respondents cannot add or remove rows manually."
+      rowCountExpression: "حدد تعبيرا يحسب عدد الصفوف. هذا التعبير يتجاوز إعداد \"العدد الابتدائي للصفوف\" ويعاد تقييمه كلما تغيرت القيم التي يشير إليها. النتيجة محدودة بإعدادات \"الحد الأدنى لعدد الصفوف\" و\"الحد الأقصى لعدد الصفوف\". أثناء تعيين هذا التعبير، لا يمكن للمشاركين إضافة أو إزالة الصفوف يدويا.",
       // [Auto-translated] "Triggers a confirmation prompt before removing a row."
       confirmDelete: "يؤدي إلى تشغيل مطالبة تأكيد قبل إزالة صف.",
       // [Auto-translated] "Automatically expands the detail section when a new row is added to the matrix."
       detailPanelShowOnAdding: "يوسع قسم التفاصيل تلقائيا عند إضافة صف جديد إلى المصفوفة."
     },
+    // [Auto-translated] "Specifies the number of rows displayed on each page of the matrix. `0` disables pagination and displays all rows."
+    pageSize: "يحدد عدد الصفوف المعروضة على كل صفحة من المصفوفة. '0' يعطل تقسيم الصفحات ويعرض جميع الصفوف.",
+    // [Auto-translated] "Specifies how many fields a respondent can sort by at once."
+    maxSortLevel: "يحدد عدد الحقول التي يمكن للمجيب فرز بها في نفس الوقت.",
     // "Duplicates answers from the last row and assigns them to the next added dynamic row."
     copyDefaultValueFromLastEntry: "يكرر الإجابات من الصف الأخير ويعينها إلى الصف الديناميكي المضاف التالي.",
     // [Auto-translated] "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input."
@@ -2566,7 +2977,11 @@ export var arStrings = {
       // [Auto-translated] "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
       textWrapEnabled: "ستنشئ النصوص الطويلة في خيارات الاختيار فواصل أسطر تلقائيا لتلائم القائمة المنسدلة. قم بإلغاء تحديد ما إذا كنت تريد قص النصوص.",
       // [Auto-translated] "Specifies how many columns this question spans within the grid layout."
-      effectiveColSpan: "يحدد عدد الأعمدة التي يمتد إليها هذا السؤال داخل تخطيط الشبكة."
+      effectiveColSpan: "يحدد عدد الأعمدة التي يمتد إليها هذا السؤال داخل تخطيط الشبكة.",
+      // [Auto-translated] "Specifies how the question appears when it is read-only. \"Read-Only\" displays the question with its usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the parent panel, page, or survey (\"Read-Only\" by default)."
+      readOnlyMode: "يحدد كيف يظهر السؤال عندما يكون للقراءة فقط. يعرض \"القراءة فقط\" السؤال مع أدوات التحكم المعتادة في الإدخال، ولكن معطلة للتحرير. \"العرض\" تعرض الإجابات كنص أو عناصر غير تفاعلية أخرى. \"الوراثة\" تستخدم الوضع المعين للوحة الأم أو الصفحة أو الاستبيان (\"للقراءة فقط\" افتراضيا).",
+      // [Auto-translated] "Displays hints for available keyboard actions below this question. The \"Inherit\" option applies the survey-level setting."
+      showKeyboardHints: "يعرض تلميحات لإجراءات لوحة المفاتيح المتاحة أسفل هذا السؤال. خيار \"الوراثة\" يطبق إعداد مستوى المسح."
     },
     surveyvalidator: {
       // "Use the magic wand icon to define when the question's value is considered valid."
@@ -2614,6 +3029,8 @@ export var arStrings = {
     survey: {
       // "Select if you want to prevent respondents from filling out your survey."
       readOnly: "حدد ما إذا كنت تريد منع المستجيبين من ملء الاستطلاع الخاص بك.",
+      // [Auto-translated] "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements."
+      readOnlyMode: "يحدد كيف تظهر الأسئلة للقراءة فقط، بما في ذلك صفحة المعاينة. \"القراءة فقط\" (الافتراضية) يعرض الأسئلة التي تحتوي على أدوات التحكم المعتادة في الإدخال، ولكن يتم تعطيلها للتحرير. \"العرض\" يعرض الإجابات كنص أو عناصر غير تفاعلية أخرى.",
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "لتعيين موقع شريط التقدم. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
     },
@@ -2633,7 +3050,9 @@ export var arStrings = {
       // "When selected, creates an individual column for each choice option."
       showInMultipleColumns: "عند تحديده، ينشئ عمود منفرد لكل خيار اختيار.",
       // [Auto-translated] "Arranges choice options in a multi-column layout. When set to 0, the options are displayed in a single line. When set to -1, the actual value is inherited from the \"Nested column count\" property of the parent matrix."
-      colCount: "ترتيب خيارات الاختيار في تخطيط متعدد الأعمدة. عند التعيين إلى 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من الخاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصلية."
+      colCount: "ترتيب خيارات الاختيار في تخطيط متعدد الأعمدة. عند التعيين إلى 0 ، يتم عرض الخيارات في سطر واحد. عند التعيين إلى -1، يتم توريث القيمة الفعلية من الخاصية \"عدد الأعمدة المتداخلة\" للمصفوفة الأصلية.",
+      // [Auto-translated] "Specifies how cells in this column appear when they are read-only. \"Read-Only\" displays the cells with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the matrix or survey (\"Read-Only\" by default)."
+      readOnlyMode: "يحدد كيف تظهر الخلايا في هذا العمود عندما تكون للقراءة فقط. يعرض \"القراءة فقط\" الخلايا التي تحتوي على أدوات التحكم المعتادة في الإدخال، ولكن معطلة للتحرير. \"العرض\" تعرض الإجابات كنص أو عناصر غير تفاعلية أخرى. يستخدم \"الوراثة\" الوضع المعين للمصفوفة أو المسح (\"للقراءة فقط\" افتراضيا)."
     },
     slider: {
       // "The lowest number that users can select."
@@ -2703,6 +3122,14 @@ export var arStrings = {
     questionErrorLocation: "تعيين موقع رسالة خطأ فيما يتعلق بالسؤال مع إدخال غير صالح. اختر بين: \"أعلى\" - يتم وضع نص خطأ في أعلى مربع السؤال ؛ \"أسفل\" - يتم وضع نص خطأ في أسفل مربع السؤال.",
     // [Auto-translated] "Select if you want the first input field on each page ready for text entry."
     autoFocusFirstQuestion: "حدد ما إذا كنت تريد أن يكون حقل الإدخال الأول في كل صفحة جاهزا لإدخال النص.",
+    // [Auto-translated] "Displays letters (A, B, C, ...) next to choices in Radio Button Group, Checkboxes, and Image Picker questions. Respondents can select choices by pressing the corresponding letter keys. You can override this setting for individual questions."
+    choiceShortcutsEnabled: "يعرض الحروف (A, B, C, ...) بجانب الخيارات في مجموعة أزرار الراديو، ومربعات الاختيار، وأسئلة اختيار الصور. يمكن للمشاركين اختيار الخيارات بالضغط على مفاتيح الحروف المقابلة. يمكنك تجاوز هذا الإعداد للأسئلة الفردية.",
+    checkboxbase: {
+      // [Auto-translated] "Displays letters (A, B, C, ...) next to choices and lets respondents select them by pressing the corresponding letter keys. The \"Inherit\" option uses the survey-level setting."
+      choiceShortcutsEnabled: "يعرض الحروف (A, B, C, ...) بجانب الخيارات ويسمح للمشاركين باختيارها بالضغط على مفاتيح الحروف المقابلة. يستخدم خيار \"الوراثة\" إعداد مستوى المسح."
+    },
+    // [Auto-translated] "Displays hints for available keyboard actions below questions. You can override this setting for individual questions."
+    showKeyboardHints: "يعرض تلميحات لإجراءات لوحة المفاتيح المتاحة أسفل الأسئلة. يمكنك تجاوز هذا الإعداد للأسئلة الفردية.",
     // "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab."
     questionOrder: "يحافظ على الترتيب الأصلي للأسئلة أو يحولها عشوائيا. يكون تأثير هذا الإعداد مرئيا فقط في علامة التبويب معاينة.",
     // [Auto-translated] "For text entry questions only."
@@ -2793,7 +3220,9 @@ export var arStrings = {
       // "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
       showNavigationButtons: "يضبط رؤية أزرار التنقل على الصفحة. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع ، والذي يتم تعيينه افتراضيا على \"مرئي\".",
       // [Auto-translated] "This table lets you configure each grid column on the page. It automatically sets the width percentage for each column based on the maximum number of elements in a row. To customize the grid layout, manually adjust these values and define the title width for all questions in each column."
-      gridLayoutColumns: "يتيح لك هذا الجدول تكوين كل عمود شبكة على الصفحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود."
+      gridLayoutColumns: "يتيح لك هذا الجدول تكوين كل عمود شبكة على الصفحة. يقوم تلقائيا بتعيين النسبة المئوية للعرض لكل عمود بناء على الحد الأقصى لعدد العناصر في الصف. لتخصيص تخطيط الشبكة، اضبط هذه القيم يدويا وحدد عرض العنوان لكافة الأسئلة في كل عمود.",
+      // [Auto-translated] "Specifies how questions on this page appear when they are read-only. \"Read-Only\" displays the questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements. \"Inherit\" uses the mode set for the survey (\"Read-Only\" by default)."
+      readOnlyMode: "يحدد كيف تظهر الأسئلة في هذه الصفحة عندما تكون للقراءة فقط. يعرض \"القراءة فقط\" الأسئلة مع أدوات التحكم المعتادة في الإدخال، ولكن معطلة للتحرير. \"العرض\" يعرض الإجابات كنص أو عناصر غير تفاعلية أخرى. \"الوراثة\" يستخدم الوضع المعين للاستبيان (\"للقراءة فقط\" افتراضيا)."
     },
     // [Auto-translated] "Sets the location of a timer on a page."
     timerLocation: "يضبط موقع المؤقت على الصفحة.",
@@ -2911,6 +3340,22 @@ export var arStrings = {
       // "Select if you want to store the question value with an applied mask in survey results."
       saveMaskedValue: "حدد ما إذا كنت تريد تخزين قيمة السؤال باستخدام قناع مطبق في نتائج الاستطلاع."
     },
+    regionalformat: {
+      // [Auto-translated] "A region whose formats apply to date-time, numeric, and currency input masks. If not specified, the survey language is used."
+      locale: "منطقة تنطبق تنسيقاتها على أقنعة إدخال التاريخ والزمن والرقمية والعملة. إذا لم يتم تحديدها، تستخدم لغة المسح.",
+      // [Auto-translated] "Overrides the region's date format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`m` - Month number.<br>`mm` - Month number, with a leading zero for single-digit values.<br>`d` - Day of the month.<br>`dd` - Day of the month, with a leading zero for single-digit values.<br>`yy` - The last two digits of the year.<br>`yyyy` - Four-digit year."
+      datePattern: "يتجاوز تنسيق تاريخ المنطقة المستخدم في أقنعة الإدخال. يمكن أن يحتوي النمط على أحرف فاصلة والرموز التالية: <br>'m' - رقم الشهر.<br> 'mm' - رقم الشهر، مع صفر في البداية للقيم ذات الرقم الواحد. <br>'d' - يوم الشهر. <br>'dd' - يوم الشهر، مع صفر في البداية للقيم أحادية الأرقام. <br>'yy' - آخر رقمين في السنة. <br>'yyyy' - سنة مكونة من أربعة أرقام.",
+      // [Auto-translated] "Overrides the region's time format used in input masks. The pattern can contain separator characters and the following placeholders:<br>`H` - Hours in 24-hour format.<br>`HH` - Hours in 24-hour format, with a leading zero for single-digit values.<br>`h` - Hours in 12-hour format.<br>`hh` - Hours in 12-hour format, with a leading zero for single-digit values.<br>`MM` - Minutes.<br>`ss` - Seconds.<br>`TT` - 12-hour clock period in uppercase (AM/PM).<br>`tt` - 12-hour clock period in lowercase (am/pm)."
+      timePattern: "يتجاوز تنسيق الوقت الخاص بالمنطقة المستخدم في أقنعة الإدخال. يمكن أن يحتوي النمط على أحرف فاصلة والعناصر المؤقتة التالية: <br>'H' - ساعات بصيغة 24 ساعة.<br> 'HH' - ساعات بصيغة 24 ساعة، مع صفر في البداية للقيم ذات الرقم الواحد. <br>'h' - ساعات بصيغة 12 ساعة. <br>'hh' - ساعات بصيغة 12 ساعة، مع صفر في البداية للقيم ذات الرقم الواحد. <br>'MM' - دقائق. <br>'ss' - ثواني. <br>'TT' - فترة ساعة 12 ساعة بحروف كبيرة (AM<br>/PM). 'tt' - فترة ساعة 12 ساعة بحروف صغيرة (am/pm).",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the fractional part from the integer part of a displayed number in input masks."
+      decimalSeparator: "يتجاوز الرمز الذي تستخدمه المنطقة لفصل الجزء الكسري عن الجزء الصحيح من رقم معروض في أقنعة الإدخال.",
+      // [Auto-translated] "Overrides the symbol the region uses to separate the digits of a large number into groups of three in input masks."
+      thousandsSeparator: "يتجاوز الرمز الذي تستخدمه المنطقة لفصل أرقام رقم كبير إلى مجموعات من ثلاثة في أقنعة الإدخال.",
+      // [Auto-translated] "Overrides the region's currency symbol or code used in input masks."
+      currencySymbol: "يتجاوز رمز العملة أو الرمز المستخدم في أقنعة الإدخال.",
+      // [Auto-translated] "Overrides the region's currency pattern used in input masks. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "يتجاوز نمط العملة الخاص بالمنطقة المستخدم في أقنعة الإدخال. يمكن أن يحتوي النمط على الرموز التالية: <br>'@' - رمز أو رمز العملة.<br> '#' - الرقم. <br>'-' - موقع علامة السالب في القيم السالبة (إذا تم حذفها، توضع علامة سالب في البداية)."
+    },
     patternmask: {
       // "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character."
       pattern: "يمكن أن يحتوي النمط على حرفي السلسلة والعناصر النائبة التالية: \"9\" - للرقم ؛ \"a\" - لحرف كبير أو صغير ؛ '#' - لرقم أو حرف كبير أو صغير. استخدم الشرطة المائلة للخلف '\\' للهروب من حرف."
@@ -2925,13 +3370,15 @@ export var arStrings = {
       // "A symbol used to separate the digits of a large number into groups of three."
       thousandsSeparator: "رمز يستخدم لفصل أرقام عدد كبير إلى مجموعات من ثلاثة.",
       // "Limits how many digits to retain after the decimal point for a displayed number."
-      precision: "يحد من عدد الأرقام التي سيتم الاحتفاظ بها بعد الفاصلة العشرية لرقم معروض."
+      precision: "يحد من عدد الأرقام التي سيتم الاحتفاظ بها بعد الفاصلة العشرية لرقم معروض.",
+      // [Auto-translated] "Displays trailing zeros in the fractional part up to the specified precision. For example, with a precision of 2, an input value of 1.2 is displayed as 1.20."
+      showTrailingZeros: "يعرض أصفارا متتالية في الجزء الكسري حتى الدقة المحددة. على سبيل المثال، بدقة 2، يتم عرض قيمة الإدخال 1.2 ك 1.20."
     },
     currencymask: {
-      // "One or several symbols to be displayed before the value."
-      prefix: "رمز واحد أو عدة رموز ليتم عرضها قبل القيمة.",
-      // "One or several symbols to be displayed after the value."
-      suffix: "رمز واحد أو عدة رموز ليتم عرضها بعد القيمة."
+      // [Auto-translated] "A currency symbol or code displayed with the value. The region's symbol is used by default. Clear this property to display no symbol."
+      currencySymbol: "رمز أو رمز عملة يعرض مع القيمة. يستخدم رمز المنطقة بشكل افتراضي. قم بمسح هذه الخاصية لعدم إظهار أي رمز.",
+      // [Auto-translated] "Specifies the positions of the number, currency symbol, and minus sign. The pattern can contain the following placeholders:<br>`@` - Currency symbol or code.<br>`#` - Number.<br>`-` - Position of the minus sign in negative values (if omitted, the minus sign is placed at the beginning)."
+      currencyPattern: "يحدد مواقع الرقم، ورمز العملة، وعلامة السالب. يمكن أن يحتوي النمط على الرموز التالية: <br>'@' - رمز أو رمز العملة.<br> '#' - رقم. <br>'-' - موقع علامة السالب في القيم السالبة (إذا تم حذفها، توضع علامة السالب في البداية)."
     },
     theme: {
       // "This setting applies only to questions outside of a panel."
@@ -2982,6 +3429,8 @@ export var arStrings = {
     tabAlign: "محاذاة علامات التبويب",
     // [Auto-translated] "File source type"
     sourceType: "نوع مصدر الملف",
+    // [Auto-translated] "Default camera"
+    cameraFacingMode: "الكاميرا الافتراضية",
     // [Auto-translated] "Fit to container"
     fitToContainer: "يصلح للحاوية",
     // [Auto-translated] "Set value expression"
@@ -3302,12 +3751,702 @@ export var arStrings = {
     // [Auto-translated] "Preset applied"
     presetApplied: "تطبيق الإعداد المسبق"
   },
+  // Results of survey-core/linter, shown in the JSON tab. A message key is composed as
+  linter: {
+    // [Auto-translated] "Line: {0}. "
+    lineNumber: "الخط: {0}.", // {0} 1-based line number, prefixes an entry of the error list
+    fixes: {
+      "choices/dead-source": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "استخدم الاسم المقترح"
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Remove the repeated item"
+        removeItem: "إزالة عنصر مكرر"
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "استخدم النوع المقترح"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "Use the suggested function"
+        renameFunction: "استخدم الدالة المقترحة"
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "Use the suggested mask"
+        setMaskType: "استخدم القناع المقترح"
+      },
+      "name/duplicate": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "أعط العنصر اسما حرا"
+      },
+      "name/reserved": {
+        // [Auto-translated] "Give the element a free name"
+        renameElement: "أعط العنصر اسما حرا"
+      },
+      "property/dead": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "إزالة الخاصية"
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "Use the nearest allowed value"
+        clampToRange: "استخدم أقرب قيمة مسموح بها",
+        // [Auto-translated] "Remove the property"
+        removeKey: "إزالة الخاصية",
+        // [Auto-translated] "Use the suggested value"
+        useAllowedValue: "استخدم القيمة المقترحة"
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "Turn the value into a list"
+        wrapInArray: "حول القيمة إلى قائمة"
+      },
+      "property/required": {
+        // [Auto-translated] "Give the element a name"
+        setName: "أعط العنصر اسما"
+      },
+      "property/unknown": {
+        // [Auto-translated] "Remove the property"
+        removeKey: "إزالة الخاصية",
+        // [Auto-translated] "Rename the property"
+        renameKey: "إعادة تسمية العقار"
+      },
+      "reference/unknown": {
+        // [Auto-translated] "Use the suggested name"
+        renameReference: "استخدم الاسم المقترح",
+        // [Auto-translated] "Use the suggested name"
+        setKeyName: "استخدم الاسم المقترح"
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "Use the suggested name"
+        setName: "استخدم الاسم المقترح"
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "استخدم النوع المقترح"
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "Use the suggested type"
+        setType: "استخدم النوع المقترح"
+      }
+    },
+    messages: {
+      "expression/syntax": {
+        // [Auto-translated] "The expression \"{expression}\" cannot be parsed."
+        unparsable: "لا يمكن تحليل التعبير \"{تعبير}\"."
+      },
+      "reference/unknown": {
+        // [Auto-translated] "\"{name}\" is not found - no question, panel, page, calculated value, or variable with that name exists."
+        notFound: "\"{name}\" غير موجود - لا يوجد سؤال أو لوحة أو صفحة أو قيمة محسوبة أو متغير بهذا الاسم.",
+        // [Auto-translated] "\"{segment}\" is not found in {containerType} \"{root}\" (reference: {name})."
+        inContainer: "\"{segment}\" غير موجود في {containerType} \"{root}\" (مرجع: {name}).",
+        // [Auto-translated] "\"{segment}\" is not found in the \"{scopePrefix}\" scope (reference: {name})."
+        scopedUnknown: "\"{segment}\" غير موجود في نطاق \"{scopePrefix}\" (مرجع: {name}).",
+        // [Auto-translated] "The keyName of \"{name}\" names \"{key}\" - \"{name}\" has no {keyNoun} with that name, so duplicate-key validation never runs."
+        keyNameNotFound: "اسم المفتاح ل \"{name}\" يحمل اسم \"{key}\" - \"{name}\" لا يحتوي على {keyNoun} بهذا الاسم، لذا لا يتم تشغيل التحقق من صحة المفتاح المكرر.",
+        // [Auto-translated] "\"{name}\" is not found."
+        functionArgNotFound: "\"{name}\" لم يعثر."
+      },
+      "reference/self": {
+        // [Auto-translated] "The {prop} of \"{name}\" references the element itself (reference: {reference})."
+        selfReference: "يشير {prop} في \"{name}\" إلى العنصر نفسه (مرجع: {reference})."
+      },
+      "name/duplicate": {
+        // [Auto-translated] "The name \"{name}\" is duplicated."
+        elementNames: "اسم \"{name}\" مكرر.",
+        // [Auto-translated] "The calculated value name \"{name}\" is already used by another calculated value."
+        calculatedValueNames: "اسم القيمة المحسوبة \"{name}\" يستخدم بالفعل من قبل قيمة محسوبة أخرى.",
+        // [Auto-translated] "The calculated value \"{name}\" shares its name with another element, so one of them shadows the other."
+        calculatedValueShadowsElement: "القيمة المحسوبة \"{name}\" تشترك في اسمها مع عنصر آخر، لذا أحدهما يظل الآخر."
+      },
+      "name/shadowing": {
+        // [Auto-translated] "The {nameKindText} \"{name}\" of this {ownerText} is also the built-in survey variable {{builtIn}} - the survey answers {{name}} first, so this one is unreachable in expressions."
+        builtInVariable: "المتغير {nameKindText} \"{name}\" لهذا {ownerText} هو أيضا المتغير المدمج {{builtIn}} - حيث يجيب المسح على {{name}} أولا، لذا هذا السؤال غير قابل للوصول في التعبيرات.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" shares the value of {otherType} \"{otherName}\", which has no valueName of its own - \"{otherName}\" treats the fields \"{name}\" adds as unknown, and clearIncorrectValues() deletes them. Set its valueName to \"{valueName}\" too."
+        valueNameShadowsElement: "valueName \"{valueName}\" ل \"{name}\" يشارك قيمة {otherType} \"{otherName}\"، والتي لا تملك valueName خاصة بها - \"{otherName}\" تعامل الحقول التي \"{name}\" تضيفها كغير معروفة، وclearIncorrectValues() تحذفها. اضبط valueName الخاص بها على \"{valueName}\" أيضا.",
+        // [Auto-translated] "The row \"{key}\" of matrixdropdown \"{otherName}\" is also {sharedKeyText} \"{name}\" sharing its value - a cell object and a single value cannot both live under one key; the runtime keeps one and deletes the other."
+        dropdownRowConflict: "الصف \"{key}\" في نظام السطو \"{otherName}\" هو أيضا {sharedKeyText} \"{name}\" يشارك قيمته - حيث لا يمكن لعنصر الخلية وقيمة واحدة أن يعيشا تحت مفتاح واحد؛ يحافظ وقت التشغيل على أحدهما ويحذف الآخر.",
+        // [Auto-translated] "The {type} \"{name}\" shares the data key \"{dataKey}\" with {otherType} \"{otherName}\" - it keeps {shapeText} there, while \"{otherName}\" keeps {otherShapeText}; one cannot hold the other's value, so clearIncorrectValues() deletes it."
+        valueShapeConflict: "يشارك {type} \"{name}\" مفتاح البيانات \"{dataKey}\" مع {otherType} \"{otherName}\" - يحتفظ ب {shapeText} هناك، بينما \"{otherName}\" يحتفظ ب {otherShapeText}; لا يمكن لأي منهما الاحتفاظ بقيمة الآخر، لذا يقوم clearIncorrectValues() بحذفه.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        commentKeyCollision: "مفتاح البيانات \"{dataName}\" هو أيضا مفتاح التعليق ل \"{base}\" (مفتاح بياناته بالإضافة إلى \"{لاحقة}\") - حيث يتم كتابة واحدة بصمت فوق الأخرى.",
+        // [Auto-translated] "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other."
+        totalKeyCollision: "مفتاح البيانات \"{dataName}\" هو أيضا مفتاح المجموع ل \"{base}\" (مفتاح البيانات الخاص به بالإضافة إلى \"{لاحقة}\") - حيث يتم كتابة واحدة بصمت فوق الأخرى.",
+        // [Auto-translated] "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question."
+        variableShadowsQuestion: "يقوم محفز {trigger} بتعيين المتغير \"{name}\"، وهو أيضا مفتاح بيانات السؤال \"{questionName}\" - حيث يجيب المتغير على {{name}} من تلك اللحظة فصاعدا، وليس على السؤال."
+      },
+      "name/reserved": {
+        // [Auto-translated] "The name \"{name}\" is reserved - a member of Object.prototype."
+        questionName: "الاسم \"{name}\" محفوظ - عضو في Object.prototype.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" is reserved - a member of Object.prototype."
+        valueName: "قيمة الاسم \"{valueName}\" من \"{name}\" محجوزة - عضو في Object.prototype.",
+        // [Auto-translated] "The column \"{name}\" of \"{matrixName}\" is reserved - a member of Object.prototype."
+        columnName: "العمود \"{name}\" من \"{matrixName}\" محفوظ - وهو عضو في Object.prototype.",
+        // [Auto-translated] "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype."
+        itemName: "العنصر \"{name}\" من \"{questionName}\" محفوظ - عضو في Object.prototype.",
+        // [Auto-translated] "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype."
+        rowValue: "الصف \"{rowValue}\" من \"{name}\" محجوز - وهو عضو في Object.prototype.",
+        // [Auto-translated] "The calculated value \"{name}\" is reserved - a member of Object.prototype."
+        calculatedValueName: "القيمة المحسوبة \"{name}\" محجوزة - وهي عضو في Object.prototype."
+      },
+      "element/unknown-type": {
+        // [Auto-translated] "\"{name}\" has an unknown type \"{type}\"."
+        unknownType: "\"{name}\" له نوع غير معروف \"{type}\".",
+        // [Auto-translated] "\"{name}\" has no type - an element without a type is dropped."
+        missingType: "\"{name}\" لا يحتوي على نوع - يتم حذف عنصر بدون نوع."
+      },
+      "property/unknown": {
+        // [Auto-translated] "\"{key}\" is not a property of {ownerText} ({className})."
+        unknownProperty: "\"{key}\" ليست خاصية ل {ownerText} ({className})."
+      },
+      "property/dead": {
+        // [Auto-translated] "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again."
+        notSerializable: "\"{key}\" من {ownerText} غير قابل للتسلسل - يبدأ مفعوله عند التحميل، ويحذف من JSON كلما تم حفظ الاستبيان مرة أخرى.",
+        // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
+        aliasDuplicate: "\"{key}\" و \"{aliasKey}\" من {ownerText} هما اسمان لخاصية واحدة - حيث يتم تطبيق وقت التشغيل عليهما بالترتيب الذي يكتبه JSON، لذا \"{winner}\" هو الفائز.",
+        // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
+        inertMinMax: "\"{key}\" مضبوط على \"{name}\"، لكن نوع inputType \"{inputType}\" لا حدود له - وقت التشغيل يتجاهله."
+      },
+      "property/invalid-value": {
+        // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."
+        notInChoices: "مفتاح {OwnerText} هو {valueText} - وليس أحد القيم المسموح بها ({allowedText}).",
+        // [Auto-translated] "The {key} of {ownerText} is {value}, outside its allowed range {rangeText}."
+        outOfRange: "المفتاح {key} في {ownerText} هو {value}، خارج نطاقه المسموح به {rangeText}.",
+        // [Auto-translated] "The valueName \"{valueName}\" of \"{name}\" contains a \".\" - expressions read {{valueName}} as a path into \"{rootKey}\", so the data key itself can never be addressed."
+        valueNameDotted: "يحتوي الاسم \"{valueName}\" من \"{name}\" على \".\" - تقرأ التعبيرات {{valueName}} كمسار إلى \"{rootKey}\"، لذا لا يمكن أبدا معالجة مفتاح البيانات نفسه."
+      },
+      "property/required": {
+        // [Auto-translated] "{ownerText} has no \"{key}\" - the property is required for a {className}."
+        missing: "{ownerText} لا يحتوي على \"{key}\" - الخاصية مطلوبة ل {className}.",
+        // [Auto-translated] "The name of the {className} is {valueText}, not a string - the survey cannot load it."
+        notAString: "اسم {className} هو {valueText}، وليس سلسلة نصية - لا يمكن للمسح تحميله."
+      },
+      "property/not-an-array": {
+        // [Auto-translated] "The \"{key}\" of {ownerText} is not an array - the property holds a list, and the run time wraps the value into a one-item array."
+        notAnArray: "\"{key}\" في {ownerText} ليست مصفوفة - الخاصية تحتفظ بقائمة، ومدة التشغيل تلف القيمة في مصفوفة من عنصر واحد."
+      },
+      "variable/collision": {
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on."
+        questionShadowed: "تعريف المتغير يعلن \"{متغير}\"، وهو أيضا مفتاح البيانات للسؤال \"{name}\" - تعيين المتغير يحذف الإجابة المخزنة تحت ذلك المفتاح، و{{name}} يجيب على قيمة المضيف من تلك اللحظة فصاعدا.",
+        // [Auto-translated] "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins."
+        calculatedValueShadowed: "تعريف المتغير يعلن \"{متغير}\"، وهو أيضا اسم القيمة المحسوبة \"{name}\" - كلاهما يكتب نفس الخانة، وأي من يركض آخر مرة يفوز."
+      },
+      "variable/preset": {
+        // [Auto-translated] "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked."
+        definitionNotAnObject: "variablePresets.definition ليس كائن JSON مسح، لذا لا يتم إعلان أي متغير ولا يمكن التحقق من قيمة الإعداد المسبق.",
+        // [Auto-translated] "variablePresets.presets is not an array, so no preset is declared."
+        presetsNotAnArray: "variablePresets.presets ليست مصفوفة، لذا لا يتم إعلان أي إعداد مسبق.",
+        // [Auto-translated] "Preset #{index} is not an object."
+        presetNotAnObject: "الإعداد المسبق #{index} ليس كائنا.",
+        // [Auto-translated] "Preset #{index} has no name, so nothing can reference it."
+        presetNameMissing: "الإعداد المسبق #{index} ليس له اسم، لذا لا يمكن لأي شيء الإشارة إليه.",
+        // [Auto-translated] "Preset \"{preset}\" carries no variables object, so it sets nothing."
+        presetVariablesNotAnObject: "الإعداد المسبق \"{preset}\" لا يحمل أي كائن متغيرات، لذا لا يحدد شيئا.",
+        // [Auto-translated] "Preset \"{preset}\" is declared twice - a lookup by that name answers with the first one."
+        duplicateName: "يتم إعلان الإعداد المسبق \"{preset}\" مرتين - حيث يجيب البحث بهذا الاسم بأول اسم للمعلوم.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\", which the variable definition does not declare."
+        unknownVariable: "الإعداد المسبق \"{preset}\" يحدد \"{المتغير}\"، والذي لا يعلن عنه تعريف المتغير.",
+        // [Auto-translated] "Preset \"{preset}\" sets \"{variable}\" to a value the variable definition rejects: {errors}"
+        invalidValue: "الإعداد المسبق \"{preset}\" يحدد \"{متغير}\" إلى قيمة يرفضها تعريف المتغير: {errors}"
+      },
+      "expression/unknown-function": {
+        // [Auto-translated] "The function \"{functionName}\" is not registered."
+        notRegistered: "الدالة \"{functionName}\" غير مسجلة."
+      },
+      "cycle/calculated-value": {
+        // [Auto-translated] "The calculated value \"{names}\" references itself in its own expression."
+        self: "القيمة المحسوبة \"{names}\" تشير إلى نفسها بتعبيرها الخاص.",
+        // [Auto-translated] "Calculated values {names} depend on each other."
+        loop: "القيم المحسوبة {الأسماء} تعتمد على بعضها البعض."
+      },
+      "cycle/trigger": {
+        // [Auto-translated] "The trigger reacts to the value it sets itself (\"{setToName}\")."
+        self: "يتفاعل المشغل مع القيمة التي يحددها بنفسه (\"{setToName}\").",
+        // [Auto-translated] "Triggers form a loop through the values they set: {setRoots}."
+        loop: "تشكل المحفزات حلقة عبر القيم التي يحددونها: {setRoots}."
+      },
+      "cycle/value-write": {
+        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
+        self: "{label} يقرأ القيمة التي يكتبها بنفسه - يعمل فقط عندما تتغير قيمة أخرى، لذا لا يعمل أبدا.",
+        // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
+        loop: "تكتب القيم في حلقة: {chain}. كل كتابة تعيد تشغيل التعبيرات التي تقرأها، لذا تعتمد القيم النهائية على ترتيب الإجابة على الأسئلة."
+      },
+      "expression/unknown-choice": {
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - not among its choices. Available: {available}."
+        notAmongChoices: "يقارن الشرط \"{name}\" ب {values} - وليس بين خياراته. متاح: {متاح}.",
+        // [Auto-translated] "The condition compares \"{name}\" to {values} - no choice value contains it. Available: {available}."
+        noChoiceContains: "يقارن الشرط \"{name}\" ب {values} - ولا توجد قيمة اختيار تحتويها. متاح: {متاح}."
+      },
+      "expression/type-mismatch": {
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" ({questionType}) has no value to compare."
+        "no-value": "يطبق الشرط \"{operator}\" على \"{name}\": \"{recordName}\" ({questionType}) لا قيمة للمقارنة.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds {valueShapeText} - ordering and arithmetic operators do not apply to it."
+        "non-scalar": "ينطبق الشرط \"{operator}\" على \"{name}\": \"{recordName}\" يحمل {valueShapeText} - ولا تنطبق عليه عوامل الترتيب والحساب.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - ordering operators do not apply to it."
+        "boolean-ordering": "يطبق الشرط \"{operator}\" على \"{name}\": \"{recordName}\" هو سؤال منطقي - ولا تنطبق عليه عوامل الترتيب.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a text question - its value is a string, so numeric comparison relies on implicit conversion."
+        "text-ordering": "يطبق الشرط \"{operator}\" على \"{name}\": \"{recordName}\" هو سؤال نصي - قيمته سلسلة نصية، لذا تعتمد المقارنة العددية على التحويل الضمني.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds a date string - comparing it to the number {constValue} cannot hold."
+        "date-vs-number": "ينطبق الشرط \"{operator}\" على \"{name}\": \"{recordName}\" يحمل سلسلة تاريخ - مقارنتها بالرقم الذي لا يمكن أن ينفع.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is numeric - comparing it to the string \"{constValue}\" cannot hold."
+        "number-vs-string": "يطبق الشرط \"{operator}\" على \"{name}\": \"{recordName}\" رقمي - مقارنته بالسلسلة \"{constValue}\" لا يمكن أن يحدث.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" holds an array of selected values, so \"=\" compares the whole array."
+        "array-vs-scalar": "يطبق الشرط \"{operator}\" على \"{name}\": \"{recordName}\" يحمل مصفوفة من القيم المحددة، لذا \"=\" يقارن المصفوفة بأكملها.",
+        // [Auto-translated] "The condition applies \"{operator}\" to \"{name}\": \"{recordName}\" is a boolean question - comparing it to {constValue} cannot hold."
+        "boolean-vs-const": "ينطبق الشرط \"{operator}\" على \"{name}\": \"{recordName}\" هو سؤال منطقي - مقارنته ب {constValue} لا يمكن أن يكون صحيحا."
+      },
+      "expression/contradiction": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always false, so \"{name}\" is never shown."
+        alwaysFalse: "عبارة {prop} \"{expression} دائما خاطئة، لذا لا يظهر \"{name}\" أبدا.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds, because {facts}."
+        alwaysFalseViaConstants: "المقولة {prop} \"{تعبير} لا تنطبق أبدا، لأن {الحقائق}.",
+        // [Auto-translated] "The {prop} \"{expression}\" never holds - no allowed value satisfies it: {facts}."
+        outOfRange: "المقولة {prop} \"{تعبير} لا تنطبق أبدا - لا قيمة مسموح بها تحققها: {facts}.",
+        // [Auto-translated] "The {prop} \"{expression}\" contradicts itself: {facts}."
+        unsatisfiable: "المقولة {prop} \"{تعبير} تتناقض مع نفسها: {facts}."
+      },
+      "expression/meaningless-condition": {
+        // [Auto-translated] "The {prop} \"{expression}\" is always true, so it decides nothing."
+        alwaysTrue: "المقولة {prop} \"{تعبير} دائما صحيحة، لذا فهي لا تقرر شيئا.",
+        // [Auto-translated] "The {prop} \"{expression}\" is arithmetic, not a comparison, so it never gives a yes or no."
+        notABoolean: "العبارة {prop} \"{تعبير} هي حسابية وليست مقارنة، لذا فهي لا تعطي نعم أو لا أبدا.",
+        // [Auto-translated] "Part of the {prop} \"{expression}\" has a result that is known upfront."
+        meaninglessFragment: "جزء من \"{تعبير} {prop} له نتيجة معروفة من البداية.",
+        // [Auto-translated] "The {prop} \"{expression}\" always holds, because {facts} - it decides nothing."
+        alwaysTrueViaConstants: "المقولة {prop} \"{تعبير} دائما صحيحة، لأن {facts} - لا تقرر شيئا."
+      },
+      "expression/no-reference": {
+        // [Auto-translated] "The {prop} \"{expression}\" does not read any question or variable."
+        noReference: "لا يقرأ \"{تعبير} {prop} أي سؤال أو متغير."
+      },
+      "value/not-a-choice": {
+        // [Auto-translated] "The default value of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultValue: "القيمة الافتراضية ل \"{name}\" هي {valuesText}، والتي لا يمكن أن تحتفظ بها أبدا. مسموح بها: {availableText}.",
+        // [Auto-translated] "The correct answer of \"{name}\" is {valuesText}, which it can never hold. Allowed: {availableText}."
+        correctAnswer: "الإجابة الصحيحة ل \"{name}\" هي {valuesText}، والتي لا يمكن أن تثبت أبدا. مسموح بها: {availableText}.",
+        // [Auto-translated] "The trigger sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        triggerSetValue: "يقوم الزناد بتعيين \"{name}\" إلى {valuesText}، والذي لا يمكنه الاحتفاظ به أبدا. مسموح به: {availableText}.",
+        // [Auto-translated] "The default row value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultRowValue: "قيمة الصف الافتراضية تضبط \"{name}\" إلى {valuesText}، والتي لا يمكنها الاحتفاظ بها أبدا. مسموح به: {availableText}.",
+        // [Auto-translated] "The default panel value sets \"{name}\" to {valuesText}, which it can never hold. Allowed: {availableText}."
+        defaultPanelValue: "قيمة اللوحة الافتراضية تضبط \"{name}\" إلى {valuesText}، والتي لا يمكنها الاحتفاظ بها أبدا. مسموح بها: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such row. Available: {availableText}."
+        unknownRowKey: "{prop} في \"{name}\" يذكر \"{key}\" - لا يوجد صف من هذا النوع. متاح: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such column. Available: {availableText}."
+        unknownColumnKey: "ال {prop} في \"{name}\" يذكر \"{key}\" - لا يوجد عمود من هذا القبيل. متوفر: {availableText}.",
+        // [Auto-translated] "The {prop} of \"{name}\" names \"{key}\" - no such template question. Available: {availableText}."
+        unknownQuestionKey: "ال {prop} في \"{name}\" يذكر \"{key}\" - لا يوجد سؤال في قالب كهذا. متاح: {availableText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but \"{fromName}\" holds {sourceShapeText} and \"{setToName}\" holds {targetShapeText}."
+        copyValueShape: "يقوم مشغل قيمة النسخ بنسخ \"{fromName}\" إلى \"{setToName}\"، لكن \"{fromName}\" يحمل {sourceShapeText} و\"{setToName}\" يحمل {targetShapeText}.",
+        // [Auto-translated] "The copyvalue trigger copies \"{fromName}\" into \"{setToName}\", but no value of \"{fromName}\" is among the values \"{setToName}\" can hold. Allowed: {availableText}."
+        copyValueNoOverlap: "يقوم مشغل قيمة النسخ بنسخ \"{fromName}\" إلى \"{setToName}\"، لكن لا توجد قيمة \"{fromName}\" ضمن القيم التي يمكن أن يحملها \"{setToName}\". مسموح به: {availableText}."
+      },
+      "choices/dead-source": {
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\", but no question with that name exists."
+        missing: "\"{name}\" تنسخ اختياراتها من \"{المصدر}\"، لكن لا يوجد أي شك في هذا الاسم.",
+        // [Auto-translated] "\"{name}\" copies its choices from itself."
+        self: "\"{name}\" ينسخ اختياراته من نفسه.",
+        // [Auto-translated] "\"{name}\" copies its choices from \"{source}\" ({sourceType}), which provides neither choices nor an array of values."
+        "not-a-source": "\"{name}\" ينسخ اختياراته من \"{source}\" ({sourceType})، الذي لا يوفر خيارات ولا مجموعة من القيم.",
+        // [Auto-translated] "\"{name}\" reads {prop} \"{field}\" from \"{source}\", but {sourceType} \"{source}\" has no such {fieldNoun}."
+        "missing-field": "\"{name}\" يقرأ {prop} \"{field}\" من \"{source}\"، لكن {sourceType} \"{source}\" لا يحتوي على مثل هذا {fieldNoun}."
+      },
+      "choices/duplicate": {
+        // [Auto-translated] "Another item of the {prop} of \"{name}\" already has the value {valueText} - the run time keeps both items."
+        duplicateValue: "عنصر آخر من {prop} ل \"{name}\" له قيمة {valueText} - حيث يحتفظ وقت التشغيل بكلا العنصرين.",
+        // [Auto-translated] "The choices of \"{name}\" contain {valueText} while {toggleProp} is on - it collides with the built-in {specialItemText} item."
+        specialItemCollision: "خيارات \"{name}\" تحتوي على {valueText} أثناء تشغيل {toggleProp} - حيث يصطدم بعنصر {specialItemText} المدمج."
+      },
+      "trigger/unknown-target": {
+        // [Auto-translated] "The {trigger} trigger targets page \"{name}\", which does not exist."
+        pageNotFound: "يستهدف زر {trigger} صفحة \"{name}\"، والتي لا توجد موجودة.",
+        // [Auto-translated] "The {trigger} trigger targets \"{name}\", but {containerType} \"{root}\" has no {segmentNoun} \"{segment}\"."
+        segmentNotFound: "يستهدف المحفز {trigger} \"{name}\"، لكن {containerType} \"{root}\" لا يحتوي على {segmentNoun} \"{segment}\".",
+        // [Auto-translated] "The {trigger} trigger {verb} \"{name}\", but no {kindText} with that name exists."
+        rootNotFound: "المشغلة {trigger} {verb} \"{name}\"، لكن لا يوجد {kindText} بهذا الاسم."
+      },
+      "trigger/unknown-type": {
+        // [Auto-translated] "The trigger type \"{type}\" is not known."
+        unknownType: "نوع الزناد \"{type}\" غير معروف.",
+        // [Auto-translated] "The trigger has no type."
+        noType: "الزناد ليس له نوع."
+      },
+      "validator/unknown-type": {
+        // [Auto-translated] "The validator type \"{type}\" of \"{name}\" is not known."
+        unknownType: "نوع المدقق \"{type}\" ل \"{name}\" غير معروف.",
+        // [Auto-translated] "A validator of \"{name}\" has no type."
+        noType: "المدقق ل \"{name}\" لا يملك نوعا."
+      },
+      "validator/dead": {
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" {effectText}: {causeText} ({questionType})."
+        wrongValueShape: "المدقق {validatorType} ل \"{name}\" {effectText}: {causeText} ({questionType}).",
+        // [Auto-translated] "The {validatorType} validator of \"{name}\" requires at least {min} and at most {max} - no answer satisfies it."
+        minAboveMax: "المدقق {validatorType} ل \"{name}\" يتطلب على الأقل {min} وعلى الأكثر {max} - لا يوجد جواب يحققه.",
+        // [Auto-translated] "The answercount validator of \"{name}\" requires at least {minCount} answers, above the {selectable} choices that can be selected together."
+        minCountAboveChoices: "يتطلب مدقق عدد الإجابة ل \"{name}\" على الأقل {minCount} إجابات، فوق الخيارات {قابلة للاختيار} التي يمكن اختيارها معا.",
+        // [Auto-translated] "The regex validator of \"{name}\" has a pattern the engine rejects: {error}."
+        invalidRegex: "المدقق الريجيكس ل \"{name}\" لديه نمط يرفضه المحرك: {error}.",
+        // [Auto-translated] "The expression validator of \"{name}\" has no expression, so it always passes."
+        emptyExpression: "مدقق التعبير ل \"{name}\" لا يحتوي على تعبير، لذا فإنه دائما ينجح."
+      },
+      "element/count-contradiction": {
+        // [Auto-translated] "The {minProp} of \"{name}\" is {min}, above its {maxProp} of {max} - the run time silently adjusts one of them."
+        minAboveMax: "{minProp} ل \"{name}\" هو {min}، فوق {maxProp} الخاص به ل {max} - حيث يقوم وقت التشغيل بضبط أحدها بصمت.",
+        // [Auto-translated] "The {countProp} of \"{name}\" is {count}, {direction} its {boundProp} of {bound} - the run time clamps it."
+        countOutOfBounds: "{countProp} ل \"{name}\" هو {count}، {الاتجاه} {boundProp} ل {bound} - وقت التشغيل يثبته.",
+        // [Auto-translated] "The {stepProp} of \"{name}\" is {step}, but the range it steps through ({minProp}..{maxProp}) spans only {range} - the run time clamps it."
+        stepAboveRange: "{stepProp} ل \"{name}\" هو {step}، لكن النطاق الذي يمر به ({minProp}.. {maxProp}) يمتد فقط {النطاق} - حيث يثبت وقت التشغيل ذلك.",
+        // [Auto-translated] "The minSelectedChoices of \"{name}\" is {min}, above the {selectable} choices that can be selected together - the question can never be answered."
+        minAboveChoicesCount: "minSelectedChoices ل \"{name}\" هو {min}، فوق الخيارات {قابلة للاختيار} التي يمكن اختيارها معا - ولا يمكن الإجابة على السؤال أبدا."
+      },
+      "element/never-visible": {
+        // [Auto-translated] "\"{name}\" can never become visible: its visibleIf reads {reads}, which {deadClause}, so the condition never holds."
+        dependsOnDeadValue: "\"{name}\" لا يمكن أن تصبح مرئية أبدا: فهي مرئية إذا تقرأ {reads}، وهي {deadClause}، لذا فإن الشرط لا ينطبق أبدا."
+      },
+      "mask/mismatch": {
+        // [Auto-translated] "The maskType \"{maskType}\" of \"{name}\" is not a known mask - the run time falls back to no mask at all."
+        unknownMaskType: "نوع القناع \"{maskType}\" من \"{name}\" ليس قناعا معروفا - حيث يعود وقت التشغيل إلى عدم وجود قناع على الإطلاق.",
+        // [Auto-translated] "The maskSettings of \"{name}\" set \"{key}\", which is not a property of the \"{maskType}\" mask - the run time drops it silently."
+        unknownSettingsKey: "إعدادات القناع في \"{name}\" تضبط \"{key}\"، وهي ليست خاصية لقناع \"{maskType}\" - حيث يسقط وقت التشغيل ذلك بصمت.",
+        // [Auto-translated] "The maskSettings of \"{name}\" are set without a maskType - the run time keeps only \"saveMaskedValue\" and drops the rest."
+        settingsWithoutMask: "إعدادات mask في \"{name}\" مضبوطة بدون نوع maskType - حيث يحتفظ وقت التشغيل فقط ب \"saveMaskedValue\" ويسقط الباقي.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" applies to no input: inputType \"{inputType}\" is masked only for text and tel."
+        maskInertForInputType: "قناع {maskType} ل \"{name}\" ينطبق على عدم وجود إدخال: نوع inputType \"{inputType}\" مخفي فقط للنص وtel.",
+        // [Auto-translated] "The datetime mask of \"{name}\" sets min/max without a pattern - the bounds apply to the pattern's date parts, so without one they do nothing."
+        minMaxWithoutPattern: "قناع التاريخ في \"{name}\" يحدد الحد الأدنى/الحد الأقصى بدون نمط - الحدود تنطبق على أجزاء تاريخ النمط، لذا بدون وجود واحد لا يفعلون شيئا.",
+        // [Auto-translated] "The {maskType} mask of \"{name}\" allows at least {min} and at most {max} - no value satisfies it."
+        minAboveMax: "قناع {maskType} ل \"{name}\" يسمح بالحصول على الأقل {min} وعلى الأكثر {max} - لا قيمة تحقق ذلك."
+      },
+      "page/empty": {
+        // [Auto-translated] "The dynamic panel \"{name}\" has an empty template - its panels have nothing to render."
+        emptyTemplate: "اللوحة الديناميكية \"{name}\" لها قالب فارغ - لوحاتها لا تحتوي على أي شيء ليتم عرضه.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements."
+        noElements: "العبارة {kindText} \"{name}\" لا تحتوي على عناصر.",
+        // [Auto-translated] "The {kindText} \"{name}\" has no elements that can ever render - every element is hidden, guarded by a condition that never holds, or empty."
+        noRenderableElements: "لا يحتوي \"{name}\" على {kindText} أي عناصر يمكن أن تظهر أبدا - كل عنصر مخفي، محمي بشرط لا يثبت أبدا، أو فارغ.",
+        // [Auto-translated] "The detail elements of \"{name}\" are never shown: its detailPanelMode is \"none\", which is the default."
+        detailElementsHidden: "عناصر التفاصيل في \"{name}\" لا تظهر أبدا: وضعها في detailPanelMode هو \"none\"، وهو الوضع الافتراضي."
+      }
+    },
+    // Clauses appended to a base message, in this order
+    suffixes: {
+      // [Auto-translated] "Position: {0}."
+      atPosition: "الموقع: {0}.", // {0} character offset
+      // [Auto-translated] "It was built from the legacy name, operator and value properties of the trigger."
+      fromLegacyTrigger: "تم بناؤه بناء على الاسم القديم، والمشغل وخصائص القيمة للزناد.",
+      // [Auto-translated] "Inside: {0}."
+      inScope: "الداخل: {0}.", // {0} name of the namespace
+      // [Auto-translated] "Did you mean \"{0}\"?"
+      didYouMean: "هل كنت تقصد \"{0}\"؟",
+      // [Auto-translated] "If it is a custom component, pass its definition to the linter to enable full analysis."
+      customComponentHint: "إذا كان مكونا مخصصا، مرر تعريفه إلى اللينتر لتمكين التحليل الكامل.",
+      // [Auto-translated] "Register the function before linting, or list it in the linter options."
+      registerFunctionHint: "سجل الوظيفة قبل وضع الوبر، أو أدرجها في خيارات اللينتر.",
+      // [Auto-translated] "A misspelled type is silently dropped at run time, and a custom trigger is not covered by the target and cycle checks."
+      triggerTypeDroppedHint: "النوع الذي تم إملاءه بشكل خاطئ يسقط بصمت أثناء التشغيل، ولا يغطي الفحوصات الهدف والدورة المحفز المخصص.",
+      // [Auto-translated] "If it is a variable set at run time, list it in the linter options."
+      knownVariablesHint: "إذا كان متغير محددا أثناء التشغيل، قم بإدراجه في خيارات linter.",
+      // [Auto-translated] "The loop may be unreachable if the trigger conditions never hold together - verify the expressions."
+      loopMayBeUnreachable: "قد تكون الحلقة غير قابلة للوصول إذا لم تتوافق شروط المحفز - تحقق من التعبيرات.",
+      // [Auto-translated] "A defaultValueExpression applies only until its question is answered."
+      defaultValueExpressionNote: "يطبق تعبير القيمة الافتراضي فقط حتى يتم الإجابة على سؤاله.",
+      // [Auto-translated] "In expression: {0}"
+      inExpression: "في التعبير: {0}", // {0} the expression the defect was found in
+      // [Auto-translated] "Referenced in bindings."
+      inBindings: "تمت الإشارة إليه في الروابط.",
+      // [Auto-translated] "Referenced in the choicesByUrl {0}."
+      inChoicesByUrl: "مذكور في الاختياراتByUrl {0}.", // {0} the url or the path property
+      // [Auto-translated] "Referenced in the \"{0}\" text."
+      inText: "مذكور في نص \"{0}\".", // {0} the localizable property the text belongs to
+      // [Auto-translated] "{0}() reads that name from every entry of {1} \"{2}\"."
+      functionArgInContainer: "{0} () يقرأ هذا الاسم من كل إدخال {1} \"{2}\".",
+      // [Auto-translated] "The {0}() argument names no question, panel or page."
+      functionArgStandalone: "الحجة {0}() لا تذكر سؤالا أو لجنة أو صفحة.",
+      // [Auto-translated] "The deserializer drops a key it does not know."
+      deserializerDropsKey: "يسقط جهاز إزالة التسلسل مفتاحا لا يعرفه.",
+      // [Auto-translated] "The deserializer drops a validator it cannot resolve, so nothing validates."
+      validatorDroppedHint: "يقوم جهاز إزالة التسلسل بإسقاط مدقق لا يستطيع حله، لذا لا شيء يتحقق من صحته.",
+      // [Auto-translated] "The inputType is \"{0}\"."
+      validatorInputType: "نوع الإدخال هو \"{0}\".",
+      // [Auto-translated] "It is the data key of \"{0}\"."
+      dataKeyOwner: "إنه مفتاح البيانات ل \"{0}\"." // {0} the element that answers under it
+    },
+    // The facts a contradiction rests on. {ref} is a reference as an expression writes it,
+    facts: {
+      // [Auto-translated] ", "
+      separator: ",",
+      // [Auto-translated] " and "
+      and: "و",
+      // [Auto-translated] "{ref} is always {value}"
+      constant: "{ref} دائما {value}",
+      // [Auto-translated] "{ref} is {bounds}"
+      range: "{ref} هو {حدود}",
+      // [Auto-translated] "at least {0}"
+      atLeast: "على الأقل {0}",
+      // [Auto-translated] "at most {0}"
+      atMost: "في أفضل الأحوال {0}",
+      conflict: {
+        // [Auto-translated] "{ref} cannot be both {values}"
+        equalValues: "{ref} لا يمكن أن يكونا كلاهما {قيم}",
+        // [Auto-translated] "{ref} cannot be {value} and not be it"
+        equalAndNotEqual: "{ref} لا يمكن أن يكون {value} ولا يكون",
+        // [Auto-translated] "{ref} cannot be empty and be {value}"
+        emptyAndValue: "{ref} لا يمكن أن تكون فارغة و{value}",
+        // [Auto-translated] "{ref} cannot be empty and not empty"
+        emptyAndNotEmpty: "{ref} لا يمكن أن يكون فارغا وغير فارغ",
+        // [Auto-translated] "{ref} cannot be above {min} and below {max}"
+        impossibleBounds: "{ref} لا يمكن أن يكون فوق {min} أو أقل من {max}",
+        // [Auto-translated] "{ref} is asked to be one of no value at all"
+        emptySet: "{ref} يطلب أن يكون واحدا بلا قيمة على الإطلاق"
+      }
+    },
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    hints: {
+      // [Auto-translated] "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel."
+      rowScopePrefix: "المراجع \"{0}.\" متاحة فقط داخل خلية المصفوفة أو لوحة تفاصيل المصفوفة.",
+      // [Auto-translated] "\"{0}\" is only available inside a matrix cell or a matrix detail panel."
+      rowScopeStandalone: "\"{0}\" متاح فقط داخل خلية المصفوفة أو لوحة تفاصيل المصفوفة.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel or a panel container."
+      panelScopePrefix: "المراجع \"{0}.\" متوفرة فقط داخل لوحة ديناميكية أو حاوية لوحة.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a dynamic panel."
+      panelSiblingPrefix: "المراجع \"{0}.\" متوفرة فقط داخل لوحة ديناميكية.",
+      // [Auto-translated] "\"{0}\" is only available inside a dynamic panel."
+      panelStandalone: "\"{0}\" متاحة فقط داخل لوحة ديناميكية.",
+      // [Auto-translated] "\"{0}\" is only available inside choice, row and column conditions."
+      itemScope: "\"{0}\" متاح فقط داخل ظروف الاختيار، الصف، والأعمدة.",
+      // [Auto-translated] "\"{0}.\" references are only available inside a composite question."
+      compositeScopePrefix: "المراجع \"{0}.\" متاحة فقط داخل السؤال المركب.",
+      // [Auto-translated] "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey."
+      inArrayFilterScope: "\"{0}\" غير متوفر داخل مرشح inArray الذي يعمل على العنصر ثم الاستبيان.",
+      // [Auto-translated] "\"{0}\" is a column of this matrix - reference it with the row prefix."
+      matrixColumn: "\"{0}\" هو عمود من هذه المصفوفة - الإشارة إليه بالبادئة الصف.",
+      // [Auto-translated] "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix."
+      panelQuestion: "\"{0}\" هي مسألة هذه اللوحة الديناميكية - راجع إليها بادئة اللوحة."
+    },
+    // Prose the linter reports as a "suggestion" instead of an identifier
+    suggestions: {
+      // [Auto-translated] "Set inputType: \"number\" on \"{0}\" if it collects numbers."
+      setNumberInputType: "حدد نوع المدخل: \"رقم\" على \"{0}\" إذا جمع الأرقام.",
+      // [Auto-translated] "Use \"contains\" or \"anyof\" for multi-select values."
+      useContainsOrAnyof: "استخدم \"contains\" أو \"anyof\" لقيم الاختيار المتعدد."
+    },
+    // Terms the linter splices into a message as a raw code identifier
+    terms: {
+      containerKind: {
+        // [Auto-translated] "page"
+        page: "الصفحة",
+        // [Auto-translated] "panel"
+        panel: "لوحة"
+      },
+      // which of the three name properties shadows a built-in variable
+      nameKind: {
+        // [Auto-translated] "name"
+        name: "الاسم",
+        // [Auto-translated] "valueName"
+        valueName: "valueName",
+        // [Auto-translated] "name"
+        calculatedValue: "الاسم"
+      },
+      // the owner of a shadowed name, when the finding carries no element type
+      nameOwner: {
+        // [Auto-translated] "calculated value"
+        calculatedValue: "القيمة المحسوبة",
+        // [Auto-translated] "element"
+        default: "العنصر"
+      },
+      // the owner of a property, when the JSON gives it no name of its own
+      owner: {
+        // [Auto-translated] "the survey"
+        survey: "المسح",
+        // [Auto-translated] "the {0}"
+        className: "{0}"
+      },
+      specialItem: {
+        // [Auto-translated] "Other"
+        other: "أخرى",
+        // [Auto-translated] "None"
+        none: "لا شيء",
+        // [Auto-translated] "Refuse to answer"
+        refuse: "ارفض الإجابة",
+        // [Auto-translated] "Don't know"
+        dontknow: "لا أعرف"
+      },
+      deadValidatorEffect: {
+        // [Auto-translated] "never fires"
+        neverFires: "لا يطلق أبدا",
+        // [Auto-translated] "rejects every answer"
+        rejectsEveryAnswer: "يرفض كل إجابة",
+        // [Auto-translated] "cannot validate"
+        default: "لا يمكن التحقق من صحتها"
+      },
+      // what the answer's shape does to the validator
+      deadValidatorCause: {
+        // [Auto-translated] "the question holds no answer to validate"
+        noAnswer: "السؤال لا يحمل إجابة تؤكد",
+        // [Auto-translated] "a length is read off a text value, and this answer has none"
+        textLength: "يقرأ طول من قيمة نصية، وهذا الجواب لا يحتوي على أي قيمة",
+        // [Auto-translated] "the answer is not a number and never can be"
+        notANumber: "الإجابة ليست رقما ولا يمكن أن تكون أبدا",
+        // [Auto-translated] "a number never matches an e-mail address"
+        numberVsEmail: "الرقم لا يتطابق أبدا مع عنوان البريد الإلكتروني",
+        // [Auto-translated] "the answer is not a list of values"
+        notAList: "الإجابة ليست قائمة من القيم",
+        // [Auto-translated] "the answer is not a value it can check"
+        default: "الإجابة ليست قيمة يمكن التحقق منها"
+      },
+      valueShape: {
+        // [Auto-translated] "an array"
+        array: "مصفوفة",
+        // [Auto-translated] "an object"
+        object: "كائن"
+      },
+      dropdownRowSharer: {
+        // [Auto-translated] "a row of matrix"
+        matrix: "صف من المصفوفة",
+        // [Auto-translated] "an item of multipletext"
+        multipletext: "عنصر متعدد النصوص",
+        // [Auto-translated] "a row or item of a question"
+        default: "صف أو بند من سؤال"
+      },
+      sharedValueShape: {
+        // [Auto-translated] "an array of objects"
+        records: "مصفوفة من الكائنات",
+        // [Auto-translated] "an object"
+        object: "كائن",
+        // [Auto-translated] "a plain value"
+        plain: "قيمة بسيطة",
+        // [Auto-translated] "a value"
+        default: "قيمة"
+      },
+      // the shapes the two ends of a copyvalue trigger hold
+      copyShape: {
+        // [Auto-translated] "an array of selected values"
+        array: "مصفوفة من القيم المختارة",
+        // [Auto-translated] "a single value"
+        scalar: "قيمة واحدة",
+        // [Auto-translated] "a value"
+        default: "قيمة"
+      },
+      // whether a row/panel count falls below its minimum or above its maximum
+      countDirection: {
+        // [Auto-translated] "below"
+        below: "فيما يلي",
+        // [Auto-translated] "above"
+        above: "أعلاه"
+      },
+      // the verb of element/never-visible, by the number of questions the condition reads
+      deadValueClause: {
+        // [Auto-translated] "is never visible and never receives a value"
+        one: "لا يظهر أبدا ولا يتلقى قيمة",
+        // [Auto-translated] "are never visible and never receive a value"
+        many: "لا تظهر أبدا ولا تحصل على قيمة"
+      },
+      targetKind: {
+        // [Auto-translated] "question"
+        question: "سؤال",
+        // [Auto-translated] "question or variable"
+        questionvalue: "سؤال أو متغير",
+        // [Auto-translated] "page"
+        page: "الصفحة"
+      },
+      triggerVerb: {
+        // [Auto-translated] "reads"
+        fromName: "قراءات",
+        // [Auto-translated] "navigates to"
+        gotoName: "يتنقل إلى",
+        // [Auto-translated] "sets"
+        default: "المجموعات"
+      },
+      // no "operator" table on purpose: an operator stays the identifier the JSON spells,
+      sourceField: {
+        // [Auto-translated] "template question"
+        paneldynamic: "سؤال القالب",
+        // [Auto-translated] "column"
+        default: "العمود"
+      },
+      // the noun for the container level an unknown trigger-target segment belongs to
+      segmentNoun: {
+        // [Auto-translated] "template question"
+        paneldynamic: "سؤال القالب",
+        // [Auto-translated] "column"
+        matrixdynamic: "العمود",
+        // [Auto-translated] "item"
+        multipletext: "العنصر",
+        // [Auto-translated] "row"
+        matrix: "الصف",
+        // [Auto-translated] "row"
+        matrixdropdownRow: "الصف",
+        // [Auto-translated] "column"
+        matrixdropdownColumn: "العمود",
+        // [Auto-translated] "field"
+        default: "الميدان"
+      }
+    }
+  },
   // Localized default JSON for new questions (see settings.toolbox.defaultJSON)
   defaultJson: {
-    choices: [{ value: "item1", text: "بند 1" }, { value: "item2", text: "بند 2" }, { value: "item3", text: "بند 3" }],
-    columns: [{ value: "column1", text: "عمود 1" }, { value: "column2", text: "عمود 2" }, { value: "column3", text: "عمود 3" }],
-    rows: [{ value: "row1", text: "صف 1" }, { value: "row2", text: "صف 2" }],
-    matrixColumns: [{ name: "column1", title: "عمود 1" }, { name: "column2", title: "عمود 2" }, { name: "column3", title: "عمود 3" }]
+    choices: [
+      {
+        value: "item1",
+        // "Item 1"
+        text: "بند 1"
+      },
+      {
+        value: "item2",
+        // "Item 2"
+        text: "بند 2"
+      },
+      {
+        value: "item3",
+        // "Item 3"
+        text: "بند 3"
+      }
+    ],
+    columns: [
+      {
+        value: "column1",
+        // "Column 1"
+        text: "عمود 1"
+      },
+      {
+        value: "column2",
+        // "Column 2"
+        text: "عمود 2"
+      },
+      {
+        value: "column3",
+        // "Column 3"
+        text: "عمود 3"
+      }
+    ],
+    rows: [
+      {
+        value: "row1",
+        // "Row 1"
+        text: "صف 1"
+      },
+      {
+        value: "row2",
+        // "Row 2"
+        text: "صف 2"
+      }
+    ],
+    matrixColumns: [
+      {
+        name: "column1",
+        // "Column 1"
+        title: "عمود 1"
+      },
+      {
+        name: "column2",
+        // "Column 2"
+        title: "عمود 2"
+      },
+      {
+        name: "column3",
+        // "Column 3"
+        title: "عمود 3"
+      }
+    ]
   }
 };
 

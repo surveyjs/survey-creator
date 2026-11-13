@@ -53,6 +53,9 @@ export class QuestionLinkValueModel extends Question {
   public get tooltip() {
     return this.showTooltip ? this.linkValueText : undefined;
   }
+  public get supportClearTitleAction(): boolean {
+    return false;
+  }
   public getType(): string {
     return "linkvalue";
   }
@@ -91,7 +94,11 @@ export class QuestionLinkValueModel extends Question {
 
 Serializer.addClass(
   "linkvalue",
-  ["showValueInLink",
+  [
+    // Question.allowClear serializes as boolean, so its default is false. The decorator
+    // default true is not the value the setter compares, and allowClear = false was ignored.
+    { name: "allowClear:boolean", default: true, visible: false },
+    "showValueInLink",
     {
       name: "showTooltip: boolean",
       default: false,

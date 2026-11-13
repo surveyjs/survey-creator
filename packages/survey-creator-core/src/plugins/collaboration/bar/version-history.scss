@@ -10,19 +10,37 @@
   gap: var(--sjs2-spacing-x025);
 }
 
-// The list's <li> and item body bring their own box, hover and pointer cursor.
-// Each row owns all three instead, so the list chrome is flattened here. Two
-// classes per selector, which beats survey-core's single-class rules whatever
-// the stylesheet order turns out to be.
+// The list's <li> and item body bring their own box, hover, pointer cursor and
+// one-line truncation. Each row owns all of that instead, so the list chrome is
+// flattened here. Two classes per selector, which beats survey-core's
+// single-class rules whatever the stylesheet order turns out to be.
 .svc-version-history .sv-list__item {
   cursor: default;
   overflow: visible;
   white-space: normal;
 }
 
+// survey-core puts the pointer on the item BODY, which wraps every row - the
+// <li> rule above alone leaves each entry looking clickable. The group header
+// sets its own pointer below.
 .svc-version-history .sv-list__item-body {
   padding: 0;
   background: transparent;
+  cursor: default;
+  overflow: visible;
+  white-space: normal;
+}
+
+// Nothing in the timeline is truncated: survey-core keeps list text on one line
+// (`.sv-list__item span`) and the shared row clips its title and subtitle
+// (collab-row.scss). Here they wrap, breaking a long name or value if they must.
+.svc-version-history .sv-list__item span,
+.svc-version-history .svc-collab-row__title,
+.svc-version-history .svc-collab-row__subtitle {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  overflow-wrap: anywhere;
 }
 
 .svc-version-history .sv-list__item--hovered > .sv-list__item-body {
@@ -44,12 +62,6 @@
   background: var(--sjs2-color-component-action-brand-primary-default-bg);
   color: var(--sjs2-color-component-action-brand-primary-default-label);
   margin-bottom: var(--sjs2-spacing-x025);
-}
-
-.svc-version-history__row--named:hover,
-.svc-version-history__row--base:hover,
-.svc-version-history__row--change:hover {
-  background: var(--sjs2-color-bg-basic-secondary);
 }
 
 // The group header is the only interactive row.

@@ -120,6 +120,21 @@ function pluginIgnoreStyles() {
     }
   };
 }
+const omitScssFromDeclarations = () => ({
+  name: "omit-scss-from-declarations",
+  generateBundle(options, bundle) {
+    for (const filename in bundle) {
+      if (filename.endsWith(".d.ts") && bundle[filename].type === "asset") {
+        const asset = bundle[filename];
+        let content = typeof asset.source === "string"
+          ? asset.source
+          : asset.source.toString("utf-8");
+        const scssImportRegex = /^import\s+['"][^'"]+\.scss['"];?\r?\n?/gm;
+        asset.source = content.replace(scssImportRegex, "");
+      }
+    }
+  }
+});
 
 // rollup-plugin-esbuild searches upward for a tsconfig file name, so callers below pass basename()
 // instead of an absolute path. Keep the decorator semantics explicit as well: survey-core's
@@ -164,6 +179,7 @@ export function createUmdConfig(options) {
             declarationDir: declarationDir
           }
         }),
+      omitScssFromDeclarations(),
       emitCss
         ? rollupPostcss({
           extract: emitCss,

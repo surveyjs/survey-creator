@@ -1,3 +1,4 @@
+import { expect } from "playwright/test";
 import { url, compareScreenshot, test, setJSON, resetHoverToCreator } from "./helper";
 const title = "Property Grid Screenshot";
 
@@ -89,5 +90,20 @@ test.describe(title, () => {
 
     await tagbox.getByRole("button", { name: "Clear" }).click();
     await compareScreenshot(page, tagbox, "pg-tagbox-empty.png");
+  });
+
+  test("PG: first question after tab from search", async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.evaluate(() => {
+      window["creator"].propertyGridNavigationMode = "buttons";
+    });
+    await page.locator(".svc-sidebar-tabs").getByTitle("Pages").click();
+    const panel = page.locator(".spg-root-modern .spg-page").first();
+    const question = panel.locator(".spg-question").first();
+    await expect(question).toHaveAttribute("data-name", "pages");
+    await page.locator(".svc-side-bar .svc-search__input").focus();
+    await page.keyboard.press("Tab");
+    await resetHoverToCreator(page);
+    await compareScreenshot(page, panel, "pg-pages-first-question.png");
   });
 });

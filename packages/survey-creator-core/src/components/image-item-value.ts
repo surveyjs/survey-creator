@@ -1,4 +1,4 @@
-import { Action, ActionContainer, ComputedUpdater, CssClassBuilder, ImageItemValue, ItemValue, property, QuestionSelectBase } from "survey-core";
+import { Action, ActionContainer, ComputedUpdater, toCssClasses, ImageItemValue, ItemValue, property, QuestionSelectBase } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
@@ -15,13 +15,14 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   }
 
   getRootCss() {
-    return new CssClassBuilder()
-      .append("svc-image-item-value-wrapper")
-      .append("svc-image-item-value")
-      .append("svc-image-item-value--new", this.isNew || this.isUploading)
-      .append("svc-image-item-value-wrapper--ghost", this.isDragDropGhost)
-      .append("svc-image-item-value--file-dragging", this.isFileDragging)
-      .append("svc-image-item-value--single", this.getIsNewItemSingle()).toString();
+    return toCssClasses(
+      "svc-image-item-value-wrapper",
+      "svc-image-item-value",
+      (this.isNew || this.isUploading) && "svc-image-item-value--new",
+      this.isDragDropGhost && "svc-image-item-value-wrapper--ghost",
+      this.isFileDragging && "svc-image-item-value--file-dragging",
+      this.getIsNewItemSingle() && "svc-image-item-value--single"
+    );
   }
 
   public getIsNewItemSingle() {
@@ -98,7 +99,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         showTitle: false,
         innerCss: "svc-image-item-value-controls__drag-area-indicator",
         data: { model: this },
-        visible: this.isDraggable,
+        visible: new ComputedUpdater(() => this.isDraggable) as unknown as boolean,
         appearance: { style: "brand", mode: "quaternary-surface", size: "small" },
       }),
       new Action({
@@ -107,6 +108,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         iconName: "icon-choosefile",
         showTitle: false,
         needSpace: true,
+        visible: new ComputedUpdater(() => this.canEditChoices) as unknown as boolean,
         appearance: { style: "brand", mode: "quaternary-surface", size: "small" },
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
@@ -120,6 +122,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         title: new ComputedUpdater(() => this.removeFileTitle) as unknown as string,
         iconName: "icon-delete",
         showTitle: false,
+        visible: new ComputedUpdater(() => this.allowRemove) as unknown as boolean,
         appearance: { style: "alert", mode: "quaternary-surface", size: "small" },
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
@@ -146,7 +149,12 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
     return this.topActionsContainerValue;
   }
 
+  // Choosing or uploading a file changes the question's choices.
+  private get canEditChoices(): boolean {
+    return !this.creator.readOnly && this.canTouchItems;
+  }
   chooseFile(model: ImageItemValueWrapperViewModel) {
+    if (!model.canEditChoices) return;
     const fileInput = <HTMLInputElement>model.itemsRoot.getElementsByClassName("svc-choose-file-input")[0];
     const context = { element: model.question, item: model.item, elementType: model.question.getType(), propertyName: "imageLink" };
     model.creator.chooseFiles(fileInput, (files: File[]) => {
@@ -161,6 +169,10 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   }
 
   public uploadFiles(files) {
+    if (!this.canEditChoices) {
+      this.isChoosingNewFile = false;
+      return;
+    }
     this.isUploading = true;
     const context = { element: this.question, item: undefined, elementType: this.question.getType(), propertyName: "imageLink" };
     this.creator.uploadFiles(files, this.question, (status, link) => {

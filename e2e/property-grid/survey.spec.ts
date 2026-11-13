@@ -35,7 +35,7 @@ test.describe(title, () => {
   });
 
   test("Add calculated values", async ({ page }) => {
-    const addButton = getButtonByText(page.locator("div[data-name=calculatedValues]"), "Add new variable").first();
+    const addButton = getButtonByText(page.locator("div[data-name=calculatedValues]"), "Add variable").first();
     const rows = page.locator("div[data-name=calculatedValues]").locator("tbody").locator("tr");
 
     await setJSON(page, json);
@@ -188,6 +188,7 @@ test.describe(title, () => {
     };
     await page.evaluate(() => {
       window["creator"].animationEnabled = true;
+      window["Survey"].settings.animation.respectReducedMotion = false;
     });
     await setJSON(page, json);
     await page.setViewportSize({ width: 1600, height: 600 });

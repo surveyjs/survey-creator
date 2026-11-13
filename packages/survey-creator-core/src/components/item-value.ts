@@ -13,9 +13,10 @@ import {
   ComputedUpdater,
   AnimationBoolean,
   ChoiceItem,
-  settings,
+  isAnimationEnabled,
   prepareElementForVerticalAnimation,
-  cleanHtmlElementAfterAnimation
+  cleanHtmlElementAfterAnimation,
+  getIdSelector
 } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { DragDropChoices } from "survey-core";
@@ -51,6 +52,8 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
   ) {
     super();
     this.item.onExpandPanelAtDesign.add(this.onExpandPanelAtDesign);
+    this.item.locText.onStringChanged.add(this.onItemTextChanged);
+    this.onItemTextChanged();
     this.updateIsNew(question, item);
     for (let key in specificChoices) {
       this.registerOnPropertyChanged(key, specificChoices[key]);
@@ -66,32 +69,40 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     );
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragItemValue);
 
-    this.allowItemOperations = { allowDelete: undefined, allowEdit: undefined, allowAdd: undefined };
     this.collectionProperty = Serializer.findProperty(question.getType(), this.collectionPropertyName);
-    this.creator.onCollectionItemAllowingCallback(question.ownerObj || question,
-      this.collectionProperty,
-      question.visibleChoices,
-      this.item,
-      this.allowItemOperations
-    );
-    if (this.allowItemOperations.allowDelete === undefined) {
-      this.allowItemOperations.allowDelete = true;
-    }
-    if (this.allowItemOperations.allowAdd === undefined) {
-      this.allowItemOperations.allowAdd = true;
-    }
-    if (!this.allowItemOperations.allowAdd) {
-      this.updateIsNewVisibility();
-    }
-    if (!this.creator.isCanModifyProperty(question, "choices")) {
-      this.canTouchItems = false;
-    }
+    this.updatePermissions();
     this.setupShowPanel();
+    // The permissions may change while the item is rendered: the creator
+    // tells when to recompute them.
+    this.creator.onPermissionsChanged.add(this.onPermissionsChangedHandler);
   }
 
   private dragOrClickHelper: DragOrClickHelper;
-  private allowItemOperations: ICollectionItemAllowOperations;
-  private canTouchItems: boolean = true;
+  // Properties, not fields: the rendered row follows them.
+  @property() private allowItemOperations: ICollectionItemAllowOperations;
+  @property({ defaultValue: true }) protected canTouchItems: boolean;
+  private onPermissionsChangedHandler = (): void => this.updatePermissions();
+  private updatePermissions(): void {
+    const operations: ICollectionItemAllowOperations = { allowDelete: undefined, allowEdit: undefined, allowAdd: undefined, allowDrag: undefined };
+    this.creator.onCollectionItemAllowingCallback(this.question.ownerObj || this.question,
+      this.collectionProperty,
+      this.question.visibleChoices,
+      this.item,
+      operations
+    );
+    if (operations.allowDelete === undefined) {
+      operations.allowDelete = true;
+    }
+    if (operations.allowAdd === undefined) {
+      operations.allowAdd = true;
+    }
+    if (operations.allowDrag === undefined) {
+      operations.allowDrag = true;
+    }
+    this.allowItemOperations = operations;
+    this.updateIsNewVisibility();
+    this.canTouchItems = this.creator.isCanModifyProperty(this.question, "choices");
+  }
   private focusCameFromDown: boolean = false;
   private collectionProperty: JsonObjectProperty;
 
@@ -142,12 +153,14 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     return this.creator.expandCollapseManager;
   }
   public dispose(): void {
+    this.creator.onPermissionsChanged.remove(this.onPermissionsChangedHandler);
     super.dispose();
     this.dragDropHelper.onGhostPositionChanged.remove(
       this.handleDragDropGhostPositionChanged
     );
     if (this.item) {
       this.item.onExpandPanelAtDesign.remove(this.onExpandPanelAtDesign);
+      this.item.locText.onStringChanged.remove(this.onItemTextChanged);
     }
     if (this.canShowPanel()) {
       this.expandCollapseManager.disposeChoice(this.item, this);
@@ -171,7 +184,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     }
   };
   get isDraggable() {
-    return this.isDraggableItem(this.item);
+    return this.allowItemOperations.allowDrag !== false && this.isDraggableItem(this.item);
   }
   public isDraggableItem(item: ItemValue) {
     if (this.creator.readOnly || !this.canTouchItems) return false;
@@ -184,7 +197,10 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     return undefined;
   }
 
+  // add/remove re-check the permissions: they may have changed after the
+  // buttons were rendered.
   public add(model: ItemValueWrapperViewModel) {
+    if (!model.allowAdd) return;
     const propName = this.getSpecificProp(model);
     if (propName) {
       model.question[propName] = true;
@@ -201,6 +217,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
   }
 
   public remove(model: ItemValueWrapperViewModel) {
+    if (!model.allowRemove) return;
     const propName = this.getSpecificProp(model);
     if (propName) {
       model.question[propName] = false;
@@ -235,7 +252,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     setTimeout(() => {
       const root = this.creator.rootElement?.getRootNode() || DomDocumentHelper.getDocument();
       if (!(root instanceof Document || root instanceof ShadowRoot)) return;
-      const el = root.querySelector("#" + this.question.id);
+      const el = root.querySelector(getIdSelector(this.question.renderedId));
       if (!el) return;
       const buttons = el.querySelectorAll(".svc-item-value-controls__remove");
       (buttons[index] as HTMLElement)?.focus();
@@ -268,6 +285,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
         showTitle: false,
         appearance: { size: "x-small", style: "brand", mode: "tertiary" },
         title: new ComputedUpdater(() => this.tooltip) as unknown as string,
+        ariaLabel: new ComputedUpdater(() => this.actionAriaLabel) as unknown as string,
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
         },
@@ -289,6 +307,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
         appearance: { size: "x-small", style: "alert", mode: "tertiary" },
         iconSize: "auto",
         title: new ComputedUpdater(() => this.tooltip) as unknown as string,
+        ariaLabel: new ComputedUpdater(() => this.actionAriaLabel) as unknown as string,
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
           event.currentTarget.removeEventListener("focusout", this.onFocusOut);
@@ -312,6 +331,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
         appearance: { style: "brand", size: "x-small", mode: "tertiary" },
         iconSize: "auto",
         title: new ComputedUpdater(() => this.expandPanelTooltip) as unknown as string,
+        ariaLabel: new ComputedUpdater(() => this.expandPanelAriaLabel) as unknown as string,
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
         },
@@ -338,6 +358,21 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
   }
   get expandPanelTooltip() {
     return getLocString(this.showPanel ? "pe.collapseNestedChoices" : "pe.expandNestedChoices");
+  }
+  // item.text is not reactive. The None/Other/Select All text belongs to the question,
+  // so the item's locText notifies about every text change.
+  @property() private itemText: string;
+  private onItemTextChanged = (): void => {
+    this.itemText = this.item.text;
+  };
+  get actionAriaLabel(): string {
+    return this.getAriaLabel(this.isNew ? "pe.addItemAriaLabel" : "pe.removeItemAriaLabel");
+  }
+  get expandPanelAriaLabel(): string {
+    return this.getAriaLabel(this.showPanel ? "pe.collapseNestedChoicesAriaLabel" : "pe.expandNestedChoicesAriaLabel");
+  }
+  private getAriaLabel(strName: string): string {
+    return this.itemText ? getLocString(strName)["format"](this.itemText) : undefined;
   }
   get allowAdd() {
     const isNew = !this.question.isItemInList(this.item);
@@ -394,10 +429,10 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
           return { cssClass: cssClasses.onLeave, ...baseOptions };
         },
         getAnimatedElement: () => {
-          return this.question.getWrapperElement()?.querySelector(`#${this.item.panel.id}`).parentElement.parentElement as HTMLElement;
+          return this.question.getWrapperElement()?.querySelector(getIdSelector(this.item.panel.renderedId))?.parentElement?.parentElement as HTMLElement;
         },
         isAnimationEnabled: () => {
-          return settings.animationEnabled && this.creator.animationAllowed;
+          return isAnimationEnabled() && this.creator.animationAllowed;
         },
         getRerenderEvent: () => {
           return this.onElementRerendered;

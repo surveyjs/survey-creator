@@ -65,7 +65,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
     return (this.item as any);
   }
 
-  render(): React.JSX.Element {
+  renderElement(): React.JSX.Element {
     const item = this.item;
     const itemComponent = ReactElementFactory.Instance.createElement(
       this.model.itemComponent,
@@ -78,7 +78,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
       }
     );
     return (
-      <div className={item.css} key={item.id} ref={this.rootRef}>
+      <div className={item.css} key={item.id} ref={this.rootRef} role={this.model.ariaRole}>
         {(item.needSeparator && !this.creator.toolbox.showCategoryTitles) ? (
           <div className="svc-toolbox__category-separator"></div>
         ) : null}
@@ -139,7 +139,7 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
   protected getStateElement(): Base {
     return this.model;
   }
-  render(): React.JSX.Element {
+  renderElement(): React.JSX.Element {
     const banner = (this.props.isCompact ?
       <span className="svc-toolbox__item-banner"
         onClick={(event: any) => {
