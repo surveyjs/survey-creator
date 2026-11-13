@@ -3,6 +3,7 @@ import { List, ReactElementFactory, SurveyActionBar, SurveyElementBase } from "s
 import type { Base } from "survey-core";
 import type { CheckView, IssueView, TesterTestRowModel, WhyPart } from "survey-creator-core/tester";
 import "./StepRowView";
+import { useModelUpdates } from "./useModel";
 
 // One of the components this bundle registers, and half of what it draws at all: the toolbars, the
 // lists, the run-mode menu and its popup are survey-core models that survey-react-ui already draws, and
@@ -16,6 +17,11 @@ import "./StepRowView";
 // It subscribes to the row and to nothing else. Everything it draws - including the lock while a run is
 // in flight, and every sentence on the line - is a property of the row, which is what keeps this file
 // markup.
+//
+// SurveyElementBase repaints only for the properties read during its own render (survey-react-ui's
+// PropertyAccessTracker). A child function component renders after that render has returned, so what it
+// reads off the row is not tracked by the class above it: StepList and CheckLine subscribe to the row
+// themselves, the way every other function component of this bundle does.
 
 interface Props {
   item: any;
@@ -143,6 +149,7 @@ export class TestRowView extends SurveyElementBase<Props, any> {
 // in that frame is a property of the row.
 function StepList(props: { row: TesterTestRowModel }): React.JSX.Element {
   const { row } = props;
+  useModelUpdates(row);
   return (
     <div className="svt-step-list">
       <div className="svt-step-list__head">
@@ -205,6 +212,7 @@ export function IssueLine(props: {
 // the details of a check an integrator registered.
 function CheckLine(props: { row: TesterTestRowModel, check: CheckView }): React.JSX.Element {
   const { row, check } = props;
+  useModelUpdates(row);
   const open = row.isCheckOpen(check.key);
   return (
     <div className="svt-assert__row">

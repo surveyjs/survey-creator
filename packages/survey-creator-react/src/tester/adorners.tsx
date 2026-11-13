@@ -226,8 +226,12 @@ export class CheckMenuView extends SurveyElementBase<{ model: TesterCheckMenuMod
 // the question's own dropdown is held open beside it, so the person ticks against the list they see.
 // Which popup that is is the model's answer - it is undefined for a question that has not rendered one
 // - and closing the menu closes it, because the menu unmounts this component with it.
+//
+// It subscribes to the menu itself: CheckMenuView is a SurveyElementBase, which repaints only for what
+// its own render read, and nothing below is read there.
 function Picker(props: { model: TesterCheckMenuModel }): React.JSX.Element {
   const { model } = props;
+  useModelUpdates(model);
   const held = model.choicesPopup;
   useEffect(() => {
     if (!held) return undefined;

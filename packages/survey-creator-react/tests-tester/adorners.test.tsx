@@ -189,6 +189,15 @@ describe("the adorners", () => {
     // Every choice is ticked to start with: the picker is there to narrow what the check covers.
     expect(menu.pickerItems.length).toBe(3);
     expect(one.container.querySelectorAll(".svt-picker__hit").length).toBe(3);
+    // Unticking one is drawn. The picker is a function component inside the SurveyElementBase menu, so
+    // this pins that it repaints off the menu on its own (adorners.tsx).
+    const boxes = (): Array<HTMLInputElement> =>
+      Array.from(one.container.querySelectorAll(".svt-picker__hit input")) as Array<HTMLInputElement>;
+    expect(boxes().every(box => box.checked)).toBe(true);
+    await act(async() => { boxes()[1].click(); });
+    await settle();
+    expect(menu.isPicked(menu.pickerItems[1].value)).toBe(false);
+    expect(boxes().map(box => box.checked)).toEqual([true, false, true]);
 
     // Closing the menu closes the popup it was holding open.
     await act(async() => { model.recorder.adorners.setOpen(undefined); });

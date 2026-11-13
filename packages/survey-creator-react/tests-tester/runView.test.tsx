@@ -127,6 +127,13 @@ describe("the runner screen", () => {
     await act(async() => { raw.click(); });
     await settle();
     expect(container.querySelector(".svt-step__json")).toBeTruthy();
+    // And the same press closes it. The line is a function component inside a SurveyElementBase row,
+    // so this is what pins that it repaints off the row on its own (TestRowView.tsx).
+    const hide = container.querySelector(".svt-assert__line .svt-step__aside") as HTMLElement;
+    expect(textOf(hide)).not.toBe("raw..");
+    await act(async() => { hide.click(); });
+    await settle();
+    expect(container.querySelector(".svt-step__json")).toBeFalsy();
   }, 60000);
 
   it("moves the console to the left pane and back, off the model's own toggle", async() => {
