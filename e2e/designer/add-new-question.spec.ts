@@ -258,4 +258,19 @@ test.describe(title, () => {
     await page.keyboard.press("Space");
     await expect.poll(questionCount).toBe(4);
   });
+
+  test("Question type selector announces whether its list is open", async ({ page }) => {
+    await setJSON(page, { pages: [{ name: "page1", elements: [{ type: "text", name: "question1" }] }] });
+    const typeSelector = page.locator(".svc-page__content:not(.svc-page__content--new) .svc-page__footer")
+      .getByRole("button", { name: "Select question type" });
+    await expect(typeSelector).toHaveAttribute("aria-expanded", "false");
+    await typeSelector.focus();
+    await page.keyboard.press("Enter");
+    await expect(getListItemByText(page, "Single-Line Input")).toBeVisible();
+    await expect(typeSelector).toHaveAttribute("aria-expanded", "true");
+    await page.keyboard.press("Tab");
+    await page.keyboard.press("Escape");
+    await expect(getListItemByText(page, "Single-Line Input")).toBeHidden();
+    await expect(typeSelector).toHaveAttribute("aria-expanded", "false");
+  });
 });

@@ -1511,6 +1511,16 @@ test("Question type selector has a name that differs from Add Question", (): any
   expect(selectorModel.title).not.toEqual(creator.addNewQuestionText);
 });
 
+test("Question type selector reflects popup visibility in ariaExpanded", (): any => {
+  const creator = new CreatorTester();
+  const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  expect(selectorModel.ariaExpanded).toBe(false);
+  selectorModel.popupModel.show();
+  expect(selectorModel.ariaExpanded).toBe(true);
+  selectorModel.popupModel.hide();
+  expect(selectorModel.ariaExpanded).toBe(false);
+});
+
 test("Question type selector popup displayMode", (): any => {
   let creator = new CreatorTester();
   let selectorModel = creator.getQuestionTypeSelectorModel(() => { });
