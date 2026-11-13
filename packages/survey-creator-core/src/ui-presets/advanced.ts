@@ -329,6 +329,7 @@ export const Advanced = {
               { name: "visibleIf", tab: "logic" },
               { name: "questionTitleLocation", tab: "questionSettings" },
               { name: "questionOrder", tab: "questionSettings" },
+              { name: "valueName", tab: "data" },
             ],
             tabs: [
               { name: "questionSettings", index: 100 },

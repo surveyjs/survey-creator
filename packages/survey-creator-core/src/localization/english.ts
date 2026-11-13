@@ -333,6 +333,9 @@ export var enStrings = {
   },
   // Property Editors
   pe: {
+    panelbase: {
+      valueName: "Data key"
+    },
     panel: {
       name: "Panel name",
       title: "Panel title",
@@ -680,6 +683,7 @@ export var enStrings = {
     landscapeOrientation: "Switch to landscape orientation",
     portraitOrientation: "Switch to portrait orientation",
     clearInvisibleValues: "Clear hidden question values",
+    dataNesting: "Store panel and page values in objects",
     cookieName: "Limit to one response",
     partialSendEnabled: "Auto-save survey progress on page change",
     storeOthersAsComment: "Save the \"Other\" option value as a separate property",
@@ -1105,6 +1109,13 @@ export var enStrings = {
     clearInvisibleValues: {
       none: "Never"
     },
+    dataNesting: {
+      auto: "Panels and pages with a data key",
+      none: "Never (flat data)",
+      panel: "Every panel",
+      page: "Every page",
+      panelAndPage: "Every panel and page"
+    },
     clearIfInvisible: {
       none: "Never"
     },
@@ -1520,6 +1531,9 @@ export var enStrings = {
     }
   },
   pehelp: {
+    panelbase: {
+      valueName: "The questions inside this panel or page store their values in an object under this key in survey results. If you leave it empty, their values are stored with the values of the enclosing panel or page (or at the top level), unless the survey's \"Store panel and page values in objects\" setting nests every panel or page under its name. When that setting is \"Never (flat data)\", the key is kept but ignored. The key is not available inside a dynamic panel, a matrix detail section, or a composite question, whose entries keep flat data."
+    },
     panel: {
       name: "A panel ID that is not visible to respondents.",
       description: "Type a panel subtitle.",
@@ -1708,6 +1722,7 @@ export var enStrings = {
     includeIntoResult: "Select if you wish the calculated value of the expression to be saved along with survey results.",
     triggers: "A trigger is an event or condition that is based on an expression. Once the expression is evaluated to \"true\", a trigger sets off an action. Such an action can optionally have a target question it affects.",
     clearInvisibleValues: "Choose whether or not to clear values for questions hidden by conditional logic and when to do it.",
+    dataNesting: "Specifies which panels and pages store their questions' values in an object. \"Panels and pages with a data key\" nests only the panels and pages whose data key is set. \"Every panel\", \"Every page\", and \"Every panel and page\" also nest the panels or pages without a data key, under their names. \"Never (flat data)\" ignores every data key and stores all values at the top level. Changing this setting does not move data you have already collected.",
     textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing.",
     columns: "The left value serves as a column ID used in conditional rules, the right value is displayed to respondents.",
     rows: "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents.",
@@ -2047,6 +2062,7 @@ export var enStrings = {
       "mask/mismatch": { setMaskType: "Use the suggested mask" },
       "name/duplicate": { renameElement: "Give the element a free name" },
       "name/reserved": { renameElement: "Give the element a free name" },
+      "nesting/generated-key": { setValueName: "Set the valueName to the current name" },
       "property/dead": { removeKey: "Remove the property" },
       "property/invalid-value": {
         clampToRange: "Use the nearest allowed value",
@@ -2094,6 +2110,7 @@ export var enStrings = {
         commentKeyCollision: "The data key \"{dataName}\" is also the comment key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other.",
         totalKeyCollision: "The data key \"{dataName}\" is also the totals key of \"{base}\" (its data key plus \"{suffix}\") - one write silently overwrites the other.",
         variableShadowsQuestion: "The {trigger} trigger sets the variable \"{name}\", which is also the data key of question \"{questionName}\" - the variable answers {{name}} from then on, not the question.",
+        containerKeyShadowed: "The {ownerText} \"{name}\" stores its questions' values under \"{key}\", which is also {kindText} \"{variable}\" - {{key}} and {{key}.x} read the variable first.",
       },
       "name/reserved": {
         questionName: "The name \"{name}\" is reserved - a member of Object.prototype.",
@@ -2102,6 +2119,17 @@ export var enStrings = {
         itemName: "The item \"{name}\" of \"{questionName}\" is reserved - a member of Object.prototype.",
         rowValue: "The row \"{rowValue}\" of \"{name}\" is reserved - a member of Object.prototype.",
         calculatedValueName: "The calculated value \"{name}\" is reserved - a member of Object.prototype.",
+        containerKey: "\"{name}\" stores its questions' values under \"{key}\", which is reserved - a member of Object.prototype.",
+      },
+      "nesting/generated-key": {
+        generatedName: "The {kind} \"{name}\" keeps a generated name, and dataNesting \"{dataNesting}\" stores its questions' values under it - renaming the {kind} moves them to another key. Set its valueName to \"{name}\" to keep the key.",
+        unnamed: "This {kind} has no name: dataNesting \"{dataNesting}\" stores its questions' values under \"{key}\", the name the survey generates for it in load order - adding or moving {kind}s changes it. Give it a name or a valueName.",
+      },
+      "nesting/ignored-key": {
+        insideComposite: "The valueName \"{valueName}\" of panel \"{name}\" stores nothing: the panel is inside the composite question \"{recordName}\", whose value stays flat - the panel's questions write into the question's value directly.",
+      },
+      "nesting/key-conflict": {
+        questionKey: "\"{name}\" stores its questions' values in an object under \"{key}\", which is also the data key of the {questionType} question \"{questionName}\" - one key cannot hold both: an answer to \"{questionName}\" replaces the object, and the question shows it.",
       },
       "element/unknown-type": {
         unknownType: "\"{name}\" has an unknown type \"{type}\".",
@@ -2130,6 +2158,10 @@ export var enStrings = {
       "variable/collision": {
         questionShadowed: "The variable definition declares \"{variable}\", which is also the data key of question \"{name}\" - setting the variable deletes the answer stored under that key, and {{name}} answers the host value from then on.",
         calculatedValueShadowed: "The variable definition declares \"{variable}\", which is also the name of calculated value \"{name}\" - both write the same slot, and whichever runs last wins.",
+      },
+      "variable/dotted-key": {
+        questionKey: "The variable definition question \"{name}\" has the data key \"{key}\", which holds a dot. A variable key cannot hold one, so the question declares no variable.",
+        containerKey: "The variable definition {elementType} \"{name}\" has the data key \"{key}\", which holds a dot. A variable key cannot hold one, so the {elementType} declares no object variable and none of its questions is a variable.",
       },
       "variable/preset": {
         definitionNotAnObject: "variablePresets.definition is not a survey JSON object, so no variable is declared and no preset value can be checked.",
@@ -2306,6 +2338,7 @@ export var enStrings = {
       inArrayFilterScope: "\"{0}\" is not available inside an inArray filter, which runs against the item and then the survey.",
       matrixColumn: "\"{0}\" is a column of this matrix - reference it with the row prefix.",
       panelQuestion: "\"{0}\" is a question of this dynamic panel - reference it with the panel prefix.",
+      containerKeyNotNesting: "\"{0}\" is the valueName of a panel or page that stores no object: the survey's dataNesting is \"none\", or the panel is inside a dynamic panel, a matrix detail panel, or a composite question, which keep their records flat.",
     },
     // Prose the linter reports as a "suggestion" instead of an identifier
     suggestions: {
@@ -2317,6 +2350,13 @@ export var enStrings = {
       containerKind: {
         page: "page",
         panel: "panel",
+      },
+      // what a container key of name/shadowing is also the name of
+      variableKind: {
+        calculatedValue: "the calculated value",
+        variable: "the host variable",
+        trigger: "the trigger variable",
+        default: "the variable",
       },
       // which of the three name properties shadows a built-in variable
       nameKind: {

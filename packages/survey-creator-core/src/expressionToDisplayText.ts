@@ -1,6 +1,7 @@
 import * as Survey from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 import { wrapTextByCurlyBraces } from "./utils/creator-utils";
+import { getQuestionByVariableName } from "./utils/data-path";
 
 export class ExpressionToDisplayText {
   private showTitles: boolean;
@@ -88,8 +89,7 @@ export class ExpressionToDisplayText {
     return expression.replace(wrapTextByCurlyBraces(variable), wrapTextByCurlyBraces(question.title));
   }
   private getQuestionByName(name: string): Survey.Question {
-    if (!this.survey) return null;
-    return <Survey.Question>this.survey.getQuestionByValueName(name);
+    return getQuestionByVariableName(this.survey, name);
   }
 }
 

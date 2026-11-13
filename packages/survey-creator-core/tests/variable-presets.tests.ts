@@ -5,7 +5,8 @@ import "../src/custom-questions/question-color";
 import "../src/components/tabs/theme-custom-questions/color-alpha";
 import "../src/property-grid/theme-settings";
 import "../src/property-grid/header-settings";
-import { Action, IAction, QuestionDropdownModel, QuestionTextModel, SurveyModel, SurveyVariablePresets, settings as surveySettings } from "survey-core";
+import { Action, Helpers, IAction, QuestionDropdownModel, QuestionTextModel, SurveyModel, SurveyVariablePresets, settings as surveySettings } from "survey-core";
+import { VariablePresetsEditor } from "../src/variable-presets-editor";
 import { CreatorTester } from "./creator-tester";
 import { TabTestPlugin } from "../src/components/tabs/test-plugin";
 import { TestSurveyTabViewModel } from "../src/components/tabs/test";
@@ -559,6 +560,168 @@ describe("The condition editor edits a host variable with the definition's quest
     expect(valueQuestion.getType()).toBe("text");
     expect(valueQuestion.titleLocation).toBe("hidden");
     expect(valueQuestion.value).toBe("gold");
+    editor.dispose();
+  });
+});
+
+describe("Variable presets in Preview: nested values (nested data, survey-library #12233)", () => {
+  const nestedDefinition = { elements: [
+    { type: "panel", name: "user", valueName: "users", title: "User", elements: [
+      { type: "dropdown", name: "tier", title: "Tier", choices: ["gold", "silver"], isRequired: true },
+      { type: "text", name: "name", title: "Name" }] },
+    { type: "dropdown", name: "role", choices: ["admin", "user"] }] };
+  function createNestedContainer(): any {
+    return {
+      definition: nestedDefinition,
+      presets: [
+        { name: "Gold", variables: { users: { tier: "gold", name: "Ann" }, role: "admin" } },
+        { name: "Silver", variables: { users: { tier: "silver", name: "Bob" }, role: "user" } }
+      ]
+    };
+  }
+  const nestedSurveyJSON = { elements: [
+    { type: "text", name: "gold", visibleIf: "{users.tier} = 'gold'", title: "Hello {users.name}" },
+    { type: "text", name: "admin", visibleIf: "{role} = 'admin'" },
+    { type: "expression", name: "who", expression: "{users.name}" }],
+  calculatedValues: [{ name: "greeting", expression: "'Hi ' + {users.name}" }] };
+  function createNestedCreator(container: any = createNestedContainer()): CreatorTester {
+    const creator = new CreatorTester({ variablePresets: container });
+    creator.JSON = nestedSurveyJSON;
+    return creator;
+  }
+
+  test("The active preset's object variable drives conditions, titles, expressions and calculated values", () => {
+    const creator = createNestedCreator();
+    getManager(creator).active = "Gold";
+    const survey = getPreviewModel(creator).survey;
+    expect(survey.getVariable("users")).toStrictEqual({ tier: "gold", name: "Ann" });
+    const gold = survey.getQuestionByName("gold");
+    expect(gold.isVisible).toBeTruthy();
+    expect(gold.locTitle.renderedHtml).toBe("Hello Ann");
+    expect(survey.getQuestionByName("admin").isVisible).toBeTruthy();
+    expect(survey.getValue("who")).toBe("Ann");
+    expect(survey.getVariable("greeting")).toBe("Hi Ann");
+  });
+  test("Switching the preset, and to no preset, builds a new survey with the new values", () => {
+    const creator = createNestedCreator();
+    const manager = getManager(creator);
+    manager.active = "Gold";
+    const model = getPreviewModel(creator);
+    const goldSurvey = model.survey;
+    manager.active = "Silver";
+    // a new survey, so no value of the previous object variable can stay behind in an expression or
+    // a title (on one survey, clearing an object variable leaves them stale: library report-15)
+    expect(model.survey).not.toBe(goldSurvey);
+    expect(model.survey.getQuestionByName("gold").isVisible).toBeFalsy();
+    expect(model.survey.getValue("who")).toBe("Bob");
+    expect(model.survey.getVariable("greeting")).toBe("Hi Bob");
+    const silverSurvey = model.survey;
+    manager.active = "";
+    expect(model.survey).not.toBe(silverSurvey);
+    expect(model.survey.getVariable("users")).toBeUndefined();
+    expect(model.survey.getQuestionByName("gold").isVisible).toBeFalsy();
+    expect(model.survey.getValue("who")).toBeUndefined();
+  });
+  test("Editing the active preset's inner value in the preset editor restarts Preview with it", () => {
+    const creator = createNestedCreator();
+    getManager(creator).active = "Gold";
+    const model = getPreviewModel(creator);
+    const survey = model.survey;
+    const editor = new VariablePresetsEditor(creator, getManager(creator));
+    editor.editPreset(0);
+    editor.editSurvey.getQuestionByName("tier").value = "silver";
+    expect(editor.apply()).toBeTruthy();
+    expect(creator.variablePresets.presets[0].variables).toStrictEqual({ users: { tier: "silver", name: "Ann" }, role: "admin" });
+    expect(model.survey).not.toBe(survey);
+    expect(model.survey.getVariable("users")).toStrictEqual({ tier: "silver", name: "Ann" });
+    expect(model.survey.getQuestionByName("gold").isVisible).toBeFalsy();
+    editor.dispose();
+  });
+  test("An inner value of the active preset changed in place restarts Preview", () => {
+    const container = createNestedContainer();
+    const creator = createNestedCreator(container);
+    const manager = getManager(creator);
+    manager.active = "Gold";
+    const model = getPreviewModel(creator);
+    const survey = model.survey;
+    // the same preset object, edited in place: the values Preview runs with must not be the
+    // container's own nested objects, or there would be no difference to see
+    container.presets[0].variables.users.tier = "silver";
+    manager.setPresets(container.presets, "Gold");
+    expect(model.survey).not.toBe(survey);
+    expect(model.survey.getVariable("users")).toStrictEqual({ tier: "silver", name: "Ann" });
+    expect(model.survey.getQuestionByName("gold").isVisible).toBeFalsy();
+  });
+  test("A survey that writes an object variable does not change the host's container", () => {
+    const container = createNestedContainer();
+    const creator = createNestedCreator(container);
+    getManager(creator).active = "Gold";
+    const survey = getPreviewModel(creator).survey;
+    survey.getVariable("users").tier = "written";
+    expect(container.presets[0].variables.users).toStrictEqual({ tier: "gold", name: "Ann" });
+  });
+  test("The designer survey has no variables", () => {
+    const creator = createNestedCreator();
+    getManager(creator).active = "Gold";
+    getPreviewModel(creator);
+    creator.activeTab = "designer";
+    // the survey's own calculated value is the only variable there
+    expect(creator.survey.getVariableNames()).toStrictEqual(["greeting"]);
+    expect(creator.survey.getVariable("users")).toBeUndefined();
+    expect(creator.survey.getVariable("role")).toBeUndefined();
+  });
+  test("onVariablePresetsChanged carries the nested values unchanged", () => {
+    const creator = createNestedCreator();
+    const log: Array<any> = [];
+    creator.onVariablePresetsChanged.add((sender, options) => { log.push(Helpers.getUnbindValue(options.variablePresets.presets)); });
+    getManager(creator).active = "Gold";
+    expect(log[0]).toStrictEqual(createNestedContainer().presets);
+    const editor = new VariablePresetsEditor(creator, getManager(creator));
+    editor.editPreset(1);
+    editor.editSurvey.getQuestionByName("name").value = "Bill";
+    expect(editor.apply()).toBeTruthy();
+    const expected = createNestedContainer().presets;
+    expected[1].variables.users.name = "Bill";
+    expect(log).toHaveLength(2);
+    expect(log[1]).toStrictEqual(expected);
+    editor.dispose();
+  });
+  test("Values that are no plain objects reach the survey as they are and never restart it for nothing", () => {
+    class Account { constructor(public id: number) {} }
+    const fn = () => 1;
+    const since = new Date(2020, 1, 2);
+    const account = new Account(7);
+    const container = { presets: [
+      { name: "A", variables: { fn: fn, account: account, users: { since: since, name: undefined, tier: "gold" } } },
+      { name: "B", variables: { role: "user" } }
+    ] };
+    const creator = createNestedCreator(container);
+    const manager = getManager(creator);
+    manager.active = "A";
+    const model = getPreviewModel(creator);
+    const survey = model.survey;
+    expect(survey.getVariable("fn")).toBe(fn);
+    expect(survey.getVariable("account")).toBe(account);
+    expect(survey.getVariable("users").since).toBe(since);
+    expect(survey.getQuestionByName("gold").isVisible).toBeTruthy();
+    survey.setValue("admin", "kept");
+    // an edit of the inactive preset only
+    container.presets[1].variables.role = "admin";
+    manager.setPresets(container.presets, "A");
+    expect(model.survey).toBe(survey);
+    expect(model.survey.getValue("admin")).toBe("kept");
+  });
+  test("An edit of the active preset that changes only the case restarts Preview", () => {
+    const creator = createNestedCreator();
+    getManager(creator).active = "Gold";
+    const model = getPreviewModel(creator);
+    const survey = model.survey;
+    const editor = new VariablePresetsEditor(creator, getManager(creator));
+    editor.editPreset(0);
+    editor.editSurvey.getQuestionByName("name").value = "ANN";
+    expect(editor.apply()).toBeTruthy();
+    expect(model.survey).not.toBe(survey);
+    expect(model.survey.getQuestionByName("gold").locTitle.renderedHtml).toBe("Hello ANN");
     editor.dispose();
   });
 });

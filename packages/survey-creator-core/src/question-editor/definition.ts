@@ -807,6 +807,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "questionErrorLocation", tab: "questionSettings" },
       { name: "gridLayoutColumns", tab: "questionSettings", index: 900 },
       { name: "questionOrder", tab: "questionSettings" },
+      { name: "valueName", tab: "data" },
     ],
     tabs: [
       { name: "questionSettings", index: 100 },
@@ -913,6 +914,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "triggers", tab: "logic" },
 
       { name: "clearInvisibleValues", tab: "data" },
+      { name: "dataNesting", tab: "data" },
       { name: "textUpdateMode", tab: "data" },
       { name: "partialSendEnabled", tab: "data" },
       { name: "storeOthersAsComment", tab: "data" },

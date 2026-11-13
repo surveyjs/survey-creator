@@ -1855,7 +1855,32 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
         });
         textQuestion.inputActionsContainer.addAction(action);
       }
+      if (prop.name === "valueName" && obj instanceof PanelModelBase) {
+        this.setupDataKeyPlaceholder(obj, textQuestion);
+      }
     }
+  }
+  // Nested data (survey-library #12233): in a by-name dataNesting mode a panel or page without valueName stores its
+  // questions' values under its name, so the editor shows the name as its placeholder. It follows a rename and a
+  // dataNesting change (the keys replace the callbacks of a previous editor). The data never moves (D8): no warning.
+  private setupDataKeyPlaceholder(container: PanelModelBase, question: QuestionTextBase): void {
+    const staticPlaceholder = question.placeholder;
+    const key = "__pgDataKeyPlaceholder";
+    const update = (): void => {
+      // The grid of another selection disposed this editor. The survey's key is shared by every container's
+      // editor: the live one owns it now, so only this container's callback goes.
+      if (question.isDisposed) {
+        container.unRegisterFunctionOnPropertyValueChanged("name", key);
+        return;
+      }
+      const survey: any = container.survey;
+      const mode: string = !!survey ? survey.dataNesting : "";
+      const kind = container.isPage ? "page" : "panel";
+      question.placeholder = mode === kind || mode === "panelAndPage" ? container.name : staticPlaceholder;
+    };
+    update();
+    container.registerFunctionOnPropertyValueChanged("name", update, key);
+    (<any>container.survey)?.registerFunctionOnPropertyValueChanged("dataNesting", update, key);
   }
   //Show the default property value as the placeholder. It is based on the edited object locale and doesn't depend on the creator locale.
   private setupDefaultValuePlaceholder(obj: Base, question: QuestionTextBase, prop: JsonObjectProperty): void {

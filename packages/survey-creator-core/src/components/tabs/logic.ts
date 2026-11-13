@@ -161,6 +161,15 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     this.items.forEach(item => item.renameQuestion(oldName, newName));
     this.invisibleItems.forEach(item => item.renameQuestion(oldName, newName));
   }
+  // Nested data: see SurveyLogicItem.renameDataKey. Returns true when a rule split into elements with
+  // different texts: the items no longer match the survey and have to be built again.
+  public renameDataKey(oldPath: Array<string>, newKey: string, keepName?: string): boolean {
+    let res = false;
+    this.items.concat(this.invisibleItems).forEach(item => {
+      if (item.renameDataKey(oldPath, newKey, keepName)) res = true;
+    });
+    return res;
+  }
   public renameItemValue(item: ItemValue, oldValue: any): void {
     const question = this.getItemValueQuestion(item, oldValue);
     if (!question) return;
@@ -221,7 +230,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     const names: { [key: string]: Question } = {};
     this.items.forEach(item => {
       item.getQuestionNames().forEach(name => {
-        const question = this.survey.getQuestionByName(name);
+        const question = <Question>this.survey.getQuestionByName(name) || item.getQuestionByVariableName(name);
         if (!!question && !names[name]) {
           names[name] = question;
         }
@@ -229,7 +238,8 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     });
     let res: Question[] = [];
     Object.keys(names).forEach(item => {
-      if (!!names[item]) {
+      // an inner question can be named twice: {street} and {address.street}
+      if (!!names[item] && res.indexOf(names[item]) < 0) {
         res.push(names[item]);
       }
     });
