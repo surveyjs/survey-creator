@@ -4848,7 +4848,8 @@ export class SurveyCreatorModel extends Base
       appearance: { style: "brand", mode: "tertiary", size: "small" },
       showTitle: false,
       iconSize: "auto",
-      title: this.getLocString("ed.addNewQuestion"),
+      title: this.getLocString("ed.selectQuestionType"),
+      ariaExpanded: false,
     }, {
       items: [],
       allowSelection: false,
@@ -4859,6 +4860,7 @@ export class SurveyCreatorModel extends Base
     }, this);
     newAction.popupModel.getTargetCallback = undefined;
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
+      newAction.ariaExpanded = opt.isVisible;
       if (opt.isVisible) {
         const listModel = newAction.popupModel.contentComponentData.model;
         listModel.setItems(getActions());

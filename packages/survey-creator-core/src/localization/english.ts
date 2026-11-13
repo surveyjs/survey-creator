@@ -162,6 +162,7 @@ export var enStrings = {
     themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost.",
     themeResetConfirmationOk: "Yes, reset the theme",
     addNewQuestion: "Add Question",
+    selectQuestionType: "Select question type",
     selectPage: "Select page...",
     carryForwardChoicesCopied: "Choices are copied from",
     choicesLoadedFromWebText: "Choices are loaded from a web service.",

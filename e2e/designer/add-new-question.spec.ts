@@ -226,4 +226,51 @@ test.describe(title, () => {
     resultJson = await getJSON(page);
     expect(resultJson).toEqual(expectedJson);
   });
+
+  test("Add Question is a native button and the type selector is a separate sibling button", async ({ page }) => {
+    await setJSON(page, {
+      pages: [{
+        name: "page1",
+        elements: [
+          { type: "text", name: "question1" },
+          { type: "panel", name: "panel1", elements: [{ type: "text", name: "question2" }] }
+        ]
+      }]
+    });
+    const surface = page.locator(".svc-page__content:not(.svc-page__content--new) .svc-page__footer .svc-surface-btn");
+    await expect(surface).not.toHaveAttribute("tabindex");
+    const addButton = surface.getByRole("button", { name: "Add Question", exact: true });
+    const typeSelector = surface.getByRole("button", { name: "Select question type" });
+    await expect(addButton).toHaveCount(1);
+    await expect(typeSelector).toHaveCount(1);
+    await expect(page.locator(".svc-panel__add-new-question-container").getByRole("button", { name: "Select question type" })).toHaveCount(1);
+
+    await typeSelector.focus();
+    await page.keyboard.press("Shift+Tab");
+    await expect(addButton).toBeFocused();
+    const questionCount = () => page.evaluate(() => (window as any).creator.survey.getAllQuestions().length);
+    expect(await questionCount()).toBe(2);
+    await page.keyboard.press("Enter");
+    await expect.poll(questionCount).toBe(3);
+
+    await typeSelector.focus();
+    await page.keyboard.press("Shift+Tab");
+    await page.keyboard.press("Space");
+    await expect.poll(questionCount).toBe(4);
+  });
+
+  test("Question type selector announces whether its list is open", async ({ page }) => {
+    await setJSON(page, { pages: [{ name: "page1", elements: [{ type: "text", name: "question1" }] }] });
+    const typeSelector = page.locator(".svc-page__content:not(.svc-page__content--new) .svc-page__footer")
+      .getByRole("button", { name: "Select question type" });
+    await expect(typeSelector).toHaveAttribute("aria-expanded", "false");
+    await typeSelector.focus();
+    await page.keyboard.press("Enter");
+    await expect(getListItemByText(page, "Single-Line Input")).toBeVisible();
+    await expect(typeSelector).toHaveAttribute("aria-expanded", "true");
+    await page.keyboard.press("Tab");
+    await page.keyboard.press("Escape");
+    await expect(getListItemByText(page, "Single-Line Input")).toBeHidden();
+    await expect(typeSelector).toHaveAttribute("aria-expanded", "false");
+  });
 });

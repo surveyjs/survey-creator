@@ -31,6 +31,19 @@
 .svc-surface-btn:where(:active:has(.svc-surface-btn__selector:active)) {
     transform: none;
 }
+// The surface is not focusable: the title button and the type selector are sibling tab stops inside it.
+// The focus ring of the title button is drawn around the whole surface.
+.svc-surface-btn__title-button {
+    appearance: none;
+    background: none;
+    border: none;
+    margin: 0;
+    outline: none;
+    cursor: pointer;
+}
+.svc-surface-btn:has(.svc-surface-btn__title-button:focus-visible) {
+    box-shadow: var(--sd-action-boxshadow), var(--sjs2-border-effect-component-action-a11y);
+}
 .svc-surface-btn__selector {
     position: absolute;
     inset-inline-end: 0;
