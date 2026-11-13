@@ -138,7 +138,14 @@ const finish = (): void => {
   if (printed) printed.builds = { before: before, after: stampBuilds() };
   process.stdout.write(JSON.stringify(printed) + "\n", () => process.exit(0));
 };
+// The message first: a link error's stack starts with the whole import line of the build (over 2 KB), so the cut
+// would drop "does not provide an export named ..." (04, P5).
+function errorText(e: any): string {
+  if (!e || !e.stack) return String(e);
+  const head = String(e);
+  return e.stack.startsWith(head) ? e.stack : head + "\n" + e.stack;
+}
 main().then(finish, (e: any) => {
-  printed = { type: "failed", id: id, error: String(e && e.stack ? e.stack : e).substring(0, 2000) };
+  printed = { type: "failed", id: id, error: errorText(e).substring(0, 2000) };
   finish();
 });

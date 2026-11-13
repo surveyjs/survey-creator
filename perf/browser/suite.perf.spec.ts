@@ -210,8 +210,17 @@ for (const id of split.run) {
     versionMismatch = undefined;
     const reset = resetOverride[id] || (scenario.browser && scenario.browser.reset) || (scenario.kind === "load" ? "page" : "restore");
     let res: any;
-    if (noopMode) res = await runNoopCheck(id, fixture);
-    else res = reset === "page" ? await runFresh(id, fixture) : await runAction(id, fixture);
+    try {
+      if (noopMode) res = await runNoopCheck(id, fixture);
+      else res = reset === "page" ? await runFresh(id, fixture) : await runAction(id, fixture);
+    } catch(e: any) {
+      // What the page said before the throw is often the cause (a build without an API the creator calls) (04, P5).
+      // The mismatch first, so the cut never drops it; the original stack last.
+      const said = (versionMismatch ? ["versionMismatch: survey-core " + versionMismatch.core + ", creator " + versionMismatch.creator] : [])
+        .concat(problems.slice(before, before + 5));
+      if (said.length === 0) throw e;
+      throw new Error(String(e && e.message ? e.message : e) + "\nThe page before the error:\n" + said.join("\n") + (e && e.stack ? "\n" + e.stack : ""));
+    }
     if (res.entry && versionMismatch) res.entry.info.versionMismatch = versionMismatch;
     const changed = buildChange();
     const failed = problems.slice(before).concat(changed ? [changed] : []);

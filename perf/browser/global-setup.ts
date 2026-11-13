@@ -2,7 +2,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import { execSync } from "node:child_process";
 import { createRequire } from "node:module";
-import { runnerRoot, resolveTargetDir, checkBuildFresh, creatorCoreSrc, uiSrc, creatorCoreBuildHint, uiBuildHint,
+import { runnerRoot, resolveTargetDir, checkBuildFresh, creatorCoreInputs, uiSrc, creatorCoreBuildHint, uiBuildHint,
   coreBuildHint, libraryUiBuildHint } from "../harness/node/build.ts";
 import type { TargetKind } from "../harness/node/build.ts";
 import { buildStamp } from "../core/stamp.ts";
@@ -83,7 +83,7 @@ export async function bundlePage(): Promise<{ bytes: number, inputs: number }> {
 // build, and the library builds always, only for existence. A dangling junction fails here, naming it.
 export function checkBuilds(): void {
   const fresh: { [kind: string]: { src: Array<string>, hint: string } } = {
-    creatorCore: { src: creatorCoreSrc, hint: creatorCoreBuildHint },
+    creatorCore: { src: creatorCoreInputs(), hint: creatorCoreBuildHint },
     ui: { src: uiSrc, hint: uiBuildHint }
   };
   const hints: { [kind: string]: string } = { core: coreBuildHint, libraryUi: libraryUiBuildHint };

@@ -6,7 +6,7 @@ import { splitOnly } from "../harness/ids.ts";
 import { fixtureOfId } from "../harness/scenario.ts";
 import { getFixture } from "../fixtures/index.ts";
 import { readEnv } from "../harness/node/env.ts";
-import { resolveTargetDir, checkBuildFresh, checkBuildExists, runnerRoot, coreMain, creatorCoreMain, creatorCoreSrc, creatorCoreBuildHint,
+import { resolveTargetDir, checkBuildFresh, checkBuildExists, runnerRoot, coreMain, creatorCoreMain, creatorCoreInputs, creatorCoreBuildHint,
   coreBuildHint } from "../harness/node/build.ts";
 import { headCommit } from "../harness/node/git.ts";
 import { libraryCheckoutCommit } from "../harness/node/library-commit.ts";
@@ -35,8 +35,8 @@ const coreFile = path.join(core.dir, coreMain);
 const creatorCoreFile = path.join(creatorCore.dir, creatorCoreMain);
 // survey-core belongs to another repo: it is only checked to exist; its version, commit and mtime are recorded.
 if (!fs.existsSync(coreFile)) throw new Error("Missing build file " + coreFile + ". Run: " + coreBuildHint);
-// The creator-core build of this checkout is checked against its src; another one only exists.
-if (creatorCore.isRunnerBuild) checkBuildFresh(creatorCoreSrc, [creatorCoreFile], creatorCoreBuildHint);
+// The creator-core build of this checkout is checked against its src and the survey-core parts it bundles; another one only exists.
+if (creatorCore.isRunnerBuild) checkBuildFresh(creatorCoreInputs(), [creatorCoreFile], creatorCoreBuildHint);
 else checkBuildExists([creatorCoreFile]);
 [["PERF_CORE_DIR", core, coreFile], ["PERF_CREATOR_CORE_DIR", creatorCore, creatorCoreFile]].forEach((t: any) => {
   console.log(t[0] + " " + t[1].dir + ": " + readVersion(t[1].dir) + ", built " + new Date(fs.statSync(t[2]).mtimeMs).toISOString() +

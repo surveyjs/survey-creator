@@ -91,6 +91,9 @@ export default class PerfReporter {
       const info = JSON.parse(envInfo.body.toString());
       this.result.machine = machineInfo({ chromium: info.chromium, extra: readEnv().machineExtra });
       if (this.result.build.ui && info.framework.react)this.result.build.ui.framework = { react: info.framework.react };
+      // The reporter is made before globalSetup, which installs React 19 into perf/react19 on a fresh runner: read the
+      // deps again now, or the first result file of a new runner lacks react / react-dom and has another fingerprint (04).
+      this.result.build.deps = dependencyInfo([runnerRoot, react19Dir]);
       return;
     }
     if (id === "environment" || !test.title || this.ids.indexOf(id) < 0) return;

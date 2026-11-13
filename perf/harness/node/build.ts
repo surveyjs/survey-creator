@@ -30,7 +30,22 @@ export const uiSrc = [path.join(packageDir("survey-creator-react"), "src")];
 export const coreMain = path.join("fesm", "survey-core.mjs");
 export const creatorCoreMain = path.join("fesm", "survey-creator-core.mjs");
 
-export const coreBuildHint = "npm run build && npm run build:i18n && npm run build:icons && npm run build:linter (in survey-library packages/survey-core)";
+// The parts of the survey-core build that creator-core's rollup copies into its build (only the bare survey-core is
+// external): manifest.ts's `bundles`. The runner's creator-core build is stale when the survey-core build it was made
+// against (its node_modules junction, not PERF_CORE_DIR) has newer ones (04, R04-F1).
+export const bundledCoreParts = ["linter", "themes", path.join("fesm", "linter"), path.join("fesm", "themes")];
+export function creatorCoreInputs(): Array<string> {
+  let core = "";
+  try {
+    core = followLink(coreLink);
+  } catch(e) {
+    return creatorCoreSrc;
+  }
+  return creatorCoreSrc.concat(bundledCoreParts.map((p: string) => path.join(core, p)).filter((d: string) => fs.existsSync(d)));
+}
+
+// What the creator needs from survey-core (manifest.ts's libraryBuilds).
+export const coreBuildHint = "npm run build && npm run build:icons && npm run build:linter && npm run build:themes (in survey-library packages/survey-core)";
 export const libraryUiBuildHint = "npm run build (in survey-library packages/survey-react-ui)";
 export const creatorCoreBuildHint = "npm run build (in packages/survey-creator-core)";
 export const uiBuildHint = "npm run build (in packages/survey-creator-react)";

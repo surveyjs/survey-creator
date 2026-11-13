@@ -104,6 +104,16 @@ Prerequisites for Playwright runs:
 - Let Playwright start its own server via the package's `webServer` config — don't pre-start one, or you'll get "port already in use".
 - Run one package's tests at a time to keep output manageable.
 
+### Performance tests
+`perf/` holds the nightly perf suites (Creator in Node + jsdom, and React 19 in headless Chromium); they only measure, and the perf server judges.
+Build the chain first; `perf/README.md` has the variables and how to add a scenario, `perf/CONTRACT.md` what the perf server relies on.
+
+```bash
+cd packages/survey-creator-core && npm run perf       # core suite
+cd packages/survey-creator-react && npm run perf:ci   # react suite
+cd packages/survey-creator-core && npm run perf:test  # the perf code's own unit tests
+```
+
 ## Architecture
 
 ### The creator model: `SurveyCreatorModel`
