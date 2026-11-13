@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { ActionContainer, LocalizableString, QuestionCommentModel, QuestionMatrixDropdownModel, Serializer } from "survey-core";
 import { Translation } from "../src/components/tabs/translation";
-import { PropertyGridEditorHtml, PropertyGridEditorInlineHtml, PropertyGridEditorString, PropertyGridEditorText } from "../src/property-grid";
+import { PropertyGridEditorCollection } from "../src/property-grid";
 import { CreatorTester } from "./creator-tester";
 import { ICreatorRichTextEditor } from "../src/rich-text";
 import { StringEditorViewModelBase } from "../src/components/string-editor";
@@ -73,11 +73,36 @@ function attachSampleHandler(creator: CreatorTester): (sender: any, options: any
   return handler;
 }
 
+function withExampleTypes(run: () => void): void {
+  const surveyDescription = Serializer.findProperty("survey", "description");
+  const pageDescription = Serializer.findProperty("page", "description");
+  const questionTitle = Serializer.findProperty("question", "title");
+  const questionDescription = Serializer.findProperty("question", "description");
+  const choiceText = Serializer.findProperty("itemvalue", "text");
+  const previous = [surveyDescription.type, pageDescription.type, questionTitle.type, questionDescription.type, choiceText.type];
+  surveyDescription.type = "html";
+  pageDescription.type = "html";
+  questionTitle.type = "inlinehtml";
+  questionDescription.type = "text";
+  choiceText.type = "inlinehtml";
+  PropertyGridEditorCollection.clearHash();
+  try {
+    run();
+  } finally {
+    surveyDescription.type = previous[0];
+    pageDescription.type = previous[1];
+    questionTitle.type = previous[2];
+    questionDescription.type = previous[3];
+    choiceText.type = previous[4];
+    PropertyGridEditorCollection.clearHash();
+  }
+}
+
 const htmlSurvey = {
   title: "<strong>Survey</strong>",
   elements: [
     { type: "text", name: "q", title: "<em>Q</em>" },
-    { type: "radiogroup", name: "choices", choices: ["<strong>Bold</strong> choice", "Plain choice"] }
+    { type: "radiogroup", name: "choices", choices: [{ value: "bold", text: "<strong>Bold</strong> choice" }, "Plain choice"] }
   ]
 };
 
@@ -163,44 +188,39 @@ describe("rich text registration", () => {
     expect(propertyGrid.getSurveyMarkdownHtml(titleEditor, "**bold**", "description", undefined)).toContain("spg-bold");
   });
 
-  test("string editor enables rich text only for html and inlinehtml properties", () => {
-    const creator = new CreatorTester();
-    creator.JSON = {
-      elements: [
-        { type: "text", name: "q", title: "Tom & Jerry" },
-        { type: "radiogroup", name: "colors", choices: ["red"] }
-      ]
-    };
-    const { editor } = createModeEditor();
-    creator.registerRichTextEditor(editor);
-    const question = creator.survey.getQuestionByName("q");
-    expect(question.locTitle.hasHtml).toBe(false);
+  test("string editor follows the example property types", () => {
+    withExampleTypes(() => {
+      const creator = new CreatorTester();
+      creator.JSON = {
+        title: "Survey",
+        description: "<p>About</p>",
+        pages: [{
+          name: "page1",
+          description: "<p>Page</p>",
+          elements: [
+            { type: "text", name: "q", title: "Title <em>i</em>", description: "Plain <em>text</em>" },
+            { type: "radiogroup", name: "colors", choices: [{ value: "red", text: "<strong>Red</strong>" }] }
+          ]
+        }]
+      };
+      creator.registerRichTextEditor(createModeEditor().editor);
+      const question = creator.survey.getQuestionByName("q");
+      const choice = creator.survey.getQuestionByName("colors").choices[0];
 
-    const title = new StringEditorViewModelBase(question.locTitle, creator);
-    expect(title.richTextMode).toBe("none");
-    expect(title.editAsText).toBe(true);
-    const description = new StringEditorViewModelBase(question.locDescription, creator);
-    expect(description.richTextMode).toBe("none");
-    const completed = new StringEditorViewModelBase(creator.survey.locCompletedHtml, creator);
-    expect(completed.richTextMode).toBe("block");
-    expect(completed.editAsText).toBe(false);
+      expect(new StringEditorViewModelBase(creator.survey.locTitle, creator).richTextMode).toBe("none");
+      expect(new StringEditorViewModelBase(creator.survey.locDescription, creator).richTextMode).toBe("block");
+      expect(new StringEditorViewModelBase(creator.survey.pages[0].locDescription, creator).richTextMode).toBe("block");
+      const title = new StringEditorViewModelBase(question.locTitle, creator);
+      expect(title.richTextMode).toBe("inline");
+      expect(title.editAsText).toBe(false);
+      expect(new StringEditorViewModelBase(question.locDescription, creator).richTextMode).toBe("none");
+      expect(new StringEditorViewModelBase(choice.locText, creator).richTextMode).toBe("inline");
 
-    Serializer.addProperty("survey", { name: "promo:inlinehtml" });
-    try {
-      const inline = new StringEditorViewModelBase(new LocalizableString(creator.survey, false, "promo"), creator);
-      expect(inline.richTextMode).toBe("inline");
-      expect(inline.editAsText).toBe(false);
-    } finally {
-      Serializer.removeProperty("survey", "promo");
-    }
-
-    creator.survey.onTextMarkdown.add(() => { });
-    const stillPlain = new StringEditorViewModelBase(question.locTitle, creator);
-    expect(stillPlain.richTextMode).toBe("none");
-
-    const choice = creator.survey.getQuestionByName("colors").choices[0];
-    creator.inplaceEditChoiceValues = true;
-    expect(new StringEditorViewModelBase(choice.locText, creator).richTextMode).toBe("none");
+      creator.survey.onTextMarkdown.add(() => { });
+      expect(new StringEditorViewModelBase(creator.survey.locTitle, creator).richTextMode).toBe("none");
+      creator.inplaceEditChoiceValues = true;
+      expect(new StringEditorViewModelBase(choice.locText, creator).richTextMode).toBe("inline");
+    });
   });
 
   test("rich string editor saves sanitizeHtml, and an onHtmlToMarkdown handler overrides it", () => {
@@ -308,118 +328,137 @@ describe("rich text registration", () => {
     expect(creator.survey.locTitle.renderedHtml).not.toContain("RICH:");
   });
 
-  test("property grid uses a richtext question only for html and inlinehtml", () => {
-    const { editor } = createModeEditor();
-    const creator = new CreatorTester();
-    creator.registerRichTextEditor(editor);
-    creator.JSON = { elements: [{ type: "text", name: "q" }] };
-    const question = creator.survey.getQuestionByName("q");
-    const textEditor = new PropertyGridEditorText();
-    const stringEditor = new PropertyGridEditorString();
-    const htmlEditor = new PropertyGridEditorHtml();
-    const inlineEditor = new PropertyGridEditorInlineHtml();
+  test("property grid uses a richtext question for the example html and inlinehtml properties", () => {
+    withExampleTypes(() => {
+      const creator = new CreatorTester();
+      creator.registerRichTextEditor(createModeEditor().editor);
+      creator.JSON = {
+        pages: [{ name: "page1", elements: [{ type: "text", name: "q" }, { type: "radiogroup", name: "colors", choices: ["red"] }] }]
+      };
+      const question = creator.survey.getQuestionByName("q");
+      const choice = creator.survey.getQuestionByName("colors").choices[0];
+      const json = (obj: any, className: string, name: string) => {
+        return PropertyGridEditorCollection.getJSON(obj, Serializer.findProperty(className, name), creator);
+      };
 
-    const title = textEditor.getJSON(question, Serializer.findProperty("question", "title"), creator);
-    expect(title.type).toBe("comment");
-    expect(title.acceptCarriageReturn).toBeUndefined();
+      expect(json(creator.survey, "survey", "title").type).toBe("text");
 
-    const description = textEditor.getJSON(question, Serializer.findProperty("question", "description"), creator);
-    expect(description.type).toBe("comment");
-    expect(description.acceptCarriageReturn).toBeUndefined();
+      const surveyDescription = json(creator.survey, "survey", "description");
+      expect(surveyDescription.type).toBe("richtext");
+      expect(surveyDescription.acceptCarriageReturn).toBe(true);
 
-    const surveyTitle = stringEditor.getJSON(creator.survey, Serializer.findProperty("survey", "title"), creator);
-    expect(surveyTitle.type).toBe("text");
+      const pageDescription = json(creator.survey.pages[0], "page", "description");
+      expect(pageDescription.type).toBe("richtext");
+      expect(pageDescription.acceptCarriageReturn).toBe(true);
 
-    const completed = htmlEditor.getJSON(creator.survey, Serializer.findProperty("survey", "completedHtml"), creator);
-    expect(completed.type).toBe("richtext");
-    expect(completed.acceptCarriageReturn).toBe(true);
+      const questionTitle = json(question, "question", "title");
+      expect(questionTitle.type).toBe("richtext");
+      expect(questionTitle.acceptCarriageReturn).toBe(false);
+      expect(questionTitle.rows).toBe(1);
+      expect(questionTitle.allowResize).toBe(false);
 
-    Serializer.addProperty("survey", { name: "promo:inlinehtml" });
-    try {
-      const inline = inlineEditor.getJSON(creator.survey, Serializer.findProperty("survey", "promo"), creator);
-      expect(inline.type).toBe("richtext");
-      expect(inline.acceptCarriageReturn).toBe(false);
-      expect(inline.rows).toBe(1);
-      expect(inline.allowResize).toBe(false);
-    } finally {
-      Serializer.removeProperty("survey", "promo");
-    }
+      const questionDescription = json(question, "question", "description");
+      expect(questionDescription.type).toBe("comment");
+      expect(questionDescription.acceptCarriageReturn).toBeUndefined();
 
-    const plain = new CreatorTester();
-    const plainHtml = htmlEditor.getJSON(plain.survey, Serializer.findProperty("survey", "completedHtml"), plain);
-    expect(plainHtml.type).toBe("comment");
-    expect(plainHtml.allowResize).toBe(true);
-    expect(plainHtml.autoGrow).toBe(false);
+      const choiceText = json(choice, "itemvalue", "text");
+      expect(choiceText.type).toBe("richtext");
+      expect(choiceText.acceptCarriageReturn).toBe(false);
+
+      const plain = new CreatorTester();
+      const plainDescription = PropertyGridEditorCollection.getJSON(plain.survey, Serializer.findProperty("survey", "description"), plain);
+      expect(plainDescription.type).toBe("comment");
+      expect(plainDescription.allowResize).toBe(true);
+      expect(plainDescription.autoGrow).toBe(false);
+    });
   });
 
-  test("translation cells follow the edit mode, keep plain placeholders, and store HTML unchanged", () => {
-    const creator = new CreatorTester();
-    creator.registerRichTextEditor(createModeEditor().editor);
-    creator.JSON = {
-      elements: [
-        {
-          type: "text",
-          name: "q",
-          title: { default: "Title <em>i</em>" },
-          description: { default: "Desc <strong>d</strong>", de: "Beschreibung" }
-        },
-        {
-          type: "radiogroup",
-          name: "colors",
-          choices: [{ value: "a", text: "<strong>A</strong>" }]
-        }
-      ],
-      completedHtml: "<p>Done</p>"
-    };
-    const translation = new Translation(creator.survey, creator);
-    translation.reset();
-    const title = commentCells(translation, "title");
-    const description = commentCells(translation, "description");
-    const choice = commentCells(translation, "a");
-    const completed = commentCells(translation, "completedHtml");
-    expect(title.length).toBeGreaterThan(0);
-    expect(title[0].getType()).toBe("comment");
-    expect(title[0].acceptCarriageReturn).toBe(true);
-    expect(description[0].getType()).toBe("comment");
-    expect(description[0].acceptCarriageReturn).toBe(true);
-    expect(choice[0].getType()).toBe("comment");
-    expect(choice[0].acceptCarriageReturn).toBe(false);
-    expect(completed.length).toBeGreaterThan(0);
-    expect(completed[0].getType()).toBe("richtext");
-    expect(completed[0].acceptCarriageReturn).toBe(true);
-    const emptyCompleted = completed.filter(cell => !cell.value)[0];
-    expect(emptyCompleted).toBeTruthy();
-    expect(emptyCompleted.placeholder.indexOf("<")).toBe(-1);
-    expect(emptyCompleted.placeholder).toContain("Done");
+  test("translation cells follow the example property types and store HTML unchanged", () => {
+    withExampleTypes(() => {
+      const creator = new CreatorTester();
+      creator.registerRichTextEditor(createModeEditor().editor);
+      creator.JSON = {
+        title: "Survey",
+        description: "<p>Done</p>",
+        pages: [{
+          name: "page1",
+          description: "<p>Page</p>",
+          elements: [
+            {
+              type: "text",
+              name: "q",
+              title: { default: "Title <em>i</em>" },
+              description: { default: "Desc <strong>d</strong>", de: "Beschreibung" }
+            },
+            {
+              type: "radiogroup",
+              name: "colors",
+              choices: [{ value: "red", text: "<strong>Red</strong>" }]
+            }
+          ]
+        }]
+      };
+      const translation = new Translation(creator.survey, creator);
+      translation.reset();
+      const surveyTitle = cellsFor(translation, "survey", "title");
+      const surveyDescription = cellsFor(translation, "survey", "description");
+      const pageDescription = cellsFor(translation, "page", "description");
+      const questionTitle = cellsFor(translation, "text", "title");
+      const questionDescription = cellsFor(translation, "text", "description");
+      const choice = cellsFor(translation, "choiceitem", "text");
 
-    const question = creator.survey.getQuestionByName("q");
-    const deCell = description.filter(cell => cell.value === "Beschreibung")[0];
-    expect(deCell).toBeTruthy();
-    deCell.value = "<em>Hallo</em>";
-    expect(question.locDescription.getLocaleText("de")).toBe("<em>Hallo</em>");
+      expect(surveyTitle[0].getType()).toBe("comment");
+      expect(surveyTitle[0].acceptCarriageReturn).toBe(false);
+      expect(surveyDescription[0].getType()).toBe("richtext");
+      expect(surveyDescription[0].acceptCarriageReturn).toBe(true);
+      expect(pageDescription[0].getType()).toBe("richtext");
+      expect(pageDescription[0].acceptCarriageReturn).toBe(true);
+      expect(questionTitle[0].getType()).toBe("richtext");
+      expect(questionTitle[0].acceptCarriageReturn).toBe(false);
+      expect(questionDescription[0].getType()).toBe("comment");
+      expect(questionDescription[0].acceptCarriageReturn).toBe(true);
+      expect(choice[0].getType()).toBe("richtext");
+      expect(choice[0].acceptCarriageReturn).toBe(false);
 
-    const csv = translation.exportToCSV();
-    expect(csv).toContain("<em>Hallo</em>");
-    translation.importFromNestedArray(parseCsv(csv));
-    expect(creator.survey.getQuestionByName("q").locDescription.getLocaleText("de")).toBe("<em>Hallo</em>");
+      const emptyTitle = questionTitle.filter(cell => !cell.value)[0];
+      expect(emptyTitle).toBeTruthy();
+      expect(emptyTitle.placeholder.indexOf("<")).toBe(-1);
+      expect(emptyTitle.placeholder).toContain("Title");
 
-    translation.readOnly = true;
-    translation.reset();
-    const readOnlyCompleted = commentCells(translation, "completedHtml")[0];
-    expect(readOnlyCompleted.getType()).toBe("richtext");
-    expect(readOnlyCompleted.isReadOnly).toBe(true);
+      const question = creator.survey.getQuestionByName("q");
+      const deCell = questionDescription.filter(cell => cell.value === "Beschreibung")[0];
+      expect(deCell).toBeTruthy();
+      deCell.value = "<em>Hallo</em>";
+      expect(question.locDescription.getLocaleText("de")).toBe("<em>Hallo</em>");
+
+      const csv = translation.exportToCSV();
+      expect(csv).toContain("<em>Hallo</em>");
+      translation.importFromNestedArray(parseCsv(csv));
+      expect(creator.survey.getQuestionByName("q").locDescription.getLocaleText("de")).toBe("<em>Hallo</em>");
+
+      translation.readOnly = true;
+      translation.reset();
+      expect(cellsFor(translation, "text", "title")[0].getType()).toBe("richtext");
+      expect(cellsFor(translation, "text", "title")[0].isReadOnly).toBe(true);
+    });
   });
 });
 
-function commentCells(translation: Translation, rowName: string): QuestionCommentModel[] {
+function cellsFor(translation: Translation, ownerType: string, propertyName: string): QuestionCommentModel[] {
   const found: QuestionCommentModel[] = [];
   translation.stringsSurvey.getAllQuestions().forEach(question => {
     if (!(question instanceof QuestionMatrixDropdownModel)) return;
-    question.visibleRows.forEach(row => {
-      const name = (<any>row).rowName || (row as any).value || ((<any>row).item && (<any>row).item.value);
-      if (name !== rowName) return;
-      row.cells.forEach(cell => {
-        if (cell.question instanceof QuestionCommentModel) found.push(cell.question);
+    question.rows.forEach(row => {
+      const item = (<any>row).translationData;
+      const type = item && item.context && item.context.getType && item.context.getType();
+      const locName = item && item.locString && item.locString.name;
+      if (type !== ownerType || locName !== propertyName) return;
+      question.visibleRows.forEach(visible => {
+        const name = (<any>visible).rowName || (visible as any).value || ((<any>visible).item && (<any>visible).item.value);
+        if (name !== row.value) return;
+        visible.cells.forEach(cell => {
+          if (cell.question instanceof QuestionCommentModel) found.push(cell.question);
+        });
       });
     });
   });

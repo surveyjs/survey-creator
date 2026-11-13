@@ -33,23 +33,13 @@
     Survey.Serializer.findProperty("question", "description").type = "text";
     Survey.Serializer.findProperty("itemvalue", "text").type = "inlinehtml";
 
-    function renderRichString(_sender, options) {
-      var owner = options.item || options.element;
-      var typeName = owner && typeof owner.getType === "function" ? owner.getType() : "";
-      var prop = typeName ? Survey.Serializer.findProperty(typeName, options.name) : null;
-      var type = prop && prop.type;
-      if (type !== "html" && type !== "inlinehtml") return;
-      var html = SurveyRichText.RichText.sanitizeHtml(options.text, { inline: type === "inlinehtml" });
-      if (html !== options.text || /<[A-Za-z/!?]/.test(html)) options.html = html;
-    }
-
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
     SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
 
     var creator = new SurveyCreator.SurveyCreator({ showLogicTab: false });
     creator.registerRichTextEditor(SurveyRichText.RichText);
     creator.onSurveyInstanceCreated.add(function (_sender, options) {
-      options.survey.onTextMarkdown.add(renderRichString);
+      options.survey.onTextMarkdown.add(SurveyRichText.RichText.renderStringHandler);
     });
     creator.JSON = {
       title: "Rich text demo",
