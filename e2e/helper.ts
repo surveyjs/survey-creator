@@ -346,7 +346,7 @@ export async function addQuestionByAddQuestionButton(page: Page, text: string) {
 }
 
 export function getAddNewQuestionButton(page: Page): Locator {
-  return page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn > span").getByText("Add Question");
+  return page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn > .svc-surface-btn__title-button").getByText("Add Question");
 }
 
 export function getToolboxItemByText(page: Page, text: string): Locator {

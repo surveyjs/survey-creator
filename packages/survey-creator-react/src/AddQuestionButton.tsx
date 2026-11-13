@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Action, Base, IAction, PageModel, SurveyModel } from "survey-core";
 import {
-  attachKey2click,
   Popup,
   SurveyActionBar,
   ReactElementFactory,
@@ -26,7 +25,7 @@ export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action
   }
   protected renderElement(): React.JSX.Element {
     return <>
-      {attachKey2click(<div
+      <div
         className={this.item.getActionBarItemCss()}
         onClick={(e) => {
           e.stopPropagation();
@@ -34,11 +33,11 @@ export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action
         }}
         onMouseOver={(e) => this.model.hoverStopper && this.model.hoverStopper(e.nativeEvent, e.currentTarget)}
       >
-        <span className={this.item.getActionBarItemTitleCss()}>
+        <button type="button" className={this.item.getActionBarItemTitleCss() + " svc-surface-btn__title-button"}>
           {this.model.addNewQuestionText}
-        </span>
+        </button>
         {this.renderTypeSelector()}
-      </div>)}
+      </div>
     </>;
   }
 }

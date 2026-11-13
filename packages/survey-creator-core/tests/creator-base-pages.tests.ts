@@ -1504,6 +1504,13 @@ test("Question type selector localization", (): any => {
   locStrings.ed.addNewTypeQuestion = oldAddNewTypeQuestion;
 });
 
+test("Question type selector has a name that differs from Add Question", (): any => {
+  const creator = new CreatorTester();
+  const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  expect(selectorModel.title).toEqual("Select question type");
+  expect(selectorModel.title).not.toEqual(creator.addNewQuestionText);
+});
+
 test("Question type selector popup displayMode", (): any => {
   let creator = new CreatorTester();
   let selectorModel = creator.getQuestionTypeSelectorModel(() => { });

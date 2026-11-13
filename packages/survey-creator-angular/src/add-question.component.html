@@ -1,9 +1,9 @@
 <ng-template #template>
-  <div [class]="model.getActionBarItemCss()" [key2click] (click)="addNewQuestion($event)"
+  <div [class]="model.getActionBarItemCss()" (click)="addNewQuestion($event)"
     (mouseover)="adorner.hoverStopper && adorner.hoverStopper($event, $event.currentTarget)">
-    <span [class]="model.getActionBarItemTitleCss()">
+    <button type="button" [class]="model.getActionBarItemTitleCss() + ' svc-surface-btn__title-button'">
       {{ adorner.addNewQuestionText }}
-    </span>
+    </button>
     <div [class]="model.cssClasses.itemTypeSelector">
       <ng-template [component]="{ name: 'sv-action-bar-item-dropdown', data: { model: model.data.questionTypeSelectorModel } }"></ng-template>
     </div>

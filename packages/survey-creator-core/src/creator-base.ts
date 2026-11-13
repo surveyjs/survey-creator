@@ -4848,7 +4848,7 @@ export class SurveyCreatorModel extends Base
       appearance: { style: "brand", mode: "tertiary", size: "small" },
       showTitle: false,
       iconSize: "auto",
-      title: this.getLocString("ed.addNewQuestion"),
+      title: this.getLocString("ed.selectQuestionType"),
     }, {
       items: [],
       allowSelection: false,

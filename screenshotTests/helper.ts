@@ -95,7 +95,7 @@ export function getSurveyListItemByText(page, text) {
   return page.locator(".sv-popup__content .sd-menu-item").getByText(text);
 }
 export function getAddNewQuestionButton(page: Page): Locator {
-  return page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn > span").getByText("Add Question");
+  return page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn > .svc-surface-btn__title-button").getByText("Add Question");
 }
 
 export function getToolboxItemByText(page, text) {
