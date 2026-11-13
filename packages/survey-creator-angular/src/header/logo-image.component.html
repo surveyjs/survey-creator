@@ -3,7 +3,7 @@
     <input type="file" aria-hidden="true" tabindex="-1" [accept]="model.acceptedTypes" class="svc-choose-file-input" />
     <ng-container *ngIf="!survey.locLogo.renderedHtml">
       <ng-container *ngIf="model.allowEdit && !model.isUploading">
-        <div class="svc-logo-image-placeholder" (click)="model.chooseFile(model)" [key2click]>
+        <div class="svc-logo-image-placeholder" role="button" [attr.aria-label]="model.chooseLogoAriaLabel" (click)="model.chooseFile(model)" [key2click]>
           <svg>
             <use xlink:href="#icon-image-48x48"></use>
           </svg>

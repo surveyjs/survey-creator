@@ -193,6 +193,7 @@ export var enStrings = {
     imageChooseImage: "Choose Image",
     addNewTypeQuestion: "Add {0}", // {0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
+    chooseLogoAriaLabel: "Upload logo",
     choices_Item: "Item ",
     selectFile: "Select a file",
     removeFile: "Remove the file",

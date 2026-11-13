@@ -44,6 +44,9 @@ export class LogoImageViewModel extends Base {
   get chooseLogoPlaceholder() {
     return this.creator.getLocString("ed.chooseLogoPlaceholder");
   }
+  get chooseLogoAriaLabel(): string {
+    return this.creator.getLocString("ed.chooseLogoAriaLabel");
+  }
   public get acceptedTypes(): string {
     return getAcceptedTypesByContentMode("image");
   }
