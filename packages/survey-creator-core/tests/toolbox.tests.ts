@@ -888,6 +888,25 @@ test("Toolbox showSubitems property", (): any => {
   expect(toolboxTool.itemComponent).toBe("svc-toolbox-item");
 });
 
+test("Toolbox tools are list items only inside a list, Bug#8155", (): any => {
+  const creator = new CreatorTester();
+  const toolbox = creator.toolbox;
+  const textItem = toolbox.getItemByName("text") as QuestionToolboxItem;
+  const textTool = new ToolboxToolViewModel(textItem, creator, toolbox);
+  expect(toolbox.showInSingleCategory).toBeTruthy();
+  expect(toolbox.toolboxAriaLabel).toBe("Toolbox");
+  expect(textTool.ariaRole).toBe("listitem");
+  expect(new ToolboxToolViewModel(toolbox.dotsItem as any, creator, toolbox).ariaRole).toBe("listitem");
+  expect(new ToolboxToolViewModel(toolbox.searchItem as any, creator, toolbox).ariaRole).toBeUndefined();
+
+  const subitemsList = textItem.popupModel.contentComponentData.model;
+  expect(new ToolboxToolViewModel(textItem.items[0], creator, subitemsList).ariaRole).toBe("listitem");
+
+  toolbox.showCategoryTitles = true;
+  expect(toolbox.showInSingleCategory).toBeFalsy();
+  expect(textTool.ariaRole).toBeUndefined();
+});
+
 test("Toolbox item clearSubitems function", (): any => {
   const creator = new CreatorTester();
   const textItem = creator.toolbox.getItemByName("text") as QuestionToolboxItem;
