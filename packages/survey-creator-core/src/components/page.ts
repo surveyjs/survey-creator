@@ -1,4 +1,4 @@
-import { ActionContainer, classesToSelector, ComputedUpdater, toCssClasses, DragOrClickHelper, IAction, PageModel, property, QuestionRowModel, SurveyModel, settings as SurveySettings } from "survey-core";
+import { ActionContainer, classesToSelector, ComputedUpdater, toCssClasses, DragOrClickHelper, IAction, PageModel, property, QuestionRowModel, SurveyModel } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementActionContainer } from "./action-container-view-model";
@@ -389,7 +389,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       (this.allowExpandCollapse || !!this.page["isGhost"]) && this.expandCollapseAnimationRunning && "svc-page__content--animation-running",
       !!this.isGhost && "svc-page__content--new",
       !this.isGhost && !!this.isSelected && "svc-page__content--selected",
-      !this.isGhost && SurveySettings.designMode.showEmptyTitles === false && "svc-page__content--no-header"
+      !this.isGhost && this.page.survey?.showEmptyTitlesInDesignMode === false && "svc-page__content--no-header"
     );
 
     if (isInsideCollapsed) {

@@ -1,4 +1,4 @@
-import { ComponentCollection, ListModel, PopupDropdownViewModel, QuestionTextModel, settings as surveySettings } from "survey-core";
+import { ComponentCollection, ListModel, PopupDropdownViewModel, QuestionTextModel } from "survey-core";
 import { vi } from "vitest";
 import { PageAdorner } from "../src/components/page";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
@@ -208,19 +208,12 @@ test("Page content lazy rendering: needRenderContent should be updated on creato
   const pageAdorner = new PageAdorner(creator, creator.survey.pages[0]);
   expect(pageAdorner.needRenderContent).toBe(false);
 
-  // the pageEditMode setter writes these global survey-core settings
-  const { showEmptyTitles, showEmptyDescriptions } = surveySettings.designMode;
-  try {
-    creator.pageEditMode = "bypage";
-    expect(pageAdorner.needRenderContent).toBe(true);
+  creator.pageEditMode = "bypage";
+  expect(pageAdorner.needRenderContent).toBe(true);
 
-    // the rendered content should not fall back to the loading placeholder
-    creator.pageEditMode = "standard";
-    expect(pageAdorner.needRenderContent).toBe(true);
-  } finally {
-    surveySettings.designMode.showEmptyTitles = showEmptyTitles;
-    surveySettings.designMode.showEmptyDescriptions = showEmptyDescriptions;
-  }
+  // the rendered content should not fall back to the loading placeholder
+  creator.pageEditMode = "standard";
+  expect(pageAdorner.needRenderContent).toBe(true);
 });
 
 test("Page content lazy rendering: the observer resolves the loading placeholder", async (): Promise<any> => {
@@ -432,15 +425,8 @@ test("Page content lazy rendering: showPlaceholder does not depend on the rows o
 
 test("Page content lazy rendering: creator.pageEditMode change builds the rows", (): any => {
   const { creator, page } = createPendingPage();
-  // the pageEditMode setter writes these global survey-core settings
-  const { showEmptyTitles, showEmptyDescriptions } = surveySettings.designMode;
-  try {
-    creator.pageEditMode = "bypage";
-    expect(getRowNames(page)).toEqual([["q4"]]);
-  } finally {
-    surveySettings.designMode.showEmptyTitles = showEmptyTitles;
-    surveySettings.designMode.showEmptyDescriptions = showEmptyDescriptions;
-  }
+  creator.pageEditMode = "bypage";
+  expect(getRowNames(page)).toEqual([["q4"]]);
 });
 
 test("Page content lazy rendering: isGhost builds the rows", (): any => {
@@ -542,22 +528,15 @@ test("Page content lazy rendering: elements added to a pending page get their fi
 });
 
 test("Page content lazy rendering: bypage and single modes build the rows when the adorner is attached", (): any => {
-  // the pageEditMode option writes these global survey-core settings
-  const { showEmptyTitles, showEmptyDescriptions } = surveySettings.designMode;
-  try {
-    ["bypage", "single"].forEach((mode: any) => {
-      const creator = new CreatorTester({ pageEditMode: mode });
-      creator.JSON = createPagesJSON(6);
-      const page = creator.survey.pages[3];
-      expect(page.rows).toHaveLength(0);
-      const adorner = new PageAdorner(creator, page);
-      expect(adorner.needRenderContent).toBe(true);
-      expect(getRowNames(page)).toEqual([["q4"]]);
-    });
-  } finally {
-    surveySettings.designMode.showEmptyTitles = showEmptyTitles;
-    surveySettings.designMode.showEmptyDescriptions = showEmptyDescriptions;
-  }
+  ["bypage", "single"].forEach((mode: any) => {
+    const creator = new CreatorTester({ pageEditMode: mode });
+    creator.JSON = createPagesJSON(6);
+    const page = creator.survey.pages[3];
+    expect(page.rows).toHaveLength(0);
+    const adorner = new PageAdorner(creator, page);
+    expect(adorner.needRenderContent).toBe(true);
+    expect(getRowNames(page)).toEqual([["q4"]]);
+  });
 });
 
 test("Page content lazy rendering: a page with elements on one line sets the width mode when the adorner is attached", (): any => {
