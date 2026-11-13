@@ -18,7 +18,7 @@ import { updateLogicExpression } from "./logic-expression";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 import { wrapTextByCurlyBraces } from "../../utils/creator-utils";
 import { SurveyHelper } from "../../survey-helper";
-import { findInnerQuestion, getExpressionScopePaths, isInnerQuestion } from "../../utils/data-path";
+import { findInnerQuestion, getConditionQuestionKey, getExpressionScopePaths, isInnerQuestion } from "../../utils/data-path";
 
 // The variable prefixes a data key change rewrites for an element resolved in the given data scopes: for every
 // scope above the changed key, the relative path down to it ("page1.address" from the root, "address" from
@@ -392,7 +392,7 @@ export class SurveyLogicItem {
     if (!this.isQuestionInExpression(matrix)) return;
     const columnPostFix = "." + question.getValueName();
     if (!this.isStrContainsInExpression(columnPostFix + surveyLibSettings.expressionVariableDelimiters.end)) return;
-    const questionPrefix = matrix.getValueName() + ".";
+    const questionPrefix = getConditionQuestionKey(matrix) + ".";
     const rows: Array<ItemValue> = matrix["rows"];
     let newExpression = this.expression;
     for (var i = 0; i < rows.length; i++) {
@@ -419,13 +419,15 @@ export class SurveyLogicItem {
     if (!str) return false;
     return this.expression.toLocaleLowerCase().indexOf(str.toLocaleLowerCase()) > -1;
   }
+  // The variable an expression reads the question by: inside a record its value name after the record's
+  // prefix; else the name the condition editor lists it by ({city} for an inner question, not {town}).
   private getItemValueQuestionName(question: Question): string {
-    const valName = question.getValueName();
     if (!!question.parentQuestion) {
+      const valName = question.getValueName();
       if (question.parentQuestion.isDescendantOf("paneldynamic")) return "panel." + valName;
       if (question.parentQuestion.isDescendantOf("matrixdropdownbase")) return "row." + valName;
     }
-    return valName;
+    return getConditionQuestionKey(question);
   }
   public removeQuestion(name: string): void {
     this.removeQuestionInExpression(name);

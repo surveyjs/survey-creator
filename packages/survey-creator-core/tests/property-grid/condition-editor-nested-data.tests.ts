@@ -251,6 +251,18 @@ describe("renames rewrite names and paths (nested data, survey-library #12233)",
     checkRename(surveyJson(), { q1: ["{street} = 1 and {address.street} = 2", "{road} = 1 and {address.road} = 2"] },
       creator => creator.survey.getQuestionByName("street").name = "road");
   });
+  test("an inner question's choice value renamed: {city} with valueName town and an inner matrix's rows follow", () => {
+    const creator = createCreator({ elements: [
+      { type: "panel", name: "panel1", valueName: "address", elements: [
+        { type: "radiogroup", name: "city", valueName: "town", choices: ["a", "b"] },
+        { type: "matrixdropdown", name: "m", valueName: "mv", rows: ["r1"], columns: [{ name: "c1", cellType: "dropdown", choices: ["x", "y"] }] }] },
+      { type: "text", name: "q1", visibleIf: "{city} = 'a' and {m.r1.c1} = 'x'" }
+    ] });
+    creator.survey.getQuestionByName("city").choices[0].value = "a1";
+    expect(creator.survey.getQuestionByName("q1").visibleIf, "#1").toBe("({city} = 'a1') and ({m.r1.c1} = 'x')");
+    creator.survey.getQuestionByName("m").columns[0].choices[0].value = "x1";
+    expect(creator.survey.getQuestionByName("q1").visibleIf, "#2").toBe("({city} = 'a1') and ({m.r1.c1} = 'x1')");
+  });
   test("rename city (valueName town) -> place: {city} follows, {address.town} does not change", () => {
     checkRename(surveyJson(), { q1: ["{city} = 1 and {address.town} = 2", "{place} = 1 and {address.town} = 2"] },
       creator => creator.survey.getQuestionByName("city").name = "place");
@@ -369,15 +381,25 @@ describe("the Creator uses survey-core's variable lookup (nested data, survey-li
     expect(getRow(editor, 1).getQuestionByName("questionName").value).toBe("kind-unwrapped");
     expect(editor.text).toBe("{address.kind-unwrapped} = 'home' and {kind-unwrapped} = 'work'");
   });
-  test("an inner question captured at the root by a top-level valueName is written by its data path", () => {
-    const survey = new SurveyModel({ elements: [addressPanel(), { type: "text", name: "q1" }, { type: "text", name: "q2", valueName: "city" }] });
+  test("an inner question captured at the root by a top-level valueName is listed and written by its data path", () => {
+    const survey = new SurveyModel({ elements: [addressPanel(), { type: "text", name: "q1" },
+      { type: "text", name: "q2", valueName: "city" }, { type: "text", name: "q3", valueName: "street" }] });
     const q1 = survey.getQuestionByName("q1");
+    // {city} and {street} read q2 and q3 at runtime: the inner questions are listed by their paths, and q2
+    // and q3 keep their own entries (sorted by their texts, q2 and q3)
+    expect(getListNames(survey, q1)).toEqual(["address.street", "address.town", "kind", "city", "street"]);
     const editor = new ConditionEditor(survey, q1, new EmptySurveyCreatorOptions(), "visibleIf");
     const row = getRow(editor);
-    row.getQuestionByName("questionName").value = "city";
+    row.getQuestionByName("questionName").value = "address.town";
     row.getQuestionByName("questionValue").value = "x";
-    // {city} would read q2 at runtime; {address.town} reads the inner question
-    expect(editor.text).toBe("{address.town} = 'x'");
+    expect(editor.text, "#1: the inner city").toBe("{address.town} = 'x'");
+    row.getQuestionByName("questionName").value = "city";
+    row.getQuestionByName("questionValue").value = "y";
+    expect(editor.text, "#2: q2").toBe("{city} = 'y'");
+    editor.text = "{address.street} = 'a' and {street} = 'b'";
+    expect(editor.panel.panels.map(panel => panel.getQuestionByName("questionName").value), "#3: the rows round-trip")
+      .toEqual(["address.street", "street"]);
+    expect(editor.text).toBe("{address.street} = 'a' and {street} = 'b'");
   });
   test("findInnerQuestion keeps today's answers for comment keys, postfixes and top-level questions", () => {
     const survey = new SurveyModel(surveyJson({}, { elements: [{ type: "radiogroup", name: "kind", choices: ["home"], showOtherItem: true }] }));

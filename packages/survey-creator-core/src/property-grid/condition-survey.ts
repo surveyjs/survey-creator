@@ -144,19 +144,21 @@ export function buildConditionQuestionList(survey: SurveyModel, object: Base, pr
   return res;
 }
 // Nested data: survey-core lists a question by its value name, which for an inner question is a key of its
-// container's object, not of the survey data, so {town} is not found at the root (survey-library #12233, D9).
-// The editor inserts the question's name instead ({city}), which resolves at the root and inside the
-// container, and survives a change of the container's key or of dataNesting. Sub-entries ("mv.r1") follow.
+// container's object, not of the survey data, so {town} is not found at the root (survey-library #12233).
+// The editor inserts the variable survey-core names it by instead (getConditionQuestionKey): its name
+// ({city}), which resolves at the root and inside the container, and survives a change of the container's
+// key or of dataNesting; or its data path when a top-level value name takes the name. Sub-entries
+// ("mv.r1") follow.
 function renameInnerQuestionEntries(res: Array<any>, start: number, question: Question): void {
-  if (!isInnerQuestion(question)) return;
   const valueName = question.getValueName();
-  if (valueName === question.name) return;
+  const key = getConditionQuestionKey(question);
+  if (valueName === key) return;
   for (let i = start; i < res.length; i++) {
     const name: string = res[i].name;
     if (res[i].question !== question || typeof name !== "string" || name.indexOf(valueName) !== 0) continue;
     const nextCh = name[valueName.length];
     if (nextCh !== undefined && nextCh !== "." && nextCh !== "[") continue;
-    res[i].name = question.name + name.substring(valueName.length);
+    res[i].name = key + name.substring(valueName.length);
   }
 }
 function isItemValue(object: Base): boolean {

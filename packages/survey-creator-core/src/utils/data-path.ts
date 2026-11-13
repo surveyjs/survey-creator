@@ -12,11 +12,14 @@ function getDataPath(el: any): Array<string> {
 export function isInnerQuestion(question: Base): boolean {
   return getDataPath(question).length > 1;
 }
-// The name the condition editor lists a question by: an inner question's name ({street}, {city} for a question
-// with valueName "town"), which resolves at the root and inside its container; else its value name, as before.
+// The name the condition editor lists a question by: the variable survey-core names it by
+// (SurveyModel.getQuestionVariableName). An inner question's name ({street}, {city} for a question with
+// valueName "town"), which resolves at the root and inside its container, or its data path ({address.town})
+// when a top-level value name takes the name; else its value name, as before.
 export function getConditionQuestionKey(question: Question): string {
   if (!question) return "";
-  return isInnerQuestion(question) ? question.name : question.getValueName();
+  const survey = <SurveyModel><any>question.survey;
+  return !!survey ? survey.getQuestionVariableName(question) : question.getValueName();
 }
 export interface IInnerQuestionInfo {
   question: Question;
