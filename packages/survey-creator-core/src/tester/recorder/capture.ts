@@ -94,6 +94,16 @@ interface ValueGesture {
   // The input this snapshot belongs to. One snapshot per input, so a cascade cannot overwrite it and a
   // second keystroke replaces it.
   valueEpoch: number;
+  // The snapshot the current one replaced. A row or a panel command takes the current one back to it:
+  // see dropOwnValueChange().
+  prior?: IUserSnapshot;
+}
+
+interface IUserSnapshot {
+  hasUserValue: boolean;
+  userValue: any;
+  userComment: any;
+  userTarget?: string;
 }
 
 export class RecorderCapture {
@@ -209,6 +219,10 @@ export class RecorderCapture {
   private noteModelChange(): void {
     const gesture = this.gesture;
     if (!gesture || gesture.valueEpoch === this.inputEpoch) return;
+    gesture.prior = {
+      hasUserValue: gesture.hasUserValue, userValue: gesture.userValue,
+      userComment: gesture.userComment, userTarget: gesture.userTarget,
+    };
     gesture.valueEpoch = this.inputEpoch;
     gesture.hasUserValue = true;
     gesture.userValue = clone(gesture.question.value);
@@ -351,11 +365,38 @@ export class RecorderCapture {
       return;
     }
     if (typeof payload !== "number") return;
+    this.dropOwnValueChange();
     // The value the person typed into a cell comes first: this press is the later step.
     this.flushValueOnly();
     this.emit({
       command: command, target: target, payload: payload, description: testerText(said, target),
     });
+  }
+
+  // Adding or removing a row or a panel moves the question's own value, and survey-core announces that
+  // move through onValueChanged before onMatrixRowAdded / onMatrixRowRemoved (and the panel pair). The
+  // snapshot noteModelChange() took on that announcement is therefore not an answer: it is the array the
+  // row command is about to account for, and settling it would write a whole-array "set" in front of
+  // every press. The input it was taken on is the same input as the row command, so it is taken back to
+  // what the gesture held before this input - an earlier cell value, or nothing. With nothing earlier the
+  // gesture settles as unchanged, which is what the person did to the value: nothing, apart from the press.
+  private dropOwnValueChange(): void {
+    const gesture = this.gesture;
+    if (!gesture || gesture.valueEpoch !== this.inputEpoch) return;
+    const prior = gesture.prior;
+    if (!!prior && prior.hasUserValue) {
+      gesture.hasUserValue = true;
+      gesture.userValue = prior.userValue;
+      gesture.userComment = prior.userComment;
+      gesture.userTarget = prior.userTarget;
+    } else {
+      gesture.hasUserValue = true;
+      gesture.userValue = gesture.valueBefore;
+      gesture.userComment = gesture.commentBefore;
+      gesture.userTarget = undefined;
+    }
+    gesture.prior = undefined;
+    gesture.valueEpoch = -1;
   }
 
   // The value gesture only: the gesture object itself stays, because the click that adds a row is part of

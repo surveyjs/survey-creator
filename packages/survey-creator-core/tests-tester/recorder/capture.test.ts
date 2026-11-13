@@ -307,6 +307,22 @@ describe("what the survey did by itself", () => {
       .toEqual(["addRow items 1"]);
     harness.dispose();
   });
+
+  it("records a panel the person added, and not the value the addition moved", () => {
+    const harness = createHarness({
+      elements: [{
+        type: "paneldynamic", name: "people", panelCount: 1,
+        templateElements: [{ type: "text", name: "first" }],
+      }],
+    });
+    const people: any = harness.survey.getQuestionByName("people");
+    fire(harness.node("people"), "pointerdown");
+    people.addPanel();
+    harness.capture.flush();
+    expect(harness.commands.map(command => command.command + " " + command.target + " " + command.payload))
+      .toEqual(["addPanel people 1"]);
+    harness.dispose();
+  });
 });
 
 describe("the model afterwards", () => {

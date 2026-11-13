@@ -366,11 +366,11 @@ describe("what a person did, through the model", () => {
     recorder.flush();
     await drain(recorder);
     // The index the model reported, which is what the case addresses a row by. The removal also moves
-    // the matrix's own value, and the capture cannot tell that change from an answer - so a "set" of
-    // the array is written in front of it. It is the prototype's behaviour, it replays to the same
-    // state, and it is entry 17 of promts/creator-tester-notes.md.
+    // the matrix's own value; that move belongs to the press, so no "set" of the array is written in
+    // front of it (entry 17 of the notes, and RecorderCapture.dropOwnValueChange).
     const steps = stepsOf(host);
-    expect(steps[steps.length - 1]).toEqual({ name: "removeRow-items", removeRow: { items: 1 } });
+    expect(steps.length).toBe(3);
+    expect(steps[2]).toEqual({ name: "removeRow-items", removeRow: { items: 1 } });
     expect(recorder.verifyOutcome?.status).toBe("passed");
   }, 30000);
 });
