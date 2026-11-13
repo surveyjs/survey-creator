@@ -1,0 +1,118 @@
+{
+  "huge/edit/add-question": {
+    "rev": 1,
+    "hash": "ae013d81b08a9654ce04a9441e9926e549ab61b4"
+  },
+  "huge/edit/property": {
+    "rev": 1,
+    "hash": "678ddd3fa73ba533533a6391d1a33c494bf775de"
+  },
+  "huge/load/json": {
+    "rev": 1,
+    "hash": "a008fed69aa23f30693dbe5004ba634cc87bb111"
+  },
+  "huge/output/dispose": {
+    "rev": 1,
+    "hash": "560e291430c794e97430db978459af3944a4d37f"
+  },
+  "huge/output/text": {
+    "rev": 1,
+    "hash": "f4957d0dcf4af1f4b1ffdd5b00c0e8d0c61cb8c6"
+  },
+  "huge/select/element@q3978": {
+    "rev": 1,
+    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+  },
+  "huge/tabs/designer": {
+    "rev": 1,
+    "hash": "75772437b3aa0377f199a06ceb5bbcd6d3a00205"
+  },
+  "huge/tabs/json": {
+    "rev": 1,
+    "hash": "3cea7f788950a7fb5925b63d99697575b354e880"
+  },
+  "huge/tabs/logic": {
+    "rev": 1,
+    "hash": "3cea7f788950a7fb5925b63d99697575b354e880"
+  },
+  "huge/tabs/preview": {
+    "rev": 1,
+    "hash": "3cea7f788950a7fb5925b63d99697575b354e880"
+  },
+  "huge/tabs/roundtrip": {
+    "rev": 1,
+    "hash": "db81211ed14adf8689e2e25e558381cd45ee9f7f"
+  },
+  "huge/tabs/translation": {
+    "rev": 1,
+    "hash": "3cea7f788950a7fb5925b63d99697575b354e880"
+  },
+  "locales/load/json": {
+    "rev": 1,
+    "hash": "a008fed69aa23f30693dbe5004ba634cc87bb111"
+  },
+  "locales/tabs/translation": {
+    "rev": 1,
+    "hash": "3cea7f788950a7fb5925b63d99697575b354e880"
+  },
+  "typical/edit/add-question": {
+    "rev": 1,
+    "hash": "ae013d81b08a9654ce04a9441e9926e549ab61b4"
+  },
+  "typical/edit/convert@dropdown1": {
+    "rev": 1,
+    "hash": "27aed2e85dfc4990e42f77baaa7664acf37e3e48"
+  },
+  "typical/edit/delete": {
+    "rev": 1,
+    "hash": "2b94cb4394bd80f605cb7cd37c2e6a5f2762f80a"
+  },
+  "typical/edit/property": {
+    "rev": 1,
+    "hash": "678ddd3fa73ba533533a6391d1a33c494bf775de"
+  },
+  "typical/edit/undo-redo": {
+    "rev": 1,
+    "hash": "878bf68a432b9e52833c4c845252c298666f6e62"
+  },
+  "typical/load/json": {
+    "rev": 1,
+    "hash": "a008fed69aa23f30693dbe5004ba634cc87bb111"
+  },
+  "typical/select/element@checkbox1": {
+    "rev": 1,
+    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+  },
+  "typical/select/element@dropdown1": {
+    "rev": 1,
+    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+  },
+  "typical/select/element@matrixdynamic1": {
+    "rev": 1,
+    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+  },
+  "typical/select/element@page1": {
+    "rev": 1,
+    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+  },
+  "typical/select/element@panel1": {
+    "rev": 1,
+    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+  },
+  "typical/select/element@paneldynamic1": {
+    "rev": 1,
+    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+  },
+  "typical/select/element@survey": {
+    "rev": 1,
+    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+  },
+  "typical/select/element@text1": {
+    "rev": 1,
+    "hash": "b210d11545e2627dbbea10f8aeea34cd15834632"
+  },
+  "typical/tabs/theme": {
+    "rev": 1,
+    "hash": "ff2883ca8be9f70b0625b3f40068d081a87f80ac"
+  }
+}

@@ -206,6 +206,8 @@ describe("loading the fixtures", () => {
       });
     };
     walk(dir);
+    // Since 02 the folder has the scenarios: a scan that finds nothing would pass for the wrong reason.
+    expect(files.length).toBeGreaterThan(0);
     const offenders = files.filter((f: string) => /(from|import)\s*\(?\s*["'][^"']*fixtures\//.test(fs.readFileSync(f, "utf8")));
     expect(offenders).toEqual([]);
   });

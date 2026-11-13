@@ -22,3 +22,8 @@ in `sync.ts` (`VENDORED`) and this table must name the same files; `perf:test` c
 | `harness/node/env.ts` | `perf/harness/node/env.ts@5f2307e29` | adapted | `PERF_LIB_UI_DIR`, `PERF_CREATOR_CORE_DIR`, `PERF_LIB_COMMIT` added; `PERF_EXTRA_JSON` removed, as the creator has no extra fixtures |
 | `harness/node/build.ts` | `perf/harness/node/build.ts@5f2307e29` | adapted | the four target directories, their variables and defaults (00 § Runner and target); `followLink`: the junction realpath, with an error naming a dangling link and its target; the creator `src` folders and build hints; `resolveCoreDir` kept as `resolveTargetDir("core")` |
 | `fixtures/random.ts` | `perf/fixtures/random.ts@5f2307e29` | verbatim | the seeded PRNG |
+| `scenarios/revs.ts` | `perf/scenarios/revs.ts@5f2307e29` | adapted | `perf/browser/page-helpers.ts` is read only when it exists (03 adds it); a method call of a helper's name (`creator.selectElement(`) is not a helper call; every scenario must name `createCreator` (options.ts) in `uses` |
+| `core/run.ts` | `perf/core/run.ts@5f2307e29` | adapted | two target builds (`PERF_CORE_DIR`, `PERF_CREATOR_CORE_DIR`): survey-core only checked to exist, the runner's creator-core checked against its `src`; `product`, `build.creatorCore`; the library commit from `PERF_LIB_COMMIT` or its survey-library checkout; the deps fingerprint over the runner's root and creator-core; no extra fixtures; `info.processMs` |
+
+`core/scenario-process.ts` is modelled on the library's file of the same name but written for the creator (the jsdom
+window, the resolve hook, the settle, the creator funnels), so it is not listed.

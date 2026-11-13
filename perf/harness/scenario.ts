@@ -45,6 +45,9 @@ export interface PerfContext {
   cache: { [key: string]: any };
   // Browser only (03): the DOM helpers of the page.
   page?: PerfPage;
+  // A full GC and the heap it leaves, for info.heapGrowthKB (C10): core uses gc() and process.memoryUsage(); the
+  // browser (03) its own. A scenario adds to its entry's info through ctx.cache.info.
+  heap?: { collect(): void | Promise<void>, usedBytes(): number };
 }
 
 export interface PerfScenario<S = any> {
