@@ -1,5 +1,5 @@
 <template>
-  <div :class="item.css" ref="root">
+  <div :class="item.css" ref="root" :role="model?.ariaRole">
     <div
       class="svc-toolbox__category-separator"
       v-if="item.needSeparator && !creator.toolbox.showCategoryTitles"

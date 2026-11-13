@@ -700,6 +700,8 @@ export var frenchTranslation = {
       templateDescription: "Modèle de description d’entrée",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Modèle de titre d’entrée",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Titre d’entrée temporaire",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Texte du panneau vide",
       // [Auto-translated] "Tab title pattern"
@@ -978,12 +980,20 @@ export var frenchTranslation = {
     addItem: "Cliquez pour ajouter un item...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Cliquez pour supprimer l’élément...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Ajouter {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Retirez {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Faire glisser l’élément",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Élargir les choix imbriqués",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Effondrement des choix imbriqués",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Élargissez les choix imbriqués de {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Effondrement des choix imbriqués de {0}",
     // [Auto-translated] "Show description"
     showDescription: "Description de l’émission",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2880,8 @@ export var frenchTranslation = {
       width: "Définit la largeur du panneau par rapport aux autres éléments de topographie de la même ligne. Accepte les valeurs CSS (px, %, in, pt, etc.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Saisissez un modèle pour les titres de panneau dynamiques. Utilisez {panelIndex} pour la position générale du panneau et {visiblePanelIndex} pour son ordre parmi les panneaux visibles. Insérez ces espaces réservés dans le motif pour ajouter une numérotation automatique.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Un texte de secours pour les titres d’entrées qui s’applique lorsque le motif de titre d’entrée ne produit pas de valeur significative. Utilisez {panelIndex} pour la position générale de l’entrée et {visiblePanelIndex} pour son ordre parmi les entrées visibles.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Saisissez un modèle pour les titres d’onglets. Utilisez {panelIndex} pour la position générale d’un panneau et {visiblePanelIndex} pour son ordre parmi les panneaux visibles. Insérez ces espaces réservés dans le motif pour ajouter une numérotation automatique.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

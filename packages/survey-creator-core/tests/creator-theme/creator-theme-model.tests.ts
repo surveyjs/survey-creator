@@ -1,8 +1,9 @@
 import { CreatorTester } from "../creator-tester";
 import { CreatorThemeModel } from "../../src/creator-theme/creator-theme-model";
 import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
-import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes } from "../../src/creator-theme/creator-themes";
-import SurveyThemes from "survey-core/themes";
+import { CreatorThemes, ICreatorTheme, PredefinedCreatorThemes, registerCreatorTheme } from "../../src/creator-theme/creator-themes";
+import SurveyThemes, { DefaultLight } from "survey-core/themes";
+import { vi } from "vitest";
 
 import "survey-core/survey.i18n";
 import { PredefinedBackgroundColors, PredefinedColors } from "../../src/components/tabs/themes";
@@ -320,4 +321,82 @@ test("creator.showCreatorThemeSettings", (): any => {
 
   creator.showCreatorThemeSettings = false;
   expect(tabControlModelBottomToolbar.actions[0].isVisible).toEqual(false);
+});
+test("Default creator theme: survey-core DefaultLight is not filled", (): any => {
+  mockDomWindowGetComputedStyleFromInlineStyles({
+    [CreatorThemeModel.varColorUtilitySurface]: "#EDF9F7",
+    [CreatorThemeModel.varColorProjectBrand]: "#19B394",
+  });
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
+  const themeModel = creator.getPlugin<TabDesignerPlugin>("designer")["themeModel"] as CreatorThemeModel;
+  themeModel[CreatorThemeModel.varColorProjectBrand] = "#ff0000";
+  expect(DefaultLight.cssVariables).toStrictEqual({});
+});
+
+test("Default creator theme: every model computes its own default variables", (): any => {
+  const brand = CreatorThemeModel.varColorProjectBrand;
+  // The probe div is appended to the model's root: an inline value wins, otherwise the root's value is inherited
+  vi.spyOn(DomWindowHelper, "getWindow").mockReturnValue({
+    ...window,
+    getComputedStyle: (el: any) => ({
+      getPropertyValue: (property: string) => {
+        const inline = el?.style?.getPropertyValue?.(property);
+        if (inline) return inline;
+        if (property === brand) return el?.parentElement?.getAttribute("data-brand") || "";
+        return "";
+      }
+    })
+  } as any);
+  const createRoot = (value: string): HTMLElement => {
+    const root = document.createElement("div");
+    root.setAttribute("data-brand", value);
+    document.body.appendChild(root);
+    return root;
+  };
+  const createModel = (root: HTMLElement): CreatorThemeModel => {
+    const model = new CreatorThemeModel();
+    model.getRootElement = () => root;
+    model.loadTheme({ themeName: "default" });
+    return model;
+  };
+  const rootA = createRoot("#111111");
+  const rootB = createRoot("#222222");
+  try {
+    [[rootA, rootB], [rootB, rootA]].forEach(roots => {
+      const models = roots.map(root => createModel(root));
+      roots.forEach((root, index) => {
+        const value = root.getAttribute("data-brand");
+        expect(models[index][brand], "model property, root " + value).toBe(value);
+        expect(models[index]["getThemeFromCreatorThemes"]("default", "light").cssVariables[brand], "default theme, root " + value).toBe(value);
+      });
+    });
+    expect(CreatorThemes["default-light"].cssVariables).toStrictEqual({});
+  } finally {
+    rootA.remove();
+    rootB.remove();
+  }
+});
+
+test("Default creator theme: a registered default-light theme is not mutated", (): any => {
+  const savedDefaultLight = CreatorThemes["default-light"];
+  const savedPredefinedCreatorThemes = [...PredefinedCreatorThemes];
+  const customCssVariables = {};
+  const customDefaultLight: ICreatorTheme = { themeName: "default", colorPalette: "light", cssVariables: customCssVariables };
+  mockDomWindowGetComputedStyleFromInlineStyles({
+    [CreatorThemeModel.varColorUtilitySurface]: "#EDF9F7",
+    [CreatorThemeModel.varColorProjectBrand]: "#19B394",
+  });
+  try {
+    registerCreatorTheme(customDefaultLight);
+    expect(CreatorThemes["default-light"]).toBe(customDefaultLight);
+    const creator: CreatorTester = new CreatorTester({ showThemeTab: true, showCreatorThemeSettings: true });
+    const themeModel = creator.getPlugin<TabDesignerPlugin>("designer")["themeModel"] as CreatorThemeModel;
+    themeModel[CreatorThemeModel.varColorProjectBrand] = "#ff0000";
+    expect(customDefaultLight.cssVariables).toBe(customCssVariables);
+    expect(customCssVariables).toStrictEqual({});
+  } finally {
+    CreatorThemes["default-light"] = savedDefaultLight;
+    PredefinedCreatorThemes.length = 0;
+    savedPredefinedCreatorThemes.forEach(t => PredefinedCreatorThemes.push(t));
+  }
 });

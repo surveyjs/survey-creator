@@ -700,6 +700,8 @@ export var jaStrings = {
       templateDescription: "エントリの説明パターン",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "エントリータイトルパターン",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "エントリータイトルのプレースホルダー",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "空のパネルテキスト",
       // [Auto-translated] "Tab title pattern"
@@ -978,12 +980,20 @@ export var jaStrings = {
     addItem: "クリックしてアイテムを追加…",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "クリックしてアイテムを削除します...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "{0}を外してください",
     // [Auto-translated] "Drag the item"
     dragItem: "アイテムをドラッグする",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "ネストされた選択肢を拡大する",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "崩壊入れ子選択",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "{0}の入れ子型の選択肢を拡大する",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "{0}の崩壊ネスト選択",
     // [Auto-translated] "Show description"
     showDescription: "番組の説明",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2880,8 @@ export var jaStrings = {
       width: "パネルの幅を、同じ行内の他の調査要素に比例して設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "動的パネルタイトルのテンプレートを入力します。パネルの一般的な位置には {panelIndex} を使用し、表示されているパネル間の順序には {visiblePanelIndex} を使用します。これらのプレースホルダーをパターンに挿入して、自動番号付けを追加します。",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "エントリタイトルのフォールバックテキストで、エントリタイトルパターンが意味のある値を生成しない場合に適用されます。エントリの一般的な位置には{panelIndex}、表示されるエントリ間の順序には{visiblePanelIndex}を使いましょう。",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "タブタイトルのテンプレートを入力します。パネルの一般的な位置には {panelIndex} を使用し、可視パネル間の順序には {visiblePanelIndex} を使用します。これらのプレースホルダーをパターンに挿入して、自動番号付けを追加します。",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

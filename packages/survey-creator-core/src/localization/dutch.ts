@@ -700,6 +700,8 @@ export var nlStrings = {
       templateDescription: "Patroon invoerbeschrijving",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Patroon voor de titel van het item",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Plaatshouder voor de inschrijftitel",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Lege paneeltekst",
       // [Auto-translated] "Tab title pattern"
@@ -978,12 +980,20 @@ export var nlStrings = {
     addItem: "Klik om een item toe te voegen...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klik om het item te verwijderen...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Voeg {0} toe",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Verwijder {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Sleep het item",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Breid geneste keuzes uit",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse geneste keuzes",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Breid geneste keuzes uit {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Collapse geneste keuzes van {0}",
     // [Auto-translated] "Show description"
     showDescription: "Beschrijving van de show",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2880,8 @@ export var nlStrings = {
       width: "Hiermee stelt u de breedte van het paneel in verhouding tot andere enquête-elementen in dezelfde lijn. Accepteert CSS-waarden (px, %, in, pt, enz.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Typ een sjabloon voor dynamische paneeltitels. Gebruik {panelIndex} voor de algemene positie van het paneel en {visiblePanelIndex} voor de volgorde tussen de zichtbare panelen. Voeg deze tijdelijke aanduidingen toe aan het patroon om automatische nummering toe te voegen.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Een fallback-tekst voor invoertitels die van toepassing is wanneer het invoertitelpatroon geen betekenisvolle waarde oplevert. Gebruik {panelIndex} voor de algemene positie van de entry en {visiblePanelIndex} voor de volgorde tussen zichtbare items.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Typ een sjabloon voor tabbladtitels. Gebruik {panelIndex} voor de algemene positie van een paneel en {visiblePanelIndex} voor de volgorde tussen zichtbare panelen. Voeg deze tijdelijke aanduidingen toe aan het patroon om automatische nummering toe te voegen.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

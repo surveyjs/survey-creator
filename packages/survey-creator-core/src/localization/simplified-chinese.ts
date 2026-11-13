@@ -700,6 +700,8 @@ export var simplifiedChineseTranslation = {
       templateDescription: "条目描述模式",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "条目标题模式",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "条目标题占位符",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "空面板文本",
       // [Auto-translated] "Tab title pattern"
@@ -978,12 +980,20 @@ export var simplifiedChineseTranslation = {
     addItem: "添加项...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "单击以删除该项目...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "添加{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "把{0}",
     // [Auto-translated] "Drag the item"
     dragItem: "拖动项目",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "扩展嵌套选项",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "折叠嵌套选择",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "扩展嵌套的选择，{0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "{0}的嵌套选择崩溃",
     // [Auto-translated] "Show description"
     showDescription: "节目简介",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2880,8 @@ export var simplifiedChineseTranslation = {
       width: "设置面板的宽度，使其与同一行中的其他测量图元成比例。接受 CSS 值（px、%、in、pt 等）。",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "键入动态面板标题的模板。使用 {panelIndex} 作为面板的常规位置，使用 {visiblePanelIndex} 作为其在可见面板中的顺序。将这些占位符插入到图案中以添加自动编号。",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "当条目标题模式不产生有意义值时，应用的备用文本。使用 {panelIndex} 表示条目的一般位置，{visiblePanelIndex} 表示其在可见条目中的顺序。",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "键入选项卡标题的模板。使用 {panelIndex} 表示面板的大致位置，使用 {visiblePanelIndex} 表示其在可见面板中的顺序。将这些占位符插入到图案中以添加自动编号。",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

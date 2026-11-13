@@ -700,6 +700,8 @@ export var skStrings = {
       templateDescription: "Vzor popisu záznamu",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Vzor názvu záznamu",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Zástupca názvu príspevku",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Prázdny text panela",
       // [Auto-translated] "Tab title pattern"
@@ -978,12 +980,20 @@ export var skStrings = {
     addItem: "Kliknutím pridať položku...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Kliknutím položku odstránite...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Pridaj {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Odstráňte {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Potiahnite položku",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Rozšíriť vnorené voľby",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse vnorené voľby",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Rozšírte vnorené voľby {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Kolaps vnorených rozhodnutí {0}",
     // [Auto-translated] "Show description"
     showDescription: "Popis relácie",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2880,8 @@ export var skStrings = {
       width: "Nastaví šírku panela v pomere k ostatným prvkom prieskumu v tej istej čiare. Akceptuje hodnoty CSS (px, %, in, pt atď.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Zadajte šablónu pre názvy dynamických panelov. Použite {panelIndex} pre všeobecnú pozíciu panela a {visiblePanelIndex} pre jeho poradie medzi viditeľnými panelmi. Vložením týchto zástupných symbolov do vzoru pridáte automatické číslovanie.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Záložný text pre názvy záznamov, ktorý sa uplatní, keď vzor názvu nevytvára zmysluplnú hodnotu. Použite {panelIndex} pre všeobecnú pozíciu záznamu a {visiblePanelIndex} pre poradie medzi viditeľnými položkami.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Zadajte šablónu pre názvy kariet. Použite {panelIndex} pre všeobecnú pozíciu panela a {visiblePanelIndex} pre jeho poradie medzi viditeľnými panelmi. Vložením týchto zástupných symbolov do vzoru pridáte automatické číslovanie.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

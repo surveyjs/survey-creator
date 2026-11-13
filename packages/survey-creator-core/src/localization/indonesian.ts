@@ -700,6 +700,8 @@ export var indonesianStrings = {
       templateDescription: "Pola deskripsi entri",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Pola judul entri",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Penanda penanda judul entri",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Teks panel kosong",
       // [Auto-translated] "Tab title pattern"
@@ -978,12 +980,20 @@ export var indonesianStrings = {
     addItem: "Klik untuk menambahkan sebuah item...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klik untuk menghapus item...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Tambahkan {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Hapus {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Seret item",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Perluas pilihan bersarang",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Menggabungkan pilihan bersarang",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Perluas pilihan bersarang {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Pilihan bertingkat {0}",
     // [Auto-translated] "Show description"
     showDescription: "Tampilkan deskripsi",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2880,8 @@ export var indonesianStrings = {
       width: "Mengatur lebar panel secara proporsional dengan elemen survei lainnya di baris yang sama. Menerima nilai CSS (px, %, in, pt, dll.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Ketik template untuk judul panel dinamis. Gunakan {panelIndex} untuk posisi umum panel dan {visiblePanelIndex} untuk urutannya di antara panel yang terlihat. Masukkan tempat penampung ini ke dalam pola untuk menambahkan penomoran otomatis.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Teks cadangan untuk judul entri yang berlaku ketika pola judul entri tidak menghasilkan nilai yang bermakna. Gunakan {panelIndex} untuk posisi umum entri dan {visiblePanelIndex} untuk urutannya di antara entri yang terlihat.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Ketik templat untuk judul tab. Gunakan {panelIndex} untuk posisi umum panel dan {visiblePanelIndex} untuk urutannya di antara panel yang terlihat. Masukkan tempat penampung ini ke dalam pola untuk menambahkan penomoran otomatis.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

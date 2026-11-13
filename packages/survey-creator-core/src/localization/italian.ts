@@ -700,6 +700,8 @@ export var italianTranslation = {
       templateDescription: "Modello di descrizione della voce",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Modello del titolo della voce",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Titolo di partecipazione provvisoria",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Testo del pannello vuoto",
       // [Auto-translated] "Tab title pattern"
@@ -978,12 +980,20 @@ export var italianTranslation = {
     addItem: "Clicca per aggiungere un'opzione...",
     // "Click to remove the item..."
     removeItem: "Clicca per rimuovere un'opzione...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Aggiungi {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Rimuovi {0}",
     // "Drag the item"
     dragItem: "Trascina l'opzione",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Espandi le scelte annidate",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collasso delle scelte annidate",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Espandi le scelte annidate di {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Collasso le scelte annidate di {0}",
     // [Auto-translated] "Show description"
     showDescription: "Descrizione dello show",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2880,8 @@ export var italianTranslation = {
       width: "Imposta la larghezza del pannello in proporzione agli altri elementi di rilievo nella stessa linea. Accetta valori CSS (px, %, in, pt, ecc.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Digita un modello per i titoli dei pannelli dinamici. Utilizzare {panelIndex} per la posizione generale del pannello e {visiblePanelIndex} per l'ordine tra i pannelli visibili. Inserire questi segnaposto nel motivo per aggiungere la numerazione automatica.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Un testo di riserva per i titoli delle voci che si applica quando il modello del titolo delle voci non produce un valore significativo. Usare {panelIndex} per la posizione generale della voce e {visiblePanelIndex} per il suo ordine tra le voci visibili.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Digita un modello per i titoli delle schede. Utilizzate {panelIndex} per la posizione generale di un pannello e {visiblePanelIndex} per l'ordine tra i pannelli visibili. Inserire questi segnaposto nel motivo per aggiungere la numerazione automatica.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

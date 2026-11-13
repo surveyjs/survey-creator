@@ -700,6 +700,8 @@ export var turkishStrings = {
       templateDescription: "Giriş açıklama deseni",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Giriş başlığı deseni",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Giriş başlığı yer tutucu",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Boş panel metni",
       // [Auto-translated] "Tab title pattern"
@@ -978,12 +980,20 @@ export var turkishStrings = {
     addItem: "Yeni nesne ekleme için tıklayınız...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Öğeyi kaldırmak için tıklayın...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Ekle {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Kaldır {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Öğeyi sürükleyin",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "İç içe seçenekleri genişlet",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Çöktü iç içe seçimler",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "İç içe seçeneklerini genişletmek {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Çöktü iç içe seçimler {0}",
     // [Auto-translated] "Show description"
     showDescription: "Gösteri açıklaması",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2880,8 @@ export var turkishStrings = {
       width: "Panelin genişliğini aynı satırdaki diğer anket öğeleriyle orantılı olarak ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Dinamik panel başlıkları için bir şablon yazın. Panelin genel konumu için {panelIndex} ve görünür paneller arasındaki sırası için {visiblePanelIndex} kullanın. Otomatik numaralandırma eklemek için bu yer tutucuları desene ekleyin.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Giriş başlıkları için bir yedek metin, giriş başlığı deseni anlamlı bir değer üretmediğinde uygulanır. Girişin genel konumu için {panelIndex}, görünür girişler arasındaki sırası için ise {visiblePanelIndex} kullanın.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Sekme başlıkları için bir şablon yazın. Panelin genel konumu için {panelIndex} ve görünür paneller arasındaki sırası için {visiblePanelIndex} kullanın. Otomatik numaralandırma eklemek için bu yer tutucuları desene ekleyin.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

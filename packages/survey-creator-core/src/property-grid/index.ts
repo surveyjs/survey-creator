@@ -129,6 +129,9 @@ export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
 export interface IPropertyGridEditor {
   fit(prop: JsonObjectProperty, context?: string): boolean;
   isDefault?: () => boolean;
+  // An editor that depends on the creator options returns false here for the grids that turn it off.
+  // PropertyGridEditorCollection then picks the next fitting editor, and does not cache the result.
+  isEnabled?: (options: ISurveyCreatorOptions) => boolean;
   getJSON(
     obj: Base,
     prop: JsonObjectProperty,
@@ -206,33 +209,55 @@ export var PropertyGridEditorCollection = {
   },
   register(editor: IPropertyGridEditor): void {
     this.editors.push(editor);
+    // A property looked up before this call would keep its cached editor and never see the new one.
+    this.clearHash();
   },
-  getEditor(prop: JsonObjectProperty, context?: string): IPropertyGridEditor {
+  getEditor(prop: JsonObjectProperty, context?: string, options?: ISurveyCreatorOptions): IPropertyGridEditor {
     if (!prop) return null;
     if (!!context) {
       for (var i = this.editors.length - 1; i >= 0; i--) {
         let ed = this.editors[i];
-        if (ed.fit(prop, context)) return ed;
+        if (ed.fit(prop, context) && this.isEditorEnabled(ed, options)) return ed;
       }
     }
     var fitEd = this.fitHash[prop.id];
     if (!!fitEd) return fitEd;
-    let ed = this.isEditorFit(prop);
-    return !!ed ? ed : this.isEditorFit(prop, true);
+    const search = { dependsOnOptions: false };
+    const ed = this.findEditor(prop, false, options, search) || this.findEditor(prop, true, options, search);
+    if (!!ed && !search.dependsOnOptions) {
+      this.fitHash[prop.id] = ed;
+    }
+    return ed;
   },
   isEditorFit(
     prop: JsonObjectProperty,
-    asDefault: boolean = false
+    asDefault: boolean = false,
+    options?: ISurveyCreatorOptions
   ): IPropertyGridEditor {
+    const search = { dependsOnOptions: false };
+    const ed = this.findEditor(prop, asDefault, options, search);
+    if (!!ed && !search.dependsOnOptions) {
+      this.fitHash[prop.id] = ed;
+    }
+    return ed;
+  },
+  isEditorEnabled(editor: IPropertyGridEditor, options?: ISurveyCreatorOptions): boolean {
+    return typeof editor.isEnabled !== "function" || editor.isEnabled(options);
+  },
+  // search.dependsOnOptions is set when an editor with isEnabled fits the property: the result then
+  // depends on the grid's options and must not go to fitHash, which all grids share.
+  findEditor(prop: JsonObjectProperty, asDefault: boolean, options: ISurveyCreatorOptions,
+    search: { dependsOnOptions: boolean }): IPropertyGridEditor {
     for (var i = this.editors.length - 1; i >= 0; i--) {
       let ed = this.editors[i];
-      if (
-        (!asDefault && ed.fit(prop)) ||
-        (asDefault && ed.isDefault && ed.isDefault())
-      ) {
-        this.fitHash[prop.id] = ed;
-        return ed;
+      const fits = asDefault ? !!ed.isDefault && ed.isDefault() : ed.fit(prop);
+      if (!fits) continue;
+      // typeof: a custom editor may already have an unrelated isEnabled field
+      if (typeof ed.isEnabled === "function") {
+        search.dependsOnOptions = true;
+        if (!ed.isEnabled(options)) continue;
       }
+      return ed;
     }
     return null;
   },
@@ -243,61 +268,61 @@ export var PropertyGridEditorCollection = {
     context?: string,
     propGridDefinition?: ISurveyPropertyGridDefinition
   ): any {
-    var res = this.getEditor(prop, context);
+    var res = this.getEditor(prop, context, options);
     return !!res ? res.getJSON(obj, prop, options, propGridDefinition) : null;
   },
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions,
     propGridDefinition?: ISurveyPropertyGridDefinition): any {
-    var res = this.getEditor(prop);
+    var res = this.getEditor(prop, undefined, options);
     if (!!res && !!res.onCreated) {
       res.onCreated(obj, question, prop, options, propGridDefinition);
     }
   },
   onSetup(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    var res = this.getEditor(prop);
+    var res = this.getEditor(prop, undefined, options);
     if (!!res && !!res.onSetup) {
       res.onSetup(obj, question, prop, options);
     }
   },
-  onDisposing(obj: Base, question: Question, prop: JsonObjectProperty): void {
-    var res = this.getEditor(prop);
+  onDisposing(obj: Base, question: Question, prop: JsonObjectProperty, options?: ISurveyCreatorOptions): void {
+    var res = this.getEditor(prop, undefined, options);
     if (!!res && !!res.onDisposing) {
       res.onDisposing(obj, question, prop);
     }
   },
   onAfterSetValue(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    var res = this.getEditor(prop);
+    var res = this.getEditor(prop, undefined, options);
     if (!!res && !!res.onAfterSetValue) {
       res.onAfterSetValue(obj, question, prop, options);
     }
   },
   validateValue(obj: Base, question: Question, prop: JsonObjectProperty, value: any, options: ISurveyCreatorOptions): string {
-    var res = this.getEditor(prop);
+    var res = this.getEditor(prop, undefined, options);
     if (!!res && !!res.validateValue) {
       return res.validateValue(obj, question, prop, value, options);
     }
     return "";
   },
-  onAfterRenderQuestion(obj: Base, prop: JsonObjectProperty, evtOptions: any) {
-    var res = this.getEditor(prop);
+  onAfterRenderQuestion(obj: Base, prop: JsonObjectProperty, evtOptions: any, options?: ISurveyCreatorOptions) {
+    var res = this.getEditor(prop, undefined, options);
     if (!!res && !!res.onAfterRenderQuestion) {
       res.onAfterRenderQuestion(obj, prop, evtOptions);
     }
   },
-  onMatrixCellCreated(obj: Base, prop: JsonObjectProperty, options: any) {
-    var res = this.getEditor(prop);
+  onMatrixCellCreated(obj: Base, prop: JsonObjectProperty, options: any, creatorOptions?: ISurveyCreatorOptions) {
+    var res = this.getEditor(prop, undefined, creatorOptions);
     if (!!res && !!res.onMatrixCellCreated) {
       res.onMatrixCellCreated(options.question.obj, options);
     }
   },
-  onMatrixCellValidate(obj: Base, prop: JsonObjectProperty, options: any) {
-    var res = this.getEditor(prop);
+  onMatrixCellValidate(obj: Base, prop: JsonObjectProperty, options: any, creatorOptions?: ISurveyCreatorOptions) {
+    var res = this.getEditor(prop, undefined, creatorOptions);
     if (!!res && !!res.onMatrixCellValidate) {
       res.onMatrixCellValidate(options.question.obj, options);
     }
   },
-  onMatrixCellValueChanged(obj: Base, prop: JsonObjectProperty, options: any) {
-    var res = this.getEditor(prop);
+  onMatrixCellValueChanged(obj: Base, prop: JsonObjectProperty, options: any, creatorOptions?: ISurveyCreatorOptions) {
+    var res = this.getEditor(prop, undefined, creatorOptions);
     if (!!res && !!res.onMatrixCellValueChanged) {
       res.onMatrixCellValueChanged(obj, options);
     }
@@ -316,9 +341,10 @@ export var PropertyGridEditorCollection = {
   onMatrixAllowRemoveRow(
     obj: Base,
     prop: JsonObjectProperty,
-    row: MatrixDynamicRowModel
+    row: MatrixDynamicRowModel,
+    options?: ISurveyCreatorOptions
   ): boolean {
-    var res = this.getEditor(prop);
+    var res = this.getEditor(prop, undefined, options);
     if (!!res && !!res.onMatrixAllowRemoveRow) {
       return res.onMatrixAllowRemoveRow(obj, row);
     }
@@ -331,39 +357,40 @@ export var PropertyGridEditorCollection = {
     setObjFunc: (obj: Base) => void,
     options: ISurveyCreatorOptions
   ) {
-    var res = this.getEditor(prop);
+    var res = this.getEditor(prop, undefined, options);
     if (!!res && !!res.onGetMatrixRowAction) {
       res.onGetMatrixRowAction(obj, prop, evtOptions, setObjFunc, options);
     }
   },
   onUpdateQuestionCssClasses(obj: Base,
     prop: JsonObjectProperty,
-    options: any) {
-    var res = this.getEditor(prop);
+    options: any,
+    creatorOptions?: ISurveyCreatorOptions) {
+    var res = this.getEditor(prop, undefined, creatorOptions);
     if (!!res && !!res.onUpdateQuestionCssClasses) {
       res.onUpdateQuestionCssClasses(obj, options);
     }
   },
   onGetQuestionTitleActions(obj: Base, prop: JsonObjectProperty, options: any, creator: ISurveyCreatorOptions) {
-    var res = this.getEditor(prop);
+    var res = this.getEditor(prop, undefined, creator);
     if (!!res && !!res.onGetQuestionTitleActions) {
       res.onGetQuestionTitleActions(obj, options, creator);
     }
   },
-  onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question) {
-    var res = this.getEditor(prop);
+  onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question, options?: ISurveyCreatorOptions) {
+    var res = this.getEditor(prop, undefined, options);
     if (!!res && !!res.onValueChanged) {
       res.onValueChanged(obj, prop, question);
     }
   },
-  onValueChanging(obj: Base, prop: JsonObjectProperty, question: Question, options: any) {
-    var res = this.getEditor(prop);
+  onValueChanging(obj: Base, prop: JsonObjectProperty, question: Question, options: any, creatorOptions?: ISurveyCreatorOptions) {
+    var res = this.getEditor(prop, undefined, creatorOptions);
     if (!!res && !!res.onValueChanging) {
       res.onValueChanging(obj, prop, question, options);
     }
   },
-  onMasterValueChanged(obj: Base, prop: JsonObjectProperty, question: Question) {
-    var res = this.getEditor(prop);
+  onMasterValueChanged(obj: Base, prop: JsonObjectProperty, question: Question, options?: ISurveyCreatorOptions) {
+    var res = this.getEditor(prop, undefined, options);
     if (!!res && !!res.onMasterValueChanged) {
       res.onMasterValueChanged(obj, prop, question);
     }
@@ -375,7 +402,7 @@ export class PropertyGridTitleActionsCreator {
   public onGetQuestionTitleActions(options) {
     const question = options.question;
     const property = question.property;
-    const editor = PropertyGridEditorCollection.getEditor(property);
+    const editor = PropertyGridEditorCollection.getEditor(property, undefined, this.options);
     if (!editor) return;
     const actions = [];
     let enabled = !question.isReadOnly;
@@ -405,7 +432,7 @@ export class PropertyGridTitleActionsCreator {
     }
   }
   public onValueChanged(obj: any, property: JsonObjectProperty, question: Question): void {
-    const editor = PropertyGridEditorCollection.getEditor(property);
+    const editor = PropertyGridEditorCollection.getEditor(property, undefined, this.options);
     if (!!editor && !!editor.createPropertyEditorSetup && !!editor.isPropertyEditorSetupEnabled) {
       const act = question.getTitleToolbar().getActionById("property-grid-setup");
       if (!!act) {
@@ -850,9 +877,6 @@ export class PropertyGridModel {
   ) {
     this.options = options;
     this.propertyGridDefinition = propertyGridDefinition;
-    if (this.options.enableLinkFileEditor) {
-      PropertyGridEditorCollection.register(new PropertyGridLinkEditor());
-    }
     this.obj = obj;
   }
   public get obj() {
@@ -982,7 +1006,7 @@ export class PropertyGridModel {
   private clearSurveyValue() {
     this.surveyValue.getAllQuestions().forEach((q: any) => {
       if (!!q.property && !!q.obj) {
-        PropertyGridEditorCollection.onDisposing(q.obj, q, q.property);
+        PropertyGridEditorCollection.onDisposing(q.obj, q, q.property, this.options);
       }
     });
     this.surveyValue.onValidateQuestion.clear();
@@ -1337,7 +1361,7 @@ export class PropertyGridModel {
   private onValueChanging(options: any) {
     var q = options.question;
     if (!q || !q.property || !Array.isArray(options.value) && Helpers.isTwoValueEquals(options.value, options.oldValue, false, false, false)) return;
-    PropertyGridEditorCollection.onValueChanging(this.obj, q.property, q, options);
+    PropertyGridEditorCollection.onValueChanging(this.obj, q.property, q, options, this.options);
     var changingOptions = {
       obj: this.obj,
       propertyName: q.property.name,
@@ -1368,7 +1392,7 @@ export class PropertyGridModel {
     q["nameHasError"] = false;
     this.changeDependedProperties(q, (name: string): Question => { return this.survey.getQuestionByName(name); },
       (name: string): any => { return this.survey.getValue(name); });
-    PropertyGridEditorCollection.onValueChanged(this.obj, q.property, q);
+    PropertyGridEditorCollection.onValueChanged(this.obj, q.property, q, this.options);
     if (
       !!this.classNameProperty &&
       options.name === this.classNameProperty &&
@@ -1401,7 +1425,8 @@ export class PropertyGridModel {
       PropertyGridEditorCollection.onMasterValueChanged(
         (<any>question).obj,
         (<any>q).property,
-        q
+        q,
+        this.options
       );
     }
   }
@@ -1423,7 +1448,8 @@ export class PropertyGridModel {
     PropertyGridEditorCollection.onAfterRenderQuestion(
       this.obj,
       options.question.property,
-      options
+      options,
+      this.options
     );
   }
   private isCellCreating = false;
@@ -1432,7 +1458,8 @@ export class PropertyGridModel {
     PropertyGridEditorCollection.onMatrixCellCreated(
       this.obj,
       options.question.property,
-      options
+      options,
+      this.options
     );
     this.isCellCreating = false;
     var obj = options.row.editingObj;
@@ -1470,7 +1497,7 @@ export class PropertyGridModel {
     const q = options.row.getQuestionByColumnName(options.columnName);
     if (!q || !q.property) return;
     options.error = this.validateQuestionValue(<any>options.row.editingObj, q, q.property, options.value);
-    PropertyGridEditorCollection.onMatrixCellValidate(options.question.editingObj, options.question.property, options);
+    PropertyGridEditorCollection.onMatrixCellValidate(options.question.editingObj, options.question.property, options, this.options);
   }
   private onGetMatrixRowAction(options: any) {
     PropertyGridEditorCollection.onGetMatrixRowAction(
@@ -1487,7 +1514,8 @@ export class PropertyGridModel {
     PropertyGridEditorCollection.onUpdateQuestionCssClasses(
       this.obj,
       options.question.property,
-      options
+      options,
+      this.options
     );
 
   }
@@ -1511,7 +1539,8 @@ export class PropertyGridModel {
     PropertyGridEditorCollection.onMatrixCellValueChanged(
       this.obj,
       options.question.property,
-      options
+      options,
+      this.options
     );
   }
   private getMatrixAllowRemoveRow(question: Question, row: MatrixDynamicRowModel): boolean {
@@ -1547,7 +1576,8 @@ export class PropertyGridModel {
     var res = PropertyGridEditorCollection.onMatrixAllowRemoveRow(
       this.obj,
       (<any>question).property,
-      row
+      row,
+      this.options
     );
     return this.options.onCanDeleteItemCallback(
       <any>this.obj,
@@ -1915,28 +1945,61 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type === "url" || prop.type === "file";
   }
+  // The editor is registered once, at module load, and each grid turns it on or off here. Registering it
+  // per grid (when the grid's options turned it on) changed every later grid on the page, because the
+  // collection is shared: a grid with enableLinkFileEditor false got it too, and each grid added one more
+  // instance. Without options (a lookup made outside a grid) it stays on: SurveyCreatorModel has it on by
+  // default, so before this change such a lookup returned it as soon as a creator had built a grid.
+  public isEnabled(options: ISurveyCreatorOptions): boolean {
+    return !options || !!options.enableLinkFileEditor;
+  }
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
     const res: any = { type: "fileedit", storeDataAsText: false, placeholder: editorLocalization.getString("pe.fileInputPlaceholder") };
     return res;
   }
-  public onCreated(obj: Base, question: QuestionFileEditorModel, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions,
+    propGridDefinition?: ISurveyPropertyGridDefinition): void {
+    // getJSON creates a "fileedit" question for this editor
+    const fileQuestion = <QuestionFileEditorModel>question;
     if (["image", "imageitemvalue"].indexOf(obj.getType()) > -1) {
-      const questionObj = obj.getType() == "imageitemvalue" ? (<any>obj).locOwner : <Question>obj;
+      const questionObj = this.getContentModeOwner(obj);
       if (questionObj) {
+        // The edited question outlives the grid, so the handler has a key per grid question and
+        // onDisposing removes it. Questions in a matrix detail panel do not get onDisposing (the grid
+        // disposes only its own questions): their handler removes itself once its question is disposed.
+        const key = this.getContentModeHandlerKey(question);
         questionObj.registerFunctionOnPropertyValueChanged("contentMode", (newValue: string) => {
-          question.acceptedTypes = getAcceptedTypesByContentMode(newValue);
-        });
-        question.acceptedTypes = getAcceptedTypesByContentMode(questionObj.contentMode);
+          if (fileQuestion.isDisposed) {
+            questionObj.unRegisterFunctionOnPropertyValueChanged("contentMode", key);
+            return;
+          }
+          fileQuestion.acceptedTypes = getAcceptedTypesByContentMode(newValue);
+        }, key);
+        fileQuestion.acceptedTypes = getAcceptedTypesByContentMode((<any>questionObj).contentMode);
       }
     } else {
-      question.acceptedTypes = getAcceptedTypesByContentMode("image");
+      fileQuestion.acceptedTypes = getAcceptedTypesByContentMode("image");
     }
-    question.onChooseFilesCallback = ((input, callback) => {
-      options.chooseFiles(input, callback, { element: obj, elementType: obj.getType(), propertyName: question.name });
+    fileQuestion.onChooseFilesCallback = ((input, callback) => {
+      options.chooseFiles(input, callback, { element: obj, elementType: obj.getType(), propertyName: fileQuestion.name });
     });
+  }
+  public onDisposing(obj: Base, question: Question, prop: JsonObjectProperty): void {
+    const questionObj = this.getContentModeOwner(obj);
+    if (!questionObj) return;
+    questionObj.unRegisterFunctionOnPropertyValueChanged("contentMode", this.getContentModeHandlerKey(question));
   }
   public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
     return validateImageItemValueProperty(obj, prop, val);
+  }
+  private getContentModeOwner(obj: Base): Base {
+    const type = obj.getType();
+    if (type === "imageitemvalue") return (<any>obj).locOwner;
+    return type === "image" ? obj : undefined;
+  }
+  // uniqueId, not id: a question id is unique only within its survey, and every grid survey starts again at sq_0
+  private getContentModeHandlerKey(question: Question): string {
+    return "linkEditorAcceptedTypes" + question.uniqueId;
   }
 }
 
@@ -2226,7 +2289,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     }
     return jsonItem;
   }
-  private setChoices(obj: Base, question: Question, prop: JsonObjectProperty) {
+  protected setChoices(obj: Base, question: Question, prop: JsonObjectProperty) {
     var propChoices = prop.getChoices(obj, (choices: any) => {
       this.setChoicesCore(question, prop, choices);
     });
@@ -2263,6 +2326,17 @@ export class PropertyGridEditorSet extends PropertyGridEditorDropdown {
     json.type = hasTagbox ? "tagbox" : "checkbox";
     json.showSelectAllItem = !hasTagbox;
     return json;
+  }
+  onMasterValueChanged(obj: Base, prop: JsonObjectProperty, question: Question): void {
+    // The value is an array: keep the items that are still offered instead of matching the whole array against the choices
+    this.setChoices(obj, question, prop);
+    const val = question.value;
+    if (!Array.isArray(val) || val.length === 0) return;
+    const choices = (<QuestionSelectBase>question).choices;
+    const newVal = val.filter(item => !!ItemValue.getItemByValue(choices, item));
+    if (newVal.length !== val.length) {
+      question.value = newVal;
+    }
   }
 }
 export class PropertyGridEditorPage extends PropertyGridEditorDropdown {
@@ -2414,6 +2488,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorColorWithAlpha());
 PropertyGridEditorCollection.register(new PropertyGridEditorDateTime());
 PropertyGridEditorCollection.register(new PropertyGridEditorUndefinedBoolean());
 PropertyGridEditorCollection.register(new PropertyGridEditorSwitchToggle());
+PropertyGridEditorCollection.register(new PropertyGridLinkEditor());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);

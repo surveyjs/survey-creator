@@ -700,6 +700,8 @@ export var ruStrings = {
       templateDescription: "Шаблон описания входа",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Шаблон заголовка записи",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Заполнитель титула заявки",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Пустой текст на панели",
       // [Auto-translated] "Tab title pattern"
@@ -978,12 +980,20 @@ export var ruStrings = {
     addItem: "Нажмите, чтобы добавить элемент...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Нажмите, чтобы удалить элемент...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Добавить {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Удалите {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Перетащите элемент",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Расширение вложенных вариантов",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Варианты с вложением коллапса",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Расширяйте вложенные варианты {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Вложенные варианты {0}",
     // [Auto-translated] "Show description"
     showDescription: "Описание шоу",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2880,8 @@ export var ruStrings = {
       width: "Устанавливает ширину панели пропорционально другим элементам съемки в той же линии. Принимает значения CSS (px, %, in, pt и т. д.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Введите шаблон для динамических заголовков панелей. Используйте {panelIndex} для общего положения панели и {visiblePanelIndex} для ее порядка среди видимых панелей. Вставьте эти заполнители в шаблон, чтобы добавить автоматическую нумерацию.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Резервный текст для заголовков записей, который применяется, когда шаблон заголовков не даёт значимого значения. Используйте {panelIndex} для общего положения записи и {visiblePanelIndex} для её порядка среди видимых записей.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Введите шаблон для заголовков вкладок. Используйте {panelIndex} для общего положения панели и {visiblePanelIndex} для ее порядка среди видимых панелей. Вставьте эти заполнители в шаблон, чтобы добавить автоматическую нумерацию.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

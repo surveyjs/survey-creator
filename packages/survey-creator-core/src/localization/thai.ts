@@ -700,6 +700,8 @@ export const thStrings = {
       templateDescription: "รูปแบบคำอธิบายแผง",
       // "Entry title pattern"
       templateTitle: "รูปแบบชื่อแผง",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "ตัวแทนตําแหน่งชื่อรายการ",
       // "Empty panel text"
       noEntriesText: "ข้อความแผงว่าง",
       // "Tab title pattern"
@@ -978,12 +980,20 @@ export const thStrings = {
     addItem: "คลิกเพื่อเพิ่มรายการ...",
     // "Click to remove the item..."
     removeItem: "คลิกเพื่อลบรายการ...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "เพิ่ม{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "ลบ{0}",
     // "Drag the item"
     dragItem: "ลากรายการ",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "ขยายตัวเลือกซ้อน",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "ยุบตัวเลือกซ้อน",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "ขยายตัวเลือกซ้อนของ{0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "ยุบตัวเลือกซ้อนของ{0}",
     // [Auto-translated] "Show description"
     showDescription: "แสดงรายละเอียด",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2880,8 @@ export const thStrings = {
       width: "ตั้งความกว้างของแผงให้สัมพันธ์กับองค์ประกอบแบบสำรวจอื่นๆ ในบรรทัดเดียวกัน รับค่าของ CSS (px, %, in, pt, ฯลฯ)",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "พิมพ์ในเทมเพลตสำหรับชื่อแผงไดนามิก ใช้ {panelIndex} สำหรับตำแหน่งทั่วไปของแผงและ {visiblePanelIndex} สำหรับลำดับของแผงที่มองเห็นได้แทรกแทนที่ลงในเทมเพลตเพื่อเพิ่มการนับอัตโนมัติ",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "ข้อความสํารองสําหรับชื่อรายการที่ใช้เมื่อรูปแบบชื่อรายการไม่ให้ค่าที่มีความหมายใช้ {panelIndex} สําหรับตําแหน่งทั่วไปของรายการ และ {visiblePanelIndex} สําหรับลําดับระหว่างรายการที่มองเห็น",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "พิมพ์ในเทมเพลตสำหรับชื่อแท็บ ใช้ {panelIndex} สำหรับตำแหน่งทั่วไปของแผงและ {visiblePanelIndex} สำหรับลำดับของแผงที่มองเห็นได้แทรกแทนที่ลงในเทมเพลตเพื่อเพิ่มการนับอัตโนมัติ",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

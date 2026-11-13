@@ -700,6 +700,8 @@ export var spanishTranslation = {
       templateDescription: "Patrón de descripción de la entrada",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Patrón de título de entrada",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Título de entrada provisional",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Texto de panel vacío",
       // [Auto-translated] "Tab title pattern"
@@ -978,12 +980,20 @@ export var spanishTranslation = {
     addItem: "Haga clic para agregar un artículo ...",
     // "Click to remove the item..."
     removeItem: "Haga click para eliminar el elemento...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Añadir {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Elimina {0}",
     // "Drag the item"
     dragItem: "Arrastra el elemento",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Expandir las opciones anidadas",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Colapso de las elecciones anidadas",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Expande las opciones anidadas de {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Colapsar las elecciones anidadas de {0}",
     // [Auto-translated] "Show description"
     showDescription: "Descripción del programa",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2880,8 @@ export var spanishTranslation = {
       width: "Define la anchura del panel en proporción a otros elementos topográficos de la misma línea. Acepta valores CSS (px, %, in, pt, etc.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Escriba una plantilla para los títulos de los paneles dinámicos. Utilice {panelIndex} para la posición general del panel y {visiblePanelIndex} para su orden entre los paneles visibles. Inserte estos marcadores de posición en el patrón para agregar numeración automática.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Un texto de respaldo para los títulos de entrada que se aplica cuando el patrón de título de entrada no produce un valor significativo. Usa {panelIndex} para la posición general de la entrada y {visiblePanelIndex} para su orden entre las entradas visibles.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Escriba una plantilla para los títulos de las pestañas. Utilice {panelIndex} para la posición general de un panel y {visiblePanelIndex} para su orden entre los paneles visibles. Inserte estos marcadores de posición en el patrón para agregar numeración automática.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

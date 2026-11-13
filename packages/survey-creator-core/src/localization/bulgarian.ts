@@ -700,6 +700,8 @@ export var bgStrings = {
       templateDescription: "Модел на описание на записа",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Модел на заглавие на записа",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Място за заглавие на участниците",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Празен текст на панел",
       // [Auto-translated] "Tab title pattern"
@@ -978,12 +980,20 @@ export var bgStrings = {
     addItem: "Кликни за добавяне на елемент...",
     // "Click to remove the item..."
     removeItem: "Кликни за изтриване на елемент...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Добави {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Премахни {0}",
     // "Drag the item"
     dragItem: "Плъзни елемента",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Разширете вложените избори",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Вложени избори с колапс",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Разширете вложените избори на {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Колапс вложени избори на {0}",
     // [Auto-translated] "Show description"
     showDescription: "Описание на шоуто",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2880,8 @@ export var bgStrings = {
       width: "Задава ширината на панела пропорционално на другите елементи на изследването в същия ред. Приема CSS стойности (px, %, in, pt и т.н.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Въведете шаблон за динамични заглавия на панели. Използвайте {panelIndex} за общата позиция на панела и {visiblePanelIndex} за реда му сред видимите панели. Вмъкнете тези контейнери в шаблона, за да добавите автоматично номериране.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Резервен текст за заглавия на записи, който се прилага, когато шаблонът на заглавието не произвежда значима стойност. Използвайте {panelIndex} за общата позиция на записа и {visiblePanelIndex} за реда му сред видимите записи.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Въведете шаблон за заглавията на разделите. Използвайте {panelIndex} за общата позиция на панела и {visiblePanelIndex} за реда му между видимите панели. Вмъкнете тези контейнери в шаблона, за да добавите автоматично номериране.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

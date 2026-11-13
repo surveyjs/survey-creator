@@ -340,8 +340,14 @@ export class SurveyLogicItem {
   }
   public renameQuestion(oldName: string, newName: string): void {
     if (!oldName || !newName || oldName === newName) return;
+    // "{matrix-total.column}" refers to a column total of the matrix "matrix"
+    const postFixes = [surveyLibSettings.expressionVariableDelimiters.end, ".", "["];
+    const totalsSuffix = surveyLibSettings.matrix.totalsSuffix;
+    if (!!totalsSuffix) {
+      postFixes.push(totalsSuffix + ".");
+    }
     ["", "panel.", "row."].forEach(prefix =>
-      this.renameQuestionInExpression(prefix + oldName, prefix + newName, [surveyLibSettings.expressionVariableDelimiters.end, ".", "["])
+      this.renameQuestionInExpression(prefix + oldName, prefix + newName, postFixes)
     );
     var ops = this.actions;
     for (var i = 0; i < ops.length; i++) {
@@ -565,7 +571,7 @@ export class SurveyLogicItem {
     newName = ob + newName;
     let newExpression = this.expression;
     postFixes.forEach(ch => {
-      newExpression = this.renameQuestionInExpressionCore(newExpression, newExpression.toLocaleLowerCase(), oldName + ch, newName + ch);
+      newExpression = this.renameQuestionInExpressionCore(newExpression, newExpression.toLocaleLowerCase(), oldName + ch.toLocaleLowerCase(), newName + ch);
     });
     if (newExpression != this.expression) {
       this.applyExpression(newExpression, true);

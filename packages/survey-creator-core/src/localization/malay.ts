@@ -700,6 +700,8 @@ export var msStrings = {
       templateDescription: "Corak penerangan entri",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Corak tajuk penyertaan",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Tempat letak tajuk penyertaan",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Teks panel kosong",
       // [Auto-translated] "Tab title pattern"
@@ -978,12 +980,20 @@ export var msStrings = {
     addItem: "Klik untuk menambahkan item...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klik untuk mengalih keluar item...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Tambah {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Buang {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Seret item",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Kembangkan pilihan bersarang",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Runtuhkan pilihan bersarang",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Kembangkan pilihan bersarang {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Runtuhkan pilihan bersarang {0}",
     // [Auto-translated] "Show description"
     showDescription: "Tunjukkan penerangan",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2880,8 @@ export var msStrings = {
       width: "Mengesetkan lebar panel mengikut kadar unsur tinjauan lain dalam baris yang sama. Menerima nilai CSS (px, %, dalam, pt, dll.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Taipkan templat untuk tajuk panel dinamik. Gunakan {panelIndex} untuk kedudukan umum panel dan {visiblePanelIndex} untuk pesanannya di kalangan panel yang kelihatan. Masukkan ruang letak ini ke dalam corak untuk menambah penomboran automatik.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Teks sandaran untuk tajuk entri yang digunakan apabila corak tajuk entri tidak menghasilkan nilai yang bermakna. Gunakan {panelIndex} untuk kedudukan umum entri dan {visiblePanelIndex} untuk susunannya antara entri yang kelihatan.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Taipkan templat untuk tajuk tab. Gunakan {panelIndex} untuk kedudukan umum panel dan {visiblePanelIndex} untuk pesanannya di kalangan panel yang boleh dilihat. Masukkan ruang letak ini ke dalam corak untuk menambah penomboran automatik.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

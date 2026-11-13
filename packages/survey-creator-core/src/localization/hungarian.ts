@@ -700,6 +700,8 @@ export var huStrings = {
       templateDescription: "Bejegyzés leírási mintája",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Bejegyzés címmintája",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Entry title helykitöltő",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Üres panelszöveg",
       // [Auto-translated] "Tab title pattern"
@@ -978,12 +980,20 @@ export var huStrings = {
     addItem: "Kattintson egy elem felvételéhez...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Kattintson az elem eltávolításához...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Add {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Távolítsd {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Húzza az elemet",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Bővítsd a bészkelő lehetőségeket",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Összerakás egymásba helyezett választások",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Bővítsd az egymásba ágyazott {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Összeomlás {0}",
     // [Auto-translated] "Show description"
     showDescription: "Műsorleírás",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2880,8 @@ export var huStrings = {
       width: "A panel szélességét az ugyanabban a sorban lévő többi földmérési elemhez viszonyítva állítja be. CSS-értékeket fogad el (px, %, in, pt stb.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Írjon be egy sablont a dinamikus panelcímekhez. Használja a {panelIndex} elemet a panel általános pozíciójához, a {visiblePanelIndex} értéket pedig a látható panelek közötti sorrendjéhez. Szúrja be ezeket a helyőrzőket a mintába az automatikus számozás hozzáadásához.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Egy tartalék szöveg a bejegyzés címeihez, amely akkor érvényes, ha a bejegyzés címmintája nem ad értelmes értéket. Használd a {panelIndex} a bejegyzés általános pozíciójához, a {visiblePanelIndex} sorrendhez pedig a látható bejegyzések között.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Írjon be egy sablont a lapcímekhez. Használja a {panelIndex} elemet a panel általános pozíciójához, a {visiblePanelIndex} sablont pedig a látható panelek közötti sorrendjéhez. Szúrja be ezeket a helyőrzőket a mintába az automatikus számozás hozzáadásához.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
