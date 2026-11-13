@@ -757,12 +757,10 @@ export class SurveyCreatorModel extends Base
   public get richTextEditor(): ICreatorRichTextEditor {
     return this.richTextEditorValue;
   }
-  // Rich strings are enabled when an editor is registered and the designed survey
-  // (creator.survey, area "designer-tab") has an onTextMarkdown handler. Creator only
-  // reads that event; it does not attach or change handlers. onHtmlToMarkdown is not
-  // part of the condition: it still decides editAsText for strings whose mode is "none".
+  // True once an editor is registered. Which strings use it is richTextModeForProperty:
+  // serializer type "html" or "inlinehtml". onTextMarkdown is not part of this.
   public isRichStringsEnabled(): boolean {
-    return !!this.richTextEditorValue && !!this.surveyValue && !this.surveyValue.onTextMarkdown.isEmpty;
+    return !!this.richTextEditorValue;
   }
 
   /**

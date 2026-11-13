@@ -1,9 +1,20 @@
-import type { ActionContainer, Base, LocalizableString } from "survey-core";
+import { Serializer } from "survey-core";
+import type { ActionContainer } from "survey-core";
 
 // Satisfied structurally by the RichText facade of survey-core/rich-text.
 // Creator never imports that plugin; the customer passes it to registerRichTextEditor.
 export interface ICreatorRichTextEditor {
-  getStringEditMode(owner: Base, name: string, locStr: LocalizableString): "none" | "inline" | "block";
   attachEditor(element: HTMLElement, options: { mode: "inline" | "block", onInput?: () => void }): { toolbar: ActionContainer, detach(): void };
   sanitizeHtml(html: string, options?: { inline?: boolean }): string;
+}
+
+// "html" is a block of paragraphs and lists. "inlinehtml" is one line of character formatting.
+// Every other property stays plain text. An application that wants a survey string edited as rich
+// text changes that property's serializer type; Creator does not consult onTextMarkdown.
+export function richTextModeForProperty(owner: any, name: string): "none" | "inline" | "block" {
+  const typeName = owner && typeof owner.getType === "function" ? owner.getType() : undefined;
+  const type = typeName && name ? Serializer.findProperty(typeName, name)?.type : undefined;
+  if (type === "inlinehtml") return "inline";
+  if (type === "html") return "block";
+  return "none";
 }

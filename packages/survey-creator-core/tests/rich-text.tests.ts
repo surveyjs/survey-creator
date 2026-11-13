@@ -1,10 +1,17 @@
 import { describe, expect, test } from "vitest";
-import { ActionContainer, QuestionCommentModel, QuestionMatrixDropdownModel, QuestionTextModel, Serializer } from "survey-core";
+import { ActionContainer, LocalizableString, QuestionCommentModel, QuestionMatrixDropdownModel, Serializer } from "survey-core";
 import { Translation } from "../src/components/tabs/translation";
-import { PropertyGridEditorHtml, PropertyGridEditorString, PropertyGridEditorText } from "../src/property-grid";
+import { PropertyGridEditorHtml, PropertyGridEditorInlineHtml, PropertyGridEditorString, PropertyGridEditorText } from "../src/property-grid";
 import { CreatorTester } from "./creator-tester";
 import { ICreatorRichTextEditor } from "../src/rich-text";
 import { StringEditorViewModelBase } from "../src/components/string-editor";
+
+class RichTextQuestionStub extends QuestionCommentModel {
+  public getType(): string { return "richtext"; }
+}
+if (!Serializer.findClass("richtext")) {
+  Serializer.addClass("richtext", [], () => new RichTextQuestionStub(""), "comment");
+}
 
 const richTextAreas = [
   "designer-tab", "preview-tab", "theme-tab", "translation-tab:source-survey",
@@ -13,7 +20,6 @@ const richTextAreas = [
 
 function createFakeEditor(): ICreatorRichTextEditor {
   return {
-    getStringEditMode: () => "block",
     attachEditor: () => ({ toolbar: new ActionContainer(), detach: () => { } }),
     sanitizeHtml: (html: string) => html
   };
@@ -23,12 +29,6 @@ function createModeEditor(): { editor: ICreatorRichTextEditor, sanitized: Array<
   const sanitized: Array<{ html: string, inline?: boolean }> = [];
   const attached: string[] = [];
   const editor: ICreatorRichTextEditor = {
-    getStringEditMode: (owner, name, locStr) => {
-      if (!locStr || !locStr.useMarkdown) return "none";
-      const type = Serializer.findProperty(owner.getType?.(), name)?.type;
-      if (type === "html") return "none";
-      return type === "text" ? "block" : "inline";
-    },
     attachEditor: (_element, options) => {
       attached.push(options.mode);
       return { toolbar: new ActionContainer(), detach: () => { attached.push("detach-" + options.mode); } };
@@ -94,7 +94,7 @@ describe("rich text registration", () => {
     expect(creator.isRichStringsEnabled()).toBe(false);
   });
 
-  test("rich strings stay off without an editor, and without a designer onTextMarkdown handler", () => {
+  test("rich strings turn on when an editor is registered, and onTextMarkdown does not change that", () => {
     const creator = new CreatorTester();
     attachSampleHandler(creator);
     creator.JSON = htmlSurvey;
@@ -104,7 +104,7 @@ describe("rich text registration", () => {
     creator.registerRichTextEditor(createFakeEditor());
     expect(creator.isRichStringsEnabled()).toBe(true);
     creator.survey.onTextMarkdown.clear();
-    expect(creator.isRichStringsEnabled()).toBe(false);
+    expect(creator.isRichStringsEnabled()).toBe(true);
   });
 
   test("an onHtmlToMarkdown handler does not enable or disable rich strings", () => {
@@ -114,10 +114,11 @@ describe("rich text registration", () => {
       options.text = options.html;
     });
     creator.JSON = { elements: [{ type: "text", name: "q", title: "Plain" }] };
-    expect(creator.survey.onTextMarkdown.isEmpty).toBe(true);
-    expect(creator.isRichStringsEnabled()).toBe(false);
+    expect(creator.isRichStringsEnabled()).toBe(true);
 
     creator.survey.onTextMarkdown.add(() => { });
+    expect(creator.isRichStringsEnabled()).toBe(true);
+    creator.survey.onTextMarkdown.clear();
     expect(creator.isRichStringsEnabled()).toBe(true);
   });
 
@@ -162,7 +163,7 @@ describe("rich text registration", () => {
     expect(propertyGrid.getSurveyMarkdownHtml(titleEditor, "**bold**", "description", undefined)).toContain("spg-bold");
   });
 
-  test("string editor mode follows the registered editor when rich strings are enabled", () => {
+  test("string editor enables rich text only for html and inlinehtml properties", () => {
     const creator = new CreatorTester();
     creator.JSON = {
       elements: [
@@ -172,33 +173,34 @@ describe("rich text registration", () => {
     };
     const { editor } = createModeEditor();
     creator.registerRichTextEditor(editor);
-    creator.survey.onTextMarkdown.add(() => { });
     const question = creator.survey.getQuestionByName("q");
     expect(question.locTitle.hasHtml).toBe(false);
 
     const title = new StringEditorViewModelBase(question.locTitle, creator);
-    expect(title.richTextMode).toBe("block");
-    expect(title.editAsText).toBe(false);
+    expect(title.richTextMode).toBe("none");
+    expect(title.editAsText).toBe(true);
     const description = new StringEditorViewModelBase(question.locDescription, creator);
-    expect(description.richTextMode).toBe("block");
-    const surveyTitle = new StringEditorViewModelBase(creator.survey.locTitle, creator);
-    expect(surveyTitle.richTextMode).toBe(Serializer.findProperty("survey", "title").type === "text" ? "block" : "inline");
+    expect(description.richTextMode).toBe("none");
+    const completed = new StringEditorViewModelBase(creator.survey.locCompletedHtml, creator);
+    expect(completed.richTextMode).toBe("block");
+    expect(completed.editAsText).toBe(false);
 
-    creator.inplaceEditChoiceValues = true;
+    Serializer.addProperty("survey", { name: "promo:inlinehtml" });
+    try {
+      const inline = new StringEditorViewModelBase(new LocalizableString(creator.survey, false, "promo"), creator);
+      expect(inline.richTextMode).toBe("inline");
+      expect(inline.editAsText).toBe(false);
+    } finally {
+      Serializer.removeProperty("survey", "promo");
+    }
+
+    creator.survey.onTextMarkdown.add(() => { });
+    const stillPlain = new StringEditorViewModelBase(question.locTitle, creator);
+    expect(stillPlain.richTextMode).toBe("none");
+
     const choice = creator.survey.getQuestionByName("colors").choices[0];
-    const inplace = new StringEditorViewModelBase(choice.locText, creator);
-    expect(inplace.richTextMode).toBe("none");
-
-    (creator.survey as any).isTranslationSurface = true;
-    const translated = new StringEditorViewModelBase(choice.locText, creator);
-    expect(translated.richTextMode).not.toBe("none");
-
-    const plain = new CreatorTester();
-    plain.JSON = { elements: [{ type: "text", name: "q", title: "Plain" }] };
-    plain.registerRichTextEditor(editor);
-    const withoutHandler = new StringEditorViewModelBase(plain.survey.getQuestionByName("q").locTitle, plain);
-    expect(withoutHandler.richTextMode).toBe("none");
-    expect(withoutHandler.editAsText).toBe(true);
+    creator.inplaceEditChoiceValues = true;
+    expect(new StringEditorViewModelBase(choice.locText, creator).richTextMode).toBe("none");
   });
 
   test("rich string editor saves sanitizeHtml, and an onHtmlToMarkdown handler overrides it", () => {
@@ -206,33 +208,36 @@ describe("rich text registration", () => {
     creator.JSON = { elements: [{ type: "text", name: "q", title: "old" }] };
     const { editor, sanitized } = createModeEditor();
     creator.registerRichTextEditor(editor);
-    creator.survey.onTextMarkdown.add(() => { });
-    const question = creator.survey.getQuestionByName("q");
-    const editorModel = new StringEditorViewModelBase(question.locTitle, creator);
-    editorModel.setLocString(question.locTitle);
+    const editorModel = new StringEditorViewModelBase(creator.survey.locCompletedHtml, creator);
+    editorModel.setLocString(creator.survey.locCompletedHtml);
 
     editorModel.onBlur({ target: { innerHTML: "<em>word</em>", innerText: "word", textContent: "word" } });
-    expect(question.title).toBe("SAN:<em>word</em>");
+    expect(creator.survey.completedHtml).toBe("SAN:<em>word</em>");
     expect(sanitized[0]).toEqual({ html: "<em>word</em>", inline: false });
 
     editorModel.onBlur({ target: { innerHTML: "Tom & Jerry", innerText: "Tom & Jerry", textContent: "Tom & Jerry" } });
-    expect(question.title).toBe("Tom & Jerry");
+    expect(creator.survey.completedHtml).toBe("Tom & Jerry");
 
     editorModel.onBlur({ target: { innerHTML: "<br>", innerText: "", textContent: "" } });
-    expect(question.locTitle.text).toBe("");
+    expect(creator.survey.locCompletedHtml.text).toBe("");
 
-    const surveyTitle = new StringEditorViewModelBase(creator.survey.locTitle, creator);
-    surveyTitle.onBlur({ target: { innerHTML: "<em>t</em>", innerText: "t", textContent: "t" } });
-    expect(sanitized[sanitized.length - 1].inline).toBe(surveyTitle.richTextMode === "inline");
+    Serializer.addProperty("survey", { name: "promo:inlinehtml" });
+    try {
+      const inline = new StringEditorViewModelBase(new LocalizableString(creator.survey, false, "promo"), creator);
+      inline.onBlur({ target: { innerHTML: "<em>t</em>", innerText: "t", textContent: "t" } });
+      expect(sanitized[sanitized.length - 1].inline).toBe(true);
+    } finally {
+      Serializer.removeProperty("survey", "promo");
+    }
 
     creator.onHtmlToMarkdown.add((_sender, options) => {
       options.text = String(options.html).toUpperCase();
     });
     const before = sanitized.length;
-    const overridden = new StringEditorViewModelBase(question.locTitle, creator);
-    overridden.setLocString(question.locTitle);
+    const overridden = new StringEditorViewModelBase(creator.survey.locCompletedHtml, creator);
+    overridden.setLocString(creator.survey.locCompletedHtml);
     overridden.onBlur({ target: { innerHTML: "<em>word</em>", innerText: "word", textContent: "word" } });
-    expect(question.title).toBe("<EM>WORD</EM>");
+    expect(creator.survey.completedHtml).toBe("<EM>WORD</EM>");
     expect(sanitized.length).toBe(before);
 
     const untouched = new CreatorTester();
@@ -247,10 +252,8 @@ describe("rich text registration", () => {
     creator.JSON = { elements: [{ type: "text", name: "q", title: "Title" }] };
     const { editor, attached } = createModeEditor();
     creator.registerRichTextEditor(editor);
-    creator.survey.onTextMarkdown.add(() => { });
-    const question = creator.survey.getQuestionByName("q");
-    const model = new StringEditorViewModelBase(question.locTitle, creator);
-    model.setLocString(question.locTitle);
+    const model = new StringEditorViewModelBase(creator.survey.locCompletedHtml, creator);
+    model.setLocString(creator.survey.locCompletedHtml);
     const element = document.createElement("div");
     let blurred = false;
     model.blurEditor = () => { blurred = true; };
@@ -299,77 +302,54 @@ describe("rich text registration", () => {
     const creator = new CreatorTester();
     creator.registerRichTextEditor(createFakeEditor());
     creator.JSON = htmlSurvey;
-    expect(creator.isRichStringsEnabled()).toBe(false);
+    expect(creator.isRichStringsEnabled()).toBe(true);
     expect(creator.survey.locTitle.hasHtml).toBe(false);
     expect(creator.survey.getQuestionByName("q").locTitle.hasHtml).toBe(false);
     expect(creator.survey.locTitle.renderedHtml).not.toContain("RICH:");
   });
 
-  test("property grid string editors become rich comments, and html editors stay plain", () => {
+  test("property grid uses a richtext question only for html and inlinehtml", () => {
     const { editor } = createModeEditor();
     const creator = new CreatorTester();
     creator.registerRichTextEditor(editor);
     creator.JSON = { elements: [{ type: "text", name: "q" }] };
-    creator.survey.onTextMarkdown.add(() => { });
     const question = creator.survey.getQuestionByName("q");
     const textEditor = new PropertyGridEditorText();
     const stringEditor = new PropertyGridEditorString();
     const htmlEditor = new PropertyGridEditorHtml();
+    const inlineEditor = new PropertyGridEditorInlineHtml();
 
     const title = textEditor.getJSON(question, Serializer.findProperty("question", "title"), creator);
     expect(title.type).toBe("comment");
-    expect(title.allowRichText).toBe(true);
-    expect(title.acceptCarriageReturn).toBe(true);
-    expect(title.textFormat).toBeUndefined();
+    expect(title.acceptCarriageReturn).toBeUndefined();
 
     const description = textEditor.getJSON(question, Serializer.findProperty("question", "description"), creator);
-    expect(description.allowRichText).toBe(true);
-    expect(description.acceptCarriageReturn).toBe(true);
+    expect(description.type).toBe("comment");
+    expect(description.acceptCarriageReturn).toBeUndefined();
 
     const surveyTitle = stringEditor.getJSON(creator.survey, Serializer.findProperty("survey", "title"), creator);
-    expect(surveyTitle.type).toBe("comment");
-    expect(surveyTitle.allowRichText).toBe(true);
-    expect(surveyTitle.acceptCarriageReturn).toBe(false);
-    expect(surveyTitle.rows).toBe(1);
-    expect(surveyTitle.allowResize).toBe(false);
-    expect(surveyTitle.textFormat).toBeUndefined();
-
-    const required = textEditor.getJSON(question, Serializer.findProperty("question", "requiredErrorText"), creator);
-    expect(required.allowRichText).toBeUndefined();
-    expect(required.type).toBe("comment");
+    expect(surveyTitle.type).toBe("text");
 
     const completed = htmlEditor.getJSON(creator.survey, Serializer.findProperty("survey", "completedHtml"), creator);
-    expect(completed.allowRichText).toBeUndefined();
-    expect(completed.type).toBe("comment");
+    expect(completed.type).toBe("richtext");
+    expect(completed.acceptCarriageReturn).toBe(true);
+
+    Serializer.addProperty("survey", { name: "promo:inlinehtml" });
+    try {
+      const inline = inlineEditor.getJSON(creator.survey, Serializer.findProperty("survey", "promo"), creator);
+      expect(inline.type).toBe("richtext");
+      expect(inline.acceptCarriageReturn).toBe(false);
+      expect(inline.rows).toBe(1);
+      expect(inline.allowResize).toBe(false);
+    } finally {
+      Serializer.removeProperty("survey", "promo");
+    }
 
     const plain = new CreatorTester();
-    const plainTitle = textEditor.getJSON(new QuestionTextModel("q"), Serializer.findProperty("question", "title"), plain);
-    expect(plainTitle.allowRichText).toBeUndefined();
-    expect(plainTitle.type).toBe("comment");
-    expect(plainTitle.rows).toBe(2);
-  });
-
-  test("allowRichText is listed on a comment only when the property is visible", () => {
-    const prop = Serializer.findProperty("comment", "allowRichText");
-    const previous = prop.visible;
-    try {
-      prop.visible = true;
-      const creator = new CreatorTester();
-      creator.JSON = { elements: [{ type: "comment", name: "c" }] };
-      creator.selectElement(creator.survey.getQuestionByName("c"));
-      const editorQuestion = creator.propertyGrid.getQuestionByName("allowRichText");
-      expect(editorQuestion).toBeTruthy();
-      expect(editorQuestion.parent.name).toBe("general");
-      expect(editorQuestion.title).toBe("Enable rich text formatting");
-
-      prop.visible = false;
-      const hidden = new CreatorTester();
-      hidden.JSON = { elements: [{ type: "comment", name: "c" }] };
-      hidden.selectElement(hidden.survey.getQuestionByName("c"));
-      expect(hidden.propertyGrid.getQuestionByName("allowRichText")).toBeFalsy();
-    } finally {
-      prop.visible = previous;
-    }
+    const plainHtml = htmlEditor.getJSON(plain.survey, Serializer.findProperty("survey", "completedHtml"), plain);
+    expect(plainHtml.type).toBe("comment");
+    expect(plainHtml.allowResize).toBe(true);
+    expect(plainHtml.autoGrow).toBe(false);
   });
 
   test("translation cells follow the edit mode, keep plain placeholders, and store HTML unchanged", () => {
@@ -388,23 +368,29 @@ describe("rich text registration", () => {
           name: "colors",
           choices: [{ value: "a", text: "<strong>A</strong>" }]
         }
-      ]
+      ],
+      completedHtml: "<p>Done</p>"
     };
-    creator.survey.onTextMarkdown.add(() => { });
     const translation = new Translation(creator.survey, creator);
     translation.reset();
     const title = commentCells(translation, "title");
     const description = commentCells(translation, "description");
     const choice = commentCells(translation, "a");
+    const completed = commentCells(translation, "completedHtml");
     expect(title.length).toBeGreaterThan(0);
-    expect(title[0].allowRichText).toBe(true);
+    expect(title[0].getType()).toBe("comment");
     expect(title[0].acceptCarriageReturn).toBe(true);
+    expect(description[0].getType()).toBe("comment");
     expect(description[0].acceptCarriageReturn).toBe(true);
-    expect(choice[0].allowRichText).toBe(true);
+    expect(choice[0].getType()).toBe("comment");
     expect(choice[0].acceptCarriageReturn).toBe(false);
-    const emptyTitle = title.filter(cell => !cell.value)[0] || title[0];
-    expect(emptyTitle.placeholder.indexOf("<")).toBe(-1);
-    expect(emptyTitle.placeholder).toContain("Title");
+    expect(completed.length).toBeGreaterThan(0);
+    expect(completed[0].getType()).toBe("richtext");
+    expect(completed[0].acceptCarriageReturn).toBe(true);
+    const emptyCompleted = completed.filter(cell => !cell.value)[0];
+    expect(emptyCompleted).toBeTruthy();
+    expect(emptyCompleted.placeholder.indexOf("<")).toBe(-1);
+    expect(emptyCompleted.placeholder).toContain("Done");
 
     const question = creator.survey.getQuestionByName("q");
     const deCell = description.filter(cell => cell.value === "Beschreibung")[0];
@@ -419,9 +405,9 @@ describe("rich text registration", () => {
 
     translation.readOnly = true;
     translation.reset();
-    const readOnlyTitle = commentCells(translation, "title")[0];
-    expect(readOnlyTitle.allowRichText).toBe(true);
-    expect(readOnlyTitle.isReadOnly).toBe(true);
+    const readOnlyCompleted = commentCells(translation, "completedHtml")[0];
+    expect(readOnlyCompleted.getType()).toBe("richtext");
+    expect(readOnlyCompleted.isReadOnly).toBe(true);
   });
 });
 

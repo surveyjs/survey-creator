@@ -15,6 +15,7 @@ import { editorLocalization, getLocString } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../creator-settings";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { SurveyHelper, getDefaultLocaleName, isDefaultLocale } from "../../survey-helper";
+import { richTextModeForProperty } from "../../rich-text";
 import { translationCss } from "./translation-theme";
 import { CreatorDomHelper } from "../../dom-helper";
 
@@ -1003,6 +1004,10 @@ export class TranslationBase extends Base implements ITranslationLocales {
       var itemValue = ItemValue.getItemByValue(question.rows, rowName);
       return !!itemValue ? itemValue["translationData"] : null;
     };
+    survey.onMatrixCellCreating.add((_sender: SurveyModel, options: any) => {
+      const item = getTransationItem(options.question, options.row?.name);
+      if (this.richTextModeForItem(item) !== "none") options.cellType = "richtext";
+    });
     survey.onMatrixCellCreated.add((sender: SurveyModel, options: any) => {
       if (options.cell.question instanceof QuestionCommentModel) {
         const cellQuestion = <QuestionCommentModel>options.cell.question;
@@ -1052,7 +1057,6 @@ export class TranslationBase extends Base implements ITranslationLocales {
   protected configureRichTranslationCell(cellQuestion: QuestionCommentModel, item: TranslationItem): void {
     const mode = this.richTextModeForItem(item);
     if (mode === "none") return;
-    cellQuestion.allowRichText = true;
     cellQuestion.acceptCarriageReturn = mode === "block";
   }
   protected richTextModeForItem(item: TranslationItem): "none" | "inline" | "block" {
@@ -1060,9 +1064,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
     if (!item || !creator || typeof creator.isRichStringsEnabled !== "function" || !creator.isRichStringsEnabled()) return "none";
     const loc = <LocalizableString>item.locString;
     if (!loc || (typeof loc.getIsMultiple === "function" && loc.getIsMultiple())) return "none";
-    const editor = creator.richTextEditor;
-    if (!editor) return "none";
-    return editor.getStringEditMode(item.context, loc.name, loc);
+    return richTextModeForProperty(item.context, loc.name);
   }
   protected plainRichPlaceholder(text: string, item: TranslationItem): string {
     const mode = this.richTextModeForItem(item);

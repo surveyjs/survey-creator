@@ -4,6 +4,7 @@ import { editorLocalization } from "../editorLocalization";
 import { clearNewLines } from "../utils/utils";
 import { getNextColumnTitle, getNextItemText, getNextItemValue, getNextValue } from "../utils/creator-utils";
 import { select } from "../utils/html-element-utils";
+import { richTextModeForProperty } from "../rich-text";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { QuestionAdornerViewModel } from "./question";
 import { QuestionRatingAdornerViewModel } from "./question-rating";
@@ -380,9 +381,8 @@ export class StringEditorViewModelBase extends Base {
     }
   }
   private resolveRichTextMode(): "none" | "inline" | "block" {
-    const editor = this.creator?.richTextEditor;
-    if (!editor || !this.creator.isRichStringsEnabled() || this.isInplaceForEditValues) return "none";
-    return editor.getStringEditMode(this.locString.owner as unknown as Base, this.locString.name, this.locString);
+    if (!this.creator?.richTextEditor || !this.creator.isRichStringsEnabled()) return "none";
+    return richTextModeForProperty(this.locString.owner, this.locString.name);
   }
   private attachRichTextEditor(element: HTMLElement): void {
     if (this.richTextMode === "none" || this.richTextDetach || !element || !this.creator?.richTextEditor) return;

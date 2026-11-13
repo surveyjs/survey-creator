@@ -42,6 +42,7 @@ import { QuestionFactory } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { parsePropertyDescription } from "./description-parser";
+import { richTextModeForProperty } from "../rich-text";
 import { QuestionFileEditorModel } from "../custom-questions/question-file";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
 import { QuestionLinkValueModel } from "../components/link-value";
@@ -1841,26 +1842,12 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
     });
   }
 }
-function localizableStringForProperty(obj: Base, prop: JsonObjectProperty): any {
-  if (typeof obj.getLocalizableString === "function") {
-    const existing = obj.getLocalizableString(prop.name);
-    if (existing) return existing;
-  }
-  const key = prop.serializationProperty;
-  const created = key ? obj[key] : undefined;
-  if (created && typeof created.getLocaleText === "function") return created;
-  return typeof obj.getLocalizableString === "function" ? obj.getLocalizableString(prop.name) : undefined;
-}
 function applyRichTextPropertyEditor(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions, json: any): any {
   const creator = options as any;
   if (!creator || typeof creator.isRichStringsEnabled !== "function" || !creator.isRichStringsEnabled()) return json;
-  const editor = creator.richTextEditor;
-  if (!editor) return json;
-  const locStr = localizableStringForProperty(obj, prop);
-  const mode = editor.getStringEditMode(obj, prop.name, locStr);
-  if (!mode || mode === "none") return json;
-  json.type = "comment";
-  json.allowRichText = true;
+  const mode = richTextModeForProperty(obj, prop.name);
+  if (mode === "none") return json;
+  json.type = "richtext";
   json.acceptCarriageReturn = mode === "block";
   if (mode === "inline") {
     json.rows = 1;
@@ -1887,7 +1874,7 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
     if (!!prop.dataList) {
       json.dataList = prop.dataList;
     }
-    return applyRichTextPropertyEditor(obj, prop, options, json);
+    return json;
   }
   public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
     return validateImageItemValueProperty(obj, prop, val);
@@ -2054,10 +2041,10 @@ export class PropertyGridEditorText extends PropertyGridEditorStringBase {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return applyRichTextPropertyEditor(obj, prop, options, this.updateMaxLength(prop, {
+    return this.updateMaxLength(prop, {
       type: "comment",
       rows: 2
-    }));
+    });
   }
 }
 export class PropertyGridEditorHtml extends PropertyGridEditorStringBase {
@@ -2069,11 +2056,23 @@ export class PropertyGridEditorHtml extends PropertyGridEditorStringBase {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return this.updateMaxLength(prop, {
+    return applyRichTextPropertyEditor(obj, prop, options, this.updateMaxLength(prop, {
       type: "comment",
       "allowResize": true,
       "autoGrow": false,
-    });
+    }));
+  }
+}
+export class PropertyGridEditorInlineHtml extends PropertyGridEditorStringBase {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type === "inlinehtml";
+  }
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
+    return applyRichTextPropertyEditor(obj, prop, options, this.updateMaxLength(prop, { type: "text" }));
   }
 }
 export class PropertyGridEditorStringArray extends PropertyGridEditor {
@@ -2402,6 +2401,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorNumber());
 PropertyGridEditorCollection.register(new PropertyGridEditorSpinEdit());
 PropertyGridEditorCollection.register(new PropertyGridEditorText());
 PropertyGridEditorCollection.register(new PropertyGridEditorHtml());
+PropertyGridEditorCollection.register(new PropertyGridEditorInlineHtml());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
 PropertyGridEditorCollection.register(new PropertyGridEditorSet());
 PropertyGridEditorCollection.register(new PropertyGridEditorPage());
