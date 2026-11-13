@@ -27,9 +27,10 @@
   <div id="creatorElement"></div>
   <script>
     // Rich text editing follows the serializer type: "html" is a block, "inlinehtml" is one line.
-    // Other types stay plain text. Change the type here to turn a string into a rich editor.
-    Survey.Serializer.findProperty("survey", "title").type = "inlinehtml";
-    Survey.Serializer.findProperty("question", "title").type = "html";
+    Survey.Serializer.findProperty("survey", "description").type = "html";
+    Survey.Serializer.findProperty("page", "description").type = "html";
+    Survey.Serializer.findProperty("question", "title").type = "inlinehtml";
+    Survey.Serializer.findProperty("question", "description").type = "text";
     Survey.Serializer.findProperty("itemvalue", "text").type = "inlinehtml";
 
     function renderRichString(_sender, options) {
@@ -51,26 +52,35 @@
       options.survey.onTextMarkdown.add(renderRichString);
     });
     creator.JSON = {
-      title: "Rich text <strong>demo</strong>",
-      description: "Plain description. Tags such as <em>this</em> stay text.",
-      elements: [
+      title: "Rich text demo",
+      description: "<p>Survey description with <em>italic</em> text.</p><p>Second paragraph.</p>",
+      pages: [
         {
-          type: "text",
-          name: "q1",
-          title: "<p>Title with <em>italic</em>, <strong>bold</strong> and <a href=\"https://surveyjs.io\">a link</a></p><ul><li>item one</li><li>item two</li></ul>",
-          description: "<p>This description is a plain string.</p>"
-        },
-        {
-          type: "radiogroup",
-          name: "q2",
-          title: "Choices use inline HTML",
-          choices: ["<strong>Bold</strong> choice", "Plain choice"]
-        },
-        {
-          type: "richtext",
-          name: "answer",
-          title: "Rich answer",
-          placeholder: "Type and format text"
+          name: "page1",
+          description: "<p>Page description.</p><ul><li>item one</li><li>item two</li></ul>",
+          elements: [
+            {
+              type: "text",
+              name: "q1",
+              title: "Title with <em>italic</em>, <strong>bold</strong> and <a href=\"https://surveyjs.io\">a link</a>",
+              description: "Plain description. Tags such as <em>this</em> stay text."
+            },
+            {
+              type: "radiogroup",
+              name: "q2",
+              title: "Choices use inline HTML",
+              choices: [
+                { value: "bold", text: "<strong>Bold</strong> choice" },
+                { value: "plain", text: "Plain choice" }
+              ]
+            },
+            {
+              type: "richtext",
+              name: "answer",
+              title: "Rich answer",
+              placeholder: "Type and format text"
+            }
+          ]
         }
       ]
     };
