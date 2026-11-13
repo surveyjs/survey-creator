@@ -1,0 +1,100 @@
+import * as fs from "node:fs";
+import * as path from "node:path";
+import type { Counters } from "../counters.ts";
+import type { PerfEnv } from "./env.ts";
+import type { MachineInfo } from "./machine.ts";
+import type { DepsInfo } from "./deps.ts";
+
+// The result file of one suite run: survey-library's schema 2 with the creator's additions (00, Result file). A
+// schema-2 reader ignores the additions: product, build.creatorCore, build.libraryUi and info.versionMismatch.
+export type Suite = "core" | "react";
+
+// survey-core's checkLibraryVersion message when survey-core and the creator differ (00, Measurement rules).
+export interface VersionMismatch {
+  core: string;
+  creator: string;
+}
+
+export interface ResultEntry {
+  id: string;
+  rev: number;
+  unit: "ms";
+  samples: Array<number>;
+  median: number;
+  min: number;
+  max: number;
+  mad: number;
+  phases?: { [phase: string]: { median: number, min: number } };
+  counters: Counters;
+  info: { versionMismatch?: VersionMismatch, [name: string]: any };
+  jsonErrors: number;
+  tolerance: number | null;
+  local: boolean;
+  repeat?: number;
+  counterOnly?: boolean;
+}
+
+export interface BuildPart {
+  dir: string;
+  version: string | null;
+  commit: string | null;
+  mtime: string | null;
+  framework?: { [name: string]: string };
+}
+
+export interface ResultFile {
+  schema: 2;
+  product: "creator";
+  suite: Suite;
+  kind: string;
+  label: string;
+  ref: string | null;
+  commit: string | null;
+  previousCommit: string | null;
+  date: string;
+  requested: { only: Array<string> | null, notInSuite: Array<string> };
+  incomplete: { reason: "timeout" | "killed", unrun: Array<string> } | null;
+  // core: survey-core; ui: the creator UI build (react suite); creatorCore: survey-creator-core; libraryUi: the
+  // survey-library UI build the creator UI renders with (survey-react-ui, react suite).
+  build: { core: BuildPart, ui?: BuildPart, creatorCore: BuildPart, libraryUi?: BuildPart, deps: DepsInfo };
+  machine: MachineInfo;
+  // null here; the caller may fill it in (CONTRACT.md: the perf server records the host load there).
+  environment: any;
+  fixtures: { [key: string]: { hash: string, dataHash?: string, options: any } };
+  skipped: Array<{ id: string, reason: string }>;
+  // Scenarios that threw (a check, a warning, jsonErrors on the runner's build); 04 sees them as missing.
+  failed: Array<{ id: string, error: string }>;
+  results: Array<ResultEntry>;
+}
+
+export function readVersion(dir: string): string | null {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(dir, "package.json"), "utf8")).version || null;
+  } catch(e) {
+    return null;
+  }
+}
+
+export function buildPart(dir: string, mainFile: string, commit: string | null): BuildPart {
+  const file = path.join(dir, mainFile);
+  return { dir: dir, version: readVersion(dir), commit: commit, mtime: fs.existsSync(file) ? new Date(fs.statSync(file).mtimeMs).toISOString() : null };
+}
+
+function stamp(date: Date): string {
+  return date.toISOString().replace(/[-:]/g, "").replace(/\.\d+Z$/, "Z");
+}
+
+// <suite>-latest.json when PERF_ONLY is unset, <suite>-<kind>-<timestamp>.json otherwise; PERF_RESULT_FILE wins.
+export function resultFilePath(env: PerfEnv, suite: Suite, date: Date): string {
+  if (env.resultFile) return path.resolve(env.resultFile);
+  const name = env.only ? suite + "-" + env.kind + "-" + stamp(date) + ".json" : suite + "-latest.json";
+  return path.join(env.resultsDir, name);
+}
+
+// Atomic: a temp file, then a rename, so a reader never sees half a file.
+export function writeJsonAtomic(file: string, value: any): void {
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  const tmp = file + "." + process.pid + ".tmp";
+  fs.writeFileSync(tmp, JSON.stringify(value, null, 2) + "\n");
+  fs.renameSync(tmp, file);
+}

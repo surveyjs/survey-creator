@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>perf: Survey Creator for React 19</title>
+    <!-- The perf page (03): every file comes from http://perf.local/, the minified (production) builds. perf-page.js
+         loads first so its timer tracking sees every timer the builds start; it reads the globals only when called. -->
+    <script src="/page/perf-page.js"></script>
+    <link rel="stylesheet" href="/core/survey-core.min.css">
+    <link rel="stylesheet" href="/creator-core/survey-creator-core.min.css">
+    <script src="/core/survey.core.min.js"></script>
+    <script src="/core/themes/index.min.js"></script>
+    <script src="/react19/react19.js"></script>
+    <script src="/libui/survey-react-ui.min.js"></script>
+    <script src="/creator-core/survey-creator-core.min.js"></script>
+    <script src="/ui/survey-creator-react.min.js"></script>
+    <style>
+      #root { position: fixed; inset: 0; }
+    </style>
+  </head>
+  <body spellcheck="false">
+    <div id="root"></div>
+  </body>
+</html>
