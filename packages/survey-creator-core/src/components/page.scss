@@ -94,6 +94,10 @@ svc-page {
   white-space: nowrap;
   gap: var(--sjs2-spacing-x150, 12px);
 
+  &:focus-within {
+    opacity: var(--sjs2-opacity-visible);
+  }
+
   h4.sd-title {
     .sv-string-editor {
       &[aria-placeholder]:empty:before {
