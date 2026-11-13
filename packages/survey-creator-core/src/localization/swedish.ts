@@ -981,12 +981,20 @@ export let svStrings = {
     addItem: "Klicka för att lägga till...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klicka för att ta bort objektet...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Lägg till {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Ta bort {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Dra objektet",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Utöka nästlade val",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Kollapsnästlade val",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Utöka nästlade val av {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Kollapsa inbäddade val av {0}",
     // [Auto-translated] "Show description"
     showDescription: "Showbeskrivning",
     // [Auto-translated] "Hide description"

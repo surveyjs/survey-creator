@@ -981,12 +981,20 @@ export var koreanStrings = {
     addItem: "항목을 추가하려면 클립하십시오.",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "항목을 제거하려면 클릭하세요...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "추가{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "제거{0}",
     // [Auto-translated] "Drag the item"
     dragItem: "항목을 드래그합니다",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "중첩 선택 확장",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "붕괴 중첩 선택",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "중첩된 선택지를 확장{0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "중첩된 선택지 붕괴{0}",
     // [Auto-translated] "Show description"
     showDescription: "쇼 설명",
     // [Auto-translated] "Hide description"

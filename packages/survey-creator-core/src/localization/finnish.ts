@@ -980,12 +980,20 @@ export var fiStrings = {
     addItem: "Klikkaa lisätäksesi uusi kohde...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Poista kohde napsauttamalla...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Lisää {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Poista {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Kohteen vetäminen",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Laajenna sisäkkäisiä valintoja",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse sisäkkäiset valinnat",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Laajenna sisäkkäisiä vaihtoehtoja {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Romahda sisäkkäiset {0}",
     // [Auto-translated] "Show description"
     showDescription: "Ohjelman kuvaus",
     // [Auto-translated] "Hide description"

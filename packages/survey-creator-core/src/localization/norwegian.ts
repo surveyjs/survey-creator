@@ -980,12 +980,20 @@ export var nbStrings = {
     addItem: "Klikk for å legge til...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klikk for å fjerne elementet...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Legg til {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Fjern {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Dra elementet",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Utvid nestede valg",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Kollaps-nestede valg",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Utvid nestede valg av {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Kollaps-nestede valg av {0}",
     // [Auto-translated] "Show description"
     showDescription: "Seriens beskrivelse",
     // [Auto-translated] "Hide description"

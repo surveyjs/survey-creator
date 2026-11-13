@@ -980,12 +980,20 @@ export var czStrings = {
     addItem: "Kliknutím přidáte položku...",
     // "Click to remove the item..."
     removeItem: "Kliknutím odstraníte položku...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Přidejte {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Odstraňte {0}",
     // "Drag the item"
     dragItem: "Přetáhněte položku",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Rozšiřte vnořené volby",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Kolaps vnořených voleb",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Rozšiřte vnořené volby {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Kolaps vnořených voleb {0}",
     // [Auto-translated] "Show description"
     showDescription: "Popis pořadu",
     // [Auto-translated] "Hide description"

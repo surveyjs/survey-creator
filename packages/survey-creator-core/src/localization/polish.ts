@@ -981,12 +981,20 @@ export var polishStrings = {
     addItem: "Kliknij, aby dodać element...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Kliknij, aby usunąć element...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Dodaj {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Usuń {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Przeciągnij element",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Rozwiń zagnieżdżone wybory",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Wybory zagnieżdżone w upadku",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Rozwiń zagnieżdżone wybory {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Upadek zagnieżdżonych wyborów {0}",
     // [Auto-translated] "Show description"
     showDescription: "Opis programu",
     // [Auto-translated] "Hide description"

@@ -980,12 +980,20 @@ export var skStrings = {
     addItem: "Kliknutím pridať položku...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Kliknutím položku odstránite...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Pridaj {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Odstráňte {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Potiahnite položku",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Rozšíriť vnorené voľby",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse vnorené voľby",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Rozšírte vnorené voľby {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Kolaps vnorených rozhodnutí {0}",
     // [Auto-translated] "Show description"
     showDescription: "Popis relácie",
     // [Auto-translated] "Hide description"

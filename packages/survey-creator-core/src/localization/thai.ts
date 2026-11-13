@@ -980,12 +980,20 @@ export const thStrings = {
     addItem: "คลิกเพื่อเพิ่มรายการ...",
     // "Click to remove the item..."
     removeItem: "คลิกเพื่อลบรายการ...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "เพิ่ม{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "ลบ{0}",
     // "Drag the item"
     dragItem: "ลากรายการ",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "ขยายตัวเลือกซ้อน",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "ยุบตัวเลือกซ้อน",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "ขยายตัวเลือกซ้อนของ{0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "ยุบตัวเลือกซ้อนของ{0}",
     // [Auto-translated] "Show description"
     showDescription: "แสดงรายละเอียด",
     // [Auto-translated] "Hide description"

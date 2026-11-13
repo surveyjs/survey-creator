@@ -980,12 +980,20 @@ export var germanTranslation = {
     addItem: "Klicken, um ein Element hinzuzufügen ...",
     // "Click to remove the item..."
     removeItem: "Klicken, um ein Element zu entfernen ...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Fügen Sie {0} hinzu",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Entfernen Sie {0}",
     // "Drag the item"
     dragItem: "Element ziehen",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Verschachtelte Optionen erweitern",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse verschachtelte Entscheidungen",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Erweitern Sie verschachtelte Optionen von {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Kollaps, verschachtelte Entscheidungen von {0}",
     // [Auto-translated] "Show description"
     showDescription: "Serienbeschreibung",
     // [Auto-translated] "Hide description"

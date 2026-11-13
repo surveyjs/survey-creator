@@ -980,12 +980,20 @@ export var arStrings = {
     addItem: "انقر لإضافة عنصر...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "انقر لإزالة العنصر...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "أضف {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "إزالة {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "سحب العنصر",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "توسيع الخيارات المتداخلة",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "انهيار الخيارات المتداخلة",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "وسع الخيارات المتداخلة {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "خيارات الانهيار المتداخلة {0}",
     // [Auto-translated] "Show description"
     showDescription: "وصف العرض",
     // [Auto-translated] "Hide description"

@@ -980,12 +980,20 @@ export var bgStrings = {
     addItem: "Кликни за добавяне на елемент...",
     // "Click to remove the item..."
     removeItem: "Кликни за изтриване на елемент...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Добави {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Премахни {0}",
     // "Drag the item"
     dragItem: "Плъзни елемента",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Разширете вложените избори",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Вложени избори с колапс",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Разширете вложените избори на {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Колапс вложени избори на {0}",
     // [Auto-translated] "Show description"
     showDescription: "Описание на шоуто",
     // [Auto-translated] "Hide description"

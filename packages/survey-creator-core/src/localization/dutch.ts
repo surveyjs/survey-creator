@@ -980,12 +980,20 @@ export var nlStrings = {
     addItem: "Klik om een item toe te voegen...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klik om het item te verwijderen...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Voeg {0} toe",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Verwijder {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Sleep het item",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Breid geneste keuzes uit",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse geneste keuzes",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Breid geneste keuzes uit {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Collapse geneste keuzes van {0}",
     // [Auto-translated] "Show description"
     showDescription: "Beschrijving van de show",
     // [Auto-translated] "Hide description"

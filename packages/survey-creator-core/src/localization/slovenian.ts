@@ -980,12 +980,20 @@ export var slStrings = {
     addItem: "Kliknite za dodajanje elementa...",
     // "Click to remove the item..."
     removeItem: "Kliknite za odstranitev elementa...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Dodaj {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Odstrani {0}",
     // "Drag the item"
     dragItem: "Povlecite element",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Razširite gnezdene izbire",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse gnezdene izbire",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Razširite gnezdene izbire {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Collapse gnezdene izbire {0}",
     // [Auto-translated] "Show description"
     showDescription: "Opis oddaje",
     // [Auto-translated] "Hide description"

@@ -980,12 +980,20 @@ export var hrStrings = {
     addItem: "Kliknite da biste dodali stavku...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Kliknite da biste uklonili stavku...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Dodaj {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Uklonite {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Vucite stavku",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Proširi ugniježđene izbore",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse ugnježđeni izbori",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Proširite ugniježđene izbore {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Kolaps ugniježđenih izbora {0}",
     // [Auto-translated] "Show description"
     showDescription: "Opis serije",
     // [Auto-translated] "Hide description"

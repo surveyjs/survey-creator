@@ -980,12 +980,20 @@ export var msStrings = {
     addItem: "Klik untuk menambahkan item...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klik untuk mengalih keluar item...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Tambah {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Buang {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Seret item",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Kembangkan pilihan bersarang",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Runtuhkan pilihan bersarang",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Kembangkan pilihan bersarang {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Runtuhkan pilihan bersarang {0}",
     // [Auto-translated] "Show description"
     showDescription: "Tunjukkan penerangan",
     // [Auto-translated] "Hide description"

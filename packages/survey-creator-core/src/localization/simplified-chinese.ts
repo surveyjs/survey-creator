@@ -980,12 +980,20 @@ export var simplifiedChineseTranslation = {
     addItem: "添加项...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "单击以删除该项目...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "添加{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "把{0}",
     // [Auto-translated] "Drag the item"
     dragItem: "拖动项目",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "扩展嵌套选项",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "折叠嵌套选择",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "扩展嵌套的选择，{0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "{0}的嵌套选择崩溃",
     // [Auto-translated] "Show description"
     showDescription: "节目简介",
     // [Auto-translated] "Hide description"
