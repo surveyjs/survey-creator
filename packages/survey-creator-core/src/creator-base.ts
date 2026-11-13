@@ -93,6 +93,7 @@ import { ICreatorTheme } from "./creator-theme/creator-themes";
 import { SurveyElementAdornerBase } from "./components/survey-element-adorner-base";
 import { TabbedMenuContainer, TabbedMenuItem } from "./tabbed-menu";
 import { doMachineStringsTranslation } from "./utils/creator-locstrings";
+import type { ICreatorRichTextEditor } from "./rich-text";
 
 import { iconsV1, iconsV2 } from "./svgbundle";
 
@@ -751,6 +752,18 @@ export class SurveyCreatorModel extends Base
    */
   public onGetObjectDisplayName: EventBase<SurveyCreatorModel, ElementGetDisplayNameEvent> = this.onElementGetDisplayName;
   public onHtmlToMarkdown: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+  private richTextEditorValue: ICreatorRichTextEditor;
+  public registerRichTextEditor(editor: ICreatorRichTextEditor | undefined): void {
+    this.richTextEditorValue = editor;
+  }
+  public get richTextEditor(): ICreatorRichTextEditor {
+    return this.richTextEditorValue;
+  }
+  // True once an editor is registered. Which strings use it is richTextModeForProperty:
+  // serializer type "html" or "inlinehtml". onTextMarkdown is not part of this.
+  public isRichStringsEnabled(): boolean {
+    return !!this.richTextEditorValue;
+  }
 
   /**
    * An event that is raised when Survey Creator obtains the expand/collapse state of a survey element on the design surface. Handle this event to set a required state.

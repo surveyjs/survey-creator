@@ -15,6 +15,7 @@ import { editorLocalization, getLocString } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../creator-settings";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { SurveyHelper, getDefaultLocaleName, isDefaultLocale } from "../../survey-helper";
+import { richTextModeForProperty } from "../../rich-text";
 import { translationCss } from "./translation-theme";
 import { CreatorDomHelper } from "../../dom-helper";
 
@@ -1004,6 +1005,10 @@ export class TranslationBase extends Base implements ITranslationLocales {
       var itemValue = ItemValue.getItemByValue(question.rows, rowName);
       return !!itemValue ? itemValue["translationData"] : null;
     };
+    survey.onMatrixCellCreating.add((_sender: SurveyModel, options: any) => {
+      const item = getTransationItem(options.question, options.row?.name);
+      if (this.richTextModeForItem(item) !== "none") options.cellType = "richtext";
+    });
     survey.onMatrixCellCreated.add((sender: SurveyModel, options: any) => {
       if (options.cell.question instanceof QuestionCommentModel) {
         const cellQuestion = <QuestionCommentModel>options.cell.question;
@@ -1015,6 +1020,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
           const loc = item.locString;
           isMultiLine = loc.getIsMultiple();
           cellQuestion.acceptCarriageReturn = isMultiLine || (<LocalizableString>loc).allowLineBreaks;
+          this.configureRichTranslationCell(cellQuestion, item);
         }
         if (!isMultiLine) {
           cellQuestion.rows = 1;
@@ -1047,7 +1053,30 @@ export class TranslationBase extends Base implements ITranslationLocales {
     return survey;
   }
   private setPlaceHolder(cellQuestion: QuestionCommentModel, item: TranslationItem, locale: string) {
-    cellQuestion.placeholder = item.getPlaceholder(locale);
+    cellQuestion.placeholder = this.plainRichPlaceholder(item.getPlaceholder(locale), item);
+  }
+  protected configureRichTranslationCell(cellQuestion: QuestionCommentModel, item: TranslationItem): void {
+    const mode = this.richTextModeForItem(item);
+    if (mode === "none") return;
+    cellQuestion.acceptCarriageReturn = mode === "block";
+  }
+  protected richTextModeForItem(item: TranslationItem): "none" | "inline" | "block" {
+    const creator = this.options as any;
+    if (!item || !creator || typeof creator.isRichStringsEnabled !== "function" || !creator.isRichStringsEnabled()) return "none";
+    const loc = <LocalizableString>item.locString;
+    if (!loc || (typeof loc.getIsMultiple === "function" && loc.getIsMultiple())) return "none";
+    return richTextModeForProperty(item.context, loc.name);
+  }
+  protected plainRichPlaceholder(text: string, item: TranslationItem): string {
+    const mode = this.richTextModeForItem(item);
+    if (mode === "none" || !text) return text || "";
+    const html = (this.options as any).richTextEditor.sanitizeHtml(text, { inline: mode === "inline" });
+    if (!html) return "";
+    const document = DomDocumentHelper.getDocument();
+    if (!document) return html;
+    const element = document.createElement("div");
+    element.innerHTML = html;
+    return element.textContent || "";
   }
   // The single write path for translation item edits on the real survey; subclasses hook it
   // to react to the change. No-op writes are filtered out.

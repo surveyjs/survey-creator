@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Survey Creator rich text</title>
+  <script src="./node_modules/react/umd/react.development.js"></script>
+  <script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
+  <script src="./node_modules/survey-core/survey.core.js"></script>
+  <script src="./node_modules/survey-core/themes/index.js"></script>
+  <link rel="stylesheet" href="./node_modules/survey-core/rich-text.css" />
+  <script src="./node_modules/survey-core/rich-text/index.js"></script>
+  <script src="./node_modules/survey-react-ui/survey-react-ui.js"></script>
+  <script src="./node_modules/survey-creator-core/survey-creator-core.js"></script>
+  <script src="./build/survey-creator-react.js"></script>
+  <link rel="stylesheet" href="./node_modules/survey-core/survey-core.css" />
+  <link rel="stylesheet" href="./node_modules/survey-creator-core/survey-creator-core.css" />
+  <link rel="stylesheet" href="./fonts.css" />
+  <style>
+    html, body { margin: 0; height: 100%; }
+    #creatorElement { height: 100%; }
+  </style>
+</head>
+
+<body>
+  <div id="creatorElement"></div>
+  <script>
+    // Rich text editing follows the serializer type: "html" is a block, "inlinehtml" is one line.
+    Survey.Serializer.findProperty("survey", "description").type = "html";
+    Survey.Serializer.findProperty("page", "description").type = "html";
+    Survey.Serializer.findProperty("question", "title").type = "inlinehtml";
+    Survey.Serializer.findProperty("question", "description").type = "text";
+    Survey.Serializer.findProperty("itemvalue", "text").type = "inlinehtml";
+
+    SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
+    SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
+
+    var creator = new SurveyCreator.SurveyCreator({ showLogicTab: false });
+    creator.registerRichTextEditor(SurveyRichText.RichText);
+    creator.onSurveyInstanceCreated.add(function (_sender, options) {
+      options.survey.onTextMarkdown.add(SurveyRichText.RichText.renderStringHandler);
+    });
+    creator.JSON = {
+      title: "Rich text demo",
+      description: "<p>Survey description with <em>italic</em> text.</p><p>Second paragraph.</p>",
+      pages: [
+        {
+          name: "page1",
+          description: "<p>Page description.</p><ul><li>item one</li><li>item two</li></ul>",
+          elements: [
+            {
+              type: "text",
+              name: "q1",
+              title: "Title with <em>italic</em>, <strong>bold</strong> and <a href=\"https://surveyjs.io\">a link</a>",
+              description: "Plain description. Tags such as <em>this</em> stay text."
+            },
+            {
+              type: "radiogroup",
+              name: "q2",
+              title: "Choices use inline HTML",
+              choices: [
+                { value: "bold", text: "<strong>Bold</strong> choice" },
+                { value: "plain", text: "Plain choice" }
+              ]
+            },
+            {
+              type: "richtext",
+              name: "answer",
+              title: "Rich answer",
+              placeholder: "Type and format text"
+            }
+          ]
+        }
+      ]
+    };
+
+    ReactDOM.render(
+      React.createElement(SurveyCreator.SurveyCreatorComponent, { creator: creator }),
+      document.getElementById("creatorElement")
+    );
+  </script>
+</body>
+
+</html>
