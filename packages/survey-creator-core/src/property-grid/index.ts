@@ -1700,6 +1700,14 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
   }
 }
 
+// The edited object's default: the default of its survey (SurveyModel.propertyDefaults) when the survey sets one,
+// else the global default. A matrix column keeps most of its properties on its cell question (getOriginalByProperty).
+function getObjDefaultValue(obj: Base, prop: JsonObjectProperty): any {
+  const owner = !!obj && typeof obj.getOriginalByProperty === "function" ? obj.getOriginalByProperty(prop.name) : undefined;
+  const res = !!owner && typeof owner.getDefaultPropertyValue === "function" ? owner.getDefaultPropertyValue(prop.name) : undefined;
+  return res !== undefined ? res : prop.getDefaultValue(obj);
+}
+
 export class PropertyGridEditorBoolean extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty, context?: string): boolean {
     return prop.type == "boolean" || prop.type == "switch";
@@ -1722,7 +1730,7 @@ export class PropertyGridEditorBoolean extends PropertyGridEditor {
         const val = choices[i].value || choices[i];
         jsonChoices.push({ value: val, text: editorLocalization.getPropertyValueInEditor(prop.name, val) });
       }
-      const defaultValue = prop.getDefaultValue(obj) || jsonChoices[0].value;
+      const defaultValue = getObjDefaultValue(obj, prop) || jsonChoices[0].value;
       const indexTrue = defaultValue === choices[1].value ? 1 : 0;
       const indexFalse = indexTrue === 0 ? 1 : 0;
       res.valueTrue = jsonChoices[indexTrue].value;
@@ -1757,7 +1765,7 @@ export class PropertyGridEditorSwitchToggle extends PropertyGridEditor {
         const val = choices[i].value || choices[i];
         jsonChoices.push({ value: val, text: editorLocalization.getPropertyValueInEditor(prop.name, val) });
       }
-      const defaultValue = prop.getDefaultValue(obj) || jsonChoices[0].value;
+      const defaultValue = getObjDefaultValue(obj, prop) || jsonChoices[0].value;
       const indexTrue = defaultValue === choices[1].value ? 1 : 0;
       const indexFalse = indexTrue === 0 ? 1 : 0;
       res.valueTrue = jsonChoices[indexTrue].value;
@@ -2038,7 +2046,10 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
   public onValueChanging(obj: Base, prop: JsonObjectProperty, question: Question, options: any): void {
     if (!options.value && options.value !== 0) {
       if (prop.defaultValue !== undefined) {
-        options.value = prop.defaultValue;
+        // A cleared value goes back to the edited object's default (its survey's own default when the survey sets
+        // one), not to the global default: a value equal to the survey's default is not written into the JSON
+        const objDefault = getObjDefaultValue(obj, prop);
+        options.value = objDefault !== undefined ? objDefault : prop.defaultValue;
       } else {
         if (!prop.isRequired && options.value === "") {
           options.value = undefined;
