@@ -98,6 +98,8 @@ test.describe(title, () => {
     await expect(title2).toBe("title");
     await titleEditor.click();
     await page.keyboard.type("2");
+    // Kept on purpose: edits made within UndoRedoAction.maximumMergeTime (1000 ms) merge into one undo step;
+    // the pause makes the next edit a separate step.
     await page.waitForTimeout(1100);
     await page.keyboard.type("-345");
     const title3 = await getQuestionTitle();
@@ -120,10 +122,13 @@ test.describe(title, () => {
     await titleEditor.click();
     await page.keyboard.press("Control+a");
     await page.keyboard.type("1234");
+    // Kept on purpose: edits made within UndoRedoAction.maximumMergeTime (1000 ms) merge into one undo step;
+    // the pause makes the next edit a separate step.
     await page.waitForTimeout(1000);
     await page.keyboard.press("Control+a");
     await page.keyboard.press("Backspace");
-    await page.waitForTimeout(1000);
+    // An empty title falls back to the question name
+    await expect.poll(getQuestionTitle).toBe("q1");
     await page.keyboard.press("Control+z");
     const title = await getQuestionTitle();
     await expect(title).toBe("1234");

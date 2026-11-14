@@ -79,7 +79,6 @@ test.describe(title, () => {
     const columnCell = page.locator(".sd-table__cell--column-title").locator(".svc-matrix-cell").first();
     const matrix = page.locator(".sd-matrixdropdown");
     await columnCell.hover({ force: true, position: { x: 1, y: 1 } });
-    await page.waitForTimeout(100);
     await compareScreenshot(page, matrix, "matrix-column-cell-hover.png");
     await columnCell.click({ position: { x: 1, y: 1 } });
     await compareScreenshot(page, matrix, "matrix-column-cell-selected.png");
@@ -120,7 +119,6 @@ test.describe(title, () => {
     const columnCell = page.locator(".sd-table__cell--column-title").locator(".svc-matrix-cell").first();
     const matrix = page.locator(".sd-matrixdropdown");
     await columnCell.hover({ force: true, position: { x: 1, y: 1 } });
-    await page.waitForTimeout(100);
     await compareScreenshot(page, matrix, "matrix-vertical-column-cell-hover.png");
     await columnCell.click({ position: { x: 1, y: 1 } });
     await compareScreenshot(page, matrix, "matrix-vertical-column-cell-selected.png");
@@ -200,11 +198,9 @@ test.describe(title, () => {
     const pageContent = page.locator(".svc-page__content:not(.svc-page__content--new)");
     await compareScreenshot(page, pageContent, "question-panel-content-matrix.png");
     await qTitle.hover({ position: { x: 5, y: 5 } });
-    await page.waitForTimeout(300);
     await compareScreenshot(page, pageContent, "question-panel-content-matrix-hover.png");
     await qTitle.click({ position: { x: 5, y: 5 } });
     await qTitle.click({ position: { x: 5, y: 5 } });
-    await page.waitForTimeout(300);
     await compareScreenshot(page, pageContent, "question-panel-content-matrix-selected.png");
   });
 
@@ -295,7 +291,7 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".sv-popup__container"), "matrix-dropdown-popup-select.png", { maxDiffPixels: 42 });
     await showContentBehindPopup(page);
     await page.locator("button").filter({ hasText: "Cancel" }).click();
-    await page.waitForTimeout(500);
+    await expect(page.locator(".sv-popup__container").filter({ visible: true })).toHaveCount(0);
 
     await page.locator(".svc-matrix-cell").nth(4).hover({ force: true });
     await expect(ratingButton).toBeVisible();

@@ -60,7 +60,6 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 2560, height: 1440 });
     await page.getByRole("button", { name: "Used Strings Only" }).click();
     await getListItemByText(page, "All Strings").click();
-    await page.waitForTimeout(500);
     await compareScreenshot(page, stringsView, "translation-tab-show-all-strings.png", { maxDiffPixels: 50 });
   });
 
@@ -112,7 +111,7 @@ test.describe(title, () => {
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup.png");
     await showContentBehindPopup(page);
     await page.getByRole("button", { name: "Apply" }).click();
-    await page.waitForTimeout(1000);
+    await expect(translationDialog.filter({ visible: true })).toHaveCount(0);
     await page.locator("textarea").nth(1).type("translated");
     await page.locator(".spg-title .sd-action").first().click();
     await page.locator("span", { hasText: "Dansk" }).click();
@@ -120,12 +119,10 @@ test.describe(title, () => {
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-enabled-dropdown.png");
     await showContentBehindPopup(page);
     await page.setViewportSize({ width: 1000, height: 1440 });
-    await page.waitForTimeout(500);
     await hideContentBehindPopup(page);
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-medium-screen.png", { maxDiffPixels: 2 });
     await showContentBehindPopup(page);
     await page.setViewportSize({ width: 800, height: 1440 });
-    await page.waitForTimeout(500);
     await hideContentBehindPopup(page);
     await compareScreenshot(page, translationDialog, "translation-auto-translate-popup-small-screen.png", { maxDiffPixels: 2 });
     await showContentBehindPopup(page);

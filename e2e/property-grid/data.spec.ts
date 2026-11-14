@@ -105,7 +105,8 @@ test.describe(title, () => {
     await getPropertyGridCategory(page, generalGroupName).click();
     await dataTab.click();
     await page.locator("span").getByText("Set Default Answer", { exact: true }).click();
-    await page.waitForTimeout(1000);
+    // The dialog focuses its input 100 ms after it opens
+    await expect(page.locator(".sv-popup--modal-popup input")).toBeFocused();
     await page.keyboard.press("2");
     await page.keyboard.press("4");
     await expect(page.locator(".sv-popup--modal-popup input")).toHaveValue("02/04/yyyy");

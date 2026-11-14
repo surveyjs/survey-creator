@@ -1,5 +1,5 @@
 import { Locator, Page } from "playwright/test";
-import { test } from "../e2e/helper";
+import { test, expect } from "../e2e/helper";
 
 export * from "../e2e/helper";
 
@@ -117,7 +117,16 @@ export async function changeToolboxLocation(page: Page, newVal: string) {
   await page.evaluate((newVal) => {
     window["creator"].toolboxLocation = newVal;
   }, newVal);
-  await page.waitForTimeout(500);
+  // The creator tab carries this class only while the toolbox is on the right
+  const toolboxRight = page.locator(".svc-creator__toolbox--right");
+  if (newVal === "right") {
+    await expect(toolboxRight.first()).toBeVisible();
+  } else {
+    await expect(toolboxRight).toHaveCount(0);
+  }
+  if (newVal === "sidebar") {
+    await expect(page.locator(".svc-creator-tab .svc-toolbox")).toHaveCount(0);
+  }
 }
 
 export async function setDirRTL(page) {

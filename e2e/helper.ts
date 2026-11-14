@@ -157,6 +157,13 @@ export async function doDragDrop({ page, element, target, options }: { page: Pag
   await page.mouse.up();
 }
 
+// Resolves after two rendering updates. The browser dispatches the scroll event of a scroll
+// (for example, scrollIntoViewIfNeeded) in the next rendering update, so a popup opened right
+// after the scroll could be closed by that late event.
+export async function waitForAnimationFrames(page: Page): Promise<void> {
+  await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
+}
+
 export async function showCreatorSettings(page) {
   await page.locator(".svc-sidebar-tabs__bottom-container .sd-action").click();
 }

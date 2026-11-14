@@ -46,8 +46,9 @@ test.describe(title, () => {
     expect(isActiveElementFontColor1).toBeTruthy();
     await expect(page.locator("div[data-name='fontColor1'] .sv-popup")).not.toBeVisible();
     await page.keyboard.press("ArrowDown");
-    await page.waitForTimeout(1000);
     await expect(page.locator("div[data-name='fontColor1'] .sv-popup")).toBeVisible();
+    // The popup moves the focus into its list after it shows; the arrows below navigate that list
+    await expect(page.locator("div[data-name='fontColor1'] .sv-popup:focus-within")).toHaveCount(1);
     await page.keyboard.press("ArrowDown");
     await page.keyboard.press("ArrowDown");
     await page.keyboard.press("Enter");

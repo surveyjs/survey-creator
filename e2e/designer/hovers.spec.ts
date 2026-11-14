@@ -22,11 +22,13 @@ test.describe(title, () => {
     const question = page.locator(".svc-question__adorner").first();
 
     await pageContent.hover({ position: { x: 5, y: 5 } });
+    // Kept on purpose: the page must not be hovered before pageHoverDelay (2000 ms) runs out.
     await page.waitForTimeout(300);
     await expect(pageContent).not.toHaveClass(hoveredClass, { timeout: 200 });
     await expect(pageContent).toHaveClass(hoveredClass, { timeout: 3000 });
 
     await page.locator(".sd-page__title").first().hover();
+    // Kept on purpose: moving inside the page must not drop its hover; the class is already there, so only a pause can show that it stays.
     await page.waitForTimeout(300);
     await expect(pageContent).toHaveClass(hoveredClass, { timeout: 200 });
 
@@ -34,9 +36,9 @@ test.describe(title, () => {
     await expect(pageContent).not.toHaveClass(hoveredClass, { timeout: 500 });
 
     await question.hover({ position: { x: -10, y: 0 } });
-    await page.waitForTimeout(300);
     await expect(question).toHaveClass(hoveredClass, { timeout: 3000 });
 
+    // Kept on purpose: the page must not become hovered while the question is, even after pageHoverDelay (2000 ms) runs out.
     await page.waitForTimeout(3000);
     await expect(pageContent).not.toHaveClass(hoveredClass);
 
@@ -53,6 +55,7 @@ test.describe(title, () => {
     const addQuestion = page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").first();
 
     await addQuestion.hover({ position: { x: 5, y: 5 } });
+    // Kept on purpose: checks that the page hover does not appear; nothing else changes on this hover to wait for.
     await page.waitForTimeout(300);
     await expect(pageContent).not.toHaveClass(hoveredClass);
   });
@@ -68,10 +71,8 @@ test.describe(title, () => {
 
     const pageHoverSelector = page.locator(".svc-page-navigator-item__banner").getByText("page2", { exact: true });
 
-    await page.waitForTimeout(10);
     await expect(page.locator(".svc-page-navigator-item-content").filter({ visible: true })).toHaveCount(2);
     await page.locator(".svc-page-navigator-item-content").nth(1).hover();
-    await page.waitForTimeout(1500);
     await expect(pageHoverSelector).toBeVisible();
   });
 
@@ -87,7 +88,6 @@ test.describe(title, () => {
     const action = page.locator(".svc-tab-designer .svc-question__adorner.svc-hovered").getByRole("button", { name: "Delete" });
 
     await questionTitle.hover({ position: { x: 5, y: 5 } });
-    await page.waitForTimeout(300);
     await expect(action).toBeVisible();
 
     await page.locator(".svc-toolbox").hover();
@@ -98,7 +98,7 @@ test.describe(title, () => {
     });
 
     await questionTitle.hover({ position: { x: 5, y: 5 } });
-    await page.waitForTimeout(300);
+    await expect(page.locator(".svc-tab-designer .svc-question__adorner.svc-hovered")).toBeVisible();
     await expect(action).not.toBeVisible();
   });
 });

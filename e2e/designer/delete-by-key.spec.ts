@@ -20,13 +20,11 @@ test.describe(title, () => {
 
     await getVisibleElement(page, ".svc-question__content").first().click({ position: { x: 100, y: 100 } });
     await page.keyboard.press("Delete");
-    await page.waitForTimeout(100);
     await expect(getVisibleElement(page, ".svc-question__content")).toHaveCount(1);
     await expect(getVisibleElement(page, ".svc-question__content")).toHaveClass(/svc-question__content--selected/);
     await expect(getVisibleElement(page, ".svc-question__content.svc-question__content--selected")).toBeFocused();
 
     await page.keyboard.press("Delete");
-    await page.waitForTimeout(500);
     await expect(getVisibleElement(page, ".svc-question__content")).toHaveCount(0);
   });
 });

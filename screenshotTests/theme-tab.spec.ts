@@ -41,6 +41,8 @@ test.describe(title, () => {
         { elements: [{ type: "text", name: "question2" }] }
       ]
     });
+    // Kept on purpose (both pauses): without them the toolbar locator captured a property grid header
+    // instead of the footer toolbar on React (5 of 5 runs); no state was found to wait for instead.
     await page.waitForTimeout(300);
     await getTabbedMenuItemByText(page, creatorTabThemeName).click();
     await page.setViewportSize({ width: 380, height: 600 });

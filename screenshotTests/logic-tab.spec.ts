@@ -244,7 +244,7 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".sl-table__cell--detail-panel"), "logic-error-condition-question-name.png");
     await page.click(".svc-logic-operator.svc-logic-operator--question");
     await getVisibleSelectListItemByText(page, "q1").click();
-    await page.waitForTimeout(500);
+    await expect(getVisibleSelectListItemByText(page, "q1")).toHaveCount(0);
     await page.click(".sl-panel__done-button");
 
     await compareScreenshot(page, page.locator(".sl-table__cell--detail-panel"), "logic-error-condition-question-value.png");
@@ -256,7 +256,7 @@ test.describe(title, () => {
 
     await page.click(".svc-logic-operator--action");
     await getVisibleSelectListItemByText(page, "Copy answer").click();
-    await page.waitForTimeout(500);
+    await expect(getVisibleSelectListItemByText(page, "Copy answer")).toHaveCount(0);
     await page.click(".sl-panel__done-button");
 
     await compareScreenshot(page, page.locator(".sl-table__cell--detail-panel"), "logic-error-action-questions.png");

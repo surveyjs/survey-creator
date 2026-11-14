@@ -15,7 +15,6 @@ test.describe(title, () => {
     await page.evaluate(() => {
       window["creator"].locale = "de";
     });
-    await page.waitForTimeout(500);
-    expect(await page.locator(".svc-question__content-actions .sd-action__title").first().textContent()).toBe(checkboxText);
+    await expect(page.locator(".svc-question__content-actions .sd-action__title").first()).toHaveText(checkboxText);
   });
 });

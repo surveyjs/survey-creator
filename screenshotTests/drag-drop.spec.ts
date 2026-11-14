@@ -181,7 +181,6 @@ test.describe(title, () => {
 
     await doDrag({ page, element: firstItem.locator(".svc-item-value-controls__drag"), target: firstItem });
 
-    await page.waitForTimeout(500);
     await compareScreenshot(page, qRoot, "drag-drop-item-values-ranking--dragging.png");
   });
 
@@ -309,7 +308,6 @@ test.describe(title, () => {
         targetPosition: { x: 20, y: 20 },
       }
     });
-    await page.waitForTimeout(500);
 
     await compareScreenshot(page, page.locator("[data-name=\"choices\"]"), "drag-drop-matrix-pg-choices.png");
   });
@@ -344,7 +342,6 @@ test.describe(title, () => {
         targetPosition: { x: 20, y: 40 }
       }
     });
-    await page.waitForTimeout(500);
 
     await compareScreenshot(page, page.locator("[data-name=\"choices\"]"), "drag-drop-matrix-pg-choices-scroll.png");
   });
@@ -536,7 +533,6 @@ test.describe(title, () => {
     }
 
     await expect(page.locator(".svc-question__content")).toHaveCount(2);
-    await page.waitForTimeout(500);
     await setClass(1, "drag-over-top");
     await compareScreenshot(page, page1, "drag-drop-inside-panel-dynamic-top.png");
     await setClass(1, "drag-over-top", "remove");
@@ -645,7 +641,6 @@ test.describe(title, () => {
 
     const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").first();
     await doDrag({ page, element: toolboxToolAction, target: panel });
-    await page.waitForTimeout(500);
     await compareScreenshot(page, page.locator(".svc-page__content"), "drag-drop-in-collapsed-panel.png");
   });
 
@@ -688,7 +683,6 @@ test.describe(title, () => {
 
     const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").first();
     await doDrag({ page, element: toolboxToolAction, target: pageElement });
-    await page.waitForTimeout(500);
     await compareScreenshot(page, page.locator(".svc-tab-designer_content"), "drag-drop-in-collapsed-page.png");
   });
 });

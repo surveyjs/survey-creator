@@ -116,7 +116,6 @@ test.describe(title, () => {
 
     await choiceExpandButton.click();
     await addQuestion.click();
-    await page.waitForTimeout(1000);
     await page.mouse.move(0, 0);
     await compareScreenshot(page, ".sd-element__content", "choices-elements-designe-surface.png");
   });

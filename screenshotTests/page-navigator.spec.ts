@@ -35,16 +35,13 @@ test.describe(title, () => {
   test("On the right side (default)", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 500 });
     await setJSON(page, json);
-    await page.waitForTimeout(500);
     const pageNavigatorContainer = page.locator(".svc-tab-designer__page-navigator");
     const pageNavigatorElement = page.locator(".svc-page-navigator");
 
     await expect(pageNavigatorElement).toBeVisible();
-    await page.waitForTimeout(1000);
     await compareScreenshot(page, pageNavigatorContainer, "page-navigator-right.png");
 
     await page.locator(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)").hover();
-    await page.waitForTimeout(1000);
     await compareScreenshot(page, pageNavigatorContainer, "page-navigator-right-hovered.png");
 
     // await page.setViewportSize({ width: 1920, height: 1400 });
@@ -72,18 +69,15 @@ test.describe(title, () => {
   test("On the left side", async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 500 });
     await setJSON(page, json);
-    await page.waitForTimeout(500);
 
     const pageNavigatorContainer = page.locator(".svc-tab-designer__page-navigator");
     const pageNavigatorElement = page.locator(".svc-page-navigator");
     await changeToolboxLocation(page, "right");
 
     await expect(pageNavigatorElement).toBeVisible();
-    await page.waitForTimeout(1000);
     await compareScreenshot(page, pageNavigatorContainer, "page-navigator-left.png");
 
     await page.locator(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)").hover();
-    await page.waitForTimeout(1000);
     await compareScreenshot(page, pageNavigatorContainer, "page-navigator-left-hovered.png");
 
     // await page.setViewportSize({ width: 1920, height: 1400 });
@@ -96,15 +90,12 @@ test.describe(title, () => {
     await setDirRTL(page);
 
     await setJSON(page, json);
-    await page.waitForTimeout(500);
     const pageNavigatorElement = page.locator(".svc-tab-designer__page-navigator");
 
     await expect(pageNavigatorElement).toBeVisible();
-    await page.waitForTimeout(1000);
     await compareScreenshot(page, pageNavigatorElement, "page-navigator-left-rtl.png");
 
     await page.locator(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)").hover();
-    await page.waitForTimeout(1000);
     await compareScreenshot(page, pageNavigatorElement, "page-navigator-left-rtl-hovered.png");
   });
 
@@ -132,7 +123,6 @@ test.describe(title, () => {
     await expect(page.locator(firstPageNavigatorItem)).not.toBeVisible();
     await expect(page.locator(thirdPageNavigatorItem)).toBeVisible();
 
-    await page.waitForTimeout(1000);
     await compareScreenshot(page, page.locator(".svc-creator-tab"), "design-surface-navigated-to-3rd.png");
   });
 
@@ -398,7 +388,6 @@ test.describe(title, () => {
       ],
       showQuestionNumbers: false,
     });
-    await page.waitForTimeout(500);
 
     const pageNavigatorElement = page.locator(".svc-tab-designer__page-navigator");
 
@@ -467,7 +456,6 @@ test.describe(title, () => {
     });
     await page.evaluate(() => { document.body.focus(); });
     await page.locator(".svc-designer-header").hover({ position: { x: 1, y: 1 } });
-    await page.waitForTimeout(500);
     const designSurface = page.locator(".svc-tab-designer--with-surface-tools");
     await expect(designSurface).toBeVisible();
     await compareScreenshot(page, designSurface, "page-navigator-not-overlaped.png");
@@ -537,7 +525,6 @@ test.describe(title, () => {
     });
     await page.evaluate(() => { document.body.focus(); });
     await page.locator(".svc-designer-header").hover({ position: { x: 1, y: 1 } });
-    await page.waitForTimeout(500);
     const designSurface = page.locator(".svc-tab-designer--with-surface-tools");
     await expect(designSurface).toBeVisible();
     await compareScreenshot(page, designSurface, "page-navigator-by-page-not-overlaped.png");
@@ -644,11 +631,9 @@ test.describe(title, () => {
     const pageSelector = page.locator(".svc-page-navigator__selector");
     await pageSelector.click();
     await getListItemByText(page, "page4").click();
-    await page.waitForTimeout(500);
     await compareScreenshot(page, designSurface, "page-navigator-select-long-page.png");
     await pageSelector.click();
     await getListItemByText(page, "page2").click();
-    await page.waitForTimeout(500);
     await compareScreenshot(page, designSurface, "page-navigator-select-short-page.png");
   });
 });

@@ -851,7 +851,7 @@ test.describe(title, () => {
     };
     await setJSON(page, json);
     await page.locator(".svc-string-editor").getByText("question1").click();
-    await page.waitForTimeout(200);
+    await expect(page.locator(".svc-string-editor").getByText("question1")).toBeFocused();
     await page.keyboard.press("Tab");
     await expect(page.locator(".svc-item-value-controls__add").nth(0)).toBeFocused();
     await page.keyboard.press("Tab");

@@ -1,4 +1,4 @@
-import { test, url, setJSON, compareScreenshot } from "./helper";
+import { test, expect, url, setJSON, compareScreenshot, selectedObjectTextSelector } from "./helper";
 
 const title = "ValueLink Actions in Data section Screenshot";
 
@@ -23,7 +23,7 @@ test.describe(title, () => {
 
     // await page.click(".svd-grid-expand");
     await page.locator(".svc-question__content").click({ position: { x: 10, y: 10 } });
-    await page.waitForTimeout(500);
+    await expect(page.locator(selectedObjectTextSelector)).toHaveText("question1");
     await page.locator("div[id$='ariaTitle'][id^='pg-sp']:has-text('General')").click();
     await page.locator("div[id$='ariaTitle'][id^='pg-sp']:has-text('Data')").click();
 

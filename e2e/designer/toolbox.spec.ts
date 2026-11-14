@@ -12,6 +12,7 @@ import {
   getSubToolboxItemByText,
   setAllowEditSurveyTitle,
   doDragDrop,
+  waitForAnimationFrames,
 } from "../helper";
 
 const title = "Toolbox";
@@ -254,7 +255,8 @@ test.describe(title, () => {
 
     for (let i = 580; i > 540; i--) {
       await setSize(i);
-      await page.waitForTimeout(100);
+      // The toolbox refits in the frame after its ResizeObserver callback; check the layout after that refit
+      await waitForAnimationFrames(page);
       expect(await hasNoScroll()).toBeTruthy();
     }
   });
@@ -289,9 +291,8 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1920, height: 598 });
     await expect(page.locator(".svc-toolbox .sv-dots__item")).toBeVisible();
     await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(23);
-    // Wait for layout to recalculate visibility after enabling search and viewport change
-    await page.waitForTimeout(100);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(10);
+    // The layout recalculates visibility after enabling search and the viewport change
+    await expect.poll(() => getVisibleToolboxToolsCount(page)).toEqual(10);
   });
 
   test("toolbar responsiveness in compact mode", async ({ page }) => {
@@ -378,19 +379,15 @@ test.describe(title, () => {
 
     await expect(toolboxSubTypesPopup).not.toBeVisible();
     await ratingSubmenuBtn.hover();
-    await page.waitForTimeout(400);
     await expect(toolboxSubTypesPopup).toBeVisible();
     await ratingTool.hover();
-    await page.waitForTimeout(400);
     await expect(toolboxSubTypesPopup).not.toBeVisible();
     await ratingSubmenuBtn.hover();
-    await page.waitForTimeout(400);
     await expect(toolboxSubTypesPopup).toBeVisible();
 
     const smileysItem = getSubToolboxItemByText(page, "Smileys");
     const placeholder = page.locator(".svc-designer__placeholder-container");
     await smileysItem.hover({ force: true });
-    await page.waitForTimeout(400);
     await doDragDrop({
       page,
       element: smileysItem,
@@ -435,12 +432,10 @@ test.describe(title, () => {
     const toolboxSubTypesPopup = page.locator(".sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filter({ visible: true });
 
     await getToolboxItemByText(page, "Single-Line Input").click();
-    await page.waitForTimeout(400);
     await expect(page.locator(".svc-question__content")).toHaveCount(1);
 
     const singleLineTool = page.locator(".svc-toolbox__tool").filter({ has: getToolboxItemByText(page, "Single-Line Input") });
     await singleLineTool.locator(".svc-toolbox__item-submenu-button").hover();
-    await page.waitForTimeout(400);
     await expect(toolboxSubTypesPopup).toBeVisible();
 
     await getSubToolboxItemByText(page, "Password").click();
@@ -473,7 +468,6 @@ test.describe(title, () => {
 
     await expect(toolboxSubTypesPopup).not.toBeVisible();
     await ratingTool.locator(".svc-toolbox__item-submenu-button").hover();
-    await page.waitForTimeout(400);
     await expect(toolboxSubTypesPopup).toBeVisible();
 
     await page.locator(".sv-scroll__scroller").first().evaluate((el) => el.scrollBy(2, 100));
