@@ -34,7 +34,7 @@ const expectedRows = [
 describe("Preview results, moving elements and the JSON tab (nested data, survey-library #12233)", () => {
   test("Results: the JSON view is the nested object and the table has one row per question", () => {
     const creator = new CreatorTester();
-    creator.JSON = { elements: [
+    creator.JSON = { dataNesting: "auto", elements: [
       { ...addressPanel, valueName: "address" },
       { type: "text", name: "q1", title: "Question 1" }
     ] };
@@ -60,7 +60,7 @@ describe("Preview results, moving elements and the JSON tab (nested data, survey
   });
   test("Moving a question into and out of a nesting panel in the designer changes where Preview stores it", () => {
     const creator = new CreatorTester();
-    creator.JSON = { elements: [
+    creator.JSON = { dataNesting: "auto", elements: [
       { ...addressPanel, valueName: "address" },
       { type: "text", name: "q1" }
     ] };
@@ -101,7 +101,7 @@ describe("Preview results, moving elements and the JSON tab (nested data, survey
   });
   test("The JSON tab's linter checks paths of a nested variable definition", () => {
     const creator = new CreatorTester({ variablePresets: {
-      definition: { elements: [
+      definition: { dataNesting: "auto", elements: [
         { type: "panel", name: "user", valueName: "users", elements: [
           { type: "dropdown", name: "tier", choices: ["gold", "silver"] },
           { type: "text", name: "name" }] },

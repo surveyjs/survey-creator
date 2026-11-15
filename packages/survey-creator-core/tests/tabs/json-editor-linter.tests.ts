@@ -1284,6 +1284,7 @@ describe("The nested-data findings are told in the words of the creator (nested 
   };
   test("A container key shadowed by a calculated value", () => {
     const text = textOf({
+      dataNesting: "auto",
       elements: [addressPanel("total")],
       calculatedValues: [{ name: "total", expression: "1" }]
     }, "name/shadowing");
@@ -1298,23 +1299,25 @@ describe("The nested-data findings are told in the words of the creator (nested 
       expect(found).toHaveLength(1);
       return found[0].text;
     };
-    expect(shadowed({ elements: [addressPanel("customerTier")] }, { variablePresets: { definition: variableDefinition } }))
+    expect(shadowed({ dataNesting: "auto", elements: [addressPanel("customerTier")] }, { variablePresets: { definition: variableDefinition } }))
       .toBe("The panel \"p1\" stores its questions' values under \"customerTier\", which is also the host variable" +
         " \"customerTier\" - {customerTier} and {customerTier.x} read the variable first.");
     expect(shadowed({
+      dataNesting: "auto",
       pages: [{ name: "pg1", valueName: "score", elements: [{ type: "text", name: "q1" }] }],
       triggers: [{ type: "setvalue", expression: "{q1} notempty", setToName: "score", isVariable: true, setValue: 1 }]
     })).toBe("The page \"pg1\" stores its questions' values under \"score\", which is also the trigger variable" +
       " \"score\" - {score} and {score.x} read the variable first.");
   });
   test("A reserved container key", () => {
-    const text = textOf({ elements: [addressPanel("constructor")] }, "name/reserved");
+    const text = textOf({ dataNesting: "auto", elements: [addressPanel("constructor")] }, "name/reserved");
     expect(text).toBe("\"p1\" stores its questions' values under \"constructor\", which is reserved - a member of" +
       " Object.prototype.");
     expectFilled(text);
   });
   test("A container key that is also a question's data key", () => {
     const text = textOf({
+      dataNesting: "auto",
       elements: [addressPanel("addr"), { type: "text", name: "addr" }]
     }, "nesting/key-conflict");
     expect(text).toBe("\"p1\" stores its questions' values in an object under \"addr\", which is also the data key of" +
@@ -1341,7 +1344,7 @@ describe("The nested-data findings are told in the words of the creator (nested 
       ] } };
     });
     const editor = new TextareaJsonEditorModel(creator);
-    editor.text = JSON.stringify({ elements: [{ type: "text", name: "q1" }] }, null, 2);
+    editor.text = JSON.stringify({ dataNesting: "auto", elements: [{ type: "text", name: "q1" }] }, null, 2);
     editor.processErrors(editor.text);
     const found = editor.linter.findings.filter(f => f.ruleId === "nesting/ignored-key");
     expect(found).toHaveLength(1);

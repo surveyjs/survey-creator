@@ -44,10 +44,10 @@ describe("property grid strings: panel and page valueName, survey dataNesting (n
 
 describe("property grid: panel and page valueName, survey dataNesting (nested data, survey-library #12233)", () => {
   test("a panel and a page show valueName in the Data tab, a question still shows the join identifier", () => {
-    const survey = new SurveyModel(panelJson());
+    const survey = new SurveyModel(panelJson({ dataNesting: "auto" }));
     [survey.getPanelByName("panel1"), survey.pages[0]].forEach(container => {
       const editor = new PropertyGridModelTester(container).survey.getQuestionByName("valueName");
-      expect(editor, container.getType()).toBeTruthy();
+      expect(editor.isVisible, container.getType()).toBe(true);
       expect(editor.parent.name, container.getType()).toBe("data");
       expect(editor.title, container.getType()).toBe("Data key");
       expect(editor.description, container.getType()).toBe(valueNameHelp);
@@ -55,7 +55,7 @@ describe("property grid: panel and page valueName, survey dataNesting (nested da
     const editor = new PropertyGridModelTester(survey.getQuestionByName("q1")).survey.getQuestionByName("valueName");
     expect(editor.title).toBe("Join identifier");
   });
-  test("the survey shows dataNesting in the Data tab with five choices, \"auto\" by default", () => {
+  test("the survey shows dataNesting in the Data tab with five choices, \"none\" by default", () => {
     const creator = new CreatorTester();
     creator.JSON = panelJson();
     creator.selectElement(creator.survey);
@@ -66,7 +66,7 @@ describe("property grid: panel and page valueName, survey dataNesting (nested da
     expect(names.indexOf("dataNesting")).toBe(names.indexOf("clearInvisibleValues") + 1);
     expect(editor.title).toBe("Store panel and page values in objects");
     expect(editor.description).toBe(dataNestingHelp);
-    expect(editor.value).toBe("auto");
+    expect(editor.value).toBe("none");
     expect(editor.choices.map(c => c.value)).toEqual(["auto", "none", "panel", "page", "panelAndPage"]);
     expect(editor.choices.map(c => c.text)).toEqual([
       "Panels and pages with a data key", "Never (flat data)", "Every panel", "Every page", "Every panel and page"
@@ -74,12 +74,12 @@ describe("property grid: panel and page valueName, survey dataNesting (nested da
     editor.value = "panel";
     expect(creator.survey.dataNesting).toBe("panel");
     expect(creator.JSON.dataNesting).toBe("panel");
-    editor.value = "auto";
+    editor.value = "none";
     expect(creator.JSON.dataNesting).toBeUndefined();
   });
   test("a panel valueName set in the grid goes to the JSON and is made valid as a question's is", () => {
     const creator = new CreatorTester();
-    creator.JSON = panelJson();
+    creator.JSON = panelJson({ dataNesting: "auto" });
     const panel = creator.survey.getPanelByName("panel1");
     creator.selectElement(panel);
     const editor = creator.propertyGrid.getQuestionByName("valueName");
@@ -100,6 +100,7 @@ describe("property grid: panel and page valueName, survey dataNesting (nested da
   test("valueName is shown for a panel inside a dynamic panel's template and a matrix detail panel", () => {
     const creator = new CreatorTester();
     creator.JSON = {
+      dataNesting: "auto",
       elements: [
         { type: "paneldynamic", name: "pd", templateElements: [
           { type: "panel", name: "pin", elements: [{ type: "panel", name: "pin2", elements: [{ type: "text", name: "q1" }] }] }] },
@@ -129,7 +130,7 @@ describe("property grid: panel and page valueName, survey dataNesting (nested da
     ] });
     try {
       const creator = new CreatorTester();
-      creator.JSON = { elements: [{ type: "nestedaddress", name: "comp" }] };
+      creator.JSON = { dataNesting: "auto", elements: [{ type: "nestedaddress", name: "comp" }] };
       const comp: any = creator.survey.getQuestionByName("comp");
       const inner = <PanelModel>comp.contentPanel.getElementByName("cin");
       expect(inner).toBeTruthy();
@@ -148,7 +149,7 @@ describe("property grid: panel and page valueName, survey dataNesting (nested da
         options.show = false;
       }
     });
-    creator.JSON = panelJson();
+    creator.JSON = panelJson({ dataNesting: "auto" });
     const isShown = (name: string): boolean => {
       const editor = creator.propertyGrid.getQuestionByName(name);
       return !!editor && editor.isVisible;
@@ -220,13 +221,13 @@ describe("property grid: panel and page valueName, survey dataNesting (nested da
   });
   test("undo and redo of valueName and dataNesting", () => {
     const creator = new CreatorTester();
-    creator.JSON = panelJson();
+    creator.JSON = panelJson({ dataNesting: "auto" });
     const panel = creator.survey.getPanelByName("panel1");
     creator.selectElement(panel);
     creator.propertyGrid.getQuestionByName("valueName").value = "address";
     creator.selectElement(creator.survey);
     creator.propertyGrid.getQuestionByName("dataNesting").value = "none";
-    expect(creator.JSON.dataNesting).toBe("none");
+    expect(creator.JSON.dataNesting, "the default is not written").toBeUndefined();
     creator.undo();
     expect(creator.survey.dataNesting).toBe("auto");
     creator.undo();
@@ -261,7 +262,7 @@ describe("property grid: panel and page valueName, survey dataNesting (nested da
   test("the advanced preset shows a panel's and a page's valueName in the Data tab, and no dataNesting", () => {
     const creator = new CreatorTester();
     new UIPreset(Advanced as any).apply(creator);
-    creator.JSON = panelJson();
+    creator.JSON = panelJson({ dataNesting: "auto" });
     [creator.survey.getPanelByName("panel1"), creator.survey.pages[0]].forEach(container => {
       creator.selectElement(container);
       const editor = creator.propertyGrid.getQuestionByName("valueName");

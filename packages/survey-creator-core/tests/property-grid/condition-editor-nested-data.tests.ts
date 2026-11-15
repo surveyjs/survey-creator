@@ -17,6 +17,7 @@ const addressPanel = (extra?: any): any => Object.assign({
   ]
 }, extra || {});
 const surveyJson = (extra?: any, panelExtra?: any): any => Object.assign({
+  dataNesting: "auto",
   elements: [addressPanel(panelExtra), { type: "text", name: "q1" }]
 }, extra || {});
 
@@ -111,7 +112,7 @@ describe("condition editor: inner questions (nested data, survey-library #12233)
     expect(q1.visibleIf).toBe("{address.street} = 'y' and {address.kind} = 'work'");
   });
   test("an inner question's name that starts with its valueName is shown once", () => {
-    const survey = new SurveyModel({ elements: [addressPanel({ elements: [{ type: "text", name: "town2", valueName: "town" }] }),
+    const survey = new SurveyModel({ dataNesting: "auto", elements: [addressPanel({ elements: [{ type: "text", name: "town2", valueName: "town" }] }),
       { type: "text", name: "q1" }] });
     const editor = new ConditionEditor(survey, survey.getQuestionByName("q1"), new EmptySurveyCreatorOptions(), "visibleIf");
     expect(editor.allConditionQuestions.map(item => item.value + ":" + item.text)).toEqual(["town2:town2"]);
@@ -134,13 +135,13 @@ describe("condition editor: inner questions (nested data, survey-library #12233)
     expect(getListNames(survey, survey.getQuestionByName("street"))).toEqual(["city", "kind", "q1"]);
   });
   test("sub-entries of an inner matrix and multiple text use the question's name, also with their own valueName", () => {
-    const survey = new SurveyModel({ elements: [addressPanel({ elements: [
+    const survey = new SurveyModel({ dataNesting: "auto", elements: [addressPanel({ elements: [
       { type: "matrix", name: "m", valueName: "mv", rows: ["r1"], columns: ["c1", "c2"] },
       { type: "multipletext", name: "mt", valueName: "mtv", items: [{ name: "i1" }] }
     ] }), { type: "text", name: "q1" }] });
     expect(getListNames(survey, survey.getQuestionByName("q1"))).toEqual(["m.r1", "mt.i1"]);
 
-    const runtime = new SurveyModel({ elements: [addressPanel({ elements: [
+    const runtime = new SurveyModel({ dataNesting: "auto", elements: [addressPanel({ elements: [
       { type: "matrix", name: "m", valueName: "mv", rows: ["r1"], columns: ["c1", "c2"] },
       { type: "multipletext", name: "mt", valueName: "mtv", items: [{ name: "i1" }] }
     ] }), { type: "text", name: "q1", visibleIf: "{m.r1} = 'c1' and {mt.i1} = 'a'" }] });
@@ -158,7 +159,7 @@ describe("condition editor: inner questions (nested data, survey-library #12233)
     expect(editor.text).toBe("{address.mv.r1} = 'c1'");
   });
   test("a top-level question with valueName keeps today's {valueName}", () => {
-    const survey = new SurveyModel({ elements: [addressPanel(), { type: "text", name: "q1" }, { type: "text", name: "q2", valueName: "shared" }] });
+    const survey = new SurveyModel({ dataNesting: "auto", elements: [addressPanel(), { type: "text", name: "q1" }, { type: "text", name: "q2", valueName: "shared" }] });
     expect(getListNames(survey, survey.getQuestionByName("q1"))).toEqual(["city", "kind", "shared", "street"]);
   });
 });
@@ -166,7 +167,7 @@ describe("condition editor: inner questions (nested data, survey-library #12233)
 describe("expression assistant: inner questions (nested data, survey-library #12233)", () => {
   test("the assistant is offered the editor's names: city, m.r1 and mt.i1", () => {
     const creator = new CreatorTester();
-    creator.JSON = { elements: [addressPanel({ elements: [
+    creator.JSON = { dataNesting: "auto", elements: [addressPanel({ elements: [
       { type: "text", name: "city", valueName: "town", title: "City" },
       { type: "matrix", name: "m", valueName: "mv", rows: ["r1"], columns: ["c1", "c2"] },
       { type: "multipletext", name: "mt", valueName: "mtv", items: [{ name: "i1" }] }
@@ -183,7 +184,7 @@ describe("expression assistant: inner questions (nested data, survey-library #12
 });
 
 describe("logic tab: inner questions (nested data, survey-library #12233)", () => {
-  const createSurvey = (): SurveyModel => new SurveyModel({ elements: [
+  const createSurvey = (): SurveyModel => new SurveyModel({ dataNesting: "auto", elements: [
     addressPanel({ elements: [
       { type: "text", name: "street", title: "Street title" },
       { type: "text", name: "city", valueName: "town", title: "City title" }
@@ -258,7 +259,7 @@ describe("renames rewrite names and paths (nested data, survey-library #12233)",
       creator => creator.survey.getQuestionByName("street").name = "road");
   });
   test("an inner question's choice value renamed: {city} with valueName town and an inner matrix's rows follow", () => {
-    const creator = createCreator({ elements: [
+    const creator = createCreator({ dataNesting: "auto", elements: [
       { type: "panel", name: "panel1", valueName: "address", elements: [
         { type: "radiogroup", name: "city", valueName: "town", choices: ["a", "b"] },
         { type: "matrixdropdown", name: "m", valueName: "mv", rows: ["r1"], columns: [{ name: "c1", cellType: "dropdown", choices: ["x", "y"] }] }] },
@@ -325,7 +326,7 @@ describe("renames rewrite names and paths (nested data, survey-library #12233)",
       creator => creator.survey.getQuestionByName("b").name = "b2");
   });
   test("an inner select question renamed: choicesFromQuestion follows, in \"auto\" and in \"page\" mode", () => {
-    const creator = createCreator({ elements: [addressPanel(), { type: "dropdown", name: "q2", choicesFromQuestion: "kind" }] });
+    const creator = createCreator({ dataNesting: "auto", elements: [addressPanel(), { type: "dropdown", name: "q2", choicesFromQuestion: "kind" }] });
     creator.survey.getQuestionByName("kind").name = "kind2";
     expect(creator.survey.getQuestionByName("q2").choicesFromQuestion).toBe("kind2");
     creator.undo();
@@ -362,7 +363,7 @@ describe("findInnerQuestion (nested data, survey-library #12233)", () => {
     expect(findInnerQuestion(survey, "street")).toBeNull();
   });
   test("getQuestionByVariableName: the question whose whole value a variable names", () => {
-    const survey = new SurveyModel({ elements: [
+    const survey = new SurveyModel({ dataNesting: "auto", elements: [
       addressPanel({ elements: [
         { type: "text", name: "street" }, { type: "text", name: "city", valueName: "town" },
         { type: "matrix", name: "m", rows: ["r1"], columns: ["c1"] }] }),
@@ -409,7 +410,7 @@ describe("the Creator uses survey-core's variable lookup (nested data, survey-li
     expect(editor.text).toBe("{address.kind-unwrapped} = 'home' and {kind-unwrapped} = 'work'");
   });
   test("an inner question captured at the root by a top-level valueName is listed and written by its data path", () => {
-    const survey = new SurveyModel({ elements: [addressPanel(), { type: "text", name: "q1" },
+    const survey = new SurveyModel({ dataNesting: "auto", elements: [addressPanel(), { type: "text", name: "q1" },
       { type: "text", name: "q2", valueName: "city" }, { type: "text", name: "q3", valueName: "street" }] });
     const q1 = survey.getQuestionByName("q1");
     // {city} and {street} read q2 and q3 at runtime: the inner questions are listed by their paths, and q2

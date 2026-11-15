@@ -667,7 +667,7 @@ describe("Variable presets editor: nested values (nested data, survey-library #1
       { type: "text", name: "name", title: "Name" }] },
     { type: "dropdown", name: "role", choices: ["admin", "user"] }
   ];
-  const nestedDefinition = { elements: nestedElements };
+  const nestedDefinition = { dataNesting: "auto", elements: nestedElements };
   const goldVariables = { users: { tier: "gold", name: "Ann" }, role: "admin" };
   function createNestedContainer(definition: any = nestedDefinition, variables?: any): any {
     return {
@@ -780,10 +780,10 @@ describe("Variable presets editor: nested values (nested data, survey-library #1
     expect(saveNewPreset(definition)).toStrictEqual(expected);
   });
   test("auto: a page with its own valueName nests, as the only page and as one of two", () => {
-    const onePage = { pages: [{ name: "page1", valueName: "account", elements: nestedElements }] };
+    const onePage = { dataNesting: "auto", pages: [{ name: "page1", valueName: "account", elements: nestedElements }] };
     expect(getDefinitionData(onePage)).toStrictEqual({ account: goldVariables });
     expect(saveNewPreset(onePage)).toStrictEqual({ account: goldVariables });
-    const twoPages = { pages: [
+    const twoPages = { dataNesting: "auto", pages: [
       { name: "page1", valueName: "account", elements: [nestedElements[0]] },
       { name: "page2", elements: [nestedElements[1]] }
     ] };

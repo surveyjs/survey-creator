@@ -565,7 +565,7 @@ describe("The condition editor edits a host variable with the definition's quest
 });
 
 describe("Variable presets in Preview: nested values (nested data, survey-library #12233)", () => {
-  const nestedDefinition = { elements: [
+  const nestedDefinition = { dataNesting: "auto", elements: [
     { type: "panel", name: "user", valueName: "users", title: "User", elements: [
       { type: "dropdown", name: "tier", title: "Tier", choices: ["gold", "silver"], isRequired: true },
       { type: "text", name: "name", title: "Name" }] },
