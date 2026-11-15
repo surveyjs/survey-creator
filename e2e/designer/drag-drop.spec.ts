@@ -64,166 +64,70 @@ test.describe(title, () => {
     expect(await getQuestionsLength(page)).toEqual(2);
   });
 
-  test("Drag Drop Toolbox All Questions", async ({ page }) => {
-    test.setTimeout(200_000);
-    const newGhostPage = page.locator("[data-sv-drop-target-survey-element='newGhostPage']").filter({ visible: true }).first();
-    const EmptyPage = page.locator("[data-sv-drop-target-survey-element='page1']").filter({ visible: true }).first();
+  // The toolbox items in the order the former single test dropped them, each with the question type it adds.
+  const allToolboxItems: Array<{ title: string, type: string }> = [
+    { title: "Image Picker", type: "imagepicker" },
+    { title: "Checkboxes", type: "checkbox" },
+    { title: "Radio Button Group", type: "radiogroup" },
+    { title: "Dropdown", type: "dropdown" },
+    { title: "Long Text", type: "comment" },
+    { title: "Rating Scale", type: "rating" },
+    { title: "Ranking", type: "ranking" },
+    { title: "Single-Line Input", type: "text" },
+    { title: "HTML", type: "html" },
+    { title: "Signature", type: "signaturepad" },
+    { title: "Expression (read-only)", type: "expression" },
+    { title: "File Upload", type: "file" },
+    { title: "Single-Select Matrix", type: "matrix" },
+    { title: "Multi-Select Matrix", type: "matrixdropdown" },
+    { title: "Dynamic Matrix", type: "matrixdynamic" },
+    { title: "Multiple Textboxes", type: "multipletext" },
+    { title: "Panel", type: "panel" },
+    { title: "Dynamic Panel", type: "paneldynamic" },
+    { title: "Yes/No (Boolean)", type: "boolean" },
+    { title: "Image", type: "image" }
+  ];
 
-    const CheckboxItem = page.locator("[aria-label='Checkboxes']").filter({ visible: true }).first();
-    const RadiogroupItem = page.locator("[aria-label='Radio Button Group']").filter({ visible: true }).first();
-    const DropdownItem = page.locator("[aria-label='Dropdown']").filter({ visible: true }).first();
-    const CommentItem = page.locator("[aria-label='Long Text']").filter({ visible: true }).first();
-    const RankingItem = page.locator("[aria-label='Ranking']").filter({ visible: true }).first();
-    const ImagePickerItem = page.locator("[aria-label='Image Picker']").filter({ visible: true }).first();
-    const BooleanItem = page.locator("[aria-label='Yes/No (Boolean)']").filter({ visible: true }).first();
-    const ImageItem = page.locator("[aria-label='Image']").filter({ visible: true }).first();
-    const HtmlItem = page.locator("[aria-label='HTML']").filter({ visible: true }).first();
-    const SignatureItem = page.locator("[aria-label='Signature']").filter({ visible: true }).first();
-    const ExpressionItem = page.locator("[aria-label='Expression (read-only)']").filter({ visible: true }).first();
-    const FileItem = page.locator("[aria-label='File Upload']").filter({ visible: true }).first();
-    const MatrixSingleChoiceItem = page.locator("[aria-label='Single-Select Matrix']").filter({ visible: true }).first();
-    const MatrixMultipleChoiceItem = page.locator("[aria-label='Multi-Select Matrix']").filter({ visible: true }).first();
-    const MatrixDynamicRowsItem = page.locator("[aria-label='Dynamic Matrix']").filter({ visible: true }).first();
-    const MultipleTextItem = page.locator("[aria-label='Multiple Textboxes']").filter({ visible: true }).first();
-    const PanelItem = page.locator("[aria-label='Panel']").filter({ visible: true }).first();
-    const PanelDynamicItem = page.locator("[aria-label='Dynamic Panel']").filter({ visible: true }).first();
-    const RatingToolboxItem = page.locator("[aria-label='Rating Scale']").filter({ visible: true }).first();
-    const SingleInputToolboxItem = page.locator("[aria-label='Single-Line Input']").filter({ visible: true }).first();
-
-    await setJSON(page, { pages: [{ name: "page1" }] });
-    await page.setViewportSize({ width: 2560, height: 2000 });
-    await page.evaluate(() => {
-      const c = (window as any).creator;
-      const root = c.rootElement.getRootNode();
-      // eslint-disable-next-line surveyjs/eslint-plugin-i18n/allowed-in-shadow-dom
-      const el = document.getElementById("survey-creator");
-      if (el) {
-        el.style.position = "relative";
-        (el.style as any).bottom = undefined;
-        el.style.height = "15000px";
-      }
-      const rootEl = root.getElementsByTagName && root.getElementsByTagName("app-root")[0];
-      if (rootEl) (rootEl as HTMLElement).style.position = "relative";
+  test.describe("Drag Drop Toolbox All Questions", () => {
+    test.beforeEach(async ({ page }) => {
+      await page.setViewportSize({ width: 2560, height: 2000 });
     });
+    const getToolboxItem = (page, itemTitle: string) => page.locator(`[aria-label='${itemTitle}']`).filter({ visible: true }).first();
+    const dropOnNewGhostPage = async (page, itemTitle: string) => {
+      const newGhostPage = page.locator("[data-sv-drop-target-survey-element='newGhostPage']").filter({ visible: true }).first();
+      await newGhostPage.scrollIntoViewIfNeeded();
+      const box = await <any>newGhostPage.boundingBox();
+      await doDragDrop({ page, element: getToolboxItem(page, itemTitle), target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
+    };
 
-    await doDragDrop({ page, element: ImagePickerItem, target: EmptyPage, options: { steps: 20 } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(1);
-    await newGhostPage.scrollIntoViewIfNeeded();
+    // One test per item: each drop starts from the same one-question survey and adds one page with one question.
+    for (const item of allToolboxItems) {
+      test(item.title, async ({ page }) => {
+        await setJSON(page, { pages: [{ name: "page1", elements: [{ type: "text", name: "question1" }] }] });
+        await dropOnNewGhostPage(page, item.title);
+        await page.waitForTimeout(150);
+        expect(await getPagesLength(page)).toEqual(2);
+        expect(await page.evaluate(() => window["creator"].survey.pages[1].elements.map(el => el.getType()))).toEqual([item.type]);
+      });
+    }
 
-    let box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: CheckboxItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(2);
-    await newGhostPage.scrollIntoViewIfNeeded();
+    // The survey keeps growing: a drop on the empty page, then two drops on the new ghost page.
+    test("3 drops in a row", async ({ page }) => {
+      const EmptyPage = page.locator("[data-sv-drop-target-survey-element='page1']").filter({ visible: true }).first();
+      await setJSON(page, { pages: [{ name: "page1" }] });
 
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: RadiogroupItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(3);
-    await newGhostPage.scrollIntoViewIfNeeded();
+      await doDragDrop({ page, element: getToolboxItem(page, "Image Picker"), target: EmptyPage, options: { steps: 20 } });
+      await page.waitForTimeout(150);
+      expect(await getPagesLength(page)).toEqual(1);
 
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: DropdownItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(4);
-    await newGhostPage.scrollIntoViewIfNeeded();
+      await dropOnNewGhostPage(page, "Checkboxes");
+      await page.waitForTimeout(150);
+      expect(await getPagesLength(page)).toEqual(2);
 
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: CommentItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(5);
-    await newGhostPage.scrollIntoViewIfNeeded();
-
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: RatingToolboxItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(6);
-    await newGhostPage.scrollIntoViewIfNeeded();
-
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: RankingItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(7);
-    await newGhostPage.scrollIntoViewIfNeeded();
-
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: SingleInputToolboxItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(8);
-    await newGhostPage.scrollIntoViewIfNeeded();
-
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: HtmlItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(9);
-    await newGhostPage.scrollIntoViewIfNeeded();
-
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: SignatureItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(10);
-    await newGhostPage.scrollIntoViewIfNeeded();
-
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: ExpressionItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(11);
-    await newGhostPage.scrollIntoViewIfNeeded();
-
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: FileItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(12);
-    await newGhostPage.scrollIntoViewIfNeeded();
-
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: MatrixSingleChoiceItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(13);
-    await newGhostPage.scrollIntoViewIfNeeded();
-
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: MatrixMultipleChoiceItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(14);
-    await newGhostPage.scrollIntoViewIfNeeded();
-
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: MatrixDynamicRowsItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(15);
-    await newGhostPage.scrollIntoViewIfNeeded();
-
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: MultipleTextItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(16);
-    await newGhostPage.scrollIntoViewIfNeeded();
-
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: PanelItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(17);
-    await newGhostPage.scrollIntoViewIfNeeded();
-
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: PanelDynamicItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(18);
-    await newGhostPage.scrollIntoViewIfNeeded();
-
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: BooleanItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(19);
-    await newGhostPage.scrollIntoViewIfNeeded();
-
-    box = await <any>newGhostPage.boundingBox();
-    await doDragDrop({ page, element: ImageItem, target: newGhostPage, options: { targetPosition: { x: box.width / 2, y: box.height - 50 } } });
-    await page.waitForTimeout(150);
-    expect(await getPagesLength(page)).toEqual(20);
-    await newGhostPage.scrollIntoViewIfNeeded();
+      await dropOnNewGhostPage(page, "Radio Button Group");
+      await page.waitForTimeout(150);
+      expect(await getPagesLength(page)).toEqual(3);
+    });
   });
 
   test("Drag Drop Toolbox Responsivity", async ({ page }) => {
