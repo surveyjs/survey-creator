@@ -364,7 +364,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.rootElement = rootElement;
     }
     if (this.surveyElement != surveyElement) {
+      surveyElement.blockAnimations();
       this.setSurveyElement(surveyElement);
+      surveyElement.releaseAnimations();
       this.creator.onLocaleChanded.add(this.creatorOnLocaleChanged);
       this.creator.onElementTypeRestrictionChanged.add(this.creatorElementTypeRestrictionChanged);
       this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
