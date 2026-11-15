@@ -980,12 +980,20 @@ export const roStrings = {
     addItem: "Faceți clic pentru a adăuga un element...",
     // "Click to remove the item..."
     removeItem: "Faceți clic pentru a elimina elementul...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Adaugă {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Scoate {0}",
     // "Drag the item"
     dragItem: "Trageți elementul",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Extinde alegerile imbricate",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Colapsul alegerilor imbricate",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Extinde opțiunile imbricate ale {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Colapsul alegerii imbriculate de {0}",
     // [Auto-translated] "Show description"
     showDescription: "Descrierea emisiunii",
     // [Auto-translated] "Hide description"

@@ -980,12 +980,20 @@ export var jaStrings = {
     addItem: "クリックしてアイテムを追加…",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "クリックしてアイテムを削除します...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "{0}を外してください",
     // [Auto-translated] "Drag the item"
     dragItem: "アイテムをドラッグする",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "ネストされた選択肢を拡大する",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "崩壊入れ子選択",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "{0}の入れ子型の選択肢を拡大する",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "{0}の崩壊ネスト選択",
     // [Auto-translated] "Show description"
     showDescription: "番組の説明",
     // [Auto-translated] "Hide description"

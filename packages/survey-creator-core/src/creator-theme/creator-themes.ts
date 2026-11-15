@@ -63,7 +63,8 @@ export function registerCreatorTheme(...themes: Array<ConfigsHash<ICreatorTheme>
 //     iconSet: "v2"
 //   }
 // };
-export const CreatorThemes: { [index: string]: ICreatorTheme } = { "default-light": DefaultLight };
+// A copy, so the registry never holds survey-core's exported DefaultLight object or its cssVariables.
+export const CreatorThemes: { [index: string]: ICreatorTheme } = { "default-light": { ...DefaultLight, cssVariables: { ...DefaultLight.cssVariables } } };
 // let stylesStr = "";
 // if (Object.keys(Default.cssVariables).length) {
 //   Object.keys(Default.cssVariables).forEach((varName) => {

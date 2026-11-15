@@ -980,12 +980,20 @@ export var turkishStrings = {
     addItem: "Yeni nesne ekleme için tıklayınız...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Öğeyi kaldırmak için tıklayın...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Ekle {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Kaldır {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Öğeyi sürükleyin",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "İç içe seçenekleri genişlet",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Çöktü iç içe seçimler",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "İç içe seçeneklerini genişletmek {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Çöktü iç içe seçimler {0}",
     // [Auto-translated] "Show description"
     showDescription: "Gösteri açıklaması",
     // [Auto-translated] "Hide description"

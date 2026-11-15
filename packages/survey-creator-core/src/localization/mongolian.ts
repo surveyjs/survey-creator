@@ -980,12 +980,20 @@ export var mnStrings = {
     addItem: "Хэсэг нэмэх бол дарах...",
     // "Click to remove the item..."
     removeItem: "Хэсэг устгах бол дарах...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Нэмэх {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Устгах {0}",
     // "Drag the item"
     dragItem: "Хэсгийг чирэх",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Nested сонголтуудыг өргөжүүлэх",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Уналтад орсон сонголтууд",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Үргэлжилсэн сонголтуудыг өргөтгөх {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Уналтад орсон сонголтууд {0}",
     // [Auto-translated] "Show description"
     showDescription: "Нэвтрүүлгийн тайлбар",
     // [Auto-translated] "Hide description"

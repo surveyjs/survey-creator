@@ -980,12 +980,20 @@ export var frenchTranslation = {
     addItem: "Cliquez pour ajouter un item...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Cliquez pour supprimer l’élément...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Ajouter {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Retirez {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Faire glisser l’élément",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Élargir les choix imbriqués",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Effondrement des choix imbriqués",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Élargissez les choix imbriqués de {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Effondrement des choix imbriqués de {0}",
     // [Auto-translated] "Show description"
     showDescription: "Description de l’émission",
     // [Auto-translated] "Hide description"

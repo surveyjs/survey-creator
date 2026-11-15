@@ -1620,13 +1620,18 @@ test("SurveyPropertyItemValuesEditor + koShowHeader", () => {
   );
   expect(choicesQuestion.showHeader).toBeTruthy();
 
-  Serializer.findProperty("itemvalue", "text").visible = false;
-  propertyGrid = new PropertyGridModelTester(question);
-  choicesQuestion = <QuestionMatrixDynamicModel>(
-    propertyGrid.survey.getQuestionByName("choices")
-  );
-  expect(choicesQuestion.showHeader).toBeFalsy(); //one column only
-  Serializer.findProperty("itemvalue", "text").visible = false;
+  const textProp = Serializer.findProperty("itemvalue", "text");
+  const savedTextVisible = textProp.visible;
+  textProp.visible = false;
+  try {
+    propertyGrid = new PropertyGridModelTester(question);
+    choicesQuestion = <QuestionMatrixDynamicModel>(
+      propertyGrid.survey.getQuestionByName("choices")
+    );
+    expect(choicesQuestion.showHeader).toBeFalsy(); //one column only
+  } finally {
+    textProp.visible = savedTextVisible;
+  }
 });
 test("SurveyPropertyCalculatedValueEditor", () => {
   var survey = new SurveyModel();

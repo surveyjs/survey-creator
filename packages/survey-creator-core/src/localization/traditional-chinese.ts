@@ -981,12 +981,20 @@ export var traditionalChineseTranslation = {
     addItem: "點選以新增專案...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "按下以刪除該專案...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "加入{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "移除{0}",
     // [Auto-translated] "Drag the item"
     dragItem: "拖動專案",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "擴展巢狀選擇",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "坍縮巢狀選擇",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "擴展巢狀{0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "摺疊巢狀選擇{0}",
     // [Auto-translated] "Show description"
     showDescription: "節目簡介",
     // [Auto-translated] "Hide description"

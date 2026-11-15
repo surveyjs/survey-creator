@@ -980,12 +980,20 @@ export var indonesianStrings = {
     addItem: "Klik untuk menambahkan sebuah item...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klik untuk menghapus item...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Tambahkan {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Hapus {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Seret item",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Perluas pilihan bersarang",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Menggabungkan pilihan bersarang",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Perluas pilihan bersarang {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Pilihan bertingkat {0}",
     // [Auto-translated] "Show description"
     showDescription: "Tampilkan deskripsi",
     // [Auto-translated] "Hide description"

@@ -980,12 +980,20 @@ export var italianTranslation = {
     addItem: "Clicca per aggiungere un'opzione...",
     // "Click to remove the item..."
     removeItem: "Clicca per rimuovere un'opzione...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Aggiungi {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Rimuovi {0}",
     // "Drag the item"
     dragItem: "Trascina l'opzione",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Espandi le scelte annidate",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collasso delle scelte annidate",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Espandi le scelte annidate di {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Collasso le scelte annidate di {0}",
     // [Auto-translated] "Show description"
     showDescription: "Descrizione dello show",
     // [Auto-translated] "Hide description"

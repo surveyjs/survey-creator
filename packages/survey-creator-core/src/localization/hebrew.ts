@@ -980,12 +980,20 @@ export var hebrewStrings = {
     addItem: "לחץ להוספת פריט...",
     // "Click to remove the item..."
     removeItem: "לחץ להסרת הפריט...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "הוסף {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "הסר {0}",
     // "Drag the item"
     dragItem: "גרור את הפריט",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "הרחבת אפשרויות מקוננות",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "קריסת בחירות מקוננות",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "הרחיב את אפשרויות המקוננות של {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "קריסת בחירות מקוננות {0}",
     // [Auto-translated] "Show description"
     showDescription: "תיאור התוכנית",
     // [Auto-translated] "Hide description"

@@ -980,12 +980,20 @@ export var catalanTranslation = {
     addItem: "Haga clic para agregar un artículo ...",
     // "Click to remove the item..."
     removeItem: "Haga click para eliminar el elemento...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Afegeix {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Elimina {0}",
     // "Drag the item"
     dragItem: "Arrastra el elemento",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Expandeix les opcions anidades",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Col·lapse de les eleccions nidades",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Expandeix les opcions nidades de {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Col·lapsa les eleccions nidades de {0}",
     // [Auto-translated] "Show description"
     showDescription: "Descripció de l'espectacle",
     // [Auto-translated] "Hide description"

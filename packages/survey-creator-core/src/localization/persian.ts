@@ -980,12 +980,20 @@ export var persianStrings = {
     addItem: "برای اضافه کردن یک آیتم کلیک کنید...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "فشار دهید تا مورد حذف شود...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "اضافه {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "حذف {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "مورد را بکشید",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "گسترش گزینه های تو در تو",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "انتخاب های تو در تو فروپاشی",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "گسترش گزینه های تو در تو {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "انتخاب های تو در تو فروپاشی {0}",
     // [Auto-translated] "Show description"
     showDescription: "توضیحات برنامه",
     // [Auto-translated] "Hide description"

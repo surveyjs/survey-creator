@@ -980,12 +980,20 @@ export var ruStrings = {
     addItem: "Нажмите, чтобы добавить элемент...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Нажмите, чтобы удалить элемент...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Добавить {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Удалите {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Перетащите элемент",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Расширение вложенных вариантов",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Варианты с вложением коллапса",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Расширяйте вложенные варианты {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Вложенные варианты {0}",
     // [Auto-translated] "Show description"
     showDescription: "Описание шоу",
     // [Auto-translated] "Hide description"

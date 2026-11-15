@@ -71,13 +71,16 @@ export function findSuitableTheme(themeName: string, colorPalette: string, isPan
 
 export function getObjectDiffs(obj1: any, obj2: any = {}): any {
   const result: any = {};
+  if (!obj1) return result;
+  obj2 = obj2 || {};
   Object.keys(obj1).forEach(key => {
-    if (typeof obj1[key] === "object") {
-      result[key] = getObjectDiffs(obj1[key], obj2[key]);
-    } else {
-      if (obj1[key] !== undefined && obj1[key] != obj2[key]) {
-        result[key] = obj1[key];
-      }
+    const value = obj1[key];
+    // Stored themes may contain null values (Bug#8156); treat them as missing (typeof null === "object")
+    if (value === undefined || value === null) return;
+    if (typeof value === "object") {
+      result[key] = getObjectDiffs(value, obj2[key]);
+    } else if (value != obj2[key]) {
+      result[key] = value;
     }
   });
   return result;

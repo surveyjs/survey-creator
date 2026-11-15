@@ -980,12 +980,20 @@ export var htStrings = {
     addItem: "Klike pou ajoute yon atik...",
     // "Click to remove the item..."
     removeItem: "Klike pou retire atik la...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Add {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Retire {0}",
     // "Drag the item"
     dragItem: "Trennen atik la",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Elaji chwa imbriqué",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Efondreman chwa enbrike",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Elaji chwa enbrikasyon {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Efondreman chwa enbrikasyon nan {0}",
     // [Auto-translated] "Show description"
     showDescription: "Montre deskripsyon",
     // [Auto-translated] "Hide description"

@@ -83,7 +83,7 @@ export class AdaptiveToolbox extends SurveyElementBase<ISurveyCreatorToolboxProp
           {placeholder}
           <Scroll>
             {(this.toolbox.showInSingleCategory) ?
-              (<div className="svc-toolbox__category">
+              (<div className="svc-toolbox__category" role="list" aria-label={this.toolbox.toolboxAriaLabel}>
                 {this.renderItems(this.toolbox.renderedActions, this.toolbox.isCompactRendered)}
               </div>)
               : this.renderCategories()

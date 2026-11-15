@@ -89,7 +89,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       if (!!q && q.parent?.name === "triggerEditorPanel") {
         const action = <LogicActionTriggerModel>this.getActionModelByPanel(options.panel);
         if (action) {
-          action.onPanelQuestionValueChanged(<PanelModel>q.parent, options.name);
+          action.onPanelQuestionValueChanged(<PanelModel>q.parent, options.name, this.options);
         }
       }
     });

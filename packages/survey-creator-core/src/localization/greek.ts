@@ -980,12 +980,20 @@ export var grStrings = {
     addItem: "Κλικ για προσθήκη στοιχείου...",
     // "Click to remove the item..."
     removeItem: "Κλικ για διαγραφή του στοιχείου...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Προσθέστε {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Αφαιρέστε {0}",
     // "Drag the item"
     dragItem: "Σύρετε το στοιχείο",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Ανάπτυξη ένθετων επιλογών",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Σύμπτυξη ένθετων επιλογών",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Επέκταση ένθετων επιλογών {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Σύμπτυξη ένθετων επιλογών {0}",
     // [Auto-translated] "Show description"
     showDescription: "Εμφάνιση περιγραφής",
     // [Auto-translated] "Hide description"

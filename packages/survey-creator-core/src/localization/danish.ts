@@ -981,12 +981,20 @@ export var danishStrings = {
     addItem: "Klik for at tilføje...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klik for at fjerne elementet...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Tilføj {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Fjern {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Træk elementet",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Udvid indlejrede valg",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse indlejrede valg",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Udvid indlejrede valg af {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Collapse indlejrede valg af {0}",
     // [Auto-translated] "Show description"
     showDescription: "Showbeskrivelse",
     // [Auto-translated] "Hide description"

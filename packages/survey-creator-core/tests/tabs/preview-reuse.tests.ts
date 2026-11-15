@@ -10,7 +10,7 @@ import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 import { TabThemePlugin } from "../../src/components/tabs/theme-plugin";
 import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
 import { TabJsonEditorTextareaPlugin, TextareaJsonEditorModel } from "../../src/components/tabs/json-editor-textarea";
-import { ItemValue, QuestionCheckboxModel, SurveyModel } from "survey-core";
+import { ItemValue, QuestionCheckboxModel, SurveyModel, settings as surveySettings } from "survey-core";
 import { vi } from "vitest";
 import "survey-core/survey.i18n";
 
@@ -132,9 +132,16 @@ describe("Preview: every change shows in the next preview", () => {
     creator.storeSjsVersion = false;
     openPreview(creator);
     expect(getPlugin(creator).model["json"].sjsVersion).toBeUndefined();
-    creator.pageEditMode = "single";
-    openPreview(creator);
-    expect(getPlugin(creator).model["json"].pages).toBeUndefined();
+    // the pageEditMode setter writes these global survey-core settings
+    const { showEmptyTitles, showEmptyDescriptions } = surveySettings.designMode;
+    try {
+      creator.pageEditMode = "single";
+      openPreview(creator);
+      expect(getPlugin(creator).model["json"].pages).toBeUndefined();
+    } finally {
+      surveySettings.designMode.showEmptyTitles = showEmptyTitles;
+      surveySettings.designMode.showEmptyDescriptions = showEmptyDescriptions;
+    }
   });
 });
 

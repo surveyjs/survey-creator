@@ -527,6 +527,60 @@ test("item value adorner and newItem value", () => {
   question.choices = [];
   expect(question.newItem.value).toEqual("Item 1");
 });
+test("item value add/remove actions have aria-label with the item text, Bug#8154", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: ["Item 1", { value: "Item 2", text: "Second" }] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const itemAdorner = new ItemValueWrapperViewModel(creator, question, question.choices[1]);
+  const noneAdorner = new ItemValueWrapperViewModel(creator, question, question.noneItem);
+  const newItemAdorner = new ItemValueWrapperViewModel(creator, question, question.newItem);
+  expect(itemAdorner.removeAction.ariaLabel).toBe("Remove Second");
+  expect(itemAdorner.removeAction.title).toBe("Click to remove the item...");
+  expect(noneAdorner.addAction.ariaLabel).toBe("Add None");
+  expect(newItemAdorner.addAction.ariaLabel).toBe("Add Item 3");
+  question.choices.push(new ItemValue("Item 3"));
+  expect(newItemAdorner.addAction.ariaLabel).toBe("Add Item 4");
+
+  question.choices[1].text = "Renamed";
+  expect(itemAdorner.removeAction.ariaLabel).toBe("Remove Renamed");
+  question.noneText = "Nothing";
+  expect(noneAdorner.addAction.ariaLabel).toBe("Add Nothing");
+  question.showNoneItem = true;
+  expect(noneAdorner.removeAction.ariaLabel).toBe("Remove Nothing");
+
+  noneAdorner.dispose();
+  question.noneText = "Disposed";
+  expect(noneAdorner.removeAction.ariaLabel).toBe("Remove Nothing");
+
+  const otherAdorner = new ItemValueWrapperViewModel(creator, question, question.otherItem);
+  const selectAllAdorner = new ItemValueWrapperViewModel(creator, question, question.selectAllItem);
+  expect(otherAdorner.addAction.ariaLabel).toBe("Add Other (describe)");
+  expect(selectAllAdorner.addAction.ariaLabel).toBe("Add Select All");
+  question.otherText = "Something else";
+  question.selectAllText = "Everything";
+  expect(otherAdorner.addAction.ariaLabel).toBe("Add Something else");
+  expect(selectAllAdorner.addAction.ariaLabel).toBe("Add Everything");
+
+  const emptyItem = new ChoiceItem("");
+  question.choices.push(emptyItem);
+  const emptyItemAdorner = new ItemValueWrapperViewModel(creator, question, emptyItem);
+  expect(emptyItemAdorner.removeAction.ariaLabel).toBeFalsy();
+  expect(emptyItemAdorner.removeAction.title).toBe("Click to remove the item...");
+});
+test("item value expand panel action has aria-label with the item text, Bug#8154", () => {
+  const creator = new CreatorTester();
+  creator.maxChoiceContentNestingLevel = 2;
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [{ value: 1, text: "First" }] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const itemAdorner = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  expect(itemAdorner.expandPanelAction.ariaLabel).toBe("Expand nested choices of First");
+  itemAdorner.togglePanel();
+  expect(itemAdorner.expandPanelAction.ariaLabel).toBe("Collapse nested choices of First");
+});
 
 test("placeholder choices are hidden while the question choices cannot be modified", () => {
   const creator = new CreatorTester();

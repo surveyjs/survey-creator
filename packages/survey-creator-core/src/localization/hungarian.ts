@@ -980,12 +980,20 @@ export var huStrings = {
     addItem: "Kattintson egy elem felvételéhez...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Kattintson az elem eltávolításához...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Add {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Távolítsd {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Húzza az elemet",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Bővítsd a bészkelő lehetőségeket",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Összerakás egymásba helyezett választások",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Bővítsd az egymásba ágyazott {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Összeomlás {0}",
     // [Auto-translated] "Show description"
     showDescription: "Műsorleírás",
     // [Auto-translated] "Hide description"
