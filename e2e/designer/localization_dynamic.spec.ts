@@ -1,4 +1,4 @@
-import { url, test, expect, setJSON } from "../helper";
+import { url, test, expect, setJSON, loadCreatorLocales } from "../helper";
 
 const title = "Localization UI";
 
@@ -12,6 +12,7 @@ test.describe(title, () => {
     const checkboxText = "Auswahl";
     await setJSON(page, { elements: [{ type: "checkbox", name: "question1" }] });
     await page.locator("[data-name='question1']").click();
+    await loadCreatorLocales(page);
     await page.evaluate(() => {
       window["creator"].locale = "de";
     });

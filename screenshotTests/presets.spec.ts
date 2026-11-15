@@ -1,4 +1,4 @@
-import { urlPresets, compareScreenshot, test, expect, changeToolboxSearchEnabled, changeToolboxScrolling, showCreatorSettings, showPresets, hideContentBehindPopup, showContentBehindPopup } from "./helper";
+import { urlPresets, compareScreenshot, test, expect, changeToolboxSearchEnabled, changeToolboxScrolling, showCreatorSettings, showPresets, hideContentBehindPopup, showContentBehindPopup, loadCreatorLocales } from "./helper";
 
 const title = "Presets";
 
@@ -40,6 +40,8 @@ test.describe(title, () => {
       presetsPlugin.addPreset(customPreset);
     });
     await page.setViewportSize({ width: 1440, height: 1505 });
+    // the Languages page lists the creator locales
+    await loadCreatorLocales(page);
     await showPresets(page);
   });
 

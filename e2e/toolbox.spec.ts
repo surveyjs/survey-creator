@@ -1,5 +1,5 @@
 
-import { url, test, expect } from "./helper";
+import { url, test, expect, loadCreatorLocales } from "./helper";
 
 const title = "Toolbox";
 
@@ -16,6 +16,7 @@ test.describe(title, () => {
     const node = page.locator(".svc-toolbox__category-title").first();
 
     expect(await node.textContent()).toBe("Choice Questions");
+    await loadCreatorLocales(page);
     await page.evaluate(() => {
       window["creator"].locale = "de";
     });
