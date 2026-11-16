@@ -366,6 +366,8 @@ export var turkishStrings = {
     addNewTypeQuestion: "{0} ekle", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Yükleme logosu",
     // [Auto-translated] "Item "
     choices_Item: "Madde ",
     // [Auto-translated] "Select a file"

@@ -1,4 +1,4 @@
-import { url, test, expect, setJSON, getPropertyGridCategory, getVisibleSelectListItemByText } from "../helper";
+import { url, test, expect, setJSON, getPropertyGridCategory, getVisibleSelectListItemByText, loadCreatorLocales } from "../helper";
 
 const title = "Property Grid";
 
@@ -25,6 +25,7 @@ test.describe(title, () => {
       ]
     };
     await setJSON(page, json);
+    await loadCreatorLocales(page);
     await page.evaluate(() => {
       window["creator"].locale = "de";
     });
@@ -70,6 +71,7 @@ test.describe(title, () => {
       ]
     };
     await setJSON(page, json);
+    await loadCreatorLocales(page);
     await page.evaluate(() => {
       window["creator"].locale = "de";
     });

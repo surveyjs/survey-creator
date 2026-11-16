@@ -366,6 +366,8 @@ export var spanishTranslation = {
     addNewTypeQuestion: "Añadir {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGOTIPO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logo de subida",
     // [Auto-translated] "Item "
     choices_Item: "Artículo ",
     // [Auto-translated] "Select a file"

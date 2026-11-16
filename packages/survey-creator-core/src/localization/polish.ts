@@ -366,6 +366,8 @@ export var polishStrings = {
     addNewTypeQuestion: "Dodaj {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logo Upload",
     // [Auto-translated] "Item "
     choices_Item: "Przedmiot ",
     // [Auto-translated] "Select a file"

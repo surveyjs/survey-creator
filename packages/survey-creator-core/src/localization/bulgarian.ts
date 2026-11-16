@@ -366,6 +366,8 @@ export var bgStrings = {
     addNewTypeQuestion: "Добави {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[ЛОГО]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Логото за качване",
     // "Item "
     choices_Item: "Елемент ",
     // [Auto-translated] "Select a file"

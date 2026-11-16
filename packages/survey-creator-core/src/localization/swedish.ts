@@ -366,6 +366,8 @@ export let svStrings = {
     addNewTypeQuestion: "Lägg till {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGOTYP]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Uppladdningslogotyp",
     // [Auto-translated] "Item "
     choices_Item: "Sak ",
     // [Auto-translated] "Select a file"

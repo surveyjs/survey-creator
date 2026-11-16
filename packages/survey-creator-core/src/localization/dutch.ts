@@ -366,6 +366,8 @@ export var nlStrings = {
     addNewTypeQuestion: "Voeg {0} toe", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Uploadlogo",
     // [Auto-translated] "Item "
     choices_Item: "Item ",
     // [Auto-translated] "Select a file"

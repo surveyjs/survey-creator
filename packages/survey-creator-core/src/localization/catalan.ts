@@ -366,6 +366,8 @@ export var catalanTranslation = {
     addNewTypeQuestion: "Afegir {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGOTIPO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logotip de pujada",
     // [Auto-translated] "Item "
     choices_Item: "Artículo ",
     // [Auto-translated] "Select a file"

@@ -366,6 +366,8 @@ export var grStrings = {
     addNewTypeQuestion: "Προσθήκη {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[ΛΟΓΟΤΥΠΟ]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Μεταφόρτωση λογότυπου",
     // "Item "
     choices_Item: "Στοιχείο ",
     // "Select a file"

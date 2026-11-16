@@ -366,6 +366,8 @@ export var ruStrings = {
     addNewTypeQuestion: "Добавить {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[ЛОГОТИП]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Логотип загрузки",
     // [Auto-translated] "Item "
     choices_Item: "Пункт ",
     // [Auto-translated] "Select a file"

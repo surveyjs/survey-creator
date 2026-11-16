@@ -366,6 +366,8 @@ export var koreanStrings = {
     addNewTypeQuestion: "{0} 추가", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[로고]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "업로드 로고",
     // [Auto-translated] "Item "
     choices_Item: "항목 ",
     // [Auto-translated] "Select a file"

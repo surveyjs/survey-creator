@@ -110,7 +110,6 @@ test.describe(title, () => {
       await page.click(".sv-action--zoomOut button");
     }
     await page.setViewportSize({ width: 600, height: 1900 });
-    await page.waitForTimeout(500);
     await compareScreenshot(page, surfaceSelector, "design-surface-zoom-out.png");
   });
 
@@ -150,7 +149,6 @@ test.describe(title, () => {
 
     await compareScreenshot(page, designerTabContent, "page-content.png");
     await pageContent.hover({ position: { x: 5, y: 5 } });
-    await page.waitForTimeout(300);
     await compareScreenshot(page, designerTabContent, "page-content-hover.png");
 
     await pageContent.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn").hover();

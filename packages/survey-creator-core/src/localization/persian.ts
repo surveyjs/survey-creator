@@ -366,6 +366,8 @@ export var persianStrings = {
     addNewTypeQuestion: "اضافه {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[لوگو]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "لوگو بارگذاری",
     // [Auto-translated] "Item "
     choices_Item: "مورد ",
     // [Auto-translated] "Select a file"

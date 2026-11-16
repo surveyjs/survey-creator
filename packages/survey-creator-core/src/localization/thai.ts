@@ -366,6 +366,8 @@ export const thStrings = {
     addNewTypeQuestion: "เพิ่ม {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[โลโก้]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "อัปโหลดโลโก้",
     // "Item "
     choices_Item: "รายการ ",
     // "Select a file"

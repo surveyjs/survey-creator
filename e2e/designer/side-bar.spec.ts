@@ -326,7 +326,6 @@ test.describe(title, () => {
     expect(await getQuestionTopPosition()).toEqual(366);
     await page.locator(".sv-action--object-selector").click();
     await page.locator(".sd-menu-item").getByText("Column 2").click();
-    await page.waitForTimeout(500);
-    expect(await getQuestionTopPosition()).toEqual(72);
+    await expect.poll(getQuestionTopPosition).toEqual(72);
   });
 });
