@@ -51,50 +51,63 @@ test.describe(title, () => {
     await compareScreenshot(page, toolbar, "theme-tab-toolbar-responsive.png");
   });
 
-  test("theme setting property grid", async ({ page }) => {
-    await page.setViewportSize({ width: 1580, height: 4300 });
-    await setJSON(page, {
-      showQuestionNumbers: true,
-      title: "Title",
-      pages: [
-        { elements: [{ type: "text", name: "question1" }] },
-        { elements: [{ type: "text", name: "question2" }] }
-      ]
+  test.describe("theme setting property grid", () => {
+    const getExpandedGroup = page => page.locator(".spg-theme-builder-root .spg-panel.sd-element--expanded");
+    // Each part starts with the General group expanded, as the former single test did.
+    test.beforeEach(async ({ page }) => {
+      await page.setViewportSize({ width: 1580, height: 4300 });
+      await setJSON(page, {
+        showQuestionNumbers: true,
+        title: "Title",
+        pages: [
+          { elements: [{ type: "text", name: "question1" }] },
+          { elements: [{ type: "text", name: "question2" }] }
+        ]
+      });
+      await getTabbedMenuItemByText(page, creatorTabThemeName).click();
+      const westResizer = page.locator(".svc-resizer-west");
+      const { x, y, width, height } = await <any>westResizer.boundingBox();
+      await westResizer.hover();
+      await page.mouse.down();
+      await page.mouse.move(x - 150, (height - y) / 2, { steps: 5 });
+      await page.mouse.up();
     });
-    await getTabbedMenuItemByText(page, creatorTabThemeName).click();
-    const westResizer = page.locator(".svc-resizer-west");
-    const { x, y, width, height } = await <any>westResizer.boundingBox();
-    await westResizer.hover();
-    await page.mouse.down();
-    await page.mouse.move(x - 150, (height - y) / 2, { steps: 5 });
-    await page.mouse.up();
 
-    await resetFocusToBody(page);
-    const expandedGroup = page.locator(".spg-theme-builder-root .spg-panel.sd-element--expanded");
-    await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-general-group.png");
+    test("General group", async ({ page }) => {
+      await resetFocusToBody(page);
+      await compareScreenshot(page, getExpandedGroup(page), "theme-editor-property-grid-general-group.png");
+    });
 
-    await getPropertyGridCategory(page, "General").click();
-    await getPropertyGridCategory(page, "Header").click();
-    await expandedGroup.locator(".sv-button-group__item-caption").getByText("Basic").click();
-    await resetFocusToBody(page);
-    await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-header-group.png");
+    test("Header group", async ({ page }) => {
+      const expandedGroup = getExpandedGroup(page);
+      await getPropertyGridCategory(page, "General").click();
+      await getPropertyGridCategory(page, "Header").click();
+      await expandedGroup.locator(".sv-button-group__item-caption").getByText("Basic").click();
+      await resetFocusToBody(page);
+      await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-header-group.png");
 
-    await expandedGroup.locator(".sv-button-group__item-caption").getByText("Advanced").click();
-    await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-header-group-advanced.png");
+      await expandedGroup.locator(".sv-button-group__item-caption").getByText("Advanced").click();
+      await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-header-group-advanced.png");
+    });
 
-    await getPropertyGridCategory(page, "Header").click();
-    await getPropertyGridCategory(page, "Background").click();
-    await resetFocusToBody(page);
-    await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-background-group.png");
+    test("Background group", async ({ page }) => {
+      await getPropertyGridCategory(page, "General").click();
+      await getPropertyGridCategory(page, "Background").click();
+      await resetFocusToBody(page);
+      await compareScreenshot(page, getExpandedGroup(page), "theme-editor-property-grid-background-group.png");
+    });
 
-    await getPropertyGridCategory(page, "Background").click();
-    await getPropertyGridCategory(page, "Appearance").click();
-    await resetFocusToBody(page);
-    await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-appearance-group.png");
+    test("Appearance group", async ({ page }) => {
+      const expandedGroup = getExpandedGroup(page);
+      await getPropertyGridCategory(page, "General").click();
+      await getPropertyGridCategory(page, "Appearance").click();
+      await resetFocusToBody(page);
+      await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-appearance-group.png");
 
-    await page.getByRole("checkbox", { name: "Advanced mode" }).click();
-    await resetFocusToBody(page);
-    await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-advanced-group.png");
+      await page.getByRole("checkbox", { name: "Advanced mode" }).click();
+      await resetFocusToBody(page);
+      await compareScreenshot(page, expandedGroup, "theme-editor-property-grid-advanced-group.png");
+    });
   });
 
   test("theme setting property grid mobile", async ({ page }) => {
