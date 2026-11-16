@@ -366,6 +366,8 @@ export var mnStrings = {
     addNewTypeQuestion: "{0} нэмэх", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[Лого]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Upload лого",
     // "Item "
     choices_Item: "Хэсэг ",
     // [Auto-translated] "Select a file"

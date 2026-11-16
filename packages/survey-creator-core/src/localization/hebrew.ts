@@ -366,6 +366,8 @@ export var hebrewStrings = {
     addNewTypeQuestion: "הוסף {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[לוגו]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "לוגו העלאה",
     // "Item "
     choices_Item: "פריט ",
     // [Auto-translated] "Select a file"

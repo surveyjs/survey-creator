@@ -366,6 +366,8 @@ export var jaStrings = {
     addNewTypeQuestion: "{0}を追加", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[ロゴ]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "アップロードロゴ",
     // [Auto-translated] "Item "
     choices_Item: "アイテム",
     // [Auto-translated] "Select a file"

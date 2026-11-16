@@ -366,6 +366,8 @@ export var msStrings = {
     addNewTypeQuestion: "Tambah {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Muat naik logo",
     // [Auto-translated] "Item "
     choices_Item: "Perkara ",
     // [Auto-translated] "Select a file"

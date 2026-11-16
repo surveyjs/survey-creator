@@ -366,6 +366,8 @@ export var danishStrings = {
     addNewTypeQuestion: "Tilføj {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Upload-logo",
     // [Auto-translated] "Item "
     choices_Item: "Vare ",
     // [Auto-translated] "Select a file"

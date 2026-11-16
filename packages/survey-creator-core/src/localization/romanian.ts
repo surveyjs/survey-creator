@@ -366,6 +366,8 @@ export const roStrings = {
     addNewTypeQuestion: "Adăugați {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logo-ul de încărcare",
     // "Item "
     choices_Item: "Element ",
     // "Select a file"

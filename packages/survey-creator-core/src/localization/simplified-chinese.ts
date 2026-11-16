@@ -366,6 +366,8 @@ export var simplifiedChineseTranslation = {
     addNewTypeQuestion: "添加{0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[徽标]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "上传标志",
     // [Auto-translated] "Item "
     choices_Item: "项目",
     // [Auto-translated] "Select a file"

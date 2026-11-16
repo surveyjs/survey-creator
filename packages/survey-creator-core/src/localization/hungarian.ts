@@ -366,6 +366,8 @@ export var huStrings = {
     addNewTypeQuestion: "{0} hozzáadása", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGÓ]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Feltöltési logó",
     // [Auto-translated] "Item "
     choices_Item: "Cikk ",
     // [Auto-translated] "Select a file"

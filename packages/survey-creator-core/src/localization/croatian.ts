@@ -366,6 +366,8 @@ export var hrStrings = {
     addNewTypeQuestion: "Dodaj {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Upload logo",
     // [Auto-translated] "Item "
     choices_Item: "Stavka ",
     // [Auto-translated] "Select a file"

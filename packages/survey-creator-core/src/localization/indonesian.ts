@@ -366,6 +366,8 @@ export var indonesianStrings = {
     addNewTypeQuestion: "Tambahkan {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Unggah logo",
     // [Auto-translated] "Item "
     choices_Item: "Benda ",
     // [Auto-translated] "Select a file"

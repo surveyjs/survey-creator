@@ -366,6 +366,8 @@ export var slStrings = {
     addNewTypeQuestion: "Dodaj {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[LOGOTIP]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logotip Upload",
     // "Item "
     choices_Item: "Element ",
     // "Select a file"
