@@ -1,4 +1,4 @@
-import { urlPresets, test, expect, showPresets, doDragDrop, showCreatorSettings } from "./helper";
+import { urlPresets, test, expect, showPresets, doDragDrop, showCreatorSettings, loadCreatorLocales } from "./helper";
 
 const title = "Presets";
 async function getRowsInputValues(matrix: any) {
@@ -35,6 +35,8 @@ test.describe(title, () => {
     await page.waitForLoadState("networkidle");
     await page.goto(`${urlPresets}`);
     await page.setViewportSize({ width: 1920, height: 1400 });
+    // the Languages page lists the creator locales
+    await loadCreatorLocales(page);
     await showPresets(page);
   });
 

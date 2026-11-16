@@ -101,6 +101,21 @@ export const setJSON = async (page: Page, json: object) => {
   }, json);
 };
 
+// The react and js test pages load survey-creator-core.i18n.js only on localized_ui.html.
+// Call this before a test sets creator.locale on another page, opens the presets editor (its Languages
+// page lists the creator locales) or shows creator strings of another locale. Angular and Vue bundle
+// the locales, so there it does nothing.
+export const loadCreatorLocales = async (page: Page) => {
+  await page.waitForFunction(() => !!window["creator"]);
+  const isMissing = await page.evaluate(() => {
+    const core = window["SurveyCreatorCore"];
+    return !!core && !core.editorLocalization.locales["de"];
+  });
+  if (isMissing) {
+    await page.addScriptTag({ url: "/node_modules/survey-creator-core/survey-creator-core.i18n.js" });
+  }
+};
+
 export const setToolboxItemJSON = async (page: Page, itemName: string, json: object) => {
   await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate(({ itemName, json }) => {
