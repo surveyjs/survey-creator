@@ -164,11 +164,13 @@ describe("Property grid: the Filter Control layout", () => {
   });
 });
 
+// The presets have one chip in the row: in the designer it shows the default preset, and a click on it
+// opens that preset.
 describe("Designer: a Filter Control's preset chip", () => {
-  const createCreator = (): { creator: CreatorTester, filter: any, adorner: QuestionAdornerViewModel } => {
+  const createCreator = (defaultItem?: string): { creator: CreatorTester, filter: any, adorner: QuestionAdornerViewModel } => {
     const creator = new CreatorTester();
     creator.JSON = { elements: [{ type: "text", name: "q1" },
-      { type: "filter", name: "f", fields: [{ name: "x" }],
+      { type: "filter", name: "f", fields: [{ name: "x" }], defaultItem: defaultItem,
         items: [{ name: "a", expression: "{x} > 1" }, { name: "b", expression: "{x} > 2" }] }] };
     const filter = creator.survey.getQuestionByName("f");
     const adorner = new QuestionAdornerViewModel(creator, filter, <any>undefined);
@@ -176,20 +178,21 @@ describe("Designer: a Filter Control's preset chip", () => {
   };
   const detailShown = (creator: CreatorTester): Array<boolean> =>
     (<QuestionMatrixDynamicModel>creator.propertyGrid.getQuestionByName("items")).visibleRows.map(row => row.isDetailPanelShowing);
+  const presetChip = (filter: any): any => filter.chipsToolbar.getActionById("sv-filter-preset");
   test("opens the preset on the Presets tab", () => {
-    const { creator, filter } = createCreator();
+    const { creator, filter } = createCreator("b");
     creator.selectElement(creator.survey.getQuestionByName("q1"));
-    filter.chipsToolbar.getActionById("sv-filter-item-b").action();
+    presetChip(filter).action();
     expect(creator.selectedElement, "#1").toBe(filter);
     expect(creator.propertyGrid.currentPage.name, "#2").toBe("presets");
     expect(detailShown(creator), "#3").toEqual([false, true]);
-    expect(filter.activeItemName, "#4: nothing is turned on").toBe("");
+    expect(filter.activeItemName, "#4: the click turns nothing on or off").toBe("b");
   });
   test("the same when the filter is already selected on another tab", () => {
-    const { creator, filter } = createCreator();
+    const { creator, filter } = createCreator("a");
     creator.selectElement(filter);
     creator.propertyGrid.currentPage = creator.propertyGrid.getPageByName("filterSettings");
-    filter.chipsToolbar.getActionById("sv-filter-item-a").action();
+    presetChip(filter).action();
     expect(creator.propertyGrid.currentPage.name, "#1").toBe("presets");
     expect(detailShown(creator), "#2").toEqual([true, false]);
   });
@@ -202,22 +205,29 @@ describe("Designer: a Filter Control's preset chip", () => {
       expect(creator.selectedElement, "#" + index + ": " + id).toBe(filter);
     });
   });
-  test("with the property grid hidden, the preset opens on the Presets tab once it shows", () => {
+  test("with no default preset the chip selects the filter and opens no preset", () => {
     const { creator, filter } = createCreator();
+    creator.selectElement(creator.survey.getQuestionByName("q1"));
+    presetChip(filter).action();
+    expect(creator.selectedElement, "#1").toBe(filter);
+    expect(detailShown(creator), "#2").toEqual([false, false]);
+  });
+  test("with the property grid hidden, the preset opens on the Presets tab once it shows", () => {
+    const { creator, filter } = createCreator("b");
     creator.selectElement(filter);
     creator.propertyGrid.currentPage = creator.propertyGrid.getPageByName("filterSettings");
     creator.sidebar.renderedIsVisible = false;
-    filter.chipsToolbar.getActionById("sv-filter-item-b").action();
+    presetChip(filter).action();
     creator.sidebar.renderedIsVisible = true;
     (<any>creator.sidebar).afterExpand();
     expect(creator.propertyGrid.currentPage.name, "#1").toBe("presets");
     expect(detailShown(creator), "#2").toEqual([false, true]);
   });
   test("a detached adorner leaves no callback", () => {
-    const { creator, filter, adorner } = createCreator();
+    const { creator, filter, adorner } = createCreator("a");
     creator.selectElement(creator.survey.getQuestionByName("q1"));
     adorner.dispose();
-    filter.chipsToolbar.getActionById("sv-filter-item-a").action();
+    presetChip(filter).action();
     expect(creator.selectedElement.name).toBe("q1");
   });
 });
