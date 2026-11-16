@@ -11,6 +11,8 @@
       <template v-if="model.allowEdit && !model.isUploading">
         <div
           class="svc-logo-image-placeholder"
+          role="button"
+          :aria-label="model.chooseLogoAriaLabel"
           @click="model.chooseFile(model)"
           v-key2click
         >
