@@ -201,7 +201,7 @@ This monorepo does **not** use npm workspaces — each package installs and buil
     npm run test:watch                    # watch mode
     npm run test:core                     # only the "core" project
     npm run test:presets                  # only the "presets" project
-    npx vitest run tests/creator-base-1.tests.ts   # a single file
+    npx vitest run tests/creator-base-2.tests.ts   # a single file
     npx vitest run -t "toolbox"                    # tests whose name matches a substring
     ```
 

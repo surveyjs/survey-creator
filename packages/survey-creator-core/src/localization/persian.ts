@@ -304,6 +304,8 @@ export var persianStrings = {
     themeResetConfirmationOk: "بله، موضوع را تنظیم مجدد کنید",
     // "Add Question"
     addNewQuestion: "اضافه کردن سوال",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "انتخاب نوع سوال",
     // "Select page..."
     selectPage: "انتخاب صفحه ...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var persianStrings = {
     addNewTypeQuestion: "اضافه {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[لوگو]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "لوگو بارگذاری",
     // [Auto-translated] "Item "
     choices_Item: "مورد ",
     // [Auto-translated] "Select a file"
@@ -700,6 +704,8 @@ export var persianStrings = {
       templateDescription: "الگوی توضیحات ورودی",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "الگوی عنوان ورودی",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "عنوان موقت ورودی",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "متن پانل خالی",
       // [Auto-translated] "Tab title pattern"
@@ -978,12 +984,20 @@ export var persianStrings = {
     addItem: "برای اضافه کردن یک آیتم کلیک کنید...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "فشار دهید تا مورد حذف شود...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "اضافه {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "حذف {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "مورد را بکشید",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "گسترش گزینه های تو در تو",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "انتخاب های تو در تو فروپاشی",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "گسترش گزینه های تو در تو {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "انتخاب های تو در تو فروپاشی {0}",
     // [Auto-translated] "Show description"
     showDescription: "توضیحات برنامه",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2884,8 @@ export var persianStrings = {
       width: "عرض پانل را متناسب با سایر عناصر بررسی در همان خط تنظیم می کند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "قالب را برای عناوین پانل پویا تایپ کنید. از {panelIndex} برای موقعیت عمومی پانل و {visiblePanelIndex} برای سفارش ان در میان پانل های قابل مشاهده استفاده کنید. این نگهدارنده ها را در الگو قرار دهید تا شماره گذاری خودکار اضافه شود.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "یک متن پشتیبان برای عناوین ورودی که زمانی اعمال می شود که الگوی عنوان ورودی مقدار معناداری تولید نمی کند. برای موقعیت کلی ورودی از {panelIndex} و برای ترتیب آن در میان ورودی های قابل مشاهده {visiblePanelIndex} استفاده کنید.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "در قالبی برای عناوین زبانه تایپ کنید. از {panelIndex} برای موقعیت عمومی پانل و {visiblePanelIndex} برای سفارش ان در میان پانل های قابل مشاهده استفاده کنید. این نگهدارنده ها را در الگو قرار دهید تا شماره گذاری خودکار اضافه شود.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

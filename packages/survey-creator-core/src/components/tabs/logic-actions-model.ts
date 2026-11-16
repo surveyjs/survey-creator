@@ -244,7 +244,7 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
       panel.visible = false;
     }
   }
-  public onPanelQuestionValueChanged(panel: PanelModel, qName: string): void {
+  public onPanelQuestionValueChanged(panel: PanelModel, qName: string, options?: ISurveyCreatorOptions): void {
     if (this.panelObj) {
       const prop = Serializer.findProperty(this.panelObj.getType(), qName);
       const depProps = prop?.getDependedProperties();
@@ -253,7 +253,7 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
           const dQ = panel.getQuestionByName(dp);
           const dProp = Serializer.findProperty(this.panelObj.getType(), dp);
           if (!!dQ && !!dProp) {
-            PropertyGridEditorCollection.onMasterValueChanged(this.panelObj, dProp, dQ);
+            PropertyGridEditorCollection.onMasterValueChanged(this.panelObj, dProp, dQ, options);
           }
         });
       }

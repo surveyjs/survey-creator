@@ -1625,3 +1625,28 @@ test("Theme builder: survey in the Theme tab is created with TOC when showTOC is
   expect(themeSurveyTab.survey.showTOC).toBeTruthy();
   expect((themeSurveyTab.survey as any).tocModel.listModel.actions.length).toBe(2);
 });
+
+test("Theme builder: a theme with null values can be edited, Bug#8156", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "question1" }] }] };
+  creator.theme = {
+    themeName: "default",
+    colorPalette: "light",
+    isPanelless: null,
+    header: null,
+    cssVariables: {
+      "--sjs2-color-project-brand-600": "#123456",
+      "--sjs2-color-bg-basic-primary": null,
+      "--sjs-general-backcolor": null
+    }
+  } as any;
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+
+  creator.switchTab("theme");
+  const primaryColor = themePlugin.propertyGrid.survey.getQuestionByName("primaryColor");
+  expect(primaryColor.value).toBe("#123456");
+
+  primaryColor.value = "#aa0000";
+  expect(creator.theme.cssVariables!["--sjs2-color-project-brand-600"]).toBe("#aa0000");
+  expect(creator.theme.isPanelless).toBe(false);
+});

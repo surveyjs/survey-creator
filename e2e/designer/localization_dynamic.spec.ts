@@ -1,4 +1,4 @@
-import { url, test, expect, setJSON } from "../helper";
+import { url, test, expect, setJSON, loadCreatorLocales } from "../helper";
 
 const title = "Localization UI";
 
@@ -12,10 +12,10 @@ test.describe(title, () => {
     const checkboxText = "Auswahl";
     await setJSON(page, { elements: [{ type: "checkbox", name: "question1" }] });
     await page.locator("[data-name='question1']").click();
+    await loadCreatorLocales(page);
     await page.evaluate(() => {
       window["creator"].locale = "de";
     });
-    await page.waitForTimeout(500);
-    expect(await page.locator(".svc-question__content-actions .sd-action__title").first().textContent()).toBe(checkboxText);
+    await expect(page.locator(".svc-question__content-actions .sd-action__title").first()).toHaveText(checkboxText);
   });
 });

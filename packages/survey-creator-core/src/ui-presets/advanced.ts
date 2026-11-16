@@ -305,6 +305,7 @@ export const Advanced = {
               { name: "confirmDelete", tab: "entries" },
               { name: "displayMode", tab: "entries" },
               { name: "templateTitle", tab: "entries" },
+              { name: "templateTitlePlaceholder", tab: "entries" },
               { name: "templateDescription", tab: "entries" },
               { name: "templateTabTitle", tab: "entries" },
               { name: "tabAlign", tab: "entries" },

@@ -304,6 +304,8 @@ export var slStrings = {
     themeResetConfirmationOk: "Da, ponastavi temo",
     // "Add Question"
     addNewQuestion: "Dodaj vprašanje",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Izberite vrsto vprašanja",
     // "Select page..."
     selectPage: "Izberite stran...",
     // "Choices are copied from"
@@ -366,6 +368,8 @@ export var slStrings = {
     addNewTypeQuestion: "Dodaj {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[LOGOTIP]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logotip Upload",
     // "Item "
     choices_Item: "Element ",
     // "Select a file"
@@ -700,6 +704,8 @@ export var slStrings = {
       templateDescription: "Vzorec opisa plošče",
       // "Entry title pattern"
       templateTitle: "Vzorec naslova plošče",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Naslov vnosa kot nadomestek",
       // "Empty panel text"
       noEntriesText: "Prazno besedilo plošče",
       // "Tab title pattern"
@@ -978,12 +984,20 @@ export var slStrings = {
     addItem: "Kliknite za dodajanje elementa...",
     // "Click to remove the item..."
     removeItem: "Kliknite za odstranitev elementa...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Dodaj {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Odstrani {0}",
     // "Drag the item"
     dragItem: "Povlecite element",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Razširite gnezdene izbire",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse gnezdene izbire",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Razširite gnezdene izbire {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Collapse gnezdene izbire {0}",
     // [Auto-translated] "Show description"
     showDescription: "Opis oddaje",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2884,8 @@ export var slStrings = {
       width: "Določi širino panela v razmerju z drugimi elementi ankete v isti vrstici. Sprejema CSS vrednosti (px, %, in, pt, itd.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Vnesite predlogo za dinamične naslove panelov. Uporabite {panelIndex} za splošno pozicijo panela in {visiblePanelIndex} za njegov vrstni red med vidnimi paneli. Vstavite te označevalce v vzorec za dodajanje samodejnega številčenja.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Rezervno besedilo za naslove vnosov, ki se uporabi, kadar vzorec naslova vnosa ne daje smiselne vrednosti. Uporabite {panelIndex} za splošno pozicijo vnosa in {visiblePanelIndex} za vrstni red med vidnimi vnosi.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Vnesite predlogo za naslove zavihkov. Uporabite {panelIndex} za splošno pozicijo panela in {visiblePanelIndex} za njegov vrstni red med vidnimi paneli. Vstavite te označevalce v vzorec za dodajanje samodejnega številčenja.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

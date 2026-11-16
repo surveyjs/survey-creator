@@ -452,6 +452,7 @@ export class QuestionToolbox
   private dragOrClickHelper: DragOrClickHelper;
 
   public get toolboxNoResultsFound() { return getLocString("ed.toolboxNoResultsFound"); }
+  public get toolboxAriaLabel() { return getLocString("ed.toolbox"); }
 
   //koItems = ko.observableArray();
   /**

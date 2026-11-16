@@ -304,6 +304,8 @@ export var htStrings = {
     themeResetConfirmationOk: "Wi, reset tèm nan",
     // "Add Question"
     addNewQuestion: "Ajoute Kesyon",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Chwazi kalite kesyon",
     // "Select page..."
     selectPage: "Chwazi paj...",
     // "Choices are copied from"
@@ -366,6 +368,8 @@ export var htStrings = {
     addNewTypeQuestion: "Ajoute {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Voye logo",
     // "Item "
     choices_Item: "Atik",
     // "Select a file"
@@ -700,6 +704,8 @@ export var htStrings = {
       templateDescription: "Modèl deskripsyon panèl",
       // "Entry title pattern"
       templateTitle: "Modèl tit panèl",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Antre placeholder",
       // "Empty panel text"
       noEntriesText: "Tèks panèl vid",
       // "Tab title pattern"
@@ -978,12 +984,20 @@ export var htStrings = {
     addItem: "Klike pou ajoute yon atik...",
     // "Click to remove the item..."
     removeItem: "Klike pou retire atik la...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Add {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Retire {0}",
     // "Drag the item"
     dragItem: "Trennen atik la",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Elaji chwa imbriqué",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Efondreman chwa enbrike",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Elaji chwa enbrikasyon {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Efondreman chwa enbrikasyon nan {0}",
     // [Auto-translated] "Show description"
     showDescription: "Montre deskripsyon",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2884,8 @@ export var htStrings = {
       width: "Mete lajè panèl la an pwopòsyon ak lòt eleman sondaj nan menm liy lan. Aksepte valè CSS (px, %, in, pt, elatriye).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Tape yon modèl pou tit panèl dinamik. Sèvi ak {panelIndex} pou pozisyon jeneral panèl la ak {visiblePanelIndex} pou lòd li nan mitan panno vizib. Mete espas sa yo nan modèl la pou ajoute nimero otomatik.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Yon tèks fallback pou antre ki aplike lè modèl antre a pa pwodwi yon valè siyifikatif. Sèvi ak {panelIndex} pou pozisyon jeneral antre a ak {visiblePanelIndex} pou lòd li yo nan mitan antre vizib.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Tape yon modèl pou tit tab yo. Sèvi ak {panelIndex} pou pozisyon jeneral yon panèl ak {visiblePanelIndex} pou lòd li nan mitan panno vizib. Mete espas sa yo nan modèl la pou ajoute nimero otomatik.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

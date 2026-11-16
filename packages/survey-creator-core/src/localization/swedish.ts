@@ -304,6 +304,8 @@ export let svStrings = {
     themeResetConfirmationOk: "Ja, återställ temat",
     // [Auto-translated] "Add Question"
     addNewQuestion: "Lägg till fråga",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Välj frågetyp",
     // [Auto-translated] "Select page..."
     selectPage: "Välj sida...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export let svStrings = {
     addNewTypeQuestion: "Lägg till {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGOTYP]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Uppladdningslogotyp",
     // [Auto-translated] "Item "
     choices_Item: "Sak ",
     // [Auto-translated] "Select a file"
@@ -700,6 +704,8 @@ export let svStrings = {
       templateDescription: "Mönster för postbeskrivning",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Mönster för posttitel",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Platshållare för deltagartiteln",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Tomma paneltext",
       // [Auto-translated] "Tab title pattern"
@@ -979,12 +985,20 @@ export let svStrings = {
     addItem: "Klicka för att lägga till...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klicka för att ta bort objektet...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Lägg till {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Ta bort {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Dra objektet",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Utöka nästlade val",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Kollapsnästlade val",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Utöka nästlade val av {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Kollapsa inbäddade val av {0}",
     // [Auto-translated] "Show description"
     showDescription: "Showbeskrivning",
     // [Auto-translated] "Hide description"
@@ -2871,6 +2885,8 @@ export let svStrings = {
       width: "Ställer in panelens bredd i proportion till andra undersökningselement på samma rad. Accepterar CSS-värden (px, %, in, pt, etc.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Skriv in en mall för dynamiska panelrubriker. Använd {panelIndex} för panelens allmänna position och {visiblePanelIndex} för dess ordning bland de synliga panelerna. Infoga dessa platshållare i mönstret för att lägga till automatisk numrering.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "En reservtext för posttitlar som gäller när posttitelmönstret inte ger ett meningsfullt värde. Använd {panelIndex} för postens allmänna position och {visiblePanelIndex} för dess ordning bland synliga poster.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Skriv in en mall för flikrubriker. Använd {panelIndex} för en panels allmänna position och {visiblePanelIndex} för dess ordning bland synliga paneler. Infoga dessa platshållare i mönstret för att lägga till automatisk numrering.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

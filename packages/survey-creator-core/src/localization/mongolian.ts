@@ -304,6 +304,8 @@ export var mnStrings = {
     themeResetConfirmationOk: "Тийм ээ, сэдвийг дахин тохируулах",
     // "Add Question"
     addNewQuestion: "Асуулт нэмэх",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Асуултын төрөл сонгох",
     // "Select page..."
     selectPage: "Хуудас сонгох...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var mnStrings = {
     addNewTypeQuestion: "{0} нэмэх", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[Лого]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Upload лого",
     // "Item "
     choices_Item: "Хэсэг ",
     // [Auto-translated] "Select a file"
@@ -700,6 +704,8 @@ export var mnStrings = {
       templateDescription: "Оролтын тодорхойлолтын загвар",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Оролт гарчгийн загвар",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Оролцогчийн цолны оролцоо",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Хоосон хавтан текст",
       // [Auto-translated] "Tab title pattern"
@@ -978,12 +984,20 @@ export var mnStrings = {
     addItem: "Хэсэг нэмэх бол дарах...",
     // "Click to remove the item..."
     removeItem: "Хэсэг устгах бол дарах...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Нэмэх {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Устгах {0}",
     // "Drag the item"
     dragItem: "Хэсгийг чирэх",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Nested сонголтуудыг өргөжүүлэх",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Уналтад орсон сонголтууд",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Үргэлжилсэн сонголтуудыг өргөтгөх {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Уналтад орсон сонголтууд {0}",
     // [Auto-translated] "Show description"
     showDescription: "Нэвтрүүлгийн тайлбар",
     // [Auto-translated] "Hide description"
@@ -2870,6 +2884,8 @@ export var mnStrings = {
       width: "Панелийн өргөнийг ижил шугамаар бусад судалгааны элементүүдтэй тэнцүү тогтооно. CSS-ийн үнэт зүйлсийг (px, %, in, pt г.м) хүлээн зөвшөөрдөг.",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Динамик панел цолны темплэйтэд бичнэ. Харагдах панелуудын дунд түүний дарааллыг {panelIndex} болон {visiblePanelIndex} -ийг ашиглана уу. Автомат дугаар нэмэхийн тулд эдгээр байрлагчдыг загварт оруул.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Бичлэгийн гарчгийн хэв маяг утга утга гаргахгүй үед хэрэглэгддэг нөөц текст. Бичлэгийн ерөнхий байрлалыг {panelIndex}, харагдах бичлэгүүдийн дарааллыг {visiblePanelIndex} гэж ашиглана.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Таб нэрний темплэйтэд бичнэ. {panelIndex} нь панелийн ерөнхий байрлал болон {visiblePanelIndex} -ийг ил харагдах панелуудын дунд эмх цэгцтэй байлгахад ашиглана. Автомат дугаар нэмэхийн тулд эдгээр байрлагчдыг загварт оруул.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."

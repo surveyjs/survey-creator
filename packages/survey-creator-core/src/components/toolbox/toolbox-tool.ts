@@ -53,6 +53,14 @@ export class ToolboxToolViewModel extends Base {
     return !this.creator.readOnly;
   }
 
+  // A listitem must be inside a list: the search button and the tools of a titled category are not
+  public get ariaRole(): string {
+    const toolbox = this.creator.toolbox;
+    if (this.item === toolbox.searchItem) return undefined;
+    if (this.model === toolbox && !toolbox.showInSingleCategory) return undefined;
+    return "listitem";
+  }
+
   public onMouseOver(itemValue, mouseoverEvent) {
     this.model.mouseOverHandler(itemValue);
   }

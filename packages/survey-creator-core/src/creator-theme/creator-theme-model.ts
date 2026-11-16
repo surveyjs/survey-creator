@@ -66,7 +66,10 @@ export class CreatorThemeModel extends Base implements ICreatorTheme {
     if (!theme) return;
 
     if (themeName === CreatorThemeModel.defaultThemeName && (colorPalette || CreatorThemeModel.defaultColorPalette) === CreatorThemeModel.defaultColorPalette && (!theme.cssVariables || Object.keys(theme.cssVariables).length === 0)) {
-      theme.cssVariables = { ...this.baseThemeVariables, ...DefaultLight.cssVariables };
+      // A copy, never written back into the registered theme: the registered object is shared by every creator
+      // on the page (and may be survey-core's own DefaultLight), while baseThemeVariables are computed from this
+      // model's root. Writing them into it froze the first model's values for all later models and creators.
+      return { ...theme, cssVariables: { ...this.baseThemeVariables } };
     }
     return theme;
   }

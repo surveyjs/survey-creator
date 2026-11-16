@@ -1,5 +1,5 @@
 <ng-template #template>
-  <div [class]="model.cssClasses.root">
+  <div [class]="model.cssClasses.root" role="list">
     <ng-container *ngFor="let item of model.renderedActions">
       <svc-toolbox-tool [item]="item" [creator]="creator" [parentModel]="model" [isCompact]="false"></svc-toolbox-tool>
     </ng-container>

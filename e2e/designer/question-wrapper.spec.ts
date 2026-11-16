@@ -127,7 +127,6 @@ test.describe(title, () => {
     await expect(page.locator(".svc-question__content textarea")).toHaveCount(0);
     await expect(page.locator(".svc-question__content.svc-question__content--selected")).toHaveCount(0);
     await page.locator(".svc-question__content").hover({ position: { x: 5, y: 5 } });
-    await page.waitForTimeout(500);
     await expect(convertActionButton).toBeVisible();
 
     await convertActionButton.click();
