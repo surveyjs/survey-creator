@@ -304,6 +304,8 @@ export var arStrings = {
     themeResetConfirmationOk: "نعم ، إعادة تعيين السمة",
     // [Auto-translated] "Add Question"
     addNewQuestion: "إضافة سؤال",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "اختر نوع السؤال",
     // [Auto-translated] "Select page..."
     selectPage: "اختر صفحة...",
     // [Auto-translated] "Choices are copied from"

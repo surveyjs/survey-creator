@@ -304,6 +304,8 @@ export var huStrings = {
     themeResetConfirmationOk: "Igen, állítsa vissza a témát",
     // "Add Question"
     addNewQuestion: "Kérdés felvétele",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Válaszd ki a kérdéstípust",
     // [Auto-translated] "Select page..."
     selectPage: "Válasszon oldalt...",
     // [Auto-translated] "Choices are copied from"

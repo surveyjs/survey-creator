@@ -304,6 +304,8 @@ export var grStrings = {
     themeResetConfirmationOk: "Ναι, επαναφορά θέματος",
     // "Add Question"
     addNewQuestion: "Προσθήκη Ερώτησης",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Επιλέξτε τύπο ερώτησης",
     // "Select page..."
     selectPage: "Επιλέξτε σελίδα...",
     // "Choices are copied from"

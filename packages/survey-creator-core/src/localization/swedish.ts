@@ -304,6 +304,8 @@ export let svStrings = {
     themeResetConfirmationOk: "Ja, återställ temat",
     // [Auto-translated] "Add Question"
     addNewQuestion: "Lägg till fråga",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Välj frågetyp",
     // [Auto-translated] "Select page..."
     selectPage: "Välj sida...",
     // [Auto-translated] "Choices are copied from"

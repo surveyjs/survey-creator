@@ -304,6 +304,8 @@ export var persianStrings = {
     themeResetConfirmationOk: "بله، موضوع را تنظیم مجدد کنید",
     // "Add Question"
     addNewQuestion: "اضافه کردن سوال",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "انتخاب نوع سوال",
     // "Select page..."
     selectPage: "انتخاب صفحه ...",
     // [Auto-translated] "Choices are copied from"

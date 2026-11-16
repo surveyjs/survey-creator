@@ -304,6 +304,8 @@ export var czStrings = {
     themeResetConfirmationOk: "Ano, resetovat motiv",
     // "Add Question"
     addNewQuestion: "Přidat otázku",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Vyberte typ otázky",
     // "Select page..."
     selectPage: "Vyberte stránku...",
     // [Auto-translated] "Choices are copied from"

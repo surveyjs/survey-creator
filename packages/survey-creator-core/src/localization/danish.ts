@@ -304,6 +304,8 @@ export var danishStrings = {
     themeResetConfirmationOk: "Ja, nulstil temaet",
     // [Auto-translated] "Add Question"
     addNewQuestion: "Tilføj spørgsmål",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Vælg spørgsmålstype",
     // [Auto-translated] "Select page..."
     selectPage: "Vælg side...",
     // [Auto-translated] "Choices are copied from"

@@ -304,6 +304,8 @@ export var msStrings = {
     themeResetConfirmationOk: "Ya, tetapkan semula tema",
     // "Add Question"
     addNewQuestion: "Tambahkan soalan",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Pilih jenis soalan",
     // "Select page..."
     selectPage: "Pilih halaman...",
     // [Auto-translated] "Choices are copied from"

@@ -304,6 +304,8 @@ export var turkishStrings = {
     themeResetConfirmationOk: "Evet, temayı sıfırlayın",
     // "Add Question"
     addNewQuestion: "Soru Ekle",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Soru türünü seç",
     // [Auto-translated] "Select page..."
     selectPage: "Sayfa seç...",
     // [Auto-translated] "Choices are copied from"

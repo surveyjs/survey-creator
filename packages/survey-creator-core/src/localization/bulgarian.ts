@@ -304,6 +304,8 @@ export var bgStrings = {
     themeResetConfirmationOk: "Да, нулирайте темата",
     // "Add Question"
     addNewQuestion: "Добавяне на въпрос",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Изберете тип въпрос",
     // "Select page..."
     selectPage: "Избиране на страница...",
     // [Auto-translated] "Choices are copied from"

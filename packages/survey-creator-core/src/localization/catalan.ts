@@ -304,6 +304,8 @@ export var catalanTranslation = {
     themeResetConfirmationOk: "Sí, restablece el tema",
     // "Add Question"
     addNewQuestion: "Afegir pregunta",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Selecciona el tipus de pregunta",
     // "Select page..."
     selectPage: "Seleccionar pàgina ...",
     // [Auto-translated] "Choices are copied from"

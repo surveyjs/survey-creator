@@ -304,6 +304,8 @@ export var nbStrings = {
     themeResetConfirmationOk: "Ja, tilbakestill temaet",
     // "Add Question"
     addNewQuestion: "Legg til spørsmål",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Velg spørsmålstype",
     // "Select page..."
     selectPage: "Velg side...",
     // [Auto-translated] "Choices are copied from"

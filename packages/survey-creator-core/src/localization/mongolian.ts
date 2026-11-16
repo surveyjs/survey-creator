@@ -304,6 +304,8 @@ export var mnStrings = {
     themeResetConfirmationOk: "Тийм ээ, сэдвийг дахин тохируулах",
     // "Add Question"
     addNewQuestion: "Асуулт нэмэх",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Асуултын төрөл сонгох",
     // "Select page..."
     selectPage: "Хуудас сонгох...",
     // [Auto-translated] "Choices are copied from"

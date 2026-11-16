@@ -304,6 +304,8 @@ export var nlStrings = {
     themeResetConfirmationOk: "Ja, reset het thema",
     // "Add Question"
     addNewQuestion: "Vraag toevoegen",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Selecteer vraagtype",
     // "Select page..."
     selectPage: "Selecteer pagina...",
     // [Auto-translated] "Choices are copied from"

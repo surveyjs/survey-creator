@@ -304,6 +304,8 @@ export var ruStrings = {
     themeResetConfirmationOk: "Да, сбросьте тему",
     // "Add Question"
     addNewQuestion: "Добавить вопрос",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Выберите тип вопроса",
     // [Auto-translated] "Select page..."
     selectPage: "Выберите страницу...",
     // [Auto-translated] "Choices are copied from"

@@ -304,6 +304,8 @@ export var koreanStrings = {
     themeResetConfirmationOk: "예, 테마를 재설정합니다.",
     // [Auto-translated] "Add Question"
     addNewQuestion: "질문 추가",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "문제 유형 선택",
     // [Auto-translated] "Select page..."
     selectPage: "페이지 선택...",
     // [Auto-translated] "Choices are copied from"

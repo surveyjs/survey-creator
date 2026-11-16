@@ -304,6 +304,8 @@ export var simplifiedChineseTranslation = {
     themeResetConfirmationOk: "是，重置主题",
     // "Add Question"
     addNewQuestion: "添加问题",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "选择题型",
     // [Auto-translated] "Select page..."
     selectPage: "选择页面...",
     // [Auto-translated] "Choices are copied from"

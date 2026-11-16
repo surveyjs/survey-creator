@@ -304,6 +304,8 @@ export var hrStrings = {
     themeResetConfirmationOk: "Da, resetirajte temu",
     // "Add Question"
     addNewQuestion: "Dodaj pitanje",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Odaberite vrstu pitanja",
     // "Select page..."
     selectPage: "Odaberite stranicu...",
     // [Auto-translated] "Choices are copied from"

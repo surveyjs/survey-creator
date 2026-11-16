@@ -304,6 +304,8 @@ export const roStrings = {
     themeResetConfirmationOk: "Da, resetează tema",
     // "Add Question"
     addNewQuestion: "Adaugă întrebare",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Selectează tipul întrebării",
     // "Select page..."
     selectPage: "Selectează pagina...",
     // "Choices are copied from"

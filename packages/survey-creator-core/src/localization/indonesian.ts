@@ -304,6 +304,8 @@ export var indonesianStrings = {
     themeResetConfirmationOk: "Ya, atur ulang tema",
     // "Add Question"
     addNewQuestion: "Tambah pertanyaan",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Pilih jenis pertanyaan",
     // [Auto-translated] "Select page..."
     selectPage: "Pilih halaman...",
     // [Auto-translated] "Choices are copied from"

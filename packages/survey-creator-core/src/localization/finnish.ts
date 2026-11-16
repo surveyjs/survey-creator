@@ -304,6 +304,8 @@ export var fiStrings = {
     themeResetConfirmationOk: "Kyllä, nollaa teema",
     // "Add Question"
     addNewQuestion: "Lisää kysymys",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Valitse kysymystyyppi",
     // "Select page..."
     selectPage: "Valitse sivu...",
     // [Auto-translated] "Choices are copied from"

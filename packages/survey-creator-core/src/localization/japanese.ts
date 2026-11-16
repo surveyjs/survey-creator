@@ -304,6 +304,8 @@ export var jaStrings = {
     themeResetConfirmationOk: "はい、テーマをリセットします",
     // "Add Question"
     addNewQuestion: "質問を追加",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "選択問題タイプ",
     // "Select page..."
     selectPage: "ページを選択...",
     // [Auto-translated] "Choices are copied from"

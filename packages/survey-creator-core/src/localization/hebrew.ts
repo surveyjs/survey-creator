@@ -304,6 +304,8 @@ export var hebrewStrings = {
     themeResetConfirmationOk: "כן, אפס את ערכת הנושא",
     // "Add Question"
     addNewQuestion: "הוסף שאלה",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "בחר סוג שאלה",
     // "Select page..."
     selectPage: "בחר דף...",
     // "Choices are copied from"

@@ -304,6 +304,8 @@ export var skStrings = {
     themeResetConfirmationOk: "Áno, obnoviť motív",
     // "Add Question"
     addNewQuestion: "Pridať otázku",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Vyberte typ otázky",
     // "Select page..."
     selectPage: "Vybrať stránku...",
     // [Auto-translated] "Choices are copied from"

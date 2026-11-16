@@ -304,6 +304,8 @@ export var germanTranslation = {
     themeResetConfirmationOk: "Ja, Design zurücksetzen.",
     // "Add Question"
     addNewQuestion: "Frage hinzufügen",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Fragetyp auswählen",
     // "Select page..."
     selectPage: "Seite auswählen ...",
     // [Auto-translated] "Choices are copied from"

@@ -304,6 +304,8 @@ export var spanishTranslation = {
     themeResetConfirmationOk: "Sí, restablece el tema",
     // "Add Question"
     addNewQuestion: "Añadir pregunta",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Seleccionar tipo de pregunta",
     // "Select page..."
     selectPage: "Seleccionar página ...",
     // [Auto-translated] "Choices are copied from"

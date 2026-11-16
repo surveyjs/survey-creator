@@ -304,6 +304,8 @@ export const thStrings = {
     themeResetConfirmationOk: "ใช่ รีเซ็ตธีม",
     // "Add Question"
     addNewQuestion: "เพิ่มคำถาม",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "เลือกประเภทคําถาม",
     // "Select page..."
     selectPage: "เลือกหน้า...",
     // "Choices are copied from"

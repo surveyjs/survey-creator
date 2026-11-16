@@ -304,6 +304,8 @@ export var frenchTranslation = {
     themeResetConfirmationOk: "Oui, réinitialisez le thème",
     // "Add Question"
     addNewQuestion: "Ajouter Question",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Sélectionnez le type de question",
     // [Auto-translated] "Select page..."
     selectPage: "Sélectionner une page...",
     // [Auto-translated] "Choices are copied from"
