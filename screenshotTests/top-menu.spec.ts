@@ -1,5 +1,5 @@
-import { test, expect } from "@playwright/test";
-import { url, setJSON, compareScreenshot } from "./helper";
+import { expect } from "@playwright/test";
+import { test, url, setJSON, compareScreenshot } from "./helper";
 
 test.describe("Top Menu Screenshot", () => {
   test.beforeEach(async ({ page }) => {

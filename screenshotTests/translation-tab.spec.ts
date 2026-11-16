@@ -1,5 +1,5 @@
-import { test, expect, Page } from "@playwright/test";
-import { url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, hideContentBehindPopup, showContentBehindPopup, loadCreatorLocales } from "./helper";
+import { expect, Page } from "@playwright/test";
+import { test, url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, hideContentBehindPopup, showContentBehindPopup, loadCreatorLocales } from "./helper";
 
 const title = "Translation tab Screenshot";
 

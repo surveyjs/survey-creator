@@ -1,5 +1,5 @@
-import { test, expect } from "@playwright/test";
-import { url, urlDropdownCollapseView, setJSON, compareScreenshot } from "./helper";
+import { expect } from "@playwright/test";
+import { test, url, urlDropdownCollapseView, setJSON, compareScreenshot } from "./helper";
 
 const title = "Dropdown question creator test";
 
