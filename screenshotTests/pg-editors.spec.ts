@@ -1,5 +1,5 @@
 import { test, expect } from "playwright/test";
-import { url, setJSON, getPropertyGridCategory, generalGroupName, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton, compareScreenshot, doDragDrop, setIsCompact, resetFocusToBody, getVisibleSelectListItemByText, hideContentBehindPopup, showContentBehindPopup, clickAfterScrollIntoView } from "./helper";
+import { url, setJSON, getPropertyGridCategory, generalGroupName, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton, compareScreenshot, doDragDrop, setIsCompact, resetFocusToBody, getVisibleSelectListItemByText, hideContentBehindPopup, showContentBehindPopup, clickAfterScrollIntoView, selectedObjectTextSelector } from "./helper";
 
 const title = "Property Grid Editors";
 test.describe(title, () => {
@@ -223,7 +223,7 @@ test.describe(title, () => {
     });
 
     await page.locator(".svc-question__content .sd-question__title").first().click();
-    await page.waitForTimeout(500);
+    await expect(page.locator(selectedObjectTextSelector)).toHaveText("question2");
     await getPropertyGridCategory(page, generalGroupName).click();
     await getPropertyGridCategory(page, "Conditions").click();
     await page.locator(".spg-panel__content div[data-name='visibleIf'] button").filter({ hasText: "Edit" }).click();
@@ -232,7 +232,7 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), "pg-logic-popup-boolean.png");
     await showContentBehindPopup(page);
     await page.locator("button").filter({ hasText: "Cancel" }).first().click();
-    await page.waitForTimeout(1000);
+    await expect(page.locator(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container").filter({ visible: true })).toHaveCount(0);
     await page.locator(".spg-panel__content div[data-name='enableIf'] button").filter({ hasText: "Edit" }).click();
     await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), "pg-logic-popup-rating.png");
@@ -447,7 +447,6 @@ test.describe(title, () => {
     await getPropertyGridCategory(page, "Conditions").click();
 
     await page.locator("div[data-name='triggers'] button[title='Show Details']").first().click();
-    await page.waitForTimeout(500);
 
     await compareScreenshot(page, page.locator("div[data-name='triggers'] .spg-table__cell--detail-panel").first(), "triggers-editor-dropdown-long-text.png");
   });
@@ -870,7 +869,6 @@ test.describe(title, () => {
     const questionHeader = page.getByRole("group", { name: "Conditions" }).locator(".spg-question__header");
     const json = { "pages": [{ "name": "page1", "elements": [{ "type": "text", "name": "text", }] }] };
     await setJSON(page, json);
-    await page.waitForTimeout(1000);
     await page.locator(".svc-page").first().click({ position: { x: 5, y: 5 } });
     await getPropertyGridCategory(page, "Conditions").click();
     await doDragDrop({ page,
@@ -901,7 +899,6 @@ test.describe(title, () => {
       ]
     };
     await setJSON(page, json);
-    await page.waitForTimeout(1000);
 
     await question1.click({ position: { x: 20, y: 20 } });
     await page.locator(".spg-question[data-name='visible']").getByRole("button", { name: "Show description" }).click();

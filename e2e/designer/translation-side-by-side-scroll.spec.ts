@@ -128,6 +128,7 @@ async function scrollContainer(page, to: "top" | "middle" | "end") {
       await waitForVisibleRowsRendered(page);
       if (await container.evaluate(el => el.scrollTop + el.clientHeight >= el.scrollHeight - 2)) return;
     } else {
+      // Kept on purpose: a short pause between the attempts of this retry loop, not a wait for a state
       await page.waitForTimeout(50);
     }
   }

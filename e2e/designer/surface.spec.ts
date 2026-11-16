@@ -204,7 +204,6 @@ test.describe(title, () => {
 
     await doDragDrop({ page, element: PanelItem, target: EmptyPage, options: { steps: 10 } });
 
-    await page.waitForTimeout(1000);
     const panelSelector = page.locator(".svc-question__content--panel");
     await expect(panelSelector).toBeFocused();
   });

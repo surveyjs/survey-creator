@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import { url, test, expect, getToolboxItemByText, setJSON, objectSelectorButton } from "../helper";
+import { url, test, expect, getToolboxItemByText, setJSON, objectSelectorButton, selectedObjectTextSelector } from "../helper";
 
 const title = "Creator";
 
@@ -35,7 +35,7 @@ test.describe(title, () => {
     await getVisibleElement(page, ".svc-question__content").click({ position: { x: 100, y: 100 } });
     await expect(page.locator(".sv-string-viewer").getByText("Visible", { exact: true })).toHaveCount(1);
     await page.locator(".svc-question__content--selected .svc-question__content-actions").getByRole("button", { name: "Delete" }).click();
-    await page.waitForTimeout(2000);
+    await expect(page.locator(selectedObjectTextSelector)).toHaveText("Survey");
     await expect(page.locator(".sv-string-viewer").getByText("Show the title", { exact: true })).toHaveCount(0);
   });
 
@@ -57,7 +57,6 @@ test.describe(title, () => {
     await expect(q2.locator("span").getByText("Delete")).toBeVisible();
 
     await q2.locator("span").getByText("Delete").click();
-    await page.waitForTimeout(100);
     await expect(getVisibleElement(page, ".svc-question__content span").filter({ hasText: "q2" })).toHaveCount(0);
     await expect(getVisibleElement(page, ".svc-question__content--selected").locator("span").getByText("q1")).toBeVisible();
   });
