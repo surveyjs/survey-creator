@@ -33,8 +33,8 @@ export class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action
         }}
         onMouseOver={(e) => this.model.hoverStopper && this.model.hoverStopper(e.nativeEvent, e.currentTarget)}
       >
-        <button type="button" className={this.item.getActionBarItemTitleCss() + " svc-surface-btn__title-button"}>
-          {this.model.addNewQuestionText}
+        <button type="button" className="svc-surface-btn__title-button">
+          <span className={this.item.getActionBarItemTitleCss()}>{this.model.addNewQuestionText}</span>
         </button>
         {this.renderTypeSelector()}
       </div>

@@ -4,8 +4,8 @@
     v-on:click="onClick($event)"
     v-on:mouseover="(e) => onMouseOver(e)"
   >
-    <button type="button" :class="item.getActionBarItemTitleCss() + ' svc-surface-btn__title-button'">
-      {{ item.data.addNewQuestionText }}
+    <button type="button" class="svc-surface-btn__title-button">
+      <span :class="item.getActionBarItemTitleCss()">{{ item.data.addNewQuestionText }}</span>
     </button>
     <div :class="item.cssClasses.itemTypeSelector">
       <SvComponent :is="'sv-action-bar-item-dropdown'" :item="item.data.questionTypeSelectorModel"></SvComponent>
