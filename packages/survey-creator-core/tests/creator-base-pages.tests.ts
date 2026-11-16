@@ -933,7 +933,7 @@ test("Don't add extra subscriptions and fully unsubscribe title/description chan
   expect(designerPlugin.model.newPage).toBeTruthy();
   let pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
   pageModel.isGhost = true;
-  const getTitleSubscriptions = () => designerPlugin.model.newPage["onPropChangeFunctions"].filter(f => f.name === "title");
+  const getTitleSubscriptions = () => designerPlugin.model.newPage["onPropChangeFunctions"].filter(f => f.name === "title" && f.key === "add_ghost");
   expect(getTitleSubscriptions().length).toBe(1);
   pageModel["attachElement"](designerPlugin.model.newPage);
   expect(getTitleSubscriptions().length).toBe(1);

@@ -748,3 +748,35 @@ test("Page adorner disposes its footerActionsBar if it was built", (): any => {
   notRenderedAdorner.dispose();
   expect(notRenderedAdorner["_footerActionsBar"]).toBeUndefined();
 });
+
+test("Page adorner aria role and label", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1", title: "User Info", elements: [{ type: "text", name: "question1" }] },
+      { name: "page2", elements: [{ type: "text", name: "question2" }] }
+    ]
+  };
+  const page1 = creator.survey.pages[0];
+  const page2 = creator.survey.pages[1];
+  const adorner1 = new PageAdorner(creator, page1);
+  const adorner2 = new PageAdorner(creator, page2);
+  expect(adorner1.ariaRole).toBe("group");
+  expect(adorner1.ariaLabel).toBe("User Info");
+  expect(adorner2.ariaLabel).toBe("page2");
+
+  page1.title = "Contact";
+  expect(adorner1.ariaLabel).toBe("Contact");
+  page1.title = "";
+  expect(adorner1.ariaLabel).toBe("page1");
+  page2.name = "details";
+  expect(adorner2.ariaLabel).toBe("details");
+
+  adorner2.isGhost = true;
+  expect(adorner2.ariaRole).toBeUndefined();
+  expect(adorner2.ariaLabel).toBeUndefined();
+
+  adorner1.dispose();
+  page1.title = "After dispose";
+  expect(adorner1.ariaLabel).toBe("page1");
+});
