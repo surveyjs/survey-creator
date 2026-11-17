@@ -1,4 +1,4 @@
-import { url, compareScreenshot, test, expect, setJSON, setOptions, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator, resetFocusToBody, hideContentBehindPopup, showContentBehindPopup, mockChoicesByUrl } from "./helper";
+import { url, compareScreenshot, waitForWebFonts, test, expect, setJSON, setOptions, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator, resetFocusToBody, hideContentBehindPopup, showContentBehindPopup, mockChoicesByUrl } from "./helper";
 
 const title = "Design Surface Screenshot";
 
@@ -1542,6 +1542,9 @@ test.describe(title, () => {
   test("Question types with subtypes", async ({ page }) => {
     await page.setViewportSize({ width: 1000, height: 700 });
     await setShowToolbox(page, false);
+    // The menu is centered on the button under it when it opens and doesn't follow it later. The button moves when
+    // Open Sans replaces the fallback font, so load the fonts first.
+    await waitForWebFonts(page);
     await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
     await getListItemByText(page, "Rating Scale").hover();
     // Kept: this screenshot does not reproduce locally even without any change (10 of 10 mismatches against its own
