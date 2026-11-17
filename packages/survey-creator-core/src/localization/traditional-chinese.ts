@@ -69,6 +69,8 @@ export var traditionalChineseTranslation = {
     expression: "表達式",
     // [Auto-translated] "Signature"
     signaturepad: "簽名",
+    // [Auto-translated] "Filter"
+    filter: "篩選",
     // [Auto-translated] "Button Group"
     buttongroup: "按鈕組"
   },
@@ -820,6 +822,38 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Expression"
       expression: "表達"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "資料來源",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "顯示濾波晶片",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "顯示篩選器按鈕",
+      // [Auto-translated] "Show search"
+      showSearch: "顯示搜尋",
+      // [Auto-translated] "Search in"
+      searchFields: "搜尋",
+      // [Auto-translated] "Presets"
+      items: "預設",
+      // [Auto-translated] "Default preset"
+      defaultItem: "預設預設",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "允許多個預設",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "允許受訪者新增預設"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "預設名稱",
+      // [Auto-translated] "Preset title"
+      title: "預設標題",
+      // [Auto-translated] "Filter expression"
+      expression: "篩選表達式",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "允許編輯",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "允許刪除"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "排序方式",
@@ -881,7 +915,9 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "每個選項都在單獨的列中",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "允許依此欄位排序"
+      allowSort: "允許依此欄位排序",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "允許依此欄位進行篩選"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1073,6 +1109,8 @@ export var traditionalChineseTranslation = {
     "listIsEmpty@pages": "沒有頁數",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "無分類等級",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "無預設",
     // [Auto-translated] "Add choice"
     "addNew@choices": "增加選擇",
     // [Auto-translated] "Add rating value"
@@ -1099,6 +1137,8 @@ export var traditionalChineseTranslation = {
     "addNew@pages": "新增頁面",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "新增排序層級",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "新增預設",
     // "Value"
     value: "值",
     // "Text"
@@ -1213,6 +1253,10 @@ export var traditionalChineseTranslation = {
     pageSize: "每頁行數",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "允許使用者排序資料列",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "允許依此問題進行篩選",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "篩選運算子",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "最高排序等級",
     // [Auto-translated] "Default sort order"
@@ -1769,6 +1813,10 @@ export var traditionalChineseTranslation = {
       rateValues: "設置評分值",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "滑塊設置",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "篩選條件設定",
+      // [Auto-translated] "Presets"
+      presets: "預設",
       // "Choices from a Web Service"
       choicesByUrl: "通過 URL 導入選項",
       // [Auto-translated] "Numbering"
@@ -3039,6 +3087,18 @@ export var traditionalChineseTranslation = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "設置進度條的位置。“自動”值在調查標題的上方或下方顯示進度條。"
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "選擇動態矩陣、下拉式矩陣或動態面板，其列或面板可被篩選器縮小範圍。",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "預設值在調查開始時套用。"
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "使用大括號內的欄位名稱，例如：{price} < 20 和 {category} 任意 ['Beverages']。"
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "限制受訪者可用來篩選此欄位的運算子。留空以允許所有適合該欄位的運算子。",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "受訪者不可見的列ID。",

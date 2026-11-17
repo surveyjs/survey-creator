@@ -69,6 +69,8 @@ export const thStrings = {
     expression: "นิพจน์ (อ่านอย่างเดียว)",
     // "Signature"
     signaturepad: "แผ่นลายเซ็น",
+    // [Auto-translated] "Filter"
+    filter: "ตัวกรอง",
     // "Button Group"
     buttongroup: "กลุ่มปุ่ม"
   },
@@ -819,6 +821,38 @@ export const thStrings = {
       // "Expression"
       expression: "นิพจน์"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "แหล่งข้อมูล",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "แสดงชิปกรอง",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "แสดงปุ่มตัวกรอง",
+      // [Auto-translated] "Show search"
+      showSearch: "แสดงการค้นหา",
+      // [Auto-translated] "Search in"
+      searchFields: "ค้นหาใน",
+      // [Auto-translated] "Presets"
+      items: "การตั้งค่าล่วงหน้า",
+      // [Auto-translated] "Default preset"
+      defaultItem: "การตั้งค่าล่วงหน้าเริ่มต้น",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "อนุญาตให้ตั้งค่าล่วงหน้าหลายแบบ",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "อนุญาตให้ผู้ตอบเพิ่มการตั้งค่าล่วงหน้า"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "ชื่อที่ตั้งไว้ล่วงหน้า",
+      // [Auto-translated] "Preset title"
+      title: "ชื่อที่ตั้งไว้ล่วงหน้า",
+      // [Auto-translated] "Filter expression"
+      expression: "นิพจน์กรอง",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "อนุญาตให้แก้ไข",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "อนุญาตให้ลบ"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "เรียงตาม",
@@ -880,7 +914,9 @@ export const thStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "แต่ละตัวเลือกในคอลัมน์แยกต่างหาก",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "อนุญาตให้จัดเรียงตามคอลัมน์นี้"
+      allowSort: "อนุญาตให้จัดเรียงตามคอลัมน์นี้",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "อนุญาตให้กรองตามคอลัมน์นี้"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1072,6 +1108,8 @@ export const thStrings = {
     "listIsEmpty@pages": "ไม่มีหน้า",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "ไม่มีระดับการจัดเรียง",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "ไม่มีการตั้งค่าล่วงหน้า",
     // "Add new choice"
     "addNew@choices": "เพิ่มตัวเลือกใหม่",
     // [Auto-translated] "Add rating value"
@@ -1098,6 +1136,8 @@ export const thStrings = {
     "addNew@pages": "เพิ่มหน้า",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "เพิ่มระดับการจัดเรียง",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "เพิ่มการตั้งค่าล่วงหน้า",
     // "Value"
     value: "ค่า",
     // "Text"
@@ -1212,6 +1252,10 @@ export const thStrings = {
     pageSize: "จํานวนแถวต่อหน้า",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "อนุญาตให้ผู้ใช้จัดเรียงแถว",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "อนุญาตให้กรองตามคําถามนี้",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "ตัวดําเนินการตัวกรอง",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "ระดับการจัดเรียงสูงสุด",
     // [Auto-translated] "Default sort order"
@@ -1768,6 +1812,10 @@ export const thStrings = {
       rateValues: "ค่าการให้คะแนน",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "การตั้งค่าตัวเลื่อน",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "การตั้งค่าตัวกรอง",
+      // [Auto-translated] "Presets"
+      presets: "การตั้งค่าล่วงหน้า",
       // "Choices from a Web Service"
       choicesByUrl: "ตัวเลือกจากบริการเว็บ",
       // "Numbering"
@@ -3038,6 +3086,18 @@ export const thStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "ตั้งค่าตําแหน่งของแถบความคืบหน้า ค่า \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าด้านบนหรือด้านล่างส่วนหัวของแบบสํารวจ"
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "เลือกเมทริกซ์แบบไดนามิก เมทริกซ์แบบดรอปดาวน์ หรือแผงแบบไดนามิกที่แถวหรือแผงของมันตัวกรองจะจํากัดลง",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "การตั้งค่าล่วงหน้าจะถูกใช้เมื่อเริ่มการสํารวจ"
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "ใช้ชื่อฟิลด์ในวงเล็บโค้ง เช่น: {price} < 20 และ {category} anyof ['เครื่องดื่ม']"
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "จํากัดจํานวนตัวดําเนินการที่ผู้ตอบแบบสอบถามสามารถใช้ในการกรองตามฟิลด์นี้เว้นว่างเพื่ออนุญาตให้ใช้ตัวดําเนินการทั้งหมดที่เหมาะสมกับฟิลด์นั้น",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID คอลัมน์ที่ไม่มองเห็นได้สำหรับผู้ตอบแบบสำรวจ",

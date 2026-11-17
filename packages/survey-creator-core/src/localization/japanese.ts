@@ -69,6 +69,8 @@ export var jaStrings = {
     expression: "式（読み取り専用）",
     // "Signature"
     signaturepad: "署名パッド",
+    // [Auto-translated] "Filter"
+    filter: "フィルター",
     // [Auto-translated] "Button Group"
     buttongroup: "ボタングループ"
   },
@@ -819,6 +821,38 @@ export var jaStrings = {
       // [Auto-translated] "Expression"
       expression: "表現"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "データソース",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "フィルターチップを表示",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "フィルターボタンを表示する",
+      // [Auto-translated] "Show search"
+      showSearch: "検索を表示",
+      // [Auto-translated] "Search in"
+      searchFields: "検索",
+      // [Auto-translated] "Presets"
+      items: "プリセット",
+      // [Auto-translated] "Default preset"
+      defaultItem: "デフォルトプリセット",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "複数のプリセットを許可する",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "回答者がプリセットを追加できるようにする"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "プリセット名",
+      // [Auto-translated] "Preset title"
+      title: "プリセットタイトル",
+      // [Auto-translated] "Filter expression"
+      expression: "フィルター式",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "編集を許可する",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "削除を許可する"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "並べ替え",
@@ -880,7 +914,9 @@ export var jaStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "個別の列に各オプション",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "この列によるソートを許可してください"
+      allowSort: "この列によるソートを許可してください",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "この列によるフィルタリングを許可する"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1072,6 +1108,8 @@ export var jaStrings = {
     "listIsEmpty@pages": "ページはない",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "レベルはない",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "プリセットなし",
     // [Auto-translated] "Add choice"
     "addNew@choices": "選択肢を加える",
     // [Auto-translated] "Add rating value"
@@ -1098,6 +1136,8 @@ export var jaStrings = {
     "addNew@pages": "ページを追加",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "ソートレベルを追加",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "プリセットを追加",
     // "Value"
     value: "値",
     // "Text"
@@ -1212,6 +1252,10 @@ export var jaStrings = {
     pageSize: "ページあたりの行数",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "ユーザーが行を並べ替えることを許可します",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "この質問によるフィルタリングを許可する",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "フィルター演算子",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "最大ソートレベル",
     // [Auto-translated] "Default sort order"
@@ -1768,6 +1812,10 @@ export var jaStrings = {
       rateValues: "レート値",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "スライダー設定",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "フィルター設定",
+      // [Auto-translated] "Presets"
+      presets: "プリセット",
       // "Choices from a Web Service"
       choicesByUrl: "ウェブの選択",
       // "Numbering"
@@ -3038,6 +3086,18 @@ export var jaStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "プログレスバーの位置を設定します。「自動」の値は、調査ヘッダーの上または下に進行状況バーを表示します。"
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "動的マトリックス、ドロップダウンマトリックス、またはフィルターの行やパネルを絞り込む動的パネルを選択します。",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "調査開始時に適用されたプリセット。"
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "フィールド名はカールボッコで囲み、例:{price} < 20 や {category} anyof ['Beverages']] を選びます。"
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "回答者がこのフィールドでフィルタリングするために使用できる演算子を制限します。フィールドに合うすべての演算子を使用できるように、空欄のままにします。",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "回答者に表示されない列 ID。",

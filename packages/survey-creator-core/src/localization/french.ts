@@ -69,6 +69,8 @@ export var frenchTranslation = {
     expression: "Titre (lecture seule)",
     // [Auto-translated] "Signature"
     signaturepad: "Signature",
+    // [Auto-translated] "Filter"
+    filter: "Filtre",
     // [Auto-translated] "Button Group"
     buttongroup: "Groupe de boutons"
   },
@@ -819,6 +821,38 @@ export var frenchTranslation = {
       // [Auto-translated] "Expression"
       expression: "Expression"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Source de données",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Afficher les puces de filtre",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Afficher le bouton Filtres",
+      // [Auto-translated] "Show search"
+      showSearch: "Afficher la recherche",
+      // [Auto-translated] "Search in"
+      searchFields: "Rechercher dans",
+      // [Auto-translated] "Presets"
+      items: "Préréglages",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Préréglage par défaut",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Autoriser plusieurs préréglages",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Autoriser les répondants à ajouter des préréglages"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Nom prédéfini",
+      // [Auto-translated] "Preset title"
+      title: "Titre prédéfini",
+      // [Auto-translated] "Filter expression"
+      expression: "Expression du filtre",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Autoriser l’édition",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Autoriser la suppression"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Trier par",
@@ -880,7 +914,9 @@ export var frenchTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Chaque option dans une colonne distincte",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Autoriser le tri par cette colonne"
+      allowSort: "Autoriser le tri par cette colonne",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Autoriser le filtrage par cette colonne"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1072,6 +1108,8 @@ export var frenchTranslation = {
     "listIsEmpty@pages": "Pas de pages",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Aucun niveau de tri",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Pas de préréglages",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Ajouter le choix",
     // [Auto-translated] "Add rating value"
@@ -1098,6 +1136,8 @@ export var frenchTranslation = {
     "addNew@pages": "Ajouter la page",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Ajouter le niveau de tri",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Ajouter un préréglage",
     // "Value"
     value: "Valeur",
     // "Text"
@@ -1212,6 +1252,10 @@ export var frenchTranslation = {
     pageSize: "Lignes par page",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Permettre aux utilisateurs de trier les lignes",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Autoriser le filtrage par cette question",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Opérateurs de filtre",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Niveaux de tri maximaux",
     // [Auto-translated] "Default sort order"
@@ -1768,6 +1812,10 @@ export var frenchTranslation = {
       rateValues: "Barème",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Paramètres du curseur",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Paramètres du filtre",
+      // [Auto-translated] "Presets"
+      presets: "Préréglages",
       // "Choices from a Web Service"
       choicesByUrl: "Choix depuis API web",
       // [Auto-translated] "Numbering"
@@ -3038,6 +3086,18 @@ export var frenchTranslation = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Définit l’emplacement de la barre de progression. La valeur « Auto » affiche la barre de progression au-dessus ou en dessous de l’en-tête de l’enquête."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Sélectionnez une matrice dynamique, une matrice déroulante ou un panneau dynamique dont le filtre resserre les lignes ou les panneaux.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Le préréglage s’appliquait au début de l’enquête."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Utilisez les noms des champs entre crochets, par exemple : {price} < 20 et {category} anyof ['Beverages']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Limite les opérateurs que les répondants peuvent utiliser pour filtrer par ce champ. Laisser vide pour permettre tous les opérateurs correspondant au champ.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID de colonne qui n’est pas visible par les personnes interrogées.",
