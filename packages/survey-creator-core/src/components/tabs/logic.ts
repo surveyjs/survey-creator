@@ -3,6 +3,7 @@ import { editorLocalization } from "../../editorLocalization";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
 import { ISurveyLogicItemOwner, SurveyLogicItem, SurveyLogicAction } from "./logic-items";
 import { SurveyLogicTypes, SurveyLogicType, ISurveyLogicType } from "./logic-types";
+import { IVariableRename } from "../../utils/data-path";
 import "./logic.scss";
 
 export function initLogicOperator(question: QuestionDropdownModel) {
@@ -161,12 +162,12 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     this.items.forEach(item => item.renameQuestion(oldName, newName));
     this.invisibleItems.forEach(item => item.renameQuestion(oldName, newName));
   }
-  // Nested data: see SurveyLogicItem.renameDataKey. Returns true when a rule split into elements with
+  // Nested data: see SurveyLogicItem.renameVariables. Returns true when a rule split into elements with
   // different texts: the items no longer match the survey and have to be built again.
-  public renameDataKey(oldPath: Array<string>, newKey: string, keepName?: string): boolean {
+  public renameVariables(getRenames: (owner: Base, element: Base) => Array<IVariableRename>, key?: string): boolean {
     let res = false;
     this.items.concat(this.invisibleItems).forEach(item => {
-      if (item.renameDataKey(oldPath, newKey, keepName)) res = true;
+      if (item.renameVariables(getRenames, key)) res = true;
     });
     return res;
   }

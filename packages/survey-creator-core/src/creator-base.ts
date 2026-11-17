@@ -26,7 +26,7 @@ import {
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
-import { isInnerQuestion } from "./utils/data-path";
+import { DataKeyRename, getExpressionRecord, getExpressionScopePaths, isScopedNamesSurvey, IVariableRename } from "./utils/data-path";
 import { DragDropChoices } from "survey-core";
 import { IsTouch } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
@@ -2782,8 +2782,8 @@ export class SurveyCreatorModel extends Base
   }
   public updateConditionsOnNameChanged(obj: Base, propertyName: string, oldValue: any): void {
     if (this.isCreatingNewElement) return;
-    if (this.isObjQuestion(obj) && isInnerQuestion(obj)) {
-      this.updateConditionsOnInnerQuestionNameChanged(<Question>obj, propertyName, oldValue);
+    if (this.isObjQuestion(obj) && isScopedNamesSurvey(this.survey)) {
+      this.updateConditionsOnQuestionKeyChanged(<Question>obj, propertyName, oldValue);
     } else if (this.isObjQuestion(obj)) {
       if (propertyName === "name" && !obj["valueName"]) {
         this.updateLogicOnQuestionNameChanged(oldValue, obj["name"]);
@@ -2804,20 +2804,38 @@ export class SurveyCreatorModel extends Base
       this.updateConditionsOnContainerKeyChanged(obj, propertyName, oldValue);
     }
   }
-  // Nested data (survey-library #12233). The condition editor inserts an inner question by its name ({street}),
-  // which resolves at the root and inside its container; its value name is no key of the survey data, so a
-  // valueName change never rewrites {name} to {valueName}. A data path that reaches the question
-  // ({address.street}) follows the change of its last key.
-  private updateConditionsOnInnerQuestionNameChanged(question: Question, propertyName: string, oldValue: any): void {
-    if (propertyName === "name") {
-      this.updateLogicOnQuestionNameChanged(oldValue, question.name);
-      if (!question.valueName) {
-        this.updateLogicOnDataKeyChanged(question.getDataPath(), oldValue, question.name, oldValue);
-      }
+  // Nested data (survey-library #12233, scoped names). A variable is a data key, read in its owner's scope and
+  // then in each scope around it, or a data path. So a question's rename rewrites only when its data key changes
+  // (a name change of a question with a valueName rewrites nothing), and only the variables that read the
+  // question before the change (DataKeyRename): {street} that reads another street, or nothing, keeps its text.
+  // A question of a record (a dynamic panel's template) is read as {panel.x} by the record's own rules.
+  // A survey with one scope ("none") keeps master's text rewrite in the other branch.
+  private updateConditionsOnQuestionKeyChanged(question: Question, propertyName: string, oldValue: any): void {
+    let oldKey: string;
+    if (propertyName === "name" && !question.valueName) {
+      oldKey = oldValue;
+    } else if (propertyName === "valueName") {
+      oldKey = oldValue || question.name;
+    } else return;
+    const newKey = question.getValueName();
+    if (!oldKey || !newKey || oldKey === newKey || !settings.logic.updateExpressionsOnChanging.questionName) return;
+    const record = getExpressionRecord(this.survey, question);
+    if (!!record) {
+      this.updateLogicOnRecordKeyChanged(question, record, oldKey);
+    } else {
+      this.updateLogicOnDataKeyChanged(question, oldKey, newKey);
     }
-    if (propertyName === "valueName") {
-      this.updateLogicOnDataKeyChanged(question.getDataPath(), oldValue || question.name, question.getValueName(), question.name);
-    }
+  }
+  private updateLogicOnRecordKeyChanged(question: Question, record: Base, oldKey: string): void {
+    // a detail panel's question has no data path at design time: its key is its value name in the row
+    const dataPath = question.getDataPath();
+    const newPath = dataPath.length > 0 ? dataPath : [question.getValueName()];
+    const prefix = record.isDescendantOf("paneldynamic") ? "panel." : "row.";
+    const renames: Array<IVariableRename> = [{
+      oldName: prefix + newPath.slice(0, newPath.length - 1).concat([oldKey]).join("."),
+      newName: prefix + newPath.join(".")
+    }];
+    this.renameLogicVariables((owner, element) => getExpressionRecord(this.survey, element) === record ? renames : [], oldKey);
   }
   // A panel's or a page's data key changed (its valueName, or its name in a by-name dataNesting mode): every
   // path through the key follows. A key that stays the same (a panel with its own valueName renamed), or a
@@ -2826,13 +2844,18 @@ export class SurveyCreatorModel extends Base
     const oldKey = propertyName === "name" ? panel.getDataNestingKeyFor(panel.valueName, oldValue) : panel.getDataNestingKeyFor(oldValue, panel.name);
     const newKey = panel.getDataNestingKeyFor(panel.valueName, panel.name);
     if (!oldKey || !newKey || !panel.isDataNesting) return;
-    this.updateLogicOnDataKeyChanged(panel.getDataPath(), oldKey, newKey);
+    this.updateLogicOnDataKeyChanged(panel, oldKey, newKey);
   }
-  private updateLogicOnDataKeyChanged(newPath: Array<string>, oldKey: string, newKey: string, keepName?: string): void {
+  // el (a question or a nesting container) holds newKey now; its old key was oldKey
+  private updateLogicOnDataKeyChanged(el: Question | PanelModelBase, oldKey: string, newKey: string): void {
+    const newPath = el.getDataPath();
     if (!oldKey || !newKey || oldKey === newKey || newPath.length === 0 || !settings.logic.updateExpressionsOnChanging.questionName) return;
-    const oldPath = newPath.slice(0, newPath.length - 1).concat([oldKey]);
+    const rename = new DataKeyRename(this.survey, newPath.slice(0, newPath.length - 1).concat([oldKey]), newKey, el.isQuestion);
+    this.renameLogicVariables(owner => rename.getRenames(getExpressionScopePaths(this.survey, owner)), oldKey);
+  }
+  private renameLogicVariables(getRenames: (owner: Base, element: Base) => Array<IVariableRename>, oldKey: string): void {
     this.surveyLogicRenaming = true;
-    const isSplit = this.getSurveyLogicForUpdate().renameDataKey(oldPath, newKey, keepName);
+    const isSplit = this.getSurveyLogicForUpdate().renameVariables(getRenames, oldKey);
     this.surveyLogicRenaming = false;
     if (isSplit) {
       this.surveyLogicForUpdate = undefined;

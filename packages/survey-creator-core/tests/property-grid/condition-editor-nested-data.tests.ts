@@ -262,7 +262,7 @@ describe("renames rewrite names and paths (nested data, survey-library #12233)",
     creator.JSON = json;
     return creator;
   };
-  const checkRename = (json: any, expressions: { [name: string]: [string, string] }, change: (creator: CreatorTester) => void): void => {
+  const checkRename = (json: any, expressions: { [name: string]: [string, string] }, change: (creator: CreatorTester) => void, checkRedo?: boolean): void => {
     Object.keys(expressions).forEach(name => {
       const el = findElement(json, name);
       el.visibleIf = expressions[name][0];
@@ -275,6 +275,11 @@ describe("renames rewrite names and paths (nested data, survey-library #12233)",
     creator.undo();
     Object.keys(expressions).forEach(name => {
       expect(findQuestion(creator.survey, name).visibleIf, "undo: " + name).toBe(expressions[name][0]);
+    });
+    if (!checkRedo) return;
+    creator.redo();
+    Object.keys(expressions).forEach(name => {
+      expect(findQuestion(creator.survey, name).visibleIf, "redo: " + name).toBe(expressions[name][1]);
     });
   };
   // The question by its name wherever its scope puts it: a rename of a container changes its path of names
@@ -291,8 +296,166 @@ describe("renames rewrite names and paths (nested data, survey-library #12233)",
     return res;
   };
   test("rename street -> road: {street} and {address.street}", () => {
-    checkRename(surveyJson(), { q1: ["{street} = 1 and {address.street} = 2", "{road} = 1 and {address.road} = 2"] },
+    // the root {street} reads nothing (survey-library #12233, O3): it keeps its text
+    checkRename(surveyJson(), { q1: ["{street} = 1 and {address.street} = 2", "{street} = 1 and {address.road} = 2"] },
       creator => creator.survey.getQuestionByName("panel1.street").name = "road");
+  });
+  test("an inner street renamed next to a top-level street: the root {street} reads the top-level one and stays", () => {
+    checkRename({ dataNesting: "auto", elements: [addressPanel(), { type: "text", name: "street" }, { type: "text", name: "q1" }] },
+      { q1: ["{street} = 1 and {address.street} = 2", "{street} = 1 and {address.road} = 2"] },
+      creator => creator.survey.getQuestionByName("panel1.street").name = "road", true);
+  });
+  test("an inner street renamed: {street} in a panel with its own street stays, {address.street} there follows", () => {
+    checkRename({ dataNesting: "auto", elements: [addressPanel({ elements: [
+      { type: "text", name: "street" },
+      { type: "panel", name: "inner", valueName: "inner", elements: [{ type: "text", name: "street" }, { type: "text", name: "x" }] }] }),
+    { type: "text", name: "q1" }] },
+    { x: ["{street} = 1 and {address.street} = 2", "{street} = 1 and {address.road} = 2"] },
+    creator => creator.survey.getQuestionByName("panel1.street").name = "road", true);
+  });
+  test("the renamed key is taken in the owner's own panel: the text goes from the next scope outwards", () => {
+    // inner has no street, so {street} reads address's; inner's own road would answer a plain {road}
+    checkRename({ dataNesting: "auto", elements: [addressPanel({ elements: [
+      { type: "text", name: "street" },
+      { type: "panel", name: "inner", valueName: "inner", elements: [{ type: "text", name: "road" }, { type: "text", name: "x" }] }] }),
+    { type: "text", name: "q1" }] },
+    { x: ["{street} = 1", "{address.road} = 1"] },
+    creator => creator.survey.getQuestionByName("panel1.street").name = "road", true);
+  });
+  test("the rewritten text reads the renamed question at runtime, and the kept one does not", () => {
+    const creator = createCreator({ dataNesting: "auto", elements: [addressPanel({ elements: [
+      { type: "text", name: "street" },
+      { type: "panel", name: "inner", valueName: "inner", elements: [{ type: "text", name: "road" }, { type: "text", name: "x", visibleIf: "{street} = 1" }] }] }),
+    { type: "text", name: "q1" }] });
+    const street = creator.survey.getQuestionByName("panel1.street");
+    const x = creator.survey.getQuestionByName("panel1.inner.x");
+    expect(creator.survey.getQuestionByVariable("street", x).question).toBe(street);
+    street.name = "road";
+    expect(x.visibleIf).toBe("{address.road} = 1");
+    expect(creator.survey.getQuestionByVariable("address.road", x).question).toBe(street);
+    expect(creator.survey.getQuestionByVariable("road", x).question).not.toBe(street);
+  });
+  test("street gets a first valueName st: {street} inside the container follows its key", () => {
+    checkRename(surveyJson({}, { elements: [
+      { type: "dropdown", name: "kind", choices: ["home"] }, { type: "text", name: "street" }] }),
+    { kind: ["{street} = 3", "{st} = 3"], q1: ["{address.street} = 1", "{address.st} = 1"] },
+    creator => creator.survey.getQuestionByName("panel1.street").valueName = "st", true);
+  });
+  const scopedQ1Json = (): any => ({ dataNesting: "auto", elements: [
+    addressPanel({ elements: [{ type: "text", name: "street" }] }),
+    { type: "panel", name: "other", valueName: "other", elements: [{ type: "text", name: "q1" }, { type: "text", name: "y" }] },
+    { type: "panel", name: "o2", valueName: "o2", elements: [{ type: "text", name: "z", valueName: "q1" }, { type: "text", name: "y2" }] },
+    { type: "text", name: "q1" }, { type: "text", name: "q2" }] });
+  test("a top-level q1 renamed: {q1} follows where it reads the root's q1, not where a panel has its own q1 key", () => {
+    checkRename(scopedQ1Json(), {
+      street: ["{q1} = 1", "{q1new} = 1"],
+      y: ["{q1} = 2", "{q1} = 2"],
+      y2: ["{q1} = 3", "{q1} = 3"],
+      q2: ["{q1} = 4 and {other.q1} = 5", "{q1new} = 4 and {other.q1} = 5"]
+    }, creator => creator.survey.getQuestionByName("q1").name = "q1new", true);
+    checkRename(scopedQ1Json(), {
+      street: ["{q1} = 1", "{v1} = 1"],
+      y: ["{q1} = 2", "{q1} = 2"],
+      q2: ["{q1} = 4", "{v1} = 4"]
+    }, creator => creator.survey.getQuestionByName("q1").valueName = "v1", true);
+  });
+  test("\"none\": a rename rewrites the text everywhere, as on master", () => {
+    checkRename(surveyJson({ dataNesting: "none" }, { elements: [
+      { type: "dropdown", name: "kind", choices: ["home"] }, { type: "text", name: "street" }, { type: "text", name: "city", valueName: "town" }] }),
+    { kind: ["{street} = 3", "{road} = 3"], q1: ["{address.street} = 1 and {street} = 2", "{address.street} = 1 and {road} = 2"] },
+    creator => creator.survey.getQuestionByName("street").name = "road", true);
+    checkRename(surveyJson({ dataNesting: "none" }), { q1: ["{city} = 1 and {town} = 2", "{city} = 1 and {town} = 2"] },
+      creator => creator.survey.getQuestionByName("city").name = "place", true);
+    const json = scopedQ1Json();
+    json.dataNesting = "none";
+    json.elements.splice(1, 1);
+    checkRename(json, { street: ["{q1} = 1", "{q1new} = 1"], y2: ["{q1} = 3", "{q1new} = 3"] },
+      creator => creator.getAllQuestions().filter(q => q.name === "q1")[0].name = "q1new", true);
+  });
+  test("panel1's valueName -> addr: {address.street} inside a panel with its own address key stays", () => {
+    checkRename({ dataNesting: "auto", elements: [addressPanel(),
+      { type: "panel", name: "other", valueName: "other", elements: [
+        { type: "matrix", name: "mm", valueName: "address", rows: ["street"], columns: ["c1"] }, { type: "text", name: "y" }] },
+      { type: "text", name: "q1" }] },
+    { y: ["{address.street} = 'c1'", "{address.street} = 'c1'"], q1: ["{address.street} = 1", "{addr.street} = 1"] },
+    creator => creator.survey.getPanelByName("panel1").valueName = "addr", true);
+  });
+  test("a dynamic panel's template question renamed: {panel.x} follows, {x} that reads nothing stays", () => {
+    const creator = createCreator({ dataNesting: "auto", elements: [addressPanel({ elements: [
+      { type: "paneldynamic", name: "dp", templateElements: [
+        { type: "text", name: "x" }, { type: "text", name: "y", visibleIf: "{panel.x} = 1 and {x} = 2" }] }] }),
+    { type: "text", name: "q1", visibleIf: "{x} = 3" }] });
+    const template = (<any>creator.survey.getQuestionByName("panel1.dp")).template;
+    const q1 = creator.survey.getQuestionByName("q1");
+    template.getQuestionByName("x").name = "x2";
+    expect(template.getQuestionByName("y").visibleIf, "after").toBe("{panel.x2} = 1 and {x} = 2");
+    expect(q1.visibleIf, "after: q1").toBe("{x} = 3");
+    creator.undo();
+    expect(template.getQuestionByName("y").visibleIf, "undo").toBe("{panel.x} = 1 and {x} = 2");
+    creator.redo();
+    expect(template.getQuestionByName("y").visibleIf, "redo").toBe("{panel.x2} = 1 and {x} = 2");
+  });
+  test("a choice's visibleIf and an expression validator read in their question's scope: {street} follows", () => {
+    const creator = createCreator({ dataNesting: "auto", elements: [addressPanel({ elements: [
+      { type: "dropdown", name: "kind", choices: [{ value: "home", visibleIf: "{street} = 1" }],
+        validators: [{ type: "expression", expression: "{street} = 2" }] },
+      { type: "text", name: "street" }] }), { type: "text", name: "q1" }] });
+    const kind: any = creator.survey.getQuestionByName("panel1.kind");
+    creator.survey.getQuestionByName("panel1.street").name = "road";
+    expect(kind.choices[0].visibleIf, "after: choice").toBe("{road} = 1");
+    expect(kind.validators[0].expression, "after: validator").toBe("{road} = 2");
+    creator.undo();
+    expect(kind.choices[0].visibleIf, "undo: choice").toBe("{street} = 1");
+    expect(kind.validators[0].expression, "undo: validator").toBe("{street} = 2");
+  });
+  test("a survey where no container nests any more renames as on master", () => {
+    const creator = createCreator({ dataNesting: "auto", elements: [addressPanel(),
+      { type: "paneldynamic", name: "dp", templateElements: [
+        { type: "text", name: "x" }, { type: "text", name: "y", visibleIf: "{panel.x} = 1 and {x} = 2" }] },
+      { type: "text", name: "q1", visibleIf: "{x} = 3" }] });
+    creator.survey.getPanelByName("panel1").valueName = "";
+    const template = (<any>creator.survey.getQuestionByName("dp")).template;
+    template.getQuestionByName("x").name = "x2";
+    expect(template.getQuestionByName("y").visibleIf).toBe("{panel.x2} = 1 and {x2} = 2");
+    expect(creator.survey.getQuestionByName("q1").visibleIf).toBe("{x2} = 3");
+  });
+  test("a detail panel's question renamed: {row.x} in the detail panel follows", () => {
+    // a rename in a detail panel does not reach the creator's handler today (report-01); the handler itself is
+    // ready for it
+    const creator = createCreator({ dataNesting: "auto", elements: [addressPanel({ elements: [
+      { type: "matrixdynamic", name: "md", columns: [{ name: "c" }], detailPanelMode: "underRow", detailElements: [
+        { type: "text", name: "x" }, { type: "text", name: "y", visibleIf: "{row.x} = 1 and {x} = 2" }] }] }),
+    { type: "text", name: "q1", visibleIf: "{x} = 3" }] });
+    const detail = (<any>creator.survey.getQuestionByName("panel1.md")).detailPanel;
+    const x = detail.getQuestionByName("x");
+    x.name = "x2";
+    creator.updateConditionsOnNameChanged(x, "name", "x");
+    expect(detail.getQuestionByName("y").visibleIf).toBe("{row.x2} = 1 and {x} = 2");
+    expect(creator.survey.getQuestionByName("q1").visibleIf).toBe("{x} = 3");
+  });
+  test("one rule on elements in two scopes splits: inside the container {street} follows, at the root it stays", () => {
+    const json = surveyJson({}, { elements: [{ type: "dropdown", name: "kind", choices: ["a"] }, { type: "text", name: "street" }] });
+    checkRename(json, { kind: ["{street} = 1", "{road} = 1"], q1: ["{street} = 1", "{street} = 1"] },
+      creator => creator.survey.getQuestionByName("panel1.street").name = "road", true);
+    const creator = createCreator(json);
+    creator.survey.getQuestionByName("panel1.street").name = "road";
+    // the logic is built again after the split: the next rename finds the rule on kind alone
+    creator.survey.getQuestionByName("panel1.road").valueName = "rd";
+    expect(creator.survey.getQuestionByName("panel1.kind").visibleIf).toBe("{rd} = 1");
+    expect(creator.survey.getQuestionByName("q1").visibleIf).toBe("{street} = 1");
+  });
+  test("a trigger's setToName: a data path follows, a bare root name that reads no inner question stays", () => {
+    const creator = createCreator({ dataNesting: "auto", triggers: [
+      { type: "setvalue", expression: "{q1} = 1", setToName: "street", setValue: 1 },
+      { type: "copyvalue", expression: "{q1} = 2", setToName: "q1", fromName: "address.street" }],
+    elements: [addressPanel(), { type: "text", name: "q1" }] });
+    const names = (): Array<string> => creator.survey.triggers.map((t: any) => [t.setToName, t.fromName].filter(s => !!s).join(","));
+    creator.survey.getQuestionByName("panel1.street").name = "road";
+    expect(names(), "after").toEqual(["street", "q1,address.road"]);
+    creator.undo();
+    expect(names(), "undo").toEqual(["street", "q1,address.street"]);
+    creator.redo();
+    expect(names(), "redo").toEqual(["street", "q1,address.road"]);
   });
   test("an inner question's choice value renamed: {address.town} and an inner matrix's rows follow", () => {
     const creator = createCreator({ dataNesting: "auto", elements: [
@@ -306,8 +469,8 @@ describe("renames rewrite names and paths (nested data, survey-library #12233)",
     creator.survey.getQuestionByName("panel1.m").columns[0].choices[0].value = "x1";
     expect(creator.survey.getQuestionByName("q1").visibleIf, "#2").toBe("({address.town} = 'a1') and ({address.mv.r1.c1} = 'x1')");
   });
-  test("rename city (valueName town) -> place: {city} follows, {address.town} does not change", () => {
-    checkRename(surveyJson(), { q1: ["{city} = 1 and {address.town} = 2", "{place} = 1 and {address.town} = 2"] },
+  test("rename city (valueName town) -> place: no key changes, {city} (reads nothing) and {address.town} stay", () => {
+    checkRename(surveyJson(), { q1: ["{city} = 1 and {address.town} = 2", "{city} = 1 and {address.town} = 2"] },
       creator => creator.survey.getQuestionByName("panel1.city").name = "place");
   });
   test("city's valueName -> village: {city} does not change, {address.town} follows", () => {
@@ -353,13 +516,13 @@ describe("renames rewrite names and paths (nested data, survey-library #12233)",
     checkRename(surveyJson(), { street: ["{q1} = 1", "{v1} = 1"] },
       creator => creator.survey.getQuestionByName("q1").valueName = "v1");
   });
-  test("\"page\" mode: a page-level question is inner: {a} keeps its name, {page1.a} follows its valueName", () => {
+  test("\"page\" mode: a page-level question is inner: {a} and {page1.a} follow its valueName, {b} (reads nothing) stays", () => {
     const json = (): any => ({ dataNesting: "page", pages: [{ name: "page1", elements: [
       { type: "text", name: "a" }, { type: "text", name: "b", valueName: "bv" }, { type: "text", name: "q1" }] }] });
-    checkRename(json(), { q1: ["{a} = 1 and {page1.a} = 2", "{a} = 1 and {page1.av} = 2"] },
-      creator => creator.survey.getQuestionByName("page1.a").valueName = "av");
-    checkRename(json(), { q1: ["{b} = 1 and {page1.bv} = 2", "{b2} = 1 and {page1.bv} = 2"] },
-      creator => creator.survey.getQuestionByName("page1.b").name = "b2");
+    checkRename(json(), { q1: ["{a} = 1 and {page1.a} = 2", "{av} = 1 and {page1.av} = 2"] },
+      creator => creator.survey.getQuestionByName("page1.a").valueName = "av", true);
+    checkRename(json(), { q1: ["{b} = 1 and {page1.bv} = 2", "{b} = 1 and {page1.bv} = 2"] },
+      creator => creator.survey.getQuestionByName("page1.b").name = "b2", true);
   });
   test("an inner select question renamed: choicesFromQuestion follows, in \"auto\" and in \"page\" mode", () => {
     const creator = createCreator({ dataNesting: "auto", elements: [addressPanel(), { type: "dropdown", name: "q2", choicesFromQuestion: "kind" }] });
