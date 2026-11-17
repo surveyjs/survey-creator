@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 2.5.49 (2026-11-17)
+
+
+### Bug Fixes
+
+* **creator-core:** keep multiplevalues values when a dependsOn property changes ([#8166](https://github.com/surveyjs/survey-creator/issues/8166)) ([#8171](https://github.com/surveyjs/survey-creator/issues/8171)) ([c1bd940](https://github.com/surveyjs/survey-creator/commit/c1bd9402bb45baa00099c08d3891813df75ea8d7)), closes [#8157](https://github.com/surveyjs/survey-creator/issues/8157) [Bug#8157](https://github.com/surveyjs/Bug/issues/8157) [Bug#8157](https://github.com/surveyjs/Bug/issues/8157)
+
 ### 2.5.48 (2026-11-03)
 
 ### 2.5.47 (2026-10-13)
