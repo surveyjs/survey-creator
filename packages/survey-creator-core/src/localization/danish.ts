@@ -304,6 +304,8 @@ export var danishStrings = {
     themeResetConfirmationOk: "Ja, nulstil temaet",
     // [Auto-translated] "Add Question"
     addNewQuestion: "Tilføj spørgsmål",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Vælg spørgsmålstype",
     // [Auto-translated] "Select page..."
     selectPage: "Vælg side...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var danishStrings = {
     addNewTypeQuestion: "Tilføj {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Upload-logo",
     // [Auto-translated] "Item "
     choices_Item: "Vare ",
     // [Auto-translated] "Select a file"

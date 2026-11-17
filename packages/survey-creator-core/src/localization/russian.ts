@@ -304,6 +304,8 @@ export var ruStrings = {
     themeResetConfirmationOk: "Да, сбросьте тему",
     // "Add Question"
     addNewQuestion: "Добавить вопрос",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Выберите тип вопроса",
     // [Auto-translated] "Select page..."
     selectPage: "Выберите страницу...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var ruStrings = {
     addNewTypeQuestion: "Добавить {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[ЛОГОТИП]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Логотип загрузки",
     // [Auto-translated] "Item "
     choices_Item: "Пункт ",
     // [Auto-translated] "Select a file"

@@ -31,12 +31,10 @@ test.describe(title, () => {
       ]
     });
 
-    await page.waitForTimeout(300);
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await compareScreenshot(page, page.locator(".svc-test-tab__content .svc-pages-toolbar"), "test-tab-toolbar.png");
 
     await page.setViewportSize({ width: 380, height: 600 });
-    await page.waitForTimeout(300);
     await compareScreenshot(page, page.locator(".svc-footer-bar .svc-toolbar-wrapper"), "test-tab-toolbar-responsive.png");
   });
 

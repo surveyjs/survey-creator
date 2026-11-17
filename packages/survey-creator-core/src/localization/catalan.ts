@@ -304,6 +304,8 @@ export var catalanTranslation = {
     themeResetConfirmationOk: "Sí, restablece el tema",
     // "Add Question"
     addNewQuestion: "Afegir pregunta",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Selecciona el tipus de pregunta",
     // "Select page..."
     selectPage: "Seleccionar pàgina ...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var catalanTranslation = {
     addNewTypeQuestion: "Afegir {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGOTIPO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logotip de pujada",
     // [Auto-translated] "Item "
     choices_Item: "Artículo ",
     // [Auto-translated] "Select a file"

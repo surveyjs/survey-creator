@@ -304,6 +304,8 @@ export var czStrings = {
     themeResetConfirmationOk: "Ano, resetovat motiv",
     // "Add Question"
     addNewQuestion: "Přidat otázku",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Vyberte typ otázky",
     // "Select page..."
     selectPage: "Vyberte stránku...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var czStrings = {
     addNewTypeQuestion: "Přidat {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logo Upload",
     // "Item "
     choices_Item: "Položka ",
     // [Auto-translated] "Select a file"

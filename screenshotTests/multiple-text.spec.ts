@@ -28,7 +28,6 @@ test.describe(title, () => {
         }
       ]
     });
-    await page.waitForTimeout(1000);
 
     await page.click(".svc-question__content");
     await getPropertyGridCategory(page, "Items").click();

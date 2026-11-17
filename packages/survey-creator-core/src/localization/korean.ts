@@ -304,6 +304,8 @@ export var koreanStrings = {
     themeResetConfirmationOk: "예, 테마를 재설정합니다.",
     // [Auto-translated] "Add Question"
     addNewQuestion: "질문 추가",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "문제 유형 선택",
     // [Auto-translated] "Select page..."
     selectPage: "페이지 선택...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var koreanStrings = {
     addNewTypeQuestion: "{0} 추가", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[로고]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "업로드 로고",
     // [Auto-translated] "Item "
     choices_Item: "항목 ",
     // [Auto-translated] "Select a file"

@@ -304,6 +304,8 @@ export var italianTranslation = {
     themeResetConfirmationOk: "Sì, reimposta il tema",
     // "Add Question"
     addNewQuestion: "Aggiungi domanda",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Seleziona il tipo di domanda",
     // "Select page..."
     selectPage: "Seleziona la pagina...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var italianTranslation = {
     addNewTypeQuestion: "Aggiungi {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Caricamento del logo",
     // [Auto-translated] "Item "
     choices_Item: "Articolo ",
     // [Auto-translated] "Select a file"

@@ -534,14 +534,24 @@ export class SurveyCreatorModel extends Base
     this.pageEditModeValue = val;
     const allowModifyPages = this.pageEditModeValue !== "single";
     this.changePageModifications(allowModifyPages);
-    SurveySettings.designMode.showEmptyTitles = allowModifyPages;
-    SurveySettings.designMode.showEmptyDescriptions = allowModifyPages;
+    if (!!this.survey) {
+      this.applyPageEditModeToSurvey(this.survey);
+    }
     if (this.pageEditModeValue === "bypage") {
       this.showPageNavigator = true;
     }
     if (oldValue !== val) {
       this.onPropertyChanged.fire(this, { name: "pageEditMode", oldValue: oldValue, newValue: val });
     }
+  }
+  // The page edit mode belongs to one creator, so it is set on the creator's own design-mode surveys
+  // and not in survey-core's global settings.designMode (shared by every creator and survey on the page).
+  // "single" hides empty page titles and descriptions; other modes leave the survey values undefined,
+  // so survey-core follows settings.designMode and a customer's own global value is kept.
+  private applyPageEditModeToSurvey(survey: SurveyModel): void {
+    const show = this.pageEditMode === "single" ? false : undefined;
+    survey.showEmptyTitlesInDesignMode = show;
+    survey.showEmptyDescriptionsInDesignMode = show;
   }
 
   @property() surveyValue: SurveyModel;
@@ -3115,6 +3125,9 @@ export class SurveyCreatorModel extends Base
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);
     }
+    if (["designer", "modal-question-editor", "translation_source", "translation_target"].indexOf(reason) > -1) {
+      this.applyPageEditModeToSurvey(survey);
+    }
     survey["needRenderIcons"] = false;
     if (reason != "designer" && reason != "preview" && reason !== "theme" && reason !== "condition-builder") {
       survey.locale = editorLocalization.locale;
@@ -4888,7 +4901,8 @@ export class SurveyCreatorModel extends Base
       appearance: { style: "brand", mode: "tertiary", size: "small" },
       showTitle: false,
       iconSize: "auto",
-      title: this.getLocString("ed.addNewQuestion"),
+      title: this.getLocString("ed.selectQuestionType"),
+      ariaExpanded: false,
     }, {
       items: [],
       allowSelection: false,
@@ -4899,6 +4913,7 @@ export class SurveyCreatorModel extends Base
     }, this);
     newAction.popupModel.getTargetCallback = undefined;
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
+      newAction.ariaExpanded = opt.isVisible;
       if (opt.isVisible) {
         const listModel = newAction.popupModel.contentComponentData.model;
         listModel.setItems(getActions());

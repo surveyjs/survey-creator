@@ -304,6 +304,8 @@ export var portugueseTranslation = {
     themeResetConfirmationOk: "Sim, redefinir o tema",
     // "Add Question"
     addNewQuestion: "Adicionar Questão",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Selecione o tipo de pergunta",
     // "Select page..."
     selectPage: "Selecionar página...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var portugueseTranslation = {
     addNewTypeQuestion: "Adicionar {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logo de upload",
     // [Auto-translated] "Item "
     choices_Item: "Item ",
     // [Auto-translated] "Select a file"

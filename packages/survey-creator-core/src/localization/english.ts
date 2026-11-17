@@ -162,6 +162,7 @@ export var enStrings = {
     themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost.",
     themeResetConfirmationOk: "Yes, reset the theme",
     addNewQuestion: "Add Question",
+    selectQuestionType: "Select question type",
     selectPage: "Select page...",
     carryForwardChoicesCopied: "Choices are copied from",
     choicesLoadedFromWebText: "Choices are loaded from a web service.",
@@ -193,6 +194,7 @@ export var enStrings = {
     imageChooseImage: "Choose Image",
     addNewTypeQuestion: "Add {0}", // {0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
+    chooseLogoAriaLabel: "Upload logo",
     choices_Item: "Item ",
     selectFile: "Select a file",
     removeFile: "Remove the file",

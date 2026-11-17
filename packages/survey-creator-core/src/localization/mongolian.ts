@@ -304,6 +304,8 @@ export var mnStrings = {
     themeResetConfirmationOk: "Тийм ээ, сэдвийг дахин тохируулах",
     // "Add Question"
     addNewQuestion: "Асуулт нэмэх",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Асуултын төрөл сонгох",
     // "Select page..."
     selectPage: "Хуудас сонгох...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var mnStrings = {
     addNewTypeQuestion: "{0} нэмэх", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[Лого]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Upload лого",
     // "Item "
     choices_Item: "Хэсэг ",
     // [Auto-translated] "Select a file"

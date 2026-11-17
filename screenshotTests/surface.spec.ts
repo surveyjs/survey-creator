@@ -336,7 +336,6 @@ test.describe(title, () => {
     await compareScreenshot(page, pageContent, "question-content.png");
 
     await qContent.hover({ position: { x: 5, y: 5 } });
-    await page.waitForTimeout(300);
     await compareScreenshot(page, pageContent, "question-content-hover.png");
 
     await qContent.click({ position: { x: 5, y: 5 } });
@@ -381,11 +380,9 @@ test.describe(title, () => {
     const pageContent = page.locator(".svc-page__content:not(.svc-page__content--new)");
 
     await qContent.hover({ position: { x: 5, y: 5 } });
-    await page.waitForTimeout(300);
     await compareScreenshot(page, pageContent, "question-panel-content-hover.png");
 
     await panelContent.hover({ position: { x: 5, y: 5 } });
-    await page.waitForTimeout(300);
     await compareScreenshot(page, pageContent, "question-panel-inner-hover.png");
   });
 
@@ -1537,7 +1534,6 @@ test.describe(title, () => {
     await page.locator(".svc-question__adorner").nth(2).scrollIntoViewIfNeeded();
     await page.hover(".svc-creator", { position: { x: 10, y: 10 } });
     await resetFocusToBody(page);
-    await page.waitForTimeout(100);
 
     const root = page.locator(".sd-page.sd-body__page");
     await compareScreenshot(page, root.nth(0), "actions-on-converted-question.png");
@@ -1548,6 +1544,8 @@ test.describe(title, () => {
     await setShowToolbox(page, false);
     await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
     await getListItemByText(page, "Rating Scale").hover();
+    // Kept: this screenshot does not reproduce locally even without any change (10 of 10 mismatches against its own
+    // Windows baseline), so removing the pause could not be verified
     await page.waitForTimeout(400);
     await getListItemByText(page, "Labels").hover();
     await compareScreenshot(page, page.locator(".sv-popup--menu-popup").filter({ visible: true }), "question-type-rating-subtypes.png");

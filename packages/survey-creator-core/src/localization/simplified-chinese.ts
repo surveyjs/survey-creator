@@ -304,6 +304,8 @@ export var simplifiedChineseTranslation = {
     themeResetConfirmationOk: "是，重置主题",
     // "Add Question"
     addNewQuestion: "添加问题",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "选择题型",
     // [Auto-translated] "Select page..."
     selectPage: "选择页面...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var simplifiedChineseTranslation = {
     addNewTypeQuestion: "添加{0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[徽标]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "上传标志",
     // [Auto-translated] "Item "
     choices_Item: "项目",
     // [Auto-translated] "Select a file"

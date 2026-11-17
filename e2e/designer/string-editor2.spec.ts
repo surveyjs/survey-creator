@@ -474,12 +474,12 @@ test.describe(title, () => {
   test("Paste multiline selectbase", async ({ page }) => {
     await getToolboxItemByText(page, "Radio Button Group").click();
     await expect(getStringEditorByText(page, "Item 2")).not.toBeFocused();
+    // The new question starts editing its title shortly after it is added; a click on Item 2 before that loses the focus
+    await expect(getStringEditorByText(page, "question1")).toBeFocused();
 
     await getStringEditorByText(page, "Item 2").hover();
     await getStringEditorByText(page, "Item 2").click();
-    await page.waitForTimeout(500);
     await getStringEditorByText(page, "Item 2").click();
-    await page.waitForTimeout(500);
     await expect(getStringEditorByText(page, "Item 2")).toBeFocused();
 
     await page.keyboard.press("Home");

@@ -304,6 +304,8 @@ export var jaStrings = {
     themeResetConfirmationOk: "はい、テーマをリセットします",
     // "Add Question"
     addNewQuestion: "質問を追加",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "選択問題タイプ",
     // "Select page..."
     selectPage: "ページを選択...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var jaStrings = {
     addNewTypeQuestion: "{0}を追加", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[ロゴ]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "アップロードロゴ",
     // [Auto-translated] "Item "
     choices_Item: "アイテム",
     // [Auto-translated] "Select a file"

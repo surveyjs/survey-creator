@@ -304,6 +304,8 @@ export var grStrings = {
     themeResetConfirmationOk: "Ναι, επαναφορά θέματος",
     // "Add Question"
     addNewQuestion: "Προσθήκη Ερώτησης",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Επιλέξτε τύπο ερώτησης",
     // "Select page..."
     selectPage: "Επιλέξτε σελίδα...",
     // "Choices are copied from"
@@ -366,6 +368,8 @@ export var grStrings = {
     addNewTypeQuestion: "Προσθήκη {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[ΛΟΓΟΤΥΠΟ]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Μεταφόρτωση λογότυπου",
     // "Item "
     choices_Item: "Στοιχείο ",
     // "Select a file"

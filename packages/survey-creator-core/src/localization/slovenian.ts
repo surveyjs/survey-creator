@@ -304,6 +304,8 @@ export var slStrings = {
     themeResetConfirmationOk: "Da, ponastavi temo",
     // "Add Question"
     addNewQuestion: "Dodaj vprašanje",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Izberite vrsto vprašanja",
     // "Select page..."
     selectPage: "Izberite stran...",
     // "Choices are copied from"
@@ -366,6 +368,8 @@ export var slStrings = {
     addNewTypeQuestion: "Dodaj {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[LOGOTIP]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logotip Upload",
     // "Item "
     choices_Item: "Element ",
     // "Select a file"

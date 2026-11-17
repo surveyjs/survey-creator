@@ -32,7 +32,8 @@ function getBarItemByText(page: Page, text: string): Locator {
 async function listItemClick(page:Page, text: string) {
   await expect(getVisibleSelectListItemByText(page, text)).toBeVisible();
   await getVisibleSelectListItemByText(page, text).click();
-  await page.waitForTimeout(100);
+  // The dropdown closes once the item is applied
+  await expect(getVisibleSelectListItemByText(page, text)).toHaveCount(0);
 }
 
 const json = { elements: [{ type: "checkbox", name: "string_editor", choices: ["Item 1", "Item 2", "Item 3"] }] };
@@ -404,7 +405,6 @@ test.describe(title, () => {
     await logicDetailButtonElement(page).first().click();
     await logicQuestionSelector(page).first().click();
     await listItemClick(page, "q3");
-    await page.waitForTimeout(1000);
     await logicQuestionValueSelector(page).first().fill("45");
     await logicActionSelector(page).first().click();
     await listItemClick(page, "Complete survey");
@@ -417,11 +417,9 @@ test.describe(title, () => {
     await logicAddNewRuleButton(page).click();
     await logicQuestionSelector(page).first().click();
     await listItemClick(page, "q1");
-    await page.waitForTimeout(1000);
 
     await expect(logicDropdownValueSelector(page).first()).toBeVisible();
     await logicDropdownValueSelector(page).first().click();
-    await page.waitForTimeout(1000);
 
     const dropdownPopup = page.locator(".svc-logic-question-value .sv-popup__content");
     await expect(dropdownPopup).toBeVisible();
@@ -432,7 +430,6 @@ test.describe(title, () => {
     await listItemClick(page, "Show/hide question");
     await logicQuestionSelector(page).nth(1).click();
     await listItemClick(page, "q3");
-    await page.waitForTimeout(1000);
     await check2Rule(page);
 
     await tableRulesSelector(page).nth(1).hover();

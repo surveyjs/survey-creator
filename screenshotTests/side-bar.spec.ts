@@ -30,7 +30,6 @@ test.describe(title, () => {
     await getListItemByText(page, "educationalNeeds").click();
     await page.locator(".svc-string-editor__input").filter({ hasText: "Patient Name" }).click();
     await objectSelectorButton(page).click();
-    await page.waitForTimeout(1000);
 
     await hideContentBehindPopup(page);
     await compareScreenshot(page, objectSelectorContent, "side-bar-object-selector-with-selected-item.png");

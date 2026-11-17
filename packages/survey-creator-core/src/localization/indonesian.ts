@@ -304,6 +304,8 @@ export var indonesianStrings = {
     themeResetConfirmationOk: "Ya, atur ulang tema",
     // "Add Question"
     addNewQuestion: "Tambah pertanyaan",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Pilih jenis pertanyaan",
     // [Auto-translated] "Select page..."
     selectPage: "Pilih halaman...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var indonesianStrings = {
     addNewTypeQuestion: "Tambahkan {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Unggah logo",
     // [Auto-translated] "Item "
     choices_Item: "Benda ",
     // [Auto-translated] "Select a file"

@@ -49,8 +49,6 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, creatorTabPreviewName).click();
     await page.locator(".sd-navigation__complete-btn").click();
 
-    await page.waitForTimeout(1000);
-
     const thankYouMessage = page.locator(".sd-completedpage");
     await compareScreenshot(page, thankYouMessage, "complete-tab-thank-message.png");
 

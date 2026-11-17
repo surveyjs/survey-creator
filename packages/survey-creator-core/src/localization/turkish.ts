@@ -304,6 +304,8 @@ export var turkishStrings = {
     themeResetConfirmationOk: "Evet, temayı sıfırlayın",
     // "Add Question"
     addNewQuestion: "Soru Ekle",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Soru türünü seç",
     // [Auto-translated] "Select page..."
     selectPage: "Sayfa seç...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var turkishStrings = {
     addNewTypeQuestion: "{0} ekle", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Yükleme logosu",
     // [Auto-translated] "Item "
     choices_Item: "Madde ",
     // [Auto-translated] "Select a file"
