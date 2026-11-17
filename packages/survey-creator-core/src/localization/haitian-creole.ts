@@ -304,6 +304,8 @@ export var htStrings = {
     themeResetConfirmationOk: "Wi, reset tèm nan",
     // "Add Question"
     addNewQuestion: "Ajoute Kesyon",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Chwazi kalite kesyon",
     // "Select page..."
     selectPage: "Chwazi paj...",
     // "Choices are copied from"
@@ -366,6 +368,8 @@ export var htStrings = {
     addNewTypeQuestion: "Ajoute {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Voye logo",
     // "Item "
     choices_Item: "Atik",
     // "Select a file"

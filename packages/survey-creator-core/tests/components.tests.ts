@@ -1473,6 +1473,12 @@ test("LogoImageViewModel isUploading", () => {
   expect(logoImageAdorner.acceptedTypes).toBe(imageMimeTypes);
 });
 
+test("LogoImageViewModel chooseLogoAriaLabel", () => {
+  const creator = new CreatorTester();
+  const logoImageAdorner = new LogoImageViewModel(creator, null);
+  expect(logoImageAdorner.chooseLogoAriaLabel).toBe("Upload logo");
+});
+
 test("QuestionRatingAdornerViewModel allowAdd allowRemove on property readonly", () => {
   const creator = new CreatorTester();
   creator.maxRateValues = 4;

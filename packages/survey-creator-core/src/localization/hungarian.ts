@@ -304,6 +304,8 @@ export var huStrings = {
     themeResetConfirmationOk: "Igen, állítsa vissza a témát",
     // "Add Question"
     addNewQuestion: "Kérdés felvétele",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Válaszd ki a kérdéstípust",
     // [Auto-translated] "Select page..."
     selectPage: "Válasszon oldalt...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var huStrings = {
     addNewTypeQuestion: "{0} hozzáadása", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGÓ]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Feltöltési logó",
     // [Auto-translated] "Item "
     choices_Item: "Cikk ",
     // [Auto-translated] "Select a file"

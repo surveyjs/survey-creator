@@ -304,6 +304,8 @@ export var hrStrings = {
     themeResetConfirmationOk: "Da, resetirajte temu",
     // "Add Question"
     addNewQuestion: "Dodaj pitanje",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Odaberite vrstu pitanja",
     // "Select page..."
     selectPage: "Odaberite stranicu...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var hrStrings = {
     addNewTypeQuestion: "Dodaj {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Upload logo",
     // [Auto-translated] "Item "
     choices_Item: "Stavka ",
     // [Auto-translated] "Select a file"

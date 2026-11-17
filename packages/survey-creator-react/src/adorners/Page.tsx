@@ -93,6 +93,8 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
         id={this.props.page.renderedId}
         data-sv-drop-target-survey-page={this.model.dropTargetName}
         className={"svc-page__content " + this.model.css}
+        role={this.model.ariaRole}
+        aria-label={this.model.ariaLabel}
         onClick={(e) => {
           return this.model.select(this.model, new ReactMouseEvent(e));
         }}
@@ -106,7 +108,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
         {this.renderPlaceholder()}
         {this.renderHeader()}
         {this.renderFooter()}
-      </div>)
+      </div>, undefined, { disableTabStop: true })
     );
   }
   protected renderPlaceholder(): React.JSX.Element {

@@ -304,6 +304,8 @@ export var arStrings = {
     themeResetConfirmationOk: "نعم ، إعادة تعيين السمة",
     // [Auto-translated] "Add Question"
     addNewQuestion: "إضافة سؤال",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "اختر نوع السؤال",
     // [Auto-translated] "Select page..."
     selectPage: "اختر صفحة...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var arStrings = {
     addNewTypeQuestion: "أضف {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[الشعار]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "رفع الشعار",
     // [Auto-translated] "Item "
     choices_Item: "بند ",
     // [Auto-translated] "Select a file"

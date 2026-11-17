@@ -304,6 +304,8 @@ export var nlStrings = {
     themeResetConfirmationOk: "Ja, reset het thema",
     // "Add Question"
     addNewQuestion: "Vraag toevoegen",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Selecteer vraagtype",
     // "Select page..."
     selectPage: "Selecteer pagina...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var nlStrings = {
     addNewTypeQuestion: "Voeg {0} toe", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Uploadlogo",
     // [Auto-translated] "Item "
     choices_Item: "Item ",
     // [Auto-translated] "Select a file"

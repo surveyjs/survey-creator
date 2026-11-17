@@ -85,11 +85,9 @@ test.describe(title, () => {
 
     await selectTextAreaContent(page, ".svc-json-editor-tab__content-area", 5, 8, 5, 8);
     await page.keyboard.type("a");
-    await page.waitForTimeout(1100);
     await expect(page.locator(".svc-json-editor-tab__errros_list")).toBeVisible();
 
     await page.keyboard.press("Backspace");
-    await page.waitForTimeout(1100);
     await expect(page.locator(".svc-json-editor-tab__errros_list")).not.toBeVisible();
   });
 
@@ -100,7 +98,6 @@ test.describe(title, () => {
     await selectTextAreaContent(page, ".svc-json-editor-tab__content-area");
     await selectTextAreaContent(page, ".svc-json-editor-tab__content-area", 5, 8, 5, 8);
     await page.keyboard.type("a");
-    await page.waitForTimeout(1100);
     await expect(page.locator(".svc-json-editor-tab__errros_list")).toBeVisible();
 
     await selectTextAreaContent(page, ".svc-json-editor-tab__content-area", 2, 2, 2, 2);
@@ -108,7 +105,6 @@ test.describe(title, () => {
     // the blocking error whose position Delete is meant to fix
     await page.locator(".svc-json-errors__item:not(.svc-json-errors__item--warning) .sv-string-viewer").first().click();
     await page.keyboard.press("Delete");
-    await page.waitForTimeout(1100);
     await expect(page.locator(".svc-json-editor-tab__errros_list")).not.toBeVisible();
   });
 
@@ -123,7 +119,6 @@ test.describe(title, () => {
     await setJSON(page, json);
     await getTabbedMenuItemByText(page, creatorTabJsonEditorName).click();
     await page.locator(".svc-json-editor-tab__content-area").fill(JSON.stringify({ elements: elements }, null, 2));
-    await page.waitForTimeout(1100);
     await expect(page.locator(".svc-json-editor-tab__errros_list")).toBeVisible();
 
     const contentArea = ".svc-json-editor-tab__content-area";
@@ -221,11 +216,9 @@ test.describe(title, () => {
     await selectTextAreaContent(page, ".svc-json-editor-tab__content-area");
     await selectTextAreaContent(page, ".svc-json-editor-tab__content-area", 12, 21, 12, 22);
     await page.keyboard.type("1");
-    await page.waitForTimeout(1100);
     await expect(page.locator(".svc-json-editor-tab__errros_list")).toBeVisible();
 
     await page.locator(".svc-json-error__fix-button").click();
-    await page.waitForTimeout(1100);
     await expect(page.locator(".svc-json-editor-tab__errros_list")).not.toBeVisible();
   });
 });

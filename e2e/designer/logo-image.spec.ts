@@ -60,4 +60,22 @@ test.describe(title, () => {
     await page.locator(".svc-logo-image").click();
     await expect(page.locator(logoImage)).toBeVisible();
   });
+
+  test("Logo placeholder is a named button that opens the file dialog from the keyboard", async ({ page }) => {
+    await setJSON(page, { title: "Contact Form", description: "Enter your details below", pages: [{ name: "page1" }] });
+    const placeholder = page.getByRole("button", { name: "Upload logo" });
+    await expect(placeholder).toHaveClass(/svc-logo-image-placeholder/);
+
+    await page.locator(".svc-tab-designer .sd-description .sv-string-editor").first().focus();
+    await page.keyboard.press("Tab");
+    await expect(placeholder).toBeFocused();
+
+    let fileChooser = page.waitForEvent("filechooser");
+    await page.keyboard.press("Enter");
+    await fileChooser;
+
+    fileChooser = page.waitForEvent("filechooser");
+    await page.keyboard.press("Space");
+    await fileChooser;
+  });
 });

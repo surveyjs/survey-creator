@@ -1425,55 +1425,39 @@ test("creator showToolbox support", () => {
   expect(creator.toolboxLocation).toEqual("right");
 });
 test("init creator with pageEditModeValue=single", (): any => {
-  try {
-    let creator = new CreatorTester({ pageEditMode: "single" });
-    expect(creator.showJSONEditorTab).toBeFalsy();
-    creator = new CreatorTester({ pageEditModeValue: "single", showJSONEditorTab: true });
-    expect(creator.showJSONEditorTab).toBeTruthy();
-    creator = new CreatorTester({ pageEditMode: "single" });
-    creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] };
-    expect(surveySettings.designMode.showEmptyTitles).toBeFalsy();
-    expect(surveySettings.designMode.showEmptyDescriptions).toBeFalsy();
-    expect(creator.JSON.pages).toBeUndefined();
-    expect(creator.JSON.elements).toBeDefined();
-    expect(creator.text.indexOf("pages")).toBe(-1);
+  let creator = new CreatorTester({ pageEditMode: "single" });
+  expect(creator.showJSONEditorTab).toBeFalsy();
+  creator = new CreatorTester({ pageEditModeValue: "single", showJSONEditorTab: true });
+  expect(creator.showJSONEditorTab).toBeTruthy();
+  creator = new CreatorTester({ pageEditMode: "single" });
+  creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] };
+  expect(creator.survey.pages[0].hasTitle).toBeFalsy();
+  expect(creator.survey.pages[0]["_showDescription"]).toBeFalsy();
+  expect(creator.JSON.pages).toBeUndefined();
+  expect(creator.JSON.elements).toBeDefined();
+  expect(creator.text.indexOf("pages")).toBe(-1);
 
-    var objects = new ObjectSelector(creator, creator.survey);
-    const allQuestions = creator.survey.getAllQuestions();
-    expect(objects.items).toHaveLength(1 + allQuestions.length); // survey + questions
-    expect(objects.items[0].title).toEqual("Survey");
-    expect(objects.items[0].data).toEqual(creator.survey);
-    expect(objects.items[1].title).toEqual(allQuestions[0].name);
-    expect(objects.items[1].data).toEqual(allQuestions[0]);
-
-  } finally {
-    surveySettings.designMode.showEmptyTitles = true;
-    surveySettings.designMode.showEmptyDescriptions = true;
-  }
+  var objects = new ObjectSelector(creator, creator.survey);
+  const allQuestions = creator.survey.getAllQuestions();
+  expect(objects.items).toHaveLength(1 + allQuestions.length); // survey + questions
+  expect(objects.items[0].title).toEqual("Survey");
+  expect(objects.items[0].data).toEqual(creator.survey);
+  expect(objects.items[1].title).toEqual(allQuestions[0].name);
+  expect(objects.items[1].data).toEqual(allQuestions[0]);
 });
 test("get survey JSON with pageEditModeValue=single #2711", (): any => {
-  try {
-    let creator = new CreatorTester({ pageEditMode: "single" });
-    creator.text = "";
-    expect(creator.JSON).toStrictEqual({});
-  } finally {
-    surveySettings.designMode.showEmptyTitles = true;
-    surveySettings.designMode.showEmptyDescriptions = true;
-  }
+  let creator = new CreatorTester({ pageEditMode: "single" });
+  creator.text = "";
+  expect(creator.JSON).toStrictEqual({});
 });
 test("delete last question and selection with pageEditModeValue=single #2712", (): any => {
-  try {
-    let creator = new CreatorTester({ pageEditMode: "single" });
-    creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] };
-    const question = creator.survey.getAllQuestions()[0];
-    creator.selectElement(question);
-    expect(creator.selectedElement).toBe(question);
-    creator.deleteElement(question);
-    expect(creator.selectedElement).toBe(creator.survey);
-  } finally {
-    surveySettings.designMode.showEmptyTitles = true;
-    surveySettings.designMode.showEmptyDescriptions = true;
-  }
+  let creator = new CreatorTester({ pageEditMode: "single" });
+  creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] };
+  const question = creator.survey.getAllQuestions()[0];
+  creator.selectElement(question);
+  expect(creator.selectedElement).toBe(question);
+  creator.deleteElement(question);
+  expect(creator.selectedElement).toBe(creator.survey);
 });
 
 test("SurveyElementAdornerBase setSurveyElement updateActionsProperties", (): any => {

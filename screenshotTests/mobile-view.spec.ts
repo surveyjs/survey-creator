@@ -30,7 +30,6 @@ test.describe(title, () => {
         }
       ]
     });
-    await page.waitForTimeout(1000);
     await compareScreenshot(page, ".svc-creator", "creator-mobile-paddings.png");
     await page.locator(".svc-page__content").first().click({ position: { x: 5, y: 5 } });
     await compareScreenshot(page, ".svc-creator", "creator-mobile-page-selected-paddings.png");
@@ -59,7 +58,6 @@ test.describe(title, () => {
         }
       ]
     });
-    await page.waitForTimeout(1000);
     await compareScreenshot(page, ".svc-creator", "creator-smartphone.png");
     await page.locator(".svc-page__content").first().click({ position: { x: 5, y: 5 } });
     await compareScreenshot(page, ".svc-creator", "creator-smartphone-selected.png");
@@ -94,7 +92,6 @@ test.describe(title, () => {
     });
 
     await page.setViewportSize({ width: 375, height: 900 });
-    await page.waitForTimeout(1000);
     await compareScreenshot(page, ".svc-creator", "creator-smartphone-page-drag.png");
     await page.locator(".svc-page__content").first().click({ position: { x: 5, y: 5 } });
     await compareScreenshot(page, ".svc-creator", "creator-smartphone-selected-page-drag.png");

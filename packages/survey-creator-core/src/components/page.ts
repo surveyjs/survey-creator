@@ -1,4 +1,4 @@
-import { ActionContainer, classesToSelector, ComputedUpdater, toCssClasses, DragOrClickHelper, IAction, PageModel, property, QuestionRowModel, SurveyModel, settings as SurveySettings } from "survey-core";
+import { ActionContainer, classesToSelector, ComputedUpdater, toCssClasses, DragOrClickHelper, IAction, PageModel, property, QuestionRowModel, SurveyModel } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementActionContainer } from "./action-container-view-model";
@@ -52,6 +52,18 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   @property({ defaultValue: false }) isVisibleInViewPort: boolean;
+  @property() private ariaLabelValue: string;
+  // The container is not a tab stop: the group role and a short name give screen readers the page context
+  // when focus moves to an element inside. The ghost page is not a page yet, so it gets neither.
+  public get ariaRole(): string {
+    return this.isGhost ? undefined : "group";
+  }
+  public get ariaLabel(): string {
+    return this.isGhost ? undefined : this.ariaLabelValue;
+  }
+  private updateAriaLabel(): void {
+    this.ariaLabelValue = !!this.page ? SurveyHelper.getObjectName(this.page, true) : undefined;
+  }
   @property({
     defaultValue: !settings.pageContentLazyRendering,
     // Not onSet: it runs after the subscribers are notified, and the content would render without rows.
@@ -123,6 +135,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       surveyElement.registerFunctionOnPropertiesValueChanged(["visibleRows"], (newValue: Array<QuestionRowModel>) => {
         this.updateShowPlaceholder(newValue);
       }, "updatePlaceholder");
+      surveyElement.registerFunctionOnPropertiesValueChanged(["title", "name"], () => {
+        this.updateAriaLabel();
+      }, "ariaLabel");
+      this.updateAriaLabel();
       // visibleRows of a page without rows stays empty and does not fire
       surveyElement.registerFunctionOnPropertiesValueChanged(["elements"], () => {
         if (!surveyElement.wasRendered) {
@@ -165,6 +181,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["elements"], "updatePlaceholder");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["title", "description"], "add_ghost");
       surveyElement.unRegisterFunctionOnPropertiesValueChanged(["visibleRows"], "updatePlaceholder");
+      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["title", "name"], "ariaLabel");
       surveyElement["surveyChangedCallback"] = undefined;
     }
     super.detachElement(surveyElement);
@@ -389,7 +406,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       (this.allowExpandCollapse || !!this.page["isGhost"]) && this.expandCollapseAnimationRunning && "svc-page__content--animation-running",
       !!this.isGhost && "svc-page__content--new",
       !this.isGhost && !!this.isSelected && "svc-page__content--selected",
-      !this.isGhost && SurveySettings.designMode.showEmptyTitles === false && "svc-page__content--no-header"
+      !this.isGhost && this.page.survey?.showEmptyTitlesInDesignMode === false && "svc-page__content--no-header"
     );
 
     if (isInsideCollapsed) {

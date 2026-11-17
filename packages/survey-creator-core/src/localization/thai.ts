@@ -304,6 +304,8 @@ export const thStrings = {
     themeResetConfirmationOk: "ใช่ รีเซ็ตธีม",
     // "Add Question"
     addNewQuestion: "เพิ่มคำถาม",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "เลือกประเภทคําถาม",
     // "Select page..."
     selectPage: "เลือกหน้า...",
     // "Choices are copied from"
@@ -366,6 +368,8 @@ export const thStrings = {
     addNewTypeQuestion: "เพิ่ม {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[โลโก้]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "อัปโหลดโลโก้",
     // "Item "
     choices_Item: "รายการ ",
     // "Select a file"

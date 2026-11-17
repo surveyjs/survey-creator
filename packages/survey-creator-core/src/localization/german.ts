@@ -304,6 +304,8 @@ export var germanTranslation = {
     themeResetConfirmationOk: "Ja, Design zurücksetzen.",
     // "Add Question"
     addNewQuestion: "Frage hinzufügen",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Fragetyp auswählen",
     // "Select page..."
     selectPage: "Seite auswählen ...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var germanTranslation = {
     addNewTypeQuestion: "{0} hinzufügen", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Upload-Logo",
     // [Auto-translated] "Item "
     choices_Item: "Artikel ",
     // [Auto-translated] "Select a file"

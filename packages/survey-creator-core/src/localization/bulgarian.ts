@@ -304,6 +304,8 @@ export var bgStrings = {
     themeResetConfirmationOk: "Да, нулирайте темата",
     // "Add Question"
     addNewQuestion: "Добавяне на въпрос",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Изберете тип въпрос",
     // "Select page..."
     selectPage: "Избиране на страница...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var bgStrings = {
     addNewTypeQuestion: "Добави {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[ЛОГО]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Логото за качване",
     // "Item "
     choices_Item: "Елемент ",
     // [Auto-translated] "Select a file"

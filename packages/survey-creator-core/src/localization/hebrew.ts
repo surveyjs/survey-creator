@@ -304,6 +304,8 @@ export var hebrewStrings = {
     themeResetConfirmationOk: "כן, אפס את ערכת הנושא",
     // "Add Question"
     addNewQuestion: "הוסף שאלה",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "בחר סוג שאלה",
     // "Select page..."
     selectPage: "בחר דף...",
     // "Choices are copied from"
@@ -366,6 +368,8 @@ export var hebrewStrings = {
     addNewTypeQuestion: "הוסף {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[לוגו]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "לוגו העלאה",
     // "Item "
     choices_Item: "פריט ",
     // [Auto-translated] "Select a file"

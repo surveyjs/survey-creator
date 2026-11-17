@@ -1,4 +1,4 @@
-import { url, test, compareScreenshot } from "./helper";
+import { url, test, expect, compareScreenshot } from "./helper";
 
 const title = "Expression assistant Screenshot";
 
@@ -27,7 +27,11 @@ test.describe(title, () => {
     await page.getByTitle("Conditions").click();
     await page.getByRole("button", { name: "Write with AI" }).first().click();
     const dialog = page.locator(".sv-popup.svc-expression-assistant");
-    await dialog.getByRole("textbox", { name: "Describe what the expression should do" }).fill("show when q1 is maybe");
+    const description = dialog.getByRole("textbox", { name: "Describe what the expression should do" });
+    // The dialog focuses its first input, the description, 100 ms after it shows. Wait for that before clicking
+    // Generate, or the focus lands on the description after the review renders and shows in the screenshot.
+    await expect(description).toBeFocused();
+    await description.fill("show when q1 is maybe");
     await dialog.getByRole("button", { name: "Generate" }).click();
     await dialog.locator(".svc-expression-assistant__findings").waitFor();
     await compareScreenshot(page, dialog.locator(".sv-popup__container"), "expression-assistant-review-warning.png");

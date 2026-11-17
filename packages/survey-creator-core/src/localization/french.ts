@@ -304,6 +304,8 @@ export var frenchTranslation = {
     themeResetConfirmationOk: "Oui, réinitialisez le thème",
     // "Add Question"
     addNewQuestion: "Ajouter Question",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Sélectionnez le type de question",
     // [Auto-translated] "Select page..."
     selectPage: "Sélectionner une page...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +368,8 @@ export var frenchTranslation = {
     addNewTypeQuestion: "Ajouter {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logo de téléchargement",
     // [Auto-translated] "Item "
     choices_Item: "Article ",
     // [Auto-translated] "Select a file"
