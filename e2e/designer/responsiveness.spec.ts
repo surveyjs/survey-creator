@@ -63,7 +63,7 @@ test.describe(title, () => {
         { elements: [{ type: "text", name: "question2" }] }
       ]
     });
-    const toolboxItemCount = 22;
+    const toolboxItemCount = 23;
     const collapseButtonSelector = page.locator(".sd-action[title=\"Hide Panel\"]");
     const toolbox = page.locator(".svc-toolbox");
     const toolboxItemIcons = page.locator(".svc-toolbox__tool .svc-toolbox__item-container").filter({ visible: true });
