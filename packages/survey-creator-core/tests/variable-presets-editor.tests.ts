@@ -679,11 +679,17 @@ describe("Variable presets editor: nested values (nested data, survey-library #1
     };
   }
   const answers: { [name: string]: any } = { tier: "gold", name: "Ann", role: "admin" };
+  // A question by its name wherever its data scope puts it. In a nesting mode a bare name finds only the survey's
+  // own elements and an inner one needs its path of names (survey-library #12233), which differs per mode here;
+  // these tests check the data shape, not the lookup.
+  function findQuestion(survey: SurveyModel, name: string): any {
+    return survey.getAllQuestions().filter(q => q.name === name)[0] || null;
+  }
   // The rule C8 states: for the same answers, the form saves exactly the data that the definition's
   // own survey holds.
   function getDefinitionData(definition: any): any {
     const survey = new SurveyModel(definition);
-    Object.keys(answers).forEach(name => { survey.getQuestionByName(name).value = answers[name]; });
+    Object.keys(answers).forEach(name => { findQuestion(survey, name).value = answers[name]; });
     const res = survey.data;
     survey.dispose();
     return res;
@@ -692,7 +698,7 @@ describe("Variable presets editor: nested values (nested data, survey-library #1
     const creator = new CreatorTester({ variablePresets: { definition: definition, presets: [] } });
     const editor = createEditor(creator);
     getListQuestion(editor).addRow();
-    Object.keys(answers).forEach(name => { editor.editSurvey.getQuestionByName(name).value = answers[name]; });
+    Object.keys(answers).forEach(name => { findQuestion(editor.editSurvey, name).value = answers[name]; });
     expect(editor.backToList()).toBeTruthy();
     const res = editor.presets[0].variables;
     editor.dispose();
@@ -706,7 +712,7 @@ describe("Variable presets editor: nested values (nested data, survey-library #1
   }
   function getFormValues(editor: VariablePresetsEditor): any {
     const res: any = {};
-    Object.keys(answers).forEach(name => { res[name] = editor.editSurvey.getQuestionByName(name).value; });
+    Object.keys(answers).forEach(name => { res[name] = findQuestion(editor.editSurvey, name).value; });
     return res;
   }
 
@@ -723,9 +729,9 @@ describe("Variable presets editor: nested values (nested data, survey-library #1
     const creator = new CreatorTester({ variablePresets: { definition: nestedDefinition, presets: [] } });
     const editor = createEditor(creator);
     getListQuestion(editor).addRow();
-    editor.editSurvey.getQuestionByName("name").value = "Ann";
+    findQuestion(editor.editSurvey, "name").value = "Ann";
     expect(editor.backToList()).toBeFalsy();
-    const tier = editor.editSurvey.getQuestionByName("tier");
+    const tier = findQuestion(editor.editSurvey, "tier");
     expect(tier.errors).toHaveLength(1);
     expect(tier.errors[0].getText()).toBe(new SurveyModel().getLocalizationString("requiredError"));
     editor.dispose();
@@ -805,10 +811,10 @@ describe("Variable presets editor: nested values (nested data, survey-library #1
   // Answers the inner questions, the ones inside a dynamic panel's panel and a detail panel included,
   // and returns the survey's data.
   function answerRecords(survey: SurveyModel): any {
-    survey.getQuestionByName("a").value = "x";
-    const list: any = survey.getQuestionByName("list");
+    findQuestion(survey, "a").value = "x";
+    const list: any = findQuestion(survey, "list");
     list.panels[0].getQuestionByName("b").value = "y";
-    const matrix: any = survey.getQuestionByName("m");
+    const matrix: any = findQuestion(survey, "m");
     const row = matrix.visibleRows[0];
     row.showDetailPanel();
     row.detailPanel.getQuestionByName("e").value = "z";
@@ -842,14 +848,14 @@ describe("Variable presets editor: nested values (nested data, survey-library #1
     expect(editor.backToList()).toBeTruthy();
     expect(editor.presets[0].variables).toStrictEqual(expected);
     editor.editPreset(0);
-    expect(editor.editSurvey.getQuestionByName("a").value).toBe("x");
-    expect((<any>editor.editSurvey.getQuestionByName("list")).panels[0].getQuestionByName("b").value).toBe("y");
+    expect(findQuestion(editor.editSurvey, "a").value).toBe("x");
+    expect((<any>findQuestion(editor.editSurvey, "list")).panels[0].getQuestionByName("b").value).toBe("y");
     editor.dispose();
   });
   test("Keys in another spelling open the definition's questions and save in its spelling", () => {
     const editor = openPreset(nestedDefinition, { Users: { Tier: "gold", Nope: 1 }, ROLE: "user" });
-    expect(editor.editSurvey.getQuestionByName("tier").value).toBe("gold");
-    expect(editor.editSurvey.getQuestionByName("role").value).toBe("user");
+    expect(findQuestion(editor.editSurvey, "tier").value).toBe("gold");
+    expect(findQuestion(editor.editSurvey, "role").value).toBe("user");
     expect(editor.backToList()).toBeTruthy();
     // an inner key the definition does not know is kept as written, like a root one
     expect(editor.presets[0].variables).toStrictEqual({ users: { tier: "gold", Nope: 1 }, role: "user" });
@@ -875,10 +881,10 @@ describe("Variable presets editor: nested values (nested data, survey-library #1
   test("A literal dotted key is no path: it stays an unknown key, as the companion reads it", () => {
     const variables = { "users.tier": "gold", role: "admin" };
     const editor = openPreset(nestedDefinition, { ...variables });
-    expect(editor.editSurvey.getQuestionByName("tier").value).toBeUndefined();
+    expect(findQuestion(editor.editSurvey, "tier").value).toBeUndefined();
     expect(editor.editSurvey.getValue("tier")).toBeUndefined();
     expect(editor.backToList()).toBeFalsy();
-    editor.editSurvey.getQuestionByName("tier").value = "silver";
+    findQuestion(editor.editSurvey, "tier").value = "silver";
     expect(editor.backToList()).toBeTruthy();
     expect(editor.presets[0].variables).toStrictEqual({ "users.tier": "gold", users: { tier: "silver" }, role: "admin" });
     editor.dispose();
@@ -911,7 +917,7 @@ describe("Variable presets editor: nested values (nested data, survey-library #1
       ] }
     ] };
     const answer = (survey: SurveyModel): any => {
-      const row = (<any>survey.getQuestionByName("m")).visibleRows[0];
+      const row = (<any>findQuestion(survey, "m")).visibleRows[0];
       row.showDetailPanel();
       const items = row.detailPanel.getQuestionByName("items");
       if (items.panels.length === 0) items.addPanel();

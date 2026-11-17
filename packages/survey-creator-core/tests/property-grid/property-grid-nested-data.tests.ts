@@ -186,7 +186,8 @@ describe("property grid: panel and page valueName, survey dataNesting (nested da
     expect(editor.renderedPlaceholder).toBe("page1");
     page.name = "step1";
     expect(editor.renderedPlaceholder, "renamed").toBe("step1");
-    creator.selectElement(creator.survey.getPanelByName("panel1"));
+    // the page holds data, so panel1 is found by its path of names, after the rename (survey-library #12233)
+    creator.selectElement(creator.survey.getPanelByName("step1.panel1"));
     const panelEditor = <QuestionTextModel>creator.propertyGrid.getQuestionByName("valueName");
     expect(panelEditor.renderedPlaceholder, "a panel does not nest in \"page\" mode").toBeFalsy();
   });
@@ -205,7 +206,7 @@ describe("property grid: panel and page valueName, survey dataNesting (nested da
   test("after another selection, the live editor follows dataNesting and the old one lets go of its container", () => {
     const creator = new CreatorTester();
     creator.JSON = panelJson({ dataNesting: "panelAndPage" });
-    const panel = creator.survey.getPanelByName("panel1");
+    const panel = creator.survey.getPanelByName("page1.panel1");
     creator.selectElement(panel);
     const oldEditor = <QuestionTextModel>creator.propertyGrid.getQuestionByName("valueName");
     creator.selectElement(creator.survey.pages[0]);

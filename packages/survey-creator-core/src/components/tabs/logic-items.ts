@@ -497,21 +497,25 @@ export class SurveyLogicItem {
     }
     return (this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName)) && this.isSuitableByLogicTypeInActions(logicTypeName);
   }
+  // Nested data (survey-library #12233): in a nesting mode a name is unique only inside its scope, and a bare
+  // name read at the root finds no inner question. A name that only inner questions have is matched by what the
+  // rule's variables resolve to ({address.street}, or {street} inside the container), not by the text: a root
+  // rule's {street} reads no inner street. Any other name keeps the text match.
   private isSuitableInExpression(filteredName: string): boolean {
-    if (this.expression.indexOf(wrapTextByCurlyBraces(filteredName)) !== -1 || this.expression.indexOf("'" + filteredName + ".") !== -1) return true;
-    return this.isInnerQuestionInExpression(filteredName);
+    const innerQuestions = this.getInnerQuestionsByName(filteredName);
+    const isInnerOnly = innerQuestions.length > 0 && !this.survey.getQuestionByName(filteredName);
+    if (!isInnerOnly && (this.expression.indexOf(wrapTextByCurlyBraces(filteredName)) !== -1 || this.expression.indexOf("'" + filteredName + ".") !== -1)) return true;
+    return this.isInnerQuestionInExpression(innerQuestions);
   }
-  private isInnerQuestionInExpression(questionName: string): boolean {
-    if (!this.expression || !this.survey) return false;
-    const question = this.survey.getQuestionByName(questionName);
-    if (!question || !isInnerQuestion(question)) return false;
+  private getInnerQuestionsByName(name: string): Array<Question> {
+    if (!this.expression || !this.survey) return [];
+    return <Array<Question>>this.survey.getAllQuestions().filter(q => q.name === name && isInnerQuestion(q));
+  }
+  private isInnerQuestionInExpression(questions: Array<Question>): boolean {
+    if (questions.length === 0) return false;
     const names: Array<string> = [];
     this.getQuestionNamesFromExpression(names);
-    return names.some(name => {
-      // a name of a question is the name form, which the check above has already looked for
-      if (!!this.survey.getQuestionByName(name)) return false;
-      return this.getQuestionByVariableName(name) === question;
-    });
+    return names.some(name => questions.indexOf(this.getQuestionByVariableName(name)) > -1);
   }
   // The question a variable of this rule names (getQuestionByVariableName): an inner one by its name or by a
   // data path ({address.street}) resolved in the data scopes of the rule's elements, a top-level one by its

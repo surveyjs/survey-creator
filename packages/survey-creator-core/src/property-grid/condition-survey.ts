@@ -124,7 +124,7 @@ export function buildConditionQuestionList(survey: SurveyModel, object: Base, pr
     //text cannot be derived from the question. Both the name and the title path are built already
     if (!options.useElementTitles) {
       text = res[i].name;
-      // an inner question's entry already starts with its name (renameInnerQuestionEntries)
+      // an inner question's entry already starts with its data path (renameInnerQuestionEntries)
       let valueName = isInnerQuestion(question) ? "" : question.valueName;
       if (!!valueName && text.indexOf(valueName) == 0) {
         text = text.replace(valueName, question.name);
@@ -145,10 +145,9 @@ export function buildConditionQuestionList(survey: SurveyModel, object: Base, pr
 }
 // Nested data: survey-core lists a question by its value name, which for an inner question is a key of its
 // container's object, not of the survey data, so {town} is not found at the root (survey-library #12233).
-// The editor inserts the variable survey-core names it by instead (getConditionQuestionKey): its name
-// ({city}), which resolves at the root and inside the container, and survives a change of the container's
-// key or of dataNesting; or its data path when a top-level value name takes the name. Sub-entries
-// ("mv.r1") follow.
+// The editor inserts the variable survey-core names it by instead (getConditionQuestionKey): its data path
+// ({address.town}), which resolves at the root and inside the container; a bare name read at the root finds no
+// inner question. Sub-entries ("address.mv.r1") follow.
 function renameInnerQuestionEntries(res: Array<any>, start: number, question: Question): void {
   const valueName = question.getValueName();
   const key = getConditionQuestionKey(question);
@@ -205,7 +204,7 @@ function mergeSelectBasedQuestions(res: Array<any>): void {
   for (let i = 0; i < res.length; i++) {
     if (res[i].context) continue;
     const q: Question = res[i].question;
-    // inner questions are listed by their unique names and keep their own entries (renameInnerQuestionEntries)
+    // inner questions are listed by their data paths and keep their own entries (renameInnerQuestionEntries)
     if (isInnerQuestion(q)) continue;
     if (q.isDescendantOf("selectbase")) {
       const valueName = q.getFilteredName();
@@ -767,9 +766,10 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       questionName.choices = this.getQuestionNameChoices(questionName.value);
     }
   }
-  // Nested data: a row read from a data path ({address.street}) keeps the path as its value, so the selector
-  // gets it as one more choice, with the text of the listed entry ("street"); else the value would not be
-  // among the choices, the selector would show nothing and the row would not validate.
+  // Nested data: a row read from a relative variable ({street} inside its container, {address.street} inside
+  // page1) keeps it as its value, so the selector gets it as one more choice, with the text of the listed entry
+  // ("address.street"); else the value would not be among the choices, the selector would show nothing and the
+  // row would not validate.
   private getQuestionNameChoices(questionName: string): Array<any> {
     const res: Array<any> = this.getConditionQuestions();
     if (!questionName || res.some(item => item.value === questionName)) return res;
@@ -903,9 +903,10 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
     return question;
   }
-  // Nested data: an expression may name an inner question by a data path ({address.street},
-  // {page1.address.street}) or, inside its container, by its value name. The row keeps the text as written;
-  // its question and value editor are the ones of the listed entry ("street").
+  // Nested data: an expression may name an inner question by its data path from the root
+  // ({page1.address.street}) or by a path relative to an enclosing container ({address.street} inside page1,
+  // {street} inside address). The row keeps the text as written; its question and value editor are the ones of
+  // the listed entry ("page1.address.street").
   private getConditionEntryName(name: string): string {
     if (!name || !!this.addConditionQuestionsHash[name] || !!this.addConditionQuestionsHash[removeUnwrapPostfix(name)]) return name;
     const info = findInnerQuestion(this.survey, removeUnwrapPostfix(name), getConditionContextObject(this.object));

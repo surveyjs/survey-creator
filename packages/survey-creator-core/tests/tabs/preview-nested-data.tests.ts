@@ -16,10 +16,12 @@ const addressPanel = {
     { type: "text", name: "city", title: "City" }
   ]
 };
-function answerAndComplete(survey: SurveyModel): void {
-  survey.getQuestionByName("street").value = "Main St";
-  survey.getQuestionByName("city").value = "Oslo";
-  survey.getQuestionByName("q1").value = "yes";
+// In a nesting mode a bare name finds only the survey's own elements: an inner question is found by its path of
+// names (survey-library #12233). pagePath is the page's part of it, when the page holds data.
+function answerAndComplete(survey: SurveyModel, pagePath: string = ""): void {
+  survey.getQuestionByName(pagePath + "address.street").value = "Main St";
+  survey.getQuestionByName(pagePath + "address.city").value = "Oslo";
+  survey.getQuestionByName(pagePath + "q1").value = "yes";
   survey.doComplete();
 }
 function getRows(results: SurveyResultsModel): Array<any> {
@@ -53,7 +55,7 @@ describe("Preview results, moving elements and the JSON tab (nested data, survey
       { type: "text", name: "q1", title: "Question 1" }
     ] }] };
     const survey = getPreviewSurvey(creator);
-    answerAndComplete(survey);
+    answerAndComplete(survey, "page1.");
     const results = new SurveyResultsModel(survey);
     expect(results.resultText).toBe(JSON.stringify({ page1: { address: { street: "Main St", city: "Oslo" }, q1: "yes" } }, null, 4));
     expect(getRows(results)).toStrictEqual(expectedRows);
@@ -67,10 +69,11 @@ describe("Preview results, moving elements and the JSON tab (nested data, survey
     const q1 = creator.survey.getQuestionByName("q1");
     creator.survey.getPanelByName("address").addElement(q1);
     let survey = getPreviewSurvey(creator);
-    survey.getQuestionByName("q1").value = "moved";
+    expect(survey.getQuestionByName("q1"), "q1 is in the panel's name scope now").toBeNull();
+    survey.getQuestionByName("address.q1").value = "moved";
     expect(survey.data).toStrictEqual({ address: { q1: "moved" } });
     creator.activeTab = "designer";
-    creator.survey.pages[0].addElement(creator.survey.getQuestionByName("q1"));
+    creator.survey.pages[0].addElement(creator.survey.getQuestionByName("address.q1"));
     expect(creator.JSON.pages[0].elements.map((el: any) => el.name)).toStrictEqual(["address", "q1"]);
     survey = getPreviewSurvey(creator);
     survey.getQuestionByName("q1").value = "back";
@@ -93,7 +96,8 @@ describe("Preview results, moving elements and the JSON tab (nested data, survey
     expect(creator.survey.title).toBe("Edited");
     expect(creator.survey.dataNesting).toBe("panel");
     expect(creator.survey.pages[0].valueName).toBe("p");
-    expect(creator.survey.getPanelByName("address").valueName).toBe("addr");
+    // the page holds data under "p": the panel is in its name scope
+    expect(creator.survey.getPanelByName("page1.address").valueName).toBe("addr");
     const saved = creator.JSON;
     expect(saved.dataNesting).toBe("panel");
     expect(saved.pages[0].valueName).toBe("p");
