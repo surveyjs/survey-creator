@@ -219,23 +219,29 @@ test.describe(title, () => {
     await expect(panelSelector).toBeFocused();
   });
 
-  test("Checks the editor focused state when opening grid properties by keyboard navigation on small screens.", async ({ page }) => {
-    await page.setViewportSize({ width: 1000, height: 1000 });
+  test.describe(() => {
+    // Load the page at this size instead of resizing it. After a resize to this width, the tab bar measures its space
+    // before the property grid collapses into a flyout, so for a frame it moves Logic, JSON Editor and Translations
+    // into its "..." menu, and a Tab pressed then focuses that menu.
+    test.use({ viewport: { width: 1000, height: 1000 } });
 
-    await page.keyboard.press("Tab");
-    await expect(page.getByRole("tab", { name: "Designer" })).toBeFocused();
-    await page.keyboard.press("Tab");
-    await expect(page.getByRole("tab", { name: "Preview" })).toBeFocused();
-    await page.keyboard.press("Tab");
-    await expect(page.getByRole("tab", { name: "Logic" })).toBeFocused();
-    await page.keyboard.press("Tab");
-    await expect(page.getByRole("tab", { name: "JSON Editor" })).toBeFocused();
-    await page.keyboard.press("Tab");
-    await expect(page.getByRole("tab", { name: "Translations" })).toBeFocused();
-    await page.keyboard.press("Tab");
-    await expect(page.getByRole("button", { name: "Survey settings" })).toBeFocused();
-    await page.keyboard.press("Enter");
-    await expect(page.getByRole("textbox", { name: "Survey title" })).toBeFocused();
+    test("Checks the editor focused state when opening grid properties by keyboard navigation on small screens.", async ({ page }) => {
+      await expect(page.getByRole("tab", { name: "Translations" })).toBeVisible();
+      await page.keyboard.press("Tab");
+      await expect(page.getByRole("tab", { name: "Designer" })).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(page.getByRole("tab", { name: "Preview" })).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(page.getByRole("tab", { name: "Logic" })).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(page.getByRole("tab", { name: "JSON Editor" })).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(page.getByRole("tab", { name: "Translations" })).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(page.getByRole("button", { name: "Survey settings" })).toBeFocused();
+      await page.keyboard.press("Enter");
+      await expect(page.getByRole("textbox", { name: "Survey title" })).toBeFocused();
+    });
   });
 
   test("Check page navigator is visually hidden", async ({ page }) => {
