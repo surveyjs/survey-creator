@@ -69,6 +69,8 @@ export var czStrings = {
     expression: "Výraz (pouze pro čtení)",
     // "Signature"
     signaturepad: "Podpisová podložka",
+    // [Auto-translated] "Filter"
+    filter: "Filtr",
     // "Button Group"
     buttongroup: "Skupina tlačítek"
   },
@@ -819,6 +821,38 @@ export var czStrings = {
       // [Auto-translated] "Expression"
       expression: "Výraz"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Zdroj dat",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Zobrazit filtrační čipy",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Zobrazit tlačítko Filtry",
+      // [Auto-translated] "Show search"
+      showSearch: "Zobrazit vyhledávání",
+      // [Auto-translated] "Search in"
+      searchFields: "Hledat v",
+      // [Auto-translated] "Presets"
+      items: "Přednastavení",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Výchozí přednastavení",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Povolit více přednastavení",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Umožnit respondentům přidávat předvolby"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Název přednastavení",
+      // [Auto-translated] "Preset title"
+      title: "Přednastavený název",
+      // [Auto-translated] "Filter expression"
+      expression: "Výraz filtru",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Povolit úpravy",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Povolit mazání"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Seřadit podle",
@@ -880,7 +914,9 @@ export var czStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Každá možnost v samostatném sloupci",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Povolit třídění podle tohoto sloupce"
+      allowSort: "Povolit třídění podle tohoto sloupce",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Povolit filtrování podle tohoto sloupce"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1072,6 +1108,8 @@ export var czStrings = {
     "listIsEmpty@pages": "Žádné stránky",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Žádné úrovně třídění",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Žádné přednastavení",
     // "Add new choice"
     "addNew@choices": "Přidat volbu",
     // [Auto-translated] "Add rating value"
@@ -1098,6 +1136,8 @@ export var czStrings = {
     "addNew@pages": "Přidat stránku",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Přidat úroveň třídění",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Přidat přednastavení",
     // "Value"
     value: "Hodnota",
     // [Auto-translated] "Text"
@@ -1212,6 +1252,10 @@ export var czStrings = {
     pageSize: "Řádky na stránku",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Umožnit uživatelům třídit řádky",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Povolit filtrování podle této otázky",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Filtrační operátory",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximální úrovně třídění",
     // [Auto-translated] "Default sort order"
@@ -1768,6 +1812,10 @@ export var czStrings = {
       rateValues: "Hodnoty sazeb",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Nastavení posuvníku",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Nastavení filtru",
+      // [Auto-translated] "Presets"
+      presets: "Přednastavení",
       // "Choices from a Web Service"
       choicesByUrl: "Volby z webu",
       // "Numbering"
@@ -3038,6 +3086,18 @@ export var czStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Nastaví umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Vyberte dynamickou matici, rozbalovací matici nebo dynamický panel, jehož řádky nebo panely filtr zužuje.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Přednastavení aplikované při spuštění průzkumu."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Používejte názvy polí v složených závorkách, například: {price} < 20 a {category} kterýkoli z ['Nápoje']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Omezuje operátory, které mohou respondenti použít k filtrování podle tohoto pole. Nechte prázdné, aby byly povoleny všechny operátory, které odpovídají poli.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID sloupce, které není viditelné pro respondenty.",
