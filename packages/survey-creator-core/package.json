@@ -35,6 +35,8 @@
     "test:core": "vitest run --project core",
     "test:core:watch": "vitest --project core",
     "test:translate": "survey-utils check-strings creator --path ../..",
+    "perf": "node ../../perf/core/run.ts",
+    "perf:test": "vitest run --config vitest.perf.config.ts",
     "watch:dev": "rollup -c rollup.config.mjs -w",
     "watch:prod": "rollup -c rollup.config.mjs -w --environment emitMinified",
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\"",
