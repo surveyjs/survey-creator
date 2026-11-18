@@ -671,11 +671,14 @@ export class StringEditorViewModelBase extends Base {
     }
     return false;
   }
-  private onRichTextKeyDown = (event: KeyboardEvent): void => {
-    if (event.keyCode !== 13 || event.shiftKey || event.ctrlKey || event.metaKey) return;
-    if (this.shouldDelegateEnterToRichText(event)) return;
-    event.stopImmediatePropagation();
-    this.commitFromEnter(event);
+  // Angular types `(keydown.capture)` as Event: `.capture` is not a DOM event name.
+  public onKeyDownCapture = (event: Event): void => {
+    const keyEvent = event as KeyboardEvent;
+    if (this.richTextEditMode !== "block") return;
+    if (keyEvent.keyCode !== 13 || keyEvent.shiftKey || keyEvent.ctrlKey || keyEvent.metaKey) return;
+    if (this.shouldDelegateEnterToRichText(keyEvent)) return;
+    keyEvent.stopImmediatePropagation();
+    this.commitFromEnter(keyEvent);
   };
   private attachRichTextEditor(element: HTMLElement): void {
     this.detachRichTextEditor();
@@ -684,13 +687,13 @@ export class StringEditorViewModelBase extends Base {
     this.richTextHandle = handle;
     this.richTextToolbar = handle.toolbar;
     if (this.richTextEditMode === "block") {
-      element.addEventListener("keydown", this.onRichTextKeyDown, true);
+      element.addEventListener("keydown", this.onKeyDownCapture, true);
     }
   }
   private detachRichTextEditor(): void {
     this.disarmRichTextFocusOut();
     const element = this.getEditorElement?.();
-    if (element) element.removeEventListener("keydown", this.onRichTextKeyDown, true);
+    if (element) element.removeEventListener("keydown", this.onKeyDownCapture, true);
     if (this.richTextHandle) this.richTextHandle.detach();
     this.richTextHandle = undefined;
     this.richTextToolbar = undefined;
