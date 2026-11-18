@@ -69,6 +69,8 @@ export var grStrings = {
     expression: "Έκφραση (μόνο για ανάγνωση)",
     // "Signature"
     signaturepad: "Υπογραφή",
+    // [Auto-translated] "Filter"
+    filter: "Φίλτρο",
     // "Button Group"
     buttongroup: "Ομάδα Κουμπιών"
   },
@@ -819,6 +821,38 @@ export var grStrings = {
       // "Expression"
       expression: "Έκφραση"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Πηγή δεδομένων",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Εμφάνιση τσιπ φίλτρου",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Εμφάνιση του κουμπιού Φίλτρα",
+      // [Auto-translated] "Show search"
+      showSearch: "Εμφάνιση αναζήτησης",
+      // [Auto-translated] "Search in"
+      searchFields: "Αναζήτηση σε",
+      // [Auto-translated] "Presets"
+      items: "Προεπιλογές",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Προεπιλεγμένη προεπιλογή",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Επιτρέψτε πολλαπλές προεπιλογές",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Επιτρέψτε στους συμμετέχοντες να προσθέτουν προεπιλογές"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Όνομα προεπιλογής",
+      // [Auto-translated] "Preset title"
+      title: "Τίτλος προεπιλογής",
+      // [Auto-translated] "Filter expression"
+      expression: "Έκφραση φίλτρου",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Επιτρέψτε την επεξεργασία",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Επιτρέψτε τη διαγραφή"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Ταξινόμηση ανά",
@@ -880,7 +914,9 @@ export var grStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Κάθε επιλογή σε ξεχωριστή στήλη",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Να επιτρέπεται η ταξινόμηση κατά αυτήν τη στήλη"
+      allowSort: "Να επιτρέπεται η ταξινόμηση κατά αυτήν τη στήλη",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Επιτρέπεται το φιλτράρισμα με βάση αυτή τη στήλη"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1072,6 +1108,8 @@ export var grStrings = {
     "listIsEmpty@pages": "Δεν έχετε προσθέσει σελίδες",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Χωρίς επίπεδα ταξινόμησης",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Χωρίς προεπιλογές",
     // "Add new choice"
     "addNew@choices": "Προσθήκη νέας επιλογής",
     // [Auto-translated] "Add rating value"
@@ -1098,6 +1136,8 @@ export var grStrings = {
     "addNew@pages": "Προσθήκη νέας σελίδας",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Προσθήκη επιπέδου ταξινόμησης",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Προσθήκη προεπιλογής",
     // "Value"
     value: "Τιμή",
     // "Text"
@@ -1212,6 +1252,10 @@ export var grStrings = {
     pageSize: "Σειρές ανά σελίδα",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Να επιτρέπεται στους χρήστες η ταξινόμηση γραμμών",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Να επιτρέπεται το φιλτράρισμα με βάση αυτή την ερώτηση",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Τελεστές φίλτρων",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Μέγιστα επίπεδα ταξινόμησης",
     // [Auto-translated] "Default sort order"
@@ -1768,6 +1812,10 @@ export var grStrings = {
       rateValues: "Τιμές Αξιολόγησης",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Ρυθμίσεις ρυθμιστικού",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Ρυθμίσεις Φίλτρου",
+      // [Auto-translated] "Presets"
+      presets: "Προεπιλογές",
       // "Choices from a Web Service"
       choicesByUrl: "Επιλογές από Web Service",
       // "Numbering"
@@ -3038,6 +3086,18 @@ export var grStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Ορίζει την τοποθεσία της γραμμής προόδου. Η τιμή \"Αυτόματα\" εμφανίζει τη γραμμή προόδου πάνω ή κάτω από την κεφαλίδα της έρευνας."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Επιλέξτε έναν δυναμικό πίνακα, έναν πίνακα αναδυόμενου μενού ή ένα δυναμικό πάνελ του οποίου τις γραμμές ή πάνελ περιορίζει το φίλτρο.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Η προεπιλογή που εφαρμόζεται όταν ξεκινά η έρευνα."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Χρησιμοποιήστε ονόματα πεδίων σε αγκύλες, για παράδειγμα: {price} < 20 και {category} οποιοδήποτε από τα ['Drinks']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Περιορίζει τους τελεστές που μπορούν να χρησιμοποιήσουν οι ερωτώμενοι για να φιλτράρουν με βάση αυτό το πεδίο. Αφήστε κενό για να επιτρέψετε σε όλους τους τελεστές που ταιριάζουν στο πεδίο.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Ένα ID στήλης που δεν είναι ορατό στους συμμετέχοντες.",

@@ -69,6 +69,8 @@ export var nlStrings = {
     expression: "Berekening",
     // "Signature"
     signaturepad: "Handtekening",
+    // [Auto-translated] "Filter"
+    filter: "Filter",
     // [Auto-translated] "Button Group"
     buttongroup: "Knoppengroep"
   },
@@ -819,6 +821,38 @@ export var nlStrings = {
       // [Auto-translated] "Expression"
       expression: "Uitdrukking"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Gegevensbron",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Filterchips weergeven",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "De knop Filters weergeven",
+      // [Auto-translated] "Show search"
+      showSearch: "Zoek weergeven",
+      // [Auto-translated] "Search in"
+      searchFields: "Zoeken in",
+      // [Auto-translated] "Presets"
+      items: "Presets",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Standaardpreset",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Meerdere presets toestaan",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Sta respondenten toe om presets toe te voegen"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Vooraf ingestelde naam",
+      // [Auto-translated] "Preset title"
+      title: "Vooraf ingestelde titel",
+      // [Auto-translated] "Filter expression"
+      expression: "Filterexpressie",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Staat bewerken toe",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Verwijderen toestaan"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Sorteer op",
@@ -880,7 +914,9 @@ export var nlStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Elke optie in een aparte kolom",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Sta sortering toe op deze kolom"
+      allowSort: "Sta sortering toe op deze kolom",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Filteren op deze kolom toestaan"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1072,6 +1108,8 @@ export var nlStrings = {
     "listIsEmpty@pages": "Geen pagina's",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Geen sort-levels",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Geen presets",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Voeg keuze toe",
     // [Auto-translated] "Add rating value"
@@ -1098,6 +1136,8 @@ export var nlStrings = {
     "addNew@pages": "Pagina toevoegen",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Voeg sorteerniveau toe",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Preset toevoegen",
     // "Value"
     value: "Waarde",
     // "Text"
@@ -1212,6 +1252,10 @@ export var nlStrings = {
     pageSize: "Rijen per pagina",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Laat gebruikers rijen sorteren",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Filter op deze vraag toestaan",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Filteroperatoren",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximale sorteerniveaus",
     // [Auto-translated] "Default sort order"
@@ -1768,6 +1812,10 @@ export var nlStrings = {
       rateValues: "Beoordeel waarden",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Instellingen voor schuifregelaars",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Filterinstellingen",
+      // [Auto-translated] "Presets"
+      presets: "Presets",
       // "Choices from a Web Service"
       choicesByUrl: "Keuzes van internet",
       // "Numbering"
@@ -3038,6 +3086,18 @@ export var nlStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Hiermee stelt u de locatie van de voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Selecteer een dynamische matrix, een dropdown-matrix of een dynamisch paneel waarvan de rijen of panelen door het filter wordt verkleind.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "De preset die wordt toegepast wanneer de enquête begint."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Gebruik veldnamen tussen krullende haakjes, bijvoorbeeld: {price} < 20 en {category} elk van ['Beverages']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Beperkt de operatoren die respondenten kunnen gebruiken om op dit veld te filteren. Laat leeg om alle operatoren toe te laten die bij het veld passen.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Een kolom-id die niet zichtbaar is voor respondenten.",
