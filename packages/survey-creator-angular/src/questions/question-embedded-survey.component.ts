@@ -13,8 +13,8 @@ export class EmbeddedSurveyQuestionComponent extends QuestionAngular<QuestionEmb
   public get survey() {
     return this.model.embeddedSurvey;
   }
-  public override ngAfterViewInit(): void {
-    super.ngAfterViewInit();
+  protected override afterViewInit(): void {
+    super.afterViewInit();
     this.survey.rootElement = this.container.nativeElement;
   }
   protected override onModelChanged(): void {

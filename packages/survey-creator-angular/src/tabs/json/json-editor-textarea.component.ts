@@ -18,7 +18,7 @@ export class TextareaJsonEditorComponent extends BaseAngular<TextareaJsonEditorM
     this.model.canShowErrors = false;
     super.ngOnInit();
   }
-  public ngAfterViewInit() {
+  protected override afterViewInit(): void {
     this.model.textElement = this.inputEl.nativeElement;
   }
 }

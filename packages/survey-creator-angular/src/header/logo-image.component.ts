@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { CreatorModelComponent } from "../creator-model.component";
 import { SurveyModel } from "survey-core";
 import { SurveyCreatorModel, LogoImageViewModel } from "survey-creator-core";
@@ -10,7 +10,7 @@ import { AngularComponentFactory, SurveyBaseProviders } from "survey-angular-ui"
   styles: [":host { display: none; }"],
   providers: SurveyBaseProviders
 })
-export class CreatorLogoImageComponent extends CreatorModelComponent<LogoImageViewModel> implements AfterViewInit {
+export class CreatorLogoImageComponent extends CreatorModelComponent<LogoImageViewModel> {
   @Input() data!: SurveyCreatorModel;
   @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>;
   public model!: LogoImageViewModel;
@@ -40,7 +40,7 @@ export class CreatorLogoImageComponent extends CreatorModelComponent<LogoImageVi
     super.ngOnDestroy();
     this.survey.locLogo.onStringChanged.remove(this.onChangeHandler);
   }
-  ngAfterViewInit(): void {
+  protected override afterViewInit(): void {
     this.model.root = this.container.nativeElement;
   }
 }

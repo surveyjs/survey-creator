@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { TabbedMenuContainer, TabbedMenuItem } from "survey-creator-core";
 
@@ -8,7 +8,7 @@ import { TabbedMenuContainer, TabbedMenuItem } from "survey-creator-core";
   styles: [":host { display: none; }"],
   providers: SurveyBaseProviders
 })
-export class TabbledMenuComponent extends BaseAngular<TabbedMenuContainer> implements AfterViewInit {
+export class TabbledMenuComponent extends BaseAngular<TabbedMenuContainer> {
   @Input() model!: TabbedMenuContainer;
   @ViewChild("container") container!: ElementRef<HTMLDivElement>;
   protected getModel(): TabbedMenuContainer {
@@ -19,7 +19,7 @@ export class TabbledMenuComponent extends BaseAngular<TabbedMenuContainer> imple
       this.model.initResponsivityManager(this.container.nativeElement);
     }
   }
-  ngAfterViewInit(): void {
+  protected override afterViewInit(): void {
     this.initResponsivityManager();
   }
   protected override afterUpdate(isSync?: boolean): void {

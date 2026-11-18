@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, NgZone, SimpleChanges, ViewChild, ViewContainerRef } from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, Input, NgZone, SimpleChanges, ViewChild, ViewContainerRef } from "@angular/core";
 import { LocalizableString, CharacterCounter } from "survey-core";
 import { StringEditorViewModelBase, SurveyCreatorModel, editableStringRendererName } from "survey-creator-core";
 import { CreatorModelComponent, compareComponentData } from "./creator-model.component";
@@ -12,7 +12,7 @@ import { Optional } from "@angular/core";
   styles: [":host { display: none; }"],
   providers: SurveyBaseProviders
 })
-export class StringEditorComponent extends CreatorModelComponent<StringEditorViewModelBase> implements AfterViewInit {
+export class StringEditorComponent extends CreatorModelComponent<StringEditorViewModelBase> {
   public baseModel!: StringEditorViewModelBase;
   private justFocused: boolean = false;
   @Input() model!: any;
@@ -96,7 +96,7 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
     super.ngOnInit();
     this.locString?.onStringChanged.add(this.onChangeHandler);
   }
-  ngAfterViewInit(): void {
+  protected override afterViewInit(): void {
     if ((<any>this.locString).__isEditing) {
       this.container.nativeElement.focus();
     }

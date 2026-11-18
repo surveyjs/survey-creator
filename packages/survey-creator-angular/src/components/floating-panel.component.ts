@@ -18,7 +18,7 @@ export class FloatingPanelComponent extends BaseAngular {
     return this.model;
   }
 
-  ngAfterViewInit(): void {
+  protected override afterViewInit(): void {
     if (!!this.root?.nativeElement) {
       this.model.setComponentElement(this.root.nativeElement);
     }

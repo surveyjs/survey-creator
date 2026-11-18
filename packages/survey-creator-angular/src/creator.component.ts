@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, SurveyContentComponent, SurveyBaseProviders } from "survey-angular-ui";
 import { SurveyCreatorModel, TabbedMenuItem, cssVariablesToString } from "survey-creator-core";
 
@@ -7,7 +7,7 @@ import { SurveyCreatorModel, TabbedMenuItem, cssVariablesToString } from "survey
   templateUrl: "./creator.component.html",
   providers: SurveyBaseProviders
 })
-export class CreatorComponent extends BaseAngular<SurveyCreatorModel> implements AfterViewInit {
+export class CreatorComponent extends BaseAngular<SurveyCreatorModel> {
   @Input() model!: SurveyCreatorModel;
   @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>;
 
@@ -37,7 +37,7 @@ export class CreatorComponent extends BaseAngular<SurveyCreatorModel> implements
       this.creator.setRootElement(this.container.nativeElement);
     }
   }
-  public ngAfterViewInit(): void {
+  protected override afterViewInit(): void {
     this.creator.setRootElement(this.container.nativeElement);
     super.ngOnInit();
   }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { CreatorModelComponent } from "../creator-model.component";
 import { SurveyCreatorModel, ToolboxToolViewModel, QuestionToolboxItem } from "survey-creator-core";
 import { Action, ActionContainer } from "survey-core";
@@ -10,7 +10,7 @@ import { SurveyBaseProviders } from "survey-angular-ui";
   styles: [":host { display: none; }"],
   providers: SurveyBaseProviders
 })
-export class ToolboxToolComponent extends CreatorModelComponent<Action> implements AfterViewInit {
+export class ToolboxToolComponent extends CreatorModelComponent<Action> {
   @Input() creator!: SurveyCreatorModel;
   @Input() item!: Action;
   @Input() parentModel!: ActionContainer;
@@ -34,7 +34,7 @@ export class ToolboxToolComponent extends CreatorModelComponent<Action> implemen
     this.model.dispose();
     this.item.updateModeCallback = undefined as any;
   }
-  ngAfterViewInit(): void {
+  protected override afterViewInit(): void {
     if (this.item) {
       this.item.updateModeCallback = (mode, callback) => {
         this.item.mode = mode;

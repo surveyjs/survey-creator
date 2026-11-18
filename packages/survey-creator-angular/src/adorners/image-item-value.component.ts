@@ -57,7 +57,7 @@ export class ImageItemValueDesignerComponent extends CreatorModelComponent<Image
     const needStyle = !this.adorner.getIsNewItemSingle();
     return { width: needStyle ? this.question.renderedImageWidth + "px" : undefined, height: needStyle ? this.question.renderedImageHeight + "px" : undefined };
   }
-  public ngAfterViewInit() {
+  protected override afterViewInit(): void {
     this.adorner.itemsRoot = this.container.nativeElement;
   }
   preventDragHandler(e: Event) {
