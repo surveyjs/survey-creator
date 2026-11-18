@@ -80,7 +80,7 @@ test.describe(title, () => {
     await showContentBehindPopup(page);
   });
 
-  test("Check run expression description", async ({ page }) => {
+  test("Check run expression description", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
 
     await page.evaluate(() => {

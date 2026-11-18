@@ -154,7 +154,7 @@ test.describe(title, () => {
     await compareScreenshot(page, ".svc-side-bar", "side-bar-tabbed-property-grid-translation-general.png");
   });
 
-  test("check mobile popup in new side bar", async ({ page }) => {
+  test("check mobile popup in new side bar", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 500, height: 800 });
     await page.evaluate(() => {
       window["Survey"]._setIsTouch(true);

@@ -1,5 +1,4 @@
-import { test, expect } from "@playwright/test";
-import { url, compareScreenshot, setJSON, getTabbedMenuItemByText, creatorTabPreviewName, getListItemByText, resetHoverToCreator, getBarItemByTitle, explicitErrorHandler, getButtonByText, getVisibleSelectListItemByText, hideContentBehindPopup, showContentBehindPopup } from "./helper";
+import { test, expect, url, compareScreenshot, setJSON, getTabbedMenuItemByText, creatorTabPreviewName, getListItemByText, resetHoverToCreator, getBarItemByTitle, explicitErrorHandler, getButtonByText, getVisibleSelectListItemByText, hideContentBehindPopup, showContentBehindPopup } from "./helper";
 
 const title = "Test tab Screenshot";
 
@@ -155,7 +154,7 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".svd-simulator-content"), "test-tab-survey-width.png");
   });
 
-  test("Check survey timer", async ({ page }) => {
+  test("Check survey timer", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     const json = {
       showQuestionNumbers: true,

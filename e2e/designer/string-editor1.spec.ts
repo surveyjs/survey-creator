@@ -65,7 +65,7 @@ test.describe(title, () => {
     await expect(page.locator(".sv-string-editor").getByText(questionTitle)).toBeVisible();
   });
 
-  test("Check string editor visibility", async ({ page }) => {
+  test("Check string editor visibility", { tag: "@fresh-page" }, async ({ page }) => {
     await setJSON(page, json);
 
     await expect(page.locator(".sd-question__description .svc-string-editor")).not.toBeVisible();
@@ -82,7 +82,7 @@ test.describe(title, () => {
     await expect(page.locator(".sd-question__description .svc-string-editor")).toBeVisible();
   });
 
-  test("Check string editor visibility on defferent ReadOnly cases", async ({ page }) => {
+  test("Check string editor visibility on defferent ReadOnly cases", { tag: "@fresh-page" }, async ({ page }) => {
     const json_t = { elements: [{ type: "checkbox", name: "q1", choices: ["Item 1", "Item 2"] }, { type: "radiogroup", name: "q2", choices: ["Item 3", "Item 4"] }] };
     await setJSON(page, json_t);
 
@@ -132,7 +132,7 @@ test.describe(title, () => {
     expect(await item("q2", "Item 4").getAttribute("contenteditable")).toEqual("false");
   });
 
-  test("Check creator events on string editor", async ({ page }) => {
+  test("Check creator events on string editor", { tag: "@fresh-page" }, async ({ page }) => {
     const msg = "Description length can not be greater than 10 characters";
     await page.evaluate(({ jsonArg, msgArg }) => {
       (window as any).creator.JSON = jsonArg;
@@ -156,7 +156,7 @@ test.describe(title, () => {
     expect(hasSelection).toBe(true);
   });
 
-  test("Check string editor on isRequired", async ({ page }) => {
+  test("Check string editor on isRequired", { tag: "@fresh-page" }, async ({ page }) => {
     const msg = "Please enter a value";
     await page.evaluate(({ jsonArg }) => {
       (window as any).Survey.Serializer.findProperty("question", "description").isRequired = true;

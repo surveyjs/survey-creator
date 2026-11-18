@@ -144,7 +144,7 @@ test.describe(title, () => {
     expect(await getVisibleToolboxToolsCount(page)).toEqual(11);
   });
 
-  test("Categories allowExpandMultipleCategories property", async ({ page }) => {
+  test("Categories allowExpandMultipleCategories property", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1900, height: 600 });
 
     await setupCategories(page);
@@ -423,7 +423,7 @@ test.describe(title, () => {
     expect(resultJson).toEqual(expectedJson);
   });
 
-  test("toolbox subTypes: add items by click", async ({ page }) => {
+  test("toolbox subTypes: add items by click", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1900, height: 600 });
 
     await explicitErrorHandler(page);

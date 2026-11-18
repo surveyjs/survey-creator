@@ -237,7 +237,7 @@ test.describe(title, () => {
     await compareScreenshot(page, toolboxElement, "toolbox-categories.png", { maxDiffPixels: 10 });
   });
 
-  test("Toolbox with subtypes (ltr)", async ({ page }) => {
+  test("Toolbox with subtypes (ltr)", { tag: "@fresh-page" }, async ({ page }) => {
     const toolboxElement = page.locator(".svc-toolbox");
     const subtypesPopup = page.locator(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filter({ has: page.locator(":visible") });
 
@@ -255,7 +255,7 @@ test.describe(title, () => {
     await showContentBehindPopup(page);
   });
 
-  test("Toolbox with custom subtypes set dynamically (ltr)", async ({ page }) => {
+  test("Toolbox with custom subtypes set dynamically (ltr)", { tag: "@fresh-page" }, async ({ page }) => {
     const toolboxElement = page.locator(".svc-toolbox");
     const subtypesPopup = page.locator(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filter({ has: page.locator(":visible") });
 
@@ -282,7 +282,7 @@ test.describe(title, () => {
 
   // test.skip("Toolbox with subtypes (wrap)", ...) // Skipped as in original
 
-  test("Toolbox with subtypes (rtl)", async ({ page }) => {
+  test("Toolbox with subtypes (rtl)", { tag: "@fresh-page" }, async ({ page }) => {
     await setDirRTL(page);
 
     const toolboxElement = page.locator(".svc-toolbox");
