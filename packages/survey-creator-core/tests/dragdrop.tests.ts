@@ -989,7 +989,7 @@ test("Drag Drop Question with Multiline (StartWithNewLine === false)", () => {
   expect(page.rows[0].elements[2].name).toBe("q3"); // "r1 q3 check");
 });
 
-test("onModified is raised when frop from toolbox", (): any => {
+test("onModified is raised when drop from toolbox", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     "pages": [
