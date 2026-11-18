@@ -63,7 +63,7 @@
           :remainingCharacterCounter="getCharacterCounterClass"
         ></SvComponent>
       </span>
-      <div v-if="toolbar" class="svc-string-editor__toolbar" role="toolbar">
+      <div v-if="toolbar" class="svc-string-editor__toolbar" :class="{ 'svc-string-editor__toolbar--open': toolbarOpen }" role="toolbar">
         <SvComponent :is="'sv-action-bar'" :model="toolbar"></SvComponent>
       </div>
     </span>
@@ -128,6 +128,7 @@ const placeholder = computed(() => baseModel.value?.placeholder);
 const contentEditable = computed(() => baseModel.value?.contentEditable);
 const editorTag = computed(() => baseModel.value?.richTextEditMode === "block" ? "div" : "span");
 const toolbar = computed(() => baseModel.value?.richTextToolbar);
+const toolbarOpen = computed(() => baseModel.value?.richTextToolbarOpen);
 const characterCounter = computed(() => baseModel.value?.characterCounter);
 const showCharacterCounter = computed(
   () => baseModel.value?.showCharacterCounter

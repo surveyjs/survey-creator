@@ -43,6 +43,7 @@ import { SurveyHelper } from "../survey-helper";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { parsePropertyDescription } from "./description-parser";
 import { assignCreatorStringConverter } from "../components/creator-string-converter";
+import { richTextModeForProperty } from "../rich-text-editor";
 import { QuestionFileEditorModel } from "../custom-questions/question-file";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
 import { QuestionLinkValueModel } from "../components/link-value";
@@ -1844,19 +1845,12 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
 function applyRichTextPropertyEditor(json: any, obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
   const creator = options as any;
   if (!creator || typeof creator.isRichStringsEnabled !== "function" || !creator.isRichStringsEnabled() || !creator.richTextEditor) return;
-  const loc = typeof obj.getLocalizableString === "function" ? obj.getLocalizableString(prop.name) : undefined;
-  if (!loc) return;
-  const mode = creator.richTextEditor.getStringEditMode(obj, prop.name, loc);
+  const mode = richTextModeForProperty(obj, prop.name);
   if (mode === "none") return;
-  const editMode = !loc || loc.allowLineBreaks ? "block" : mode;
-  json.type = "comment";
-  json.allowRichText = true;
-  json.richTextEditMode = editMode;
-  json.richTextToolbarVisibility = "onFocus";
-  if (prop.name === "title") json.richTextDisableBold = true;
-  if (editMode === "inline") {
+  json.type = "richtext";
+  json.acceptCarriageReturn = mode === "block";
+  if (mode === "inline") {
     json.rows = 1;
-    json.acceptCarriageReturn = false;
     json.allowResize = false;
   }
 }
@@ -1880,7 +1874,6 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
     if (!!prop.dataList) {
       json.dataList = prop.dataList;
     }
-    applyRichTextPropertyEditor(json, obj, prop, options);
     return json;
   }
   public validateValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
@@ -2052,7 +2045,6 @@ export class PropertyGridEditorText extends PropertyGridEditorStringBase {
       type: "comment",
       rows: 2
     });
-    applyRichTextPropertyEditor(json, obj, prop, options);
     return json;
   }
 }
@@ -2065,11 +2057,27 @@ export class PropertyGridEditorHtml extends PropertyGridEditorStringBase {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return this.updateMaxLength(prop, {
+    const json = this.updateMaxLength(prop, {
       type: "comment",
       "allowResize": true,
       "autoGrow": false,
     });
+    applyRichTextPropertyEditor(json, obj, prop, options);
+    return json;
+  }
+}
+export class PropertyGridEditorInlineHtml extends PropertyGridEditorStringBase {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type === "inlinehtml";
+  }
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
+    const json = this.updateMaxLength(prop, { type: "text" });
+    applyRichTextPropertyEditor(json, obj, prop, options);
+    return json;
   }
 }
 export class PropertyGridEditorStringArray extends PropertyGridEditor {
@@ -2398,6 +2406,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorNumber());
 PropertyGridEditorCollection.register(new PropertyGridEditorSpinEdit());
 PropertyGridEditorCollection.register(new PropertyGridEditorText());
 PropertyGridEditorCollection.register(new PropertyGridEditorHtml());
+PropertyGridEditorCollection.register(new PropertyGridEditorInlineHtml());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
 PropertyGridEditorCollection.register(new PropertyGridEditorSet());
 PropertyGridEditorCollection.register(new PropertyGridEditorPage());

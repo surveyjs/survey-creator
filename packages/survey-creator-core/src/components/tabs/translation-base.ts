@@ -17,7 +17,7 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { SurveyHelper, getDefaultLocaleName, isDefaultLocale } from "../../survey-helper";
 import { translationCss } from "./translation-theme";
 import { CreatorDomHelper } from "../../dom-helper";
-import { applyRichTextTranslationCell, plainRichPlaceholder } from "../creator-string-converter";
+import { applyRichTextTranslationCell, plainRichPlaceholder, richTranslationCellType } from "../creator-string-converter";
 
 // The library localizes a few strings outside their localizable string: the property itself stays
 // empty and the text the survey renders comes from the error class that falls back to it (see
@@ -988,10 +988,60 @@ export class TranslationBase extends Base implements ITranslationLocales {
     // dependency collector, which takes most of the build time on a large survey.
     var json = { autoGrowComment: true, allowResizeComment: false, widthMode: "responsive" };
     setSurveyJSONForPropertyGrid(json, false);
+    const getTransationItem = (question: QuestionMatrixDropdownModel, rowName: any): TranslationItem => {
+      var itemValue = ItemValue.getItemByValue(question.rows, rowName);
+      return !!itemValue ? itemValue["translationData"] : null;
+    };
     const survey: SurveyModel = this.options.createSurvey(json, "translation_strings", this, (survey: SurveyModel): void => {
       this.makeSurveyIdSpaceUnique(survey);
       survey.lazyRenderEnabled = true;
       survey.skeletonComponentName = "sd-translation-line-skeleton";
+      survey.onMatrixCellCreating.add((_sender: SurveyModel, options: any) => {
+        const item = getTransationItem(options.question, options.row.name);
+        if (!item) return;
+        const cellType = richTranslationCellType(this.options, item.context, item.locString as LocalizableString);
+        if (cellType) options.cellType = cellType;
+      });
+      survey.onMatrixCellCreated.add((sender: SurveyModel, options: any) => {
+        if (options.cell.question instanceof QuestionCommentModel) {
+          const cellQuestion = <QuestionCommentModel>options.cell.question;
+          const item = getTransationItem(options.question, options.row.name);
+          let isMultiLine = false;
+          if (!!item) {
+            cellQuestion.maxLength = item.maxLength;
+            const loc = item.locString;
+            isMultiLine = loc.getIsMultiple();
+            cellQuestion.acceptCarriageReturn = isMultiLine || (<LocalizableString>loc).allowLineBreaks;
+          }
+          if (!isMultiLine) {
+            cellQuestion.rows = 1;
+          }
+          this.applyRichTextTranslationCell(cellQuestion, item);
+          this.setPlaceHolder(cellQuestion, item, options.columnName);
+        }
+      });
+      survey.onMatrixCellValueChanging.add((_: SurveyModel, options: any) => {
+        const item = getTransationItem(options.question, options.row.name);
+        if (!!item) {
+          options.value = this.getProcessedTranslationItemText(options.columnName, item.locString, options.value, item.context);
+        }
+      });
+      survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {
+        const item = getTransationItem(options.question, options.row.name);
+        if (!!item) {
+          this.setItemLocText(item, options.columnName, options.value);
+          const colName = options.columnName;
+          options.row.cells.forEach(cell => {
+            if (colName === getDefaultLocaleName() || cell.column.name.indexOf(colName + "-") === 0)
+              this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
+          });
+        }
+      });
+      survey.onUpdatePanelCssClasses.add((sender: SurveyModel, options) => {
+        if (options.panel["__translationHasIndent"]) {
+          options.cssClasses.panel.content += " st-panel-indent";
+        }
+      });
       survey.startLoadingFromJson();
       survey.css = translationCss;
       survey.addNewPage("page");
@@ -1000,50 +1050,6 @@ export class TranslationBase extends Base implements ITranslationLocales {
       survey.endLoadingFromJson();
       this.onSurveyStringsCreated(survey);
     }, this.getSurveyStringsArea());
-    const getTransationItem = (question: QuestionMatrixDropdownModel, rowName: any): TranslationItem => {
-      var itemValue = ItemValue.getItemByValue(question.rows, rowName);
-      return !!itemValue ? itemValue["translationData"] : null;
-    };
-    survey.onMatrixCellCreated.add((sender: SurveyModel, options: any) => {
-      if (options.cell.question instanceof QuestionCommentModel) {
-        const cellQuestion = <QuestionCommentModel>options.cell.question;
-        const item = getTransationItem(options.question, options.row.name);
-        let isMultiLine = false;
-        if (!!item) {
-          cellQuestion.maxLength = item.maxLength;
-          const loc = item.locString;
-          isMultiLine = loc.getIsMultiple();
-          cellQuestion.acceptCarriageReturn = isMultiLine || (<LocalizableString>loc).allowLineBreaks;
-        }
-        if (!isMultiLine) {
-          cellQuestion.rows = 1;
-        }
-        this.applyRichTextTranslationCell(cellQuestion, item);
-        this.setPlaceHolder(cellQuestion, item, options.columnName);
-      }
-    });
-    survey.onMatrixCellValueChanging.add((_: SurveyModel, options: any) => {
-      const item = getTransationItem(options.question, options.row.name);
-      if (!!item) {
-        options.value = this.getProcessedTranslationItemText(options.columnName, item.locString, options.value, item.context);
-      }
-    });
-    survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {
-      const item = getTransationItem(options.question, options.row.name);
-      if (!!item) {
-        this.setItemLocText(item, options.columnName, options.value);
-        const colName = options.columnName;
-        options.row.cells.forEach(cell => {
-          if (colName === getDefaultLocaleName() || cell.column.name.indexOf(colName + "-") === 0)
-            this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
-        });
-      }
-    });
-    survey.onUpdatePanelCssClasses.add((sender: SurveyModel, options) => {
-      if (options.panel["__translationHasIndent"]) {
-        options.cssClasses.panel.content += " st-panel-indent";
-      }
-    });
     survey.currentPage = survey.pages[0];
     return survey;
   }
@@ -1053,7 +1059,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
   }
   private setPlaceHolder(cellQuestion: QuestionCommentModel, item: TranslationItem, locale: string) {
     const source = item.getPlaceholder(locale);
-    cellQuestion.placeholder = plainRichPlaceholder(cellQuestion, source, item.context, (item.locString as LocalizableString).name);
+    cellQuestion.placeholder = plainRichPlaceholder(cellQuestion, source, this.options);
   }
   // The single write path for translation item edits on the real survey; subclasses hook it
   // to react to the change. No-op writes are filtered out.

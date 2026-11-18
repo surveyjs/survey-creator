@@ -1,4 +1,5 @@
 import { Base, DomDocumentHelper, LocalizableString, SurveyModel } from "survey-core";
+import { richTextModeForProperty } from "../rich-text-editor";
 
 const converters = new WeakMap<any, any>();
 
@@ -56,23 +57,21 @@ export function assignCreatorStringConverter(question: any, creator: any): void 
   if (converter) question.richTextConverter = converter;
 }
 
-export function plainRichPlaceholder(question: any, source: string, element: Base, name: string): string {
-  const converter = question && question.richTextConverter;
-  if (!question || !question.allowRichText || !converter) return source || "";
-  const html = converter.toHtml(source || "", {
-    inline: question.richTextEditMode !== "block",
-    element: element,
-    name: name
-  });
-  return htmlToPlainText(html);
+export function richTranslationCellType(creator: any, owner: Base, locStr: LocalizableString): string | undefined {
+  if (!isCreatorRichStringsEnabled(creator) || !locStr || locStr.getIsMultiple()) return undefined;
+  if (richTextModeForProperty(owner, locStr.name) === "none") return undefined;
+  return "richtext";
+}
+
+export function plainRichPlaceholder(question: any, source: string, creator: any): string {
+  const editor = creator && creator.richTextEditor;
+  if (!question || question.getType() !== "richtext" || !editor || typeof editor.sanitizeHtml !== "function") return source || "";
+  return htmlToPlainText(editor.sanitizeHtml(source || ""));
 }
 
 export function applyRichTextTranslationCell(question: any, creator: any, owner: Base, locStr: LocalizableString): void {
-  if (!question || !isCreatorRichStringsEnabled(creator) || !locStr || locStr.getIsMultiple()) return;
-  const mode = creator.richTextEditor.getStringEditMode(owner, locStr.name, locStr);
-  if (mode === "none") return;
-  question.allowRichText = true;
-  question.richTextEditMode = mode;
-  question.richTextToolbarVisibility = "onFocus";
-  question.richTextConverter = getCreatorStringConverter(creator);
+  if (!question || !locStr) return;
+  const mode = richTextModeForProperty(owner, locStr.name);
+  if (mode === "none" || question.getType() !== "richtext") return;
+  question.acceptCarriageReturn = mode === "block";
 }

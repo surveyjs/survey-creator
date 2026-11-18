@@ -24,7 +24,8 @@ const routes = [
   { path: "test-pages/theme-tab", component: ThemeTabComponent },
   { path: "test-pages/no-license", component: NoLicenseComponent },
   { path: "test-pages/presets", component: PresetsComponent },
-  { path: "test-pages/creator-themes", component: CreatorThemesComponent }, 
+  { path: "test-pages/creator-themes", component: CreatorThemesComponent },
+  { path: "test-pages/rich-text", loadChildren: () => import("./test/rich-text.module").then(m => m.RichTextPageModule) },
   { path: "", component: ExampleComponent }
 ];
 

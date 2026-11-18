@@ -16,7 +16,7 @@ import { QuestionLinkValueModel } from "../link-value";
 import { getDefaultLocaleName, isDefaultLocale } from "../../survey-helper";
 import { TranslationCopiesMap } from "./translation-copies-map";
 import { TranslationRowEqualizer, equalizerSourceSide, equalizerTargetSide } from "./translation-row-equalizer";
-import { applyRichTextTranslationCell, plainRichPlaceholder } from "../creator-string-converter";
+import { applyRichTextTranslationCell, plainRichPlaceholder, richTranslationCellType } from "../creator-string-converter";
 import {
   TranslationBase, TranslationEditor, TranslationGroup, TranslationItem,
   createMachineTranslationAction, runItemsMachineTranslation
@@ -1998,10 +1998,18 @@ export class TranslationElementStrings extends TranslationBase {
         options.html = html;
       }
     });
+    survey.onMatrixCellCreating.add(this.onMatrixCellCreating);
     survey.onMatrixCellCreated.add(this.onMatrixCellCreated);
     survey.onMatrixCellValueChanging.add(this.onMatrixCellValueChanging);
     survey.onMatrixCellValueChanged.add(this.onMatrixCellValueChanged);
   }
+  private onMatrixCellCreating = (_: SurveyModel, options: any): void => {
+    if (options.question !== this.stringsMatrix) return;
+    const item = this.getMatrixItem(options.row);
+    if (!item) return;
+    const cellType = richTranslationCellType(this.options, item.context, item.locString as LocalizableString);
+    if (cellType) options.cellType = cellType;
+  };
   private onMatrixCellCreated = (_: SurveyModel, options: any): void => {
     if (options.question !== this.stringsMatrix) return;
     const cellQuestion = options.cell.question;
@@ -2022,7 +2030,7 @@ export class TranslationElementStrings extends TranslationBase {
     if (!!item) {
       const locStr = item.locString as LocalizableString;
       applyRichTextTranslationCell(cellQuestion, this.options, item.context, locStr);
-      cellQuestion.placeholder = plainRichPlaceholder(cellQuestion, item.getPlaceholder(options.columnName), item.context, locStr.name);
+      cellQuestion.placeholder = plainRichPlaceholder(cellQuestion, item.getPlaceholder(options.columnName), this.options);
     }
   };
   private onMatrixCellValueChanging = (_: SurveyModel, options: any): void => {
@@ -2041,6 +2049,7 @@ export class TranslationElementStrings extends TranslationBase {
   };
   private disposeStringsMatrix(): void {
     if (!!this.hostSurvey) {
+      this.hostSurvey.onMatrixCellCreating.remove(this.onMatrixCellCreating);
       this.hostSurvey.onMatrixCellCreated.remove(this.onMatrixCellCreated);
       this.hostSurvey.onMatrixCellValueChanging.remove(this.onMatrixCellValueChanging);
       this.hostSurvey.onMatrixCellValueChanged.remove(this.onMatrixCellValueChanged);

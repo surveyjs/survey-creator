@@ -16,7 +16,7 @@
           (click)="edit($event)" [attr.aria-placeholder]="placeholder" [attr.aria-label]="ariaLabel" [attr.contenteditable]="contentEditable" [attr.tabIndex]="baseModel.tabIndex" [innerHtml]="locString.renderedHtml | safeHtml" #container></div>
           <sv-ng-character-counter *ngIf="showCharacterCounter" [counter]="characterCounter" [remainingCharacterCounter]="getCharacterCounterClass"></sv-ng-character-counter>
         </span>
-        <div class="svc-string-editor__toolbar" role="toolbar" *ngIf="baseModel.richTextToolbar">
+        <div class="svc-string-editor__toolbar" role="toolbar" *ngIf="baseModel.richTextToolbar" [class.svc-string-editor__toolbar--open]="baseModel.richTextToolbarOpen">
           <sv-action-bar [model]="baseModel.richTextToolbar"></sv-action-bar>
         </div>
     </span>

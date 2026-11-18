@@ -239,7 +239,7 @@
   z-index: 20;
 }
 
-.svc-string-editor:focus-within .svc-string-editor__toolbar {
+.svc-string-editor:focus-within .svc-string-editor__toolbar--open {
   display: block;
 }
 

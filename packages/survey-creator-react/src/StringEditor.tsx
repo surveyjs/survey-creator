@@ -212,7 +212,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
             </div>
             {counter}
           </span>
-          {this.baseModel.richTextToolbar ? <div className="svc-string-editor__toolbar" role="toolbar"><SurveyActionBar model={this.baseModel.richTextToolbar}></SurveyActionBar></div> : null}
+          {this.baseModel.richTextToolbar ? <div className={"svc-string-editor__toolbar" + (this.baseModel.richTextToolbarOpen ? " svc-string-editor__toolbar--open" : "")} role="toolbar"><SurveyActionBar model={this.baseModel.richTextToolbar}></SurveyActionBar></div> : null}
         </span>
         {this.errorText ? <span className="svc-string-editor__error">{this.errorText}</span> : ""}
       </span>

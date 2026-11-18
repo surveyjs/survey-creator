@@ -1,6 +1,6 @@
 import { ActionContainer, Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter, toCssClasses } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
-import { htmlToMarkdownProbe } from "../rich-text-editor";
+import { htmlToMarkdownProbe, richTextModeForProperty } from "../rich-text-editor";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines } from "../utils/utils";
 import { getNextColumnTitle, getNextItemText, getNextItemValue, getNextValue } from "../utils/creator-utils";
@@ -262,6 +262,7 @@ export class StringEditorViewModelBase extends Base {
   @property({ defaultValue: true }) editAsText: boolean;
   @property({ defaultValue: "none" }) richTextEditMode: "none" | "inline" | "block";
   @property() richTextToolbar: ActionContainer;
+  @property({ defaultValue: false }) richTextToolbarOpen: boolean;
   compostionInProgress: boolean;
 
   constructor(private locString: LocalizableString, private creator?: SurveyCreatorModel) {
@@ -378,11 +379,14 @@ export class StringEditorViewModelBase extends Base {
   }
   private updateEditMode(): void {
     this.checkMarkdownToTextConversion(this.locString?.owner, this.locString?.name);
-    if (!this.creator || !this.creator.isRichStringsEnabled() || this.isInplaceForEditValues) {
+    if (!this.creator || !this.creator.isRichStringsEnabled()) {
       this.richTextEditMode = "none";
       return;
     }
-    this.richTextEditMode = this.creator.richTextEditor.getStringEditMode(this.locString.owner as any, this.locString.name, this.locString);
+    const mode = richTextModeForProperty(this.locString.owner as any, this.locString.name);
+    this.richTextEditMode = mode;
+    // A rich string edits HTML even when onHtmlToMarkdown has no handler.
+    if (mode !== "none") this.editAsText = false;
   }
 
   public onCompositionStart(event: any): void {
@@ -529,7 +533,8 @@ export class StringEditorViewModelBase extends Base {
       html = html.trim();
       text = text.trim();
     }
-    if (!this.editAsText && this.creator) {
+    let clearedText;
+    if (this.richTextEditMode !== "none" && this.creator) {
       const options = {
         element: <Base><any>this.locString.owner,
         text: <any>null,
@@ -537,17 +542,35 @@ export class StringEditorViewModelBase extends Base {
         html: html
       };
       this.creator.onHtmlToMarkdown.fire(this.creator, options);
-      mdText = options.text;
-    }
-    let clearedText;
-    // "" is a saved empty string. null means the event has no converter.
-    if (mdText != null) {
-      clearedText = mdText;
+      // A handler that sets options.text overrides the stored value. Otherwise store canonical HTML.
+      if (options.text != null) {
+        clearedText = options.text;
+      } else {
+        const editor = this.creator.richTextEditor;
+        clearedText = editor && typeof editor.sanitizeHtml === "function"
+          ? editor.sanitizeHtml(html, { inline: this.richTextEditMode === "inline" }) || ""
+          : html;
+      }
     } else {
-      clearedText = this.locString.hasHtml && !this.editAsText ? html : text;
-      const txt = clearNewLines(clearedText);
-      if (!this.locString.allowLineBreaks || !txt) {
-        clearedText = txt;
+      if (!this.editAsText && this.creator) {
+        const options = {
+          element: <Base><any>this.locString.owner,
+          text: <any>null,
+          name: this.locString.name,
+          html: html
+        };
+        this.creator.onHtmlToMarkdown.fire(this.creator, options);
+        mdText = options.text;
+      }
+      // "" is a saved empty string. null means the event has no converter.
+      if (mdText != null) {
+        clearedText = mdText;
+      } else {
+        clearedText = this.locString.hasHtml && !this.editAsText ? html : text;
+        const txt = clearNewLines(clearedText);
+        if (!this.locString.allowLineBreaks || !txt) {
+          clearedText = txt;
+        }
       }
     }
     const owner = this.locString.owner as any;
@@ -633,7 +656,9 @@ export class StringEditorViewModelBase extends Base {
     }
   }
   public onKeyDown(event: KeyboardEvent): boolean {
-    if (event.keyCode === 13 && !event.shiftKey && !this.shouldDelegateEnterToRichText(event)) {
+    // Inline rich text inserts a <br> on Enter. Ctrl/Cmd+Enter still commits.
+    const inlineBreak = this.richTextEditMode === "inline" && !event.ctrlKey && !event.metaKey;
+    if (event.keyCode === 13 && !event.shiftKey && !inlineBreak && !this.shouldDelegateEnterToRichText(event)) {
       this.commitFromEnter(event);
     }
     if (event.keyCode === 27) {
@@ -661,7 +686,9 @@ export class StringEditorViewModelBase extends Base {
   }
   private isSelectionInsideListItem(element: HTMLElement): boolean {
     if (!element) return false;
-    const selection = element.ownerDocument?.getSelection?.();
+    const rootNode = element.getRootNode() as Document | ShadowRoot;
+    const isShadowDom = rootNode instanceof ShadowRoot;
+    const selection = isShadowDom ? (rootNode as any).getSelection() : element.ownerDocument?.getSelection?.();
     if (!selection || selection.rangeCount === 0) return false;
     let node: Node = selection.getRangeAt(0).startContainer;
     if (node && node.nodeType !== 1) node = node.parentNode;
@@ -680,12 +707,21 @@ export class StringEditorViewModelBase extends Base {
     keyEvent.stopImmediatePropagation();
     this.commitFromEnter(keyEvent);
   };
+  private syncRichTextToolbar = (): void => {
+    const handle = this.richTextHandle as { toolbarOpen?: boolean };
+    // Editors that do not report selection keep the toolbar visible. The plugin shows it only while text is selected.
+    this.richTextToolbarOpen = !!handle && handle.toolbarOpen !== false;
+  };
   private attachRichTextEditor(element: HTMLElement): void {
     this.detachRichTextEditor();
     if (!this.creator || this.richTextEditMode === "none" || !element) return;
-    const handle = this.creator.richTextEditor.attachEditor(element, { mode: this.richTextEditMode as "inline" | "block" });
+    const handle = this.creator.richTextEditor.attachEditor(element, {
+      mode: this.richTextEditMode as "inline" | "block",
+      onState: this.syncRichTextToolbar
+    });
     this.richTextHandle = handle;
     this.richTextToolbar = handle.toolbar;
+    this.syncRichTextToolbar();
     if (this.richTextEditMode === "block") {
       element.addEventListener("keydown", this.onKeyDownCapture, true);
     }
@@ -697,6 +733,7 @@ export class StringEditorViewModelBase extends Base {
     if (this.richTextHandle) this.richTextHandle.detach();
     this.richTextHandle = undefined;
     this.richTextToolbar = undefined;
+    this.richTextToolbarOpen = false;
   }
   public onKeyUp(event: KeyboardEvent): boolean {
     const rootNode = (event.target as HTMLElement).getRootNode() as Document | ShadowRoot;
