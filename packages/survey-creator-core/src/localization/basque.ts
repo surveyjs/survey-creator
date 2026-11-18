@@ -166,7 +166,7 @@ export var euStrings = {
     selectPage: "Hautatu orrialdea...",
     carryForwardChoicesCopied: "Aukerak hemendik kopiatzen dira",
     choicesLoadedFromWebText: "Aukerak web-zerbitzu batetik kargatzen dira.",
-    choicesLoadedFromWebLinkText: "Joan ezarpetara",
+    choicesLoadedFromWebLinkText: "Joan ezarpenetara",
     choicesLoadedFromWebPreviewTitle: "Kargatutako aukeren aurrebista",
     expressionBannerPlaceholder: "Ez da adierazpenik ezarri",
     expressionBannerLinkText: "Editatu adierazpena",
@@ -384,7 +384,7 @@ export var euStrings = {
       newPanelPosition: "Sarrera berriaren kokapena",
       pageSize: "Sarrerak orrialde bakoitzeko",
       allowSort: "Baimendu erabiltzaileei sarrerak ordenatzen",
-      keyName: "Prevenitu erantzun bikoiztuak ondoko galderan"
+      keyName: "Saihestu erantzun bikoiztuak ondoko galderan"
     },
     question: {
       name: "Galderaren izena",
@@ -481,7 +481,7 @@ export var euStrings = {
     matrixdropdowncolumn: {
       name: "Zutabearen izena",
       title: "Zutabearen izenburua",
-      isUnique: "Prevenitu erantzun bikoiztuak",
+      isUnique: "Saihestu erantzun bikoiztuak",
       width: "Zutabearen zabalera",
       minWidth: "Zutabearen gutxieneko zabalera",
       rows: "Sarrera-eremuaren altuera (lerrotan)",
@@ -653,7 +653,7 @@ export var euStrings = {
     markRequired: "Markatu derrigorrezko gisa",
     removeRequiredMark: "Kendu derrigorrezko marka",
     eachRowRequired: "Eskatu erantzuna errenkada bakoitzean",
-    eachRowUnique: "Prevenitu erantzun bikoiztuak errenkadetan",
+    eachRowUnique: "Saihestu erantzun bikoiztuak errenkadetan",
     requiredErrorText: "Derrigorrezko galderen errore-mezua",
     requireTrueErrorText: "Bai erantzuna behar denean erakusteko errore-mezua",
     startWithNewLine: "Bistaratu galdera lerro berri batean",
@@ -924,7 +924,7 @@ export var euStrings = {
     defaultPanelValue: "Balio lehenetsiak",
     cells: "Gelaxka-testuak",
     fileInputPlaceholder: "Hautatu fitxategi bat edo itsatsi fitxategi-esteka bat...",
-    keyName: "Prevenitu erantzun bikoiztuak ondoko zutabean",
+    keyName: "Saihestu erantzun bikoiztuak ondoko zutabean",
     itemvalue: {
       visibleIf: "Egin aukera ikusgai baldin",
       enableIf: "Egin aukera hautagarri baldin"
@@ -1470,7 +1470,7 @@ export var euStrings = {
     sl: "Esloveniera",
     sr: "Serbiera",
     sv: "Suediera",
-    sw: "Swahili",
+    sw: "Swahilia",
     tel: "Teluguera",
     tg: "Tajikera",
     th: "Thailandiera",
@@ -1744,9 +1744,9 @@ export var euStrings = {
     totalText: "Zutabe batek gutxienez \"Agregazio-metodoa\" edo \"Guztizko balioaren adierazpena\" bidez ezarritako guztizko balioak bistaratzen baditu soilik da ikusgai.",
     cellErrorLocation: "Errore-mezuaren kokapena ezartzen du sarrera baliogabea duen gelaxka batekiko. \"Heredatu\" aukerak \"Errore-mezuaren lerrokatzea\" propietatearen ezarpena aplikatzen du.",
     detailErrorLocation: "Xehetasun-ataletan habiaratutako galderen errore-mezuen kokapena ezartzen du. \"Heredatu\" aukerak \"Errore-mezuaren lerrokatzea\" propietatearen ezarpena aplikatzen du.",
-    keyDuplicationError: "\"Prevenitu erantzun bikoiztuak\" propietatea gaituta dagoenean, sarrera bikoiztu bat bidaltzen saiatzen den erantzuleak hurrengo errore-mezua jasoko du.",
+    keyDuplicationError: "\"Saihestu erantzun bikoiztuak\" propietatea gaituta dagoenean, sarrera bikoiztu bat bidaltzen saiatzen den erantzuleak hurrengo errore-mezua jasoko du.",
     matrixdropdown: {
-      keyDuplicationError: "Matrize-zutabe baterako \"Prevenitu erantzun bikoiztuak\" propietatea gaituta dagoenean, sarrera bikoiztu bat bidaltzen saiatzen den erantzuleak hurrengo errore-mezua jasoko du."
+      keyDuplicationError: "Matrize-zutabe baterako \"Saihestu erantzun bikoiztuak\" propietatea gaituta dagoenean, sarrera bikoiztu bat bidaltzen saiatzen den erantzuleak hurrengo errore-mezua jasoko du."
     },
     totalExpression: "Guztizko balioak adierazpen baten arabera kalkulatzeko aukera ematen du. Adierazpenak oinarrizko kalkuluak (`{q1_id} + {q2_id}`), adierazpen boolearrak (`{age} > 60`) eta funtzioak ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etab.) izan ditzake.",
     keyName: "Erreferentzia ezazu zutabe-ID bat, erabiltzaileari zehaztutako zutabeko galdera bakoitzerako erantzun bakarra ematea eskatzeko.",
@@ -2102,7 +2102,7 @@ export var euStrings = {
         notFound: "\"{name}\" ez da aurkitu - ez dago izen hori duen galderarik, panelik, orrialderik, balio kalkulaturik edo aldagairik.",
         inContainer: "\"{segment}\" ez da aurkitu {containerType} \"{root}\" barruan (erreferentzia: {name}).",
         scopedUnknown: "\"{segment}\" ez da aurkitu \"{scopePrefix}\" esparruan (erreferentzia: {name}).",
-        keyNameNotFound: "\"{name}\"(r)en keyName propietateak \"{key}\" izendatzen du - \"{name}\"(e)k ez du izen hori duen {keyNoun}ik, beraz gako bikoiztuen balidazioa ez da inoiz exekutatzen.",
+        keyNameNotFound: "\"{name}\"(r)en keyName propietateak \"{key}\" izendatzen du - izen hori duen {keyNoun} ez dago \"{name}\"(e)n, beraz gako bikoiztuen balidazioa ez da inoiz exekutatzen.",
         functionArgNotFound: "\"{name}\" ez da aurkitu."
       },
       "reference/self": {
@@ -2228,7 +2228,7 @@ export var euStrings = {
         missing: "\"{name}\"(e)k \"{source}\" elementutik kopiatzen ditu aukerak, baina ez dago izen hori duen galderarik.",
         self: "\"{name}\"(e)k bere burutik kopiatzen ditu aukerak.",
         "not-a-source": "\"{name}\"(e)k \"{source}\" ({sourceType}) elementutik kopiatzen ditu aukerak, baina horrek ez du ez aukerarik ez balio-matrizerik ematen.",
-        "missing-field": "\"{name}\"(e)k {prop} \"{field}\" irakurtzen du \"{source}\" elementutik, baina {sourceType} \"{source}\"(e)k ez du horrelako {fieldNoun}ik."
+        "missing-field": "\"{name}\"(e)k {prop} \"{field}\" irakurtzen du \"{source}\" elementutik, baina \"{field}\" {fieldNoun} ez da existitzen {sourceType} \"{source}\"(e)n."
       },
       "choices/duplicate": {
         duplicateValue: "\"{name}\"(r)en {prop} propietatearen beste elementu batek badu {valueText} balioa - exekuzio-denborak bi elementuak mantentzen ditu.",
@@ -2236,8 +2236,8 @@ export var euStrings = {
       },
       "trigger/unknown-target": {
         pageNotFound: "{trigger} abiarazleak \"{name}\" orrialdea du helburu, baina ez da existitzen.",
-        segmentNotFound: "{trigger} abiarazleak \"{name}\" du helburu, baina {containerType} \"{root}\"(e)k ez du \"{segment}\" {segmentNoun}ik.",
-        rootNotFound: "{trigger} abiarazleak \"{name}\" {verb}, baina ez dago izen hori duen {kindText}ik."
+        segmentNotFound: "{trigger} abiarazleak \"{name}\" du helburu, baina \"{segment}\" {segmentNoun} ez da existitzen {containerType} \"{root}\"(e)n.",
+        rootNotFound: "{trigger} abiarazleak \"{name}\" {verb}, baina ez da existitzen izen hori duen {kindText}."
       },
       "trigger/unknown-type": {
         unknownType: "\"{type}\" abiarazle mota ez da ezaguna.",
@@ -2417,7 +2417,7 @@ export var euStrings = {
       },
       triggerVerb: {
         fromName: "irakurtzen du",
-        gotoName: "honako honetara nabigatzen du",
+        gotoName: "helburu gisa du",
         default: "ezartzen du"
       },
       // no "operator" table on purpose: an operator stays the identifier the JSON spells,
