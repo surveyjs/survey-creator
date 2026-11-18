@@ -1,0 +1,84 @@
+// The JSON screen: a toolbar, the document, and a footer that says what is wrong with it.
+//
+// It is the bench the document is repaired on and it is never blocked, which is why it is the only
+// screen with no banner of its own - the other two carry the way here instead.
+
+.svt-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 520px;
+}
+
+.svt-toolbar {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 6px;
+  background: var(--svt-panel);
+  border: 1px solid var(--svt-line);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+}
+
+.svt-toolbar__spacer {
+  flex: 1;
+}
+
+// The toolbar says what the editor was opened on, because it holds the whole document and only the
+// reveal was scoped to one test.
+.svt-toolbar__title {
+  font-size: 13px;
+  color: var(--svt-ink);
+}
+
+.svt-toolbar__note {
+  font-size: 11px;
+  color: var(--svt-ink-soft);
+}
+
+.svt-editor__host {
+  flex: 1;
+  display: flex;
+  border: 1px solid var(--svt-line);
+  border-top: none;
+  background: var(--svt-control);
+  min-height: 420px;
+
+  &:focus-within {
+    border-color: var(--svt-accent);
+  }
+}
+
+.svt-editor__area {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  resize: none;
+  border: 0;
+  outline: none;
+  padding: 8px 10px;
+  background: transparent;
+  color: var(--svt-ink);
+  tab-size: 2;
+  font-family: var(--svt-mono);
+  font-size: 13px;
+  line-height: 18px;
+  white-space: pre;
+  overflow: auto;
+}
+
+.svt-footer {
+  padding: 5px 8px;
+  font-size: 11px;
+  color: var(--svt-ink-soft);
+  background: var(--svt-panel);
+  border: 1px solid var(--svt-line);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+}
+
+.svt-footer--error,
+.svt-footer__error {
+  color: var(--svt-fail);
+}

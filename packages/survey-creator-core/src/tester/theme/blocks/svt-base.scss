@@ -1,0 +1,386 @@
+// The vocabulary every screen of the widget shares: the two verbs, the fields, the badges, the notes
+// and the one status vocabulary - a coloured dot, and a word only when something failed.
+//
+// `svt-button` and `svt-link` are what the models put on `Action.innerCss`, so a toolbar of the runner,
+// of the JSON screen and of the recorder's session bar all draw the same two things. The prototype had
+// two button looks - the runner's `.button` and the recorder's taller `.btn` - and the model layer
+// merged them into this one class; the recorder's 44px targets survive as the block-scoped rules in
+// blocks/svt-recorder.scss, which is where that decision belongs.
+
+.svt-button {
+  border: 1px solid var(--svt-line);
+  background: var(--svt-control);
+  color: inherit;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+
+  &:hover:not(:disabled) {
+    border-color: var(--svt-accent);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.svt-button--primary {
+  background: var(--svt-accent);
+  border-color: var(--svt-accent);
+  color: var(--svt-on-accent);
+  font-weight: 600;
+}
+
+.svt-link {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--svt-accent-ink);
+  font-size: 12px;
+  text-decoration: underline;
+
+  &:disabled {
+    color: var(--svt-muted);
+    cursor: not-allowed;
+    text-decoration: none;
+  }
+}
+
+.svt-link--tiny {
+  font-size: 11px;
+  margin-left: 6px;
+}
+
+// The one link in a group that starts something rather than filtering what is there.
+.svt-link--strong {
+  font-weight: 600;
+}
+
+// The one destructive verb on a row, and the only one that asks before it acts.
+.svt-link--danger {
+  color: var(--svt-fail);
+}
+
+.svt-field {
+  display: block;
+  margin-bottom: 12px;
+
+  > span {
+    display: block;
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 3px;
+  }
+
+  > em {
+    display: block;
+    color: var(--svt-ink-soft);
+    font-size: 11px;
+    font-style: normal;
+    margin-top: 3px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 5px 7px;
+    border: 1px solid var(--svt-line);
+    border-radius: 4px;
+    background: var(--svt-control);
+    color: inherit;
+  }
+
+  input[type="range"] {
+    width: 100%;
+  }
+}
+
+.svt-field--check {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 8px;
+  align-items: center;
+
+  > em {
+    grid-column: 2;
+  }
+}
+
+.svt-input {
+  width: 100%;
+  padding: 5px 7px;
+  border: 1px solid var(--svt-line);
+  border-radius: 4px;
+  background: var(--svt-control);
+  color: inherit;
+}
+
+.svt-input--small {
+  width: 120px;
+  padding: 3px 6px;
+  font-size: 12px;
+}
+
+.svt-badge {
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 10px;
+  border: 1px solid var(--svt-line);
+  color: var(--svt-ink-soft);
+}
+
+.svt-badge--ok {
+  border-color: var(--svt-pass);
+  color: var(--svt-pass);
+}
+
+.svt-badge--warning {
+  border-color: var(--svt-warn);
+  color: var(--svt-warn);
+}
+
+.svt-badge--error {
+  border-color: var(--svt-fail);
+  color: var(--svt-fail);
+}
+
+.svt-alert {
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-size: 12px;
+  margin: 8px 0;
+
+  .svt-link {
+    margin-left: 8px;
+  }
+}
+
+.svt-alert--error {
+  background: var(--svt-alert-error-bg);
+  border: 1px solid var(--svt-alert-error-line);
+}
+
+.svt-alert--warning {
+  background: var(--svt-alert-warn-bg);
+  border: 1px solid var(--svt-alert-warn-line);
+}
+
+// What a transition did - a session closed, a test deleted. It reports rather than warns, and it is
+// dismissed rather than fixed.
+.svt-alert--info {
+  background: var(--svt-alert-info-bg);
+  border: 1px solid var(--svt-alert-info-line);
+}
+
+.svt-alert--ok {
+  background: var(--svt-alert-ok-bg);
+  border: 1px solid var(--svt-alert-ok-line);
+}
+
+.svt-code {
+  background: var(--svt-code-bg);
+  border: 1px solid var(--svt-line);
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 11px;
+  overflow: auto;
+  max-height: 320px;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: var(--svt-mono);
+}
+
+.svt-code--tiny {
+  font-size: 10px;
+  max-height: 220px;
+}
+
+.svt-mono {
+  font-family: var(--svt-mono);
+}
+
+// The status vocabulary. `svt-status-dot` is the shared one - the prototype's `.dot`, keyed by the
+// tester's own status - and `svt-dot` is the test row's tone dot, which knows three states and not
+// six. Two dots, two names: the prefix alone would have collided them.
+.svt-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  background: var(--svt-muted);
+  flex: 0 0 auto;
+}
+
+.svt-status-dot--passed {
+  background: var(--svt-pass);
+}
+
+.svt-status-dot--failed,
+.svt-status-dot--error {
+  background: var(--svt-fail);
+}
+
+.svt-status-dot--skipped {
+  background: var(--svt-muted);
+}
+
+.svt-status-dot--canceled {
+  background: var(--svt-warn);
+}
+
+.svt-status-dot--running {
+  background: var(--svt-running);
+  animation: svt-pulse 1s infinite alternate;
+}
+
+@keyframes svt-pulse {
+  from {
+    opacity: 0.4;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.svt-status {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--svt-muted);
+}
+
+.svt-status--passed {
+  color: var(--svt-pass);
+}
+
+.svt-status--failed,
+.svt-status--error {
+  color: var(--svt-fail);
+}
+
+.svt-status--canceled {
+  color: var(--svt-warn);
+}
+
+.svt-status--running {
+  color: var(--svt-running);
+}
+
+.svt-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  background: var(--svt-dot-idle);
+}
+
+.svt-dot--passed {
+  background: var(--svt-pass-strong);
+}
+
+.svt-dot--failed {
+  background: var(--svt-fail-strong);
+}
+
+.svt-dot--running {
+  background: var(--svt-primary);
+}
+
+// A pill wherever a state has to be read: the recorder's session badge, a step's own state, the
+// replay indicator. Nothing signals with colour alone - every pill says the word as well.
+.svt-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 18px;
+  white-space: nowrap;
+  background: var(--svt-gray-100);
+  color: var(--svt-gray-700);
+}
+
+.svt-pill__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: 0 0 8px;
+  background: currentColor;
+}
+
+.svt-pill--on,
+.svt-pill--new {
+  background: var(--svt-blue-100);
+  color: var(--svt-blue-800);
+}
+
+.svt-pill--ok {
+  background: var(--svt-green-100);
+  color: var(--svt-green-700);
+}
+
+.svt-pill--failed,
+.svt-pill--errored {
+  background: var(--svt-red-100);
+  color: var(--svt-red-700);
+}
+
+.svt-pill--saved,
+.svt-pill--idle {
+  background: var(--svt-gray-100);
+  color: var(--svt-gray-700);
+}
+
+.svt-pill--rec {
+  background: var(--svt-red-100);
+  color: var(--svt-red-700);
+}
+
+.svt-pill--warn {
+  background: var(--svt-yellow-100);
+  color: var(--svt-yellow-800);
+}
+
+// What an issue of the suite has against the document, and what a check that did not hold has against
+// the model. Both are read at several sizes and in three places - a test row, the JSON screen's issue
+// list and the recorder's banner - so the block is here rather than in any one of them.
+.svt-diff {
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: baseline;
+
+  code {
+    font-family: var(--svt-mono);
+  }
+
+  em {
+    font-style: normal;
+    opacity: 0.85;
+  }
+
+  .svt-link {
+    font-size: 12px;
+  }
+}
+
+.svt-diff--error {
+  background: var(--svt-bad-bg);
+  color: var(--svt-bad-ink);
+}
+
+.svt-diff--warning {
+  background: var(--svt-amber-50);
+  color: var(--svt-amber-800);
+}

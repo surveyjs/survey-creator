@@ -1,0 +1,722 @@
+// The runner screen: the tests panel on the right, the spectator pane and the console on the left,
+// and one row per test with the steps of its last run inside it.
+//
+// One status vocabulary throughout - a coloured dot, and a word only when a test failed. No green row
+// tint, no PASSED column, no second copy of the list anywhere.
+
+.svt-runner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--svt-page);
+  min-height: 0;
+
+  // The runner's primary is the blue rather than the teal: the teal is the widget's accent and the
+  // blue is what a run is. The prototype made the same swap on the same element.
+  .svt-button--primary {
+    background: var(--svt-primary);
+    border-color: var(--svt-primary);
+
+    &:hover:not(:disabled) {
+      background: var(--svt-primary-hover);
+      border-color: var(--svt-primary-hover);
+    }
+  }
+
+  .svt-link {
+    color: var(--svt-primary);
+
+    &:hover:not(:disabled) {
+      color: var(--svt-primary-hover);
+    }
+
+    &:disabled {
+      color: var(--svt-ink-3);
+    }
+  }
+}
+
+.svt-runner__body {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+}
+
+.svt-runner__left {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  padding: 12px;
+}
+
+// The console fills the pane itself, so the padding that frames a card would only shrink it.
+.svt-runner__left--flush {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.svt-runner__right {
+  flex: 0 0 440px;
+  width: 440px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--svt-card);
+  border-left: 1px solid var(--svt-border);
+}
+
+.svt-survey-pane {
+  background: var(--svt-card);
+  border: 1px solid var(--svt-border);
+  border-radius: 6px;
+}
+
+.svt-survey-pane--empty {
+  padding: 14px;
+  color: var(--svt-ink-3);
+  font-size: 13px;
+}
+
+.svt-survey-pane__badge {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--svt-divider);
+  font-size: 12px;
+  color: var(--svt-ink-3);
+
+  strong {
+    font-size: 13px;
+    color: var(--svt-ink-1);
+  }
+
+  span {
+    color: var(--svt-ink-3);
+  }
+}
+
+// The tester is driving this model: a keystroke here would change what the next check reads.
+.svt-spectator {
+  pointer-events: none;
+  user-select: none;
+  overflow: auto;
+}
+
+.svt-target-highlight {
+  outline: 2px solid var(--svt-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+// A programmatic focus does not raise :focus-visible in every browser, so the ring is drawn rather
+// than waited for: the control that is about to be written into has to look focused.
+.svt-target-focus {
+  outline: 2px solid var(--svt-primary);
+  outline-offset: 1px;
+  border-radius: 3px;
+}
+
+// the tests panel ---------------------------------------------------------
+.svt-tests {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+
+  .svt-alert {
+    margin: 8px 12px;
+  }
+}
+
+// The run lives with the tests: what the checkboxes say is what the button runs.
+.svt-tests__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-bottom: 1px solid var(--svt-border);
+}
+
+.svt-tests__summary {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--svt-ink-3);
+}
+
+// One button for what a run does and one for how it is watched, and they are one control: they touch,
+// and the seam is the shared border.
+.svt-tests__action--run .svt-button {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.svt-tests__action--mode {
+  margin-left: -1px;
+}
+
+.svt-run-button__mode {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  font-size: 12px;
+  color: var(--svt-ink-2);
+}
+
+.svt-tests__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-bottom: 1px solid var(--svt-border);
+}
+
+.svt-tests__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--svt-ink-1);
+}
+
+.svt-tests__links {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.svt-tests__suite-issues {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--svt-divider);
+}
+
+.svt-tests__list {
+  flex: 1;
+  overflow: auto;
+}
+
+.svt-tests__empty {
+  padding: 12px;
+  font-size: 13px;
+  color: var(--svt-ink-3);
+}
+
+.svt-tests__delay {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--svt-border);
+  font-size: 12px;
+  color: var(--svt-ink-3);
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  input[type="number"] {
+    width: 66px;
+  }
+}
+
+.svt-tests__foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--svt-border);
+  font-size: 12px;
+  color: var(--svt-ink-3);
+
+  .svt-link {
+    margin-left: auto;
+    font-size: 12px;
+  }
+}
+
+// What the picker used to say under its list: which tests cannot be recorded into, and why.
+.svt-tests__note {
+  font-size: 12px;
+  color: var(--svt-ink-3);
+  flex: 1 1 100%;
+  order: 1;
+}
+
+// New test: one question and one button. Creating a test is the act of starting to record it, so this
+// form ends on the recorder screen - and everything else the test carries is asked for there.
+.svt-new-test {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--svt-border);
+  background: var(--svt-panel);
+}
+
+.svt-new-test__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  .svt-input {
+    flex: 1 1 200px;
+  }
+}
+
+.svt-new-test__hint {
+  margin: 0;
+  font-size: 11px;
+  color: var(--svt-ink-3);
+}
+
+.svt-new-test__refused {
+  margin: 0;
+  font-size: 12px;
+  color: var(--svt-fail);
+}
+
+// one test ----------------------------------------------------------------
+.svt-test-row {
+  border-bottom: 1px solid var(--svt-divider);
+}
+
+.svt-test-row__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--svt-ink-1);
+
+  &:hover {
+    background: var(--svt-divider);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--svt-primary);
+    outline-offset: -2px;
+  }
+}
+
+.svt-test-row__check {
+  margin: 0;
+  cursor: pointer;
+}
+
+.svt-test-row__name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.svt-test-row__state {
+  font-size: 12px;
+  color: var(--svt-bad-ink);
+}
+
+.svt-test-row__note,
+.svt-test-row__time {
+  font-size: 12px;
+  color: var(--svt-ink-3);
+}
+
+// The run, before the name and always on the page: it is pressed far more often than every other verb
+// put together, so it is the one that costs neither a hover nor an expansion to reach.
+.svt-test-row__run {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--svt-line);
+  border-radius: 4px;
+  background: var(--svt-control);
+  font-size: 9px;
+  line-height: 1;
+  color: var(--svt-accent-ink);
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    border-color: var(--svt-accent);
+    background: var(--svt-divider);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+// The only other control in the head, at the far end of it. The head stays clickable, but this is the
+// one thing that announces itself as the way to open the row - so it is a target, at the size the rest
+// of the widget uses for one, and not a chevron a person has to aim at.
+.svt-test-row__toggle {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  cursor: pointer;
+  color: var(--svt-ink-3);
+  font-size: 15px;
+  line-height: 1;
+
+  &:hover {
+    color: var(--svt-ink-1);
+    background: var(--svt-divider);
+  }
+}
+
+// What is done to the test, rather than read off it. In the expansion, above what the last run made of
+// it, because a person opens a row either to read the run or to act on the test.
+.svt-test-row__verbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0 0;
+}
+
+.svt-test-row__delete {
+  color: var(--svt-fail);
+
+  &:hover:not(:disabled) {
+    border-color: var(--svt-fail);
+  }
+}
+
+.svt-test-row__namebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.svt-test-row__namefield {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  > span {
+    flex: 0 0 auto;
+    font-size: 12px;
+    color: var(--svt-ink-soft);
+  }
+
+  .svt-input {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.svt-test-row__refused {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--svt-fail);
+}
+
+.svt-test-row__body {
+  padding: 0 12px 12px 42px;
+}
+
+.svt-test-row__hint {
+  margin: 0 0 6px;
+  font-size: 12px;
+  color: var(--svt-ink-3);
+}
+
+.svt-test-row--failed {
+  .svt-test-row__head {
+    background: var(--svt-bad-bg);
+
+    &:hover {
+      background: var(--svt-bad-bg-hover);
+    }
+  }
+
+  .svt-test-row__toggle:hover {
+    background: var(--svt-bad-bg-hover);
+  }
+
+  .svt-test-row__name {
+    color: var(--svt-bad-ink);
+  }
+
+  .svt-test-row__body {
+    background: var(--svt-bad-bg);
+  }
+}
+
+.svt-test-row--disabled .svt-test-row__name {
+  color: var(--svt-ink-3);
+}
+
+// the steps of a run ------------------------------------------------------
+// One line per step. Not three: the command, the mark and the word "passed" are one statement.
+//
+// The container is `svt-step-list__steps` and not `svt-steps`: the recorder's grid owns that name - it
+// is TesterStepsModel's own getType() and the stem of every `svt-steps__*` class that model hands out -
+// and the prototype had the two under one name by accident. See the README mapping table.
+.svt-step-list__steps {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0 4px;
+}
+
+.svt-step {
+  font-family: var(--svt-mono);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.svt-step__line {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+
+  &:hover .svt-step__aside {
+    opacity: 1;
+  }
+}
+
+.svt-step__mark {
+  flex: 0 0 10px;
+  color: var(--svt-ink-3);
+}
+
+.svt-step__text {
+  flex: 1;
+  min-width: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--svt-ink-2);
+}
+
+.svt-step--passed .svt-step__mark {
+  color: var(--svt-pass-strong);
+}
+
+.svt-step--failed {
+  .svt-step__mark {
+    color: var(--svt-fail-strong);
+  }
+
+  .svt-step__text {
+    color: var(--svt-bad-ink);
+  }
+}
+
+.svt-step__aside {
+  font-size: 11px;
+  opacity: 0;
+  flex: 0 0 auto;
+
+  &:focus-visible {
+    opacity: 1;
+  }
+}
+
+.svt-step__json {
+  margin: 2px 0 6px;
+  padding: 6px 8px;
+  max-height: 220px;
+  overflow: auto;
+  background: var(--svt-page);
+  border: 1px solid var(--svt-border);
+  border-radius: 4px;
+  font-family: var(--svt-mono);
+  font-size: 11px;
+  color: var(--svt-ink-2);
+}
+
+// The number of the step, which is the number it has in the document: "steps[3]" in the suite JSON,
+// the "step 3" the console prints, and this. The cursor stands in front of the one that runs next.
+.svt-step__num {
+  flex: 0 0 auto;
+  min-width: 22px;
+  text-align: right;
+  color: var(--svt-ink-3);
+}
+
+.svt-step--next {
+  background: var(--svt-blue-50);
+  border-radius: 4px;
+
+  .svt-step__num {
+    color: var(--svt-primary);
+    font-weight: 600;
+  }
+
+  .svt-step__text {
+    color: var(--svt-ink-1);
+  }
+}
+
+// The end of the case. It is a position and not a step, so it carries neither a number nor a mark -
+// and its play mark is the one that leaves nothing to run.
+.svt-step--end .svt-step__text {
+  color: var(--svt-ink-3);
+  font-style: italic;
+}
+
+// Always on the page, like the row's own run and for the same reason: it is the verb this list exists
+// for. Pressing it runs everything in front of the step it is on, and stops there.
+.svt-step__run {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  // The line is laid out on the baseline of its text; this one sits between the mark and the sentence,
+  // so it is centred on the line rather than hung off the glyph inside it.
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--svt-border);
+  border-radius: 3px;
+  background: var(--svt-control);
+  font-size: 8px;
+  line-height: 1;
+  color: var(--svt-accent-ink);
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    border-color: var(--svt-accent);
+    background: var(--svt-divider);
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+// The steps of the case, all of them, and the one place a part of a test is run from. The list is the
+// document's and as long as the case is; what a run produced is laid over it by position.
+.svt-step-list {
+  padding: 6px 0 2px;
+}
+
+.svt-step-list__head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 2px 0 4px;
+  font-size: 12px;
+  color: var(--svt-ink-3);
+
+  strong {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--svt-ink-2);
+  }
+}
+
+.svt-step-list__where {
+  color: var(--svt-primary);
+}
+
+.svt-step-list__empty,
+.svt-step-list__note,
+.svt-step-list__legend {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: var(--svt-ink-3);
+}
+
+.svt-step-list__note {
+  color: var(--svt-warn);
+}
+
+// why a check did not hold ------------------------------------------------
+.svt-assert {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  background: var(--svt-bad-bg);
+  border: 1px solid var(--svt-red-200);
+  font-size: 12px;
+  color: var(--svt-bad-ink);
+
+  .svt-link {
+    font-size: 12px;
+  }
+
+  .svt-step__json {
+    background: var(--svt-control);
+    border-color: var(--svt-red-200);
+    color: var(--svt-ink-2);
+  }
+}
+
+// A failing check is a line and, behind the raw link, the whole result the tester produced for it -
+// which is where `details` lives. Same shape as a step line, for the same reason.
+.svt-assert__row {
+  + .svt-assert__row {
+    margin-top: 4px;
+  }
+
+  code {
+    font-family: var(--svt-mono);
+  }
+}
+
+.svt-assert__line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: baseline;
+}
+
+// Why the check did not hold: the exported detail shapes, as fields. The raw link still opens the
+// whole result, which is where the details of a third-party check stay.
+.svt-why {
+  margin-top: 6px;
+
+  code {
+    font-family: var(--svt-mono);
+  }
+}
+
+.svt-why__line {
+  margin: 0 0 2px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: baseline;
+}
+
+.svt-why__label {
+  flex: 0 0 auto;
+  padding: 0 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--svt-control);
+  border: 1px solid var(--svt-red-200);
+  color: var(--svt-bad-ink);
+}
+
+.svt-why__note {
+  margin: 0 0 2px 12px;
+  font-size: 11px;
+  opacity: 0.85;
+}

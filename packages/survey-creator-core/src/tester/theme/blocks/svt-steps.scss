@@ -1,0 +1,334 @@
+// The steps of the case being recorded. The list is a survey of one dynamic matrix
+// (model/stepsSurvey.ts), rendered by whichever renderer is asking, so what follows is only the fit:
+// the renderer's own page chrome is taken away so the table sits in the card the way a hand-written
+// one would, and nothing here touches how the matrix behaves.
+//
+// This is one of the two blocks that name library classes, and it names a lot of them. Every such
+// selector is inside `.svt-steps`, and every one is about putting a rendered survey into a box this
+// stylesheet drew - never about changing what a survey-core component is.
+
+// Like the form: the list takes the height its survey needs, and the screen is the one scroller.
+.svt-steps {
+  display: block;
+
+  // The renderer paints its own page: a survey background, a card per question, a padded page around
+  // it, and an opaque backdrop behind the sticky action columns built out of three theme tokens. All
+  // of it is right for a form standing on a page of its own and wrong for a table inside a card, so
+  // the tokens are told to be the card and the page chrome is taken away.
+  //
+  // The scale comes down the same way the recorded form's does, through the base units the theme is
+  // built from - see `.svt-form .sd-root-modern` for why that is the lever. It is what makes the row a
+  // row: the Name cell is a real text question, and its height, its padding and its radius are all
+  // multiples of the size and spacing units. Setting a height on the field instead only shrinks the
+  // field and leaves the cell around it the height the theme drew it.
+  .sd-root-modern {
+    --sjs2-color-utility-body: var(--svt-card);
+    --sjs2-color-utility-surface-survey: var(--svt-card);
+    --sjs2-color-component-panel-default-bg: var(--svt-card);
+    // No mobile mode, at any width. The renderer switches a survey to it below `--sd-mobile-width`,
+    // which is 600px by default and read off this element - and a matrix in mobile mode stops being a
+    // table: every row is laid out as a card of stacked label-and-value pairs. That is the right
+    // answer for a form a person fills in on a phone, and the wrong one for this list, which is a
+    // table on purpose and is now narrower than 600px by design. Zero turns the switch off rather than
+    // moving it: survey-core builds no ResizeObserver for a survey whose threshold does not parse as a
+    // number, and a threshold of zero is one no width is below either - so it is off under both
+    // readings.
+    --sd-mobile-width: 0;
+    --sjs2-base-unit-font-size: 6px;
+    --sjs2-base-unit-line-height: 6px;
+    --sjs2-base-unit-size: 4px;
+    --sjs2-base-unit-spacing: 4px;
+    --sjs2-base-unit-radius: 4px;
+    background-color: transparent;
+  }
+
+  .sd-container-modern__title,
+  .sd-page__header,
+  .sd-element__num {
+    display: none;
+  }
+
+  .sd-body,
+  .sd-body__page,
+  .sd-page,
+  .sd-page__content {
+    padding: 0;
+    margin: 0;
+  }
+
+  .sd-row,
+  .sd-page__row {
+    margin-top: 0;
+  }
+
+  // The option panels under the matrix: a little air between the three rows of the same survey.
+  .sd-row + .sd-row {
+    margin-top: 10px;
+  }
+
+  .sd-panel__title {
+    font-size: 13px;
+  }
+
+  .sd-panel__description {
+    font-size: 12px;
+    color: var(--svt-gray-500);
+  }
+
+  .sd-question,
+  .sd-question__content,
+  .sd-element--with-frame {
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  // The wrapper hangs the table out over the page padding this card does not have.
+  .sd-table-wrapper {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-width: 100%;
+  }
+
+  // The theme gives every cell a floor of fifteen size units, which is the right floor for a matrix a
+  // respondent types into and the wrong one for three columns holding a number, a name and a word: it
+  // is what the columns of this list would be pushed out to whatever the model asked for. The widths
+  // the matrix declares are the ones that should decide, so the floor is taken away and they do.
+  .sd-table {
+    --sd-table-cell-min-width: 0;
+  }
+
+  // The type of the runner's own step list, to the token: the mono face at 12px on a 1.7 line. The
+  // runner puts 6px between one thing on a line and the next; a table doubles every such figure,
+  // because the gap between two cells is the padding of both - so it is 4px here and the gap is the
+  // runner's. The two lists show the same steps of the same case, and a person moving between them
+  // should not have to re-learn what a step looks like.
+  //
+  // The gap between two rows is a transparent border on the cells of both - the table is
+  // border-collapse: separate with no border-spacing, so the theme spaces rows this way. Halved, for
+  // the same reason the padding is: this is a list, and a list is read down.
+  .sd-table__cell {
+    padding: 0 4px;
+    vertical-align: middle;
+    text-align: left;
+    font-family: var(--svt-mono);
+    font-size: 12px;
+    line-height: 1.7;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+  }
+
+  .sd-table > thead > tr > th {
+    border-bottom-width: 4px;
+  }
+
+  .sd-table__cell--header {
+    padding: 0 4px 2px;
+    font-family: inherit;
+    line-height: 1.45;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--svt-ink-3);
+  }
+
+  // The number of the step, which is the number it has in the document - the same one the runner's
+  // list and the console print - and the word the last run left behind. Both are read, neither is
+  // typed.
+  .svt-steps__cell--num,
+  .sd-table__cell--header:first-of-type {
+    text-align: right;
+  }
+
+  .svt-steps__cell--num,
+  .svt-steps__cell--state {
+    color: var(--svt-ink-3);
+  }
+
+  // The one cell that is typed into. The theme's own class for a text field is `sd-formbox` - there is
+  // no `sd-input` in this build, and a rule written against one styles nothing at all. Its size comes
+  // from the units above; what is said here is only that it is set in the face of the line it stands
+  // in.
+  .sd-formbox {
+    font-family: var(--svt-mono);
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  // The table is border-collapse: separate and its cells use transparent borders as row spacing, so a
+  // row is separated and tinted through its cells rather than through the <tr>.
+  .sd-table__row > td {
+    box-shadow: inset 0 -1px 0 var(--svt-divider);
+  }
+
+  // Every row says what it is with a word in the State column; the colour only repeats it. The classes
+  // are keyed by the row's own state code and never by the word the cell prints, so a translated State
+  // column cannot rename one.
+  .svt-steps__row--failed > td,
+  .svt-steps__row--errored > td {
+    background: var(--svt-red-50);
+  }
+
+  // The row the cursor stands in front of: the one the next recorded step is inserted above. It reads
+  // as selected, and its own "Start here" is spent - pressing it would replay the same prefix for
+  // nothing, so it is dimmed and takes no press. The handler declines it as well; this is the look,
+  // not the lock.
+  .svt-steps__row--cursor > td {
+    background: var(--svt-blue-50);
+  }
+
+  .svt-steps__row--cursor > td:first-child {
+    box-shadow: inset 3px 0 0 var(--svt-blue-600), inset 0 -1px 0 var(--svt-divider);
+  }
+
+  .svt-steps__row--cursor .svt-steps__start {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  // "Start here", as the runner draws the same verb: an 18px square with a play mark in it, and the
+  // sentence about it in the tooltip rather than on the line. See `.svt-step__run` - these two are one
+  // button in two lists.
+  .svt-steps__start .sd-action {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    min-height: 18px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--svt-border);
+    border-radius: 3px;
+    background: var(--svt-control);
+    box-shadow: none;
+    color: var(--svt-accent-ink);
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--svt-accent);
+      background: var(--svt-divider);
+    }
+  }
+
+  .svt-steps__start .sd-action__title {
+    margin: 0;
+    font-family: var(--svt-mono);
+    font-size: 8px;
+    line-height: 1;
+    font-weight: 400;
+    color: inherit;
+  }
+
+  // Its neighbour: the chevron that opens what the step does. Same square, so the two read as a pair.
+  .sd-table__cell--detail-button {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    min-height: 18px;
+    padding: 0;
+    border-radius: 3px;
+
+    .sd-action__icon {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  .sd-table__cell--actions {
+    padding: 0 2px;
+
+    // The two of them are a pair and are read as one: the theme puts a full spacing unit between the
+    // items of an action bar, which is the figure for a bar of labelled buttons and not for two
+    // glyphs.
+    .sd-action-bar {
+      --sd-action-bar-gap: 2px;
+    }
+  }
+
+  // The handle a row is dragged by hangs into the space to the left of its own cell - the theme pulls
+  // it there with a negative margin - so the cell holds nothing and needs no padding to hold it in.
+  .sd-table__cell--drag,
+  .sd-table__cell--header.sd-table__cell--drag {
+    padding: 0;
+  }
+
+  // Delete, at the end of the row. The theme hangs the last action bar of a row three spacing units
+  // out past its own cell, which is right for a matrix whose last column is a wide answer and wrong
+  // here: it pushed the one button at the end of the row that much further from the row. It ends where
+  // the cells before it end.
+  .sd-table__cell--actions:not(.sd-table__cell--vertical):last-child .sd-action-bar {
+    margin-right: 0;
+  }
+
+  // Under the row: what the step does and what it does it to, in the face and at the size of the row
+  // above them. They were two columns, and holding a column open for the longest command in the case
+  // made every other row as wide as that one.
+  .sd-table__row--detail > td {
+    background: var(--svt-page);
+  }
+
+  .sd-table__cell--detail-panel {
+    padding: 2px 4px 6px 30px;
+
+    .sd-row + .sd-row {
+      margin-top: 0;
+    }
+
+    .sd-question__title {
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--svt-ink-3);
+      min-width: 64px;
+    }
+
+    .sd-question__content {
+      font-family: var(--svt-mono);
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--svt-ink-2);
+    }
+  }
+
+  // The question bar under the table: the Add Row button, standing for "the next step is the last
+  // one".
+  .sd-matrixdynamic__footer {
+    padding: 6px 0 2px;
+  }
+}
+
+// With the cursor already at the end the Add Row button is spent, the same way a row's own "Start
+// here" is.
+.svt-steps--at-end .sd-matrixdynamic__add-btn {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+// Frozen while the tester runs. `inert` is what actually locks it; this only says so, and it binds to
+// the session's `stepsLocked` and never to the spinner's `replayState`.
+.svt-steps--frozen {
+  opacity: 0.6;
+}
+
+// Where the next recorded step lands, said once, under the list it is about.
+.svt-steps__cursor {
+  margin: 0;
+  padding: 8px 14px 2px;
+  font-size: 12px;
+  color: var(--svt-gray-500);
+  border-top: 1px solid var(--svt-divider);
+}
+
+// The row's way into the document, at the far end of the line from "Start here": it is the one row
+// verb that is about reading rather than about editing.
+.svt-steps__json {
+  display: inline-flex;
+}
