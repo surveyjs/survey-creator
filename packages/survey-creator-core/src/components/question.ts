@@ -23,6 +23,8 @@ import {
   QuestionFactory,
   PopupModel,
   QuestionCompositeModel,
+  QuestionMatrixDynamicModel,
+  Base,
   defaultActionBarCss
 } from "survey-core";
 import { SurveyCreatorModel, isContentElement } from "../creator-base";
@@ -106,6 +108,32 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     event.cancelBubble = true;
     creator.selectElement(selEl, undefined, false);
     return true;
+  }
+  // A Filter Control's button clicked in the designer. Its click never reaches select(): an action
+  // stops the event. Any button selects the control; a preset's chip also opens the preset - its row
+  // in the presets matrix ("items") with the details open.
+  private onFilterDesignClick(item?: Base): void {
+    if (!this.canSelectElement()) return;
+    if (!item) {
+      this.creator.selectElement(this.surveyElement, undefined, false);
+      return;
+    }
+    this.creator.selectElement(this.surveyElement, "items", false);
+    // The sidebar keeps one callback to run once it shows, and this one takes the place of the
+    // grid's own: it goes to the category of "items" itself.
+    this.creator.sidebar.executeOnExpand(() => {
+      const grid = this.creator.propertyGrid;
+      const matrix = <QuestionMatrixDynamicModel>grid?.getQuestionByName("items");
+      if (!matrix) return;
+      const category = this.creator.showOneCategoryInPropertyGrid ? matrix.page?.name : (<any>matrix.parent)?.name;
+      if (!!category) {
+        this.creator.activatePropertyGridCategory(category);
+      }
+      const row = matrix.visibleRows.filter(r => r.editingObj === item)[0];
+      if (!!row && !row.isDetailPanelShowing) {
+        row.showDetailPanel();
+      }
+    });
   }
 
   rootCss() {
@@ -357,6 +385,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         (<any>surveyElement).setCanShowOptionItemCallback(undefined);
         this.creator.onPermissionsChanged.remove(this.permissionsChangedHandler);
       }
+      if (!!surveyElement["setDesignItemClickCallback"]) {
+        (<any>surveyElement).setDesignItemClickCallback(undefined);
+      }
       delete (<any>surveyElement.locDescription).placeholder;
     }
     this.resetPropertyValue("isEmptyElement");
@@ -376,6 +407,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
           this.permissionsChangedHandler = () => this.updateOptionItems();
         }
         this.creator.onPermissionsChanged.add(this.permissionsChangedHandler);
+      }
+      // The Filter Control: its buttons clicked in the designer select it, a preset's chip opens the preset
+      if (!!surveyElement["setDesignItemClickCallback"]) {
+        (<any>surveyElement).setDesignItemClickCallback((item?: Base): void => { this.onFilterDesignClick(item); });
       }
       if (this.surveyElement instanceof QuestionHtmlModel) {
         surveyElement.registerFunctionOnPropertyValueChanged("html", (newValue: any) => {

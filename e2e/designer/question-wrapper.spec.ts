@@ -18,10 +18,10 @@ function normalize(str: string) {
   return str.replace(/\xa0/gi, " ").replace(/(?:\r\n|\r|\n)/g, "");
 }
 
-const convertQuestionTypesCount = 22;
+const convertQuestionTypesCount = 23;
 const convertTextQuestionInputTypesCount = 13;
 const selectedObjectTextSelector = ".svc-side-bar__container-header .sv-action--object-selector .sd-action__title";
-const convertPopupContent = "Radio Button Group\nRating Scale\nSlider\nCheckboxes\nDropdown\nMulti-Select Dropdown\nYes/No (Boolean)\nFile Upload\nImage Picker\nRanking\nSingle-Line Input\nLong Text\nMultiple Textboxes\nPanel\nDynamic Panel\nSingle-Select Matrix\nMulti-Select Matrix\nDynamic Matrix\nHTML\nExpression (read-only)\nImage\nSignature";
+const convertPopupContent = "Radio Button Group\nRating Scale\nSlider\nCheckboxes\nDropdown\nMulti-Select Dropdown\nYes/No (Boolean)\nFile Upload\nImage Picker\nRanking\nSingle-Line Input\nLong Text\nMultiple Textboxes\nPanel\nDynamic Panel\nSingle-Select Matrix\nMulti-Select Matrix\nDynamic Matrix\nHTML\nExpression (read-only)\nImage\nSignature\nFilter";
 const convertInputTypePopupContent = "Color\nDate\nDate and Time\nEmail\nMonth\nNumber\nPassword\nRange\nPhone Number\nText\nTime\nURL\nWeek";
 
 test.describe(title, () => {
@@ -127,7 +127,6 @@ test.describe(title, () => {
     await expect(page.locator(".svc-question__content textarea")).toHaveCount(0);
     await expect(page.locator(".svc-question__content.svc-question__content--selected")).toHaveCount(0);
     await page.locator(".svc-question__content").hover({ position: { x: 5, y: 5 } });
-    await page.waitForTimeout(500);
     await expect(convertActionButton).toBeVisible();
 
     await convertActionButton.click();

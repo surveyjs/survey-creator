@@ -69,6 +69,8 @@ export var arStrings = {
     expression: "عملية حسابية (للقرائة فقط)",
     // "Signature"
     signaturepad: "لوحة توقيع",
+    // [Auto-translated] "Filter"
+    filter: "فلتر",
     // "Button Group"
     buttongroup: "Button group"
   },
@@ -304,6 +306,8 @@ export var arStrings = {
     themeResetConfirmationOk: "نعم ، إعادة تعيين السمة",
     // [Auto-translated] "Add Question"
     addNewQuestion: "إضافة سؤال",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "اختر نوع السؤال",
     // [Auto-translated] "Select page..."
     selectPage: "اختر صفحة...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var arStrings = {
     addNewTypeQuestion: "أضف {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[الشعار]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "رفع الشعار",
     // [Auto-translated] "Item "
     choices_Item: "بند ",
     // [Auto-translated] "Select a file"
@@ -815,6 +821,38 @@ export var arStrings = {
       // [Auto-translated] "Expression"
       expression: "تعبير"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "مصدر البيانات",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "عرض شرائح المرشح",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "عرض زر الفلاتر",
+      // [Auto-translated] "Show search"
+      showSearch: "عرض البحث",
+      // [Auto-translated] "Search in"
+      searchFields: "ابحث في",
+      // [Auto-translated] "Presets"
+      items: "الإعدادات المسبقة",
+      // [Auto-translated] "Default preset"
+      defaultItem: "الإعداد المسبق الافتراضي",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "السماح بعدة إعدادات مسبقة",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "السماح للمستجيبين بإضافة إعدادات مسبقة"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "اسم الإعداد المسبق",
+      // [Auto-translated] "Preset title"
+      title: "عنوان الإعداد المسبق",
+      // [Auto-translated] "Filter expression"
+      expression: "تعبير المرشح",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "السماح بالتحرير",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "السماح بالحذف"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "الترتيب حسب",
@@ -876,7 +914,9 @@ export var arStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "كل خيار في عمود منفصل",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "السماح بالترتيب حسب هذا العمود"
+      allowSort: "السماح بالترتيب حسب هذا العمود",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "السماح بالتصفية حسب هذا العمود"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1068,6 +1108,8 @@ export var arStrings = {
     "listIsEmpty@pages": "لا صفحات",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "لا توجد مستويات فرز",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "لا إعدادات مسبقة",
     // [Auto-translated] "Add choice"
     "addNew@choices": "إضافة الاختيار",
     // [Auto-translated] "Add rating value"
@@ -1094,6 +1136,8 @@ export var arStrings = {
     "addNew@pages": "إضافة صفحة",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "أضف مستوى الفرز",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "إضافة إعداد مسبق",
     // "Value"
     value: "القيمة",
     // "Text"
@@ -1208,6 +1252,10 @@ export var arStrings = {
     pageSize: "الصفوف في الصفحة",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "السماح للمستخدمين بفرز الصفوف",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "السماح بالتصفية بناء على هذا السؤال",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "عوامل المرشح",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "أقصى مستويات الفرز",
     // [Auto-translated] "Default sort order"
@@ -1764,6 +1812,10 @@ export var arStrings = {
       rateValues: "قيم التقييم",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "إعدادات شريط التمرير",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "إعدادات الفلتر",
+      // [Auto-translated] "Presets"
+      presets: "الإعدادات المسبقة",
       // "Choices from a Web Service"
       choicesByUrl: "خيارات من الإنترنت",
       // "Numbering"
@@ -3034,6 +3086,18 @@ export var arStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "لتعيين موقع شريط التقدم. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "اختر مصفوفة ديناميكية، أو مصفوفة منسدلة، أو لوحة ديناميكية يضيق الفلتر صفوفها أو لوحاتها.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "الإعداد المسبق الذي يطبق عند بدء الاستبيان."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "استخدم أسماء الحقول بين قوسين ملتفة، على سبيل المثال: {price} < 20 و {category} أي من ['مشروبات']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "يحدد الحدود التي يمكن للمشاركين استخدامها للتصفية حسب هذا الحقل. اترك فارغا للسماح لجميع المشغلين الذين يناسب الحقل.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "معرف عمود غير مرئي للمستجيبين.",

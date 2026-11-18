@@ -69,6 +69,8 @@ export var catalanTranslation = {
     expression: "Expressió (només lectura)",
     // "Signature"
     signaturepad: "Signatura",
+    // [Auto-translated] "Filter"
+    filter: "Filtre",
     // [Auto-translated] "Button Group"
     buttongroup: "Grup de botons"
   },
@@ -304,6 +306,8 @@ export var catalanTranslation = {
     themeResetConfirmationOk: "Sí, restablece el tema",
     // "Add Question"
     addNewQuestion: "Afegir pregunta",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Selecciona el tipus de pregunta",
     // "Select page..."
     selectPage: "Seleccionar pàgina ...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var catalanTranslation = {
     addNewTypeQuestion: "Afegir {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGOTIPO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logotip de pujada",
     // [Auto-translated] "Item "
     choices_Item: "Artículo ",
     // [Auto-translated] "Select a file"
@@ -815,6 +821,38 @@ export var catalanTranslation = {
       // [Auto-translated] "Expression"
       expression: "Expressió"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Font de dades",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Mostra els xips de filtre",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Mostra el botó Filtres",
+      // [Auto-translated] "Show search"
+      showSearch: "Mostra la cerca",
+      // [Auto-translated] "Search in"
+      searchFields: "Cerca a",
+      // [Auto-translated] "Presets"
+      items: "Presets",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Predefinició predeterminada",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Permetre múltiples predefinicions",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Permetre als enquestats afegir presets"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Nom predefinit",
+      // [Auto-translated] "Preset title"
+      title: "Títol predefinit",
+      // [Auto-translated] "Filter expression"
+      expression: "Expressió del filtre",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Permetre l'edició",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Permetre l'eliminació"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Ordenar per",
@@ -876,7 +914,9 @@ export var catalanTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Cada opción en una columna separada",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Permet ordenar per aquesta columna"
+      allowSort: "Permet ordenar per aquesta columna",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Permetre el filtratge per aquesta columna"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1068,6 +1108,8 @@ export var catalanTranslation = {
     "listIsEmpty@pages": "Sense pàgines",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "No hi ha nivells de sort",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Sense presets",
     // "Add new choice"
     "addNew@choices": "Añade una opción",
     // [Auto-translated] "Add rating value"
@@ -1094,6 +1136,8 @@ export var catalanTranslation = {
     "addNew@pages": "Afegeix pàgina",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Afegeix nivell d'ordenació",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Afegeix un ajust predefinit",
     // "Value"
     value: "Valor",
     // [Auto-translated] "Text"
@@ -1208,6 +1252,10 @@ export var catalanTranslation = {
     pageSize: "Files per pàgina",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Permetre als usuaris ordenar files",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Permetre el filtratge per aquesta pregunta",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Operadors de filtre",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Nivells màxims d'ordenació",
     // [Auto-translated] "Default sort order"
@@ -1764,6 +1812,10 @@ export var catalanTranslation = {
       rateValues: "Valores de la tasa",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Configuració del control deslizante",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Configuració del filtre",
+      // [Auto-translated] "Presets"
+      presets: "Presets",
       // "Choices from a Web Service"
       choicesByUrl: "Opcions de la web",
       // "Numbering"
@@ -3034,6 +3086,18 @@ export var catalanTranslation = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Establece la ubicación de la barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la enquesta."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Seleccioneu una matriu dinàmica, una matriu desplegable o un panell dinàmic les files o panells del qual el filtre va reduint.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "El preajust s'aplica quan comença l'enquesta."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Utilitza noms de camps entre parèntesis, per exemple: {price} < 20 i {category} anyof ['Beverages']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Limita els operadors que els enquestats poden utilitzar per filtrar per aquest camp. Deixa buit per permetre tots els operadors que s'ajustin al camp.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Un identificador de columna que no es visible para los encuestados.",

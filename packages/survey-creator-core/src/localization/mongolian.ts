@@ -69,6 +69,8 @@ export var mnStrings = {
     expression: "Илэрхийлэл (зөвхөн унших)",
     // "Signature"
     signaturepad: "Гарын үсэг",
+    // [Auto-translated] "Filter"
+    filter: "Шүүлтүүр",
     // "Button Group"
     buttongroup: "Багц товч"
   },
@@ -304,6 +306,8 @@ export var mnStrings = {
     themeResetConfirmationOk: "Тийм ээ, сэдвийг дахин тохируулах",
     // "Add Question"
     addNewQuestion: "Асуулт нэмэх",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Асуултын төрөл сонгох",
     // "Select page..."
     selectPage: "Хуудас сонгох...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var mnStrings = {
     addNewTypeQuestion: "{0} нэмэх", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[Лого]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Upload лого",
     // "Item "
     choices_Item: "Хэсэг ",
     // [Auto-translated] "Select a file"
@@ -815,6 +821,38 @@ export var mnStrings = {
       // [Auto-translated] "Expression"
       expression: "Өгүүлбэр"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Өгөгдлийн эх сурвалж",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Шүүлтүүрийн чипүүдийг харуулах",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Шүүлтүүрийн товчийг харуулах",
+      // [Auto-translated] "Show search"
+      showSearch: "Хайлтыг харуулах",
+      // [Auto-translated] "Search in"
+      searchFields: "Хайх",
+      // [Auto-translated] "Presets"
+      items: "Урьдчилсан тохиргоонууд",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Анхдагч урьдчилсан тохиргоо",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Олон урьдчилсан тохиргоог зөвшөөрөх",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Оролцогчдод урьдчилсан тохиргоо нэмэхийг зөвшөөрөх"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Урьдчилсан тохиргооны нэр",
+      // [Auto-translated] "Preset title"
+      title: "Урьдчилсан тохиргооны гарчиг",
+      // [Auto-translated] "Filter expression"
+      expression: "Шүүлтүүрийн илэрхийлэл",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Засварлахыг зөвшөөрөх",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Устгахыг зөвшөөрөх"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Эрэмбэл",
@@ -876,7 +914,9 @@ export var mnStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Тус тусдаа баганад байгаа сонголт бүр",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Энэ баганаар эрэмбэлэхийг зөвшөөрнө"
+      allowSort: "Энэ баганаар эрэмбэлэхийг зөвшөөрнө",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Энэ баганаар шүүлтүүр хийхийг зөвшөөрөх"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1068,6 +1108,8 @@ export var mnStrings = {
     "listIsEmpty@pages": "Хуудас байхгүй",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Сортлох түвшин байхгүй",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Урьдчилсан тохиргоо байхгүй",
     // "Add new choice"
     "addNew@choices": "Сонголт оруулах",
     // [Auto-translated] "Add rating value"
@@ -1094,6 +1136,8 @@ export var mnStrings = {
     "addNew@pages": "Хуудас нэмэх",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Сорт түвшин нэмэх",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Урьдчилсан тохиргоо нэмэх",
     // "Value"
     value: "Утга",
     // "Text"
@@ -1208,6 +1252,10 @@ export var mnStrings = {
     pageSize: "Хуудас тутамд мөр",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Хэрэглэгчдэд мөрүүдийг эрэмбэлэх боломж олгох",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Энэ асуултаар шүүлтүүр хийхийг зөвшөөрөх",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Шүүлтүүрийн операторууд",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Хамгийн их ангиллын түвшин",
     // [Auto-translated] "Default sort order"
@@ -1764,6 +1812,10 @@ export var mnStrings = {
       rateValues: "Утгыг үнэлэх",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Слайдерын тохиргоо",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Шүүлтүүрийн тохиргоо",
+      // [Auto-translated] "Presets"
+      presets: "Урьдчилсан тохиргоонууд",
       // "Choices from a Web Service"
       choicesByUrl: "RESTful сервисийн сонголтууд",
       // "Numbering"
@@ -3034,6 +3086,18 @@ export var mnStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Явцын барын байршлыг тогтооно. \"Auto\" value нь судалгааны гарчгийн дээр эсвэл доод тал дахь явцын барыг харуулна."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Шүүлтүүр нь мөр эсвэл самбаруудыг нарийсгадаг динамик матриц, унадаг матриц эсвэл динамик самбарыг сонгоно уу.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Судалгаа эхлэх үед хэрэгжсэн урьдчилсан тохиргоо."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Талбарын нэрийг мушгирсан хаалтанд ашиглана уу, жишээ нь: {price} < 20 ба {category} ['Ундаан'] аль нэгэн."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Оролцогчдыг энэ талбараар шүүхэд ашиглаж болох операторуудыг хязгаарлана. Талбарт тохирох бүх операторыг зөвшөөрөхийн тулд хоосон үлдээнэ.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Хариулагчдад харагдахгүй байгаа баганын ID.",

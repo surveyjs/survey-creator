@@ -69,6 +69,8 @@ export let svStrings = {
     expression: "Formel",
     // [Auto-translated] "Signature"
     signaturepad: "Underskrift",
+    // [Auto-translated] "Filter"
+    filter: "Filter",
     // [Auto-translated] "Button Group"
     buttongroup: "Knappgrupp"
   },
@@ -304,6 +306,8 @@ export let svStrings = {
     themeResetConfirmationOk: "Ja, återställ temat",
     // [Auto-translated] "Add Question"
     addNewQuestion: "Lägg till fråga",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Välj frågetyp",
     // [Auto-translated] "Select page..."
     selectPage: "Välj sida...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export let svStrings = {
     addNewTypeQuestion: "Lägg till {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGOTYP]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Uppladdningslogotyp",
     // [Auto-translated] "Item "
     choices_Item: "Sak ",
     // [Auto-translated] "Select a file"
@@ -816,6 +822,38 @@ export let svStrings = {
       // [Auto-translated] "Expression"
       expression: "Uttryck"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Datakälla",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Visa filterchip",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Visa Filter-knappen",
+      // [Auto-translated] "Show search"
+      showSearch: "Visa sökning",
+      // [Auto-translated] "Search in"
+      searchFields: "Sök i",
+      // [Auto-translated] "Presets"
+      items: "Förinställningar",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Standardförinställning",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Tillåt flera förinställningar",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Tillåt respondenter att lägga till förinställningar"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Förinställt namn",
+      // [Auto-translated] "Preset title"
+      title: "Förinställd titel",
+      // [Auto-translated] "Filter expression"
+      expression: "Filteruttryck",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Tillåt redigering",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Tillåt borttagning"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Sortera efter",
@@ -877,7 +915,9 @@ export let svStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Varje alternativ i en separat kolumn",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Tillåt sortering efter denna kolumn"
+      allowSort: "Tillåt sortering efter denna kolumn",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Tillåt filtrering efter denna kolumn"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1069,6 +1109,8 @@ export let svStrings = {
     "listIsEmpty@pages": "Inga sidor",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Inga sorteringsnivåer",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Inga förinställningar",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Lägg till valmöjligheter",
     // [Auto-translated] "Add rating value"
@@ -1095,6 +1137,8 @@ export let svStrings = {
     "addNew@pages": "Lägg till sida",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Lägg till sorteringsnivå",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Lägg till förinställning",
     // "Value"
     value: "Värde",
     // [Auto-translated] "Text"
@@ -1209,6 +1253,10 @@ export let svStrings = {
     pageSize: "Rader per sida",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Tillåt användare att sortera rader",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Tillåt filtrering efter denna fråga",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Filteroperatorer",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximala sorteringsnivåer",
     // [Auto-translated] "Default sort order"
@@ -1765,6 +1813,10 @@ export let svStrings = {
       rateValues: "Ordna värden",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Inställningar för skjutreglage",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Filterinställningar",
+      // [Auto-translated] "Presets"
+      presets: "Förinställningar",
       // "Choices from a Web Service"
       choicesByUrl: "Välj från webben",
       // [Auto-translated] "Numbering"
@@ -3035,6 +3087,18 @@ export let svStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Ställer in platsen för förloppsindikatorn. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Välj en dynamisk matris, en rullgardinsmenysmatris eller en dynamisk panel vars rader eller paneler filtret snävar in till.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Förinställningen som tillämpas när undersökningen startar."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Använd fältnamn inom klammer, till exempel: {price} < 20 och {category} någon av ['Beverages']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Begränsar vilka operatorer respondenter kan använda för att filtrera efter detta fält. Lämna tomt för att tillåta alla operatorer som passar fältet.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Ett kolumn-ID som inte är synligt för svarande.",

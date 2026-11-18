@@ -1,5 +1,5 @@
-import { test, expect } from "@playwright/test";
-import { url, setJSON, setOptions, hideAllAdornerActions, getPropertyGridCategory, changeToolboxScrolling, explicitErrorHandler, resetHoverToCreator, getPagesLength, setShowAddQuestionButton, setAllowEditSurveyTitle, compareScreenshot, doDrag, doDragDrop } from "./helper";
+import { expect } from "@playwright/test";
+import { test, url, setJSON, setOptions, hideAllAdornerActions, getPropertyGridCategory, changeToolboxScrolling, explicitErrorHandler, resetHoverToCreator, getPagesLength, setShowAddQuestionButton, setAllowEditSurveyTitle, compareScreenshot, doDrag, doDragDrop } from "./helper";
 import { downArrowImageLink, upArrowImageLink } from "../resources/base64images";
 
 const title = "DragDrop Screenshot";
@@ -181,7 +181,6 @@ test.describe(title, () => {
 
     await doDrag({ page, element: firstItem.locator(".svc-item-value-controls__drag"), target: firstItem });
 
-    await page.waitForTimeout(500);
     await compareScreenshot(page, qRoot, "drag-drop-item-values-ranking--dragging.png");
   });
 
@@ -309,7 +308,6 @@ test.describe(title, () => {
         targetPosition: { x: 20, y: 20 },
       }
     });
-    await page.waitForTimeout(500);
 
     await compareScreenshot(page, page.locator("[data-name=\"choices\"]"), "drag-drop-matrix-pg-choices.png");
   });
@@ -344,7 +342,6 @@ test.describe(title, () => {
         targetPosition: { x: 20, y: 40 }
       }
     });
-    await page.waitForTimeout(500);
 
     await compareScreenshot(page, page.locator("[data-name=\"choices\"]"), "drag-drop-matrix-pg-choices-scroll.png");
   });
@@ -536,7 +533,6 @@ test.describe(title, () => {
     }
 
     await expect(page.locator(".svc-question__content")).toHaveCount(2);
-    await page.waitForTimeout(500);
     await setClass(1, "drag-over-top");
     await compareScreenshot(page, page1, "drag-drop-inside-panel-dynamic-top.png");
     await setClass(1, "drag-over-top", "remove");
@@ -606,7 +602,7 @@ test.describe(title, () => {
     await compareScreenshot(page, newGhostPagePage, "drag-drop-scroll.png");
   });
 
-  test("Drag Drop to collapsed panel", async ({ page }) => {
+  test("Drag Drop to collapsed panel", { tag: "@fresh-page" }, async ({ page }) => {
     await setAllowEditSurveyTitle(page, false);
     await setShowAddQuestionButton(page, false);
     await page.evaluate(() => {
@@ -645,11 +641,10 @@ test.describe(title, () => {
 
     const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").first();
     await doDrag({ page, element: toolboxToolAction, target: panel });
-    await page.waitForTimeout(500);
     await compareScreenshot(page, page.locator(".svc-page__content"), "drag-drop-in-collapsed-panel.png");
   });
 
-  test("Drag Drop to collapsed page", async ({ page }) => {
+  test("Drag Drop to collapsed page", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       window["creator"].expandCollapseButtonVisibility = "onhover";
       window["creator"].expandOnDragTimeOut = 1000000;
@@ -688,7 +683,6 @@ test.describe(title, () => {
 
     const toolboxToolAction = page.locator(".svc-toolbox__tool > .svc-toolbox__tool-content").first();
     await doDrag({ page, element: toolboxToolAction, target: pageElement });
-    await page.waitForTimeout(500);
     await compareScreenshot(page, page.locator(".svc-tab-designer_content"), "drag-drop-in-collapsed-page.png");
   });
 });
@@ -698,7 +692,7 @@ test.describe("DragDrop custom widget Screenshot", () => {
     await page.goto(`${url}`);
   });
 
-  test("Drag indicator for custom widget", async ({ page }) => {
+  test("Drag indicator for custom widget", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       const widget = {
         name: "peoplepicker",

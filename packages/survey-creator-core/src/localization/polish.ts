@@ -69,6 +69,8 @@ export var polishStrings = {
     expression: "Wyrażenie",
     // [Auto-translated] "Signature"
     signaturepad: "Podpis",
+    // [Auto-translated] "Filter"
+    filter: "Filtr",
     // [Auto-translated] "Button Group"
     buttongroup: "Grupa przycisków"
   },
@@ -304,6 +306,8 @@ export var polishStrings = {
     themeResetConfirmationOk: "Tak, zresetuj motyw",
     // [Auto-translated] "Add Question"
     addNewQuestion: "Dodaj pytanie",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Wybierz typ pytania",
     // [Auto-translated] "Select page..."
     selectPage: "Wybierz stronę...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var polishStrings = {
     addNewTypeQuestion: "Dodaj {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logo Upload",
     // [Auto-translated] "Item "
     choices_Item: "Przedmiot ",
     // [Auto-translated] "Select a file"
@@ -816,6 +822,38 @@ export var polishStrings = {
       // [Auto-translated] "Expression"
       expression: "Wyrażenie"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Źródło danych",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Pokaż chipy filtrów",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Pokaż przycisk Filtry",
+      // [Auto-translated] "Show search"
+      showSearch: "Pokaż wyszukiwanie",
+      // [Auto-translated] "Search in"
+      searchFields: "Wyszukaj w",
+      // [Auto-translated] "Presets"
+      items: "Presety",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Domyślny preset",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Zezwól na wiele ustawień wstępnych",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Pozwól respondentom na dodawanie ustawień wstępnych"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Nazwa presetu",
+      // [Auto-translated] "Preset title"
+      title: "Tytuł presetu",
+      // [Auto-translated] "Filter expression"
+      expression: "Wyrażenie filtra",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Zezwól na edycję",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Zezwól na usuwanie"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Sortuj według",
@@ -877,7 +915,9 @@ export var polishStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Każda opcja w osobnej kolumnie",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Zezwalaj na sortowanie według tej kolumny"
+      allowSort: "Zezwalaj na sortowanie według tej kolumny",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Zezwól na filtrowanie według tej kolumny"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1069,6 +1109,8 @@ export var polishStrings = {
     "listIsEmpty@pages": "Brak stron",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Brak poziomów sortowania",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Brak presetów",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Dodaj wybór",
     // [Auto-translated] "Add rating value"
@@ -1095,6 +1137,8 @@ export var polishStrings = {
     "addNew@pages": "Dodaj stronę",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Dodaj poziom sortowania",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Dodaj preset",
     // "Value"
     value: "Wartość",
     // "Text"
@@ -1209,6 +1253,10 @@ export var polishStrings = {
     pageSize: "Wiersze na stronę",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Pozwól użytkownikom na sortowanie wierszy",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Zezwól na filtrowanie według tego pytania",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Operatory filtrów",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksymalne poziomy sortowania",
     // [Auto-translated] "Default sort order"
@@ -1765,6 +1813,10 @@ export var polishStrings = {
       rateValues: "Wartość oceny",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Ustawienia suwaka",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Ustawienia filtra",
+      // [Auto-translated] "Presets"
+      presets: "Presety",
       // "Choices from a Web Service"
       choicesByUrl: "Odpowiedzi z webserwisu",
       // [Auto-translated] "Numbering"
@@ -3035,6 +3087,18 @@ export var polishStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Ustawia położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu powyżej lub poniżej nagłówka ankiety."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Wybierz macierz dynamiczną, macierz rozwijaną lub panel dynamiczny, którego wiersze lub panele filtr zawęża.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Ustawienie wstępne zastosowane na początku ankiety."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Używaj nazw pól w nawiasach spiralnych, na przykład: {price} < 20 oraz {category} dowolnego z ['Napojów']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Ogranicza operatory, których respondenci mogą używać do filtrowania według tego pola. Pozostaw puste, aby umożliwić wszystkim operatorom pasującym do pola.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Identyfikator kolumny, który nie jest widoczny dla respondentów.",

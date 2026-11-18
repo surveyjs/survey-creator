@@ -36,7 +36,7 @@ async function trackAnimationClasses(page: Page): Promise<void> {
 }
 
 test.describe(title, () => {
-  test("root class follows the OS preference without a reload", async ({ page }) => {
+  test("root class follows the OS preference without a reload", { tag: "@fresh-page" }, async ({ page }) => {
     await page.goto(url);
     // The test page starts with animations off. Turning them on is not reactive, so the
     // first media change below is what re-renders the root with the new flag.
@@ -53,7 +53,7 @@ test.describe(title, () => {
     await expect(root).toHaveClass(/svc-creator--disable-animations/);
   });
 
-  test("no enter/leave animations when the user requests reduced motion", async ({ page }) => {
+  test("no enter/leave animations when the user requests reduced motion", { tag: "@fresh-page" }, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(url);
     await enableCreatorAnimations(page, true);
@@ -67,7 +67,7 @@ test.describe(title, () => {
     expect(classes.length).toEqual(0);
   });
 
-  test("enter/leave animations run when respectReducedMotion is false", async ({ page }) => {
+  test("enter/leave animations run when respectReducedMotion is false", { tag: "@fresh-page" }, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(url);
     await enableCreatorAnimations(page, false);

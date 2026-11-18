@@ -2,12 +2,11 @@
   <div
     :class="item.getActionBarItemCss()"
     v-on:click="onClick($event)"
-    v-key2click
     v-on:mouseover="(e) => onMouseOver(e)"
   >
-    <span :class="item.getActionBarItemTitleCss()">
-      {{ item.data.addNewQuestionText }}
-    </span>
+    <button type="button" class="svc-surface-btn__title-button">
+      <span :class="item.getActionBarItemTitleCss()">{{ item.data.addNewQuestionText }}</span>
+    </button>
     <div :class="item.cssClasses.itemTypeSelector">
       <SvComponent :is="'sv-action-bar-item-dropdown'" :item="item.data.questionTypeSelectorModel"></SvComponent>
     </div>
@@ -15,7 +14,6 @@
 </template>
 <script lang="ts" setup>
 import type { Action } from "survey-core";
-import { key2ClickDirective as vKey2click } from "survey-vue3-ui";
 import { SvComponent } from "survey-vue3-ui";
 import { useBase } from "survey-vue3-ui";
 const props = defineProps<{item: Action;}>();

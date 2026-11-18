@@ -1,3 +1,4 @@
+import type { Locator } from "@playwright/test";
 import {
   url,
   test,
@@ -14,6 +15,7 @@ import {
   changeToolboxSearchEnabled,
   doDragDrop,
   objectSelectorButton,
+  waitForAnimationFrames,
 } from "../helper";
 
 const title = "Side bar";
@@ -164,6 +166,18 @@ test.describe(title, () => {
     const toolboxPopup = page.locator(".svc-toolbox-popup .sv-popup__container").first();
     const pageNavigationPopup = page.locator(".svc-page-navigator .sv-popup__container").first();
     const pageNavigator = page.locator(".svc-page-navigator__selector").filter({ visible: true });
+    // boundingBox() can return null right after toBeVisible(): read a popup's position with retrying assertions.
+    const popupTop = (popup: Locator) => async () => (await popup.boundingBox())?.y;
+    const popupLeft = (popup: Locator) => async () => (await popup.boundingBox())?.x;
+    // Picking a toolbox item adds a question. The creator focuses its title and scrolls it into view later, from
+    // timers, and that scroll closes a popup opened in the meantime. Wait for the focus, then for the rendering
+    // update that dispatches the scroll event.
+    const pickFirstToolboxItem = async () => {
+      await toolboxPopup.locator(".sd-menu-item").first().click();
+      await expect(toolboxPopup).toBeHidden();
+      await expect(page.locator(".svc-question__content--selected .sv-string-editor").first()).toBeFocused();
+      await waitForAnimationFrames(page);
+    };
 
     await setJSON(page, {
       pages: [
@@ -178,32 +192,28 @@ test.describe(title, () => {
     await expect(dotsInToolbox).toBeVisible();
     await dotsInToolbox.click();
     await expect(toolboxPopup).toBeVisible();
-    let box = await toolboxPopup.boundingBox();
-    expect(box!.y).toBeGreaterThanOrEqual(0);
-    expect(box!.x).toBeGreaterThanOrEqual(0);
-    await toolboxPopup.locator(".sd-menu-item").first().click();
+    await expect.poll(popupTop(toolboxPopup)).toBeGreaterThanOrEqual(0);
+    await expect.poll(popupLeft(toolboxPopup)).toBeGreaterThanOrEqual(0);
+    await pickFirstToolboxItem();
 
     await pageNavigator.click();
     await expect(pageNavigationPopup).toBeVisible();
-    box = await pageNavigationPopup.boundingBox();
-    expect(box!.y).toBeGreaterThanOrEqual(0);
-    expect(box!.x).toBeLessThan(1500 - 100);
+    await expect.poll(popupTop(pageNavigationPopup)).toBeGreaterThanOrEqual(0);
+    await expect.poll(popupLeft(pageNavigationPopup)).toBeLessThan(1500 - 100);
     await pageNavigationPopup.locator(".sd-menu-item").getByText("page2").click();
 
     await changeToolboxLocation(page, "right");
 
     await dotsInToolbox.click();
     await expect(toolboxPopup).toBeVisible();
-    box = await toolboxPopup.boundingBox();
-    expect(box!.y).toBeGreaterThanOrEqual(0);
-    expect(box!.x).toBeLessThan(1500 - 100);
-    await toolboxPopup.locator(".sd-menu-item").first().click();
+    await expect.poll(popupTop(toolboxPopup)).toBeGreaterThanOrEqual(0);
+    await expect.poll(popupLeft(toolboxPopup)).toBeLessThan(1500 - 100);
+    await pickFirstToolboxItem();
 
     await pageNavigator.click();
     await expect(pageNavigationPopup).toBeVisible();
-    box = await pageNavigationPopup.boundingBox();
-    expect(box!.y).toBeGreaterThanOrEqual(0);
-    expect(box!.x).toBeGreaterThanOrEqual(0);
+    await expect.poll(popupTop(pageNavigationPopup)).toBeGreaterThanOrEqual(0);
+    await expect.poll(popupLeft(pageNavigationPopup)).toBeGreaterThanOrEqual(0);
     await pageNavigationPopup.locator(".sd-menu-item").first().click();
   });
 
@@ -214,7 +224,7 @@ test.describe(title, () => {
     const toolboxInDesigner = page.locator(".svc-creator-tab .svc-toolbox");
     const toolboxInSidebar = page.locator(".svc-side-bar .svc-toolbox");
     const toolboxButtonSelector = page.locator(".sd-action[title=\"Toolbox\"]");
-    const toolboxItemCount = 22;
+    const toolboxItemCount = 23;
     const itemsInToolboxInDesigner = toolboxInDesigner.locator(".svc-toolbox__item:not(.svc-toolbox__item-subtype):not(.svc-toolbox__item--dots)");
     const visibleItemsInToolboxInDesigner = itemsInToolboxInDesigner.filter({ visible: true });
     const itemsInToolboxInSidebar = toolboxInSidebar.locator(".svc-toolbox__item:not(.svc-toolbox__item-subtype):not(.svc-toolbox__item--dots)");
@@ -326,7 +336,6 @@ test.describe(title, () => {
     expect(await getQuestionTopPosition()).toEqual(366);
     await page.locator(".sv-action--object-selector").click();
     await page.locator(".sd-menu-item").getByText("Column 2").click();
-    await page.waitForTimeout(500);
-    expect(await getQuestionTopPosition()).toEqual(72);
+    await expect.poll(getQuestionTopPosition).toEqual(72);
   });
 });
