@@ -1,5 +1,4 @@
-import { test, expect } from "playwright/test";
-import { url, setJSON, getPropertyGridCategory, generalGroupName, compareScreenshot } from "./helper";
+import { test, expect, url, setJSON, getPropertyGridCategory, generalGroupName, compareScreenshot } from "./helper";
 
 // The settings of the Filter Control (survey-library #11890) in the property grid
 const title = "Property Grid: the Filter Control";

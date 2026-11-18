@@ -9,7 +9,7 @@ test.describe(title, () => {
     await page.waitForLoadState("load");
   });
 
-  test("Check minimal height", async ({ page }) => {
+  test("Check minimal height", { tag: "@fresh-page" }, async ({ page }) => {
     await changeToolboxScrolling(page, false);
     await changeToolboxSearchEnabled(page, false);
     await page.setViewportSize({ width: 1120, height: 900 });
@@ -76,7 +76,7 @@ test.describe(title, () => {
     await compareScreenshot(page, root, "propery-grid-flyout.png");
   });
 
-  test("Scaling design surface", async ({ page }) => {
+  test("Scaling design surface", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 3700 });
     await page.evaluate(() => {
       window["creator"].allowZoom = true;
@@ -185,7 +185,7 @@ test.describe(title, () => {
     await compareScreenshot(page, rootSelector, "page-selected-responsive.png", { maxDiffPixels: 2 });
   });
 
-  test("Page hidden header and top toolbar", async ({ page }) => {
+  test("Page hidden header and top toolbar", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     const json = {
       showQuestionNumbers: true,
@@ -311,7 +311,7 @@ test.describe(title, () => {
     await compareScreenshot(page, ".svc-logo-image", "logo-image-adorners-clear-hover.png");
   });
 
-  test("Check string editor on isRequired", async ({ page }) => {
+  test("Check string editor on isRequired", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate((json) => {
       window["Survey"].Serializer.findProperty("survey", "title").isRequired = true;
       window["creator"].JSON = json;

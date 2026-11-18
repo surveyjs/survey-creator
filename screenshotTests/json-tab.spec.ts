@@ -1,5 +1,4 @@
-import { test, expect } from "@playwright/test";
-import { url, setJSON, getTabbedMenuItemByText, compareScreenshot, urlWidget } from "./helper";
+import { test, expect, url, setJSON, getTabbedMenuItemByText, compareScreenshot, urlWidget } from "./helper";
 
 const title = "Json tab Screenshot";
 

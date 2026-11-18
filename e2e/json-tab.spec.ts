@@ -147,7 +147,7 @@ test.describe(title, () => {
     expect(caretTop + state.lineHeight).toBeLessThanOrEqual(state.scrollTop + state.clientHeight);
   });
 
-  test("Check deactivating other tabs when json has errors", async ({ page }) => {
+  test("Check deactivating other tabs when json has errors", { tag: "@fresh-page" }, async ({ page }) => {
     await setJSON(page, json);
     await getTabbedMenuItemByText(page, creatorTabJsonEditorName).click();
 

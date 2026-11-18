@@ -130,7 +130,7 @@ test.describe(title, () => {
     await expect(mobileSelector).toHaveCount(0);
   });
 
-  test("Check cleaning json doesn't cause warnings", async ({ page }) => {
+  test("Check cleaning json doesn't cause warnings", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       (console as any).error = (msg: unknown) => {
         throw new Error(String(msg));
