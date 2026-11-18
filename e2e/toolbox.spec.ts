@@ -7,7 +7,7 @@ test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${url}`);
   });
-  test("Survey Creator Toolbox categories are not localized Bug#7284", async ({ page }) => {
+  test("Survey Creator Toolbox categories are not localized Bug#7284", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1800, height: 800 });
 
     await page.evaluate(() => {

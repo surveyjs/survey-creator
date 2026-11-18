@@ -18,3 +18,4 @@ visualRegressionTests-V2/tests/
 **/screenshotLegacyTests/*.ts
 **/promts/
 **/e2e/offline-cache/*/
+perf/results/

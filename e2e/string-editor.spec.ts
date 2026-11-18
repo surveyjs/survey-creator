@@ -6,7 +6,7 @@ test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${url}`);
   });
-  test("String editor paste", async ({ page }) => {
+  test("String editor paste", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1000, height: 800 });
     const testJson = {
       "title": "Title",
@@ -36,7 +36,7 @@ test.describe(title, () => {
     const text = await page.getByRole("textbox", { name: "Survey Title" }).textContent();
     await expect(text).toBe("Lorem ipsum dolor si");
   });
-  test("String editor maxLength", async ({ page }) => {
+  test("String editor maxLength", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1000, height: 800 });
     const testJson = {
       "pages": [
@@ -107,7 +107,8 @@ test.describe(title, () => {
       return { survey: survey.title, page: survey.pages[0].title, question: survey.getQuestionByName("q1").title, modified: window["modifiedCounter"] };
     });
 
-    await addTrailingSpaces(page.getByRole("textbox", { name: "Survey Title" }));
+    // exact: until the property grid collapses at this width, its "Survey title" input matches the name too
+    await addTrailingSpaces(page.getByRole("textbox", { name: "Survey Title", exact: true }));
     expect(await getValues()).toEqual({ survey: "Survey  ", page: "Page", question: "Question", modified: 1 });
 
     await addTrailingSpaces(page.getByRole("textbox", { name: "Page 1" }));

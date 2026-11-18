@@ -602,7 +602,7 @@ test.describe(title, () => {
     await compareScreenshot(page, newGhostPagePage, "drag-drop-scroll.png");
   });
 
-  test("Drag Drop to collapsed panel", async ({ page }) => {
+  test("Drag Drop to collapsed panel", { tag: "@fresh-page" }, async ({ page }) => {
     await setAllowEditSurveyTitle(page, false);
     await setShowAddQuestionButton(page, false);
     await page.evaluate(() => {
@@ -644,7 +644,7 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".svc-page__content"), "drag-drop-in-collapsed-panel.png");
   });
 
-  test("Drag Drop to collapsed page", async ({ page }) => {
+  test("Drag Drop to collapsed page", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       window["creator"].expandCollapseButtonVisibility = "onhover";
       window["creator"].expandOnDragTimeOut = 1000000;
@@ -692,7 +692,7 @@ test.describe("DragDrop custom widget Screenshot", () => {
     await page.goto(`${url}`);
   });
 
-  test("Drag indicator for custom widget", async ({ page }) => {
+  test("Drag indicator for custom widget", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       const widget = {
         name: "peoplepicker",

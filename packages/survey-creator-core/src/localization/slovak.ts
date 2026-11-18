@@ -69,6 +69,8 @@ export var skStrings = {
     expression: "Výraz (iba na čítanie)",
     // "Signature"
     signaturepad: "Priestor na podpis",
+    // [Auto-translated] "Filter"
+    filter: "Filter",
     // [Auto-translated] "Button Group"
     buttongroup: "Skupina tlačidiel"
   },
@@ -304,6 +306,8 @@ export var skStrings = {
     themeResetConfirmationOk: "Áno, obnoviť motív",
     // "Add Question"
     addNewQuestion: "Pridať otázku",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Vyberte typ otázky",
     // "Select page..."
     selectPage: "Vybrať stránku...",
     // [Auto-translated] "Choices are copied from"
@@ -817,6 +821,38 @@ export var skStrings = {
       // [Auto-translated] "Expression"
       expression: "Výraz"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Zdroj údajov",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Zobraziť filtračné čipy",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Zobraziť tlačidlo Filtre",
+      // [Auto-translated] "Show search"
+      showSearch: "Zobraziť vyhľadávanie",
+      // [Auto-translated] "Search in"
+      searchFields: "Hľadať v",
+      // [Auto-translated] "Presets"
+      items: "Prednastavenia",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Predvolené prednastavenie",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Povoliť viacero predvolieb",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Povoliť respondentom pridávať prednastavenia"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Názov prednastavenia",
+      // [Auto-translated] "Preset title"
+      title: "Prednastavený názov",
+      // [Auto-translated] "Filter expression"
+      expression: "Výraz filtra",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Povoliť úpravy",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Povoliť mazanie"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Zoradiť podľa",
@@ -878,7 +914,9 @@ export var skStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Každá možnosť v samostatnom stĺpci",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Povoľte triedenie podľa tohto stĺpca"
+      allowSort: "Povoľte triedenie podľa tohto stĺpca",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Povoliť filtrovanie podľa tohto stĺpca"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1070,6 +1108,8 @@ export var skStrings = {
     "listIsEmpty@pages": "Žiadne stránky",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Žiadne triedenie úrovní",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Žiadne prednastavenia",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Pridajte výber",
     // [Auto-translated] "Add rating value"
@@ -1096,6 +1136,8 @@ export var skStrings = {
     "addNew@pages": "Pridať stránku",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Pridať úroveň triedenia",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Pridať prednastavenie",
     // "Value"
     value: "Hodnota",
     // [Auto-translated] "Text"
@@ -1210,6 +1252,10 @@ export var skStrings = {
     pageSize: "Riadky na stránku",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Umožniť používateľom triediť riadky",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Povoliť filtrovanie podľa tejto otázky",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Filtračné operátory",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximálne úrovne triedenia",
     // [Auto-translated] "Default sort order"
@@ -1766,6 +1812,10 @@ export var skStrings = {
       rateValues: "Hodnoty hodnotenia",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Nastavenia posuvníka",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Nastavenia filtra",
+      // [Auto-translated] "Presets"
+      presets: "Prednastavenia",
       // "Choices from a Web Service"
       choicesByUrl: "Možnosti z webu",
       // "Numbering"
@@ -3036,6 +3086,18 @@ export var skStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Nastaví umiestnenie indikátora priebehu. Hodnota \"Auto\" zobrazuje indikátor priebehu nad alebo pod hlavičkou prieskumu."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Vyberte dynamickú maticu, rozbaľovaciu maticu alebo dynamický panel, ktorého riadky alebo panely filter zužuje.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Prednastavenie aplikované na začiatku prieskumu."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Použite názvy polí v zložitých zátvorkách, napríklad: {price} < 20 a {category} ktorýkoľvek z ['Nápoje']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Obmedzuje operátory, ktoré môžu respondenti použiť na filtrovanie podľa tohto poľa. Ponechajte prázdne, aby boli povolené všetky operátory, ktoré zodpovedajú poľu.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID stĺpca, ktoré respondenti nevidia.",

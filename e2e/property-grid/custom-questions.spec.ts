@@ -7,7 +7,7 @@ test.describe(title, () => {
     await page.goto(url);
   });
 
-  test("Check color editor key navigation", async ({ page }) => {
+  test("Check color editor key navigation", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await page.evaluate(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
@@ -55,7 +55,7 @@ test.describe(title, () => {
     await expect(page.locator("div[data-name='fontColor1'] .sd-formbox__input")).toHaveValue("#55B534");
   });
 
-  test("Check spinedit editor key navigation", async ({ page }) => {
+  test("Check spinedit editor key navigation", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await page.evaluate(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
@@ -113,7 +113,7 @@ test.describe(title, () => {
     await expect(firstSpinInputSelector).toHaveValue("16");
   });
 
-  test("Check file editor key navigation", async ({ page }) => {
+  test("Check file editor key navigation", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await page.evaluate(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
@@ -145,7 +145,7 @@ test.describe(title, () => {
     await expect(colorInputSelector).toHaveValue("");
   });
 
-  test("Check file editor with disable input", async ({ page }) => {
+  test("Check file editor with disable input", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await page.evaluate(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {

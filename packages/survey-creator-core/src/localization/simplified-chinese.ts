@@ -69,6 +69,8 @@ export var simplifiedChineseTranslation = {
     expression: "表达式(只读)",
     // [Auto-translated] "Signature"
     signaturepad: "签名",
+    // [Auto-translated] "Filter"
+    filter: "筛选",
     // [Auto-translated] "Button Group"
     buttongroup: "按钮组"
   },
@@ -304,6 +306,8 @@ export var simplifiedChineseTranslation = {
     themeResetConfirmationOk: "是，重置主题",
     // "Add Question"
     addNewQuestion: "添加问题",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "选择题型",
     // [Auto-translated] "Select page..."
     selectPage: "选择页面...",
     // [Auto-translated] "Choices are copied from"
@@ -817,6 +821,38 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Expression"
       expression: "表达"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "数据来源",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "显示滤波芯片",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "显示筛选器按钮",
+      // [Auto-translated] "Show search"
+      showSearch: "显示搜索",
+      // [Auto-translated] "Search in"
+      searchFields: "搜索",
+      // [Auto-translated] "Presets"
+      items: "预设",
+      // [Auto-translated] "Default preset"
+      defaultItem: "默认预设",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "允许多个预设",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "允许受访者添加预设"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "预设名称",
+      // [Auto-translated] "Preset title"
+      title: "预设标题",
+      // [Auto-translated] "Filter expression"
+      expression: "过滤器表达式",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "允许编辑",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "允许删除"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "排序",
@@ -878,7 +914,9 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "每个选项都在单独的列中",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "允许按此列排序"
+      allowSort: "允许按此列排序",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "允许按此列进行筛选"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1070,6 +1108,8 @@ export var simplifiedChineseTranslation = {
     "listIsEmpty@pages": "没有页面",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "无等级",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "无预设",
     // [Auto-translated] "Add choice"
     "addNew@choices": "增加选择",
     // [Auto-translated] "Add rating value"
@@ -1096,6 +1136,8 @@ export var simplifiedChineseTranslation = {
     "addNew@pages": "添加页面",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "添加排序层级",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "添加预设",
     // "Value"
     value: "值",
     // "Text"
@@ -1210,6 +1252,10 @@ export var simplifiedChineseTranslation = {
     pageSize: "每页行数",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "允许用户排序行",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "允许通过此问题进行筛选",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "滤波器运算符",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "最高排序等级",
     // [Auto-translated] "Default sort order"
@@ -1766,6 +1812,10 @@ export var simplifiedChineseTranslation = {
       rateValues: "设置评分值",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "滑块设置",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "筛选设置",
+      // [Auto-translated] "Presets"
+      presets: "预设",
       // "Choices from a Web Service"
       choicesByUrl: "通过 URL 导入选项",
       // [Auto-translated] "Numbering"
@@ -3036,6 +3086,18 @@ export var simplifiedChineseTranslation = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "设置进度条的位置。“自动”值在调查标题的上方或下方显示进度条。"
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "选择一个动态矩阵、下拉矩阵或一个动态面板，其筛选器会缩小行或面板。",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "调查开始时应用的预设。"
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "使用大括号中的字段名称，例如：{price} < 20 和 {category} 任意 ['Beverages']。"
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "限制受访者可用来筛选该字段的运算符。留空以允许所有适合该字段的运算符。",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "受访者不可见的列 ID。",

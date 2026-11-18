@@ -656,7 +656,7 @@ test.describe(title, () => {
     await expect(getStringEditorByText(page, "Item 5")).toHaveCount(1);
   });
 
-  test("Check string editor composition update events", async ({ page }) => {
+  test("Check string editor composition update events", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       const property = (window as any).Survey.Serializer.findProperty("question", "title");
       property.maxLength = 2;
@@ -692,7 +692,7 @@ test.describe(title, () => {
     });
   });
 
-  test("Check string-editor enter key", async ({ page }) => {
+  test("Check string-editor enter key", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       const property = (window as any).Survey.Serializer.findProperty("question", "title");
       property.maxLength = 2;

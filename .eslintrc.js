@@ -111,6 +111,14 @@ module.exports = {
   },
   "overrides": [
     {
+      // The perf suites: Node scripts that print, and TypeScript that Node runs directly.
+      "files": ["perf/**"],
+      "rules": {
+        "no-console": "off",
+        "@typescript-eslint/consistent-type-imports": "error"
+      }
+    },
+    {
       "files": [
         "*.js"
       ],

@@ -1,5 +1,4 @@
-import { expect } from "@playwright/test";
-import { test, url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, getListItemByText, resetHoverToCreator, compareScreenshot, resetFocusToBody, getVisibleSelectListItemByText, hideContentBehindPopup, showContentBehindPopup } from "./helper";
+import { test, expect, url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, getListItemByText, resetHoverToCreator, compareScreenshot, resetFocusToBody, getVisibleSelectListItemByText, hideContentBehindPopup, showContentBehindPopup } from "./helper";
 
 const title = "Logic tab Screenshot";
 

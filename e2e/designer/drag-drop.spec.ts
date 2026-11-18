@@ -650,7 +650,7 @@ test.describe(title, () => {
     expect(await getItemValueByIndex(page, "question1", 2)).toEqual("Item 2");
   });
 
-  test("Drag Drop ItemValue (choices): not-allowed cursor", async ({ page }) => {
+  test("Drag Drop ItemValue (choices): not-allowed cursor", { tag: "@fresh-page" }, async ({ page }) => {
     const json = {
       pages: [{ name: "page1", elements: [{ type: "radiogroup", name: "question1", choices: ["Item 1", "Item 2"] }] }],
     };
@@ -1115,7 +1115,7 @@ test.describe(title, () => {
     expect(await getJSON(page)).toEqual(expectedJson);
   });
 
-  test("Drag Drop to new page and Undo", async ({ page }) => {
+  test("Drag Drop to new page and Undo", { tag: "@fresh-page" }, async ({ page }) => {
     const newGhostPagePage = page.locator("[data-sv-drop-target-survey-element='newGhostPage']").filter({ visible: true }).first();
     const EmptyPage = page.locator("[data-sv-drop-target-survey-element='page1']").filter({ visible: true }).first();
     const undoAction = page.getByRole("button", { name: "Undo" }).filter({ visible: true }).first();

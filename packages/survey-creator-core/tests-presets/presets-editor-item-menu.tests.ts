@@ -88,7 +88,7 @@ test("Preset edit, context menu - defaut toolbox matrices", () => {
   const value = editor.getValue("toolbox_matrix");
   expect(value.filter(v => v.name === "ranking")).toHaveLength(1);
   expect(value.filter(v => v.name === "text")).toHaveLength(0);
-  expect(value).toHaveLength(17);
+  expect(value).toHaveLength(18);
 
   const cats = editor.getValue("toolbox_categories");
   expect(cats).toHaveLength(2);
@@ -175,14 +175,14 @@ test("Preset edit, categories context menu - remove", () => {
   const unsorted = editor.getValue("toolbox_matrix");
   expect(cats[0].items).toHaveLength(3);
   expect(cats[0].items.filter(i => i.name == "comment")).toHaveLength(1);
-  expect(unsorted).toHaveLength(17);
+  expect(unsorted).toHaveLength(18);
   actions.filter(a => a.id == "remove-from")[0].action();
 
   const cats2 = editor.getValue("toolbox_categories");
   const unsorted2 = editor.getValue("toolbox_matrix");
   expect(cats2[0].items).toHaveLength(2);
   expect(cats2[0].items.filter(i => i.name == "comment")).toHaveLength(0);
-  expect(unsorted2).toHaveLength(18);
+  expect(unsorted2).toHaveLength(19);
   expect(unsorted.filter(i => i.name == "comment")).toHaveLength(1);
 });
 
@@ -195,7 +195,7 @@ test("Preset edit, categories context menu - check move to category", () => {
   expect(cats[0].items.filter(i => i.name == "comment")).toHaveLength(1);
   expect(cats[1].items).toHaveLength(2);
   expect(cats[1].items.filter(i => i.name == "comment")).toHaveLength(0);
-  expect(unsorted).toHaveLength(17);
+  expect(unsorted).toHaveLength(18);
   actions.filter(a => a.id == "move-to-categories")[0].items.filter(a => a.id == "to-containers")[0].action();
 
   const cats2 = editor.getValue("toolbox_categories");
@@ -206,7 +206,7 @@ test("Preset edit, categories context menu - check move to category", () => {
   expect(cats2[1].category).toBe("containers");
   expect(cats2[1].items).toHaveLength(3);
   expect(cats2[1].items.filter(i => i.name == "comment")).toHaveLength(1);
-  expect(unsorted2).toHaveLength(17);
+  expect(unsorted2).toHaveLength(18);
   expect(unsorted.filter(i => i.name == "comment")).toHaveLength(0);
 });
 
@@ -218,7 +218,7 @@ test("Preset edit, context menu - check move to new category", () => {
   expect(cats).toHaveLength(2);
   expect(cats[0].items).toHaveLength(3);
   expect(cats[0].items.filter(i => i.name == "comment")).toHaveLength(1);
-  expect(unsorted).toHaveLength(17);
+  expect(unsorted).toHaveLength(18);
   actions.filter(a => a.id == "move-to-new-category")[0].action();
 
   const cats2 = editor.getValue("toolbox_categories");
@@ -229,7 +229,7 @@ test("Preset edit, context menu - check move to new category", () => {
   expect(cats2[2].category).toBe("category1");
   expect(cats2[2].items).toHaveLength(1);
   expect(cats2[2].items.filter(i => i.name == "comment")).toHaveLength(1);
-  expect(unsorted2).toHaveLength(17);
+  expect(unsorted2).toHaveLength(18);
   expect(unsorted.filter(i => i.name == "comment")).toHaveLength(0);
 });
 
@@ -251,7 +251,7 @@ test("Preset edit (no categories), context menu - defaut toolbox matrices", () =
   const value = editor.getValue("toolbox_matrix");
   expect(value.filter(v => v.name === "ranking")).toHaveLength(1);
   expect(value.filter(v => v.name === "text")).toHaveLength(0);
-  expect(value).toHaveLength(17);
+  expect(value).toHaveLength(18);
 
   const cats = editor.getValue("toolbox_items");
   expect(cats).toHaveLength(5);
@@ -327,14 +327,14 @@ test("Preset edit (no categories), categories context menu - remove", () => {
   const unsorted = editor.getValue("toolbox_matrix");
   expect(items).toHaveLength(5);
   expect(items.filter(i => i.name == "comment")).toHaveLength(1);
-  expect(unsorted).toHaveLength(17);
+  expect(unsorted).toHaveLength(18);
   actions.filter(a => a.id == "remove-from")[0].action();
 
   const items2 = editor.getValue("toolbox_categories");
   const unsorted2 = editor.getValue("toolbox_matrix");
   expect(items2).toHaveLength(2);
   expect(items2.filter(i => i.name == "comment")).toHaveLength(0);
-  expect(unsorted2).toHaveLength(18);
+  expect(unsorted2).toHaveLength(19);
   expect(unsorted.filter(i => i.name == "comment")).toHaveLength(1);
 });
 

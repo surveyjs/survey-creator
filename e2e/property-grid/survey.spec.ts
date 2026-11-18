@@ -175,7 +175,7 @@ test.describe(title, () => {
     await expect(popupContainer).not.toBeVisible();
   });
 
-  test("Search correctly scrolls to element", async ({ page }) => {
+  test("Search correctly scrolls to element", { tag: "@fresh-page" }, async ({ page }) => {
     const json = {
       "pages": [
         {

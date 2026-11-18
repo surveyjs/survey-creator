@@ -8,7 +8,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1920, height: 1080 });
   });
 
-  test("Change Creator.locale property", async ({ page }) => {
+  test("Change Creator.locale property", { tag: "@fresh-page" }, async ({ page }) => {
     const checkboxText = "Auswahl";
     await setJSON(page, { elements: [{ type: "checkbox", name: "question1" }] });
     await page.locator("[data-name='question1']").click();

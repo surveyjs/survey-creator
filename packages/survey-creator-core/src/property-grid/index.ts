@@ -1029,6 +1029,11 @@ export class PropertyGridModel {
     // A focus still waiting for the previous grid survey would mark this one as rendered
     this.cancelDeferredFocus();
     this.isSurveyJustCreated = true;
+    // Title actions are created on the first request and cached. A renderer can render the new survey
+    // synchronously from onNewSurveyCreatedCallback (Angular does), so add these handlers before calling it
+    if (!!this.obj) {
+      this.addTitleActionsHandlers();
+    }
     if (this.onNewSurveyCreatedCallback) {
       this.onNewSurveyCreatedCallback();
     }
@@ -1043,19 +1048,6 @@ export class PropertyGridModel {
       if (options.errors.length === 0) {
         this.onValidateQuestion(options);
       }
-    });
-    this.survey.onGetQuestionTitleActions.add((sender, options) => {
-      this.titleActionsCreator.onGetQuestionTitleActions(options);
-      this.onGetQuestionTitleActions(options, this.options);
-      const q = options.question;
-      this.options.onPropertyEditorUpdateTitleActionsCallback(this.obj, q.property, q, options.actions);
-      options.actions.forEach(action => {
-        if (!action.appearance)
-          action.appearance = { style: "neutral", mode: "tertiary", size: "small" };
-      });
-    });
-    this.survey.onGetPanelTitleActions.add((sender, options) => {
-      options.actions.splice(0, options.actions.length);
     });
     this.survey.onMatrixCellCreated.add((sender, options) => {
       this.onMatrixCellCreated(options);
@@ -1151,6 +1143,21 @@ export class PropertyGridModel {
     survey.getAllQuestions().forEach(setupQuestion);
     survey.onQuestionCreated.add((_, options) => setupQuestion(options.question));
     this.options.onPropertyGridSurveyCreatedCallback(this.obj, this.survey);
+  }
+  private addTitleActionsHandlers(): void {
+    this.survey.onGetQuestionTitleActions.add((sender, options) => {
+      this.titleActionsCreator.onGetQuestionTitleActions(options);
+      this.onGetQuestionTitleActions(options, this.options);
+      const q = options.question;
+      this.options.onPropertyEditorUpdateTitleActionsCallback(this.obj, q.property, q, options.actions);
+      options.actions.forEach(action => {
+        if (!action.appearance)
+          action.appearance = { style: "neutral", mode: "tertiary", size: "small" };
+      });
+    });
+    this.survey.onGetPanelTitleActions.add((sender, options) => {
+      options.actions.splice(0, options.actions.length);
+    });
   }
   private updateNextVisibleQuestionGroupingCss(question: Question): void {
     const parent = question && question.parent;
@@ -2237,6 +2244,11 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       let text = editorLocalization.getString("qt." + value);
       if (text && text !== value) return text;
     }
+    // The operators are named the way the logic tab names them.
+    if (prop.name === "filterOperators") {
+      let text = editorLocalization.getString("op." + value);
+      if (text && text !== value) return text;
+    }
     if (value === null) return null;
     return editorLocalization.getPropertyValueInEditor(prop.name, value);
   }
@@ -2311,6 +2323,30 @@ export class PropertyGridEditorSet extends PropertyGridEditorDropdown {
     const newVal = val.filter(item => !!ItemValue.getItemByValue(choices, item));
     if (newVal.length !== val.length) {
       question.value = newVal;
+    }
+  }
+}
+// A string[] property that names its choices (the Filter Control's searchFields, filterOperators) is
+// a pick list; one without them (dataList) stays a text area, see PropertyGridEditorStringArray.
+export class PropertyGridEditorStringArrayChoices extends PropertyGridEditorSet {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "string[]" && prop.hasChoices;
+  }
+  // The value is an array: keep the names the new choices still have. The dropdown's own check
+  // compares the whole array to a single choice and would clear it every time.
+  onMasterValueChanged(obj: Base, prop: JsonObjectProperty, question: Question): void {
+    const propChoices = prop.getChoices(obj, (choices: any) => { });
+    if (Array.isArray(propChoices) && propChoices.length > 0) {
+      this.setChoices(obj, question, prop);
+    } else {
+      // setChoices keeps the old list when it is handed an empty one
+      (<QuestionSelectBase>question).choices = [];
+    }
+    const value = question.value;
+    if (!Array.isArray(value)) return;
+    const kept = value.filter((val: any): boolean => !!ItemValue.getItemByValue((<QuestionSelectBase>question).choices, val));
+    if (kept.length !== value.length) {
+      question.value = kept;
     }
   }
 }
@@ -2393,6 +2429,17 @@ export class PropertyGridEditorQuestionSelectBase extends PropertyGridEditorQues
     return res;
   }
 }
+// The Filter Control's source: a question that holds records the control can filter - a dynamic or
+// dropdown matrix, a dynamic panel. survey-core resolves it by the same duck typing.
+export class PropertyGridEditorQuestionFilterSource extends PropertyGridEditorQuestionSelectBase {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "question_filtersource";
+  }
+  protected isQuestionFit(question: Question): boolean {
+    const q: any = question;
+    return typeof q.getFilterFields === "function" && typeof q.setControlFilter === "function";
+  }
+}
 export class PropertyGridEditorQuestionCarryForward extends PropertyGridEditorQuestionSelectBase {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "question_carryforward";
@@ -2453,10 +2500,12 @@ PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
 PropertyGridEditorCollection.register(new PropertyGridEditorSet());
 PropertyGridEditorCollection.register(new PropertyGridEditorPage());
 PropertyGridEditorCollection.register(new PropertyGridEditorStringArray());
+PropertyGridEditorCollection.register(new PropertyGridEditorStringArrayChoices());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionCarryForward());
+PropertyGridEditorCollection.register(new PropertyGridEditorQuestionFilterSource());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
 PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 PropertyGridEditorCollection.register(new PropertyGridEditorColorWithAlpha());

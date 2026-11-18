@@ -1,5 +1,5 @@
-import { expect, Page } from "@playwright/test";
-import { test, url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, hideContentBehindPopup, showContentBehindPopup, loadCreatorLocales } from "./helper";
+import type { Page } from "@playwright/test";
+import { test, expect, url, getTabbedMenuItemByText, getBarItemByTitle, setJSON, getListItemByText, compareScreenshot, hideContentBehindPopup, showContentBehindPopup, loadCreatorLocales } from "./helper";
 
 const title = "Translation tab Screenshot";
 
@@ -8,7 +8,7 @@ test.describe(title, () => {
     await page.goto(`${url}`);
   });
 
-  test("strings view", async ({ page }) => {
+  test("strings view", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 2560, height: 1440 });
     // the empty cells of the ru column show the creator ru placeholder
     await loadCreatorLocales(page);

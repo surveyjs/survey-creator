@@ -69,6 +69,8 @@ export var spanishTranslation = {
     expression: "Expresión (solo lectura)",
     // "Signature"
     signaturepad: "Almohadilla de firma",
+    // [Auto-translated] "Filter"
+    filter: "Filtro",
     // [Auto-translated] "Button Group"
     buttongroup: "Grupo de botones"
   },
@@ -304,6 +306,8 @@ export var spanishTranslation = {
     themeResetConfirmationOk: "Sí, restablece el tema",
     // "Add Question"
     addNewQuestion: "Añadir pregunta",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Seleccionar tipo de pregunta",
     // "Select page..."
     selectPage: "Seleccionar página ...",
     // [Auto-translated] "Choices are copied from"
@@ -817,6 +821,38 @@ export var spanishTranslation = {
       // [Auto-translated] "Expression"
       expression: "Expresión"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Fuente de datos",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Mostrar chips de filtro",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Mostrar el botón Filtros",
+      // [Auto-translated] "Show search"
+      showSearch: "Mostrar búsqueda",
+      // [Auto-translated] "Search in"
+      searchFields: "Buscar en",
+      // [Auto-translated] "Presets"
+      items: "Presets",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Ajuste predeterminado",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Permitir múltiples ajustes preestablecidos",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Permitir que los encuestados añadan ajustes preestablecidos"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Nombre predefinido",
+      // [Auto-translated] "Preset title"
+      title: "Título predefinido",
+      // [Auto-translated] "Filter expression"
+      expression: "Expresión del filtro",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Permitir edición",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Permitir la eliminación"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Ordenar por",
@@ -878,7 +914,9 @@ export var spanishTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Cada opción en una columna separada",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Permitir ordenación por esta columna"
+      allowSort: "Permitir ordenación por esta columna",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Permitir filtrado por esta columna"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1070,6 +1108,8 @@ export var spanishTranslation = {
     "listIsEmpty@pages": "Sin páginas",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "No hay niveles de suerte",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Sin ajustes preestablecidos",
     // "Add new choice"
     "addNew@choices": "Añade una opción",
     // [Auto-translated] "Add rating value"
@@ -1096,6 +1136,8 @@ export var spanishTranslation = {
     "addNew@pages": "Añadir página",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Añadir nivel de ordenación",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Añadir preajuste",
     // "Value"
     value: "Valor",
     // "Text"
@@ -1210,6 +1252,10 @@ export var spanishTranslation = {
     pageSize: "Filas por página",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Permitir a los usuarios ordenar filas",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Permitir filtrar por esta pregunta",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Operadores de filtro",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Niveles máximos de ordenación",
     // [Auto-translated] "Default sort order"
@@ -1766,6 +1812,10 @@ export var spanishTranslation = {
       rateValues: "Valores de la tasa",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Configuración del control deslizante",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Configuración del filtro",
+      // [Auto-translated] "Presets"
+      presets: "Presets",
       // "Choices from a Web Service"
       choicesByUrl: "Opciones de la web",
       // "Numbering"
@@ -3036,6 +3086,18 @@ export var spanishTranslation = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Establece la ubicación de la barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la encuesta."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Selecciona una matriz dinámica, una matriz desplegable o un panel dinámico cuyas filas o paneles el filtro acota a la retaguardia.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "El ajuste preestablecido se aplica cuando comienza la encuesta."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Utilice nombres de campos entre corchetes, por ejemplo: {price} < 20 y {category} anyof ['Beverages']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Limita los operadores que los encuestados pueden usar para filtrar por este campo. Dejar vacío para permitir todos los operadores que se adapten al campo.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Un identificador de columna que no es visible para los encuestados.",

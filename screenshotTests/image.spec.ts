@@ -1,5 +1,4 @@
-import { expect } from "@playwright/test";
-import { test, url, setJSON, explicitErrorHandler } from "./helper";
+import { test, expect, url, setJSON, explicitErrorHandler } from "./helper";
 import { upArrowImageLink } from "../resources/base64images";
 
 test.beforeEach(async ({ page }) => {

@@ -69,6 +69,8 @@ export var indonesianStrings = {
     expression: "Ekspresi (dibaca saja)",
     // [Auto-translated] "Signature"
     signaturepad: "Tanda tangan",
+    // [Auto-translated] "Filter"
+    filter: "Filter",
     // [Auto-translated] "Button Group"
     buttongroup: "Grup Tombol"
   },
@@ -304,6 +306,8 @@ export var indonesianStrings = {
     themeResetConfirmationOk: "Ya, atur ulang tema",
     // "Add Question"
     addNewQuestion: "Tambah pertanyaan",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Pilih jenis pertanyaan",
     // [Auto-translated] "Select page..."
     selectPage: "Pilih halaman...",
     // [Auto-translated] "Choices are copied from"
@@ -817,6 +821,38 @@ export var indonesianStrings = {
       // [Auto-translated] "Expression"
       expression: "Ekspresi"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Sumber data",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Tampilkan chip filter",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Tampilkan tombol Filter",
+      // [Auto-translated] "Show search"
+      showSearch: "Tampilkan pencarian",
+      // [Auto-translated] "Search in"
+      searchFields: "Cari di",
+      // [Auto-translated] "Presets"
+      items: "Preset",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Prasetel default",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Izinkan beberapa preset",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Izinkan responden menambahkan preset"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Nama preset",
+      // [Auto-translated] "Preset title"
+      title: "Judul preset",
+      // [Auto-translated] "Filter expression"
+      expression: "Ekspresi filter",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Izinkan pengeditan",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Izinkan penghapusan"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Urutkan berdasarkan",
@@ -878,7 +914,9 @@ export var indonesianStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Setiap opsi dalam kolom terpisah",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Izinkan pengurutan berdasarkan kolom ini"
+      allowSort: "Izinkan pengurutan berdasarkan kolom ini",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Izinkan penyaringan berdasarkan kolom ini"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1070,6 +1108,8 @@ export var indonesianStrings = {
     "listIsEmpty@pages": "Tidak ada halaman",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Tidak ada tingkat pengurutan",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Tidak ada preset",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Tambahkan pilihan",
     // [Auto-translated] "Add rating value"
@@ -1096,6 +1136,8 @@ export var indonesianStrings = {
     "addNew@pages": "Tambah halaman",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Tambahkan tingkat pengurutan",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Tambahkan preset",
     // "Value"
     value: "Nilai",
     // "Text"
@@ -1210,6 +1252,10 @@ export var indonesianStrings = {
     pageSize: "Baris per halaman",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Izinkan pengguna mengurutkan baris",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Izinkan penyaringan berdasarkan pertanyaan ini",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Operator filter",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Tingkat pengurutan maksimum",
     // [Auto-translated] "Default sort order"
@@ -1766,6 +1812,10 @@ export var indonesianStrings = {
       rateValues: "Nilai Tingkat",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Pengaturan Penggeser",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Pengaturan Filter",
+      // [Auto-translated] "Presets"
+      presets: "Preset",
       // "Choices from a Web Service"
       choicesByUrl: "Pilih dari Web",
       // [Auto-translated] "Numbering"
@@ -3036,6 +3086,18 @@ export var indonesianStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Mengatur lokasi bilah progres. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Pilih matriks dinamis, matriks dropdown, atau panel dinamis yang baris atau panelnya dipersempit oleh filter.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Preset diterapkan saat survei dimulai."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Gunakan nama bidang dalam tanda kurung melingkar, misalnya: {price} < 20 dan {category} anyof ['Beverages']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Membatasi operator yang dapat digunakan responden untuk memfilter berdasarkan bidang ini. Biarkan kosong untuk mengizinkan semua operator yang sesuai dengan bidang tersebut.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID kolom yang tidak terlihat oleh responden.",

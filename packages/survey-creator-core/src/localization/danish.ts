@@ -69,6 +69,8 @@ export var danishStrings = {
     expression: "Udtryk",
     // [Auto-translated] "Signature"
     signaturepad: "Underskrift",
+    // [Auto-translated] "Filter"
+    filter: "Filter",
     // [Auto-translated] "Button Group"
     buttongroup: "Knap gruppe"
   },
@@ -304,6 +306,8 @@ export var danishStrings = {
     themeResetConfirmationOk: "Ja, nulstil temaet",
     // [Auto-translated] "Add Question"
     addNewQuestion: "Tilføj spørgsmål",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Vælg spørgsmålstype",
     // [Auto-translated] "Select page..."
     selectPage: "Vælg side...",
     // [Auto-translated] "Choices are copied from"
@@ -818,6 +822,38 @@ export var danishStrings = {
       // [Auto-translated] "Expression"
       expression: "Udtryk"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Datakilde",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Vis filterchips",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Vis Filtre-knappen",
+      // [Auto-translated] "Show search"
+      showSearch: "Vis søgning",
+      // [Auto-translated] "Search in"
+      searchFields: "Søg i",
+      // [Auto-translated] "Presets"
+      items: "Presets",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Standardforudindstilling",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Tillad flere forudindstillinger",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Tillad respondenter at tilføje forudindstillinger"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Forudindstillet navn",
+      // [Auto-translated] "Preset title"
+      title: "Forudindstillede titel",
+      // [Auto-translated] "Filter expression"
+      expression: "Filterudtryk",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Tillad redigering",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Tillad sletning"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Sorter efter",
@@ -879,7 +915,9 @@ export var danishStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Hver indstilling i en separat kolonne",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Tillad sortering efter denne kolonne"
+      allowSort: "Tillad sortering efter denne kolonne",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Tillad filtrering efter denne kolonne"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1071,6 +1109,8 @@ export var danishStrings = {
     "listIsEmpty@pages": "Ingen sider",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Ingen sort-niveauer",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Ingen forudindstillinger",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Tilføj valg",
     // [Auto-translated] "Add rating value"
@@ -1097,6 +1137,8 @@ export var danishStrings = {
     "addNew@pages": "Tilføj side",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Tilføj sorteringsniveau",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Tilføj forudindstilling",
     // "Value"
     value: "Værdi",
     // "Text"
@@ -1211,6 +1253,10 @@ export var danishStrings = {
     pageSize: "Rækker pr. side",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Tillad brugere at sortere rækker",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Tillad filtrering efter dette spørgsmål",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Filteroperatører",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksimale sorteringsniveauer",
     // [Auto-translated] "Default sort order"
@@ -1767,6 +1813,10 @@ export var danishStrings = {
       rateValues: "Bedøm-værdier",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Indstillinger for skyder",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Filterindstillinger",
+      // [Auto-translated] "Presets"
+      presets: "Presets",
       // "Choices from a Web Service"
       choicesByUrl: "Valgmuligheder fra Web",
       // [Auto-translated] "Numbering"
@@ -3037,6 +3087,18 @@ export var danishStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Angiver placeringen af statuslinjen. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Vælg en dynamisk matrix, en dropdown-matrix eller et dynamisk panel, hvis rækker eller paneler filteret indsnævrer i rækker eller paneler.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Forudindstillingen gælder ved undersøgelsens start."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Brug feltnavne i krøllede parenteser, for eksempel: {price} < 20 og {category} enhver af ['Beverages']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Begrænser de operatorer, respondenter kan bruge til at filtrere efter dette felt. Lad være tomt for at tillade alle operatorer, der passer til feltet.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Et kolonne-id, der ikke er synligt for svarpersoner.",

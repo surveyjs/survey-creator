@@ -1,4 +1,4 @@
-import { url, compareScreenshot, test, expect, setJSON, setOptions, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator, resetFocusToBody, hideContentBehindPopup, showContentBehindPopup, mockChoicesByUrl } from "./helper";
+import { url, compareScreenshot, waitForWebFonts, test, expect, setJSON, setOptions, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator, resetFocusToBody, hideContentBehindPopup, showContentBehindPopup, mockChoicesByUrl } from "./helper";
 
 const title = "Design Surface Screenshot";
 
@@ -137,7 +137,7 @@ test.describe(title, () => {
     await showContentBehindPopup(page);
   });
 
-  test("Test question type converter (mobile)", async ({ page }) => {
+  test("Test question type converter (mobile)", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 599, height: 900 });
 
     const surveyJSON = {
@@ -676,7 +676,7 @@ test.describe(title, () => {
     await compareScreenshot(page, root, "question-required-focus.png");
   });
 
-  test("Character counter on surface", async ({ page }) => {
+  test("Character counter on surface", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1120, height: 900 });
     await page.evaluate(() => {
       window["Survey"].Serializer.findProperty("survey", "title").maxLength = 20;
@@ -1442,7 +1442,7 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".svc-question__content--panel"), "panel-title-editing.png");
   });
 
-  test("Composite question - check no scroll", async ({ page }) => {
+  test("Composite question - check no scroll", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       window["Survey"].ComponentCollection.Instance.add({
         name: "fullname",
@@ -1475,7 +1475,7 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".svc-question__adorner"), "composite-question-no-scroll.png");
   });
 
-  test("Composite question - spacing between questions", async ({ page }) => {
+  test("Composite question - spacing between questions", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       window["Survey"].ComponentCollection.Instance.add({
         name: "fullname",
@@ -1542,6 +1542,9 @@ test.describe(title, () => {
   test("Question types with subtypes", async ({ page }) => {
     await page.setViewportSize({ width: 1000, height: 700 });
     await setShowToolbox(page, false);
+    // The menu is centered on the button under it when it opens and doesn't follow it later. The button moves when
+    // Open Sans replaces the fallback font, so load the fonts first.
+    await waitForWebFonts(page);
     await page.locator(".svc-page__footer .svc-add-new-question-action .svc-surface-btn .svc-surface-btn__selector .sd-action").click();
     await getListItemByText(page, "Rating Scale").hover();
     // Kept: this screenshot does not reproduce locally even without any change (10 of 10 mismatches against its own
