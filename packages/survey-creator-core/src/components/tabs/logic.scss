@@ -272,6 +272,11 @@
   margin-right: var(--sjs2-spacing-x100);
 }
 
+html[dir="rtl"] .sl-question__header--left {
+  margin-right: 0;
+  margin-left: var(--ctr-expression-items-gap, var(--sjs-spacing-x1));
+}
+
 .sl-row {
   .svc-logic-question-value.sd-question--title-top .sd-question__content {
     width: 100%;
