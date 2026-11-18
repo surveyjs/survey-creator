@@ -1029,6 +1029,11 @@ export class PropertyGridModel {
     // A focus still waiting for the previous grid survey would mark this one as rendered
     this.cancelDeferredFocus();
     this.isSurveyJustCreated = true;
+    // Title actions are created on the first request and cached. A renderer can render the new survey
+    // synchronously from onNewSurveyCreatedCallback (Angular does), so add these handlers before calling it
+    if (!!this.obj) {
+      this.addTitleActionsHandlers();
+    }
     if (this.onNewSurveyCreatedCallback) {
       this.onNewSurveyCreatedCallback();
     }
@@ -1043,19 +1048,6 @@ export class PropertyGridModel {
       if (options.errors.length === 0) {
         this.onValidateQuestion(options);
       }
-    });
-    this.survey.onGetQuestionTitleActions.add((sender, options) => {
-      this.titleActionsCreator.onGetQuestionTitleActions(options);
-      this.onGetQuestionTitleActions(options, this.options);
-      const q = options.question;
-      this.options.onPropertyEditorUpdateTitleActionsCallback(this.obj, q.property, q, options.actions);
-      options.actions.forEach(action => {
-        if (!action.appearance)
-          action.appearance = { style: "neutral", mode: "tertiary", size: "small" };
-      });
-    });
-    this.survey.onGetPanelTitleActions.add((sender, options) => {
-      options.actions.splice(0, options.actions.length);
     });
     this.survey.onMatrixCellCreated.add((sender, options) => {
       this.onMatrixCellCreated(options);
@@ -1151,6 +1143,21 @@ export class PropertyGridModel {
     survey.getAllQuestions().forEach(setupQuestion);
     survey.onQuestionCreated.add((_, options) => setupQuestion(options.question));
     this.options.onPropertyGridSurveyCreatedCallback(this.obj, this.survey);
+  }
+  private addTitleActionsHandlers(): void {
+    this.survey.onGetQuestionTitleActions.add((sender, options) => {
+      this.titleActionsCreator.onGetQuestionTitleActions(options);
+      this.onGetQuestionTitleActions(options, this.options);
+      const q = options.question;
+      this.options.onPropertyEditorUpdateTitleActionsCallback(this.obj, q.property, q, options.actions);
+      options.actions.forEach(action => {
+        if (!action.appearance)
+          action.appearance = { style: "neutral", mode: "tertiary", size: "small" };
+      });
+    });
+    this.survey.onGetPanelTitleActions.add((sender, options) => {
+      options.actions.splice(0, options.actions.length);
+    });
   }
   private updateNextVisibleQuestionGroupingCss(question: Question): void {
     const parent = question && question.parent;
