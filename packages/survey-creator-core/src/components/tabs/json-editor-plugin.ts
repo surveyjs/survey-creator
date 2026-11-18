@@ -12,6 +12,10 @@ import { DomWindowHelper } from "survey-core";
 import { CreatorDomHelper } from "../../dom-helper";
 
 const maxErrorLength = 150;
+export interface IJsonEditorState {
+  creatorText: string;
+  data: any;
+}
 export abstract class JsonEditorBaseModel extends Base {
   public isJSONChanged: boolean = false;
   private isApplying: boolean = false;
@@ -40,8 +44,25 @@ export abstract class JsonEditorBaseModel extends Base {
   protected abstract getText(): string;
   protected abstract setText(val: string): void;
   protected onEditorActivated(): void { }
+  public editorState: IJsonEditorState;
+  public saveEditorState(): IJsonEditorState {
+    const data = this.getEditorStateData();
+    return data ? { creatorText: this.creator.text, data: data } : undefined;
+  }
+  protected getEditorStateData(): any {
+    return undefined;
+  }
+  protected restoreEditorView(data: any): void { }
   public onPluginActivate(): void {
-    this.text = this.creator.text;
+    const text = this.creator.text;
+    const state = this.editorState;
+    this.editorState = undefined;
+    if (!!state && state.creatorText === text) {
+      this.restoreEditorView(state.data);
+      this.processErrors(this.text);
+    } else {
+      this.text = text;
+    }
     this.onEditorActivated();
     this.isJSONChanged = false;
   }
@@ -330,17 +351,29 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   }
 
   public model: JsonEditorBaseModel;
+  private editorState: IJsonEditorState;
   public activate(): void {
     this.model = this.createModel(this.creator);
+    this.model.editorState = this.editorState;
+    this.editorState = undefined;
   }
   public deactivate(): boolean {
     if (this.model) {
       this.model.applyChanges(true);
+      // text the survey refused to take is not kept: the tab opens with the survey's text again
+      this.editorState = this.model.isJSONChanged ? undefined : this.model.saveEditorState();
       this.model.dispose();
       this.model = undefined;
     }
     return true;
   }
+  public dispose(): void {
+    if (this.editorState) {
+      this.disposeEditorState(this.editorState.data);
+      this.editorState = undefined;
+    }
+  }
+  protected disposeEditorState(data: any): void { }
   public applyPendingChanges(): boolean {
     return !this.model || this.model.applyChanges();
   }
