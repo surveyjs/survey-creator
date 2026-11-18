@@ -28,7 +28,8 @@ const router = createRouter({
     { path: "/test-pages/theme-tab", component: ThemeTab },
     { path: "/test-pages/no-license", component: NoLicense },
     { path: "/test-pages/presets", component: Presets },
-    { path: "/test-pages/creator-themes", component: CreatorThemes }
+    { path: "/test-pages/creator-themes", component: CreatorThemes },
+    { path: "/test-pages/rich-text", component: () => import("../components/test/RichText.vue") }
   ]
 })
 
