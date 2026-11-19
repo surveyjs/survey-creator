@@ -1,7 +1,9 @@
-import { SurveyModel, Question, QuestionDropdownModel, settings } from "survey-core";
+import { SurveyModel, Question, QuestionDropdownModel, QuestionMatrixDynamicModel, PopupDropdownViewModel, settings } from "survey-core";
 import { ConditionEditor } from "../../src/property-grid/condition-survey";
 import { EmptySurveyCreatorOptions } from "../../src/creator-settings";
 import { SurveyLogic } from "../../src/components/tabs/logic";
+import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
+import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 import { ExpressionToDisplayText } from "../../src/expressionToDisplayText";
 import { TextareaJsonEditorModel } from "../../src/components/tabs/json-editor-textarea";
 import { CreatorTester } from "../creator-tester";
@@ -253,6 +255,103 @@ describe("logic tab: inner questions (nested data, survey-library #12233)", () =
     expect(toText("{city} = 'x'")).toBe("{city} == 'x'");
     // as for a top-level question
     expect(toText("{q1} = 'x'")).toBe("{q1} == x");
+  });
+  // One name in two scopes: a top-level street and panel1's street, each read by its own rules. The filter's
+  // entries are the questions' paths of names (survey-library #12233, CS6).
+  const twoStreetsJson = (dataNesting: string = "auto"): any => ({ dataNesting: dataNesting, elements: [
+    { type: "text", name: "street" },
+    { type: "text", name: "q1", visibleIf: "{street} = 'root'" },
+    addressPanel({ elements: [
+      { type: "text", name: "street" },
+      { type: "text", name: "inner", visibleIf: "{street} = 'inner'" }
+    ] }),
+    { type: "text", name: "q2", visibleIf: "{address.street} = 'path'" }
+  ], triggers: [{ type: "copyvalue", expression: "{q1} = 1", setToName: "address.street", fromName: "street" }] });
+  const getFilterEntries = (json: any): { plugin: TabLogicPlugin, filter: any, entries: Array<string> } => {
+    const creator = new CreatorTester({ showLogicTab: true });
+    creator.JSON = json;
+    const plugin = <TabLogicPlugin>creator.getPlugin("logic");
+    const filter = creator.getActionBarItem("svc-logic-filter-question");
+    new PopupDropdownViewModel(filter.popupModel); // popupModel.onShow fills the list
+    const animationEnabled = settings.animationEnabled;
+    settings.animationEnabled = false;
+    plugin.activate();
+    filter.action();
+    settings.animationEnabled = animationEnabled;
+    const entries = filter.popupModel.contentComponentData.model.actions.slice(1).map((item: any) => item.id + "|" + item.title);
+    return { plugin, filter, entries };
+  };
+  const getFiltered = (logic: SurveyLogic, filter: string, items?: Array<any>): Array<string> =>
+    (items || logic.items).filter(item => item.isSuitable(filter)).map(item => item.expression).sort();
+  test("two questions named street in two scopes: two filter entries, each filters its own rules", () => {
+    const { plugin, filter, entries } = getFilterEntries(twoStreetsJson());
+    expect(entries).toEqual(["panel1.inner|panel1.inner", "panel1.street|panel1.street", "q1|q1", "q2|q2", "street|street"]);
+    const logic = plugin.model;
+    // the trigger's fromName reads the top-level street, its setToName (a data path, O4a) writes panel1's
+    expect(getFiltered(logic, "street")).toEqual(["{q1} = 1", "{street} = 'root'"]);
+    expect(getFiltered(logic, "panel1.street")).toEqual(["{address.street} = 'path'", "{q1} = 1", "{street} = 'inner'"]);
+    logic.questionFilter = "panel1.street";
+    expect(filter.title, "the filter shows the id").toBe("panel1.street");
+  });
+  test("an action on an inner question is found by the question's path", () => {
+    const { plugin } = getFilterEntries(twoStreetsJson());
+    expect(getFiltered(plugin.model, "panel1.inner")).toEqual(["{street} = 'inner'"]);
+    expect(getFiltered(plugin.model, "q1"), "a top-level question: its action and its variable").toEqual(["{q1} = 1", "{street} = 'root'"]);
+  });
+  test("a bare name set by code finds the rules of the inner question only that name has", () => {
+    const logic = new SurveyLogicUI(createSurvey());
+    const rows = <QuestionMatrixDynamicModel>logic.itemsSurvey.getQuestionByName("items");
+    expect(rows.rowCount).toBe(4);
+    logic.questionFilter = "street";
+    expect(rows.rowCount).toBe(2);
+    expect(getFiltered(logic, "street")).toEqual(["{address.street} = 'x'", "{street} = 'w'"]);
+    expect(getFiltered(logic, "panel1.street"), "the path finds the same rules").toEqual(["{address.street} = 'x'", "{street} = 'w'"]);
+  });
+  test("a choice's visibleIf and an expression validator resolve in their question's scope", () => {
+    const survey = new SurveyModel({ dataNesting: "auto", elements: [
+      { type: "text", name: "street" },
+      addressPanel({ elements: [
+        { type: "text", name: "street" },
+        { type: "dropdown", name: "d", choices: [{ value: 1, visibleIf: "{street} = 'x'" }, 2] },
+        { type: "text", name: "t", validators: [{ type: "expression", expression: "{street} = 'y'" }] }
+      ] })
+    ] });
+    const logic = new SurveyLogic(survey, new EmptySurveyCreatorOptions());
+    // both are logic types the tab does not show (showInUI: false)
+    const items = logic.invisibleItems;
+    expect(getFiltered(logic, "panel1.street", items)).toEqual(["{street} = 'x'", "{street} = 'y'"]);
+    expect(getFiltered(logic, "street", items), "the top-level street").toEqual([]);
+  });
+  test("one rule on questions in two scopes reads a street in each: both are listed, each finds the rule", () => {
+    const root = [{ type: "text", name: "street" }, { type: "text", name: "q1", visibleIf: "{street} = 'x'" }];
+    const panel = addressPanel({ elements: [{ type: "text", name: "street" }, { type: "text", name: "inner", visibleIf: "{street} = 'x'" }] });
+    [root.concat([panel]), [panel].concat(root)].forEach((elements, index) => {
+      const { plugin, entries } = getFilterEntries({ dataNesting: "auto", elements: elements });
+      expect(plugin.model.items, "one rule, two actions").toHaveLength(1);
+      expect(entries, "order " + index).toEqual(["panel1.inner|panel1.inner", "panel1.street|panel1.street", "q1|q1", "street|street"]);
+      expect(getFiltered(plugin.model, "street"), "order " + index).toEqual(["{street} = 'x'"]);
+      expect(getFiltered(plugin.model, "panel1.street"), "order " + index).toEqual(["{street} = 'x'"]);
+    });
+  });
+  test("a variable no scope resolves: a top-level question by its name is listed and found, a path of names is not", () => {
+    const { plugin, entries } = getFilterEntries({ dataNesting: "auto", elements: [
+      { type: "text", name: "q1", valueName: "vn" },
+      { type: "text", name: "q2", visibleIf: "{q1} = 1" },
+      { type: "text", name: "q3", visibleIf: "{panel1.street} = 1" },
+      addressPanel()
+    ] });
+    // {q1} reads nothing at runtime (q1 stores under vn), but the list and the filter keep master's match by name
+    expect(entries).toEqual(["q1|q1", "q2|q2", "q3|q3"]);
+    expect(getFiltered(plugin.model, "q1")).toEqual(["{q1} = 1"]);
+    // {panel1.street} is a path of names, no variable: it reads nothing, and panel1's street is neither listed nor found
+    expect(getFiltered(plugin.model, "panel1.street")).toEqual([]);
+  });
+  test("\"none\": the filter's ids are the questions' names", () => {
+    const json = twoStreetsJson("none");
+    json.elements.splice(0, 1);
+    const { plugin, entries } = getFilterEntries(json);
+    expect(entries).toEqual(["inner|inner", "q1|q1", "q2|q2", "street|street"]);
+    expect(getFiltered(plugin.model, "street")).toEqual(["{q1} = 1", "{street} = 'inner'", "{street} = 'root'"]);
   });
 });
 

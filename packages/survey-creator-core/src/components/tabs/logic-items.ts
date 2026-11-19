@@ -18,7 +18,7 @@ import { updateLogicExpression } from "./logic-expression";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 import { wrapTextByCurlyBraces } from "../../utils/creator-utils";
 import { SurveyHelper } from "../../survey-helper";
-import { getConditionQuestionKey, getQuestionByVariableName, isInnerQuestion, IVariableRename } from "../../utils/data-path";
+import { getConditionQuestionKey, getQuestionByVariableName, isInnerQuestion, isScopedNamesSurvey, IVariableRename } from "../../utils/data-path";
 
 export class SurveyLogicAction {
   private surveyValue: SurveyModel;
@@ -122,6 +122,28 @@ export class SurveyLogicAction {
       res = this.questionNamesValues.filter(question => { return question === questionName || question.indexOf(questionName + ".") === 0; }).length > 0;
     }
     return res;
+  }
+  // Nested data (survey-library #12233, CS6): the action is on the question (a column's matrix, a template
+  // question's dynamic panel), or a question name of it (a trigger's setToName, fromName, gotoName) finds it.
+  public isSuitableByQuestion(question: Question): boolean {
+    if (!this.element) return false;
+    if (this.element === question || this.parentElement === question) return true;
+    return this.questionNames.some(propName => this.findQuestionByName(propName, this.element[propName]) === question);
+  }
+  // gotoName is a path of names (O4a); setToName and fromName are data paths, read from the survey data.
+  private findQuestionByName(propName: string, name: string): Question {
+    if (!name || typeof name !== "string") return null;
+    if (propName === "gotoName") return <Question>this.survey.getQuestionByName(name);
+    return getQuestionByVariableName(this.survey, name);
+  }
+  // The questions the action is on and names, for the Logic tab's question filter in a survey with scopes.
+  public addUsedQuestions(questions: Array<Question>): void {
+    if (!this.element) return;
+    const add = (q: any): void => {
+      if (!!q && q.isQuestion && questions.indexOf(q) < 0) questions.push(q);
+    };
+    add(this.getOwnerElement());
+    this.questionNames.forEach(propName => add(this.findQuestionByName(propName, this.element[propName])));
   }
   public isSuitableByLogicType(logicTypeName: string): boolean {
     if (!this.logicTypeName) return true;
@@ -431,6 +453,19 @@ export class SurveyLogicItem {
     this.getQuestionNamesFromActions(res);
     return res;
   }
+  // Nested data (survey-library #12233): the questions the rule reads (getQuestionsByVariableName) and the
+  // questions its actions are on and name. One entry per question: one text ({street}) reads different questions
+  // in different scopes.
+  public getUsedQuestions(): Array<Question> {
+    const res: Array<Question> = [];
+    const names: Array<string> = [];
+    this.getQuestionNamesFromExpression(names);
+    names.forEach(name => this.getQuestionsByVariableName(name).forEach(question => {
+      if (res.indexOf(question) < 0) res.push(question);
+    }));
+    this.actions.forEach(action => action.addUsedQuestions(res));
+    return res;
+  }
   public getActionTypes(): string[] {
     return this.actions.map(action => action.logicTypeName);
   }
@@ -475,10 +510,41 @@ export class SurveyLogicItem {
     if (!filteredName) {
       return this.isSuitableByLogicTypeInActions(logicTypeName);
     }
-    if (!logicTypeName) {
-      return this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName);
+    const res = this.isSuitableByQuestionFilter(filteredName);
+    return !logicTypeName ? res : res && this.isSuitableByLogicTypeInActions(logicTypeName);
+  }
+  // Nested data (survey-library #12233, CS6): in a survey where a container nests, the filter is a question's
+  // path of names (the Logic tab's entry ids). A rule is suitable when a variable of it, resolved in the rule's
+  // scopes, reads that question, or when an action is on it or names it. A filter that finds no question (a
+  // host's bare name of an inner question) is matched below, as is every filter in "none".
+  private isSuitableByQuestionFilter(filteredName: string): boolean {
+    const question = isScopedNamesSurvey(this.survey) ? <Question>this.survey.getQuestionByName(filteredName) : null;
+    if (!question) return this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName);
+    return this.isQuestionReadInExpression(question) || this.actions.some(action => action.isSuitableByQuestion(question));
+  }
+  private isQuestionReadInExpression(question: Question): boolean {
+    if (!this.expression) return false;
+    const names: Array<string> = [];
+    this.getQuestionNamesFromExpression(names);
+    return names.some(name => this.getQuestionsByVariableName(name).indexOf(question) > -1);
+  }
+  // Nested data (survey-library #12233): the questions a variable of the rule reads, one per scope of its
+  // actions (one rule groups actions with one expression text, and {street} reads a different question in each
+  // scope). When no scope resolves it, a top-level question by its name, as master lists and matches {q1} for a
+  // question that stores under another value name. An inner question is never found by name: a path of names
+  // ({panel1.street}) is no variable.
+  private getQuestionsByVariableName(name: string): Array<Question> {
+    const res: Array<Question> = [];
+    const owners: Array<Base> = this.actions.length > 0 ? this.actions.map(action => this.getExpressionOwner(action)) : [null];
+    owners.forEach(owner => {
+      const question = getQuestionByVariableName(this.survey, name, owner);
+      if (!!question && res.indexOf(question) < 0) res.push(question);
+    });
+    if (res.length === 0) {
+      const question = <Question>this.survey.getQuestionByName(name);
+      if (!!question && !isInnerQuestion(question)) res.push(question);
     }
-    return (this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName)) && this.isSuitableByLogicTypeInActions(logicTypeName);
+    return res;
   }
   // Nested data (survey-library #12233): in a nesting mode a name is unique only inside its scope, and a bare
   // name read at the root finds no inner question. A name that only inner questions have is matched by what the
@@ -501,10 +567,10 @@ export class SurveyLogicItem {
     return names.some(name => questions.indexOf(this.getQuestionByVariableName(name)) > -1);
   }
   // The question a variable of this rule names (getQuestionByVariableName): an inner one by its name or by a
-  // data path ({address.street}) resolved in the data scopes of the rule's elements, a top-level one by its
-  // value name.
+  // data path ({address.street}) resolved in the data scopes of the rule's elements (getExpressionOwner), a
+  // top-level one by its value name.
   public getQuestionByVariableName(name: string): Question {
-    const owners: Array<Base> = this.actions.length > 0 ? this.actions.map(action => action.parentElement || action.element) : [null];
+    const owners: Array<Base> = this.actions.length > 0 ? this.actions.map(action => this.getExpressionOwner(action)) : [null];
     for (let i = 0; i < owners.length; i++) {
       const question = getQuestionByVariableName(this.survey, name, owners[i]);
       if (!!question) return question;

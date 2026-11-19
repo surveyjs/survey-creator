@@ -3,7 +3,7 @@ import { editorLocalization } from "../../editorLocalization";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
 import { ISurveyLogicItemOwner, SurveyLogicItem, SurveyLogicAction } from "./logic-items";
 import { SurveyLogicTypes, SurveyLogicType, ISurveyLogicType } from "./logic-types";
-import { IVariableRename } from "../../utils/data-path";
+import { IVariableRename, isScopedNamesSurvey } from "../../utils/data-path";
 import "./logic.scss";
 
 export function initLogicOperator(question: QuestionDropdownModel) {
@@ -228,6 +228,15 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     return !!this.errorText;
   }
   public getUsedQuestions(): Question[] {
+    // Nested data (survey-library #12233): in a survey with scopes a variable's text names different questions
+    // in different rules, so the list is built per question, as each rule resolves its variables.
+    if (isScopedNamesSurvey(this.survey)) {
+      const questions: Array<Question> = [];
+      this.items.forEach(item => item.getUsedQuestions().forEach(q => {
+        if (questions.indexOf(q) < 0) questions.push(q);
+      }));
+      return questions;
+    }
     const names: { [key: string]: Question } = {};
     this.items.forEach(item => {
       item.getQuestionNames().forEach(name => {
