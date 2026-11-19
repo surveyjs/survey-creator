@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
-import { ActionContainer, LocalizableString, QuestionCommentModel, QuestionMatrixDropdownModel, Serializer } from "survey-core";
+import { ActionContainer, LocalizableString, QuestionCommentModel, QuestionMatrixDropdownModel, QuestionTextBase, Serializer } from "survey-core";
 import { Translation } from "../src/components/tabs/translation";
+import { editorLocalization } from "../src/editorLocalization";
 import { PropertyGridEditorCollection } from "../src/property-grid";
 import { CreatorTester } from "./creator-tester";
 import { ICreatorRichTextEditor } from "../src/rich-text";
@@ -416,6 +417,40 @@ describe("rich text registration", () => {
       expect(plainDescription.allowResize).toBe(true);
       expect(plainDescription.autoGrow).toBe(false);
     });
+  });
+
+  test("a rich text property editor keeps the reset to default action", () => {
+    Serializer.addProperty("survey", {
+      name: "test:html",
+      default: "default",
+      category: "general",
+      visibleIndex: 1
+    });
+    PropertyGridEditorCollection.clearHash();
+    try {
+      const creator = new CreatorTester();
+      creator.registerRichTextEditor(createFakeEditor());
+      creator.JSON = {};
+      creator.selectElement(creator.survey);
+      const editor = creator.propertyGrid.getQuestionByName("test") as QuestionTextBase;
+      expect(editor.getType()).toBe("richtext");
+      const resetAction = editor.inputActionsContainer.getActionById("reset");
+      expect(resetAction.title).toBe(editorLocalization.getString("pe.resetToDefaultCaption"));
+      expect(resetAction.iconSize).toBe(16);
+      expect(resetAction.getActionBarItemCss()).toContain("sd-action--x-small");
+      expect(resetAction.enabled).toBeFalsy();
+
+      creator.survey.setPropertyValue("test", "some_value");
+      expect(editor.value).toBe("some_value");
+      expect(resetAction.enabled).toBeTruthy();
+
+      resetAction.action();
+      expect(creator.survey.getPropertyValue("test")).toBe("default");
+      expect(resetAction.enabled).toBeFalsy();
+    } finally {
+      Serializer.removeProperty("survey", "test");
+      PropertyGridEditorCollection.clearHash();
+    }
   });
 
   test("translation cells follow the example property types and store HTML unchanged", () => {

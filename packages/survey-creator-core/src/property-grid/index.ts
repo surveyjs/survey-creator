@@ -1806,11 +1806,12 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
     if (prop.name === "title") {
       question.allowSpaceAsAnswer = true;
     }
-    if (question.getType() == "text" || question.getType() == "comment") {
+    if (question.getType() == "text" || question.getType() == "comment" || question.getType() == "richtext") {
       const textQuestion = question as QuestionTextBase;
       if (!textQuestion.getMaxLength() && obj.hasDefaultPropertyValue(prop.name)) {
         this.setupDefaultValuePlaceholder(obj, textQuestion, prop);
         const isDefaultValue = () => prop.isDefaultValueByObj(obj, prop.getValue(obj));
+        const isRichText = question.getType() == "richtext";
         const action = new Action({
           id: "reset",
           title: editorLocalization.getString("pe.resetToDefaultCaption"),
@@ -1821,6 +1822,10 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
           },
           enabled: !isDefaultValue()
         });
+        if (isRichText) {
+          action.iconSize = 16;
+          action.appearance = { size: "x-small" };
+        }
         obj.registerFunctionOnPropertyValueChanged(prop.name, () => {
           action.enabled = !isDefaultValue();
         });
