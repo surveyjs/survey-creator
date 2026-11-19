@@ -2,7 +2,7 @@ import {
   Base, SurveyModel, ListModel, Question, PanelModel, PageModel, PopupModel, property, IElement, Serializer,
   JsonObjectProperty, ActionContainer, AdaptiveActionContainer, IAction, Action, IPanel, SurveyElement, ItemValue,
   QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
-  EventBase, hasLicense, slk, glc, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
+  EventBase, hasLicense, slk, glc, getEmbeddedLicense, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles, createDropdownActionModel,
   toCssClasses,
@@ -366,6 +366,9 @@ export class SurveyCreatorModel extends Base
   public get licenseText(): string {
     const unlicensedPlugins = this.getUnlicensedPluginsNames();
     if (unlicensedPlugins.length > 0) return this.pluginLicenseTexts[unlicensedPlugins[0]];
+    // The "embedded-<name>" marker grants no license; it only replaces the banner text
+    const embedded = !!getEmbeddedLicense && getEmbeddedLicense();
+    if (embedded) return this.getLocString("survey.licenseEmbedded").replace("{whiteLabelUrl}", embedded.whiteLabelUrl);
     const licenseDateString = this.licenseDateString;
     if (licenseDateString) return this.getLocString("survey.license2").replace("{date}", licenseDateString);
     return this.getLocString("survey.license");
