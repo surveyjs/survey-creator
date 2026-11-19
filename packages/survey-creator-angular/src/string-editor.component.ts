@@ -1,21 +1,24 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, NgZone, ViewChild, ViewContainerRef } from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, Input, NgZone, SimpleChanges, ViewChild, ViewContainerRef } from "@angular/core";
 import { LocalizableString, CharacterCounter } from "survey-core";
 import { StringEditorViewModelBase, SurveyCreatorModel, editableStringRendererName } from "survey-creator-core";
-import { CreatorModelComponent } from "./creator-model.component";
-import { AngularComponentFactory } from "survey-angular-ui";
+import { CreatorModelComponent, compareComponentData } from "./creator-model.component";
+import { AngularComponentFactory, COMPONENT_DEPTH, SurveyBaseProviders } from "survey-angular-ui";
+import { Inject } from "@angular/core";
+import { Optional } from "@angular/core";
 
 @Component({
   selector: "svc-string-editor",
   templateUrl: "./string-editor.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
-export class StringEditorComponent extends CreatorModelComponent<StringEditorViewModelBase> implements AfterViewInit {
+export class StringEditorComponent extends CreatorModelComponent<StringEditorViewModelBase> {
   public baseModel!: StringEditorViewModelBase;
   private justFocused: boolean = false;
   @Input() model!: any;
   @ViewChild("container") container!: ElementRef<HTMLElement>;
-  constructor(cdr: ChangeDetectorRef, vcr: ViewContainerRef, private ngZone: NgZone) {
-    super(cdr, vcr);
+  constructor(cdr: ChangeDetectorRef, vcr: ViewContainerRef, private ngZone: NgZone, @Optional() @Inject(COMPONENT_DEPTH) depth?: number | null) {
+    super(cdr, vcr, depth);
   }
   public createModel(): void {
     this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
@@ -38,8 +41,8 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   protected getModel(): StringEditorViewModelBase {
     return this.baseModel;
   }
-  protected getPropertiesToTrack(): string[] {
-    return ["creator", "locString"];
+  protected override shouldUpdateModel(changes: SimpleChanges) {
+    return compareComponentData(changes, ["locStr", "creator"], "model");
   }
   public get placeholder(): string {
     return this.baseModel.placeholder;
@@ -93,7 +96,7 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
     super.ngOnInit();
     this.locString?.onStringChanged.add(this.onChangeHandler);
   }
-  ngAfterViewInit(): void {
+  protected override afterViewInit(): void {
     if ((<any>this.locString).__isEditing) {
       this.container.nativeElement.focus();
     }

@@ -1,5 +1,5 @@
 import { MonacoJsonEditorModel } from "survey-creator-core";
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 
 @Component({
@@ -7,14 +7,14 @@ import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
   templateUrl: "./json-editor-monaco.component.html",
   styles: [":host { display: none; }"]
 })
-export class MonacoJsonEditorComponent extends BaseAngular<MonacoJsonEditorModel> implements AfterViewInit {
+export class MonacoJsonEditorComponent extends BaseAngular<MonacoJsonEditorModel> {
   @Input() model!: MonacoJsonEditorModel;
   @ViewChild("inputEl") inputEl!: ElementRef<HTMLElement>;
   protected getModel(): MonacoJsonEditorModel {
     return this.model;
   }
 
-  public ngAfterViewInit(): void {
+  protected override afterViewInit(): void {
     this.model.init(this.inputEl.nativeElement);
   }
 }

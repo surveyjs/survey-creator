@@ -1,16 +1,18 @@
 
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild, ViewContainerRef } from "@angular/core";
-import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
+import { SimpleChanges } from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild, ViewContainerRef } from "@angular/core";
+import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent, SurveyBaseProviders } from "survey-angular-ui";
 import { ItemValue, PageModel, PanelModel, Question, QuestionSelectBase, SurveyModel } from "survey-core";
 import { SurveyCreatorModel, ItemValueWrapperViewModel, QuestionAdornerViewModel } from "survey-creator-core";
-import { CreatorModelComponent } from "../creator-model.component";
+import { CreatorModelComponent, compareComponentData } from "../creator-model.component";
 
 @Component({
   selector: "svc-item-value",
   templateUrl: "./item-value.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
-export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueWrapperViewModel> implements AfterViewInit {
+export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueWrapperViewModel> {
   @Input() componentName!: string;
   @Input() componentData!: any;
   @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>;
@@ -75,8 +77,8 @@ export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueW
       }
     }
   }
-  protected getPropertiesToTrack(): string[] {
-    return ["creator", "question", "item"];
+  protected override shouldUpdateModel(changes: SimpleChanges) {
+    return compareComponentData(changes, ["creator", "question", "model"], "componentData");
   }
   protected getModel(): ItemValueWrapperViewModel {
     return this.adorner;
@@ -86,7 +88,7 @@ export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueW
     this.adorner.dispose();
     this.cleanContainer(this.item);
   }
-  ngAfterViewInit() {
+  protected override afterViewInit(): void {
     this.setupContainer();
   }
 }

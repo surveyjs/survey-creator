@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { ItemValue } from "survey-core";
 import { getTranslationLocaleProgress, translationLocaleItemComponentName } from "survey-creator-core";
 
@@ -10,7 +10,8 @@ import { getTranslationLocaleProgress, translationLocaleItemComponentName } from
 @Component({
   selector: "svc-translation-locale-item",
   templateUrl: "./translation-locale-item.component.html",
-  styles: [":host { display: none }"]
+  styles: [":host { display: none }"],
+  providers: SurveyBaseProviders
 })
 export class TranslationLocaleItemComponent extends BaseAngular<ItemValue> {
   @Input() model!: ItemValue;

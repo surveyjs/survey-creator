@@ -1,14 +1,15 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { SurveyCreatorModel, QuestionToolbox, QuestionToolboxItem } from "survey-creator-core";
 import { Action } from "survey-core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 
 @Component({
   selector: "svc-toolbox",
   templateUrl: "./adaptive-toolbox.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
-export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> implements AfterViewInit {
+export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> {
   @Input() model!: SurveyCreatorModel;
   @ViewChild("container") container!: ElementRef<HTMLDivElement>;
   public get toolbox() {
@@ -25,11 +26,7 @@ export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> imple
       this.toolbox.afterRender(this.container.nativeElement);
     }
   }
-  ngAfterViewInit() {
-    this.afterRender();
-  }
-  override ngAfterViewChecked(): void {
-    super.ngAfterViewChecked();
+  protected override afterViewInit(): void {
     this.afterRender();
   }
   protected override afterUpdate(isSync?: boolean): void {

@@ -89,5 +89,5 @@ export class ExampleComponent {
   }
 
   public survey = new SurveyModel(json);
-  public creator = new SurveyCreatorModel({ showLogicTab: true, showTranslationTab: true, showThemeTab: true })
+  public creator = new SurveyCreatorModel({ showLogicTab: true, showTranslationTab: true, showThemeTab: true, pageEditMode: "bypage" })
 }

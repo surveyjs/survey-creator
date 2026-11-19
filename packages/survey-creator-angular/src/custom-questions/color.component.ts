@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
-import { AngularComponentFactory, QuestionAngular } from "survey-angular-ui";
+import { AngularComponentFactory, QuestionAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { QuestionColorModel } from "survey-creator-core";
 
 @Component({
   templateUrl: "color.component.html",
-  selector: "svc-color"
+  selector: "svc-color",
+  providers: SurveyBaseProviders
 })
 
 export class QuestionColorComponent extends QuestionAngular<QuestionColorModel> {

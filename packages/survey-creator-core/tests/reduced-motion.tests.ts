@@ -67,8 +67,8 @@ test("toolbox animations follow reduced motion", (): void => {
   settings.animation.respectReducedMotion = true;
   setReducedMotion(false);
   const creator = new CreatorTester();
-  creator.toolbox.supportOnElementRerenderedEvent = false;
-  creator.sidebar.supportOnElementRerenderedEvent = false;
+  creator.toolbox.enableOnElementRerenderedEvent();
+  creator.sidebar.enableOnElementRerenderedEvent();
   expect(creator.toolbox.animationAllowed).toBe(true);
   expect(creator.sidebar.animationAllowed).toBe(true);
 

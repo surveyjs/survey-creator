@@ -1,11 +1,12 @@
 import { PropertyGridViewModel } from "survey-creator-core";
 import { Component, Input } from "@angular/core";
-import { AngularComponentFactory, BaseAngular, ButtonGroupQuestionComponent } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, ButtonGroupQuestionComponent, SurveyBaseProviders } from "survey-angular-ui";
 
 @Component({
   selector: "svc-property-grid",
   templateUrl: "./property-grid.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class PropertyGridComponent extends BaseAngular<PropertyGridViewModel> {
   @Input() model!: PropertyGridViewModel;

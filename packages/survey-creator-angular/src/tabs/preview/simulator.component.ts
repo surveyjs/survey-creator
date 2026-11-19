@@ -1,13 +1,14 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, ViewContainerRef } from "@angular/core";
-import { BaseAngular } from "survey-angular-ui";
+import { ChangeDetectorRef, Component, Input, OnDestroy, ViewContainerRef } from "@angular/core";
+import { BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { SurveySimulatorModel } from "survey-creator-core";
 
 @Component({
   selector: "survey-simulator",
   templateUrl: "./simulator.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
-export class SimulatorComponent extends BaseAngular<SurveySimulatorModel> implements AfterViewInit, OnDestroy {
+export class SimulatorComponent extends BaseAngular<SurveySimulatorModel> implements OnDestroy {
   @Input() model!: SurveySimulatorModel;
 
   constructor(
@@ -26,7 +27,7 @@ export class SimulatorComponent extends BaseAngular<SurveySimulatorModel> implem
     return ["popupOverlayHeight", "landscape", "device", "survey"];
   }
 
-  ngAfterViewInit(): void {
+  protected override afterViewInit(): void {
     this.model.queueSurveyLayoutRefresh();
   }
 
