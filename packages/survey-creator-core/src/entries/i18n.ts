@@ -1,5 +1,6 @@
 //localization
 import "../localization/arabic";
+import "../localization/basque";
 import "../localization/bulgarian";
 import "../localization/burmese";
 import "../localization/catalan";
