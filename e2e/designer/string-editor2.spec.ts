@@ -445,6 +445,9 @@ test.describe(title, () => {
     await page.keyboard.press("Tab");
     await page.keyboard.press("Enter");
     await page.keyboard.press("Enter");
+    // Enter on the last row adds Row 3 and focuses it once it renders (from a timer in Angular): Shift+Tab before that
+    // leaves the focus on Row 3
+    await expect(getStringEditorByText(page, "Row 3")).toBeFocused();
     await page.keyboard.press("Shift+Tab");
     await expect(getStringEditorByText(page, "Row 2")).toBeFocused();
     await expect(getStringEditorByText(page, "Row 1")).toBeVisible();
