@@ -362,11 +362,13 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       this.addNewAction();
     }
   }
-  public getExpressionAsDisplayText(expression: string): string {
+  // context: the element the rule's variables resolve in (SurveyLogicItem.getExpressionContext), else the root
+  public getExpressionAsDisplayText(expression: string, context?: Base): string {
     return SurveyLogicType.expressionToDisplayText(
       this.survey,
       this.options,
-      expression
+      expression,
+      context
     );
   }
   protected buildItems(showInUI: boolean): Array<SurveyLogicItem> {

@@ -392,6 +392,13 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   // (the rule text a host may change) and listens to onExpressionAssistantAccepted.
   public getExpressionCheckInput: () => IExpressionAssistantInput;
   public getExpressionDisplayText: (expression: string) => string;
+  // Nested data (survey-library #12233, CS7): the element whose scopes the editor reads a variable in when it
+  // has no object: the Logic tab's rule (SurveyLogicItem.getExpressionContext). Lookups only: the editor
+  // writes no property of it. Set it before the text.
+  public scopeElement: Base;
+  private getScopeElement(): Base {
+    return !!this.object ? getConditionContextObject(this.object) : this.scopeElement;
+  }
   public onExpressionAssistantAccepted: (isTextEditor: boolean) => void;
   public get assistantPrompt(): Question {
     return this.editSurvey.getQuestionByName("aiPrompt");
@@ -426,7 +433,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       getExpression: (): string => this.text || "",
       accept: (expression: string) => this.setTextFromAssistant(expression),
       getDisplayText: (expression: string): string => !!this.getExpressionDisplayText ? this.getExpressionDisplayText(expression)
-        : new ExpressionToDisplayText(this.survey, this.options).toDisplayText(expression)
+        : new ExpressionToDisplayText(this.survey, this.options, this.getScopeElement()).toDisplayText(expression)
     });
   }
   // Fills the editor with an accepted expression, routed by whether the builder can show it - also
@@ -949,7 +956,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   // the listed entry ("page1.address.street").
   private getConditionEntryName(name: string): string {
     if (!name || !!this.addConditionQuestionsHash[name] || !!this.addConditionQuestionsHash[removeUnwrapPostfix(name)]) return name;
-    const info = findInnerQuestion(this.survey, removeUnwrapPostfix(name), getConditionContextObject(this.object));
+    const info = findInnerQuestion(this.survey, removeUnwrapPostfix(name), this.getScopeElement());
     return !!info && !!this.addConditionQuestionsHash[info.entryName] ? info.entryName : name;
   }
   private getQuestionConditionJson(questionName: string, operator?: string): any {

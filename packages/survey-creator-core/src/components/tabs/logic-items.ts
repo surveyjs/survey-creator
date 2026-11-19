@@ -18,7 +18,8 @@ import { updateLogicExpression } from "./logic-expression";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 import { wrapTextByCurlyBraces } from "../../utils/creator-utils";
 import { SurveyHelper } from "../../survey-helper";
-import { getConditionQuestionKey, getQuestionByVariableName, isInnerQuestion, isScopedNamesSurvey, IVariableRename } from "../../utils/data-path";
+import { getConditionQuestionKey, getExpressionOwner, getExpressionRecord, getExpressionScopePaths, getQuestionByVariableName, isInnerQuestion,
+  isScopedNamesSurvey, IVariableRename } from "../../utils/data-path";
 
 export class SurveyLogicAction {
   private surveyValue: SurveyModel;
@@ -209,7 +210,7 @@ export interface ISurveyLogicItemOwner {
   readOnly: boolean;
   editItem(item: SurveyLogicItem);
   removeItem(item: SurveyLogicItem);
-  getExpressionAsDisplayText(expression: string): string;
+  getExpressionAsDisplayText(expression: string, context?: Base): string;
   getVisibleLogicTypes(): Array<SurveyLogicType>;
 }
 
@@ -493,8 +494,22 @@ export class SurveyLogicItem {
   }
   private getExpressionAsDisplayText(): string {
     return !!this.owner
-      ? this.owner.getExpressionAsDisplayText(this.expression)
+      ? this.owner.getExpressionAsDisplayText(this.expression, this.getExpressionContext())
       : this.expression;
+  }
+  // Nested data (survey-library #12233, CS7): the element the rule's variables resolve in, for its display text
+  // and the rule editor's lookups: its actions' owner (getExpressionOwner) when all of them resolve alike (the
+  // same scopes and record), else null, the root, as before. null too in a survey where nothing nests.
+  public getExpressionContext(): Base {
+    if (this.actions.length === 0 || !isScopedNamesSurvey(this.survey)) return null;
+    const owners = this.actions.map(action => this.getExpressionOwner(action));
+    const getScopes = (owner: Base): string => JSON.stringify(getExpressionScopePaths(this.survey, owner));
+    const scopes = getScopes(owners[0]);
+    const record = getExpressionRecord(this.survey, owners[0]);
+    for (let i = 1; i < owners.length; i++) {
+      if (getExpressionRecord(this.survey, owners[i]) !== record || getScopes(owners[i]) !== scopes) return null;
+    }
+    return owners[0];
   }
   public get editText(): string {
     return editorLocalization.getString("pe.edit");
@@ -581,10 +596,7 @@ export class SurveyLogicItem {
   // dynamic panel, a column's matrix), a choice's or a validator's question (they have no scope of their own),
   // else the element.
   private getExpressionOwner(action: SurveyLogicAction): Base {
-    const el: any = action.parentElement || action.element;
-    if (!!el && el.isDescendantOf("itemvalue") && !!el.locOwner) return el.locOwner;
-    if (!!el && el.isDescendantOf("surveyvalidator") && !!el.errorOwner) return el.errorOwner;
-    return el;
+    return getExpressionOwner(action.parentElement || action.element);
   }
   // Nested data (survey-library #12233): getRenames gives, for an action's element (owner: see
   // getExpressionOwner), the variables a key change rewrites as that element

@@ -1,4 +1,4 @@
-import { Base, SurveyModel, Question, QuestionDropdownModel, QuestionMatrixDynamicModel, PopupDropdownViewModel, settings } from "survey-core";
+import { ActionContainer, Base, SurveyModel, Question, QuestionDropdownModel, QuestionMatrixDynamicModel, PopupDropdownViewModel, settings } from "survey-core";
 import { ConditionEditor } from "../../src/property-grid/condition-survey";
 import { EmptySurveyCreatorOptions } from "../../src/creator-settings";
 import { SurveyLogic } from "../../src/components/tabs/logic";
@@ -7,6 +7,7 @@ import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 import { ExpressionToDisplayText } from "../../src/expressionToDisplayText";
 import { TextareaJsonEditorModel } from "../../src/components/tabs/json-editor-textarea";
 import { CreatorTester } from "../creator-tester";
+import { PropertyGridModelTester } from "./property-grid.base";
 import { buildExpressionContext } from "../../src/expression-assistant/expression-context";
 import { getExpressionLintOptions } from "../../src/expression-assistant/expression-check";
 import { findInnerQuestion, getQuestionByVariableName } from "../../src/utils/data-path";
@@ -439,6 +440,193 @@ describe("logic tab: inner questions (nested data, survey-library #12233)", () =
     const { plugin, entries } = getFilterEntries(json);
     expect(entries).toEqual(["inner|inner", "q1|q1", "q2|q2", "street|street"]);
     expect(getFiltered(plugin.model, "street")).toEqual(["{q1} = 1", "{street} = 'inner'", "{street} = 'root'"]);
+  });
+  // A rule's variables resolve in the rule's scope when all its actions share one (survey-library #12233, CS7):
+  // {kind} on a question inside address is how the runtime and an author write it.
+  const kindRuleJson = (): any => ({ dataNesting: "auto", elements: [
+    addressPanel({ elements: [
+      { type: "dropdown", name: "kind", choices: ["home", "work"] },
+      { type: "text", name: "street", title: "Street title", visibleIf: "{kind} = 'home'" },
+      { type: "text", name: "city", valueName: "town" }
+    ] }),
+    { type: "text", name: "q1" }
+  ] });
+  const titlesOptions = (): EmptySurveyCreatorOptions => {
+    const options = new EmptySurveyCreatorOptions();
+    options.useElementTitles = true;
+    return options;
+  };
+  const getItemText = (logic: SurveyLogic, expression: string, items?: Array<any>): string =>
+    (items || logic.items).filter(item => item.expression === expression)[0].expressionText;
+  test("a rule on an inner question with an in-scope {kind}: opening it and saving it with no edit keeps the text", () => {
+    const survey = new SurveyModel(kindRuleJson());
+    const logic = new SurveyLogicUI(survey);
+    logic.editItem(logic.items[0]);
+    expect(logic.expressionEditor.text).toBe("{kind} = 'home'");
+    expect(logic.saveEditableItem(), "the editor has no empty row").toBe(true);
+    expect(survey.getQuestionByName("panel1.street").visibleIf).toBe("{kind} = 'home'");
+  });
+  test("the rule editor reads an in-scope {kind}: the row has kind's dropdown and shows the entry address.kind", () => {
+    const logic = new SurveyLogicUI(new SurveyModel(kindRuleJson()));
+    logic.editItem(logic.items[0]);
+    const row = getRow(logic.expressionEditor);
+    const questionName = <QuestionDropdownModel>row.getQuestionByName("questionName");
+    expect(questionName.value, "the row keeps the text as written").toBe("kind");
+    expect(questionName.selectedItem.text).toBe("address.kind");
+    const value = <QuestionDropdownModel>row.getQuestionByName("questionValue");
+    expect(value.getType()).toBe("dropdown");
+    expect(value.choices.map(c => c.value)).toEqual(["home", "work"]);
+    expect(value.value).toBe("home");
+  });
+  test("display texts with titles on resolve in the rule's scope; from the root a bare inner name stays raw", () => {
+    const logic = new SurveyLogic(createSurvey(), titlesOptions());
+    expect(getItemText(logic, "{street} = 'w'"), "on inner, inside address").toBe("{Street title} == w");
+    expect(getItemText(logic, "{address.street} = 'x'")).toBe("{Street title} == x");
+    expect(getItemText(logic, "{street} = 'y'"), "on the root q2").toBe("{street} == 'y'");
+
+    const survey = new SurveyModel({ dataNesting: "panelAndPage", pages: [
+      { name: "page1", elements: [
+        addressPanel({ elements: [{ type: "text", name: "street", title: "Street title" }] }),
+        { type: "text", name: "q0", visibleIf: "{address.street} = 'x'" }
+      ] },
+      { name: "page2", elements: [{ type: "text", name: "q2", visibleIf: "{page1.address.street} = 'y'" }] }
+    ] });
+    const pageLogic = new SurveyLogic(survey, titlesOptions());
+    expect(getItemText(pageLogic, "{address.street} = 'x'"), "relative to page1").toBe("{Street title} == x");
+    expect(getItemText(pageLogic, "{page1.address.street} = 'y'")).toBe("{Street title} == y");
+  });
+  test("a rule whose actions sit in two scopes resolves from the root, as before; one scope resolves in it", () => {
+    const survey = new SurveyModel({ dataNesting: "auto", elements: [
+      addressPanel({ elements: [
+        { type: "text", name: "street", title: "Street title" },
+        { type: "text", name: "inner", visibleIf: "{street} = 'x'" },
+        { type: "text", name: "inner2", visibleIf: "{street} = 'y'" },
+        { type: "text", name: "inner3", visibleIf: "{street} = 'y'" }
+      ] }),
+      { type: "text", name: "q1", visibleIf: "{street} = 'x'" }
+    ] });
+    const logic = new SurveyLogic(survey, titlesOptions());
+    expect(logic.items.map(item => item.actions.length)).toEqual([2, 2]);
+    expect(getItemText(logic, "{street} = 'x'"), "inner and the root q1").toBe("{street} == 'x'");
+    expect(getItemText(logic, "{street} = 'y'"), "inner2 and inner3, both inside address").toBe("{Street title} == y");
+  });
+  test("a choice's visibleIf and a validator inside address: an in-scope {street} shows the title (their question's scope)", () => {
+    const survey = new SurveyModel({ dataNesting: "auto", elements: [
+      addressPanel({ elements: [
+        { type: "text", name: "street", title: "Street title" },
+        { type: "dropdown", name: "d", choices: [{ value: 1, visibleIf: "{street} = 'x'" }, 2] },
+        { type: "text", name: "t", validators: [{ type: "expression", expression: "{street} = 'y'" }] }
+      ] })
+    ] });
+    const logic = new SurveyLogic(survey, titlesOptions());
+    expect(getItemText(logic, "{street} = 'x'", logic.invisibleItems)).toBe("{Street title} == x");
+    expect(getItemText(logic, "{street} = 'y'", logic.invisibleItems)).toBe("{Street title} == y");
+    const choice = (<QuestionDropdownModel>survey.getQuestionByName("panel1.d")).choices[0];
+    expect(new ExpressionToDisplayText(survey, titlesOptions(), choice).toDisplayText("{street} = 'x'")).toBe("{Street title} == x");
+  });
+  const getSelectorValue = (panel: any, text: string): any =>
+    (<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).choices.filter(c => c.text === text)[0].value;
+  test("the rule editor follows a saved rule's scope: an action moved to the root, a new rule on an inner question", () => {
+    const survey = new SurveyModel(kindRuleJson());
+    let logic = new SurveyLogicUI(survey);
+    const item = logic.items[0];
+    logic.editItem(item);
+    const panel = logic.itemEditor.panels[0];
+    panel.getQuestionByName("elementSelector").value = getSelectorValue(panel, "q1");
+    expect(logic.saveEditableItem()).toBe(true);
+    expect(survey.getQuestionByName("q1").visibleIf).toBe("{kind} = 'home'");
+    logic.editItem(item);
+    expect(logic.expressionEditor.scopeElement, "q1's scope, the root").toBe(survey.getQuestionByName("q1"));
+    expect(getRow(logic.expressionEditor).getQuestionByName("questionName").value, "{kind} reads nothing on q1").toBeFalsy();
+
+    survey.getQuestionByName("q1").visibleIf = "";
+    logic = new SurveyLogicUI(survey);
+    logic.addNew();
+    logic.expressionEditor.text = "{address.kind} = 'home'";
+    const newPanel = logic.itemEditor.panels[0];
+    newPanel.getQuestionByName("logicTypeName").value = "question_visibility";
+    newPanel.getQuestionByName("elementSelector").value = getSelectorValue(newPanel, "street");
+    expect(logic.saveEditableItem()).toBe(true);
+    const street = survey.getQuestionByName("panel1.street");
+    expect(street.visibleIf).toBe("{address.kind} = 'home'");
+    logic.editItem(logic.items[0]);
+    expect(logic.expressionEditor.scopeElement).toBe(street);
+    logic.expressionEditor.text = "{kind} = 'work'";
+    expect(getRow(logic.expressionEditor).getQuestionByName("questionValue").getType()).toBe("dropdown");
+    expect(logic.saveEditableItem()).toBe(true);
+    expect(street.visibleIf).toBe("{kind} = 'work'");
+  });
+  test("a context that is no survey object resolves from the root", () => {
+    const survey = createSurvey();
+    expect(new ExpressionToDisplayText(survey, titlesOptions(), <any>{}).toDisplayText("{address.street} = 'x'")).toBe("{Street title} == x");
+  });
+  // Documents a change from one title to another (CS7, confirmed as an exception): inside address {kind} reads the
+  // inner kind at runtime, not a root kind of the same name. The display text followed the root before.
+  test("a root question with the same name as an in-scope one: the display text shows the in-scope question", () => {
+    const survey = new SurveyModel({ dataNesting: "auto", elements: [
+      { type: "text", name: "street", title: "Root street" },
+      addressPanel({ elements: [
+        { type: "text", name: "street", title: "Street title" },
+        { type: "text", name: "inner", visibleIf: "{street} = 'x'" }
+      ] })
+    ] });
+    expect(getItemText(new SurveyLogic(survey, titlesOptions()), "{street} = 'x'")).toBe("{Street title} == x");
+  });
+  test("\"none\": a rule on a question inside a panel resolves as before", () => {
+    const json = kindRuleJson();
+    json.dataNesting = "none";
+    const logic = new SurveyLogic(new SurveyModel(json), titlesOptions());
+    expect(getItemText(logic, "{kind} = 'home'")).toBe("{kind} == home");
+  });
+  describe("the expression assistant's display text", () => {
+    let savedShowDialog: any;
+    let dialogs: Array<any>;
+    beforeEach(() => {
+      savedShowDialog = settings.showDialog;
+      dialogs = [];
+      settings.showDialog = <any>((options: any) => {
+        const footerToolbar = new ActionContainer();
+        footerToolbar.setItems([{ id: "cancel", title: "Cancel" }, { id: "apply", title: "Apply" }]);
+        const popup = { options: options, footerToolbar: footerToolbar };
+        dialogs.push(popup);
+        return popup;
+      });
+    });
+    afterEach(() => { settings.showDialog = savedShowDialog; });
+    const createCreator = (): { creator: CreatorTester, requests: Array<any> } => {
+      const creator = new CreatorTester({ showLogicTab: true });
+      creator.useElementTitles = true;
+      creator.JSON = createSurvey().toJSON();
+      const requests: Array<any> = [];
+      creator.onAIExpressionRequest.add((_, options) => { requests.push(options); });
+      return { creator, requests };
+    };
+    test("the Logic tab's rule editor: the rule's scope", () => {
+      const { creator } = createCreator();
+      const logic = new SurveyLogicUI(creator.survey, creator);
+      logic.editItem(logic.items.filter(item => item.expression === "{street} = 'w'")[0]);
+      expect(logic.expressionEditor.getExpressionDisplayText("{street} = 'w'")).toBe("{Street title} == w");
+    });
+    test("the property grid's condition editor: the edited object's scope", () => {
+      const { creator } = createCreator();
+      const inner = creator.survey.getQuestionByName("panel1.inner");
+      const editor = new ConditionEditor(creator.survey, inner, creator, "visibleIf");
+      expect(editor.showExpressionAssistant().options.getDisplayText("{street} = 'w'")).toBe("{Street title} == w");
+    });
+    test("the property grid's title action: the edited object's scope", () => {
+      const { creator, requests } = createCreator();
+      const inner = creator.survey.getQuestionByName("panel1.inner");
+      const propertyGrid = new PropertyGridModelTester(inner, creator);
+      const pgQuestion = propertyGrid.survey.getQuestionByName("visibleIf");
+      pgQuestion.getTitleActions().filter(a => a.id === "property-grid-expression-assistant")[0].action();
+      const popup = dialogs[0];
+      const survey = popup.options.data.survey;
+      survey.setValue("prompt", "street is v");
+      popup.footerToolbar.getActionById("expression-assistant-generate").action();
+      requests[0].callback({ data: { expression: "{street} = 'v'" } });
+      expect(survey.getQuestionByName("review").html).toContain("{Street title} == v");
+      popup.options.onHide();
+    });
   });
 });
 

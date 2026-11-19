@@ -55,6 +55,15 @@ export function getQuestionByVariableName(survey: SurveyModel, name: string, el?
   if (!!info) return !info.rest ? info.question : null;
   return <Question>survey.getQuestionByValueName(name) || null;
 }
+// The element whose scopes an expression of el resolves in: a choice's or a validator's question (they have no
+// scope of their own), else el.
+export function getExpressionOwner(el: Base): Base {
+  const res: any = el;
+  if (!res || typeof res.isDescendantOf !== "function") return el;
+  if (res.isDescendantOf("itemvalue") && !!res.locOwner) return res.locOwner;
+  if (res.isDescendantOf("surveyvalidator") && !!res.errorOwner) return res.errorOwner;
+  return el;
+}
 // The data paths an expression of el resolves names in, innermost first, ending with the root ([]). The paths
 // relative to a record (a template element, a column) are left out: a rename rewrites paths from the survey data.
 export function getExpressionScopePaths(survey: SurveyModel, el: Base): Array<Array<string>> {

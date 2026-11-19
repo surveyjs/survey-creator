@@ -82,7 +82,7 @@ export class PropertyGridEditorExpression extends PropertyGridEditor {
   public onGetQuestionTitleActions(obj: Base, options: any, creatorOptions: ISurveyCreatorOptions): void {
     const action = createExpressionAssistantTitleAction(obj, options.question, (expression: string): string => {
       const survey = (<any>obj).getSurvey ? (<any>obj).getSurvey() : undefined;
-      return !!survey ? new ExpressionToDisplayText(survey, getExpressionAssistantCreator(obj)).toDisplayText(expression) : expression;
+      return !!survey ? new ExpressionToDisplayText(survey, getExpressionAssistantCreator(obj), obj).toDisplayText(expression) : expression;
     });
     if (!!action) options.actions.push(action);
   }
