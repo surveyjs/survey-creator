@@ -1,8 +1,9 @@
 import { describe, expect, test } from "vitest";
-import { ActionContainer, QuestionRadiogroupModel, Serializer, SurveyModel } from "survey-core";
+import { ActionContainer, QuestionRadiogroupModel, QuestionTextBase, Serializer, SurveyModel } from "survey-core";
 import { RichText } from "survey-core/rich-text";
 import { StringEditorViewModelBase } from "../src/components/string-editor";
 import { ICreatorRichTextEditor } from "../src/rich-text-editor";
+import { editorLocalization } from "../src/editorLocalization";
 import { CreatorTester } from "./creator-tester";
 import { PropertyGridEditorCollection } from "../src/property-grid";
 import "../src/property-grid/matrices";
@@ -354,6 +355,40 @@ describe("rich text property grid", () => {
     expect(completed.getType()).toBe("richtext");
     expect(completed.acceptCarriageReturn).toBe(true);
     restoreExampleTypes();
+  });
+
+  test("a rich text property editor keeps the reset to default action", () => {
+    Serializer.addProperty("survey", {
+      name: "test:html",
+      default: "default",
+      category: "general",
+      visibleIndex: 1
+    });
+    PropertyGridEditorCollection.clearHash();
+    try {
+      const creator = new CreatorTester();
+      creator.registerRichTextEditor(RichText);
+      creator.JSON = {};
+      creator.selectElement(creator.survey);
+      const editor = creator.propertyGrid.getQuestionByName("test") as QuestionTextBase;
+      expect(editor.getType()).toBe("richtext");
+      const resetAction = editor.inputActionsContainer.getActionById("reset");
+    expect(resetAction.title).toBe(editorLocalization.getString("pe.resetToDefaultCaption"));
+    expect(resetAction.iconSize).toBe(16);
+    expect(resetAction.getActionBarItemCss()).toContain("sd-action--x-small");
+    expect(resetAction.enabled).toBeFalsy();
+
+      creator.survey.setPropertyValue("test", "some_value");
+      expect(editor.value).toBe("some_value");
+      expect(resetAction.enabled).toBeTruthy();
+
+      resetAction.action();
+      expect(creator.survey.getPropertyValue("test")).toBe("default");
+      expect(resetAction.enabled).toBeFalsy();
+    } finally {
+      Serializer.removeProperty("survey", "test");
+      PropertyGridEditorCollection.clearHash();
+    }
   });
 
   test("choice text cells are inline rich editors and the value stays plain", () => {

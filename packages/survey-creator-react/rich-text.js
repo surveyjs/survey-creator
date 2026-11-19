@@ -1,8 +1,9 @@
-/* global SurveyCreator, SurveyCreatorCore, SurveyTheme, React, ReactDOM, SurveyRichText */
-// Dev-only harness for Creator rich text. Not part of any bundle.
+/* global Survey, SurveyCreator, SurveyCreatorCore, SurveyTheme, React, ReactDOM, SurveyRichText */
+// Dev-only harness for Creator rich text. Not part of any bundle and not used by automated tests.
+// Survey JSON is Appendix A of the rich text spec. ?plugin=off loads neither the plugin nor the setup.
 var demoSurveyJson = String.raw`{
-  "title": "Rich text **demo**",
-  "description": "Survey description with *italic* text.\n\nSecond paragraph.",
+  "title": "Rich text <strong>demo</strong>",
+  "description": "<p>Survey description with <em>italic</em> text.</p><p>Second paragraph.</p>",
   "pages": [
     {
       "name": "strings",
@@ -10,40 +11,53 @@ var demoSurveyJson = String.raw`{
       "elements": [
         {
           "type": "text", "name": "s1",
-          "title": "Title with *italic*, **bold**, ~~strike~~ and [a link](https://surveyjs.io)",
-          "description": "Line one\nLine two\n\n- item one\n- item two"
+          "title": "Title with <em>italic</em>, <strong>bold</strong>, <s>strike</s> and <a href=\"https://surveyjs.io\">a link</a>",
+          "description": "<p>Line one<br>Line two</p><ul><li>item one</li><li>item two</li></ul>"
         },
         {
           "type": "radiogroup", "name": "s2", "title": "Plain title",
-          "choices": ["**Bold** choice", "Plain choice", "Choice with a literal \\* star"]
+          "choices": [
+            { "value": "bold", "text": "<strong>Bold</strong> choice" },
+            { "value": "plain", "text": "Plain choice" },
+            { "value": "markdown", "text": "Markdown **is not** rendered" },
+            { "value": "tom", "text": "Tom & Jerry" }
+          ]
         },
         { "type": "text", "name": "s3", "title": "Raw <b>html</b> and <script>alert(1)</script>" },
-        { "type": "text", "name": "s4", "title": "[js link](javascript:alert(1))" },
-        { "type": "text", "name": "s5", "title": "Table", "description": "| a | b |\n|---|---|\n| 1 | 2 |" },
-        { "type": "text", "name": "s6", "title": "- not a list in a title" },
+        { "type": "text", "name": "s4", "title": "<a href=\"javascript:alert(1)\">js link</a>" },
+        { "type": "text", "name": "s5", "title": "Table", "description": "<table><tr><td>a</td><td>b</td></tr><tr><td>1</td><td>2</td></tr></table>" },
+        { "type": "text", "name": "s6", "title": "<ul><li>a list</li><li>in a title</li></ul>" },
         {
-          "type": "text", "name": "s7", "title": "HTML string",
+          "type": "text", "name": "s7", "title": "Styled string",
           "description": "<p style=\"color:red\">Red</p><table><tr><td>cell</td></tr></table>"
-        }
+        },
+        { "type": "text", "name": "s8", "title": "Plain multi-line description", "description": "Plain line one\nPlain line two" }
       ]
     },
     {
       "name": "editor",
       "title": "Editor",
       "elements": [
-        { "type": "comment", "name": "c_md", "title": "Markdown answer", "allowRichText": true, "placeholder": "Type and format text" },
-        { "type": "comment", "name": "c_typing", "title": "Updates while typing", "allowRichText": true, "textUpdateMode": "onTyping" },
-        { "type": "comment", "name": "c_html", "title": "HTML answer", "allowRichText": true },
-        { "type": "comment", "name": "c_inline", "title": "Inline mode", "allowRichText": true, "acceptCarriageReturn": false },
-        { "type": "comment", "name": "c_max", "title": "Max length 50", "allowRichText": true, "maxLength": 50 },
-        { "type": "comment", "name": "c_rows", "title": "Rows, autoGrow, resize", "allowRichText": true, "rows": 6, "autoGrow": true, "allowResize": true },
+        { "type": "richtext", "name": "c_md", "title": "Rich answer (static toolbar)", "placeholder": "Type and format text" },
+        { "type": "richtext", "name": "c_typing", "title": "Updates while typing", "textUpdateMode": "onTyping" },
         {
-          "type": "comment", "name": "c_unsupported", "title": "Unsupported stored content", "allowRichText": true,
+          "type": "richtext", "name": "c_legacy", "title": "Plain answer from before rich text",
+          "defaultValue": "Typed in a textarea: a < b & c\nSecond line"
+        },
+        { "type": "richtext", "name": "c_inline", "title": "Inline mode", "acceptCarriageReturn": false },
+        { "type": "richtext", "name": "c_max", "title": "Max length 50", "maxLength": 50 },
+        { "type": "richtext", "name": "c_rows", "title": "Rows, autoGrow, resize", "rows": 6, "autoGrow": true, "allowResize": true },
+        { "type": "richtext", "name": "c_tb_none", "title": "Toolbar: none (shortcuts only)", "richTextToolbarMode": "none" },
+        { "type": "richtext", "name": "c_tb_focus", "title": "Toolbar: on focus", "richTextToolbarMode": "onFocus" },
+        { "type": "richtext", "name": "c_tb_selection", "title": "Toolbar: on selection", "richTextToolbarMode": "onSelection" },
+        { "type": "richtext", "name": "c_tb_static", "title": "Toolbar: static", "richTextToolbarMode": "static" },
+        {
+          "type": "richtext", "name": "c_unsupported", "title": "Unsupported stored content",
           "defaultValue": "<p style=\"color:red\">Red</p><table><tr><td>cell</td></tr></table>"
         },
         {
-          "type": "matrixdropdown", "name": "m1", "title": "Matrix with a rich comment cell",
-          "columns": [{ "name": "notes", "cellType": "comment", "allowRichText": true }],
+          "type": "matrixdropdown", "name": "m1", "title": "Matrix with a rich text cell",
+          "columns": [{ "name": "notes", "cellType": "richtext" }],
           "rows": ["Row 1"]
         }
       ]
@@ -54,62 +68,35 @@ var demoSurveyJson = String.raw`{
 var pluginLoaded = typeof SurveyRichText !== "undefined" && !!SurveyRichText.RichText;
 var richStringAreas = ["designer-tab", "preview-tab", "theme-tab", "translation-tab:source-survey", "translation-tab:target-survey", "matrix-cell-question-popup-editor"];
 
-document.getElementById("plugin-status").textContent = pluginLoaded ? "Plugin: loaded" : "Plugin: off";
-
-function text(id, value) {
-  document.getElementById(id).textContent = value;
-}
-
 SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
 SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
 
-function createCreator() {
-  var host = document.getElementById("creator-host");
-  if (window.creatorModel) {
-    ReactDOM.unmountComponentAtNode(host);
-    window.creatorModel.dispose();
-  }
-  var creator = new SurveyCreator.SurveyCreator({
-    showThemeTab: true,
-    showTranslationTab: true,
-    showLogicTab: true
-  });
-  var registerEditor = pluginLoaded && document.getElementById("register-editor").checked;
-  var htmlHandler = pluginLoaded && document.getElementById("html-handler").checked;
-  var passThrough = pluginLoaded && document.getElementById("pass-through").checked;
-  if (registerEditor) {
-    creator.registerRichTextEditor(SurveyRichText.RichText);
-  }
-  if (pluginLoaded) {
-    creator.onSurveyInstanceCreated.add(function (_, options) {
-      if (richStringAreas.indexOf(options.area) > -1) {
-        options.survey.onTextMarkdown.add(passThrough
-          ? function (_sender, markdownOptions) { markdownOptions.html = markdownOptions.text; }
-          : SurveyRichText.RichText.textMarkdownHandler);
-        // Comment answers in the preview and theme tabs. Not forwarded from creator.onHtmlToMarkdown.
-        options.survey.onHtmlToMarkdown.add(passThrough
-          ? function (_sender, markdownOptions) { markdownOptions.text = markdownOptions.html; }
-          : SurveyRichText.RichText.htmlToMarkdownHandler);
-      }
-    });
-  }
-  if (htmlHandler) {
-    creator.onHtmlToMarkdown.add(passThrough
-      ? function (_sender, markdownOptions) { markdownOptions.text = markdownOptions.html; }
-      : SurveyRichText.RichText.htmlToMarkdownHandler);
-  }
-  creator.JSON = JSON.parse(demoSurveyJson);
-  window.creatorModel = creator;
-  window.creator = creator;
-  ReactDOM.render(
-    React.createElement(SurveyCreator.SurveyCreatorComponent, { creator: creator }),
-    host
-  );
-  var rich = creator.isRichStringsEnabled();
-  text("rich-status", rich ? "Rich strings: enabled" : "Rich strings: off");
+if (pluginLoaded) {
+  Survey.Serializer.findProperty("survey", "description").type = "html";
+  Survey.Serializer.findProperty("survey", "description").defaultValue = "description";
+  Survey.Serializer.findProperty("survey", "title").defaultValue = "title";
+  Survey.Serializer.findProperty("page", "description").type = "html";
+  Survey.Serializer.findProperty("question", "title").type = "inlinehtml";
+  Survey.Serializer.findProperty("itemvalue", "text").type = "inlinehtml";
 }
 
-document.getElementById("register-editor").addEventListener("change", createCreator);
-document.getElementById("html-handler").addEventListener("change", createCreator);
-document.getElementById("pass-through").addEventListener("change", createCreator);
-createCreator();
+var creator = new SurveyCreator.SurveyCreator({
+  showThemeTab: true,
+  showTranslationTab: true,
+  showLogicTab: true
+});
+if (pluginLoaded) {
+  creator.registerRichTextEditor(SurveyRichText.RichText);
+  creator.onSurveyInstanceCreated.add(function (_, options) {
+    if (richStringAreas.indexOf(options.area) > -1) {
+      options.survey.onTextMarkdown.add(SurveyRichText.RichText.renderStringHandler);
+    }
+  });
+}
+creator.JSON = JSON.parse(demoSurveyJson);
+window.creator = creator;
+
+ReactDOM.render(
+  React.createElement(SurveyCreator.SurveyCreatorComponent, { creator: creator }),
+  document.getElementById("creator-host")
+);
