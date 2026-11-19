@@ -116,6 +116,7 @@ export function buildConditionQuestionList(survey: SurveyModel, object: Base, pr
   addSurveyCalculatedValues(survey, variableNames);
   sortOrder = options.onConditionQuestionsGetListCallback(propertyName, <any>object, editor, res, variableNames);
 
+  const innerTexts = getInnerEntryTexts(res, options);
   for (let i = 0; i < res.length; i++) {
     res[i].value = res[i].name;
     let question = !!res[i].question ? res[i].question : res[i];
@@ -124,10 +125,13 @@ export function buildConditionQuestionList(survey: SurveyModel, object: Base, pr
     //text cannot be derived from the question. Both the name and the title path are built already
     if (!options.useElementTitles) {
       text = res[i].name;
-      // an inner question's entry already starts with its data path (renameInnerQuestionEntries)
-      let valueName = isInnerQuestion(question) ? "" : question.valueName;
-      if (!!valueName && text.indexOf(valueName) == 0) {
-        text = text.replace(valueName, question.name);
+      if (isInnerQuestion(question)) {
+        text = innerTexts[i];
+      } else {
+        let valueName = question.valueName;
+        if (!!valueName && text.indexOf(valueName) == 0) {
+          text = text.replace(valueName, question.name);
+        }
       }
     }
     res[i].text = options.getObjectDisplayName(question, "condition-editor", "condition", text);
@@ -154,11 +158,47 @@ function renameInnerQuestionEntries(res: Array<any>, start: number, question: Qu
   if (valueName === key) return;
   for (let i = start; i < res.length; i++) {
     const name: string = res[i].name;
-    if (res[i].question !== question || typeof name !== "string" || name.indexOf(valueName) !== 0) continue;
-    const nextCh = name[valueName.length];
-    if (nextCh !== undefined && nextCh !== "." && nextCh !== "[") continue;
+    if (res[i].question !== question || !isEntryOf(name, valueName)) continue;
     res[i].name = key + name.substring(valueName.length);
   }
+}
+// CS8: an inner question's entry shows its data path with the question's own key, the last segment, replaced by
+// its name: "address.city" for city with valueName "town" in the container "address", as a top-level question's
+// entry shows "q1" for its {val1}. The containers keep their keys, which is what the written path starts with, and
+// a sub-entry keeps its tail ("address.m.r1" for m with valueName "mv"). Only the text changes: the value stays
+// the data path. An entry that does not start with the key (a host renamed it in onConditionQuestionsGetList)
+// shows its name.
+function getInnerEntryText(name: string, question: Question): string {
+  const valueName = question.getValueName();
+  const key = getConditionQuestionKey(question);
+  if (valueName === question.name || !isEntryOf(name, key)) return name;
+  const ownKeyStart = key.length - valueName.length;
+  if (ownKeyStart < 1 || key.substring(ownKeyStart) !== valueName || key[ownKeyStart - 1] !== ".") return name;
+  return key.substring(0, ownKeyStart) + question.name + name.substring(key.length);
+}
+// The texts of inner entries (getInnerEntryText), by the entry's index. Names are unique in a name scope, but two
+// containers can share a key ("address"), so two questions named city in them would both show "address.city":
+// those entries show their data paths instead, which differ.
+function getInnerEntryTexts(res: Array<any>, options: ISurveyCreatorOptions): { [index: number]: string } {
+  const texts: { [index: number]: string } = {};
+  if (options.useElementTitles) return texts;
+  const counts: { [text: string]: number } = {};
+  for (let i = 0; i < res.length; i++) {
+    const question = res[i].question;
+    if (!question || !isInnerQuestion(question)) continue;
+    texts[i] = getInnerEntryText(res[i].name, question);
+    counts[texts[i]] = (counts[texts[i]] || 0) + 1;
+  }
+  for (const i in texts) {
+    if (counts[texts[i]] > 1) texts[i] = res[i].name;
+  }
+  return texts;
+}
+// "name" is the variable "prefix" itself or a path into it ("prefix.r1", "prefix[0].x")
+function isEntryOf(name: string, prefix: string): boolean {
+  if (typeof name !== "string" || !prefix || name.indexOf(prefix) !== 0) return false;
+  const nextCh = name[prefix.length];
+  return nextCh === undefined || nextCh === "." || nextCh === "[";
 }
 function isItemValue(object: Base): boolean {
   return !!object && object.isDescendantOf("itemvalue");
