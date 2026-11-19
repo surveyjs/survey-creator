@@ -36,6 +36,7 @@ export class TabDesignerViewModel extends Base {
     },
   }) showPlaceholder: boolean;
   @property() surfaceScale = 100;
+  @property({ defaultValue: false }) wysiwygMode: boolean;
   @property() surfaceCssVariables: { [index: string]: string } = {};
   public scaleCssVariables: { [index: string]: string } = {};
   public creator: SurveyCreatorModel;
@@ -418,6 +419,9 @@ export class TabDesignerViewModel extends Base {
     }
     if (this.showPlaceholder) {
       rootCss += " svc-tab-designer--with-placeholder";
+    }
+    if (this.wysiwygMode) {
+      rootCss += " svc-tab-designer--wysiwyg";
     }
     rootCss += " svc-tab-designer--" + this.creator.pageEditMode + "-mode";
     return rootCss;

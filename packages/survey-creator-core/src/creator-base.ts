@@ -4869,15 +4869,22 @@ export class SurveyCreatorModel extends Base
     }
     return element;
   }
-  public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
-    let panel = !!element && element.isPanel ? <PanelModel>element : null;
+  public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement, insertAfter?: SurveyElement) {
+    const panel = !insertAfter && !!element && element.isPanel ? <PanelModel>element : null;
     const onSelectQuestionType = (questionType: string, json?: any) => {
       this.currentAddQuestionType = questionType;
-      this.addNewQuestionInPage(beforeAdd, panel, questionType, json);
+      if (insertAfter) {
+        beforeAdd(questionType);
+        this.addNewQuestionAfter(insertAfter, questionType, json);
+      } else {
+        this.addNewQuestionInPage(beforeAdd, panel, questionType, json);
+      }
       newAction.popupModel.hide();
     };
     const getActions = () => {
-      const ownerElement = this._getActualElementToAddNewElements(element);
+      const ownerElement = insertAfter
+        ? this._getActualElementToAddNewElements(<SurveyElement><any>insertAfter.parent)
+        : this._getActualElementToAddNewElements(element);
       const availableTypes = this.getAvailableToolboxItems(ownerElement).map((item) => {
         return this.createIActionBarItemByClass(item, item.needSeparator, onSelectQuestionType);
       });
@@ -4945,6 +4952,23 @@ export class SurveyCreatorModel extends Base
     let newElement = this.createNewElement(json);
 
     this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
+  }
+
+  @undoRedoTransaction()
+  public addNewQuestionAfter(afterElement: SurveyElement, type: string = null, initJson: any = null): void {
+    if (this.readOnly || !afterElement || !afterElement.parent) return;
+    if (!type) type = this.currentAddQuestionType || this.defaultAddQuestionType;
+    const parent = <IPanel><any>afterElement.parent;
+    let json = initJson;
+    if (!json) {
+      const toolboxItem = this.toolbox.getItemByName(type);
+      json = !!toolboxItem && !!toolboxItem.json ? toolboxItem.json : { type: type };
+    }
+    const newElement = this.createNewElement(json);
+    const index = parent.elements.indexOf(<IElement><any>afterElement);
+    this.survey.lazyRenderEnabled = false;
+    this.doClickQuestionCore(newElement, "ADDED_FROM_PAGEBUTTON", index > -1 ? index + 1 : -1, parent);
+    this.selectElement(newElement, null, !this.toolbox.searchManager.filterString, this.startEditTitleOnQuestionAdded);
   }
 
   createIActionBarItemByClass(item: QuestionToolboxItem, needSeparator: boolean, onSelectQuestionType?: (questionType: string, json?: any) => void): Action {

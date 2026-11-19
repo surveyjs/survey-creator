@@ -79,8 +79,53 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel i
     return this.choicesModel.collapseAction;
   }
 
+  protected syncWysiwygSurface(): void {
+    this.syncDesignDropdown(this.wysiwygMode);
+  }
+  private syncDesignDropdown(enabled: boolean): void {
+    const question = this.question;
+    if (!question || question.isDisposed) return;
+    if (!enabled && !(<any>question).dropdownListModelValue) return;
+    if (enabled) {
+      question.forceIsInputReadOnly = false;
+    } else {
+      question.resetPropertyValue("forceIsInputReadOnly");
+    }
+    const dropdown = question.dropdownListModel;
+    if (!dropdown) return;
+    const model = <any>dropdown;
+    if (!model.__svcDesignClick) {
+      model.__svcDesignClick = true;
+      const original = dropdown.onClick.bind(dropdown);
+      model.onClick = (event?: any) => {
+        if (model.allowOpenInDesignMode && question.isDesignMode && !question.readOnly && !question.isPreviewStyle && !question.isReadOnlyAttr) {
+          dropdown.popupModel.toggleVisibility();
+          model.isListFocusedByKeyboard = false;
+          model.focusItemOnClickAndPopup?.();
+          question.focusInputElement(false);
+          return;
+        }
+        original(event);
+      };
+    }
+    model.allowOpenInDesignMode = enabled;
+    const list = model.listModel;
+    if (!list) return;
+    if (enabled) {
+      if (!model.__svcDesignSelection) {
+        model.__svcDesignSelection = list.onSelectionChanged;
+      }
+      list.itemComponent = "svc-wysiwyg-dropdown-item";
+      list.onSelectionChanged = () => { };
+    } else if (model.__svcDesignSelection) {
+      list.onSelectionChanged = model.__svcDesignSelection;
+      list.itemComponent = "sv-list-item-content";
+      model.__svcDesignSelection = undefined;
+    }
+  }
   public attachElement(surveyElement: SurveyElement) {
     super.attachElement(surveyElement);
+    this.syncWysiwygSurface();
     if (!!surveyElement) {
       surveyElement.registerFunctionOnPropertyValueChanged("isSelectedInDesigner",
         () => {
@@ -89,6 +134,7 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel i
     }
   }
   public detachElement(surveyElement: SurveyElement): void {
+    this.syncDesignDropdown(false);
     if (!!surveyElement) {
       surveyElement.unRegisterFunctionOnPropertyValueChanged("isSelectedInDesigner", "dropdownCollapseChecker");
     }

@@ -1118,6 +1118,7 @@ creator.onMachineTranslate.add((_, options) => {
 window.creator = creator;
 creator.showOneCategoryInPropertyGrid = true;
 creator.propertyGridNavigationMode = "buttons";
+creator.getPlugin("designer").wysiwygMode = true;
 // creator.getPlugin("designer").showOneCategoryInPropertyGrid = true;
 // creator.getPlugin("theme").showOneCategoryInPropertyGrid = true;
 

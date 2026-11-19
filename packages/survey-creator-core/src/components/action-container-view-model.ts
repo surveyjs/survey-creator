@@ -14,6 +14,8 @@ class SurveyElementResponsivityManager extends ResponsivityManager {
 }
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
   public alwaysShrink = false;
+  // Every visible action stays an icon. The overflow menu is not used.
+  public forceIconMode = false;
   protected responsivityManager: SurveyElementResponsivityManager;
 
   private needToShrink(item: Action, shrinkTypeConverterAction: boolean) {
@@ -47,7 +49,21 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
     this.dotsItem.popupModel.cssClass += " svc-creator-popup";
   }
 
+  public setForceIconMode(value: boolean): void {
+    this.forceIconMode = value;
+    this.alwaysShrink = value;
+    this.dotsItem.visible = false;
+    if (value) {
+      this.visibleActions.forEach(item => item.mode = "small");
+    }
+    this.raiseUpdate({ updateResponsivenessMode: UpdateResponsivenessMode.Hard });
+  }
   public fit(options: { availableSpace: number, gap?: number }) {
+    if (this.forceIconMode) {
+      this.dotsItem.visible = false;
+      this.visibleActions.forEach(item => item.mode = "small");
+      return;
+    }
     if (options.availableSpace <= 0) return;
     options.gap = options.gap ?? 0;
     const { availableSpace, gap } = options;

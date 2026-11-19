@@ -1,6 +1,6 @@
 import * as React from "react";
 import { QuestionDropdownAdornerViewModel } from "survey-creator-core";
-import { ItemValue, QuestionDropdownModel, QuestionSelectBase, SurveyModel } from "survey-core";
+import { ItemValue, ListModel, QuestionDropdownModel, QuestionSelectBase, SurveyModel } from "survey-core";
 import { ReactElementFactory, ReactSurveyElementsWrapper } from "survey-react-ui";
 import {
   QuestionAdornerComponent,
@@ -27,6 +27,7 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
   }
 
   renderElementPlaceholder(): React.JSX.Element {
+    if (this.dropdownModel.wysiwygMode) return null;
     const textStyle = (this.question as any).textStyle;
     return (
       <div
@@ -70,6 +71,37 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
     );
   }
 }
+
+class WysiwygDropdownListItem extends React.Component<{ item: ItemValue, model: ListModel<ItemValue> }> {
+  render(): React.ReactNode {
+    const item = this.props.item;
+    const question = this.props.model?.locOwner as QuestionSelectBase;
+    if (!question || !item) return null;
+    const element = ReactElementFactory.Instance.createElement(
+      question.isDescendantOf("dropdown") ? "survey-radiogroup-item" : "survey-checkbox-item",
+      {
+        question: question,
+        cssClasses: question.cssClasses,
+        isDisplayMode: true,
+        item: item,
+        index: question.visibleChoices.findIndex(choice => choice === item),
+        isChecked: question.isItemSelected(item)
+      }
+    );
+    return (
+      <div
+        onClick={(event) => event.stopPropagation()}
+        onPointerDown={(event) => event.stopPropagation()}
+      >
+        {ReactSurveyElementsWrapper.wrapItemValue(question.survey as SurveyModel, element, question, item)}
+      </div>
+    );
+  }
+}
+
+ReactElementFactory.Instance.registerElement("svc-wysiwyg-dropdown-item", (props) => {
+  return React.createElement(WysiwygDropdownListItem, props);
+});
 
 ReactElementFactory.Instance.registerElement(
   "svc-dropdown-question",

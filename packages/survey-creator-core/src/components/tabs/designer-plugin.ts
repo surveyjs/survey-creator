@@ -37,6 +37,57 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private tabControlModelValue: TabControlModel;
   private prevActivePage: string;
   private presetModel: CreatorPresetsModel;
+  private wysiwygModeValue = false;
+  private wysiwygModeListeners: Array<(value: boolean) => void> = [];
+
+  public get wysiwygMode(): boolean {
+    return this.wysiwygModeValue;
+  }
+  public set wysiwygMode(value: boolean) {
+    if (this.wysiwygModeValue === value) return;
+    this.wysiwygModeValue = value;
+    if (this.model) {
+      this.model.wysiwygMode = value;
+    }
+    this.wysiwygModeListeners.forEach(listener => listener(value));
+    // Design mode omits the runner frame classes. Recompute them for the new flag.
+    this.creator.survey?.updateElementCss(true);
+  }
+  // The designer survey runs in design mode, which skips sd-question--with-frame / sd-panel--nested.
+  // WYSIWYG needs those classes so an element keeps the same box as in Preview.
+  private bindWysiwygRunnerStyles(survey: SurveyModel): void {
+    if (!survey || (<any>survey).__svcWysiwygRunnerStyles) return;
+    (<any>survey).__svcWysiwygRunnerStyles = true;
+    const append = (element: any, cssClasses: any, rootName: string): void => {
+      if (!cssClasses || !cssClasses[rootName]) return;
+      let root: string = cssClasses[rootName];
+      if (cssClasses.withFrame) root = root.split(cssClasses.withFrame).join(" ");
+      if (cssClasses.nested) root = root.split(cssClasses.nested).join(" ");
+      root = root.replace(/\s+/g, " ").trim();
+      if (this.wysiwygMode) {
+        const parent = element?.parent;
+        const hasFrame = !!parent && (parent.isPage || parent.showPanelAsPage);
+        const runnerClass = hasFrame ? cssClasses.withFrame : cssClasses.nested;
+        if (runnerClass) root += " " + runnerClass;
+      }
+      cssClasses[rootName] = root;
+    };
+    survey.onUpdateQuestionCssClasses.add((_, options) => {
+      append(options.question, options.cssClasses, "mainRoot");
+    });
+    survey.onUpdatePanelCssClasses.add((_, options) => {
+      append(options.panel, options.cssClasses?.panel, "container");
+    });
+  }
+  public subscribeWysiwygMode(listener: (value: boolean) => void): void {
+    this.wysiwygModeListeners.push(listener);
+  }
+  public unsubscribeWysiwygMode(listener: (value: boolean) => void): void {
+    const index = this.wysiwygModeListeners.indexOf(listener);
+    if (index > -1) {
+      this.wysiwygModeListeners.splice(index, 1);
+    }
+  }
 
   public get tabControlModel() {
     return this.tabControlModelValue;
@@ -321,9 +372,12 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
     this.designerStateManager = new DesignerStateManager();
     this.designerStateManager.initForSurvey(this.creator.survey);
+    this.bindWysiwygRunnerStyles(this.creator.survey);
     this.creator.onSurveyInstanceCreated.add((s, o) => {
       if (o.area == "designer-tab") {
         this.designerStateManager.initForSurvey(o.survey);
+        this.bindWysiwygRunnerStyles(o.survey);
+        if (this.wysiwygMode) o.survey.updateElementCss(true);
       }
     });
     this.creator.onPropertyChanged.add((sender, options) => {
@@ -421,6 +475,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
 
   public activate(): void {
     this.model = new TabDesignerViewModel(this.creator);
+    this.model.wysiwygMode = this.wysiwygMode;
     this.model.surfaceScale = this.creator.survey.widthScale;
     this.creator.sidebar.hideSideBarVisibilityControlActions = this.showOneCategoryInPropertyGrid;
     this.updateActivePage();

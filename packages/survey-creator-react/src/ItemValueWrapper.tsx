@@ -78,9 +78,15 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
 
   renderElement(): React.JSX.Element {
     this.model.item = this.props.item;
+    const question = this.model.question;
+    const wysiwygChoices = !!(this.model.creator.getPlugin("designer", false) as any)?.wysiwygMode
+      && !!question
+      && !question.isDescendantOf("ranking")
+      && !question.isDescendantOf("imagepicker")
+      && (question.isDescendantOf("radiogroup") || question.isDescendantOf("checkbox") || question.isDescendantOf("dropdown"));
     const button = this.model.allowAdd ? (
       this.renderButton(this.model.addAction)
-    ) : (
+    ) : wysiwygChoices ? null : (
       <>
         {" "}
         {this.model.isDraggable ? (
@@ -103,6 +109,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
           ref={this.rootRef}
           className={
             "svc-item-value-wrapper" +
+          (wysiwygChoices ? " svc-item-value-wrapper--wysiwyg" : "") +
           (this.model.allowAdd ? " svc-item-value--new" : "") +
           (this.model.isDragging ? " svc-item-value--dragging" : "") +
           (this.model.isDragDropGhost ? " svc-item-value--ghost" : "") +
@@ -117,7 +124,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
         >
           <div className="svc-item-value__ghost"></div>
 
-          <div className="svc-item-value-controls" onBlur={this.onBlur}>{button}</div>
+          {button ? <div className="svc-item-value-controls" onBlur={this.onBlur}>{button}</div> : null}
 
           <div className={"svc-item-value__item"} onClick={(event) => this.model.select(this.model, event.nativeEvent)}>{this.props.element}</div>
           {this.renderPanelAction()}

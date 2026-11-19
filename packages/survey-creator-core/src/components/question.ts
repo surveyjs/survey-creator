@@ -62,6 +62,7 @@ interface IConvertToSelection {
 }
 
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
+  @property({ defaultValue: false }) wysiwygMode: boolean;
   @property({ defaultValue: "" }) _currentAddQuestionType: string;
   get currentAddQuestionType(): string {
     return this._currentAddQuestionType;
@@ -337,6 +338,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   // evaluated - by the question itself (it recalculates them when its choices
   // or its container change) or on a permissions change the creator reports.
   private optionItemsModifiable: boolean;
+  private wysiwygModeListener: (value: boolean) => void;
+  private wysiwygSubscribed: boolean;
   // No initializer: attachElement runs in the base constructor, before the
   // fields of this class are initialized. Created on the first subscription,
   // kept so that remove() gets the same function.
@@ -347,9 +350,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private setCanShowOptionItemCallback(): void {
     const question = <QuestionSelectBase>this.surveyElement;
     question.setCanShowOptionItemCallback((item: ItemValue): boolean => {
-      // Placeholder items exist to add them: none while choices cannot change.
+      // Placeholder items exist to add them: none while choices cannot change,
+      // and none in WYSIWYG mode (enabled items still render through hasItem).
       this.optionItemsModifiable = this.canModifyChoices();
-      if (!this.optionItemsModifiable) return false;
+      if ((this.wysiwygMode && this.isWysiwygOptionQuestion()) || !this.optionItemsModifiable) return false;
       if (item !== question.newItem) return true;
       return this.creator.maxChoices < 1 || question.choices.length < this.creator.maxChoices;
     });
@@ -368,6 +372,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     // detachElement is skipped for an element that is disposed or adorned by
     // a newer adorner by now.
     this.creator.onPermissionsChanged.remove(this.permissionsChangedHandler);
+    this.unsubscribeWysiwygMode();
     super.detachFromUI();
   }
   protected detachElement(surveyElement: SurveyElement): void {
@@ -385,6 +390,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         (<any>surveyElement).setCanShowOptionItemCallback(undefined);
         this.creator.onPermissionsChanged.remove(this.permissionsChangedHandler);
       }
+      this.unsubscribeWysiwygMode();
       if (!!surveyElement["setDesignItemClickCallback"]) {
         (<any>surveyElement).setDesignItemClickCallback(undefined);
       }
@@ -395,6 +401,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     super.detachElement(this.element);
   }
   protected attachElement(surveyElement: SurveyElement): void {
+    this.wysiwygMode = this.readWysiwygMode();
+    this.subscribeWysiwygMode();
     super.attachElement(surveyElement);
     if (surveyElement) {
       if (
@@ -471,6 +479,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     super.updateActionsPropertiesCore();
     if (this.isActionContainerCreated) {
       this.updateActionsLocations();
+      this.applyWysiwygToolbarState();
     }
   }
   protected updateActionsVisibility(isTop: boolean): void {
@@ -950,6 +959,194 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.creator.onValueChangingCallback(options);
     return options.newValue;
   }
+  private readWysiwygMode(): boolean {
+    const plugin = this.creator?.getPlugin<TabDesignerPlugin>("designer", false);
+    return !!plugin?.wysiwygMode;
+  }
+  private subscribeWysiwygMode(): void {
+    if (this.wysiwygSubscribed) return;
+    const plugin = this.creator?.getPlugin<TabDesignerPlugin>("designer", false);
+    if (!plugin) return;
+    if (!this.wysiwygModeListener) {
+      this.wysiwygModeListener = (value: boolean) => this.setWysiwygMode(value);
+    }
+    plugin.subscribeWysiwygMode(this.wysiwygModeListener);
+    this.wysiwygSubscribed = true;
+  }
+  private unsubscribeWysiwygMode(): void {
+    if (!this.wysiwygSubscribed) return;
+    this.creator?.getPlugin<TabDesignerPlugin>("designer", false)?.unsubscribeWysiwygMode(this.wysiwygModeListener);
+    this.wysiwygSubscribed = false;
+  }
+  public setWysiwygMode(value: boolean): void {
+    if (this.wysiwygMode === value) return;
+    this.wysiwygMode = value;
+    this.onWysiwygModeChanged();
+  }
+  protected onWysiwygModeChanged(): void {
+    if (!!this.surveyElement && !!(<any>this.surveyElement)["setCanShowOptionItemCallback"]) {
+      this.setCanShowOptionItemCallback();
+    }
+    if (this.surveyElement && this.isActionContainerCreated) {
+      this.updateActionsContainer(this.surveyElement);
+      this.updateActionsProperties();
+    }
+    this.syncWysiwygSurface();
+  }
+  protected syncWysiwygSurface(): void { }
+  private isWysiwygOptionQuestion(): boolean {
+    const element = this.surveyElement;
+    if (!element) return false;
+    // Ranking inherits checkbox, and image picker inherits the same choice base.
+    if (element.isDescendantOf("ranking") || element.isDescendantOf("imagepicker")) return false;
+    return element.isDescendantOf("radiogroup") || element.isDescendantOf("checkbox") || element.isDescendantOf("dropdown");
+  }
+  private isPlainCheckbox(): boolean {
+    const element = this.surveyElement;
+    return !!element && element.isDescendantOf("checkbox") && !element.isDescendantOf("tagbox");
+  }
+  private canEnableOptionProperty(question: QuestionSelectBase, propName: string): boolean {
+    if ((<any>question)[propName] === true) return false;
+    const prop = Serializer.findProperty(question.getType(), propName);
+    if (!prop) return false;
+    if (!SurveyHelper.isPropertyVisible(question, prop, this.creator)) return false;
+    return this.creator.isCanModifyProperty(question, propName);
+  }
+  private canAddChoice(question: QuestionSelectBase): boolean {
+    if (!question || !question.choices) return false;
+    const prop = Serializer.findProperty(question.getType(), "choices");
+    if (!prop) return false;
+    if (!SurveyHelper.isPropertyVisible(question, prop, this.creator)) return false;
+    if (!this.creator.isCanModifyProperty(question, "choices")) return false;
+    return this.creator.maxChoices < 1 || question.choices.length < this.creator.maxChoices;
+  }
+  private getAddOptionEntries(): Array<{ id: string, title: string, apply: () => void }> {
+    if (!this.isWysiwygOptionQuestion()) return [];
+    const question = <QuestionSelectBase>this.surveyElement;
+    const entries: Array<{ id: string, title: string, apply: () => void }> = [];
+    if (this.canAddChoice(question)) {
+      entries.push({
+        id: "choice",
+        title: getLocString("ed.addOptionChoice"),
+        apply: () => { this.creator.createNewItemValue(question); }
+      });
+    }
+    const specials: Array<{ id: string, prop: string, title: string, checkboxOnly?: boolean }> = [
+      { id: "selectAll", prop: "showSelectAllItem", title: "ed.addOptionSelectAll", checkboxOnly: true },
+      { id: "none", prop: "showNoneItem", title: "ed.addOptionNone" },
+      { id: "other", prop: "showOtherItem", title: "ed.addOptionOther" },
+      { id: "refuse", prop: "showRefuseItem", title: "ed.addOptionRefuse" },
+      { id: "dontKnow", prop: "showDontKnowItem", title: "ed.addOptionDontKnow" },
+    ];
+    specials.forEach(item => {
+      if (item.checkboxOnly && !this.isPlainCheckbox()) return;
+      if (!this.canEnableOptionProperty(question, item.prop)) return;
+      entries.push({
+        id: item.id,
+        title: getLocString(item.title),
+        apply: () => { (<any>question)[item.prop] = true; }
+      });
+    });
+    return entries;
+  }
+  private getAddOptionItemActions(): Array<IAction> {
+    return this.getAddOptionEntries().map(entry => new Action({
+      id: entry.id,
+      title: entry.title,
+      action: () => entry.apply()
+    }));
+  }
+  private hasAddOptionItems(): boolean {
+    return this.getAddOptionEntries().length > 0;
+  }
+  private createAddOptionItemAction(): Action {
+    const action = this.createDropdownModel({
+      actionData: {
+        id: "addOptionItem",
+        title: this.creator.getLocString("pe.addNew"),
+        iconName: "icon-add_16x16",
+        visibleIndex: 40,
+        enabled: true
+      },
+      items: [],
+      updateListModel: (listModel: ListModel) => {
+        listModel.setItems(this.getAddOptionItemActions());
+      }
+    });
+    action.visible = <any>new ComputedUpdater(() => this.wysiwygMode && this.hasAddOptionItems());
+    return action;
+  }
+  private createWysiwygAddQuestionAction(): Action {
+    const action = this.creator.getQuestionTypeSelectorModel(() => { }, <SurveyElement><any>this.surveyElement.parent, this.surveyElement);
+    const title = this.creator.getLocString("ed.add");
+    action.id = "addQuestion";
+    action.title = title;
+    action.iconName = "";
+    action.showTitle = true;
+    action.visibleIndex = 100;
+    action.css = "svc-wysiwyg-toolbar__add";
+    const listModel = action.popupModel?.contentComponentData?.model;
+    if (listModel) {
+      const previous = listModel.onSelectionChanged;
+      listModel.onSelectionChanged = (item: IAction) => {
+        if (previous) previous(item);
+        action.title = this.creator.getLocString("ed.add");
+      };
+    }
+    action.visible = <any>new ComputedUpdater(() => this.wysiwygMode && this.allowEdit && !!this.creator.showAddQuestionButton);
+    return action;
+  }
+  private applyWysiwygToolbarState(): void {
+    if (!this.isActionContainerCreated) return;
+    const container = this.actionContainer;
+    if (container.forceIconMode !== this.wysiwygMode) {
+      container.setForceIconMode(this.wysiwygMode);
+    }
+    if (!this.wysiwygMode) return;
+    const section1: { [id: string]: number } = { convertTo: 0, convertInputType: 1 };
+    const standard: { [id: string]: number } = { isrequired: 10, duplicate: 11, settings: 12, delete: 13 };
+    let customIndex = 20;
+    container.actions.forEach(action => {
+      if (action.id === "addQuestion") {
+        action.visibleIndex = 100;
+        return;
+      }
+      if (action.id === "addOptionItem") {
+        action.visibleIndex = 40;
+        return;
+      }
+      if (section1[action.id] !== undefined) {
+        action.visibleIndex = section1[action.id];
+        return;
+      }
+      if (standard[action.id] !== undefined) {
+        action.visibleIndex = standard[action.id];
+        return;
+      }
+      action.visibleIndex = customIndex++;
+    });
+    const visible = container.actions
+      .filter(action => action.visible !== false)
+      .sort((a, b) => (a.visibleIndex || 0) - (b.visibleIndex || 0));
+    let hasPrevious = false;
+    let section2Marked = false;
+    visible.forEach(action => {
+      const isSection1 = section1[action.id] !== undefined;
+      if (action.id === "addQuestion") {
+        action.needSeparator = hasPrevious;
+        hasPrevious = true;
+        return;
+      }
+      if (isSection1) {
+        action.needSeparator = false;
+        hasPrevious = true;
+        return;
+      }
+      action.needSeparator = hasPrevious && !section2Marked;
+      section2Marked = true;
+      hasPrevious = true;
+    });
+  }
   protected buildActions(items: Array<Action>): void {
     super.buildActions(items);
     let element = this.surveyElement;
@@ -961,6 +1158,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (typeof element["isRequired"] !== "undefined" && !!element.getType
       && SurveyHelper.isPropertyVisible(element, Serializer.findProperty(element.getType(), "isRequired"), this.creator)) {
       items.push(this.createRequiredAction());
+    }
+    if (this.wysiwygMode) {
+      if (this.isWysiwygOptionQuestion()) {
+        items.push(this.createAddOptionItemAction());
+      }
+      items.push(this.createWysiwygAddQuestionAction());
     }
   }
   protected duplicate(): void {

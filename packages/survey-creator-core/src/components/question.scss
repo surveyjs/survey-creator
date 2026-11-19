@@ -1219,3 +1219,150 @@ svc-question,
 .svc-question__content--slider.svc-question__content--slider .sd-question__content {
   overflow-x: visible;
 }
+
+.svc-question__wysiwyg-toolbar {
+  --svc-wysiwyg-toolbar-gap: var(--sjs2-layout-component-page-content-area-gap-vertical);
+  position: absolute;
+  z-index: 4;
+  width: max-content;
+  inset-inline-end: var(--sjs2-spacing-x100, 8px);
+  top: calc(100% + var(--svc-wysiwyg-toolbar-gap) / 2);
+  display: none;
+  align-items: center;
+  box-sizing: border-box;
+  padding: var(--sjs2-spacing-x050, 4px);
+  border-radius: var(--sjs2-radius-component-drop);
+  border: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+  background: var(--sjs2-color-utility-sheet);
+  box-shadow: var(--sjs2-border-effect-floating-default);
+  pointer-events: auto;
+
+  // Fills the gap above the toolbar so the pointer can reach it without leaving the adorner.
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 100%;
+    height: calc(var(--svc-wysiwyg-toolbar-gap) / 2 + 2px);
+  }
+
+  .sd-action-bar {
+    background: transparent;
+  }
+
+  .sd-action-bar__separator {
+    width: var(--sjs2-border-width-x100, 1px);
+    height: var(--sjs2-size-x300, 24px);
+    margin-inline: var(--sjs2-spacing-x050, 4px);
+    background: var(--sjs2-color-border-basic-secondary);
+  }
+}
+
+.sd-panel .svc-question__wysiwyg-toolbar {
+  --svc-wysiwyg-toolbar-gap: var(--sjs2-layout-component-panel-content-area-gap-vertical);
+}
+
+.svc-tab-designer--wysiwyg {
+  .svc-question__adorner,
+  .svc-question__content,
+  .svc-row,
+  .sd-row,
+  .sd-page,
+  .sd-page__content,
+  .sd-panel__content,
+  .svc-page__content,
+  .svc-row > .sd-row.sd-row--multiple,
+  .sd-panel .svc-row > .sd-row--multiple,
+  .svc-question__content:not(.svc-question__content--composite-question)
+    .sd-question:not(.sd-question--paneldynamic)
+    .sd-panel__content {
+    overflow: visible;
+  }
+
+  .svc-question__adorner--selected > .svc-question__wysiwyg-toolbar,
+  .svc-hovered.svc-question__adorner > .svc-question__wysiwyg-toolbar {
+    display: flex;
+  }
+
+  .svc-question__adorner--selected > .svc-question__wysiwyg-toolbar:not(:has(.sd-action-bar__item)),
+  .svc-hovered.svc-question__adorner > .svc-question__wysiwyg-toolbar:not(:has(.sd-action-bar__item)) {
+    display: none;
+  }
+
+  .svc-question__content {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+
+    .sd-element--complex > .sd-element__header--location-top,
+    .sd-element--complex
+      > .sd-question__container
+      > .sd-question__header-and-content-container
+      > .sd-element__header--location-top {
+      padding-block: var(--sd-question-header-padding-block, var(--sd-panel-header-padding-block));
+      padding-inline: var(--sd-question-header-padding-inline, var(--sd-panel-header-padding-inline));
+    }
+
+    .sd-selectbase:not(.sd-imagepicker, .sd-boolean-fieldset) {
+      padding-left: 0;
+      padding-right: 0;
+      margin-left: 0;
+      margin-right: 0;
+      overflow-x: visible;
+    }
+
+    .sd-selectbase__column {
+      margin-left: 0;
+    }
+  }
+
+  .svc-hovered > .svc-question__content:not(.svc-question__content--dragged) {
+    box-shadow: var(--sjs2-border-effect-surface-hovered);
+  }
+
+  .svc-question__content--selected:not(.svc-question__content--dragged) {
+    box-shadow: 0 0 0 var(--sjs2-border-width-x200) var(--sjs2-color-utility-shadow-surface-focused);
+  }
+
+  .sd-panel .svc-question__content::after {
+    content: none;
+  }
+
+  // The designer card is gone, so the survey panel box has to provide its own padding and row gap.
+  .svc-question__content .sd-panel__content {
+    padding-inline: var(--sd-panel-content-padding-inline);
+    padding-block: var(--sd-panel-content-padding-block);
+    row-gap: var(--sd-panel-content-row-gap);
+    column-gap: var(--sd-panel-content-column-gap);
+  }
+
+  .sd-panel .svc-row {
+    margin-top: 0;
+  }
+
+  .svc-item-value-wrapper.svc-item-value-wrapper--wysiwyg {
+    margin-left: 0;
+    gap: 0;
+
+    .sd-item {
+      padding: calc(var(--sjs2-layout-component-labeled-group-box-gap-vertical) / 2) 0;
+    }
+
+    .sd-item:where(:first-child:not(.sd-selectbase__item--inline)) {
+      padding-top: var(--sjs2-layout-component-labeled-group-box-padding-vertical);
+    }
+
+    .sd-item:where(:last-child:not(.sd-selectbase__item--inline)) {
+      padding-bottom: var(--sjs2-layout-component-labeled-group-box-padding-vertical);
+    }
+  }
+}
+
+.svc-creator--touch:not(.svc-creator--mobile) .svc-tab-designer--wysiwyg {
+  .sd-selectbase .svc-item-value-wrapper.svc-item-value-wrapper--wysiwyg,
+  .svc-question__dropdown-choices .svc-item-value-wrapper.svc-item-value-wrapper--wysiwyg,
+  .svc-question__content--ranking .svc-item-value-wrapper.svc-item-value-wrapper--wysiwyg {
+    margin-left: 0;
+  }
+}
