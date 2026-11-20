@@ -138,12 +138,14 @@ export class SurveyCreatorComponent extends SurveyElementBase<
       <div className="svc-embedded-banner">
         <div className="svc-embedded-banner__caption">
           <span className="svc-embedded-banner__powered-by">{embedded.poweredByText}</span>
-          <span className="svc-embedded-banner__brand">{embedded.brandText}</span>
+          <span className="svc-embedded-banner__brand" role="img" aria-label={embedded.brandText}>
+            <SvgIcon iconName={embedded.brandIconName} size={"auto"}></SvgIcon>
+          </span>
         </div>
         <a className="svc-embedded-banner__link" href={embedded.linkUrl} target="_blank" rel="noopener noreferrer">{embedded.linkText}</a>
         <button type="button" className="svc-embedded-banner__close" title={embedded.closeText} aria-label={embedded.closeText}
           onClick={() => creator.closeLicenseBanner()}>
-          <SvgIcon iconName={"icon-close-16x16"} size={"auto"}></SvgIcon>
+          <SvgIcon iconName={embedded.closeIconName} size={"auto"}></SvgIcon>
         </button>
       </div>
     );

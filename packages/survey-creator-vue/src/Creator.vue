@@ -94,9 +94,17 @@
               <span class="svc-embedded-banner__powered-by">{{
                 model.embeddedLicenseBanner.poweredByText
               }}</span>
-              <span class="svc-embedded-banner__brand">{{
-                model.embeddedLicenseBanner.brandText
-              }}</span>
+              <span
+                class="svc-embedded-banner__brand"
+                role="img"
+                :aria-label="model.embeddedLicenseBanner.brandText"
+              >
+                <SvComponent
+                  :is="'sv-svg-icon'"
+                  :iconName="model.embeddedLicenseBanner.brandIconName"
+                  :size="'auto'"
+                ></SvComponent>
+              </span>
             </div>
             <a
               class="svc-embedded-banner__link"
@@ -114,7 +122,7 @@
             >
               <SvComponent
                 :is="'sv-svg-icon'"
-                :iconName="'icon-close-16x16'"
+                :iconName="model.embeddedLicenseBanner.closeIconName"
                 :size="'auto'"
               ></SvComponent>
             </button>

@@ -120,9 +120,11 @@ export interface IKeyboardShortcut {
 export interface IEmbeddedLicenseBanner {
   poweredByText: string;
   brandText: string;
+  brandIconName: string;
   linkText: string;
   linkUrl: string;
   closeText: string;
+  closeIconName: string;
 }
 
 export class ToolbarActionContainer extends ActionContainer {
@@ -386,10 +388,13 @@ export class SurveyCreatorModel extends Base
     if (!info) return undefined;
     return {
       poweredByText: this.getLocString("survey.licenseEmbeddedPoweredBy"),
+      // brandText is the accessible name of the logo image
       brandText: "SurveyJS",
+      brandIconName: "icon-logo-surveyjs-72x16",
       linkText: this.getLocString("survey.licenseEmbeddedWhiteLabel"),
       linkUrl: info.whiteLabelUrl,
-      closeText: this.getLocString("pe.close")
+      closeText: this.getLocString("pe.close"),
+      closeIconName: "icon-close-tiny-16x16"
     };
   }
   // Only the embedded card can be closed, and only for the lifetime of this creator instance

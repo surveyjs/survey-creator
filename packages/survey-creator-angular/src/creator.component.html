@@ -46,12 +46,14 @@
         <div class="svc-embedded-banner" *ngIf="creator.embeddedLicenseBanner as embedded">
           <div class="svc-embedded-banner__caption">
             <span class="svc-embedded-banner__powered-by">{{ embedded.poweredByText }}</span>
-            <span class="svc-embedded-banner__brand">{{ embedded.brandText }}</span>
+            <span class="svc-embedded-banner__brand" role="img" [attr.aria-label]="embedded.brandText">
+              <svg [iconName]="embedded.brandIconName" [size]="'auto'" sv-ng-svg-icon></svg>
+            </span>
           </div>
           <a class="svc-embedded-banner__link" [href]="embedded.linkUrl" target="_blank" rel="noopener noreferrer">{{ embedded.linkText }}</a>
           <button type="button" class="svc-embedded-banner__close" [attr.title]="embedded.closeText"
             [attr.aria-label]="embedded.closeText" (click)="creator.closeLicenseBanner()">
-            <svg [iconName]="'icon-close-16x16'" [size]="'auto'" sv-ng-svg-icon></svg>
+            <svg [iconName]="embedded.closeIconName" [size]="'auto'" sv-ng-svg-icon></svg>
           </button>
         </div>
       </ng-container>

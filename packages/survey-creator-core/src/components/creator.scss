@@ -172,10 +172,12 @@ survey-creator,
   z-index: 1001;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   gap: var(--sjs2-spacing-x150);
   padding: var(--sjs2-spacing-x150);
   box-sizing: border-box;
+  overflow: hidden;
   border-radius: var(--sjs2-radius-x150);
   background-color: var(--sjs2-color-bg-basic-primary);
   box-shadow: var(--sjs2-border-effect-floating-default);
@@ -184,31 +186,39 @@ survey-creator,
 .svc-embedded-banner__caption {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: var(--sjs2-spacing-x075);
   width: 100%;
 }
 
 .svc-embedded-banner__powered-by,
 .svc-embedded-banner__link {
-  @include sjs2--typography--small;
-  font-weight: var(--sjs2-font-weight-medium);
+  @include sjs2--typography--small-strong;
 }
 
 .svc-embedded-banner__powered-by {
   color: var(--sjs2-color-fg-basic-tertiary);
 }
 
+// The SurveyJS logo sits in a 24px-high box, vertically centered
 .svc-embedded-banner__brand {
-  font-family: $font-family;
-  font-weight: var(--sjs2-font-weight-bold);
-  font-size: var(--sjs2-typography-font-size-default);
-  line-height: calc(var(--sjs2-base-unit-line-height) * 2.25);
-  letter-spacing: 0.02em;
-  color: var(--sjs2-color-project-brand-600);
+  display: flex;
+  align-items: center;
+  height: var(--sjs2-size-x300);
+
+  .sv-svg-icon {
+    width: var(--sjs2-size-x900);
+    height: var(--sjs2-size-x200);
+  }
+
+  use {
+    fill: var(--sjs2-color-project-brand-600);
+  }
 }
 
 .svc-embedded-banner__link {
   color: var(--sjs2-color-fg-basic-secondary);
+  text-align: center;
   text-decoration: underline;
   white-space: nowrap;
 }
@@ -224,9 +234,9 @@ survey-creator,
   margin: 0;
   border: none;
   border-radius: var(--sjs2-radius-component-action);
-  background-color: var(--sjs2-color-component-action-brand-quaternary-default-bg);
+  // The design keeps the close action in its highlighted (hovered) look at all times
+  background-color: var(--sjs2-color-component-action-brand-quaternary-hovered-bg);
   cursor: pointer;
-  outline: none;
 
   .sv-svg-icon {
     width: var(--sjs2-size-x200);
@@ -234,16 +244,7 @@ survey-creator,
   }
 
   use {
-    fill: var(--sjs2-color-component-action-brand-quaternary-default-icon);
-  }
-
-  &:hover,
-  &:focus-visible {
-    background-color: var(--sjs2-color-component-action-brand-quaternary-hovered-bg);
-
-    use {
-      fill: var(--sjs2-color-component-action-brand-quaternary-hovered-icon);
-    }
+    fill: var(--sjs2-color-component-action-brand-quaternary-hovered-icon);
   }
 }
 

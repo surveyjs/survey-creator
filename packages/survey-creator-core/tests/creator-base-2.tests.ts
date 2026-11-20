@@ -988,9 +988,11 @@ test("Embedded license banner: the card texts are provided for the embedded mark
   expect(creator.embeddedLicenseBanner).toEqual({
     poweredByText: "Powered by",
     brandText: "SurveyJS",
+    brandIconName: "icon-logo-surveyjs-72x16",
     linkText: "White-label options",
     linkUrl: embeddedWhiteLabelUrl,
-    closeText: "Close"
+    closeText: "Close",
+    closeIconName: "icon-close-tiny-16x16"
   });
 
   creator.addPlugin("one", <ICreatorPlugin>{
