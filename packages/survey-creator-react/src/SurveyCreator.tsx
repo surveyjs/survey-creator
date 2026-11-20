@@ -16,6 +16,7 @@ import {
   SurveyLocStringViewer,
   Survey,
   SvgBundleComponent,
+  SvgIcon,
   PopupModal
 } from "survey-react-ui";
 import {
@@ -74,20 +75,12 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   renderElement() {
     const creator: SurveyCreatorModel = this.props.creator;
     if (creator.isCreatorDisposed) return null;
-    const areaClassName = "svc-full-container svc-creator__area svc-flex-column" + (this.props.creator.haveCommercialLicense ? "" : " svc-creator__area--with-banner");
+    const areaClassName = "svc-full-container svc-creator__area svc-flex-column" + (this.props.creator.showLicenseBanner ? " svc-creator__area--with-banner" : "");
     const contentWrapperClassName = "svc-creator__content-wrapper svc-flex-row" + (this.props.creator.isMobileView ? " svc-creator__content-wrapper--footer-toolbar" : "");
     const fullContainerClassName = "svc-flex-row svc-full-container" + (" svc-creator__side-bar--" + this.creator.sidebarLocation);
     const creatorStyles = {};
     assign(creatorStyles, this.style, this.props.creator.themeVariables);
-    let licenseBanner = null;
-    if (!this.props.creator.haveCommercialLicense) {
-      const htmlValue = { __html: this.props.creator.licenseText };
-      licenseBanner = (
-        <div className={this.props.creator.licenseBannerCss}>
-          <span className="svc-creator__non-commercial-text" dangerouslySetInnerHTML={htmlValue}></span>
-        </div>
-      );
-    }
+    const licenseBanner = this.renderLicenseBanner();
     //AM: width unrecognized by react
     return (
       <div className={this.creator.getRootCss()} ref={this.rootNode} style={creatorStyles}>
@@ -126,6 +119,32 @@ export class SurveyCreatorComponent extends SurveyElementBase<
           {licenseBanner}
           <NotifierComponent notifier={creator.notifier}></NotifierComponent>
         </div>
+      </div>
+    );
+  }
+  renderLicenseBanner() {
+    const creator: SurveyCreatorModel = this.props.creator;
+    if (!creator.showLicenseBanner) return null;
+    const embedded = creator.embeddedLicenseBanner;
+    if (!embedded) {
+      const htmlValue = { __html: creator.licenseText };
+      return (
+        <div className="svc-creator__banner">
+          <span className="svc-creator__non-commercial-text" dangerouslySetInnerHTML={htmlValue}></span>
+        </div>
+      );
+    }
+    return (
+      <div className="svc-embedded-banner">
+        <div className="svc-embedded-banner__caption">
+          <span className="svc-embedded-banner__powered-by">{embedded.poweredByText}</span>
+          <span className="svc-embedded-banner__brand">{embedded.brandText}</span>
+        </div>
+        <a className="svc-embedded-banner__link" href={embedded.linkUrl} target="_blank" rel="noopener noreferrer">{embedded.linkText}</a>
+        <button type="button" className="svc-embedded-banner__close" title={embedded.closeText} aria-label={embedded.closeText}
+          onClick={() => creator.closeLicenseBanner()}>
+          <SvgIcon iconName={"icon-close-16x16"} size={"auto"}></SvgIcon>
+        </button>
       </div>
     );
   }

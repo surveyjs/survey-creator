@@ -976,23 +976,50 @@ test("Licensed creator with the embedded marker has no banner", (): any => {
   setLicenseMocks(false, false);
 });
 
-test("License banner css: the compact overlay is used for the embedded marker only", (): any => {
+test("Embedded license banner: the card texts are provided for the embedded marker only", (): any => {
   setLicenseMocks(false, false);
   let creator = new CreatorTester();
   expect(creator.isEmbeddedLicenseBanner).toBeFalsy();
-  expect(creator.licenseBannerCss).toBe("svc-creator__banner");
+  expect(creator.embeddedLicenseBanner).toBeUndefined();
 
   setLicenseMocks(false, true);
   creator = new CreatorTester();
   expect(creator.isEmbeddedLicenseBanner).toBeTruthy();
-  expect(creator.licenseBannerCss).toBe("svc-creator__banner svc-creator__banner--embedded");
+  expect(creator.embeddedLicenseBanner).toEqual({
+    poweredByText: "Powered by",
+    brandText: "SurveyJS",
+    linkText: "White-label options",
+    linkUrl: embeddedWhiteLabelUrl,
+    closeText: "Close"
+  });
 
   creator.addPlugin("one", <ICreatorPlugin>{
     activate: () => { },
     getLicenseText: (_) => "no plugin license"
   });
   expect(creator.isEmbeddedLicenseBanner).toBeFalsy();
-  expect(creator.licenseBannerCss).toBe("svc-creator__banner");
+  expect(creator.embeddedLicenseBanner).toBeUndefined();
+  setLicenseMocks(false, false);
+});
+
+test("Embedded license banner: closeLicenseBanner hides the embedded card only", (): any => {
+  setLicenseMocks(false, false);
+  let creator = new CreatorTester();
+  expect(creator.showLicenseBanner).toBeTruthy();
+  creator.closeLicenseBanner();
+  expect(creator.isLicenseBannerClosed).toBeFalsy();
+  expect(creator.showLicenseBanner).toBeTruthy();
+
+  setLicenseMocks(false, true);
+  creator = new CreatorTester();
+  expect(creator.showLicenseBanner).toBeTruthy();
+  creator.closeLicenseBanner();
+  expect(creator.isLicenseBannerClosed).toBeTruthy();
+  expect(creator.showLicenseBanner).toBeFalsy();
+
+  setLicenseMocks(true, true);
+  creator = new CreatorTester();
+  expect(creator.showLicenseBanner).toBeFalsy();
   setLicenseMocks(false, false);
 });
 

@@ -117,6 +117,14 @@ export interface IKeyboardShortcut {
   execute: (context: any) => void;
 }
 
+export interface IEmbeddedLicenseBanner {
+  poweredByText: string;
+  brandText: string;
+  linkText: string;
+  linkUrl: string;
+  closeText: string;
+}
+
 export class ToolbarActionContainer extends ActionContainer {
   constructor(private creator: SurveyCreatorModel) {
     super();
@@ -371,10 +379,29 @@ export class SurveyCreatorModel extends Base
   public get isEmbeddedLicenseBanner(): boolean {
     return !!this.getEmbeddedLicenseInfo();
   }
-  // The embedded banner is a compact overlay: only its text is opaque and clickable,
-  // the rest of the strip lets mouse events through to the elements beneath it
-  public get licenseBannerCss(): string {
-    return toCssClasses("svc-creator__banner", this.isEmbeddedLicenseBanner && "svc-creator__banner--embedded");
+  // The embedded banner is a small floating card in the bottom-left corner instead of a full-width row.
+  // Renderers draw it from these texts; undefined means the regular banner (licenseText) is shown.
+  public get embeddedLicenseBanner(): IEmbeddedLicenseBanner | undefined {
+    const info = this.getEmbeddedLicenseInfo();
+    if (!info) return undefined;
+    return {
+      poweredByText: this.getLocString("survey.licenseEmbeddedPoweredBy"),
+      brandText: "SurveyJS",
+      linkText: this.getLocString("survey.licenseEmbeddedWhiteLabel"),
+      linkUrl: info.whiteLabelUrl,
+      closeText: this.getLocString("pe.close")
+    };
+  }
+  // Only the embedded card can be closed, and only for the lifetime of this creator instance
+  @property({ defaultValue: false }) isLicenseBannerClosed: boolean;
+  public get showLicenseBanner(): boolean {
+    if (this.haveCommercialLicense) return false;
+    return !(this.isLicenseBannerClosed && this.isEmbeddedLicenseBanner);
+  }
+  public closeLicenseBanner(): void {
+    if (this.isEmbeddedLicenseBanner) {
+      this.isLicenseBannerClosed = true;
+    }
   }
   public get licenseText(): string {
     const unlicensedPlugins = this.getUnlicensedPluginsNames();

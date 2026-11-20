@@ -5,7 +5,7 @@
       <sv-svg-bundle></sv-svg-bundle>
     </div>
     <div class="svc-full-container svc-creator__area svc-flex-column"
-      [class.svc-creator__area--with-banner]="!creator.haveCommercialLicense">
+      [class.svc-creator__area--with-banner]="creator.showLicenseBanner">
       <svc-component-container *ngIf="collabBarContainer" [model]="collabBarContainer"></svc-component-container>
       <div class="svc-flex-row svc-full-container"
         [class.svc-creator__side-bar--left]="creator.sidebarLocation == 'left'">
@@ -39,9 +39,22 @@
         </div>
         <svc-side-bar [model]="creator.sidebar" *ngIf="creator.isSidebarVisible"></svc-side-bar>
       </div>
-      <div [class]="creator.licenseBannerCss" *ngIf="!creator.haveCommercialLicense">
-        <span class="svc-creator__non-commercial-text" [innerHTML]="creator.licenseText | safeHtml"></span>
-      </div>
+      <ng-container *ngIf="creator.showLicenseBanner">
+        <div class="svc-creator__banner" *ngIf="!creator.embeddedLicenseBanner">
+          <span class="svc-creator__non-commercial-text" [innerHTML]="creator.licenseText | safeHtml"></span>
+        </div>
+        <div class="svc-embedded-banner" *ngIf="creator.embeddedLicenseBanner as embedded">
+          <div class="svc-embedded-banner__caption">
+            <span class="svc-embedded-banner__powered-by">{{ embedded.poweredByText }}</span>
+            <span class="svc-embedded-banner__brand">{{ embedded.brandText }}</span>
+          </div>
+          <a class="svc-embedded-banner__link" [href]="embedded.linkUrl" target="_blank" rel="noopener noreferrer">{{ embedded.linkText }}</a>
+          <button type="button" class="svc-embedded-banner__close" [attr.title]="embedded.closeText"
+            [attr.aria-label]="embedded.closeText" (click)="creator.closeLicenseBanner()">
+            <svg [iconName]="'icon-close-16x16'" [size]="'auto'" sv-ng-svg-icon></svg>
+          </button>
+        </div>
+      </ng-container>
       <sv-notifier [notifier]="creator.notifier"></sv-notifier>
     </div>
   </div>

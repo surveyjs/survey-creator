@@ -163,26 +163,87 @@ survey-creator,
   }
 }
 
-// The "embedded-<name>" banner overlays the bottom edge of the creator instead of taking a row.
-// The strip is transparent and ignores the mouse; only the compact text label is opaque and clickable.
-.svc-creator__banner--embedded {
+// The "embedded-<name>" banner: a small floating card in the bottom-left corner of the creator.
+// It does not take a layout row, so everything outside the card stays interactive.
+.svc-embedded-banner {
   position: absolute;
-  inset-inline: 0;
-  bottom: 0;
+  inset-inline-start: var(--sjs2-spacing-x075);
+  bottom: var(--sjs2-spacing-x075);
   z-index: 1001;
   display: flex;
-  justify-content: center;
-  line-height: normal;
-  background-color: transparent;
-  pointer-events: none;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sjs2-spacing-x150);
+  padding: var(--sjs2-spacing-x150);
+  box-sizing: border-box;
+  border-radius: var(--sjs2-radius-x150);
+  background-color: var(--sjs2-color-bg-basic-primary);
+  box-shadow: var(--sjs2-border-effect-floating-default);
+}
 
-  .svc-creator__non-commercial-text {
-    @include sjs2--typography--small-strong;
-    padding: var(--sjs2-spacing-x050) var(--sjs2-spacing-x150);
-    border-start-start-radius: var(--sjs2-radius-x100);
-    border-start-end-radius: var(--sjs2-radius-x100);
-    background-color: var(--sjs2-color-bg-brand-primary);
-    pointer-events: auto;
+.svc-embedded-banner__caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sjs2-spacing-x075);
+  width: 100%;
+}
+
+.svc-embedded-banner__powered-by,
+.svc-embedded-banner__link {
+  @include sjs2--typography--small;
+  font-weight: var(--sjs2-font-weight-medium);
+}
+
+.svc-embedded-banner__powered-by {
+  color: var(--sjs2-color-fg-basic-tertiary);
+}
+
+.svc-embedded-banner__brand {
+  font-family: $font-family;
+  font-weight: var(--sjs2-font-weight-bold);
+  font-size: var(--sjs2-typography-font-size-default);
+  line-height: calc(var(--sjs2-base-unit-line-height) * 2.25);
+  letter-spacing: 0.02em;
+  color: var(--sjs2-color-project-brand-600);
+}
+
+.svc-embedded-banner__link {
+  color: var(--sjs2-color-fg-basic-secondary);
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+.svc-embedded-banner__close {
+  position: absolute;
+  top: var(--sjs2-spacing-x050);
+  inset-inline-end: var(--sjs2-spacing-x050);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sjs2-spacing-x050);
+  margin: 0;
+  border: none;
+  border-radius: var(--sjs2-radius-component-action);
+  background-color: var(--sjs2-color-component-action-brand-quaternary-default-bg);
+  cursor: pointer;
+  outline: none;
+
+  .sv-svg-icon {
+    width: var(--sjs2-size-x200);
+    height: var(--sjs2-size-x200);
+  }
+
+  use {
+    fill: var(--sjs2-color-component-action-brand-quaternary-default-icon);
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--sjs2-color-component-action-brand-quaternary-hovered-bg);
+
+    use {
+      fill: var(--sjs2-color-component-action-brand-quaternary-hovered-icon);
+    }
   }
 }
 
