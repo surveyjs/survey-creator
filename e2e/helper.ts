@@ -13,6 +13,7 @@ export const urlWidget = "http://127.0.0.1:8080/test-pages/widget";
 export const urlThemeTab = "http://127.0.0.1:8080/test-pages/theme-tab";
 export const urlCreatorThemes = "http://127.0.0.1:8080/test-pages/creator-themes";
 export const urlPresets = "http://127.0.0.1:8080/test-pages/presets";
+export const urlRichText = "http://127.0.0.1:8080/test-pages/rich-text";
 
 // Serves a choicesByUrl request from the test itself, so no real web service is contacted.
 // Call it before setJSON. The url does not have to exist: the request never leaves the browser.

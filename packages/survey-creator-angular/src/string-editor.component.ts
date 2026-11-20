@@ -83,6 +83,9 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   public onPaste(event: any): void {
     this.baseModel.onPaste(event);
   }
+  public onKeyDownCapture(event: Event): void {
+    this.baseModel.onKeyDownCapture(event as KeyboardEvent);
+  }
   public done(event: any): void {
     this.baseModel.done(event);
     (<any>this.locString).__isEditing = false;
