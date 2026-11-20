@@ -411,9 +411,6 @@ export class SurveyCreatorModel extends Base
   public get licenseText(): string {
     const unlicensedPlugins = this.getUnlicensedPluginsNames();
     if (unlicensedPlugins.length > 0) return this.pluginLicenseTexts[unlicensedPlugins[0]];
-    // The "embedded-<name>" marker grants no license; it only replaces the banner text
-    const embedded = this.getEmbeddedLicenseInfo();
-    if (embedded) return this.getLocString("survey.licenseEmbedded").replace("{whiteLabelUrl}", embedded.whiteLabelUrl);
     const licenseDateString = this.licenseDateString;
     if (licenseDateString) return this.getLocString("survey.license2").replace("{date}", licenseDateString);
     return this.getLocString("survey.license");

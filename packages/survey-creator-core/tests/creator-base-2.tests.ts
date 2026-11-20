@@ -929,33 +929,11 @@ function setLicenseMocks(licensed: boolean, embedded: boolean): void {
   (getEmbeddedLicense as MockedFunction<typeof getEmbeddedLicense>).mockReturnValue(
     embedded ? { name: "wordpress", whiteLabelUrl: embeddedWhiteLabelUrl } : undefined);
 }
-function getEmbeddedLicenseText(): string {
-  return editorLocalization.getLocaleStrings("en").survey.licenseEmbedded.replace("{whiteLabelUrl}", embeddedWhiteLabelUrl);
-}
-
-test("License text with the embedded marker (unlicensed creator)", (): any => {
-  setLicenseMocks(false, true);
-  const creator = new CreatorTester();
-  expect(creator.haveCommercialLicense).toBeFalsy();
-  expect(creator.licenseText).toBe(getEmbeddedLicenseText());
-  expect(creator.licenseText).toContain("href='" + embeddedWhiteLabelUrl + "'");
-  expect(creator.licenseText).not.toContain("{whiteLabelUrl}");
-  setLicenseMocks(false, false);
-});
-
 test("License text without the embedded marker (unlicensed creator)", (): any => {
   setLicenseMocks(false, false);
   const creator = new CreatorTester();
   expect(creator.haveCommercialLicense).toBeFalsy();
   expect(creator.licenseText).toBe(editorLocalization.getLocaleStrings("en").survey.license);
-});
-
-test("License text with the embedded marker wins over the expired date", (): any => {
-  setLicenseMocks(false, true);
-  const creator = new CreatorTester();
-  creator.licenseDateStringValue = "123";
-  expect(creator.licenseText).toBe(getEmbeddedLicenseText());
-  setLicenseMocks(false, false);
 });
 
 test("License text from plugin wins over the embedded marker", (): any => {
