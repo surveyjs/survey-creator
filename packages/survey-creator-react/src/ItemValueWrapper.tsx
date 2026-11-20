@@ -86,7 +86,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
       && (question.isDescendantOf("radiogroup") || question.isDescendantOf("checkbox") || question.isDescendantOf("dropdown"));
     const button = this.model.allowAdd ? (
       this.renderButton(this.model.addAction)
-    ) : wysiwygChoices ? null : (
+    ) : (
       <>
         {" "}
         {this.model.isDraggable ? (

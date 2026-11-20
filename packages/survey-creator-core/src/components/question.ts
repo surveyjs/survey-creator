@@ -36,6 +36,7 @@ import { SurveyElementAdornerBase } from "./survey-element-adorner-base";
 import "./question.scss";
 import { settings } from "../creator-settings";
 import { StringItemsNavigatorBase } from "./string-editor";
+import { getNextItemText } from "../utils/creator-utils";
 import { DragDropSurveyElements } from "../dragdrop-survey-elements";
 import { DropIndicatorPosition } from "../drag-drop-enums";
 import { QuestionToolbox, QuestionToolboxItem } from "../toolbox";
@@ -1020,6 +1021,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!this.creator.isCanModifyProperty(question, "choices")) return false;
     return this.creator.maxChoices < 1 || question.choices.length < this.creator.maxChoices;
   }
+  private getNextChoiceTitle(question: QuestionSelectBase): string {
+    const nextText = getNextItemText(question.choices);
+    if (nextText) return nextText;
+    return "" + this.creator.getNextItemValue(question);
+  }
   private getAddOptionEntries(): Array<{ id: string, title: string, apply: () => void }> {
     if (!this.isWysiwygOptionQuestion()) return [];
     const question = <QuestionSelectBase>this.surveyElement;
@@ -1027,7 +1033,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (this.canAddChoice(question)) {
       entries.push({
         id: "choice",
-        title: getLocString("ed.addOptionChoice"),
+        title: this.getNextChoiceTitle(question),
         apply: () => { this.creator.createNewItemValue(question); }
       });
     }

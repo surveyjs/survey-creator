@@ -456,7 +456,11 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       };
       let footerActions: Array<IAction> = [{
         css: "svc-add-new-question-action",
-        visible: <boolean><unknown>(new ComputedUpdater<boolean>(() => this.showAddQuestionButton)),
+        visible: <boolean><unknown>(new ComputedUpdater<boolean>(() => {
+          const designer = this.creator?.getPlugin("designer", false) as { model?: { wysiwygMode?: boolean } };
+          const emptySurvey = this.isGhost && this.creator.survey.pageCount === 0;
+          return this.showAddQuestionButton && (!designer?.model?.wysiwygMode || emptySurvey);
+        })),
         component: "svc-add-new-question-btn",
         data: this
       }];

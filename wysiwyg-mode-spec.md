@@ -46,7 +46,7 @@ The toolbar applies to questions, panels and dynamic panels.
 - **"Add option item"** button, for radiogroup, checkbox, dropdown and tagbox questions:
   - The icon is the same one the choice adorner uses for adding an item: `icon-add_16x16`.
   - Clicking it opens a dropdown list of what can be added:
-    - **Choice** (a regular new item). It reuses the existing new-item logic: `creator.getNextItemValue`, the next item text, and the `onItemValueAdded` event.
+    - A regular new item. Its label is the name the next choice would get (`getNextItemText`, otherwise `creator.getNextItemValue`), not the word "Choice". Adding it reuses `creator.createNewItemValue`: `getNextItemValue`, the next item text, and the `onItemValueAdded` event.
     - **Select All** (checkbox only, sets `showSelectAllItem`).
     - **None** (`showNoneItem`).
     - **Other** (`showOtherItem`).
@@ -68,6 +68,7 @@ The toolbar applies to questions, panels and dynamic panels.
 - The chosen question is inserted **right after the current element**, in the same container (page or panel), and then selected.
 - Visibility follows `allowEdit` and `creator.showAddQuestionButton`.
 - In WYSIWYG mode, the existing in-adorner "Add Question" footer (`svc-question__content-actions`) is hidden, because this button replaces it.
+- The page footer "Add Question" button (`svc-add-new-question-action`) is hidden too. It stays visible on the empty-survey ghost page: the page is a ghost and the survey has no pages (`isGhost` and `survey.pageCount === 0`). A trailing ghost page on a survey that already has pages stays hidden.
 
 ## 2. Elements on the design surface
 
@@ -78,6 +79,14 @@ An element in WYSIWYG mode keeps the **same width and height** as in Preview. In
 - no extra rows, ghost items or inline buttons inside the question content;
 - selection and hover are shown with outline or box-shadow, not with borders or padding that change the size;
 - inline editing of texts (title, description, item texts) still works through the existing string editors.
+
+Designer and preview questions look the same — the same sizes and visual paddings — and keep different markup and CSS. Do not add the survey frame classes (`sd-question--with-frame`, `sd-panel--nested`). The designer card (`.svc-question__content`) stays, and WYSIWYG CSS copies the preview metrics onto it:
+
+- A question on a page uses the panel-simple content-area padding, background, shadow and the panel radius.
+- A question inside a panel uses the nested panel-simple tokens. The designer dashed outline on that card is removed.
+- A panel uses the panel background, shadow and radius, with no extra card padding. Its content padding and gaps come from the panel content tokens.
+
+When an element is both selected and hovered, the selected border wins, including inside a panel. The hover shadow applies only when the element is not selected.
 
 Exception: the empty-panel placeholder of panels and dynamic panels stays as it is.
 
@@ -91,14 +100,16 @@ Exception: the empty-panel placeholder of panels and dynamic panels stays as it 
 
 - The ghost items are **not** rendered: new item, Select All, None, Other, Refuse, Don't know. Implement this through the existing `setCanShowOptionItemCallback` in `question.ts`: in WYSIWYG mode it returns `false` for placeholder items. Items that are actually enabled (for example `showNoneItem: true`) are still rendered and editable.
 - Adding items is done only through the "Add option item" button in section 2 of the toolbar.
-- The item **drag indicator** (`svc-item-value-controls__drag`) and the item **remove button** are not shown. The item text stays editable inline.
-- Removing items on the design surface isn't supported in this iteration; no replacement for the remove button is added.
+- The item **drag indicator** and the item **remove button** are rendered, and both are `position: absolute`, so the theme item size and padding stay unchanged. The drag indicator sits to the left of the item.
+- The remove button keeps its own size and is hidden by default. On item hover or focus-within, the checkbox or radio decorator is hidden and the remove button is shown with its center on the decorator center.
+- Ranking and image picker are excluded: they keep their existing item controls.
+- The item text stays editable inline.
 
 ### Dropdown and tagbox
 
 - The flattened choice list and the "Show more / Show less" button (`DropdownChoicesViewModel`, `QuestionDropdownAdornerViewModel`) are not rendered. The question looks like a real, closed dropdown or tagbox control.
 - The control can be **opened** in the designer. Today `DropdownListModel` blocks opening in design mode, so this needs an explicit design-time exception.
-- Items are edited inside the opened popup list by rendering the `svc-item-value` adorners in the list rows: the same pattern that is currently used for editing dropdown items on the design surface. This covers inline text editing; the drag indicator and the remove button are hidden here as well.
+- Items are edited inside the opened popup list by rendering the `svc-item-value` adorners in the list rows. Inline text editing stays, and the same absolute drag indicator and remove button are used here as on radiogroup and checkbox items.
 - The "Add option item" toolbar button works for these types as well.
 
 ## Scope of this iteration
