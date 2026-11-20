@@ -1333,6 +1333,10 @@ svc-question,
   .sd-panel .svc-question__content::after {
     content: none;
   }
+  
+  .svc-item-value__ghost {
+    left: 0;
+  }
 
   .svc-question__content--panel {
     padding: 0;
@@ -1423,6 +1427,25 @@ svc-question,
     .sd-item:where(:last-child:not(.sd-selectbase__item--inline)) {
       padding-bottom: var(--sjs2-layout-component-labeled-group-box-padding-vertical);
     }
+  }
+}
+
+.sv-drag-drop-choices-shortcut .svc-item-value-wrapper.svc-item-value-wrapper--wysiwyg {
+  > .svc-item-value-controls:not(.svc-choice-elements-button-container) {
+    inset: 0;
+    margin: 0;
+    min-width: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .svc-item-value-controls__drag {
+    top: calc(var(--sjs2-layout-component-labeled-group-box-gap-vertical) / 2 - 0.5 * var(--sjs2-size-x400) + 0.5 * max(var(--sjs2-size-component-radio-box), 1lh));
+    pointer-events: auto;
+  }
+
+  .svc-item-value-controls__remove {
+    display: none;
   }
 }
 
