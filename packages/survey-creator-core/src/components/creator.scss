@@ -234,9 +234,9 @@ survey-creator,
   margin: 0;
   border: none;
   border-radius: var(--sjs2-radius-component-action);
-  // The design keeps the close action in its highlighted (hovered) look at all times
-  background-color: var(--sjs2-color-component-action-brand-quaternary-hovered-bg);
+  background-color: var(--sjs2-color-component-action-brand-quaternary-default-bg);
   cursor: pointer;
+  outline: none;
 
   .sv-svg-icon {
     width: var(--sjs2-size-x200);
@@ -244,7 +244,16 @@ survey-creator,
   }
 
   use {
-    fill: var(--sjs2-color-component-action-brand-quaternary-hovered-icon);
+    fill: var(--sjs2-color-component-action-brand-quaternary-default-icon);
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--sjs2-color-component-action-brand-quaternary-hovered-bg);
+
+    use {
+      fill: var(--sjs2-color-component-action-brand-quaternary-hovered-icon);
+    }
   }
 }
 
