@@ -220,6 +220,8 @@ survey-creator,
   color: var(--sjs2-color-fg-basic-secondary);
   text-align: center;
   text-decoration: underline;
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 0.15em;
   white-space: nowrap;
 }
 
