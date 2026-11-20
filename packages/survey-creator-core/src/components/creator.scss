@@ -163,6 +163,29 @@ survey-creator,
   }
 }
 
+// The "embedded-<name>" banner overlays the bottom edge of the creator instead of taking a row.
+// The strip is transparent and ignores the mouse; only the compact text label is opaque and clickable.
+.svc-creator__banner--embedded {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 1001;
+  display: flex;
+  justify-content: center;
+  line-height: normal;
+  background-color: transparent;
+  pointer-events: none;
+
+  .svc-creator__non-commercial-text {
+    @include sjs2--typography--small-strong;
+    padding: var(--sjs2-spacing-x050) var(--sjs2-spacing-x150);
+    border-start-start-radius: var(--sjs2-radius-x100);
+    border-start-end-radius: var(--sjs2-radius-x100);
+    background-color: var(--sjs2-color-bg-brand-primary);
+    pointer-events: auto;
+  }
+}
+
 .sv-drag-drop-ghost {
   top: var(--sjs2-spacing-x075);
   width: 100%;

@@ -363,11 +363,24 @@ export class SurveyCreatorModel extends Base
     return "";
   }
 
+  private getEmbeddedLicenseInfo(): { name: string, whiteLabelUrl: string } | undefined {
+    // A missing plugin license shows the plugin's own text, so the banner is not "embedded"
+    if (this.getUnlicensedPluginsNames().length > 0) return undefined;
+    return (!!getEmbeddedLicense && getEmbeddedLicense()) || undefined;
+  }
+  public get isEmbeddedLicenseBanner(): boolean {
+    return !!this.getEmbeddedLicenseInfo();
+  }
+  // The embedded banner is a compact overlay: only its text is opaque and clickable,
+  // the rest of the strip lets mouse events through to the elements beneath it
+  public get licenseBannerCss(): string {
+    return toCssClasses("svc-creator__banner", this.isEmbeddedLicenseBanner && "svc-creator__banner--embedded");
+  }
   public get licenseText(): string {
     const unlicensedPlugins = this.getUnlicensedPluginsNames();
     if (unlicensedPlugins.length > 0) return this.pluginLicenseTexts[unlicensedPlugins[0]];
     // The "embedded-<name>" marker grants no license; it only replaces the banner text
-    const embedded = !!getEmbeddedLicense && getEmbeddedLicense();
+    const embedded = this.getEmbeddedLicenseInfo();
     if (embedded) return this.getLocString("survey.licenseEmbedded").replace("{whiteLabelUrl}", embedded.whiteLabelUrl);
     const licenseDateString = this.licenseDateString;
     if (licenseDateString) return this.getLocString("survey.license2").replace("{date}", licenseDateString);

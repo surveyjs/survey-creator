@@ -85,7 +85,7 @@
             v-if="model.isSidebarVisible"
           ></SvComponent>
         </div>
-        <div class="svc-creator__banner" v-if="!model.haveCommercialLicense">
+        <div :class="model.licenseBannerCss" v-if="!model.haveCommercialLicense">
           <span
             class="svc-creator__non-commercial-text"
             v-html="model.licenseText"

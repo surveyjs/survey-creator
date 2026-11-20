@@ -976,6 +976,26 @@ test("Licensed creator with the embedded marker has no banner", (): any => {
   setLicenseMocks(false, false);
 });
 
+test("License banner css: the compact overlay is used for the embedded marker only", (): any => {
+  setLicenseMocks(false, false);
+  let creator = new CreatorTester();
+  expect(creator.isEmbeddedLicenseBanner).toBeFalsy();
+  expect(creator.licenseBannerCss).toBe("svc-creator__banner");
+
+  setLicenseMocks(false, true);
+  creator = new CreatorTester();
+  expect(creator.isEmbeddedLicenseBanner).toBeTruthy();
+  expect(creator.licenseBannerCss).toBe("svc-creator__banner svc-creator__banner--embedded");
+
+  creator.addPlugin("one", <ICreatorPlugin>{
+    activate: () => { },
+    getLicenseText: (_) => "no plugin license"
+  });
+  expect(creator.isEmbeddedLicenseBanner).toBeFalsy();
+  expect(creator.licenseBannerCss).toBe("svc-creator__banner");
+  setLicenseMocks(false, false);
+});
+
 test("isStringEditable", (): any => {
   expect(isStringEditable({ isContentElement: true }, "")).toBeFalsy();
   expect(isStringEditable({}, "")).toBeTruthy();

@@ -39,7 +39,7 @@
         </div>
         <svc-side-bar [model]="creator.sidebar" *ngIf="creator.isSidebarVisible"></svc-side-bar>
       </div>
-      <div class="svc-creator__banner" *ngIf="!creator.haveCommercialLicense">
+      <div [class]="creator.licenseBannerCss" *ngIf="!creator.haveCommercialLicense">
         <span class="svc-creator__non-commercial-text" [innerHTML]="creator.licenseText | safeHtml"></span>
       </div>
       <sv-notifier [notifier]="creator.notifier"></sv-notifier>

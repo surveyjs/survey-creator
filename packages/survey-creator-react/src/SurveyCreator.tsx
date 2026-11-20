@@ -83,7 +83,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     if (!this.props.creator.haveCommercialLicense) {
       const htmlValue = { __html: this.props.creator.licenseText };
       licenseBanner = (
-        <div className="svc-creator__banner">
+        <div className={this.props.creator.licenseBannerCss}>
           <span className="svc-creator__non-commercial-text" dangerouslySetInnerHTML={htmlValue}></span>
         </div>
       );
