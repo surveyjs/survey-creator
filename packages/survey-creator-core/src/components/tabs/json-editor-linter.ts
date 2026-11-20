@@ -288,6 +288,9 @@ function getMessageParams(finding: ILintFinding): { [key: string]: any } {
     if (finding.reason === "dropdownRowConflict") {
       params.sharedKeyText = getTerm("dropdownRowSharer", finding.elementType);
     }
+    if (finding.reason === "containerKeyShadowed") {
+      params.kindText = getTerm("variableKind", data.kind);
+    }
     if (finding.reason === "valueShapeConflict") {
       params.shapeText = getTerm("sharedValueShape", data.shape);
       params.otherShapeText = getTerm("sharedValueShape", data.otherShape);

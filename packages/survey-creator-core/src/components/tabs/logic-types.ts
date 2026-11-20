@@ -48,9 +48,10 @@ export class SurveyLogicType {
   public static expressionToDisplayText(
     survey: SurveyModel,
     options: ISurveyCreatorOptions,
-    expression: string
+    expression: string,
+    context?: Base
   ): string {
-    return new ExpressionToDisplayText(survey, options).toDisplayText(
+    return new ExpressionToDisplayText(survey, options, context).toDisplayText(
       expression
     );
   }

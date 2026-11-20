@@ -11,6 +11,7 @@ import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
 import { editorLocalization } from "../editorLocalization";
 import { buildConditionQuestionList, ConditionEditor, getConditionVariableNames } from "../property-grid/condition-survey";
+import { getConditionQuestionKey } from "../utils/data-path";
 import { IExpressionSite } from "./expression-check";
 import { LintPathResolver } from "./lint-paths";
 
@@ -45,7 +46,7 @@ function getEntryContainer(question: any): Question {
 // (or the detail panel question) instead.
 function getMatrixEntryCellQuestion(matrix: any, name: string): Question {
   if (!matrix.isDescendantOf("matrixdropdownbase")) return undefined;
-  if (name.toLowerCase() === (matrix.getValueName() || "").toLowerCase()) return undefined;
+  if (name.toLowerCase() === (getConditionQuestionKey(matrix) || "").toLowerCase()) return undefined;
   const key = name.toLowerCase();
   const rowElements: Array<any> = [].concat(matrix.columns);
   if (matrix.detailPanelMode !== "none" && !!matrix.detailPanel) rowElements.push(...matrix.detailPanel.questions);
@@ -75,7 +76,7 @@ function describeMatrixEntry(variable: IExpressionVariable, matrix: any, cellQue
 // the way survey-core builds one for the row (QuestionMatrixModel: isMultiSelect ? "checkbox" : "radiogroup").
 function isMatrixRowEntry(matrix: any, name: string): boolean {
   if (!matrix || matrix.getType() !== "matrix") return false;
-  const prefix = (matrix.getValueName() || "").toLowerCase() + ".";
+  const prefix = (getConditionQuestionKey(matrix) || "").toLowerCase() + ".";
   const key = name.toLowerCase();
   return key.indexOf(prefix) === 0 && key.length > prefix.length;
 }
@@ -83,7 +84,7 @@ function isMatrixRowEntry(matrix: any, name: string): boolean {
 function describeMatrixRowEntry(variable: IExpressionVariable, matrix: any): void {
   // the entry's title as QuestionMatrixModel.addConditionObjectsByContext spells it, whatever the
   // editor shows (settings.logic.showTitlesInExpressions)
-  const rowKey = variable.name.substring(matrix.getValueName().length + 1).toLowerCase();
+  const rowKey = variable.name.substring(getConditionQuestionKey(matrix).length + 1).toLowerCase();
   const row: any = (matrix.rows || []).filter((item: ItemValue) => String(item.value).toLowerCase() === rowKey)[0];
   if (!!row) {
     const title = matrix.processedTitle + "." + row.calculatedText;
@@ -162,7 +163,7 @@ function describeContainer(question: any): ExpressionContainer {
   const res: ExpressionContainer = { type: type, name: question.name };
   if (typeof question.title === "string" && !!question.title && question.title !== question.name) res.title = question.title;
   // the name its whole value is read by ({kids}), when it is not the question's name
-  const valueName = question.getValueName();
+  const valueName = getConditionQuestionKey(question);
   if (!!valueName && valueName !== question.name) res.valueName = valueName;
   return res;
 }
@@ -262,7 +263,7 @@ function buildVariables(creator: SurveyCreatorModel, sites: Array<IExpressionSit
   const addContainer = (container: Question): void => {
     if (!container || addedContainers.indexOf(container) > -1) return;
     addedContainers.push(container);
-    const name = container.getValueName();
+    const name = getConditionQuestionKey(container);
     if (listedNames.indexOf(name.toLowerCase()) > -1) return;
     const variable: IExpressionVariable = { name: name, kind: "question" };
     if (!!container.title && container.title !== container.name) variable.title = container.title;

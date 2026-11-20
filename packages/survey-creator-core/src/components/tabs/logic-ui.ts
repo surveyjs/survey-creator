@@ -253,6 +253,8 @@ export class SurveyLogicUI extends SurveyLogic {
       const context = <Question>item.getContext();
       res = { expressionEditor: this.createExpressionPropertyEditor(), itemEditor: new LogicItemEditor(item, this.options) };
       this.updateEditModeLogicItem(res);
+      // the rule's variables resolve in its scope (survey-library #12233, CS7): set before the context and the text
+      res.expressionEditor.scopeElement = item.getExpressionContext();
       res.expressionEditor.context = context;
       res.itemEditor.context = context;
       res.expressionEditor.text = item.expression;
@@ -262,7 +264,7 @@ export class SurveyLogicUI extends SurveyLogic {
       // the expression assistant checks a result against what saving this rule writes
       res.expressionEditor.getExpressionCheckInput = () => res.itemEditor.getExpressionCheckInput();
       res.expressionEditor.getExpressionDisplayText = (expression: string): string => {
-        const text = this.getExpressionAsDisplayText(expression);
+        const text = this.getExpressionAsDisplayText(expression, item.getExpressionContext());
         return !!this.options ? this.options.onLogicGetTitleCallback(expression, text, text, item) : text;
       };
       res.expressionEditor.onExpressionAssistantAccepted = (isTextEditor: boolean): void => {
@@ -325,6 +327,15 @@ export class SurveyLogicUI extends SurveyLogic {
     }
     itemUI.itemEditor.resetModified();
     item.isNew = false;
+    this.updateExpressionEditorScope(item, itemUI);
+  }
+  // The editor stays cached after a save, and a saved rule's actions may sit in another scope now (CS7): its
+  // rows are read again in that scope. The text was just applied, so no edit is lost.
+  private updateExpressionEditorScope(item: SurveyLogicItem, itemUI: ILogicItemUI): void {
+    const scope = item.getExpressionContext();
+    if (scope === itemUI.expressionEditor.scopeElement) return;
+    itemUI.expressionEditor.scopeElement = scope;
+    itemUI.expressionEditor.text = item.expression;
   }
   protected hasErrorInUI(): boolean {
     const creator = (<any>this.survey).creator;

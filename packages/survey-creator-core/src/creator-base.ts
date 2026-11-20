@@ -27,6 +27,7 @@ import {
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
+import { DataKeyRename, getExpressionRecord, getExpressionScopePaths, isScopedNamesSurvey, IVariableRename } from "./utils/data-path";
 import { DragDropChoices } from "survey-core";
 import { IsTouch } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
@@ -2789,7 +2790,9 @@ export class SurveyCreatorModel extends Base
   }
   public updateConditionsOnNameChanged(obj: Base, propertyName: string, oldValue: any): void {
     if (this.isCreatingNewElement) return;
-    if (this.isObjQuestion(obj)) {
+    if (this.isObjQuestion(obj) && isScopedNamesSurvey(this.survey)) {
+      this.updateConditionsOnQuestionKeyChanged(<Question>obj, propertyName, oldValue);
+    } else if (this.isObjQuestion(obj)) {
       if (propertyName === "name" && !obj["valueName"]) {
         this.updateLogicOnQuestionNameChanged(oldValue, obj["name"]);
       }
@@ -2798,16 +2801,19 @@ export class SurveyCreatorModel extends Base
         const newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
         this.updateLogicOnQuestionNameChanged(oldName, newName);
       }
-      if (propertyName === "name" && obj.isDescendantOf("selectbase")) {
-        this.updateChoicesFromQuestionOnColumnNameChanged(oldValue, obj["name"]);
-      }
-      // A question a Filter Control can filter (survey-core finds the source by the same duck typing)
-      if (propertyName === "name" && typeof obj["setControlFilter"] === "function") {
-        this.updateFilterSourceOnQuestionNameChanged(oldValue, obj["name"]);
-      }
+    }
+    if (this.isObjQuestion(obj) && propertyName === "name" && obj.isDescendantOf("selectbase")) {
+      this.updateChoicesFromQuestionOnColumnNameChanged(oldValue, obj["name"]);
+    }
+    // A question a Filter Control can filter (survey-core finds the source by the same duck typing)
+    if (this.isObjQuestion(obj) && propertyName === "name" && typeof obj["setControlFilter"] === "function") {
+      this.updateFilterSourceOnQuestionNameChanged(oldValue, obj["name"]);
     }
     if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
       this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
+    }
+    if ((propertyName === "name" || propertyName === "valueName") && obj instanceof PanelModelBase) {
+      this.updateConditionsOnContainerKeyChanged(obj, propertyName, oldValue);
     }
     // A Filter Control's defaultItem names a preset: a renamed default preset stays the default one,
     // in the same undo step as the rename.
@@ -2816,6 +2822,63 @@ export class SurveyCreatorModel extends Base
       if (!!oldValue && !!owner && owner["defaultItem"] === oldValue) {
         owner["defaultItem"] = obj["name"];
       }
+    }
+  }
+  // Nested data (survey-library #12233, scoped names). A variable is a data key, read in its owner's scope and
+  // then in each scope around it, or a data path. So a question's rename rewrites only when its data key changes
+  // (a name change of a question with a valueName rewrites nothing), and only the variables that read the
+  // question before the change (DataKeyRename): {street} that reads another street, or nothing, keeps its text.
+  // A question of a record (a dynamic panel's template) is read as {panel.x} by the record's own rules.
+  // A survey with one scope ("none") keeps master's text rewrite in the other branch.
+  private updateConditionsOnQuestionKeyChanged(question: Question, propertyName: string, oldValue: any): void {
+    let oldKey: string;
+    if (propertyName === "name" && !question.valueName) {
+      oldKey = oldValue;
+    } else if (propertyName === "valueName") {
+      oldKey = oldValue || question.name;
+    } else return;
+    const newKey = question.getValueName();
+    if (!oldKey || !newKey || oldKey === newKey || !settings.logic.updateExpressionsOnChanging.questionName) return;
+    const record = getExpressionRecord(this.survey, question);
+    if (!!record) {
+      this.updateLogicOnRecordKeyChanged(question, record, oldKey);
+    } else {
+      this.updateLogicOnDataKeyChanged(question, oldKey, newKey);
+    }
+  }
+  private updateLogicOnRecordKeyChanged(question: Question, record: Base, oldKey: string): void {
+    // a detail panel's question has no data path at design time: its key is its value name in the row
+    const dataPath = question.getDataPath();
+    const newPath = dataPath.length > 0 ? dataPath : [question.getValueName()];
+    const prefix = record.isDescendantOf("paneldynamic") ? "panel." : "row.";
+    const renames: Array<IVariableRename> = [{
+      oldName: prefix + newPath.slice(0, newPath.length - 1).concat([oldKey]).join("."),
+      newName: prefix + newPath.join(".")
+    }];
+    this.renameLogicVariables((owner, element) => getExpressionRecord(this.survey, element) === record ? renames : [], oldKey);
+  }
+  // A panel's or a page's data key changed (its valueName, or its name in a by-name dataNesting mode): every
+  // path through the key follows. A key that stays the same (a panel with its own valueName renamed), or a
+  // container that starts or stops nesting, rewrites nothing.
+  private updateConditionsOnContainerKeyChanged(panel: PanelModelBase, propertyName: string, oldValue: any): void {
+    const oldKey = propertyName === "name" ? panel.getDataNestingKeyFor(panel.valueName, oldValue) : panel.getDataNestingKeyFor(oldValue, panel.name);
+    const newKey = panel.getDataNestingKeyFor(panel.valueName, panel.name);
+    if (!oldKey || !newKey || !panel.isDataNesting) return;
+    this.updateLogicOnDataKeyChanged(panel, oldKey, newKey);
+  }
+  // el (a question or a nesting container) holds newKey now; its old key was oldKey
+  private updateLogicOnDataKeyChanged(el: Question | PanelModelBase, oldKey: string, newKey: string): void {
+    const newPath = el.getDataPath();
+    if (!oldKey || !newKey || oldKey === newKey || newPath.length === 0 || !settings.logic.updateExpressionsOnChanging.questionName) return;
+    const rename = new DataKeyRename(this.survey, newPath.slice(0, newPath.length - 1).concat([oldKey]), newKey, el.isQuestion);
+    this.renameLogicVariables(owner => rename.getRenames(getExpressionScopePaths(this.survey, owner)), oldKey);
+  }
+  private renameLogicVariables(getRenames: (owner: Base, element: Base) => Array<IVariableRename>, oldKey: string): void {
+    this.surveyLogicRenaming = true;
+    const isSplit = this.getSurveyLogicForUpdate().renameVariables(getRenames, oldKey);
+    this.surveyLogicRenaming = false;
+    if (isSplit) {
+      this.surveyLogicForUpdate = undefined;
     }
   }
   private surveyLogicForUpdate: SurveyLogic;

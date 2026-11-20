@@ -13,6 +13,7 @@ import { assignDefaultClasses } from "../utils/creator-utils";
 import { logicCss } from "../components/tabs/logic-theme";
 import { getLogicString } from "../components/tabs/logic-types";
 import { CreatorBase } from "../creator-base";
+import { findInnerQuestion, getConditionQuestionKey, getQuestionByVariableName, isInnerQuestion } from "../utils/data-path";
 import { ExpressionToDisplayText } from "../expressionToDisplayText";
 import {
   ExpressionAssistant, expressionAssistantIconName, getExpressionAssistantCreator, IExpressionAssistantInput,
@@ -22,6 +23,8 @@ import {
 // survey-core doesn't add the "-unwrapped" postfix (settings.expressionVariables.unwrapPostfix) into
 // question names any more - the plain {name} resolves to the unwrapped value. The postfix is still
 // supported in existing expressions, so the editor has to find a question by the postfixed name.
+// survey-core's getQuestionByVariable flags the postfix only on the question's own segment (isUnwrapped), not
+// one after a records question or a matrix ({pd[0].cb-unwrapped}, {m.r1.c1-unwrapped}), so the text is scanned.
 function removeUnwrapPostfix(name: string): string {
   const postfix = surveyCoreSettings.expressionVariables.unwrapPostfix;
   if (!name || !postfix) return name;
@@ -101,7 +104,9 @@ export function buildConditionQuestionList(survey: SurveyModel, object: Base, pr
       if (settings.logic.includeComplexQuestions && question.isContainer) {
         res.push({ question: question, name: question.name, text: question.title });
       }
+      const start = res.length;
       question.addConditionObjectsByContext(res, questionContext);
+      renameInnerQuestionEntries(res, start, question);
     }
     mergeSelectBasedQuestions(res);
     removeEntriesByValueName(res);
@@ -111,6 +116,7 @@ export function buildConditionQuestionList(survey: SurveyModel, object: Base, pr
   addSurveyCalculatedValues(survey, variableNames);
   sortOrder = options.onConditionQuestionsGetListCallback(propertyName, <any>object, editor, res, variableNames);
 
+  const innerTexts = getInnerEntryTexts(res, options);
   for (let i = 0; i < res.length; i++) {
     res[i].value = res[i].name;
     let question = !!res[i].question ? res[i].question : res[i];
@@ -119,9 +125,13 @@ export function buildConditionQuestionList(survey: SurveyModel, object: Base, pr
     //text cannot be derived from the question. Both the name and the title path are built already
     if (!options.useElementTitles) {
       text = res[i].name;
-      let valueName = question.valueName;
-      if (!!valueName && text.indexOf(valueName) == 0) {
-        text = text.replace(valueName, question.name);
+      if (isInnerQuestion(question)) {
+        text = innerTexts[i];
+      } else {
+        let valueName = question.valueName;
+        if (!!valueName && text.indexOf(valueName) == 0) {
+          text = text.replace(valueName, question.name);
+        }
       }
     }
     res[i].text = options.getObjectDisplayName(question, "condition-editor", "condition", text);
@@ -136,6 +146,59 @@ export function buildConditionQuestionList(survey: SurveyModel, object: Base, pr
     SurveyHelper.sortItems(res);
   }
   return res;
+}
+// Nested data: survey-core lists a question by its value name, which for an inner question is a key of its
+// container's object, not of the survey data, so {town} is not found at the root (survey-library #12233).
+// The editor inserts the variable survey-core names it by instead (getConditionQuestionKey): its data path
+// ({address.town}), which resolves at the root and inside the container; a bare name read at the root finds no
+// inner question. Sub-entries ("address.mv.r1") follow.
+function renameInnerQuestionEntries(res: Array<any>, start: number, question: Question): void {
+  const valueName = question.getValueName();
+  const key = getConditionQuestionKey(question);
+  if (valueName === key) return;
+  for (let i = start; i < res.length; i++) {
+    const name: string = res[i].name;
+    if (res[i].question !== question || !isEntryOf(name, valueName)) continue;
+    res[i].name = key + name.substring(valueName.length);
+  }
+}
+// CS8: an inner question's entry shows its data path with the question's own key, the last segment, replaced by
+// its name: "address.city" for city with valueName "town" in the container "address", as a top-level question's
+// entry shows "q1" for its {val1}. The containers keep their keys, which is what the written path starts with, and
+// a sub-entry keeps its tail ("address.m.r1" for m with valueName "mv"). Only the text changes: the value stays
+// the data path. An entry that does not start with the key (a host renamed it in onConditionQuestionsGetList)
+// shows its name.
+function getInnerEntryText(name: string, question: Question): string {
+  const valueName = question.getValueName();
+  const key = getConditionQuestionKey(question);
+  if (valueName === question.name || !isEntryOf(name, key)) return name;
+  const ownKeyStart = key.length - valueName.length;
+  if (ownKeyStart < 1 || key.substring(ownKeyStart) !== valueName || key[ownKeyStart - 1] !== ".") return name;
+  return key.substring(0, ownKeyStart) + question.name + name.substring(key.length);
+}
+// The texts of inner entries (getInnerEntryText), by the entry's index. Names are unique in a name scope, but two
+// containers can share a key ("address"), so two questions named city in them would both show "address.city":
+// those entries show their data paths instead, which differ.
+function getInnerEntryTexts(res: Array<any>, options: ISurveyCreatorOptions): { [index: number]: string } {
+  const texts: { [index: number]: string } = {};
+  if (options.useElementTitles) return texts;
+  const counts: { [text: string]: number } = {};
+  for (let i = 0; i < res.length; i++) {
+    const question = res[i].question;
+    if (!question || !isInnerQuestion(question)) continue;
+    texts[i] = getInnerEntryText(res[i].name, question);
+    counts[texts[i]] = (counts[texts[i]] || 0) + 1;
+  }
+  for (const i in texts) {
+    if (counts[texts[i]] > 1) texts[i] = res[i].name;
+  }
+  return texts;
+}
+// "name" is the variable "prefix" itself or a path into it ("prefix.r1", "prefix[0].x")
+function isEntryOf(name: string, prefix: string): boolean {
+  if (typeof name !== "string" || !prefix || name.indexOf(prefix) !== 0) return false;
+  const nextCh = name[prefix.length];
+  return nextCh === undefined || nextCh === "." || nextCh === "[";
 }
 function isItemValue(object: Base): boolean {
   return !!object && object.isDescendantOf("itemvalue");
@@ -181,6 +244,8 @@ function mergeSelectBasedQuestions(res: Array<any>): void {
   for (let i = 0; i < res.length; i++) {
     if (res[i].context) continue;
     const q: Question = res[i].question;
+    // inner questions are listed by their data paths and keep their own entries (renameInnerQuestionEntries)
+    if (isInnerQuestion(q)) continue;
     if (q.isDescendantOf("selectbase")) {
       const valueName = q.getFilteredName();
       let qs = selectBaseHash[valueName];
@@ -327,6 +392,13 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   // (the rule text a host may change) and listens to onExpressionAssistantAccepted.
   public getExpressionCheckInput: () => IExpressionAssistantInput;
   public getExpressionDisplayText: (expression: string) => string;
+  // Nested data (survey-library #12233, CS7): the element whose scopes the editor reads a variable in when it
+  // has no object: the Logic tab's rule (SurveyLogicItem.getExpressionContext). Lookups only: the editor
+  // writes no property of it. Set it before the text.
+  public scopeElement: Base;
+  private getScopeElement(): Base {
+    return !!this.object ? getConditionContextObject(this.object) : this.scopeElement;
+  }
   public onExpressionAssistantAccepted: (isTextEditor: boolean) => void;
   public get assistantPrompt(): Question {
     return this.editSurvey.getQuestionByName("aiPrompt");
@@ -361,7 +433,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       getExpression: (): string => this.text || "",
       accept: (expression: string) => this.setTextFromAssistant(expression),
       getDisplayText: (expression: string): string => !!this.getExpressionDisplayText ? this.getExpressionDisplayText(expression)
-        : new ExpressionToDisplayText(this.survey, this.options).toDisplayText(expression)
+        : new ExpressionToDisplayText(this.survey, this.options, this.getScopeElement()).toDisplayText(expression)
     });
   }
   // Fills the editor with an accepted expression, routed by whether the builder can show it - also
@@ -628,7 +700,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     const questionName = panel.getQuestionByName("questionName").value;
     const json = this.getQuestionConditionJson(questionName);
     const qType = !!json ? json.type : null;
-    const isContainer = this.isContainerQuestion(questionName);
+    const isContainer = this.isContainerQuestion(this.getConditionEntryName(questionName));
     const condQuestion = this.getConditionQuestion(questionName);
     choices.forEach((choice) => {
       const isOperatorEnabled = this.getIsOperatorEnabled(questionName, qType, choice.value, condQuestion, isContainer);
@@ -644,9 +716,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private setupConditionQuestionName(item: ConditionEditorItem, panel: PanelModel) {
     const panelQuestionName = <QuestionDropdownModel>panel.getQuestionByName("questionName");
-    panelQuestionName.choices = this.getConditionQuestions();
-    panelQuestionName.titleLocation = this.panel.panels.indexOf(panel) == 0 ? "left" : "hidden";
     const questionName = this.getQuestionNameToPanel(item.questionName);
+    panelQuestionName.choices = this.getQuestionNameChoices(questionName);
+    panelQuestionName.titleLocation = this.panel.panels.indexOf(panel) == 0 ? "left" : "hidden";
     if (!!this.getConditionQuestion(questionName)) {
       panelQuestionName.value = questionName;
     }
@@ -714,7 +786,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private getQuestionNameFromPanel(name: string): string {
     if (!this.context || !name) return name;
-    const prefix = this.context.getValueName() + ".";
+    const prefix = getConditionQuestionKey(this.context) + ".";
     return name.replace(prefix, "");
   }
   private getContextIndexInfo(name: string, prefix: string = ""): { index: number, name: string } {
@@ -724,7 +796,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (!this.context || !name) return name;
     const indexInfo = this.getContextIndexInfo(name);
     if (!indexInfo || indexInfo.index !== 0) return name;
-    return this.context.getValueName() + "." + name;
+    return getConditionQuestionKey(this.context) + "." + name;
   }
   private getContextFromPanels(): Question {
     if (!!this.object) return null;
@@ -737,15 +809,31 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private updateNamesOnContextChanged() {
     for (var i = 0; i < this.panel.panels.length; i++) {
-      this.panel.panels[i].getQuestionByName("questionName").choices = this.getConditionQuestions();
+      const questionName = this.panel.panels[i].getQuestionByName("questionName");
+      questionName.choices = this.getQuestionNameChoices(questionName.value);
     }
+  }
+  // Nested data: a row read from a relative variable ({street} inside its container, {address.street} inside
+  // page1) keeps it as its value, so the selector gets it as one more choice, with the text of the listed entry
+  // ("address.street"); else the value would not be among the choices, the selector would show nothing and the
+  // row would not validate.
+  private getQuestionNameChoices(questionName: string): Array<any> {
+    const res: Array<any> = this.getConditionQuestions();
+    if (!questionName || res.some(item => item.value === questionName)) return res;
+    const entryName = this.getConditionEntryName(questionName);
+    if (entryName === questionName) return res;
+    const index = res.findIndex(item => item.value === entryName);
+    if (index < 0) return res;
+    const choices = [].concat(res);
+    choices.splice(index + 1, 0, { value: questionName, text: res[index].text });
+    return choices;
   }
   private getContextByQuestionName(name: string): Question {
     if (!name) return null;
     const indexInfo = this.getContextIndexInfo(name, ".");
     if (!indexInfo) return null;
-    name = name.substring(0, indexInfo.index);
-    return <Question>this.survey.getQuestionByValueName(name);
+    // the prefix is the context's key (getConditionQuestionKey): an inner matrix or dynamic panel by its name
+    return getQuestionByVariableName(this.survey, name.substring(0, indexInfo.index));
   }
   private createAllConditionQuestions(): Array<ItemValue> {
     return buildConditionQuestionList(this.survey, this.object, this.propertyName, this.context, this.options, this,
@@ -856,17 +944,32 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       const directQuestion = <Question>this.survey.getQuestionByName(name);
       if (directQuestion) return directQuestion;
     }
+    if (!question && !!name) {
+      const entryName = this.getConditionEntryName(name);
+      if (entryName !== name) return <Question>this.addConditionQuestionsHash[entryName];
+    }
     return question;
+  }
+  // Nested data: an expression may name an inner question by its data path from the root
+  // ({page1.address.street}) or by a path relative to an enclosing container ({address.street} inside page1,
+  // {street} inside address). The row keeps the text as written; its question and value editor are the ones of
+  // the listed entry ("page1.address.street").
+  private getConditionEntryName(name: string): string {
+    if (!name || !!this.addConditionQuestionsHash[name] || !!this.addConditionQuestionsHash[removeUnwrapPostfix(name)]) return name;
+    const info = findInnerQuestion(this.survey, removeUnwrapPostfix(name), this.getScopeElement());
+    return !!info && !!this.addConditionQuestionsHash[info.entryName] ? info.entryName : name;
   }
   private getQuestionConditionJson(questionName: string, operator?: string): any {
     let path = "";
     const question = this.getConditionQuestion(questionName);
     if (!question) return null;
+    questionName = this.getConditionEntryName(questionName);
     if (!operator) {
       operator = this.getDefaultOperatorByQuestion(question);
     }
-    if (questionName.indexOf(question.getValueName()) == 0) {
-      path = questionName.substring(question.getValueName().length);
+    const questionKey = getConditionQuestionKey(question);
+    if (questionName.indexOf(questionKey) == 0) {
+      path = questionName.substring(questionKey.length);
     }
     const indexInfo = this.getContextIndexInfo(questionName);
     if (!!indexInfo && indexInfo.index == 0) {

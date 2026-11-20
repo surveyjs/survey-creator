@@ -7,6 +7,7 @@ import { createPageSelectorLocTitle } from "../../utils/actions";
 import { findSuitableTheme, isThemeEmpty } from "./theme-model";
 import { VariablePresetsManager } from "../../variable-presets";
 import { VariablesViewerModel } from "../variables-viewer/variables-viewer";
+import { copyPlainValue } from "../../utils/data-path";
 
 export class PreviewViewModel extends Base {
   public enableInvisiblePages: boolean = true;
@@ -122,7 +123,8 @@ export class PreviewViewModel extends Base {
   private onVariablePresetsChanged(): void {
     this.updateVariablePresetActions();
     if (!this.simulator?.survey || !this.json) return;
-    if (Helpers.isTwoValueEquals(this.appliedVariables, this.activeVariables)) return;
+    // Case-sensitively and untrimmed: "Ann" edited to "ANN" shows in a title, so it is a change.
+    if (Helpers.isTwoValueEquals(this.appliedVariables, this.activeVariables, false, true, false)) return;
     // a survey mid-run whose variables change underneath is not a state production has, and the
     // answers already given belong to the branch the previous preset chose
     this.testAgain();
@@ -178,13 +180,13 @@ export class PreviewViewModel extends Base {
       // simulator.survey was assigned, the first page would render once without them.
       // clearPrevious: a preset is a complete world and not a patch, so what it does not name is
       // unset, a variable a setup handler set included.
-      // The shallow copy keeps a survey that writes to a variable out of the host's container.
-      // Nested object values stay shared by reference, exactly as they would be in a host that
-      // passed them to setVariable itself.
+      // Deep copies, both: an object variable ({ users: { tier } }, nested data) is otherwise shared
+      // with the host's container, so a survey changing it inside would write into the preset, and
+      // a preset edited in place would equal the values Preview compares it with (no restart).
       this.appliedVariables = {};
       if (!!this.variablePresets && !!this.surveyProvider.variablePresets) {
-        this.appliedVariables = { ...this.activeVariables };
-        survey.setVariables({ ...this.activeVariables }, true);
+        this.appliedVariables = this.copyActiveVariables();
+        survey.setVariables(this.copyActiveVariables(), true);
       }
     });
     const oldSurvey = this.simulator.survey;
@@ -435,6 +437,12 @@ export class PreviewViewModel extends Base {
   // A view model built without the plugin - older tests do that - has no manager and no variables.
   private get activeVariables(): { [name: string]: any } {
     return this.variablePresets?.activeVariables || {};
+  }
+  // Arrays and plain objects are copied; anything else (a Date, a class instance, a function) is
+  // kept by reference, as a host's own setVariable would pass it. Not getUnbindValue: its JSON
+  // round trip throws on a function and alters a nested Date, which would then never compare equal.
+  private copyActiveVariables(): { [name: string]: any } {
+    return copyPlainValue(this.activeVariables);
   }
   private get activeVariablePreset(): string {
     return this.variablePresets?.active || "";

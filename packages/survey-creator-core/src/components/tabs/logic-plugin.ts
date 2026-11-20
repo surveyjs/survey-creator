@@ -1,4 +1,4 @@
-import { Action, IAction, ComputedUpdater, createDropdownActionModelAdvanced } from "survey-core";
+import { Action, IAction, ComputedUpdater, createDropdownActionModelAdvanced, Question } from "survey-core";
 import { getLogicString } from "./logic-types";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
@@ -94,10 +94,19 @@ export class TabLogicPlugin implements ICreatorPlugin {
     this.filterActionTypeAction.visible = false;
     this.fastEntryAction && (this.fastEntryAction.visible = false);
   }
+  // Nested data (survey-library #12233, CS6): an entry's id is the question's path of names (its name in "none"
+  // and in the survey's own scope), so that two questions with one name in two scopes have two entries. Without
+  // a title the entry shows the path too.
+  private createQuestionFilterItem(question: Question): { id: string, title: string } {
+    const path = this.creator.survey.getElementNamePath(question);
+    const name = SurveyHelper.getObjectName(question, this.creator.useElementTitles);
+    const displayName = path !== question.name && name === question.name ? path : undefined;
+    return { id: path, title: this.creator.getObjectDisplayName(question, "logic-tab:question-filter", "condition", displayName) };
+  }
   public createActions() {
     const items: Array<Action> = [];
     const onQuestionPopupShow = () => {
-      const items = this.model.getUsedQuestions().map(question => { return { id: question.name, title: this.creator.getObjectDisplayName(question, "logic-tab:question-filter", "condition") }; });
+      const items = this.model.getUsedQuestions().map(question => this.createQuestionFilterItem(question));
       SurveyHelper.sortItems(items, "title");
       const listModel = this.filterQuestionAction.popupModel.contentComponentData.model;
       listModel.setItems([{ id: null, title: this.showAllQuestionsText }].concat(items));
