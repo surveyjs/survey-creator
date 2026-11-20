@@ -1,13 +1,15 @@
 import { Component, Input } from "@angular/core";
 import { QuestionRowModel } from "survey-core";
 import { SurveyCreatorModel, RowViewModel } from "survey-creator-core";
-import { CreatorModelComponent } from "./creator-model.component";
-import { AngularComponentFactory } from "survey-angular-ui";
+import { CreatorModelComponent, compareComponentData } from "./creator-model.component";
+import { AngularComponentFactory, SurveyBaseProviders } from "survey-angular-ui";
+import { SimpleChanges } from "@angular/core";
 
 @Component({
   selector: "svc-row",
   templateUrl: "./row.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class CreatorRowComponent extends CreatorModelComponent<RowViewModel> {
   @Input() componentData!: { creator: SurveyCreatorModel, row: QuestionRowModel };
@@ -27,8 +29,8 @@ export class CreatorRowComponent extends CreatorModelComponent<RowViewModel> {
     this.model = new RowViewModel(this.creator, this.row, <any>undefined);
     this.model.subscribeElementChanges();
   }
-  getPropertiesToTrack(): string[] {
-    return ["creator", "row"];
+  protected override shouldUpdateModel(changes: SimpleChanges) {
+    return compareComponentData(changes, ["row", "creator"], "componentData");
   }
   override ngOnDestroy(): void {
     super.ngOnDestroy();

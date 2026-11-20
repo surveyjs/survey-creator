@@ -4,44 +4,76 @@ import { TabJsonEditorTextareaPlugin } from "../../src/components/tabs/json-edit
 import { CreatorTester } from "../creator-tester";
 import { SurveyTextWorker } from "../../src/textWorker";
 
-function createMonacoMock(): any {
+// setValue drops the undo history, the way Monaco does; edit is a keystroke the history keeps
+function createTextModelMock(language: string): any {
   let value = "";
   let eol = "\r\n";
-  let onChange: () => void = () => { };
-  const textModel = {
+  const undoStack: Array<string> = [];
+  const textModel: any = {
+    language: language, isDisposed: false, onChange: () => { },
+    getValue: () => value,
+    setValue(text: string) {
+      undoStack.length = 0;
+      textModel.replace(text);
+    },
+    edit(text: string) {
+      undoStack.push(value);
+      textModel.replace(text);
+    },
+    undo() {
+      if (undoStack.length > 0) textModel.replace(undoStack.pop());
+    },
+    replace(text: string) {
+      value = text;
+      if (text.indexOf("\n") > -1) eol = text.indexOf("\r\n") > -1 ? "\r\n" : "\n";
+      textModel.onChange();
+    },
     getEOL: () => eol,
     getLineCount: () => value.split("\n").length,
     getLineMaxColumn: (line: number) => value.split("\n")[line - 1].length + 1,
+    dispose() { textModel.isDisposed = true; },
   };
+  return textModel;
+}
+function createEditorMock(options: any): any {
+  const textModel = options.model;
   const editor: any = {
-    options: undefined, position: undefined, revealed: undefined, isDisposed: false, focusCount: 0,
-    getValue: () => value,
-    setValue(text: string) {
-      value = text;
-      if (text.indexOf("\n") > -1) eol = text.indexOf("\r\n") > -1 ? "\r\n" : "\n";
-      onChange();
-    },
+    options: options, position: undefined, revealed: undefined, viewState: undefined, isDisposed: false, focusCount: 0,
+    getValue: () => textModel.getValue(),
+    setValue: (text: string) => textModel.setValue(text),
     getModel: () => textModel,
     onDidChangeModelContent(handler: () => void) {
-      onChange = handler;
-      return { dispose() { onChange = () => { }; } };
+      textModel.onChange = handler;
+      return { dispose() { textModel.onChange = () => { }; } };
     },
     focus() { editor.focusCount++; },
     setPosition(pos: any) { editor.position = pos; },
     revealPositionInCenterIfOutsideViewport(pos: any) { editor.revealed = pos; },
+    saveViewState: () => ({ position: editor.position }),
+    restoreViewState(state: any) { editor.viewState = state; },
     dispose() { editor.isDisposed = true; },
   };
+  return editor;
+}
+function createMonacoMock(): any {
   const monaco: any = {
-    markers: undefined, markerOwner: undefined,
+    markers: undefined, markerOwner: undefined, instance: undefined,
     MarkerSeverity: { Error: 8 },
     editor: {
-      create(element: HTMLElement, options: any) { editor.options = options; return editor; },
+      createModel(value: string, language: string) {
+        const textModel = createTextModelMock(language);
+        textModel.setValue(value);
+        return textModel;
+      },
+      create(element: HTMLElement, options: any) {
+        monaco.instance = createEditorMock(options);
+        return monaco.instance;
+      },
       setModelMarkers(model: any, owner: string, markers: Array<any>) {
         monaco.markerOwner = owner;
         monaco.markers = markers;
       },
     },
-    instance: editor,
   };
   return monaco;
 }
@@ -86,7 +118,7 @@ test("Monaco: init creates a JSON editor with the creator text", () => {
   const model = new MonacoJsonEditorModel(creator);
   model.init(document.createElement("div"));
   const editor = monaco.instance;
-  expect(editor.options.language).toBe("json");
+  expect(editor.getModel().language).toBe("json");
   expect(editor.options.readOnly).toBeFalsy();
   expect(editor.options.theme).toBeUndefined();
   expect(model.text).toBe(creator.text);
@@ -193,4 +225,68 @@ test("Monaco: init on a remounted element disposes the editor created before", (
   expect(disposedBeforeCreate).toBeTruthy();
   expect(JSON.parse(model.text)).toEqual({ pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] });
   model.dispose();
+});
+
+test("Monaco: the undo history, the cursor and the scroll survive a tab switch", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.activeTab = "json";
+  const plugin = <TabJsonEditorMonacoPlugin>creator.getPlugin("json");
+  (<MonacoJsonEditorModel>plugin.model).init(document.createElement("div"));
+  const firstEditor = monaco.instance;
+  const textModel = firstEditor.getModel();
+  const original = textModel.getValue();
+  const edited = original.replace("q1", "q2");
+  textModel.edit(edited);
+  firstEditor.setPosition({ lineNumber: 3, column: 5 });
+  creator.activeTab = "preview";
+  expect(creator.survey.getAllQuestions().map(q => q.name)).toEqual(["q2"]);
+  expect(firstEditor.isDisposed).toBeTruthy();
+  expect(textModel.isDisposed).toBeFalsy();
+
+  creator.activeTab = "json";
+  const model = <MonacoJsonEditorModel>plugin.model;
+  model.init(document.createElement("div"));
+  const editor = monaco.instance;
+  expect(editor).not.toBe(firstEditor);
+  expect(editor.getModel()).toBe(textModel);
+  expect(editor.viewState).toEqual({ position: { lineNumber: 3, column: 5 } });
+  expect(model.text).toBe(edited);
+  expect(model.isJSONChanged).toBeFalsy();
+  textModel.undo();
+  expect(model.text).toBe(original);
+  creator.activeTab = "designer";
+  expect(creator.survey.getAllQuestions().map(q => q.name)).toEqual(["q1"]);
+});
+
+test("Monaco: the survey changed on another tab starts the undo history anew", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.activeTab = "json";
+  const plugin = <TabJsonEditorMonacoPlugin>creator.getPlugin("json");
+  (<MonacoJsonEditorModel>plugin.model).init(document.createElement("div"));
+  const textModel = monaco.instance.getModel();
+  textModel.edit(textModel.getValue().replace("q1", "q2"));
+  creator.activeTab = "designer";
+  creator.survey.pages[0].addNewQuestion("text", "q3");
+
+  creator.activeTab = "json";
+  const model = <MonacoJsonEditorModel>plugin.model;
+  model.init(document.createElement("div"));
+  expect(monaco.instance.viewState).toBeUndefined();
+  expect(model.text).toBe(creator.text);
+  textModel.undo();
+  expect(model.text).toBe(creator.text);
+});
+
+test("Monaco: the text model kept for the closed tab is disposed with the creator", () => {
+  const creator = new CreatorTester();
+  creator.activeTab = "json";
+  const plugin = <TabJsonEditorMonacoPlugin>creator.getPlugin("json");
+  (<MonacoJsonEditorModel>plugin.model).init(document.createElement("div"));
+  const textModel = monaco.instance.getModel();
+  creator.activeTab = "designer";
+  expect(textModel.isDisposed).toBeFalsy();
+  creator.dispose();
+  expect(textModel.isDisposed).toBeTruthy();
 });

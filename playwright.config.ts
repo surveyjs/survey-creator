@@ -28,6 +28,8 @@ export default defineConfig<object, ContextReuseOption>({
     // all JS state is fresh. Between tests Playwright goes to about:blank, clears the HTTP cache and resets storage,
     // viewport, emulated media and the clock. It keeps the mouse position and pressed buttons; the `page` fixture of
     // `test` in e2e/helper.ts releases the buttons. Reusing them saved 0.25-0.45 s per test (13-27 %) locally.
+    // The shared `test` of e2e/helper.ts reuses its own page per worker instead and doesn't use this context, except
+    // with E2E_FRESH_PAGE; this applies to the specs that import Playwright's own `test`, and to that mode.
     // - The option is private (Playwright 1.60). It applies only while `video` is "off", and PW_TEST_REUSE_CONTEXT
     //   turns it on whatever is set here.
     // - After a Playwright upgrade, check that it still applies: with --workers=1, two tests must see the same

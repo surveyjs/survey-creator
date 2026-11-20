@@ -639,7 +639,7 @@ test.describe(title, () => {
     await expect(logicActionSelector(page).first()).toBeVisible();
   });
 
-  test("Logic Tab - The Search option is available", async ({ page }) => {
+  test("Logic Tab - The Search option is available", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       (window as any).Survey.ListModel.MINELEMENTCOUNT = 2;
     });

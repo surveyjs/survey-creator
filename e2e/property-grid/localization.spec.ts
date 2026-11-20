@@ -8,7 +8,7 @@ test.describe(title, () => {
     await page.setViewportSize({ width: 1920, height: 1080 });
   });
 
-  test("visibleIf property in de localization", async ({ page }) => {
+  test("visibleIf property in de localization", { tag: "@fresh-page" }, async ({ page }) => {
     const json = {
       "pages": [
         {
@@ -49,7 +49,7 @@ test.describe(title, () => {
     await applyBtn.first().click();
   });
 
-  test("Matrix column editor in de localization", async ({ page }) => {
+  test("Matrix column editor in de localization", { tag: "@fresh-page" }, async ({ page }) => {
     const json = {
       "pages": [
         {

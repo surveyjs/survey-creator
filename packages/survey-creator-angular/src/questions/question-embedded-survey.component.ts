@@ -1,19 +1,20 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
-import { AngularComponentFactory, QuestionAngular } from "survey-angular-ui";
+import { AngularComponentFactory, QuestionAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { QuestionEmbeddedSurveyModel } from "survey-creator-core";
 
 @Component({
   selector: "svc-embeddedsurvey-question",
   templateUrl: "./question-embedded-survey.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class EmbeddedSurveyQuestionComponent extends QuestionAngular<QuestionEmbeddedSurveyModel> {
   @ViewChild("container") container!: ElementRef<HTMLDivElement>;
   public get survey() {
     return this.model.embeddedSurvey;
   }
-  public override ngAfterViewInit(): void {
-    super.ngAfterViewInit();
+  protected override afterViewInit(): void {
+    super.afterViewInit();
     this.survey.rootElement = this.container.nativeElement;
   }
   protected override onModelChanged(): void {

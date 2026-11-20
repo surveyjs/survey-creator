@@ -1,11 +1,11 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, SimpleChange } from "@angular/core";
 import { TestBed } from "@angular/core/testing";
 import { QuestionTextModel } from "survey-core";
 import { CreatorModelComponent } from "../src/creator-model.component";
 
 @Component({
   selector: "sv-ng-test-base",
-  template: ""
+  template: "<div>{{model.name}}</div>"
 })
 class TestBase extends CreatorModelComponent<QuestionTextModel> {
   @Input() input1: string = "";
@@ -14,7 +14,7 @@ class TestBase extends CreatorModelComponent<QuestionTextModel> {
   protected createModel(): void {
     this.model = new QuestionTextModel("test");
   }
-  protected getPropertiesToTrack(): string[] {
+  protected override getPropertiesToTrack(): string[] {
     return ["input1"];
   }
   protected getModel(): QuestionTextModel {
@@ -41,6 +41,9 @@ describe("base tests", () => {
     expect(!!firstModelCreated).toBe(true);
     expect(firstModelCreated["onPropertyValueCoreChanged"].size).toBe(1);
     component.input1 = "test";
+    component.ngOnChanges({
+      input1: new SimpleChange("test", undefined, false)
+    });
     fixture.detectChanges();
     let secondModelCreated = component.model;
     expect(component.modelChangedLog).toBe("->modelChanged->modelChanged");

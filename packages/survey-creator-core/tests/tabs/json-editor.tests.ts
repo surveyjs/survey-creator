@@ -356,27 +356,44 @@ test("The text is linted once per change - allowingDeactivate reuses the last wo
 // The few methods the Ace model calls, over a plain string; the gutter annotations are kept so
 // the test can read them back. setValue fires the "change" the model listens to, the way Ace
 // does; undoManager and isFocused are plain fields a test can replace.
-function createAceMock(): any {
-  let value = "";
-  let annotations: Array<any> = [];
+// The session keeps the text and its undo history, so a session moved to another editor keeps
+// them the way an Ace session does; edit is a keystroke the history records.
+function createAceSessionMock(text: string = ""): any {
   let onChange: () => void = () => { };
-  const undoManager = { reset() { }, markClean() { }, isClean: () => true, hasUndo: () => false, hasRedo: () => false };
-  const session = {
+  const undoStack: Array<string> = [];
+  const undoManager = {
+    reset() { undoStack.length = 0; }, markClean() { }, isClean: () => true,
+    hasUndo: () => undoStack.length > 0, hasRedo: () => false
+  };
+  const session: any = {
+    value: text, annotations: [], undoManager: undoManager,
     on(name: string, handler: () => void) { if (name === "change") onChange = handler; },
+    off(name: string, handler: () => void) { if (name === "change" && onChange === handler) onChange = () => { }; },
+    setValue(newText: string) { session.value = newText; onChange(); },
+    edit(newText: string) { undoStack.push(session.value); session.setValue(newText); },
+    undo() { if (undoStack.length > 0) session.setValue(undoStack.pop()); },
     setUseWorker() { }, setMode() { }, getUndoManager: () => undoManager,
-    setAnnotations(list: Array<any>) { annotations = list; },
+    setAnnotations(list: Array<any>) { session.annotations = list; },
     doc: { getNewLineCharacter: () => "\n" },
   };
-  return {
+  return session;
+}
+function createAceMock(): any {
+  const editor: any = {
     commands: { removeCommand() { } }, setReadOnly() { }, setShowPrintMargin() { }, setFontSize() { }, setTheme() { },
-    getSession: () => session, session: session, undoManager: undoManager,
-    getValue: () => value, setValue(text: string) { value = text; onChange(); },
+    session: createAceSessionMock(),
+    getSession: () => editor.session,
+    setSession(session: any) { editor.session = session; },
+    get undoManager() { return editor.session.undoManager; },
+    getValue: () => editor.session.value,
+    setValue(text: string) { editor.session.setValue(text); },
     // the text a keystroke leaves behind: the "change" it fires rebuilds the list a second later
-    setValueSilently(text: string) { value = text; },
+    setValueSilently(text: string) { editor.session.value = text; },
     renderer: { updateFull() { }, scrollCursorIntoView() { } },
     resize() { }, focus() { }, isFocused: () => false, gotoLine() { },
-    getAnnotations: () => annotations,
+    getAnnotations: () => editor.session.annotations,
   };
+  return editor;
 }
 test("Ace marks only the blocking errors in the gutter", () => {
   const creator = new CreatorTester();
@@ -1129,6 +1146,85 @@ test("Ace: an edit that was undone and redone reaches the survey on leaving the 
     expect(creator.survey.getAllQuestions().map(q => q.name)).toEqual(["q1", "q2x"]);
   } finally {
     TabJsonEditorAcePlugin.hasAceEditor = oldFunc;
+  }
+});
+
+test("Ace: the undo history survives a tab switch", () => {
+  (<any>window).ace = { createEditSession: (text: string) => createAceSessionMock(text) };
+  try {
+    const creator = new CreatorTester();
+    creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+    creator.activeTab = "json";
+    const plugin = <TabJsonEditorAcePlugin>creator.getPlugin("json");
+    const firstEditor = createAceMock();
+    (<AceJsonEditorModel>plugin.model).init(firstEditor);
+    const session = firstEditor.getSession();
+    const original = session.value;
+    const edited = original.replace("q1", "q2");
+    session.edit(edited);
+    creator.activeTab = "preview";
+    expect(creator.survey.getAllQuestions().map(q => q.name)).toEqual(["q2"]);
+    expect(firstEditor.getSession()).not.toBe(session);
+
+    creator.activeTab = "json";
+    const model = <AceJsonEditorModel>plugin.model;
+    const editor = createAceMock();
+    model.init(editor);
+    expect(editor.getSession()).toBe(session);
+    expect(model.text).toBe(edited);
+    expect(model.isJSONChanged).toBeFalsy();
+    expect(session.undoManager.hasUndo()).toBeTruthy();
+    session.undo();
+    expect(model.text).toBe(original);
+    creator.activeTab = "designer";
+    expect(creator.survey.getAllQuestions().map(q => q.name)).toEqual(["q1"]);
+  } finally {
+    delete (<any>window).ace;
+  }
+});
+
+test("Ace: the survey changed on another tab starts the undo history anew", () => {
+  (<any>window).ace = { createEditSession: (text: string) => createAceSessionMock(text) };
+  try {
+    const creator = new CreatorTester();
+    creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+    creator.activeTab = "json";
+    const plugin = <TabJsonEditorAcePlugin>creator.getPlugin("json");
+    const firstEditor = createAceMock();
+    (<AceJsonEditorModel>plugin.model).init(firstEditor);
+    const session = firstEditor.getSession();
+    session.edit(session.value.replace("q1", "q2"));
+    creator.activeTab = "designer";
+    creator.survey.pages[0].addNewQuestion("text", "q3");
+
+    creator.activeTab = "json";
+    const model = <AceJsonEditorModel>plugin.model;
+    const editor = createAceMock();
+    model.init(editor);
+    expect(editor.getSession()).toBe(session);
+    expect(model.text).toBe(creator.text);
+    expect(session.undoManager.hasUndo()).toBeFalsy();
+  } finally {
+    delete (<any>window).ace;
+  }
+});
+
+test("Ace: the session of a closed tab no longer reaches its disposed model", () => {
+  (<any>window).ace = { createEditSession: (text: string) => createAceSessionMock(text) };
+  try {
+    const creator = new CreatorTester();
+    creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+    creator.activeTab = "json";
+    const plugin = <TabJsonEditorAcePlugin>creator.getPlugin("json");
+    const firstModel = <AceJsonEditorModel>plugin.model;
+    const firstEditor = createAceMock();
+    firstModel.init(firstEditor);
+    const session = firstEditor.getSession();
+    creator.activeTab = "designer";
+    session.edit(session.value.replace("q1", "q2"));
+    expect(firstModel.isJSONChanged).toBeFalsy();
+  } finally {
+    delete (<any>window).ace;
   }
 });
 

@@ -27,6 +27,7 @@ import {
   Question,
   SurveyElement,
   hasLicense,
+  getEmbeddedLicense,
   surveyLocalization,
   IConfirmDialogOptions
 } from "survey-core";
@@ -70,7 +71,8 @@ vi.mock("survey-core", async () => {
   const originalModule = await vi.importActual("survey-core");
   return {
     ...originalModule,
-    hasLicense: vi.fn((id) => false)
+    hasLicense: vi.fn((id) => false),
+    getEmbeddedLicense: vi.fn(() => undefined)
   };
 });
 
@@ -919,6 +921,59 @@ test("License text from plugin (licensed creator)", (): any => {
   });
   expect(creator.licenseText).toBe("no license");
   expect(creator.haveCommercialLicense).toBeFalsy();
+});
+
+const embeddedWhiteLabelUrl = "https://surveyjs.io/wordpress#white-label";
+function setLicenseMocks(licensed: boolean, embedded: boolean): void {
+  (hasLicense as MockedFunction<typeof hasLicense>).mockReturnValue(licensed);
+  (getEmbeddedLicense as MockedFunction<typeof getEmbeddedLicense>).mockReturnValue(
+    embedded ? { name: "wordpress", whiteLabelUrl: embeddedWhiteLabelUrl } : undefined);
+}
+function getEmbeddedLicenseText(): string {
+  return editorLocalization.getLocaleStrings("en").survey.licenseEmbedded.replace("{whiteLabelUrl}", embeddedWhiteLabelUrl);
+}
+
+test("License text with the embedded marker (unlicensed creator)", (): any => {
+  setLicenseMocks(false, true);
+  const creator = new CreatorTester();
+  expect(creator.haveCommercialLicense).toBeFalsy();
+  expect(creator.licenseText).toBe(getEmbeddedLicenseText());
+  expect(creator.licenseText).toContain("href='" + embeddedWhiteLabelUrl + "'");
+  expect(creator.licenseText).not.toContain("{whiteLabelUrl}");
+  setLicenseMocks(false, false);
+});
+
+test("License text without the embedded marker (unlicensed creator)", (): any => {
+  setLicenseMocks(false, false);
+  const creator = new CreatorTester();
+  expect(creator.haveCommercialLicense).toBeFalsy();
+  expect(creator.licenseText).toBe(editorLocalization.getLocaleStrings("en").survey.license);
+});
+
+test("License text with the embedded marker wins over the expired date", (): any => {
+  setLicenseMocks(false, true);
+  const creator = new CreatorTester();
+  creator.licenseDateStringValue = "123";
+  expect(creator.licenseText).toBe(getEmbeddedLicenseText());
+  setLicenseMocks(false, false);
+});
+
+test("License text from plugin wins over the embedded marker", (): any => {
+  setLicenseMocks(false, true);
+  const creator = new CreatorTester();
+  creator.addPlugin("one", <ICreatorPlugin>{
+    activate: () => { },
+    getLicenseText: (_) => "no plugin license"
+  });
+  expect(creator.licenseText).toBe("no plugin license");
+  setLicenseMocks(false, false);
+});
+
+test("Licensed creator with the embedded marker has no banner", (): any => {
+  setLicenseMocks(true, true);
+  const creator = new CreatorTester();
+  expect(creator.haveCommercialLicense).toBeTruthy();
+  setLicenseMocks(false, false);
 });
 
 test("isStringEditable", (): any => {

@@ -1,0 +1,6 @@
+/* esm.sh - react-dom@19.3.1/client */
+import "/react-dom@19.3.1/es2022/react-dom.development.mjs";
+import "/react@19.3.1/es2022/react.development.mjs";
+import "/scheduler@^0.28.0?target=es2022&dev";
+export * from "/react-dom@19.3.1/es2022/client.development.mjs";
+export { default } from "/react-dom@19.3.1/es2022/client.development.mjs";

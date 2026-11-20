@@ -10,6 +10,7 @@ import {
 } from "survey-core";
 import { PropertyGridViewModel } from "../../src/property-grid/property-grid-view-model";
 export { PropertyGridEditorMatrix } from "../../src/property-grid/matrices";
+export { PropertyGridEditorCondition } from "../../src/property-grid/condition";
 import { CreatorTester } from "../creator-tester";
 import { ObjectSelectorModel } from "../../src/property-grid/object-selector";
 import { settings } from "../../src/creator-settings";
@@ -279,4 +280,31 @@ test("Object selector's title should be leaved unchanged when changing question'
   question.name = "question2";
   expect(selectorBarItem.title).toBe("General");
   expect(selectorBarItem.tooltip).toBe("question2");
+});
+test("Title actions are available if the property grid survey is rendered on creating - Bug#8191", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ]
+  };
+  const propertyGridViewModel = (creator.getPlugin("designer") as TabDesignerPlugin).propertyGridViewModel;
+  // Emulate a renderer (e.g. Angular) that re-renders the property grid synchronously
+  // when a new survey is assigned and requests title actions while rendering
+  let renderedActions: Array<string> = [];
+  propertyGridViewModel.registerPropertyChangedHandlers(["survey"], () => {
+    const q = propertyGridViewModel.survey.getQuestionByName("visibleIf");
+    renderedActions = !!q ? q.getTitleActions().map(action => action.id) : [];
+  }, "testRenderer");
+  creator.selectElement(creator.survey.getQuestionByName("q2"));
+  expect(renderedActions, "select a question").toContain("property-grid-setup");
+
+  renderedActions = [];
+  creator.convertCurrentQuestion("comment");
+  expect(creator.selectedElementName, "the converted question is selected").toBe("q2");
+  expect(creator.selectedElement.getType()).toBe("comment");
+  expect(renderedActions, "change the question type").toContain("property-grid-setup");
+  const visibleIfQuestion = propertyGridViewModel.survey.getQuestionByName("visibleIf");
+  expect(visibleIfQuestion.getTitleActions().map(action => action.id)).toContain("property-grid-setup");
 });

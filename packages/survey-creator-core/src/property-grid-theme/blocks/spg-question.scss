@@ -16,6 +16,10 @@
   input.sd-formbox__input:read-only::placeholder {
     color: rgb(from var(--sjs2-color-fg-basic-primary) r g b / var(--sjs2-opacity-disabled));
   }
+
+  .sd-formbox--readonly:where(:focus-within) {
+    background: var(--sjs2-color-component-formbox-readonly-bg);
+  }
 }
 
 .spg-question__header {

@@ -1,0 +1,3 @@
+# Recorded paths can contain names the root .gitignore excludes at any depth (dist, build, package, tmp, ...):
+# keep everything in this folder.
+!*

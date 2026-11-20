@@ -3,10 +3,12 @@ import { CreatorModelComponent } from "../../creator-model.component";
 import { SurveyModel } from "survey-core";
 import { SurveyResultsModel } from "survey-creator-core";
 
+import { SurveyBaseProviders } from "survey-angular-ui";
 @Component({
   selector: "survey-results",
   templateUrl: "./survey-results.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class SurveyResultsComponent extends CreatorModelComponent<SurveyResultsModel> {
   @Input() survey!: SurveyModel;
@@ -20,7 +22,7 @@ export class SurveyResultsComponent extends CreatorModelComponent<SurveyResultsM
   protected getModel(): SurveyResultsModel {
     return this.model;
   }
-  protected getPropertiesToTrack(): string[] {
+  protected override getPropertiesToTrack(): string[] {
     return ["survey"];
   }
 }

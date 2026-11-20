@@ -162,7 +162,7 @@ test.describe(title, () => {
     await compareScreenshot(page, row1Column1Cell, "matrix-cell-edit-bool.png");
   });
 
-  test("Matrix borders in panels", async ({ page }) => {
+  test("Matrix borders in panels", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1767, height: 1500 });
     const json = {
       "pages": [

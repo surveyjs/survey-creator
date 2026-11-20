@@ -1,12 +1,13 @@
 import { Component } from "@angular/core";
-import { AngularComponentFactory, QuestionAngular } from "survey-angular-ui";
+import { AngularComponentFactory, QuestionAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { DropdownListModel, QuestionDropdownModel, RendererFactory } from "survey-core";
 import { initLogicOperator } from "survey-creator-core";
 
 @Component({
   selector: "svc-logic-operator",
   templateUrl: "./logic-operator.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class LogicOperatorComponent extends QuestionAngular<QuestionDropdownModel> {
   private dropdownListModel?: DropdownListModel;

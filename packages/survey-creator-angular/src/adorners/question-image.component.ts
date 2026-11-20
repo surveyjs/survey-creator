@@ -1,12 +1,13 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
-import { AngularComponentFactory, EmbeddedViewContentComponent } from "survey-angular-ui";
+import { AngularComponentFactory, EmbeddedViewContentComponent, SurveyBaseProviders } from "survey-angular-ui";
 import { QuestionImageAdornerViewModel } from "survey-creator-core";
 import { QuestionDesignerComponent } from "../question.component";
 
 @Component({
   selector: "svc-image-question",
   templateUrl: "../question.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class QuestionImageDesignerComponent extends QuestionDesignerComponent {
   protected override createModel(): void {

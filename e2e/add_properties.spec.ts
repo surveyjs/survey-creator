@@ -7,7 +7,7 @@ test.describe(title, () => {
     await page.goto(`${url}`);
     await page.setViewportSize({ width: 1920, height: 1080 });
   });
-  test("Required property", async ({ page }) => {
+  test("Required property", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
     // eslint-disable-next-line no-undef
       (window as any).Survey.Serializer.addProperty("checkbox", { name: "!foo" });
@@ -21,7 +21,7 @@ test.describe(title, () => {
     await expect(page.locator(".svc-json-error").first()).toBeVisible();
   });
 
-  test("Property with default value", async ({ page }) => {
+  test("Property with default value", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
     // eslint-disable-next-line no-undef
       (window as any).Survey.Serializer.addProperty("survey", { name: "foo", default: "bar" });
@@ -34,7 +34,7 @@ test.describe(title, () => {
     await expect(page.locator("[data-name=foo] input").first()).toHaveValue("bar");
   });
 
-  test("Check boolean property", async ({ page }) => {
+  test("Check boolean property", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
     // eslint-disable-next-line no-undef
       (window as any).Survey.Serializer.addProperty("survey", { name: "foo:boolean" });
@@ -48,7 +48,7 @@ test.describe(title, () => {
     await expect(page.locator("label").filter({ hasText: "Foo", visible: true }).locator("input").first()).toBeVisible();
   });
 
-  test("Check text property", async ({ page }) => {
+  test("Check text property", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
     // eslint-disable-next-line no-undef
       (window as any).Survey.Serializer.addProperty("survey", { name: "foo:text" });
@@ -66,7 +66,7 @@ test.describe(title, () => {
     await expect(fooTextarea).toHaveValue("Bar");
   });
 
-  test("Check html property", async ({ page }) => {
+  test("Check html property", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
     // eslint-disable-next-line no-undef
       (window as any).Survey.Serializer.addProperty("survey", { name: "foo:html" });
@@ -84,7 +84,7 @@ test.describe(title, () => {
     await expect(fooTextarea).toHaveValue("Bar");
   });
 
-  test("Check itemvalues property", async ({ page }) => {
+  test("Check itemvalues property", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
     // eslint-disable-next-line no-undef
       (window as any).Survey.Serializer.addProperty("survey", { name: "foo:itemvalues" });

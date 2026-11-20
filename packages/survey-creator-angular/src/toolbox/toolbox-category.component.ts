@@ -1,11 +1,12 @@
 import { Component, Input } from "@angular/core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { QuestionToolbox, QuestionToolboxCategory, QuestionToolboxItem } from "survey-creator-core";
 
 @Component({
   selector: "svc-toolbox-category ",
   templateUrl: "./toolbox-category.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class ToolboxCategoryComponent extends BaseAngular<QuestionToolboxCategory> {
   @Input() category!: QuestionToolboxCategory;

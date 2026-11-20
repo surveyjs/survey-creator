@@ -137,7 +137,7 @@ test.describe(title, () => {
     await showContentBehindPopup(page);
   });
 
-  test("Test question type converter (mobile)", async ({ page }) => {
+  test("Test question type converter (mobile)", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 599, height: 900 });
 
     const surveyJSON = {
@@ -676,7 +676,7 @@ test.describe(title, () => {
     await compareScreenshot(page, root, "question-required-focus.png");
   });
 
-  test("Character counter on surface", async ({ page }) => {
+  test("Character counter on surface", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1120, height: 900 });
     await page.evaluate(() => {
       window["Survey"].Serializer.findProperty("survey", "title").maxLength = 20;
@@ -1442,7 +1442,7 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".svc-question__content--panel"), "panel-title-editing.png");
   });
 
-  test("Composite question - check no scroll", async ({ page }) => {
+  test("Composite question - check no scroll", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       window["Survey"].ComponentCollection.Instance.add({
         name: "fullname",
@@ -1475,7 +1475,7 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".svc-question__adorner"), "composite-question-no-scroll.png");
   });
 
-  test("Composite question - spacing between questions", async ({ page }) => {
+  test("Composite question - spacing between questions", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       window["Survey"].ComponentCollection.Instance.add({
         name: "fullname",
