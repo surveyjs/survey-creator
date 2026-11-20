@@ -2,7 +2,7 @@
 
 ## Summary
 
-Add a boolean option to the Designer tab plugin (`TabDesignerPlugin`, `designer-plugin.ts`) that turns on a **WYSIWYG mode**. In this mode, questions on the design surface look the same as in the running survey: same width, same height, no extra rows or controls inline. All editing controls move into a floating question toolbar.
+Add a boolean option to the Designer tab plugin (`TabDesignerPlugin`, `designer-plugin.ts`) that turns on a **WYSIWYG mode**. In this mode, questions on the design surface look the same as in the running survey: same width, same height, no extra rows or controls inline. Editing controls move into a floating question toolbar. The surface Add Question buttons stay where they are.
 
 The default is `false`, so the current behavior doesn't change.
 
@@ -30,7 +30,7 @@ The toolbar applies to questions, panels and dynamic panels.
 
 - The toolbar container looks like a standard **dropdown popup**: same background, border radius, shadow and padding as `sv-popup__container` in `svc-creator-popup`.
 - Actions are always in **icon mode**: buttons show only the icon, and the title is a tooltip. Responsive shrinking is not used. This is the equivalent of `SurveyElementActionContainer.alwaysShrink = true` / `mode = "small"`, with no overflow (dots) menu.
-- The three sections are separated by vertical separators.
+- The two sections are separated by a vertical separator.
 
 ### Section 1: Type
 
@@ -61,14 +61,7 @@ The toolbar applies to questions, panels and dynamic panels.
   - If no entry is available, the button is hidden.
   - Every change goes through the regular property change path, so undo/redo and the modified state work.
 
-### Section 3: Add
-
-- A button with the text **"Add"**. It needs a localization string in `editorLocalization`; reuse an existing one if there is a suitable one.
-- Clicking it always opens a dropdown and never adds a default type directly. The dropdown contains the whole toolbox, with categories, subtypes and the same filtering as the `convertTo` list. Reuse `creator.getQuestionTypeSelectorModel`.
-- The chosen question is inserted **right after the current element**, in the same container (page or panel), and then selected.
-- Visibility follows `allowEdit` and `creator.showAddQuestionButton`.
-- In WYSIWYG mode, the existing in-adorner "Add Question" footer (`svc-question__content-actions`) is hidden, because this button replaces it.
-- The page footer "Add Question" button (`svc-add-new-question-action`) is hidden too. It stays visible on the empty-survey ghost page: the page is a ghost and the survey has no pages (`isGhost` and `survey.pageCount === 0`). A trailing ghost page on a survey that already has pages stays hidden.
+The toolbar has no Add button. Adding a question stays on the design surface, with the same visibility as outside WYSIWYG mode: the page footer (`svc-add-new-question-action`) and the panel footer (`svc-panel__add-new-question-container`).
 
 ## 2. Elements on the design surface
 

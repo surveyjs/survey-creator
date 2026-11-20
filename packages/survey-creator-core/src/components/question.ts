@@ -1082,26 +1082,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     action.visible = <any>new ComputedUpdater(() => this.wysiwygMode && this.hasAddOptionItems());
     return action;
   }
-  private createWysiwygAddQuestionAction(): Action {
-    const action = this.creator.getQuestionTypeSelectorModel(() => { }, <SurveyElement><any>this.surveyElement.parent, this.surveyElement);
-    const title = this.creator.getLocString("ed.add");
-    action.id = "addQuestion";
-    action.title = title;
-    action.iconName = "";
-    action.showTitle = true;
-    action.visibleIndex = 100;
-    action.css = "svc-wysiwyg-toolbar__add";
-    const listModel = action.popupModel?.contentComponentData?.model;
-    if (listModel) {
-      const previous = listModel.onSelectionChanged;
-      listModel.onSelectionChanged = (item: IAction) => {
-        if (previous) previous(item);
-        action.title = this.creator.getLocString("ed.add");
-      };
-    }
-    action.visible = <any>new ComputedUpdater(() => this.wysiwygMode && this.allowEdit && !!this.creator.showAddQuestionButton);
-    return action;
-  }
   private applyWysiwygToolbarState(): void {
     if (!this.isActionContainerCreated) return;
     const container = this.actionContainer;
@@ -1113,10 +1093,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const standard: { [id: string]: number } = { isrequired: 10, duplicate: 11, settings: 12, delete: 13 };
     let customIndex = 20;
     container.actions.forEach(action => {
-      if (action.id === "addQuestion") {
-        action.visibleIndex = 100;
-        return;
-      }
       if (action.id === "addOptionItem") {
         action.visibleIndex = 40;
         return;
@@ -1138,11 +1114,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     let section2Marked = false;
     visible.forEach(action => {
       const isSection1 = section1[action.id] !== undefined;
-      if (action.id === "addQuestion") {
-        action.needSeparator = hasPrevious;
-        hasPrevious = true;
-        return;
-      }
       if (isSection1) {
         action.needSeparator = false;
         hasPrevious = true;
@@ -1165,11 +1136,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       && SurveyHelper.isPropertyVisible(element, Serializer.findProperty(element.getType(), "isRequired"), this.creator)) {
       items.push(this.createRequiredAction());
     }
-    if (this.wysiwygMode) {
-      if (this.isWysiwygOptionQuestion()) {
-        items.push(this.createAddOptionItemAction());
-      }
-      items.push(this.createWysiwygAddQuestionAction());
+    if (this.wysiwygMode && this.isWysiwygOptionQuestion()) {
+      items.push(this.createAddOptionItemAction());
     }
   }
   protected duplicate(): void {

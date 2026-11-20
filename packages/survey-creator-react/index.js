@@ -1123,6 +1123,7 @@ creator.getPlugin("designer").wysiwygMode = true;
 // creator.getPlugin("theme").showOneCategoryInPropertyGrid = true;
 
 // Step 3: Add a custom adorner that saves a question configuration as a toolbox item
+/*
 creator.onElementGetActions.add((_, options) => {
   if (options.element["isPage"]) return;
   const objToAdd = options.element;
@@ -1137,6 +1138,7 @@ creator.onElementGetActions.add((_, options) => {
   });
 });
 creator.JSON = json;
+*/
 
 function getCompositeInput(question) {
   return question.contentPanel.getQuestionByName("q1");
