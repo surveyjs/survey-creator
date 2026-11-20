@@ -316,6 +316,23 @@ describe("rich text registration", () => {
     expect(attached).toContain("block");
     model.onBlur({ target: element, relatedTarget: null });
     expect(attached).toContain("detach-block");
+
+    withExampleTypes(() => {
+      const inlineCreator = new CreatorTester();
+      inlineCreator.registerRichTextEditor(editor);
+      inlineCreator.JSON = { elements: [{ type: "text", name: "q", title: "Title" }] };
+      const title = inlineCreator.survey.getQuestionByName("q").locTitle;
+      const inline = new StringEditorViewModelBase(title, inlineCreator);
+      inline.setLocString(title);
+      let inlineBlurred = false;
+      inline.blurEditor = () => { inlineBlurred = true; };
+      const inlineEnter = keyEvent(13, { target: element });
+      inline.onKeyDownCapture(inlineEnter);
+      inline.onKeyDown(inlineEnter);
+      expect(inline.richTextMode).toBe("inline");
+      expect(inlineBlurred).toBe(false);
+      expect(inlineEnter.stopped).toBe(false);
+    });
     element.remove();
   });
 

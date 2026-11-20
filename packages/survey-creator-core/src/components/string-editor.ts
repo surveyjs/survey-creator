@@ -659,15 +659,15 @@ export class StringEditorViewModelBase extends Base {
     }
   }
   public onKeyDownCapture(event: KeyboardEvent): void {
-    if (this.richTextMode === "none" || event.keyCode !== 13 || event.shiftKey) return;
-    // The editor's own keydown turns Enter into a new paragraph. Creator commits
-    // instead, except inside a list item, where the editor adds or leaves an item.
-    if (this.richTextMode === "block" && this.isCaretInListItem(event.target as HTMLElement)) return;
+    // Inline Enter inserts a <br> and stays in the string. Block Enter commits,
+    // except Shift+Enter and a caret inside a list item, which the editor handles.
+    if (this.richTextMode !== "block" || event.keyCode !== 13 || event.shiftKey) return;
+    if (this.isCaretInListItem(event.target as HTMLElement)) return;
     event.stopImmediatePropagation();
     this.onKeyDown(event);
   }
   public onKeyDown(event: KeyboardEvent): boolean {
-    if (event.keyCode === 13 && !event.shiftKey) {
+    if (event.keyCode === 13 && !event.shiftKey && this.richTextMode !== "inline") {
       if (this.richTextMode === "block" && this.isCaretInListItem(event.target as HTMLElement)) {
         return true;
       }
