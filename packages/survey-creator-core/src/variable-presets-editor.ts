@@ -6,7 +6,7 @@ import { BorderlessLightPanelless } from "survey-core/themes";
 import { SurveyCreatorModel } from "./creator-base";
 import { VariablePresetsManager } from "./variable-presets";
 import { getLocString } from "./editorLocalization";
-import { isPlainRecord } from "./utils/data-path";
+import { isPlainRecord } from "./utils/plain-value";
 import "./variable-presets-editor.scss";
 
 // The Edit dialog behind the Preview toolbar button (issue #7982): one survey with two pages - the

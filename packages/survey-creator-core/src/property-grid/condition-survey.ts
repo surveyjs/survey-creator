@@ -149,32 +149,35 @@ export function buildConditionQuestionList(survey: SurveyModel, object: Base, pr
 }
 // Nested data: survey-core lists a question by its value name, which for an inner question is a key of its
 // container's object, not of the survey data, so {town} is not found at the root (survey-library #12233).
-// The editor inserts the variable survey-core names it by instead (getConditionQuestionKey): its data path
+// The editor inserts the variable survey-core names it by instead (key, getConditionQuestionKey): its data path
 // ({address.town}), which resolves at the root and inside the container; a bare name read at the root finds no
 // inner question. Sub-entries ("address.mv.r1") follow.
-function renameInnerQuestionEntries(res: Array<any>, start: number, question: Question): void {
+// CS8: the entry shows textKey, the key with the question's own key, the last segment, replaced by its name:
+// "address.city" for city with valueName "town" in the container "address", as a top-level question's entry
+// shows "q1" for its {val1}. The containers keep their keys, which is what the written path starts with, and a
+// sub-entry keeps its tail ("address.m.r1" for m with valueName "mv"). Only the text changes: the value stays the
+// data path.
+function getInnerEntryNaming(question: Question): { valueName: string, key: string, textKey: string } {
   const valueName = question.getValueName();
   const key = getConditionQuestionKey(question);
-  if (valueName === key) return;
+  const ownKeyStart = key.length - valueName.length;
+  const isOwnKeyLast = valueName !== question.name && ownKeyStart > 0 && key.substring(ownKeyStart) === valueName && key[ownKeyStart - 1] === ".";
+  return { valueName: valueName, key: key, textKey: isOwnKeyLast ? key.substring(0, ownKeyStart) + question.name : key };
+}
+function renameInnerQuestionEntries(res: Array<any>, start: number, question: Question): void {
+  const naming = getInnerEntryNaming(question);
+  if (naming.valueName === naming.key) return;
   for (let i = start; i < res.length; i++) {
     const name: string = res[i].name;
-    if (res[i].question !== question || !isEntryOf(name, valueName)) continue;
-    res[i].name = key + name.substring(valueName.length);
+    if (res[i].question !== question || !isEntryOf(name, naming.valueName)) continue;
+    res[i].name = naming.key + name.substring(naming.valueName.length);
   }
 }
-// CS8: an inner question's entry shows its data path with the question's own key, the last segment, replaced by
-// its name: "address.city" for city with valueName "town" in the container "address", as a top-level question's
-// entry shows "q1" for its {val1}. The containers keep their keys, which is what the written path starts with, and
-// a sub-entry keeps its tail ("address.m.r1" for m with valueName "mv"). Only the text changes: the value stays
-// the data path. An entry that does not start with the key (a host renamed it in onConditionQuestionsGetList)
-// shows its name.
+// runs after the host's onConditionQuestionsGetList: an entry that does not start with the key (the host renamed
+// it) shows its name
 function getInnerEntryText(name: string, question: Question): string {
-  const valueName = question.getValueName();
-  const key = getConditionQuestionKey(question);
-  if (valueName === question.name || !isEntryOf(name, key)) return name;
-  const ownKeyStart = key.length - valueName.length;
-  if (ownKeyStart < 1 || key.substring(ownKeyStart) !== valueName || key[ownKeyStart - 1] !== ".") return name;
-  return key.substring(0, ownKeyStart) + question.name + name.substring(key.length);
+  const naming = getInnerEntryNaming(question);
+  return isEntryOf(name, naming.key) ? naming.textKey + name.substring(naming.key.length) : name;
 }
 // The texts of inner entries (getInnerEntryText), by the entry's index. Names are unique in a name scope, but two
 // containers can share a key ("address"), so two questions named city in them would both show "address.city":

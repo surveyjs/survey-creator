@@ -21,6 +21,15 @@ import { SurveyHelper } from "../../survey-helper";
 import { getConditionQuestionKey, getExpressionOwner, getExpressionRecord, getExpressionScopePaths, getQuestionByVariableName, isInnerQuestion,
   isScopedNamesSurvey, IVariableRename } from "../../utils/data-path";
 
+// What follows a renamed name in a variable: its end, a path into it ("." or "["), or "-total." ("{matrix-total.column}"
+// is a column total of the matrix "matrix")
+function getRenamePostfixes(): Array<string> {
+  const res = [surveyLibSettings.expressionVariableDelimiters.end, ".", "["];
+  const totalsSuffix = surveyLibSettings.matrix.totalsSuffix;
+  if (!!totalsSuffix) res.push(totalsSuffix + ".");
+  return res;
+}
+
 export class SurveyLogicAction {
   private surveyValue: SurveyModel;
   private logicTypeValue: SurveyLogicType;
@@ -71,7 +80,8 @@ export class SurveyLogicAction {
     }
   }
   // Nested data: a question name of the action (a trigger's setToName, fromName) that is a data path
-  // through a renamed key.
+  // through a renamed key. renameQuestion matches the whole name only: without nesting "q1.x" can be another
+  // question's name (a test pins it).
   public renameDataKeyInNames(renames: Array<IVariableRename>): void {
     if (!this.element || renames.length === 0) return;
     this.questionNames.forEach(propName => {
@@ -346,12 +356,7 @@ export class SurveyLogicItem {
   }
   public renameQuestion(oldName: string, newName: string): void {
     if (!oldName || !newName || oldName === newName) return;
-    // "{matrix-total.column}" refers to a column total of the matrix "matrix"
-    const postFixes = [surveyLibSettings.expressionVariableDelimiters.end, ".", "["];
-    const totalsSuffix = surveyLibSettings.matrix.totalsSuffix;
-    if (!!totalsSuffix) {
-      postFixes.push(totalsSuffix + ".");
-    }
+    const postFixes = getRenamePostfixes();
     ["", "panel.", "row."].forEach(prefix =>
       this.renameQuestionInExpression(prefix + oldName, prefix + newName, postFixes)
     );
@@ -458,13 +463,18 @@ export class SurveyLogicItem {
   // questions its actions are on and name. One entry per question: one text ({street}) reads different questions
   // in different scopes.
   public getUsedQuestions(): Array<Question> {
+    const res = this.getReadQuestions();
+    this.actions.forEach(action => action.addUsedQuestions(res));
+    return res;
+  }
+  // the questions the expression's variables read (getQuestionsByVariableName), each once
+  private getReadQuestions(): Array<Question> {
     const res: Array<Question> = [];
     const names: Array<string> = [];
     this.getQuestionNamesFromExpression(names);
     names.forEach(name => this.getQuestionsByVariableName(name).forEach(question => {
       if (res.indexOf(question) < 0) res.push(question);
     }));
-    this.actions.forEach(action => action.addUsedQuestions(res));
     return res;
   }
   public getActionTypes(): string[] {
@@ -538,10 +548,7 @@ export class SurveyLogicItem {
     return this.isQuestionReadInExpression(question) || this.actions.some(action => action.isSuitableByQuestion(question));
   }
   private isQuestionReadInExpression(question: Question): boolean {
-    if (!this.expression) return false;
-    const names: Array<string> = [];
-    this.getQuestionNamesFromExpression(names);
-    return names.some(name => this.getQuestionsByVariableName(name).indexOf(question) > -1);
+    return !!this.expression && this.getReadQuestions().indexOf(question) > -1;
   }
   // Nested data (survey-library #12233): the questions a variable of the rule reads, one per scope of its
   // actions (one rule groups actions with one expression text, and {street} reads a different question in each
@@ -550,8 +557,7 @@ export class SurveyLogicItem {
   // ({panel1.street}) is no variable.
   private getQuestionsByVariableName(name: string): Array<Question> {
     const res: Array<Question> = [];
-    const owners: Array<Base> = this.actions.length > 0 ? this.actions.map(action => this.getExpressionOwner(action)) : [null];
-    owners.forEach(owner => {
+    this.getExpressionOwners().forEach(owner => {
       const question = getQuestionByVariableName(this.survey, name, owner);
       if (!!question && res.indexOf(question) < 0) res.push(question);
     });
@@ -575,22 +581,22 @@ export class SurveyLogicItem {
     if (!this.expression || !this.survey) return [];
     return <Array<Question>>this.survey.getAllQuestions().filter(q => q.name === name && isInnerQuestion(q));
   }
+  // Only the question the first action that resolves the variable reads counts (getQuestionByVariableName), not
+  // every action's, as in getReadQuestions: a test pins it.
   private isInnerQuestionInExpression(questions: Array<Question>): boolean {
     if (questions.length === 0) return false;
     const names: Array<string> = [];
     this.getQuestionNamesFromExpression(names);
     return names.some(name => questions.indexOf(this.getQuestionByVariableName(name)) > -1);
   }
-  // The question a variable of this rule names (getQuestionByVariableName): an inner one by its name or by a
-  // data path ({address.street}) resolved in the data scopes of the rule's elements (getExpressionOwner), a
-  // top-level one by its value name.
+  // The question a variable of this rule names: the first of getQuestionsByVariableName. Its callers cannot tell
+  // the top-level fallback by name: SurveyLogic.getUsedQuestions looks the name up first, and
+  // isInnerQuestionInExpression compares with inner questions only.
   public getQuestionByVariableName(name: string): Question {
-    const owners: Array<Base> = this.actions.length > 0 ? this.actions.map(action => this.getExpressionOwner(action)) : [null];
-    for (let i = 0; i < owners.length; i++) {
-      const question = getQuestionByVariableName(this.survey, name, owners[i]);
-      if (!!question) return question;
-    }
-    return null;
+    return this.getQuestionsByVariableName(name)[0] || null;
+  }
+  private getExpressionOwners(): Array<Base> {
+    return this.actions.length > 0 ? this.actions.map(action => this.getExpressionOwner(action)) : [null];
   }
   // The element whose scopes an action's expression resolves in: its parent element (a template question's
   // dynamic panel, a column's matrix), a choice's or a validator's question (they have no scope of their own),
@@ -625,12 +631,7 @@ export class SurveyLogicItem {
   private renameVariablePrefix(expression: string, oldName: string, newName: string): string {
     const ob = surveyLibSettings.expressionVariableDelimiters.start;
     let res = expression;
-    const postFixes = [surveyLibSettings.expressionVariableDelimiters.end, ".", "["];
-    // "{matrix-total.column}": a column total of the matrix, as renameQuestion rewrites it
-    if (!!surveyLibSettings.matrix.totalsSuffix) {
-      postFixes.push(surveyLibSettings.matrix.totalsSuffix + ".");
-    }
-    postFixes.forEach(ch => {
+    getRenamePostfixes().forEach(ch => {
       res = this.renameQuestionInExpressionCore(res, res.toLocaleLowerCase(), (ob + oldName + ch).toLocaleLowerCase(), ob + newName + ch);
     });
     return res;

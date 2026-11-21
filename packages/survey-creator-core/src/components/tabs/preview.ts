@@ -7,7 +7,7 @@ import { createPageSelectorLocTitle } from "../../utils/actions";
 import { findSuitableTheme, isThemeEmpty } from "./theme-model";
 import { VariablePresetsManager } from "../../variable-presets";
 import { VariablesViewerModel } from "../variables-viewer/variables-viewer";
-import { copyPlainValue } from "../../utils/data-path";
+import { copyPlainValue } from "../../utils/plain-value";
 
 export class PreviewViewModel extends Base {
   public enableInvisiblePages: boolean = true;

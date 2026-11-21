@@ -2790,9 +2790,10 @@ export class SurveyCreatorModel extends Base
   }
   public updateConditionsOnNameChanged(obj: Base, propertyName: string, oldValue: any): void {
     if (this.isCreatingNewElement) return;
-    if (this.isObjQuestion(obj) && isScopedNamesSurvey(this.survey)) {
+    const isQuestion = this.isObjQuestion(obj);
+    if (isQuestion && isScopedNamesSurvey(this.survey)) {
       this.updateConditionsOnQuestionKeyChanged(<Question>obj, propertyName, oldValue);
-    } else if (this.isObjQuestion(obj)) {
+    } else if (isQuestion) {
       if (propertyName === "name" && !obj["valueName"]) {
         this.updateLogicOnQuestionNameChanged(oldValue, obj["name"]);
       }
@@ -2802,11 +2803,11 @@ export class SurveyCreatorModel extends Base
         this.updateLogicOnQuestionNameChanged(oldName, newName);
       }
     }
-    if (this.isObjQuestion(obj) && propertyName === "name" && obj.isDescendantOf("selectbase")) {
+    if (isQuestion && propertyName === "name" && obj.isDescendantOf("selectbase")) {
       this.updateChoicesFromQuestionOnColumnNameChanged(oldValue, obj["name"]);
     }
     // A question a Filter Control can filter (survey-core finds the source by the same duck typing)
-    if (this.isObjQuestion(obj) && propertyName === "name" && typeof obj["setControlFilter"] === "function") {
+    if (isQuestion && propertyName === "name" && typeof obj["setControlFilter"] === "function") {
       this.updateFilterSourceOnQuestionNameChanged(oldValue, obj["name"]);
     }
     if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
@@ -2837,14 +2838,7 @@ export class SurveyCreatorModel extends Base
     } else if (propertyName === "valueName") {
       oldKey = oldValue || question.name;
     } else return;
-    const newKey = question.getValueName();
-    if (!oldKey || !newKey || oldKey === newKey || !settings.logic.updateExpressionsOnChanging.questionName) return;
-    const record = getExpressionRecord(this.survey, question);
-    if (!!record) {
-      this.updateLogicOnRecordKeyChanged(question, record, oldKey);
-    } else {
-      this.updateLogicOnDataKeyChanged(question, oldKey, newKey);
-    }
+    this.updateLogicOnDataKeyChanged(question, oldKey, question.getValueName());
   }
   private updateLogicOnRecordKeyChanged(question: Question, record: Base, oldKey: string): void {
     // a detail panel's question has no data path at design time: its key is its value name in the row
@@ -2863,13 +2857,20 @@ export class SurveyCreatorModel extends Base
   private updateConditionsOnContainerKeyChanged(panel: PanelModelBase, propertyName: string, oldValue: any): void {
     const oldKey = propertyName === "name" ? panel.getDataNestingKeyFor(panel.valueName, oldValue) : panel.getDataNestingKeyFor(oldValue, panel.name);
     const newKey = panel.getDataNestingKeyFor(panel.valueName, panel.name);
-    if (!oldKey || !newKey || !panel.isDataNesting) return;
+    if (!panel.isDataNesting) return;
     this.updateLogicOnDataKeyChanged(panel, oldKey, newKey);
   }
-  // el (a question or a nesting container) holds newKey now; its old key was oldKey
+  // el (a question or a nesting container) holds newKey now; its old key was oldKey. A question of a record goes
+  // to updateLogicOnRecordKeyChanged.
   private updateLogicOnDataKeyChanged(el: Question | PanelModelBase, oldKey: string, newKey: string): void {
+    if (!oldKey || !newKey || oldKey === newKey || !settings.logic.updateExpressionsOnChanging.questionName) return;
+    const record = el.isQuestion ? getExpressionRecord(this.survey, el) : null;
+    if (!!record) {
+      this.updateLogicOnRecordKeyChanged(<Question>el, record, oldKey);
+      return;
+    }
     const newPath = el.getDataPath();
-    if (!oldKey || !newKey || oldKey === newKey || newPath.length === 0 || !settings.logic.updateExpressionsOnChanging.questionName) return;
+    if (newPath.length === 0) return;
     const rename = new DataKeyRename(this.survey, newPath.slice(0, newPath.length - 1).concat([oldKey]), newKey, el.isQuestion);
     this.renameLogicVariables(owner => rename.getRenames(getExpressionScopePaths(this.survey, owner)), oldKey);
   }

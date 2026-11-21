@@ -421,6 +421,20 @@ describe("logic tab: inner questions (nested data, survey-library #12233)", () =
       expect(getFiltered(plugin.model, "panel1.street"), "order " + index).toEqual(["{street} = 'x'"]);
     });
   });
+  // Pins today's behaviour: a bare name of inner questions only (a host's filter) matches what the rule's first
+  // action resolves the variable to, so the order of the actions decides (review-01, prompt 01, probe).
+  test("a bare name of inner questions only: the first action's scope decides", () => {
+    const panelA = { type: "panel", name: "pa", valueName: "a", elements: [
+      { type: "text", name: "x", valueName: "k" }, { type: "text", name: "qa", visibleIf: "{k} = 1" }] };
+    const panelB = { type: "panel", name: "pb", valueName: "b", elements: [
+      { type: "text", name: "street", valueName: "k" }, { type: "text", name: "qb", visibleIf: "{k} = 1" }] };
+    [[panelA, panelB], [panelB, panelA]].forEach((elements, index) => {
+      const logic = new SurveyLogic(new SurveyModel({ dataNesting: "auto", elements: elements }), new EmptySurveyCreatorOptions());
+      expect(logic.items, "one rule, two actions").toHaveLength(1);
+      expect(getFiltered(logic, "street"), "order " + index).toEqual(index === 0 ? [] : ["{k} = 1"]);
+      expect(getFiltered(logic, "pb.street"), "the path, order " + index).toEqual(["{k} = 1"]);
+    });
+  });
   test("a variable no scope resolves: a top-level question by its name is listed and found, a path of names is not", () => {
     const { plugin, entries } = getFilterEntries({ dataNesting: "auto", elements: [
       { type: "text", name: "q1", valueName: "vn" },
@@ -656,6 +670,22 @@ describe("renames rewrite names and paths (nested data, survey-library #12233)",
       expect(findQuestion(creator.survey, name).visibleIf, "redo: " + name).toBe(expressions[name][1]);
     });
   };
+  // Pins master's rename of an action's question names: the whole name only. "q1.x" is another question's name
+  // here, so renaming q1 keeps it (review-01, prompt 01, probe).
+  test("a question rename without nesting keeps an action's name that only starts with the old name", () => {
+    ["none", "auto"].forEach(dataNesting => {
+      const creator = createCreator({
+        dataNesting: dataNesting,
+        elements: [{ type: "text", name: "q1" }, { type: "text", name: "q1.x" }, { type: "text", name: "q3" }],
+        triggers: [{ type: "setvalue", expression: "{q1} = 1", setToName: "q1.x", setValue: 2 },
+          { type: "copyvalue", expression: "{q1} = 2", setToName: "q1", fromName: "q1.x" }]
+      });
+      creator.survey.getQuestionByName("q1").name = "q2";
+      const triggers: Array<any> = creator.survey.triggers;
+      expect(triggers.map(t => [t.expression, t.setToName, t.fromName]), dataNesting).toEqual([
+        ["{q2} = 1", "q1.x", undefined], ["{q2} = 2", "q2", "q1.x"]]);
+    });
+  });
   // The question by its name wherever its scope puts it: a rename of a container changes its path of names
   // (survey-library #12233).
   const findQuestion = (survey: SurveyModel, name: string): Question => survey.getAllQuestions().filter(q => q.name === name)[0] || null;
