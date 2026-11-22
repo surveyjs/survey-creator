@@ -30,11 +30,6 @@ export interface IInnerQuestionInfo {
   // the part of the variable after the question: "" when the variable is the question's value itself
   rest: string;
 }
-// survey-core starts a lookup from anything with getValueGetterContext() (a question, a panel, a page, a matrix
-// column); anything else (a trigger, a validator) resolves from the root, as at runtime.
-function getLookupContext(el: Base): Base {
-  return !!el && typeof (<any>el).getValueGetterContext === "function" ? el : undefined;
-}
 // The inner question an expression variable names, as survey-core resolves it from el without values
 // (getQuestionByVariable): a data path from the root or from an enclosing container ({address.street},
 // {page1.address.street}, {st} inside its container). A sub-entry gives its owner and the rest ({address.m.r1}: m
@@ -42,7 +37,8 @@ function getLookupContext(el: Base): Base {
 // lookups for them.
 export function findInnerQuestion(survey: SurveyModel, name: string, el?: Base): IInnerQuestionInfo {
   if (!survey || !name) return null;
-  const info = survey.getQuestionByVariable(name, getLookupContext(el));
+  // survey-core finds nothing from a context without getValueGetterContext (no Base): that one reads from the root
+  const info = survey.getQuestionByVariable(name, typeof (<any>el)?.getValueGetterContext === "function" ? el : undefined);
   if (!info || info.isComment || info.isUnwrapped || !isInnerQuestion(info.question)) return null;
   return { question: info.question, entryName: getConditionQuestionKey(info.question) + info.rest, rest: info.rest };
 }
@@ -54,15 +50,6 @@ export function getQuestionByVariableName(survey: SurveyModel, name: string, el?
   const info = findInnerQuestion(survey, name, el);
   if (!!info) return !info.rest ? info.question : null;
   return <Question>survey.getQuestionByValueName(name) || null;
-}
-// The element whose scopes an expression of el resolves in: a choice's or a validator's question (they have no
-// scope of their own), else el.
-export function getExpressionOwner(el: Base): Base {
-  const res: any = el;
-  if (!res || typeof res.isDescendantOf !== "function") return el;
-  if (res.isDescendantOf("itemvalue") && !!res.locOwner) return res.locOwner;
-  if (res.isDescendantOf("surveyvalidator") && !!res.errorOwner) return res.errorOwner;
-  return el;
 }
 // The data paths an expression of el resolves names in, innermost first, ending with the root ([]). The paths
 // relative to a record (a template element, a column) are left out: a rename rewrites paths from the survey data.
@@ -78,10 +65,8 @@ export function getExpressionRecord(survey: SurveyModel, el: Base): Base {
 }
 // Whether a bare name resolves in scopes (survey-library #12233, O3): a container of the survey holds data now.
 // In "none", and while no container nests, the survey has one scope, and a rename rewrites the text as on master.
-// isDataScopeUsed() alone is not enough: it stays true once a container has nested.
 export function isScopedNamesSurvey(survey: SurveyModel): boolean {
-  if (!survey || survey.dataNesting === "none" || !survey.isDataScopeUsed()) return false;
-  return survey.pages.some(page => page.isDataNesting) || survey.getAllPanels(false, false).some((panel: any) => panel.isDataNesting);
+  return !!survey && survey.hasDataNesting();
 }
 
 export interface IVariableRename {

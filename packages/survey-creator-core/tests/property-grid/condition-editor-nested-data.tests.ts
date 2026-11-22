@@ -480,6 +480,17 @@ describe("logic tab: inner questions (nested data, survey-library #12233)", () =
       expect(used, mode).toEqual(["p1", "q2"]);
     }
   });
+  // survey-core's hasDataNesting() counts a container in a choice panel (its data nests: {chin: {x}}), so the
+  // survey takes the scoped path (review-01, prompt 04)
+  test("a container only in a choice panel: the filter resolves the variables", () => {
+    const logic = new SurveyLogic(new SurveyModel({ dataNesting: "auto", elements: [
+      { type: "text", name: "q1", valueName: "val1" },
+      { type: "text", name: "q3", visibleIf: "{val1} = 1" },
+      { type: "checkbox", name: "chbox", choices: [{ value: 1, elements: [
+        { type: "panel", name: "chin", valueName: "chin", elements: [{ type: "text", name: "x" }] }] }] }
+    ] }), new EmptySurveyCreatorOptions());
+    expect(getFiltered(logic, "q1"), "{val1} reads q1").toEqual(["{val1} = 1"]);
+  });
   // A rule's variables resolve in the rule's scope when all its actions share one (survey-library #12233, CS7):
   // {kind} on a question inside address is how the runtime and an author write it.
   const kindRuleJson = (): any => ({ dataNesting: "auto", elements: [

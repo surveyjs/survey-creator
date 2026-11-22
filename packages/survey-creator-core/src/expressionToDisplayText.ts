@@ -1,7 +1,7 @@
 import * as Survey from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 import { wrapTextByCurlyBraces } from "./utils/creator-utils";
-import { getExpressionOwner, getQuestionByVariableName } from "./utils/data-path";
+import { getQuestionByVariableName } from "./utils/data-path";
 
 export class ExpressionToDisplayText {
   private showTitles: boolean;
@@ -12,11 +12,9 @@ export class ExpressionToDisplayText {
     operatorToString: (operatorName: string): string => this.getDisplayOperator(operatorName),
     skipRootBrackets: true
   };
-  private context: Survey.Base;
   // context: the element the expression belongs to (nested data, survey-library #12233). Its variables resolve
   // in its scopes, as at runtime ({street} inside address); without it, from the root.
-  constructor(public survey: Survey.SurveyModel, private options: any = null, context?: Survey.Base) {
-    this.context = getExpressionOwner(context);
+  constructor(public survey: Survey.SurveyModel, private options: any = null, private context?: Survey.Base) {
   }
   public toDisplayText(expression: string): string {
     if (!this.survey) return expression;

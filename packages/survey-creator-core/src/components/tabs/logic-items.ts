@@ -18,7 +18,7 @@ import { updateLogicExpression } from "./logic-expression";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 import { wrapTextByCurlyBraces } from "../../utils/creator-utils";
 import { SurveyHelper } from "../../survey-helper";
-import { getConditionQuestionKey, getExpressionOwner, getExpressionRecord, getExpressionScopePaths, getQuestionByVariableName, isInnerQuestion,
+import { getConditionQuestionKey, getExpressionRecord, getExpressionScopePaths, getQuestionByVariableName, isInnerQuestion,
   isScopedNamesSurvey, IVariableRename } from "../../utils/data-path";
 
 // What follows a renamed name in a variable: its end, a path into it ("." or "["), or "-total." ("{matrix-total.column}"
@@ -205,10 +205,11 @@ export class SurveyLogicAction {
     const owner = this.getOwnerElement();
     return !!owner ? (<any>owner).name || "" : "";
   }
-  private getOwnerElement(): Base {
-    if (!this.element) return null;
-    const parentElement = this.parentElement;
-    return !!parentElement ? parentElement : this.element;
+  // The element whose scopes the action's expression resolves in: its parent element (a template question's
+  // dynamic panel, a column's matrix), else the element. survey-core resolves a choice and a validator as their
+  // question.
+  public getOwnerElement(): Base {
+    return this.parentElement || this.element || null;
   }
   private get questionNamesValues(): Array<string> {
     return this.questionNames.map(name => this.element[name]);
@@ -508,11 +509,11 @@ export class SurveyLogicItem {
       : this.expression;
   }
   // Nested data (survey-library #12233, CS7): the element the rule's variables resolve in, for its display text
-  // and the rule editor's lookups: its actions' owner (getExpressionOwner) when all of them resolve alike (the
+  // and the rule editor's lookups: its actions' owner (getOwnerElement) when all of them resolve alike (the
   // same scopes and record), else null, the root, as before. null too in a survey where nothing nests.
   public getExpressionContext(): Base {
     if (this.actions.length === 0 || !isScopedNamesSurvey(this.survey)) return null;
-    const owners = this.actions.map(action => this.getExpressionOwner(action));
+    const owners = this.actions.map(action => action.getOwnerElement());
     const getScopes = (owner: Base): string => JSON.stringify(getExpressionScopePaths(this.survey, owner));
     const scopes = getScopes(owners[0]);
     const record = getExpressionRecord(this.survey, owners[0]);
@@ -597,16 +598,10 @@ export class SurveyLogicItem {
     return this.getQuestionsByVariableName(name)[0] || null;
   }
   private getExpressionOwners(): Array<Base> {
-    return this.actions.length > 0 ? this.actions.map(action => this.getExpressionOwner(action)) : [null];
+    return this.actions.length > 0 ? this.actions.map(action => action.getOwnerElement()) : [null];
   }
-  // The element whose scopes an action's expression resolves in: its parent element (a template question's
-  // dynamic panel, a column's matrix), a choice's or a validator's question (they have no scope of their own),
-  // else the element.
-  private getExpressionOwner(action: SurveyLogicAction): Base {
-    return getExpressionOwner(action.parentElement || action.element);
-  }
-  // Nested data (survey-library #12233): getRenames gives, for an action's element (owner: see
-  // getExpressionOwner), the variables a key change rewrites as that element
+  // Nested data (survey-library #12233): getRenames gives, for an action's element (owner:
+  // SurveyLogicAction.getOwnerElement), the variables a key change rewrites as that element
   // reads them (DataKeyRename in utils/data-path.ts); the action's question names (a trigger's setToName) follow.
   // Returns true when the rule's elements got different texts (they are resolved in different scopes), so
   // the rule no longer has one expression and the logic has to be built again.
@@ -615,7 +610,7 @@ export class SurveyLogicItem {
     if (!this.expression || this.actions.length === 0) return false;
     if (!!key && !this.isStrContainsInExpression(key) && !this.actions.some(action => action.hasTextInNames(key))) return false;
     const texts = this.actions.map(action => {
-      const renames = getRenames(this.getExpressionOwner(action), action.element);
+      const renames = getRenames(action.getOwnerElement(), action.element);
       action.renameDataKeyInNames(renames);
       let res = this.expression;
       renames.forEach(item => res = this.renameVariablePrefix(res, item.oldName, item.newName));
