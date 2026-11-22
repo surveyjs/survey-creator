@@ -229,7 +229,9 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   }
   public getUsedQuestions(): Question[] {
     // Nested data (survey-library #12233): in a survey with scopes a variable's text names different questions
-    // in different rules, so the list is built per question, as each rule resolves its variables.
+    // in different rules, so the list is built per question, as each rule resolves its variables. Elsewhere a
+    // lookup by name, then by variable ({val1} lists q1), stays: it lists a question named like a page or like
+    // another's value name (a test pins it).
     if (isScopedNamesSurvey(this.survey)) {
       const questions: Array<Question> = [];
       this.items.forEach(item => item.getUsedQuestions().forEach(q => {

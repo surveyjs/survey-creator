@@ -609,4 +609,23 @@ describe("undo-redo: an element undo re-created (nested data, survey-library #12
     expect(creator.JSON, "#9: undo again").toEqual(json);
     expect(topPanel.elements.map(el => el.name), "#10").toEqual(["a"]);
   });
+  // Where nothing nests too (review-01, prompt 02): the lookup by name found the first panel1
+  test("nothing nests, two panels with one name: undo changes the re-created one", (): any => {
+    for (const mode of ["none", "auto"]) {
+      const creator = new CreatorTester();
+      creator.JSON = { dataNesting: mode, elements: [
+        { type: "panel", name: "panel1", elements: [{ type: "text", name: "a" }] },
+        { type: "panel", name: "outer", elements: [{ type: "panel", name: "panel1", elements: [{ type: "text", name: "b" }] }] }
+      ] };
+      const json = creator.JSON;
+      const topPanel = <any>creator.survey.pages[0].elements[0];
+      const innerPanel = <any>creator.survey.getPanelByName("outer").elements[0];
+      creator.deleteElement(innerPanel.elements[0]);
+      innerPanel.delete();
+      creator.undo();
+      creator.undo();
+      expect(topPanel.elements.map(el => el.name), mode + " #1: the first panel1 is not changed").toEqual(["a"]);
+      expect(creator.JSON, mode + " #2").toEqual(json);
+    }
+  });
 });

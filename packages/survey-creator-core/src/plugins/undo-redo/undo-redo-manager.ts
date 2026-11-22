@@ -6,7 +6,6 @@ import {
   SurveyModel
 } from "survey-core";
 import { EditableObject } from "../../editable-object";
-import { isScopedNamesSurvey } from "../../utils/data-path";
 
 // A disposed element that an undo re-created from its JSON, mapped to the new instance
 const recreatedElements = new WeakMap<Base, Base>();
@@ -330,13 +329,11 @@ export class UndoRedoArrayAction implements IUndoRedoAction {
   }
   private getSenderElement(): Base {
     if (!this._sender.isDisposed || !this.survey) return this._sender;
-    // With scoped names a bare name finds only the survey's own elements (survey-library #12233),
-    // so follow the instance an undo re-created instead
-    if (isScopedNamesSurvey(this.survey)) {
-      let sender = this._sender;
-      while(sender.isDisposed && recreatedElements.has(sender)) sender = recreatedElements.get(sender);
-      if (!sender.isDisposed) return sender;
-    }
+    // Follow the instance an undo re-created: a lookup by name can miss it (a template's element, a column,
+    // scoped names, survey-library #12233) or find another element with that name
+    let sender = this._sender;
+    while(sender.isDisposed && recreatedElements.has(sender)) sender = recreatedElements.get(sender);
+    if (!sender.isDisposed) return sender;
     const name = this._sender["name"];
     if (this._sender["isPage"] === true) {
       if (this.survey.pages.length === 0) return this.survey.addNewPage();

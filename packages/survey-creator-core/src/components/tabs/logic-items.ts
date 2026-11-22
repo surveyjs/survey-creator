@@ -541,7 +541,8 @@ export class SurveyLogicItem {
   // Nested data (survey-library #12233, CS6): in a survey where a container nests, the filter is a question's
   // path of names (the Logic tab's entry ids). A rule is suitable when a variable of it, resolved in the rule's
   // scopes, reads that question, or when an action is on it or names it. A filter that finds no question (a
-  // host's bare name of an inner question) is matched below, as is every filter in "none".
+  // host's bare name of an inner question) is matched below, as is every filter where nothing nests: master's text match
+  // differs from the resolution there ({val1} for q1, a setToName "q1.x", 'q1.x' in a function; a test pins it).
   private isSuitableByQuestionFilter(filteredName: string): boolean {
     const question = isScopedNamesSurvey(this.survey) ? <Question>this.survey.getQuestionByName(filteredName) : null;
     if (!question) return this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName);

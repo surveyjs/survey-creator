@@ -455,6 +455,31 @@ describe("logic tab: inner questions (nested data, survey-library #12233)", () =
     expect(entries).toEqual(["inner|inner", "q1|q1", "q2|q2", "street|street"]);
     expect(getFiltered(plugin.model, "street")).toEqual(["{q1} = 1", "{street} = 'inner'", "{street} = 'root'"]);
   });
+  // Pins master's results where nothing nests (review-01, prompt 02, probes): resolving each variable, as in a
+  // scoped survey, would give other ones, so the filter and the used questions keep their own code there.
+  test("nothing nests: the filter matches the text, as on master", () => {
+    for (const mode of ["none", "auto"]) {
+      const logic = new SurveyLogic(new SurveyModel({ dataNesting: mode, elements: [
+        { type: "text", name: "q1", valueName: "val1" },
+        { type: "multipletext", name: "q2", items: [{ name: "x" }] },
+        { type: "text", name: "q3", visibleIf: "{val1} = 1" },
+        { type: "text", name: "q4", visibleIf: "sumInArray({q5}, 'q2.x') > 1" },
+        { type: "text", name: "q5" }
+      ], triggers: [{ type: "setvalue", expression: "{q5} = 1", setToName: "q2.x", setValue: 2 }] }), new EmptySurveyCreatorOptions());
+      expect(getFiltered(logic, "q1"), mode + ": {val1} reads q1, its text is not q1").toEqual([]);
+      expect(getFiltered(logic, "q2"), mode + ": the text 'q2.x' and a setToName q2.x").toEqual(["sumInArray({q5}, 'q2.x') > 1", "{q5} = 1"]);
+    }
+  });
+  test("nothing nests: the used questions look a name up first, as on master", () => {
+    for (const mode of ["none", "auto"]) {
+      const used = new SurveyLogic(new SurveyModel({ dataNesting: mode, pages: [
+        { name: "p1", visibleIf: "{q2} = 1", elements: [{ type: "text", name: "q1", valueName: "q2" }, { type: "text", name: "q2", valueName: "zz" }] },
+        { name: "page2", elements: [{ type: "text", name: "p1" }] }
+      ] }), new EmptySurveyCreatorOptions()).getUsedQuestions().map(q => q.name).sort();
+      // {q2} reads q1 at runtime; the page's name finds the question p1
+      expect(used, mode).toEqual(["p1", "q2"]);
+    }
+  });
   // A rule's variables resolve in the rule's scope when all its actions share one (survey-library #12233, CS7):
   // {kind} on a question inside address is how the runtime and an author write it.
   const kindRuleJson = (): any => ({ dataNesting: "auto", elements: [
