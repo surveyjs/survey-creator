@@ -41,6 +41,7 @@ export var enStrings = {
     rating: "Rating Scale",
     slider: "Slider",
     text: "Single-Line Input",
+    datetimepicker: "Date and Time",
     boolean: "Yes/No (Boolean)",
     expression: "Expression (read-only)",
     signaturepad: "Signature",
