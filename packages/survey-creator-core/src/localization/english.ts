@@ -520,6 +520,22 @@ export var enStrings = {
       min: "Minimum value",
       max: "Maximum value"
     },
+    datetimepicker: {
+      pickerType: "Picker type",
+      range: "Range selection",
+      min: "Minimum value",
+      max: "Maximum value",
+      minValueExpression: "Minimum value expression",
+      maxValueExpression: "Maximum value expression",
+      placeholder: "Placeholder text",
+      startPlaceholder: "Start date placeholder",
+      endPlaceholder: "End date placeholder",
+      pattern: "Pattern",
+      allowClear: "Show the Clear button",
+      minErrorText: "\"Value is below minimum\" error message",
+      maxErrorText: "\"Value exceeds maximum\" error message",
+      rangeErrorText: "\"Invalid range\" error message"
+    },
     numericmask: {
       allowNegativeValues: "Allow negative values",
       thousandsSeparator: "Thousands separator",
@@ -1540,6 +1556,9 @@ export var enStrings = {
     },
     datetimemask: {
       pattern: "Ex.: mm/dd/yyyy HH:MM:ss"
+    },
+    datetimepicker: {
+      pattern: "Ex.: mm/dd/yyyy"
     },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"

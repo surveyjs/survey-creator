@@ -459,6 +459,25 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "mask", index: 250 }
     ]
   },
+  datetimepicker: {
+    properties: [
+      { name: "pickerType", tab: "specific" },
+      { name: "range", tab: "specific" },
+      { name: "pattern", tab: "specific" },
+      { name: "placeholder", tab: "specific" },
+      { name: "startPlaceholder", tab: "specific" },
+      { name: "endPlaceholder", tab: "specific" },
+      { name: "min", tab: "specific" },
+      { name: "max", tab: "specific" },
+      { name: "allowClear", tab: "specific" },
+      { name: "minValueExpression", tab: "specific" },
+      { name: "maxValueExpression", tab: "specific" },
+      { name: "minErrorText", tab: "specific" },
+      { name: "maxErrorText", tab: "specific" },
+      { name: "rangeErrorText", tab: "specific" },
+    ],
+    tabs: [{ name: "specific", index: 10 }]
+  },
   boolean: {
     properties: [
       "displayMode",

@@ -1,5 +1,5 @@
 import { Base, JsonObjectProperty, ComponentCollection, Question, PanelModel, QuestionHtmlModel, InputMaskBase, Serializer, JsonMetadataClass, InputMaskDateTime, InputMaskCurrency, QuestionTextModel } from "survey-core";
-import { PropertyGridEditorCollection, PropertyJSONGenerator, PropertyGridEditor, } from "./index";
+import { PropertyGridEditorCollection, PropertyJSONGenerator, PropertyGridEditor } from "./index";
 import { ISurveyCreatorOptions } from "../creator-settings";
 import { getLocString } from "../editorLocalization";
 import { getCurrencyPatternPlaceholder } from "./currency-pattern-placeholder";

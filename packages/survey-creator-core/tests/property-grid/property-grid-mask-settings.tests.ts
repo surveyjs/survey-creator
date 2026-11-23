@@ -1,4 +1,4 @@
-import { InputMaskCurrency, InputMaskDateTime, PanelModel, QuestionTextModel, SurveyModel, getLocaleDataValue } from "survey-core";
+import { InputMaskCurrency, InputMaskDateTime, PanelModel, Question, QuestionTextModel, Serializer, SurveyModel, getLocaleDataValue } from "survey-core";
 import { PropertyGridModelTester } from "./property-grid.base";
 import { CreatorTester } from "../creator-tester";
 import { editorLocalization } from "../../src/editorLocalization";
@@ -238,4 +238,32 @@ test("Undo/redo a currency pattern edited in the property grid", () => {
   expect(mask.currencyPattern).toEqual("@ #");
   expect(currencyPattern.value).toEqual("@ #");
   expect(creator.survey.toJSON().pages[0].elements[0].maskSettings).toStrictEqual({ currencyPattern: "@ #" });
+});
+
+test("Date time picker pattern is a text input, min and max use the picker", () => {
+  const question = <Question>Serializer.createClass("datetimepicker");
+  question.name = "q1";
+  const propertyGrid = new PropertyGridModelTester(question);
+  const patternQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("pattern");
+  expect(patternQuestion.getType()).toBe("text");
+  expect(patternQuestion.placeholder).toBe("Ex.: mm/dd/yyyy");
+
+  question["min"] = "2026-01-02";
+  question["max"] = "2026-06-01";
+  question["pattern"] = "dd.mm.yyyy";
+  const propertyGridWithLimits = new PropertyGridModelTester(question);
+  const minQuestion = propertyGridWithLimits.survey.getQuestionByName("min");
+  const maxQuestion = propertyGridWithLimits.survey.getQuestionByName("max");
+  expect(minQuestion.getType()).toBe("datetimepicker");
+  expect(maxQuestion.getType()).toBe("datetimepicker");
+  expect(minQuestion["pattern"]).toBe("dd.mm.yyyy");
+  expect(maxQuestion["pattern"]).toBe("dd.mm.yyyy");
+  expect(minQuestion["max"]).toBe("2026-06-01");
+  expect(maxQuestion["min"]).toBe("2026-01-02");
+  minQuestion.value = "2026-02-01";
+  expect(question["min"]).toBe("2026-02-01");
+  expect(maxQuestion["min"]).toBe("2026-02-01");
+  maxQuestion.value = "2026-05-01";
+  expect(question["max"]).toBe("2026-05-01");
+  expect(minQuestion["max"]).toBe("2026-05-01");
 });
