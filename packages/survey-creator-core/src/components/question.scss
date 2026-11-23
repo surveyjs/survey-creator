@@ -1227,7 +1227,7 @@ svc-question,
   // Same inset as the question card, so the add-item icon lines up with the choice control.
   --svc-wysiwyg-item-inline-start: var(--sjs2-layout-component-panel-simple-content-area-padding-horizontal);
   position: absolute;
-  z-index: 4;
+  z-index: 14;
   inset-inline: var(--sjs2-spacing-x100, 8px);
   top: calc(100% + var(--svc-wysiwyg-toolbar-gap) / 2);
   display: none;
@@ -1242,7 +1242,7 @@ svc-question,
   align-items: center;
   box-sizing: border-box;
   padding: var(--sjs2-spacing-x050, 4px);
-  border-radius: var(--sjs2-radius-component-drop);
+  border-radius: calc(var(--sjs2-radius-component-action) + var(--sjs2-spacing-x050));
   border: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   background: var(--sjs2-color-utility-sheet);
   box-shadow: var(--sjs2-border-effect-floating-default);
