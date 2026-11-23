@@ -1333,9 +1333,14 @@ svc-question,
   // Designer markup stays. These values are the preview question frame's content padding,
   // background and shadow, so the card ends up the same size.
   .svc-question__content {
-    padding-block: var(--sjs2-layout-component-panel-simple-content-area-padding-top)
-      var(--sjs2-layout-component-panel-simple-content-area-padding-bottom);
-    padding-inline: var(--sjs2-layout-component-panel-simple-content-area-padding-horizontal);
+    --sd-panelless-border-padding-vertical: calc(var(--sjs2-layout-component-page-content-area-gap-vertical)/2 - var(--sjs2-spacing-x050));
+    --sd-panelless-border-padding-horizontal: calc(var(--sjs2-layout-component-page-content-area-gap-horizontal)/2 - var(--sjs2-spacing-x050));
+    padding-block: max(var(--sd-panelless-border-padding-vertical), var(--sjs2-layout-component-panel-simple-content-area-padding-top))
+      max(var(--sd-panelless-border-padding-vertical), var(--sjs2-layout-component-panel-simple-content-area-padding-bottom));
+    margin-block: min(0px, var(--sjs2-layout-component-panel-simple-content-area-padding-top) - var(--sd-panelless-border-padding-vertical))
+      min(0px, var(--sjs2-layout-component-panel-simple-content-area-padding-bottom) - var(--sd-panelless-border-padding-vertical));
+    padding-inline: max(var(--sd-panelless-border-padding-horizontal), var(--sjs2-layout-component-panel-simple-content-area-padding-horizontal));
+    margin-inline: min(0px, var(--sjs2-layout-component-panel-simple-content-area-padding-horizontal) - var(--sd-panelless-border-padding-horizontal));
     background: var(--sjs2-color-component-panel-simple-default-bg);
     box-shadow: var(--sjs2-border-effect-component-panel-simple-default);
     border-radius: var(--sjs2-radius-component-panel);
