@@ -1220,14 +1220,25 @@ svc-question,
   overflow-x: visible;
 }
 
-.svc-question__wysiwyg-toolbar {
+.svc-question__wysiwyg-toolbars {
   --svc-wysiwyg-toolbar-gap: var(--sjs2-layout-component-page-content-area-gap-vertical);
+  // Choice control column. Radio questions override the box size below.
+  --svc-wysiwyg-choice-box: var(--sjs2-size-component-checkbox-box);
+  // Same inset as the question card, so the add-item icon lines up with the choice control.
+  --svc-wysiwyg-item-inline-start: var(--sjs2-layout-component-panel-simple-content-area-padding-horizontal);
   position: absolute;
   z-index: 4;
-  width: max-content;
-  inset-inline-end: var(--sjs2-spacing-x100, 8px);
+  inset-inline: var(--sjs2-spacing-x100, 8px);
   top: calc(100% + var(--svc-wysiwyg-toolbar-gap) / 2);
   display: none;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.svc-question__wysiwyg-toolbar {
+  position: relative;
+  display: flex;
   align-items: center;
   box-sizing: border-box;
   padding: var(--sjs2-spacing-x050, 4px);
@@ -1237,13 +1248,38 @@ svc-question,
   box-shadow: var(--sjs2-border-effect-floating-default);
   pointer-events: auto;
 
-  // Fills the gap above the toolbar so the pointer can reach it without leaving the adorner.
+  // Fills the gap above this toolbar so the pointer can reach it without leaving the adorner.
   &::before {
     content: "";
     position: absolute;
     inset-inline: 0;
     bottom: 100%;
     height: calc(var(--svc-wysiwyg-toolbar-gap) / 2 + 2px);
+  }
+
+  &--add-item {
+    margin-inline-end: auto;
+    // Border and padding sit outside the icon. Shift the bar so the + is in the choice-control column.
+    margin-inline-start: calc(
+      var(--svc-wysiwyg-item-inline-start) - var(--sjs2-spacing-x100) - var(--sjs2-border-width-x100) -
+        var(--sjs2-spacing-x100)
+    );
+
+    .sd-action {
+      --sd-action-gap: var(--sjs2-layout-component-labeled-item-box-gap-horizontal);
+      --sd-action-title-font-family: var(--sjs2-typography-font-family-component-label-content);
+      --sd-action-title-font-weight: var(--sjs2-typography-font-weight-component-label-content);
+      --sd-action-title-font-size: var(--sjs2-typography-font-size-component-label-content);
+      --sd-action-title-line-height: var(--sjs2-typography-line-height-component-label-content);
+    }
+
+    .sd-action__title {
+      padding-block: 0;
+    }
+  }
+
+  &--main {
+    margin-inline-start: auto;
   }
 
   .sd-action-bar {
@@ -1258,8 +1294,14 @@ svc-question,
   }
 }
 
-.sd-panel .svc-question__wysiwyg-toolbar {
+.sd-panel .svc-question__wysiwyg-toolbars {
   --svc-wysiwyg-toolbar-gap: var(--sjs2-layout-component-panel-content-area-gap-vertical);
+  --svc-wysiwyg-item-inline-start: var(--sjs2-layout-component-panel-simple-nested-content-area-padding-horizontal);
+}
+
+.svc-question__content--radiogroup ~ .svc-question__wysiwyg-toolbars,
+.svc-question__content--dropdown ~ .svc-question__wysiwyg-toolbars {
+  --svc-wysiwyg-choice-box: var(--sjs2-size-component-radio-box);
 }
 
 .svc-tab-designer--wysiwyg {
@@ -1279,13 +1321,12 @@ svc-question,
     overflow: visible;
   }
 
-  .svc-question__adorner--selected > .svc-question__wysiwyg-toolbar,
-  .svc-hovered.svc-question__adorner > .svc-question__wysiwyg-toolbar {
+  .svc-question__adorner--selected > .svc-question__wysiwyg-toolbars,
+  .svc-hovered.svc-question__adorner > .svc-question__wysiwyg-toolbars {
     display: flex;
   }
 
-  .svc-question__adorner--selected > .svc-question__wysiwyg-toolbar:not(:has(.sd-action-bar__item)),
-  .svc-hovered.svc-question__adorner > .svc-question__wysiwyg-toolbar:not(:has(.sd-action-bar__item)) {
+  .svc-question__wysiwyg-toolbar:not(:has(.sd-action-bar__item)) {
     display: none;
   }
 

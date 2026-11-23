@@ -5,6 +5,7 @@ import {
   QuestionHtmlModel,
   PanelModelBase,
   Action,
+  ActionContainer,
   Question,
   ItemValue,
   Serializer,
@@ -991,8 +992,26 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (this.surveyElement && this.isActionContainerCreated) {
       this.updateActionsContainer(this.surveyElement);
       this.updateActionsProperties();
+    } else {
+      this.updateAddItemActionContainer();
     }
     this.syncWysiwygSurface();
+  }
+  protected updateActionsContainer(surveyElement: SurveyElement): void {
+    super.updateActionsContainer(surveyElement);
+    this.applyWysiwygToolbarState();
+    this.updateAddItemActionContainer();
+  }
+  public getActionById(id: string): Action {
+    return super.getActionById(id) || this.addItemActionContainerValue?.getActionById(id);
+  }
+  public dispose(): void {
+    const container = this.addItemActionContainerValue;
+    this.addItemActionContainerValue = undefined;
+    if (container && !container.isDisposed) {
+      container.dispose();
+    }
+    super.dispose();
   }
   protected syncWysiwygSurface(): void { }
   private isWysiwygOptionQuestion(): boolean {
@@ -1065,21 +1084,65 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private hasAddOptionItems(): boolean {
     return this.getAddOptionEntries().length > 0;
   }
+  private addItemActionContainerValue: ActionContainer;
+  public get addItemActionContainer(): ActionContainer {
+    if (!this.addItemActionContainerValue) {
+      this.addItemActionContainerValue = this.createAddItemActionContainer();
+    }
+    return this.addItemActionContainerValue;
+  }
+  private createAddItemActionContainer(): ActionContainer {
+    const container = new ActionContainer();
+    container.sizeMode = "small";
+    container.setActionsAppearance({ style: "brand", mode: "tertiary-muted", size: "x-small" });
+    container.cssClasses = {
+      ...defaultActionBarCss,
+      root: "svc-survey-element-toolbar " + defaultActionBarCss.root,
+    };
+    this.updateAddItemActionContainer(container);
+    return container;
+  }
+  private updateAddItemActionContainer(container: ActionContainer = this.addItemActionContainerValue): void {
+    if (!container || container.isDisposed) return;
+    const current = container.getActionById("addOptionItem");
+    if (this.wysiwygMode && this.isWysiwygOptionQuestion()) {
+      if (!current) {
+        container.setItems([this.createAddOptionItemAction()]);
+      } else {
+        current.title = this.creator.getLocString("pe.addNew");
+      }
+      return;
+    }
+    if (container.actions.length === 0) return;
+    const actions = container.actions.slice();
+    container.setItems([]);
+    actions.forEach(action => action.dispose());
+  }
   private createAddOptionItemAction(): Action {
     const action = this.createDropdownModel({
       actionData: {
         id: "addOptionItem",
         title: this.creator.getLocString("pe.addNew"),
         iconName: "icon-add_16x16",
-        visibleIndex: 40,
-        enabled: true
+        iconSize: "auto",
+        visibleIndex: 0,
+        enabled: true,
+        showTitle: true
       },
       items: [],
       updateListModel: (listModel: ListModel) => {
         listModel.setItems(this.getAddOptionItemActions());
       }
     });
+    // A titled dropdown action is renamed to the chosen entry. This button always stays "Add item".
+    const listModel = <ListModel>action.popupModel.contentComponentData.model;
+    const onSelectionChanged = listModel.onSelectionChanged;
+    listModel.onSelectionChanged = (item: Action) => {
+      if (onSelectionChanged) onSelectionChanged(item);
+      action.title = this.creator.getLocString("pe.addNew");
+    };
     action.visible = <any>new ComputedUpdater(() => this.wysiwygMode && this.hasAddOptionItems());
+    action.showTitle = true;
     return action;
   }
   private applyWysiwygToolbarState(): void {
@@ -1089,38 +1152,30 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       container.setForceIconMode(this.wysiwygMode);
     }
     if (!this.wysiwygMode) return;
-    const section1: { [id: string]: number } = { convertTo: 0, convertInputType: 1 };
-    const standard: { [id: string]: number } = { isrequired: 10, duplicate: 11, settings: 12, delete: 13 };
+    // Converters and Required stay left of the separator. Copy starts the group on the right.
+    const left: { [id: string]: number } = { convertTo: 0, convertInputType: 1, isrequired: 2 };
+    const right: { [id: string]: number } = { duplicate: 10, settings: 11, delete: 12 };
     let customIndex = 20;
     container.actions.forEach(action => {
-      if (action.id === "addOptionItem") {
-        action.visibleIndex = 40;
+      if (left[action.id] !== undefined) {
+        action.visibleIndex = left[action.id];
         return;
       }
-      if (section1[action.id] !== undefined) {
-        action.visibleIndex = section1[action.id];
-        return;
-      }
-      if (standard[action.id] !== undefined) {
-        action.visibleIndex = standard[action.id];
+      if (right[action.id] !== undefined) {
+        action.visibleIndex = right[action.id];
         return;
       }
       action.visibleIndex = customIndex++;
     });
-    const visible = container.actions
-      .filter(action => action.visible !== false)
-      .sort((a, b) => (a.visibleIndex || 0) - (b.visibleIndex || 0));
+    // visibleIndex is applied after the bar was sorted, so sort again or Copy stays left of the separator.
+    container.setItems(container.actions);
+    const visible = container.actions.filter(action => action.visible !== false);
     let hasPrevious = false;
-    let section2Marked = false;
+    let separatorPlaced = false;
     visible.forEach(action => {
-      const isSection1 = section1[action.id] !== undefined;
-      if (isSection1) {
-        action.needSeparator = false;
-        hasPrevious = true;
-        return;
-      }
-      action.needSeparator = hasPrevious && !section2Marked;
-      section2Marked = true;
+      const inLeft = left[action.id] !== undefined;
+      action.needSeparator = !inLeft && hasPrevious && !separatorPlaced;
+      if (!inLeft) separatorPlaced = true;
       hasPrevious = true;
     });
   }
@@ -1135,9 +1190,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (typeof element["isRequired"] !== "undefined" && !!element.getType
       && SurveyHelper.isPropertyVisible(element, Serializer.findProperty(element.getType(), "isRequired"), this.creator)) {
       items.push(this.createRequiredAction());
-    }
-    if (this.wysiwygMode && this.isWysiwygOptionQuestion()) {
-      items.push(this.createAddOptionItemAction());
     }
   }
   protected duplicate(): void {

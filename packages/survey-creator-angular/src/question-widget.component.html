@@ -18,7 +18,7 @@
       <div *ngIf="adorner.isEmptyElement" class="svc-panel__placeholder_frame">
         <div class="svc-panel__placeholder" data-bind="text: placeholderText"></div>
       </div>
-      <div class="svc-question__content-actions">
+      <div *ngIf="!adorner.wysiwygMode" class="svc-question__content-actions">
         <sv-action-bar [model]="adorner.actionContainer" [handleClick]="false"></sv-action-bar>
       </div>
     </div>
@@ -29,5 +29,13 @@
         <div class="svc-panel__placeholder">{{ adorner.placeholderText }}</div>
       </div>
     </ng-container>
+    <div *ngIf="adorner.wysiwygMode && adorner.element.isInteractiveDesignElement" class="svc-question__wysiwyg-toolbars">
+      <div class="svc-question__wysiwyg-toolbar svc-question__wysiwyg-toolbar--add-item">
+        <sv-action-bar [model]="adorner.addItemActionContainer" [handleClick]="false"></sv-action-bar>
+      </div>
+      <div class="svc-question__wysiwyg-toolbar svc-question__wysiwyg-toolbar--main">
+        <sv-action-bar [model]="adorner.actionContainer" [handleClick]="false"></sv-action-bar>
+      </div>
+    </div>
   </div>
 </ng-template>

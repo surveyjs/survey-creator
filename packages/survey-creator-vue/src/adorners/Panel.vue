@@ -80,7 +80,7 @@
         </div>
         <SvComponent v-if="!adorner.isEmptyElement && adorner.showAddQuestionButton" :is="'sv-action-bar'" :model="adorner.addQuestionActionsContainer"></SvComponent>
         <div
-          v-if="adorner.element.isInteractiveDesignElement"
+          v-if="adorner.element.isInteractiveDesignElement && !adorner.wysiwygMode"
           class="svc-question__content-actions"
           @focusin="adorner.select(adorner, $event)"
         >
@@ -91,6 +91,14 @@
           ></SvComponent>
         </div>
       </template>
+    </div>
+    <div v-if="adorner.wysiwygMode && adorner.element.isInteractiveDesignElement" class="svc-question__wysiwyg-toolbars">
+      <div class="svc-question__wysiwyg-toolbar svc-question__wysiwyg-toolbar--add-item">
+        <SvComponent :is="'sv-action-bar'" :model="adorner.addItemActionContainer" :handleClick="false"></SvComponent>
+      </div>
+      <div class="svc-question__wysiwyg-toolbar svc-question__wysiwyg-toolbar--main">
+        <SvComponent :is="'sv-action-bar'" :model="adorner.actionContainer" :handleClick="false"></SvComponent>
+      </div>
     </div>
   </div>
 </template>

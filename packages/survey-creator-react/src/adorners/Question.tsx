@@ -114,8 +114,13 @@ export class QuestionAdornerComponent<T extends QuestionAdornerViewModel = Quest
   protected renderWysiwygToolbar(): React.JSX.Element {
     if (!this.model.wysiwygMode || !this.model.element.isInteractiveDesignElement) return null;
     return (
-      <div className="svc-question__wysiwyg-toolbar">
-        <SurveyActionBar model={this.model.actionContainer} handleClick={false}></SurveyActionBar>
+      <div className="svc-question__wysiwyg-toolbars">
+        <div className="svc-question__wysiwyg-toolbar svc-question__wysiwyg-toolbar--add-item">
+          <SurveyActionBar model={this.model.addItemActionContainer} handleClick={false}></SurveyActionBar>
+        </div>
+        <div className="svc-question__wysiwyg-toolbar svc-question__wysiwyg-toolbar--main">
+          <SurveyActionBar model={this.model.actionContainer} handleClick={false}></SurveyActionBar>
+        </div>
       </div>
     );
   }

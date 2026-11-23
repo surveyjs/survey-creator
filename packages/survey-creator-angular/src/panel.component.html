@@ -35,11 +35,19 @@
           [component]="{ name: adornerComponent, data: { adorner: adorner, question: model } }">
         </ng-template>
         <sv-action-bar *ngIf="!adorner.isEmptyElement &&adorner.showAddQuestionButton" [model]="adorner.addQuestionActionsContainer"></sv-action-bar>
-        <div *ngIf="adorner.element.isInteractiveDesignElement" class="svc-question__content-actions"
+        <div *ngIf="adorner.element.isInteractiveDesignElement && !adorner.wysiwygMode" class="svc-question__content-actions"
           (focusin)="adorner.select(adorner, $event)">
           <sv-action-bar [model]="adorner.actionContainer" [handleClick]="false"></sv-action-bar>
         </div>
       </ng-container>
+    </div>
+    <div *ngIf="adorner.wysiwygMode && adorner.element.isInteractiveDesignElement" class="svc-question__wysiwyg-toolbars">
+      <div class="svc-question__wysiwyg-toolbar svc-question__wysiwyg-toolbar--add-item">
+        <sv-action-bar [model]="adorner.addItemActionContainer" [handleClick]="false"></sv-action-bar>
+      </div>
+      <div class="svc-question__wysiwyg-toolbar svc-question__wysiwyg-toolbar--main">
+        <sv-action-bar [model]="adorner.actionContainer" [handleClick]="false"></sv-action-bar>
+      </div>
     </div>
   </div>
 </ng-template>

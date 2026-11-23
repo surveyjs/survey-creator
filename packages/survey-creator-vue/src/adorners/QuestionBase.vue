@@ -99,6 +99,7 @@
         :model="questionBannerParams"
       ></SvComponent>
       <div
+        v-if="!model.wysiwygMode"
         class="svc-question__content-actions"
         v-on:focusin="onFocusIn"
       >
@@ -110,6 +111,14 @@
       </div>
     </template>
   </div>
+    <div v-if="model.wysiwygMode && model.element.isInteractiveDesignElement" class="svc-question__wysiwyg-toolbars">
+      <div class="svc-question__wysiwyg-toolbar svc-question__wysiwyg-toolbar--add-item">
+        <SvComponent :is="'sv-action-bar'" :model="model.addItemActionContainer" :handleClick="false"></SvComponent>
+      </div>
+      <div class="svc-question__wysiwyg-toolbar svc-question__wysiwyg-toolbar--main">
+        <SvComponent :is="'sv-action-bar'" :model="model.actionContainer" :handleClick="false"></SvComponent>
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts" setup>

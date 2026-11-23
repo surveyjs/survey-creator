@@ -2117,6 +2117,45 @@ test("Expression question: an adorner moved to another question shows that quest
   adorner.attachToUI(q2);
   expect(adorner.createBannerParams().text).toBe("{b} * 2");
 });
+test("WYSIWYG toolbar separator is before copy", (): any => {
+  const creator = new CreatorTester();
+  creator.getPlugin("designer").wysiwygMode = true;
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  const adorner = new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("q1"), <any>undefined);
+  const visible = adorner.actionContainer.getVisibleActions();
+  const ids = visible.map(action => action.id);
+  expect(ids.indexOf("isrequired")).toBeLessThan(ids.indexOf("duplicate"));
+  expect(ids.indexOf("duplicate")).toBeLessThan(ids.indexOf("delete"));
+  expect(visible.filter(action => action.needSeparator).map(action => action.id)).toEqual(["duplicate"]);
+});
+test("WYSIWYG Add item is a separate toolbar action", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "radiogroup", name: "q1", choices: ["a", "b"] }, { type: "text", name: "q2" }] };
+  const question = creator.survey.getQuestionByName("q1");
+  const adorner = new QuestionAdornerViewModel(creator, question, <any>undefined);
+  expect(adorner.actionContainer.getActionById("addOptionItem")).toBeFalsy();
+  expect(adorner.addItemActionContainer.visibleActions.length).toBe(0);
+
+  creator.getPlugin("designer").wysiwygMode = true;
+  const addItem = adorner.addItemActionContainer.getActionById("addOptionItem");
+  expect(addItem).toBeTruthy();
+  expect(addItem.visible).toBe(true);
+  expect(addItem.title).toBe("Add item");
+  expect(addItem.showTitle).toBe(true);
+  expect(adorner.actionContainer.getActionById("addOptionItem")).toBeFalsy();
+
+  addItem.popupModel.isVisible = true;
+  const list = addItem.popupModel.contentComponentData.model;
+  const choice = list.actions.filter((action) => action.id === "choice")[0];
+  expect(choice).toBeTruthy();
+  list.onItemClick(choice);
+  expect(question.choices.length).toBe(3);
+  expect(addItem.title).toBe("Add item");
+
+  const textAdorner = new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("q2"), <any>undefined);
+  expect(textAdorner.addItemActionContainer.visibleActions.length).toBe(0);
+  expect(textAdorner.actionContainer.getActionById("addOptionItem")).toBeFalsy();
+});
 test("Expression question: the banner link of a detached adorner does nothing", (): any => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "expression", name: "q2", expression: "1 + 1" }] };
