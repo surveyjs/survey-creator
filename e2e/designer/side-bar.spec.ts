@@ -17,6 +17,7 @@ import {
   objectSelectorButton,
   waitForAnimationFrames,
 } from "../helper";
+import { toolboxQuestionTypeCount } from "../../packages/survey-creator-core/tests/toolbox-question-type-count";
 
 const title = "Side bar";
 
@@ -224,7 +225,7 @@ test.describe(title, () => {
     const toolboxInDesigner = page.locator(".svc-creator-tab .svc-toolbox");
     const toolboxInSidebar = page.locator(".svc-side-bar .svc-toolbox");
     const toolboxButtonSelector = page.locator(".sd-action[title=\"Toolbox\"]");
-    const toolboxItemCount = 23;
+    const toolboxItemCount = toolboxQuestionTypeCount;
     const itemsInToolboxInDesigner = toolboxInDesigner.locator(".svc-toolbox__item:not(.svc-toolbox__item-subtype):not(.svc-toolbox__item--dots)");
     const visibleItemsInToolboxInDesigner = itemsInToolboxInDesigner.filter({ visible: true });
     const itemsInToolboxInSidebar = toolboxInSidebar.locator(".svc-toolbox__item:not(.svc-toolbox__item-subtype):not(.svc-toolbox__item--dots)");
