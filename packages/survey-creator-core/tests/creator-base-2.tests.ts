@@ -929,33 +929,11 @@ function setLicenseMocks(licensed: boolean, embedded: boolean): void {
   (getEmbeddedLicense as MockedFunction<typeof getEmbeddedLicense>).mockReturnValue(
     embedded ? { name: "wordpress", whiteLabelUrl: embeddedWhiteLabelUrl } : undefined);
 }
-function getEmbeddedLicenseText(): string {
-  return editorLocalization.getLocaleStrings("en").survey.licenseEmbedded.replace("{whiteLabelUrl}", embeddedWhiteLabelUrl);
-}
-
-test("License text with the embedded marker (unlicensed creator)", (): any => {
-  setLicenseMocks(false, true);
-  const creator = new CreatorTester();
-  expect(creator.haveCommercialLicense).toBeFalsy();
-  expect(creator.licenseText).toBe(getEmbeddedLicenseText());
-  expect(creator.licenseText).toContain("href='" + embeddedWhiteLabelUrl + "'");
-  expect(creator.licenseText).not.toContain("{whiteLabelUrl}");
-  setLicenseMocks(false, false);
-});
-
 test("License text without the embedded marker (unlicensed creator)", (): any => {
   setLicenseMocks(false, false);
   const creator = new CreatorTester();
   expect(creator.haveCommercialLicense).toBeFalsy();
   expect(creator.licenseText).toBe(editorLocalization.getLocaleStrings("en").survey.license);
-});
-
-test("License text with the embedded marker wins over the expired date", (): any => {
-  setLicenseMocks(false, true);
-  const creator = new CreatorTester();
-  creator.licenseDateStringValue = "123";
-  expect(creator.licenseText).toBe(getEmbeddedLicenseText());
-  setLicenseMocks(false, false);
 });
 
 test("License text from plugin wins over the embedded marker", (): any => {
@@ -973,6 +951,55 @@ test("Licensed creator with the embedded marker has no banner", (): any => {
   setLicenseMocks(true, true);
   const creator = new CreatorTester();
   expect(creator.haveCommercialLicense).toBeTruthy();
+  setLicenseMocks(false, false);
+});
+
+test("Embedded license banner: the card texts are provided for the embedded marker only", (): any => {
+  setLicenseMocks(false, false);
+  let creator = new CreatorTester();
+  expect(creator.isEmbeddedLicenseBanner).toBeFalsy();
+  expect(creator.embeddedLicenseBanner).toBeUndefined();
+
+  setLicenseMocks(false, true);
+  creator = new CreatorTester();
+  expect(creator.isEmbeddedLicenseBanner).toBeTruthy();
+  expect(creator.embeddedLicenseBanner).toEqual({
+    poweredByText: "Powered by",
+    brandText: "SurveyJS",
+    brandIconName: "icon-logo-surveyjs-72x16",
+    linkText: "White-label options",
+    linkUrl: embeddedWhiteLabelUrl,
+    closeText: "Close",
+    closeIconName: "icon-close-tiny-16x16"
+  });
+
+  creator.addPlugin("one", <ICreatorPlugin>{
+    activate: () => { },
+    getLicenseText: (_) => "no plugin license"
+  });
+  expect(creator.isEmbeddedLicenseBanner).toBeFalsy();
+  expect(creator.embeddedLicenseBanner).toBeUndefined();
+  setLicenseMocks(false, false);
+});
+
+test("Embedded license banner: closeLicenseBanner hides the embedded card only", (): any => {
+  setLicenseMocks(false, false);
+  let creator = new CreatorTester();
+  expect(creator.showLicenseBanner).toBeTruthy();
+  creator.closeLicenseBanner();
+  expect(creator.isLicenseBannerClosed).toBeFalsy();
+  expect(creator.showLicenseBanner).toBeTruthy();
+
+  setLicenseMocks(false, true);
+  creator = new CreatorTester();
+  expect(creator.showLicenseBanner).toBeTruthy();
+  creator.closeLicenseBanner();
+  expect(creator.isLicenseBannerClosed).toBeTruthy();
+  expect(creator.showLicenseBanner).toBeFalsy();
+
+  setLicenseMocks(true, true);
+  creator = new CreatorTester();
+  expect(creator.showLicenseBanner).toBeFalsy();
   setLicenseMocks(false, false);
 });
 

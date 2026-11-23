@@ -117,6 +117,16 @@ export interface IKeyboardShortcut {
   execute: (context: any) => void;
 }
 
+export interface IEmbeddedLicenseBanner {
+  poweredByText: string;
+  brandText: string;
+  brandIconName: string;
+  linkText: string;
+  linkUrl: string;
+  closeText: string;
+  closeIconName: string;
+}
+
 export class ToolbarActionContainer extends ActionContainer {
   constructor(private creator: SurveyCreatorModel) {
     super();
@@ -363,12 +373,44 @@ export class SurveyCreatorModel extends Base
     return "";
   }
 
+  private getEmbeddedLicenseInfo(): { name: string, whiteLabelUrl: string } | undefined {
+    // A missing plugin license shows the plugin's own text, so the banner is not "embedded"
+    if (this.getUnlicensedPluginsNames().length > 0) return undefined;
+    return (!!getEmbeddedLicense && getEmbeddedLicense()) || undefined;
+  }
+  public get isEmbeddedLicenseBanner(): boolean {
+    return !!this.getEmbeddedLicenseInfo();
+  }
+  // The embedded banner is a small floating card in the bottom-left corner instead of a full-width row.
+  // Renderers draw it from these texts; undefined means the regular banner (licenseText) is shown.
+  public get embeddedLicenseBanner(): IEmbeddedLicenseBanner | undefined {
+    const info = this.getEmbeddedLicenseInfo();
+    if (!info) return undefined;
+    return {
+      poweredByText: this.getLocString("survey.licenseEmbeddedPoweredBy"),
+      // brandText is the accessible name of the logo image
+      brandText: "SurveyJS",
+      brandIconName: "icon-logo-surveyjs-72x16",
+      linkText: this.getLocString("survey.licenseEmbeddedWhiteLabel"),
+      linkUrl: info.whiteLabelUrl,
+      closeText: this.getLocString("pe.close"),
+      closeIconName: "icon-close-tiny-16x16"
+    };
+  }
+  // Only the embedded card can be closed, and only for the lifetime of this creator instance
+  @property({ defaultValue: false }) isLicenseBannerClosed: boolean;
+  public get showLicenseBanner(): boolean {
+    if (this.haveCommercialLicense) return false;
+    return !(this.isLicenseBannerClosed && this.isEmbeddedLicenseBanner);
+  }
+  public closeLicenseBanner(): void {
+    if (this.isEmbeddedLicenseBanner) {
+      this.isLicenseBannerClosed = true;
+    }
+  }
   public get licenseText(): string {
     const unlicensedPlugins = this.getUnlicensedPluginsNames();
     if (unlicensedPlugins.length > 0) return this.pluginLicenseTexts[unlicensedPlugins[0]];
-    // The "embedded-<name>" marker grants no license; it only replaces the banner text
-    const embedded = !!getEmbeddedLicense && getEmbeddedLicense();
-    if (embedded) return this.getLocString("survey.licenseEmbedded").replace("{whiteLabelUrl}", embedded.whiteLabelUrl);
     const licenseDateString = this.licenseDateString;
     if (licenseDateString) return this.getLocString("survey.license2").replace("{date}", licenseDateString);
     return this.getLocString("survey.license");
