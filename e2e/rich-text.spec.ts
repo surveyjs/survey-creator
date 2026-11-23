@@ -81,6 +81,7 @@ test.describe(title, () => {
     await surveyTitle(page).click();
     await page.keyboard.press("Control+A");
     await page.keyboard.type("Tom & Jerry");
+    await expect(surveyTitle(page)).toContainText("Tom & Jerry");
     await blur(surveyTitle(page));
 
     const result = await getJSON(page);
@@ -107,6 +108,7 @@ test.describe(title, () => {
     const titleEditor = questionTitle(page);
     await titleEditor.click();
     await page.keyboard.type("ZZ");
+    await expect(titleEditor).toContainText("ZZ");
     await page.keyboard.press("Escape");
     await expect(titleEditor).toContainText("Question title");
     await expect(titleEditor).not.toContainText("ZZ");
@@ -170,6 +172,7 @@ test.describe(title, () => {
     await area.click();
     await page.keyboard.press("Control+A");
     await page.keyboard.type("From the grid");
+    await expect(area).toContainText("From the grid");
     await blur(area);
     await expect(surveyDescription(page)).toContainText("From the grid");
     const result = await getJSON(page);
@@ -201,6 +204,7 @@ test.describe(title, () => {
     const area = page.locator(".sd-question[data-name='notes'] .sd-rich-text__area");
     await area.click();
     await page.keyboard.type("hello");
+    await expect(area).toContainText("hello");
     await selectText(area, "hello", "hello");
     await page.locator(".sd-question[data-name='notes']").getByRole("button", { name: "Bold" }).click();
     await blur(area);
@@ -226,6 +230,7 @@ test.describe(title, () => {
     const titleCell = row("Question title").locator(".sd-rich-text__area").last();
     await titleCell.click();
     await page.keyboard.type("Hallo");
+    await expect(titleCell).toContainText("Hallo");
     await selectText(titleCell, "Hallo", "Hallo");
     await expect(row("Question title").getByRole("button", { name: "Bulleted list" })).toHaveCount(0);
     await row("Question title").getByRole("button", { name: "Bold" }).click();
@@ -234,6 +239,7 @@ test.describe(title, () => {
     const descriptionCell = row("Survey description").locator(".sd-rich-text__area").last();
     await descriptionCell.click();
     await page.keyboard.type("Absatz");
+    await expect(descriptionCell).toContainText("Absatz");
     await selectText(descriptionCell, "Absatz", "Absatz");
     await expect(row("Survey description").getByRole("button", { name: "Bulleted list" })).toBeVisible();
 
