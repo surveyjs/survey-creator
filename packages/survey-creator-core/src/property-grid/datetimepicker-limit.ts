@@ -11,7 +11,7 @@ export class PropertyGridEditorDateTimePickerLimit extends PropertyGridEditor {
     return prop.classInfo?.name === "datetimepicker" && (prop.name === "min" || prop.name === "max");
   }
   public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    const json: any = { type: "datetimepicker" };
+    const json: any = { type: "datetimepicker", allowClear: false };
     this.applyLimits(obj, json, prop.name);
     return json;
   }

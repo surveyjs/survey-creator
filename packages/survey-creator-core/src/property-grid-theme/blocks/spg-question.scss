@@ -183,7 +183,7 @@
     flex-grow: 1;
     min-width: calc(var(--sjs2-base-unit-size) * 25.5);
     .sd-formbox__input {
-      min-width: max(calc(var(--sjs2-base-unit-spacing) * 17), 100%);
+      min-width: calc(var(--sjs2-base-unit-spacing) * 17);
       width: 0;
       flex-grow: 1;
     }

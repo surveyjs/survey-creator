@@ -256,6 +256,10 @@ test("Date time picker pattern is a text input, min and max use the picker", () 
   const maxQuestion = propertyGridWithLimits.survey.getQuestionByName("max");
   expect(minQuestion.getType()).toBe("datetimepicker");
   expect(maxQuestion.getType()).toBe("datetimepicker");
+  expect(minQuestion.title).toBe("Min");
+  expect(maxQuestion.title).toBe("Max");
+  expect(minQuestion["allowClear"]).toBe(false);
+  expect(maxQuestion["allowClear"]).toBe(false);
   expect(minQuestion["pattern"]).toBe("dd.mm.yyyy");
   expect(maxQuestion["pattern"]).toBe("dd.mm.yyyy");
   expect(minQuestion["max"]).toBe("2026-06-01");

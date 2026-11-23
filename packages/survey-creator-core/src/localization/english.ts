@@ -523,8 +523,8 @@ export var enStrings = {
     datetimepicker: {
       pickerType: "Picker type",
       range: "Range selection",
-      min: "Minimum value",
-      max: "Maximum value",
+      min: "Min",
+      max: "Max",
       minValueExpression: "Minimum value expression",
       maxValueExpression: "Maximum value expression",
       placeholder: "Placeholder text",
