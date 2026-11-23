@@ -330,12 +330,15 @@ export class SurveyLogicUI extends SurveyLogic {
     this.updateExpressionEditorScope(item, itemUI);
   }
   // The editor stays cached after a save, and a saved rule's actions may sit in another scope now (CS7): its
-  // rows are read again in that scope. The text was just applied, so no edit is lost.
+  // rows are read again in that scope. The text was just applied, so no edit is lost. A row opens on the name
+  // listed for the new scope ({address.kind} as {kind} inside address), and the same save writes it.
   private updateExpressionEditorScope(item: SurveyLogicItem, itemUI: ILogicItemUI): void {
     const scope = item.getExpressionContext();
-    if (scope === itemUI.expressionEditor.scopeElement) return;
-    itemUI.expressionEditor.scopeElement = scope;
-    itemUI.expressionEditor.text = item.expression;
+    const editor = itemUI.expressionEditor;
+    if (scope === editor.scopeElement) return;
+    editor.scopeElement = scope;
+    editor.text = item.expression;
+    if (editor.isReady && editor.text !== item.expression) item.apply(editor.text);
   }
   protected hasErrorInUI(): boolean {
     const creator = (<any>this.survey).creator;

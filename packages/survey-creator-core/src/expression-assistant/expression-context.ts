@@ -10,7 +10,7 @@ import { ISurveyLintOptions } from "survey-core/linter";
 import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
 import { editorLocalization } from "../editorLocalization";
-import { buildConditionQuestionList, ConditionEditor, getConditionVariableNames } from "../property-grid/condition-survey";
+import { buildConditionQuestionList, ConditionEditor, getConditionListScope, getConditionVariableNames } from "../property-grid/condition-survey";
 import { getConditionQuestionKey } from "../utils/data-path";
 import { IExpressionSite } from "./expression-check";
 import { LintPathResolver } from "./lint-paths";
@@ -44,9 +44,9 @@ function getEntryContainer(question: any): Question {
 // A matrix condition entry ("items[0].quantity", "budget.row1.quantity", "row.quantity") carries the
 // matrix as its question; the entry holds one cell, so it is described by its column's cell question
 // (or the detail panel question) instead.
-function getMatrixEntryCellQuestion(matrix: any, name: string): Question {
+function getMatrixEntryCellQuestion(matrix: any, name: string, scope: Base): Question {
   if (!matrix.isDescendantOf("matrixdropdownbase")) return undefined;
-  if (name.toLowerCase() === (getConditionQuestionKey(matrix) || "").toLowerCase()) return undefined;
+  if (name.toLowerCase() === (getConditionQuestionKey(matrix, scope) || "").toLowerCase()) return undefined;
   const key = name.toLowerCase();
   const rowElements: Array<any> = [].concat(matrix.columns);
   if (matrix.detailPanelMode !== "none" && !!matrix.detailPanel) rowElements.push(...matrix.detailPanel.questions);
@@ -74,17 +74,17 @@ function describeMatrixEntry(variable: IExpressionVariable, matrix: any, cellQue
 // A row entry of a single-choice matrix ("quality.durability") holds the answer in that row: one
 // column value, or several for cellType "checkbox". Described as the select question it amounts to,
 // the way survey-core builds one for the row (QuestionMatrixModel: isMultiSelect ? "checkbox" : "radiogroup").
-function isMatrixRowEntry(matrix: any, name: string): boolean {
+function isMatrixRowEntry(matrix: any, name: string, scope: Base): boolean {
   if (!matrix || matrix.getType() !== "matrix") return false;
-  const prefix = (getConditionQuestionKey(matrix) || "").toLowerCase() + ".";
+  const prefix = (getConditionQuestionKey(matrix, scope) || "").toLowerCase() + ".";
   const key = name.toLowerCase();
   return key.indexOf(prefix) === 0 && key.length > prefix.length;
 }
 
-function describeMatrixRowEntry(variable: IExpressionVariable, matrix: any): void {
+function describeMatrixRowEntry(variable: IExpressionVariable, matrix: any, scope: Base): void {
   // the entry's title as QuestionMatrixModel.addConditionObjectsByContext spells it, whatever the
   // editor shows (settings.logic.showTitlesInExpressions)
-  const rowKey = variable.name.substring(getConditionQuestionKey(matrix).length + 1).toLowerCase();
+  const rowKey = variable.name.substring(getConditionQuestionKey(matrix, scope).length + 1).toLowerCase();
   const row: any = (matrix.rows || []).filter((item: ItemValue) => String(item.value).toLowerCase() === rowKey)[0];
   if (!!row) {
     const title = matrix.processedTitle + "." + row.calculatedText;
@@ -247,6 +247,8 @@ function buildVariables(creator: SurveyCreatorModel, sites: Array<IExpressionSit
   const hostModel = creator.variablePresetsModel;
   const entries = buildConditionQuestionList(survey, object, propertyName, context, creator, editor, hash,
     (name: string) => hostModel?.getVariableQuestion(name));
+  // the entries name a question from the rule's owner ({m.r1} inside the matrix's container)
+  const scope = getConditionListScope(object, editor);
   const surveyVariables = survey.getVariableNames().map(name => name.toLowerCase());
   const calculatedValues = survey.calculatedValues.map(cv => cv.name.toLowerCase());
   const runtimeNames = getConditionVariableNames(survey, hostModel).map(name => name.toLowerCase());
@@ -263,7 +265,7 @@ function buildVariables(creator: SurveyCreatorModel, sites: Array<IExpressionSit
   const addContainer = (container: Question): void => {
     if (!container || addedContainers.indexOf(container) > -1) return;
     addedContainers.push(container);
-    const name = getConditionQuestionKey(container);
+    const name = getConditionQuestionKey(container, scope);
     if (listedNames.indexOf(name.toLowerCase()) > -1) return;
     const variable: IExpressionVariable = { name: name, kind: "question" };
     if (!!container.title && container.title !== container.name) variable.title = container.title;
@@ -282,9 +284,9 @@ function buildVariables(creator: SurveyCreatorModel, sites: Array<IExpressionSit
     const variable: IExpressionVariable = { name: name, kind: kind };
     if (!!entry.text && entry.text !== name) variable.title = entry.text;
     if (kind === "question") {
-      const cellQuestion = !!entry.question ? getMatrixEntryCellQuestion(entry.question, name) : undefined;
+      const cellQuestion = !!entry.question ? getMatrixEntryCellQuestion(entry.question, name, scope) : undefined;
       if (!!cellQuestion) describeMatrixEntry(variable, entry.question, cellQuestion);
-      else if (isMatrixRowEntry(entry.question, name)) describeMatrixRowEntry(variable, entry.question);
+      else if (isMatrixRowEntry(entry.question, name, scope)) describeMatrixRowEntry(variable, entry.question, scope);
       else describeExpressionQuestion(variable, entry.question);
     }
     if (kind === "hostVariable") {

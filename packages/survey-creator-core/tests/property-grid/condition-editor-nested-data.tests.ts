@@ -138,32 +138,31 @@ describe("condition editor: inner questions (nested data, survey-library #12233)
     expect(editor.text).toBe("{page1.address.street} = 'x'");
     expect(editor.hasErrors()).toBe(false);
   });
-  test("a condition inside the container offers the same paths", () => {
+  test("a condition inside the container lists the names that reach its questions from there", () => {
     const survey = new SurveyModel(surveyJson());
-    // a path from the root resolves inside the container too
-    expect(getListNames(survey, survey.getQuestionByName("panel1.street"))).toEqual(["address.town", "address.kind", "q1"]);
+    expect(getListNames(survey, survey.getQuestionByName("panel1.street"))).toEqual(["town", "kind", "q1"]);
   });
-  test("a variable relative to the container opens as a row on its question and round-trips", () => {
-    // the row keeps the variable as written and gets the question, the value editor and the text of the listed entry
+  test("a variable inside the container opens as a row on the listed entry; a longer text that reaches it too", () => {
+    // the row gets the question, the value editor and the entry listed for the owner; saving writes its name
     const check = (survey: SurveyModel, q: Question, name: string, entry: string): void => {
-      const text = "{" + name + "} = 'work'";
-      q.visibleIf = text;
+      q.visibleIf = "{" + name + "} = 'work'";
       const editor = new ConditionEditor(survey, q, new EmptySurveyCreatorOptions(), "visibleIf");
       const row = getRow(editor);
       const valueQuestion = <QuestionDropdownModel>row.getQuestionByName("questionValue");
       expect(valueQuestion.getType(), name).toBe("dropdown");
       expect(valueQuestion.choices.map(c => c.value), name).toEqual(["home", "work"]);
-      expect(row.getQuestionByName("questionName").value, name).toBe(name);
+      expect(row.getQuestionByName("questionName").value, name).toBe(entry);
       expect((<QuestionDropdownModel>row.getQuestionByName("questionName")).selectedItem?.text, name).toBe(entry);
       expect(editor.hasErrors(), name).toBe(false);
-      expect(editor.text, name).toBe(text);
+      expect(editor.text, name).toBe("{" + entry + "} = 'work'");
     };
-    // inside the container {kind} is kind's key
     let survey = new SurveyModel(surveyJson());
-    check(survey, survey.getQuestionByName("panel1.street"), "kind", "address.kind");
-    // in "panelAndPage" {address.kind} is the path from the page
-    survey = new SurveyModel({ dataNesting: "panelAndPage", pages: [{ name: "page1", elements: [addressPanel()] }] });
-    check(survey, survey.getQuestionByName("page1.panel1.street"), "address.kind", "page1.address.kind");
+    check(survey, survey.getQuestionByName("panel1.street"), "kind", "kind");
+    check(survey, survey.getQuestionByName("panel1.street"), "address.kind", "kind");
+    // in "panelAndPage" {address.kind} is the path from the page, {kind} the name inside the container
+    survey = new SurveyModel({ dataNesting: "panelAndPage", pages: [{ name: "page1", elements: [addressPanel(), { type: "text", name: "q0" }] }] });
+    check(survey, survey.getQuestionByName("page1.panel1.street"), "page1.address.kind", "kind");
+    check(survey, survey.getQuestionByName("page1.q0"), "page1.address.kind", "address.kind");
   });
   test("sub-entries of an inner matrix and multiple text follow the data path, with their own valueName", () => {
     const survey = new SurveyModel({ dataNesting: "auto", elements: [addressPanel({ elements: [
@@ -207,8 +206,7 @@ describe("condition editor: the text of an inner question's entry (nested data, 
     const survey = new SurveyModel(surveyJson());
     expect(getEntries(survey, survey.getQuestionByName("q1"))).toEqual(["address.town:address.city", "address.kind:address.kind",
       "address.street:address.street"]);
-    expect(getEntries(survey, survey.getQuestionByName("panel1.street"))).toEqual(["address.town:address.city",
-      "address.kind:address.kind", "q1:q1"]);
+    expect(getEntries(survey, survey.getQuestionByName("panel1.street"))).toEqual(["town:city", "kind:kind", "q1:q1"]);
     const editor = new ConditionEditor(survey, survey.getQuestionByName("q1"), new EmptySurveyCreatorOptions(), "visibleIf");
     getRow(editor).getQuestionByName("questionName").value = "address.town";
     getRow(editor).getQuestionByName("questionValue").value = "Oslo";
@@ -233,16 +231,15 @@ describe("condition editor: the text of an inner question's entry (nested data, 
     expect(getEntries(survey, survey.getQuestionByName("q1"))).toEqual(["town.address.town:town.address.city",
       "town.address.kind:town.address.kind", "town.address.street:town.address.street"]);
   });
-  test("a relative row's extra choice shows the entry's text: {town} inside the container shows address.city", () => {
+  test("{town} inside the container is the listed entry: it shows city, and there is no extra choice", () => {
     const survey = new SurveyModel(surveyJson());
     const street = survey.getQuestionByName("panel1.street");
     street.visibleIf = "{town} = 'Oslo'";
     const editor = new ConditionEditor(survey, street, new EmptySurveyCreatorOptions(), "visibleIf");
     const nameQuestion = <QuestionDropdownModel>getRow(editor).getQuestionByName("questionName");
     expect(nameQuestion.value).toBe("town");
-    expect(nameQuestion.selectedItem?.text).toBe("address.city");
-    expect(nameQuestion.choices.map(c => c.value + ":" + c.text)).toEqual(["address.town:address.city", "town:address.city",
-      "address.kind:address.kind", "q1:q1"]);
+    expect(nameQuestion.selectedItem?.text).toBe("city");
+    expect(nameQuestion.choices.map(c => c.value + ":" + c.text)).toEqual(["town:city", "kind:kind", "q1:q1"]);
     expect(editor.text).toBe("{town} = 'Oslo'");
   });
   test("two containers with one key and a city in each: the two entries show their data paths", () => {
@@ -516,13 +513,13 @@ describe("logic tab: inner questions (nested data, survey-library #12233)", () =
     expect(logic.saveEditableItem(), "the editor has no empty row").toBe(true);
     expect(survey.getQuestionByName("panel1.street").visibleIf).toBe("{kind} = 'home'");
   });
-  test("the rule editor reads an in-scope {kind}: the row has kind's dropdown and shows the entry address.kind", () => {
+  test("the rule editor reads an in-scope {kind}: the row has kind's dropdown and shows the entry kind", () => {
     const logic = new SurveyLogicUI(new SurveyModel(kindRuleJson()));
     logic.editItem(logic.items[0]);
     const row = getRow(logic.expressionEditor);
     const questionName = <QuestionDropdownModel>row.getQuestionByName("questionName");
-    expect(questionName.value, "the row keeps the text as written").toBe("kind");
-    expect(questionName.selectedItem.text).toBe("address.kind");
+    expect(questionName.value, "the listed entry").toBe("kind");
+    expect(questionName.selectedItem.text).toBe("kind");
     const value = <QuestionDropdownModel>row.getQuestionByName("questionValue");
     expect(value.getType()).toBe("dropdown");
     expect(value.choices.map(c => c.value)).toEqual(["home", "work"]);
@@ -598,7 +595,9 @@ describe("logic tab: inner questions (nested data, survey-library #12233)", () =
     newPanel.getQuestionByName("elementSelector").value = getSelectorValue(newPanel, "street");
     expect(logic.saveEditableItem()).toBe(true);
     const street = survey.getQuestionByName("panel1.street");
-    expect(street.visibleIf).toBe("{address.kind} = 'home'");
+    // the new rule had no owner, so its list had the root's names; the save that gives it street writes the name
+    // listed there
+    expect(street.visibleIf).toBe("{kind} = 'home'");
     logic.editItem(logic.items[0]);
     expect(logic.expressionEditor.scopeElement).toBe(street);
     logic.expressionEditor.text = "{kind} = 'work'";
@@ -1082,11 +1081,8 @@ describe("findInnerQuestion (nested data, survey-library #12233)", () => {
     expect(findInnerQuestion(survey, "town")).toBeNull();
     expect(findInnerQuestion(survey, "town", survey.getQuestionByName("panel1.street")).question.name).toBe("city");
     expect(findInnerQuestion(survey, "q1")).toBeNull();
-    // the entry is the listed one, the question's data path, whichever form the variable used
-    const info = findInnerQuestion(survey, "address.kind.x");
-    expect(info.entryName).toBe("address.kind.x");
-    expect(info.rest).toBe(".x");
-    expect(findInnerQuestion(survey, "kind.x", survey.getQuestionByName("panel1.street")).entryName).toBe("address.kind.x");
+    expect(findInnerQuestion(survey, "address.kind.x").rest).toBe(".x");
+    expect(findInnerQuestion(survey, "kind.x", survey.getQuestionByName("panel1.street")).rest).toBe(".x");
 
     survey.getPanelByName("panel1").addNewQuestion("text", "road");
     expect(findInnerQuestion(survey, "address.road").question.name).toBe("road");
@@ -1146,10 +1142,9 @@ describe("the Creator uses survey-core's variable lookup (nested data, survey-li
       expect(getRow(editor).getQuestionByName("questionName").value, item.name).toBe(item.name);
       expect(editor.text, item.name).toBe(item.text);
     });
-    // the relative form opens on the listed entry; the listed key with the postfix stays as written, as for
-    // {q1-unwrapped}
+    // the listed key with the postfix stays as written and is no choice, as for {q1-unwrapped}
     const editor = new ConditionEditor(survey, rows[1].q, new EmptySurveyCreatorOptions(), "visibleIf");
-    expect((<QuestionDropdownModel>getRow(editor).getQuestionByName("questionName")).selectedItem?.text).toBe("address.kind");
+    expect((<QuestionDropdownModel>getRow(editor).getQuestionByName("questionName")).selectedItem).toBeFalsy();
   });
   test("an inner question and a top-level value name equal to its name are listed apart", () => {
     const survey = new SurveyModel({ dataNesting: "auto", elements: [addressPanel(), { type: "text", name: "q1" },
@@ -1215,5 +1210,220 @@ describe("the unwrap postfix after a records question (nested data, survey-libra
       expect(editor.isReady).toBe(true);
       expect(editor.text).toBe(text);
     });
+  });
+});
+
+// OPEN E (Andrew, 2026-11-20): a bare name is the default, read in the container, then its parent, then the
+// survey. The editor lists each question by the name that reaches it from the rule's owner
+// (SurveyModel.getQuestionVariableName(question, owner)).
+describe("condition editor: the name that reaches a question from the rule (nested data, survey-library #12233)", () => {
+  const getEntries = (survey: SurveyModel, q: Question): Array<string> =>
+    new ConditionEditor(survey, q, new EmptySurveyCreatorOptions(), "visibleIf").allConditionQuestions.map(item => item.value + ":" + item.text);
+  test("a rule inside address lists street, saves {street}, and reopens with that row selected", () => {
+    const survey = new SurveyModel(surveyJson());
+    const kind = survey.getQuestionByName("panel1.kind");
+    let editor = new ConditionEditor(survey, kind, new EmptySurveyCreatorOptions(), "visibleIf");
+    expect(editor.allConditionQuestions.map(item => item.value)).toEqual(["town", "q1", "street"]);
+    getRow(editor).getQuestionByName("questionName").value = "street";
+    getRow(editor).getQuestionByName("questionValue").value = "x";
+    expect(editor.apply()).toBe(true);
+    expect(kind.visibleIf).toBe("{street} = 'x'");
+    editor = new ConditionEditor(survey, kind, new EmptySurveyCreatorOptions(), "visibleIf");
+    const nameQuestion = <QuestionDropdownModel>getRow(editor).getQuestionByName("questionName");
+    expect(nameQuestion.value).toBe("street");
+    expect(nameQuestion.selectedItem?.text).toBe("street");
+    expect(getRow(editor).getQuestionByName("questionValue").value).toBe("x");
+    expect(editor.text).toBe("{street} = 'x'");
+
+    const runtime = new SurveyModel(surveyJson({}, { elements: [{ type: "dropdown", name: "kind", choices: ["home"], visibleIf: "{street} = 'x'" }, { type: "text", name: "street" }] }));
+    runtime.data = { address: { street: "x" } };
+    expect(runtime.getQuestionByName("panel1.kind").isVisible).toBe(true);
+    runtime.data = { address: { street: "y" } };
+    expect(runtime.getQuestionByName("panel1.kind").isVisible).toBe(false);
+  });
+  test("a rule on page1 lists address.street; on page2, page1.address.street (\"panelAndPage\")", () => {
+    const survey = new SurveyModel({ dataNesting: "panelAndPage", pages: [
+      { name: "page1", elements: [addressPanel(), { type: "text", name: "q0" }] },
+      { name: "page2", elements: [{ type: "text", name: "q1" }] }] });
+    expect(getEntries(survey, survey.getQuestionByName("page1.q0"))).toEqual(["address.town:address.city", "address.kind:address.kind",
+      "address.street:address.street", "page2.q1:page2.q1"]);
+    expect(getEntries(survey, survey.getQuestionByName("page2.q1"))).toEqual(["page1.address.town:page1.address.city",
+      "page1.address.kind:page1.address.kind", "page1.address.street:page1.address.street", "page1.q0:page1.q0"]);
+  });
+  test("a street hidden by an inner street: each is listed by the text that reaches it, a hidden one is not listed", () => {
+    // at the root both are reached; inside address {street} reads the inner one and no text reaches the root one
+    let survey = new SurveyModel({ dataNesting: "auto", elements: [{ type: "text", name: "street" }, addressPanel(), { type: "text", name: "q1" }] });
+    expect(getEntries(survey, survey.getQuestionByName("q1"))).toEqual(["address.town:address.city", "address.kind:address.kind",
+      "address.street:address.street", "street:street"]);
+    expect(getEntries(survey, survey.getQuestionByName("panel1.kind"))).toEqual(["town:city", "q1:q1", "street:street"]);
+    // a container in a container: inside inner the outer street takes the longer text
+    survey = new SurveyModel({ dataNesting: "auto", elements: [{ type: "panel", name: "outer", valueName: "o", elements: [
+      { type: "text", name: "street" },
+      { type: "panel", name: "inner", valueName: "in", elements: [{ type: "text", name: "street" }, { type: "text", name: "x" }] }] },
+    { type: "text", name: "q1" }] });
+    expect(getEntries(survey, survey.getQuestionByName("q1"))).toEqual(["o.in.street:o.in.street", "o.in.x:o.in.x", "o.street:o.street"]);
+    expect(getEntries(survey, survey.getQuestionByName("outer.inner.x"))).toEqual(["o.street:o.street", "q1:q1", "street:street"]);
+    expect(getEntries(survey, survey.getQuestionByName("outer.street"))).toEqual(["in.street:in.street", "in.x:in.x", "q1:q1"]);
+    // two questions that share a value name read one value: neither is hidden
+    survey = new SurveyModel({ dataNesting: "auto", elements: [addressPanel(), { type: "text", name: "q2", valueName: "shared" },
+      { type: "text", name: "q3", valueName: "shared" }] });
+    expect(getEntries(survey, survey.getQuestionByName("panel1.kind")).filter(item => item.indexOf("shared") === 0)).toHaveLength(2);
+  });
+  test("a sub-entry inside the container: {mv.r1} opens on m's row, and the AI context describes it as a row", () => {
+    const creator = new CreatorTester();
+    creator.JSON = { dataNesting: "auto", elements: [addressPanel({ elements: [
+      { type: "matrix", name: "m", valueName: "mv", rows: ["r1"], columns: ["c1", "c2"] },
+      { type: "matrixdynamic", name: "md", columns: [{ name: "c1", cellType: "text" }] },
+      { type: "text", name: "t" }] })] };
+    const survey = creator.survey;
+    const t = survey.getQuestionByName("panel1.t");
+    expect(getEntries(survey, t)).toEqual(["mv.r1:m.r1", "md[0].c1:md[0].c1"]);
+    t.visibleIf = "{mv.r1} = 'c2'";
+    const editor = new ConditionEditor(survey, t, new EmptySurveyCreatorOptions(), "visibleIf");
+    const valueQuestion = <QuestionDropdownModel>getRow(editor).getQuestionByName("questionValue");
+    expect(valueQuestion.choices.map(c => c.value)).toEqual(["c1", "c2"]);
+    expect(valueQuestion.value).toBe("c2");
+    expect(editor.text).toBe("{mv.r1} = 'c2'");
+    // the AI is told the same names; the row entry is described as one row
+    const context = buildExpressionContext(creator, [{ obj: t, propertyName: "visibleIf" }], "", undefined, getExpressionLintOptions(creator)).context;
+    const row: any = context.variables.filter(v => v.name === "mv.r1")[0];
+    expect(row.type).toBe("radiogroup");
+    expect(row.choices.map(c => c.value)).toEqual(["c1", "c2"]);
+    expect(context.variables.filter(v => v.name === "md").length, "the whole value of md, by the same name").toBe(1);
+  });
+  test("a rename of street and of address with {street} in place inside address", () => {
+    const creator = new CreatorTester();
+    creator.JSON = surveyJson();
+    const kind = creator.survey.getQuestionByName("panel1.kind");
+    const editor = new ConditionEditor(creator.survey, kind, new EmptySurveyCreatorOptions(), "visibleIf");
+    getRow(editor).getQuestionByName("questionName").value = "street";
+    getRow(editor).getQuestionByName("questionValue").value = "x";
+    editor.apply();
+    expect(kind.visibleIf).toBe("{street} = 'x'");
+    creator.survey.getQuestionByName("panel1.street").name = "road";
+    expect(kind.visibleIf).toBe("{road} = 'x'");
+    creator.survey.getPanelByName("panel1").valueName = "addr";
+    expect(kind.visibleIf).toBe("{road} = 'x'");
+    const reopened = new ConditionEditor(creator.survey, kind, new EmptySurveyCreatorOptions(), "visibleIf");
+    expect(getRow(reopened).getQuestionByName("questionName").value).toBe("road");
+    expect(reopened.allConditionQuestions.map(item => item.value)).toEqual(["town", "q1", "road"]);
+    creator.undo();
+    creator.undo();
+    expect(kind.visibleIf).toBe("{street} = 'x'");
+  });
+  test("a choice value renamed: {kind} inside address and {address.kind} follow, a top-level kind's {kind} does not", () => {
+    const survey = new SurveyModel({ dataNesting: "auto", elements: [
+      addressPanel({ elements: [
+        { type: "dropdown", name: "kind", choices: ["home"] },
+        { type: "text", name: "inner", visibleIf: "{kind} = 'home'" },
+        { type: "text", name: "inner2", visibleIf: "{address.kind} = 'home'" }] }),
+      { type: "dropdown", name: "top", valueName: "kind", choices: ["home"] },
+      { type: "text", name: "q1", visibleIf: "{kind} = 'home' and {address.kind} = 'home'" }] });
+    const logic = new SurveyLogic(survey);
+    const item = (<QuestionDropdownModel>survey.getQuestionByName("panel1.kind")).choices[0];
+    item.value = "house";
+    logic.renameItemValue(item, "home");
+    expect(survey.getQuestionByName("panel1.inner").visibleIf).toBe("{kind} = 'house'");
+    expect(survey.getQuestionByName("panel1.inner2").visibleIf).toBe("{address.kind} = 'house'");
+    expect(survey.getQuestionByName("q1").visibleIf, "the root {kind} reads top").toBe("({kind} = 'home') and ({address.kind} = 'house')");
+    const topItem = (<QuestionDropdownModel>survey.getQuestionByName("top")).choices[0];
+    topItem.value = "flat";
+    logic.renameItemValue(topItem, "home");
+    expect(survey.getQuestionByName("panel1.inner").visibleIf, "{kind} inside address reads the inner kind").toBe("{kind} = 'house'");
+    expect(survey.getQuestionByName("q1").visibleIf).toBe("({kind} = 'flat') and ({address.kind} = 'house')");
+  });
+  test("the Logic tab's rule editor lists the names from the rule's owner, and the root's for a new rule", () => {
+    const survey = new SurveyModel(surveyJson({}, { elements: addressPanel().elements.concat([{ type: "text", name: "inner", visibleIf: "{street} = 'x'" }]) }));
+    const logic = new SurveyLogicUI(survey);
+    logic.editItem(logic.items[0]);
+    expect(logic.expressionEditor.allConditionQuestions.map(item => item.value)).toEqual(["town", "inner", "kind", "q1", "street"]);
+    expect(getRow(logic.expressionEditor).getQuestionByName("questionName").value).toBe("street");
+    logic.addNew();
+    expect(logic.expressionEditor.allConditionQuestions.map(item => item.value)).toEqual(["address.town", "address.inner",
+      "address.kind", "address.street", "q1"]);
+    // the filter and the used questions list the rule under street
+    const saved = new SurveyLogic(survey);
+    expect(saved.items.filter(item => item.isSuitable("street")).map(item => item.expression)).toEqual(["{street} = 'x'"]);
+    expect(saved.getUsedQuestions().map(q => q.name)).toEqual(["street", "inner"]);
+  });
+  // review 1: a listed inner name that is a top-level question's name too ({town}, {kind}) keeps its question
+  // and is written as it is; the inner entry that shows a top-level entry's text shows its data path
+  test("an inner entry named like a top-level question: its value editor, its text and the variable written", () => {
+    const json = { dataNesting: "auto", elements: [
+      addressPanel({ elements: [{ type: "dropdown", name: "kind", choices: ["home"] }, { type: "dropdown", name: "city", valueName: "town", choices: ["Oslo"] },
+        { type: "text", name: "street" }] }),
+      { type: "text", name: "town", valueName: "tv" }, { type: "text", name: "kind", valueName: "k2" }] };
+    const survey = new SurveyModel(json);
+    const street = survey.getQuestionByName("panel1.street");
+    expect(getEntries(survey, street)).toEqual(["kind:address.kind", "town:city", "k2:kind", "tv:town"]);
+    const check = (name: string, value: string, text: string): void => {
+      const editor = new ConditionEditor(survey, street, new EmptySurveyCreatorOptions(), "visibleIf");
+      getRow(editor).getQuestionByName("questionName").value = name;
+      const valueQuestion = getRow(editor).getQuestionByName("questionValue");
+      expect(valueQuestion.getType(), name).toBe("dropdown");
+      valueQuestion.value = value;
+      expect(editor.text, name).toBe(text);
+      editor.apply();
+      const reopened = new ConditionEditor(survey, street, new EmptySurveyCreatorOptions(), "visibleIf");
+      expect(getRow(reopened).getQuestionByName("questionName").value, name).toBe(name);
+      expect(getRow(reopened).getQuestionByName("questionValue").getType(), name).toBe("dropdown");
+      expect(reopened.text, name).toBe(text);
+    };
+    check("town", "Oslo", "{town} = 'Oslo'");
+    check("kind", "home", "{kind} = 'home'");
+    const runtime = new SurveyModel(json);
+    runtime.getQuestionByName("panel1.street").visibleIf = "{kind} = 'home'";
+    runtime.data = { address: { kind: "home" }, k2: "x" };
+    expect(runtime.getQuestionByName("panel1.street").isVisible).toBe(true);
+  });
+  test("a longer text with the unwrap postfix opens on the listed entry and keeps the postfix", () => {
+    const survey = new SurveyModel(surveyJson());
+    const street = survey.getQuestionByName("panel1.street");
+    street.visibleIf = "{address.kind-unwrapped} = 'home'";
+    const editor = new ConditionEditor(survey, street, new EmptySurveyCreatorOptions(), "visibleIf");
+    expect(getRow(editor).getQuestionByName("questionValue").getType()).toBe("dropdown");
+    expect(editor.text).toBe("{kind-unwrapped} = 'home'");
+  });
+  test("a top-level question whose name reads a container's object inside address is not listed there", () => {
+    const survey = new SurveyModel({ dataNesting: "auto", elements: [{ type: "dropdown", name: "kind", choices: ["a"] },
+      { type: "panel", name: "panel1", valueName: "address", elements: [
+        { type: "panel", name: "sub", valueName: "kind", elements: [{ type: "text", name: "x" }] }, { type: "text", name: "street" }] }] });
+    expect(getEntries(survey, survey.getQuestionByName("panel1.street"))).toEqual(["kind.x:kind.x"]);
+    expect(getEntries(survey, survey.getQuestionByName("kind"))).toEqual(["address.kind.x:address.kind.x", "address.street:address.street"]);
+  });
+  test("a matrix inside address: {m.r1} follows a row and a column rename; {md.r1.c1} a column and a cell choice rename", () => {
+    const creator = new CreatorTester();
+    creator.JSON = { dataNesting: "auto", elements: [addressPanel({ elements: [
+      { type: "matrix", name: "m", rows: ["r1"], columns: ["c1"] },
+      { type: "matrixdropdown", name: "md", rows: ["r1"], columns: [{ name: "c1", cellType: "dropdown", choices: ["x"] }] },
+      { type: "text", name: "t", visibleIf: "{m.r1} = 'c1' and {md.r1.c1} = 'x'" }] })] };
+    const survey = creator.survey;
+    const t = survey.getQuestionByName("panel1.t");
+    survey.getQuestionByName("panel1.m").rows[0].value = "r9";
+    expect(t.visibleIf).toBe("{m.r9} = 'c1' and {md.r1.c1} = 'x'");
+    survey.getQuestionByName("panel1.m").columns[0].value = "c9";
+    expect(t.visibleIf).toBe("({m.r9} = 'c9') and ({md.r1.c1} = 'x')");
+    const md: any = survey.getQuestionByName("panel1.md");
+    md.columns[0].choices[0].value = "y";
+    expect(t.visibleIf).toBe("({m.r9} = 'c9') and ({md.r1.c1} = 'y')");
+    md.columns[0].name = "c2";
+    expect(t.visibleIf).toBe("({m.r9} = 'c9') and ({md.r1.c2} = 'y')");
+  });
+  test("the Logic tab: a rule on a dynamic panel's template question inside address opens {panel.x} and saves it", () => {
+    const survey = new SurveyModel({ dataNesting: "auto", elements: [addressPanel({ elements: [
+      { type: "paneldynamic", name: "pd", templateElements: [{ type: "dropdown", name: "x", choices: ["a"] },
+        { type: "text", name: "y", visibleIf: "{panel.x} = 'a'" }] }] })] });
+    const logic = new SurveyLogicUI(survey);
+    logic.editItem(logic.items[0]);
+    const row = getRow(logic.expressionEditor);
+    expect(row.getQuestionByName("questionValue").getType()).toBe("dropdown");
+    expect(logic.expressionEditor.text).toBe("{panel.x} = 'a'");
+    expect(logic.saveEditableItem()).toBe(true);
+    expect((<any>survey.getQuestionByName("panel1.pd")).template.getQuestionByName("y").visibleIf).toBe("{panel.x} = 'a'");
+  });
+  test("\"none\": the entries are unchanged inside a panel and at the root", () => {
+    const survey = new SurveyModel(surveyJson({ dataNesting: "none" }));
+    expect(getEntries(survey, survey.getQuestionByName("street"))).toEqual(["town:city", "kind:kind", "q1:q1"]);
+    expect(getEntries(survey, survey.getQuestionByName("q1"))).toEqual(["town:city", "kind:kind", "street:street"]);
   });
 });

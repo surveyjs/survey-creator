@@ -372,13 +372,16 @@ export class SurveyLogicItem {
       this.renameQuestionInExpression("row." + oldName, "row." + column.name, [surveyLibSettings.expressionVariableDelimiters.end]);
     }
     const rows: Array<ItemValue> = question["rows"];
-    if (!Array.isArray(rows) || !this.isQuestionInExpression(question)) return;
-    const questionPrefix = this.getItemValueQuestionName(question) + ".";
-    for (var i = 0; i < rows.length; i++) {
-      if (Helpers.isValueEmpty(rows[i].value)) continue;
-      const rowName = rows[i].value.toString() + ".";
-      this.renameQuestionInExpression(questionPrefix + rowName + oldName, questionPrefix + rowName + column.name, [surveyLibSettings.expressionVariableDelimiters.end]);
-    }
+    const names = this.getItemValueQuestionNames(question);
+    if (!Array.isArray(rows) || !this.isQuestionInExpression(names)) return;
+    names.forEach(name => {
+      const questionPrefix = name + ".";
+      for (var i = 0; i < rows.length; i++) {
+        if (Helpers.isValueEmpty(rows[i].value)) continue;
+        const rowName = rows[i].value.toString() + ".";
+        this.renameQuestionInExpression(questionPrefix + rowName + oldName, questionPrefix + rowName + column.name, [surveyLibSettings.expressionVariableDelimiters.end]);
+      }
+    });
   }
   public renameItemValue(question: Question, item: ItemValue, oldValue: any): void {
     if (!this.canUpdateExpressionByQuestion(question)) return;
@@ -388,64 +391,76 @@ export class SurveyLogicItem {
       }
       if (this.actions[0].parentElement !== question.parentQuestion) return;
     }
-    if (!this.isQuestionInExpression(question)) return;
-    const questionName = this.getItemValueQuestionName(question).toLocaleLowerCase();
+    const names = this.getItemValueQuestionNames(question);
+    if (!this.isQuestionInExpression(names)) return;
     const rows: Array<ItemValue> = question["rows"];
     let newExpression = this.expression;
-    if (!Array.isArray(rows)) {
-      newExpression = updateLogicExpression(newExpression, questionName, oldValue, item.value);
-    } else {
-      for (var i = 0; i < rows.length; i++) {
-        if (Helpers.isValueEmpty(rows[i].value)) continue;
-        const rowName = "." + rows[i].value.toString();
-        newExpression = updateLogicExpression(newExpression, questionName + rowName, oldValue, item.value);
+    names.forEach(name => {
+      const questionName = name.toLocaleLowerCase();
+      if (!Array.isArray(rows)) {
+        newExpression = updateLogicExpression(newExpression, questionName, oldValue, item.value);
+      } else {
+        for (var i = 0; i < rows.length; i++) {
+          if (Helpers.isValueEmpty(rows[i].value)) continue;
+          const rowName = "." + rows[i].value.toString();
+          newExpression = updateLogicExpression(newExpression, questionName + rowName, oldValue, item.value);
+        }
       }
-    }
+    });
     if (newExpression != this.expression) {
       this.applyExpression(newExpression, true);
     }
   }
   private renameDropdownColumnItemValue(question: Question, item: ItemValue, oldValue: any): void {
     const matrix: Question = question.parentQuestion;
-    if (!this.isQuestionInExpression(matrix)) return;
+    const names = this.getItemValueQuestionNames(matrix);
+    if (!this.isQuestionInExpression(names)) return;
     const columnPostFix = "." + question.getValueName();
     if (!this.isStrContainsInExpression(columnPostFix + surveyLibSettings.expressionVariableDelimiters.end)) return;
-    const questionPrefix = getConditionQuestionKey(matrix) + ".";
     const rows: Array<ItemValue> = matrix["rows"];
     let newExpression = this.expression;
-    for (var i = 0; i < rows.length; i++) {
-      if (Helpers.isValueEmpty(rows[i].value)) continue;
-      const rowName = rows[i].value.toString();
-      newExpression = updateLogicExpression(newExpression, questionPrefix + rowName + columnPostFix, oldValue, item.value);
-    }
+    names.forEach(name => {
+      for (var i = 0; i < rows.length; i++) {
+        if (Helpers.isValueEmpty(rows[i].value)) continue;
+        const rowName = rows[i].value.toString();
+        newExpression = updateLogicExpression(newExpression, name + "." + rowName + columnPostFix, oldValue, item.value);
+      }
+    });
     if (newExpression != this.expression) {
       this.applyExpression(newExpression, true);
     }
   }
   public renameRowValue(question: Question, item: ItemValue, oldValue: any): void {
-    if (!this.canUpdateExpressionByQuestion(question) || !this.isQuestionInExpression(question)) return;
-    const questionName = this.getItemValueQuestionName(question);
-    this.renameQuestionInExpression(questionName + "." + oldValue.toString(), questionName + "." + item.value.toString(), [surveyLibSettings.expressionVariableDelimiters.end, "."]);
+    if (!this.canUpdateExpressionByQuestion(question)) return;
+    const names = this.getItemValueQuestionNames(question);
+    if (!this.isQuestionInExpression(names)) return;
+    names.forEach(name =>
+      this.renameQuestionInExpression(name + "." + oldValue.toString(), name + "." + item.value.toString(), [surveyLibSettings.expressionVariableDelimiters.end, "."]));
   }
   private canUpdateExpressionByQuestion(question: Question): boolean {
     return !!this.expression && !!question.name && this.actions.length > 0;
   }
-  private isQuestionInExpression(question: Question): boolean {
-    return this.isStrContainsInExpression(this.getItemValueQuestionName(question).toLocaleLowerCase());
+  private isQuestionInExpression(names: Array<string>): boolean {
+    return names.some(name => this.isStrContainsInExpression(name));
   }
   private isStrContainsInExpression(str: string): boolean {
     if (!str) return false;
     return this.expression.toLocaleLowerCase().indexOf(str.toLocaleLowerCase()) > -1;
   }
-  // The variable an expression reads the question by: inside a record its value name after the record's
-  // prefix; else the name the condition editor lists it by ({city} for an inner question, not {town}).
-  private getItemValueQuestionName(question: Question): string {
+  // The variables an expression reads the question by: inside a record its value name after the record's
+  // prefix; else the names the condition editor lists it by: its data path from the root ({address.town}) and,
+  // in a survey with scopes, the name from the rule's owner ({town} inside address), each where it reads the
+  // question from the rule's actions.
+  private getItemValueQuestionNames(question: Question): Array<string> {
     if (!!question.parentQuestion) {
       const valName = question.getValueName();
-      if (question.parentQuestion.isDescendantOf("paneldynamic")) return "panel." + valName;
-      if (question.parentQuestion.isDescendantOf("matrixdropdownbase")) return "row." + valName;
+      if (question.parentQuestion.isDescendantOf("paneldynamic")) return ["panel." + valName];
+      if (question.parentQuestion.isDescendantOf("matrixdropdownbase")) return ["row." + valName];
     }
-    return getConditionQuestionKey(question);
+    const name = getConditionQuestionKey(question);
+    if (!isScopedNamesSurvey(this.survey)) return [name];
+    const names = [name, getConditionQuestionKey(question, this.getExpressionContext())];
+    return names.filter((item, index) => names.indexOf(item) === index && this.getQuestionsByVariableName(item).indexOf(question) > -1);
   }
   public removeQuestion(name: string): void {
     this.removeQuestionInExpression(name);

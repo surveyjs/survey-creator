@@ -13,34 +13,46 @@ function getDataPath(el: any): Array<string> {
 export function isInnerQuestion(question: Base): boolean {
   return getDataPath(question).length > 1;
 }
-// The name the condition editor lists a question by: the variable survey-core names it by
-// (SurveyModel.getQuestionVariableName). An inner question's data path ({address.town} for city with valueName
-// "town"), which resolves at the root and inside its container; its name for one no root variable reaches (inside
-// a container of a record); else its value name, as before.
-export function getConditionQuestionKey(question: Question): string {
+// survey-core finds nothing from a context without getValueGetterContext (no Base): that one reads from the root
+function getVariableContext(el: Base): Base {
+  return typeof (<any>el)?.getValueGetterContext === "function" ? el : undefined;
+}
+// The name the condition editor lists a question by: the variable survey-core names it by from context, the
+// rule's owner (SurveyModel.getQuestionVariableName). An inner question's shortest text that reaches it ({street}
+// inside address, {address.town} for city with valueName "town" elsewhere); without a context its data path from
+// the root; its name for one no root variable reaches (inside a container of a record); else its value name.
+export function getConditionQuestionKey(question: Question, context?: Base): string {
   if (!question) return "";
   const survey = <SurveyModel><any>question.survey;
-  return !!survey ? survey.getQuestionVariableName(question) : question.getValueName();
+  return !!survey ? survey.getQuestionVariableName(question, getVariableContext(context)) : question.getValueName();
+}
+// No text reaches question from context: the name it would be listed by reads a value at another data path
+// there ({street} inside address reads the inner street, not a top-level street), or a container's object (a
+// panel with valueName "street"). Questions that share a value name read one value and are not hidden.
+export function isQuestionHidden(question: Question, context: Base): boolean {
+  const survey = <SurveyModel><any>question?.survey;
+  const ctx = getVariableContext(context);
+  if (!ctx || !survey || !survey.hasDataNesting()) return false;
+  const key = getConditionQuestionKey(question, ctx);
+  const info = survey.getQuestionByVariable(key, ctx);
+  // nothing found: hidden only when the root reads the question by that text (not a value name no variable reads)
+  if (!info) return survey.getQuestionByVariable(key)?.question === question;
+  return info.question !== question && info.question.getDataPath().join(".") !== question.getDataPath().join(".");
 }
 export interface IInnerQuestionInfo {
   question: Question;
-  // the variable as the condition editor lists it: the question's key (getConditionQuestionKey) and the rest of
-  // the path ("address.street", "address.m.r1"), whichever form the expression used
-  entryName: string;
   // the part of the variable after the question: "" when the variable is the question's value itself
   rest: string;
 }
 // The inner question an expression variable names, as survey-core resolves it from el without values
-// (getQuestionByVariable): a data path from the root or from an enclosing container ({address.street},
-// {page1.address.street}, {st} inside its container). A sub-entry gives its owner and the rest ({address.m.r1}: m
-// and ".r1"). Top-level questions, comment keys and postfixed names are not returned: the callers keep their own
-// lookups for them.
+// (getQuestionByVariable): a data path from the root ({address.street}) or the shorter text from inside a
+// container ({street} inside address). A sub-entry gives its owner and the rest ({address.m.r1}: m and ".r1").
+// Top-level questions, comment keys and postfixed names are not returned: the callers keep their own lookups.
 export function findInnerQuestion(survey: SurveyModel, name: string, el?: Base): IInnerQuestionInfo {
   if (!survey || !name) return null;
-  // survey-core finds nothing from a context without getValueGetterContext (no Base): that one reads from the root
-  const info = survey.getQuestionByVariable(name, typeof (<any>el)?.getValueGetterContext === "function" ? el : undefined);
+  const info = survey.getQuestionByVariable(name, getVariableContext(el));
   if (!info || info.isComment || info.isUnwrapped || !isInnerQuestion(info.question)) return null;
-  return { question: info.question, entryName: getConditionQuestionKey(info.question) + info.rest, rest: info.rest };
+  return { question: info.question, rest: info.rest };
 }
 // The question whose whole value an expression variable of el names: an inner question as findInnerQuestion
 // resolves it (first, so a key inside a container reads its own question, as at runtime), else a top-level
