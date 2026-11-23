@@ -11,7 +11,7 @@ const richStringAreas = ["designer-tab", "preview-tab", "theme-tab", "translatio
   encapsulation: ViewEncapsulation.None
 })
 export class TestRichTextComponent extends TestDefaultComponent {
-  protected createCreator(): void {
+  protected override createCreator(): void {
     super.createCreator();
     Serializer.findProperty("survey", "description").type = "html";
     Serializer.findProperty("page", "description").type = "html";
