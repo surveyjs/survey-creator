@@ -53,7 +53,7 @@ import {
   isStringEditable
 } from "../src/creator-base";
 import { SurveyHelper } from "../src/survey-helper";
-import { CreatorTester } from "./creator-tester";
+import { CreatorTester, toolboxQuestionTypeCount } from "./creator-tester";
 import { EditorLocalization, editorLocalization, setupLocale } from "../src/editorLocalization";
 import { ICreatorPlugin, settings } from "../src/creator-settings";
 import { PropertyGridEditorCollection } from "../src/property-grid/index";
@@ -617,7 +617,7 @@ test("ConvertTo and addNewQuestion for panel with maxPanelNestingLevel set", ():
   const panel5 = creator.survey.getPanelByName("panel5");
   const panel6 = creator.survey.getQuestionByName("panel6");
   const itemCount = creator.getAvailableToolboxItems().length;
-  expect(itemCount).toBe(23);
+  expect(itemCount).toBe(toolboxQuestionTypeCount);
   const panel6Model = new QuestionAdornerViewModel(creator, panel6, undefined);
   const panel5Model = new QuestionAdornerViewModel(creator, panel5, undefined);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
@@ -700,7 +700,7 @@ test("addNewQuestion popup menu for first level panels and paneldynamics", (): a
   const panel = creator.survey.getPanelByName("panel1");
   const paneldynamic = creator.survey.getQuestionByName("question1");
   const itemCount = creator.getAvailableToolboxItems().length;
-  expect(itemCount).toBe(23);
+  expect(itemCount).toBe(toolboxQuestionTypeCount);
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
   // Add New (create child) action
   expect(creator.getAvailableToolboxItems(panel)).toHaveLength(itemCount - 2);
@@ -724,7 +724,7 @@ test("getAvailableToolboxItems isAllowedToAdd forbiddenNestedElements", (): any 
   const question1 = creator.survey.getQuestionByName("question1");
   const question2 = panel2.template.getQuestionByName("question2");
   const itemCount = creator.getAvailableToolboxItems().length;
-  expect(itemCount).toBe(23);
+  expect(itemCount).toBe(toolboxQuestionTypeCount);
   creator.forbiddenNestedElements = { "panel": ["expression"], "paneldynamic": ["file", "radiogroup"] };
   expect(creator.getAvailableToolboxItems(panel1, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel2, false)).toHaveLength(itemCount - 2);
@@ -749,7 +749,7 @@ test("getAvailableToolboxItems isAllowedToAdd forbiddenNestedElements #6973", ()
     ]
   };
   const itemCount = creator.getAvailableToolboxItems().length;
-  expect(itemCount).toBe(23);
+  expect(itemCount).toBe(toolboxQuestionTypeCount);
   const panel2 = creator.survey.getQuestionByName("panel2");
   expect(creator.getAvailableToolboxItems(panel2, false)).toHaveLength(itemCount - 2);
   const innerPanel = panel2.template;

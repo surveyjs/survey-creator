@@ -178,18 +178,18 @@ test("Preset edit, toolbox - remove item from categories", () => {
   const row = categQuestion.visibleRows[1];
   row.showDetailPanel();
   const itemsQuestion = row.getQuestionByName("items");
-  expect(itemsQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["text", "comment", "multipletext"]);
+  expect(itemsQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["text", "comment", "multipletext", "datetimepicker"]);
   itemsQuestion.removeRow(1);
-  expect(itemsQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["text", "multipletext"]);
+  expect(itemsQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["text", "multipletext", "datetimepicker"]);
   expect(matrixQuestion.visibleRows).toHaveLength(1);
   expect(matrixQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["comment"]);
   expect(editor.json.toolbox).toBeDefined();
   const length = editor.json.toolbox.definition.length;
   expect(editor.json.toolbox.definition.map(i => i.name)).toContain("text");
   expect(editor.json.toolbox.definition.map(i => i.name)).not.toContain("comment");
-  expect(editor.json.toolbox.categories[1].items).toStrictEqual(["text", "multipletext"]);
+  expect(editor.json.toolbox.categories[1].items).toStrictEqual(["text", "multipletext", "datetimepicker"]);
   itemsQuestion.removeRow(0);
-  expect(editor.json.toolbox.categories[1].items).toStrictEqual(["multipletext"]);
+  expect(editor.json.toolbox.categories[1].items).toStrictEqual(["multipletext", "datetimepicker"]);
   expect(editor.json.toolbox.definition.length).toBe(length - 1);
 });
 
@@ -202,7 +202,7 @@ test("Preset edit, toolbox - remove whole category from categories", () => {
   expect(categQuestion.visibleRows).toHaveLength(5);
   const row = categQuestion.visibleRows[1];
   categQuestion.removeRow(1);
-  expect(matrixQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["text", "comment", "multipletext"]);
+  expect(matrixQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["text", "comment", "multipletext", "datetimepicker"]);
   expect(editor.json.toolbox).toBeDefined();
   expect(editor.json.toolbox.categories.length).toBe(4);
 });
@@ -261,13 +261,13 @@ test("Preset edit, toolbox - remove new item from hidden items to its default ca
   const categQuestion = survey.getQuestionByName("toolbox_categories");
   categQuestion.visibleRows[1].showDetailPanel();
   let items = categQuestion.visibleRows[1].detailPanel.getQuestionByName("items");
-  expect(items.value.map(i => i.name)).toEqual(["text", "comment", "multipletext"]);
+  expect(items.value.map(i => i.name)).toEqual(["text", "comment", "multipletext", "datetimepicker"]);
   items.removeRow(2);
-  expect(items.value.map(i => i.name)).toEqual(["text", "comment"]);
+  expect(items.value.map(i => i.name)).toEqual(["text", "comment", "datetimepicker"]);
 
   const matrixQuestion = survey.getQuestionByName("toolbox_matrix");
   matrixQuestion.removeRow(0);
-  expect(categQuestion.value[1].items.map(i => i.name)).toEqual(["text", "comment", "multipletext"]);
+  expect(categQuestion.value[1].items.map(i => i.name)).toEqual(["text", "comment", "datetimepicker", "multipletext"]);
 });
 
 test("Preset edit, toolbox - remove new item from hidden items to general category", () => {
@@ -346,14 +346,14 @@ test("Preset edit, toolbox - reorder items", () => {
   const row = categQuestion.visibleRows[1];
   row.showDetailPanel();
   const itemsQuestion = row.getQuestionByName("items");
-  expect(itemsQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["text", "comment", "multipletext"]);
+  expect(itemsQuestion.visibleRows.map(r => r.getValue("name"))).toStrictEqual(["text", "comment", "multipletext", "datetimepicker"]);
   const value = itemsQuestion.value;
   value.push(value[0]);
   value.splice(0, 1);
   itemsQuestion.value = value;
   expect(editor.json.toolbox).toBeDefined();
   expect(editor.json.toolbox.definition.map(i => i.name)).toContain("text");
-  expect(editor.json.toolbox.categories[1].items).toStrictEqual(["comment", "multipletext", "text"]);
+  expect(editor.json.toolbox.categories[1].items).toStrictEqual(["comment", "multipletext", "datetimepicker", "text"]);
 });
 
 test("Preset edit, toolbox - change category", () => {
@@ -380,7 +380,7 @@ test("Preset edit, toolbox - change category", () => {
   itemsQuestion.value = value;
   itemsQuestion2.value = value2;
 
-  expect(editor.json.toolbox.categories[1].items).toStrictEqual(["text", "comment", "multipletext", "panel"]);
+  expect(editor.json.toolbox.categories[1].items).toStrictEqual(["text", "comment", "multipletext", "datetimepicker", "panel"]);
   expect(editor.json.toolbox.categories[2].items).toStrictEqual(["paneldynamic"]);
 });
 
@@ -752,12 +752,12 @@ test("Change toolbox presets multiple times", () => {
   const categoriesValue = [...categoriesQuestion.value];
   categoriesQuestion.value = [categoriesValue[1], categoriesValue[2]];
   expect(editor.json.toolbox.categories.map(t => t.category)).toEqual(["text", "containers"]);
-  expect(editor.json.toolbox.definition.map(t => t.name)).toEqual(["text", "comment", "multipletext", "panel", "paneldynamic"]);
+  expect(editor.json.toolbox.definition.map(t => t.name)).toEqual(["text", "comment", "multipletext", "datetimepicker", "panel", "paneldynamic"]);
 
   let defaultTabQuestion = survey.getQuestionByName("tabs_activeTab");
   defaultTabQuestion.value = "preview";
   expect(editor.json.toolbox.categories.map(t => t.category)).toEqual(["text", "containers"]);
-  expect(editor.json.toolbox.definition.map(t => t.name)).toEqual(["text", "comment", "multipletext", "panel", "paneldynamic"]);
+  expect(editor.json.toolbox.definition.map(t => t.name)).toEqual(["text", "comment", "multipletext", "datetimepicker", "panel", "paneldynamic"]);
 });
 test("Toolbox import and defaults", () => {
   const editor = new CreatorPresetEditorModel({});
