@@ -2124,8 +2124,9 @@ test("WYSIWYG toolbar separator is before copy", (): any => {
   const adorner = new QuestionAdornerViewModel(creator, creator.survey.getQuestionByName("q1"), <any>undefined);
   const visible = adorner.actionContainer.getVisibleActions();
   const ids = visible.map(action => action.id);
-  expect(ids.indexOf("isrequired")).toBeLessThan(ids.indexOf("duplicate"));
-  expect(ids.indexOf("duplicate")).toBeLessThan(ids.indexOf("delete"));
+  expect(ids.indexOf("convertTo")).toBeLessThan(ids.indexOf("duplicate"));
+  expect(ids.indexOf("duplicate")).toBeLessThan(ids.indexOf("isrequired"));
+  expect(ids.indexOf("isrequired")).toBeLessThan(ids.indexOf("delete"));
   expect(visible.filter(action => action.needSeparator).map(action => action.id)).toEqual(["duplicate"]);
 });
 test("WYSIWYG Add item is a separate toolbar action", (): any => {

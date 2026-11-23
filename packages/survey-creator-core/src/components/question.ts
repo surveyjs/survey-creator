@@ -1152,9 +1152,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       container.setForceIconMode(this.wysiwygMode);
     }
     if (!this.wysiwygMode) return;
-    // Converters and Required stay left of the separator. Copy starts the group on the right.
-    const left: { [id: string]: number } = { convertTo: 0, convertInputType: 1, isrequired: 2 };
-    const right: { [id: string]: number } = { duplicate: 10, settings: 11, delete: 12 };
+    // Converters stay left of the separator. Copy, Required and Delete follow it.
+    const left: { [id: string]: number } = { convertTo: 0, convertInputType: 1 };
+    const right: { [id: string]: number } = { duplicate: 10, isrequired: 11, delete: 12, settings: 13 };
     let customIndex = 20;
     container.actions.forEach(action => {
       if (left[action.id] !== undefined) {
