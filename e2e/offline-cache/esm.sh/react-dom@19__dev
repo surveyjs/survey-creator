@@ -1,0 +1,4 @@
+/* esm.sh - react-dom@19.3.1 */
+import "/react@19.3.1/es2022/react.development.mjs";
+export * from "/react-dom@19.3.1/es2022/react-dom.development.mjs";
+export { default } from "/react-dom@19.3.1/es2022/react-dom.development.mjs";

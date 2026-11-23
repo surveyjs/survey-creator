@@ -69,6 +69,8 @@ export var spanishTranslation = {
     expression: "Expresión (solo lectura)",
     // "Signature"
     signaturepad: "Almohadilla de firma",
+    // [Auto-translated] "Filter"
+    filter: "Filtro",
     // [Auto-translated] "Button Group"
     buttongroup: "Grupo de botones"
   },
@@ -304,6 +306,8 @@ export var spanishTranslation = {
     themeResetConfirmationOk: "Sí, restablece el tema",
     // "Add Question"
     addNewQuestion: "Añadir pregunta",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Seleccionar tipo de pregunta",
     // "Select page..."
     selectPage: "Seleccionar página ...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var spanishTranslation = {
     addNewTypeQuestion: "Añadir {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGOTIPO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logo de subida",
     // [Auto-translated] "Item "
     choices_Item: "Artículo ",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var spanishTranslation = {
       templateDescription: "Patrón de descripción de la entrada",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Patrón de título de entrada",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Título de entrada provisional",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Texto de panel vacío",
       // [Auto-translated] "Tab title pattern"
@@ -813,6 +821,38 @@ export var spanishTranslation = {
       // [Auto-translated] "Expression"
       expression: "Expresión"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Fuente de datos",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Mostrar chips de filtro",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Mostrar el botón Filtros",
+      // [Auto-translated] "Show search"
+      showSearch: "Mostrar búsqueda",
+      // [Auto-translated] "Search in"
+      searchFields: "Buscar en",
+      // [Auto-translated] "Presets"
+      items: "Presets",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Ajuste predeterminado",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Permitir múltiples ajustes preestablecidos",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Permitir que los encuestados añadan ajustes preestablecidos"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Nombre predefinido",
+      // [Auto-translated] "Preset title"
+      title: "Título predefinido",
+      // [Auto-translated] "Filter expression"
+      expression: "Expresión del filtro",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Permitir edición",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Permitir la eliminación"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Ordenar por",
@@ -874,7 +914,9 @@ export var spanishTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Cada opción en una columna separada",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Permitir ordenación por esta columna"
+      allowSort: "Permitir ordenación por esta columna",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Permitir filtrado por esta columna"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var spanishTranslation = {
     addItem: "Haga clic para agregar un artículo ...",
     // "Click to remove the item..."
     removeItem: "Haga click para eliminar el elemento...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Añadir {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Elimina {0}",
     // "Drag the item"
     dragItem: "Arrastra el elemento",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Expandir las opciones anidadas",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Colapso de las elecciones anidadas",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Expande las opciones anidadas de {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Colapsar las elecciones anidadas de {0}",
     // [Auto-translated] "Show description"
     showDescription: "Descripción del programa",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var spanishTranslation = {
     "listIsEmpty@pages": "Sin páginas",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "No hay niveles de suerte",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Sin ajustes preestablecidos",
     // "Add new choice"
     "addNew@choices": "Añade una opción",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var spanishTranslation = {
     "addNew@pages": "Añadir página",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Añadir nivel de ordenación",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Añadir preajuste",
     // "Value"
     value: "Valor",
     // "Text"
@@ -1162,8 +1216,8 @@ export var spanishTranslation = {
     visible: "¿Es visible?",
     // "Required"
     isRequired: "¿Se requiere?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Acepta solo una respuesta positiva",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Requiere una respuesta positiva",
     // [Auto-translated] "Mark as required"
     markRequired: "Marcar según sea necesario",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var spanishTranslation = {
     eachRowUnique: "Evitar respuestas duplicadas en filas",
     // "Error message for required questions"
     requiredErrorText: "Texto de error requerido",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Mensaje de error cuando se requiere Sí",
     // "Display the question on a new line"
     startWithNewLine: "¿Empieza con la nueva línea?",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var spanishTranslation = {
     pageSize: "Filas por página",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Permitir a los usuarios ordenar filas",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Permitir filtrar por esta pregunta",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Operadores de filtro",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Niveles máximos de ordenación",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var spanishTranslation = {
       rateValues: "Valores de la tasa",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Configuración del control deslizante",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Configuración del filtro",
+      // [Auto-translated] "Presets"
+      presets: "Presets",
       // "Choices from a Web Service"
       choicesByUrl: "Opciones de la web",
       // "Numbering"
@@ -2868,6 +2932,8 @@ export var spanishTranslation = {
       width: "Define la anchura del panel en proporción a otros elementos topográficos de la misma línea. Acepta valores CSS (px, %, in, pt, etc.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Escriba una plantilla para los títulos de los paneles dinámicos. Utilice {panelIndex} para la posición general del panel y {visiblePanelIndex} para su orden entre los paneles visibles. Inserte estos marcadores de posición en el patrón para agregar numeración automática.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Un texto de respaldo para los títulos de entrada que se aplica cuando el patrón de título de entrada no produce un valor significativo. Usa {panelIndex} para la posición general de la entrada y {visiblePanelIndex} para su orden entre las entradas visibles.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Escriba una plantilla para los títulos de las pestañas. Utilice {panelIndex} para la posición general de un panel y {visiblePanelIndex} para su orden entre los paneles visibles. Inserte estos marcadores de posición en el patrón para agregar numeración automática.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var spanishTranslation = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Establece la ubicación de la barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la encuesta."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Selecciona una matriz dinámica, una matriz desplegable o un panel dinámico cuyas filas o paneles el filtro acota a la retaguardia.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "El ajuste preestablecido se aplica cuando comienza la encuesta."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Utilice nombres de campos entre corchetes, por ejemplo: {price} < 20 y {category} anyof ['Beverages']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Limita los operadores que los encuestados pueden usar para filtrar por este campo. Dejar vacío para permitir todos los operadores que se adapten al campo.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Un identificador de columna que no es visible para los encuestados.",
@@ -3274,8 +3352,6 @@ export var spanishTranslation = {
     valueTrue: "Un valor que se debe guardar en los resultados de la encuesta cuando los encuestados dan una respuesta positiva.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Un valor que se debe guardar en los resultados de la encuesta cuando los encuestados dan una respuesta negativa.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Selecciona tratar una respuesta negativa como sin respuesta, por lo que los encuestados deben seleccionar \"Sí\" (o marcar la casilla) para continuar. Por ejemplo, úsalo para exigir consentimiento a términos y condiciones. Solo se aplica cuando la pregunta es obligatoria.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "No se recomienda deshabilitar esta opción, ya que invalida la imagen de vista previa y dificulta que un usuario comprenda si los archivos se han cargado.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var spanishTranslation = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" y \"{aliasKey}\" de {ownerText} son dos nombres de una sola propiedad: el tiempo de ejecución los aplica en el orden en que el JSON los escribe, así que \"{winner}\" gana.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" está configurado en \"{name}\", pero inputType \"{inputType}\" no tiene límites: el tiempo de ejecución lo ignora.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" está configurado en \"{name}\", pero \"{name}\" no tiene ni isRequired ni requiredIf - el tiempo de ejecución lo ignora."
+        inertMinMax: "\"{key}\" está configurado en \"{name}\", pero inputType \"{inputType}\" no tiene límites: el tiempo de ejecución lo ignora."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

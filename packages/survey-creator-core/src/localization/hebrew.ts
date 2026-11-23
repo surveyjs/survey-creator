@@ -69,6 +69,8 @@ export var hebrewStrings = {
     expression: "ביטוי (קריאה בלבד)",
     // "Signature"
     signaturepad: "חתימה",
+    // [Auto-translated] "Filter"
+    filter: "סינון",
     // "Button Group"
     buttongroup: "קבוצת כפתורים"
   },
@@ -304,6 +306,8 @@ export var hebrewStrings = {
     themeResetConfirmationOk: "כן, אפס את ערכת הנושא",
     // "Add Question"
     addNewQuestion: "הוסף שאלה",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "בחר סוג שאלה",
     // "Select page..."
     selectPage: "בחר דף...",
     // "Choices are copied from"
@@ -366,6 +370,8 @@ export var hebrewStrings = {
     addNewTypeQuestion: "הוסף {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[לוגו]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "לוגו העלאה",
     // "Item "
     choices_Item: "פריט ",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var hebrewStrings = {
       templateDescription: "תבנית תיאור הערך",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "תבנית כות��ת ערך",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "מקום לכותרת הכניסה",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "טקסט ריק בחלונית",
       // [Auto-translated] "Tab title pattern"
@@ -813,6 +821,38 @@ export var hebrewStrings = {
       // [Auto-translated] "Expression"
       expression: "ביטוי"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "מקור הנתונים",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "הצג שבבי סינון",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "הצג את כפתור המסננים",
+      // [Auto-translated] "Show search"
+      showSearch: "הצג חיפוש",
+      // [Auto-translated] "Search in"
+      searchFields: "חפש ב",
+      // [Auto-translated] "Presets"
+      items: "פריסטים",
+      // [Auto-translated] "Default preset"
+      defaultItem: "הגדרה מראש ברירת מחדל",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "אפשר פריסטים מרובים",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "אפשר למשיבים להוסיף פריסטים"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "שם פריסט",
+      // [Auto-translated] "Preset title"
+      title: "כותרת פריסט",
+      // [Auto-translated] "Filter expression"
+      expression: "ביטוי מסנן",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "אפשר עריכה",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "אפשר מחיקה"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "מיין לפי",
@@ -874,7 +914,9 @@ export var hebrewStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "כל אפשרות בעמודה נפרדת",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "אפשר מיון לפי עמודה זו"
+      allowSort: "אפשר מיון לפי עמודה זו",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "אפשר סינון לפי עמודה זו"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var hebrewStrings = {
     addItem: "לחץ להוספת פריט...",
     // "Click to remove the item..."
     removeItem: "לחץ להסרת הפריט...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "הוסף {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "הסר {0}",
     // "Drag the item"
     dragItem: "גרור את הפריט",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "הרחבת אפשרויות מקוננות",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "קריסת בחירות מקוננות",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "הרחיב את אפשרויות המקוננות של {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "קריסת בחירות מקוננות {0}",
     // [Auto-translated] "Show description"
     showDescription: "תיאור התוכנית",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var hebrewStrings = {
     "listIsEmpty@pages": "אין עמודים",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "אין רמות מיון",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "ללא פריסטים",
     // "Add new choice"
     "addNew@choices": "הוסף ברירת בחירה",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var hebrewStrings = {
     "addNew@pages": "דף הוסף",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "הוספת רמת מיון",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "הוסף פריסט",
     // "Value"
     value: "ערך",
     // "Text"
@@ -1162,8 +1216,8 @@ export var hebrewStrings = {
     visible: "נראה",
     // "Required"
     isRequired: "נדרש",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "קבל רק תשובה חיובית",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "דרוש תשובה חיובית",
     // "Mark as required"
     markRequired: "סמן כשדה חובה",
     // "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var hebrewStrings = {
     eachRowUnique: "מניעת תגובות כפולות בשורות",
     // "Error message for required questions"
     requiredErrorText: "הודעת שגיאה לשדה חובה",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "הודעת שגיאה כאשר נדרש כן",
     // "Display the question on a new line"
     startWithNewLine: "הצג את השאלה בשורה חדשה",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var hebrewStrings = {
     pageSize: "שורות בעמוד",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "אפשר למשתמשים למיין שורות",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "אפשר סינון לפי שאלה זו",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "מפעילי סינון",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "רמות מיון מקסימליות",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var hebrewStrings = {
       rateValues: "ערכי דירוג",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "הגדרות מחוון",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "הגדרות סינון",
+      // [Auto-translated] "Presets"
+      presets: "פריסטים",
       // "Choices from a Web Service"
       choicesByUrl: "בחירות משירות RESTful",
       // "Numbering"
@@ -2868,6 +2932,8 @@ export var hebrewStrings = {
       width: "קובע את רוחב החלונית ביחס לרכיבי סקר אחרים באותה שורה. מקבל ערכי CSS (px, %, in, pt וכו').",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "הקלד תבנית לכותרות חלוניות דינמיות. השתמש ב- {panelIndex} למיקום הכללי של החלונית וב- {visiblePanelIndex} לסדר שלה בין חלוניות גלויות. הוסף מצייני מיקום אלה לתבנית כדי להוסיף מספור אוטומטי.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "טקסט גיבוי לכותרות הערכים שמתאים כאשר תבנית כותרת הכניסה אינה מייצרת ערך משמעותי. השתמש ב-{panelIndex} למיקום הכללי של הערך וב-{visiblePanelIndex} לסדר בין הערכים הנראים.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "הקלד תבנית עבור כותרות כרטיסיות. השתמש ב- {panelIndex} למיקום הכללי של חלונית וב- {visiblePanelIndex} לסדר שלה בין חלוניות גלויות. הוסף מצייני מיקום אלה לתבנית כדי להוסיף מספור אוטומטי.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var hebrewStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "מגדיר את המיקום של מד ההתקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "בחר מטריצה דינמית, מטריצה נפתחת או לוח דינמי שהמסנן מצמצם את השורות או הלוחות שלו.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "ההגדרה המוקדמת שהוחלה כאשר הסקר מתחיל."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "השתמש בשמות שדות בסוגריים מסולסלים, לדוגמה: {price} < 20 ו-{category} כל אחד מ-['משקאות']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "מגביל את האופרטורים שהמשיבים יכולים להשתמש בהם כדי לסנן לפי שדה זה. השאר ריק כדי לאפשר לכל האופרטורים המתאימים לשדה.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "מזהה עמודה שאינו גלוי למשיבים.",
@@ -3274,8 +3352,6 @@ export var hebrewStrings = {
     valueTrue: "ערך שיש לשמור בתוצאות הסקר כאשר המשיבים נותנים תשובה חיובית.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "ערך שיש לשמור בתוצאות הסקר כאשר המשיבים נותנים תשובה שלילית.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "בחר להתייחס לתשובה שלילית כלא נענתה, כך שהמשיבים חייבים לבחור \"כן\" (או לסמן את תיבת הסימון) כדי להמשיך. לדוגמה, השתמש בזה כדי לדרוש הסכמה לתנאים ולהגבלות. זה חל רק כאשר השאלה נדרשת.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "לא מומלץ להשבית אפשרות זו מכיוון שהיא עוקפת את תמונת התצוגה המקדימה ומקשה על המשתמש להבין אם הקבצים הועלו.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var hebrewStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" ו-\"{aliasKey}\" של {ownerText} הם שני שמות של תכונה אחת - זמן הריצה מיישם אותם לפי הסדר שבו JSON כותב אותם, כך ש\"{winner}\" מנצח.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" מוגדר על \"{name}\", אבל ל-inputType \"{inputType}\" אין גבולות - זמן הריצה מתעלם ממנו.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" מוגדר על \"{name}\", אך \"{name}\" אינו isRequired ולא requiredIf - זמן הריצה מתעלם ממנו."
+        inertMinMax: "\"{key}\" מוגדר על \"{name}\", אבל ל-inputType \"{inputType}\" אין גבולות - זמן הריצה מתעלם ממנו."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

@@ -21,7 +21,6 @@
   <script src="../node_modules/survey-core/survey.i18n.js"></script>
   <script src="../node_modules/survey-core/themes/index.js"></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.js"></script>
-  <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.js"></script>
   <script src="../node_modules/survey-js-ui/survey-js-ui.js"></script>
   <script src="../build/survey-creator-js.js"></script>
   <script src="./sc.js"></script>
@@ -34,17 +33,46 @@
   window.surveyJSFramework = "react";
   SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
     SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
-  const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
-  creator.tabResponsivenessMode = "menu";
-  creator["animationEnabled"] = false;
-  creator.showOneCategoryInPropertyGrid = false;
-  creator.allowZoom = false;
+  // The page's creator. The first load and resetCreatorForReuse() both build it here, so they can't drift apart.
+  const createDefaultCreator = () => {
+    const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
+    creator.tabResponsivenessMode = "menu";
+    creator["animationEnabled"] = false;
+    creator.showOneCategoryInPropertyGrid = false;
+    creator.allowZoom = false;
+    return creator;
+  };
+  const creator = createDefaultCreator();
   window.creator = creator;
+  window.creatorResetCount = 0;
 
   class SurveyCreatorRenderComponent extends SurveyUI.Component {
     constructor(props) {
       super(props);
       this.state = { creator: creator };
+      // Used by the e2e fixture (e2e/helper.ts) to reuse this page for the next test. After a test,
+      // releaseCreatorForReuse() unmounts the creator and disposes it (and the one updateCreatorModel replaced);
+      // the next test's resetCreatorForReuse() renders a new default creator in a new component instance. Each
+      // bumps window.creatorResetCount once it's done. The creators are disposed in a timer of their own, so an
+      // error there is an uncaught page error.
+      window.releaseCreatorForReuse = () => {
+        const oldCreators = [window.creator, window.prevCreator];
+        this.setState({ creator: undefined }, () => setTimeout(() => {
+          try {
+            oldCreators.forEach(c => c && !c.isDisposed && c.dispose());
+          } finally {
+            window.creatorResetCount++;
+          }
+        }));
+        return true;
+      };
+      window.resetCreatorForReuse = () => {
+        const newCreator = createDefaultCreator();
+        window.creator = newCreator;
+        window.prevCreator = undefined;
+        this.setState({ creator: newCreator }, () => window.creatorResetCount++);
+        return true;
+      };
       window.updateCreatorModel = (options, json) => {
         window.prevCreator = window.creator;
         const creator = new SurveyCreator.SurveyCreator(options);
@@ -58,7 +86,7 @@
       }
     }
     render() {
-      return SurveyUI.createElement(SurveyCreator.SurveyCreatorComponent, { creator: this.state.creator });
+      return this.state.creator ? SurveyUI.createElement(SurveyCreator.SurveyCreatorComponent, { creator: this.state.creator }) : null;
     }
   }
   // SurveyCreator.renderSurveyCreator(creator, document.getElementById("survey-creator"));
@@ -96,7 +124,12 @@
 
   shadowRoot.appendChild(rootElement);
 
-  SurveyUI.render(survey, rootElement);
+  // Render once both stylesheets have loaded: the tab bar measures its items only once, after the first
+  // render, and items measured without the creator CSS keep it collapsed into a menu.
+  Promise.all([surveyLink, creatorLink].map(link => new Promise(resolve => {
+    link.addEventListener("load", resolve);
+    link.addEventListener("error", resolve);
+  }))).then(() => SurveyUI.render(survey, rootElement));
 </script>
 
 </html>

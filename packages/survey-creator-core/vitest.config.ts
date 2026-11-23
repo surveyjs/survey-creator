@@ -146,7 +146,7 @@ export default defineConfig({
           // Vitest surfaces them as "unhandled errors" and fails the run.
           // Treat them as benign timer leaks until source-side cleanup lands.
           dangerouslyIgnoreUnhandledErrors: true,
-          setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
+          setupFiles: ["./tests/jsdom-inline-style.ts", "./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
         },
       },
       {
@@ -162,7 +162,7 @@ export default defineConfig({
           testTimeout: 30000,
           hookTimeout: 30000,
           dangerouslyIgnoreUnhandledErrors: true,
-          setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
+          setupFiles: ["./tests/jsdom-inline-style.ts", "./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
         },
       },
       {
@@ -178,7 +178,7 @@ export default defineConfig({
           testTimeout: 30000,
           hookTimeout: 30000,
           dangerouslyIgnoreUnhandledErrors: true,
-          setupFiles: ["./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
+          setupFiles: ["./tests/jsdom-inline-style.ts", "./tests/vitest-jest-globals-shim.ts", "jest-canvas-mock", "./tests/vitest.setup.ts"],
         },
       },
     ],

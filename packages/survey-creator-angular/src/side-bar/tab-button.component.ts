@@ -1,10 +1,11 @@
 import { Component, Input } from "@angular/core";
-import { BaseAngular, AngularComponentFactory } from "survey-angular-ui";
+import { BaseAngular, AngularComponentFactory, SurveyBaseProviders } from "survey-angular-ui";
 import { Action } from "survey-core";
 @Component({
   selector: "svc-tab-button",
   templateUrl: "./tab-button.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class TabButtonComponent extends BaseAngular<Action> {
   @Input() model!: Action;

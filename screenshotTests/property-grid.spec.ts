@@ -57,7 +57,7 @@ test.describe(title, () => {
 
     await compareScreenshot(page, page.getByRole("group", { name: "Validation" }), "pg-matrix-dropdown-width.png");
   });
-  test("PG: tagbox editor", async ({ page }) => {
+  test("PG: tagbox editor", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       (window as any).Survey.Serializer.addProperty("question", {
         category: "general",

@@ -1,12 +1,13 @@
 import { Component } from "@angular/core";
-import { AngularComponentFactory } from "survey-angular-ui";
+import { AngularComponentFactory, SurveyBaseProviders } from "survey-angular-ui";
 import { QuestionAdornerViewModel } from "survey-creator-core";
 import { QuestionDesignerComponent } from "./question.component";
 
 @Component({
   selector: "svc-widget-question",
   templateUrl: "./question-widget.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class QuestionWidgetDesignerComponent extends QuestionDesignerComponent {
   protected override createModel(): void {

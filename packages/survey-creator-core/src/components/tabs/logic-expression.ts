@@ -10,48 +10,18 @@ export class SurveyLogicExpressionUpdater {
   }
   public get isModified(): boolean { return this.constChanges.length > 0; }
   public toString(): string {
-    var self = this;
-    var isRoot = true;
-    var strFunc = function (op: Operand): string {
-      var locIsRoot = isRoot;
-      isRoot = false;
-      if (op.getType() === "const") {
-        return self.constToString(<Const>op);
-      }
-      if (op.getType() === "binary") {
-        return self.binaryToString(<BinaryOperand>op, locIsRoot, strFunc);
-      }
-      return undefined;
-    };
-    return this.operand.toString(strFunc);
+    // the output is an expression that is parsed again: "=" for equal, the changed constants, no root brackets
+    return this.operand.toString({
+      constToString: (op: Const): string => this.constToString(op),
+      operatorToString: (operatorName: string): string => SurveyLogicExpressionUpdater.operatorText[operatorName],
+      skipRootBrackets: true
+    });
   }
   private constToString(op: Const): string {
     for (var i = 0; i < this.constChanges.length; i ++) {
       if (this.constChanges[i].op === op) return this.constChanges[i].val;
     }
-    return op.toString();
-  }
-  private binaryToString(
-    op: BinaryOperand,
-    isRoot: boolean,
-    func: (op: Operand) => string
-  ): string {
-    return (
-      (isRoot ? "" : "(") +
-      this.operandToString(op.leftOperand, func) +
-      " " +
-      this.operatorToString(op.operator) +
-      " " +
-      this.operandToString(op.rightOperand, func) +
-      (isRoot ? "" : ")")
-    );
-  }
-  private operandToString(op: any, func: (op: Operand) => string): string {
-    return !!op ? op.toString(func) : "";
-  }
-  private operatorToString(operator: string): string {
-    var res = SurveyLogicExpressionUpdater.operatorText[operator];
-    return !!res ? res : operator;
+    return undefined;
   }
   static operatorText = {
     less: "<",

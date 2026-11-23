@@ -69,6 +69,8 @@ export var htStrings = {
     expression: "Ekspresyon (li sèlman)",
     // "Signature"
     signaturepad: "Siyati",
+    // [Auto-translated] "Filter"
+    filter: "Filtè",
     // "Button Group"
     buttongroup: "Gwoup bouton"
   },
@@ -304,6 +306,8 @@ export var htStrings = {
     themeResetConfirmationOk: "Wi, reset tèm nan",
     // "Add Question"
     addNewQuestion: "Ajoute Kesyon",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Chwazi kalite kesyon",
     // "Select page..."
     selectPage: "Chwazi paj...",
     // "Choices are copied from"
@@ -366,6 +370,8 @@ export var htStrings = {
     addNewTypeQuestion: "Ajoute {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Voye logo",
     // "Item "
     choices_Item: "Atik",
     // "Select a file"
@@ -700,6 +706,8 @@ export var htStrings = {
       templateDescription: "Modèl deskripsyon panèl",
       // "Entry title pattern"
       templateTitle: "Modèl tit panèl",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Antre placeholder",
       // "Empty panel text"
       noEntriesText: "Tèks panèl vid",
       // "Tab title pattern"
@@ -813,6 +821,38 @@ export var htStrings = {
       // "Expression"
       expression: "Ekspresyon"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Sous done",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Montre chip filtè yo",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Montre bouton Filtè yo",
+      // [Auto-translated] "Show search"
+      showSearch: "Montre rechèch",
+      // [Auto-translated] "Search in"
+      searchFields: "Chèche nan",
+      // [Auto-translated] "Presets"
+      items: "Predefini",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Predefini default",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Pèmèt plizyè predefini",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Pèmèt moun ki reponn yo ajoute predefini"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Non predefini",
+      // [Auto-translated] "Preset title"
+      title: "predefini",
+      // [Auto-translated] "Filter expression"
+      expression: "Ekspresyon filtè",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Pèmèt edisyon",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Pèmèt efase"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Triye pa",
@@ -874,7 +914,9 @@ export var htStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Chak opsyon nan yon kolòn separe",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Pèmèt klasman pa kolòn sa a"
+      allowSort: "Pèmèt klasman pa kolòn sa a",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Pèmèt filtraj pa kolòn sa a"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var htStrings = {
     addItem: "Klike pou ajoute yon atik...",
     // "Click to remove the item..."
     removeItem: "Klike pou retire atik la...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Add {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Retire {0}",
     // "Drag the item"
     dragItem: "Trennen atik la",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Elaji chwa imbriqué",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Efondreman chwa enbrike",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Elaji chwa enbrikasyon {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Efondreman chwa enbrikasyon nan {0}",
     // [Auto-translated] "Show description"
     showDescription: "Montre deskripsyon",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var htStrings = {
     "listIsEmpty@pages": "Ou poko gen okenn paj",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Pa gen nivo sòt",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Pa gen predefinisyon",
     // "Add new choice"
     "addNew@choices": "Ajoute nouvo chwa",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var htStrings = {
     "addNew@pages": "Ajoute nouvo paj",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Ajoute triye nivo",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Ajoute preset",
     // "Value"
     value: "Valè",
     // "Text"
@@ -1162,8 +1216,8 @@ export var htStrings = {
     visible: "Vizib",
     // "Required"
     isRequired: "Obligatwa",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Aksepte sèlman yon repons pozitif",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Mande pou yon repons pozitif",
     // "Mark as required"
     markRequired: "Make jan sa nesesè",
     // "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var htStrings = {
     eachRowUnique: "Anpeche repons doub nan ranje",
     // "Error message for required questions"
     requiredErrorText: "Mesaj erè pou kesyon obligatwa yo",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Mesaj erè lè Wi mande",
     // "Display the question on a new line"
     startWithNewLine: "Montre kesyon an sou yon nouvo liy",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var htStrings = {
     pageSize: "Ranje pou chak paj",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Pèmèt itilizatè yo sòt ranje ranje",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Pèmèt filtraj pa kesyon sa a",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Operatè filtè",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Nivo maksimòm sòt",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var htStrings = {
       rateValues: "Valè Rating",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Anviwònman koulis",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Anviwònman Filtè",
+      // [Auto-translated] "Presets"
+      presets: "Predefini",
       // "Choices from a Web Service"
       choicesByUrl: "Chwa nan yon sèvis entènèt",
       // "Numbering"
@@ -2868,6 +2932,8 @@ export var htStrings = {
       width: "Mete lajè panèl la an pwopòsyon ak lòt eleman sondaj nan menm liy lan. Aksepte valè CSS (px, %, in, pt, elatriye).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Tape yon modèl pou tit panèl dinamik. Sèvi ak {panelIndex} pou pozisyon jeneral panèl la ak {visiblePanelIndex} pou lòd li nan mitan panno vizib. Mete espas sa yo nan modèl la pou ajoute nimero otomatik.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Yon tèks fallback pou antre ki aplike lè modèl antre a pa pwodwi yon valè siyifikatif. Sèvi ak {panelIndex} pou pozisyon jeneral antre a ak {visiblePanelIndex} pou lòd li yo nan mitan antre vizib.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Tape yon modèl pou tit tab yo. Sèvi ak {panelIndex} pou pozisyon jeneral yon panèl ak {visiblePanelIndex} pou lòd li nan mitan panno vizib. Mete espas sa yo nan modèl la pou ajoute nimero otomatik.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var htStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Mete kote ba pwogrè a. Valè \"Oto\" a montre ba pwogrè a anwo oswa anba tèt sondaj la."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Chwazi yon matris dinamik, yon matris desann oswa yon panèl dinamik kote filtè a limite ranje oswa panèl yo.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Preset la aplike lè sondaj la kòmanse."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Sèvi ak non chan yo nan parantèz, pa egzanp: {price} < 20 ak {category} anyof ['Drinks']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Limite operatè yo ka itilize pou filtre pa chan sa a. Kite vid pou pèmèt tout operatè ki adapte ak chan an.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Yon ID kolòn ki pa vizib pou moun ki reponn yo.",
@@ -3274,8 +3352,6 @@ export var htStrings = {
     valueTrue: "Yon valè pou sove nan rezilta sondaj yo lè moun ki repond bay yon repons pozitif.",
     // "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Yon valè pou sove nan rezilta sondaj yo lè moun ki repond bay yon repons negatif.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Chwazi pou trete yon repons negatif kòm san repons, kidonk moun ki repond yo dwe chwazi \"Wi\" (oswa tcheke kazye a) pou kontinye. Pa egzanp, sèvi ak li pou mande konsantman pou tèm ak kondisyon yo. Aplike sèlman lè kesyon an egzije.",
     // "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Li pa rekòmande pou ou enfim opsyon sa a paske li depase imaj Preview la epi li fè li difisil pou yon itilizatè konprann si wi ou non dosye yo te Uploaded.",
     // "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var htStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{kle}\" ak \"{aliasKey}\" nan {ownerText} se de non yon sèl pwopriyete - tan an kouri aplike yo nan lòd la JSON ekri yo, se konsa \"{gayan}\" ranport.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" se mete sou \"{non}\", men inputType \"{inputType}\" pa gen okenn limit - tan an kouri inyore li.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{kle}\" se mete sou \"{non}\", men \"{non}\" pa gen ni isRequired ni obligatwaSi - tan an kouri inyore li."
+        inertMinMax: "\"{key}\" se mete sou \"{non}\", men inputType \"{inputType}\" pa gen okenn limit - tan an kouri inyore li."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

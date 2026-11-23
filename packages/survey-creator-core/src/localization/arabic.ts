@@ -69,6 +69,8 @@ export var arStrings = {
     expression: "عملية حسابية (للقرائة فقط)",
     // "Signature"
     signaturepad: "لوحة توقيع",
+    // [Auto-translated] "Filter"
+    filter: "فلتر",
     // "Button Group"
     buttongroup: "Button group"
   },
@@ -304,6 +306,8 @@ export var arStrings = {
     themeResetConfirmationOk: "نعم ، إعادة تعيين السمة",
     // [Auto-translated] "Add Question"
     addNewQuestion: "إضافة سؤال",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "اختر نوع السؤال",
     // [Auto-translated] "Select page..."
     selectPage: "اختر صفحة...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var arStrings = {
     addNewTypeQuestion: "أضف {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[الشعار]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "رفع الشعار",
     // [Auto-translated] "Item "
     choices_Item: "بند ",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var arStrings = {
       templateDescription: "نمط وصف الإدخال",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "نمط عنوان الإدخال",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "عنوان المدخل مؤقت",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "نص اللوحة الفارغ",
       // [Auto-translated] "Tab title pattern"
@@ -813,6 +821,38 @@ export var arStrings = {
       // [Auto-translated] "Expression"
       expression: "تعبير"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "مصدر البيانات",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "عرض شرائح المرشح",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "عرض زر الفلاتر",
+      // [Auto-translated] "Show search"
+      showSearch: "عرض البحث",
+      // [Auto-translated] "Search in"
+      searchFields: "ابحث في",
+      // [Auto-translated] "Presets"
+      items: "الإعدادات المسبقة",
+      // [Auto-translated] "Default preset"
+      defaultItem: "الإعداد المسبق الافتراضي",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "السماح بعدة إعدادات مسبقة",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "السماح للمستجيبين بإضافة إعدادات مسبقة"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "اسم الإعداد المسبق",
+      // [Auto-translated] "Preset title"
+      title: "عنوان الإعداد المسبق",
+      // [Auto-translated] "Filter expression"
+      expression: "تعبير المرشح",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "السماح بالتحرير",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "السماح بالحذف"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "الترتيب حسب",
@@ -874,7 +914,9 @@ export var arStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "كل خيار في عمود منفصل",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "السماح بالترتيب حسب هذا العمود"
+      allowSort: "السماح بالترتيب حسب هذا العمود",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "السماح بالتصفية حسب هذا العمود"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var arStrings = {
     addItem: "انقر لإضافة عنصر...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "انقر لإزالة العنصر...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "أضف {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "إزالة {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "سحب العنصر",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "توسيع الخيارات المتداخلة",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "انهيار الخيارات المتداخلة",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "وسع الخيارات المتداخلة {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "خيارات الانهيار المتداخلة {0}",
     // [Auto-translated] "Show description"
     showDescription: "وصف العرض",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var arStrings = {
     "listIsEmpty@pages": "لا صفحات",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "لا توجد مستويات فرز",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "لا إعدادات مسبقة",
     // [Auto-translated] "Add choice"
     "addNew@choices": "إضافة الاختيار",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var arStrings = {
     "addNew@pages": "إضافة صفحة",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "أضف مستوى الفرز",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "إضافة إعداد مسبق",
     // "Value"
     value: "القيمة",
     // "Text"
@@ -1162,8 +1216,8 @@ export var arStrings = {
     visible: "مرئي؟",
     // "Required"
     isRequired: "مطلوب؟",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "اقبل فقط إجابة إيجابية",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "أطلب إجابة إيجابية",
     // [Auto-translated] "Mark as required"
     markRequired: "وضع علامة كمطلوب",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var arStrings = {
     eachRowUnique: "منع تكرار الاستجابات في الصفوف",
     // "Error message for required questions"
     requiredErrorText: "نص خطأ إلزامي السؤال",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "رسالة خطأ عندما يكون مطلوبا خيار نعم",
     // "Display the question on a new line"
     startWithNewLine: "إظهار السؤال في صف جديد",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var arStrings = {
     pageSize: "الصفوف في الصفحة",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "السماح للمستخدمين بفرز الصفوف",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "السماح بالتصفية بناء على هذا السؤال",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "عوامل المرشح",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "أقصى مستويات الفرز",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var arStrings = {
       rateValues: "قيم التقييم",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "إعدادات شريط التمرير",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "إعدادات الفلتر",
+      // [Auto-translated] "Presets"
+      presets: "الإعدادات المسبقة",
       // "Choices from a Web Service"
       choicesByUrl: "خيارات من الإنترنت",
       // "Numbering"
@@ -2868,6 +2932,8 @@ export var arStrings = {
       width: "يضبط عرض اللوحة بما يتناسب مع عناصر الاستطلاع الأخرى في نفس السطر. يقبل قيم CSS (px ، ٪ ، in ، pt ، إلخ).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "اكتب قالبا لعناوين اللوحات الديناميكية. استخدم {panelIndex} للموضع العام لللوحة و {visiblePanelIndex} لترتيبها بين اللوحات المرئية. قم بإدراج هذه العناصر النائبة في النموذج لإضافة ترقيم تلقائي.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "نص احتياطي لعناوين المدخلات ينطبق عندما لا ينتج نمط عنوان المدخل قيمة ذات معنى. استخدم {panelIndex} للموقع العام للمدخل و{visiblePanelIndex} لترتيبه بين المدخلات المرئية.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "اكتب قالبا لعناوين علامات التبويب. استخدم {panelIndex} للموضع العام للوحة و {visiblePanelIndex} لترتيبها بين اللوحات المرئية. قم بإدراج هذه العناصر النائبة في النموذج لإضافة ترقيم تلقائي.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var arStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "لتعيين موقع شريط التقدم. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "اختر مصفوفة ديناميكية، أو مصفوفة منسدلة، أو لوحة ديناميكية يضيق الفلتر صفوفها أو لوحاتها.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "الإعداد المسبق الذي يطبق عند بدء الاستبيان."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "استخدم أسماء الحقول بين قوسين ملتفة، على سبيل المثال: {price} < 20 و {category} أي من ['مشروبات']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "يحدد الحدود التي يمكن للمشاركين استخدامها للتصفية حسب هذا الحقل. اترك فارغا للسماح لجميع المشغلين الذين يناسب الحقل.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "معرف عمود غير مرئي للمستجيبين.",
@@ -3274,8 +3352,6 @@ export var arStrings = {
     valueTrue: "قيمة يجب حفظها في نتائج الاستطلاع عندما يعطي المستجيبون إجابة إيجابية.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "قيمة يجب حفظها في نتائج الاستطلاع عندما يعطي المستجيبون إجابة سلبية.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "اختر اعتبار الإجابة السلبية غير مجيبة، لذا يجب على المشاركين اختيار \"نعم\" (أو وضع علامة على خانة الاختيار) للاستمرار. على سبيل المثال، استخدمها لطلب الموافقة على الشروط والأحكام. ينطبق فقط عندما يكون السؤال مطلوبا.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "لا يوصى بتعطيل هذا الخيار لأنه يتجاوز صورة المعاينة ويجعل من الصعب على المستخدم فهم ما إذا كان قد تم تحميل الملفات.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var arStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" و \"{aliasKey}\" من {ownerText} هما اسمان لخاصية واحدة - حيث يتم تطبيق وقت التشغيل عليهما بالترتيب الذي يكتبه JSON، لذا \"{winner}\" هو الفائز.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" مضبوط على \"{name}\"، لكن نوع inputType \"{inputType}\" لا حدود له - وقت التشغيل يتجاهله.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" مضبوط على \"{name}\"، لكن \"{name}\" لا يحتوي على isRequired ولا required If - وقت التشغيل يتجاهله."
+        inertMinMax: "\"{key}\" مضبوط على \"{name}\"، لكن نوع inputType \"{inputType}\" لا حدود له - وقت التشغيل يتجاهله."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

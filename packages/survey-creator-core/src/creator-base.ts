@@ -2,7 +2,7 @@ import {
   Base, SurveyModel, ListModel, Question, PanelModel, PageModel, PopupModel, property, IElement, Serializer,
   JsonObjectProperty, ActionContainer, AdaptiveActionContainer, IAction, Action, IPanel, SurveyElement, ItemValue,
   QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
-  EventBase, hasLicense, slk, glc, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
+  EventBase, hasLicense, slk, glc, getEmbeddedLicense, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
   chooseFiles, createDropdownActionModel,
   toCssClasses,
@@ -11,6 +11,7 @@ import {
   SvgThemeSets,
   QuestionPanelDynamicModel,
   ExpressionAIRequestEvent,
+  FilterAIRequestEvent,
   ChoiceItem,
   patchLegacyCSSVariables,
   ensureBaseThemeStyles,
@@ -20,7 +21,8 @@ import {
   SurveyVariablePresets,
   isAnimationEnabled,
   isReducedMotionPreferred,
-  subscribeReducedMotionChange
+  subscribeReducedMotionChange,
+  getIdSelector
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
@@ -38,6 +40,7 @@ import { ICreatorSelectionOwner } from "./selection-owner";
 import { SelectionHistory } from "./selection-history";
 
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
+import { TabJsonEditorMonacoPlugin } from "./components/tabs/json-editor-monaco";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 import { TabTestPlugin } from "./components/tabs/test-plugin";
 import { SurveyLogic } from "./components/tabs/logic";
@@ -364,6 +367,9 @@ export class SurveyCreatorModel extends Base
   public get licenseText(): string {
     const unlicensedPlugins = this.getUnlicensedPluginsNames();
     if (unlicensedPlugins.length > 0) return this.pluginLicenseTexts[unlicensedPlugins[0]];
+    // The "embedded-<name>" marker grants no license; it only replaces the banner text
+    const embedded = !!getEmbeddedLicense && getEmbeddedLicense();
+    if (embedded) return this.getLocString("survey.licenseEmbedded").replace("{whiteLabelUrl}", embedded.whiteLabelUrl);
     const licenseDateString = this.licenseDateString;
     if (licenseDateString) return this.getLocString("survey.license2").replace("{date}", licenseDateString);
     return this.getLocString("survey.license");
@@ -532,14 +538,24 @@ export class SurveyCreatorModel extends Base
     this.pageEditModeValue = val;
     const allowModifyPages = this.pageEditModeValue !== "single";
     this.changePageModifications(allowModifyPages);
-    SurveySettings.designMode.showEmptyTitles = allowModifyPages;
-    SurveySettings.designMode.showEmptyDescriptions = allowModifyPages;
+    if (!!this.survey) {
+      this.applyPageEditModeToSurvey(this.survey);
+    }
     if (this.pageEditModeValue === "bypage") {
       this.showPageNavigator = true;
     }
     if (oldValue !== val) {
       this.onPropertyChanged.fire(this, { name: "pageEditMode", oldValue: oldValue, newValue: val });
     }
+  }
+  // The page edit mode belongs to one creator, so it is set on the creator's own design-mode surveys
+  // and not in survey-core's global settings.designMode (shared by every creator and survey on the page).
+  // "single" hides empty page titles and descriptions; other modes leave the survey values undefined,
+  // so survey-core follows settings.designMode and a customer's own global value is kept.
+  private applyPageEditModeToSurvey(survey: SurveyModel): void {
+    const show = this.pageEditMode === "single" ? false : undefined;
+    survey.showEmptyTitlesInDesignMode = show;
+    survey.showEmptyDescriptionsInDesignMode = show;
   }
 
   @property() surveyValue: SurveyModel;
@@ -1167,7 +1183,10 @@ export class SurveyCreatorModel extends Base
   // options.systemPrompt and options.messages to a model and passes the answer to
   // options.callback({ text }), ({ data }) or ({ error }). Creator never calls a model: it checks the
   // answer and - while aiFixAttempts allow - sends a rejected answer back with the problems it found
-  // (attempt > 0, issues).
+  // (attempt > 0, issues). A Filter Control preset's expression is written through this event too,
+  // with survey-core's filter payload (FilterAIRequestEvent: responseFormat.name "survey_filter",
+  // question - the control); a handler that only forwards systemPrompt, messages and responseFormat
+  // serves both.
   //
   // The doccomment of onExpressionAssistantRequest (v3.2.3), which onAIExpressionRequest replaces, kept
   // for the technical writer; only the event name in the example is changed:
@@ -1204,7 +1223,8 @@ export class SurveyCreatorModel extends Base
   //   }
   // });
   // ```
-  public onAIExpressionRequest: EventBase<SurveyCreatorModel, ExpressionAIRequestEvent> = this.addCreatorEvent<SurveyCreatorModel, ExpressionAIRequestEvent>();
+  public onAIExpressionRequest: EventBase<SurveyCreatorModel, ExpressionAIRequestEvent | FilterAIRequestEvent> =
+    this.addCreatorEvent<SurveyCreatorModel, ExpressionAIRequestEvent | FilterAIRequestEvent>();
 
   /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.
@@ -2300,7 +2320,9 @@ export class SurveyCreatorModel extends Base
     this.addTab({ name: "preview", pluginCreator: () => new TabTestPlugin(this), iconName: TabTestPlugin.iconName });
     this.addTab({ name: "theme", pluginCreator: () => new ThemeTabPlugin(this), iconName: ThemeTabPlugin.iconName });
     this.addTab({ name: "logic", pluginCreator: () => new TabLogicPlugin(this), iconName: TabLogicPlugin.iconName });
-    if (TabJsonEditorAcePlugin.hasAceEditor()) {
+    if (TabJsonEditorMonacoPlugin.hasMonacoEditor()) {
+      this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorMonacoPlugin(this), iconName: TabJsonEditorMonacoPlugin.iconName, componentName: "svc-tab-json-editor-monaco" });
+    } else if (TabJsonEditorAcePlugin.hasAceEditor()) {
       this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorAcePlugin(this), iconName: TabJsonEditorAcePlugin.iconName, componentName: "svc-tab-json-editor-ace" });
     } else {
       this.addTab({ name: "json", pluginCreator: () => new TabJsonEditorTextareaPlugin(this), iconName: TabJsonEditorTextareaPlugin.iconName, componentName: "svc-tab-json-editor-textarea" });
@@ -2792,9 +2814,21 @@ export class SurveyCreatorModel extends Base
       if (propertyName === "name" && obj.isDescendantOf("selectbase")) {
         this.updateChoicesFromQuestionOnColumnNameChanged(oldValue, obj["name"]);
       }
+      // A question a Filter Control can filter (survey-core finds the source by the same duck typing)
+      if (propertyName === "name" && typeof obj["setControlFilter"] === "function") {
+        this.updateFilterSourceOnQuestionNameChanged(oldValue, obj["name"]);
+      }
     }
     if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
       this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
+    }
+    // A Filter Control's defaultItem names a preset: a renamed default preset stays the default one,
+    // in the same undo step as the rename.
+    if (propertyName === "name" && obj.getType() === "filteritem") {
+      const owner = obj["itemOwner"];
+      if (!!oldValue && !!owner && owner["defaultItem"] === oldValue) {
+        owner["defaultItem"] = obj["name"];
+      }
     }
   }
   private surveyLogicForUpdate: SurveyLogic;
@@ -2859,6 +2893,14 @@ export class SurveyCreatorModel extends Base
     questions.forEach(q => {
       if (q.choicesFromQuestion === oldName) {
         q.choicesFromQuestion = newName;
+      }
+    });
+  }
+  private updateFilterSourceOnQuestionNameChanged(oldName: string, newName: string) {
+    if (!oldName || oldName === newName) return;
+    this.getAllQuestions().forEach(q => {
+      if (q.isDescendantOf("filter") && q["source"] === oldName) {
+        q["source"] = newName;
       }
     });
   }
@@ -3083,6 +3125,9 @@ export class SurveyCreatorModel extends Base
     }
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);
+    }
+    if (["designer", "modal-question-editor", "translation_source", "translation_target"].indexOf(reason) > -1) {
+      this.applyPageEditModeToSurvey(survey);
     }
     survey["needRenderIcons"] = false;
     if (reason != "designer" && reason != "preview" && reason !== "theme" && reason !== "condition-builder") {
@@ -3782,7 +3827,7 @@ export class SurveyCreatorModel extends Base
         element: selEl,
         question: undefined,
         page: elementPage,
-        id: selEl.id,
+        id: selEl.renderedId,
         scrollIfVisible: true,
         scrollIntoViewOptions: scrollIntoViewOptions,
         passedRootElement: this.rootElement,
@@ -3802,8 +3847,8 @@ export class SurveyCreatorModel extends Base
   }
 
   private getHtmlElementForScroll(element: any): HTMLElement {
-    const id = element.getType() === "matrixdropdowncolumn" ? element.colOwner.id : element.id;
-    return this.rootElement?.querySelector(`#${id}`);
+    const id = element.getType() === "matrixdropdowncolumn" ? element.colOwner.renderedId : element.renderedId;
+    return this.rootElement?.querySelector(getIdSelector(id));
   }
 
   private getSelectedSurveyElement(): IElement {
@@ -4857,7 +4902,8 @@ export class SurveyCreatorModel extends Base
       appearance: { style: "brand", mode: "tertiary", size: "small" },
       showTitle: false,
       iconSize: "auto",
-      title: this.getLocString("ed.addNewQuestion"),
+      title: this.getLocString("ed.selectQuestionType"),
+      ariaExpanded: false,
     }, {
       items: [],
       allowSelection: false,
@@ -4868,6 +4914,7 @@ export class SurveyCreatorModel extends Base
     }, this);
     newAction.popupModel.getTargetCallback = undefined;
     newAction.popupModel.onVisibilityChanged.add((_: PopupModel, opt: { model: PopupModel, isVisible: boolean }) => {
+      newAction.ariaExpanded = opt.isVisible;
       if (opt.isVisible) {
         const listModel = newAction.popupModel.contentComponentData.model;
         listModel.setItems(getActions());

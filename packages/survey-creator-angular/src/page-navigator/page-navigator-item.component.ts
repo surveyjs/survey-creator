@@ -1,11 +1,12 @@
 import { Component, Input } from "@angular/core";
 import { Action, IAction } from "survey-core";
-import { BaseAngular } from "survey-angular-ui";
+import { BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 
 @Component({
   selector: "svc-page-navigator-item",
   templateUrl: "./page-navigator-item.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class PageNavigatorItemComponent extends BaseAngular<Action> {
   @Input() model!: Action | IAction;

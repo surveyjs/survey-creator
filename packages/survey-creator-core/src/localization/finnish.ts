@@ -69,6 +69,8 @@ export var fiStrings = {
     expression: "Lauseke(vain luku)",
     // "Signature"
     signaturepad: "Allekirjoitusalusta",
+    // [Auto-translated] "Filter"
+    filter: "Suodatin",
     // [Auto-translated] "Button Group"
     buttongroup: "Painike-ryhmä"
   },
@@ -304,6 +306,8 @@ export var fiStrings = {
     themeResetConfirmationOk: "Kyllä, nollaa teema",
     // "Add Question"
     addNewQuestion: "Lisää kysymys",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Valitse kysymystyyppi",
     // "Select page..."
     selectPage: "Valitse sivu...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var fiStrings = {
     addNewTypeQuestion: "Lisää {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Latauslogo",
     // [Auto-translated] "Item "
     choices_Item: "Kohta ",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var fiStrings = {
       templateDescription: "Merkinnän kuvausmalli",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Merkinnän otsikon malli",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Entry title -paikkamerkki",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Tyhjä paneeliteksti",
       // [Auto-translated] "Tab title pattern"
@@ -813,6 +821,38 @@ export var fiStrings = {
       // [Auto-translated] "Expression"
       expression: "Lauseke"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Tietolähde",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Näytä suodatinpiirit",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Näytä Suodattimet-painike",
+      // [Auto-translated] "Show search"
+      showSearch: "Näytä haku",
+      // [Auto-translated] "Search in"
+      searchFields: "Hae",
+      // [Auto-translated] "Presets"
+      items: "Esiasetukset",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Oletusesiasetus",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Salli useita esiasetuksia",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Salli vastaajien lisätä esiasetuksia"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Esiasetuksen nimi",
+      // [Auto-translated] "Preset title"
+      title: "Esiasetettu otsikko",
+      // [Auto-translated] "Filter expression"
+      expression: "Suodatinlauseke",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Salli muokkaus",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Salli poistaminen"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Lajittele mukaan",
@@ -874,7 +914,9 @@ export var fiStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Jokainen vaihtoehto erillisessä sarakkeessa",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Salli lajittelu tämän sarakkeen mukaan"
+      allowSort: "Salli lajittelu tämän sarakkeen mukaan",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Salli suodatus tämän sarakkeen mukaan"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var fiStrings = {
     addItem: "Klikkaa lisätäksesi uusi kohde...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Poista kohde napsauttamalla...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Lisää {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Poista {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Kohteen vetäminen",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Laajenna sisäkkäisiä valintoja",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse sisäkkäiset valinnat",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Laajenna sisäkkäisiä vaihtoehtoja {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Romahda sisäkkäiset {0}",
     // [Auto-translated] "Show description"
     showDescription: "Ohjelman kuvaus",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var fiStrings = {
     "listIsEmpty@pages": "Ei sivuja",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Ei lajittelutasoja",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Ei esiasetuksia",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Lisää valinta",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var fiStrings = {
     "addNew@pages": "Lisää sivu",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Lisää lajittelutaso",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Lisää esiasetus",
     // "Value"
     value: "Arvo",
     // "Text"
@@ -1162,8 +1216,8 @@ export var fiStrings = {
     visible: "Näkyvissä",
     // "Required"
     isRequired: "Pakollinen",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Hyväksy vain myönteinen vastaus",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Vaadi myönteinen vastaus",
     // [Auto-translated] "Mark as required"
     markRequired: "Merkitse pakollisesti",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var fiStrings = {
     eachRowUnique: "Estä päällekkäiset vastaukset riveillä",
     // "Error message for required questions"
     requiredErrorText: "Vaadittu virheteksti",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Virheilmoitus, kun Kyllä vaaditaan",
     // "Display the question on a new line"
     startWithNewLine: "Onko aloitus uudella rivillä?",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var fiStrings = {
     pageSize: "Rivit per sivu",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Salli käyttäjien lajitella rivejä",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Salli suodatus tämän kysymyksen perusteella",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Suodatinoperaattorit",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksimilajittelutasot",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var fiStrings = {
       rateValues: "Järjestä arvot",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Liukusäätimen asetukset",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Suodatinasetukset",
+      // [Auto-translated] "Presets"
+      presets: "Esiasetukset",
       // "Choices from a Web Service"
       choicesByUrl: "Valintoja verkosta",
       // "Numbering"
@@ -2868,6 +2932,8 @@ export var fiStrings = {
       width: "Asettaa paneelin leveyden suhteessa muihin saman rivin mittauselementteihin. Hyväksyy CSS-arvot (px, %, in, pt jne.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Kirjoita malli dynaamisten paneelien otsikoille. Käytä {panelIndex} paneelin yleistä sijaintia ja {visiblePanelIndex} sen järjestystä näkyvien paneelien joukossa. Lisää nämä paikkamerkit kuvioon lisätäksesi automaattisen numeroinnin.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Varateksti merkintäotsikoille, joka koskee silloin, kun merkintäotsikon malli ei tuota merkityksellistä arvoa. Käytä {panelIndex} merkinnän yleiseen sijaintiin ja {visiblePanelIndex} sen järjestykseen näkyvien merkintöjen välillä.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Kirjoita välilehtien otsikoiden malli. Käytä {panelIndex} paneelin yleistä sijaintia ja {visiblePanelIndex} sen järjestystä näkyvien paneelien joukossa. Lisää nämä paikkamerkit kuvioon lisätäksesi automaattisen numeroinnin.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var fiStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Määrittää edistymispalkin sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Valitse dynaaminen matriisi, pudotusvalikko tai dynaaminen paneeli, jonka rivejä tai paneeleja suodatin kaventaa.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Esiasetus otetaan käyttöön kyselyn alkaessa."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Käytä kenttien nimiä kiharoissa sulkeissa, esimerkiksi: {price} < 20 ja {category} jokin ['Juomat']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Rajoitukset, joita vastaajat voivat käyttää suodattaakseen tämän kentän perusteella. Jätä tyhjäksi, jotta kaikki kenttään sopivat operaattorit sallitaan.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Sarakkeen tunnus, joka ei näy vastaajille.",
@@ -3274,8 +3352,6 @@ export var fiStrings = {
     valueTrue: "Arvo, joka tallennetaan kyselyn tuloksiin, kun vastaajat antavat myönteisen vastauksen.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Arvo, joka tallennetaan kyselyn tuloksiin, kun vastaajat antavat kielteisen vastauksen.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Valitse käsitellä kielteisen vastauksen vastaamattomana, joten vastaajien on valittava \"Kyllä\" (tai rastittava valintaruutu) jatkaakseen. Esimerkiksi käytä sitä vaatiaksesi suostumusta ehtoihin. Koskee vain, kun kysymys vaaditaan.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Tätä asetusta ei suositella poistettavaksi käytöstä, koska se ohittaa esikatselukuvan ja vaikeuttaa käyttäjän ymmärtämistä, onko tiedostot ladattu.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var fiStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" ja \"{aliasKey}\" {ownerText} ovat yhden ominaisuuden kaksi nimeä – suoritusaika soveltaa niitä siinä järjestyksessä kuin JSON ne kirjoittaa, joten \"{winner}\" voittaa.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" on asetettu \"{name}\", mutta inputType \"{inputType}\" ei rajoita – suoritusaika ei huomioi sitä.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" on asetettu \"{name}\", mutta \"{name}\" ei ole isRequired eikä required If - suoritusaika ei ohita sitä."
+        inertMinMax: "\"{key}\" on asetettu \"{name}\", mutta inputType \"{inputType}\" ei rajoita – suoritusaika ei huomioi sitä."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

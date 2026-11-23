@@ -69,6 +69,8 @@ export var traditionalChineseTranslation = {
     expression: "表達式",
     // [Auto-translated] "Signature"
     signaturepad: "簽名",
+    // [Auto-translated] "Filter"
+    filter: "篩選",
     // [Auto-translated] "Button Group"
     buttongroup: "按鈕組"
   },
@@ -304,6 +306,8 @@ export var traditionalChineseTranslation = {
     themeResetConfirmationOk: "是，重置主題",
     // [Auto-translated] "Add Question"
     addNewQuestion: "添加問題",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "選擇題型",
     // [Auto-translated] "Select page..."
     selectPage: "選擇頁面...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var traditionalChineseTranslation = {
     addNewTypeQuestion: "新增{0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[徽標]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "上傳標誌",
     // [Auto-translated] "Item "
     choices_Item: "專案",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var traditionalChineseTranslation = {
       templateDescription: "條目描述模���",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "條目標題模式",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "條目標題佔位符",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "空面板文本",
       // [Auto-translated] "Tab title pattern"
@@ -814,6 +822,38 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Expression"
       expression: "表達"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "資料來源",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "顯示濾波晶片",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "顯示篩選器按鈕",
+      // [Auto-translated] "Show search"
+      showSearch: "顯示搜尋",
+      // [Auto-translated] "Search in"
+      searchFields: "搜尋",
+      // [Auto-translated] "Presets"
+      items: "預設",
+      // [Auto-translated] "Default preset"
+      defaultItem: "預設預設",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "允許多個預設",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "允許受訪者新增預設"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "預設名稱",
+      // [Auto-translated] "Preset title"
+      title: "預設標題",
+      // [Auto-translated] "Filter expression"
+      expression: "篩選表達式",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "允許編輯",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "允許刪除"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "排序方式",
@@ -875,7 +915,9 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "每個選項都在單獨的列中",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "允許依此欄位排序"
+      allowSort: "允許依此欄位排序",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "允許依此欄位進行篩選"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -979,12 +1021,20 @@ export var traditionalChineseTranslation = {
     addItem: "點選以新增專案...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "按下以刪除該專案...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "加入{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "移除{0}",
     // [Auto-translated] "Drag the item"
     dragItem: "拖動專案",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "擴展巢狀選擇",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "坍縮巢狀選擇",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "擴展巢狀{0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "摺疊巢狀選擇{0}",
     // [Auto-translated] "Show description"
     showDescription: "節目簡介",
     // [Auto-translated] "Hide description"
@@ -1059,6 +1109,8 @@ export var traditionalChineseTranslation = {
     "listIsEmpty@pages": "沒有頁數",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "無分類等級",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "無預設",
     // [Auto-translated] "Add choice"
     "addNew@choices": "增加選擇",
     // [Auto-translated] "Add rating value"
@@ -1085,6 +1137,8 @@ export var traditionalChineseTranslation = {
     "addNew@pages": "新增頁面",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "新增排序層級",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "新增預設",
     // "Value"
     value: "值",
     // "Text"
@@ -1163,8 +1217,8 @@ export var traditionalChineseTranslation = {
     visible: "是否可見?",
     // "Required"
     isRequired: "是否為必填項?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "只接受正面的答案",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "要求一個正面的答案",
     // [Auto-translated] "Mark as required"
     markRequired: "標記為必填",
     // [Auto-translated] "Remove the required mark"
@@ -1175,6 +1229,8 @@ export var traditionalChineseTranslation = {
     eachRowUnique: "防止行中出現重複回應",
     // "Error message for required questions"
     requiredErrorText: "“必需”錯誤消息",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "需要「是」時出現錯誤訊息",
     // "Display the question on a new line"
     startWithNewLine: "問題是否新起一行?",
     // "Rows"
@@ -1197,6 +1253,10 @@ export var traditionalChineseTranslation = {
     pageSize: "每頁行數",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "允許使用者排序資料列",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "允許依此問題進行篩選",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "篩選運算子",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "最高排序等級",
     // [Auto-translated] "Default sort order"
@@ -1753,6 +1813,10 @@ export var traditionalChineseTranslation = {
       rateValues: "設置評分值",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "滑塊設置",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "篩選條件設定",
+      // [Auto-translated] "Presets"
+      presets: "預設",
       // "Choices from a Web Service"
       choicesByUrl: "通過 URL 導入選項",
       // [Auto-translated] "Numbering"
@@ -2869,6 +2933,8 @@ export var traditionalChineseTranslation = {
       width: "設置面板的寬度，使其與同一行中的其他測量圖元成比例。接受 CSS 值（px、%、in、pt 等）。",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "鍵入動態面板標題的範本。使用 {panelIndex} 作為面板的常規位置，使用 {visiblePanelIndex} 作為其在可見面板中的順序。將這些佔位元插入到圖案中以添加自動編號。",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "一個用於條目標題的備用文字，適用於條目標題模式未產生有意義的值。使用 {panelIndex} 表示條目的一般位置，{visiblePanelIndex} 表示其在可見條目中的順序。",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "鍵入選項卡標題的範本。使用 {panelIndex} 表示面板的大致位置，使用 {visiblePanelIndex} 表示其在可見面板中的順序。將這些佔位元插入到圖案中以添加自動編號。",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3021,6 +3087,18 @@ export var traditionalChineseTranslation = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "設置進度條的位置。“自動”值在調查標題的上方或下方顯示進度條。"
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "選擇動態矩陣、下拉式矩陣或動態面板，其列或面板可被篩選器縮小範圍。",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "預設值在調查開始時套用。"
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "使用大括號內的欄位名稱，例如：{price} < 20 和 {category} 任意 ['Beverages']。"
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "限制受訪者可用來篩選此欄位的運算子。留空以允許所有適合該欄位的運算子。",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "受訪者不可見的列ID。",
@@ -3275,8 +3353,6 @@ export var traditionalChineseTranslation = {
     valueTrue: "當受訪者給出肯定答案時保存在調查結果中的值。",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "當受訪者給出否定答案時保存在調查結果中的值。",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "選擇將否定回答視為未回答，因此受訪者必須選擇「是」（或勾選勾選方塊）才能繼續。例如，可使用此選項要求同意條款與條件。僅在需要該問題時適用。",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "不建議禁用此選項，因為它會覆蓋預覽圖像，並使用戶難以了解檔是否已上傳。",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3893,9 +3969,7 @@ export var traditionalChineseTranslation = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "{ownerText} 的「{key}」和「{aliasKey}」是同一個屬性的兩個名稱——執行時間會依照 JSON 寫入的順序套用它們，因此「{winner}」勝出。",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "「{key}」設在「{name}」上，但 inputType「{inputType}」沒有界限——執行時間會忽略它。",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "「{key}」設在「{name}」上，但「{name}」既沒有 isRequired，也沒有 requiredIf——執行時間會忽略它。"
+        inertMinMax: "「{key}」設在「{name}」上，但 inputType「{inputType}」沒有界限——執行時間會忽略它。"
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

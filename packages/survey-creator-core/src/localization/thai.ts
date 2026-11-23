@@ -69,6 +69,8 @@ export const thStrings = {
     expression: "นิพจน์ (อ่านอย่างเดียว)",
     // "Signature"
     signaturepad: "แผ่นลายเซ็น",
+    // [Auto-translated] "Filter"
+    filter: "ตัวกรอง",
     // "Button Group"
     buttongroup: "กลุ่มปุ่ม"
   },
@@ -304,6 +306,8 @@ export const thStrings = {
     themeResetConfirmationOk: "ใช่ รีเซ็ตธีม",
     // "Add Question"
     addNewQuestion: "เพิ่มคำถาม",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "เลือกประเภทคําถาม",
     // "Select page..."
     selectPage: "เลือกหน้า...",
     // "Choices are copied from"
@@ -366,6 +370,8 @@ export const thStrings = {
     addNewTypeQuestion: "เพิ่ม {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[โลโก้]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "อัปโหลดโลโก้",
     // "Item "
     choices_Item: "รายการ ",
     // "Select a file"
@@ -700,6 +706,8 @@ export const thStrings = {
       templateDescription: "รูปแบบคำอธิบายแผง",
       // "Entry title pattern"
       templateTitle: "รูปแบบชื่อแผง",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "ตัวแทนตําแหน่งชื่อรายการ",
       // "Empty panel text"
       noEntriesText: "ข้อความแผงว่าง",
       // "Tab title pattern"
@@ -813,6 +821,38 @@ export const thStrings = {
       // "Expression"
       expression: "นิพจน์"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "แหล่งข้อมูล",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "แสดงชิปกรอง",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "แสดงปุ่มตัวกรอง",
+      // [Auto-translated] "Show search"
+      showSearch: "แสดงการค้นหา",
+      // [Auto-translated] "Search in"
+      searchFields: "ค้นหาใน",
+      // [Auto-translated] "Presets"
+      items: "การตั้งค่าล่วงหน้า",
+      // [Auto-translated] "Default preset"
+      defaultItem: "การตั้งค่าล่วงหน้าเริ่มต้น",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "อนุญาตให้ตั้งค่าล่วงหน้าหลายแบบ",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "อนุญาตให้ผู้ตอบเพิ่มการตั้งค่าล่วงหน้า"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "ชื่อที่ตั้งไว้ล่วงหน้า",
+      // [Auto-translated] "Preset title"
+      title: "ชื่อที่ตั้งไว้ล่วงหน้า",
+      // [Auto-translated] "Filter expression"
+      expression: "นิพจน์กรอง",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "อนุญาตให้แก้ไข",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "อนุญาตให้ลบ"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "เรียงตาม",
@@ -874,7 +914,9 @@ export const thStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "แต่ละตัวเลือกในคอลัมน์แยกต่างหาก",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "อนุญาตให้จัดเรียงตามคอลัมน์นี้"
+      allowSort: "อนุญาตให้จัดเรียงตามคอลัมน์นี้",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "อนุญาตให้กรองตามคอลัมน์นี้"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export const thStrings = {
     addItem: "คลิกเพื่อเพิ่มรายการ...",
     // "Click to remove the item..."
     removeItem: "คลิกเพื่อลบรายการ...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "เพิ่ม{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "ลบ{0}",
     // "Drag the item"
     dragItem: "ลากรายการ",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "ขยายตัวเลือกซ้อน",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "ยุบตัวเลือกซ้อน",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "ขยายตัวเลือกซ้อนของ{0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "ยุบตัวเลือกซ้อนของ{0}",
     // [Auto-translated] "Show description"
     showDescription: "แสดงรายละเอียด",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export const thStrings = {
     "listIsEmpty@pages": "ไม่มีหน้า",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "ไม่มีระดับการจัดเรียง",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "ไม่มีการตั้งค่าล่วงหน้า",
     // "Add new choice"
     "addNew@choices": "เพิ่มตัวเลือกใหม่",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export const thStrings = {
     "addNew@pages": "เพิ่มหน้า",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "เพิ่มระดับการจัดเรียง",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "เพิ่มการตั้งค่าล่วงหน้า",
     // "Value"
     value: "ค่า",
     // "Text"
@@ -1162,8 +1216,8 @@ export const thStrings = {
     visible: "มองเห็นได้",
     // "Required"
     isRequired: "จำเป็น",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "ยอมรับเฉพาะคําตอบในเชิงบวกเท่านั้น",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "ต้องการคําตอบในเชิงบวก",
     // "Mark as required"
     markRequired: "ทำเครื่องหมายว่าจำเป็น",
     // "Remove the required mark"
@@ -1174,6 +1228,8 @@ export const thStrings = {
     eachRowUnique: "ป้องกันการตอบซ้ำในแถว",
     // "Error message for required questions"
     requiredErrorText: "ข้อความข้อผิดพลาดสำหรับคำถามที่จำเป็น",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "ข้อความแสดงข้อผิดพลาดเมื่อจําเป็นต้องใช้ Yes",
     // "Display the question on a new line"
     startWithNewLine: "แสดงคำถามในบรรทัดใหม่",
     // "Rows"
@@ -1196,6 +1252,10 @@ export const thStrings = {
     pageSize: "จํานวนแถวต่อหน้า",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "อนุญาตให้ผู้ใช้จัดเรียงแถว",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "อนุญาตให้กรองตามคําถามนี้",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "ตัวดําเนินการตัวกรอง",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "ระดับการจัดเรียงสูงสุด",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export const thStrings = {
       rateValues: "ค่าการให้คะแนน",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "การตั้งค่าตัวเลื่อน",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "การตั้งค่าตัวกรอง",
+      // [Auto-translated] "Presets"
+      presets: "การตั้งค่าล่วงหน้า",
       // "Choices from a Web Service"
       choicesByUrl: "ตัวเลือกจากบริการเว็บ",
       // "Numbering"
@@ -2868,6 +2932,8 @@ export const thStrings = {
       width: "ตั้งความกว้างของแผงให้สัมพันธ์กับองค์ประกอบแบบสำรวจอื่นๆ ในบรรทัดเดียวกัน รับค่าของ CSS (px, %, in, pt, ฯลฯ)",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "พิมพ์ในเทมเพลตสำหรับชื่อแผงไดนามิก ใช้ {panelIndex} สำหรับตำแหน่งทั่วไปของแผงและ {visiblePanelIndex} สำหรับลำดับของแผงที่มองเห็นได้แทรกแทนที่ลงในเทมเพลตเพื่อเพิ่มการนับอัตโนมัติ",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "ข้อความสํารองสําหรับชื่อรายการที่ใช้เมื่อรูปแบบชื่อรายการไม่ให้ค่าที่มีความหมายใช้ {panelIndex} สําหรับตําแหน่งทั่วไปของรายการ และ {visiblePanelIndex} สําหรับลําดับระหว่างรายการที่มองเห็น",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "พิมพ์ในเทมเพลตสำหรับชื่อแท็บ ใช้ {panelIndex} สำหรับตำแหน่งทั่วไปของแผงและ {visiblePanelIndex} สำหรับลำดับของแผงที่มองเห็นได้แทรกแทนที่ลงในเทมเพลตเพื่อเพิ่มการนับอัตโนมัติ",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export const thStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "ตั้งค่าตําแหน่งของแถบความคืบหน้า ค่า \"อัตโนมัติ\" จะแสดงแถบความคืบหน้าด้านบนหรือด้านล่างส่วนหัวของแบบสํารวจ"
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "เลือกเมทริกซ์แบบไดนามิก เมทริกซ์แบบดรอปดาวน์ หรือแผงแบบไดนามิกที่แถวหรือแผงของมันตัวกรองจะจํากัดลง",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "การตั้งค่าล่วงหน้าจะถูกใช้เมื่อเริ่มการสํารวจ"
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "ใช้ชื่อฟิลด์ในวงเล็บโค้ง เช่น: {price} < 20 และ {category} anyof ['เครื่องดื่ม']"
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "จํากัดจํานวนตัวดําเนินการที่ผู้ตอบแบบสอบถามสามารถใช้ในการกรองตามฟิลด์นี้เว้นว่างเพื่ออนุญาตให้ใช้ตัวดําเนินการทั้งหมดที่เหมาะสมกับฟิลด์นั้น",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID คอลัมน์ที่ไม่มองเห็นได้สำหรับผู้ตอบแบบสำรวจ",
@@ -3274,8 +3352,6 @@ export const thStrings = {
     valueTrue: "ค่าที่จะบันทึกในผลลัพธ์แบบสำรวจเมื่อผู้ตอบให้คำตอบที่บวก",
     // "A value to save in survey results when respondents give a negative answer."
     valueFalse: "ค่าที่จะบันทึกในผลลัพธ์แบบสำรวจเมื่อผู้ตอบให้คำตอบที่ลบ",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "เลือกที่จะถือว่าคําตอบเชิงลบเป็นคําตอบที่ยังไม่ได้รับคําตอบ ดังนั้นผู้ตอบแบบสอบถามต้องเลือก \"ใช่\" (หรือติ๊กถูกช่องทําเครื่องหมาย) เพื่อดําเนินการต่อตัวอย่างเช่น ใช้เพื่อขอความยินยอมต่อข้อกําหนดและเงื่อนไขใช้ได้เฉพาะเมื่อคําถามนั้นจําเป็นเท่านั้น",
     // "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "ไม่แนะนำให้คุณปิดใช้งานตัวเลือกนี้เนื่องจากจะยกเลิกการพรีวิวภาพและทำให้ผู้ใช้เข้าใจได้ยากว่าไฟล์ได้ถูกอัปโหลดหรือไม่",
     // "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export const thStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" และ \"{aliasKey}\" ของ {ownerText} เป็นชื่อสองชื่อของคุณสมบัติเดียวกัน - เวลาทํางานจะนําไปใช้ตามลําดับที่ JSON เขียน ดังนั้น \"{winner}\" จึงชนะ",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" ถูกตั้งค่าเป็น \"{name}\" แต่ inputType \"{inputType}\" ไม่มีขอบเขต - เวลารันจะไม่สนใจ",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" ถูกตั้งค่าไว้ที่ \"{name}\" แต่ \"{name}\" ไม่มีทั้ง isRequired หรือ nrequired If - เวลารันจะไม่สนใจ"
+        inertMinMax: "\"{key}\" ถูกตั้งค่าเป็น \"{name}\" แต่ inputType \"{inputType}\" ไม่มีขอบเขต - เวลารันจะไม่สนใจ"
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

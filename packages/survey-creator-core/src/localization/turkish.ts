@@ -69,6 +69,8 @@ export var turkishStrings = {
     expression: "İfade (düzenlenemez)",
     // "Signature"
     signaturepad: "İmza Defteri",
+    // [Auto-translated] "Filter"
+    filter: "Filtre",
     // [Auto-translated] "Button Group"
     buttongroup: "Düğme Grubu"
   },
@@ -304,6 +306,8 @@ export var turkishStrings = {
     themeResetConfirmationOk: "Evet, temayı sıfırlayın",
     // "Add Question"
     addNewQuestion: "Soru Ekle",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Soru türünü seç",
     // [Auto-translated] "Select page..."
     selectPage: "Sayfa seç...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var turkishStrings = {
     addNewTypeQuestion: "{0} ekle", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Yükleme logosu",
     // [Auto-translated] "Item "
     choices_Item: "Madde ",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var turkishStrings = {
       templateDescription: "Giriş açıklama deseni",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Giriş başlığı deseni",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Giriş başlığı yer tutucu",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Boş panel metni",
       // [Auto-translated] "Tab title pattern"
@@ -813,6 +821,38 @@ export var turkishStrings = {
       // [Auto-translated] "Expression"
       expression: "İfade"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Veri kaynağı",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Filtre çiplerini göster",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Filtreler düğmesini göster",
+      // [Auto-translated] "Show search"
+      showSearch: "Aramayı göster",
+      // [Auto-translated] "Search in"
+      searchFields: "Ara",
+      // [Auto-translated] "Presets"
+      items: "Ön ayarlar",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Varsayılan ön ayar",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Birden fazla ön ayara izin ver",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Yanıtlayıcıların ön ayar eklemesine izin ver"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Ön ayar adı",
+      // [Auto-translated] "Preset title"
+      title: "Ön ayarlı başlık",
+      // [Auto-translated] "Filter expression"
+      expression: "Filtre ifadesi",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Düzenlemeye izin ver",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Silmeye izin ver"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Sıralayın",
@@ -874,7 +914,9 @@ export var turkishStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Her seçenek ayrı bir sütunda",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Bu sütuna göre sıralamaya izin verin"
+      allowSort: "Bu sütuna göre sıralamaya izin verin",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Bu sütuna göre filtrelemeye izin ver"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var turkishStrings = {
     addItem: "Yeni nesne ekleme için tıklayınız...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Öğeyi kaldırmak için tıklayın...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Ekle {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Kaldır {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Öğeyi sürükleyin",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "İç içe seçenekleri genişlet",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Çöktü iç içe seçimler",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "İç içe seçeneklerini genişletmek {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Çöktü iç içe seçimler {0}",
     // [Auto-translated] "Show description"
     showDescription: "Gösteri açıklaması",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var turkishStrings = {
     "listIsEmpty@pages": "Sayfa yok",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Sıralama seviyeleri yok",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Ön ayar yok",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Seçenek ekle",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var turkishStrings = {
     "addNew@pages": "Sayfa ekle",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Sıralama seviyesi ekleyin",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Ön ayar ekle",
     // "Value"
     value: "Değer",
     // "Text"
@@ -1162,8 +1216,8 @@ export var turkishStrings = {
     visible: "Görünür?",
     // "Required"
     isRequired: "Zorunlu?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Sadece olumlu bir cevabı kabul et",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Olumlu bir cevap talep ediyorum",
     // [Auto-translated] "Mark as required"
     markRequired: "Gerektiği gibi işaretleyin",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var turkishStrings = {
     eachRowUnique: "Satırlarda yinelenen yanıtları önleme",
     // "Error message for required questions"
     requiredErrorText: "Zorunlu hata yazısı",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Evet gerektiğinde hata mesajı",
     // "Display the question on a new line"
     startWithNewLine: "Yeni satırla başla?",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var turkishStrings = {
     pageSize: "Sayfa başına satır sayısı",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Kullanıcıların satırları sıralamasına izin verin",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Bu soruya göre filtrelemeye izin ver",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Filtre operatörleri",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksimum sıralama seviyeleri",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var turkishStrings = {
       rateValues: "Oran değerleri",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Kaydırıcı Ayarları",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Filtre Ayarları",
+      // [Auto-translated] "Presets"
+      presets: "Ön ayarlar",
       // "Choices from a Web Service"
       choicesByUrl: "Webten seçenekler",
       // "Numbering"
@@ -2868,6 +2932,8 @@ export var turkishStrings = {
       width: "Panelin genişliğini aynı satırdaki diğer anket öğeleriyle orantılı olarak ayarlar. CSS değerlerini (px, %, in, pt, vb.) kabul eder.",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Dinamik panel başlıkları için bir şablon yazın. Panelin genel konumu için {panelIndex} ve görünür paneller arasındaki sırası için {visiblePanelIndex} kullanın. Otomatik numaralandırma eklemek için bu yer tutucuları desene ekleyin.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Giriş başlıkları için bir yedek metin, giriş başlığı deseni anlamlı bir değer üretmediğinde uygulanır. Girişin genel konumu için {panelIndex}, görünür girişler arasındaki sırası için ise {visiblePanelIndex} kullanın.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Sekme başlıkları için bir şablon yazın. Panelin genel konumu için {panelIndex} ve görünür paneller arasındaki sırası için {visiblePanelIndex} kullanın. Otomatik numaralandırma eklemek için bu yer tutucuları desene ekleyin.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var turkishStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "İlerleme çubuğunun konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Filtrenin satır veya panelleri daralttığı dinamik bir matris, açılır matris veya dinamik panel seçin.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Anket başladığında uygulanan ön ayar."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Kıvırcık parantez içinde alan adları kullanın, örneğin: {price} < 20 ve {category} herhangi bir ['İçecekler']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Katılımcıların bu alana göre filtrelemek için kullanabileceği sınırlar. Alana uygun tüm operatörlere izin vermek için boş bırakın.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Yanıtlayanlar tarafından görülemeyen bir sütun kimliği.",
@@ -3274,8 +3352,6 @@ export var turkishStrings = {
     valueTrue: "Yanıtlayanlar olumlu yanıt verdiğinde anket sonuçlarına kaydedilecek bir değer.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Yanıtlayanlar olumsuz yanıt verdiğinde anket sonuçlarına kaydedilecek bir değer.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Olumsuz cevabı cevapsız olarak değerlendirmeyi seçin, böylece yanıtlayanlar ilerlemek için \"Evet\" seçeneğini seçmelidir (veya işaret kutusunu işaretlemelidir). Örneğin, şartlara onay talep etmek için kullanın. Yalnızca soru gerekli olduğunda geçerlidir.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Önizleme görüntüsünü geçersiz kıldığı ve kullanıcının dosyaların karşıya yüklenip yüklenmediğini anlamasını zorlaştırdığı için bu seçeneği devre dışı bırakmanız önerilmez.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var turkishStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "{ownerText}'in \"{key}\" ve \"{aliasKey}\" bir özelliğin iki adıdır - çalışma süresi bunları JSON'un yazdığı sırayla uygular, yani \"{winner}\" kazanır.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" \"{name}\" üzerinde ayarlanır, ancak inputType \"{inputType}\" sınırı yoktur - çalışma zamanı bunu görmezden gelir.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" \"{name}\" olarak ayarlanmış, ancak \"{name}\" ne isRequired ne de requiredIf — çalışma süresi bunu görmezden gelmiştir."
+        inertMinMax: "\"{key}\" \"{name}\" üzerinde ayarlanır, ancak inputType \"{inputType}\" sınırı yoktur - çalışma zamanı bunu görmezden gelir."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

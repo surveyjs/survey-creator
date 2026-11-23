@@ -1,13 +1,14 @@
-import { Component, Input, AfterViewInit, ViewChild, ElementRef } from "@angular/core";
-import { BaseAngular } from "survey-angular-ui";
+import { Component, Input, ViewChild, ElementRef } from "@angular/core";
+import { BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { TabbedMenuItem } from "survey-creator-core";
 
 @Component({
   selector: "svc-tabbed-menu-item-wrapper",
   templateUrl: "./tabbed-menu-item-wrapper.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
-export class TabbedMenuItemWrapperComponent extends BaseAngular<TabbedMenuItem> implements AfterViewInit {
+export class TabbedMenuItemWrapperComponent extends BaseAngular<TabbedMenuItem> {
   @Input() model!: TabbedMenuItem;
   @ViewChild("container") container!: ElementRef<HTMLElement>;
   protected getModel(): TabbedMenuItem {
@@ -17,7 +18,7 @@ export class TabbedMenuItemWrapperComponent extends BaseAngular<TabbedMenuItem> 
     super.ngOnDestroy();
     this.model.updateModeCallback = undefined as any;
   }
-  ngAfterViewInit(): void {
+  protected override afterViewInit(): void {
     if (this.model) {
       this.model.updateModeCallback = (mode, callback) => {
         this.model.mode = mode;

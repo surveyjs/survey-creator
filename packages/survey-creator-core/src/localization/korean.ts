@@ -69,6 +69,8 @@ export var koreanStrings = {
     expression: "표현식",
     // [Auto-translated] "Signature"
     signaturepad: "서명",
+    // [Auto-translated] "Filter"
+    filter: "필터",
     // [Auto-translated] "Button Group"
     buttongroup: "단추 그룹"
   },
@@ -304,6 +306,8 @@ export var koreanStrings = {
     themeResetConfirmationOk: "예, 테마를 재설정합니다.",
     // [Auto-translated] "Add Question"
     addNewQuestion: "질문 추가",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "문제 유형 선택",
     // [Auto-translated] "Select page..."
     selectPage: "페이지 선택...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var koreanStrings = {
     addNewTypeQuestion: "{0} 추가", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[로고]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "업로드 로고",
     // [Auto-translated] "Item "
     choices_Item: "항목 ",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var koreanStrings = {
       templateDescription: "항목 설명 패턴",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "항목 제목 패턴",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "항목 제목 자리표",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "빈 패널 텍스트",
       // [Auto-translated] "Tab title pattern"
@@ -814,6 +822,38 @@ export var koreanStrings = {
       // [Auto-translated] "Expression"
       expression: "식"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "데이터 소스",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "필터 칩 표시",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "필터 버튼 표시",
+      // [Auto-translated] "Show search"
+      showSearch: "검색 보기",
+      // [Auto-translated] "Search in"
+      searchFields: "검색",
+      // [Auto-translated] "Presets"
+      items: "프리셋",
+      // [Auto-translated] "Default preset"
+      defaultItem: "기본 프리셋",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "여러 프리셋 허용",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "응답자가 프리셋을 추가할 수 있도록 허용"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "프리셋 이름",
+      // [Auto-translated] "Preset title"
+      title: "프리셋 제목",
+      // [Auto-translated] "Filter expression"
+      expression: "필터 표현식",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "편집 허용",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "삭제 허용"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "정렬",
@@ -875,7 +915,9 @@ export var koreanStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "별도의 열에 있는 각 옵션",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "이 열에 따라 정렬 허용"
+      allowSort: "이 열에 따라 정렬 허용",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "이 열에 따른 필터링 허용"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -979,12 +1021,20 @@ export var koreanStrings = {
     addItem: "항목을 추가하려면 클립하십시오.",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "항목을 제거하려면 클릭하세요...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "추가{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "제거{0}",
     // [Auto-translated] "Drag the item"
     dragItem: "항목을 드래그합니다",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "중첩 선택 확장",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "붕괴 중첩 선택",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "중첩된 선택지를 확장{0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "중첩된 선택지 붕괴{0}",
     // [Auto-translated] "Show description"
     showDescription: "쇼 설명",
     // [Auto-translated] "Hide description"
@@ -1059,6 +1109,8 @@ export var koreanStrings = {
     "listIsEmpty@pages": "부지 없어",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "분류 없는 레벨",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "프리셋 없음",
     // [Auto-translated] "Add choice"
     "addNew@choices": "선택권 추가로",
     // [Auto-translated] "Add rating value"
@@ -1085,6 +1137,8 @@ export var koreanStrings = {
     "addNew@pages": "페이지 추가",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "정렬 단계 추가",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "프리셋 추가",
     // "Value"
     value: "값",
     // "Text"
@@ -1163,8 +1217,8 @@ export var koreanStrings = {
     visible: "보입니까??",
     // "Required"
     isRequired: "필수입니까?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "긍정적인 답변만 받아들이세요",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "긍정적인 답변을 요구하세요",
     // [Auto-translated] "Mark as required"
     markRequired: "필요에 따라 표시",
     // [Auto-translated] "Remove the required mark"
@@ -1175,6 +1229,8 @@ export var koreanStrings = {
     eachRowUnique: "행의 중복 응답 방지",
     // "Error message for required questions"
     requiredErrorText: "\"필수\" 오류 메시지",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "예 입력이 필요할 때 오류 메시지",
     // "Display the question on a new line"
     startWithNewLine: "새 줄로 시작하겠습니까?",
     // "Rows"
@@ -1197,6 +1253,10 @@ export var koreanStrings = {
     pageSize: "페이지당 행 수",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "사용자가 행을 정렬할 수 있게 합니다",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "이 질문에 따라 필터링 허용",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "필터 연산자",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "최대 정렬 단계",
     // [Auto-translated] "Default sort order"
@@ -1753,6 +1813,10 @@ export var koreanStrings = {
       rateValues: "길이 값",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "슬라이더 설정",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "필터 설정",
+      // [Auto-translated] "Presets"
+      presets: "프리셋",
       // "Choices from a Web Service"
       choicesByUrl: "웹에서 선택",
       // [Auto-translated] "Numbering"
@@ -2869,6 +2933,8 @@ export var koreanStrings = {
       width: "패널의 폭을 같은 줄에 있는 다른 측량 요소에 비례하여 설정합니다. CSS 값(px, %, in, pt 등)을 허용합니다.",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "동적 패널 제목에 대한 템플릿을 입력합니다. 패널의 일반 위치에는 {panelIndex}를 사용하고 표시되는 패널 간의 순서에는 {visiblePanelIndex}를 사용합니다. 이러한 자리 표시자를 패턴에 삽입하여 자동 번호 매기기를 추가합니다.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "항목 제목 패턴이 의미 있는 값을 생성하지 못할 때 적용되는 대체 텍스트입니다. 항목의 일반적인 위치는 {panelIndex}를, 보이는 항목들 사이에서의 순서는 {visiblePanelIndex}를 사용하세요.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "탭 제목에 대한 템플릿을 입력합니다. 패널의 일반적인 위치에는 {panelIndex}를 사용하고 표시되는 패널 간의 순서에는 {visiblePanelIndex}를 사용합니다. 이러한 자리 표시자를 패턴에 삽입하여 자동 번호 매기기를 추가합니다.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3021,6 +3087,18 @@ export var koreanStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "진행률 표시줄의 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "필터가 줄 또는 패널을 좁히는 동적 매트릭스, 드롭다운 매트릭스 또는 동적 패널을 선택하세요.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "설문조사가 시작될 때 적용된 프리셋입니다."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "필드 이름을 중괄호 안에 두세요. 예를 들어 {price} < 20, {category} ['Beverages']의 어떤 항목이든지 함께 사용하세요."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "응답자가 이 필드로 필터링할 수 있는 연산자 수를 제한합니다. 필드에 맞는 모든 연산자를 허용하려면 빈 상태로 두세요.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "응답자에게 표시되지 않는 열 ID입니다.",
@@ -3275,8 +3353,6 @@ export var koreanStrings = {
     valueTrue: "응답자들이 긍정적인 답변을 할 때 설문조사 결과에 저장하는 값입니다.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "응답자들이 부정적인 답변을 할 때 설문조사 결과에 저장하는 값입니다.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "부정적인 답변을 미답변으로 간주하므로, 응답자는 \"예\"를 선택하거나 체크박스를 체크해야 진행할 수 있습니다. 예를 들어, 이용 약관에 대한 동의를 요구하는 데 사용할 수 있습니다. 질문이 요구되는 경우에만 적용됩니다.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "이 옵션은 미리 보기 이미지를 재정의하고 사용자가 파일이 업로드되었는지 여부를 이해하기 어렵게 만들기 때문에 사용하지 않도록 설정하지 않는 것이 좋습니다.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3893,9 +3969,7 @@ export var koreanStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "{ownerText}의 \"{key}\"와 \"{aliasKey}\"는 하나의 속성에 대한 두 이름이며, 실행 시간이 JSON이 작성하는 순서대로 적용되므로 \"{winner}\"가 승리합니다.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\"는 \"{name}\" 위에 설정되어 있지만, inputType \"{inputType}\"는 경계가 없어 런타임이 이를 무시합니다.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\"는 \"{name}\" 위에 설정되어 있지만, \"{name}\"는 isRequired도, requiredIf도 없습니다 - 런타임이 이를 무시합니다."
+        inertMinMax: "\"{key}\"는 \"{name}\" 위에 설정되어 있지만, inputType \"{inputType}\"는 경계가 없어 런타임이 이를 무시합니다."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

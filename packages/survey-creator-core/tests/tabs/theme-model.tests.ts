@@ -654,6 +654,25 @@ test("getThemeChanges", (): any => {
   expect(themeChanges.cssVariables!["--sjs2-color-project-brand-600"]).toBe("rgba(255, 0, 0, 1)");
 });
 
+test("getThemeChanges treats null values as missing, Bug#8156", (): any => {
+  const themeChanges = getThemeChanges({
+    themeName: "default",
+    colorPalette: "light",
+    isPanelless: null,
+    header: null,
+    cssVariables: {
+      "--sjs2-color-project-brand-600": "rgba(255, 0, 0, 1)",
+      "--sjs2-color-bg-basic-primary": null
+    }
+  } as any);
+  expect(themeChanges.themeName).toBe("default");
+  expect(themeChanges.colorPalette).toBe("light");
+  expect(themeChanges.isPanelless).toBe(false);
+  expect(themeChanges.header).toBeUndefined();
+  expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs2-color-project-brand-600"]);
+  expect(themeChanges.cssVariables!["--sjs2-color-project-brand-600"]).toBe("rgba(255, 0, 0, 1)");
+});
+
 test("Theme builder: toJSON keeps base theme variables on colorPalette change", (): any => {
   const themeModel = new ThemeModel();
   themeModel.initialize();

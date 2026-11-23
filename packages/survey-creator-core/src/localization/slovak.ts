@@ -69,6 +69,8 @@ export var skStrings = {
     expression: "Výraz (iba na čítanie)",
     // "Signature"
     signaturepad: "Priestor na podpis",
+    // [Auto-translated] "Filter"
+    filter: "Filter",
     // [Auto-translated] "Button Group"
     buttongroup: "Skupina tlačidiel"
   },
@@ -304,6 +306,8 @@ export var skStrings = {
     themeResetConfirmationOk: "Áno, obnoviť motív",
     // "Add Question"
     addNewQuestion: "Pridať otázku",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Vyberte typ otázky",
     // "Select page..."
     selectPage: "Vybrať stránku...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var skStrings = {
     addNewTypeQuestion: "Pridať {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logo Upload",
     // [Auto-translated] "Item "
     choices_Item: "Položka ",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var skStrings = {
       templateDescription: "Vzor popisu záznamu",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Vzor názvu záznamu",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Zástupca názvu príspevku",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Prázdny text panela",
       // [Auto-translated] "Tab title pattern"
@@ -813,6 +821,38 @@ export var skStrings = {
       // [Auto-translated] "Expression"
       expression: "Výraz"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Zdroj údajov",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Zobraziť filtračné čipy",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Zobraziť tlačidlo Filtre",
+      // [Auto-translated] "Show search"
+      showSearch: "Zobraziť vyhľadávanie",
+      // [Auto-translated] "Search in"
+      searchFields: "Hľadať v",
+      // [Auto-translated] "Presets"
+      items: "Prednastavenia",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Predvolené prednastavenie",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Povoliť viacero predvolieb",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Povoliť respondentom pridávať prednastavenia"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Názov prednastavenia",
+      // [Auto-translated] "Preset title"
+      title: "Prednastavený názov",
+      // [Auto-translated] "Filter expression"
+      expression: "Výraz filtra",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Povoliť úpravy",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Povoliť mazanie"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Zoradiť podľa",
@@ -874,7 +914,9 @@ export var skStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Každá možnosť v samostatnom stĺpci",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Povoľte triedenie podľa tohto stĺpca"
+      allowSort: "Povoľte triedenie podľa tohto stĺpca",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Povoliť filtrovanie podľa tohto stĺpca"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var skStrings = {
     addItem: "Kliknutím pridať položku...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Kliknutím položku odstránite...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Pridaj {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Odstráňte {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Potiahnite položku",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Rozšíriť vnorené voľby",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse vnorené voľby",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Rozšírte vnorené voľby {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Kolaps vnorených rozhodnutí {0}",
     // [Auto-translated] "Show description"
     showDescription: "Popis relácie",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var skStrings = {
     "listIsEmpty@pages": "Žiadne stránky",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Žiadne triedenie úrovní",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Žiadne prednastavenia",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Pridajte výber",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var skStrings = {
     "addNew@pages": "Pridať stránku",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Pridať úroveň triedenia",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Pridať prednastavenie",
     // "Value"
     value: "Hodnota",
     // [Auto-translated] "Text"
@@ -1162,8 +1216,8 @@ export var skStrings = {
     visible: "Je viditeľné?",
     // "Required"
     isRequired: "Vyžaduje sa?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Prijmite len pozitívnu odpoveď",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Vyžadujte pozitívnu odpoveď",
     // [Auto-translated] "Mark as required"
     markRequired: "Označiť podľa potreby",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var skStrings = {
     eachRowUnique: "Zabráňte duplicitným odpovediam v riadkoch",
     // "Error message for required questions"
     requiredErrorText: "Text chyby pri povinných položkách",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Chybová správa, keď je potrebné Áno",
     // "Display the question on a new line"
     startWithNewLine: "Začína sa novým riadkom?",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var skStrings = {
     pageSize: "Riadky na stránku",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Umožniť používateľom triediť riadky",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Povoliť filtrovanie podľa tejto otázky",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Filtračné operátory",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximálne úrovne triedenia",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var skStrings = {
       rateValues: "Hodnoty hodnotenia",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Nastavenia posuvníka",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Nastavenia filtra",
+      // [Auto-translated] "Presets"
+      presets: "Prednastavenia",
       // "Choices from a Web Service"
       choicesByUrl: "Možnosti z webu",
       // "Numbering"
@@ -2868,6 +2932,8 @@ export var skStrings = {
       width: "Nastaví šírku panela v pomere k ostatným prvkom prieskumu v tej istej čiare. Akceptuje hodnoty CSS (px, %, in, pt atď.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Zadajte šablónu pre názvy dynamických panelov. Použite {panelIndex} pre všeobecnú pozíciu panela a {visiblePanelIndex} pre jeho poradie medzi viditeľnými panelmi. Vložením týchto zástupných symbolov do vzoru pridáte automatické číslovanie.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Záložný text pre názvy záznamov, ktorý sa uplatní, keď vzor názvu nevytvára zmysluplnú hodnotu. Použite {panelIndex} pre všeobecnú pozíciu záznamu a {visiblePanelIndex} pre poradie medzi viditeľnými položkami.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Zadajte šablónu pre názvy kariet. Použite {panelIndex} pre všeobecnú pozíciu panela a {visiblePanelIndex} pre jeho poradie medzi viditeľnými panelmi. Vložením týchto zástupných symbolov do vzoru pridáte automatické číslovanie.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var skStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Nastaví umiestnenie indikátora priebehu. Hodnota \"Auto\" zobrazuje indikátor priebehu nad alebo pod hlavičkou prieskumu."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Vyberte dynamickú maticu, rozbaľovaciu maticu alebo dynamický panel, ktorého riadky alebo panely filter zužuje.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Prednastavenie aplikované na začiatku prieskumu."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Použite názvy polí v zložitých zátvorkách, napríklad: {price} < 20 a {category} ktorýkoľvek z ['Nápoje']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Obmedzuje operátory, ktoré môžu respondenti použiť na filtrovanie podľa tohto poľa. Ponechajte prázdne, aby boli povolené všetky operátory, ktoré zodpovedajú poľu.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID stĺpca, ktoré respondenti nevidia.",
@@ -3274,8 +3352,6 @@ export var skStrings = {
     valueTrue: "Hodnota, ktorú treba uložiť do výsledkov prieskumu, keď respondenti poskytnú kladnú odpoveď.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Hodnota, ktorú je potrebné uložiť do výsledkov prieskumu, keď respondenti poskytnú zápornú odpoveď.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Vyberte tak, aby sa negatívna odpoveď považovala za nezodpovedanú, takže respondenti musia zvoliť \"Áno\" (alebo zaškrtnúť políčko), aby mohli pokračovať. Napríklad použite túto možnosť na vyžadovanie súhlasu s podmienkami. Platí len vtedy, keď je otázka potrebná.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Neodporúča sa vypnúť túto možnosť, pretože prepíše obrázok ukážky a používateľovi sťaží pochopenie, či boli súbory nahrané.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var skStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" a \"{aliasKey}\" z {ownerText} sú dva názvy jednej vlastnosti – za behu ich aplikuje v poradí, v akom ich JSON zapisuje, takže \"{winner}\" vyhráva.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" je nastavený na \"{name}\", ale inputType \"{inputType}\" nemá žiadne hranice – čas behu ho ignoruje.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" je nastavený na \"{name}\", ale \"{name}\" nemá ani isRequired, ani requiredIf - čas behu ho ignoruje."
+        inertMinMax: "\"{key}\" je nastavený na \"{name}\", ale inputType \"{inputType}\" nemá žiadne hranice – čas behu ho ignoruje."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

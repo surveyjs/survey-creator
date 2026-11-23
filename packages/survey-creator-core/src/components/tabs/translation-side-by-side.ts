@@ -3,7 +3,7 @@ import {
   ILocalizableOwner, ItemValue, LocalizableString, PageModel, PanelModel, PanelModelBase, PopupBaseViewModel, Question,
   QuestionCommentModel, QuestionDropdownModel, QuestionRowModel,
   QuestionMatrixDropdownModel, Serializer, SurveyElement, SurveyModel, property,
-  settings as surveySettings, surveyLocalization
+  settings as surveySettings, surveyLocalization, getIdSelector
 } from "survey-core";
 import { ISurveyCreatorOptions } from "../../creator-settings";
 import { applyCreatorUiLocaleToAction, editorLocalization, getLocString } from "../../editorLocalization";
@@ -482,7 +482,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     if (!copy) return;
     const question = (<any>copy).isQuestion ? <Question>copy : undefined;
     const page = (<any>copy).isPage ? <PageModel>copy : <PageModel>(<any>copy).page;
-    const id = (<any>copy).id;
+    const id = (<any>copy).renderedId;
     survey.scrollElementToTop(<any>copy, question, page, id, false, undefined, undefined,
       () => this.keepElementInView(survey, id, scrollFollowUpFrames));
   }
@@ -494,7 +494,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     DomWindowHelper.requestAnimationFrame(() => {
       if (this.isDisposed || this.targetSurvey !== survey) return;
       const root = survey.rootElement;
-      const element = !!root && typeof root.querySelector === "function" ? root.querySelector("#" + id) : undefined;
+      const element = !!root && typeof root.querySelector === "function" ? root.querySelector(getIdSelector(id)) : undefined;
       if (!element || typeof element.getBoundingClientRect !== "function" || typeof element.scrollIntoView !== "function") return;
       // The whole row, not only its top line, has to be in the view (the survey's own check
       // is satisfied by a row whose top is still on the screen).

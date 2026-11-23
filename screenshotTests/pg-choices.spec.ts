@@ -80,7 +80,7 @@ test.describe(title, () => {
     await compareScreenshot(page, choicesElement, "choices-empty-add-btn-hovered.png");
   });
 
-  test("Collection editor headers", async ({ page }) => {
+  test("Collection editor headers", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
 
     const addCustomProperty = async () => {

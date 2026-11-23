@@ -69,6 +69,8 @@ export const roStrings = {
     expression: "Expresie (doar citire)",
     // "Signature"
     signaturepad: "Pad de semnătură",
+    // [Auto-translated] "Filter"
+    filter: "Filtru",
     // "Button Group"
     buttongroup: "Grup de butoane"
   },
@@ -304,6 +306,8 @@ export const roStrings = {
     themeResetConfirmationOk: "Da, resetează tema",
     // "Add Question"
     addNewQuestion: "Adaugă întrebare",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Selectează tipul întrebării",
     // "Select page..."
     selectPage: "Selectează pagina...",
     // "Choices are copied from"
@@ -366,6 +370,8 @@ export const roStrings = {
     addNewTypeQuestion: "Adăugați {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Logo-ul de încărcare",
     // "Item "
     choices_Item: "Element ",
     // "Select a file"
@@ -700,6 +706,8 @@ export const roStrings = {
       templateDescription: "Model de descriere a panoului",
       // "Entry title pattern"
       templateTitle: "Model de titlu a panoului",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Titlu de intrare provizoriu",
       // "Empty panel text"
       noEntriesText: "Text panou gol",
       // "Tab title pattern"
@@ -813,6 +821,38 @@ export const roStrings = {
       // "Expression"
       expression: "Expresie"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Sursa de date",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Afișează cipurile de filtru",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Afișează butonul Filtre",
+      // [Auto-translated] "Show search"
+      showSearch: "Afișează căutarea",
+      // [Auto-translated] "Search in"
+      searchFields: "Caută în",
+      // [Auto-translated] "Presets"
+      items: "Presetări",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Presetare implicită",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Permiteți mai multe presetări",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Permiteți respondenților să adauge presetări"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Nume presetat",
+      // [Auto-translated] "Preset title"
+      title: "Titlu presetat",
+      // [Auto-translated] "Filter expression"
+      expression: "Expresie de filtru",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Permite editarea",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Permiteți ștergerea"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Sortează după",
@@ -874,7 +914,9 @@ export const roStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Fiecare opțiune într-o coloană separată",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Permiteți sortarea după această coloană"
+      allowSort: "Permiteți sortarea după această coloană",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Permiteți filtrarea prin această coloană"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export const roStrings = {
     addItem: "Faceți clic pentru a adăuga un element...",
     // "Click to remove the item..."
     removeItem: "Faceți clic pentru a elimina elementul...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Adaugă {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Scoate {0}",
     // "Drag the item"
     dragItem: "Trageți elementul",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Extinde alegerile imbricate",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Colapsul alegerilor imbricate",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Extinde opțiunile imbricate ale {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Colapsul alegerii imbriculate de {0}",
     // [Auto-translated] "Show description"
     showDescription: "Descrierea emisiunii",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export const roStrings = {
     "listIsEmpty@pages": "Fără pagini",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Fără niveluri de sortare",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Fără presetări",
     // "Add new choice"
     "addNew@choices": "Adăugați o alegere nouă",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export const roStrings = {
     "addNew@pages": "Adaugă pagină",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Adaugă nivelul de sortare",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Adaugă preset",
     // "Value"
     value: "Valoare",
     // [Auto-translated] "Text"
@@ -1162,8 +1216,8 @@ export const roStrings = {
     visible: "Vizibil",
     // "Required"
     isRequired: "Obligatoriu",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Acceptă doar un răspuns pozitiv",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Cer un răspuns pozitiv",
     // "Mark as required"
     markRequired: "Marchează ca obligatoriu",
     // "Remove the required mark"
@@ -1174,6 +1228,8 @@ export const roStrings = {
     eachRowUnique: "Prevenirea răspunsurilor duplicate în rânduri",
     // "Error message for required questions"
     requiredErrorText: "Mesaj de eroare pentru întrebările obligatorii",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Mesaj de eroare când Da este necesar",
     // "Display the question on a new line"
     startWithNewLine: "Afișează întrebarea pe un rând nou",
     // "Rows"
@@ -1196,6 +1252,10 @@ export const roStrings = {
     pageSize: "Rânduri pe pagină",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Permite utilizatorilor să sorteze rândurile",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Permiteți filtrarea după această întrebare",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Operatori de filtru",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Niveluri maxime de sortare",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export const roStrings = {
       rateValues: "Valori evaluare",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Setări glisor",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Setări filtru",
+      // [Auto-translated] "Presets"
+      presets: "Presetări",
       // "Choices from a Web Service"
       choicesByUrl: "Alegeri dintr-un serviciu web",
       // "Numbering"
@@ -2868,6 +2932,8 @@ export const roStrings = {
       width: "Setează lățimea panoului în proporție cu alte elemente ale chestionarului de pe același rând. Acceptă valori CSS (px, %, in, pt etc.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Introduceți un șablon pentru titlurile panourilor dinamice. Utilizați {panelIndex} pentru poziția generală a panoului și {visiblePanelIndex} pentru ordinea acestuia printre panourile vizibile. Introduceți aceste substituenți în model pentru a adăuga numerotare automată.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Un text de rezervă pentru titlurile intrărilor care se aplică atunci când tiparul titlului nu produce o valoare semnificativă. Folosiți {panelIndex} pentru poziția generală a intrării și {visiblePanelIndex} pentru ordinea sa dintre intrările vizibile.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Introduceți un șablon pentru titlurile filelor. Utilizați {panelIndex} pentru poziția generală a unui panou și {visiblePanelIndex} pentru ordinea acestuia printre panourile vizibile. Introduceți aceste substituenți în model pentru a adăuga numerotare automată.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export const roStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Setează locația barei de progres. Valoarea \"Auto\" afișează bara de progres deasupra sau dedesubtul antetului sondajului."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Selectați o matrice dinamică, o matrice derulantă sau un panou dinamic ale cărui rânduri sau panouri filtrul le restrânge.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Presetul aplicat la începutul sondajului."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Folosiți numele câmpurilor între paranteze, de exemplu: {price} < 20 și {category} anyof ['Drinks']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Limitează operatorii pe care respondenții îi pot folosi pentru a filtra după acest câmp. Lasă gol pentru a permite toți operatorii care corespund câmpului.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Un ID al coloanei care nu este vizibil pentru respondenți.",
@@ -3274,8 +3352,6 @@ export const roStrings = {
     valueTrue: "O valoare de salvat în rezultatele chestionarului atunci când respondenții oferă un răspuns pozitiv.",
     // "A value to save in survey results when respondents give a negative answer."
     valueFalse: "O valoare de salvat în rezultatele chestionarului atunci când respondenții oferă un răspuns negativ.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Selectați să tratați un răspuns negativ ca nerăspuns, astfel încât respondenții trebuie să selecteze \"Da\" (sau să bifeze căsuța) pentru a continua. De exemplu, folosiți-o pentru a solicita consimțământul pentru termeni și condiții. Se aplică doar când întrebarea este obligatorie.",
     // "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Nu este recomandat să dezactivați această opțiune, deoarece suprascrie Previzualizarea imaginii și face dificilă pentru utilizator înțelegerea dacă fișierele au fost încărcate.",
     // "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export const roStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" și \"{aliasKey}\" din {ownerText} sunt două nume ale unei proprietăți – timpul de rulare le aplică în ordinea în care JSON-ul le scrie, deci \"{winner}\" câștigă.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" este setat pe \"{name}\", dar inputType \"{inputType}\" nu are limite - timpul de execuție îl ignoră.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{cheia}\" este setată pe \"{name}\", dar \"{name}\" nu are nici isRequired, nici requiredIf - timpul de rulare îl ignoră."
+        inertMinMax: "\"{key}\" este setat pe \"{name}\", dar inputType \"{inputType}\" nu are limite - timpul de execuție îl ignoră."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

@@ -1,12 +1,13 @@
 
 import { Component, Input } from "@angular/core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { getActionDropdownButtonTarget, Action } from "survey-core";
 
 @Component({
   selector: "svc-side-bar-property-grid-header",
   templateUrl: "./side-bar-property-grid-header.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class SidebarPropertyGridHeaderComponent extends BaseAngular<Action> {
   @Input() model!: Action;

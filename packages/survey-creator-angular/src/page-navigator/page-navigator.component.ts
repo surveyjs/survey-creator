@@ -1,13 +1,15 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { PageNavigatorViewModel, PagesController } from "survey-creator-core";
 import { CreatorModelComponent } from "../creator-model.component";
 
+import { SurveyBaseProviders } from "survey-angular-ui";
 @Component({
   selector: "svc-page-navigator",
   templateUrl: "./page-navigator.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
-export class PageNavigatorComponent extends CreatorModelComponent<PageNavigatorViewModel> implements AfterViewInit {
+export class PageNavigatorComponent extends CreatorModelComponent<PageNavigatorViewModel> {
   public model!: PageNavigatorViewModel;
   @Input() pagesController!: PagesController;
   @Input() pageEditMode!: string;
@@ -21,10 +23,10 @@ export class PageNavigatorComponent extends CreatorModelComponent<PageNavigatorV
   protected getModel(): PageNavigatorViewModel {
     return this.model;
   }
-  protected getPropertiesToTrack(): string[] {
+  protected override getPropertiesToTrack(): string[] {
     return ["pagesController", "pageEditMode"];
   }
-  public ngAfterViewInit(): void {
+  protected override afterViewInit(): void {
     const el = this.container.nativeElement;
     this.model.attachToUI(el);
   }

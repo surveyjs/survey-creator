@@ -69,6 +69,8 @@ export var huStrings = {
     expression: "Kifejezés (csak olvasható)",
     // [Auto-translated] "Signature"
     signaturepad: "Aláírás",
+    // [Auto-translated] "Filter"
+    filter: "Szűrő",
     // [Auto-translated] "Button Group"
     buttongroup: "Gombcsoport"
   },
@@ -304,6 +306,8 @@ export var huStrings = {
     themeResetConfirmationOk: "Igen, állítsa vissza a témát",
     // "Add Question"
     addNewQuestion: "Kérdés felvétele",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Válaszd ki a kérdéstípust",
     // [Auto-translated] "Select page..."
     selectPage: "Válasszon oldalt...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var huStrings = {
     addNewTypeQuestion: "{0} hozzáadása", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGÓ]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Feltöltési logó",
     // [Auto-translated] "Item "
     choices_Item: "Cikk ",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var huStrings = {
       templateDescription: "Bejegyzés leírási mintája",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Bejegyzés címmintája",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Entry title helykitöltő",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Üres panelszöveg",
       // [Auto-translated] "Tab title pattern"
@@ -813,6 +821,38 @@ export var huStrings = {
       // [Auto-translated] "Expression"
       expression: "Kifejezés"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Adatforrás",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Szűrőchipek megjelenítése",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Szűrők gomb megjelenítése",
+      // [Auto-translated] "Show search"
+      showSearch: "Keresés megjelenítése",
+      // [Auto-translated] "Search in"
+      searchFields: "Keresés",
+      // [Auto-translated] "Presets"
+      items: "Előbeállítások",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Alapértelmezett előbeállítás",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Több előbeállítás engedélyezése",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Engedélyezze a válaszadók számára az előbeállítások hozzáadását"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Előbeállítás név",
+      // [Auto-translated] "Preset title"
+      title: "Előre beállított cím",
+      // [Auto-translated] "Filter expression"
+      expression: "Szűrőkifejezés",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Szerkesztés engedélyezése",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Törlés engedélyezése"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Rendezd",
@@ -874,7 +914,9 @@ export var huStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Minden beállítás külön oszlopban",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Engedélyezzük a rendezést ezen oszlop szerint"
+      allowSort: "Engedélyezzük a rendezést ezen oszlop szerint",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Engedélyezze a szűrést ezen oszlop szerint"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var huStrings = {
     addItem: "Kattintson egy elem felvételéhez...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Kattintson az elem eltávolításához...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Add {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Távolítsd {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Húzza az elemet",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Bővítsd a bészkelő lehetőségeket",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Összerakás egymásba helyezett választások",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Bővítsd az egymásba ágyazott {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Összeomlás {0}",
     // [Auto-translated] "Show description"
     showDescription: "Műsorleírás",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var huStrings = {
     "listIsEmpty@pages": "Nincsenek oldalak",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Nincsenek sortozási szintek",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Nincsenek előbeállítások",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Választási lehetőségek hozzáadása",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var huStrings = {
     "addNew@pages": "Oldal hozzáadása",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Szűrési szint hozzáadása",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Előbeállítás hozzáadása",
     // "Value"
     value: "Érték",
     // "Text"
@@ -1162,8 +1216,8 @@ export var huStrings = {
     visible: "Látható?",
     // "Required"
     isRequired: "Kötelező?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Csak pozitív választ fogadj el",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Pozitív választ kell kérni",
     // [Auto-translated] "Mark as required"
     markRequired: "Megjelölés kötelezőként",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var huStrings = {
     eachRowUnique: "A sorokban ismétlődő válaszok megakadályozása",
     // "Error message for required questions"
     requiredErrorText: "\"Kötelező\" hibaüzenet",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Hibaüzenet, ha igen szükséges",
     // "Display the question on a new line"
     startWithNewLine: "Új sorban kezdődik?",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var huStrings = {
     pageSize: "Sorok oldalonként",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Engedd a felhasználók sorok rendezését",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Engedélyezze a szűrést ezen a kérdés alapján",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Szűrő operátorok",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximális rendezési szintek",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var huStrings = {
       rateValues: "Szorzó értékek",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Csúszka beállításai",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Szűrőbeállítások",
+      // [Auto-translated] "Presets"
+      presets: "Előbeállítások",
       // "Choices from a Web Service"
       choicesByUrl: "Lehetőségek a webről",
       // [Auto-translated] "Numbering"
@@ -2868,6 +2932,8 @@ export var huStrings = {
       width: "A panel szélességét az ugyanabban a sorban lévő többi földmérési elemhez viszonyítva állítja be. CSS-értékeket fogad el (px, %, in, pt stb.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Írjon be egy sablont a dinamikus panelcímekhez. Használja a {panelIndex} elemet a panel általános pozíciójához, a {visiblePanelIndex} értéket pedig a látható panelek közötti sorrendjéhez. Szúrja be ezeket a helyőrzőket a mintába az automatikus számozás hozzáadásához.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Egy tartalék szöveg a bejegyzés címeihez, amely akkor érvényes, ha a bejegyzés címmintája nem ad értelmes értéket. Használd a {panelIndex} a bejegyzés általános pozíciójához, a {visiblePanelIndex} sorrendhez pedig a látható bejegyzések között.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Írjon be egy sablont a lapcímekhez. Használja a {panelIndex} elemet a panel általános pozíciójához, a {visiblePanelIndex} sablont pedig a látható panelek közötti sorrendjéhez. Szúrja be ezeket a helyőrzőket a mintába az automatikus számozás hozzáadásához.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var huStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Beállítja a folyamatjelző sáv helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Válasszon ki egy dinamikus mátrixot, legördülő mátrixot vagy egy dinamikus panelt, amelynek sorait vagy paneljeit a szűrő szűkíti.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Az előbeállítás, amely a felmérés elindításakor érvényesül."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Használjon mezőneveket göndör zárójelben, például: {price} < 20 és {category} bármelyik ['Italok']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Korlátok, amelyeket a válaszadók használhatnak a mező szerinti szűréshez. Hagyja üresen, hogy minden olyan operátor megmaradjon, amely megfelel a mezőnek.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "A válaszadók számára nem látható oszlopazonosító.",
@@ -3274,8 +3352,6 @@ export var huStrings = {
     valueTrue: "Olyan érték, amelyet meg kell menteni a felmérés eredményeiben, amikor a válaszadók pozitív választ adnak.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "A felmérés eredményeiben mentendő érték, ha a válaszadók negatív választ adnak.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Válaszd ki, hogy a negatív választ válasz nem válaszoltnak kezeli, így a válaszadóknak a \"Igen\" (vagy a jelölőnégyzetet) kell választaniuk a továbblépéshez. Például használhatjuk arra, hogy beleegyezést kérjen a feltételekhez. Csak akkor érvényes, ha a kérdés szükséges.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Nem ajánlott letiltani ezt a beállítást, mivel felülbírálja az előnézeti képet, és megnehezíti a felhasználó számára annak megértését, hogy a fájlok fel vannak-e töltve.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var huStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "A {ownerText} \"{key}\" és \"{aliasKey}\" két neve egy tulajdonságnak – a futási idő a JSON írási sorrendjében alkalmazza őket, így a \"{winner}\" nyer.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "a \"{key}\" a \"{name}\"-re van beállítva, de az inputType \"{inputType}\" korlátlanul rendelkezik – a futási idő figyelmen kívül hagyja azt.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" be van állítva a \"{name}\"-re, de a \"{name}\" sem isRequired, sem required If - a futási idő figyelmen kívül hagyja azt."
+        inertMinMax: "a \"{key}\" a \"{name}\"-re van beállítva, de az inputType \"{inputType}\" korlátlanul rendelkezik – a futási idő figyelmen kívül hagyja azt."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

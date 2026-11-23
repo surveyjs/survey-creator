@@ -69,6 +69,8 @@ export var hrStrings = {
     expression: "Izraz (samo za čitanje)",
     // "Signature"
     signaturepad: "Jastučić za potpis",
+    // [Auto-translated] "Filter"
+    filter: "Filtriraj",
     // [Auto-translated] "Button Group"
     buttongroup: "Grupa gumba"
   },
@@ -304,6 +306,8 @@ export var hrStrings = {
     themeResetConfirmationOk: "Da, resetirajte temu",
     // "Add Question"
     addNewQuestion: "Dodaj pitanje",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Odaberite vrstu pitanja",
     // "Select page..."
     selectPage: "Odaberite stranicu...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var hrStrings = {
     addNewTypeQuestion: "Dodaj {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Upload logo",
     // [Auto-translated] "Item "
     choices_Item: "Stavka ",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var hrStrings = {
       templateDescription: "Uzorak opisa unosa",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Uzorak naslova unosa",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Privremeni naslov unosa",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Prazan tekst na ploči",
       // [Auto-translated] "Tab title pattern"
@@ -813,6 +821,38 @@ export var hrStrings = {
       // [Auto-translated] "Expression"
       expression: "Izraz"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Izvor podataka",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Prikaži filter čipove",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Prikaži gumb Filteri",
+      // [Auto-translated] "Show search"
+      showSearch: "Prikaži pretraživanje",
+      // [Auto-translated] "Search in"
+      searchFields: "Pretraži u",
+      // [Auto-translated] "Presets"
+      items: "Predlošci",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Zadani predložak",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Dopusti više predložaka",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Dopusti ispitanicima dodavanje predložaka"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Naziv predloška",
+      // [Auto-translated] "Preset title"
+      title: "Unaprijed postavljeni naslov",
+      // [Auto-translated] "Filter expression"
+      expression: "Izraz filtra",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Dopusti uređivanje",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Dopusti brisanje"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Sortiraj po",
@@ -874,7 +914,9 @@ export var hrStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Svaka mogućnost u zasebnom stupcu",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Dopustite sortiranje po ovom stupcu"
+      allowSort: "Dopustite sortiranje po ovom stupcu",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Dopusti filtriranje prema ovom stupcu"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var hrStrings = {
     addItem: "Kliknite da biste dodali stavku...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Kliknite da biste uklonili stavku...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Dodaj {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Uklonite {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Vucite stavku",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Proširi ugniježđene izbore",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse ugnježđeni izbori",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Proširite ugniježđene izbore {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Kolaps ugniježđenih izbora {0}",
     // [Auto-translated] "Show description"
     showDescription: "Opis serije",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var hrStrings = {
     "listIsEmpty@pages": "Nema stranica",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Nema razina sortiranja",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Bez predložaka",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Dodaj izbor",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var hrStrings = {
     "addNew@pages": "Dodaj stranicu",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Dodaj razinu sortiranja",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Dodaj predložak",
     // "Value"
     value: "Vrijednost",
     // "Text"
@@ -1162,8 +1216,8 @@ export var hrStrings = {
     visible: "Je li vidljivo?",
     // "Required"
     isRequired: "Je potrebno?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Prihvatite samo pozitivan odgovor",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Zahtijevajte pozitivan odgovor",
     // [Auto-translated] "Mark as required"
     markRequired: "Označi kao obavezno",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var hrStrings = {
     eachRowUnique: "Sprječavanje dvostrukih odgovora u recima",
     // "Error message for required questions"
     requiredErrorText: "Potreban tekst pogreške",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Poruka o pogrešci kada je potreban 'da'",
     // "Display the question on a new line"
     startWithNewLine: "Počinje li s novom linijom?",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var hrStrings = {
     pageSize: "Redovi po stranici",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Dopustite korisnicima sortiranje redaka",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Dopusti filtriranje prema ovom pitanju",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Operatori filtra",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksimalne razine sortiranja",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var hrStrings = {
       rateValues: "Vrijednosti cijena",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Postavke klizača",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Postavke filtera",
+      // [Auto-translated] "Presets"
+      presets: "Predlošci",
       // "Choices from a Web Service"
       choicesByUrl: "Izbori s weba",
       // "Numbering"
@@ -2868,6 +2932,8 @@ export var hrStrings = {
       width: "Postavlja širinu ploče proporcionalno ostalim elementima istraživanja u istoj liniji. Prihvaća CSS vrijednosti (px, %, in, pt itd.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Upišite predložak za dinamičke naslove ploča. Koristite {panelIndex} za opći položaj panela i {visiblePanelIndex} za njegov redoslijed među vidljivim pločama. Umetnite ova rezervirana mjesta u uzorak da biste dodali automatsko numeriranje.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Rezervni tekst za naslove unosa koji se primjenjuje kada obrazac naslova unosa ne daje smislenu vrijednost. Koristite {panelIndex} za opći položaj unosa i {visiblePanelIndex} za njegov redoslijed među vidljivim unosima.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Upišite predložak za naslove kartica. Koristite {panelIndex} za opći položaj panela i {visiblePanelIndex} za njegov redoslijed među vidljivim pločama. Umetnite ova rezervirana mjesta u uzorak da biste dodali automatsko numeriranje.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var hrStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Postavlja lokaciju trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja ankete."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Odaberite dinamičku matricu, padajuću matricu ili dinamički panel čije retke ili panele filtar sužava.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Predložak primijenjen na početku ankete."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Koristite nazive polja u vitičastim zagradama, na primjer: {price} < 20 i {category} bilo koji od ['Beverages']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Ograničava operatore koje ispitanici mogu koristiti za filtriranje po ovom polju. Ostavite prazno da biste dopustili sve operatore koji odgovaraju polju.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID stupca koji nije vidljiv ispitanicima.",
@@ -3274,8 +3352,6 @@ export var hrStrings = {
     valueTrue: "Vrijednost koju treba uštedjeti u rezultatima ankete kada ispitanici daju pozitivan odgovor.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Vrijednost koju treba spremiti u rezultatima ankete kada ispitanici daju negativan odgovor.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Odaberite da se negativan odgovor tretira kao neodgovoren, pa ispitanici moraju odabrati \"Da\" (ili označiti kućicu) da bi nastavili. Na primjer, koristite ga za zahtjev za pristanak na uvjete korištenja. Primjenjuje se samo kada je pitanje obavezno.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Ne preporučuje se da onemogućite ovu opciju jer ona nadjačava sliku pretpregleda i otežava korisniku da shvati jesu li datoteke prenesene.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var hrStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" i \"{aliasKey}\" iz {ownerText} su dva imena jednog svojstva – vrijeme izvršavanja ih primjenjuje redoslijedom kojim ih JSON piše, pa \"{winner}\" pobjeđuje.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" je postavljen na \"{name}\", ali inputType \"{inputType}\" nema granica – vrijeme izvršavanja ga ignorira.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" je postavljen na \"{name}\", ali \"{name}\" nema ni isRequired ni requiredAko - vrijeme izvršavanja ga ignorira."
+        inertMinMax: "\"{key}\" je postavljen na \"{name}\", ali inputType \"{inputType}\" nema granica – vrijeme izvršavanja ga ignorira."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

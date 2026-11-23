@@ -69,6 +69,8 @@ export var persianStrings = {
     expression: "توصیفی",
     // "Signature"
     signaturepad: "قسمت امضا",
+    // [Auto-translated] "Filter"
+    filter: "فیلتر",
     // "Button Group"
     buttongroup: "گروه دکمه"
   },
@@ -304,6 +306,8 @@ export var persianStrings = {
     themeResetConfirmationOk: "بله، موضوع را تنظیم مجدد کنید",
     // "Add Question"
     addNewQuestion: "اضافه کردن سوال",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "انتخاب نوع سوال",
     // "Select page..."
     selectPage: "انتخاب صفحه ...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var persianStrings = {
     addNewTypeQuestion: "اضافه {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[لوگو]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "لوگو بارگذاری",
     // [Auto-translated] "Item "
     choices_Item: "مورد ",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var persianStrings = {
       templateDescription: "الگوی توضیحات ورودی",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "الگوی عنوان ورودی",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "عنوان موقت ورودی",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "متن پانل خالی",
       // [Auto-translated] "Tab title pattern"
@@ -813,6 +821,38 @@ export var persianStrings = {
       // [Auto-translated] "Expression"
       expression: "بیان"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "منبع داده",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "نمایش تراشه های فیلتر",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "نمایش دکمه فیلترها",
+      // [Auto-translated] "Show search"
+      showSearch: "نمایش جستجو",
+      // [Auto-translated] "Search in"
+      searchFields: "جستجو در",
+      // [Auto-translated] "Presets"
+      items: "پیش تنظیم ها",
+      // [Auto-translated] "Default preset"
+      defaultItem: "پیش تنظیم پیش فرض",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "اجازه دادن به چندین پیش تنظیم",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "اجازه دادن به پاسخ دهندگان برای افزودن پیش تنظیم ها"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "نام پیش تنظیم",
+      // [Auto-translated] "Preset title"
+      title: "عنوان پیش فرض",
+      // [Auto-translated] "Filter expression"
+      expression: "عبارت فیلتر",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "اجازه ویرایش",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "اجازه حذف"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "مرتب سازی بر اساس",
@@ -874,7 +914,9 @@ export var persianStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "هر گزینه در یک ستون جداگانه",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "اجازه مرتب سازی بر اساس این ستون را بدهید"
+      allowSort: "اجازه مرتب سازی بر اساس این ستون را بدهید",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "اجازه فیلتر کردن بر اساس این ستون"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var persianStrings = {
     addItem: "برای اضافه کردن یک آیتم کلیک کنید...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "فشار دهید تا مورد حذف شود...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "اضافه {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "حذف {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "مورد را بکشید",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "گسترش گزینه های تو در تو",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "انتخاب های تو در تو فروپاشی",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "گسترش گزینه های تو در تو {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "انتخاب های تو در تو فروپاشی {0}",
     // [Auto-translated] "Show description"
     showDescription: "توضیحات برنامه",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var persianStrings = {
     "listIsEmpty@pages": "بدون صفحه",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "بدون سطح مرتب سازی",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "بدون پیش تنظیم",
     // [Auto-translated] "Add choice"
     "addNew@choices": "انتخاب اضافه کنید",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var persianStrings = {
     "addNew@pages": "صفحه افزودن",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "افزودن سطح مرتب سازی",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "افزودن پیش تنظیم",
     // "Value"
     value: "مقدار",
     // "Text"
@@ -1162,8 +1216,8 @@ export var persianStrings = {
     visible: "نمایش داده شود؟",
     // "Required"
     isRequired: "ضروری است؟",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "فقط یک پاسخ مثبت را بپذیرید",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "نیاز به پاسخ مثبت",
     // [Auto-translated] "Mark as required"
     markRequired: "علامت گذاری به عنوان مورد نیاز",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var persianStrings = {
     eachRowUnique: "جلوگیری از پاسخ های تکراری در ردیف ها",
     // "Error message for required questions"
     requiredErrorText: "متن خطای موردنیاز",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "پیام خطا زمانی که نیاز به پاسخ بله است",
     // "Display the question on a new line"
     startWithNewLine: "با سطر جدید شروع شود؟",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var persianStrings = {
     pageSize: "ردیف ها در هر صفحه",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "اجازه دادن به کاربران برای مرتب سازی ردیف ها",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "اجازه فیلتر کردن بر اساس این سؤال",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "عملگرهای فیلتر",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "حداکثر سطوح مرتب سازی",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var persianStrings = {
       rateValues: "مقادیر رتبه بندی",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "تنظیمات نوار لغزنده",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "تنظیمات فیلتر",
+      // [Auto-translated] "Presets"
+      presets: "پیش تنظیم ها",
       // "Choices from a Web Service"
       choicesByUrl: "انتخاب ها از وب",
       // "Numbering"
@@ -2868,6 +2932,8 @@ export var persianStrings = {
       width: "عرض پانل را متناسب با سایر عناصر بررسی در همان خط تنظیم می کند. مقادیر CSS را می پذیرد (px، ٪، in، pt و غیره).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "قالب را برای عناوین پانل پویا تایپ کنید. از {panelIndex} برای موقعیت عمومی پانل و {visiblePanelIndex} برای سفارش ان در میان پانل های قابل مشاهده استفاده کنید. این نگهدارنده ها را در الگو قرار دهید تا شماره گذاری خودکار اضافه شود.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "یک متن پشتیبان برای عناوین ورودی که زمانی اعمال می شود که الگوی عنوان ورودی مقدار معناداری تولید نمی کند. برای موقعیت کلی ورودی از {panelIndex} و برای ترتیب آن در میان ورودی های قابل مشاهده {visiblePanelIndex} استفاده کنید.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "در قالبی برای عناوین زبانه تایپ کنید. از {panelIndex} برای موقعیت عمومی پانل و {visiblePanelIndex} برای سفارش ان در میان پانل های قابل مشاهده استفاده کنید. این نگهدارنده ها را در الگو قرار دهید تا شماره گذاری خودکار اضافه شود.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var persianStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "مکان نوار پیشرفت را تنظیم می کند. مقدار \"خودکار\" نوار پیشرفت را در بالا یا پایین سربرگ نظرسنجی نشان می دهد."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "یک ماتریس پویا، ماتریس کشویی یا پنل پویا را انتخاب کنید که فیلتر ردیف ها یا پنل های آن را محدود می کند.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "پیش تنظیمی که هنگام شروع نظرسنجی اعمال می شود."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "از نام فیلدها در کروشه های پیچ خورده استفاده کنید، برای مثال: {price} < 20 و {category} هر یک از ['Beverages']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "محدودیت هایی که عملگرهایی که پاسخ دهندگان می توانند برای فیلتر کردن بر اساس این فیلد استفاده کنند را مشخص می کند. خالی بگذارید تا همه عملگرهای مناسب برای فیلد مجاز باشند.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "یک شناسه ستون که برای پاسخ دهندگان قابل مشاهده نیست.",
@@ -3274,8 +3352,6 @@ export var persianStrings = {
     valueTrue: "ارزش برای صرفه جویی در نتایج نظرسنجی زمانی که پاسخ دهندگان پاسخ مثبت می دهند.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "ارزش برای صرفه جویی در نتایج نظرسنجی زمانی که پاسخ دهندگان پاسخ منفی می دهند.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "انتخاب کنید که پاسخ منفی به عنوان پاسخ بی پاسخ تلقی شود، بنابراین پاسخ دهندگان باید «بله» (یا تیک باکس) را انتخاب کنند تا ادامه دهند. برای مثال، از آن برای درخواست رضایت به شرایط و ضوابط استفاده کنید. فقط زمانی اعمال می شود که سوال لازم باشد.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "توصیه نمی شود که این گزینه را غیرفعال کنید زیرا تصویر پیش نمایش را لغو می کند و درک اینکه آیا فایل ها آپلود شده اند یا خیر را برای کاربر دشوار می کند.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var persianStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "«{key}» و «{aliasKey}» از {ownerText} دو نام یک ویژگی هستند - زمان اجرا آن ها را به ترتیبی که JSON می نویسد اعمال می کند، بنابراین «{winner}» برنده است.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "«{key}» روی «{name} تنظیم شده است، اما input Type «{inputType}» هیچ محدودیتی ندارد - زمان اجرا آن را نادیده می گیرد.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" روی \"{name}\" تنظیم شده، اما \"{name}\" نه isRequired است و نه requiredIf - زمان اجرا آن را نادیده می گیرد."
+        inertMinMax: "«{key}» روی «{name} تنظیم شده است، اما input Type «{inputType}» هیچ محدودیتی ندارد - زمان اجرا آن را نادیده می گیرد."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

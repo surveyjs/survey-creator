@@ -1,0 +1,7 @@
+# Recorded files are served byte for byte: no line-ending conversion on checkout.
+* -text
+# Files of this folder itself.
+/refresh.mjs text=auto
+/manifest.json text=auto
+/*.md text=auto
+/.git* text=auto

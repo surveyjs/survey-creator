@@ -1,4 +1,4 @@
-import { urlPresets, compareScreenshot, test, expect, changeToolboxSearchEnabled, changeToolboxScrolling, showCreatorSettings, showPresets, hideContentBehindPopup, showContentBehindPopup } from "./helper";
+import { urlPresets, compareScreenshot, test, expect, changeToolboxSearchEnabled, changeToolboxScrolling, showCreatorSettings, showPresets, hideContentBehindPopup, showContentBehindPopup, loadCreatorLocales } from "./helper";
 
 const title = "Presets";
 
@@ -40,6 +40,8 @@ test.describe(title, () => {
       presetsPlugin.addPreset(customPreset);
     });
     await page.setViewportSize({ width: 1440, height: 1505 });
+    // the Languages page lists the creator locales
+    await loadCreatorLocales(page);
     await showPresets(page);
   });
 
@@ -65,7 +67,6 @@ test.describe(title, () => {
     await page.locator(".spg-table__cell--actions .sd-action").nth(1).click();
     await page.getByText("Manage Presets", { exact: true }).hover();
     await page.getByText("Manage Presets", { exact: true }).click();
-    await page.waitForTimeout(300);
     await hideContentBehindPopup(page);
     await compareScreenshot(page, ".sv-popup__container", "presets-list-dialog.png");
     await showContentBehindPopup(page);
@@ -176,8 +177,7 @@ test.describe(title, () => {
     expect(moreButton).toBeVisible();
     moreButton.click();
     await page.getByText("Move to category...").hover();
-    await page.waitForTimeout(300);
-    expect(await page.getByText("Text Input Questions")).toBeVisible();
+    await expect(page.locator(".sv-popup").filter({ visible: true }).getByText("Text Input Questions")).toBeVisible();
     await compareScreenshot(page, root, "presets-context-menu.png");
   });
 
@@ -188,8 +188,9 @@ test.describe(title, () => {
 
     await page.getByRole("row", { name: "Designer" }).hover();
     await page.getByRole("row", { name: "Designer" }).getByRole("button", { name: "Edit", exact: true }).click();
+    // The dialog focuses its first input 100 ms after it opens; work in it only after that, or the focus moves away
+    await expect(page.getByRole("textbox", { name: "Title", exact: true })).toBeFocused();
     await page.getByRole("combobox", { name: "Icon name" }).focus();
-    await page.waitForTimeout(500);
     await page.getByRole("combobox", { name: "Icon name" }).click({ force: true });
 
     await hideContentBehindPopup(page);

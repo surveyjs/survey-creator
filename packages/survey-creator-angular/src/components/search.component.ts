@@ -1,11 +1,12 @@
 import { SearchManager } from "survey-creator-core";
 import { Component, Input } from "@angular/core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 
 @Component({
   selector: "svc-search",
   templateUrl: "./search.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class SearchComponent extends BaseAngular<SearchManager> {
   @Input() model!: SearchManager;

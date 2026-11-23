@@ -6,7 +6,8 @@ export var enStrings = {
   survey: {
     duplicate: "Duplicate",
     license: "To use the Survey Creator library in your application, a <a href='https://surveyjs.io/licensing' target='_blank'>developer license</a> is required. If you have an active license, please <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>set up your license key</a> and ensure you're using the <a href='https://surveyjs.io/stay-updated/release-notes' target='_blank'>latest version</a>.",
-    license2: "Your maintenance subscription expired on {date}. You may continue using all <a href='https://surveyjs.io/stay-updated/release-notes' target='_blank'>versions released up to that date</a>. To remove this banner in the latest version, please <a href='https://surveyjs.io/manage#license-manager' target='_blank'>renew your subscription</a> and <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>set up a new license key</a>."
+    license2: "Your maintenance subscription expired on {date}. You may continue using all <a href='https://surveyjs.io/stay-updated/release-notes' target='_blank'>versions released up to that date</a>. To remove this banner in the latest version, please <a href='https://surveyjs.io/manage#license-manager' target='_blank'>renew your subscription</a> and <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>set up a new license key</a>.",
+    licenseEmbedded: "Powered by SurveyJS · <a href='{whiteLabelUrl}' target='_blank'>White-label options</a>"
   },
   // Creator tabs
   tabs: {
@@ -42,6 +43,7 @@ export var enStrings = {
     boolean: "Yes/No (Boolean)",
     expression: "Expression (read-only)",
     signaturepad: "Signature",
+    filter: "Filter",
     buttongroup: "Button Group"
   },
   toolboxCategories: {
@@ -162,6 +164,7 @@ export var enStrings = {
     themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost.",
     themeResetConfirmationOk: "Yes, reset the theme",
     addNewQuestion: "Add Question",
+    selectQuestionType: "Select question type",
     selectPage: "Select page...",
     carryForwardChoicesCopied: "Choices are copied from",
     choicesLoadedFromWebText: "Choices are loaded from a web service.",
@@ -193,6 +196,7 @@ export var enStrings = {
     imageChooseImage: "Choose Image",
     addNewTypeQuestion: "Add {0}", // {0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
+    chooseLogoAriaLabel: "Upload logo",
     choices_Item: "Item ",
     selectFile: "Select a file",
     removeFile: "Remove the file",
@@ -368,6 +372,7 @@ export var enStrings = {
       confirmDelete: "Confirm entry removal",
       templateDescription: "Entry description pattern",
       templateTitle: "Entry title pattern",
+      templateTitlePlaceholder: "Entry title placeholder",
       noEntriesText: "Empty panel text",
       templateTabTitle: "Tab title pattern",
       tabTitlePlaceholder: "Tab title placeholder",
@@ -431,6 +436,24 @@ export var enStrings = {
     calculatedvalue: {
       expression: "Expression"
     },
+    filter: {
+      source: "Data source",
+      allowFastMode: "Show filter chips",
+      allowAdvancedMode: "Show the Filters button",
+      showSearch: "Show search",
+      searchFields: "Search in",
+      items: "Presets",
+      defaultItem: "Default preset",
+      allowMultipleItems: "Allow multiple presets",
+      allowAddItems: "Allow respondents to add presets"
+    },
+    filteritem: {
+      name: "Preset name",
+      title: "Preset title",
+      expression: "Filter expression",
+      allowEdit: "Allow editing",
+      allowDelete: "Allow deleting"
+    },
     sortcriterion: {
       field: "Sort by",
       direction: "Order"
@@ -467,7 +490,8 @@ export var enStrings = {
       visibleIf: "Make the column visible if",
       requiredIf: "Make the column required if",
       showInMultipleColumns: "Each option in a separate column",
-      allowSort: "Allow sorting by this column"
+      allowSort: "Allow sorting by this column",
+      allowFiltering: "Allow filtering by this column"
     },
     matrixcolumn: {
       isExclusive: "Clear others in the same row"
@@ -528,9 +552,13 @@ export var enStrings = {
     addNew: "Add item",
     addItem: "Click to add an item...",
     removeItem: "Click to remove the item...",
+    addItemAriaLabel: "Add {0}",
+    removeItemAriaLabel: "Remove {0}",
     dragItem: "Drag the item",
     expandNestedChoices: "Expand nested choices",
     collapseNestedChoices: "Collapse nested choices",
+    expandNestedChoicesAriaLabel: "Expand nested choices of {0}",
+    collapseNestedChoicesAriaLabel: "Collapse nested choices of {0}",
     showDescription: "Show description",
     hideDescription: "Hide description",
     edit: "Edit",
@@ -568,6 +596,7 @@ export var enStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "No links",
     "listIsEmpty@pages": "No pages",
     "listIsEmpty@sortCriteria": "No sort levels",
+    "listIsEmpty@filterItems": "No presets",
     "addNew@choices": "Add choice",
     "addNew@rateValues": "Add rating value",
     "addNew@customLabels": "Add label",
@@ -581,6 +610,7 @@ export var enStrings = {
     "addNew@navigateToUrlOnCondition": "Add link",
     "addNew@pages": "Add page",
     "addNew@sortCriteria": "Add sort level",
+    "addNew@filterItems": "Add preset",
     value: "Value",
     text: "Text",
     imageLink: "Image or video file URL",
@@ -621,12 +651,13 @@ export var enStrings = {
     createCustomChoiceText: "\"Create Custom Choice\" command text",
     visible: "Visible",
     isRequired: "Required",
-    requiredTrue: "Accept only a positive answer",
+    requireTrue: "Require a positive answer",
     markRequired: "Mark as required",
     removeRequiredMark: "Remove the required mark",
     eachRowRequired: "Require an answer in each row",
     eachRowUnique: "Prevent duplicate responses in rows",
     requiredErrorText: "Error message for required questions",
+    requireTrueErrorText: "Error message when Yes is required",
     startWithNewLine: "Display the question on a new line",
     rows: "Rows",
     cols: "Columns",
@@ -638,6 +669,8 @@ export var enStrings = {
     rowCount: "Initial number of rows",
     pageSize: "Rows per page",
     allowSort: "Allow users to sort rows",
+    allowFiltering: "Allow filtering by this question",
+    filterOperators: "Filter operators",
     maxSortLevel: "Maximum sort levels",
     sortCriteria: "Default sort order",
     showSortBar: "Show sort bar",
@@ -929,6 +962,8 @@ export var enStrings = {
       requiredIf: "Required If",
       rateValues: "Rating Values",
       sliderSettings: "Slider Settings",
+      filterSettings: "Filter Settings",
+      presets: "Presets",
       choicesByUrl: "Choices from a Web Service",
       numbering: "Numbering",
       validators: "Validators",
@@ -1553,6 +1588,7 @@ export var enStrings = {
       state: "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed.",
       width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.).",
       templateTitle: "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering.",
+      templateTitlePlaceholder: "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries.",
       templateTabTitle: "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering.",
       tabTitlePlaceholder: "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value.",
       templateVisibleIf: "This setting allows you to control the visibility of individual entries within the dynamic panel. Use the `{panel}` placeholder to reference the current entry in your expression.",
@@ -1639,6 +1675,14 @@ export var enStrings = {
       readOnlyMode: "Specifies how read-only questions appear, including on the preview page. \"Read-Only\" (default) displays questions with their usual input controls, but disabled for editing. \"View\" displays answers as text or other non-interactive elements.",
       progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
     },
+    filter: {
+      source: "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down.",
+      defaultItem: "The preset applied when the survey starts."
+    },
+    filteritem: {
+      expression: "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+    },
+    filterOperators: "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field.",
     matrixdropdowncolumn: {
       name: "A column ID that is not visible to respondents.",
       isUnique: "When enabled for a column, a respondent is required to provide a unique response for each question within this column.",
@@ -1775,7 +1819,6 @@ export var enStrings = {
     searchEnabled: "Select if you want to update the drop-down menu contents to match the search query that a user is typing in the input field.",
     valueTrue: "A value to save in survey results when respondents give a positive answer.",
     valueFalse: "A value to save in survey results when respondents give a negative answer.",
-    requiredTrue: "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required.",
     showPreview: "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded.",
     selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area.",
     dataList: "Enter a list of choices that will be suggested to the respondent during input.",
@@ -2109,7 +2152,6 @@ export var enStrings = {
         notSerializable: "\"{key}\" of {ownerText} is not serializable - it takes effect on load, and is dropped from the JSON whenever the survey is saved again.",
         aliasDuplicate: "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins.",
         inertMinMax: "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it.",
-        requiredTrueNotRequired: "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it.",
       },
       "property/invalid-value": {
         notInChoices: "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText}).",

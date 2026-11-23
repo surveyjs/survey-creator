@@ -69,6 +69,8 @@ export var grStrings = {
     expression: "Έκφραση (μόνο για ανάγνωση)",
     // "Signature"
     signaturepad: "Υπογραφή",
+    // [Auto-translated] "Filter"
+    filter: "Φίλτρο",
     // "Button Group"
     buttongroup: "Ομάδα Κουμπιών"
   },
@@ -304,6 +306,8 @@ export var grStrings = {
     themeResetConfirmationOk: "Ναι, επαναφορά θέματος",
     // "Add Question"
     addNewQuestion: "Προσθήκη Ερώτησης",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Επιλέξτε τύπο ερώτησης",
     // "Select page..."
     selectPage: "Επιλέξτε σελίδα...",
     // "Choices are copied from"
@@ -366,6 +370,8 @@ export var grStrings = {
     addNewTypeQuestion: "Προσθήκη {0}", // {0} is localizable question type
     // "[LOGO]"
     chooseLogoPlaceholder: "[ΛΟΓΟΤΥΠΟ]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Μεταφόρτωση λογότυπου",
     // "Item "
     choices_Item: "Στοιχείο ",
     // "Select a file"
@@ -700,6 +706,8 @@ export var grStrings = {
       templateDescription: "Πρότυπο περιγραφής πλαισίου",
       // "Entry title pattern"
       templateTitle: "Πρότυπο τίτλου πλαισίου",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Σύμβολο κράτησης θέσης τίτλου καταχώρισης",
       // "Empty panel text"
       noEntriesText: "Κείμενο κενού πλαισίου",
       // "Tab title pattern"
@@ -813,6 +821,38 @@ export var grStrings = {
       // "Expression"
       expression: "Έκφραση"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Πηγή δεδομένων",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Εμφάνιση τσιπ φίλτρου",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Εμφάνιση του κουμπιού Φίλτρα",
+      // [Auto-translated] "Show search"
+      showSearch: "Εμφάνιση αναζήτησης",
+      // [Auto-translated] "Search in"
+      searchFields: "Αναζήτηση σε",
+      // [Auto-translated] "Presets"
+      items: "Προεπιλογές",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Προεπιλεγμένη προεπιλογή",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Επιτρέψτε πολλαπλές προεπιλογές",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Επιτρέψτε στους συμμετέχοντες να προσθέτουν προεπιλογές"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Όνομα προεπιλογής",
+      // [Auto-translated] "Preset title"
+      title: "Τίτλος προεπιλογής",
+      // [Auto-translated] "Filter expression"
+      expression: "Έκφραση φίλτρου",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Επιτρέψτε την επεξεργασία",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Επιτρέψτε τη διαγραφή"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Ταξινόμηση ανά",
@@ -874,7 +914,9 @@ export var grStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Κάθε επιλογή σε ξεχωριστή στήλη",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Να επιτρέπεται η ταξινόμηση κατά αυτήν τη στήλη"
+      allowSort: "Να επιτρέπεται η ταξινόμηση κατά αυτήν τη στήλη",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Επιτρέπεται το φιλτράρισμα με βάση αυτή τη στήλη"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var grStrings = {
     addItem: "Κλικ για προσθήκη στοιχείου...",
     // "Click to remove the item..."
     removeItem: "Κλικ για διαγραφή του στοιχείου...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Προσθέστε {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Αφαιρέστε {0}",
     // "Drag the item"
     dragItem: "Σύρετε το στοιχείο",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Ανάπτυξη ένθετων επιλογών",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Σύμπτυξη ένθετων επιλογών",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Επέκταση ένθετων επιλογών {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Σύμπτυξη ένθετων επιλογών {0}",
     // [Auto-translated] "Show description"
     showDescription: "Εμφάνιση περιγραφής",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var grStrings = {
     "listIsEmpty@pages": "Δεν έχετε προσθέσει σελίδες",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Χωρίς επίπεδα ταξινόμησης",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Χωρίς προεπιλογές",
     // "Add new choice"
     "addNew@choices": "Προσθήκη νέας επιλογής",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var grStrings = {
     "addNew@pages": "Προσθήκη νέας σελίδας",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Προσθήκη επιπέδου ταξινόμησης",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Προσθήκη προεπιλογής",
     // "Value"
     value: "Τιμή",
     // "Text"
@@ -1162,8 +1216,8 @@ export var grStrings = {
     visible: "Ορατό",
     // "Required"
     isRequired: "Υποχρεωτικό",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Αποδεχτείτε μόνο μια θετική απάντηση",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Απαιτήστε μια θετική απάντηση",
     // "Mark as required"
     markRequired: "Σήμανση ως υποχρεωτικό",
     // "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var grStrings = {
     eachRowUnique: "Αποτροπή διπλών απαντήσεων σε γραμμές",
     // "Error message for required questions"
     requiredErrorText: "Μήνυμα σφάλματος για υποχρεωτικές ερωτήσεις",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Μήνυμα λάθους όταν απαιτείται Ναι",
     // "Display the question on a new line"
     startWithNewLine: "Εμφάνιση ερώτησης σε νέα γραμμή",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var grStrings = {
     pageSize: "Σειρές ανά σελίδα",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Να επιτρέπεται στους χρήστες η ταξινόμηση γραμμών",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Να επιτρέπεται το φιλτράρισμα με βάση αυτή την ερώτηση",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Τελεστές φίλτρων",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Μέγιστα επίπεδα ταξινόμησης",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var grStrings = {
       rateValues: "Τιμές Αξιολόγησης",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Ρυθμίσεις ρυθμιστικού",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Ρυθμίσεις Φίλτρου",
+      // [Auto-translated] "Presets"
+      presets: "Προεπιλογές",
       // "Choices from a Web Service"
       choicesByUrl: "Επιλογές από Web Service",
       // "Numbering"
@@ -2868,6 +2932,8 @@ export var grStrings = {
       width: "Ορίζει το πλάτος του πάνελ σε σχέση με άλλα στοιχεία έρευνας στην ίδια γραμμή. Δέχεται τιμές CSS (px, %, in, pt, κλπ).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Πληκτρολογήστε ένα πρότυπο για τους τίτλους των δυναμικών πάνελ. Χρησιμοποιήστε {panelIndex} για τη γενική θέση του πάνελ και {visiblePanelIndex} για τη σειρά του μεταξύ των ορατών πάνελ. Εισαγάγετε αυτούς τους χώρους κράτησης στο μοτίβο για αυτόματη αρίθμηση.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Ένα εναλλακτικό κείμενο για τίτλους καταχωρήσεων που εφαρμόζεται όταν το μοτίβο τίτλου καταχώρισης δεν παράγει μια σημαντική τιμή. Χρησιμοποιήστε το {panelIndex} για τη γενική θέση της καταχώρισης και το {visiblePanelIndex} για τη σειρά της μεταξύ των ορατών καταχωρήσεων.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Πληκτρολογήστε ένα πρότυπο για τους τίτλους των καρτελών. Χρησιμοποιήστε {panelIndex} για τη γενική θέση του πάνελ και {visiblePanelIndex} για τη σειρά του μεταξύ των ορατών πάνελ. Εισαγάγετε αυτούς τους χώρους κράτησης στο μοτίβο για αυτόματη αρίθμηση.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var grStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Ορίζει την τοποθεσία της γραμμής προόδου. Η τιμή \"Αυτόματα\" εμφανίζει τη γραμμή προόδου πάνω ή κάτω από την κεφαλίδα της έρευνας."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Επιλέξτε έναν δυναμικό πίνακα, έναν πίνακα αναδυόμενου μενού ή ένα δυναμικό πάνελ του οποίου τις γραμμές ή πάνελ περιορίζει το φίλτρο.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Η προεπιλογή που εφαρμόζεται όταν ξεκινά η έρευνα."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Χρησιμοποιήστε ονόματα πεδίων σε αγκύλες, για παράδειγμα: {price} < 20 και {category} οποιοδήποτε από τα ['Drinks']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Περιορίζει τους τελεστές που μπορούν να χρησιμοποιήσουν οι ερωτώμενοι για να φιλτράρουν με βάση αυτό το πεδίο. Αφήστε κενό για να επιτρέψετε σε όλους τους τελεστές που ταιριάζουν στο πεδίο.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Ένα ID στήλης που δεν είναι ορατό στους συμμετέχοντες.",
@@ -3274,8 +3352,6 @@ export var grStrings = {
     valueTrue: "Μια τιμή που αποθηκεύεται στα αποτελέσματα της έρευνας όταν οι συμμετέχοντες δίνουν θετική απάντηση.",
     // "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Μια τιμή που αποθηκεύεται στα αποτελέσματα της έρευνας όταν οι συμμετέχοντες δίνουν αρνητική απάντηση.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Επιλέξτε για να αντιμετωπίσετε μια αρνητική απάντηση ως αναπάντητη, επομένως οι ερωτηθέντες πρέπει να επιλέξουν \"Ναι\" (ή να επιλέξουν το πλαίσιο ελέγχου) για να συνεχίσουν. Για παράδειγμα, χρησιμοποιήστε το για να απαιτήσετε συναίνεση στους όρους και τις προϋποθέσεις. Ισχύει μόνο όταν απαιτείται η ερώτηση.",
     // "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Δεν συνιστάται να απενεργοποιήσετε αυτήν την επιλογή, καθώς παρακάμπτει την εικόνα προεπισκόπησης και καθιστά δύσκολο για έναν χρήστη να καταλάβει αν τα αρχεία έχουν ανέβει.",
     // "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var grStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "Τα \"{key}\" και \"{aliasKey}\" του {ownerText} είναι δύο ονόματα μιας ιδιότητας - ο χρόνος εκτέλεσης τα εφαρμόζει με τη σειρά που τα γράφει το JSON, οπότε το \"{winner}\" κερδίζει.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "Το \"{key}\" έχει οριστεί στο \"{name}\", αλλά το inputType \"{inputType}\" δεν έχει όρια - ο χρόνος εκτέλεσης το αγνοεί.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "Το \"{key}\" έχει οριστεί στο \"{name}\", αλλά το \"{name}\" δεν έχει ούτε isRequired ούτε requiredIf - ο χρόνος εκτέλεσης το αγνοεί."
+        inertMinMax: "Το \"{key}\" έχει οριστεί στο \"{name}\", αλλά το inputType \"{inputType}\" δεν έχει όρια - ο χρόνος εκτέλεσης το αγνοεί."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

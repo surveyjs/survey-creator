@@ -237,14 +237,13 @@ test.describe(title, () => {
     await compareScreenshot(page, toolboxElement, "toolbox-categories.png", { maxDiffPixels: 10 });
   });
 
-  test("Toolbox with subtypes (ltr)", async ({ page }) => {
+  test("Toolbox with subtypes (ltr)", { tag: "@fresh-page" }, async ({ page }) => {
     const toolboxElement = page.locator(".svc-toolbox");
     const subtypesPopup = page.locator(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filter({ has: page.locator(":visible") });
 
     await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
     const itemSelector = getToolboxItemByText(page, "Rating Scale").locator("../..");
     await page.setViewportSize({ width: 2560, height: 1440 });
-    await page.waitForTimeout(300);
     await itemSelector.hover();
     await compareScreenshot(page, itemSelector, "toolbox-left-rating-subtypes-item.png");
     await itemSelector.locator(".svc-toolbox__item-submenu-button").hover();
@@ -256,7 +255,7 @@ test.describe(title, () => {
     await showContentBehindPopup(page);
   });
 
-  test("Toolbox with custom subtypes set dynamically (ltr)", async ({ page }) => {
+  test("Toolbox with custom subtypes set dynamically (ltr)", { tag: "@fresh-page" }, async ({ page }) => {
     const toolboxElement = page.locator(".svc-toolbox");
     const subtypesPopup = page.locator(".sv-popup.sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filter({ has: page.locator(":visible") });
 
@@ -273,7 +272,6 @@ test.describe(title, () => {
       textItem.addSubitem(questiongroupItem);
     });
 
-    await page.waitForTimeout(300);
     await itemSelector.hover();
     await itemSelector.locator(".svc-toolbox__item-submenu-button").hover();
     await getToolboxItemByText(page, "Stars").hover();
@@ -284,7 +282,7 @@ test.describe(title, () => {
 
   // test.skip("Toolbox with subtypes (wrap)", ...) // Skipped as in original
 
-  test("Toolbox with subtypes (rtl)", async ({ page }) => {
+  test("Toolbox with subtypes (rtl)", { tag: "@fresh-page" }, async ({ page }) => {
     await setDirRTL(page);
 
     const toolboxElement = page.locator(".svc-toolbox");
@@ -293,7 +291,6 @@ test.describe(title, () => {
 
     await setJSON(page, { showQuestionNumbers: true, pages: [{ name: "page1" }] });
     await page.setViewportSize({ width: 2560, height: 1440 });
-    await page.waitForTimeout(300);
     await itemSelector.hover();
     await compareScreenshot(page, itemSelector, "toolbox-right-rating-subtypes-item.png");
     await itemSelector.locator(".svc-toolbox__item-submenu-button").hover();
@@ -472,10 +469,8 @@ test.describe(title, () => {
     await compareScreenshot(page, toolboxElement, "toolbox-search-right.png");
     await toolboxSearch.click();
     await toolboxSearch.type("single");
-    await page.waitForTimeout(300);
     await compareScreenshot(page, toolboxElement, "toolbox-search-right-entered.png");
     await toolboxSearch.type("qwerty");
-    await page.waitForTimeout(300);
     await compareScreenshot(page, toolboxElement, "toolbox-search-right-placeholder.png");
   });
 

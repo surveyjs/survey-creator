@@ -52,6 +52,7 @@ export * from "../QuestionError";
 export * from "../tabs/logic-operator";
 export * from "../tabs/Designer";
 export * from "../tabs/JsonEditorAce";
+export * from "../tabs/JsonEditorMonaco";
 export * from "../tabs/JsonEditorTextarea";
 export * from "../tabs/Logic";
 export * from "../tabs/Preview";

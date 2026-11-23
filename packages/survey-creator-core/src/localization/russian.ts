@@ -69,6 +69,8 @@ export var ruStrings = {
     expression: "Выражение (только для чтения)",
     // [Auto-translated] "Signature"
     signaturepad: "Подпись",
+    // [Auto-translated] "Filter"
+    filter: "Фильтр",
     // [Auto-translated] "Button Group"
     buttongroup: "Группа кнопок"
   },
@@ -304,6 +306,8 @@ export var ruStrings = {
     themeResetConfirmationOk: "Да, сбросьте тему",
     // "Add Question"
     addNewQuestion: "Добавить вопрос",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Выберите тип вопроса",
     // [Auto-translated] "Select page..."
     selectPage: "Выберите страницу...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var ruStrings = {
     addNewTypeQuestion: "Добавить {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[ЛОГОТИП]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Логотип загрузки",
     // [Auto-translated] "Item "
     choices_Item: "Пункт ",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var ruStrings = {
       templateDescription: "Шаблон описания входа",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Шаблон заголовка записи",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Заполнитель титула заявки",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Пустой текст на панели",
       // [Auto-translated] "Tab title pattern"
@@ -813,6 +821,38 @@ export var ruStrings = {
       // [Auto-translated] "Expression"
       expression: "Выражение"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Источник данных",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Показать фильтрующие чипы",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Показать кнопку «Фильтры»",
+      // [Auto-translated] "Show search"
+      showSearch: "Показать поиск",
+      // [Auto-translated] "Search in"
+      searchFields: "Поиск в",
+      // [Auto-translated] "Presets"
+      items: "Пресеты",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Предустановка по умолчанию",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Разрешить несколько предустановок",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Разрешить респондентам добавлять пресеты"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Имя пресета",
+      // [Auto-translated] "Preset title"
+      title: "Название пресета",
+      // [Auto-translated] "Filter expression"
+      expression: "Выражение фильтра",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Разрешить редактирование",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Разрешить удаление"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Сортировать по",
@@ -874,7 +914,9 @@ export var ruStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Каждый вариант в отдельной колонке",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Разрешите сортировку по этому столбцу"
+      allowSort: "Разрешите сортировку по этому столбцу",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Разрешить фильтрацию по этому столбцу"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var ruStrings = {
     addItem: "Нажмите, чтобы добавить элемент...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Нажмите, чтобы удалить элемент...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Добавить {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Удалите {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Перетащите элемент",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Расширение вложенных вариантов",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Варианты с вложением коллапса",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Расширяйте вложенные варианты {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Вложенные варианты {0}",
     // [Auto-translated] "Show description"
     showDescription: "Описание шоу",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var ruStrings = {
     "listIsEmpty@pages": "Нет страниц",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Нет уровней сортировки",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Без пресетов",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Добавьте выбор",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var ruStrings = {
     "addNew@pages": "Добавить страницу",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Добавить уровень сортировки",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Добавить пресет",
     // "Value"
     value: "Значение",
     // "Text"
@@ -1162,8 +1216,8 @@ export var ruStrings = {
     visible: "Отображать?",
     // "Required"
     isRequired: "Обязательный?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Принимайте только положительный ответ",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Требуйте положительного ответа",
     // [Auto-translated] "Mark as required"
     markRequired: "Отметьте как обязательный",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var ruStrings = {
     eachRowUnique: "Предотвращение дублирования ответов в строках",
     // "Error message for required questions"
     requiredErrorText: "Это поле обязательное для заполнения",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Сообщение об ошибке, когда требуется ответ «Да»",
     // "Display the question on a new line"
     startWithNewLine: "Начинать с новой строки?",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var ruStrings = {
     pageSize: "Строки на странице",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Разрешить пользователям сортировать строки",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Разрешить фильтрацию по этому вопросу",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Операторы фильтров",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Максимальные уровни сортировки",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var ruStrings = {
       rateValues: "Оценить важность(вес) вопроса",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Настройки слайдера",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Настройки фильтра",
+      // [Auto-translated] "Presets"
+      presets: "Пресеты",
       // "Choices from a Web Service"
       choicesByUrl: "Выбор из Интернета",
       // [Auto-translated] "Numbering"
@@ -2868,6 +2932,8 @@ export var ruStrings = {
       width: "Устанавливает ширину панели пропорционально другим элементам съемки в той же линии. Принимает значения CSS (px, %, in, pt и т. д.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Введите шаблон для динамических заголовков панелей. Используйте {panelIndex} для общего положения панели и {visiblePanelIndex} для ее порядка среди видимых панелей. Вставьте эти заполнители в шаблон, чтобы добавить автоматическую нумерацию.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Резервный текст для заголовков записей, который применяется, когда шаблон заголовков не даёт значимого значения. Используйте {panelIndex} для общего положения записи и {visiblePanelIndex} для её порядка среди видимых записей.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Введите шаблон для заголовков вкладок. Используйте {panelIndex} для общего положения панели и {visiblePanelIndex} для ее порядка среди видимых панелей. Вставьте эти заполнители в шаблон, чтобы добавить автоматическую нумерацию.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var ruStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Задает расположение индикатора выполнения. Значение \"Auto\" отображает индикатор выполнения над или под заголовком опроса."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Выберите динамическую матрицу, выпадающую матрицу или динамическую панель, строки или панели которых фильтр сужает.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Пресет, применяемый при начале опроса."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Используйте имена полей в завитых скобках, например: {price} < 20 и {category} любой из ['Напитки']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Ограничивает операторы, которые респонденты могут использовать для фильтрации по этому полю. Оставьте пустым, чтобы разрешить все операторы, подходящие для поля.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Идентификатор столбца, который не виден респондентам.",
@@ -3274,8 +3352,6 @@ export var ruStrings = {
     valueTrue: "Значение, сохраняемое в результатах опроса, когда респонденты дают положительный ответ.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Значение, сохраняемое в результатах опроса, когда респонденты дают отрицательный ответ.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Выберите считать отрицательный ответ неотвеченным, поэтому респондентам нужно выбрать «Да» (или поставить галочку) для продолжения. Например, используйте его для получения согласия на условия положений. Применяется только тогда, когда вопрос требуется.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Не рекомендуется отключать эту опцию, так как она переопределяет изображение предварительного просмотра и затрудняет понимание пользователем того, были ли файлы загружены.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var ruStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" и \"{aliasKey}\" из {ownerText} — два названия одного свойства — время выполнения применяет их в порядке записи JSON, поэтому побеждает \"{winner}\".",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" установлен на \"{name}\", но inputType \"{inputType}\" не имеет ограничений — время выполнения игнорирует его.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "«{key}» установлен на «{name}», но «{name}» не имеет ни isRequired, ни requiredIf — время выполнения игнорирует его."
+        inertMinMax: "\"{key}\" установлен на \"{name}\", но inputType \"{inputType}\" не имеет ограничений — время выполнения игнорирует его."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

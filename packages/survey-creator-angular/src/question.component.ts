@@ -1,13 +1,14 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild, ViewContainerRef, ViewEncapsulation } from "@angular/core";
-import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
+import { ChangeDetectorRef, Component, ElementRef, Input, SimpleChanges, ViewChild, ViewContainerRef, ViewEncapsulation } from "@angular/core";
+import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent, SurveyBaseProviders } from "survey-angular-ui";
 import { PageModel, PanelModel, Question, SurveyModel } from "survey-core";
 import { SurveyCreatorModel, QuestionAdornerViewModel } from "survey-creator-core";
-import { CreatorModelComponent } from "./creator-model.component";
+import { CreatorModelComponent, compareComponentData } from "./creator-model.component";
 
 @Component({
   selector: "svc-question",
   templateUrl: "./question.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class QuestionDesignerComponent<T extends QuestionAdornerViewModel = QuestionAdornerViewModel> extends CreatorModelComponent<T> {
   @Input() componentName!: string;
@@ -25,8 +26,8 @@ export class QuestionDesignerComponent<T extends QuestionAdornerViewModel = Ques
       this.adorner = new QuestionAdornerViewModel(this.creator, this.model, <any>null) as T;
     }
   }
-  protected getPropertiesToTrack(): string[] {
-    return ["model", "creator"];
+  protected override shouldUpdateModel(changes: SimpleChanges) {
+    return compareComponentData(changes, ["model", "creator"], "componentData");
   }
   protected getModel(): T {
     return this.adorner;
@@ -48,8 +49,8 @@ export class QuestionDesignerComponent<T extends QuestionAdornerViewModel = Ques
     event.stopPropagation();
     this.adorner.addNewQuestion();
   }
-  public override ngAfterViewChecked(): void {
-    super.ngAfterViewChecked();
+  public override afterUpdate(): void {
+    super.afterUpdate();
     if (this.adorner && this.container?.nativeElement) {
       this.adorner.rootElement = this.container.nativeElement;
     }

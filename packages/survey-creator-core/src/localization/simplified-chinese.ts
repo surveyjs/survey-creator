@@ -69,6 +69,8 @@ export var simplifiedChineseTranslation = {
     expression: "表达式(只读)",
     // [Auto-translated] "Signature"
     signaturepad: "签名",
+    // [Auto-translated] "Filter"
+    filter: "筛选",
     // [Auto-translated] "Button Group"
     buttongroup: "按钮组"
   },
@@ -304,6 +306,8 @@ export var simplifiedChineseTranslation = {
     themeResetConfirmationOk: "是，重置主题",
     // "Add Question"
     addNewQuestion: "添加问题",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "选择题型",
     // [Auto-translated] "Select page..."
     selectPage: "选择页面...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var simplifiedChineseTranslation = {
     addNewTypeQuestion: "添加{0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[徽标]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "上传标志",
     // [Auto-translated] "Item "
     choices_Item: "项目",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var simplifiedChineseTranslation = {
       templateDescription: "条目描述模式",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "条目标题模式",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "条目标题占位符",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "空面板文本",
       // [Auto-translated] "Tab title pattern"
@@ -813,6 +821,38 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Expression"
       expression: "表达"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "数据来源",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "显示滤波芯片",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "显示筛选器按钮",
+      // [Auto-translated] "Show search"
+      showSearch: "显示搜索",
+      // [Auto-translated] "Search in"
+      searchFields: "搜索",
+      // [Auto-translated] "Presets"
+      items: "预设",
+      // [Auto-translated] "Default preset"
+      defaultItem: "默认预设",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "允许多个预设",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "允许受访者添加预设"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "预设名称",
+      // [Auto-translated] "Preset title"
+      title: "预设标题",
+      // [Auto-translated] "Filter expression"
+      expression: "过滤器表达式",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "允许编辑",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "允许删除"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "排序",
@@ -874,7 +914,9 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "每个选项都在单独的列中",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "允许按此列排序"
+      allowSort: "允许按此列排序",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "允许按此列进行筛选"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var simplifiedChineseTranslation = {
     addItem: "添加项...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "单击以删除该项目...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "添加{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "把{0}",
     // [Auto-translated] "Drag the item"
     dragItem: "拖动项目",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "扩展嵌套选项",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "折叠嵌套选择",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "扩展嵌套的选择，{0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "{0}的嵌套选择崩溃",
     // [Auto-translated] "Show description"
     showDescription: "节目简介",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var simplifiedChineseTranslation = {
     "listIsEmpty@pages": "没有页面",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "无等级",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "无预设",
     // [Auto-translated] "Add choice"
     "addNew@choices": "增加选择",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var simplifiedChineseTranslation = {
     "addNew@pages": "添加页面",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "添加排序层级",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "添加预设",
     // "Value"
     value: "值",
     // "Text"
@@ -1162,8 +1216,8 @@ export var simplifiedChineseTranslation = {
     visible: "是否可见?",
     // "Required"
     isRequired: "是否为必填项?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "只接受一个积极的答案",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "要求一个积极的答案",
     // [Auto-translated] "Mark as required"
     markRequired: "标记为必填",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var simplifiedChineseTranslation = {
     eachRowUnique: "防止行中出现重复响应",
     // "Error message for required questions"
     requiredErrorText: "错误文字",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "需要“是”时出现错误信息",
     // "Display the question on a new line"
     startWithNewLine: "问题是否新起一行?",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var simplifiedChineseTranslation = {
     pageSize: "每页行数",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "允许用户排序行",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "允许通过此问题进行筛选",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "滤波器运算符",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "最高排序等级",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var simplifiedChineseTranslation = {
       rateValues: "设置评分值",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "滑块设置",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "筛选设置",
+      // [Auto-translated] "Presets"
+      presets: "预设",
       // "Choices from a Web Service"
       choicesByUrl: "通过 URL 导入选项",
       // [Auto-translated] "Numbering"
@@ -2868,6 +2932,8 @@ export var simplifiedChineseTranslation = {
       width: "设置面板的宽度，使其与同一行中的其他测量图元成比例。接受 CSS 值（px、%、in、pt 等）。",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "键入动态面板标题的模板。使用 {panelIndex} 作为面板的常规位置，使用 {visiblePanelIndex} 作为其在可见面板中的顺序。将这些占位符插入到图案中以添加自动编号。",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "当条目标题模式不产生有意义值时，应用的备用文本。使用 {panelIndex} 表示条目的一般位置，{visiblePanelIndex} 表示其在可见条目中的顺序。",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "键入选项卡标题的模板。使用 {panelIndex} 表示面板的大致位置，使用 {visiblePanelIndex} 表示其在可见面板中的顺序。将这些占位符插入到图案中以添加自动编号。",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var simplifiedChineseTranslation = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "设置进度条的位置。“自动”值在调查标题的上方或下方显示进度条。"
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "选择一个动态矩阵、下拉矩阵或一个动态面板，其筛选器会缩小行或面板。",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "调查开始时应用的预设。"
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "使用大括号中的字段名称，例如：{price} < 20 和 {category} 任意 ['Beverages']。"
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "限制受访者可用来筛选该字段的运算符。留空以允许所有适合该字段的运算符。",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "受访者不可见的列 ID。",
@@ -3274,8 +3352,6 @@ export var simplifiedChineseTranslation = {
     valueTrue: "当受访者给出肯定答案时保存在调查结果中的值。",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "当受访者给出否定答案时保存在调查结果中的值。",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "选择将否定回答视为未回答，因此受访者必须选择“是”（或勾选复选框）才能继续。例如，可以用它来要求对条款和条件的同意。仅在需要该问题时适用。",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "不建议禁用此选项，因为它会覆盖预览图像，并使用户难以了解文件是否已上传。",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var simplifiedChineseTranslation = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "{ownerText} 中的“{key}” 和 “{aliasKey}} 是同一个属性的两个名称——运行时会按 JSON 写入顺序应用它们，所以”{winner}“ 获胜。",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "“{key}” 设置在 “{name}” 上，但 inputType “{inputType}” 没有边界——运行时会忽略它。",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "“{key}” 设置在“{name}”上，但“{name}”既没有 isRequired，也没有 requiredIf ——运行时会忽略它。"
+        inertMinMax: "“{key}” 设置在 “{name}” 上，但 inputType “{inputType}” 没有边界——运行时会忽略它。"
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

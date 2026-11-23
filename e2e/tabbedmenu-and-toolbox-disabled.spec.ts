@@ -50,7 +50,11 @@ test.describe(title, () => {
     await page.evaluate(() => {
       window["creator"].toolbox.enabled = false;
     });
-    await page.locator(".svc-toolbox .svc-search__input").first().click({ force: true });
+    // The toolbox leaves its compact layout, where the search input has no width, a few frames after the resize.
+    // A forced click on an element with no size fails at once instead of waiting.
+    const searchInput = page.locator(".svc-toolbox .svc-search__input").first();
+    await expect(searchInput).toBeVisible();
+    await searchInput.click({ force: true });
     await page.keyboard.press("z");
     await expect(page.locator("[aria-label='Rating Scale']")).toBeVisible();
     await page.setViewportSize({ width: 1000, height: 800 });

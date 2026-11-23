@@ -69,6 +69,8 @@ export var danishStrings = {
     expression: "Udtryk",
     // [Auto-translated] "Signature"
     signaturepad: "Underskrift",
+    // [Auto-translated] "Filter"
+    filter: "Filter",
     // [Auto-translated] "Button Group"
     buttongroup: "Knap gruppe"
   },
@@ -304,6 +306,8 @@ export var danishStrings = {
     themeResetConfirmationOk: "Ja, nulstil temaet",
     // [Auto-translated] "Add Question"
     addNewQuestion: "Tilføj spørgsmål",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Vælg spørgsmålstype",
     // [Auto-translated] "Select page..."
     selectPage: "Vælg side...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var danishStrings = {
     addNewTypeQuestion: "Tilføj {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Upload-logo",
     // [Auto-translated] "Item "
     choices_Item: "Vare ",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var danishStrings = {
       templateDescription: "Indgangsbeskrivelse mønster",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Mønster for indgangstitel",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Pladsholder for deltagertitlen",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Tom paneltekst",
       // [Auto-translated] "Tab title pattern"
@@ -814,6 +822,38 @@ export var danishStrings = {
       // [Auto-translated] "Expression"
       expression: "Udtryk"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Datakilde",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Vis filterchips",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Vis Filtre-knappen",
+      // [Auto-translated] "Show search"
+      showSearch: "Vis søgning",
+      // [Auto-translated] "Search in"
+      searchFields: "Søg i",
+      // [Auto-translated] "Presets"
+      items: "Presets",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Standardforudindstilling",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Tillad flere forudindstillinger",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Tillad respondenter at tilføje forudindstillinger"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Forudindstillet navn",
+      // [Auto-translated] "Preset title"
+      title: "Forudindstillede titel",
+      // [Auto-translated] "Filter expression"
+      expression: "Filterudtryk",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Tillad redigering",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Tillad sletning"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Sorter efter",
@@ -875,7 +915,9 @@ export var danishStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Hver indstilling i en separat kolonne",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Tillad sortering efter denne kolonne"
+      allowSort: "Tillad sortering efter denne kolonne",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Tillad filtrering efter denne kolonne"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -979,12 +1021,20 @@ export var danishStrings = {
     addItem: "Klik for at tilføje...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klik for at fjerne elementet...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Tilføj {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Fjern {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Træk elementet",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Udvid indlejrede valg",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse indlejrede valg",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Udvid indlejrede valg af {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Collapse indlejrede valg af {0}",
     // [Auto-translated] "Show description"
     showDescription: "Showbeskrivelse",
     // [Auto-translated] "Hide description"
@@ -1059,6 +1109,8 @@ export var danishStrings = {
     "listIsEmpty@pages": "Ingen sider",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Ingen sort-niveauer",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Ingen forudindstillinger",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Tilføj valg",
     // [Auto-translated] "Add rating value"
@@ -1085,6 +1137,8 @@ export var danishStrings = {
     "addNew@pages": "Tilføj side",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Tilføj sorteringsniveau",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Tilføj forudindstilling",
     // "Value"
     value: "Værdi",
     // "Text"
@@ -1163,8 +1217,8 @@ export var danishStrings = {
     visible: "Er synlig?",
     // "Required"
     isRequired: "Er påkrævet?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Accepter kun et positivt svar",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Kræver et positivt svar",
     // [Auto-translated] "Mark as required"
     markRequired: "Markér efter behov",
     // [Auto-translated] "Remove the required mark"
@@ -1175,6 +1229,8 @@ export var danishStrings = {
     eachRowUnique: "Undgå dublerede svar i rækker",
     // "Error message for required questions"
     requiredErrorText: "Fejlmeddelelsen \"Påkrævet\"",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Fejlmeddelelse, når Ja er påkrævet",
     // "Display the question on a new line"
     startWithNewLine: "Skal starte med ny linie?",
     // "Rows"
@@ -1197,6 +1253,10 @@ export var danishStrings = {
     pageSize: "Rækker pr. side",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Tillad brugere at sortere rækker",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Tillad filtrering efter dette spørgsmål",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Filteroperatører",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksimale sorteringsniveauer",
     // [Auto-translated] "Default sort order"
@@ -1753,6 +1813,10 @@ export var danishStrings = {
       rateValues: "Bedøm-værdier",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Indstillinger for skyder",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Filterindstillinger",
+      // [Auto-translated] "Presets"
+      presets: "Presets",
       // "Choices from a Web Service"
       choicesByUrl: "Valgmuligheder fra Web",
       // [Auto-translated] "Numbering"
@@ -2869,6 +2933,8 @@ export var danishStrings = {
       width: "Indstiller panelets bredde i forhold til andre undersøgelseselementer på samme linje. Accepterer CSS-værdier (px, %, in, pt osv.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Indtast en skabelon til dynamiske paneltitler. Brug {panelIndex} til panelets generelle placering og {visiblePanelIndex} til dets rækkefølge blandt synlige paneler. Indsæt disse pladsholdere i mønsteret for at tilføje automatisk nummerering.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "En fallback-tekst for indgangstitler, der gælder, når indgangstitelmønstret ikke giver en meningsfuld værdi. Brug {panelIndex} til postens generelle position og {visiblePanelIndex} til dens rækkefølge blandt synlige poster.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Indtast en skabelon til fanetitler. Brug {panelIndex} til et panels generelle placering og {visiblePanelIndex} til dets rækkefølge blandt synlige paneler. Indsæt disse pladsholdere i mønsteret for at tilføje automatisk nummerering.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3021,6 +3087,18 @@ export var danishStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Angiver placeringen af statuslinjen. Værdien \"Auto\" viser statuslinjen over eller under undersøgelsesoverskriften."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Vælg en dynamisk matrix, en dropdown-matrix eller et dynamisk panel, hvis rækker eller paneler filteret indsnævrer i rækker eller paneler.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Forudindstillingen gælder ved undersøgelsens start."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Brug feltnavne i krøllede parenteser, for eksempel: {price} < 20 og {category} enhver af ['Beverages']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Begrænser de operatorer, respondenter kan bruge til at filtrere efter dette felt. Lad være tomt for at tillade alle operatorer, der passer til feltet.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Et kolonne-id, der ikke er synligt for svarpersoner.",
@@ -3275,8 +3353,6 @@ export var danishStrings = {
     valueTrue: "En værdi, der skal gemmes i undersøgelsesresultater, når respondenterne giver et positivt svar.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "En værdi, der skal gemmes i undersøgelsesresultater, når respondenterne giver et negativt svar.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Vælg at behandle et negativt svar som ubesvaret, så respondenterne skal vælge \"Ja\" (eller sætte kryds i boksen) for at fortsætte. Brug det for eksempel til at kræve samtykke til vilkår og betingelser. Gælder kun, når spørgsmålet er påkrævet.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Det anbefales ikke, at du deaktiverer denne indstilling, da den tilsidesætter eksempelbilledet og gør det svært for en bruger at forstå, om filerne er blevet uploadet.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3893,9 +3969,7 @@ export var danishStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" og \"{aliasKey}\" i {ownerText} er to navne på én egenskab – køretiden anvender dem i den rækkefølge, JSON'en skriver dem, så \"{winner}\" vinder.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" sættes på \"{name}\", men inputType \"{inputType}\" har ingen grænser – kørselstiden ignorerer det.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" sættes til \"{name}\", men \"{name}\" har hverken isRequired eller requiredIf - kørselstiden ignorerer det."
+        inertMinMax: "\"{key}\" sættes på \"{name}\", men inputType \"{inputType}\" har ingen grænser – kørselstiden ignorerer det."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

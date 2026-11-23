@@ -69,6 +69,8 @@ export var jaStrings = {
     expression: "式（読み取り専用）",
     // "Signature"
     signaturepad: "署名パッド",
+    // [Auto-translated] "Filter"
+    filter: "フィルター",
     // [Auto-translated] "Button Group"
     buttongroup: "ボタングループ"
   },
@@ -304,6 +306,8 @@ export var jaStrings = {
     themeResetConfirmationOk: "はい、テーマをリセットします",
     // "Add Question"
     addNewQuestion: "質問を追加",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "選択問題タイプ",
     // "Select page..."
     selectPage: "ページを選択...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var jaStrings = {
     addNewTypeQuestion: "{0}を追加", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[ロゴ]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "アップロードロゴ",
     // [Auto-translated] "Item "
     choices_Item: "アイテム",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var jaStrings = {
       templateDescription: "エントリの説明パターン",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "エントリータイトルパターン",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "エントリータイトルのプレースホルダー",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "空のパネルテキスト",
       // [Auto-translated] "Tab title pattern"
@@ -813,6 +821,38 @@ export var jaStrings = {
       // [Auto-translated] "Expression"
       expression: "表現"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "データソース",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "フィルターチップを表示",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "フィルターボタンを表示する",
+      // [Auto-translated] "Show search"
+      showSearch: "検索を表示",
+      // [Auto-translated] "Search in"
+      searchFields: "検索",
+      // [Auto-translated] "Presets"
+      items: "プリセット",
+      // [Auto-translated] "Default preset"
+      defaultItem: "デフォルトプリセット",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "複数のプリセットを許可する",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "回答者がプリセットを追加できるようにする"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "プリセット名",
+      // [Auto-translated] "Preset title"
+      title: "プリセットタイトル",
+      // [Auto-translated] "Filter expression"
+      expression: "フィルター式",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "編集を許可する",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "削除を許可する"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "並べ替え",
@@ -874,7 +914,9 @@ export var jaStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "個別の列に各オプション",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "この列によるソートを許可してください"
+      allowSort: "この列によるソートを許可してください",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "この列によるフィルタリングを許可する"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var jaStrings = {
     addItem: "クリックしてアイテムを追加…",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "クリックしてアイテムを削除します...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "{0}を外してください",
     // [Auto-translated] "Drag the item"
     dragItem: "アイテムをドラッグする",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "ネストされた選択肢を拡大する",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "崩壊入れ子選択",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "{0}の入れ子型の選択肢を拡大する",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "{0}の崩壊ネスト選択",
     // [Auto-translated] "Show description"
     showDescription: "番組の説明",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var jaStrings = {
     "listIsEmpty@pages": "ページはない",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "レベルはない",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "プリセットなし",
     // [Auto-translated] "Add choice"
     "addNew@choices": "選択肢を加える",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var jaStrings = {
     "addNew@pages": "ページを追加",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "ソートレベルを追加",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "プリセットを追加",
     // "Value"
     value: "値",
     // "Text"
@@ -1162,8 +1216,8 @@ export var jaStrings = {
     visible: "表示",
     // "Required"
     isRequired: "必須",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "肯定的な答えだけを受け入れてください",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "肯定的な答えを求める",
     // [Auto-translated] "Mark as required"
     markRequired: "必須としてマーク",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var jaStrings = {
     eachRowUnique: "行での回答の重複を防ぐ",
     // "Error message for required questions"
     requiredErrorText: "必要なエラーテキスト",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "「はい」が必要な場合のエラーメッセージ",
     // "Display the question on a new line"
     startWithNewLine: "ニューラインで開始",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var jaStrings = {
     pageSize: "ページあたりの行数",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "ユーザーが行を並べ替えることを許可します",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "この質問によるフィルタリングを許可する",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "フィルター演算子",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "最大ソートレベル",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var jaStrings = {
       rateValues: "レート値",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "スライダー設定",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "フィルター設定",
+      // [Auto-translated] "Presets"
+      presets: "プリセット",
       // "Choices from a Web Service"
       choicesByUrl: "ウェブの選択",
       // "Numbering"
@@ -2868,6 +2932,8 @@ export var jaStrings = {
       width: "パネルの幅を、同じ行内の他の調査要素に比例して設定します。CSS 値 (px、%、in、pt など) を受け入れます。",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "動的パネルタイトルのテンプレートを入力します。パネルの一般的な位置には {panelIndex} を使用し、表示されているパネル間の順序には {visiblePanelIndex} を使用します。これらのプレースホルダーをパターンに挿入して、自動番号付けを追加します。",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "エントリタイトルのフォールバックテキストで、エントリタイトルパターンが意味のある値を生成しない場合に適用されます。エントリの一般的な位置には{panelIndex}、表示されるエントリ間の順序には{visiblePanelIndex}を使いましょう。",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "タブタイトルのテンプレートを入力します。パネルの一般的な位置には {panelIndex} を使用し、可視パネル間の順序には {visiblePanelIndex} を使用します。これらのプレースホルダーをパターンに挿入して、自動番号付けを追加します。",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var jaStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "プログレスバーの位置を設定します。「自動」の値は、調査ヘッダーの上または下に進行状況バーを表示します。"
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "動的マトリックス、ドロップダウンマトリックス、またはフィルターの行やパネルを絞り込む動的パネルを選択します。",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "調査開始時に適用されたプリセット。"
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "フィールド名はカールボッコで囲み、例:{price} < 20 や {category} anyof ['Beverages']] を選びます。"
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "回答者がこのフィールドでフィルタリングするために使用できる演算子を制限します。フィールドに合うすべての演算子を使用できるように、空欄のままにします。",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "回答者に表示されない列 ID。",
@@ -3274,8 +3352,6 @@ export var jaStrings = {
     valueTrue: "回答者が肯定的な回答をした場合にアンケート結果に保存する値。",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "回答者が否定的な回答をした場合にアンケート結果に保存する値。",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "否定的な回答を未回答とみなすように選択し、回答者は「はい」を選択するか(チェックボックスにチェックを入れる)必要があります。例えば、利用規約への同意を求めるために使用してください。質問が必要な場合にのみ適用されます。",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "このオプションはプレビュー画像を上書きし、ファイルがアップロードされたかどうかをユーザーが理解しにくくなるため、無効にすることはお勧めしません。",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var jaStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "{ownerText}の「{key}」と「{aliasKey}」は1つのプロパティの名前であり、実行時間はJSONが書く順に適用されるため、「{winner}」が勝ちます。",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "「{key}」は「{name}」に設定されていますが、inputType「{inputType}」には境界がなく、実行時間上は無視されます。",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "「{key}」は「{name}」に設定されていますが、「{name}」はisRequiredもRequiredもなければ、実行時間上は無視されます。"
+        inertMinMax: "「{key}」は「{name}」に設定されていますが、inputType「{inputType}」には境界がなく、実行時間上は無視されます。"
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

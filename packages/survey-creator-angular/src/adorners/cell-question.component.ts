@@ -1,11 +1,12 @@
 import { Component, Input } from "@angular/core";
 import { Question } from "survey-core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 
 @Component({
   selector: "svc-cell-question",
   templateUrl: "./cell-question.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class CellQuestionComponent<T extends Question> extends BaseAngular<T> {
   @Input() componentName!: string;

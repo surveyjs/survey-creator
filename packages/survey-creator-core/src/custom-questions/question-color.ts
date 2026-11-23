@@ -1,4 +1,4 @@
-import { Action, ActionContainer, ComputedUpdater, toCssClasses, IAction, IsTouch, ItemValue, ListModel, LocalizableString, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
+import { Action, ActionContainer, ComputedUpdater, toCssClasses, IAction, IsTouch, ItemValue, ListModel, LocalizableString, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray, getIdSelector } from "survey-core";
 import { parseColor } from "../utils/color-utils";
 
 const DEFAULT_COLOR: string = "#000000";
@@ -7,7 +7,7 @@ export class QuestionColorModel extends QuestionTextModel {
 
   private getPopupWidthTarget(container: HTMLElement): HTMLElement {
     if (!container) return undefined;
-    const root = container.closest(`[id="${this.id}"]`) as HTMLElement;
+    const root = container.closest(getIdSelector(this.renderedId)) as HTMLElement;
     if (!root?.classList.contains("sd-formbox")) return undefined;
     return root;
   }

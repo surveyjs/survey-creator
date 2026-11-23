@@ -69,6 +69,8 @@ export var nlStrings = {
     expression: "Berekening",
     // "Signature"
     signaturepad: "Handtekening",
+    // [Auto-translated] "Filter"
+    filter: "Filter",
     // [Auto-translated] "Button Group"
     buttongroup: "Knoppengroep"
   },
@@ -304,6 +306,8 @@ export var nlStrings = {
     themeResetConfirmationOk: "Ja, reset het thema",
     // "Add Question"
     addNewQuestion: "Vraag toevoegen",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Selecteer vraagtype",
     // "Select page..."
     selectPage: "Selecteer pagina...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var nlStrings = {
     addNewTypeQuestion: "Voeg {0} toe", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Uploadlogo",
     // [Auto-translated] "Item "
     choices_Item: "Item ",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var nlStrings = {
       templateDescription: "Patroon invoerbeschrijving",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Patroon voor de titel van het item",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Plaatshouder voor de inschrijftitel",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Lege paneeltekst",
       // [Auto-translated] "Tab title pattern"
@@ -813,6 +821,38 @@ export var nlStrings = {
       // [Auto-translated] "Expression"
       expression: "Uitdrukking"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Gegevensbron",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Filterchips weergeven",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "De knop Filters weergeven",
+      // [Auto-translated] "Show search"
+      showSearch: "Zoek weergeven",
+      // [Auto-translated] "Search in"
+      searchFields: "Zoeken in",
+      // [Auto-translated] "Presets"
+      items: "Presets",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Standaardpreset",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Meerdere presets toestaan",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Sta respondenten toe om presets toe te voegen"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Vooraf ingestelde naam",
+      // [Auto-translated] "Preset title"
+      title: "Vooraf ingestelde titel",
+      // [Auto-translated] "Filter expression"
+      expression: "Filterexpressie",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Staat bewerken toe",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Verwijderen toestaan"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Sorteer op",
@@ -874,7 +914,9 @@ export var nlStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Elke optie in een aparte kolom",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Sta sortering toe op deze kolom"
+      allowSort: "Sta sortering toe op deze kolom",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Filteren op deze kolom toestaan"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var nlStrings = {
     addItem: "Klik om een item toe te voegen...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klik om het item te verwijderen...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Voeg {0} toe",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Verwijder {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Sleep het item",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Breid geneste keuzes uit",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Collapse geneste keuzes",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Breid geneste keuzes uit {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Collapse geneste keuzes van {0}",
     // [Auto-translated] "Show description"
     showDescription: "Beschrijving van de show",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var nlStrings = {
     "listIsEmpty@pages": "Geen pagina's",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Geen sort-levels",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Geen presets",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Voeg keuze toe",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var nlStrings = {
     "addNew@pages": "Pagina toevoegen",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Voeg sorteerniveau toe",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Preset toevoegen",
     // "Value"
     value: "Waarde",
     // "Text"
@@ -1162,8 +1216,8 @@ export var nlStrings = {
     visible: "Is zichtbaar?",
     // "Required"
     isRequired: "Is verplicht?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Accepteer alleen een positief antwoord",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Vraag naar een positief antwoord",
     // [Auto-translated] "Mark as required"
     markRequired: "Markeren zoals vereist",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var nlStrings = {
     eachRowUnique: "Voorkom dubbele antwoorden in rijen",
     // "Error message for required questions"
     requiredErrorText: "Tekst bij niet-ingevulde verplichte vraag",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Foutmelding wanneer Ja vereist is",
     // "Display the question on a new line"
     startWithNewLine: "Beginnen met een nieuwe regel?",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var nlStrings = {
     pageSize: "Rijen per pagina",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Laat gebruikers rijen sorteren",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Filter op deze vraag toestaan",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Filteroperatoren",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximale sorteerniveaus",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var nlStrings = {
       rateValues: "Beoordeel waarden",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Instellingen voor schuifregelaars",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Filterinstellingen",
+      // [Auto-translated] "Presets"
+      presets: "Presets",
       // "Choices from a Web Service"
       choicesByUrl: "Keuzes van internet",
       // "Numbering"
@@ -2868,6 +2932,8 @@ export var nlStrings = {
       width: "Hiermee stelt u de breedte van het paneel in verhouding tot andere enquête-elementen in dezelfde lijn. Accepteert CSS-waarden (px, %, in, pt, enz.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Typ een sjabloon voor dynamische paneeltitels. Gebruik {panelIndex} voor de algemene positie van het paneel en {visiblePanelIndex} voor de volgorde tussen de zichtbare panelen. Voeg deze tijdelijke aanduidingen toe aan het patroon om automatische nummering toe te voegen.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Een fallback-tekst voor invoertitels die van toepassing is wanneer het invoertitelpatroon geen betekenisvolle waarde oplevert. Gebruik {panelIndex} voor de algemene positie van de entry en {visiblePanelIndex} voor de volgorde tussen zichtbare items.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Typ een sjabloon voor tabbladtitels. Gebruik {panelIndex} voor de algemene positie van een paneel en {visiblePanelIndex} voor de volgorde tussen zichtbare panelen. Voeg deze tijdelijke aanduidingen toe aan het patroon om automatische nummering toe te voegen.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var nlStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Hiermee stelt u de locatie van de voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Selecteer een dynamische matrix, een dropdown-matrix of een dynamisch paneel waarvan de rijen of panelen door het filter wordt verkleind.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "De preset die wordt toegepast wanneer de enquête begint."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Gebruik veldnamen tussen krullende haakjes, bijvoorbeeld: {price} < 20 en {category} elk van ['Beverages']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Beperkt de operatoren die respondenten kunnen gebruiken om op dit veld te filteren. Laat leeg om alle operatoren toe te laten die bij het veld passen.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Een kolom-id die niet zichtbaar is voor respondenten.",
@@ -3274,8 +3352,6 @@ export var nlStrings = {
     valueTrue: "Een waarde die moet worden opgeslagen in enquêteresultaten wanneer respondenten een positief antwoord geven.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Een waarde die moet worden opgeslagen in enquêteresultaten wanneer respondenten een negatief antwoord geven.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Selecteer om een ontkennend antwoord als onbeantwoord te behandelen, zodat respondenten \"Ja\" moeten selecteren (of het vakje aanvinken) om verder te gaan. Gebruik het bijvoorbeeld om toestemming te vragen voor de voorwaarden en voorwaarden. Gilt alleen wanneer de vraag vereist is.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Het wordt niet aanbevolen om deze optie uit te schakelen, omdat deze de voorbeeldafbeelding overschrijft en het voor een gebruiker moeilijk maakt om te begrijpen of de bestanden zijn geüpload.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var nlStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" en \"{aliasKey}\" van {ownerText} zijn twee namen van één eigenschap - de runtime past ze toe in de volgorde waarin de JSON ze schrijft, dus \"{winner}\" wint.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" is ingesteld op \"{name}\", maar inputType \"{inputType}\" kent geen grenzen - de looptijd negeert het.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" is ingesteld op \"{name}\", maar \"{name}\" heeft noch isRequired noch requiredIf - de runtime negeert het."
+        inertMinMax: "\"{key}\" is ingesteld op \"{name}\", maar inputType \"{inputType}\" kent geen grenzen - de looptijd negeert het."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

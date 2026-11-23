@@ -69,6 +69,8 @@ export var indonesianStrings = {
     expression: "Ekspresi (dibaca saja)",
     // [Auto-translated] "Signature"
     signaturepad: "Tanda tangan",
+    // [Auto-translated] "Filter"
+    filter: "Filter",
     // [Auto-translated] "Button Group"
     buttongroup: "Grup Tombol"
   },
@@ -304,6 +306,8 @@ export var indonesianStrings = {
     themeResetConfirmationOk: "Ya, atur ulang tema",
     // "Add Question"
     addNewQuestion: "Tambah pertanyaan",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Pilih jenis pertanyaan",
     // [Auto-translated] "Select page..."
     selectPage: "Pilih halaman...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var indonesianStrings = {
     addNewTypeQuestion: "Tambahkan {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Unggah logo",
     // [Auto-translated] "Item "
     choices_Item: "Benda ",
     // [Auto-translated] "Select a file"
@@ -700,6 +706,8 @@ export var indonesianStrings = {
       templateDescription: "Pola deskripsi entri",
       // [Auto-translated] "Entry title pattern"
       templateTitle: "Pola judul entri",
+      // [Auto-translated] "Entry title placeholder"
+      templateTitlePlaceholder: "Penanda penanda judul entri",
       // [Auto-translated] "Empty panel text"
       noEntriesText: "Teks panel kosong",
       // [Auto-translated] "Tab title pattern"
@@ -813,6 +821,38 @@ export var indonesianStrings = {
       // [Auto-translated] "Expression"
       expression: "Ekspresi"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Sumber data",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Tampilkan chip filter",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Tampilkan tombol Filter",
+      // [Auto-translated] "Show search"
+      showSearch: "Tampilkan pencarian",
+      // [Auto-translated] "Search in"
+      searchFields: "Cari di",
+      // [Auto-translated] "Presets"
+      items: "Preset",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Prasetel default",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Izinkan beberapa preset",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Izinkan responden menambahkan preset"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Nama preset",
+      // [Auto-translated] "Preset title"
+      title: "Judul preset",
+      // [Auto-translated] "Filter expression"
+      expression: "Ekspresi filter",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Izinkan pengeditan",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Izinkan penghapusan"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Urutkan berdasarkan",
@@ -874,7 +914,9 @@ export var indonesianStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Setiap opsi dalam kolom terpisah",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Izinkan pengurutan berdasarkan kolom ini"
+      allowSort: "Izinkan pengurutan berdasarkan kolom ini",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Izinkan penyaringan berdasarkan kolom ini"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -978,12 +1020,20 @@ export var indonesianStrings = {
     addItem: "Klik untuk menambahkan sebuah item...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klik untuk menghapus item...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Tambahkan {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Hapus {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Seret item",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Perluas pilihan bersarang",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Menggabungkan pilihan bersarang",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Perluas pilihan bersarang {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Pilihan bertingkat {0}",
     // [Auto-translated] "Show description"
     showDescription: "Tampilkan deskripsi",
     // [Auto-translated] "Hide description"
@@ -1058,6 +1108,8 @@ export var indonesianStrings = {
     "listIsEmpty@pages": "Tidak ada halaman",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Tidak ada tingkat pengurutan",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Tidak ada preset",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Tambahkan pilihan",
     // [Auto-translated] "Add rating value"
@@ -1084,6 +1136,8 @@ export var indonesianStrings = {
     "addNew@pages": "Tambah halaman",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Tambahkan tingkat pengurutan",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Tambahkan preset",
     // "Value"
     value: "Nilai",
     // "Text"
@@ -1162,8 +1216,8 @@ export var indonesianStrings = {
     visible: "Terlihat?",
     // "Required"
     isRequired: "Wajib?",
-    // [Auto-translated] "Accept only a positive answer"
-    requiredTrue: "Terima hanya jawaban positif",
+    // [Auto-translated] "Require a positive answer"
+    requireTrue: "Membutuhkan jawaban positif",
     // [Auto-translated] "Mark as required"
     markRequired: "Tandai sesuai kebutuhan",
     // [Auto-translated] "Remove the required mark"
@@ -1174,6 +1228,8 @@ export var indonesianStrings = {
     eachRowUnique: "Mencegah respons duplikat dalam baris",
     // "Error message for required questions"
     requiredErrorText: "Pesan kesalahan \"Wajib\"",
+    // [Auto-translated] "Error message when Yes is required"
+    requireTrueErrorText: "Pesan kesalahan saat Ya diperlukan",
     // "Display the question on a new line"
     startWithNewLine: "Mulai dengan baris baru?",
     // "Rows"
@@ -1196,6 +1252,10 @@ export var indonesianStrings = {
     pageSize: "Baris per halaman",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Izinkan pengguna mengurutkan baris",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Izinkan penyaringan berdasarkan pertanyaan ini",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Operator filter",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Tingkat pengurutan maksimum",
     // [Auto-translated] "Default sort order"
@@ -1752,6 +1812,10 @@ export var indonesianStrings = {
       rateValues: "Nilai Tingkat",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Pengaturan Penggeser",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Pengaturan Filter",
+      // [Auto-translated] "Presets"
+      presets: "Preset",
       // "Choices from a Web Service"
       choicesByUrl: "Pilih dari Web",
       // [Auto-translated] "Numbering"
@@ -2868,6 +2932,8 @@ export var indonesianStrings = {
       width: "Mengatur lebar panel secara proporsional dengan elemen survei lainnya di baris yang sama. Menerima nilai CSS (px, %, in, pt, dll.).",
       // "Type in a template for entry titles. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTitle: "Ketik template untuk judul panel dinamis. Gunakan {panelIndex} untuk posisi umum panel dan {visiblePanelIndex} untuk urutannya di antara panel yang terlihat. Masukkan tempat penampung ini ke dalam pola untuk menambahkan penomoran otomatis.",
+      // [Auto-translated] "A fallback text for entry titles that applies when the entry title pattern doesn't produce a meaningful value. Use {panelIndex} for the entry's general position and {visiblePanelIndex} for its order among visible entries."
+      templateTitlePlaceholder: "Teks cadangan untuk judul entri yang berlaku ketika pola judul entri tidak menghasilkan nilai yang bermakna. Gunakan {panelIndex} untuk posisi umum entri dan {visiblePanelIndex} untuk urutannya di antara entri yang terlihat.",
       // "Type in a template for tab titles. Use {panelIndex} for an entry's general position and {visiblePanelIndex} for its order among visible entries. Insert these placeholders into the pattern to add automatic numbering."
       templateTabTitle: "Ketik templat untuk judul tab. Gunakan {panelIndex} untuk posisi umum panel dan {visiblePanelIndex} untuk urutannya di antara panel yang terlihat. Masukkan tempat penampung ini ke dalam pola untuk menambahkan penomoran otomatis.",
       // "A fallback text for tab titles that applies when the tab title pattern doesn't produce a meaningful value."
@@ -3020,6 +3086,18 @@ export var indonesianStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Mengatur lokasi bilah progres. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Pilih matriks dinamis, matriks dropdown, atau panel dinamis yang baris atau panelnya dipersempit oleh filter.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Preset diterapkan saat survei dimulai."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Gunakan nama bidang dalam tanda kurung melingkar, misalnya: {price} < 20 dan {category} anyof ['Beverages']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Membatasi operator yang dapat digunakan responden untuk memfilter berdasarkan bidang ini. Biarkan kosong untuk mengizinkan semua operator yang sesuai dengan bidang tersebut.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID kolom yang tidak terlihat oleh responden.",
@@ -3274,8 +3352,6 @@ export var indonesianStrings = {
     valueTrue: "Nilai yang harus disimpan dalam hasil survei ketika responden memberikan jawaban positif.",
     // [Auto-translated] "A value to save in survey results when respondents give a negative answer."
     valueFalse: "Nilai untuk disimpan dalam hasil survei ketika responden memberikan jawaban negatif.",
-    // [Auto-translated] "Select to treat a negative answer as unanswered, so respondents must select \"Yes\" (or check the checkbox) to proceed. For example, use it to require consent to terms and conditions. Applies only when the question is required."
-    requiredTrue: "Pilih untuk memperlakukan jawaban negatif sebagai belum terjawab, jadi responden harus memilih \"Ya\" (atau centang kotak) untuk melanjutkan. Misalnya, gunakan untuk meminta persetujuan terhadap syarat dan ketentuan. Hanya berlaku ketika pertanyaan diperlukan.",
     // [Auto-translated] "It's not recommended that you disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded."
     showPreview: "Anda tidak disarankan untuk menonaktifkan opsi ini karena menggantikan gambar Pratinjau dan menyulitkan pengguna untuk memahami apakah file telah diunggah.",
     // [Auto-translated] "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area."
@@ -3892,9 +3968,7 @@ export var indonesianStrings = {
         // [Auto-translated] "\"{key}\" and \"{aliasKey}\" of {ownerText} are two names of one property - the run time applies them in the order the JSON writes them, so \"{winner}\" wins."
         aliasDuplicate: "\"{key}\" dan \"{aliasKey}\" dari {ownerText} adalah dua nama dari satu properti - waktu eksekusi menerapkannya sesuai urutan JSON menulisnya, sehingga \"{winner}\" menang.",
         // [Auto-translated] "\"{key}\" is set on \"{name}\", but inputType \"{inputType}\" has no bounds - the run time ignores it."
-        inertMinMax: "\"{key}\" diatur pada \"{name}\", tetapi inputType \"{inputType}\" tidak memiliki batasan - waktu eksekusi mengabaikannya.",
-        // [Auto-translated] "\"{key}\" is set on \"{name}\", but \"{name}\" has neither isRequired nor requiredIf - the run time ignores it."
-        requiredTrueNotRequired: "\"{key}\" diatur pada \"{name}\", tetapi \"{name}\" tidak memiliki isRequired maupun requiredIf - waktu eksekusi mengabaikannya."
+        inertMinMax: "\"{key}\" diatur pada \"{name}\", tetapi inputType \"{inputType}\" tidak memiliki batasan - waktu eksekusi mengabaikannya."
       },
       "property/invalid-value": {
         // [Auto-translated] "The {key} of {ownerText} is {valueText} - not one of the allowed values ({allowedText})."

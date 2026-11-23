@@ -2,11 +2,13 @@
   <div
     :key="model.page.id"
     v-if="model.page"
-    :id="model.page.id"
+    :id="model.page.renderedId"
     class="svc-page__content"
     :class="model.css"
     :data-sv-drop-target-survey-page="model.dropTargetName"
-    v-key2click
+    :role="model.ariaRole"
+    :aria-label="model.ariaLabel"
+    v-key2click="{ disableTabStop: true }"
     @click="
       (e) => {
         model.select(model, e);
