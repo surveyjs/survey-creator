@@ -630,7 +630,7 @@ describe("Variable presets in Preview: nested values (nested data, survey-librar
     const editor = new VariablePresetsEditor(creator, getManager(creator));
     editor.editPreset(0);
     // tier is inside the "user" panel, which holds data: it is found by its path of names
-    editor.editSurvey.getQuestionByName("user.tier").value = "silver";
+    editor.editSurvey.getQuestionByName("users.tier").value = "silver";
     expect(editor.apply()).toBeTruthy();
     expect(creator.variablePresets.presets[0].variables).toStrictEqual({ users: { tier: "silver", name: "Ann" }, role: "admin" });
     expect(model.survey).not.toBe(survey);
@@ -679,7 +679,7 @@ describe("Variable presets in Preview: nested values (nested data, survey-librar
     expect(log[0]).toStrictEqual(createNestedContainer().presets);
     const editor = new VariablePresetsEditor(creator, getManager(creator));
     editor.editPreset(1);
-    editor.editSurvey.getQuestionByName("user.name").value = "Bill";
+    editor.editSurvey.getQuestionByName("users.name").value = "Bill";
     expect(editor.apply()).toBeTruthy();
     const expected = createNestedContainer().presets;
     expected[1].variables.users.name = "Bill";
@@ -719,7 +719,7 @@ describe("Variable presets in Preview: nested values (nested data, survey-librar
     const survey = model.survey;
     const editor = new VariablePresetsEditor(creator, getManager(creator));
     editor.editPreset(0);
-    editor.editSurvey.getQuestionByName("user.name").value = "ANN";
+    editor.editSurvey.getQuestionByName("users.name").value = "ANN";
     expect(editor.apply()).toBeTruthy();
     expect(model.survey).not.toBe(survey);
     expect(model.survey.getQuestionByName("gold").locTitle.renderedHtml).toBe("Hello ANN");

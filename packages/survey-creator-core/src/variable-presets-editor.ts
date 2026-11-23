@@ -1,16 +1,15 @@
 import {
   Action, Helpers, IAction, IDialogOptions, ISurveyVariablePreset, ITheme, QuestionMatrixDynamicModel,
-  settings as surveySettings, SurveyModel
+  settings as surveySettings, SurveyModel, SurveyVariablePresets
 } from "survey-core";
 import { BorderlessLightPanelless } from "survey-core/themes";
 import { SurveyCreatorModel } from "./creator-base";
 import { VariablePresetsManager } from "./variable-presets";
 import { getLocString } from "./editorLocalization";
-import { isPlainRecord } from "./utils/plain-value";
 import "./variable-presets-editor.scss";
 
 // The Edit dialog behind the Preview toolbar button (issue #7982): one survey with two pages - the
-// preset list, and the definition itself as the form for one preset - shown through
+// preset list, and a form built from the definition's variables for one preset - shown through
 // settings.showDialog the way src/ui-preset-editor/presets-manager.ts shows its own editors. There
 // is no new framework component: a dialog holding a plain survey needs none.
 //
@@ -175,10 +174,16 @@ export class VariablePresetsEditor {
       },
       { type: "text", name: this.descriptionKey, title: getLocString("vp.presetDescription") }
     ];
+    // A companion of our own: the creator's may hold the data of a host's validateVariables call,
+    // and a question's JSON would carry it (a matrix's rowCount).
+    const model = new SurveyVariablePresets({ definition: this.creator.variablePresets?.definition });
+    const elements = this.getDefinitionElements(model);
+    const dataNesting = this.getDataNesting(model);
+    model.dispose();
     return {
-      // Explicitly: a host may change the serializer default (decisions N2), and getDefinitionElements
-      // spells out the definition's shape for "auto".
-      dataNesting: "auto",
+      // Explicitly: a host may change the serializer default (decisions N2). The dialog's own
+      // elements do not nest: they are on pages, and the list is a matrix.
+      dataNesting: dataNesting,
       pages: [
         {
           name: "variablePresetsList",
@@ -205,98 +210,49 @@ export class VariablePresetsEditor {
         },
         {
           name: "variablePresetEditor",
-          elements: metaElements.concat(this.getDefinitionElements())
+          elements: metaElements.concat(elements)
         }
       ]
     };
   }
-  // The definition's elements go on the form page at the root, not inside a panel per preset: a
-  // definition that says visibleIf: "{customerTier} = 'gold'" on one variable resolves
-  // {customerTier} against the survey root, so nesting it would make every cross-variable rule in
-  // the definition silently misbehave. At the root the definition behaves exactly as it does inside
-  // SurveyVariablePresets.validateVariables, which is what these values are checked against.
-  //
-  // Nested data (survey-library #12233): the form must store the values in the definition's data
-  // shape, which its dataNesting and its containers' valueName decide. The edit survey stays in
-  // "auto" - copying dataNesting would nest the editor's own pages and keys too - so the shape is
-  // made explicit instead: every copied container gets valueName = its key in the definition's own
-  // survey, or loses it when it does not nest there ("none"), and a page that nests becomes a panel
-  // with its key. The companion's definition model is private, hence a model of our own.
-  private getDefinitionElements(): Array<any> {
-    const definition = this.creator.variablePresets?.definition;
-    if (!definition) return [];
-    const json = Helpers.getUnbindValue(definition);
-    const model = new SurveyModel(definition);
-    try {
-      const pages: Array<any> = Array.isArray(json.pages) ? json.pages : [];
-      if (pages.length > 1) {
-        // A definition may declare its own pages, and page 2 of a two-page wizard cannot also be
-        // three pages: each definition page becomes a panel carrying that page's title and
-        // description, so the author's grouping survives without its pagination.
-        return pages.map((page: any, index: number) => {
-          const panel: any = {
-            type: "panel",
-            name: page.name || ("variablePresetPanel" + index),
-            title: page.title,
-            description: page.description,
-            elements: page.elements || []
-          };
-          this.copyDataKeys(panel, model.pages[index], false);
-          return panel;
-        });
+  // The form is built from the variable structure, not copied from the definition's JSON: each
+  // variable's question, and a panel per object variable named by its key, so that in "panel" mode
+  // the form stores the variables' shape ({ users: { tier } }). A definition's rule between two
+  // variables resolves as in the definition, since the form's scopes are the data paths. The
+  // author's layout is not kept: a panel or page that does not nest is not in the structure, and
+  // its conditions are gone with it. An object variable's panel keeps its container's.
+  private getDefinitionElements(model: SurveyVariablePresets): Array<any> {
+    const root: Array<any> = [];
+    const panels: { [path: string]: any } = Object.create(null);
+    model.getVariablePaths().forEach(path => {
+      const keys = path.split(".");
+      let elements = root;
+      for (let i = 1; i < keys.length; i++) {
+        const panelPath = keys.slice(0, i).join(".");
+        let panel = panels[panelPath];
+        if (!panel) {
+          // The question, when a question and a container share the key: the panel takes nothing of it.
+          const el: any = model.getVariableElement(panelPath);
+          const json = el.isQuestion ? {} : el.toJSON();
+          panel = { type: "panel", name: keys[i - 1], elements: [] };
+          ["title", "description", "visible", "visibleIf", "enableIf", "requiredIf", "readOnly", "isRequired"].forEach(prop => {
+            if (json[prop] !== undefined) panel[prop] = json[prop];
+          });
+          panels[panelPath] = panel;
+          elements.push(panel);
+        }
+        elements = panel.elements;
       }
-      const elements: Array<any> = pages.length === 1 ? (pages[0].elements || []) : (Array.isArray(json.elements) ? json.elements : []);
-      const page = model.pages[0];
-      if (!page) return elements;
-      // One page: its elements stay at the root unless the page nests (its valueName, or its name in
-      // the page modes, where root elements land on page1 too).
-      const wrapper: any = { type: "panel", name: page.name, elements: elements };
-      this.copyDataKeys(wrapper, page, false);
-      return !!wrapper.valueName ? [wrapper] : elements;
-    } finally {
-      model.dispose();
-    }
-  }
-  // json is a copied container, el its counterpart in the definition's model. Inside a record (a
-  // dynamic panel's template, a matrix's detail panel) a panel's key is the one it gets in the
-  // records built from the template (RN3).
-  private copyDataKeys(json: any, el: any, inRecord: boolean): void {
-    if (!el) return;
-    if (el.isPanel || el.isPage) {
-      const key: string = inRecord ? el.getRecordDataNestingKey() : el.getDataScopeKey();
-      if (!!key) {
-        json.valueName = key;
-      } else {
-        delete json.valueName;
-      }
-      this.copyDataKeysOfElements(json.elements, el.elements, inRecord);
-      return;
-    }
-    if (!!el.template) {
-      this.copyDataKeysOfElements(json.templateElements, el.template.elements, true);
-    }
-    if (!!el.detailPanel) {
-      this.copyDataKeysOfElements(json.detailElements, el.detailPanel.elements, true);
-    }
-  }
-  private copyDataKeysOfElements(jsonElements: Array<any>, elements: Array<any>, inRecord: boolean): void {
-    if (!Array.isArray(jsonElements) || !Array.isArray(elements)) return;
-    // By position, so that a container without a name is matched too, and by name when the model
-    // dropped an element it could not create (an unknown type). A nameless one must have the type.
-    let next = 0;
-    jsonElements.forEach(json => {
-      if (!json || typeof json !== "object") return;
-      let index = -1;
-      const candidate = elements[next];
-      if (!!candidate && (!!json.name ? candidate.name === json.name : String(json.type).toLowerCase() === candidate.getType())) {
-        index = next;
-      } else if (!!json.name) {
-        index = elements.findIndex(el => el.name === json.name);
-      }
-      if (index < 0) return;
-      next = index + 1;
-      this.copyDataKeys(json, elements[index], inRecord);
+      const question = model.getVariableQuestion(path);
+      elements.push({ type: question.getType(), ...question.toJSON() });
     });
+    return root;
+  }
+  // "panel", but "none" for a definition in "none": it has no object variable, and a panel in a
+  // dynamic panel's template nests under its valueName in every other mode.
+  private getDataNesting(model: SurveyVariablePresets): string {
+    const question: any = model.getVariableQuestion(model.getVariablePaths()[0]);
+    return question?.survey?.dataNesting === "none" ? "none" : "panel";
   }
   private setupEvents(): void {
     const survey = this.editSurvey;
@@ -400,7 +356,8 @@ export class VariablePresetsEditor {
     const variables: any = {};
     Object.keys(data).forEach(key => {
       if (key === this.listKey || key === this.nameKey || key === this.descriptionKey) return;
-      // The keys are the definition's own data keys, so valueName is honoured for free. survey.data
+      // The keys are the variables' own keys: a question keeps its valueName, a panel is named by
+      // its key. survey.data
       // already omits empty questions, so a preset that leaves an optional variable blank simply
       // has no key and the host's setVariable is never called for it.
       variables[key] = data[key];
@@ -416,39 +373,14 @@ export class VariablePresetsEditor {
     preset.variables = variables;
     this.lastEditedName = preset.name;
   }
-  // The one place where the two naming rules meet: variable names match case-insensitively at
-  // runtime (setVariable lower-cases) and core validates { customertier: "gold" } as a perfectly
-  // good preset, while survey data keys are case-sensitive - assigned as it is, that value would
-  // leave the customerTier question blank and sit in the data as an orphan. A key the definition
-  // does not know is kept untouched, so it round-trips unchanged.
-  // Nested data: the keys are mapped at every level of an object variable ({ Users: { Tier } } opens
-  // as users.tier), as the companion's validateVariables maps them. The form has the definition's
-  // shape, so the mapped values are its data as they are; the editor's own keys stay.
+  // The preset's keys as written: a key in another letter case than the definition's is not its
+  // variable's field, and a key the definition does not know round-trips unchanged.
   private assignVariables(data: any, variables: any): void {
     if (!variables) return;
-    const mapped = this.mapToDefinition(variables, "");
-    Object.keys(mapped).forEach(key => {
-      if (key === this.listKey || key === this.nameKey || key === this.descriptionKey) return;
-      data[key] = mapped[key];
-    });
-  }
-  private mapToDefinition(variables: any, path: string): any {
-    const model = this.creator.variablePresetsModel;
-    const res: any = {};
     Object.keys(variables).forEach(key => {
-      const keyPath = !!path ? path + "." + key : key;
-      // The question, or the nesting container of an object variable. Only when the key is the
-      // element's own key: a literal dotted key ("users.tier") is no path here, as the companion
-      // reads it, so it stays an unknown key, kept as written.
-      let el: any = model.getVariableElement(keyPath);
-      if (!!el && el.getValueName().toLowerCase() !== key.toLowerCase()) el = undefined;
-      let val = variables[key];
-      if (!!el && !el.isQuestion && isPlainRecord(val)) {
-        val = this.mapToDefinition(val, keyPath);
-      }
-      res[!!el ? el.getValueName() : key] = val;
+      if (key === this.listKey || key === this.nameKey || key === this.descriptionKey) return;
+      data[key] = variables[key];
     });
-    return res;
   }
   private getPreset(name: string): ISurveyVariablePreset {
     return this.presetsValue.filter(preset => preset.name === name)[0];
