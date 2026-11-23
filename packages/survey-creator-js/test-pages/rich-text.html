@@ -113,11 +113,6 @@
   creatorLink.setAttribute("href", "../node_modules/survey-creator-core/survey-creator-core.min.css");
   shadowRoot.appendChild(creatorLink);
 
-  const richTextLink = document.createElement("link");
-  richTextLink.setAttribute("rel", "stylesheet");
-  richTextLink.setAttribute("href", "../node_modules/survey-core/rich-text.css");
-  shadowRoot.appendChild(richTextLink);
-
   shadowRoot.appendChild(rootElement);
 
   SurveyUI.render(survey, rootElement);

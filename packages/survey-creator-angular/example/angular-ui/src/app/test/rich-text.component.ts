@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from "@angular/core";
 import { Serializer } from "survey-core";
 import { RichText } from "survey-core/rich-text";
-import "survey-core/rich-text.css";
 import { TestDefaultComponent } from "./default.component";
 
 const richStringAreas = ["designer-tab", "preview-tab", "theme-tab", "translation-tab:source-survey", "translation-tab:target-survey", "matrix-cell-question-popup-editor"];

@@ -5,7 +5,6 @@
 import { onMounted } from "vue";
 import { Serializer } from "survey-core";
 import { RichText } from "survey-core/rich-text";
-import "survey-core/rich-text.css";
 import Common from "./Common.vue";
 
 const richStringAreas = ["designer-tab", "preview-tab", "theme-tab", "translation-tab:source-survey", "translation-tab:target-survey", "matrix-cell-question-popup-editor"];
