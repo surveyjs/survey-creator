@@ -211,7 +211,7 @@ export class SurveyLogicAction {
   public getOwnerElement(): Base {
     return this.parentElement || this.element || null;
   }
-  private get questionNamesValues(): Array<string> {
+  public get questionNamesValues(): Array<string> {
     return this.questionNames.map(name => this.element[name]);
   }
 }
@@ -607,8 +607,7 @@ export class SurveyLogicItem {
   // the rule no longer has one expression and the logic has to be built again.
   // key: the old key; a rule whose texts do not contain it is skipped without resolving its scopes
   public renameVariables(getRenames: (owner: Base, element: Base) => Array<IVariableRename>, key?: string): boolean {
-    if (!this.expression || this.actions.length === 0) return false;
-    if (!!key && !this.isStrContainsInExpression(key) && !this.actions.some(action => action.hasTextInNames(key))) return false;
+    if (!this.hasKeyText(key)) return false;
     const texts = this.actions.map(action => {
       const renames = getRenames(action.getOwnerElement(), action.element);
       action.renameDataKeyInNames(renames);
@@ -623,6 +622,20 @@ export class SurveyLogicItem {
     }
     this.actions.forEach((action, index) => action.apply(texts[index], true));
     return true;
+  }
+  // Nested data: the variables of the expression and the actions' question names, with the element each action
+  // reads them from (getOwnerElement), for a rule whose texts contain key
+  public forEachVariable(key: string, callback: (owner: Base, name: string) => void): void {
+    if (!this.hasKeyText(key)) return;
+    const names: Array<string> = [];
+    this.getQuestionNamesFromExpression(names);
+    this.actions.forEach(action => names.concat(action.questionNamesValues).forEach(name => {
+      if (!!name && typeof name === "string") callback(action.getOwnerElement(), name);
+    }));
+  }
+  private hasKeyText(key: string): boolean {
+    if (!this.expression || this.actions.length === 0) return false;
+    return !key || this.isStrContainsInExpression(key) || this.actions.some(action => action.hasTextInNames(key));
   }
   private renameVariablePrefix(expression: string, oldName: string, newName: string): string {
     const ob = surveyLibSettings.expressionVariableDelimiters.start;

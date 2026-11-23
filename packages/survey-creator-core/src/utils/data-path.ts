@@ -1,4 +1,4 @@
-import { Base, Question, SurveyModel } from "survey-core";
+import { Base, Question, SurveyModel, settings as surveyLibSettings } from "survey-core";
 
 // Nested data (survey-library #12233): a panel or a page with a data key stores its questions' values in an
 // object, and expressions read them by a data path: {address.street} from the root, or a path relative to an
@@ -73,107 +73,85 @@ export interface IVariableRename {
   oldName: string;
   newName: string;
 }
-function isPathPrefix(prefix: Array<string>, path: Array<string>): boolean {
-  if (prefix.length > path.length) return false;
-  for (let i = 0; i < prefix.length; i++) {
-    if (prefix[i].toLowerCase() !== path[i].toLowerCase()) return false;
-  }
-  return true;
+interface IDataKeyMatch {
+  owner: Base;
+  // the variable's text up to its question ("address.street" in {address.street.length}; "address" when it reads
+  // the container itself), where the element's key is in it, and the text after it
+  oldName: string;
+  keyIndex: number;
+  tail: string;
+  // the question the text reads (the element, or one inside the container) and its data path before the change
+  question: Question;
+  path: string;
+  // the container itself: the keys of the question inside it that the text was read through
+  innerKeys: number;
+  // a postfix follows the question's key ({address.street-comment})
+  isPostfix: boolean;
 }
-// The data keys each scope of the survey holds, letter case ignored: a question by its value name, a nesting
-// container by its key. Elements inside a record (a template) are left out: their keys live in the records.
-class DataScopeKeys {
-  private counts: { [entry: string]: number } = {};
-  public static create(survey: SurveyModel): DataScopeKeys {
-    const res = new DataScopeKeys();
-    const add = (el: any): void => {
-      const path = getDataPath(el);
-      if (path.length > 0) res.add(path.slice(0, path.length - 1), path[path.length - 1], !!el.isQuestion, 1);
-    };
-    survey.getAllQuestions(false, false).forEach(add);
-    survey.getAllPanels(false, false).forEach(add);
-    survey.pages.forEach(add);
-    return res;
-  }
-  public clone(): DataScopeKeys {
-    const res = new DataScopeKeys();
-    res.counts = Object.assign({}, this.counts);
-    return res;
-  }
-  public add(scope: Array<string>, key: string, isQuestion: boolean, delta: number): void {
-    const entry = DataScopeKeys.getEntry(scope, key, isQuestion);
-    this.counts[entry] = (this.counts[entry] || 0) + delta;
-  }
-  public has(scope: Array<string>, key: string, isQuestion: boolean): boolean {
-    return this.counts[DataScopeKeys.getEntry(scope, key, isQuestion)] > 0;
-  }
-  private static getEntry(scope: Array<string>, key: string, isQuestion: boolean): string {
-    return (isQuestion ? "q" : "c") + "\u0000" + scope.concat([key]).join("\u0000").toLowerCase();
-  }
-}
-// Whether the keys of path after scopes[index] (the scopes an expression resolves in, innermost first) read
-// the element at path, as the runtime walks them (PanelDataScopeValueGetterContext): the innermost scope that
-// holds the first key answers; at each level a question goes before a container of the same key.
-function readsDataPath(keys: DataScopeKeys, scopes: Array<Array<string>>, index: number, path: Array<string>, isQuestion: boolean): boolean {
-  const scope = scopes[index];
-  if (scope.length >= path.length || !isPathPrefix(scope, path)) return false;
-  const first = path[scope.length];
-  for (let i = 0; i < index; i++) {
-    if (keys.has(scopes[i], first, true) || keys.has(scopes[i], first, false)) return false;
-  }
-  for (let level = scope.length; level < path.length; level++) {
-    const at = path.slice(0, level);
-    const hasQuestion = keys.has(at, path[level], true);
-    if (level === path.length - 1 && isQuestion) return hasQuestion;
-    if (hasQuestion || !keys.has(at, path[level], false)) return false;
-  }
-  return true;
-}
-// Nested data (survey-library #12233, scoped names, CS1): the data key at the end of oldPath (a question's value
-// name, a container's key) became newKey. A variable is rewritten when it read the element before the change,
-// to the text that reads it after: from the same scope, or, when an inner scope now holds the new key, from the
-// next scope outwards that reaches it. A variable that read another element, or nothing, keeps its text.
-// The change runs before the rewrite, so the state before it is rebuilt: only the element's own key differs.
+// Nested data (survey-library #12233, scoped names, CS1): the data key of element (a question's value name, a
+// container's key) changes from oldKey to newKey. Before the change (survey.onDataKeyChangingCallback) survey-core
+// tells which variables read the element; after it, each of them is rewritten to a text that reads the element
+// again: the same text with the new key, or, when an inner scope now holds that key, the name that reaches the
+// question from the owner. A variable that read another element, or nothing, keeps its text.
 export class DataKeyRename {
-  private oldPath: Array<string>;
-  private newPath: Array<string>;
-  private before: DataScopeKeys;
-  private after: DataScopeKeys;
-  private isCaseChange: boolean;
-  constructor(private survey: SurveyModel, oldPath: Array<string>, newKey: string, private isQuestion: boolean) {
-    this.oldPath = oldPath;
-    this.newPath = oldPath.slice(0, oldPath.length - 1).concat([newKey]);
-    this.isCaseChange = oldPath[oldPath.length - 1].toLowerCase() === newKey.toLowerCase();
+  private matches: Array<IDataKeyMatch> = [];
+  private path: Array<string>;
+  constructor(private survey: SurveyModel, public readonly element: Base, public readonly oldKey: string, public readonly newKey: string) {
+    this.path = getDataPath(element);
   }
-  // built on the first rule that names the old key: one walk of the survey's elements
-  private createKeys(): void {
-    if (!!this.after) return;
-    const scope = this.oldPath.slice(0, this.oldPath.length - 1);
-    this.after = DataScopeKeys.create(this.survey);
-    this.before = this.after.clone();
-    this.before.add(scope, this.newPath[this.newPath.length - 1], this.isQuestion, -1);
-    this.before.add(scope, this.oldPath[this.oldPath.length - 1], this.isQuestion, 1);
+  // before the change: a variable (of an expression, or an action's question name) that owner reads
+  public addVariable(owner: Base, name: string): void {
+    if (name.toLowerCase().indexOf(this.oldKey.toLowerCase()) < 0) return;
+    // a column total ({m-total.c1}) reads the matrix; renameVariablePrefix keeps the suffix
+    let text = name.split(surveyLibSettings.matrix.totalsSuffix + ".").join(".");
+    let info = this.survey.getQuestionByVariable(text, owner);
+    let innerKeys = 0;
+    if (!info && !this.element.isQuestion) {
+      // the container's own value ({address}): a question inside it is read by the same text and its keys
+      const inner = (<Array<Question>>(<any>this.element).questions).filter(q => getDataPath(q).length > this.path.length)[0];
+      if (!inner) return;
+      const keys = getDataPath(inner).slice(this.path.length);
+      innerKeys = keys.length;
+      text += "." + keys.join(".");
+      info = this.survey.getQuestionByVariable(text, owner);
+    }
+    if (!info || info.question !== this.element && (this.element.isQuestion || !(<any>this.element).containsElement(info.question))) return;
+    const head = text.substring(0, text.length - info.rest.length).split(".");
+    const keyIndex = this.path.length - 1 - (getDataPath(info.question).length - head.length);
+    const isPostfix = !!info.isComment || !!info.isUnwrapped;
+    // the text does not name the key (read from inside the container), or a postfix follows it ({street-comment})
+    if (keyIndex < 0 || keyIndex === head.length - 1 && isPostfix) return;
+    const oldName = head.slice(0, head.length - innerKeys).join(".");
+    if (this.matches.some(m => m.owner === owner && m.oldName.toLowerCase() === oldName.toLowerCase())) return;
+    this.matches.push({ owner: owner, oldName: oldName, keyIndex: keyIndex, tail: text.substring(oldName.length), question: info.question,
+      path: getDataPath(info.question).join(".").toLowerCase(), innerKeys: innerKeys, isPostfix: isPostfix });
   }
-  // scopes: getExpressionScopePaths of the expression's owner
-  public getRenames(scopes: Array<Array<string>>): Array<IVariableRename> {
-    this.createKeys();
+  // after the change: the texts to rewrite in what owner reads
+  public getRenames(owner: Base): Array<IVariableRename> {
     const res: Array<IVariableRename> = [];
-    scopes.forEach((scope, index) => {
-      if (!readsDataPath(this.before, scopes, index, this.oldPath, this.isQuestion)) return;
-      // another element still holds the old key there (a shared value name): the text still reads it
-      if (!this.isCaseChange && readsDataPath(this.after, scopes, index, this.oldPath, this.isQuestion)) return;
-      const oldName = this.oldPath.slice(scope.length).join(".");
-      let newName = this.newPath.slice(scope.length).join(".");
-      for (let i = index; i < scopes.length; i++) {
-        if (readsDataPath(this.after, scopes, i, this.newPath, this.isQuestion)) {
-          newName = this.newPath.slice(scopes[i].length).join(".");
-          break;
-        }
-      }
-      if (oldName !== newName && !res.some(item => item.oldName.toLowerCase() === oldName.toLowerCase())) {
-        res.push({ oldName: oldName, newName: newName });
-      }
+    this.matches.forEach(m => {
+      if (m.owner !== owner) return;
+      // another question holds the old key at the same place (a shared value name): the text still reads it. One
+      // that a scope further out holds does not count: the text read the element before.
+      const old = this.getQuestion(m.oldName + m.tail, owner);
+      if (!!old && old !== m.question && getDataPath(old).join(".").toLowerCase() === m.path) return;
+      const newName = this.getNewName(m);
+      if (newName !== m.oldName) res.push({ oldName: m.oldName, newName: newName });
     });
     return res;
+  }
+  private getNewName(m: IDataKeyMatch): string {
+    const keys = m.oldName.split(".");
+    keys[m.keyIndex] = this.newKey;
+    const res = keys.join(".");
+    if (m.isPostfix || this.getQuestion(res + m.tail, m.owner) === m.question) return res;
+    // an inner scope holds the new key: the name that reaches the question (without the keys inside the container)
+    const parts = this.survey.getQuestionVariableName(m.question, m.owner).split(".");
+    const name = parts.slice(0, parts.length - m.innerKeys).join(".");
+    return !!name && this.getQuestion(name + m.tail, m.owner) === m.question ? name : res;
+  }
+  private getQuestion(text: string, owner: Base): Question {
+    const info = this.survey.getQuestionByVariable(text, owner);
+    return !!info ? info.question : null;
   }
 }

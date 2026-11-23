@@ -171,6 +171,9 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     });
     return res;
   }
+  public forEachVariable(key: string, callback: (owner: Base, name: string) => void): void {
+    this.items.concat(this.invisibleItems).forEach(item => item.forEachVariable(key, callback));
+  }
   public renameItemValue(item: ItemValue, oldValue: any): void {
     const question = this.getItemValueQuestion(item, oldValue);
     if (!question) return;

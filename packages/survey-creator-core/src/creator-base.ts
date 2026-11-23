@@ -27,7 +27,7 @@ import {
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
-import { DataKeyRename, getExpressionRecord, getExpressionScopePaths, isScopedNamesSurvey, IVariableRename } from "./utils/data-path";
+import { DataKeyRename, getExpressionRecord, isScopedNamesSurvey, IVariableRename } from "./utils/data-path";
 import { DragDropChoices } from "survey-core";
 import { IsTouch } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
@@ -2625,6 +2625,7 @@ export class SurveyCreatorModel extends Base
       this.existingPages[options.page.id] = true;
       this.doOnPageAdded(options.page);
     });
+    survey.onDataKeyChangingCallback = (el: Base, oldKey: string, newKey: string): void => this.onDataKeyChanging(el, oldKey, newKey);
 
     this.setSurvey(survey);
     this.expandCollapseManager.expandCollapseElements("loading", false);
@@ -2860,19 +2861,38 @@ export class SurveyCreatorModel extends Base
     if (!panel.isDataNesting) return;
     this.updateLogicOnDataKeyChanged(panel, oldKey, newKey);
   }
+  // The variables that read el, found before its data key changes (survey.onDataKeyChangingCallback, also on undo
+  // and redo); updateLogicOnDataKeyChanged rewrites them after the change. A callback with no change after it
+  // (an exception in the set) leaves them until the next callback.
+  private dataKeyRename: DataKeyRename;
+  private onDataKeyChanging(el: Base, oldKey: string, newKey: string): void {
+    this.dataKeyRename = undefined;
+    if (this.isCreatingNewElement || !isScopedNamesSurvey(this.survey) || !settings.logic.updateExpressionsOnChanging.questionName) return;
+    // a question of a record goes to updateLogicOnRecordKeyChanged; a panel of a template does not nest
+    if (el.isQuestion ? !!getExpressionRecord(this.survey, el) : !(<PanelModelBase>el).isDataNesting) return;
+    const rename = new DataKeyRename(this.survey, el, oldKey, newKey);
+    this.getSurveyLogicForUpdate().forEachVariable(oldKey, (owner, name) => rename.addVariable(owner, name));
+    this.dataKeyRename = rename;
+  }
   // el (a question or a nesting container) holds newKey now; its old key was oldKey. A question of a record goes
   // to updateLogicOnRecordKeyChanged.
   private updateLogicOnDataKeyChanged(el: Question | PanelModelBase, oldKey: string, newKey: string): void {
+    const rename = this.dataKeyRename;
+    this.dataKeyRename = undefined;
     if (!oldKey || !newKey || oldKey === newKey || !settings.logic.updateExpressionsOnChanging.questionName) return;
     const record = el.isQuestion ? getExpressionRecord(this.survey, el) : null;
     if (!!record) {
       this.updateLogicOnRecordKeyChanged(<Question>el, record, oldKey);
-      return;
+    } else if (!!rename && rename.element === el && rename.oldKey === String(oldKey) && rename.newKey === String(newKey)) {
+      // the callback's keys are strings; a numeric valueName from JSON comes here as a number
+      // A question's name and valueName setters update survey-core's key index after this notification: done here
+      // first, so that the lookups read the new key (the second call changes nothing). The line goes when
+      // survey-core updates the index before it notifies.
+      if (el.isQuestion) {
+        this.survey.questionRenamed(<Question>el, oldKey, oldKey);
+      }
+      this.renameLogicVariables(owner => rename.getRenames(owner), rename.oldKey);
     }
-    const newPath = el.getDataPath();
-    if (newPath.length === 0) return;
-    const rename = new DataKeyRename(this.survey, newPath.slice(0, newPath.length - 1).concat([oldKey]), newKey, el.isQuestion);
-    this.renameLogicVariables(owner => rename.getRenames(getExpressionScopePaths(this.survey, owner)), oldKey);
   }
   private renameLogicVariables(getRenames: (owner: Base, element: Base) => Array<IVariableRename>, oldKey: string): void {
     this.surveyLogicRenaming = true;

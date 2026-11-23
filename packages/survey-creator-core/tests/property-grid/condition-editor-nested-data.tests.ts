@@ -976,6 +976,99 @@ describe("renames rewrite names and paths (nested data, survey-library #12233)",
     pageCreator.survey.getQuestionByName("page1.a").name = "a2";
     expect(pageCreator.survey.getQuestionByName("page1.q2").choicesFromQuestion).toBe("a2");
   });
+  // A rename asks survey-core what each variable reads before the change (survey.onDataKeyChangingCallback), on
+  // every path that changes a key (review-01, prompt 03)
+  test("a rename in the property grid and from code, with their undo and redo, give one result", () => {
+    const json = surveyJson({}, { elements: [{ type: "dropdown", name: "kind", choices: ["a"], visibleIf: "{street} = 1" }, { type: "text", name: "street" }] });
+    json.elements[1].visibleIf = "{address.street} = 2";
+    const texts = (creator: CreatorTester): Array<string> => ["panel1.kind", "q1"].map(name => creator.survey.getQuestionByName(name).visibleIf);
+    const byCode = createCreator(json);
+    byCode.survey.getQuestionByName("panel1.street").name = "road";
+    byCode.survey.getQuestionByName("panel1.road").valueName = "rd";
+    const inGrid = createCreator(json);
+    inGrid.selectElement(inGrid.survey.getQuestionByName("panel1.street"));
+    inGrid.propertyGrid.getQuestionByName("name").value = "road";
+    inGrid.propertyGrid.getQuestionByName("valueName").value = "rd";
+    [byCode, inGrid].forEach((creator, index) => {
+      expect(texts(creator), "after: " + index).toEqual(["{rd} = 1", "{address.rd} = 2"]);
+      creator.undo();
+      expect(texts(creator), "undo: " + index).toEqual(["{road} = 1", "{address.road} = 2"]);
+      creator.undo();
+      expect(texts(creator), "undo twice: " + index).toEqual(["{street} = 1", "{address.street} = 2"]);
+      creator.redo();
+      creator.redo();
+      expect(texts(creator), "redo: " + index).toEqual(["{rd} = 1", "{address.rd} = 2"]);
+    });
+  });
+  test("a key-changing callback with no change after it is not applied to a later change", () => {
+    const creator = createCreator(surveyJson({ elements: [addressPanel(), { type: "text", name: "q1", visibleIf: "{address.street} = 1" },
+      { type: "paneldynamic", name: "dp", templateElements: [{ type: "panel", name: "tp", valueName: "tv", elements: [{ type: "text", name: "x" }] }] }] }));
+    const street = creator.survey.getQuestionByName("panel1.street");
+    // the set after the callback does not happen (an exception). The next callback drops what the first one
+    // found, even one with nothing to look up and no rewrite after it (a template panel's key). A change by
+    // setPropertyValue (no callback; nothing in the Creator or survey-core sets a name that way) then
+    // rewrites nothing.
+    creator.survey.onDataKeyChangingCallback(street, "street", "road");
+    (<any>creator.survey.getQuestionByName("dp")).template.getElementByName("tp").valueName = "tv2";
+    street.setPropertyValue("name", "road");
+    expect(creator.survey.getQuestionByName("q1").visibleIf).toBe("{address.street} = 1");
+  });
+  test("a name a scope further out holds too: {street} inside the container follows, the root one stays", () => {
+    const json = { dataNesting: "auto", elements: [addressPanel({ elements: [
+      { type: "text", name: "street" }, { type: "text", name: "k" }] }), { type: "text", name: "street" }, { type: "text", name: "q1" }] };
+    checkRename(json, { k: ["{street} = 1", "{road} = 1"], q1: ["{street} = 2", "{street} = 2"] },
+      creator => creator.survey.getQuestionByName("panel1.street").name = "road", true);
+    checkRename(json, { k: ["{street} = 1", "{st} = 1"] },
+      creator => creator.survey.getQuestionByName("panel1.street").valueName = "st", true);
+    // a container key that a root container holds too
+    checkRename({ dataNesting: "auto", elements: [
+      { type: "panel", name: "r", valueName: "in", elements: [{ type: "text", name: "x" }] },
+      { type: "panel", name: "out", valueName: "out", elements: [{ type: "text", name: "s" },
+        { type: "panel", name: "i", valueName: "in", elements: [{ type: "text", name: "x" }] }] }] },
+    { s: ["{in.x} = 1", "{in3.x} = 1"] }, creator => creator.survey.getPanelByName("out.i").valueName = "in3", true);
+  });
+  test("one key in two containers on two pages: only the variable of the renamed container follows", () => {
+    checkRename({ dataNesting: "auto", pages: [
+      { name: "p1", elements: [{ type: "panel", name: "a", valueName: "address", elements: [{ type: "text", name: "street" }] }] },
+      { name: "p2", elements: [{ type: "panel", name: "b", valueName: "address", elements: [{ type: "text", name: "town" }] },
+        { type: "text", name: "q1" }] }] },
+    { q1: ["{address.street} = 1 and {address.town} = 2", "{addr.street} = 1 and {address.town} = 2"] },
+    creator => creator.survey.getPanelByName("a").valueName = "addr", true);
+  });
+  test("a container's new key taken by a question inside it: the text read from inside drops the key", () => {
+    checkRename(surveyJson({}, { elements: [{ type: "text", name: "kind" }, { type: "text", name: "street" }, { type: "text", name: "addr" }] }),
+      { kind: ["{address.street} = 1", "{street} = 1"] }, creator => creator.survey.getPanelByName("panel1").valueName = "addr", true);
+  });
+  test("a numeric valueName from JSON changed: the variable follows", () => {
+    // no undo here: survey-core's makeNameValid throws when undo sets the number back (str.trim)
+    const creator = createCreator(surveyJson({}, { elements: [{ type: "text", name: "street", valueName: 7 }] }));
+    const q1 = creator.survey.getQuestionByName("q1");
+    q1.visibleIf = "{address.7} = 1";
+    creator.survey.getQuestionByName("panel1.street").valueName = "st";
+    expect(q1.visibleIf).toBe("{address.st} = 1");
+  });
+  test("a container's own value, a comment and a column total follow a key change", () => {
+    const json = { dataNesting: "auto", elements: [addressPanel({ elements: [{ type: "text", name: "street", showCommentArea: true },
+      { type: "matrixdropdown", name: "m", valueName: "mv", rows: ["r1"], columns: [{ name: "c1", totalType: "sum" }] }] }),
+    { type: "text", name: "q1" }] };
+    const text = "{address} notempty and {address.street-comment} = 1 and {address.mv-total.c1} = 2";
+    checkRename(json, { q1: [text, "{addr} notempty and {addr.street-comment} = 1 and {addr.mv-total.c1} = 2"] },
+      creator => creator.survey.getPanelByName("panel1").valueName = "addr", true);
+    // the comment's postfix is not followed when the question itself is renamed, as before
+    checkRename(json, { q1: [text, "{address} notempty and {address.street-comment} = 1 and {address.mv2-total.c1} = 2"] },
+      creator => {
+        creator.survey.getQuestionByName("panel1.street").name = "road";
+        creator.survey.getQuestionByName("panel1.m").valueName = "mv2";
+      });
+  });
+  test("a question inside a choice panel renamed: {chin.x} follows", () => {
+    checkRename({ dataNesting: "auto", elements: [
+      { type: "checkbox", name: "chbox", choices: [{ value: 1, elements: [
+        { type: "panel", name: "chin", valueName: "chin", elements: [{ type: "text", name: "x" }] }] }] },
+      { type: "text", name: "q1" }] },
+    { q1: ["{chin.x} = 1", "{chin.y} = 1"] },
+    creator => creator.survey.getAllQuestions(false, false, true).filter(q => q.name === "x")[0].name = "y", true);
+  });
 });
 
 describe("findInnerQuestion (nested data, survey-library #12233)", () => {
