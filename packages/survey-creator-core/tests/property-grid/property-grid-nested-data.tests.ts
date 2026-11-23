@@ -220,6 +220,65 @@ describe("property grid: panel and page valueName, survey dataNesting (nested da
     creator.survey.dataNesting = "page";
     expect(editor.renderedPlaceholder).toBe("page1");
   });
+  test("the shown editor is notified when the placeholder follows a rename and a dataNesting change", () => {
+    const creator = new CreatorTester();
+    creator.JSON = panelJson({ dataNesting: "panel" });
+    const panel = creator.survey.getPanelByName("panel1");
+    creator.selectElement(panel);
+    const editor = <QuestionTextModel>creator.propertyGrid.getQuestionByName("valueName");
+    const changes: Array<string> = [];
+    editor.onPropertyChanged.add((_, options) => {
+      if (options.name === "placeholder") changes.push(options.newValue);
+    });
+    panel.name = "address";
+    creator.survey.dataNesting = "auto";
+    expect(changes, "a renderer re-reads renderedPlaceholder on these changes").toEqual(["address", ""]);
+  });
+  test("a panel inside a dynamic panel's template or a matrix detail panel does not nest by name: no placeholder", () => {
+    ["panel", "panelAndPage"].forEach(mode => {
+      const creator = new CreatorTester();
+      creator.JSON = {
+        dataNesting: mode,
+        pages: [{ name: "page1", elements: [
+          { type: "paneldynamic", name: "pd", templateElements: [
+            { type: "panel", name: "pin", elements: [{ type: "panel", name: "pin2", elements: [{ type: "text", name: "q1" }] }] }] },
+          { type: "matrixdynamic", name: "m", rowCount: 1, detailPanelMode: "underRow", columns: [{ name: "c1" }],
+            detailElements: [{ type: "panel", name: "din", elements: [{ type: "text", name: "q2" }] }] }
+        ] }]
+      };
+      const getQuestion = (name: string): any => creator.survey.getAllQuestions().filter(q => q.name === name)[0];
+      const pin = <PanelModel>(<QuestionPanelDynamicModel>getQuestion("pd")).template.getElementByName("pin");
+      const row = (<QuestionMatrixDynamicModel>getQuestion("m")).visibleRows[0];
+      row.showDetailPanel();
+      [pin, <PanelModel>pin.getElementByName("pin2"), <PanelModel>row.detailPanel.getElementByName("din")].forEach(panel => {
+        creator.selectElement(panel);
+        expect(creator.selectedElement, mode + " " + panel.name).toBe(panel);
+        const editor = <QuestionTextModel>creator.propertyGrid.getQuestionByName("valueName");
+        expect(editor.renderedPlaceholder, mode + " " + panel.name + ": a by-name mode does not change a record's shape").toBeFalsy();
+      });
+    });
+  });
+  test("the placeholder follows a move of the selected panel out of and into a dynamic panel's template", () => {
+    const creator = new CreatorTester();
+    creator.JSON = {
+      dataNesting: "panel",
+      pages: [{ name: "page1", elements: [{ type: "paneldynamic", name: "list", templateElements: [
+        { type: "panel", name: "inner", elements: [{ type: "text", name: "b" }] }
+      ] }] }]
+    };
+    const list = <QuestionPanelDynamicModel>creator.survey.getAllQuestions().filter(q => q.name === "list")[0];
+    const inner = <PanelModel>list.template.elements[0];
+    creator.selectElement(inner);
+    const editor = <QuestionTextModel>creator.propertyGrid.getQuestionByName("valueName");
+    expect(editor.renderedPlaceholder, "in the template").toBeFalsy();
+    list.template.removeElement(inner);
+    creator.survey.pages[0].addElement(inner);
+    expect(creator.propertyGrid.getQuestionByName("valueName"), "the same editor").toBe(editor);
+    expect(editor.renderedPlaceholder, "on the page").toBe("inner");
+    creator.survey.pages[0].removeElement(inner);
+    list.template.addElement(inner);
+    expect(editor.renderedPlaceholder, "back in the template").toBeFalsy();
+  });
   test("undo and redo of valueName and dataNesting", () => {
     const creator = new CreatorTester();
     creator.JSON = panelJson({ dataNesting: "auto" });
