@@ -162,8 +162,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     this.items.forEach(item => item.renameQuestion(oldName, newName));
     this.invisibleItems.forEach(item => item.renameQuestion(oldName, newName));
   }
-  // Nested data: see SurveyLogicItem.renameVariables. Returns true when a rule split into elements with
-  // different texts: the items no longer match the survey and have to be built again.
+  // true when a rule split into actions with different texts: the items no longer match the survey
   public renameVariables(getRenames: (owner: Base, element: Base) => Array<IVariableRename>, key?: string): boolean {
     let res = false;
     this.items.concat(this.invisibleItems).forEach(item => {
@@ -231,10 +230,9 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     return !!this.errorText;
   }
   public getUsedQuestions(): Question[] {
-    // Nested data (survey-library #12233): in a survey with scopes a variable's text names different questions
-    // in different rules, so the list is built per question, as each rule resolves its variables. Elsewhere a
-    // lookup by name, then by variable ({val1} lists q1), stays: it lists a question named like a page or like
-    // another's value name (a test pins it).
+    // Nested data (survey-library #12233): one text reads different questions in different rules, so each rule
+    // resolves its own variables. Where nothing nests, master's lookup by name, then by variable ({val1} lists q1),
+    // stays: it also lists a question named like a page or like another question's value name.
     if (isScopedNamesSurvey(this.survey)) {
       const questions: Array<Question> = [];
       this.items.forEach(item => item.getUsedQuestions().forEach(q => {
@@ -253,7 +251,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     });
     let res: Question[] = [];
     Object.keys(names).forEach(item => {
-      // an inner question can be named twice: {street} and {address.street}
+      // one question can be named twice: {q1} and its value name {val1}
       if (!!names[item] && res.indexOf(names[item]) < 0) {
         res.push(names[item]);
       }
@@ -367,7 +365,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       this.addNewAction();
     }
   }
-  // context: the element the rule's variables resolve in (SurveyLogicItem.getExpressionContext), else the root
+  // context: the element the rule's variables resolve in; the root without it
   public getExpressionAsDisplayText(expression: string, context?: Base): string {
     return SurveyLogicType.expressionToDisplayText(
       this.survey,

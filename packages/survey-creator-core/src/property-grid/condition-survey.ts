@@ -146,15 +146,10 @@ export function buildConditionQuestionList(survey: SurveyModel, object: Base, pr
 export function getConditionListScope(object: Base, editor: ConditionEditor): Base {
   return !!editor ? editor.getScopeElement() : getConditionContextObject(object);
 }
-// Nested data: survey-core lists a question by its value name, which for an inner question is a key of its
-// container's object, not of the survey data, so {town} is not found at the root (survey-library #12233).
-// The editor inserts the variable survey-core names it by from the rule's owner instead (key,
-// getConditionQuestionKey): {street} inside address, the data path {address.town} at the root or on another page,
-// the longer text when an inner scope hides the shorter one. Sub-entries ("address.mv.r1") follow.
-// CS8: the entry shows textKey, the key with the question's own key, the last segment, replaced by its name:
-// "address.city" for city with valueName "town" in the container "address" ("city" inside it), as a top-level
-// question's entry shows "q1" for its {val1}. The containers keep their keys, which is what the written path starts
-// with, and a sub-entry keeps its tail ("address.m.r1" for m with valueName "mv"). Only the text changes.
+// Nested data (survey-library #12233): an inner question's value name is no key of the survey data, so {town} is
+// not found at the root. Its entries are the variable that reaches it from the rule's owner instead ({street}
+// inside address, {address.town} elsewhere). The text shows the question's name for its own key, the last segment
+// ("address.city" for city with valueName "town"), as a top-level entry shows "q1" for {val1}.
 function getInnerEntryNaming(question: Question, scope: Base): { valueName: string, key: string, textKey: string } {
   const valueName = question.getValueName();
   const key = getConditionQuestionKey(question, scope);
@@ -171,21 +166,17 @@ function renameInnerQuestionEntries(res: Array<any>, start: number, question: Qu
     res[i].name = naming.key + name.substring(naming.valueName.length);
   }
 }
-// runs after the host's onConditionQuestionsGetList: an entry that does not start with the key (the host renamed
-// it) shows its name
+// runs after the host's onConditionQuestionsGetList: an entry the host renamed shows its name
 function getInnerEntryText(name: string, question: Question, scope: Base): string {
   const naming = getInnerEntryNaming(question, scope);
   return isEntryOf(name, naming.key) ? naming.textKey + name.substring(naming.key.length) : name;
 }
-// A top-level entry shows its name, with the question's value name replaced by its name ({val1} shows "q1").
 function getTopEntryText(name: string, question: any): string {
   const valueName = question.valueName;
   return !!valueName && name.indexOf(valueName) == 0 ? name.replace(valueName, question.name) : name;
 }
-// The texts of inner entries (getInnerEntryText), by the entry's index. Names are unique in a name scope, but two
-// containers can share a key ("address"), so two questions named city in them can both show "city", and inside a
-// container an inner kind can show the text of a top-level one: those inner entries show their data paths from
-// the root instead, which differ.
+// Two containers can share a key (an address split across two pages), and an inner kind can show the text of a
+// top-level kind: an inner entry whose text is not unique shows its data path from the root instead.
 function getInnerEntryTexts(res: Array<any>, options: ISurveyCreatorOptions, scope: Base): { [index: number]: string } {
   const texts: { [index: number]: string } = {};
   if (options.useElementTitles) return texts;
@@ -202,7 +193,6 @@ function getInnerEntryTexts(res: Array<any>, options: ISurveyCreatorOptions, sco
   }
   return texts;
 }
-// The entry's name as the root reads it: the listed key replaced by the data path ("kind" gives "address.kind").
 function getRootEntryName(name: string, question: Question, scope: Base): string {
   const key = getConditionQuestionKey(question, scope);
   return isEntryOf(name, key) ? getConditionQuestionKey(question) + name.substring(key.length) : name;
@@ -257,7 +247,7 @@ function mergeSelectBasedQuestions(res: Array<any>): void {
   for (let i = 0; i < res.length; i++) {
     if (res[i].context) continue;
     const q: Question = res[i].question;
-    // inner questions are listed by their data paths and keep their own entries (renameInnerQuestionEntries)
+    // an inner question keeps its own entries: they are named from the rule's owner
     if (isInnerQuestion(q)) continue;
     if (q.isDescendantOf("selectbase")) {
       const valueName = q.getFilteredName();
@@ -413,10 +403,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   // (the rule text a host may change) and listens to onExpressionAssistantAccepted.
   public getExpressionCheckInput: () => IExpressionAssistantInput;
   public getExpressionDisplayText: (expression: string) => string;
-  // Nested data (survey-library #12233, CS7): the element whose scopes the editor reads a variable in when it
-  // has no object: the Logic tab's rule (SurveyLogicItem.getExpressionContext). Lookups only: the editor
-  // writes no property of it. The list names each question from it, so a change builds the list again. Set it
-  // before the text.
+  // The element the editor resolves variables in when it has no object (a Logic tab rule); nothing is written to
+  // it. The list names each question from it, so a change rebuilds the list: set it before the text.
   private scopeElementValue: Base;
   public get scopeElement(): Base {
     return this.scopeElementValue;
@@ -755,9 +743,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       panelQuestionName.value = questionName;
     }
   }
-  // Nested data: a text that reaches an inner question but is not the name listed for this owner
-  // ({address.kind} inside address, written before the rule had this owner) opens on the listed entry ("kind"),
-  // so saving writes that name. Any other text that matches no entry stays as written.
+  // A text that reaches an inner question but is not its listed name ({address.kind} inside address, written
+  // before the rule had this owner) opens on the listed entry, so saving writes {kind}. Any other unknown text stays.
   private getListedName(name: string): string {
     if (!name || !!this.getConditionQuestion(name)) return name;
     const scope = this.getScopeElement();

@@ -329,8 +329,8 @@ export class UndoRedoArrayAction implements IUndoRedoAction {
   }
   private getSenderElement(): Base {
     if (!this._sender.isDisposed || !this.survey) return this._sender;
-    // Follow the instance an undo re-created: a lookup by name can miss it (a template's element, a column,
-    // scoped names, survey-library #12233) or find another element with that name
+    // Follow the instance an undo re-created: a lookup by name can miss it (a template's element, a column, a name
+    // used in two scopes) or find another element with that name
     let sender = this._sender;
     while(sender.isDisposed && recreatedElements.has(sender)) sender = recreatedElements.get(sender);
     if (!sender.isDisposed) return sender;

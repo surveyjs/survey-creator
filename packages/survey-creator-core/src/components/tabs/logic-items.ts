@@ -20,8 +20,7 @@ import { wrapTextByCurlyBraces } from "../../utils/creator-utils";
 import { SurveyHelper } from "../../survey-helper";
 import { getConditionQuestionKey, getQuestionByVariableName, isInnerQuestion, isScopedNamesSurvey, IVariableRename } from "../../utils/data-path";
 
-// What follows a renamed name in a variable: its end, a path into it ("." or "["), or "-total." ("{matrix-total.column}"
-// is a column total of the matrix "matrix")
+// What can follow a renamed name: the variable's end, a path into it, or "-total." ({matrix-total.column})
 function getRenamePostfixes(): Array<string> {
   const res = [surveyLibSettings.expressionVariableDelimiters.end, ".", "["];
   const totalsSuffix = surveyLibSettings.matrix.totalsSuffix;
@@ -78,9 +77,8 @@ export class SurveyLogicAction {
       }
     }
   }
-  // Nested data: a question name of the action (a trigger's setToName, fromName) that is a data path
-  // through a renamed key. renameQuestion matches the whole name only: without nesting "q1.x" can be another
-  // question's name (a test pins it).
+  // Nested data (survey-library #12233): a trigger's setToName or fromName can be a data path through a renamed
+  // key. renameQuestion matches the whole name only: where nothing nests, "q1.x" can be another question's name.
   public renameDataKeyInNames(renames: Array<IVariableRename>): void {
     if (!this.element || renames.length === 0) return;
     this.questionNames.forEach(propName => {
@@ -133,20 +131,17 @@ export class SurveyLogicAction {
     }
     return res;
   }
-  // Nested data (survey-library #12233, CS6): the action is on the question (a column's matrix, a template
-  // question's dynamic panel), or a question name of it (a trigger's setToName, fromName, gotoName) finds it.
   public isSuitableByQuestion(question: Question): boolean {
     if (!this.element) return false;
     if (this.element === question || this.parentElement === question) return true;
     return this.questionNames.some(propName => this.findQuestionByName(propName, this.element[propName]) === question);
   }
-  // gotoName is a path of names (O4a); setToName and fromName are data paths, read from the survey data.
+  // gotoName is a path of names; setToName and fromName are data paths, read from the survey data.
   private findQuestionByName(propName: string, name: string): Question {
     if (!name || typeof name !== "string") return null;
     if (propName === "gotoName") return <Question>this.survey.getQuestionByName(name);
     return getQuestionByVariableName(this.survey, name);
   }
-  // The questions the action is on and names, for the Logic tab's question filter in a survey with scopes.
   public addUsedQuestions(questions: Array<Question>): void {
     if (!this.element) return;
     const add = (q: any): void => {
@@ -204,9 +199,8 @@ export class SurveyLogicAction {
     const owner = this.getOwnerElement();
     return !!owner ? (<any>owner).name || "" : "";
   }
-  // The element whose scopes the action's expression resolves in: its parent element (a template question's
-  // dynamic panel, a column's matrix), else the element. survey-core resolves a choice and a validator as their
-  // question.
+  // The element whose scopes the action's expression resolves in. survey-core resolves a choice and a validator
+  // as their question.
   public getOwnerElement(): Base {
     return this.parentElement || this.element || null;
   }
@@ -446,10 +440,8 @@ export class SurveyLogicItem {
     if (!str) return false;
     return this.expression.toLocaleLowerCase().indexOf(str.toLocaleLowerCase()) > -1;
   }
-  // The variables an expression reads the question by: inside a record its value name after the record's
-  // prefix; else the names the condition editor lists it by: its data path from the root ({address.town}) and,
-  // in a survey with scopes, the name from the rule's owner ({town} inside address), each where it reads the
-  // question from the rule's actions.
+  // The editor may have written either name: the data path from the root ({address.town}) or the name from the
+  // rule's owner ({town} inside address). Each is kept only where it reads the question.
   private getItemValueQuestionNames(question: Question): Array<string> {
     if (!!question.parentQuestion) {
       const valName = question.getValueName();
@@ -474,15 +466,12 @@ export class SurveyLogicItem {
     this.getQuestionNamesFromActions(res);
     return res;
   }
-  // Nested data (survey-library #12233): the questions the rule reads (getQuestionsByVariableName) and the
-  // questions its actions are on and name. One entry per question: one text ({street}) reads different questions
-  // in different scopes.
+  // By question, not by text: one text ({street}) reads different questions in different scopes.
   public getUsedQuestions(): Array<Question> {
     const res = this.getReadQuestions();
     this.actions.forEach(action => action.addUsedQuestions(res));
     return res;
   }
-  // the questions the expression's variables read (getQuestionsByVariableName), each once
   private getReadQuestions(): Array<Question> {
     const res: Array<Question> = [];
     const names: Array<string> = [];
@@ -522,13 +511,10 @@ export class SurveyLogicItem {
       ? this.owner.getExpressionAsDisplayText(this.expression, this.getExpressionContext())
       : this.expression;
   }
-  // Nested data (survey-library #12233, CS7): the element the rule's variables resolve in, for its display text
-  // and the rule editor's lookups: its actions' owner (getOwnerElement) when all of them resolve alike, else
-  // null, the root, as before. null too in a survey where nothing nests. Owners resolve alike when they share
-  // the record they run in (a template panel's dynamic panel, a detail element's matrix; paths inside the record
-  // are not compared), or have none and share the innermost data path key by key ("a.b" is not a > b; the other
-  // paths are its prefixes). The path, not the value scope: containers on one key (an address split across two
-  // pages) share a path, but each has its own scope object.
+  // The element the rule's variables resolve in: its actions' owner when all of them resolve alike, else null
+  // (the root). Owners resolve alike when they share a record, or have none and share the innermost data path.
+  // Compared by path, not by value scope: two containers on one key (an address split across two pages) share a
+  // path, not a scope.
   public getExpressionContext(): Base {
     if (this.actions.length === 0 || !isScopedNamesSurvey(this.survey)) return null;
     const owners = this.actions.map(action => action.getOwnerElement());
@@ -554,11 +540,9 @@ export class SurveyLogicItem {
     const res = this.isSuitableByQuestionFilter(filteredName);
     return !logicTypeName ? res : res && this.isSuitableByLogicTypeInActions(logicTypeName);
   }
-  // Nested data (survey-library #12233, CS6): in a survey where a container nests, the filter is a question's
-  // path of names (the Logic tab's entry ids). A rule is suitable when a variable of it, resolved in the rule's
-  // scopes, reads that question, or when an action is on it or names it. A filter that finds no question (a
-  // host's bare name of an inner question) is matched below, as is every filter where nothing nests: master's text match
-  // differs from the resolution there ({val1} for q1, a setToName "q1.x", 'q1.x' in a function; a test pins it).
+  // Where a container nests, the filter is a question's path of names (the filter's entry ids); any other filter
+  // goes to isSuitableInExpression. Where nothing nests, master's text match stays: it differs from the resolution
+  // ({val1} for q1, a setToName "q1.x").
   private isSuitableByQuestionFilter(filteredName: string): boolean {
     const question = isScopedNamesSurvey(this.survey) ? <Question>this.survey.getQuestionByName(filteredName) : null;
     if (!question) return this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName);
@@ -567,11 +551,9 @@ export class SurveyLogicItem {
   private isQuestionReadInExpression(question: Question): boolean {
     return !!this.expression && this.getReadQuestions().indexOf(question) > -1;
   }
-  // Nested data (survey-library #12233): the questions a variable of the rule reads, one per scope of its
-  // actions (one rule groups actions with one expression text, and {street} reads a different question in each
-  // scope). When no scope resolves it, a top-level question by its name, as master lists and matches {q1} for a
-  // question that stores under another value name. An inner question is never found by name: a path of names
-  // ({panel1.street}) is no variable.
+  // One question per scope of the rule's actions: actions under one text can read different questions ({street}).
+  // When no scope resolves the text, a top-level question by its name, as master matches {q1} for a question with
+  // another value name. Never an inner question by name: a path of names ({panel1.street}) is no variable.
   private getQuestionsByVariableName(name: string): Array<Question> {
     const res: Array<Question> = [];
     this.getExpressionOwners().forEach(owner => {
@@ -584,9 +566,7 @@ export class SurveyLogicItem {
     }
     return res;
   }
-  // Nested data (survey-library #12233): in a nesting mode a name is unique only inside its scope, and a bare
-  // name read at the root finds no inner question. A name that only inner questions have is matched by what the
-  // rule's variables resolve to ({address.street}, or {street} inside the container), not by the text: a root
+  // A name that only inner questions have is matched by what the rule's variables read, not by the text: a root
   // rule's {street} reads no inner street. Any other name keeps the text match.
   private isSuitableInExpression(filteredName: string): boolean {
     const innerQuestions = this.getInnerQuestionsByName(filteredName);
@@ -598,29 +578,23 @@ export class SurveyLogicItem {
     if (!this.expression || !this.survey) return [];
     return <Array<Question>>this.survey.getAllQuestions().filter(q => q.name === name && isInnerQuestion(q));
   }
-  // Only the question the first action that resolves the variable reads counts (getQuestionByVariableName), not
-  // every action's, as in getReadQuestions: a test pins it.
   private isInnerQuestionInExpression(questions: Array<Question>): boolean {
     if (questions.length === 0) return false;
     const names: Array<string> = [];
     this.getQuestionNamesFromExpression(names);
     return names.some(name => questions.indexOf(this.getQuestionByVariableName(name)) > -1);
   }
-  // The question a variable of this rule names: the first of getQuestionsByVariableName. Its callers cannot tell
-  // the top-level fallback by name: SurveyLogic.getUsedQuestions looks the name up first, and
-  // isInnerQuestionInExpression compares with inner questions only.
+  // The top-level fallback by name changes nothing for the callers: each looks the name up first or compares with
+  // inner questions only.
   public getQuestionByVariableName(name: string): Question {
     return this.getQuestionsByVariableName(name)[0] || null;
   }
   private getExpressionOwners(): Array<Base> {
     return this.actions.length > 0 ? this.actions.map(action => action.getOwnerElement()) : [null];
   }
-  // Nested data (survey-library #12233): getRenames gives, for an action's element (owner:
-  // SurveyLogicAction.getOwnerElement), the variables a key change rewrites as that element
-  // reads them (DataKeyRename in utils/data-path.ts); the action's question names (a trigger's setToName) follow.
-  // Returns true when the rule's elements got different texts (they are resolved in different scopes), so
-  // the rule no longer has one expression and the logic has to be built again.
-  // key: the old key; a rule whose texts do not contain it is skipped without resolving its scopes
+  // getRenames gives the variables a key change rewrites as an action's owner reads them. Returns true when the
+  // actions got different texts (they resolve in different scopes): the rule no longer has one expression, and the
+  // logic is built again. A rule whose texts do not contain key is skipped without resolving its scopes.
   public renameVariables(getRenames: (owner: Base, element: Base) => Array<IVariableRename>, key?: string): boolean {
     if (!this.hasKeyText(key)) return false;
     const texts = this.actions.map(action => {
@@ -638,8 +612,6 @@ export class SurveyLogicItem {
     this.actions.forEach((action, index) => action.apply(texts[index], true));
     return true;
   }
-  // Nested data: the variables of the expression and the actions' question names, with the element each action
-  // reads them from (getOwnerElement), for a rule whose texts contain key
   public forEachVariable(key: string, callback: (owner: Base, name: string) => void): void {
     if (!this.hasKeyText(key)) return;
     const names: Array<string> = [];

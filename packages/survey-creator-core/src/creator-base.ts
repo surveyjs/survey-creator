@@ -2826,12 +2826,10 @@ export class SurveyCreatorModel extends Base
       }
     }
   }
-  // Nested data (survey-library #12233, scoped names). A variable is a data key, read in its owner's scope and
-  // then in each scope around it, or a data path. So a question's rename rewrites only when its data key changes
-  // (a name change of a question with a valueName rewrites nothing), and only the variables that read the
-  // question before the change (DataKeyRename): {street} that reads another street, or nothing, keeps its text.
-  // A question of a record (a dynamic panel's template) is read as {panel.x} by the record's own rules.
-  // A survey with one scope ("none") keeps master's text rewrite in the other branch.
+  // Nested data (survey-library #12233): a variable reads a data key, so a rename rewrites only when the data key
+  // changes (a name change of a question with a valueName rewrites nothing), and only the variables that read the
+  // question before the change: {street} that read another street keeps its text. A survey where nothing nests
+  // keeps master's text rewrite.
   private updateConditionsOnQuestionKeyChanged(question: Question, propertyName: string, oldValue: any): void {
     let oldKey: string;
     if (propertyName === "name" && !question.valueName) {
@@ -2852,18 +2850,17 @@ export class SurveyCreatorModel extends Base
     }];
     this.renameLogicVariables((owner, element) => getExpressionRecord(this.survey, element) === record ? renames : [], oldKey);
   }
-  // A panel's or a page's data key changed (its valueName, or its name in a by-name dataNesting mode): every
-  // path through the key follows. A key that stays the same (a panel with its own valueName renamed), or a
-  // container that starts or stops nesting, rewrites nothing.
+  // A container's key is its valueName, or its name in a by-name dataNesting mode. A key that stays the same (a
+  // panel with a valueName renamed), or a container that starts or stops nesting, rewrites nothing.
   private updateConditionsOnContainerKeyChanged(panel: PanelModelBase, propertyName: string, oldValue: any): void {
     const oldKey = propertyName === "name" ? panel.getDataNestingKeyFor(panel.valueName, oldValue) : panel.getDataNestingKeyFor(oldValue, panel.name);
     const newKey = panel.getDataNestingKeyFor(panel.valueName, panel.name);
     if (!panel.isDataNesting) return;
     this.updateLogicOnDataKeyChanged(panel, oldKey, newKey);
   }
-  // The variables that read el, found before its data key changes (survey.onDataKeyChangingCallback, also on undo
-  // and redo); updateLogicOnDataKeyChanged rewrites them after the change. A callback with no change after it
-  // (an exception in the set) leaves them until the next callback.
+  // The variables that read an element are found before its data key changes (also on undo and redo): after the
+  // change they resolve to something else. A callback with no change after it (the set threw) leaves them until the
+  // next callback.
   private dataKeyRename: DataKeyRename;
   private onDataKeyChanging(el: Base, oldKey: string, newKey: string): void {
     this.dataKeyRename = undefined;
@@ -2874,8 +2871,6 @@ export class SurveyCreatorModel extends Base
     this.getSurveyLogicForUpdate().forEachVariable(oldKey, (owner, name) => rename.addVariable(owner, name));
     this.dataKeyRename = rename;
   }
-  // el (a question or a nesting container) holds newKey now; its old key was oldKey. A question of a record goes
-  // to updateLogicOnRecordKeyChanged.
   private updateLogicOnDataKeyChanged(el: Question | PanelModelBase, oldKey: string, newKey: string): void {
     const rename = this.dataKeyRename;
     this.dataKeyRename = undefined;
@@ -2885,9 +2880,8 @@ export class SurveyCreatorModel extends Base
       this.updateLogicOnRecordKeyChanged(<Question>el, record, oldKey);
     } else if (!!rename && rename.element === el && rename.oldKey === String(oldKey) && rename.newKey === String(newKey)) {
       // the callback's keys are strings; a numeric valueName from JSON comes here as a number
-      // A question's name and valueName setters update survey-core's key index after this notification: done here
-      // first, so that the lookups read the new key (the second call changes nothing). The line goes when
-      // survey-core updates the index before it notifies.
+      // survey-core updates its key index after this notification: done here first, so that the lookups read the
+      // new key (its own call then changes nothing). Remove it when survey-core updates the index before it notifies.
       if (el.isQuestion) {
         this.survey.questionRenamed(<Question>el, oldKey, oldKey);
       }

@@ -94,9 +94,8 @@ export class TabLogicPlugin implements ICreatorPlugin {
     this.filterActionTypeAction.visible = false;
     this.fastEntryAction && (this.fastEntryAction.visible = false);
   }
-  // Nested data (survey-library #12233, CS6): an entry's id is the question's path of names (its name in "none"
-  // and in the survey's own scope), so that two questions with one name in two scopes have two entries. Without
-  // a title the entry shows the path too.
+  // Nested data (survey-library #12233): the id is the question's path of names, so that two questions with one
+  // name in two scopes get two entries. Without a title the entry shows the path too.
   private createQuestionFilterItem(question: Question): { id: string, title: string } {
     const path = this.creator.survey.getElementNamePath(question);
     const name = SurveyHelper.getObjectName(question, this.creator.useElementTitles);

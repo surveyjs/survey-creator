@@ -1867,10 +1867,9 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
       }
     }
   }
-  // Nested data (survey-library #12233): a panel or page without valueName that nests under its name shows the
-  // name as its placeholder (not inside a record's template). It follows a rename, a move (a parent's move is not
-  // followed) and a dataNesting change through callbacks, not a renderedPlaceholder getter: nothing would notify the
-  // rendered editor (the keys replace the callbacks of a previous editor). The data never moves (D8): no warning.
+  // Nested data (survey-library #12233): a container that nests under its name (not in a record's template) shows
+  // the name as its valueName placeholder. Callbacks, not a renderedPlaceholder getter: nothing would notify the
+  // rendered editor. Its own move is followed, not a move of its parent. No warning on a rename: the data never moves.
   private setupDataKeyPlaceholder(container: PanelModelBase, question: QuestionTextBase): void {
     const staticPlaceholder = question.placeholder;
     const key = "__pgDataKeyPlaceholder";

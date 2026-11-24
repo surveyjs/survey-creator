@@ -253,7 +253,7 @@ export class SurveyLogicUI extends SurveyLogic {
       const context = <Question>item.getContext();
       res = { expressionEditor: this.createExpressionPropertyEditor(), itemEditor: new LogicItemEditor(item, this.options) };
       this.updateEditModeLogicItem(res);
-      // the rule's variables resolve in its scope (survey-library #12233, CS7): set before the context and the text
+      // set before the context and the text: the editor reads them in the rule's scope
       res.expressionEditor.scopeElement = item.getExpressionContext();
       res.expressionEditor.context = context;
       res.itemEditor.context = context;
@@ -329,9 +329,9 @@ export class SurveyLogicUI extends SurveyLogic {
     item.isNew = false;
     this.updateExpressionEditorScope(item, itemUI);
   }
-  // The editor stays cached after a save, and a saved rule's actions may sit in another scope now (CS7): its
-  // rows are read again in that scope. The text was just applied, so no edit is lost. A row opens on the name
-  // listed for the new scope ({address.kind} as {kind} inside address), and the same save writes it.
+  // The editor stays cached after a save, and the saved rule may resolve in another scope now: its rows are read
+  // again there. The text was just applied, so no edit is lost. A row that opens on the new scope's name ({kind}
+  // for {address.kind} inside address) is written in the same save.
   private updateExpressionEditorScope(item: SurveyLogicItem, itemUI: ILogicItemUI): void {
     const scope = item.getExpressionContext();
     const editor = itemUI.expressionEditor;

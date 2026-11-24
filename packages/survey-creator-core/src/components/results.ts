@@ -59,9 +59,8 @@ function addCollapsed(survey: Survey.SurveyModel, items: any[] = [], initLvl: nu
   });
 }
 
-// getPlainData gives a question's own item its question; a choice, a matrix row, a record, a comment, a file item and an
-// extra data key carry none, and neither does a cell of a paged matrix's record off its page (never look a sub-row up
-// by name: a matrix row or a cell can share another question's name).
+// getPlainData gives only a question's own item its question (not even a cell of a paged matrix's record off its
+// page). A sub-row is never looked up by name: a matrix row or a cell can share another question's name.
 function getRowQuestion(survey: Survey.SurveyModel, data: any, isTopLevel: boolean): Survey.Question {
   if (typeof data.getQuestion === "function") return data.getQuestion();
   // A top-level extra data key can be stored by a question getAllQuestions() does not list (one in a choice's panel):

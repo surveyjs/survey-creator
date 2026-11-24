@@ -17,10 +17,9 @@ export function isInnerQuestion(question: Base): boolean {
 function getVariableContext(el: Base): Base {
   return typeof (<any>el)?.getValueGetterContext === "function" ? el : undefined;
 }
-// The name the condition editor lists a question by: the variable survey-core names it by from context, the
-// rule's owner (SurveyModel.getQuestionVariableName). An inner question's shortest text that reaches it ({street}
-// inside address, {address.town} for city with valueName "town" elsewhere); without a context its data path from
-// the root; its name for one no root variable reaches (inside a container of a record); else its value name.
+// The name the condition editor lists a question by from context, the rule's owner: the shortest text that reaches
+// it ({street} inside address, {address.street} elsewhere; its name inside a container of a record, which no root
+// path reaches).
 export function getConditionQuestionKey(question: Question, context?: Base): string {
   if (!question) return "";
   const survey = <SurveyModel><any>question.survey;
@@ -44,34 +43,30 @@ export interface IInnerQuestionInfo {
   // the part of the variable after the question: "" when the variable is the question's value itself
   rest: string;
 }
-// The inner question an expression variable names, as survey-core resolves it from el without values
-// (getQuestionByVariable): a data path from the root ({address.street}) or the shorter text from inside a
-// container ({street} inside address). A sub-entry gives its owner and the rest ({address.m.r1}: m and ".r1").
-// Top-level questions, comment keys and postfixed names are not returned: the callers keep their own lookups.
+// A sub-entry gives its owner and the rest ({address.m.r1}: m and ".r1"). Top-level questions, comment keys and
+// postfixed names give null: the callers keep their own lookups for them.
 export function findInnerQuestion(survey: SurveyModel, name: string, el?: Base): IInnerQuestionInfo {
   if (!survey || !name) return null;
   const info = survey.getQuestionByVariable(name, getVariableContext(el));
   if (!info || info.isComment || info.isUnwrapped || !isInnerQuestion(info.question)) return null;
   return { question: info.question, rest: info.rest };
 }
-// The question whose whole value an expression variable of el names: an inner question as findInnerQuestion
-// resolves it (first, so a key inside a container reads its own question, as at runtime), else a top-level
-// question by its value name. null for a sub-entry ({address.m.r1}) and for any other name.
+// The inner question first, so that a key inside a container reads its own question, as at runtime. null for a
+// sub-entry ({address.m.r1}).
 export function getQuestionByVariableName(survey: SurveyModel, name: string, el?: Base): Question {
   if (!survey || !name) return null;
   const info = findInnerQuestion(survey, name, el);
   if (!!info) return !info.rest ? info.question : null;
   return <Question>survey.getQuestionByValueName(name) || null;
 }
-// The record (a dynamic panel, a matrix) whose rows an element's expressions run in: a template's element, a
-// detail panel's, a column. null for any other element.
+// The record (a dynamic panel, a matrix) whose rows an element's expressions run in, else null
 export function getExpressionRecord(survey: SurveyModel, el: Base): Base {
   if (!survey || !el) return null;
   const first = survey.getExpressionScopePaths(el)[0];
   return !!first && !!first.record ? first.record : null;
 }
-// Whether a bare name resolves in scopes (survey-library #12233, O3): a container of the survey holds data now.
-// In "none", and while no container nests, the survey has one scope, and a rename rewrites the text as on master.
+// In "none", and while no container nests, the survey has one scope: the Creator matches and rewrites texts as on
+// master.
 export function isScopedNamesSurvey(survey: SurveyModel): boolean {
   return !!survey && survey.hasDataNesting();
 }
@@ -95,11 +90,10 @@ interface IDataKeyMatch {
   // a postfix follows the question's key ({address.street-comment})
   isPostfix: boolean;
 }
-// Nested data (survey-library #12233, scoped names, CS1): the data key of element (a question's value name, a
-// container's key) changes from oldKey to newKey. Before the change (survey.onDataKeyChangingCallback) survey-core
-// tells which variables read the element; after it, each of them is rewritten to a text that reads the element
-// again: the same text with the new key, or, when an inner scope now holds that key, the name that reaches the
-// question from the owner. A variable that read another element, or nothing, keeps its text.
+// The data key of element (a question's value name, a container's key) changes from oldKey to newKey. Before the
+// change survey-core tells which variables read the element; after it, each is rewritten to a text that reads the
+// element again: the same text with the new key, or, when an inner scope now holds that key, the name that
+// reaches the question from the owner. A variable that read another element, or nothing, keeps its text.
 export class DataKeyRename {
   private matches: Array<IDataKeyMatch> = [];
   private path: Array<string>;

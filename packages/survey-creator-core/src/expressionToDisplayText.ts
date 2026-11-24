@@ -12,8 +12,8 @@ export class ExpressionToDisplayText {
     operatorToString: (operatorName: string): string => this.getDisplayOperator(operatorName),
     skipRootBrackets: true
   };
-  // context: the element the expression belongs to (nested data, survey-library #12233). Its variables resolve
-  // in its scopes, as at runtime ({street} inside address); without it, from the root.
+  // context: the element the expression belongs to. Its variables resolve in its scopes, as at runtime ({street}
+  // inside address); without it, from the root.
   constructor(public survey: Survey.SurveyModel, private options: any = null, private context?: Survey.Base) {
   }
   public toDisplayText(expression: string): string {

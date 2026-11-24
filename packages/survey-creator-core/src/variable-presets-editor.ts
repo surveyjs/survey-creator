@@ -181,7 +181,7 @@ export class VariablePresetsEditor {
     const dataNesting = this.getDataNesting(model);
     model.dispose();
     return {
-      // Explicitly: a host may change the serializer default (decisions N2). The dialog's own
+      // Explicitly: a host may change the serializer default. The dialog's own
       // elements do not nest: they are on pages, and the list is a matrix.
       dataNesting: dataNesting,
       pages: [
@@ -215,12 +215,12 @@ export class VariablePresetsEditor {
       ]
     };
   }
-  // The form is built from the variable structure, not copied from the definition's JSON: each
-  // variable's question, and a panel per object variable named by its key, so that in "panel" mode
-  // the form stores the variables' shape ({ users: { tier } }). A definition's rule between two
-  // variables resolves as in the definition, since the form's scopes are the data paths. The
-  // author's layout is not kept: a panel or page that does not nest is not in the structure, and
-  // its conditions are gone with it. An object variable's panel keeps its container's.
+  // Built from the variable structure, not copied from the definition's JSON: a panel per object
+  // variable, named by its key, so that in "panel" mode the form stores the variables' shape
+  // ({ users: { tier } }) and a rule between two variables resolves as in the definition. A panel
+  // or page that does not nest is not in the structure: its layout and conditions are lost. An
+  // object variable's panel keeps its container's title, description, visible, readOnly and
+  // isRequired, and their conditions.
   private getDefinitionElements(model: SurveyVariablePresets): Array<any> {
     const root: Array<any> = [];
     const panels: { [path: string]: any } = Object.create(null);
@@ -357,9 +357,8 @@ export class VariablePresetsEditor {
     Object.keys(data).forEach(key => {
       if (key === this.listKey || key === this.nameKey || key === this.descriptionKey) return;
       // The keys are the variables' own keys: a question keeps its valueName, a panel is named by
-      // its key. survey.data
-      // already omits empty questions, so a preset that leaves an optional variable blank simply
-      // has no key and the host's setVariable is never called for it.
+      // its key. survey.data already omits empty questions, so a preset that leaves an optional
+      // variable blank simply has no key and the host's setVariable is never called for it.
       variables[key] = data[key];
     });
     preset.name = data[this.nameKey];
