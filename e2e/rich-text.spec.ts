@@ -141,7 +141,8 @@ test.describe(title, () => {
     await setJSON(page, json);
     await page.evaluate(() => {
       const creator = (window as any).creator;
-      creator.selectElement(creator.survey.getQuestionByName("q"));
+      // Focus stays in the grid: focusElement would move it to the design surface after a delay.
+      creator.selectElement(creator.survey.getQuestionByName("q"), undefined, false);
     });
     await revealCategory(page);
 
@@ -160,7 +161,7 @@ test.describe(title, () => {
     });
     expect(choiceColumns).toEqual({ text: "richtext", breaks: false, value: "text" });
 
-    await page.evaluate(() => (window as any).creator.selectElement((window as any).creator.survey));
+    await page.evaluate(() => (window as any).creator.selectElement((window as any).creator.survey, undefined, false));
     await revealCategory(page);
     const surveyGridTitle = page.locator(".svc-side-bar [data-name='title']");
     await expect(surveyGridTitle.locator(".sd-rich-text")).toHaveCount(0);
@@ -170,6 +171,9 @@ test.describe(title, () => {
 
     const area = surveyGridDescription.locator(".sd-rich-text__area");
     await area.click();
+    // The grid re-renders on the selection change and only then attaches the editor to this
+    // contenteditable. Typing before that goes to a stale element and the edit is lost.
+    await expect(area).toHaveText("Survey description");
     await page.keyboard.press("Control+A");
     await page.keyboard.type("From the grid");
     await expect(area).toContainText("From the grid");
