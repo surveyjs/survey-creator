@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from "@angular/core";
+import { Component, NgZone, ViewEncapsulation } from "@angular/core";
 import { registerCreatorTheme, SurveyCreatorModel } from "survey-creator-core";
 import { TestDefaultComponent } from "./default.component";
 import SurveyTheme from "survey-core/themes";
@@ -11,8 +11,8 @@ registerCreatorTheme(SurveyTheme);
   encapsulation: ViewEncapsulation.None
 })
 export class CreatorThemesComponent extends TestDefaultComponent {
-  constructor() {
-    super();
+  constructor(zone: NgZone) {
+    super(zone);
   }
   protected override createCreator(): void {
     this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
