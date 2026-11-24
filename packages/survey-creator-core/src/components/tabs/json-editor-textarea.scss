@@ -112,6 +112,7 @@ svc-tab-json-editor-textarea {
 .svc-json-error__actions {
   pointer-events: all;
   flex: 0 0 auto;
+  --sd-action-bar-gap: var(--sjs2-spacing-x050);
 }
 
 .svc-json-error__fix-button {

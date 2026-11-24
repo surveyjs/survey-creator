@@ -186,7 +186,7 @@ export abstract class JsonEditorBaseModel extends Base {
     }
     const container = new ActionContainer();
     container.containerCss = "svc-json-error__actions";
-    container.setActionsAppearance({ style: "neutral", size: "xx-small", mode: "tertiary" });
+    container.setActionsAppearance({ style: "neutral", size: "xx-small", mode: "tertiary-muted-surface" });
     container.setItems(items);
     return container;
   }

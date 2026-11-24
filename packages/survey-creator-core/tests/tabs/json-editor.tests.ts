@@ -46,6 +46,7 @@ test("JsonEditor error item copies the full error text", () => {
   expect(copyAction.iconName).toBe("icon-copy-16x16");
   expect(copyAction.iconSize).toBe(16);
   expect(copyAction.predefinedAppearance.size).toBe("xx-small");
+  expect(copyAction.predefinedAppearance.mode).toBe("tertiary-muted-surface");
   expect(copyAction.locTooltipName).toBe("ed.surveyJsonCopyButton");
   expect(action.getTooltip()).toBeFalsy();
   expect(action.title.indexOf("...")).toBeGreaterThan(-1);
