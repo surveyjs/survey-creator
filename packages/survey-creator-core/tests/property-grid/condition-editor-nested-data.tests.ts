@@ -557,6 +557,46 @@ describe("logic tab: inner questions (nested data, survey-library #12233)", () =
     expect(getItemText(logic, "{street} = 'x'"), "inner and the root q1").toBe("{street} == 'x'");
     expect(getItemText(logic, "{street} = 'y'"), "inner2 and inner3, both inside address").toBe("{Street title} == y");
   });
+  test("a rule's shared owner: two child panels of a container and two containers on one key share it; two nesting containers and a container and the root do not", () => {
+    const survey = new SurveyModel({ dataNesting: "auto", pages: [
+      { name: "page1", elements: [
+        addressPanel({ elements: [
+          { type: "text", name: "street" },
+          { type: "panel", name: "childA", elements: [{ type: "text", name: "a1", visibleIf: "{street} = 'x'" }] },
+          { type: "panel", name: "childB", visibleIf: "{street} = 'x'", elements: [{ type: "text", name: "b1", visibleIf: "{street} = 'x'" }] },
+          { type: "text", name: "s2", visibleIf: "{street} = 'y'" },
+          { type: "panel", name: "geo", valueName: "geo", elements: [{ type: "text", name: "lat", visibleIf: "{street} = 'y'" }] },
+          { type: "text", name: "kind", visibleIf: "{q1} = 1" }
+        ] }),
+        { type: "text", name: "q1", visibleIf: "{street} = 'z'" },
+        { type: "panel", name: "other", valueName: "other", elements: [{ type: "text", name: "o1", visibleIf: "{street} = 'z'" }] }
+      ] },
+      { name: "page2", elements: [
+        { type: "panel", name: "panel2", valueName: "address", elements: [{ type: "text", name: "city", visibleIf: "{q1} = 1" }] }
+      ] }
+    ] });
+    const logic = new SurveyLogic(survey);
+    const getContext = (expression: string): string => {
+      const item = logic.items.filter(item => item.expression === expression)[0];
+      const context: any = item.getExpressionContext();
+      return item.actions.length + ": " + (!!context ? context.name : "null");
+    };
+    expect(getContext("{street} = 'x'"), "a1 in childA, childB's own expression and b1 in childB").toBe("3: a1");
+    expect(getContext("{street} = 'y'"), "s2 in address, lat in address.geo").toBe("2: null");
+    expect(getContext("{street} = 'z'"), "the root q1, o1 in other").toBe("2: null");
+    expect(getContext("{q1} = 1"), "address split across two pages: kind on page1, city on page2").toBe("2: kind");
+  });
+  test("a rule's shared owner: a dotted key is not the path it spells (\"a.b\" and a > b)", () => {
+    const survey = new SurveyModel({ dataNesting: "auto", elements: [
+      { type: "text", name: "q1" },
+      { type: "panel", name: "p1", valueName: "a.b", elements: [{ type: "text", name: "x1", visibleIf: "{q1} = 5" }] },
+      { type: "panel", name: "pa", valueName: "a", elements: [
+        { type: "panel", name: "pb", valueName: "b", elements: [{ type: "text", name: "x2", visibleIf: "{q1} = 5" }] }] }
+    ] });
+    const item = new SurveyLogic(survey).items[0];
+    expect(item.actions.length).toBe(2);
+    expect(item.getExpressionContext()).toBe(null);
+  });
   test("a choice's visibleIf and a validator inside address: an in-scope {street} shows the title (their question's scope)", () => {
     const survey = new SurveyModel({ dataNesting: "auto", elements: [
       addressPanel({ elements: [

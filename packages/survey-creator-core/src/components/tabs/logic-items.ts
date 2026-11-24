@@ -18,8 +18,7 @@ import { updateLogicExpression } from "./logic-expression";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 import { wrapTextByCurlyBraces } from "../../utils/creator-utils";
 import { SurveyHelper } from "../../survey-helper";
-import { getConditionQuestionKey, getExpressionRecord, getExpressionScopePaths, getQuestionByVariableName, isInnerQuestion,
-  isScopedNamesSurvey, IVariableRename } from "../../utils/data-path";
+import { getConditionQuestionKey, getQuestionByVariableName, isInnerQuestion, isScopedNamesSurvey, IVariableRename } from "../../utils/data-path";
 
 // What follows a renamed name in a variable: its end, a path into it ("." or "["), or "-total." ("{matrix-total.column}"
 // is a column total of the matrix "matrix")
@@ -524,18 +523,19 @@ export class SurveyLogicItem {
       : this.expression;
   }
   // Nested data (survey-library #12233, CS7): the element the rule's variables resolve in, for its display text
-  // and the rule editor's lookups: its actions' owner (getOwnerElement) when all of them resolve alike (the
-  // same scopes and record), else null, the root, as before. null too in a survey where nothing nests.
+  // and the rule editor's lookups: its actions' owner (getOwnerElement) when all of them resolve alike, else
+  // null, the root, as before. null too in a survey where nothing nests. Owners resolve alike when they share
+  // the record they run in (a template panel's dynamic panel, a detail element's matrix; paths inside the record
+  // are not compared), or have none and share the innermost data path key by key ("a.b" is not a > b; the other
+  // paths are its prefixes). The path, not the value scope: containers on one key (an address split across two
+  // pages) share a path, but each has its own scope object.
   public getExpressionContext(): Base {
     if (this.actions.length === 0 || !isScopedNamesSurvey(this.survey)) return null;
     const owners = this.actions.map(action => action.getOwnerElement());
-    const getScopes = (owner: Base): string => JSON.stringify(getExpressionScopePaths(this.survey, owner));
-    const scopes = getScopes(owners[0]);
-    const record = getExpressionRecord(this.survey, owners[0]);
-    for (let i = 1; i < owners.length; i++) {
-      if (getExpressionRecord(this.survey, owners[i]) !== record || getScopes(owners[i]) !== scopes) return null;
-    }
-    return owners[0];
+    const [first, ...rest] = owners.map(owner => this.survey.getExpressionScopePaths(owner)[0]);
+    const isAlike = (s: typeof first): boolean => s.record === first.record &&
+      (!!s.record || s.path.length === first.path.length && s.path.every((key, i) => key === first.path[i]));
+    return rest.every(isAlike) ? owners[0] : null;
   }
   public get editText(): string {
     return editorLocalization.getString("pe.edit");

@@ -63,11 +63,6 @@ export function getQuestionByVariableName(survey: SurveyModel, name: string, el?
   if (!!info) return !info.rest ? info.question : null;
   return <Question>survey.getQuestionByValueName(name) || null;
 }
-// The data paths an expression of el resolves names in, innermost first, ending with the root ([]). The paths
-// relative to a record (a template element, a column) are left out: a rename rewrites paths from the survey data.
-export function getExpressionScopePaths(survey: SurveyModel, el: Base): Array<Array<string>> {
-  return survey.getExpressionScopePaths(el).filter(item => !item.record).map(item => item.path);
-}
 // The record (a dynamic panel, a matrix) whose rows an element's expressions run in: a template's element, a
 // detail panel's, a column. null for any other element.
 export function getExpressionRecord(survey: SurveyModel, el: Base): Base {
