@@ -822,10 +822,6 @@ export var spanishTranslation = {
       expression: "Expresión"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Buscar en",
-      // [Auto-translated] "Presets"
-      presets: "Presets",
       // [Auto-translated] "Default preset"
       defaultPreset: "Ajuste predeterminado",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var spanishTranslation = {
       // [Auto-translated] "Preset title"
       title: "Título predefinido",
       // [Auto-translated] "Filter expression"
-      expression: "Expresión del filtro",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Permitir edición",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Permitir la eliminación"
+      expression: "Expresión del filtro"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var spanishTranslation = {
       sliderSettings: "Configuración del control deslizante",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Configuración del filtro",
-      // [Auto-translated] "Presets"
-      presets: "Presets",
       // "Choices from a Web Service"
       choicesByUrl: "Opciones de la web",
       // "Numbering"

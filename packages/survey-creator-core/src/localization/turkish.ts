@@ -822,10 +822,6 @@ export var turkishStrings = {
       expression: "İfade"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Ara",
-      // [Auto-translated] "Presets"
-      presets: "Ön ayarlar",
       // [Auto-translated] "Default preset"
       defaultPreset: "Varsayılan ön ayar",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var turkishStrings = {
       // [Auto-translated] "Preset title"
       title: "Ön ayarlı başlık",
       // [Auto-translated] "Filter expression"
-      expression: "Filtre ifadesi",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Düzenlemeye izin ver",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Silmeye izin ver"
+      expression: "Filtre ifadesi"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var turkishStrings = {
       sliderSettings: "Kaydırıcı Ayarları",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Filtre Ayarları",
-      // [Auto-translated] "Presets"
-      presets: "Ön ayarlar",
       // "Choices from a Web Service"
       choicesByUrl: "Webten seçenekler",
       // "Numbering"

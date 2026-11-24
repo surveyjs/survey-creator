@@ -822,10 +822,6 @@ export var grStrings = {
       expression: "Έκφραση"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Αναζήτηση σε",
-      // [Auto-translated] "Presets"
-      presets: "Προεπιλογές",
       // [Auto-translated] "Default preset"
       defaultPreset: "Προεπιλεγμένη προεπιλογή",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var grStrings = {
       // [Auto-translated] "Preset title"
       title: "Τίτλος προεπιλογής",
       // [Auto-translated] "Filter expression"
-      expression: "Έκφραση φίλτρου",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Επιτρέψτε την επεξεργασία",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Επιτρέψτε τη διαγραφή"
+      expression: "Έκφραση φίλτρου"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var grStrings = {
       sliderSettings: "Ρυθμίσεις ρυθμιστικού",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Ρυθμίσεις Φίλτρου",
-      // [Auto-translated] "Presets"
-      presets: "Προεπιλογές",
       // "Choices from a Web Service"
       choicesByUrl: "Επιλογές από Web Service",
       // "Numbering"

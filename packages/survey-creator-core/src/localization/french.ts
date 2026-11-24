@@ -822,10 +822,6 @@ export var frenchTranslation = {
       expression: "Expression"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Rechercher dans",
-      // [Auto-translated] "Presets"
-      presets: "Préréglages",
       // [Auto-translated] "Default preset"
       defaultPreset: "Préréglage par défaut",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var frenchTranslation = {
       // [Auto-translated] "Preset title"
       title: "Titre prédéfini",
       // [Auto-translated] "Filter expression"
-      expression: "Expression du filtre",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Autoriser l’édition",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Autoriser la suppression"
+      expression: "Expression du filtre"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var frenchTranslation = {
       sliderSettings: "Paramètres du curseur",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Paramètres du filtre",
-      // [Auto-translated] "Presets"
-      presets: "Préréglages",
       // "Choices from a Web Service"
       choicesByUrl: "Choix depuis API web",
       // [Auto-translated] "Numbering"

@@ -822,10 +822,6 @@ export var htStrings = {
       expression: "Ekspresyon"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Chèche nan",
-      // [Auto-translated] "Presets"
-      presets: "Predefini",
       // [Auto-translated] "Default preset"
       defaultPreset: "Predefini default",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var htStrings = {
       // [Auto-translated] "Preset title"
       title: "predefini",
       // [Auto-translated] "Filter expression"
-      expression: "Ekspresyon filtè",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Pèmèt edisyon",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Pèmèt efase"
+      expression: "Ekspresyon filtè"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var htStrings = {
       sliderSettings: "Anviwònman koulis",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Anviwònman Filtè",
-      // [Auto-translated] "Presets"
-      presets: "Predefini",
       // "Choices from a Web Service"
       choicesByUrl: "Chwa nan yon sèvis entènèt",
       // "Numbering"

@@ -830,10 +830,6 @@ export var euStrings = {
       // "Show filter chips"
       // "Show the Filters button"
       // "Show search"
-      // "Search in"
-      searchFields: "Bilatu hemen",
-      // "Presets"
-      presets: "Aurrezarpenak",
       // "Default preset"
       defaultPreset: "Aurrezarpen lehenetsia",
       // "Allow multiple presets"
@@ -846,11 +842,7 @@ export var euStrings = {
       // "Preset title"
       title: "Aurrezarpenaren izenburua",
       // "Filter expression"
-      expression: "Iragazki-adierazpena",
-      // "Allow editing"
-      allowEdit: "Baimendu editatzea",
-      // "Allow deleting"
-      allowDelete: "Baimendu ezabatzea"
+      expression: "Iragazki-adierazpena"
     },
     sortcriterion: {
       // "Sort by"
@@ -1813,8 +1805,6 @@ export var euStrings = {
       sliderSettings: "Gradutzailearen ezarpenak",
       // "Filter Settings"
       filterSettings: "Iragazkiaren ezarpenak",
-      // "Presets"
-      presets: "Aurrezarpenak",
       // "Choices from a Web Service"
       choicesByUrl: "Aukerak web-zerbitzu batetik",
       // "Numbering"

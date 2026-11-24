@@ -822,10 +822,6 @@ export var hrStrings = {
       expression: "Izraz"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Pretraži u",
-      // [Auto-translated] "Presets"
-      presets: "Predlošci",
       // [Auto-translated] "Default preset"
       defaultPreset: "Zadani predložak",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var hrStrings = {
       // [Auto-translated] "Preset title"
       title: "Unaprijed postavljeni naslov",
       // [Auto-translated] "Filter expression"
-      expression: "Izraz filtra",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Dopusti uređivanje",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Dopusti brisanje"
+      expression: "Izraz filtra"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var hrStrings = {
       sliderSettings: "Postavke klizača",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Postavke filtera",
-      // [Auto-translated] "Presets"
-      presets: "Predlošci",
       // "Choices from a Web Service"
       choicesByUrl: "Izbori s weba",
       // "Numbering"

@@ -822,10 +822,6 @@ export const thStrings = {
       expression: "นิพจน์"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "ค้นหาใน",
-      // [Auto-translated] "Presets"
-      presets: "การตั้งค่าล่วงหน้า",
       // [Auto-translated] "Default preset"
       defaultPreset: "การตั้งค่าล่วงหน้าเริ่มต้น",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export const thStrings = {
       // [Auto-translated] "Preset title"
       title: "ชื่อที่ตั้งไว้ล่วงหน้า",
       // [Auto-translated] "Filter expression"
-      expression: "นิพจน์กรอง",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "อนุญาตให้แก้ไข",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "อนุญาตให้ลบ"
+      expression: "นิพจน์กรอง"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export const thStrings = {
       sliderSettings: "การตั้งค่าตัวเลื่อน",
       // [Auto-translated] "Filter Settings"
       filterSettings: "การตั้งค่าตัวกรอง",
-      // [Auto-translated] "Presets"
-      presets: "การตั้งค่าล่วงหน้า",
       // "Choices from a Web Service"
       choicesByUrl: "ตัวเลือกจากบริการเว็บ",
       // "Numbering"

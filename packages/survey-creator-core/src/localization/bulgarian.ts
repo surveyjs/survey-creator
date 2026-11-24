@@ -822,10 +822,6 @@ export var bgStrings = {
       expression: "Изразяване"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Търсене в",
-      // [Auto-translated] "Presets"
-      presets: "Предварителни настройки",
       // [Auto-translated] "Default preset"
       defaultPreset: "По подразбиране предварителна настройка",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var bgStrings = {
       // [Auto-translated] "Preset title"
       title: "Заглавие на предварително зададена настройка",
       // [Auto-translated] "Filter expression"
-      expression: "Израз за филтър",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Разреши редактиране",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Разреши изтриването"
+      expression: "Израз за филтър"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var bgStrings = {
       sliderSettings: "Настройки на плъзгача",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Настройки на филтъра",
-      // [Auto-translated] "Presets"
-      presets: "Предварителни настройки",
       // "Choices from a Web Service"
       choicesByUrl: "Избор от услугата RESTful",
       // "Numbering"

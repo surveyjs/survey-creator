@@ -822,10 +822,6 @@ export var persianStrings = {
       expression: "بیان"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "جستجو در",
-      // [Auto-translated] "Presets"
-      presets: "پیش تنظیم ها",
       // [Auto-translated] "Default preset"
       defaultPreset: "پیش تنظیم پیش فرض",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var persianStrings = {
       // [Auto-translated] "Preset title"
       title: "عنوان پیش فرض",
       // [Auto-translated] "Filter expression"
-      expression: "عبارت فیلتر",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "اجازه ویرایش",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "اجازه حذف"
+      expression: "عبارت فیلتر"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var persianStrings = {
       sliderSettings: "تنظیمات نوار لغزنده",
       // [Auto-translated] "Filter Settings"
       filterSettings: "تنظیمات فیلتر",
-      // [Auto-translated] "Presets"
-      presets: "پیش تنظیم ها",
       // "Choices from a Web Service"
       choicesByUrl: "انتخاب ها از وب",
       // "Numbering"

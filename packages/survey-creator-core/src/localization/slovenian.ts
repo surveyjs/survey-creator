@@ -822,10 +822,6 @@ export var slStrings = {
       expression: "Izraz"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Iskanje v",
-      // [Auto-translated] "Presets"
-      presets: "Prednastavitve",
       // [Auto-translated] "Default preset"
       defaultPreset: "Privzeta prednastavitev",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var slStrings = {
       // [Auto-translated] "Preset title"
       title: "Prednastavljen naslov",
       // [Auto-translated] "Filter expression"
-      expression: "Izraz filtra",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Dovoli urejanje",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Dovoli brisanje"
+      expression: "Izraz filtra"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var slStrings = {
       sliderSettings: "Nastavitve drsnika",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Nastavitve filtra",
-      // [Auto-translated] "Presets"
-      presets: "Prednastavitve",
       // "Choices from a Web Service"
       choicesByUrl: "Možnosti iz spletne storitve",
       // "Numbering"

@@ -822,10 +822,6 @@ export var simplifiedChineseTranslation = {
       expression: "表达"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "搜索",
-      // [Auto-translated] "Presets"
-      presets: "预设",
       // [Auto-translated] "Default preset"
       defaultPreset: "默认预设",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Preset title"
       title: "预设标题",
       // [Auto-translated] "Filter expression"
-      expression: "过滤器表达式",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "允许编辑",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "允许删除"
+      expression: "过滤器表达式"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var simplifiedChineseTranslation = {
       sliderSettings: "滑块设置",
       // [Auto-translated] "Filter Settings"
       filterSettings: "筛选设置",
-      // [Auto-translated] "Presets"
-      presets: "预设",
       // "Choices from a Web Service"
       choicesByUrl: "通过 URL 导入选项",
       // [Auto-translated] "Numbering"

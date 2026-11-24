@@ -822,10 +822,6 @@ export var msStrings = {
       expression: "Ungkapan"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Cari dalam",
-      // [Auto-translated] "Presets"
-      presets: "Pratetap",
       // [Auto-translated] "Default preset"
       defaultPreset: "Pratetap lalai",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var msStrings = {
       // [Auto-translated] "Preset title"
       title: "Tajuk pratetap",
       // [Auto-translated] "Filter expression"
-      expression: "Ekspresi penapis",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Benarkan penyuntingan",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Benarkan pemadaman"
+      expression: "Ekspresi penapis"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var msStrings = {
       sliderSettings: "Tetapan Gelangsar",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Tetapan Penapis",
-      // [Auto-translated] "Presets"
-      presets: "Pratetap",
       // "Choices from a Web Service"
       choicesByUrl: "Pilihan daripada Web",
       // "Numbering"

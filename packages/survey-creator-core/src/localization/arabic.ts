@@ -822,10 +822,6 @@ export var arStrings = {
       expression: "تعبير"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "ابحث في",
-      // [Auto-translated] "Presets"
-      presets: "الإعدادات المسبقة",
       // [Auto-translated] "Default preset"
       defaultPreset: "الإعداد المسبق الافتراضي",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var arStrings = {
       // [Auto-translated] "Preset title"
       title: "عنوان الإعداد المسبق",
       // [Auto-translated] "Filter expression"
-      expression: "تعبير المرشح",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "السماح بالتحرير",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "السماح بالحذف"
+      expression: "تعبير المرشح"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var arStrings = {
       sliderSettings: "إعدادات شريط التمرير",
       // [Auto-translated] "Filter Settings"
       filterSettings: "إعدادات الفلتر",
-      // [Auto-translated] "Presets"
-      presets: "الإعدادات المسبقة",
       // "Choices from a Web Service"
       choicesByUrl: "خيارات من الإنترنت",
       // "Numbering"

@@ -822,10 +822,6 @@ export var czStrings = {
       expression: "Výraz"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Hledat v",
-      // [Auto-translated] "Presets"
-      presets: "Přednastavení",
       // [Auto-translated] "Default preset"
       defaultPreset: "Výchozí přednastavení",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var czStrings = {
       // [Auto-translated] "Preset title"
       title: "Přednastavený název",
       // [Auto-translated] "Filter expression"
-      expression: "Výraz filtru",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Povolit úpravy",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Povolit mazání"
+      expression: "Výraz filtru"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var czStrings = {
       sliderSettings: "Nastavení posuvníku",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Nastavení filtru",
-      // [Auto-translated] "Presets"
-      presets: "Přednastavení",
       // "Choices from a Web Service"
       choicesByUrl: "Volby z webu",
       // "Numbering"

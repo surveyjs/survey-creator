@@ -823,10 +823,6 @@ export var traditionalChineseTranslation = {
       expression: "表達"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "搜尋",
-      // [Auto-translated] "Presets"
-      presets: "預設",
       // [Auto-translated] "Default preset"
       defaultPreset: "預設預設",
       // [Auto-translated] "Allow respondents to add presets"
@@ -838,11 +834,7 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Preset title"
       title: "預設標題",
       // [Auto-translated] "Filter expression"
-      expression: "篩選表達式",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "允許編輯",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "允許刪除"
+      expression: "篩選表達式"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1805,8 +1797,6 @@ export var traditionalChineseTranslation = {
       sliderSettings: "滑塊設置",
       // [Auto-translated] "Filter Settings"
       filterSettings: "篩選條件設定",
-      // [Auto-translated] "Presets"
-      presets: "預設",
       // "Choices from a Web Service"
       choicesByUrl: "通過 URL 導入選項",
       // [Auto-translated] "Numbering"

@@ -199,15 +199,27 @@ describe("Property grid: the Filter Control layout", () => {
   const panelNames = (grid: PropertyGridModelTester): Array<string> => grid.survey.pages[0].elements.map(el => el.name);
   const elementNames = (grid: PropertyGridModelTester, tab: string): Array<string> =>
     (<PanelModel>grid.survey.getPanelByName(tab)).elements.map(el => el.name);
-  test("filter tabs: General with the target question, then Filter Settings, then Presets", () => {
+  test("filter tabs: General without the target question, then Filter Settings, then Filter Presets", () => {
     const survey = new SurveyModel({ elements: [{ type: "filter", name: "f" }] });
     const grid = new PropertyGridModelTester(survey.getQuestionByName("f"));
-    expect(panelNames(grid).slice(0, 3), "#1").toEqual(["general", "filterSettings", "presets"]);
-    expect(elementNames(grid, "general").indexOf("targetQuestion") > -1, "#2").toBe(true);
-    expect(elementNames(grid, "filterSettings"), "#3").toEqual(["fields", "showQuickFilters", "showAllFiltersButton", "showSearchBar", "searchFields", "searchPlaceholder"]);
-    expect(elementNames(grid, "presets"), "#4").toEqual(["presets", "defaultPreset", "showPresets", "allowAddPresets", "allowEditPresets", "allowDeletePresets"]);
+    expect(panelNames(grid).slice(0, 3), "#1").toEqual(["general", "filterSettings", "filterPresets"]);
+    const visibleGeneral = (<PanelModel>grid.survey.getPanelByName("general")).elements.filter(el => el.isVisible).map(el => el.name);
+    expect(visibleGeneral, "#2").toEqual(["name", "title", "visible", "readOnly"]);
+    expect(elementNames(grid, "filterSettings"), "#3").toEqual(["targetQuestion", "fields", "showQuickFilters", "showSearchBar", "searchFields", "searchPlaceholder", "showAllFiltersButton"]);
+    expect(elementNames(grid, "filterPresets"), "#4").toEqual(["presets", "defaultPreset", "showPresets", "allowEditPresets", "allowAddPresets", "allowDeletePresets"]);
     expect(grid.survey.getPanelByName("filterSettings").title, "#5").toBe("Filter Settings");
-    expect(grid.survey.getPanelByName("presets").title, "#6").toBe("Presets");
+    expect(grid.survey.getPanelByName("filterPresets").title, "#6").toBe("Filter Presets");
+  });
+  test("filter captions", () => {
+    const survey = new SurveyModel({ elements: [{ type: "filter", name: "f", presets: [{ name: "a" }] }] });
+    const grid = new PropertyGridModelTester(survey.getQuestionByName("f"));
+    const titles = (names: Array<string>): Array<string> => names.map(name => grid.survey.getQuestionByName(name).title);
+    expect(titles(["targetQuestion", "showSearchBar", "searchFields", "searchPlaceholder", "presets"]), "#1")
+      .toEqual(["Question to filter", "Show search bar", "Fields to search", "Search placeholder text", "Filter presets"]);
+    const row = (<QuestionMatrixDynamicModel>grid.survey.getQuestionByName("presets")).visibleRows[0];
+    row.showDetailPanel();
+    expect(["allowEdit", "allowDelete"].map(name => row.detailPanel.getQuestionByName(name).title), "#2")
+      .toEqual(["Allow respondents to edit this preset", "Allow respondents to delete this preset"]);
   });
   test("filterOperators follows allowFiltering", () => {
     const survey = new SurveyModel({ elements: [{ type: "text", name: "q1" },
@@ -245,12 +257,12 @@ describe("Designer: a Filter Control's preset chip", () => {
   const detailShown = (creator: CreatorTester): Array<boolean> =>
     (<QuestionMatrixDynamicModel>creator.propertyGrid.getQuestionByName("presets")).visibleRows.map(row => row.isDetailPanelShowing);
   const presetChip = (filter: any): any => filter.chipsToolbar.getActionById("sv-filter-presets");
-  test("opens the preset on the Presets tab", () => {
+  test("opens the preset on the Filter Presets tab", () => {
     const { creator, filter } = createCreator("b");
     creator.selectElement(creator.survey.getQuestionByName("q1"));
     presetChip(filter).action();
     expect(creator.selectedElement, "#1").toBe(filter);
-    expect(creator.propertyGrid.currentPage.name, "#2").toBe("presets");
+    expect(creator.propertyGrid.currentPage.name, "#2").toBe("filterPresets");
     expect(detailShown(creator), "#3").toEqual([false, true]);
     expect(filter.selectedPreset, "#4: the click turns nothing on or off").toBe("b");
   });
@@ -259,7 +271,7 @@ describe("Designer: a Filter Control's preset chip", () => {
     creator.selectElement(filter);
     creator.propertyGrid.currentPage = creator.propertyGrid.getPageByName("filterSettings");
     presetChip(filter).action();
-    expect(creator.propertyGrid.currentPage.name, "#1").toBe("presets");
+    expect(creator.propertyGrid.currentPage.name, "#1").toBe("filterPresets");
     expect(detailShown(creator), "#2").toEqual([true, false]);
   });
   // The chips' clicks stop at the chip (Action.doAction stops the event), so the adorner never sees them
@@ -278,7 +290,7 @@ describe("Designer: a Filter Control's preset chip", () => {
     expect(creator.selectedElement, "#1").toBe(filter);
     expect(detailShown(creator), "#2").toEqual([false, false]);
   });
-  test("with the property grid hidden, the preset opens on the Presets tab once it shows", () => {
+  test("with the property grid hidden, the preset opens on the Filter Presets tab once it shows", () => {
     const { creator, filter } = createCreator("b");
     creator.selectElement(filter);
     creator.propertyGrid.currentPage = creator.propertyGrid.getPageByName("filterSettings");
@@ -286,7 +298,7 @@ describe("Designer: a Filter Control's preset chip", () => {
     presetChip(filter).action();
     creator.sidebar.renderedIsVisible = true;
     (<any>creator.sidebar).afterExpand();
-    expect(creator.propertyGrid.currentPage.name, "#1").toBe("presets");
+    expect(creator.propertyGrid.currentPage.name, "#1").toBe("filterPresets");
     expect(detailShown(creator), "#2").toEqual([false, true]);
   });
   test("a detached adorner leaves no callback", () => {

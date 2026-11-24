@@ -822,10 +822,6 @@ export var hebrewStrings = {
       expression: "ביטוי"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "חפש ב",
-      // [Auto-translated] "Presets"
-      presets: "פריסטים",
       // [Auto-translated] "Default preset"
       defaultPreset: "הגדרה מראש ברירת מחדל",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var hebrewStrings = {
       // [Auto-translated] "Preset title"
       title: "כותרת פריסט",
       // [Auto-translated] "Filter expression"
-      expression: "ביטוי מסנן",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "אפשר עריכה",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "אפשר מחיקה"
+      expression: "ביטוי מסנן"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var hebrewStrings = {
       sliderSettings: "הגדרות מחוון",
       // [Auto-translated] "Filter Settings"
       filterSettings: "הגדרות סינון",
-      // [Auto-translated] "Presets"
-      presets: "פריסטים",
       // "Choices from a Web Service"
       choicesByUrl: "בחירות משירות RESTful",
       // "Numbering"

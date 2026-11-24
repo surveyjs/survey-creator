@@ -822,10 +822,6 @@ export var fiStrings = {
       expression: "Lauseke"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Hae",
-      // [Auto-translated] "Presets"
-      presets: "Esiasetukset",
       // [Auto-translated] "Default preset"
       defaultPreset: "Oletusesiasetus",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var fiStrings = {
       // [Auto-translated] "Preset title"
       title: "Esiasetettu otsikko",
       // [Auto-translated] "Filter expression"
-      expression: "Suodatinlauseke",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Salli muokkaus",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Salli poistaminen"
+      expression: "Suodatinlauseke"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var fiStrings = {
       sliderSettings: "Liukusäätimen asetukset",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Suodatinasetukset",
-      // [Auto-translated] "Presets"
-      presets: "Esiasetukset",
       // "Choices from a Web Service"
       choicesByUrl: "Valintoja verkosta",
       // "Numbering"

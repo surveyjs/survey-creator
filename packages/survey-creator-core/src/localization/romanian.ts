@@ -822,10 +822,6 @@ export const roStrings = {
       expression: "Expresie"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Caută în",
-      // [Auto-translated] "Presets"
-      presets: "Presetări",
       // [Auto-translated] "Default preset"
       defaultPreset: "Presetare implicită",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export const roStrings = {
       // [Auto-translated] "Preset title"
       title: "Titlu presetat",
       // [Auto-translated] "Filter expression"
-      expression: "Expresie de filtru",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Permite editarea",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Permiteți ștergerea"
+      expression: "Expresie de filtru"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export const roStrings = {
       sliderSettings: "Setări glisor",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Setări filtru",
-      // [Auto-translated] "Presets"
-      presets: "Presetări",
       // "Choices from a Web Service"
       choicesByUrl: "Alegeri dintr-un serviciu web",
       // "Numbering"

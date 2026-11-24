@@ -823,10 +823,6 @@ export var polishStrings = {
       expression: "Wyrażenie"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Wyszukaj w",
-      // [Auto-translated] "Presets"
-      presets: "Presety",
       // [Auto-translated] "Default preset"
       defaultPreset: "Domyślny preset",
       // [Auto-translated] "Allow respondents to add presets"
@@ -838,11 +834,7 @@ export var polishStrings = {
       // [Auto-translated] "Preset title"
       title: "Tytuł presetu",
       // [Auto-translated] "Filter expression"
-      expression: "Wyrażenie filtra",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Zezwól na edycję",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Zezwól na usuwanie"
+      expression: "Wyrażenie filtra"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1805,8 +1797,6 @@ export var polishStrings = {
       sliderSettings: "Ustawienia suwaka",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Ustawienia filtra",
-      // [Auto-translated] "Presets"
-      presets: "Presety",
       // "Choices from a Web Service"
       choicesByUrl: "Odpowiedzi z webserwisu",
       // [Auto-translated] "Numbering"

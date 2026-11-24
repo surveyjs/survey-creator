@@ -822,10 +822,6 @@ export var huStrings = {
       expression: "Kifejezés"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Keresés",
-      // [Auto-translated] "Presets"
-      presets: "Előbeállítások",
       // [Auto-translated] "Default preset"
       defaultPreset: "Alapértelmezett előbeállítás",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var huStrings = {
       // [Auto-translated] "Preset title"
       title: "Előre beállított cím",
       // [Auto-translated] "Filter expression"
-      expression: "Szűrőkifejezés",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Szerkesztés engedélyezése",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Törlés engedélyezése"
+      expression: "Szűrőkifejezés"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var huStrings = {
       sliderSettings: "Csúszka beállításai",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Szűrőbeállítások",
-      // [Auto-translated] "Presets"
-      presets: "Előbeállítások",
       // "Choices from a Web Service"
       choicesByUrl: "Lehetőségek a webről",
       // [Auto-translated] "Numbering"

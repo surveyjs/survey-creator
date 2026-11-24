@@ -40,13 +40,13 @@ test.describe(title, () => {
     return content;
   };
 
-  test("General: the target question", async ({ page }) => {
+  test("General", async ({ page }) => {
     const content = page.locator(".spg-panel__content").filter({ hasText: "" });
     await expect(content).toBeVisible();
     await compareScreenshot(page, content, "pg-filter-general.png");
   });
 
-  test("Filter Settings: fields, quick filters and search", async ({ page }) => {
+  test("Filter Settings: the target question, fields, quick filters and search", async ({ page }) => {
     await compareScreenshot(page, await showCategory(page, "Filter Settings"), "pg-filter-settings.png");
   });
 
@@ -56,7 +56,7 @@ test.describe(title, () => {
     await resetHoverToCreator(page);
     await compareScreenshot(page, content, "pg-filter-field-details.png");
   });
-  test("Presets", async ({ page }) => {
-    await compareScreenshot(page, await showCategory(page, "Presets"), "pg-filter-presets.png");
+  test("Filter Presets", async ({ page }) => {
+    await compareScreenshot(page, await showCategory(page, "Filter Presets"), "pg-filter-presets.png");
   });
 });

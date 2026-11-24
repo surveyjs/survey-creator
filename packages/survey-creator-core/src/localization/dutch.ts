@@ -822,10 +822,6 @@ export var nlStrings = {
       expression: "Uitdrukking"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Zoeken in",
-      // [Auto-translated] "Presets"
-      presets: "Presets",
       // [Auto-translated] "Default preset"
       defaultPreset: "Standaardpreset",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var nlStrings = {
       // [Auto-translated] "Preset title"
       title: "Vooraf ingestelde titel",
       // [Auto-translated] "Filter expression"
-      expression: "Filterexpressie",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Staat bewerken toe",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Verwijderen toestaan"
+      expression: "Filterexpressie"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var nlStrings = {
       sliderSettings: "Instellingen voor schuifregelaars",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Filterinstellingen",
-      // [Auto-translated] "Presets"
-      presets: "Presets",
       // "Choices from a Web Service"
       choicesByUrl: "Keuzes van internet",
       // "Numbering"

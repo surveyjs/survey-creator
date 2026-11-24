@@ -151,21 +151,21 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   filter: {
     properties: [
-      "targetQuestion",
+      { name: "targetQuestion", tab: "filterSettings" },
       { name: "fields", tab: "filterSettings" },
       { name: "showQuickFilters", tab: "filterSettings" },
-      { name: "showAllFiltersButton", tab: "filterSettings" },
       { name: "showSearchBar", tab: "filterSettings" },
       { name: "searchFields", tab: "filterSettings" },
       { name: "searchPlaceholder", tab: "filterSettings" },
-      { name: "presets", tab: "presets" },
-      { name: "defaultPreset", tab: "presets" },
-      { name: "showPresets", tab: "presets" },
-      { name: "allowAddPresets", tab: "presets" },
-      { name: "allowEditPresets", tab: "presets" },
-      { name: "allowDeletePresets", tab: "presets" }
+      { name: "showAllFiltersButton", tab: "filterSettings" },
+      { name: "presets", tab: "filterPresets" },
+      { name: "defaultPreset", tab: "filterPresets" },
+      { name: "showPresets", tab: "filterPresets" },
+      { name: "allowEditPresets", tab: "filterPresets" },
+      { name: "allowAddPresets", tab: "filterPresets" },
+      { name: "allowDeletePresets", tab: "filterPresets" }
     ],
-    tabs: [{ name: "filterSettings", index: 10 }, { name: "presets", index: 20 }]
+    tabs: [{ name: "filterSettings", index: 10 }, { name: "filterPresets", index: 20 }]
   },
   matrixdropdownbase: {
     properties: [
@@ -764,7 +764,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   "calculatedvalue@items": {
     properties: ["name", "expression"]
   },
-  // The Filter Control's fields: the whole entry in its row, no detail panel
+  // The Filter Control's fields: the row of the matrix, then its detail panel
   "filter@fields": {
     properties: ["name", "title"]
   },

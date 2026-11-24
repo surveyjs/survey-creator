@@ -822,10 +822,6 @@ export var jaStrings = {
       expression: "表現"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "検索",
-      // [Auto-translated] "Presets"
-      presets: "プリセット",
       // [Auto-translated] "Default preset"
       defaultPreset: "デフォルトプリセット",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var jaStrings = {
       // [Auto-translated] "Preset title"
       title: "プリセットタイトル",
       // [Auto-translated] "Filter expression"
-      expression: "フィルター式",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "編集を許可する",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "削除を許可する"
+      expression: "フィルター式"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var jaStrings = {
       sliderSettings: "スライダー設定",
       // [Auto-translated] "Filter Settings"
       filterSettings: "フィルター設定",
-      // [Auto-translated] "Presets"
-      presets: "プリセット",
       // "Choices from a Web Service"
       choicesByUrl: "ウェブの選択",
       // "Numbering"

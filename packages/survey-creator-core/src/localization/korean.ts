@@ -823,10 +823,6 @@ export var koreanStrings = {
       expression: "식"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "검색",
-      // [Auto-translated] "Presets"
-      presets: "프리셋",
       // [Auto-translated] "Default preset"
       defaultPreset: "기본 프리셋",
       // [Auto-translated] "Allow respondents to add presets"
@@ -838,11 +834,7 @@ export var koreanStrings = {
       // [Auto-translated] "Preset title"
       title: "프리셋 제목",
       // [Auto-translated] "Filter expression"
-      expression: "필터 표현식",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "편집 허용",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "삭제 허용"
+      expression: "필터 표현식"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1805,8 +1797,6 @@ export var koreanStrings = {
       sliderSettings: "슬라이더 설정",
       // [Auto-translated] "Filter Settings"
       filterSettings: "필터 설정",
-      // [Auto-translated] "Presets"
-      presets: "프리셋",
       // "Choices from a Web Service"
       choicesByUrl: "웹에서 선택",
       // [Auto-translated] "Numbering"

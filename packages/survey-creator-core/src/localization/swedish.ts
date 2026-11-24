@@ -823,10 +823,6 @@ export let svStrings = {
       expression: "Uttryck"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Sök i",
-      // [Auto-translated] "Presets"
-      presets: "Förinställningar",
       // [Auto-translated] "Default preset"
       defaultPreset: "Standardförinställning",
       // [Auto-translated] "Allow respondents to add presets"
@@ -838,11 +834,7 @@ export let svStrings = {
       // [Auto-translated] "Preset title"
       title: "Förinställd titel",
       // [Auto-translated] "Filter expression"
-      expression: "Filteruttryck",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Tillåt redigering",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Tillåt borttagning"
+      expression: "Filteruttryck"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1805,8 +1797,6 @@ export let svStrings = {
       sliderSettings: "Inställningar för skjutreglage",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Filterinställningar",
-      // [Auto-translated] "Presets"
-      presets: "Förinställningar",
       // "Choices from a Web Service"
       choicesByUrl: "Välj från webben",
       // [Auto-translated] "Numbering"

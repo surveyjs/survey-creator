@@ -822,10 +822,6 @@ export var catalanTranslation = {
       expression: "Expressió"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Cerca a",
-      // [Auto-translated] "Presets"
-      presets: "Presets",
       // [Auto-translated] "Default preset"
       defaultPreset: "Predefinició predeterminada",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var catalanTranslation = {
       // [Auto-translated] "Preset title"
       title: "Títol predefinit",
       // [Auto-translated] "Filter expression"
-      expression: "Expressió del filtre",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Permetre l'edició",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Permetre l'eliminació"
+      expression: "Expressió del filtre"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var catalanTranslation = {
       sliderSettings: "Configuració del control deslizante",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Configuració del filtre",
-      // [Auto-translated] "Presets"
-      presets: "Presets",
       // "Choices from a Web Service"
       choicesByUrl: "Opcions de la web",
       // "Numbering"

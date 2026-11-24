@@ -822,10 +822,6 @@ export var skStrings = {
       expression: "Výraz"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Hľadať v",
-      // [Auto-translated] "Presets"
-      presets: "Prednastavenia",
       // [Auto-translated] "Default preset"
       defaultPreset: "Predvolené prednastavenie",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var skStrings = {
       // [Auto-translated] "Preset title"
       title: "Prednastavený názov",
       // [Auto-translated] "Filter expression"
-      expression: "Výraz filtra",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Povoliť úpravy",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Povoliť mazanie"
+      expression: "Výraz filtra"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var skStrings = {
       sliderSettings: "Nastavenia posuvníka",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Nastavenia filtra",
-      // [Auto-translated] "Presets"
-      presets: "Prednastavenia",
       // "Choices from a Web Service"
       choicesByUrl: "Možnosti z webu",
       // "Numbering"

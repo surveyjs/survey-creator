@@ -822,10 +822,6 @@ export var nbStrings = {
       expression: "Uttrykk"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Søk i",
-      // [Auto-translated] "Presets"
-      presets: "Forhåndsinnstillinger",
       // [Auto-translated] "Default preset"
       defaultPreset: "Standard forhåndsinnstilling",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var nbStrings = {
       // [Auto-translated] "Preset title"
       title: "Forhåndsbestemt tittel",
       // [Auto-translated] "Filter expression"
-      expression: "Filteruttrykk",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Tillat redigering",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Tillat sletting"
+      expression: "Filteruttrykk"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var nbStrings = {
       sliderSettings: "Innstillinger for glidebryter",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Filterinnstillinger",
-      // [Auto-translated] "Presets"
-      presets: "Forhåndsinnstillinger",
       // "Choices from a Web Service"
       choicesByUrl: "Valg fra web",
       // "Numbering"

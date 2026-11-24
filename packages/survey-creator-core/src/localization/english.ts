@@ -438,26 +438,26 @@ export var enStrings = {
       expression: "Expression"
     },
     filter: {
-      targetQuestion: "Target question",
+      targetQuestion: "Question to filter",
       fields: "Fields",
       showQuickFilters: "Show quick filters",
+      showSearchBar: "Show search bar",
+      searchFields: "Fields to search",
+      searchPlaceholder: "Search placeholder text",
       showAllFiltersButton: "Show the All Filters button",
-      showSearchBar: "Show the search bar",
-      searchFields: "Search in",
-      searchPlaceholder: "Search bar placeholder",
-      presets: "Presets",
+      presets: "Filter presets",
       defaultPreset: "Default preset",
       showPresets: "Show presets",
-      allowAddPresets: "Allow respondents to add presets",
       allowEditPresets: "Allow respondents to edit presets",
+      allowAddPresets: "Allow respondents to add presets",
       allowDeletePresets: "Allow respondents to delete presets"
     },
     filterpreset: {
       name: "Preset name",
       title: "Preset title",
       expression: "Filter expression",
-      allowEdit: "Allow editing",
-      allowDelete: "Allow deleting"
+      allowEdit: "Allow respondents to edit this preset",
+      allowDelete: "Allow respondents to delete this preset"
     },
     filterfield: {
       name: "Field name",
@@ -976,7 +976,7 @@ export var enStrings = {
       rateValues: "Rating Values",
       sliderSettings: "Slider Settings",
       filterSettings: "Filter Settings",
-      presets: "Presets",
+      filterPresets: "Filter Presets",
       choicesByUrl: "Choices from a Web Service",
       numbering: "Numbering",
       validators: "Validators",

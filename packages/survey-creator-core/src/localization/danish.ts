@@ -823,10 +823,6 @@ export var danishStrings = {
       expression: "Udtryk"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Søg i",
-      // [Auto-translated] "Presets"
-      presets: "Presets",
       // [Auto-translated] "Default preset"
       defaultPreset: "Standardforudindstilling",
       // [Auto-translated] "Allow respondents to add presets"
@@ -838,11 +834,7 @@ export var danishStrings = {
       // [Auto-translated] "Preset title"
       title: "Forudindstillede titel",
       // [Auto-translated] "Filter expression"
-      expression: "Filterudtryk",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Tillad redigering",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Tillad sletning"
+      expression: "Filterudtryk"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1805,8 +1797,6 @@ export var danishStrings = {
       sliderSettings: "Indstillinger for skyder",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Filterindstillinger",
-      // [Auto-translated] "Presets"
-      presets: "Presets",
       // "Choices from a Web Service"
       choicesByUrl: "Valgmuligheder fra Web",
       // [Auto-translated] "Numbering"

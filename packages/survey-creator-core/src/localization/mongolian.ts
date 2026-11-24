@@ -822,10 +822,6 @@ export var mnStrings = {
       expression: "Өгүүлбэр"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Хайх",
-      // [Auto-translated] "Presets"
-      presets: "Урьдчилсан тохиргоонууд",
       // [Auto-translated] "Default preset"
       defaultPreset: "Анхдагч урьдчилсан тохиргоо",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var mnStrings = {
       // [Auto-translated] "Preset title"
       title: "Урьдчилсан тохиргооны гарчиг",
       // [Auto-translated] "Filter expression"
-      expression: "Шүүлтүүрийн илэрхийлэл",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Засварлахыг зөвшөөрөх",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Устгахыг зөвшөөрөх"
+      expression: "Шүүлтүүрийн илэрхийлэл"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var mnStrings = {
       sliderSettings: "Слайдерын тохиргоо",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Шүүлтүүрийн тохиргоо",
-      // [Auto-translated] "Presets"
-      presets: "Урьдчилсан тохиргоонууд",
       // "Choices from a Web Service"
       choicesByUrl: "RESTful сервисийн сонголтууд",
       // "Numbering"

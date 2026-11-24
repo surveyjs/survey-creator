@@ -822,10 +822,6 @@ export var indonesianStrings = {
       expression: "Ekspresi"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Cari di",
-      // [Auto-translated] "Presets"
-      presets: "Preset",
       // [Auto-translated] "Default preset"
       defaultPreset: "Prasetel default",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var indonesianStrings = {
       // [Auto-translated] "Preset title"
       title: "Judul preset",
       // [Auto-translated] "Filter expression"
-      expression: "Ekspresi filter",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Izinkan pengeditan",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Izinkan penghapusan"
+      expression: "Ekspresi filter"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var indonesianStrings = {
       sliderSettings: "Pengaturan Penggeser",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Pengaturan Filter",
-      // [Auto-translated] "Presets"
-      presets: "Preset",
       // "Choices from a Web Service"
       choicesByUrl: "Pilih dari Web",
       // [Auto-translated] "Numbering"

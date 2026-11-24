@@ -822,10 +822,6 @@ export var ruStrings = {
       expression: "Выражение"
     },
     filter: {
-      // [Auto-translated] "Search in"
-      searchFields: "Поиск в",
-      // [Auto-translated] "Presets"
-      presets: "Пресеты",
       // [Auto-translated] "Default preset"
       defaultPreset: "Предустановка по умолчанию",
       // [Auto-translated] "Allow respondents to add presets"
@@ -837,11 +833,7 @@ export var ruStrings = {
       // [Auto-translated] "Preset title"
       title: "Название пресета",
       // [Auto-translated] "Filter expression"
-      expression: "Выражение фильтра",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Разрешить редактирование",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Разрешить удаление"
+      expression: "Выражение фильтра"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1804,8 +1796,6 @@ export var ruStrings = {
       sliderSettings: "Настройки слайдера",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Настройки фильтра",
-      // [Auto-translated] "Presets"
-      presets: "Пресеты",
       // "Choices from a Web Service"
       choicesByUrl: "Выбор из Интернета",
       // [Auto-translated] "Numbering"
