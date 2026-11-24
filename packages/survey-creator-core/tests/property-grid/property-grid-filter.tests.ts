@@ -373,3 +373,52 @@ describe("Designer: a Filter Control's preset chip", () => {
     expect(creator.selectedElement.name).toBe("q1");
   });
 });
+
+describe("Property grid: the Filter Control fields of a new target", () => {
+  const expenses = (name: string): any => ({ type: "matrixdynamic", name: name,
+    columns: [{ name: "date", title: "Date" }, { name: "category", title: "Category" }],
+    detailPanelMode: "underRowSingle",
+    detailElements: [{ type: "text", name: "project", title: "Project" }, { type: "boolean", name: "receipt", title: "Receipt" }] });
+  const rowsOf = (creator: CreatorTester): QuestionMatrixDynamicModel => <QuestionMatrixDynamicModel>creator.propertyGrid.getQuestionByName("fields");
+  const shown = (matrix: QuestionMatrixDynamicModel): Array<any> => matrix.visibleRows.map(r => {
+    const name = r.cells.filter(c => c.column.name === "name")[0].question;
+    return [r.editingObj && r.editingObj["name"], !!name.selectedItem && name.selectedItem.value];
+  });
+  test("a copy of the page: the copied filter switched to the other matrix shows that matrix's fields", () => {
+    const creator = new CreatorTester();
+    creator.JSON = { pages: [{ name: "page1", elements: [{ type: "filter", name: "f1", targetQuestion: "expenses" }, expenses("expenses")] }] };
+    const copy = creator.copyPage(creator.survey.pages[0]);
+    const filter = <any>copy.elements.filter((e: any) => e.getType() === "filter")[0];
+    const matrix = <any>copy.elements.filter((e: any) => e.getType() === "matrixdynamic")[0];
+    creator.selectElement(filter);
+    const target = creator.propertyGrid.getQuestionByName("targetQuestion");
+    const expected = (name: string): Array<any> =>
+      creator.survey.getQuestionByName(name).getFilterFields().map((f: any) => [f.name, f.name]);
+    [matrix.name, "expenses", matrix.name].forEach((name: string, index: number): void => {
+      target.value = name;
+      expect(filter.targetQuestion, "#1." + index).toBe(name);
+      expect(shown(rowsOf(creator)), "#2." + index).toEqual(expected(name));
+    });
+    expect(shown(rowsOf(creator)).length, "#3: the columns and the details").toBe(4);
+    expect(filter.fields.length, "#4").toBe(0);
+  });
+  test("a target with as many fields under other names, more fields and fewer", () => {
+    const creator = new CreatorTester();
+    creator.JSON = { elements: [
+      { type: "matrixdynamic", name: "m1", columns: [{ name: "a" }, { name: "b" }, { name: "c" }] },
+      { type: "matrixdynamic", name: "m2", columns: [{ name: "x" }, { name: "y" }, { name: "z" }] },
+      { type: "matrixdynamic", name: "m3", columns: [{ name: "p" }, { name: "q" }, { name: "r" }, { name: "s" }] },
+      { type: "filter", name: "f1", targetQuestion: "m1" }] };
+    const filter = <any>creator.survey.getQuestionByName("f1");
+    creator.selectElement(filter);
+    const target = creator.propertyGrid.getQuestionByName("targetQuestion");
+    expect(shown(rowsOf(creator)), "#1").toEqual([["a", "a"], ["b", "b"], ["c", "c"]]);
+    target.value = "m2";
+    expect(shown(rowsOf(creator)), "#2: as many").toEqual([["x", "x"], ["y", "y"], ["z", "z"]]);
+    target.value = "m3";
+    expect(shown(rowsOf(creator)), "#3: one more").toEqual([["p", "p"], ["q", "q"], ["r", "r"], ["s", "s"]]);
+    target.value = "m1";
+    expect(shown(rowsOf(creator)), "#4: one fewer").toEqual([["a", "a"], ["b", "b"], ["c", "c"]]);
+    expect(filter.toJSON().fields, "#5").toBeUndefined();
+  });
+});

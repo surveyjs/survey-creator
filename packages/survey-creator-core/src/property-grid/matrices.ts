@@ -818,6 +818,8 @@ const filterFieldsReleaseKey = "filterFieldsRelease";
 const filterFieldsSignatureKey = "filterFieldsSignature";
 const filterFieldsDesignEntriesKey = "filterFieldsDesignEntries";
 const filterFieldsAddingKey = "filterFieldsAdding";
+const filterFieldsClearingKey = "filterFieldsClearing";
+const filterFieldsTargetKey = "filterFieldsTarget";
 export class PropertyGridEditorMatrixFilterFields extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type === "filterfield[]";
@@ -856,7 +858,7 @@ export class PropertyGridEditorMatrixFilterFields extends PropertyGridEditorMatr
     options?: ISurveyCreatorOptions, propGridDefinition?: ISurveyPropertyGridDefinition): void {
     super.onCreated(obj, question, prop, options, propGridDefinition);
     const matrix = <QuestionMatrixDynamicModel>question;
-    matrix.valueFromDataCallback = (): Array<Base> => this.getRows(obj, matrix);
+    matrix.valueFromDataCallback = (): Array<Base> => !!matrix[filterFieldsClearingKey] ? [] : this.getRows(obj, matrix);
     // The entries in fields, in their own order - a row removed is an entry gone - then a row Add field
     // has just added. The rows of the target's fields that have no entry (designOwner) are not written.
     matrix.valueToDataCallback = (rows: Array<Base>): Array<Base> => {
@@ -1003,7 +1005,45 @@ export class PropertyGridEditorMatrixFilterFields extends PropertyGridEditorMatr
   private updateRows(obj: Base, matrix: QuestionMatrixDynamicModel, force: boolean = false): void {
     if (!matrix || matrix.isDisposed) return;
     const rows = this.getRows(obj, matrix, false);
-    if (!force && this.getSignature(obj, rows) === matrix[filterFieldsSignatureKey]) return;
+    const target = (<any>obj).targetQuestion;
+    const isNewTarget = matrix[filterFieldsTargetKey] !== target;
+    matrix[filterFieldsTargetKey] = target;
+    if (!force && !isNewTarget && this.getSignature(obj, rows) === matrix[filterFieldsSignatureKey]) return;
+    if (!force && (isNewTarget || !this.isOneRowChange(matrix, rows))) {
+      this.rebuildRows(obj, matrix);
+    } else {
+      matrix.updateValueFromSurvey(this.getFields(obj));
+    }
+  }
+  // The matrix follows a live array by its objects: it keeps its rows for an array of the same length
+  // and takes a change of one more or one less object for an insert or a remove of that object. So does
+  // the table for a row added or removed, or a row's entry that joined fields. Rows replaced otherwise - a
+  // new target, its fields changed - would keep the old rows, their entries and the old target's names
+  // in Field name ("Select...").
+  private isOneRowChange(matrix: QuestionMatrixDynamicModel, rows: Array<Base>): boolean {
+    const built: Array<any> = (<any>matrix).generatedVisibleRows;
+    if (!Array.isArray(built)) return true;
+    const old = built.map((row: any): Base => row.editingObj);
+    if (old.length === rows.length) return old.every((entry: Base, index: number): boolean => entry === rows[index]);
+    if (Math.abs(old.length - rows.length) !== 1) return false;
+    const longer = old.length > rows.length ? old : rows;
+    const shorter = old.length > rows.length ? rows : old;
+    let i = 0;
+    while(i < shorter.length && longer[i] === shorter[i]) i++;
+    for (let j = i; j < shorter.length; j++) {
+      if (longer[j + 1] !== shorter[j]) return false;
+    }
+    return true;
+  }
+  // New rows through the matrix's own way of taking an array of another length: an empty one first,
+  // then the rows. Nothing is written into fields: the value comes from the survey, it does not go to it.
+  private rebuildRows(obj: Base, matrix: QuestionMatrixDynamicModel): void {
+    matrix[filterFieldsClearingKey] = true;
+    try {
+      matrix.updateValueFromSurvey(this.getFields(obj));
+    } finally {
+      matrix[filterFieldsClearingKey] = false;
+    }
     matrix.updateValueFromSurvey(this.getFields(obj));
   }
   // What a row is: its name, and the entry's place in fields where it has one.
