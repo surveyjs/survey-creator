@@ -822,26 +822,16 @@ export var bgStrings = {
       expression: "Изразяване"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Източник на данни",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Показване на филтърни чипове",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Показване на бутона Филтри",
-      // [Auto-translated] "Show search"
-      showSearch: "Покажи търсенето",
       // [Auto-translated] "Search in"
       searchFields: "Търсене в",
       // [Auto-translated] "Presets"
-      items: "Предварителни настройки",
+      presets: "Предварителни настройки",
       // [Auto-translated] "Default preset"
-      defaultItem: "По подразбиране предварителна настройка",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Разрешаване на множество предварителни настройки",
+      defaultPreset: "По подразбиране предварителна настройка",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Позволете на респондентите да добавят предварителни настройки"
+      allowAddPresets: "Позволете на респондентите да добавят предварителни настройки"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Име на предварителна настройка",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var bgStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Няма нива на сортиране",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Без предварителни настройки",
+    "listIsEmpty@filterPresets": "Без предварителни настройки",
     // "Add new choice"
     "addNew@choices": "Добавяне на възможност за избор",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var bgStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Добавете ниво на сортиране",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Добавяне на предварителна настройка",
+    "addNew@filterPresets": "Добавяне на предварителна настройка",
     // "Value"
     value: "Стойност",
     // "Text"
@@ -3088,11 +3078,11 @@ export var bgStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Изберете динамична матрица, падащо меню или динамичен панел, чиито редове или панели филтърът стеснява.",
+      targetQuestion: "Изберете динамична матрица, падащо меню или динамичен панел, чиито редове или панели филтърът стеснява.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Предварително зададената настройка се прилага при стартиране на проучването."
+      defaultPreset: "Предварително зададената настройка се прилага при стартиране на проучването."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Използвайте имена на полета в къдрави скоби, например: {price} < 20 и {category} някое от ['Напитки']."
     },

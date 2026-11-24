@@ -822,26 +822,16 @@ export var huStrings = {
       expression: "Kifejezés"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Adatforrás",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Szűrőchipek megjelenítése",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Szűrők gomb megjelenítése",
-      // [Auto-translated] "Show search"
-      showSearch: "Keresés megjelenítése",
       // [Auto-translated] "Search in"
       searchFields: "Keresés",
       // [Auto-translated] "Presets"
-      items: "Előbeállítások",
+      presets: "Előbeállítások",
       // [Auto-translated] "Default preset"
-      defaultItem: "Alapértelmezett előbeállítás",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Több előbeállítás engedélyezése",
+      defaultPreset: "Alapértelmezett előbeállítás",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Engedélyezze a válaszadók számára az előbeállítások hozzáadását"
+      allowAddPresets: "Engedélyezze a válaszadók számára az előbeállítások hozzáadását"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Előbeállítás név",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var huStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Nincsenek sortozási szintek",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Nincsenek előbeállítások",
+    "listIsEmpty@filterPresets": "Nincsenek előbeállítások",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Választási lehetőségek hozzáadása",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var huStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Szűrési szint hozzáadása",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Előbeállítás hozzáadása",
+    "addNew@filterPresets": "Előbeállítás hozzáadása",
     // "Value"
     value: "Érték",
     // "Text"
@@ -3088,11 +3078,11 @@ export var huStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Válasszon ki egy dinamikus mátrixot, legördülő mátrixot vagy egy dinamikus panelt, amelynek sorait vagy paneljeit a szűrő szűkíti.",
+      targetQuestion: "Válasszon ki egy dinamikus mátrixot, legördülő mátrixot vagy egy dinamikus panelt, amelynek sorait vagy paneljeit a szűrő szűkíti.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Az előbeállítás, amely a felmérés elindításakor érvényesül."
+      defaultPreset: "Az előbeállítás, amely a felmérés elindításakor érvényesül."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Használjon mezőneveket göndör zárójelben, például: {price} < 20 és {category} bármelyik ['Italok']."
     },

@@ -822,26 +822,16 @@ export var italianTranslation = {
       expression: "Espressione"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Fonte dati",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Mostra chip di filtro",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Mostra il pulsante Filtri",
-      // [Auto-translated] "Show search"
-      showSearch: "Mostra ricerca",
       // [Auto-translated] "Search in"
       searchFields: "Cerca in",
       // [Auto-translated] "Presets"
-      items: "Presets",
+      presets: "Presets",
       // [Auto-translated] "Default preset"
-      defaultItem: "Preimpostazione predefinita",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Consenti più preset",
+      defaultPreset: "Preimpostazione predefinita",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Consenti ai rispondenti di aggiungere preset"
+      allowAddPresets: "Consenti ai rispondenti di aggiungere preset"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Nome preset",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var italianTranslation = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Nessun livello di sorting",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Nessun preset",
+    "listIsEmpty@filterPresets": "Nessun preset",
     // "Add new choice"
     "addNew@choices": "Aggiungi una scelta",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var italianTranslation = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Aggiungi livello di ordinamento",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Aggiungi preset",
+    "addNew@filterPresets": "Aggiungi preset",
     // "Value"
     value: "Valore",
     // "Text"
@@ -3088,11 +3078,11 @@ export var italianTranslation = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Seleziona una matrice dinamica, una matrice a tendina opponibile o un pannello dinamico le cui righe o pannelli il filtro restringe.",
+      targetQuestion: "Seleziona una matrice dinamica, una matrice a tendina opponibile o un pannello dinamico le cui righe o pannelli il filtro restringe.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Il preset si applica all'inizio del sondaggio."
+      defaultPreset: "Il preset si applica all'inizio del sondaggio."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Usa i nomi dei campi tra parentesi, ad esempio: {price} < 20 e {category} anyof ['Bevande']."
     },

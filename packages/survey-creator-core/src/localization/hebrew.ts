@@ -822,26 +822,16 @@ export var hebrewStrings = {
       expression: "ביטוי"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "מקור הנתונים",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "הצג שבבי סינון",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "הצג את כפתור המסננים",
-      // [Auto-translated] "Show search"
-      showSearch: "הצג חיפוש",
       // [Auto-translated] "Search in"
       searchFields: "חפש ב",
       // [Auto-translated] "Presets"
-      items: "פריסטים",
+      presets: "פריסטים",
       // [Auto-translated] "Default preset"
-      defaultItem: "הגדרה מראש ברירת מחדל",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "אפשר פריסטים מרובים",
+      defaultPreset: "הגדרה מראש ברירת מחדל",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "אפשר למשיבים להוסיף פריסטים"
+      allowAddPresets: "אפשר למשיבים להוסיף פריסטים"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "שם פריסט",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var hebrewStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "אין רמות מיון",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "ללא פריסטים",
+    "listIsEmpty@filterPresets": "ללא פריסטים",
     // "Add new choice"
     "addNew@choices": "הוסף ברירת בחירה",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var hebrewStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "הוספת רמת מיון",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "הוסף פריסט",
+    "addNew@filterPresets": "הוסף פריסט",
     // "Value"
     value: "ערך",
     // "Text"
@@ -3088,11 +3078,11 @@ export var hebrewStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "בחר מטריצה דינמית, מטריצה נפתחת או לוח דינמי שהמסנן מצמצם את השורות או הלוחות שלו.",
+      targetQuestion: "בחר מטריצה דינמית, מטריצה נפתחת או לוח דינמי שהמסנן מצמצם את השורות או הלוחות שלו.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "ההגדרה המוקדמת שהוחלה כאשר הסקר מתחיל."
+      defaultPreset: "ההגדרה המוקדמת שהוחלה כאשר הסקר מתחיל."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "השתמש בשמות שדות בסוגריים מסולסלים, לדוגמה: {price} < 20 ו-{category} כל אחד מ-['משקאות']."
     },

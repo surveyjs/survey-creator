@@ -2845,18 +2845,24 @@ export class SurveyCreatorModel extends Base
       }
       // A question a Filter Control can filter (survey-core finds the source by the same duck typing)
       if (propertyName === "name" && typeof obj["setControlFilter"] === "function") {
-        this.updateFilterSourceOnQuestionNameChanged(oldValue, obj["name"]);
+        this.updateFilterTargetOnQuestionNameChanged(oldValue, obj["name"]);
       }
     }
     if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
       this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
+      this.updateFilterFieldsOnFieldNameChanged(obj["colOwner"], oldValue, obj["name"]);
     }
-    // A Filter Control's defaultItem names a preset: a renamed default preset stays the default one,
+    // A Filter Control's fields entry names a column or a template question of its target: a renamed
+    // one keeps its entry, in the same undo step as the rename.
+    if (propertyName === "name" && this.isObjQuestion(obj) && !!obj["parentQuestion"]) {
+      this.updateFilterFieldsOnFieldNameChanged(obj["parentQuestion"], oldValue, obj["name"]);
+    }
+    // A Filter Control's defaultPreset names a preset: a renamed default preset stays the default one,
     // in the same undo step as the rename.
-    if (propertyName === "name" && obj.getType() === "filteritem") {
-      const owner = obj["itemOwner"];
-      if (!!oldValue && !!owner && owner["defaultItem"] === oldValue) {
-        owner["defaultItem"] = obj["name"];
+    if (propertyName === "name" && obj.getType() === "filterpreset") {
+      const owner = obj["presetOwner"];
+      if (!!oldValue && !!owner && owner["defaultPreset"] === oldValue) {
+        owner["defaultPreset"] = obj["name"];
       }
     }
   }
@@ -2925,12 +2931,21 @@ export class SurveyCreatorModel extends Base
       }
     });
   }
-  private updateFilterSourceOnQuestionNameChanged(oldName: string, newName: string) {
+  private updateFilterTargetOnQuestionNameChanged(oldName: string, newName: string) {
     if (!oldName || oldName === newName) return;
     this.getAllQuestions().forEach(q => {
-      if (q.isDescendantOf("filter") && q["source"] === oldName) {
-        q["source"] = newName;
+      if (q.isDescendantOf("filter") && q["targetQuestion"] === oldName) {
+        q["targetQuestion"] = newName;
       }
+    });
+  }
+  private updateFilterFieldsOnFieldNameChanged(target: Base, oldName: string, newName: string) {
+    if (!target || !oldName || oldName === newName || typeof target["setControlFilter"] !== "function") return;
+    this.getAllQuestions().forEach(q => {
+      if (!q.isDescendantOf("filter") || q["targetQuestion"] !== target["name"]) return;
+      (q["fields"] || []).forEach((entry: any) => {
+        if (entry.name === oldName) entry.name = newName;
+      });
     });
   }
   public isObjQuestion(obj: Base): boolean {

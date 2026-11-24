@@ -822,26 +822,16 @@ export var htStrings = {
       expression: "Ekspresyon"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Sous done",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Montre chip filtè yo",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Montre bouton Filtè yo",
-      // [Auto-translated] "Show search"
-      showSearch: "Montre rechèch",
       // [Auto-translated] "Search in"
       searchFields: "Chèche nan",
       // [Auto-translated] "Presets"
-      items: "Predefini",
+      presets: "Predefini",
       // [Auto-translated] "Default preset"
-      defaultItem: "Predefini default",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Pèmèt plizyè predefini",
+      defaultPreset: "Predefini default",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Pèmèt moun ki reponn yo ajoute predefini"
+      allowAddPresets: "Pèmèt moun ki reponn yo ajoute predefini"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Non predefini",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var htStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Pa gen nivo sòt",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Pa gen predefinisyon",
+    "listIsEmpty@filterPresets": "Pa gen predefinisyon",
     // "Add new choice"
     "addNew@choices": "Ajoute nouvo chwa",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var htStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Ajoute triye nivo",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Ajoute preset",
+    "addNew@filterPresets": "Ajoute preset",
     // "Value"
     value: "Valè",
     // "Text"
@@ -3088,11 +3078,11 @@ export var htStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Chwazi yon matris dinamik, yon matris desann oswa yon panèl dinamik kote filtè a limite ranje oswa panèl yo.",
+      targetQuestion: "Chwazi yon matris dinamik, yon matris desann oswa yon panèl dinamik kote filtè a limite ranje oswa panèl yo.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Preset la aplike lè sondaj la kòmanse."
+      defaultPreset: "Preset la aplike lè sondaj la kòmanse."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Sèvi ak non chan yo nan parantèz, pa egzanp: {price} < 20 ak {category} anyof ['Drinks']."
     },

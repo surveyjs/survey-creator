@@ -822,26 +822,16 @@ export var turkishStrings = {
       expression: "İfade"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Veri kaynağı",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Filtre çiplerini göster",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Filtreler düğmesini göster",
-      // [Auto-translated] "Show search"
-      showSearch: "Aramayı göster",
       // [Auto-translated] "Search in"
       searchFields: "Ara",
       // [Auto-translated] "Presets"
-      items: "Ön ayarlar",
+      presets: "Ön ayarlar",
       // [Auto-translated] "Default preset"
-      defaultItem: "Varsayılan ön ayar",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Birden fazla ön ayara izin ver",
+      defaultPreset: "Varsayılan ön ayar",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Yanıtlayıcıların ön ayar eklemesine izin ver"
+      allowAddPresets: "Yanıtlayıcıların ön ayar eklemesine izin ver"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Ön ayar adı",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var turkishStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Sıralama seviyeleri yok",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Ön ayar yok",
+    "listIsEmpty@filterPresets": "Ön ayar yok",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Seçenek ekle",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var turkishStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Sıralama seviyesi ekleyin",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Ön ayar ekle",
+    "addNew@filterPresets": "Ön ayar ekle",
     // "Value"
     value: "Değer",
     // "Text"
@@ -3088,11 +3078,11 @@ export var turkishStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Filtrenin satır veya panelleri daralttığı dinamik bir matris, açılır matris veya dinamik panel seçin.",
+      targetQuestion: "Filtrenin satır veya panelleri daralttığı dinamik bir matris, açılır matris veya dinamik panel seçin.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Anket başladığında uygulanan ön ayar."
+      defaultPreset: "Anket başladığında uygulanan ön ayar."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Kıvırcık parantez içinde alan adları kullanın, örneğin: {price} < 20 ve {category} herhangi bir ['İçecekler']."
     },

@@ -822,26 +822,16 @@ export var mnStrings = {
       expression: "Өгүүлбэр"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Өгөгдлийн эх сурвалж",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Шүүлтүүрийн чипүүдийг харуулах",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Шүүлтүүрийн товчийг харуулах",
-      // [Auto-translated] "Show search"
-      showSearch: "Хайлтыг харуулах",
       // [Auto-translated] "Search in"
       searchFields: "Хайх",
       // [Auto-translated] "Presets"
-      items: "Урьдчилсан тохиргоонууд",
+      presets: "Урьдчилсан тохиргоонууд",
       // [Auto-translated] "Default preset"
-      defaultItem: "Анхдагч урьдчилсан тохиргоо",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Олон урьдчилсан тохиргоог зөвшөөрөх",
+      defaultPreset: "Анхдагч урьдчилсан тохиргоо",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Оролцогчдод урьдчилсан тохиргоо нэмэхийг зөвшөөрөх"
+      allowAddPresets: "Оролцогчдод урьдчилсан тохиргоо нэмэхийг зөвшөөрөх"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Урьдчилсан тохиргооны нэр",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var mnStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Сортлох түвшин байхгүй",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Урьдчилсан тохиргоо байхгүй",
+    "listIsEmpty@filterPresets": "Урьдчилсан тохиргоо байхгүй",
     // "Add new choice"
     "addNew@choices": "Сонголт оруулах",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var mnStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Сорт түвшин нэмэх",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Урьдчилсан тохиргоо нэмэх",
+    "addNew@filterPresets": "Урьдчилсан тохиргоо нэмэх",
     // "Value"
     value: "Утга",
     // "Text"
@@ -3088,11 +3078,11 @@ export var mnStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Шүүлтүүр нь мөр эсвэл самбаруудыг нарийсгадаг динамик матриц, унадаг матриц эсвэл динамик самбарыг сонгоно уу.",
+      targetQuestion: "Шүүлтүүр нь мөр эсвэл самбаруудыг нарийсгадаг динамик матриц, унадаг матриц эсвэл динамик самбарыг сонгоно уу.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Судалгаа эхлэх үед хэрэгжсэн урьдчилсан тохиргоо."
+      defaultPreset: "Судалгаа эхлэх үед хэрэгжсэн урьдчилсан тохиргоо."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Талбарын нэрийг мушгирсан хаалтанд ашиглана уу, жишээ нь: {price} < 20 ба {category} ['Ундаан'] аль нэгэн."
     },

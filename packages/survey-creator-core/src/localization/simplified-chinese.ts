@@ -822,26 +822,16 @@ export var simplifiedChineseTranslation = {
       expression: "表达"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "数据来源",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "显示滤波芯片",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "显示筛选器按钮",
-      // [Auto-translated] "Show search"
-      showSearch: "显示搜索",
       // [Auto-translated] "Search in"
       searchFields: "搜索",
       // [Auto-translated] "Presets"
-      items: "预设",
+      presets: "预设",
       // [Auto-translated] "Default preset"
-      defaultItem: "默认预设",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "允许多个预设",
+      defaultPreset: "默认预设",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "允许受访者添加预设"
+      allowAddPresets: "允许受访者添加预设"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "预设名称",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var simplifiedChineseTranslation = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "无等级",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "无预设",
+    "listIsEmpty@filterPresets": "无预设",
     // [Auto-translated] "Add choice"
     "addNew@choices": "增加选择",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var simplifiedChineseTranslation = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "添加排序层级",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "添加预设",
+    "addNew@filterPresets": "添加预设",
     // "Value"
     value: "值",
     // "Text"
@@ -3088,11 +3078,11 @@ export var simplifiedChineseTranslation = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "选择一个动态矩阵、下拉矩阵或一个动态面板，其筛选器会缩小行或面板。",
+      targetQuestion: "选择一个动态矩阵、下拉矩阵或一个动态面板，其筛选器会缩小行或面板。",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "调查开始时应用的预设。"
+      defaultPreset: "调查开始时应用的预设。"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "使用大括号中的字段名称，例如：{price} < 20 和 {category} 任意 ['Beverages']。"
     },

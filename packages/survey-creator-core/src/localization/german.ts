@@ -822,26 +822,16 @@ export var germanTranslation = {
       expression: "Ausdruck"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Datenquelle",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Filterchips anzeigen",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Die Schaltfläche Filter anzeigen",
-      // [Auto-translated] "Show search"
-      showSearch: "Suche anzeigen",
       // [Auto-translated] "Search in"
       searchFields: "Suchen in",
       // [Auto-translated] "Presets"
-      items: "Voreinstellungen",
+      presets: "Voreinstellungen",
       // [Auto-translated] "Default preset"
-      defaultItem: "Standard-Voreinstellung",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Mehrere Voreinstellungen erlauben",
+      defaultPreset: "Standard-Voreinstellung",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Erlauben Sie Befragten, Voreinstellungen hinzuzufügen"
+      allowAddPresets: "Erlauben Sie Befragten, Voreinstellungen hinzuzufügen"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Voreinstellungsname",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var germanTranslation = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Keine Sortier-Level",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Keine Voreinstellungen",
+    "listIsEmpty@filterPresets": "Keine Voreinstellungen",
     // "Add new choice"
     "addNew@choices": "Auswahlmöglichkeit hinzufügen",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var germanTranslation = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Sortierebene hinzufügen",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Voreinstellung hinzufügen",
+    "addNew@filterPresets": "Voreinstellung hinzufügen",
     // "Value"
     value: "Wert",
     // [Auto-translated] "Text"
@@ -3088,11 +3078,11 @@ export var germanTranslation = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Wählen Sie eine dynamische Matrix, eine Dropdown-Matrix oder ein dynamisches Panel aus, deren Zeilen oder Panels der Filter eingrenzt.",
+      targetQuestion: "Wählen Sie eine dynamische Matrix, eine Dropdown-Matrix oder ein dynamisches Panel aus, deren Zeilen oder Panels der Filter eingrenzt.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Die Voreinstellung, die angewendet wird, wenn die Umfrage beginnt."
+      defaultPreset: "Die Voreinstellung, die angewendet wird, wenn die Umfrage beginnt."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Verwenden Sie Feldnamen in gelockten Klammern, zum Beispiel: {price} < 20 und {category} beliebige ['Getränke']."
     },

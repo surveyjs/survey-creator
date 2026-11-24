@@ -822,26 +822,16 @@ export var frenchTranslation = {
       expression: "Expression"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Source de données",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Afficher les puces de filtre",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Afficher le bouton Filtres",
-      // [Auto-translated] "Show search"
-      showSearch: "Afficher la recherche",
       // [Auto-translated] "Search in"
       searchFields: "Rechercher dans",
       // [Auto-translated] "Presets"
-      items: "Préréglages",
+      presets: "Préréglages",
       // [Auto-translated] "Default preset"
-      defaultItem: "Préréglage par défaut",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Autoriser plusieurs préréglages",
+      defaultPreset: "Préréglage par défaut",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Autoriser les répondants à ajouter des préréglages"
+      allowAddPresets: "Autoriser les répondants à ajouter des préréglages"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Nom prédéfini",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var frenchTranslation = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Aucun niveau de tri",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Pas de préréglages",
+    "listIsEmpty@filterPresets": "Pas de préréglages",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Ajouter le choix",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var frenchTranslation = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Ajouter le niveau de tri",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Ajouter un préréglage",
+    "addNew@filterPresets": "Ajouter un préréglage",
     // "Value"
     value: "Valeur",
     // "Text"
@@ -3088,11 +3078,11 @@ export var frenchTranslation = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Sélectionnez une matrice dynamique, une matrice déroulante ou un panneau dynamique dont le filtre resserre les lignes ou les panneaux.",
+      targetQuestion: "Sélectionnez une matrice dynamique, une matrice déroulante ou un panneau dynamique dont le filtre resserre les lignes ou les panneaux.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Le préréglage s’appliquait au début de l’enquête."
+      defaultPreset: "Le préréglage s’appliquait au début de l’enquête."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Utilisez les noms des champs entre crochets, par exemple : {price} < 20 et {category} anyof ['Beverages']."
     },

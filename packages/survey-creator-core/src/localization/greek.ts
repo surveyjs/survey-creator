@@ -822,26 +822,16 @@ export var grStrings = {
       expression: "Έκφραση"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Πηγή δεδομένων",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Εμφάνιση τσιπ φίλτρου",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Εμφάνιση του κουμπιού Φίλτρα",
-      // [Auto-translated] "Show search"
-      showSearch: "Εμφάνιση αναζήτησης",
       // [Auto-translated] "Search in"
       searchFields: "Αναζήτηση σε",
       // [Auto-translated] "Presets"
-      items: "Προεπιλογές",
+      presets: "Προεπιλογές",
       // [Auto-translated] "Default preset"
-      defaultItem: "Προεπιλεγμένη προεπιλογή",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Επιτρέψτε πολλαπλές προεπιλογές",
+      defaultPreset: "Προεπιλεγμένη προεπιλογή",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Επιτρέψτε στους συμμετέχοντες να προσθέτουν προεπιλογές"
+      allowAddPresets: "Επιτρέψτε στους συμμετέχοντες να προσθέτουν προεπιλογές"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Όνομα προεπιλογής",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var grStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Χωρίς επίπεδα ταξινόμησης",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Χωρίς προεπιλογές",
+    "listIsEmpty@filterPresets": "Χωρίς προεπιλογές",
     // "Add new choice"
     "addNew@choices": "Προσθήκη νέας επιλογής",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var grStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Προσθήκη επιπέδου ταξινόμησης",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Προσθήκη προεπιλογής",
+    "addNew@filterPresets": "Προσθήκη προεπιλογής",
     // "Value"
     value: "Τιμή",
     // "Text"
@@ -3088,11 +3078,11 @@ export var grStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Επιλέξτε έναν δυναμικό πίνακα, έναν πίνακα αναδυόμενου μενού ή ένα δυναμικό πάνελ του οποίου τις γραμμές ή πάνελ περιορίζει το φίλτρο.",
+      targetQuestion: "Επιλέξτε έναν δυναμικό πίνακα, έναν πίνακα αναδυόμενου μενού ή ένα δυναμικό πάνελ του οποίου τις γραμμές ή πάνελ περιορίζει το φίλτρο.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Η προεπιλογή που εφαρμόζεται όταν ξεκινά η έρευνα."
+      defaultPreset: "Η προεπιλογή που εφαρμόζεται όταν ξεκινά η έρευνα."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Χρησιμοποιήστε ονόματα πεδίων σε αγκύλες, για παράδειγμα: {price} < 20 και {category} οποιοδήποτε από τα ['Drinks']."
     },

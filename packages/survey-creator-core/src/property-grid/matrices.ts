@@ -768,11 +768,11 @@ export class PropertyGridEditorMatrixCalculatedValues extends PropertyGridEditor
     matrix.useCaseSensitiveComparison = false;
   }
 }
-// The Filter Control's presets: name and title in the row (definition "filter@items"), the rest in the
-// detail panel ("filteritem@items"). The order of the rows is the order of the chips.
-export class PropertyGridEditorMatrixFilterItems extends PropertyGridEditorMatrix {
+// The Filter Control's presets: name and title in the row (definition "filter@presets"), the rest in the
+// detail panel ("filterpreset@presets"). The order of the rows is the order of the chips.
+export class PropertyGridEditorMatrixFilterPresets extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type === "filteritem[]";
+    return prop.type === "filterpreset[]";
   }
   protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
     return obj.getType() + "@" + prop.name;
@@ -791,19 +791,79 @@ export class PropertyGridEditorMatrixFilterItems extends PropertyGridEditorMatri
   }
   // Not pe.addNew@items / pe.listIsEmpty@items: the items of a multiple text question use those.
   protected getAddRowText(prop: JsonObjectProperty): string {
-    return editorLocalization.getString("pe.addNew@filterItems");
+    return editorLocalization.getString("pe.addNew@filterPresets");
   }
   protected getnoRowsText(prop: JsonObjectProperty): string {
-    return editorLocalization.getString("pe.listIsEmpty@filterItems");
+    return editorLocalization.getString("pe.listIsEmpty@filterPresets");
   }
   // A preset renamed or retitled in its row: the Default preset list names it anew. The grid updates
-  // the editors that depend on "items" when the array changes, not when a row of it does.
+  // the editors that depend on "presets" when the array changes, not when a row of it does.
   public onMatrixCellValueChanged(obj: Base, options: any): void {
     const grid = !!options.question ? options.question.survey : undefined;
-    const editor: any = !!grid ? grid.getQuestionByName("defaultItem") : undefined;
+    const editor: any = !!grid ? grid.getQuestionByName("defaultPreset") : undefined;
     if (!!editor && !!editor.property) {
       PropertyGridEditorCollection.onMasterValueChanged(obj, editor.property, editor);
     }
+  }
+}
+// The Filter Control's fields: Field name and Field title in the row, Available operators and Show in
+// quick filters in its details (filterfield@fields). Field name picks a field of the target question or
+// takes a name of its own (a field of the record the target has no column for); the operators offered
+// are those the entry's field takes, and follow its name (operators depends on name).
+export class PropertyGridEditorMatrixFilterFields extends PropertyGridEditorMatrix {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type === "filterfield[]";
+  }
+  protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
+    return obj.getType() + "@" + prop.name;
+  }
+  protected getDefaulColumnNames(): Array<string> {
+    return ["name", "title"];
+  }
+  protected getKeyValue(): string {
+    return "name";
+  }
+  protected getBaseValue(prop: JsonObjectProperty): string {
+    return "field";
+  }
+  protected getAddRowText(prop: JsonObjectProperty): string {
+    return editorLocalization.getString("pe.addNew@filterFields");
+  }
+  protected getnoRowsText(prop: JsonObjectProperty): string {
+    return editorLocalization.getString("pe.listIsEmpty@filterFields");
+  }
+  protected getColumnsJSON(obj: Base, prop: JsonObjectProperty, propNames: Array<string>,
+    options: ISurveyCreatorOptions, propGridDefinition: ISurveyPropertyGridDefinition
+  ): Array<any> {
+    const res = super.getColumnsJSON(obj, prop, propNames, options, propGridDefinition);
+    res.forEach((column: any): void => {
+      if (column.name === "name") {
+        column.cellType = "dropdown";
+        column.allowCustomChoices = true;
+      }
+    });
+    return res;
+  }
+  public onMatrixCellCreated(obj: Base, options: any): void {
+    super.onMatrixCellCreated(obj, options);
+    if (options.columnName === "name") {
+      const question = options.cellQuestion;
+      question.choices = this.getTargetFieldChoices(obj);
+      // A field of the record the target has no column for is the dropdown's own custom choice, as a
+      // typed name is: the dropdown makes one only while the survey loads its data, not for a cell.
+      const name = !!options.row.editingObj ? options.row.editingObj.name : undefined;
+      if (!!name && !question.choices.some((choice: ItemValue): boolean => choice.value === name)) {
+        question.customChoices = [new ItemValue(name)];
+      }
+    }
+  }
+  // The fields of the target question, by the name an entry matches them by.
+  private getTargetFieldChoices(obj: Base): Array<any> {
+    const survey: any = !!obj ? (<any>obj).getSurvey() : undefined;
+    const target: any = !!survey ? survey.getQuestionByName((<any>obj).targetQuestion) : undefined;
+    if (!target || typeof target.getFilterFields !== "function") return [];
+    return target.getFilterFields().map((field: any): any =>
+      ({ value: field.name, text: !!field.locTitle && field.locTitle.textOrHtml || field.name }));
   }
 }
 export class PropertyGridEditorMatrixHtmlConditions extends PropertyGridEditorMatrix {
@@ -1138,7 +1198,8 @@ PropertyGridEditorCollection.register(
   new PropertyGridEditorMatrixMutlipleTextItems()
 );
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixSortCriteria());
-PropertyGridEditorCollection.register(new PropertyGridEditorMatrixFilterItems());
+PropertyGridEditorCollection.register(new PropertyGridEditorMatrixFilterPresets());
+PropertyGridEditorCollection.register(new PropertyGridEditorMatrixFilterFields());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixValidators());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixTriggers());
 

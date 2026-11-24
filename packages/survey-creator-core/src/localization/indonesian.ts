@@ -822,26 +822,16 @@ export var indonesianStrings = {
       expression: "Ekspresi"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Sumber data",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Tampilkan chip filter",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Tampilkan tombol Filter",
-      // [Auto-translated] "Show search"
-      showSearch: "Tampilkan pencarian",
       // [Auto-translated] "Search in"
       searchFields: "Cari di",
       // [Auto-translated] "Presets"
-      items: "Preset",
+      presets: "Preset",
       // [Auto-translated] "Default preset"
-      defaultItem: "Prasetel default",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Izinkan beberapa preset",
+      defaultPreset: "Prasetel default",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Izinkan responden menambahkan preset"
+      allowAddPresets: "Izinkan responden menambahkan preset"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Nama preset",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var indonesianStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Tidak ada tingkat pengurutan",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Tidak ada preset",
+    "listIsEmpty@filterPresets": "Tidak ada preset",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Tambahkan pilihan",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var indonesianStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Tambahkan tingkat pengurutan",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Tambahkan preset",
+    "addNew@filterPresets": "Tambahkan preset",
     // "Value"
     value: "Nilai",
     // "Text"
@@ -3088,11 +3078,11 @@ export var indonesianStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Pilih matriks dinamis, matriks dropdown, atau panel dinamis yang baris atau panelnya dipersempit oleh filter.",
+      targetQuestion: "Pilih matriks dinamis, matriks dropdown, atau panel dinamis yang baris atau panelnya dipersempit oleh filter.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Preset diterapkan saat survei dimulai."
+      defaultPreset: "Preset diterapkan saat survei dimulai."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Gunakan nama bidang dalam tanda kurung melingkar, misalnya: {price} < 20 dan {category} anyof ['Beverages']."
     },

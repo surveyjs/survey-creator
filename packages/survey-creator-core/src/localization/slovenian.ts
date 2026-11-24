@@ -822,26 +822,16 @@ export var slStrings = {
       expression: "Izraz"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Vir podatkov",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Prikaži filtre čipov",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Prikaži gumb Filtri",
-      // [Auto-translated] "Show search"
-      showSearch: "Prikaži iskanje",
       // [Auto-translated] "Search in"
       searchFields: "Iskanje v",
       // [Auto-translated] "Presets"
-      items: "Prednastavitve",
+      presets: "Prednastavitve",
       // [Auto-translated] "Default preset"
-      defaultItem: "Privzeta prednastavitev",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Dovoli več prednastavitev",
+      defaultPreset: "Privzeta prednastavitev",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Dovoli anketirancem, da dodajo prednastavitve"
+      allowAddPresets: "Dovoli anketirancem, da dodajo prednastavitve"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Ime prednastavitve",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var slStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Brez nivojev razvrščanja",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Brez prednastavitev",
+    "listIsEmpty@filterPresets": "Brez prednastavitev",
     // "Add new choice"
     "addNew@choices": "Dodaj novo možnost",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var slStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Dodaj stopnjo sortiranja",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Dodaj prednastavitev",
+    "addNew@filterPresets": "Dodaj prednastavitev",
     // "Value"
     value: "Vrednost",
     // "Text"
@@ -3088,11 +3078,11 @@ export var slStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Izberite dinamično matriko, spustno matriko ali dinamično ploščo, katere vrstice ali plošče filter zoži.",
+      targetQuestion: "Izberite dinamično matriko, spustno matriko ali dinamično ploščo, katere vrstice ali plošče filter zoži.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Prednastavitev, uporabljena ob začetku ankete."
+      defaultPreset: "Prednastavitev, uporabljena ob začetku ankete."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Uporabite imena polj v zavitih oklepajih, na primer: {price} < 20 in {category} katerikoli od ['Beverages']."
     },

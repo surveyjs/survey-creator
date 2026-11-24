@@ -822,26 +822,16 @@ export var msStrings = {
       expression: "Ungkapan"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Sumber data",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Tunjukkan cip penapis",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Tunjukkan butang Penapis",
-      // [Auto-translated] "Show search"
-      showSearch: "Tunjukkan carian",
       // [Auto-translated] "Search in"
       searchFields: "Cari dalam",
       // [Auto-translated] "Presets"
-      items: "Pratetap",
+      presets: "Pratetap",
       // [Auto-translated] "Default preset"
-      defaultItem: "Pratetap lalai",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Benarkan pelbagai pratetap",
+      defaultPreset: "Pratetap lalai",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Benarkan responden menambah pratetap"
+      allowAddPresets: "Benarkan responden menambah pratetap"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Nama pratetap",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var msStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Tiada tahap pengisihan",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Tiada pratetap",
+    "listIsEmpty@filterPresets": "Tiada pratetap",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Tambah pilihan",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var msStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Tambah tahap pengisihan",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Tambah pratetap",
+    "addNew@filterPresets": "Tambah pratetap",
     // "Value"
     value: "Nilai",
     // "Text"
@@ -3088,11 +3078,11 @@ export var msStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Pilih matriks dinamik, matriks lungsur bawah atau panel dinamik yang baris atau panelnya ditapis.",
+      targetQuestion: "Pilih matriks dinamik, matriks lungsur bawah atau panel dinamik yang baris atau panelnya ditapis.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Pratetap digunakan apabila tinjauan bermula."
+      defaultPreset: "Pratetap digunakan apabila tinjauan bermula."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Gunakan nama medan dalam kurungan kerinting, contohnya: {price} < 20 dan {category} mana-mana ['Minuman']."
     },

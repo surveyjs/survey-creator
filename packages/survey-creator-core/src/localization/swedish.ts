@@ -823,26 +823,16 @@ export let svStrings = {
       expression: "Uttryck"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Datakälla",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Visa filterchip",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Visa Filter-knappen",
-      // [Auto-translated] "Show search"
-      showSearch: "Visa sökning",
       // [Auto-translated] "Search in"
       searchFields: "Sök i",
       // [Auto-translated] "Presets"
-      items: "Förinställningar",
+      presets: "Förinställningar",
       // [Auto-translated] "Default preset"
-      defaultItem: "Standardförinställning",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Tillåt flera förinställningar",
+      defaultPreset: "Standardförinställning",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Tillåt respondenter att lägga till förinställningar"
+      allowAddPresets: "Tillåt respondenter att lägga till förinställningar"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Förinställt namn",
       // [Auto-translated] "Preset title"
@@ -1110,7 +1100,7 @@ export let svStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Inga sorteringsnivåer",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Inga förinställningar",
+    "listIsEmpty@filterPresets": "Inga förinställningar",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Lägg till valmöjligheter",
     // [Auto-translated] "Add rating value"
@@ -1138,7 +1128,7 @@ export let svStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Lägg till sorteringsnivå",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Lägg till förinställning",
+    "addNew@filterPresets": "Lägg till förinställning",
     // "Value"
     value: "Värde",
     // [Auto-translated] "Text"
@@ -3089,11 +3079,11 @@ export let svStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Välj en dynamisk matris, en rullgardinsmenysmatris eller en dynamisk panel vars rader eller paneler filtret snävar in till.",
+      targetQuestion: "Välj en dynamisk matris, en rullgardinsmenysmatris eller en dynamisk panel vars rader eller paneler filtret snävar in till.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Förinställningen som tillämpas när undersökningen startar."
+      defaultPreset: "Förinställningen som tillämpas när undersökningen startar."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Använd fältnamn inom klammer, till exempel: {price} < 20 och {category} någon av ['Beverages']."
     },

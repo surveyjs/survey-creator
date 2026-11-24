@@ -822,26 +822,16 @@ export var fiStrings = {
       expression: "Lauseke"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Tietolähde",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Näytä suodatinpiirit",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Näytä Suodattimet-painike",
-      // [Auto-translated] "Show search"
-      showSearch: "Näytä haku",
       // [Auto-translated] "Search in"
       searchFields: "Hae",
       // [Auto-translated] "Presets"
-      items: "Esiasetukset",
+      presets: "Esiasetukset",
       // [Auto-translated] "Default preset"
-      defaultItem: "Oletusesiasetus",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Salli useita esiasetuksia",
+      defaultPreset: "Oletusesiasetus",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Salli vastaajien lisätä esiasetuksia"
+      allowAddPresets: "Salli vastaajien lisätä esiasetuksia"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Esiasetuksen nimi",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var fiStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Ei lajittelutasoja",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Ei esiasetuksia",
+    "listIsEmpty@filterPresets": "Ei esiasetuksia",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Lisää valinta",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var fiStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Lisää lajittelutaso",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Lisää esiasetus",
+    "addNew@filterPresets": "Lisää esiasetus",
     // "Value"
     value: "Arvo",
     // "Text"
@@ -3088,11 +3078,11 @@ export var fiStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Valitse dynaaminen matriisi, pudotusvalikko tai dynaaminen paneeli, jonka rivejä tai paneeleja suodatin kaventaa.",
+      targetQuestion: "Valitse dynaaminen matriisi, pudotusvalikko tai dynaaminen paneeli, jonka rivejä tai paneeleja suodatin kaventaa.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Esiasetus otetaan käyttöön kyselyn alkaessa."
+      defaultPreset: "Esiasetus otetaan käyttöön kyselyn alkaessa."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Käytä kenttien nimiä kiharoissa sulkeissa, esimerkiksi: {price} < 20 ja {category} jokin ['Juomat']."
     },

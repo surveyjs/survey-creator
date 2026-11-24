@@ -822,26 +822,16 @@ export var nlStrings = {
       expression: "Uitdrukking"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Gegevensbron",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Filterchips weergeven",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "De knop Filters weergeven",
-      // [Auto-translated] "Show search"
-      showSearch: "Zoek weergeven",
       // [Auto-translated] "Search in"
       searchFields: "Zoeken in",
       // [Auto-translated] "Presets"
-      items: "Presets",
+      presets: "Presets",
       // [Auto-translated] "Default preset"
-      defaultItem: "Standaardpreset",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Meerdere presets toestaan",
+      defaultPreset: "Standaardpreset",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Sta respondenten toe om presets toe te voegen"
+      allowAddPresets: "Sta respondenten toe om presets toe te voegen"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Vooraf ingestelde naam",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var nlStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Geen sort-levels",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Geen presets",
+    "listIsEmpty@filterPresets": "Geen presets",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Voeg keuze toe",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var nlStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Voeg sorteerniveau toe",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Preset toevoegen",
+    "addNew@filterPresets": "Preset toevoegen",
     // "Value"
     value: "Waarde",
     // "Text"
@@ -3088,11 +3078,11 @@ export var nlStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Selecteer een dynamische matrix, een dropdown-matrix of een dynamisch paneel waarvan de rijen of panelen door het filter wordt verkleind.",
+      targetQuestion: "Selecteer een dynamische matrix, een dropdown-matrix of een dynamisch paneel waarvan de rijen of panelen door het filter wordt verkleind.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "De preset die wordt toegepast wanneer de enquête begint."
+      defaultPreset: "De preset die wordt toegepast wanneer de enquête begint."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Gebruik veldnamen tussen krullende haakjes, bijvoorbeeld: {price} < 20 en {category} elk van ['Beverages']."
     },

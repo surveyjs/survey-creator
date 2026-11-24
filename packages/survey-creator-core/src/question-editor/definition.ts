@@ -151,15 +151,19 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   filter: {
     properties: [
-      "source",
-      { name: "allowFastMode", tab: "filterSettings" },
-      { name: "allowAdvancedMode", tab: "filterSettings" },
-      { name: "showSearch", tab: "filterSettings" },
+      "targetQuestion",
+      { name: "fields", tab: "filterSettings" },
+      { name: "showQuickFilters", tab: "filterSettings" },
+      { name: "showAllFiltersButton", tab: "filterSettings" },
+      { name: "showSearchBar", tab: "filterSettings" },
       { name: "searchFields", tab: "filterSettings" },
-      { name: "items", tab: "presets" },
-      { name: "defaultItem", tab: "presets" },
-      { name: "allowMultipleItems", tab: "presets" },
-      { name: "allowAddItems", tab: "presets" }
+      { name: "searchPlaceholder", tab: "filterSettings" },
+      { name: "presets", tab: "presets" },
+      { name: "defaultPreset", tab: "presets" },
+      { name: "showPresets", tab: "presets" },
+      { name: "allowAddPresets", tab: "presets" },
+      { name: "allowEditPresets", tab: "presets" },
+      { name: "allowDeletePresets", tab: "presets" }
     ],
     tabs: [{ name: "filterSettings", index: 10 }, { name: "presets", index: 20 }]
   },
@@ -760,11 +764,18 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   "calculatedvalue@items": {
     properties: ["name", "expression"]
   },
-  // The Filter Control's presets: the row of the matrix, then its detail panel
-  "filter@items": {
+  // The Filter Control's fields: the whole entry in its row, no detail panel
+  "filter@fields": {
     properties: ["name", "title"]
   },
-  "filteritem@items": {
+  "filterfield@fields": {
+    properties: ["operators", "showInQuickFilters"]
+  },
+  // The Filter Control's presets: the row of the matrix, then its detail panel
+  "filter@presets": {
+    properties: ["name", "title"]
+  },
+  "filterpreset@presets": {
     properties: ["expression", "allowEdit", "allowDelete"]
   },
   paneldynamic: {

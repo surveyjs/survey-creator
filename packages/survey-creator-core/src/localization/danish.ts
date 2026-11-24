@@ -823,26 +823,16 @@ export var danishStrings = {
       expression: "Udtryk"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Datakilde",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Vis filterchips",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Vis Filtre-knappen",
-      // [Auto-translated] "Show search"
-      showSearch: "Vis søgning",
       // [Auto-translated] "Search in"
       searchFields: "Søg i",
       // [Auto-translated] "Presets"
-      items: "Presets",
+      presets: "Presets",
       // [Auto-translated] "Default preset"
-      defaultItem: "Standardforudindstilling",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Tillad flere forudindstillinger",
+      defaultPreset: "Standardforudindstilling",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Tillad respondenter at tilføje forudindstillinger"
+      allowAddPresets: "Tillad respondenter at tilføje forudindstillinger"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Forudindstillet navn",
       // [Auto-translated] "Preset title"
@@ -1110,7 +1100,7 @@ export var danishStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Ingen sort-niveauer",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Ingen forudindstillinger",
+    "listIsEmpty@filterPresets": "Ingen forudindstillinger",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Tilføj valg",
     // [Auto-translated] "Add rating value"
@@ -1138,7 +1128,7 @@ export var danishStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Tilføj sorteringsniveau",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Tilføj forudindstilling",
+    "addNew@filterPresets": "Tilføj forudindstilling",
     // "Value"
     value: "Værdi",
     // "Text"
@@ -3089,11 +3079,11 @@ export var danishStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Vælg en dynamisk matrix, en dropdown-matrix eller et dynamisk panel, hvis rækker eller paneler filteret indsnævrer i rækker eller paneler.",
+      targetQuestion: "Vælg en dynamisk matrix, en dropdown-matrix eller et dynamisk panel, hvis rækker eller paneler filteret indsnævrer i rækker eller paneler.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Forudindstillingen gælder ved undersøgelsens start."
+      defaultPreset: "Forudindstillingen gælder ved undersøgelsens start."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Brug feltnavne i krøllede parenteser, for eksempel: {price} < 20 og {category} enhver af ['Beverages']."
     },

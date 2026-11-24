@@ -823,26 +823,16 @@ export var polishStrings = {
       expression: "Wyrażenie"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Źródło danych",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Pokaż chipy filtrów",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Pokaż przycisk Filtry",
-      // [Auto-translated] "Show search"
-      showSearch: "Pokaż wyszukiwanie",
       // [Auto-translated] "Search in"
       searchFields: "Wyszukaj w",
       // [Auto-translated] "Presets"
-      items: "Presety",
+      presets: "Presety",
       // [Auto-translated] "Default preset"
-      defaultItem: "Domyślny preset",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Zezwól na wiele ustawień wstępnych",
+      defaultPreset: "Domyślny preset",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Pozwól respondentom na dodawanie ustawień wstępnych"
+      allowAddPresets: "Pozwól respondentom na dodawanie ustawień wstępnych"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Nazwa presetu",
       // [Auto-translated] "Preset title"
@@ -1110,7 +1100,7 @@ export var polishStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Brak poziomów sortowania",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Brak presetów",
+    "listIsEmpty@filterPresets": "Brak presetów",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Dodaj wybór",
     // [Auto-translated] "Add rating value"
@@ -1138,7 +1128,7 @@ export var polishStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Dodaj poziom sortowania",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Dodaj preset",
+    "addNew@filterPresets": "Dodaj preset",
     // "Value"
     value: "Wartość",
     // "Text"
@@ -3089,11 +3079,11 @@ export var polishStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Wybierz macierz dynamiczną, macierz rozwijaną lub panel dynamiczny, którego wiersze lub panele filtr zawęża.",
+      targetQuestion: "Wybierz macierz dynamiczną, macierz rozwijaną lub panel dynamiczny, którego wiersze lub panele filtr zawęża.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Ustawienie wstępne zastosowane na początku ankiety."
+      defaultPreset: "Ustawienie wstępne zastosowane na początku ankiety."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Używaj nazw pól w nawiasach spiralnych, na przykład: {price} < 20 oraz {category} dowolnego z ['Napojów']."
     },

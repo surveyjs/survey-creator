@@ -9,7 +9,7 @@ const json = { elements: [
   { type: "matrixdynamic", name: "m", columns: [
     { name: "country", cellType: "dropdown", choices: ["de", "fr"] },
     { name: "age", cellType: "text", inputType: "number" }] },
-  { type: "filter", name: "f", source: "m", items: [{ name: "adults", expression: "{age} > 18" }, { name: "blank" }] }] };
+  { type: "filter", name: "f", targetQuestion: "m", presets: [{ name: "adults", expression: "{age} > 18" }, { name: "blank" }] }] };
 
 function createCreator(withHandler: boolean = true): { creator: CreatorTester, requests: Array<FilterAIRequestEvent> } {
   const creator = new CreatorTester();
@@ -22,7 +22,7 @@ function createCreator(withHandler: boolean = true): { creator: CreatorTester, r
 }
 function getExpressionEditor(creator: CreatorTester, index: number): any {
   const grid = new PropertyGridModelTester(creator.survey.getQuestionByName("f"), creator);
-  const row = (<QuestionMatrixDynamicModel>grid.survey.getQuestionByName("items")).visibleRows[index];
+  const row = (<QuestionMatrixDynamicModel>grid.survey.getQuestionByName("presets")).visibleRows[index];
   row.showDetailPanel();
   return row.detailPanel.getQuestionByName("expression");
 }
@@ -81,7 +81,7 @@ describe("Property grid: the AI wand of a filter preset's expression", () => {
   });
   test("an answer that is no list of conditions is accepted; Accept writes the expression, one undo takes it back", () => {
     const { creator, requests } = createCreator();
-    const item = (<any>creator.survey.getQuestionByName("f")).items[1];
+    const item = (<any>creator.survey.getQuestionByName("f")).presets[1];
     const { popup, editor } = ask(creator, 1, "the young and the old");
     requests[0].callback({ data: { expression: "{age} < 18 or {age} > 65", title: "Ends", explanation: "" } });
     const apply = popup.footerToolbar.getActionById("apply");

@@ -822,26 +822,16 @@ export var skStrings = {
       expression: "Výraz"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Zdroj údajov",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Zobraziť filtračné čipy",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Zobraziť tlačidlo Filtre",
-      // [Auto-translated] "Show search"
-      showSearch: "Zobraziť vyhľadávanie",
       // [Auto-translated] "Search in"
       searchFields: "Hľadať v",
       // [Auto-translated] "Presets"
-      items: "Prednastavenia",
+      presets: "Prednastavenia",
       // [Auto-translated] "Default preset"
-      defaultItem: "Predvolené prednastavenie",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Povoliť viacero predvolieb",
+      defaultPreset: "Predvolené prednastavenie",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Povoliť respondentom pridávať prednastavenia"
+      allowAddPresets: "Povoliť respondentom pridávať prednastavenia"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Názov prednastavenia",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var skStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Žiadne triedenie úrovní",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Žiadne prednastavenia",
+    "listIsEmpty@filterPresets": "Žiadne prednastavenia",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Pridajte výber",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var skStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Pridať úroveň triedenia",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Pridať prednastavenie",
+    "addNew@filterPresets": "Pridať prednastavenie",
     // "Value"
     value: "Hodnota",
     // [Auto-translated] "Text"
@@ -3088,11 +3078,11 @@ export var skStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Vyberte dynamickú maticu, rozbaľovaciu maticu alebo dynamický panel, ktorého riadky alebo panely filter zužuje.",
+      targetQuestion: "Vyberte dynamickú maticu, rozbaľovaciu maticu alebo dynamický panel, ktorého riadky alebo panely filter zužuje.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Prednastavenie aplikované na začiatku prieskumu."
+      defaultPreset: "Prednastavenie aplikované na začiatku prieskumu."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Použite názvy polí v zložitých zátvorkách, napríklad: {price} < 20 a {category} ktorýkoľvek z ['Nápoje']."
     },

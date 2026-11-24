@@ -2245,7 +2245,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       if (text && text !== value) return text;
     }
     // The operators are named the way the logic tab names them.
-    if (prop.name === "filterOperators") {
+    if (prop.name === "filterOperators" || (prop.name === "operators" && !!prop.classInfo && prop.classInfo.name === "filterfield")) {
       let text = editorLocalization.getString("op." + value);
       if (text && text !== value) return text;
     }
@@ -2431,9 +2431,9 @@ export class PropertyGridEditorQuestionSelectBase extends PropertyGridEditorQues
 }
 // The Filter Control's source: a question that holds records the control can filter - a dynamic or
 // dropdown matrix, a dynamic panel. survey-core resolves it by the same duck typing.
-export class PropertyGridEditorQuestionFilterSource extends PropertyGridEditorQuestionSelectBase {
+export class PropertyGridEditorQuestionFilterTarget extends PropertyGridEditorQuestionSelectBase {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "question_filtersource";
+    return prop.type == "question_filtertarget";
   }
   protected isQuestionFit(question: Question): boolean {
     const q: any = question;
@@ -2505,7 +2505,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionCarryForward());
-PropertyGridEditorCollection.register(new PropertyGridEditorQuestionFilterSource());
+PropertyGridEditorCollection.register(new PropertyGridEditorQuestionFilterTarget());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
 PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 PropertyGridEditorCollection.register(new PropertyGridEditorColorWithAlpha());

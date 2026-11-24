@@ -822,26 +822,16 @@ export const roStrings = {
       expression: "Expresie"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Sursa de date",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Afișează cipurile de filtru",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Afișează butonul Filtre",
-      // [Auto-translated] "Show search"
-      showSearch: "Afișează căutarea",
       // [Auto-translated] "Search in"
       searchFields: "Caută în",
       // [Auto-translated] "Presets"
-      items: "Presetări",
+      presets: "Presetări",
       // [Auto-translated] "Default preset"
-      defaultItem: "Presetare implicită",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Permiteți mai multe presetări",
+      defaultPreset: "Presetare implicită",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Permiteți respondenților să adauge presetări"
+      allowAddPresets: "Permiteți respondenților să adauge presetări"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Nume presetat",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export const roStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Fără niveluri de sortare",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Fără presetări",
+    "listIsEmpty@filterPresets": "Fără presetări",
     // "Add new choice"
     "addNew@choices": "Adăugați o alegere nouă",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export const roStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Adaugă nivelul de sortare",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Adaugă preset",
+    "addNew@filterPresets": "Adaugă preset",
     // "Value"
     value: "Valoare",
     // [Auto-translated] "Text"
@@ -3088,11 +3078,11 @@ export const roStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Selectați o matrice dinamică, o matrice derulantă sau un panou dinamic ale cărui rânduri sau panouri filtrul le restrânge.",
+      targetQuestion: "Selectați o matrice dinamică, o matrice derulantă sau un panou dinamic ale cărui rânduri sau panouri filtrul le restrânge.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Presetul aplicat la începutul sondajului."
+      defaultPreset: "Presetul aplicat la începutul sondajului."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Folosiți numele câmpurilor între paranteze, de exemplu: {price} < 20 și {category} anyof ['Drinks']."
     },

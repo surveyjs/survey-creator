@@ -823,26 +823,16 @@ export var traditionalChineseTranslation = {
       expression: "表達"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "資料來源",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "顯示濾波晶片",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "顯示篩選器按鈕",
-      // [Auto-translated] "Show search"
-      showSearch: "顯示搜尋",
       // [Auto-translated] "Search in"
       searchFields: "搜尋",
       // [Auto-translated] "Presets"
-      items: "預設",
+      presets: "預設",
       // [Auto-translated] "Default preset"
-      defaultItem: "預設預設",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "允許多個預設",
+      defaultPreset: "預設預設",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "允許受訪者新增預設"
+      allowAddPresets: "允許受訪者新增預設"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "預設名稱",
       // [Auto-translated] "Preset title"
@@ -1110,7 +1100,7 @@ export var traditionalChineseTranslation = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "無分類等級",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "無預設",
+    "listIsEmpty@filterPresets": "無預設",
     // [Auto-translated] "Add choice"
     "addNew@choices": "增加選擇",
     // [Auto-translated] "Add rating value"
@@ -1138,7 +1128,7 @@ export var traditionalChineseTranslation = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "新增排序層級",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "新增預設",
+    "addNew@filterPresets": "新增預設",
     // "Value"
     value: "值",
     // "Text"
@@ -3089,11 +3079,11 @@ export var traditionalChineseTranslation = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "選擇動態矩陣、下拉式矩陣或動態面板，其列或面板可被篩選器縮小範圍。",
+      targetQuestion: "選擇動態矩陣、下拉式矩陣或動態面板，其列或面板可被篩選器縮小範圍。",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "預設值在調查開始時套用。"
+      defaultPreset: "預設值在調查開始時套用。"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "使用大括號內的欄位名稱，例如：{price} < 20 和 {category} 任意 ['Beverages']。"
     },

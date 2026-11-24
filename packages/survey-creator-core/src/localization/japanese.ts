@@ -822,26 +822,16 @@ export var jaStrings = {
       expression: "表現"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "データソース",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "フィルターチップを表示",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "フィルターボタンを表示する",
-      // [Auto-translated] "Show search"
-      showSearch: "検索を表示",
       // [Auto-translated] "Search in"
       searchFields: "検索",
       // [Auto-translated] "Presets"
-      items: "プリセット",
+      presets: "プリセット",
       // [Auto-translated] "Default preset"
-      defaultItem: "デフォルトプリセット",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "複数のプリセットを許可する",
+      defaultPreset: "デフォルトプリセット",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "回答者がプリセットを追加できるようにする"
+      allowAddPresets: "回答者がプリセットを追加できるようにする"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "プリセット名",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var jaStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "レベルはない",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "プリセットなし",
+    "listIsEmpty@filterPresets": "プリセットなし",
     // [Auto-translated] "Add choice"
     "addNew@choices": "選択肢を加える",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var jaStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "ソートレベルを追加",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "プリセットを追加",
+    "addNew@filterPresets": "プリセットを追加",
     // "Value"
     value: "値",
     // "Text"
@@ -3088,11 +3078,11 @@ export var jaStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "動的マトリックス、ドロップダウンマトリックス、またはフィルターの行やパネルを絞り込む動的パネルを選択します。",
+      targetQuestion: "動的マトリックス、ドロップダウンマトリックス、またはフィルターの行やパネルを絞り込む動的パネルを選択します。",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "調査開始時に適用されたプリセット。"
+      defaultPreset: "調査開始時に適用されたプリセット。"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "フィールド名はカールボッコで囲み、例:{price} < 20 や {category} anyof ['Beverages']] を選びます。"
     },

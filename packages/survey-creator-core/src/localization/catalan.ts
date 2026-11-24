@@ -822,26 +822,16 @@ export var catalanTranslation = {
       expression: "Expressió"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Font de dades",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Mostra els xips de filtre",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Mostra el botó Filtres",
-      // [Auto-translated] "Show search"
-      showSearch: "Mostra la cerca",
       // [Auto-translated] "Search in"
       searchFields: "Cerca a",
       // [Auto-translated] "Presets"
-      items: "Presets",
+      presets: "Presets",
       // [Auto-translated] "Default preset"
-      defaultItem: "Predefinició predeterminada",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Permetre múltiples predefinicions",
+      defaultPreset: "Predefinició predeterminada",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Permetre als enquestats afegir presets"
+      allowAddPresets: "Permetre als enquestats afegir presets"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Nom predefinit",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var catalanTranslation = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "No hi ha nivells de sort",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Sense presets",
+    "listIsEmpty@filterPresets": "Sense presets",
     // "Add new choice"
     "addNew@choices": "Añade una opción",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var catalanTranslation = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Afegeix nivell d'ordenació",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Afegeix un ajust predefinit",
+    "addNew@filterPresets": "Afegeix un ajust predefinit",
     // "Value"
     value: "Valor",
     // [Auto-translated] "Text"
@@ -3088,11 +3078,11 @@ export var catalanTranslation = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Seleccioneu una matriu dinàmica, una matriu desplegable o un panell dinàmic les files o panells del qual el filtre va reduint.",
+      targetQuestion: "Seleccioneu una matriu dinàmica, una matriu desplegable o un panell dinàmic les files o panells del qual el filtre va reduint.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "El preajust s'aplica quan comença l'enquesta."
+      defaultPreset: "El preajust s'aplica quan comença l'enquesta."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Utilitza noms de camps entre parèntesis, per exemple: {price} < 20 i {category} anyof ['Beverages']."
     },

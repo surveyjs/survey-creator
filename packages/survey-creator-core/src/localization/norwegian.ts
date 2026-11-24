@@ -822,26 +822,16 @@ export var nbStrings = {
       expression: "Uttrykk"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Datakilde",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Vis filterbrikker",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Vis Filter-knappen",
-      // [Auto-translated] "Show search"
-      showSearch: "Vis søk",
       // [Auto-translated] "Search in"
       searchFields: "Søk i",
       // [Auto-translated] "Presets"
-      items: "Forhåndsinnstillinger",
+      presets: "Forhåndsinnstillinger",
       // [Auto-translated] "Default preset"
-      defaultItem: "Standard forhåndsinnstilling",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Tillat flere forhåndsinnstillinger",
+      defaultPreset: "Standard forhåndsinnstilling",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Tillat respondenter å legge til forhåndsinnstillinger"
+      allowAddPresets: "Tillat respondenter å legge til forhåndsinnstillinger"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Forhåndsinnstilt navn",
       // [Auto-translated] "Preset title"
@@ -1109,7 +1099,7 @@ export var nbStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Ingen sorteringsnivåer",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Ingen forhåndsinnstillinger",
+    "listIsEmpty@filterPresets": "Ingen forhåndsinnstillinger",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Legg til valg",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1127,7 @@ export var nbStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Legg til sorteringsnivå",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Legg til forhåndsinnstilling",
+    "addNew@filterPresets": "Legg til forhåndsinnstilling",
     // "Value"
     value: "Verdi",
     // "Text"
@@ -3088,11 +3078,11 @@ export var nbStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Velg en dynamisk matrise, en nedtrekksmenymatrise eller et dynamisk panel hvor filteret snevrer inn radene eller panelene.",
+      targetQuestion: "Velg en dynamisk matrise, en nedtrekksmenymatrise eller et dynamisk panel hvor filteret snevrer inn radene eller panelene.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Forhåndsinnstillingen som gjelder når undersøkelsen starter."
+      defaultPreset: "Forhåndsinnstillingen som gjelder når undersøkelsen starter."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Bruk feltnavn i krøllete parenteser, for eksempel: {price} < 20 og {category} any of ['Beverages']."
     },
