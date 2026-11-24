@@ -866,6 +866,43 @@ export class PropertyGridEditorMatrixFilterFields extends PropertyGridEditorMatr
       ({ value: field.name, text: !!field.locTitle && field.locTitle.textOrHtml || field.name }));
   }
 }
+// A preset's Allow checkboxes (allowEdit, allowDelete, allowCopy). A preset without a permission of its
+// own (undefined) follows the control's, so the checkbox shows the permission in effect - the
+// control's until the preset has one - and a click writes the preset's own. Registered after
+// PropertyGridEditorUndefinedBoolean, which would fit these properties too and show Inherit / Yes / No.
+const filterPresetControlPermissions: { [name: string]: string } = {
+  allowEdit: "allowEditPresets", allowDelete: "allowDeletePresets", allowCopy: "allowAddPresets"
+};
+export class PropertyGridEditorFilterPresetPermission extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type === "boolean" && !!prop.classInfo && prop.classInfo.name === "filterpreset" &&
+      !!filterPresetControlPermissions[prop.name];
+  }
+  // No default: a boolean question's default would be written into a preset that has no permission.
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    return { type: "boolean", renderAs: "checkbox", titleLocation: "hidden" };
+  }
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty): void {
+    const controlPropName = filterPresetControlPermissions[prop.name];
+    question.valueFromDataCallback = (val: any): boolean => {
+      if (typeof val === "boolean") return val;
+      const control: any = (<any>obj).presetOwner;
+      return !!control && !!control[controlPropName];
+    };
+    question.updateValueFromSurvey((<any>obj)[prop.name]);
+    const control: Base = (<any>obj).presetOwner;
+    if (!control) return;
+    // A question in a row's details is not disposed through onDisposing: the handler takes itself off.
+    const key = "filterPresetPermission_" + question.id;
+    control.registerFunctionOnPropertyValueChanged(controlPropName, (): void => {
+      if (question.isDisposed || obj.isDisposed) {
+        control.unRegisterFunctionOnPropertyValueChanged(controlPropName, key);
+        return;
+      }
+      question.updateValueFromSurvey((<any>obj)[prop.name]);
+    }, key);
+  }
+}
 export class PropertyGridEditorMatrixHtmlConditions extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "htmlconditions";
@@ -1200,6 +1237,7 @@ PropertyGridEditorCollection.register(
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixSortCriteria());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixFilterPresets());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixFilterFields());
+PropertyGridEditorCollection.register(new PropertyGridEditorFilterPresetPermission());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixValidators());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixTriggers());
 

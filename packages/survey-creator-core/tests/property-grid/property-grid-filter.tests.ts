@@ -121,6 +121,28 @@ describe("Property grid: the Filter Control presets", () => {
     expect(defaultPreset.choices.length, "#2").toBe(0);
     expect(!!filter.defaultPreset, "#3").toBe(false);
   });
+  test("a preset's Allow checkboxes show the control's permission until the preset has its own", () => {
+    const { filter, matrix } = createGrid({ allowDeletePresets: true, presets: [{ name: "a" }, { name: "b", allowEdit: true, allowDelete: false }] });
+    const detail = (row: number, name: string): any => {
+      const r = matrix.visibleRows[row];
+      r.showDetailPanel();
+      return r.detailPanel.getQuestionByName(name);
+    };
+    const a = filter.presets[0];
+    expect([detail(0, "allowEdit").value, detail(0, "allowDelete").value], "#1: the control's").toEqual([false, true]);
+    expect([detail(1, "allowEdit").value, detail(1, "allowDelete").value], "#2: the preset's own").toEqual([true, false]);
+    filter.allowEditPresets = true;
+    filter.allowDeletePresets = false;
+    expect([detail(0, "allowEdit").value, detail(0, "allowDelete").value], "#3: follows the control").toEqual([true, false]);
+    expect([detail(1, "allowEdit").value, detail(1, "allowDelete").value], "#4: keeps its own").toEqual([true, false]);
+    expect([a.allowEdit, a.allowDelete], "#5: nothing written").toEqual([undefined, undefined]);
+    detail(0, "allowEdit").value = false;
+    expect(a.allowEdit, "#6: a click writes the preset's own").toBe(false);
+    expect(a.toJSON(), "#7").toEqual({ name: "a", allowEdit: false });
+    filter.allowEditPresets = false;
+    filter.allowEditPresets = true;
+    expect(detail(0, "allowEdit").value, "#8: its own now").toBe(false);
+  });
   test("the add button of multiple text items is unchanged", () => {
     const survey = new SurveyModel({ elements: [{ type: "multipletext", name: "q1", items: [{ name: "i1" }] }] });
     const grid = new PropertyGridModelTester(survey.getQuestionByName("q1"));
