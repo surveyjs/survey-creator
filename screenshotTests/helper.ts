@@ -1,5 +1,5 @@
 import { Locator, Page } from "playwright/test";
-import { expect } from "../e2e/helper";
+import { test, expect } from "../e2e/helper";
 
 export * from "../e2e/helper";
 
