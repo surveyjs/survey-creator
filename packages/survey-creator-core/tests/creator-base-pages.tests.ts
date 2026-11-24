@@ -933,7 +933,7 @@ test("Don't add extra subscriptions and fully unsubscribe title/description chan
   expect(designerPlugin.model.newPage).toBeTruthy();
   let pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
   pageModel.isGhost = true;
-  const getTitleSubscriptions = () => designerPlugin.model.newPage["onPropChangeFunctions"].filter(f => f.name === "title");
+  const getTitleSubscriptions = () => designerPlugin.model.newPage["onPropChangeFunctions"].filter(f => f.name === "title" && f.key === "add_ghost");
   expect(getTitleSubscriptions().length).toBe(1);
   pageModel["attachElement"](designerPlugin.model.newPage);
   expect(getTitleSubscriptions().length).toBe(1);
@@ -1502,6 +1502,23 @@ test("Question type selector localization", (): any => {
   expect(creator.addNewQuestionText).toEqual("Add New Rating Scale");
   locStrings.ed.addNewQuestion = oldAddNewQuestion;
   locStrings.ed.addNewTypeQuestion = oldAddNewTypeQuestion;
+});
+
+test("Question type selector has a name that differs from Add Question", (): any => {
+  const creator = new CreatorTester();
+  const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  expect(selectorModel.title).toEqual("Select question type");
+  expect(selectorModel.title).not.toEqual(creator.addNewQuestionText);
+});
+
+test("Question type selector reflects popup visibility in ariaExpanded", (): any => {
+  const creator = new CreatorTester();
+  const selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  expect(selectorModel.ariaExpanded).toBe(false);
+  selectorModel.popupModel.show();
+  expect(selectorModel.ariaExpanded).toBe(true);
+  selectorModel.popupModel.hide();
+  expect(selectorModel.ariaExpanded).toBe(false);
 });
 
 test("Question type selector popup displayMode", (): any => {

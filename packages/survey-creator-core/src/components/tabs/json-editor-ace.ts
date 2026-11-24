@@ -34,6 +34,9 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
   public init(aceEditor: any): void {
     const window = DomWindowHelper.getWindow();
     this.aceEditor = aceEditor;
+    if (!!this.editorState) {
+      this.aceEditor.setSession(this.editorState.data);
+    }
     const aceModules = (window?.["ace"] as any)?.define?.modules;
     if (!(aceModules && aceModules["ace/ext/searchbox"])) {
       this.aceEditor.commands["removeCommand"]("find");
@@ -45,15 +48,26 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
         this.aceEditor.session.setMode("ace/mode/json");
       } catch{ }
     }
-    const self: AceJsonEditorModel = this;
     this.aceEditor.setShowPrintMargin(false);
-    this.aceEditor.getSession().on("change", () => {
-      self.onTextChanged();
-    });
+    this.aceEditor.getSession().on("change", this.onSessionChange);
     this.aceEditor.getSession().setUseWorker(true);
     SurveyTextWorker.newLineChar =
       this.aceEditor.session.doc.getNewLineCharacter();
     this.onPluginActivate();
+  }
+  private onSessionChange = (): void => {
+    this.onTextChanged();
+  };
+  // The session holds the text, its undo history, the cursor and the scroll position. The editor
+  // of a closed tab is not destroyed, so it gets an empty session in exchange: one session must
+  // not stay in two editors.
+  protected getEditorStateData(): any {
+    const ace = DomWindowHelper.getWindow()?.["ace"];
+    if (!this.aceEditor || typeof ace?.createEditSession !== "function") return undefined;
+    const session = this.aceEditor.getSession();
+    session.off("change", this.onSessionChange);
+    this.aceEditor.setSession(ace.createEditSession(""));
+    return session;
   }
 
   public onPluginActivate(): void {

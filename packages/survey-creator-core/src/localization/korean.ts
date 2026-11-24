@@ -69,6 +69,8 @@ export var koreanStrings = {
     expression: "표현식",
     // [Auto-translated] "Signature"
     signaturepad: "서명",
+    // [Auto-translated] "Filter"
+    filter: "필터",
     // [Auto-translated] "Button Group"
     buttongroup: "단추 그룹"
   },
@@ -304,6 +306,8 @@ export var koreanStrings = {
     themeResetConfirmationOk: "예, 테마를 재설정합니다.",
     // [Auto-translated] "Add Question"
     addNewQuestion: "질문 추가",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "문제 유형 선택",
     // [Auto-translated] "Select page..."
     selectPage: "페이지 선택...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var koreanStrings = {
     addNewTypeQuestion: "{0} 추가", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[로고]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "업로드 로고",
     // [Auto-translated] "Item "
     choices_Item: "항목 ",
     // [Auto-translated] "Select a file"
@@ -816,6 +822,38 @@ export var koreanStrings = {
       // [Auto-translated] "Expression"
       expression: "식"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "데이터 소스",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "필터 칩 표시",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "필터 버튼 표시",
+      // [Auto-translated] "Show search"
+      showSearch: "검색 보기",
+      // [Auto-translated] "Search in"
+      searchFields: "검색",
+      // [Auto-translated] "Presets"
+      items: "프리셋",
+      // [Auto-translated] "Default preset"
+      defaultItem: "기본 프리셋",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "여러 프리셋 허용",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "응답자가 프리셋을 추가할 수 있도록 허용"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "프리셋 이름",
+      // [Auto-translated] "Preset title"
+      title: "프리셋 제목",
+      // [Auto-translated] "Filter expression"
+      expression: "필터 표현식",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "편집 허용",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "삭제 허용"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "정렬",
@@ -877,7 +915,9 @@ export var koreanStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "별도의 열에 있는 각 옵션",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "이 열에 따라 정렬 허용"
+      allowSort: "이 열에 따라 정렬 허용",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "이 열에 따른 필터링 허용"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -981,12 +1021,20 @@ export var koreanStrings = {
     addItem: "항목을 추가하려면 클립하십시오.",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "항목을 제거하려면 클릭하세요...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "추가{0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "제거{0}",
     // [Auto-translated] "Drag the item"
     dragItem: "항목을 드래그합니다",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "중첩 선택 확장",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "붕괴 중첩 선택",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "중첩된 선택지를 확장{0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "중첩된 선택지 붕괴{0}",
     // [Auto-translated] "Show description"
     showDescription: "쇼 설명",
     // [Auto-translated] "Hide description"
@@ -1061,6 +1109,8 @@ export var koreanStrings = {
     "listIsEmpty@pages": "부지 없어",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "분류 없는 레벨",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "프리셋 없음",
     // [Auto-translated] "Add choice"
     "addNew@choices": "선택권 추가로",
     // [Auto-translated] "Add rating value"
@@ -1087,6 +1137,8 @@ export var koreanStrings = {
     "addNew@pages": "페이지 추가",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "정렬 단계 추가",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "프리셋 추가",
     // "Value"
     value: "값",
     // "Text"
@@ -1201,6 +1253,10 @@ export var koreanStrings = {
     pageSize: "페이지당 행 수",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "사용자가 행을 정렬할 수 있게 합니다",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "이 질문에 따라 필터링 허용",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "필터 연산자",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "최대 정렬 단계",
     // [Auto-translated] "Default sort order"
@@ -1757,6 +1813,10 @@ export var koreanStrings = {
       rateValues: "길이 값",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "슬라이더 설정",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "필터 설정",
+      // [Auto-translated] "Presets"
+      presets: "프리셋",
       // "Choices from a Web Service"
       choicesByUrl: "웹에서 선택",
       // [Auto-translated] "Numbering"
@@ -3027,6 +3087,18 @@ export var koreanStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "진행률 표시줄의 위치를 설정합니다. \"자동\" 값은 설문조사 헤더 위 또는 아래에 진행률 표시줄을 표시합니다."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "필터가 줄 또는 패널을 좁히는 동적 매트릭스, 드롭다운 매트릭스 또는 동적 패널을 선택하세요.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "설문조사가 시작될 때 적용된 프리셋입니다."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "필드 이름을 중괄호 안에 두세요. 예를 들어 {price} < 20, {category} ['Beverages']의 어떤 항목이든지 함께 사용하세요."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "응답자가 이 필드로 필터링할 수 있는 연산자 수를 제한합니다. 필드에 맞는 모든 연산자를 허용하려면 빈 상태로 두세요.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "응답자에게 표시되지 않는 열 ID입니다.",

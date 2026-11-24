@@ -65,9 +65,11 @@ test.describe(title, () => {
     const sectionContentElement = page.getByRole("group", { name: "Conditions" });
 
     await sectionContentElement.locator(".sd-action").nth(1).click();
+    // The dialog moves the focus to its first input 100 ms after it opens; the Tab presses below start from the dropdown
+    await expect(page.locator(".sv-popup--modal-popup .sv-popup__container :focus")).toHaveCount(1);
     await page.locator(".sl-dropdown").first().click();
     await getVisibleSelectListItemByText(page, "region").click({ position: { x: 10, y: 20 } });
-    await page.waitForTimeout(1000);
+    await expect(getVisibleSelectListItemByText(page, "region")).toHaveCount(0);
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
     await page.keyboard.press("ArrowDown");
@@ -78,7 +80,7 @@ test.describe(title, () => {
     await showContentBehindPopup(page);
   });
 
-  test("Check run expression description", async ({ page }) => {
+  test("Check run expression description", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
 
     await page.evaluate(() => {

@@ -1,5 +1,4 @@
-import { test, expect } from "playwright/test";
-import { url, setJSON, getPropertyGridCategory, generalGroupName, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton, compareScreenshot, doDragDrop, setIsCompact, resetFocusToBody, getVisibleSelectListItemByText, hideContentBehindPopup, showContentBehindPopup, clickAfterScrollIntoView } from "./helper";
+import { test, expect, url, setJSON, getPropertyGridCategory, generalGroupName, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText, getQuestionBarItemByTitle, setShowToolbox, setShowAddQuestionButton, setAllowEditSurveyTitle, getAddNewQuestionButton, compareScreenshot, doDragDrop, setIsCompact, resetFocusToBody, getVisibleSelectListItemByText, hideContentBehindPopup, showContentBehindPopup, clickAfterScrollIntoView, selectedObjectTextSelector } from "./helper";
 
 const title = "Property Grid Editors";
 test.describe(title, () => {
@@ -7,7 +6,7 @@ test.describe(title, () => {
     await page.goto(`${url}`);
   });
 
-  test("Properties on the same line", async ({ page }) => {
+  test("Properties on the same line", { tag: "@fresh-page" }, async ({ page }) => {
     const json = {
       showQuestionNumbers: true,
       "elements": [
@@ -52,7 +51,7 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".spg-panel__content").filter({ hasText: "" }), "properties-on-one-line-focus.png");
   });
 
-  test("Properties on the same line (date)", async ({ page }) => {
+  test("Properties on the same line (date)", { tag: "@fresh-page" }, async ({ page }) => {
     const json = {
       showQuestionNumbers: true,
       "elements": [
@@ -223,7 +222,7 @@ test.describe(title, () => {
     });
 
     await page.locator(".svc-question__content .sd-question__title").first().click();
-    await page.waitForTimeout(500);
+    await expect(page.locator(selectedObjectTextSelector)).toHaveText("question2");
     await getPropertyGridCategory(page, generalGroupName).click();
     await getPropertyGridCategory(page, "Conditions").click();
     await page.locator(".spg-panel__content div[data-name='visibleIf'] button").filter({ hasText: "Edit" }).click();
@@ -232,7 +231,7 @@ test.describe(title, () => {
     await compareScreenshot(page, page.locator(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), "pg-logic-popup-boolean.png");
     await showContentBehindPopup(page);
     await page.locator("button").filter({ hasText: "Cancel" }).first().click();
-    await page.waitForTimeout(1000);
+    await expect(page.locator(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container").filter({ visible: true })).toHaveCount(0);
     await page.locator(".spg-panel__content div[data-name='enableIf'] button").filter({ hasText: "Edit" }).click();
     await hideContentBehindPopup(page);
     await compareScreenshot(page, page.locator(".sv-popup.svc-property-editor.sv-popup--modal-popup .sv-popup__container"), "pg-logic-popup-rating.png");
@@ -447,7 +446,6 @@ test.describe(title, () => {
     await getPropertyGridCategory(page, "Conditions").click();
 
     await page.locator("div[data-name='triggers'] button[title='Show Details']").first().click();
-    await page.waitForTimeout(500);
 
     await compareScreenshot(page, page.locator("div[data-name='triggers'] .spg-table__cell--detail-panel").first(), "triggers-editor-dropdown-long-text.png");
   });
@@ -466,7 +464,7 @@ test.describe(title, () => {
     await compareScreenshot(page, questionSelector, "pg-editor-errors.png");
   });
 
-  test("Check color editor", async ({ page }) => {
+  test("Check color editor", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => window["creator"].currentPlugin.propertyGrid.searchEnabled = false);
     await page.setViewportSize({ width: 1920, height: 920 });
     await page.evaluate(() => {
@@ -511,7 +509,7 @@ test.describe(title, () => {
     await compareScreenshot(page, questionSelector, "color-editor-title-location-left.png");
   });
 
-  test("Check color editor with empty value", async ({ page }) => {
+  test("Check color editor with empty value", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await page.evaluate(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
@@ -538,7 +536,7 @@ test.describe(title, () => {
     await compareScreenshot(page, questionSelector, "color-editor-empty-disabled.png");
   });
 
-  test("Check spinedit editor", async ({ page }) => {
+  test("Check spinedit editor", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await page.evaluate(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
@@ -574,7 +572,7 @@ test.describe(title, () => {
     await compareScreenshot(page, questionSelector, "spin-editor-title-location-left.png");
   });
 
-  test("Check file editor", async ({ page }) => {
+  test("Check file editor", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await page.evaluate(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
@@ -605,7 +603,7 @@ test.describe(title, () => {
     await compareScreenshot(page, questionSelector, "file-editor-title-location-left-focus.png");
   });
 
-  test("Check dropdown editor with titleLocation: 'left'", async ({ page }) => {
+  test("Check dropdown editor with titleLocation: 'left'", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await page.evaluate(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
@@ -674,7 +672,7 @@ test.describe(title, () => {
     await compareScreenshot(page, sectionContentElement, "boolean-editors-no-grouping.png");
   });
 
-  test("Check comment editor with reset button", async ({ page }) => {
+  test("Check comment editor with reset button", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 900 });
     await page.evaluate(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
@@ -692,7 +690,7 @@ test.describe(title, () => {
     await compareScreenshot(page, questionSelector, "comment-with-reset-enabled-button.png");
   });
 
-  test("Check text editor with reset button", async ({ page }) => {
+  test("Check text editor with reset button", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1920 });
     await page.evaluate(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
@@ -773,7 +771,7 @@ test.describe(title, () => {
     await compareScreenshot(page, dropdownSelector, "pg-dropdown-clean-button-hover.png");
   });
 
-  test("Property grid checkbox with description", async ({ page }) => {
+  test("Property grid checkbox with description", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.evaluate(() => {
       (window as any).SurveyCreatorCore.localization.getLocale("en").pehelp["visible"] = "Visible property's description";
@@ -826,7 +824,7 @@ test.describe(title, () => {
     await compareScreenshot(page, expandedGroup, "pg-pages-with-reset.png");
   });
 
-  test("popup overlay in property grid", async ({ page }) => {
+  test("popup overlay in property grid", { tag: "@fresh-page" }, async ({ page }) => {
     await setShowToolbox(page, false);
     await setAllowEditSurveyTitle(page, false);
     await setShowAddQuestionButton(page, false);
@@ -870,7 +868,6 @@ test.describe(title, () => {
     const questionHeader = page.getByRole("group", { name: "Conditions" }).locator(".spg-question__header");
     const json = { "pages": [{ "name": "page1", "elements": [{ "type": "text", "name": "text", }] }] };
     await setJSON(page, json);
-    await page.waitForTimeout(1000);
     await page.locator(".svc-page").first().click({ position: { x: 5, y: 5 } });
     await getPropertyGridCategory(page, "Conditions").click();
     await doDragDrop({ page,
@@ -881,7 +878,7 @@ test.describe(title, () => {
     await compareScreenshot(page, questionHeader, "helper-action.png");
   });
 
-  test("Multiline help text", async ({ page }) => {
+  test("Multiline help text", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1240, height: 870 });
     await page.evaluate(() => {
       const translations = (window as any).SurveyCreatorCore.getLocaleStrings("en");
@@ -901,14 +898,13 @@ test.describe(title, () => {
       ]
     };
     await setJSON(page, json);
-    await page.waitForTimeout(1000);
 
     await question1.click({ position: { x: 20, y: 20 } });
     await page.locator(".spg-question[data-name='visible']").getByRole("button", { name: "Show description" }).click();
     await compareScreenshot(page, ".spg-row.spg-row--multiple", "multiline-help-text.png");
   });
 
-  test("Character counter in property grid", async ({ page }) => {
+  test("Character counter in property grid", { tag: "@fresh-page" }, async ({ page }) => {
     const showSidebarButton = page.locator("[title='Show Panel']");
 
     await page.setViewportSize({ width: 1120, height: 900 });

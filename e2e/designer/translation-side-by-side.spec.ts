@@ -342,7 +342,7 @@ test.describe(title, () => {
     await expect(target.locator(".sd-header__text .svc-translation-state--translated")).toBeVisible();
   });
 
-  test("target locale switch re-renders target pane strings", async ({ page }) => {
+  test("target locale switch re-renders target pane strings", { tag: "@fresh-page" }, async ({ page }) => {
     // Keep the locale dropdowns short so every item is rendered in the popup list.
     await page.evaluate(() => {
       (window as any).Survey.surveyLocalization.supportedLocales = ["de", "it"];

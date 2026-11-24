@@ -76,7 +76,12 @@
 
   shadowRoot.appendChild(rootElement);
 
-  SurveyCreator.renderSurveyCreator(creator, rootElement);
+  // Render once both stylesheets have loaded: the tab bar measures its items only once, after the first
+  // render, and items measured without the creator CSS keep it collapsed into a menu.
+  Promise.all([surveyLink, creatorLink].map(link => new Promise(resolve => {
+    link.addEventListener("load", resolve);
+    link.addEventListener("error", resolve);
+  }))).then(() => SurveyCreator.renderSurveyCreator(creator, rootElement));
 </script>
 
 </html>

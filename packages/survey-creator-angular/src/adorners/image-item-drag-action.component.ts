@@ -1,11 +1,12 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { Action } from "survey-core";
 
 @Component({
   selector: "svc-image-item-drag-action",
   templateUrl: "./image-item-drag-action.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class ImageItemDragActionComponent extends BaseAngular {
   @Input() model!: Action;

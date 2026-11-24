@@ -204,7 +204,6 @@ test.describe(title, () => {
 
     await doDragDrop({ page, element: PanelItem, target: EmptyPage, options: { steps: 10 } });
 
-    await page.waitForTimeout(1000);
     const panelSelector = page.locator(".svc-question__content--panel");
     await expect(panelSelector).toBeFocused();
   });
@@ -220,23 +219,29 @@ test.describe(title, () => {
     await expect(panelSelector).toBeFocused();
   });
 
-  test("Checks the editor focused state when opening grid properties by keyboard navigation on small screens.", async ({ page }) => {
-    await page.setViewportSize({ width: 1000, height: 1000 });
+  test.describe(() => {
+    // Load the page at this size instead of resizing it. After a resize to this width, the tab bar measures its space
+    // before the property grid collapses into a flyout, so for a frame it moves Logic, JSON Editor and Translations
+    // into its "..." menu, and a Tab pressed then focuses that menu.
+    test.use({ viewport: { width: 1000, height: 1000 } });
 
-    await page.keyboard.press("Tab");
-    await expect(page.getByRole("tab", { name: "Designer" })).toBeFocused();
-    await page.keyboard.press("Tab");
-    await expect(page.getByRole("tab", { name: "Preview" })).toBeFocused();
-    await page.keyboard.press("Tab");
-    await expect(page.getByRole("tab", { name: "Logic" })).toBeFocused();
-    await page.keyboard.press("Tab");
-    await expect(page.getByRole("tab", { name: "JSON Editor" })).toBeFocused();
-    await page.keyboard.press("Tab");
-    await expect(page.getByRole("tab", { name: "Translations" })).toBeFocused();
-    await page.keyboard.press("Tab");
-    await expect(page.getByRole("button", { name: "Survey settings" })).toBeFocused();
-    await page.keyboard.press("Enter");
-    await expect(page.getByRole("textbox", { name: "Survey title" })).toBeFocused();
+    test("Checks the editor focused state when opening grid properties by keyboard navigation on small screens.", async ({ page }) => {
+      await expect(page.getByRole("tab", { name: "Translations" })).toBeVisible();
+      await page.keyboard.press("Tab");
+      await expect(page.getByRole("tab", { name: "Designer" })).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(page.getByRole("tab", { name: "Preview" })).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(page.getByRole("tab", { name: "Logic" })).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(page.getByRole("tab", { name: "JSON Editor" })).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(page.getByRole("tab", { name: "Translations" })).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(page.getByRole("button", { name: "Survey settings" })).toBeFocused();
+      await page.keyboard.press("Enter");
+      await expect(page.getByRole("textbox", { name: "Survey title" })).toBeFocused();
+    });
   });
 
   test("Check page navigator is visually hidden", async ({ page }) => {
@@ -543,5 +548,58 @@ test.describe(title, () => {
 
     await page.getByRole("button", { name: "General" }).click();
     await expect(settingsButton).toHaveClass(/sd-action--active/);
+  });
+
+  test("Page container is not a tab stop and is a named group", async ({ page }) => {
+    await page.setViewportSize({ width: 1600, height: 1000 });
+    const json = {
+      "title": "Contact Form",
+      "description": "Enter your details below",
+      "pages": [
+        {
+          "name": "page1",
+          "title": "User Info",
+          "description": "User Info Details",
+          "elements": [
+            { "type": "text", "name": "question1", "isRequired": true },
+            { "type": "text", "name": "question2", "visibleIf": "{question1} = 1" },
+            {
+              "type": "panel",
+              "name": "panel1",
+              "title": "This is a panel",
+              "elements": [
+                { "type": "text", "name": "question3" },
+                { "type": "boolean", "name": "question4" }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(page, json);
+    await page.mouse.move(0, 0);
+
+    const pageContent = page.locator(".svc-page__content:not(.svc-page__content--new)");
+    await expect(pageContent).toHaveAttribute("tabindex", "-1");
+    await expect(pageContent).toHaveAttribute("role", "group");
+    await expect(pageContent).toHaveAttribute("aria-label", "User Info");
+    const ghostPageContent = page.locator(".svc-page__content--new");
+    await expect(ghostPageContent).toHaveAttribute("tabindex", "-1");
+    await expect(ghostPageContent).not.toHaveAttribute("role");
+    await expect(ghostPageContent).not.toHaveAttribute("aria-label");
+
+    await page.locator(".svc-tab-designer .sd-description .sv-string-editor").first().focus();
+    await page.keyboard.press("Tab");
+    await page.keyboard.press("Tab");
+    await expect(page.getByRole("textbox", { name: "Page 1" })).toBeFocused();
+    await expect(pageContent).toHaveClass(/svc-page__content--selected/);
+
+    await page.evaluate(() => { (window as any).creator.selectElement((window as any).creator.survey, undefined, false); });
+    await expect(pageContent).not.toHaveClass(/svc-page__content--selected/);
+    await page.locator(".svc-tab-designer .svc-question__content-actions").getByRole("button", { name: "Delete" }).last().focus();
+    await page.keyboard.press("Tab");
+    const pageDuplicate = pageContent.locator(".svc-page__content-actions").getByRole("button", { name: "Duplicate" });
+    await expect(pageDuplicate).toBeFocused();
+    await expect(pageContent.locator(".svc-page__content-actions")).toHaveCSS("opacity", "1");
   });
 });

@@ -52,6 +52,8 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
   ) {
     super();
     this.item.onExpandPanelAtDesign.add(this.onExpandPanelAtDesign);
+    this.item.locText.onStringChanged.add(this.onItemTextChanged);
+    this.onItemTextChanged();
     this.updateIsNew(question, item);
     for (let key in specificChoices) {
       this.registerOnPropertyChanged(key, specificChoices[key]);
@@ -158,6 +160,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
     );
     if (this.item) {
       this.item.onExpandPanelAtDesign.remove(this.onExpandPanelAtDesign);
+      this.item.locText.onStringChanged.remove(this.onItemTextChanged);
     }
     if (this.canShowPanel()) {
       this.expandCollapseManager.disposeChoice(this.item, this);
@@ -282,6 +285,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
         showTitle: false,
         appearance: { size: "x-small", style: "brand", mode: "tertiary" },
         title: new ComputedUpdater(() => this.tooltip) as unknown as string,
+        ariaLabel: new ComputedUpdater(() => this.actionAriaLabel) as unknown as string,
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
         },
@@ -303,6 +307,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
         appearance: { size: "x-small", style: "alert", mode: "tertiary" },
         iconSize: "auto",
         title: new ComputedUpdater(() => this.tooltip) as unknown as string,
+        ariaLabel: new ComputedUpdater(() => this.actionAriaLabel) as unknown as string,
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
           event.currentTarget.removeEventListener("focusout", this.onFocusOut);
@@ -326,6 +331,7 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
         appearance: { style: "brand", size: "x-small", mode: "tertiary" },
         iconSize: "auto",
         title: new ComputedUpdater(() => this.expandPanelTooltip) as unknown as string,
+        ariaLabel: new ComputedUpdater(() => this.expandPanelAriaLabel) as unknown as string,
         onFocus: (_, event: FocusEvent) => {
           this.onFocusAction(event);
         },
@@ -352,6 +358,21 @@ export class ItemValueWrapperViewModel extends Base implements IExpandCollapseCh
   }
   get expandPanelTooltip() {
     return getLocString(this.showPanel ? "pe.collapseNestedChoices" : "pe.expandNestedChoices");
+  }
+  // item.text is not reactive. The None/Other/Select All text belongs to the question,
+  // so the item's locText notifies about every text change.
+  @property() private itemText: string;
+  private onItemTextChanged = (): void => {
+    this.itemText = this.item.text;
+  };
+  get actionAriaLabel(): string {
+    return this.getAriaLabel(this.isNew ? "pe.addItemAriaLabel" : "pe.removeItemAriaLabel");
+  }
+  get expandPanelAriaLabel(): string {
+    return this.getAriaLabel(this.showPanel ? "pe.collapseNestedChoicesAriaLabel" : "pe.expandNestedChoicesAriaLabel");
+  }
+  private getAriaLabel(strName: string): string {
+    return this.itemText ? getLocString(strName)["format"](this.itemText) : undefined;
   }
   get allowAdd() {
     const isNew = !this.question.isItemInList(this.item);

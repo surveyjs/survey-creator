@@ -1,14 +1,16 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { CreatorModelComponent } from "../creator-model.component";
 import { SurveyCreatorModel, ToolboxToolViewModel, QuestionToolboxItem } from "survey-creator-core";
 import { Action, ActionContainer } from "survey-core";
 
+import { SurveyBaseProviders } from "survey-angular-ui";
 @Component({
   selector: "svc-toolbox-tool",
   templateUrl: "./toolbox-tool.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
-export class ToolboxToolComponent extends CreatorModelComponent<Action> implements AfterViewInit {
+export class ToolboxToolComponent extends CreatorModelComponent<Action> {
   @Input() creator!: SurveyCreatorModel;
   @Input() item!: Action;
   @Input() parentModel!: ActionContainer;
@@ -18,7 +20,7 @@ export class ToolboxToolComponent extends CreatorModelComponent<Action> implemen
   createModel() {
     this.model = new ToolboxToolViewModel(<any>this.item, this.creator, this.parentModel);
   }
-  protected getPropertiesToTrack(): string[] {
+  protected override getPropertiesToTrack(): string[] {
     return ["creator", "item"];
   }
   protected getModel(): Action {
@@ -32,7 +34,7 @@ export class ToolboxToolComponent extends CreatorModelComponent<Action> implemen
     this.model.dispose();
     this.item.updateModeCallback = undefined as any;
   }
-  ngAfterViewInit(): void {
+  protected override afterViewInit(): void {
     if (this.item) {
       this.item.updateModeCallback = (mode, callback) => {
         this.item.mode = mode;

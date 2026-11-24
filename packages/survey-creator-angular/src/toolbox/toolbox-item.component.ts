@@ -1,11 +1,12 @@
 import { Component, Input } from "@angular/core";
 import { ToolboxToolViewModel, SurveyCreatorModel, IQuestionToolboxItem, QuestionToolboxItem } from "survey-creator-core";
-import { BaseAngular, AngularComponentFactory } from "survey-angular-ui";
+import { BaseAngular, AngularComponentFactory, SurveyBaseProviders } from "survey-angular-ui";
 
 @Component({
   selector: "svc-toolbox-item",
   templateUrl: "./toolbox-item.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class ToolboxItemComponent extends BaseAngular<ToolboxToolViewModel> {
   @Input() creator!: SurveyCreatorModel;

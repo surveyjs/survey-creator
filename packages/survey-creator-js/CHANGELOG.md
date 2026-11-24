@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 3.2.7 (2026-11-18)
+
+
+### Bug Fixes
+
+* **property-grid:** keep editor title actions when the property grid survey is rendered on creation (fix [#8191](https://github.com/surveyjs/survey-creator/issues/8191)) ([#8192](https://github.com/surveyjs/survey-creator/issues/8192)) ([9fe3ec8](https://github.com/surveyjs/survey-creator/commit/9fe3ec89ca23448a582075f690f039d097e59504))
+
+### 3.2.6 (2026-11-17)
+
 ### 3.2.5 (2026-11-11)
 
 ### 3.2.4 (2026-11-03)

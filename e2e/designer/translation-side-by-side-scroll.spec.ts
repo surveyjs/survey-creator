@@ -128,6 +128,7 @@ async function scrollContainer(page, to: "top" | "middle" | "end") {
       await waitForVisibleRowsRendered(page);
       if (await container.evaluate(el => el.scrollTop + el.clientHeight >= el.scrollHeight - 2)) return;
     } else {
+      // Kept on purpose: a short pause between the attempts of this retry loop, not a wait for a state
       await page.waitForTimeout(50);
     }
   }
@@ -292,7 +293,7 @@ test.describe(title, () => {
     await expect.poll(async () => await source.evaluate(el => el.scrollTop), { timeout: 5000 }).toBeCloseTo(targetTop, 0);
   });
 
-  test("target language switch keeps the rows aligned; clearing it restores the natural heights", async ({ page }) => {
+  test("target language switch keeps the rows aligned; clearing it restores the natural heights", { tag: "@fresh-page" }, async ({ page }) => {
     // Keep the locale dropdowns short so every item is rendered in the popup list.
     await page.evaluate(() => {
       (window as any).Survey.surveyLocalization.supportedLocales = ["de", "fr"];

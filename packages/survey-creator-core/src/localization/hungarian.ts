@@ -69,6 +69,8 @@ export var huStrings = {
     expression: "Kifejezés (csak olvasható)",
     // [Auto-translated] "Signature"
     signaturepad: "Aláírás",
+    // [Auto-translated] "Filter"
+    filter: "Szűrő",
     // [Auto-translated] "Button Group"
     buttongroup: "Gombcsoport"
   },
@@ -304,6 +306,8 @@ export var huStrings = {
     themeResetConfirmationOk: "Igen, állítsa vissza a témát",
     // "Add Question"
     addNewQuestion: "Kérdés felvétele",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Válaszd ki a kérdéstípust",
     // [Auto-translated] "Select page..."
     selectPage: "Válasszon oldalt...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var huStrings = {
     addNewTypeQuestion: "{0} hozzáadása", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGÓ]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Feltöltési logó",
     // [Auto-translated] "Item "
     choices_Item: "Cikk ",
     // [Auto-translated] "Select a file"
@@ -815,6 +821,38 @@ export var huStrings = {
       // [Auto-translated] "Expression"
       expression: "Kifejezés"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Adatforrás",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Szűrőchipek megjelenítése",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Szűrők gomb megjelenítése",
+      // [Auto-translated] "Show search"
+      showSearch: "Keresés megjelenítése",
+      // [Auto-translated] "Search in"
+      searchFields: "Keresés",
+      // [Auto-translated] "Presets"
+      items: "Előbeállítások",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Alapértelmezett előbeállítás",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Több előbeállítás engedélyezése",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Engedélyezze a válaszadók számára az előbeállítások hozzáadását"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Előbeállítás név",
+      // [Auto-translated] "Preset title"
+      title: "Előre beállított cím",
+      // [Auto-translated] "Filter expression"
+      expression: "Szűrőkifejezés",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Szerkesztés engedélyezése",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Törlés engedélyezése"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Rendezd",
@@ -876,7 +914,9 @@ export var huStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Minden beállítás külön oszlopban",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Engedélyezzük a rendezést ezen oszlop szerint"
+      allowSort: "Engedélyezzük a rendezést ezen oszlop szerint",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Engedélyezze a szűrést ezen oszlop szerint"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -980,12 +1020,20 @@ export var huStrings = {
     addItem: "Kattintson egy elem felvételéhez...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Kattintson az elem eltávolításához...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Add {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Távolítsd {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Húzza az elemet",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Bővítsd a bészkelő lehetőségeket",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Összerakás egymásba helyezett választások",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Bővítsd az egymásba ágyazott {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Összeomlás {0}",
     // [Auto-translated] "Show description"
     showDescription: "Műsorleírás",
     // [Auto-translated] "Hide description"
@@ -1060,6 +1108,8 @@ export var huStrings = {
     "listIsEmpty@pages": "Nincsenek oldalak",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Nincsenek sortozási szintek",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Nincsenek előbeállítások",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Választási lehetőségek hozzáadása",
     // [Auto-translated] "Add rating value"
@@ -1086,6 +1136,8 @@ export var huStrings = {
     "addNew@pages": "Oldal hozzáadása",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Szűrési szint hozzáadása",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Előbeállítás hozzáadása",
     // "Value"
     value: "Érték",
     // "Text"
@@ -1200,6 +1252,10 @@ export var huStrings = {
     pageSize: "Sorok oldalonként",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Engedd a felhasználók sorok rendezését",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Engedélyezze a szűrést ezen a kérdés alapján",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Szűrő operátorok",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximális rendezési szintek",
     // [Auto-translated] "Default sort order"
@@ -1756,6 +1812,10 @@ export var huStrings = {
       rateValues: "Szorzó értékek",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Csúszka beállításai",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Szűrőbeállítások",
+      // [Auto-translated] "Presets"
+      presets: "Előbeállítások",
       // "Choices from a Web Service"
       choicesByUrl: "Lehetőségek a webről",
       // [Auto-translated] "Numbering"
@@ -3026,6 +3086,18 @@ export var huStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Beállítja a folyamatjelző sáv helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Válasszon ki egy dinamikus mátrixot, legördülő mátrixot vagy egy dinamikus panelt, amelynek sorait vagy paneljeit a szűrő szűkíti.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Az előbeállítás, amely a felmérés elindításakor érvényesül."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Használjon mezőneveket göndör zárójelben, például: {price} < 20 és {category} bármelyik ['Italok']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Korlátok, amelyeket a válaszadók használhatnak a mező szerinti szűréshez. Hagyja üresen, hogy minden olyan operátor megmaradjon, amely megfelel a mezőnek.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "A válaszadók számára nem látható oszlopazonosító.",

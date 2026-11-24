@@ -1,4 +1,4 @@
-import { urlPresets, test, expect, showPresets, doDragDrop, showCreatorSettings } from "./helper";
+import { urlPresets, test, expect, showPresets, doDragDrop, showCreatorSettings, loadCreatorLocales } from "./helper";
 
 const title = "Presets";
 async function getRowsInputValues(matrix: any) {
@@ -35,6 +35,8 @@ test.describe(title, () => {
     await page.waitForLoadState("networkidle");
     await page.goto(`${urlPresets}`);
     await page.setViewportSize({ width: 1920, height: 1400 });
+    // the Languages page lists the creator locales
+    await loadCreatorLocales(page);
     await showPresets(page);
   });
 
@@ -96,9 +98,10 @@ test.describe(title, () => {
 
     await page.getByRole("row", { name: "Designer" }).hover();
     await page.getByRole("row", { name: "Designer" }).getByRole("button", { name: "Edit", exact: true }).click();
+    // The dialog focuses its first input 100 ms after it opens; work in it only after that, or the focus moves away
+    await expect(page.getByRole("textbox", { name: "Title", exact: true })).toBeFocused();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Designer1");
     await page.getByRole("combobox", { name: "Icon name" }).focus();
-    await page.waitForTimeout(500);
     await page.locator(".sd-dropdown__input").filter({ has: page.getByRole("combobox", { name: "Icon name" }) }).click();
     await page.getByText("icon-actual-size-24x24").click();
     await page.getByRole("button", { name: "Apply" }).click();
@@ -149,7 +152,7 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Containers2");
     await page.getByRole("button", { name: "Apply" }).click();
     expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Matrix Questions", "Misc", "Containers2"]);
-    expect((await getToolboxTexts(page)).slice(20, 21)).toEqual(["Dynamic Panel"]);
+    expect((await getToolboxTexts(page)).slice(21, 22)).toEqual(["Dynamic Panel"]);
 
   });
 
@@ -240,7 +243,6 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "Title", exact: true }).blur();
     await expect(page.getByRole("textbox", { name: "Title", exact: true })).toHaveValue("Custom");
     await page.getByRole("button", { name: "Apply" }).click();
-    await page.waitForTimeout(500);
     await page.getByRole("row", { name: "Custom" }).hover();
     await page.getByRole("row", { name: "Custom" }).getByTitle("Expand").click();
 
@@ -250,15 +252,14 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "Title", exact: true }).blur();
     await expect(page.getByRole("textbox", { name: "Title", exact: true })).toHaveValue("Custom 1");
     await page.getByRole("combobox", { name: "Icon name" }).focus();
-    await page.waitForTimeout(500);
     await page.getByRole("combobox", { name: "Icon name" }).click();
     await page.getByText("icon-arrowleft-16x16").click();
     await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).fill("{\"type\": \"text\"}");
     await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).blur();
     await page.getByRole("button", { name: "Apply" }).click();
     expect(await items.locator(".sd-table__cell-action--icon-action svg use").filter({ visible: true }).nth(1).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
-    expect(await page.locator(".svc-toolbox__item-title").filter({ visible: true }).nth(22)).toHaveText("Custom 1");
-    expect(await page.locator(".svc-toolbox__item").filter({ visible: true }).nth(22).locator("svg use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
+    expect(await page.locator(".svc-toolbox__item-title").filter({ visible: true }).nth(23)).toHaveText("Custom 1");
+    expect(await page.locator(".svc-toolbox__item").filter({ visible: true }).nth(23).locator("svg use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
 
     await hidden.getByRole("button", { name: "Add new item" }).click();
     await expect(page.getByRole("textbox", { name: "Name", exact: true })).toBeFocused();
@@ -266,7 +267,6 @@ test.describe(title, () => {
     await expect(page.getByRole("textbox", { name: "Title", exact: true })).toHaveValue("Custom 2");
     await page.getByRole("textbox", { name: "Title", exact: true }).blur();
     await page.getByRole("combobox", { name: "Icon name" }).focus();
-    await page.waitForTimeout(500);
     await page.getByRole("combobox", { name: "Icon name" }).click();
     await page.getByRole("option", { name: "icon-arrowright-16x16" }).click();
     await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).fill("{\"type\": \"text\"}");
@@ -374,9 +374,10 @@ test.describe(title, () => {
 
     await page.getByRole("row", { name: "Navigation" }).hover();
     await page.getByRole("row", { name: "Navigation" }).getByRole("button", { name: "Edit", exact: true }).click();
+    // The dialog focuses its first input 100 ms after it opens; work in it only after that, or the focus moves away
+    await expect(page.getByRole("textbox", { name: "Title", exact: true })).toBeFocused();
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Navigation1");
     await page.getByRole("combobox", { name: "Icon name" }).focus();
-    await page.waitForTimeout(500);
     await page.locator(".sd-dropdown__input").filter({ has: page.getByRole("combobox", { name: "Icon name" }) }).click();
     await page.getByText("icon-more-24x24").click();
     await page.getByRole("button", { name: "Apply" }).click();
@@ -407,7 +408,6 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "Name" }).fill("custom");
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Custom");
     await page.getByRole("combobox", { name: "Icon name" }).focus();
-    await page.waitForTimeout(500);
     await page.getByRole("combobox", { name: "Icon name" }).click();
     await page.getByText("icon-more-24x24").click();
     await page.getByRole("button", { name: "Apply" }).click();
@@ -532,29 +532,23 @@ test.describe(title, () => {
 
   test("Hide action popup after scroll content", async ({ page }) => {
     const visiblePopups = page.locator(".sv-popup__container").filter({ visible: true });
-    const timeout = 50;
 
     expect(await visiblePopups.count()).toBe(0);
     await page.locator(".sps-navigation-bar .sd-action").filter({ hasText: "Languages" }).click();
-    await page.waitForTimeout(timeout);
-    expect(await visiblePopups.count()).toBe(1);
+    await expect(visiblePopups).toHaveCount(1);
 
     await page.locator(".svc-tab-designer > .sv-scroll__wrapper > .sv-scroll__scrollbar").first().evaluate((el) => el.scrollBy(2, 10));
-    await page.waitForTimeout(timeout);
-    expect(await visiblePopups.count()).toBe(0);
+    await expect(visiblePopups).toHaveCount(0);
   });
 
   test("Hide dropdown popup after scroll content", async ({ page }) => {
     const visiblePopups = page.locator(".sv-popup__container").filter({ visible: true });
-    const timeout = 50;
 
     expect(await visiblePopups.count()).toBe(0);
     await page.locator("[data-name='languages_creator']").getByRole("button", { name: "Select", exact: true }).click();
-    await page.waitForTimeout(timeout);
-    expect(await visiblePopups.count()).toBe(1);
+    await expect(visiblePopups).toHaveCount(1);
 
     await page.locator(".svc-tab-designer > .sv-scroll__wrapper > .sv-scroll__scrollbar").first().evaluate((el) => el.scrollBy(2, 10));
-    await page.waitForTimeout(timeout);
-    expect(await visiblePopups.count()).toBe(0);
+    await expect(visiblePopups).toHaveCount(0);
   });
 });

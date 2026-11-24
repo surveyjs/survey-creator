@@ -7,7 +7,7 @@ test.describe(title, () => {
     await page.goto(url);
     await page.setViewportSize({ width: 1920, height: 1080 });
   });
-  test("Check spinedit arrows click", async ({ page }) => {
+  test("Check spinedit arrows click", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
         name: "fontSize",
@@ -35,7 +35,7 @@ test.describe(title, () => {
     const fontSize2 = await page.evaluate(() => (<any>window).creator.survey.fontSize);
     expect(fontSize2).toBe(16);
   });
-  test("Check spinedit arrows click changeValueOnPressing: false", async ({ page }) => {
+  test("Check spinedit arrows click changeValueOnPressing: false", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
         name: "fontSize",
@@ -64,7 +64,7 @@ test.describe(title, () => {
     expect(fontSize2).toBe(16);
   });
 
-  test("Check spinedit editor applies value on enter", async ({ page }) => {
+  test("Check spinedit editor applies value on enter", { tag: "@fresh-page" }, async ({ page }) => {
     await page.evaluate(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
         name: "fontSize",

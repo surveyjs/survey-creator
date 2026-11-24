@@ -163,6 +163,102 @@ survey-creator,
   }
 }
 
+// The "embedded-<name>" banner: a small floating card in the bottom-left corner of the creator.
+// It does not take a layout row, so everything outside the card stays interactive.
+.svc-embedded-banner {
+  position: absolute;
+  inset-inline-start: var(--sjs2-spacing-x075);
+  bottom: var(--sjs2-spacing-x075);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sjs2-spacing-x150);
+  padding: var(--sjs2-spacing-x150);
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: var(--sjs2-radius-x150);
+  background-color: var(--sjs2-color-bg-basic-primary);
+  box-shadow: var(--sjs2-border-effect-floating-default);
+}
+
+.svc-embedded-banner__caption {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sjs2-spacing-x075);
+  width: 100%;
+}
+
+.svc-embedded-banner__powered-by,
+.svc-embedded-banner__link {
+  @include sjs2--typography--small-strong;
+}
+
+.svc-embedded-banner__powered-by {
+  color: var(--sjs2-color-fg-basic-tertiary);
+}
+
+// The SurveyJS logo sits in a 24px-high box, vertically centered
+.svc-embedded-banner__brand {
+  display: flex;
+  align-items: center;
+  height: var(--sjs2-size-x300);
+
+  .sv-svg-icon {
+    width: var(--sjs2-size-x900);
+    height: var(--sjs2-size-x200);
+  }
+
+  use {
+    fill: var(--sjs2-color-project-brand-600);
+  }
+}
+
+.svc-embedded-banner__link {
+  color: var(--sjs2-color-fg-basic-secondary);
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 0.15em;
+  white-space: nowrap;
+}
+
+.svc-embedded-banner__close {
+  position: absolute;
+  top: var(--sjs2-spacing-x050);
+  inset-inline-end: var(--sjs2-spacing-x050);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sjs2-spacing-x050);
+  margin: 0;
+  border: none;
+  border-radius: var(--sjs2-radius-component-action);
+  background-color: var(--sjs2-color-component-action-brand-quaternary-default-bg);
+  cursor: pointer;
+  outline: none;
+
+  .sv-svg-icon {
+    width: var(--sjs2-size-x200);
+    height: var(--sjs2-size-x200);
+  }
+
+  use {
+    fill: var(--sjs2-color-component-action-brand-quaternary-default-icon);
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--sjs2-color-component-action-brand-quaternary-hovered-bg);
+
+    use {
+      fill: var(--sjs2-color-component-action-brand-quaternary-hovered-icon);
+    }
+  }
+}
+
 .sv-drag-drop-ghost {
   top: var(--sjs2-spacing-x075);
   width: 100%;

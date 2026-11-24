@@ -12,6 +12,7 @@ import {
   getSubToolboxItemByText,
   setAllowEditSurveyTitle,
   doDragDrop,
+  waitForAnimationFrames,
 } from "../helper";
 
 const title = "Toolbox";
@@ -94,7 +95,7 @@ test.describe(title, () => {
 
     const categoriesHeader = page.locator(".svc-toolbox__category-header");
     await expect(categoriesHeader).toHaveCount(3);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(17);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(18);
 
     await categoriesHeader.nth(1).click();
     expect(await getVisibleToolboxToolsCount(page)).toEqual(3);
@@ -117,7 +118,7 @@ test.describe(title, () => {
 
     await page.setViewportSize({ width: 1900, height: 600 });
     await expect(categoriesHeader).toHaveCount(3);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(17);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(18);
 
     await categoriesHeader.nth(1).click();
     expect(await getVisibleToolboxToolsCount(page)).toEqual(3);
@@ -135,7 +136,7 @@ test.describe(title, () => {
 
     const categoriesHeader = page.locator(".svc-toolbox__category-header");
     await expect(categoriesHeader).toHaveCount(3);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(17);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(18);
 
     await page.setViewportSize({ width: 1200, height: 600 });
     await expect(page.locator(".svc-toolbox .sv-dots__item")).toBeVisible();
@@ -143,7 +144,7 @@ test.describe(title, () => {
     expect(await getVisibleToolboxToolsCount(page)).toEqual(11);
   });
 
-  test("Categories allowExpandMultipleCategories property", async ({ page }) => {
+  test("Categories allowExpandMultipleCategories property", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1900, height: 600 });
 
     await setupCategories(page);
@@ -158,16 +159,16 @@ test.describe(title, () => {
     expect(await getVisibleToolboxToolsCount(page)).toEqual(0);
 
     await categoriesHeader.nth(0).click();
-    await expect(categories.nth(0).locator(":scope>.svc-toolbox__tool")).toHaveCount(17);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(17);
+    await expect(categories.nth(0).locator(":scope>.svc-toolbox__tool")).toHaveCount(18);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(18);
 
     await categoriesHeader.nth(1).click();
     await expect(categories.nth(1).locator(":scope>.svc-toolbox__tool")).toHaveCount(3);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(20);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(21);
 
     await categoriesHeader.nth(2).click();
     await expect(categories.nth(2).locator(":scope>.svc-toolbox__tool")).toHaveCount(2);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(22);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(23);
   });
 
   test("Categories keepAllCategoriesExpanded property", async ({ page }) => {
@@ -185,7 +186,7 @@ test.describe(title, () => {
 
     await expect(categoriesHeader).toHaveCount(3);
     await expect(collapsibleCategories).toHaveCount(0);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(22);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(23);
 
     await categoriesHeader.nth(0).hover({ force: true });
     await expect(categoriesHeader.nth(0).locator(collapsedCategoriesClassName)).toHaveCount(0);
@@ -194,7 +195,7 @@ test.describe(title, () => {
     await categoriesHeader.nth(0).click();
     await expect(categoriesHeader).toHaveCount(3);
     await expect(collapsibleCategories).toHaveCount(0);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(22);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(23);
 
     await categoriesHeader.nth(1).hover({ force: true });
     await expect(categoriesHeader.nth(1).locator(collapsedCategoriesClassName)).toHaveCount(0);
@@ -203,7 +204,7 @@ test.describe(title, () => {
     await categoriesHeader.nth(1).click();
     await expect(categoriesHeader).toHaveCount(3);
     await expect(collapsibleCategories).toHaveCount(0);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(22);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(23);
 
     await categoriesHeader.nth(2).hover({ force: true });
     await expect(categoriesHeader.nth(2).locator(collapsedCategoriesClassName)).toHaveCount(0);
@@ -212,7 +213,7 @@ test.describe(title, () => {
     await categoriesHeader.nth(2).click();
     await expect(categoriesHeader).toHaveCount(3);
     await expect(collapsibleCategories).toHaveCount(0);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(22);
+    expect(await getVisibleToolboxToolsCount(page)).toEqual(23);
   });
 
   test("add question from toolbox popup items", async ({ page }) => {
@@ -254,7 +255,8 @@ test.describe(title, () => {
 
     for (let i = 580; i > 540; i--) {
       await setSize(i);
-      await page.waitForTimeout(100);
+      // The toolbox refits in the frame after its ResizeObserver callback; check the layout after that refit
+      await waitForAnimationFrames(page);
       expect(await hasNoScroll()).toBeTruthy();
     }
   });
@@ -282,16 +284,15 @@ test.describe(title, () => {
       ],
     });
     await expect(page.locator(".svc-toolbox .sv-dots__item")).toBeVisible();
-    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(23);
+    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(24);
     expect(await getVisibleToolboxToolsCount(page)).toEqual(11);
 
     await changeToolboxSearchEnabled(page, true);
     await page.setViewportSize({ width: 1920, height: 598 });
     await expect(page.locator(".svc-toolbox .sv-dots__item")).toBeVisible();
-    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(23);
-    // Wait for layout to recalculate visibility after enabling search and viewport change
-    await page.waitForTimeout(100);
-    expect(await getVisibleToolboxToolsCount(page)).toEqual(10);
+    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(24);
+    // The layout recalculates visibility after enabling search and the viewport change
+    await expect.poll(() => getVisibleToolboxToolsCount(page)).toEqual(10);
   });
 
   test("toolbar responsiveness in compact mode", async ({ page }) => {
@@ -352,7 +353,7 @@ test.describe(title, () => {
     const scrollContainerHeight = await page.locator(".sv-scroll__container").first().evaluate((el) => el.clientHeight);
     expect(scrollContainerHeight).toBeLessThanOrEqual(515);
     expect(await getVisibleToolboxToolsCount(page)).toEqual(11);
-    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(23);
+    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(24);
 
     await page.locator(".svc-question__content--text").click({ position: { x: 200, y: 20 } });
     await page.locator(".sd-action__title").getByText("Save as Toolbox Item").click();
@@ -361,7 +362,7 @@ test.describe(title, () => {
     const scrollContainerHeight2 = await page.locator(".sv-scroll__container").first().evaluate((el) => el.clientHeight);
     expect(scrollContainerHeight2).toBeLessThanOrEqual(515);
     expect(await getVisibleToolboxToolsCount(page)).toEqual(11);
-    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(24);
+    await expect(page.locator(".svc-toolbox__category>.svc-toolbox__tool")).toHaveCount(25);
   });
 
   test("toolbox subTypes: add items by drag-n-drop", async ({ page }) => {
@@ -378,19 +379,15 @@ test.describe(title, () => {
 
     await expect(toolboxSubTypesPopup).not.toBeVisible();
     await ratingSubmenuBtn.hover();
-    await page.waitForTimeout(400);
     await expect(toolboxSubTypesPopup).toBeVisible();
     await ratingTool.hover();
-    await page.waitForTimeout(400);
     await expect(toolboxSubTypesPopup).not.toBeVisible();
     await ratingSubmenuBtn.hover();
-    await page.waitForTimeout(400);
     await expect(toolboxSubTypesPopup).toBeVisible();
 
     const smileysItem = getSubToolboxItemByText(page, "Smileys");
     const placeholder = page.locator(".svc-designer__placeholder-container");
     await smileysItem.hover({ force: true });
-    await page.waitForTimeout(400);
     await doDragDrop({
       page,
       element: smileysItem,
@@ -426,7 +423,7 @@ test.describe(title, () => {
     expect(resultJson).toEqual(expectedJson);
   });
 
-  test("toolbox subTypes: add items by click", async ({ page }) => {
+  test("toolbox subTypes: add items by click", { tag: "@fresh-page" }, async ({ page }) => {
     await page.setViewportSize({ width: 1900, height: 600 });
 
     await explicitErrorHandler(page);
@@ -435,12 +432,10 @@ test.describe(title, () => {
     const toolboxSubTypesPopup = page.locator(".sv-popup-inner.svc-toolbox-subtypes .sv-popup__container").filter({ visible: true });
 
     await getToolboxItemByText(page, "Single-Line Input").click();
-    await page.waitForTimeout(400);
     await expect(page.locator(".svc-question__content")).toHaveCount(1);
 
     const singleLineTool = page.locator(".svc-toolbox__tool").filter({ has: getToolboxItemByText(page, "Single-Line Input") });
     await singleLineTool.locator(".svc-toolbox__item-submenu-button").hover();
-    await page.waitForTimeout(400);
     await expect(toolboxSubTypesPopup).toBeVisible();
 
     await getSubToolboxItemByText(page, "Password").click();
@@ -473,7 +468,6 @@ test.describe(title, () => {
 
     await expect(toolboxSubTypesPopup).not.toBeVisible();
     await ratingTool.locator(".svc-toolbox__item-submenu-button").hover();
-    await page.waitForTimeout(400);
     await expect(toolboxSubTypesPopup).toBeVisible();
 
     await page.locator(".sv-scroll__scroller").first().evaluate((el) => el.scrollBy(2, 100));

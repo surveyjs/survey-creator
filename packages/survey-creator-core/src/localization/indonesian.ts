@@ -69,6 +69,8 @@ export var indonesianStrings = {
     expression: "Ekspresi (dibaca saja)",
     // [Auto-translated] "Signature"
     signaturepad: "Tanda tangan",
+    // [Auto-translated] "Filter"
+    filter: "Filter",
     // [Auto-translated] "Button Group"
     buttongroup: "Grup Tombol"
   },
@@ -152,8 +154,8 @@ export var indonesianStrings = {
     redo: "Ulangi",
     // [Auto-translated] "Expand"
     expandTooltip: "Memperluas",
-    // [Auto-translated] "Collapse"
-    collapseTooltip: "Roboh",
+    // "Collapse"
+    collapseTooltip: "Ciutkan",
     // "Expand All"
     expandAllTooltip: "Perluas Semua",
     // "Collapse All"
@@ -304,6 +306,8 @@ export var indonesianStrings = {
     themeResetConfirmationOk: "Ya, atur ulang tema",
     // "Add Question"
     addNewQuestion: "Tambah pertanyaan",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Pilih jenis pertanyaan",
     // [Auto-translated] "Select page..."
     selectPage: "Pilih halaman...",
     // [Auto-translated] "Choices are copied from"
@@ -366,8 +370,10 @@ export var indonesianStrings = {
     addNewTypeQuestion: "Tambahkan {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Unggah logo",
     // [Auto-translated] "Item "
-    choices_Item: "Benda ",
+    choices_Item: "Item",
     // [Auto-translated] "Select a file"
     selectFile: "Pilih file",
     // [Auto-translated] "Remove the file"
@@ -417,8 +423,8 @@ export var indonesianStrings = {
       column_resetValueName: "Mereset nilai kolom",
       // [Auto-translated] "Set column value"
       column_setValueName: "Mengatur nilai kolom",
-      // [Auto-translated] "Complete survey"
-      trigger_completeName: "Survei lengkap",
+      // "Complete survey"
+      trigger_completeName: "Selesaikan survei",
       // [Auto-translated] "Set answer"
       trigger_setvalueName: "Tetapkan jawaban",
       // [Auto-translated] "Copy answer"
@@ -652,8 +658,8 @@ export var indonesianStrings = {
       page: "Memindahkan panel ke halaman",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "Menampilkan panel pada baris baru",
-      // [Auto-translated] "Panel collapse state"
-      state: "Status penciwunan panel",
+      // "Panel collapse state"
+      state: "Status ciutkan panel",
       // [Auto-translated] "Inline panel width"
       width: "Lebar panel sebaris",
       // [Auto-translated] "Minimum panel width"
@@ -686,8 +692,8 @@ export var indonesianStrings = {
       page: "Memindahkan panel ke halaman",
       // [Auto-translated] "Display the panel on a new line"
       startWithNewLine: "Menampilkan panel pada baris baru",
-      // [Auto-translated] "Panel collapse state"
-      state: "Status keruntuhan panel",
+      // "Panel collapse state"
+      state: "Status ciutkan panel",
       // [Auto-translated] "Inline panel width"
       width: "Lebar panel sejajar",
       // [Auto-translated] "Minimum panel width"
@@ -815,11 +821,43 @@ export var indonesianStrings = {
       // [Auto-translated] "Expression"
       expression: "Ekspresi"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Sumber data",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Tampilkan chip filter",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Tampilkan tombol Filter",
+      // [Auto-translated] "Show search"
+      showSearch: "Tampilkan pencarian",
+      // [Auto-translated] "Search in"
+      searchFields: "Cari di",
+      // [Auto-translated] "Presets"
+      items: "Preset",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Prasetel default",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Izinkan beberapa preset",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Izinkan responden menambahkan preset"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Nama preset",
+      // [Auto-translated] "Preset title"
+      title: "Judul preset",
+      // [Auto-translated] "Filter expression"
+      expression: "Ekspresi filter",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Izinkan pengeditan",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Izinkan penghapusan"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Urutkan berdasarkan",
-      // [Auto-translated] "Order"
-      direction: "Pesanan"
+      // "Order"
+      direction: "Urutan"
     },
     urlconditionitem: {
       // [Auto-translated] "Expression"
@@ -876,7 +914,9 @@ export var indonesianStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Setiap opsi dalam kolom terpisah",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Izinkan pengurutan berdasarkan kolom ini"
+      allowSort: "Izinkan pengurutan berdasarkan kolom ini",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Izinkan penyaringan berdasarkan kolom ini"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -927,8 +967,8 @@ export var indonesianStrings = {
       decimalSeparator: "Pemisah desimal",
       // [Auto-translated] "Value precision"
       precision: "Presisi nilai",
-      // [Auto-translated] "Show trailing zeros"
-      showTrailingZeros: "Tampilkan nol terlambat",
+      // "Show trailing zeros"
+      showTrailingZeros: "Tampilkan nol di belakang",
       // [Auto-translated] "Minimum value"
       min: "Nilai minimum",
       // [Auto-translated] "Maximum value"
@@ -960,12 +1000,12 @@ export var indonesianStrings = {
     cellErrorLocation: "Perataan pesan kesalahan sel",
     // [Auto-translated] "Enabled"
     enabled: "Diaktifkan",
-    // [Auto-translated] "Disabled"
-    disabled: "Cacat",
+    // "Disabled"
+    disabled: "Dinonaktifkan",
     // [Auto-translated] "Inherit"
     inherit: "Mewarisi",
-    // [Auto-translated] "Clear"
-    clear: "Jelas",
+    // "Clear"
+    clear: "Hapus",
     // [Auto-translated] "Set"
     set: "Mengeset",
     // [Auto-translated] "Change"
@@ -980,12 +1020,20 @@ export var indonesianStrings = {
     addItem: "Klik untuk menambahkan sebuah item...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klik untuk menghapus item...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Tambahkan {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Hapus {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Seret item",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Perluas pilihan bersarang",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Menggabungkan pilihan bersarang",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Perluas pilihan bersarang {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Pilihan bertingkat {0}",
     // [Auto-translated] "Show description"
     showDescription: "Tampilkan deskripsi",
     // [Auto-translated] "Hide description"
@@ -1060,6 +1108,8 @@ export var indonesianStrings = {
     "listIsEmpty@pages": "Tidak ada halaman",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Tidak ada tingkat pengurutan",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Tidak ada preset",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Tambahkan pilihan",
     // [Auto-translated] "Add rating value"
@@ -1086,6 +1136,8 @@ export var indonesianStrings = {
     "addNew@pages": "Tambah halaman",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Tambahkan tingkat pengurutan",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Tambahkan preset",
     // "Value"
     value: "Nilai",
     // "Text"
@@ -1122,8 +1174,8 @@ export var indonesianStrings = {
     surveyDescriptionPlaceholder: "Deskripsi",
     // [Auto-translated] "Description"
     pageDescriptionPlaceholder: "Deskripsi",
-    // [Auto-translated] "Wrap choices"
-    textWrapEnabled: "Pilihan bungkus",
+    // "Wrap choices"
+    textWrapEnabled: "Bungkus teks pilihan",
     // "Enable the \"Other\" option"
     showOtherItem: "Memiliki item lain",
     // "Rename the \"Other\" option"
@@ -1166,8 +1218,8 @@ export var indonesianStrings = {
     isRequired: "Wajib?",
     // [Auto-translated] "Require a positive answer"
     requireTrue: "Membutuhkan jawaban positif",
-    // [Auto-translated] "Mark as required"
-    markRequired: "Tandai sesuai kebutuhan",
+    // "Mark as required"
+    markRequired: "Tandai sebagai wajib",
     // [Auto-translated] "Remove the required mark"
     removeRequiredMark: "Hapus tanda yang diperlukan",
     // [Auto-translated] "Require an answer in each row"
@@ -1200,6 +1252,10 @@ export var indonesianStrings = {
     pageSize: "Baris per halaman",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Izinkan pengguna mengurutkan baris",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Izinkan penyaringan berdasarkan pertanyaan ini",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Operator filter",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Tingkat pengurutan maksimum",
     // [Auto-translated] "Default sort order"
@@ -1240,8 +1296,8 @@ export var indonesianStrings = {
     and: "dan",
     // [Auto-translated] "or"
     or: "atau",
-    // [Auto-translated] "Remove"
-    remove: "Buka",
+    // "Remove"
+    remove: "Hapus",
     // [Auto-translated] "Add Condition"
     addCondition: "Tambahkan Kondisi",
     // [Auto-translated] "Select a question to start configuring conditions."
@@ -1352,8 +1408,8 @@ export var indonesianStrings = {
     isSinglePage: "Tampilkan seluruh elemen pada halaman",
     // "HTML markup"
     html: "Html",
-    // [Auto-translated] "Answer"
-    setValue: "Menjawab",
+    // "Answer"
+    setValue: "Jawaban",
     // [Auto-translated] "Storage format"
     dataFormat: "Format penyimpanan",
     // [Auto-translated] "Enable row addition"
@@ -1756,6 +1812,10 @@ export var indonesianStrings = {
       rateValues: "Nilai Tingkat",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Pengaturan Penggeser",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Pengaturan Filter",
+      // [Auto-translated] "Presets"
+      presets: "Preset",
       // "Choices from a Web Service"
       choicesByUrl: "Pilih dari Web",
       // [Auto-translated] "Numbering"
@@ -1932,8 +1992,8 @@ export var indonesianStrings = {
       "--sjs2-color-component-input-default-line": "Warna"
     },
     "header@header": {
-      // [Auto-translated] "View"
-      headerView: "Melihat",
+      // "View"
+      headerView: "Tampilan",
       // [Auto-translated] "Logo alignment"
       logoPosition: "Perataan logo",
       // [Auto-translated] "Survey title font"
@@ -1968,8 +2028,8 @@ export var indonesianStrings = {
   pv: {
     // [Auto-translated] "true"
     "true": "benar",
-    // [Auto-translated] "false"
-    "false": "palsu",
+    // "false"
+    "false": "salah",
     // [Auto-translated] "Local file"
     file: "File lokal",
     // [Auto-translated] "Camera"
@@ -2050,8 +2110,8 @@ export var indonesianStrings = {
     number: "angka",
     // [Auto-translated] "password"
     password: "kata sandi",
-    // [Auto-translated] "range"
-    range: "lingkup",
+    // "range"
+    range: "rentang",
     // [Auto-translated] "tel"
     tel: "Tel",
     // [Auto-translated] "text"
@@ -2070,8 +2130,8 @@ export var indonesianStrings = {
     cover: "Menutupi",
     // [Auto-translated] "Fill"
     fill: "Isi",
-    // [Auto-translated] "Next"
-    next: "Depan",
+    // "Next"
+    next: "Berikutnya",
     // [Auto-translated] "Last"
     last: "Terakhir",
     // "Upon survey completion"
@@ -2111,8 +2171,8 @@ export var indonesianStrings = {
       number: "Angka",
       // [Auto-translated] "Password"
       password: "Kata sandi",
-      // [Auto-translated] "Range"
-      range: "Lingkup",
+      // "Range"
+      range: "Rentang",
       // [Auto-translated] "Phone Number"
       tel: "Nomor Telepon",
       // [Auto-translated] "Text"
@@ -2127,8 +2187,8 @@ export var indonesianStrings = {
     sliderType: {
       // [Auto-translated] "Single-Value"
       single: "Nilai Tunggal",
-      // [Auto-translated] "Range"
-      range: "Lingkup"
+      // "Range"
+      range: "Rentang"
     },
     tooltipVisibility: {
       // [Auto-translated] "Auto"
@@ -2332,8 +2392,8 @@ export var indonesianStrings = {
     underInput: "Di bawah bidang input",
     // [Auto-translated] "Under the question title"
     underTitle: "Di bawah judul pertanyaan",
-    // [Auto-translated] "On lost focus"
-    onBlur: "Tentang fokus yang hilang",
+    // "On lost focus"
+    onBlur: "Saat kehilangan fokus",
     // [Auto-translated] "While typing"
     onTyping: "Saat mengetik",
     // [Auto-translated] "Under the row"
@@ -2387,16 +2447,16 @@ export var indonesianStrings = {
       radio: "Tombol radio",
       // [Auto-translated] "Checkbox"
       checkbox: "Kotak centang",
-      // [Auto-translated] "Switch"
-      switch: "Beralih",
+      // "Switch"
+      switch: "Sakelar",
       // [Auto-translated] "Custom"
       custom: "Kustom"
     },
     rateColorMode: {
       // [Auto-translated] "Default"
       default: "Default",
-      // [Auto-translated] "Scale"
-      scale: "Sisik"
+      // "Scale"
+      scale: "Skala"
     },
     scaleColorMode: {
       // [Auto-translated] "Monochrome"
@@ -2477,10 +2537,10 @@ export var indonesianStrings = {
       initial: "Asli"
     },
     progressBarLocation: {
-      // [Auto-translated] "Top"
-      top: "Puncak",
-      // [Auto-translated] "Bottom"
-      bottom: "Dasar",
+      // "Top"
+      top: "Atas",
+      // "Bottom"
+      bottom: "Bawah",
       // [Auto-translated] "Top and bottom"
       topbottom: "Atas dan bawah",
       // [Auto-translated] "Above the header"
@@ -2527,8 +2587,8 @@ export var indonesianStrings = {
     headerView: {
       // [Auto-translated] "Basic"
       basic: "Dasar",
-      // [Auto-translated] "Advanced"
-      advanced: "Maju"
+      // "Advanced"
+      advanced: "Lanjutan"
     },
     inheritWidthFrom: {
       // [Auto-translated] "Same as survey"
@@ -2541,12 +2601,12 @@ export var indonesianStrings = {
       none: "Tidak",
       // [Auto-translated] "Accent color"
       accentColor: "Warna aksen",
-      // [Auto-translated] "Custom"
-      custom: "Adat"
+      // "Custom"
+      custom: "Kustom"
     },
     colorPalette: {
-      // [Auto-translated] "Light"
-      light: "Ringan",
+      // "Light"
+      light: "Terang",
       // [Auto-translated] "Dark"
       dark: "Gelap"
     },
@@ -2745,10 +2805,10 @@ export var indonesianStrings = {
     showInvisibleElements: "Tampilkan elemen tak terlihat",
     // [Auto-translated] "Hide invisible elements"
     hideInvisibleElements: "Sembunyikan elemen tak terlihat",
-    // [Auto-translated] "Previous"
-    prevPage: "Mantan",
-    // [Auto-translated] "Next"
-    nextPage: "Depan"
+    // "Previous"
+    prevPage: "Sebelumnya",
+    // "Next"
+    nextPage: "Berikutnya"
   },
   validators: {
     // "Answer count"
@@ -3026,6 +3086,18 @@ export var indonesianStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Mengatur lokasi bilah progres. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Pilih matriks dinamis, matriks dropdown, atau panel dinamis yang baris atau panelnya dipersempit oleh filter.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Preset diterapkan saat survei dimulai."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Gunakan nama bidang dalam tanda kurung melingkar, misalnya: {price} < 20 dan {category} anyof ['Beverages']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Membatasi operator yang dapat digunakan responden untuk memfilter berdasarkan bidang ini. Biarkan kosong untuk mengizinkan semua operator yang sesuai dengan bidang tersebut.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID kolom yang tidak terlihat oleh responden.",
@@ -3643,10 +3715,10 @@ export var indonesianStrings = {
     primaryForecolor: "Warna default",
     // [Auto-translated] "Disabled color"
     primaryForecolorLight: "Warna dinonaktifkan",
-    // [Auto-translated] "Darker"
-    borderDefault: "Gelap",
-    // [Auto-translated] "Lighter"
-    borderLight: "Ringan",
+    // "Darker"
+    borderDefault: "Lebih gelap",
+    // "Lighter"
+    borderLight: "Lebih terang",
     // [Auto-translated] "Font family"
     fontFamily: "Keluarga font",
     // [Auto-translated] "Regular"
@@ -3655,8 +3727,8 @@ export var indonesianStrings = {
     fontWeightHeavy: "Berat",
     // [Auto-translated] "Semi-bold"
     fontWeightSemiBold: "Semi-tebal",
-    // [Auto-translated] "Bold"
-    fontWeightBold: "Berani",
+    // "Bold"
+    fontWeightBold: "Tebal",
     // [Auto-translated] "Color"
     color: "Warna",
     // [Auto-translated] "Placeholder color"
@@ -3677,10 +3749,10 @@ export var indonesianStrings = {
     boxShadowBlur: "Kabur",
     // [Auto-translated] "Spread"
     boxShadowSpread: "Penyebaran",
-    // [Auto-translated] "Drop"
-    boxShadowDrop: "Menjatuhkan",
-    // [Auto-translated] "Inner"
-    boxShadowInner: "Batin",
+    // "Drop"
+    boxShadowDrop: "Luar",
+    // "Inner"
+    boxShadowInner: "Dalam",
     names: {
       // [Auto-translated] "Default"
       default: "Default",
@@ -3695,7 +3767,7 @@ export var indonesianStrings = {
       // [Auto-translated] "Soft"
       soft: "Lembut",
       // [Auto-translated] "3D"
-      threedimensional: ".3D",
+      threedimensional: "3D",
       // [Auto-translated] "Monochrome"
       monochrome: "Monokrom"
     },
@@ -4263,8 +4335,8 @@ export var indonesianStrings = {
         dontknow: "Tidak tahu"
       },
       deadValidatorEffect: {
-        // [Auto-translated] "never fires"
-        neverFires: "tidak pernah memadamkan",
+        // "never fires"
+        neverFires: "tidak pernah terpicu",
         // [Auto-translated] "rejects every answer"
         rejectsEveryAnswer: "menolak setiap jawaban",
         // [Auto-translated] "cannot validate"
@@ -4345,8 +4417,8 @@ export var indonesianStrings = {
         fromName: "membaca",
         // [Auto-translated] "navigates to"
         gotoName: "menavigasi ke",
-        // [Auto-translated] "sets"
-        default: "himpunan"
+        // "sets"
+        default: "menetapkan"
       },
       // no "operator" table on purpose: an operator stays the identifier the JSON spells,
       sourceField: {
@@ -4369,8 +4441,8 @@ export var indonesianStrings = {
         matrixdropdownRow: "baris",
         // [Auto-translated] "column"
         matrixdropdownColumn: "kolom",
-        // [Auto-translated] "field"
-        default: "ladang"
+        // "field"
+        default: "bidang"
       }
     }
   },

@@ -115,6 +115,8 @@ function switchTab(page: Page, tabName: string, step: (name: string, action: () 
   return step(`tab ${tabName}`, async () => {
     await page.evaluate((name) => { (window as any).creator.activeTab = name; }, tabName);
     await expect(page.locator(`.svc-creator__content-wrapper, .svc-tab-${tabName}`).first()).toBeVisible({ timeout: 10000 });
+    // Kept on purpose: gives the tab's lazily loaded styles, fonts and images time to raise their CSP violation
+    // events before collectViolations reads them; no state marks "every violation has been reported".
     await page.waitForTimeout(700);
   });
 }
@@ -160,6 +162,7 @@ test.describe("CSP strict policy diagnostics", () => {
         const creator = (window as any).creator;
         creator.selectElement(creator.survey.getQuestionByName("q2"));
       });
+      // Kept on purpose: lets the property grid of q2 render and report its CSP violations, see switchTab
       await page.waitForTimeout(500);
     });
 

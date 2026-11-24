@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild, ViewContainerRef } from "@angular/core";
-import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent, SurveyBaseProviders } from "survey-angular-ui";
 import { PageModel, SurveyModel } from "survey-core";
 import { SurveyCreatorModel, PageAdorner } from "survey-creator-core";
 import { CreatorModelComponent } from "./creator-model.component";
@@ -7,7 +7,8 @@ import { CreatorModelComponent } from "./creator-model.component";
 @Component({
   selector: "svc-page",
   templateUrl: "./page.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class PageDesignerComponent extends CreatorModelComponent<PageAdorner> {
   @Input() model!: PageModel;
@@ -34,11 +35,11 @@ export class PageDesignerComponent extends CreatorModelComponent<PageAdorner> {
   protected getModel(): PageAdorner {
     return this.adorner;
   }
-  protected getPropertiesToTrack(): string[] {
+  protected override getPropertiesToTrack(): string[] {
     return ["creator", "model"];
   }
-  public override ngAfterViewChecked(): void {
-    super.ngAfterViewChecked();
+  public override afterUpdate() {
+    super.afterUpdate();
     if (this.adorner && this.container?.nativeElement) {
       this.adorner.setRootElement(this.container.nativeElement);
     }

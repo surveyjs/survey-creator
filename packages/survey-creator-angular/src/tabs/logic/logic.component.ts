@@ -1,11 +1,12 @@
 import { Component, Input } from "@angular/core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { SurveyLogicUI } from "survey-creator-core";
 
 @Component({
   selector: "svc-tab-logic",
   templateUrl: "./logic.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class LogicTabComponent extends BaseAngular<SurveyLogicUI> {
   @Input() model!: SurveyLogicUI;

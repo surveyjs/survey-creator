@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { ActionBarItemComponent, AngularComponentFactory } from "survey-angular-ui";
+import { ActionBarItemComponent, AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { CreatorModelComponent } from "./creator-model.component";
 import { Base } from "survey-core";
 
@@ -7,15 +7,11 @@ import { Base } from "survey-core";
   {
     selector: "svc-add-new-question-btn",
     templateUrl: "./add-question.component.html",
-    styles: [":host { display: none; }"]
+    styles: [":host { display: none; }"],
+    providers: SurveyBaseProviders
   }
 )
-export class AddQuestionButtonComponent extends CreatorModelComponent<Base> {
-  protected override getPropertiesToTrack(): string[] {
-    return [];
-  }
-  protected override createModel(): void {
-  }
+export class AddQuestionButtonComponent extends BaseAngular<Base> {
   protected override getModel(): Base {
     return this.model.data;
   }

@@ -1,11 +1,12 @@
 import { Component, Input } from "@angular/core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { ObjectSelectorModel } from "survey-creator-core";
 
 @Component({
   selector: "svc-object-selector",
   templateUrl: "./object-selector.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class ObjectSelectorComponent extends BaseAngular<ObjectSelectorModel> {
   @Input() model!: ObjectSelectorModel;

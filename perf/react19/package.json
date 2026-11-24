@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "description": "React 19 for the perf page only (C07), installed by the react perf suite into perf/react19/node_modules. The pins of survey-library perf/react19.",
+  "dependencies": {
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  }
+}

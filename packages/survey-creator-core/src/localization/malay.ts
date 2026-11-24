@@ -69,6 +69,8 @@ export var msStrings = {
     expression: "Ekspresi (baca sahaja)",
     // "Signature"
     signaturepad: "Pad tandatangan",
+    // [Auto-translated] "Filter"
+    filter: "Penapis",
     // [Auto-translated] "Button Group"
     buttongroup: "Kumpulan Butang"
   },
@@ -304,6 +306,8 @@ export var msStrings = {
     themeResetConfirmationOk: "Ya, tetapkan semula tema",
     // "Add Question"
     addNewQuestion: "Tambahkan soalan",
+    // [Auto-translated] "Select question type"
+    selectQuestionType: "Pilih jenis soalan",
     // "Select page..."
     selectPage: "Pilih halaman...",
     // [Auto-translated] "Choices are copied from"
@@ -366,6 +370,8 @@ export var msStrings = {
     addNewTypeQuestion: "Tambah {0}", // {0} is localizable question type
     // [Auto-translated] "[LOGO]"
     chooseLogoPlaceholder: "[LOGO]",
+    // [Auto-translated] "Upload logo"
+    chooseLogoAriaLabel: "Muat naik logo",
     // [Auto-translated] "Item "
     choices_Item: "Perkara ",
     // [Auto-translated] "Select a file"
@@ -815,6 +821,38 @@ export var msStrings = {
       // [Auto-translated] "Expression"
       expression: "Ungkapan"
     },
+    filter: {
+      // [Auto-translated] "Data source"
+      source: "Sumber data",
+      // [Auto-translated] "Show filter chips"
+      allowFastMode: "Tunjukkan cip penapis",
+      // [Auto-translated] "Show the Filters button"
+      allowAdvancedMode: "Tunjukkan butang Penapis",
+      // [Auto-translated] "Show search"
+      showSearch: "Tunjukkan carian",
+      // [Auto-translated] "Search in"
+      searchFields: "Cari dalam",
+      // [Auto-translated] "Presets"
+      items: "Pratetap",
+      // [Auto-translated] "Default preset"
+      defaultItem: "Pratetap lalai",
+      // [Auto-translated] "Allow multiple presets"
+      allowMultipleItems: "Benarkan pelbagai pratetap",
+      // [Auto-translated] "Allow respondents to add presets"
+      allowAddItems: "Benarkan responden menambah pratetap"
+    },
+    filteritem: {
+      // [Auto-translated] "Preset name"
+      name: "Nama pratetap",
+      // [Auto-translated] "Preset title"
+      title: "Tajuk pratetap",
+      // [Auto-translated] "Filter expression"
+      expression: "Ekspresi penapis",
+      // [Auto-translated] "Allow editing"
+      allowEdit: "Benarkan penyuntingan",
+      // [Auto-translated] "Allow deleting"
+      allowDelete: "Benarkan pemadaman"
+    },
     sortcriterion: {
       // [Auto-translated] "Sort by"
       field: "Susun mengikut",
@@ -876,7 +914,9 @@ export var msStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Setiap opsyen dalam lajur berasingan",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Benarkan pengisihan mengikut lajur ini"
+      allowSort: "Benarkan pengisihan mengikut lajur ini",
+      // [Auto-translated] "Allow filtering by this column"
+      allowFiltering: "Benarkan penapisan mengikut lajur ini"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -980,12 +1020,20 @@ export var msStrings = {
     addItem: "Klik untuk menambahkan item...",
     // [Auto-translated] "Click to remove the item..."
     removeItem: "Klik untuk mengalih keluar item...",
+    // [Auto-translated] "Add {0}"
+    addItemAriaLabel: "Tambah {0}",
+    // [Auto-translated] "Remove {0}"
+    removeItemAriaLabel: "Buang {0}",
     // [Auto-translated] "Drag the item"
     dragItem: "Seret item",
     // [Auto-translated] "Expand nested choices"
     expandNestedChoices: "Kembangkan pilihan bersarang",
     // [Auto-translated] "Collapse nested choices"
     collapseNestedChoices: "Runtuhkan pilihan bersarang",
+    // [Auto-translated] "Expand nested choices of {0}"
+    expandNestedChoicesAriaLabel: "Kembangkan pilihan bersarang {0}",
+    // [Auto-translated] "Collapse nested choices of {0}"
+    collapseNestedChoicesAriaLabel: "Runtuhkan pilihan bersarang {0}",
     // [Auto-translated] "Show description"
     showDescription: "Tunjukkan penerangan",
     // [Auto-translated] "Hide description"
@@ -1060,6 +1108,8 @@ export var msStrings = {
     "listIsEmpty@pages": "Tiada halaman",
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Tiada tahap pengisihan",
+    // [Auto-translated] "No presets"
+    "listIsEmpty@filterItems": "Tiada pratetap",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Tambah pilihan",
     // [Auto-translated] "Add rating value"
@@ -1086,6 +1136,8 @@ export var msStrings = {
     "addNew@pages": "Tambah halaman",
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Tambah tahap pengisihan",
+    // [Auto-translated] "Add preset"
+    "addNew@filterItems": "Tambah pratetap",
     // "Value"
     value: "Nilai",
     // "Text"
@@ -1200,6 +1252,10 @@ export var msStrings = {
     pageSize: "Baris setiap halaman",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Benarkan pengguna menyusun baris",
+    // [Auto-translated] "Allow filtering by this question"
+    allowFiltering: "Benarkan penapisan mengikut soalan ini",
+    // [Auto-translated] "Filter operators"
+    filterOperators: "Pengendali penapis",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Tahap pengisihan maksimum",
     // [Auto-translated] "Default sort order"
@@ -1756,6 +1812,10 @@ export var msStrings = {
       rateValues: "Nilai Kadar",
       // [Auto-translated] "Slider Settings"
       sliderSettings: "Tetapan Gelangsar",
+      // [Auto-translated] "Filter Settings"
+      filterSettings: "Tetapan Penapis",
+      // [Auto-translated] "Presets"
+      presets: "Pratetap",
       // "Choices from a Web Service"
       choicesByUrl: "Pilihan daripada Web",
       // "Numbering"
@@ -3026,6 +3086,18 @@ export var msStrings = {
       // "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
       progressBarLocation: "Menetapkan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan."
     },
+    filter: {
+      // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
+      source: "Pilih matriks dinamik, matriks lungsur bawah atau panel dinamik yang baris atau panelnya ditapis.",
+      // [Auto-translated] "The preset applied when the survey starts."
+      defaultItem: "Pratetap digunakan apabila tinjauan bermula."
+    },
+    filteritem: {
+      // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
+      expression: "Gunakan nama medan dalam kurungan kerinting, contohnya: {price} < 20 dan {category} mana-mana ['Minuman']."
+    },
+    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    filterOperators: "Had operator yang boleh digunakan responden untuk menapis mengikut medan ini. Biarkan kosong untuk membenarkan semua operator yang sesuai dengan medan.",
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID lajur yang tidak kelihatan kepada responden.",

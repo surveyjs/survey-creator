@@ -1,0 +1,49 @@
+name: API gap
+description: You had to work around Survey Creator in your application code. Tell us which API you expected instead.
+title: "[API gap] "
+labels: ["api-gap", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        SurveyJS adds small API improvements (a property, an event, an option) quickly, often in the next weekly release.
+        Please don't include application code beyond the workaround, credentials or real data.
+        Form Library issues (a survey that behaves the same without Survey Creator) go to https://github.com/surveyjs/survey-library/issues.
+  - type: input
+    id: version
+    attributes:
+      label: Package and version
+      description: For example, survey-creator-core 3.2.7 and survey-creator-react 3.2.7.
+      placeholder: survey-creator-core 3.2.7, survey-creator-react 3.2.7
+    validations:
+      required: true
+  - type: textarea
+    id: need
+    attributes:
+      label: What you needed
+      description: What were you trying to do?
+    validations:
+      required: true
+  - type: textarea
+    id: workaround
+    attributes:
+      label: The workaround you wrote
+      description: Private members, prototype patches, DOM or CSS changes inside Survey Creator markup, timers that wait for creator state, and so on.
+      render: ts
+    validations:
+      required: true
+  - type: textarea
+    id: expected-api
+    attributes:
+      label: The API you expected
+      description: A property, an event, a method or an option, and how you would call it.
+    validations:
+      required: true
+  - type: textarea
+    id: json
+    attributes:
+      label: Minimal survey JSON and creator options
+      description: The smallest survey JSON and the Survey Creator options (ICreatorOptions) that show the case.
+      render: json
+    validations:
+      required: false

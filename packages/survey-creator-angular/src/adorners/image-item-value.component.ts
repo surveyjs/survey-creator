@@ -1,14 +1,16 @@
 
+import { SimpleChanges } from "@angular/core";
 import { Component, ElementRef, Input, ViewChild } from "@angular/core";
-import { AngularComponentFactory } from "survey-angular-ui";
+import { AngularComponentFactory, SurveyBaseProviders } from "survey-angular-ui";
 import { ImageItemValue, QuestionImagePickerModel } from "survey-core";
 import { SurveyCreatorModel, ImageItemValueWrapperViewModel } from "survey-creator-core";
-import { CreatorModelComponent } from "../creator-model.component";
+import { CreatorModelComponent, compareComponentData } from "../creator-model.component";
 
 @Component({
   selector: "svc-image-item-value",
   templateUrl: "./image-item-value.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class ImageItemValueDesignerComponent extends CreatorModelComponent<ImageItemValueWrapperViewModel> {
   @Input() componentName!: string;
@@ -30,8 +32,8 @@ export class ImageItemValueDesignerComponent extends CreatorModelComponent<Image
       this.adorner = new ImageItemValueWrapperViewModel(this.creator, this.question, this.item, <any>null, <any>null);
     }
   }
-  protected getPropertiesToTrack(): string[] {
-    return ["creator", "question", "item"];
+  protected override shouldUpdateModel(changes: SimpleChanges) {
+    return compareComponentData(changes, ["creator", "question", "model"], "componentData");
   }
   protected getModel(): ImageItemValueWrapperViewModel {
     return this.adorner;
@@ -55,7 +57,7 @@ export class ImageItemValueDesignerComponent extends CreatorModelComponent<Image
     const needStyle = !this.adorner.getIsNewItemSingle();
     return { width: needStyle ? this.question.renderedImageWidth + "px" : undefined, height: needStyle ? this.question.renderedImageHeight + "px" : undefined };
   }
-  public ngAfterViewInit() {
+  protected override afterViewInit(): void {
     this.adorner.itemsRoot = this.container.nativeElement;
   }
   preventDragHandler(e: Event) {

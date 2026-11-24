@@ -27,6 +27,7 @@ import {
   Question,
   SurveyElement,
   hasLicense,
+  getEmbeddedLicense,
   surveyLocalization,
   IConfirmDialogOptions
 } from "survey-core";
@@ -70,7 +71,8 @@ vi.mock("survey-core", async () => {
   const originalModule = await vi.importActual("survey-core");
   return {
     ...originalModule,
-    hasLicense: vi.fn((id) => false)
+    hasLicense: vi.fn((id) => false),
+    getEmbeddedLicense: vi.fn(() => undefined)
   };
 });
 
@@ -615,7 +617,7 @@ test("ConvertTo and addNewQuestion for panel with maxPanelNestingLevel set", ():
   const panel5 = creator.survey.getPanelByName("panel5");
   const panel6 = creator.survey.getQuestionByName("panel6");
   const itemCount = creator.getAvailableToolboxItems().length;
-  expect(itemCount).toBe(22);
+  expect(itemCount).toBe(23);
   const panel6Model = new QuestionAdornerViewModel(creator, panel6, undefined);
   const panel5Model = new QuestionAdornerViewModel(creator, panel5, undefined);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
@@ -698,7 +700,7 @@ test("addNewQuestion popup menu for first level panels and paneldynamics", (): a
   const panel = creator.survey.getPanelByName("panel1");
   const paneldynamic = creator.survey.getQuestionByName("question1");
   const itemCount = creator.getAvailableToolboxItems().length;
-  expect(itemCount).toBe(22);
+  expect(itemCount).toBe(23);
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
   // Add New (create child) action
   expect(creator.getAvailableToolboxItems(panel)).toHaveLength(itemCount - 2);
@@ -722,7 +724,7 @@ test("getAvailableToolboxItems isAllowedToAdd forbiddenNestedElements", (): any 
   const question1 = creator.survey.getQuestionByName("question1");
   const question2 = panel2.template.getQuestionByName("question2");
   const itemCount = creator.getAvailableToolboxItems().length;
-  expect(itemCount).toBe(22);
+  expect(itemCount).toBe(23);
   creator.forbiddenNestedElements = { "panel": ["expression"], "paneldynamic": ["file", "radiogroup"] };
   expect(creator.getAvailableToolboxItems(panel1, false)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel2, false)).toHaveLength(itemCount - 2);
@@ -747,7 +749,7 @@ test("getAvailableToolboxItems isAllowedToAdd forbiddenNestedElements #6973", ()
     ]
   };
   const itemCount = creator.getAvailableToolboxItems().length;
-  expect(itemCount).toBe(22);
+  expect(itemCount).toBe(23);
   const panel2 = creator.survey.getQuestionByName("panel2");
   expect(creator.getAvailableToolboxItems(panel2, false)).toHaveLength(itemCount - 2);
   const innerPanel = panel2.template;
@@ -919,6 +921,86 @@ test("License text from plugin (licensed creator)", (): any => {
   });
   expect(creator.licenseText).toBe("no license");
   expect(creator.haveCommercialLicense).toBeFalsy();
+});
+
+const embeddedWhiteLabelUrl = "https://surveyjs.io/wordpress#white-label";
+function setLicenseMocks(licensed: boolean, embedded: boolean): void {
+  (hasLicense as MockedFunction<typeof hasLicense>).mockReturnValue(licensed);
+  (getEmbeddedLicense as MockedFunction<typeof getEmbeddedLicense>).mockReturnValue(
+    embedded ? { name: "wordpress", whiteLabelUrl: embeddedWhiteLabelUrl } : undefined);
+}
+test("License text without the embedded marker (unlicensed creator)", (): any => {
+  setLicenseMocks(false, false);
+  const creator = new CreatorTester();
+  expect(creator.haveCommercialLicense).toBeFalsy();
+  expect(creator.licenseText).toBe(editorLocalization.getLocaleStrings("en").survey.license);
+});
+
+test("License text from plugin wins over the embedded marker", (): any => {
+  setLicenseMocks(false, true);
+  const creator = new CreatorTester();
+  creator.addPlugin("one", <ICreatorPlugin>{
+    activate: () => { },
+    getLicenseText: (_) => "no plugin license"
+  });
+  expect(creator.licenseText).toBe("no plugin license");
+  setLicenseMocks(false, false);
+});
+
+test("Licensed creator with the embedded marker has no banner", (): any => {
+  setLicenseMocks(true, true);
+  const creator = new CreatorTester();
+  expect(creator.haveCommercialLicense).toBeTruthy();
+  setLicenseMocks(false, false);
+});
+
+test("Embedded license banner: the card texts are provided for the embedded marker only", (): any => {
+  setLicenseMocks(false, false);
+  let creator = new CreatorTester();
+  expect(creator.isEmbeddedLicenseBanner).toBeFalsy();
+  expect(creator.embeddedLicenseBanner).toBeUndefined();
+
+  setLicenseMocks(false, true);
+  creator = new CreatorTester();
+  expect(creator.isEmbeddedLicenseBanner).toBeTruthy();
+  expect(creator.embeddedLicenseBanner).toEqual({
+    poweredByText: "Powered by",
+    brandText: "SurveyJS",
+    brandIconName: "icon-logo-surveyjs-72x16",
+    linkText: "White-label options",
+    linkUrl: embeddedWhiteLabelUrl,
+    closeText: "Close",
+    closeIconName: "icon-close-tiny-16x16"
+  });
+
+  creator.addPlugin("one", <ICreatorPlugin>{
+    activate: () => { },
+    getLicenseText: (_) => "no plugin license"
+  });
+  expect(creator.isEmbeddedLicenseBanner).toBeFalsy();
+  expect(creator.embeddedLicenseBanner).toBeUndefined();
+  setLicenseMocks(false, false);
+});
+
+test("Embedded license banner: closeLicenseBanner hides the embedded card only", (): any => {
+  setLicenseMocks(false, false);
+  let creator = new CreatorTester();
+  expect(creator.showLicenseBanner).toBeTruthy();
+  creator.closeLicenseBanner();
+  expect(creator.isLicenseBannerClosed).toBeFalsy();
+  expect(creator.showLicenseBanner).toBeTruthy();
+
+  setLicenseMocks(false, true);
+  creator = new CreatorTester();
+  expect(creator.showLicenseBanner).toBeTruthy();
+  creator.closeLicenseBanner();
+  expect(creator.isLicenseBannerClosed).toBeTruthy();
+  expect(creator.showLicenseBanner).toBeFalsy();
+
+  setLicenseMocks(true, true);
+  creator = new CreatorTester();
+  expect(creator.showLicenseBanner).toBeFalsy();
+  setLicenseMocks(false, false);
 });
 
 test("isStringEditable", (): any => {

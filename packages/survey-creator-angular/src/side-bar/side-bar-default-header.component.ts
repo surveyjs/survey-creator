@@ -1,12 +1,13 @@
 
 import { Component, Input } from "@angular/core";
-import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
+import { AngularComponentFactory, BaseAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { SidebarHeaderModel } from "survey-creator-core";
 
 @Component({
   selector: "svc-side-bar-default-header",
   templateUrl: "./side-bar-default-header.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class SidebarDefaultHeaderComponent extends BaseAngular<SidebarHeaderModel> {
   @Input() model!: SidebarHeaderModel;

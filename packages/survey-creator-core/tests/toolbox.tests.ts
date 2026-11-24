@@ -161,7 +161,16 @@ test("toolbox default categories", (): any => {
   expect(toolbox.categories[1].items.length).toBe(3);
   expect(toolbox.categories[2].items.length).toBe(2);
   expect(toolbox.categories[3].items.length).toBe(3);
-  expect(toolbox.categories[4].items.length).toBe(4);
+  expect(toolbox.categories[4].items.length).toBe(5);
+});
+
+test("filter is the last item of the misc category", (): any => {
+  const toolbox = new QuestionToolbox(undefined, undefined, true);
+  const misc = toolbox.categories.filter(c => c.name === "misc")[0];
+  expect(misc.items[misc.items.length - 1].id, "#1").toBe("filter");
+  expect(misc.items[misc.items.length - 1].iconName, "#2").toBe("icon-filter");
+  expect(toolbox.categories.length, "#3: no extra category").toBe(5);
+  expect(misc.items[misc.items.length - 1].title, "#4").toBe("Filter");
 });
 
 test("toolbox change categories", (): any => {
@@ -886,6 +895,25 @@ test("Toolbox showSubitems property", (): any => {
 
   creator.toolbox.showSubitems = false;
   expect(toolboxTool.itemComponent).toBe("svc-toolbox-item");
+});
+
+test("Toolbox tools are list items only inside a list, Bug#8155", (): any => {
+  const creator = new CreatorTester();
+  const toolbox = creator.toolbox;
+  const textItem = toolbox.getItemByName("text") as QuestionToolboxItem;
+  const textTool = new ToolboxToolViewModel(textItem, creator, toolbox);
+  expect(toolbox.showInSingleCategory).toBeTruthy();
+  expect(toolbox.toolboxAriaLabel).toBe("Toolbox");
+  expect(textTool.ariaRole).toBe("listitem");
+  expect(new ToolboxToolViewModel(toolbox.dotsItem as any, creator, toolbox).ariaRole).toBe("listitem");
+  expect(new ToolboxToolViewModel(toolbox.searchItem as any, creator, toolbox).ariaRole).toBeUndefined();
+
+  const subitemsList = textItem.popupModel.contentComponentData.model;
+  expect(new ToolboxToolViewModel(textItem.items[0], creator, subitemsList).ariaRole).toBe("listitem");
+
+  toolbox.showCategoryTitles = true;
+  expect(toolbox.showInSingleCategory).toBeFalsy();
+  expect(textTool.ariaRole).toBeUndefined();
 });
 
 test("Toolbox item clearSubitems function", (): any => {

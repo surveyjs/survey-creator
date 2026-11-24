@@ -1,11 +1,12 @@
 import { Component, Input } from "@angular/core";
-import { AngularComponentFactory, QuestionAngular } from "survey-angular-ui";
+import { AngularComponentFactory, QuestionAngular, SurveyBaseProviders } from "survey-angular-ui";
 import { editorLocalization, QuestionLinkValueModel } from "survey-creator-core";
 
 @Component({
   selector: "svc-link-value",
   templateUrl: "./question-link-value.component.html",
-  styles: [":host { display: none; }"]
+  styles: [":host { display: none; }"],
+  providers: SurveyBaseProviders
 })
 export class LinkValueQuestionComponent extends QuestionAngular<QuestionLinkValueModel> {
   get clearCaption() {
