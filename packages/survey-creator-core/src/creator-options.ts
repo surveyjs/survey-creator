@@ -1,5 +1,5 @@
 import { ISurveyVariablePresets } from "survey-core";
-import type { IPropertyDefaults } from "survey-core";
+import type { ISurveyOptions } from "survey-core";
 
 /**
  * Survey Creator configuration. Pass it as an argument to the `SurveyCreator`/`SurveyCreatorModel` constructor:
@@ -705,9 +705,10 @@ export interface ICreatorOptions {
    * @since 3.1.1
    */
   variablePresets?: ISurveyVariablePresets;
-  // Property defaults of the surveys that show the user's survey: the designer, Preview, the Themes tab and the panes
-  // of the side-by-side Translation tab. The same type as the library's ISurveyOptions.propertyDefaults. Set them here
-  // instead of changing Serializer defaults globally: the Creator's own surveys (property grid, pop-up editors, Logic,
-  // the Translation tab's tables and settings) keep the library defaults.
-  propertyDefaults?: IPropertyDefaults;
+  // The options of the surveys that show the user's survey: the designer, Preview, the Themes tab and the panes of
+  // the side-by-side Translation tab. It is the library's survey-options object (new SurveyModel(json, options)):
+  // settings such as comparator, propertyDefaults and events, passed to these surveys as-is. The Creator's own surveys
+  // (property grid, pop-up editors, Logic, the Translation tab's tables and settings) get none of it. A later change
+  // of creator.surveyOptions applies to the surveys created after it.
+  surveyOptions?: ISurveyOptions;
 }

@@ -25,7 +25,7 @@ import {
   subscribeReducedMotionChange,
   getIdSelector
 } from "survey-core";
-import type { IPropertyDefaults, ISurveyOptions } from "survey-core";
+import type { ISurveyOptions } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
@@ -2549,8 +2549,9 @@ export class SurveyCreatorModel extends Base
    * @param insertPageIndex A zero-based index at which to insert new pages.
    */
   public addCollectionItemsJson(json: any, insertPageIndex?: number): void {
-    // The pages load with the designer survey's defaults: an explicit value equal to the global default is kept
-    const survey = new SurveyModel(json, this.getSurveyOptionsByArea("designer-tab"));
+    // The pages load with the designer survey's settings and defaults (an explicit value equal to the global default
+    // is kept), without the user's events
+    const survey = new SurveyModel(json, this.getTemporarySurveyOptions());
     this.updateAddingSurvey(survey);
     this.addSurveyPages(survey, insertPageIndex);
     // Not disposed (its pages are now the designer's): only its defaults layer is released
@@ -3117,8 +3118,8 @@ export class SurveyCreatorModel extends Base
     if (!textWorker.isJsonCorrect) return null;
     // the text normalized the way the survey saves it - through a model in design mode, so
     // that loading it runs no expressions and no choicesByUrl requests
-    // With the designer survey's defaults, the text is normalized the way creator.JSON is
-    const survey = new SurveyModel(undefined, this.getSurveyOptionsByArea("designer-tab"));
+    // With the designer survey's settings and defaults (not its events), the text is normalized the way creator.JSON is
+    const survey = new SurveyModel(undefined, this.getTemporarySurveyOptions());
     survey.setDesignMode(true);
     survey.fromJSON(this.parseJSON(this.text));
     const res = new JsonObject().toJsonObject(survey);
@@ -3226,17 +3227,29 @@ export class SurveyCreatorModel extends Base
     if (words.length === 0) return "";
     return words.map(word => word[0]).join("").toLowerCase() + "-";
   }
-  // The property defaults of the surveys that show the user's survey: the designer, Preview, the Themes tab and the
-  // two panes of the side-by-side Translation tab. They are passed to these surveys when they are created, before
-  // their JSON loads (the JSON omits values equal to the designer's defaults, so a survey loading it without them
-  // would show the library defaults instead). Changing the property later applies to the surveys created after the
-  // change: the designer survey is rebuilt when JSON is set again, the others when their tab is shown.
-  public propertyDefaults: IPropertyDefaults;
+  // The library's survey-options object (settings, propertyDefaults, events) of the surveys that show the user's
+  // survey: the designer, Preview, the Themes tab and the two panes of the side-by-side Translation tab. It is passed
+  // as-is to these surveys when they are created, before their JSON loads (the JSON omits values equal to the
+  // designer's defaults, so a survey loading it without them would show the library defaults instead); the survey
+  // copies the settings and defaults into its own state. Changing the property later applies to the surveys created
+  // after the change: the designer survey is rebuilt when JSON is set again, the others when their tab is shown.
+  public surveyOptions: ISurveyOptions;
   private static userSurveyAreas = ["designer-tab", "preview-tab", "theme-tab",
     "translation-tab:source-survey", "translation-tab:target-survey"];
   private getSurveyOptionsByArea(area: string): ISurveyOptions {
-    if (!this.propertyDefaults || SurveyCreatorModel.userSurveyAreas.indexOf(area) < 0) return undefined;
-    return { propertyDefaults: this.propertyDefaults };
+    if (!this.surveyOptions || SurveyCreatorModel.userSurveyAreas.indexOf(area) < 0) return undefined;
+    return this.surveyOptions;
+  }
+  // A hidden temporary survey that loads JSON the way the designer survey does: the designer's settings and
+  // propertyDefaults, but not the user's events, so the application's handlers do not run for it
+  private getTemporarySurveyOptions(): ISurveyOptions {
+    const options = this.getSurveyOptionsByArea("designer-tab");
+    if (!options || !Object.prototype.hasOwnProperty.call(options, "events")) return options;
+    const res: any = {};
+    Object.keys(options).forEach((key: string) => {
+      if (key !== "events") res[key] = options[key];
+    });
+    return res;
   }
   protected createSurveyCore(json: any = {}, area: string, element: Base): SurveyModel {
     const surveyOptions = this.getSurveyOptionsByArea(area);
@@ -3245,7 +3258,8 @@ export class SurveyCreatorModel extends Base
       model.generateStylesheet = false;
       return model;
     }
-    // The handlers run before the JSON loads: options.survey.propertyDefaults() merges over this.propertyDefaults
+    // The handlers run after the constructor and before the JSON loads: options.survey.settings() and
+    // options.survey.propertyDefaults() merge over this.surveyOptions, options.survey.onX.add() adds to its events
     const model = new SurveyModel(undefined, surveyOptions);
     model.generateStylesheet = false;
     const options = { survey: model, area: area, element: element, json: json };
