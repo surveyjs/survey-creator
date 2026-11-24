@@ -13,13 +13,24 @@ const screenshotQuestionTypes = [
 ];
 
 export async function useScreenshotQuestionTypes(page: Page): Promise<void> {
-  await page.waitForFunction(() => !!window["creator"]?.toolbox);
-  // The same as the questionTypes option: the toolbox keeps the list for later rebuilds of its default items.
-  await page.evaluate((types) => {
-    const toolbox = window["creator"].toolbox;
-    toolbox["supportedQuestions"] = types;
-    toolbox.createDefaultItems(types, true);
+  await page.waitForFunction(() => typeof window["updateCreatorModel"] === "function");
+  await page.evaluate((questionTypes) => {
+    window["updateCreatorModel"]({
+      expandCollapseButtonVisibility: "never",
+      showLogicTab: true,
+      showTranslationTab: true,
+      questionTypes
+    }, {});
+    const creator = window["creator"];
+    creator.tabResponsivenessMode = "menu";
+    creator.animationEnabled = false;
+    creator.showOneCategoryInPropertyGrid = false;
+    creator.allowZoom = false;
   }, screenshotQuestionTypes);
+  await page.waitForFunction(() => {
+    const items = window["creator"]?.toolbox?.items;
+    return !!items && !items.some((item: { name: string }) => item.name === "datetimepicker");
+  });
 }
 
 export const setOptions = async (page, options) => {
