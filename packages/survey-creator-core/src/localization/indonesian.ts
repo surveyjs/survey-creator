@@ -372,8 +372,8 @@ export var indonesianStrings = {
     chooseLogoPlaceholder: "[LOGO]",
     // [Auto-translated] "Upload logo"
     chooseLogoAriaLabel: "Unggah logo",
-    // "Item "
-    choices_Item: "Item ",
+    // [Auto-translated] "Item "
+    choices_Item: "Item",
     // [Auto-translated] "Select a file"
     selectFile: "Pilih file",
     // [Auto-translated] "Remove the file"
@@ -3766,7 +3766,7 @@ export var indonesianStrings = {
       plain: "Polos",
       // [Auto-translated] "Soft"
       soft: "Lembut",
-      // "3D"
+      // [Auto-translated] "3D"
       threedimensional: "3D",
       // [Auto-translated] "Monochrome"
       monochrome: "Monokrom"
