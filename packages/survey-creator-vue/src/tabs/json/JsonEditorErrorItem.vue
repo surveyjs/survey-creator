@@ -6,12 +6,21 @@
     :class="'svc-json-error__icon'"
   ></SvComponent>
   <div class="svc-json-error__container">
-    <div class="svc-json-error__title">
+    <div class="svc-json-error__title" @mousedown="onTitleMouseDown">
       <SvComponent
         :is="'survey-string'"
         :locString="item.locTitle"
       ></SvComponent>
     </div>
+    <button
+      type="button"
+      v-if="item.data.copyError"
+      @click="copyError"
+      v-key2click
+      class="svc-json-error__copy-button"
+    >
+      {{ item.data.copyButtonTitle }}
+    </button>
     <button
       type="button"
       v-if="item.data.showFixButton"
@@ -40,5 +49,13 @@ useBase(() => props.item);
 const fixError = (event: Event) => {
   event.stopPropagation();
   props.item.data.fixError();
+};
+const copyError = (event: Event) => {
+  event.stopPropagation();
+  props.item.data.copyError();
+};
+// the list cancels mousedown, which also cancels a text selection
+const onTitleMouseDown = (event: Event) => {
+  event.stopPropagation();
 };
 </script>

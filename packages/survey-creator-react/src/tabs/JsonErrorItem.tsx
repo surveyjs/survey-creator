@@ -9,13 +9,21 @@ class ItemTemplateComponent extends SurveyElementBase<{ item: ItemValue }, any> 
       <>
         <SvgIcon iconName={item.iconName} size={item.iconSize} className={"svc-json-error__icon"} ></SvgIcon>
         <div className="svc-json-error__container">
-          <div className="svc-json-error__title">
+          <div className="svc-json-error__title" onMouseDown={(event) => event.stopPropagation()}>
             <span key={2}>{this.renderLocString(item.locTitle, undefined, "locString")}</span>
           </div>
+          {this.renderCopyButton()}
           {this.renderFixButton()}
         </div>
       </>
     );
+  }
+  renderCopyButton() {
+    const item = this.props.item;
+    if (!item.data || !item.data.copyError) return null;
+    return (attachKey2click(<button type="button" onClick={(event) => { event.stopPropagation(); item.data.copyError(); }} className={"svc-json-error__copy-button"}>
+      {item.data.copyButtonTitle}
+    </button>));
   }
   renderFixButton() {
     if (!this.props.item.data.showFixButton) return null;

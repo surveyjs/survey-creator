@@ -18,6 +18,14 @@ export class JsonErrorItemComponent extends BaseAngular<Action> {
     event.stopPropagation();
     this.model.data.fixError();
   }
+  copyError(event: Event) {
+    event.stopPropagation();
+    this.model.data.copyError();
+  }
+  // the list cancels mousedown, which also cancels a text selection
+  onTitleMouseDown(event: Event) {
+    event.stopPropagation();
+  }
 }
 
 AngularComponentFactory.Instance.registerComponent("json-error-item", JsonErrorItemComponent);

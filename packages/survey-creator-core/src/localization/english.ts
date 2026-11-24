@@ -161,6 +161,7 @@ export var enStrings = {
     surveyJsonExportButton: "Export",
     surveyJsonImportButton: "Import",
     surveyJsonCopyButton: "Copy to clipboard",
+    jsonErrorCopyButton: "Copy",
     themeResetButton: "Reset theme settings to default",
     themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost.",
     themeResetConfirmationOk: "Yes, reset the theme",

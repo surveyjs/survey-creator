@@ -27,6 +27,56 @@ test("JsonEditor & showErrors/errorList", () => {
   expect(editor.errorList.actions[0].title.substring(0, 8)).toBe("Line: 6.");
 });
 
+test("JsonEditor error item copies the full error text", () => {
+  const creator = new CreatorTester();
+  const editor = new TextareaJsonEditorModel(creator);
+  const writeText = vi.fn();
+  const clipboard = Object.getOwnPropertyDescriptor(window.navigator, "clipboard");
+  Object.defineProperty(window.navigator, "clipboard", {
+    configurable: true,
+    value: { writeText: writeText }
+  });
+  const longName = "p".repeat(200);
+  const json: any = { elements: [{ type: "text", name: "q1" }] };
+  json.elements[0][longName] = 1;
+  editor.text = JSON.stringify(json, null, 3);
+  editor.processErrors(editor.text);
+  const action = editor.errorList.actions[0];
+  expect(action.data.copyButtonTitle).toBe("Copy");
+  expect(action.title.indexOf("...")).toBeGreaterThan(-1);
+  action.data.copyError();
+  expect(writeText).toHaveBeenCalledTimes(1);
+  const copied = writeText.mock.calls[0][0];
+  expect(copied.indexOf("Line:")).toBe(0);
+  expect(copied.indexOf(longName)).toBeGreaterThan(-1);
+  expect(copied.indexOf("...")).toBe(-1);
+  if (clipboard) {
+    Object.defineProperty(window.navigator, "clipboard", clipboard);
+  } else {
+    delete (window.navigator as any).clipboard;
+  }
+});
+
+test("A text selection in an error item does not move the caret", () => {
+  const editor = createEditorWithTextarea(longJson(40, 50, "error"), 300, 3000);
+  const el = editor.textElement;
+  const start = el.selectionStart;
+  const title = document.createElement("div");
+  title.className = "svc-json-error__title";
+  title.textContent = editor.errorList.actions[0].title;
+  document.body.appendChild(title);
+  const getSelection = window.getSelection;
+  window.getSelection = (() => ({
+    isCollapsed: false,
+    toString: () => "Line",
+    anchorNode: title.firstChild
+  })) as any;
+  editor.errorList.onItemClick(<any>editor.errorList.actions[0]);
+  expect(el.selectionStart).toBe(start);
+  window.getSelection = getSelection;
+  title.remove();
+});
+
 test("JsonEditor & fixError action", () => {
   const creator = new CreatorTester();
   const editor = new TextareaJsonEditorModel(creator);

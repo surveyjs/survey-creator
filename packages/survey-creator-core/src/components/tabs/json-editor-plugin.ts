@@ -99,6 +99,7 @@ export abstract class JsonEditorBaseModel extends Base {
       this.errorListValue = new ListModel({
         items: [],
         onSelectionChanged: (action: Action) => {
+          if (this.isErrorTextSelected()) return;
           const error: SurveyTextWorkerError = action.data.error;
           if (!!error)this.gotoError(error.at, error.rowAt, error.columnAt);
         },
@@ -127,14 +128,8 @@ export abstract class JsonEditorBaseModel extends Base {
     const res = [];
     errors.forEach(error => {
       const isFinding = error instanceof SurveyTextWorkerLinterFinding;
-      const line = error.rowAt > -1
-        ? (<any>getLinterString("lineNumber"))["format"](error.rowAt + 1)
-        : "";
-      let title = error.text;
-      if (title.length > maxErrorLength + 3) {
-        title = title.substring(0, maxErrorLength) + "...";
-      }
-      title = line + title;
+      const title = this.getErrorItemTitle(error, true);
+      const copyText = this.getErrorItemTitle(error, false);
       // a finding is shown by its own severity; a JSON error is an error by nature
       const kind = isFinding
         ? getFindingSeverityKind((<SurveyTextWorkerLinterFinding>error).severity)
@@ -153,11 +148,41 @@ export abstract class JsonEditorBaseModel extends Base {
           showFixButton: error.isFixable,
           fixError: () => this.applyFix(error),
           fixButtonIcon: "icon-fix",
-          fixButtonTitle: getFixTitle(error)
+          fixButtonTitle: getFixTitle(error),
+          copyButtonTitle: getLocString("ed.jsonErrorCopyButton"),
+          copyError: () => this.copyErrorText(copyText)
         }
       }));
     });
     return res;
+  }
+  private getErrorItemTitle(error: SurveyTextWorkerError, truncate: boolean): string {
+    const line = error.rowAt > -1
+      ? (<any>getLinterString("lineNumber"))["format"](error.rowAt + 1)
+      : "";
+    let title = error.text || "";
+    if (truncate && title.length > maxErrorLength + 3) {
+      title = title.substring(0, maxErrorLength) + "...";
+    }
+    return line + title;
+  }
+  // A selection inside the message means the user is about to copy it. The same click would
+  // otherwise move the caret and take the selection with it.
+  private isErrorTextSelected(): boolean {
+    const selection = DomWindowHelper.getSelection();
+    if (!selection || selection.isCollapsed) return false;
+    if (!selection.toString()) return false;
+    const node = selection.anchorNode;
+    if (!node) return false;
+    const element = node.nodeType === 1 ? <Element><any>node : node.parentElement;
+    if (!element || typeof element.closest !== "function") return false;
+    return !!element.closest(".svc-json-error__title");
+  }
+  private copyErrorText(text: string): void {
+    const win = DomWindowHelper.getWindow();
+    const clipboard = win && win.navigator && win.navigator.clipboard;
+    if (!clipboard || typeof clipboard.writeText !== "function") return;
+    clipboard.writeText(text);
   }
   // The list is rebuilt a second after the last keystroke, so a button may still describe the text
   // as it was before the keystroke, and its error was positioned in that text. The fix is taken

@@ -66,7 +66,16 @@ svc-tab-json-editor-textarea {
 
 .svc-json-error .sv-string-viewer {
   pointer-events: all;
-  cursor: pointer;
+  cursor: text;
+}
+
+.svc-json-error__title,
+.svc-json-error__title .sv-string-viewer {
+  cursor: text;
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 .svc-json-error .sv-string-viewer:hover {
@@ -98,6 +107,32 @@ svc-tab-json-editor-textarea {
   // but it still shrinks, so a long message wraps inside the row
   flex: 0 1 auto;
   min-width: 0;
+}
+
+.svc-json-error__copy-button {
+  appearance: none;
+  flex: 0 0 auto;
+  align-self: center;
+  pointer-events: all;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: var(--sjs2-color-fg-basic-secondary);
+  font: inherit;
+  line-height: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 0.15em;
+  white-space: nowrap;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.svc-json-error__copy-button:hover {
+  color: var(--sjs2-color-fg-brand-primary, #15987e);
 }
 
 .svc-json-error__fix-button {
