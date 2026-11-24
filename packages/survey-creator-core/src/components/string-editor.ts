@@ -3,7 +3,7 @@ import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines } from "../utils/utils";
 import { getNextColumnTitle, getNextItemText, getNextItemValue, getNextValue } from "../utils/creator-utils";
-import { select } from "../utils/html-element-utils";
+import { getNodeSelection, select } from "../utils/html-element-utils";
 import { IRichTextEditorHandle, richTextModeForProperty } from "../rich-text";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { QuestionAdornerViewModel } from "./question";
@@ -419,7 +419,7 @@ export class StringEditorViewModelBase extends Base {
     return !!box && box.contains(next);
   }
   private isCaretInListItem(root: HTMLElement): boolean {
-    const selection = DomWindowHelper.getWindow()?.getSelection();
+    const selection = getNodeSelection(root);
     if (!selection || selection.rangeCount === 0 || !root) return false;
     let node: Node = selection.anchorNode;
     while(node && node !== root) {
@@ -469,11 +469,10 @@ export class StringEditorViewModelBase extends Base {
     this.compostionInProgress = true;
   }
   public onBeforeInput(event: any): void {
-    const window = DomWindowHelper.getWindow();
     if (!this.compostionInProgress && this.maxLength > 0) {
       const currentValue = event.target.innerText;
       const insertedData = event.data || "";
-      const selectionLength = window?.getSelection()?.toString().length || 0;
+      const selectionLength = getNodeSelection(event.target)?.toString().length || 0;
       const newValueLength = currentValue.length + insertedData.length - selectionLength;
       if (newValueLength > this.maxLength) {
         event.preventDefault();
@@ -502,7 +501,6 @@ export class StringEditorViewModelBase extends Base {
   public onBlur(event: any): void {
     if (this.isFocusWithinRichText(event)) return;
     this.detachRichTextEditor();
-    const window = DomWindowHelper.getWindow();
     if (this.blurredByEscape) {
       this.blurredByEscape = false;
       if (this.locString.hasHtml) {
@@ -512,7 +510,7 @@ export class StringEditorViewModelBase extends Base {
       }
       this.errorText = null;
       this.focused = false;
-      window?.getSelection().removeAllRanges();
+      getNodeSelection(event.target)?.removeAllRanges();
       return;
     }
 
@@ -539,7 +537,7 @@ export class StringEditorViewModelBase extends Base {
       this.locString.strChanged();
     }
     this.focused = false;
-    window?.getSelection().removeAllRanges();
+    getNodeSelection(event.target)?.removeAllRanges();
   }
 
   private getClearedText(target: HTMLElement): string {
@@ -698,11 +696,11 @@ export class StringEditorViewModelBase extends Base {
   }
   private justFocused = false;
   public onMouseUp(event: MouseEvent): boolean {
-    const window = DomWindowHelper.getWindow();
     if (this.justFocused) {
       this.justFocused = false;
-      if (!window) return false;
-      if (window.getSelection().focusNode && (window.getSelection().focusNode.parentElement !== event.target) || window.getSelection().toString().length == 0) {
+      const selection = getNodeSelection(event.target as Node);
+      if (!selection) return false;
+      if (selection.focusNode && (selection.focusNode.parentElement !== event.target) || selection.toString().length == 0) {
         select(event.target as HTMLElement);
       }
       return false;

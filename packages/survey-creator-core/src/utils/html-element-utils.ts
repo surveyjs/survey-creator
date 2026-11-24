@@ -107,19 +107,27 @@ export function toggleHovered(e: MouseEvent, element: HTMLElement, timeout = 0) 
   }
 }
 
-export function select(element: any) {
+// A selection inside an open shadow root lives on that root. window.getSelection() is the light-DOM one.
+export function getNodeSelection(node?: Node): Selection | null {
+  const root = node && typeof (node as any).getRootNode === "function" ? (node as any).getRootNode() : undefined;
+  if (root && typeof root.getSelection === "function") {
+    return root.getSelection() as Selection | null;
+  }
   const window = DomWindowHelper.getWindow();
+  return window ? window.getSelection() : null;
+}
+
+export function select(element: any) {
   const document = DomDocumentHelper.getDocument();
-  if (!window || !document) return;
-  var range, selection;
-  if (window.getSelection && document.createRange) {
-    selection = window.getSelection();
-    range = document.createRange();
+  if (!document) return;
+  const selection = getNodeSelection(element);
+  if (selection && document.createRange) {
+    const range = document.createRange();
     range.selectNodeContents(element);
     selection.removeAllRanges();
     selection.addRange(range);
   } else if (document["selection"] && document.body["createTextRange"]) {
-    range = document.body["createTextRange"]();
+    const range = document.body["createTextRange"]();
     range.moveToElementText(element);
     range.select();
   }

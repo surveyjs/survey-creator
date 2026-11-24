@@ -221,8 +221,14 @@ export var PropertyGridEditorCollection = {
         if (ed.fit(prop, context) && this.isEditorEnabled(ed, options)) return ed;
       }
     }
+    // A lookup caches the editor for this property. The type can change afterwards
+    // (description becomes html once rich text is turned on), and the editor chosen
+    // for the previous type must not stay in front of the one that fits now.
     var fitEd = this.fitHash[prop.id];
-    if (!!fitEd) return fitEd;
+    if (!!fitEd) {
+      if (fitEd.fit(prop)) return fitEd;
+      delete this.fitHash[prop.id];
+    }
     const search = { dependsOnOptions: false };
     const ed = this.findEditor(prop, false, options, search) || this.findEditor(prop, true, options, search);
     if (!!ed && !search.dependsOnOptions) {

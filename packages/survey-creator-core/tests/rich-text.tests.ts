@@ -436,6 +436,26 @@ describe("rich text registration", () => {
     });
   });
 
+  test("property grid follows a property type changed after its editor was cached", () => {
+    const description = Serializer.findProperty("survey", "description");
+    const previous = description.type;
+    PropertyGridEditorCollection.clearHash();
+    try {
+      const creator = new CreatorTester();
+      const before = PropertyGridEditorCollection.getJSON(creator.survey, description, creator);
+      expect(before.type).toBe("comment");
+
+      description.type = "html";
+      creator.registerRichTextEditor(createModeEditor().editor);
+      const after = PropertyGridEditorCollection.getJSON(creator.survey, description, creator);
+      expect(after.type).toBe("richtext");
+      expect(after.acceptCarriageReturn).toBe(true);
+    } finally {
+      description.type = previous;
+      PropertyGridEditorCollection.clearHash();
+    }
+  });
+
   test("a rich text property editor keeps the reset to default action", () => {
     Serializer.addProperty("survey", {
       name: "test:html",
