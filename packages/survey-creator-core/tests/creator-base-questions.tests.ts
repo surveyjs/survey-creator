@@ -2200,6 +2200,86 @@ test("Renaming a template question of the target Dynamic Panel renames the Filte
   creator.undo();
   expect(filter.fields[0].name, "#2").toBe("city");
 });
+test("A new Question to filter of a Filter Control replaces its fields entries, in the same undo step", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "matrixdynamic", name: "m1", columns: [{ name: "country" }] },
+      { type: "matrixdynamic", name: "m2", columns: [{ name: "price" }] },
+      { type: "filter", name: "f1", targetQuestion: "m1", fields: [{ name: "country", title: "Land" }, { name: "city" }] }
+    ]
+  };
+  const filter = <any>creator.survey.getQuestionByName("f1");
+  filter.targetQuestion = "m2";
+  expect(filter.fields.length, "#1").toBe(0);
+  creator.undo();
+  expect([filter.targetQuestion, filter.fields.map(f => f.name)], "#2: one step").toEqual(["m1", ["country", "city"]]);
+  expect(filter.fields[0].title, "#3").toBe("Land");
+  creator.redo();
+  expect([filter.targetQuestion, filter.fields.length], "#4").toEqual(["m2", 0]);
+  filter.targetQuestion = "";
+  expect(filter.fields.length, "#5: nothing to replace").toBe(0);
+});
+test("Renaming the target question keeps the Filter Control's fields entries", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "matrixdynamic", name: "m1", columns: [{ name: "country" }] },
+      { type: "filter", name: "f1", targetQuestion: "m1", fields: [{ name: "country", title: "Land" }] }
+    ]
+  };
+  const filter = <any>creator.survey.getQuestionByName("f1");
+  creator.survey.getQuestionByName("m1").name = "orders";
+  expect([filter.targetQuestion, filter.fields.map(f => f.title)], "#1").toEqual(["orders", ["Land"]]);
+  creator.undo();
+  expect([filter.targetQuestion, filter.fields.map(f => f.title)], "#2").toEqual(["m1", ["Land"]]);
+});
+test("A Filter Control's Fields table: a change to a row of the target adds its entry in one undo step", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "matrixdynamic", name: "m1", columns: [{ name: "country" }, { name: "price" }] },
+      { type: "filter", name: "f1", targetQuestion: "m1" }
+    ]
+  };
+  const filter = <any>creator.survey.getQuestionByName("f1");
+  creator.selectElement(filter);
+  const table = (): any => creator.propertyGrid.getQuestionByName("fields");
+  const names = (): Array<string> => table().visibleRows.map(r => r.editingObj.name);
+  const title = (row: number): any => table().visibleRows[row].cells.filter(c => c.column.name === "title")[0].question;
+  expect(names(), "#1").toEqual(["country", "price"]);
+  title(1).value = "Cost";
+  expect(filter.toJSON().fields, "#2").toEqual([{ name: "price", title: "Cost" }]);
+  creator.undo();
+  expect(filter.toJSON().fields, "#3").toBeUndefined();
+  expect(names(), "#4: the row shows the column again").toEqual(["country", "price"]);
+  expect(title(1).value, "#4a").toBeFalsy();
+  creator.redo();
+  expect(filter.toJSON().fields, "#5").toEqual([{ name: "price", title: "Cost" }]);
+  expect(title(1).value, "#6").toBe("Cost");
+  title(0).value = "Land";
+  expect(filter.toJSON().fields, "#7").toEqual([{ name: "price", title: "Cost" }, { name: "country", title: "Land" }]);
+  creator.undo();
+  expect(filter.toJSON().fields, "#8: another row is a step of its own").toEqual([{ name: "price", title: "Cost" }]);
+});
+test("A Filter Control's Fields table follows the target's columns and a new target", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "matrixdynamic", name: "m1", columns: [{ name: "country" }] },
+      { type: "matrixdynamic", name: "m2", columns: [{ name: "price" }, { name: "total" }] },
+      { type: "filter", name: "f1", targetQuestion: "m1" }
+    ]
+  };
+  const filter = <any>creator.survey.getQuestionByName("f1");
+  creator.selectElement(filter);
+  const names = (): Array<string> => (<any>creator.propertyGrid.getQuestionByName("fields")).visibleRows.map(r => r.editingObj.name);
+  expect(names(), "#1").toEqual(["country"]);
+  (<any>creator.survey.getQuestionByName("m1")).addColumn("city");
+  expect(names(), "#2: a new column").toEqual(["country", "city"]);
+  filter.targetQuestion = "m2";
+  expect(names(), "#3: a new target").toEqual(["price", "total"]);
+});
 test("creator.deleteLocaleStrings", () => {
   const creator = new CreatorTester();
   creator.JSON = {

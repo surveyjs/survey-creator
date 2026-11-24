@@ -2857,6 +2857,13 @@ export class SurveyCreatorModel extends Base
     if (propertyName === "name" && this.isObjQuestion(obj) && !!obj["parentQuestion"]) {
       this.updateFilterFieldsOnFieldNameChanged(obj["parentQuestion"], oldValue, obj["name"]);
     }
+    // A Filter Control's fields entries are of its target question: a new one replaces them, in the same
+    // undo step - not a rename of the target (updateFilterTargetOnQuestionNameChanged), not undo or redo,
+    // which bring the entries back with the step.
+    if (propertyName === "targetQuestion" && obj.isDescendantOf("filter") && oldValue !== obj["targetQuestion"] &&
+      !this.isRenamingFilterTarget && !this.isProcessingUndoRedo && Array.isArray(obj["fields"]) && obj["fields"].length > 0) {
+      obj["fields"] = [];
+    }
     // A Filter Control's defaultPreset names a preset: a renamed default preset stays the default one,
     // in the same undo step as the rename.
     if (propertyName === "name" && obj.getType() === "filterpreset") {
@@ -2931,13 +2938,19 @@ export class SurveyCreatorModel extends Base
       }
     });
   }
+  private isRenamingFilterTarget: boolean = false;
   private updateFilterTargetOnQuestionNameChanged(oldName: string, newName: string) {
     if (!oldName || oldName === newName) return;
-    this.getAllQuestions().forEach(q => {
-      if (q.isDescendantOf("filter") && q["targetQuestion"] === oldName) {
-        q["targetQuestion"] = newName;
-      }
-    });
+    this.isRenamingFilterTarget = true;
+    try {
+      this.getAllQuestions().forEach(q => {
+        if (q.isDescendantOf("filter") && q["targetQuestion"] === oldName) {
+          q["targetQuestion"] = newName;
+        }
+      });
+    } finally {
+      this.isRenamingFilterTarget = false;
+    }
   }
   private updateFilterFieldsOnFieldNameChanged(target: Base, oldName: string, newName: string) {
     if (!target || !oldName || oldName === newName || typeof target["setControlFilter"] !== "function") return;
