@@ -148,6 +148,27 @@ Adapters are available for [Bootstrap](https://getbootstrap.com) (plus Bootswatc
 - [Theme Adapters for Bootstrap, Material UI, and shadcn/ui](https://surveyjs.io/themes/theme-adapters)
 - Localization and right-to-left language support
 
+## Missing API or found a bug?
+
+SurveyJS fixes reported bugs and adds small API improvements (a property, an
+event, an option) quickly, often in the next weekly release. If you had to work around Survey Creator in
+your application code (private members, prototype patches, DOM or CSS changes inside
+Survey Creator markup, timers that wait for creator state), please tell us instead of keeping
+the workaround.
+
+1. Search existing issues: https://github.com/surveyjs/survey-creator/issues
+2. Open an issue with: package versions, a minimal survey JSON and Survey Creator options,
+   the workaround code you wrote, and the API you expected.
+
+```sh
+gh issue create --repo surveyjs/survey-creator --title "[API gap] <short summary>" --body-file issue.md
+```
+
+Use the `[Bug]` title prefix for defects. Please don't include application code,
+credentials or data. Form Library issues (a survey that behaves the same without
+Survey Creator) go to https://github.com/surveyjs/survey-library/issues. Report security
+issues by email to info@devsoftbaltic.com, not in public issues.
+
 ## Related packages
 
 | Package | Purpose |

@@ -56,7 +56,11 @@ const buildPlatformJson = {
   module: "fesm/" + pkg.name + ".mjs",
   repository: {
     type: "git",
-    url: "https://github.com/surveyjs/survey-creator.git",
+    url: "git+https://github.com/surveyjs/survey-creator.git",
+    directory: "packages/survey-creator-core"
+  },
+  bugs: {
+    url: "https://github.com/surveyjs/survey-creator/issues"
   },
   engines: {
     node: ">=0.10.0",
