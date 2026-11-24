@@ -42,9 +42,14 @@ test("JsonEditor error item copies the full error text", () => {
   editor.text = JSON.stringify(json, null, 3);
   editor.processErrors(editor.text);
   const action = editor.errorList.actions[0];
-  expect(action.data.copyButtonTitle).toBe("Copy");
+  const copyAction = action.data.actions.getActionById("copy");
+  expect(copyAction.iconName).toBe("icon-copy-16x16");
+  expect(copyAction.iconSize).toBe(16);
+  expect(copyAction.predefinedAppearance.size).toBe("xx-small");
+  expect(copyAction.locTooltipName).toBe("ed.surveyJsonCopyButton");
+  expect(action.getTooltip()).toBeFalsy();
   expect(action.title.indexOf("...")).toBeGreaterThan(-1);
-  action.data.copyError();
+  copyAction.action();
   expect(writeText).toHaveBeenCalledTimes(1);
   const copied = writeText.mock.calls[0][0];
   expect(copied.indexOf("Line:")).toBe(0);

@@ -109,57 +109,11 @@ svc-tab-json-editor-textarea {
   min-width: 0;
 }
 
-.svc-json-error__copy-button {
-  appearance: none;
-  flex: 0 0 auto;
-  align-self: center;
+.svc-json-error__actions {
   pointer-events: all;
-  border: none;
-  background: transparent;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-  color: var(--sjs2-color-fg-basic-secondary);
-  font: inherit;
-  line-height: inherit;
-  text-decoration: underline;
-  text-decoration-thickness: 0.05em;
-  text-underline-offset: 0.15em;
-  white-space: nowrap;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-.svc-json-error__copy-button:hover {
-  color: var(--sjs2-color-fg-brand-primary, #15987e);
+  flex: 0 0 auto;
 }
 
 .svc-json-error__fix-button {
-  appearance: none;
-  flex-grow: 0;
-  flex-shrink: 0;
-  pointer-events: all;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 var(--sjs2-spacing-x100);
-
-  border-radius: var(--sjs2-radius-x050);
-  background: var(--sjs2-color-bg-basic-primary);
-
-  svg {
-    fill: var(--sjs2-color-fg-basic-secondary);
-    line-height: var(--sjs2-line-height-x300);
-    width: 1lh;
-    height: 1lh;
-  }
-}
-
-.svc-json-error__fix-button:hover {
-  svg {
-    fill: var(--sjs2-color-bg-brand-primary);
-  }
+  padding: var(--sjs2-spacing-x000) var(--sjs2-spacing-x050);
 }

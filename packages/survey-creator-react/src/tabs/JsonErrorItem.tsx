@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ItemValue } from "survey-core";
-import { ReactElementFactory, SurveyElementBase, SvgIcon, attachKey2click } from "survey-react-ui";
+import { ReactElementFactory, SurveyElementBase, SurveyActionBar, SvgIcon } from "survey-react-ui";
 
 class ItemTemplateComponent extends SurveyElementBase<{ item: ItemValue }, any> {
   renderElement() {
@@ -9,28 +9,13 @@ class ItemTemplateComponent extends SurveyElementBase<{ item: ItemValue }, any> 
       <>
         <SvgIcon iconName={item.iconName} size={item.iconSize} className={"svc-json-error__icon"} ></SvgIcon>
         <div className="svc-json-error__container">
-          <div className="svc-json-error__title" onMouseDown={(event) => event.stopPropagation()}>
+          <div className="svc-json-error__title" title={item.data.error?.text} onMouseDown={(event) => event.stopPropagation()}>
             <span key={2}>{this.renderLocString(item.locTitle, undefined, "locString")}</span>
           </div>
-          {this.renderCopyButton()}
-          {this.renderFixButton()}
+          <SurveyActionBar model={item.data.actions} />
         </div>
       </>
     );
-  }
-  renderCopyButton() {
-    const item = this.props.item;
-    if (!item.data || !item.data.copyError) return null;
-    return (attachKey2click(<button type="button" onClick={(event) => { event.stopPropagation(); item.data.copyError(); }} className={"svc-json-error__copy-button"}>
-      {item.data.copyButtonTitle}
-    </button>));
-  }
-  renderFixButton() {
-    if (!this.props.item.data.showFixButton) return null;
-    const item = this.props.item;
-    return (attachKey2click(<button type="button" onClick={(event) => { event.stopPropagation(); item.data.fixError(); }} title={item.data.fixButtonTitle} data-sv-tooltip={item.data.fixButtonTitle} className={"svc-json-error__fix-button"}>
-      <SvgIcon iconName={item.data.fixButtonIcon} size={"auto"}></SvgIcon>
-    </button>));
   }
 }
 

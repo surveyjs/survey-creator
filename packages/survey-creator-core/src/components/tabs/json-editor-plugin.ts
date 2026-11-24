@@ -1,4 +1,4 @@
-import { Base, property, ListModel, Action, ComputedUpdater } from "survey-core";
+import { Base, property, ListModel, Action, ActionContainer, ComputedUpdater } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { SurveyTextWorker, SurveyTextWorkerError, SurveyTextWorkerLinterFinding } from "../../textWorker";
@@ -117,10 +117,18 @@ export abstract class JsonEditorBaseModel extends Base {
   }
 
   protected setErrors(errors: Array<SurveyTextWorkerError>): void {
+    this.disposeErrorActions();
     const actions = this.createErrorActions(errors);
     // setItems unconditionally: skipping it on an empty list leaves the previous entries in it
     this.errorList.setItems(actions);
     this.hasErrors = actions.length > 0;
+  }
+  private disposeErrorActions(): void {
+    if (!this.errorListValue) return;
+    this.errorListValue.actions.forEach(item => {
+      const bar: ActionContainer = item.data && item.data.actions;
+      if (!!bar) bar.dispose();
+    });
   }
   protected gotoError(at: number, row: number, column: number): void { }
   private errorActionCounter: number = 1;
@@ -138,23 +146,49 @@ export abstract class JsonEditorBaseModel extends Base {
         id: (isFinding ? "linterfinding_" : "error_") + this.errorActionCounter++,
         component: "json-error-item",
         title: title,
-        tooltip: error.text,
         iconName: kind === "error" ? "icon-error" : "icon-warning-24x24",
         iconSize: "auto",
         // the base item already carries the alert colours an error needs
         css: kind === "warning" ? "svc-json-errors__item--warning" : undefined,
         data: {
           error: error,
+          actions: this.createErrorItemActions(error, copyText),
           showFixButton: error.isFixable,
           fixError: () => this.applyFix(error),
-          fixButtonIcon: "icon-fix",
-          fixButtonTitle: getFixTitle(error),
-          copyButtonTitle: getLocString("ed.jsonErrorCopyButton"),
-          copyError: () => this.copyErrorText(copyText)
+          fixButtonTitle: getFixTitle(error)
         }
       }));
     });
     return res;
+  }
+  private createErrorItemActions(error: SurveyTextWorkerError, copyText: string): ActionContainer {
+    const items: Array<Action> = [];
+    items.push(new Action({
+      id: "copy",
+      iconName: "icon-copy-16x16",
+      iconSize: 16,
+      showTitle: false,
+      locTitleName: "ed.surveyJsonCopyButton",
+      locTooltipName: "ed.surveyJsonCopyButton",
+      action: () => this.copyErrorText(copyText)
+    }));
+    if (error.isFixable) {
+      const fixTitle = getFixTitle(error);
+      items.push(new Action({
+        id: "fix",
+        iconName: "icon-fix",
+        iconSize: 24,
+        showTitle: false,
+        title: fixTitle,
+        innerCss: "svc-json-error__fix-button",
+        action: () => this.applyFix(error)
+      }));
+    }
+    const container = new ActionContainer();
+    container.containerCss = "svc-json-error__actions";
+    container.setActionsAppearance({ style: "neutral", size: "xx-small", mode: "tertiary" });
+    container.setItems(items);
+    return container;
   }
   private getErrorItemTitle(error: SurveyTextWorkerError, truncate: boolean): string {
     const line = error.rowAt > -1
@@ -276,6 +310,7 @@ export abstract class JsonEditorBaseModel extends Base {
   public dispose(): void {
     // the model is disposed as the tab closes: a pause it was waiting out has nothing to apply to
     this.cancelScheduledProcessing();
+    this.disposeErrorActions();
     this.lastTextWorker = undefined;
     this.lastTextWorkerText = undefined;
     this.errorsTextWorker = undefined;
