@@ -16,10 +16,12 @@ export class CreatorThemesComponent extends TestDefaultComponent {
   }
   protected override createCreator(): void {
     this.creator = new SurveyCreatorModel({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
-  
-    this.creator.tabResponsivenessMode = "menu";
-    this.creator["animationEnabled"] = false;
-    this.creator.showOneCategoryInPropertyGrid = true;
-    this.creator.allowZoom = true;
+    this.setupCreator(this.creator);
+  }
+  protected override setupCreator(creator: SurveyCreatorModel): void {
+    creator.tabResponsivenessMode = "menu";
+    creator["animationEnabled"] = false;
+    creator.showOneCategoryInPropertyGrid = true;
+    creator.allowZoom = true;
   }
 }

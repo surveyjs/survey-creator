@@ -18,14 +18,17 @@ if (props.useSlk) {
   slk("ZG9tYWluczoxMjcuMC4wLjE7MT0yMDM2LTAzLTE5LDI9MjAzNi0wMy0xOSw0PTIwMzYtMDMtMTksOD0yMDM2LTAzLTE5");
 }
 // The page's creator. The first load and resetCreatorForReuse() both build it here, so they can't drift apart.
-const createCreator = () => {
-  const newCreator = new SurveyCreatorModel(props.options);
+const setupCreator = (newCreator: SurveyCreatorModel) => {
   newCreator.tabResponsivenessMode = "menu";
   newCreator["animationEnabled"] = false;
   if(props.options.propertyGridNavigationMode != 'buttons') {
     newCreator.showOneCategoryInPropertyGrid = false;
   }
   newCreator.allowZoom = props.options.allowZoom === undefined ? false : props.options.allowZoom!;
+};
+const createCreator = () => {
+  const newCreator = new SurveyCreatorModel(props.options);
+  setupCreator(newCreator);
   return newCreator;
 };
 const creator = shallowRef(createCreator());
@@ -64,12 +67,7 @@ if (props.resetForReuse) {
   const newCreator = new SurveyCreatorModel(options);
   newCreator.JSON = json;
   creator.value = newCreator;
-  creator.value.tabResponsivenessMode = "menu";
-  creator.value["animationEnabled"] = false;
-  if(props.options.propertyGridNavigationMode != 'buttons') {
-    creator.value.showOneCategoryInPropertyGrid = false;
-  }
-  creator.value.allowZoom = props.options.allowZoom === undefined ? false : props.options.allowZoom!;
+  setupCreator(creator.value);
   (window as any).creator = creator.value;
 }
 </script>

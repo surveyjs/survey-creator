@@ -34,12 +34,15 @@
   SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
     SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
   // The page's creator. The first load and resetCreatorForReuse() both build it here, so they can't drift apart.
-  const createDefaultCreator = () => {
-    const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
+  const setupCreator = (creator) => {
     creator.tabResponsivenessMode = "menu";
     creator["animationEnabled"] = false;
     creator.showOneCategoryInPropertyGrid = false;
     creator.allowZoom = false;
+  };
+  const createDefaultCreator = () => {
+    const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
+    setupCreator(creator);
     return creator;
   };
   const creator = createDefaultCreator();
@@ -78,10 +81,7 @@
         const creator = new SurveyCreator.SurveyCreator(options);
               creator.JSON = json;
         this.setState({ creator });
-        creator.tabResponsivenessMode = "menu";
-        creator["animationEnabled"] = false;
-        creator.showOneCategoryInPropertyGrid = false;
-        creator.allowZoom = false;
+        setupCreator(creator);
         window.creator = creator;
       }
     }
