@@ -40,7 +40,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/surveyjs/survey-creator.git"
+    "url": "https://github.com/surveyjs/survey-creator.git",
+    "directory": "packages/survey-creator-angular"
+  },
+  "bugs": {
+    "url": "https://github.com/surveyjs/survey-creator/issues"
   },
   "typings": "survey-creator-angular.d.ts",
   "peerDependencies": {
