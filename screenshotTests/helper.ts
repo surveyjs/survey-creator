@@ -1,7 +1,26 @@
 import { Locator, Page } from "playwright/test";
-import { test, expect } from "../e2e/helper";
+import { expect } from "../e2e/helper";
 
 export * from "../e2e/helper";
+
+// The etalons were taken before datetimepicker joined the toolbox.
+const screenshotQuestionTypes = [
+  "radiogroup", "rating", "slider", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking",
+  "text", "comment", "multipletext",
+  "panel", "paneldynamic",
+  "matrix", "matrixdropdown", "matrixdynamic",
+  "html", "expression", "image", "signaturepad", "filter"
+];
+
+export async function useScreenshotQuestionTypes(page: Page): Promise<void> {
+  await page.waitForFunction(() => !!window["creator"]?.toolbox);
+  // The same as the questionTypes option: the toolbox keeps the list for later rebuilds of its default items.
+  await page.evaluate((types) => {
+    const toolbox = window["creator"].toolbox;
+    toolbox["supportedQuestions"] = types;
+    toolbox.createDefaultItems(types, true);
+  }, screenshotQuestionTypes);
+}
 
 export const setOptions = async (page, options) => {
   await page.waitForFunction(() => !!window["creator"]);

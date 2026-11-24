@@ -1,10 +1,11 @@
-import { url, compareScreenshot, waitForWebFonts, test, expect, setJSON, setOptions, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator, resetFocusToBody, hideContentBehindPopup, showContentBehindPopup, mockChoicesByUrl } from "./helper";
+import { url, compareScreenshot, waitForWebFonts, test, expect, setJSON, setOptions, setShowAddQuestionButton, setShowToolbox, setAllowEditSurveyTitle, setShowSidebar, getListItemByText, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, setIsCompact, doDragDrop, resetHoverToCreator, resetFocusToBody, hideContentBehindPopup, showContentBehindPopup, mockChoicesByUrl, useScreenshotQuestionTypes } from "./helper";
 
 const title = "Design Surface Screenshot";
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${url}`);
+    await useScreenshotQuestionTypes(page);
   });
 
   test("Check section", async ({ page }) => {

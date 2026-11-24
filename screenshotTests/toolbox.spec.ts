@@ -1,11 +1,12 @@
 import { expect } from "@playwright/test";
-import { url, compareScreenshot, test, setJSON, setShowSidebar, setShowAddQuestionButton, setAllowEditSurveyTitle, changeToolboxSearchEnabled, changeToolboxScrolling, getTabbedMenuItemByText, changeToolboxLocation, setDirRTL, getToolboxItemByText, hideContentBehindPopup, showContentBehindPopup } from "./helper";
+import { url, compareScreenshot, test, setJSON, setShowSidebar, setShowAddQuestionButton, setAllowEditSurveyTitle, changeToolboxSearchEnabled, changeToolboxScrolling, getTabbedMenuItemByText, changeToolboxLocation, setDirRTL, getToolboxItemByText, hideContentBehindPopup, showContentBehindPopup, useScreenshotQuestionTypes } from "./helper";
 
 const title = "Toolbox Screenshot";
 
 test.describe(title, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${url}`);
+    await useScreenshotQuestionTypes(page);
   });
 
   test("Left toolbox", async ({ page }) => {
