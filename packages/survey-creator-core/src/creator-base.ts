@@ -3227,11 +3227,11 @@ export class SurveyCreatorModel extends Base
     if (words.length === 0) return "";
     return words.map(word => word[0]).join("").toLowerCase() + "-";
   }
-  // The library's survey-options object (settings, propertyDefaults, events) of the surveys that show the user's
+  // The library's survey-options object (runtimeSettings, propertyDefaults, events) of the surveys that show the user's
   // survey: the designer, Preview, the Themes tab and the two panes of the side-by-side Translation tab. It is passed
   // as-is to these surveys when they are created, before their JSON loads (the JSON omits values equal to the
   // designer's defaults, so a survey loading it without them would show the library defaults instead); the survey
-  // copies the settings and defaults into its own state. Changing the property later applies to the surveys created
+  // reads them once, in its constructor, and they cannot change later. Changing the property applies to the surveys created
   // after the change: the designer survey is rebuilt when JSON is set again, the others when their tab is shown.
   public surveyOptions: ISurveyOptions;
   private static userSurveyAreas = ["designer-tab", "preview-tab", "theme-tab",
@@ -3240,7 +3240,7 @@ export class SurveyCreatorModel extends Base
     if (!this.surveyOptions || SurveyCreatorModel.userSurveyAreas.indexOf(area) < 0) return undefined;
     return this.surveyOptions;
   }
-  // A hidden temporary survey that loads JSON the way the designer survey does: the designer's settings and
+  // A hidden temporary survey that loads JSON the way the designer survey does: the designer's runtime settings and
   // propertyDefaults, but not the user's events, so the application's handlers do not run for it
   private getTemporarySurveyOptions(): ISurveyOptions {
     const options = this.getSurveyOptionsByArea("designer-tab");
@@ -3258,8 +3258,8 @@ export class SurveyCreatorModel extends Base
       model.generateStylesheet = false;
       return model;
     }
-    // The handlers run after the constructor and before the JSON loads: options.survey.settings() and
-    // options.survey.propertyDefaults() merge over this.surveyOptions, options.survey.onX.add() adds to its events
+    // The handlers run after the constructor and before the JSON loads. The survey's runtime settings and property
+    // defaults are this.surveyOptions and cannot change here; options.survey.onX.add() adds to its events
     const model = new SurveyModel(undefined, surveyOptions);
     model.generateStylesheet = false;
     const options = { survey: model, area: area, element: element, json: json };
@@ -5336,8 +5336,8 @@ export class SurveyCreatorModel extends Base
     super.dispose();
   }
   private releasePropertyDefaults(survey: SurveyModel): void {
-    if (!!survey && !!survey.getOwnPropertyDefaults()) {
-      survey.propertyDefaults({ classes: undefined });
+    if (!!survey) {
+      survey.releasePropertyDefaults();
     }
   }
   @property({ defaultValue: true }) enableLinkFileEditor: boolean;

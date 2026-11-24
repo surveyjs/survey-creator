@@ -119,32 +119,6 @@ describe("Creator: survey property defaults", () => {
     expect(creator.JSON.pages[0].elements.filter(el => el.name === "q10")[0].titleLocation).toBe("default");
     creator.dispose();
   });
-  test("onSurveyInstanceSetupHandlers: options.survey.propertyDefaults() for the designer survey merges over the option", () => {
-    const creator = new CreatorTester({ surveyOptions: { propertyDefaults: leftTitles } });
-    creator.onSurveyInstanceSetupHandlers.add((_, options) => {
-      if (options.area === "designer-tab") {
-        options.survey.propertyDefaults({ classes: { radiogroup: { colCount: 3 } } });
-      }
-    });
-    creator.JSON = twoQuestionsJSON;
-    const q2 = creator.survey.getQuestionByName("q2");
-    expect(q2.colCount).toBe(3);
-    expect(q2.titleLocation).toBe("left");
-    expect(creator.JSON).toEqual(twoQuestionsJSON);
-    expect(getPreviewSurvey(creator).getQuestionByName("q2").colCount).not.toBe(3);
-    creator.dispose();
-
-    const creator2 = new CreatorTester();
-    creator2.onSurveyInstanceSetupHandlers.add((_, options) => {
-      if (options.area === "designer-tab") {
-        options.survey.propertyDefaults(leftTitles);
-      }
-    });
-    creator2.JSON = twoQuestionsJSON;
-    expect(creator2.survey.getQuestionByName("q1").titleLocation).toBe("left");
-    expect(creator2.JSON).toEqual(twoQuestionsJSON);
-    creator2.dispose();
-  });
   test("The reset button uses the designer survey's default", () => {
     Serializer.addProperty("question", { name: "pdText", default: "global", category: "general" });
     try {
@@ -329,13 +303,13 @@ describe("Creator: survey property defaults", () => {
     expect(survey.getOwnPropertyDefaults()).toBeUndefined();
     expect(creator.JSON).toEqual(twoQuestionsJSON);
   });
-  test("surveyOptions settings reach the surveys that show the user's survey, not the property grid", () => {
+  test("surveyOptions runtimeSettings reach the surveys that show the user's survey, not the property grid", () => {
     const creator = new CreatorTester({
       showThemeTab: true, showTranslationTab: true, translationMode: "sideBySide",
-      surveyOptions: { comparator: { caseSensitive: true } }
+      surveyOptions: { runtimeSettings: { comparator: { caseSensitive: true } } }
     });
     creator.JSON = { locale: "de", elements: [{ type: "text", name: "q1", title: { default: "Q1", de: "F1" } }] };
-    const isCaseSensitive = (survey: SurveyModel): boolean => survey.getSettings().comparator.caseSensitive;
+    const isCaseSensitive = (survey: SurveyModel): boolean => survey.runtimeSettings.comparator.caseSensitive;
     expect(isCaseSensitive(creator.survey)).toBe(true);
     creator.selectQuestionByName("q1");
     expect(isCaseSensitive(getPropertyGridSurvey(creator))).toBe(false);
@@ -349,7 +323,7 @@ describe("Creator: survey property defaults", () => {
     expect(isCaseSensitive(model.targetSurvey)).toBe(true);
     creator.dispose();
   });
-  test("surveyOptions settings: an expression in Preview compares case-sensitively", () => {
+  test("surveyOptions runtimeSettings: an expression in Preview compares case-sensitively", () => {
     const json = { elements: [{ type: "text", name: "q1" }, { type: "text", name: "q2", visibleIf: "{q1} = 'abc'" }] };
     const usualCreator = new CreatorTester();
     usualCreator.JSON = json;
@@ -358,7 +332,7 @@ describe("Creator: survey property defaults", () => {
     expect(usualPreview.getQuestionByName("q2").isVisible).toBe(true);
     usualCreator.dispose();
 
-    const creator = new CreatorTester({ surveyOptions: { comparator: { caseSensitive: true } } });
+    const creator = new CreatorTester({ surveyOptions: { runtimeSettings: { comparator: { caseSensitive: true } } } });
     creator.JSON = json;
     const preview = getPreviewSurvey(creator);
     preview.setValue("q1", "ABC");
@@ -416,23 +390,8 @@ describe("Creator: survey property defaults", () => {
     expect(senders.filter(sender => sender !== creator.survey)).toHaveLength(0);
     creator.dispose();
   });
-  test("onSurveyInstanceSetupHandlers: options.survey.settings() for Preview merges over surveyOptions", () => {
-    const creator = new CreatorTester({ surveyOptions: { comparator: { caseSensitive: true } } });
-    creator.onSurveyInstanceSetupHandlers.add((_, options) => {
-      if (options.area === "preview-tab") {
-        options.survey.settings({ comparator: { trimStrings: false } });
-      }
-    });
-    creator.JSON = twoQuestionsJSON;
-    const comparator = getPreviewSurvey(creator).getSettings().comparator;
-    expect(comparator.caseSensitive).toBe(true);
-    expect(comparator.trimStrings).toBe(false);
-    expect(creator.survey.getSettings().comparator.trimStrings).toBe(true);
-    expect(creator.surveyOptions).toEqual({ comparator: { caseSensitive: true } });
-    creator.dispose();
-  });
   test("Without surveyOptions every survey is created without options", () => {
-    const hasOwnState = (survey: SurveyModel): boolean => !!survey.getOwnSettings() || !!survey.getOwnPropertyDefaults();
+    const hasOwnState = (survey: SurveyModel): boolean => !!survey.getOwnRuntimeSettings() || !!survey.getOwnPropertyDefaults();
     [false, true].forEach(withHandler => {
       const creator = new CreatorTester({ showThemeTab: true, showTranslationTab: true, translationMode: "sideBySide" });
       const passedOptions: Array<any> = [];

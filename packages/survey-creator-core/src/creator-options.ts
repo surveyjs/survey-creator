@@ -707,7 +707,7 @@ export interface ICreatorOptions {
   variablePresets?: ISurveyVariablePresets;
   // The options of the surveys that show the user's survey: the designer, Preview, the Themes tab and the panes of
   // the side-by-side Translation tab. It is the library's survey-options object (new SurveyModel(json, options)):
-  // settings such as comparator, propertyDefaults and events, passed to these surveys as-is. The Creator's own surveys
+  // runtimeSettings, propertyDefaults and events, passed to these surveys as-is. The Creator's own surveys
   // (property grid, pop-up editors, Logic, the Translation tab's tables and settings) get none of it. A later change
   // of creator.surveyOptions applies to the surveys created after it.
   surveyOptions?: ISurveyOptions;
