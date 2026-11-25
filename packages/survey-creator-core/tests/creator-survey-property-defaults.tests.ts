@@ -7,7 +7,7 @@ import { ThemeTabPlugin } from "../src/components/tabs/theme-plugin";
 import { TabTranslationPlugin } from "../src/components/tabs/translation-plugin";
 import { TranslationSideBySide } from "../src/components/tabs/translation-side-by-side";
 
-const leftTitles = { classes: { question: { titleLocation: "left" } } };
+const leftTitles = { question: { titleLocation: "left" } };
 const twoQuestionsJSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }, { type: "radiogroup", name: "q2", choices: [1, 2] }] }] };
 
 function getPreviewSurvey(creator: CreatorTester): SurveyModel {
@@ -122,7 +122,7 @@ describe("Creator: survey property defaults", () => {
   test("The reset button uses the designer survey's default", () => {
     Serializer.addProperty("question", { name: "pdText", default: "global", category: "general" });
     try {
-      const creator = new CreatorTester({ surveyOptions: { propertyDefaults: { classes: { question: { pdText: "own" } } } } });
+      const creator = new CreatorTester({ surveyOptions: { propertyDefaults: { question: { pdText: "own" } } } });
       creator.JSON = { elements: [{ type: "text", name: "q1" }] };
       const q1 = creator.selectQuestionByName("q1");
       expect(q1["pdText"]).toBe("own");
@@ -145,7 +145,7 @@ describe("Creator: survey property defaults", () => {
     Serializer.addProperty("question", { name: "pdBool:boolean", choices: [{ value: "first" }, { value: "second" }], default: "first", category: "general" });
     Serializer.addProperty("question", { name: "pdToggle:switchToggle", choices: [{ value: "first" }, { value: "second" }], default: "first", category: "general" });
     try {
-      const creator = new CreatorTester({ surveyOptions: { propertyDefaults: { classes: { question: { pdBool: "second", pdToggle: "second" } } } } });
+      const creator = new CreatorTester({ surveyOptions: { propertyDefaults: { question: { pdBool: "second", pdToggle: "second" } } } });
       creator.JSON = { elements: [{ type: "text", name: "q1" }] };
       const q1 = creator.selectQuestionByName("q1");
       expect(q1["pdBool"]).toBe("second");
@@ -166,7 +166,7 @@ describe("Creator: survey property defaults", () => {
   test("The number editor's cleared value is the designer survey's default", () => {
     Serializer.addProperty("question", { name: "pdNumber:number", default: 5, category: "general" });
     try {
-      const creator = new CreatorTester({ surveyOptions: { propertyDefaults: { classes: { question: { pdNumber: 3 } } } } });
+      const creator = new CreatorTester({ surveyOptions: { propertyDefaults: { question: { pdNumber: 3 } } } });
       creator.JSON = { elements: [{ type: "text", name: "q1" }] };
       const q1 = creator.selectQuestionByName("q1");
       expect(q1["pdNumber"]).toBe(3);
@@ -183,7 +183,7 @@ describe("Creator: survey property defaults", () => {
     }
   });
   test("The number editor of a matrix column uses its cell question's default in the designer survey", () => {
-    const creator = new CreatorTester({ surveyOptions: { propertyDefaults: { classes: { comment: { rows: 2 } } } } });
+    const creator = new CreatorTester({ surveyOptions: { propertyDefaults: { comment: { rows: 2 } } } });
     creator.JSON = { elements: [{ type: "matrixdropdown", name: "m1", rows: ["r1"], columns: [{ name: "col1", cellType: "comment" }] }] };
     const column = (<QuestionMatrixDropdownModel>creator.survey.getQuestionByName("m1")).columns[0];
     expect(column["rows"]).toBe(2);
@@ -256,7 +256,7 @@ describe("Creator: survey property defaults", () => {
     creator.switchTab("theme");
     const themeSurvey = (<ThemeTabPlugin>creator.getPlugin("theme")).model.survey;
     expect(themeSurvey).not.toBe(creator.survey);
-    expect(themeSurvey.getOwnPropertyDefaults().classes).toEqual(leftTitles.classes);
+    expect(themeSurvey.getOwnPropertyDefaults().classes).toEqual(leftTitles);
     expect(themeSurvey.getQuestionByName("q1").titleLocation).toBe("default");
     expect(themeSurvey.getQuestionByName("q2").titleLocation).toBe("left");
     expect(areas["theme-tab"]).toBe(true);
@@ -280,7 +280,7 @@ describe("Creator: survey property defaults", () => {
     expect(model.targetSurvey).toBeTruthy();
     [model.sourceSurvey, model.targetSurvey].forEach(survey => {
       expect(survey).not.toBe(creator.survey);
-      expect(survey.getOwnPropertyDefaults().classes).toEqual(leftTitles.classes);
+      expect(survey.getOwnPropertyDefaults().classes).toEqual(leftTitles);
       expect(survey.getQuestionByName("q1").titleLocation).toBe("default");
       expect(survey.getQuestionByName("q2").titleLocation).toBe("left");
     });
