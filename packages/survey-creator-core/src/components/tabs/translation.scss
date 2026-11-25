@@ -382,39 +382,100 @@ td.st-table__cell:first-of-type {
   }
 }
 
-// The per-element translation state of the target pane, shown by the translate title action
-// itself: the number of untranslated strings (nothing when there are none) and a chevron
-// pointing at the state of its inline strings block (see applyElementStateToAction). Nothing
-// to translate and all translated look the same - both mean "nothing for you here". The svg
-// selector outweighs the theme's action-icon fill rules.
-@mixin translationStateColor($color) {
-  --sd-action-title-color: #{$color};
-  --sd-action-hover-title-color: #{$color};
-  --sd-action-icon-color: #{$color};
+// The per-element translate action of the target pane, which shows the element's translation
+// state itself (see applyElementStateToAction): the language icon alone (nothing to translate),
+// the progress "translated/total" (no icon), or the language icon followed by a check (all
+// translated). Its look is the tertiary-surface action appearance - a white button with the
+// trigger ring - in every state. The check is the action's marker icon, which the action
+// renderers draw after the title at its natural size.
+.svc-translation-state {
+  .sd-action__icon ~ .sv-svg-icon {
+    flex-shrink: 0;
+    width: var(--sjs2-size-x200);
+    height: var(--sjs2-size-x200);
 
-  svg use {
-    fill: $color;
-  }
-
-  .sd-action__title {
-    color: $color;
+    use {
+      fill: var(--sd-action-icon-color);
+    }
   }
 }
 
-.svc-translation-state {
-  @include translationStateColor(var(--sjs2-color-fg-basic-primary-muted));
-
-  &.svc-translation-state--untranslated {
-    @include translationStateColor(var(--sjs2-color-fg-warning-primary));
+// The action sits at the top right of its element: the title wraps before it instead of running
+// under it. The action is taller than a title line, so it overhangs the line by the same amount
+// above and below, which keeps the line height, and moves out into the element's side padding -
+// 16px from the top and the right edge of a question's frame (the frame's padding is 24px at the
+// top and 40px at the sides).
+.st-side-by-side__target {
+  .sv-title-actions {
+    align-items: flex-start;
   }
 
-  // The open block: the chevron points up and the button stands out from both other states.
-  &.svc-translation-state--expanded {
-    @include translationStateColor(var(--sjs2-color-fg-brand-primary));
+  .sv-title-actions .sd-action-bar:has(> .svc-translation-state) {
+    margin-top: calc(-1 * var(--sjs2-spacing-x100));
+    margin-bottom: calc(-1 * var(--sjs2-spacing-x100));
+    margin-right: calc(-1 * var(--sjs2-spacing-x300));
+    margin-left: var(--sjs2-spacing-x100);
+  }
 
-    svg {
-      transform: rotate(180deg);
-    }
+  // A frameless element inside a panel has no side padding to move into: the action keeps to the
+  // element's own edge there.
+  .sd-element--nested .sv-title-actions .sd-action-bar:has(> .svc-translation-state) {
+    margin-right: 0;
+  }
+}
+
+// The survey header of both panes lies on the pane background, as the page and its questions
+// do, with the survey's top padding above it and the content edges of the page below it. The
+// runner's basic header is a band of its own (a background and a brand-coloured underline).
+.st-side-by-side {
+  .sd-title.sd-container-modern__title {
+    background-color: var(--sjs2-color-component-survey-header-default-bg);
+    box-shadow: none;
+    padding: var(--sjs2-layout-component-survey-box-padding-top) var(--sjs2-layout-component-survey-header-padding-horizontal) 0;
+  }
+}
+
+// A target-pane string with no translation shows the source text in the placeholder colour of
+// its place (see TranslationSideBySide.isTargetStringUntranslated). Typing a translation over it
+// writes the target language, and the string turns into a regular one.
+.st-side-by-side__target {
+  --st-untranslated-color: var(--sjs2-color-fg-basic-secondary);
+
+  .sd-question__title {
+    --st-untranslated-color: var(--sjs2-color-component-question-default-title-placeholder);
+  }
+
+  .sd-question__description {
+    --st-untranslated-color: var(--sjs2-color-component-question-default-description-placeholder);
+  }
+
+  .sd-panel__title {
+    --st-untranslated-color: var(--sjs2-color-component-panel-default-title-placeholder);
+  }
+
+  .sd-panel__description {
+    --st-untranslated-color: var(--sjs2-color-component-panel-default-description-placeholder);
+  }
+
+  .sd-page__title {
+    --st-untranslated-color: var(--sjs2-color-component-page-default-title-placeholder);
+  }
+
+  .sd-page__description {
+    --st-untranslated-color: var(--sjs2-color-component-page-default-description-placeholder);
+  }
+
+  .sd-header__text .sd-title {
+    --st-untranslated-color: var(--sjs2-color-component-survey-header-default-title-placeholder);
+  }
+
+  .sd-header__text .sd-description {
+    --st-untranslated-color: var(--sjs2-color-component-survey-header-default-description-placeholder);
+  }
+
+  // While it is being edited, the text is the one being typed - the regular colour.
+  .svc-string-editor--untranslated:not(:focus-within) .sv-string-editor {
+    color: var(--st-untranslated-color);
   }
 }
 

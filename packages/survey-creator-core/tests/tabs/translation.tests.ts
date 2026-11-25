@@ -2447,6 +2447,22 @@ test("Complex value text in TranslationItem", () => {
   expect(ti.localizableName).toBe(itemValueJson.value);
   expect(ti.text).toBe(itemValueJson.value);
 });
+test("TranslationItem.getUntranslatedText: the text being translated, unless the locale has a text of its own or of its root language", () => {
+  const survey = new SurveyModel({
+    elements: [{ type: "text", name: "q1", title: { default: "Name", fr: "Nom", pt: "Nome" } }]
+  });
+  const translation: Translation = new Translation(survey);
+  const question = survey.getQuestionByName("q1");
+  const ti = new TranslationItem("title", question.locTitle, "", translation, question);
+
+  expect(ti.getUntranslatedText("de", "fr")).toBe("Nom");
+  expect(ti.getUntranslatedText("de", "")).toBe("Name");
+  expect(ti.getUntranslatedText("fr", "")).toBe("");
+  expect(ti.getUntranslatedText("pt-br", "fr")).toBe("");
+  expect(ti.getUntranslatedText("", "fr")).toBe("");
+  question.locTitle.setLocaleText("de", "Vorname");
+  expect(ti.getUntranslatedText("de", "fr")).toBe("");
+});
 test("Store locales order", () => {
   const survey1 = new SurveyModel({
     pages: [

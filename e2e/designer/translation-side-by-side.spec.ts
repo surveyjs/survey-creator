@@ -316,7 +316,7 @@ test.describe(title, () => {
     // untranslated as well: a question is displayed - and translated - by its title, the name
     // fallback of a title-less one included, so it always has that one string to translate.
     await expect(target.locator("[data-name=q1] .svc-translation-state--translated")).toBeVisible();
-    await expect(target.locator("[data-name=q2] .svc-translation-state--untranslated")).toContainText("1");
+    await expect(target.locator("[data-name=q2] .svc-translation-state--untranslated")).toHaveText("0/1");
     await expect(target.locator("[data-name=q3] .svc-translation-state--untranslated")).toBeVisible();
     await expect(target.locator(".sd-page__title .svc-translation-state--untranslated")).toBeVisible();
     await expect(target.locator(".sd-header__text .svc-translation-state--untranslated")).toBeVisible();
@@ -340,6 +340,88 @@ test.describe(title, () => {
     // Typing the survey title translation flips the survey indicator.
     await type(target.locator(".sd-header__text .sv-string-editor").getByText("Survey title"), "Umfragetitel");
     await expect(target.locator(".sd-header__text .svc-translation-state--translated")).toBeVisible();
+  });
+
+  test("translate action: the language icon, translated/total, the language icon with a check", async ({ page }) => {
+    await setJSON(page, {
+      locale: "de",
+      pages: [{
+        name: "page1",
+        elements: [
+          { type: "text", name: "q1", title: { default: "Question 1", de: "Frage 1" } },
+          {
+            type: "radiogroup", name: "q2", title: { default: "Question 2", de: "Frage 2" },
+            choices: [{ value: "a", text: { default: "Apple", de: "Apfel" } }, { value: "b", text: "Banana" }]
+          }
+        ]
+      }]
+    });
+    await setCreatorProp(page, "translationMode", "sideBySide");
+    await getTabbedMenuItemByText(page, "Translation").click();
+    const target = page.locator(".st-side-by-side__target");
+    // Nothing to translate - the page has no title: the language icon alone.
+    const none = target.locator(".sd-page__title .svc-translation-state--none button");
+    await expect(none).toBeVisible();
+    await expect(none.locator("svg")).toHaveCount(1);
+    await expect(none.locator(".sd-action__title")).toHaveCount(0);
+    // Some strings untranslated: translated/total and no icon.
+    const progress = target.locator("[data-name=q2] .svc-translation-state--untranslated button");
+    await expect(progress).toHaveText("2/3");
+    await expect(progress.locator("svg")).toHaveCount(0);
+    // All translated: the language icon and the check.
+    const done = target.locator("[data-name=q1] .svc-translation-state--translated button");
+    await expect(done.locator("svg")).toHaveCount(2);
+    await expect(done.locator(".sd-action__title")).toHaveCount(0);
+    // The untranslated choice shows the source text muted; translating it completes the question.
+    const banana = target.locator("[data-name=q2] .svc-string-editor").filter({ hasText: "Banana" });
+    await expect(banana).toHaveClass(/svc-string-editor--untranslated/);
+    await banana.locator(".sv-string-editor").click();
+    await page.keyboard.press("Control+a");
+    await page.keyboard.type("Banane");
+    await page.keyboard.press("Control+Enter");
+    await expect(target.locator("[data-name=q2] .svc-string-editor").filter({ hasText: "Banane" })).not.toHaveClass(/svc-string-editor--untranslated/);
+    await expect(target.locator("[data-name=q2] .svc-translation-state--translated button svg")).toHaveCount(2);
+    // The action sits 16px from the top and the right edge of the question's frame.
+    const card = (await target.locator(".sd-question[data-name=q2]").boundingBox())!;
+    const action = (await target.locator("[data-name=q2] .svc-translation-state button").boundingBox())!;
+    expect(Math.abs(action.y - card.y - 16)).toBeLessThanOrEqual(1);
+    expect(Math.abs(card.x + card.width - (action.x + action.width) - 16)).toBeLessThanOrEqual(1);
+  });
+
+  test("the cards of a row pair end at the same line when the source text is much longer", async ({ page }) => {
+    const longTitle = "What can we do to make your experience with our product, its documentation, its support " +
+      "and its pricing more satisfying, and what would you change first if you could change only one thing?";
+    await setJSON(page, {
+      locale: "de",
+      pages: [{
+        name: "page1",
+        elements: [
+          { type: "text", name: "q1", title: { default: longTitle, de: "Was sollen wir verbessern?" } },
+          { type: "text", name: "q2", title: { default: "Short", de: "Kurz" }, startWithNewLine: false },
+          { type: "text", name: "q3", title: { default: "Question 3", de: "Frage 3" } }
+        ]
+      }]
+    });
+    await setCreatorProp(page, "translationMode", "sideBySide");
+    await getTabbedMenuItemByText(page, "Translation").click();
+    const source = page.locator(".st-side-by-side__source");
+    const target = page.locator(".st-side-by-side__target");
+    await expect(target.locator(".sd-question[data-name=q3]")).toBeVisible();
+    const getBottom = async (pane, name: string) => {
+      const paneBox = (await pane.boundingBox())!;
+      const box = (await pane.locator(".sd-question[data-name=" + name + "]").boundingBox())!;
+      return box.y + box.height - paneBox.y;
+    };
+    // The source card is the taller one; the target card stretches to it - and so do the cards
+    // sharing the row, which line up with their own counterparts.
+    await expect(async () => {
+      for (const name of ["q1", "q2", "q3"]) {
+        expect(Math.abs(await getBottom(source, name) - await getBottom(target, name))).toBeLessThanOrEqual(1);
+      }
+      const q1Target = (await target.locator(".sd-question[data-name=q1] .sd-question__title").boundingBox())!;
+      const q1Source = (await source.locator(".sd-question[data-name=q1] .sd-question__title").boundingBox())!;
+      expect(q1Source.height).toBeGreaterThan(q1Target.height);
+    }).toPass();
   });
 
   test("target locale switch re-renders target pane strings", { tag: "@fresh-page" }, async ({ page }) => {

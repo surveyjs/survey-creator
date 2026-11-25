@@ -43,6 +43,11 @@ export class TranslationCopiesMap {
   public getItemByEditableCopy(copyLocStr: ILocalizableString): TranslationItem {
     return !!copyLocStr ? this.byEditableCopy.get(copyLocStr) : undefined;
   }
+  public getEditableCopies(): Array<ILocalizableString> {
+    const res = new Array<ILocalizableString>();
+    this.byEditableCopy.forEach((_: TranslationItem, copy: ILocalizableString) => res.push(copy));
+    return res;
+  }
   public getCopies(realLocStr: ILocalizableString): Array<ILocalizableString> {
     return !!realLocStr ? this.byRealLocStr.get(realLocStr) : undefined;
   }

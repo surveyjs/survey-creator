@@ -422,8 +422,10 @@ export class StringEditorViewModelBase extends Base {
     let clearedText = this.getClearedText(event.target);
     this.errorText = this.getErrorTextOnChanged(clearedText);
 
-    if (this.locString.text != clearedText &&
-      !(!this.locString.text && clearedText == this.locString.calculatedText)) {
+    // An untranslated string of a translation pane shows a text that is not its own (the source
+    // language's one): leaving it unchanged must not store that text as the translation.
+    const isShownTextUnchanged = (!this.locString.text || this.isUntranslatedString) && clearedText == this.locString.calculatedText;
+    if (this.locString.text != clearedText && !isShownTextUnchanged) {
       if (!this.errorText) {
         this.setValueIntoLocStr(clearedText, event?.target);
       } else {
@@ -509,6 +511,20 @@ export class StringEditorViewModelBase extends Base {
     const owner = <any>this.locString.owner;
     const survey = !!owner && !!owner.locOwner ? owner.locOwner.survey : undefined;
     return !!survey && !!survey.isTranslationSurface;
+  }
+  // True for a string of the translation side-by-side target pane that has no text in the
+  // language being translated into: the pane shows the source text in its place, muted.
+  private get isUntranslatedString(): boolean {
+    const survey = this.getOwnerSurvey();
+    return !!survey && !!survey.isTranslationSurface && typeof survey.isUntranslatedString === "function" &&
+      !!survey.isUntranslatedString(this.locString);
+  }
+  private getOwnerSurvey(): any {
+    const owner = <any>this.locString.owner;
+    if (!owner) return undefined;
+    if (owner.isSurvey) return owner;
+    if (!!owner.locOwner) return owner.locOwner.survey;
+    return owner.survey;
   }
   private setValueIntoLocStr(clearedText: any, target: HTMLElement): void {
     if (this.isInplaceForEditValues) {
@@ -660,7 +676,8 @@ export class StringEditorViewModelBase extends Base {
       text == "" && this.placeholder == "" && "svc-string-editor--hidden",
       !this.contentEditable && "svc-string-editor--readonly",
       !!this.errorText && "svc-string-editor--error",
-      !!this.locString.allowLineBreaks && "svc-string-editor--multiline"
+      !!this.locString.allowLineBreaks && "svc-string-editor--multiline",
+      this.isUntranslatedString && "svc-string-editor--untranslated"
     );
   }
 }

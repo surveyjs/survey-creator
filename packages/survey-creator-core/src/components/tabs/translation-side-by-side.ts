@@ -1,5 +1,5 @@
 import {
-  Action, AdaptiveActionContainer, Base, DomDocumentHelper, DomWindowHelper, EventBase, Helpers, IDialogOptions, ILocalizableString,
+  Action, AdaptiveActionContainer, Base, DomDocumentHelper, DomWindowHelper, EventBase, Helpers, IActionAppearance, IDialogOptions, ILocalizableString,
   ILocalizableOwner, ItemValue, LocalizableString, PageModel, PanelModel, PanelModelBase, PopupBaseViewModel, Question,
   QuestionCommentModel, QuestionDropdownModel, QuestionRowModel,
   QuestionMatrixDropdownModel, Serializer, SurveyElement, SurveyModel, property,
@@ -72,6 +72,12 @@ const translationProgressQuestionName = "translationProgress";
 // "none" - no used strings with a stored text (nothing to translate), "untranslated" - at
 // least one used string has no stored target-locale text, "translated" - all of them do.
 export type TranslationElementState = "none" | "untranslated" | "translated";
+
+// The translate action of a target-pane element (see applyElementStateToAction): a white button
+// with the trigger ring (showBorder), the same in every state.
+const translateActionIconName = "icon-language";
+const translateActionDoneIconName = "icon-check-16x16";
+const translateActionAppearance: IActionAppearance = { style: "neutral", mode: "tertiary-surface", size: "small", showBorder: true };
 
 export class TranslationSideBySide extends TranslationBase implements ITranslationDropdownOwner {
   @property() selectedPageName: string;
@@ -272,9 +278,11 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // moves no counter until the next full refresh.
   private usedStringsRootValue: TranslationGroup;
   private usedStringsItemsValue: Array<TranslationItem>;
+  private usedLocStringsValue: Set<ILocalizableString>;
   private resetUsedStringsCache(): void {
     this.usedStringsRootValue = undefined;
     this.usedStringsItemsValue = undefined;
+    this.usedLocStringsValue = undefined;
   }
   protected getUsedStringsRoot(): TranslationGroup {
     if (!this.usedStringsRootValue) {
@@ -287,6 +295,15 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       this.usedStringsItemsValue = this.getUsedStringsRoot().allLocItems;
     }
     return this.usedStringsItemsValue;
+  }
+  // Whether a real-survey string is one of the used strings - one the counts are measured over.
+  private isUsedLocString(locStr: ILocalizableString): boolean {
+    if (!this.usedLocStringsValue) {
+      const res = new Set<ILocalizableString>();
+      this.getUsedStringsItems().forEach(item => res.add(item.locString));
+      this.usedLocStringsValue = res;
+    }
+    return this.usedLocStringsValue.has(locStr);
   }
   public isItemTranslated(item: TranslationItem, locale: string): boolean {
     return !!item.locString.getLocaleText(locale);
@@ -618,17 +635,24 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     if (counts.translated < counts.total) return "untranslated";
     return "translated";
   }
-  // The button carries the element's state itself: the number of untranslated strings when
-  // there is one (and nothing but the language icon otherwise) and a css modifier per state.
+  // The button carries the element's state itself, with a css modifier per state:
+  // - none: the language icon alone;
+  // - untranslated: the progress "translated/total" and no icon;
+  // - translated: the language icon followed by a check. The check is the action's marker icon
+  //   (the trailing icon every action renderer draws), so the standard action renderer of every
+  //   framework shows both glyphs.
   // It renders without a visible title in two of the three states, so the tooltip is also its
   // accessible name - it follows the state.
   private applyElementStateToAction(action: Action, key: string): void {
     const counts = this.elementCounts[key];
     const state = this.getStateFromCounts(counts);
-    const untranslated = !!counts ? counts.total - counts.translated : 0;
-    action.title = untranslated > 0 ? untranslated.toString() : "";
-    action.showTitle = untranslated > 0;
-    action.tooltip = untranslated > 0
+    const isProgress = state === "untranslated";
+    const untranslated = isProgress ? counts.total - counts.translated : 0;
+    action.title = isProgress ? counts.translated + "/" + counts.total : "";
+    action.showTitle = isProgress;
+    action.iconName = isProgress ? undefined : translateActionIconName;
+    action.markerIconName = state === "translated" ? translateActionDoneIconName : undefined;
+    action.tooltip = isProgress
       ? editorLocalization.getString("ed.translationStateUntranslated").replace("{0}", untranslated.toString())
       : editorLocalization.getString(state === "translated" ? "ed.translationStateAllTranslated" : "ed.translationStateNothingToTranslate");
     action.css = "svc-translation-state svc-translation-state--" + state;
@@ -783,6 +807,9 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
         this.rebuildInstances();
       } else {
         this.updateInstanceLocales();
+        if (name === "sourceLocale") {
+          this.refreshUntranslatedTexts();
+        }
         // The dialog survives a switch between two languages: it edits the real survey, and its
         // matrix follows the new locales.
         if (!!this.elementStringsModel) {
@@ -947,6 +974,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
         this.setupSourceEmptySpaces();
       }
       this.buildMappings();
+      this.setupUntranslatedTexts();
       this.updateInstanceLocales();
       this.updateInstancePages();
       this.setupLazyRowPairs();
@@ -1453,6 +1481,8 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     survey.onPropertyValueChangedCallback = (name: string, oldValue: any, newValue: any, sender: Base): void => {
       this.forwardTargetChange(name, sender);
     };
+    // Read by the string editor of a translation surface: it renders an untranslated string muted.
+    (<any>survey).isUntranslatedString = (locStr: ILocalizableString): boolean => this.isTargetStringUntranslated(locStr);
     survey.onGetQuestionTitleActions.add((_, options) => {
       if (isContentElement(options.question)) return;
       options.actions.push(this.createTranslateAction("svc-translate-question",
@@ -1480,15 +1510,18 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   private createTranslateAction(id: string, doAction: () => void, paneElement: Base): Action {
     const action = new Action({
       id: id,
-      iconName: "icon-language",
+      iconName: translateActionIconName,
       iconSize: "auto",
       showTitle: false,
-      // The number of untranslated strings is the point of the button, and a title row has
-      // little room for actions - a narrow element (a question that shares its row, a pane
-      // resized down) makes its title bar shrink its actions, and a shrunk action renders as
-      // its icon alone (see Action.hasTitle). The row wraps its text instead.
+      // The progress is the point of the button, and a title row has little room for actions -
+      // a narrow element (a question that shares its row, a pane resized down) makes its title
+      // bar shrink its actions, and a shrunk action renders as its icon alone (see
+      // Action.hasTitle). The row wraps its text instead.
       disableShrink: true,
-      appearance: { style: "neutral", mode: "secondary", size: "small" },
+      // For the same reason it never goes into the title bar's "more" menu: its width changes with
+      // the state, and a title bar measures its actions once.
+      disableHide: true,
+      appearance: Object.assign({}, translateActionAppearance),
       action: doAction
     });
     const key = this.getElementStateKey(paneElement);
@@ -1506,7 +1539,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     const toolbar = new AdaptiveActionContainer();
     const actionBarCss = survey.getCss().actionBar;
     if (!!actionBarCss) toolbar.cssClasses = actionBarCss;
-    toolbar.setActionsAppearance({ style: "neutral", size: "small", mode: "secondary" });
+    toolbar.setActionsAppearance(Object.assign({}, translateActionAppearance));
     toolbar.locOwner = survey;
     toolbar.containerCss = "sv-action-title-bar";
     toolbar.setItems([this.createTranslateAction("svc-translate-survey",
@@ -1695,6 +1728,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       survey.getRendererForString = undefined;
       survey.getRendererContextForString = undefined;
       survey.onPropertyValueChangedCallback = undefined;
+      (<any>survey).isUntranslatedString = undefined;
       survey.dispose();
     });
     this.sourceSurvey = undefined;
@@ -1729,6 +1763,71 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       const page = survey.getPageByName(name);
       if (!!page) survey.currentPage = page;
     });
+  }
+  // A target-pane string with no text of its own in the target language shows the text being
+  // translated, muted (see isTargetStringUntranslated). survey-core falls back to the default
+  // language, which is the source only while the source is the default language - for any other
+  // source the text is taken from the source language here. A string without a source text
+  // keeps survey-core's fallback. The string's own text callback (a question title shows the
+  // name when it has no text, a choice its value) runs on the result, as before.
+  private setupUntranslatedTexts(): void {
+    if (!this.targetSurvey) return;
+    this.getEditableLocStrCopies().forEach(locStr => {
+      const prevCallback = locStr.onGetTextCallback;
+      const wasPure = !prevCallback || !!locStr.isTextCallbackPure;
+      locStr.onGetTextCallback = (text: string, nonProcessedText?: string): string => {
+        const sourceText = this.getUntranslatedSourceText(locStr);
+        if (!!sourceText) {
+          text = sourceText;
+          nonProcessedText = sourceText;
+        }
+        return !!prevCallback ? prevCallback(text, nonProcessedText) : text;
+      };
+      // The callback reads the locales of this model, never a survey value.
+      locStr.isTextCallbackPure = wasPure;
+    });
+  }
+  // The rules are shared with the grid view (TranslationItem.getUntranslatedText). A default-language
+  // source needs no substitution: survey-core already shows its text. The copy's own target text
+  // is checked too, since that is what the pane renders.
+  private getUntranslatedSourceText(locStr: LocalizableString): string {
+    const source = this.sourceLocale || "";
+    const target = this.targetLocale || "";
+    if (!target || isDefaultLocale(source) || !!locStr.getLocaleText(target)) return "";
+    const item = this.copiesMap.getItemByEditableCopy(locStr);
+    return !!item ? item.getUntranslatedText(target, source) : "";
+  }
+  // A string of the target pane that has no text of its own in the target language: the pane
+  // shows the source text in its place, and the string editor renders it muted
+  // (svc-string-editor--untranslated) until a translation is typed in. These are the used
+  // strings - the ones the element's translate action counts, so a muted text and the action's
+  // state agree (rating values, for example, are not counted) - and every string that shows a
+  // source text in place of its own: the used-strings tree is kept over text edits, so a string
+  // that got its first text a moment ago is not in it yet, and its shown text must not pass for
+  // a translation (the string editor does not store it on blur).
+  public isTargetStringUntranslated(locStr: ILocalizableString): boolean {
+    const target = this.targetLocale || "";
+    if (!target || !this.targetSurvey) return false;
+    const item = this.copiesMap.getItemByEditableCopy(locStr);
+    if (!item || !!locStr.getLocaleText(target)) return false;
+    return this.isUsedLocString(item.locString) || !!this.getUntranslatedSourceText(<LocalizableString>locStr);
+  }
+  // The mapped strings of the target pane that render a text (an ILocalizableString can also be
+  // a LocalizableStrings, a list of texts such as a question's dataList).
+  private getEditableLocStrCopies(): Array<LocalizableString> {
+    return <Array<LocalizableString>>this.copiesMap.getEditableCopies().filter(copy => copy instanceof LocalizableString);
+  }
+  // A source language change re-renders the untranslated target strings, which show its texts.
+  private refreshUntranslatedTexts(): void {
+    if (!this.targetSurvey) return;
+    const wasSyncing = this._syncing;
+    this._syncing = true;
+    try {
+      this.getEditableLocStrCopies().forEach(locStr => locStr.strChanged());
+    } finally {
+      this._syncing = wasSyncing;
+    }
+    this.rowEqualizer.scheduleUpdate();
   }
   // Without a target pane no copy is editable - the mapping is built with the source copy alone,
   // so the real survey's changes still mirror into it.

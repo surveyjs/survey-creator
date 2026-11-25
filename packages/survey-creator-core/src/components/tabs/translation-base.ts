@@ -238,6 +238,15 @@ export class TranslationItem extends TranslationItemBase {
     }
     return res;
   }
+  // The text a string shows in place of its missing translation to the locale: the text being
+  // translated from fromLocale (see getTextToTranslateFrom). Empty when the string has a text of
+  // its own in the locale, or takes one from its root language (getRootLanguageText: "pt-br"
+  // shows the "pt" text), since that is what the survey shows.
+  public getUntranslatedText(locale: string, fromLocale: string): string {
+    const loc = locale || "";
+    if (!loc || !!this.getLocText(loc) || !!this.getRootLanguageText(loc)) return "";
+    return this.getTextToTranslateFrom(fromLocale);
+  }
   public getPlaceholder(locale: string, ignorePlaceHolder: boolean = false): string {
     const placeholderText = !ignorePlaceHolder ? editorLocalization.getString("ed.translationPlaceHolder", this.getTextLocale(locale)) : "";
     return this.getPlaceHolderCore(locale) || placeholderText;
@@ -291,8 +300,12 @@ export class TranslationItem extends TranslationItemBase {
     if (!!val && !!val.text) return val.text;
     const res = this.locString.getLocaleText(loc);
     if (!!res) return res;
-    const index = loc.indexOf("-");
-    if (index < 0) return "";
+    return this.getRootLanguageText(loc);
+  }
+  // The text a regional locale ("pt-br") takes from its root language ("pt"); empty for a locale
+  // that is not regional.
+  public getRootLanguageText(loc: string): string {
+    if (!loc || loc.indexOf("-") < 0) return "";
     return this.getPlaceholderText(loc);
   }
   public getPlaceholderText(loc: string): string {
