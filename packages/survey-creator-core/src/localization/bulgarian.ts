@@ -4029,8 +4029,10 @@ export var bgStrings = {
         loop: "Тригерите образуват цикъл чрез стойностите, които задават: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} чете стойността, която сам записва – работи само когато друга стойност се промени, така че никога не се изпълнява.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} изчислява стойността, която записва от тази стойност – всяко изпълнение започва от предишния резултат, така че стойността зависи от това колко пъти се изпълнява.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} копира само стойността, която записва, така че никога не задава стойност.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Стойностите се записват в цикъл: {chain}. Всяко записване повтаря изразите, които го четат, така че крайните стойности зависят от реда, в който се отговарят въпросите."
       },

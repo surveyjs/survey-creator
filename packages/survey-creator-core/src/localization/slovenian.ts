@@ -4029,8 +4029,10 @@ export var slStrings = {
         loop: "Sprožilci tvorijo zanko preko nastavitev, ki jih nastavijo: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} prebere vrednost, ki jo sam zapiše – zažene se le, ko se spremeni druga vrednost, zato se sploh ne zažene.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} izračuna vrednost, ki jo zapiše iz te vrednosti – vsak zagon se začne s prejšnjim rezultatom, zato vrednost temelji na tem, kolikokrat se zažene.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} kopira samo zapisano vrednost, zato nikoli ne nastavi vrednosti.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Vrednosti se zapisujejo v zanki: {chain}. Vsak zapis ponovi izraze, ki ga preberejo, zato končne vrednosti temeljijo na vrstnem redu odgovorov na vprašanja."
       },

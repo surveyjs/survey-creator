@@ -4029,8 +4029,10 @@ export var hrStrings = {
         loop: "Okidači tvore petlju kroz vrijednosti koje postave: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} čita vrijednost koju sam zapisuje – pokreće se samo kad se druga vrijednost promijeni, pa se uopće ne pokreće.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} sam izračunava vrijednost koju zapisuje iz te vrijednosti – svako pokretanje počinje od prethodnog rezultata, pa vrijednost ovisi o tome koliko puta se izvrši.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} kopira samo vrijednost koju zapisuje, pa nikada ne postavlja vrijednost.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Vrijednosti se zapisuju u petlji: {chain}. Svaki zapis ponovno pokreće izraze koji ga čitaju, pa konačne vrijednosti ovise o redoslijedu u kojem se pitanja odgovaraju."
       },

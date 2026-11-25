@@ -4030,8 +4030,10 @@ export var polishStrings = {
         loop: "Wyzwalacze tworzą pętlę na podstawie wartości, które ustawiają: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} odczytuje wartość, którą sam zapisuje – uruchamia się tylko wtedy, gdy zmienia się inna wartość, więc w ogóle nie działa.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} oblicza wartość, którą zapisuje z tej wartości – każdy start zaczyna się od poprzedniego wyniku, więc wartość zależy od liczby uruchomień.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} kopiuje tylko zapisaną wartość, więc nigdy nie ustawia wartości.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Wartości zapisywane są w pętli: {chain}. Każdy zapis powtarza wyrażenia, które je odczytują, więc ostateczne wartości zależą od kolejności odpowiedzi na pytania."
       },

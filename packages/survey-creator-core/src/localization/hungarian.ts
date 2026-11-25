@@ -4029,8 +4029,10 @@ export var huStrings = {
         loop: "A triggerek hurkot alkotnak az általuk beállított értékeken: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "A {label} olvassa az általa írt értéket – csak akkor fut, amikor egy másik érték változik, tehát soha nem fut.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "A {label} magától az értékből írt értéket számítja ki – minden futás az előző eredményből indul, így az érték attól függ, hányszor fut.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "A {label} csak az általa írt értéket másolja, így soha nem állít be értéket.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Az értékek egy hurokban vannak írva: {chain}. Minden írás újra futtatja azokat az kifejezéseket, amelyek olvasták, így a végső értékek attól függnek, hogy milyen sorrendben válaszolnak a kérdésekre."
       },

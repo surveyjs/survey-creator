@@ -4029,8 +4029,10 @@ export var msStrings = {
         loop: "Pencetus membentuk gelung melalui nilai yang mereka tetapkan: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} membaca nilai yang ditulisnya sendiri - ia hanya berjalan apabila nilai lain berubah, jadi ia tidak pernah berjalan langsung.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} mengira nilai yang ditulis daripada nilai itu sendiri - setiap larian bermula dari hasil sebelumnya, jadi nilai bergantung pada berapa kali ia dijalankan.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} hanya menyalin nilai yang ditulisnya, jadi ia tidak pernah menetapkan nilai.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Nilai-nilai ditulis dalam gelung: {chain}. Setiap penulisan menjalankan semula ungkapan yang membacanya, jadi nilai akhir bergantung pada urutan soalan dijawab."
       },

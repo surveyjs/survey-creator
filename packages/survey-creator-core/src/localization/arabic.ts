@@ -4029,8 +4029,10 @@ export var arStrings = {
         loop: "تشكل المحفزات حلقة عبر القيم التي يحددونها: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} يقرأ القيمة التي يكتبها بنفسه - يعمل فقط عندما تتغير قيمة أخرى، لذا لا يعمل أبدا.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "يحسب {label} القيمة التي يكتبها من تلك القيمة نفسها - كل تشغيل يبدأ من النتيجة السابقة، لذا تعتمد القيمة على عدد مرات التشغيل.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "ينسخ {label} فقط القيمة التي يكتبها، لذا لا يحدد قيمة أبدا.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "تكتب القيم في حلقة: {chain}. كل كتابة تعيد تشغيل التعبيرات التي تقرأها، لذا تعتمد القيم النهائية على ترتيب الإجابة على الأسئلة."
       },

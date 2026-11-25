@@ -4029,8 +4029,10 @@ export const roStrings = {
         loop: "Declanșatoarele formează o buclă prin valorile pe care le setează: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{Label} citește valoarea pe care o scrie singură – rulează doar când o altă valoare se schimbă, deci nu rulează deloc.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} calculează valoarea pe care o scrie chiar din acea valoare – fiecare rulare pornește de la rezultatul anterior, deci valoarea depinde de câte ori rulează ea.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} copiază doar valoarea pe care o scrie, deci nu setează niciodată o valoare.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Valorile sunt scrise într-o buclă: {chain}. Fiecare scriere rerulează expresiile care o citesc, astfel încât valorile finale depind de ordinea în care sunt răspunse la întrebări."
       },

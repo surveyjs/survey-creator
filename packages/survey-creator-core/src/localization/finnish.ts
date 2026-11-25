@@ -4029,8 +4029,10 @@ export var fiStrings = {
         loop: "Triggerit muodostavat silmukan niiden arvojen läpi: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} lukee itse kirjoittamansa arvon – se käynnistyy vain, kun toinen arvo muuttuu, joten se ei koskaan käynnisty.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} laskee itse kirjoittamansa arvon – jokainen ajo alkaa edellisestä tuloksesta, joten arvo riippuu siitä, kuinka monta kertaa se suoritetaan.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} kopioi vain kirjoittamansa arvon, joten se ei koskaan aseta arvoa.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Arvot kirjoitetaan silmukassa: {chain}. Jokainen kirjoitus toistaa lausekkeet, jotka sen lukevat, joten lopulliset arvot riippuvat siitä, missä järjestyksessä kysymyksiin vastataan."
       },

@@ -4029,8 +4029,10 @@ export var nlStrings = {
         loop: "Triggers vormen een lus via de waarden die ze instellen: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "Het {label} leest de waarde die het zelf schrijft - het draait alleen wanneer een andere waarde verandert, dus het draait helemaal niet.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "Het {label} berekent de waarde die het zelf uit die waarde schrijft – elke run begint bij het vorige resultaat, dus de waarde hangt af van hoe vaak het wordt uitgevoerd.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "Het {label} kopieert alleen de waarde die het schrijft, dus het stelt nooit een waarde in.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Waarden worden geschreven in een lus: {chain}. Elke schrijving voert de expressies die het lezen opnieuw uit, dus de uiteindelijke waarden hangen af van de volgorde waarin de vragen worden beantwoord."
       },

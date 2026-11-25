@@ -4030,8 +4030,10 @@ export let svStrings = {
         loop: "Triggers bildar en loop genom de värden de sätter: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} läser värdet den skriver själv – den körs bara när ett annat värde ändras, så den körs aldrig alls.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} beräknar det värde den skriver från det värdet själv – varje körning börjar från det föregående resultatet, så värdet beror på hur många gånger den körs.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} kopierar bara det värde den skriver, så den anger aldrig något värde.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Värden skrivs i en loop: {chain}. Varje skrivning kör om uttrycken som läste dem, så de slutgiltiga värdena beror på i vilken ordning frågorna besvaras."
       },

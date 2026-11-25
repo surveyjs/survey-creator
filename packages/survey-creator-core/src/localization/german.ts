@@ -4029,8 +4029,10 @@ export var germanTranslation = {
         loop: "Trigger bilden eine Schleife durch die von ihnen gesetzten Werte: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "Das {label} liest den Wert, den es schreibt, selbst – es läuft nur, wenn sich ein anderer Wert ändert, also wird es nie ausgeführt.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "Das {label} berechnet selbst den Wert, den es von diesem Wert aus schreibt – jeder Lauf beginnt mit dem vorherigen Ergebnis, daher hängt der Wert davon ab, wie oft er ausgeführt wird.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "Das {label} kopiert nur den von ihm geschriebenen Wert, sodass es niemals einen Wert festlegt.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Werte werden in einer Schleife geschrieben: {chain}. Jeder Schreib führt die Ausdrücke, die ihn lesen, erneut aus, sodass die Endwerte von der Reihenfolge abhängen, in der die Fragen beantwortet werden."
       },

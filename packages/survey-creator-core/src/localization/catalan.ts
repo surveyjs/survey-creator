@@ -4029,8 +4029,10 @@ export var catalanTranslation = {
         loop: "Els triggers formen un bucle a través dels valors que estableixen: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "La {etiqueta} llegeix el valor que escriu ella mateixa: només s'executa quan canvia un altre valor, així que mai s'executa.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "El {label} calcula el valor que escriu a partir d'aquest valor: cada execució comença amb el resultat anterior, així que el valor depèn de quantes vegades s'executi.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "El {label} només copia el valor que escriu, així que mai no estableix cap valor.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Els valors s'escriuen en un bucle: {cadena}. Cada escriptura repeteix les expressions que la llegeixen, així que els valors finals depenen de l'ordre en què es responen les preguntes."
       },
