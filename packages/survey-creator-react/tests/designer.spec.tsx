@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import TestRenderer, { act } from "react-test-renderer";
 import { TabDesignerViewModel } from "survey-creator-core";
 import { SurveyCreator, SurveyCreatorComponent } from "../src/SurveyCreator";
-import { TabDesignerComponent } from "../src/tabs/Designer";
+import { DesignerSurface } from "../src/tabs/Designer";
 import { CreatorSurveyPageComponent } from "../src/adorners/Page";
 import { ItemValueAdornerComponent } from "../src/ItemValueWrapper";
 import { ImageItemValueAdornerComponent } from "../src/ImageItemValueWrapper";
@@ -22,7 +22,7 @@ describe("TabDesignerComponent", () => {
   test("getRenderedPages doesn't crash for empty survey in bypage mode", () => {
     const creator = new SurveyCreator({ pageEditMode: "bypage" });
     const tabDesigner = new TabDesignerViewModel(creator);
-    const designer = new TabDesignerComponent({ data: tabDesigner });
+    const designer = new DesignerSurface({ data: tabDesigner });
 
     const renderedPages = designer["getRenderedPages"]();
     expect(renderedPages).toEqual([]);

@@ -156,6 +156,19 @@ svc-tab-designer {
   }
 }
 
+.svc-editable-survey {
+  position: relative;
+}
+
+.svc-editable-survey.svc-tab-designer--with-surface-tools {
+  padding-inline-start: calc(var(--sjs2-base-unit-spacing) * 9.25);
+  padding-inline-end: calc(var(--sjs2-base-unit-spacing) * 9.25);
+}
+
+.svc-editable-survey__mode {
+  margin-block-end: var(--sjs2-spacing-x100, 8px);
+}
+
 .svc-tab-designer__tools {
   position: absolute;
   display: flex;
@@ -208,6 +221,7 @@ svc-tab-designer {
 
 // Temporary fix for disabled formbox buttons in designer
 .svc-tab-designer_content,
+.svc-editable-survey,
 .svc-question__content--in-popup {
   .sd-editor-chevron-button,
   .sd-editor-clean-button {

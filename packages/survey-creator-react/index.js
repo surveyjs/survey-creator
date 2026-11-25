@@ -1119,6 +1119,7 @@ window.creator = creator;
 creator.showOneCategoryInPropertyGrid = true;
 creator.propertyGridNavigationMode = "buttons";
 creator.getPlugin("designer").wysiwygMode = true;
+//creator.applySurfaceTheme(SurveyTheme.DefaultLightPanelless);
 // creator.getPlugin("designer").showOneCategoryInPropertyGrid = true;
 // creator.getPlugin("theme").showOneCategoryInPropertyGrid = true;
 
@@ -1139,6 +1140,34 @@ creator.onElementGetActions.add((_, options) => {
 });
 creator.JSON = json;
 */
+
+creator.JSON = {
+  "pages": [
+    {
+      "name": "page1",
+      "elements": [
+        {
+          "type": "text",
+          "name": "question1"
+        },
+        {
+          "type": "text",
+          "name": "question2",
+          "startWithNewLine": false
+        },
+        {
+          "type": "text",
+          "name": "question3"
+        },
+        {
+          "type": "text",
+          "name": "question4"
+        }
+      ]
+    }
+  ],
+  "widthMode": "static"
+};
 
 function getCompositeInput(question) {
   return question.contentPanel.getQuestionByName("q1");

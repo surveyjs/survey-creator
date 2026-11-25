@@ -4,6 +4,7 @@ Version = `${process.env.VERSION}`;
 // import "@survey/creator/survey-creator-core.css";
 
 export { SurveyCreatorComponent } from "../SurveyCreator";
+export { EditableSurvey } from "../EditableSurvey";
 
 export * from "../adorners/Row";
 export * from "../adorners/Question";

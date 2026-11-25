@@ -10,11 +10,12 @@ import {
 import { SurveyCreatorModel, TabDesignerViewModel } from "survey-creator-core";
 import { SurveyPageNavigator } from "../PageNavigator";
 import { SurfacePlaceholder } from "../components/SurfacePlaceholder";
-interface ITabDesignerComponentProps {
+
+interface IDesignerSurfaceProps {
   data: TabDesignerViewModel;
 }
 
-export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponentProps, any> {
+export class DesignerSurface extends SurveyElementBase<IDesignerSurfaceProps, any> {
   private get model(): TabDesignerViewModel {
     return this.props.data;
   }
@@ -30,24 +31,16 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     this.allowComponentUpdate();
   };
 
-  private addDragDropEvents = () => {
-    this.creator.onDragStart.add(this.denyUpdate);
-    this.creator.onDragClear.add(this.allowUpdateHandler);
-  };
-
-  private clearDragDropEvents = () => {
-    this.creator.onDragStart.remove(this.denyUpdate);
-    this.creator.onDragClear.remove(this.allowUpdateHandler);
-  };
-
   componentDidMount(): void {
     super.componentDidMount();
-    this.addDragDropEvents();
+    this.creator.onDragStart.add(this.denyUpdate);
+    this.creator.onDragClear.add(this.allowUpdateHandler);
   }
 
   componentWillUnmount(): void {
     super.componentWillUnmount();
-    this.clearDragDropEvents();
+    this.creator.onDragStart.remove(this.denyUpdate);
+    this.creator.onDragClear.remove(this.allowUpdateHandler);
   }
 
   protected getStateElements(): Array<Base> {
@@ -55,7 +48,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   }
 
   protected getRenderedPages(): React.JSX.Element[] {
-    const renderedPages = [];
+    const renderedPages: React.JSX.Element[] = [];
 
     if (this.creator.pageEditMode !== "bypage") {
       const pages = this.model.pages;
@@ -72,28 +65,12 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     return renderedPages;
   }
   protected createRenderedPage(page: PageModel | undefined, className: string, isGhostPage?: boolean): any {
-    return <PageWrapperComponent key={page?.id} page={page} isGhost={isGhostPage} creator={this.creator} className={className}></PageWrapperComponent>;
+    return <PageWrapperComponent key={page?.id} page={page} isGhost={!!isGhostPage} creator={this.creator} className={className}></PageWrapperComponent>;
   }
-  renderElement(): React.JSX.Element {
-    const designerTabClassName = "svc-tab-designer " + this.model.getRootCss();
-
-    return (
-      <React.Fragment>
-        <div className="svc-flex-column">
-          {this.model.isToolboxVisible ? ReactElementFactory.Instance.createElement("svc-toolbox", { model: this.creator }) : null}
-        </div>
-        <div className={designerTabClassName} onClick={() => this.model.clickDesigner()}>
-          <Scroll>
-            <div className="svc-tab-designer_content">
-              {this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent()}
-            </div>
-          </Scroll>
-        </div>
-      </React.Fragment>
-    );
+  protected renderElement(): React.JSX.Element {
+    return this.model.showPlaceholder ? this.renderPlaceHolder() : this.renderTabContent();
   }
-
-  renderHeader(condition: boolean): React.JSX.Element {
+  renderHeader(condition: boolean): React.JSX.Element | null {
     if (!condition) return null;
 
     const survey: SurveyModel = this.creator.survey;
@@ -140,7 +117,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     </React.Fragment>);
   }
 
-  renderTabTools(): React.JSX.Element {
+  renderTabTools(): React.JSX.Element | null {
     if (!this.model.showSurfaceTools) return null;
 
     const pageNavigator = this.creator.showPageNavigator ?
@@ -160,10 +137,42 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   }
 }
 
+export class TabDesignerComponent extends SurveyElementBase<IDesignerSurfaceProps, any> {
+  private get model(): TabDesignerViewModel {
+    return this.props.data;
+  }
+  protected get creator(): SurveyCreatorModel {
+    return this.model.creator;
+  }
+
+  protected getStateElements(): Array<Base> {
+    return [this.model, this.model.survey, this.model.pagesController];
+  }
+
+  renderElement(): React.JSX.Element {
+    const designerTabClassName = "svc-tab-designer " + this.model.getRootCss();
+
+    return (
+      <React.Fragment>
+        <div className="svc-flex-column">
+          {this.model.isToolboxVisible ? ReactElementFactory.Instance.createElement("svc-toolbox", { model: this.creator }) : null}
+        </div>
+        <div className={designerTabClassName} onClick={() => this.model.clickDesigner()}>
+          <Scroll>
+            <div className="svc-tab-designer_content">
+              <DesignerSurface data={this.model} />
+            </div>
+          </Scroll>
+        </div>
+      </React.Fragment>
+    );
+  }
+}
+
 ReactElementFactory.Instance.registerElement("svc-tab-designer", (props) => {
   return React.createElement(
     TabDesignerComponent,
-    props as ITabDesignerComponentProps
+    props as IDesignerSurfaceProps
   );
 });
 

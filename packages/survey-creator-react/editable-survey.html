@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="SurveyJS inline designer demo" />
+  <title>SurveyJS Editable Survey</title>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.js"></script>
+
+  <script src="./node_modules/survey-core/survey.core.js"></script>
+  <script src="./node_modules/survey-core/survey.i18n.min.js"></script>
+  <script src="./node_modules/survey-core/themes/index.js"></script>
+  <script src="./node_modules/survey-react-ui/survey-react-ui.js"></script>
+  <script src="./node_modules/survey-creator-core/survey-creator-core.js"></script>
+  <script src="./node_modules/survey-creator-core/ui-presets/index.js"></script>
+  <script src="./node_modules/survey-creator-core/ui-preset-editor.js"></script>
+  <script src="./node_modules/survey-creator-core/survey-creator-core.i18n.min.js"></script>
+  <script src="./node_modules/survey-creator-core/ui-preset-editor/i18n/index.js"></script>
+
+  <script src="./build/survey-creator-react.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="./node_modules/survey-core/survey-core.css" />
+  <link rel="stylesheet" type="text/css" href="./node_modules/survey-creator-core/survey-creator-core.css" />
+  <link rel="stylesheet" type="text/css" href="./fonts.css" />
+  <style>
+    body {
+      margin: 0;
+      background: #f6f6f8;
+      color: #1c1b20;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+      font-family: "Open Sans", sans-serif;
+      line-height: 1.5;
+    }
+
+    .theme-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 24px 0;
+      padding: 12px 16px;
+      background: #fff;
+      border: 1px solid rgba(28, 27, 32, 0.12);
+      border-radius: 8px;
+    }
+
+    .theme-bar label {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 13px;
+    }
+
+    #survey-host {
+      margin: 24px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <article class="page">
+    <h1>Product feedback</h1>
+    <p>
+      Tell us how the last release landed. The form below is a normal survey until you switch it
+      to edit mode. The page around it stays put: this is the survey, not a full-screen designer.
+    </p>
+    <p>
+      Pick a theme before or after editing. Light, dark, and panelless variants apply to the
+      running survey and to the design surface.
+    </p>
+    <div class="theme-bar">
+      <label>
+        Theme
+        <select id="theme-family">
+          <option value="Default">Default</option>
+          <option value="Borderless">Borderless</option>
+          <option value="Flat">Flat</option>
+          <option value="Plain">Plain</option>
+          <option value="ThreeDimensional">Three-dimensional</option>
+          <option value="Monochrome">Monochrome</option>
+          <option value="Soft">Soft</option>
+          <option value="Contrast">Contrast</option>
+        </select>
+      </label>
+      <label>
+        Color scheme
+        <select id="theme-mode">
+          <option value="Light">Light</option>
+          <option value="Dark">Dark</option>
+        </select>
+      </label>
+      <label>
+        Panels
+        <select id="theme-panels">
+          <option value="">Normal</option>
+          <option value="Panelless">Panelless</option>
+        </select>
+      </label>
+    </div>
+    <div id="survey-host"></div>
+    <h2>What happens next</h2>
+    <p>
+      Answers stay on this page. Switch back to view to run the survey with the questions you
+      just changed. The theme selector above keeps working in either mode.
+    </p>
+  </article>
+</body>
+<script src="editable-survey.js" type="text/babel"></script>
+
+</html>

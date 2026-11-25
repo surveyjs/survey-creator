@@ -4,7 +4,7 @@ import TestRenderer, { act } from "react-test-renderer";
 import { PageModel } from "survey-core";
 import { TabDesignerViewModel } from "survey-creator-core";
 import { SurveyCreator } from "../src/SurveyCreator";
-import { TabDesignerComponent } from "../src/tabs/Designer";
+import { DesignerSurface } from "../src/tabs/Designer";
 
 describe("Designer page wrapper: page name handler", () => {
   beforeAll(() => {
@@ -32,7 +32,7 @@ describe("Designer page wrapper: page name handler", () => {
   }
   // PageWrapperComponent is not exported: take its element from the designer
   function createWrapperElement(creator: SurveyCreator, page: PageModel): React.ReactElement {
-    const designer = new TabDesignerComponent({ data: new TabDesignerViewModel(creator) });
+    const designer = new DesignerSurface({ data: new TabDesignerViewModel(creator) });
     return designer["createRenderedPage"](page, "svc-page", false);
   }
   function renderElement(element: React.ReactElement): TestRenderer.ReactTestRenderer {
