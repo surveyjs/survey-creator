@@ -4029,8 +4029,10 @@ export var nbStrings = {
         loop: "Triggere danner en løkke gjennom verdiene de setter: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} leser verdien den skriver selv – den kjører bare når en annen verdi endres, så den kjører aldri i det hele tatt.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} beregner verdien den skriver ut fra den verdien selv – hver kjøring starter fra det forrige resultatet, så verdien avhenger av hvor mange ganger den kjører.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} kopierer bare verdien den skriver, så den setter aldri en verdi.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Verdiene skrives i en løkke: {chain}. Hver skriving kjører uttrykkene som leser den på nytt, så de endelige verdiene avhenger av rekkefølgen spørsmålene besvares i."
       },

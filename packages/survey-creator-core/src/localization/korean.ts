@@ -4030,8 +4030,10 @@ export var koreanStrings = {
         loop: "트리거는 설정한 값들에 대해 루프를 형성합니다: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label}은 자신이 직접 쓴 값을 읽으며, 다른 값이 바뀔 때만 실행되므로 아예 실행되지 않습니다.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label}은 그 값에서 직접 기록하는 값을 계산합니다 - 각 실행은 이전 결과에서 시작되므로 값은 실행 횟수에 따라 달라집니다.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label}은 자신이 쓴 값만 복사하기 때문에 값을 설정하지 않습니다.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "값은 {chain} 루프 형식으로 작성됩니다. 각 쓰기는 읽은 표현식을 다시 실행하므로 최종 값은 질문에 대한 답변 순서에 따라 달라집니다."
       },

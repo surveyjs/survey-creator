@@ -1,0 +1,27 @@
+# survey-creator CI on GitHub Actions. Everything lives in surveyjs/azure-pipelines
+# (.github/workflows/creator.yml), as the Azure pipeline extended creator.yml@azurepipelines: this
+# file holds only what GitHub reads from the repository itself - triggers, token permissions and
+# concurrency. The single required status check is "CI / result".
+name: Creator
+
+on:
+  pull_request:
+  push:
+    branches: [master, V2, V3]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  # PRs: a new push cancels the previous run. Pushes: every run is kept - cancelling a pending
+  # master run would lose its staging and backport once they move here.
+  group: ${{ github.event_name == 'pull_request' && format('creator-pr-{0}', github.event.pull_request.number) || format('creator-run-{0}', github.run_id) }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  ci:
+    name: CI
+    uses: surveyjs/azure-pipelines/.github/workflows/creator.yml@gha-migration
+    secrets: inherit

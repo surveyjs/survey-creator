@@ -4029,8 +4029,10 @@ export var frenchTranslation = {
         loop: "Les déclencheurs forment une boucle à travers les valeurs qu’ils définissent : {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "Le {label} lit la valeur qu’il écrit lui-même – il ne s’exécute que lorsqu’une autre valeur change, donc il ne s’exécute jamais du tout.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "Le {label} calcule la valeur qu’il écrit à partir de cette valeur elle-même – chaque exécution commence à partir du résultat précédent, donc la valeur dépend du nombre de fois qu’elle s’exécute.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "Le {label} copie uniquement la valeur qu’il écrit, donc il ne définit jamais de valeur.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Les valeurs sont écrites dans une boucle : {chain}. Chaque écriture relance les expressions qui la lisent, de sorte que les valeurs finales dépendent de l’ordre dans lequel les questions sont résolues."
       },

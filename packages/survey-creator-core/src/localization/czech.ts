@@ -4029,8 +4029,10 @@ export var czStrings = {
         loop: "Triggery tvoří smyčku prostřednictvím nastavených hodnot: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} čte hodnotu, kterou si sám napíše – spustí se pouze tehdy, když se změní jiná hodnota, takže se vůbec nespustí.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} sám vypočítá hodnotu, kterou z této hodnoty zapíše – každý běh začíná předchozím výsledkem, takže hodnota závisí na tom, kolikrát se spustí.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} kopíruje pouze hodnotu, kterou zapíše, takže nikdy nenastaví hodnotu.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Hodnoty se zapisují v smyčce: {chain}. Každý zápis znovu spustí výrazy, které ho čtou, takže konečné hodnoty závisí na pořadí, v jakém jsou otázky zodpovězeny."
       },

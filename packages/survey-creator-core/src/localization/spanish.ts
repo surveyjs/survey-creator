@@ -4029,8 +4029,10 @@ export var spanishTranslation = {
         loop: "Los disparadores forman un bucle a través de los valores que establecen: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "La {etiqueta} lee el valor que escribe por sí misma: solo se ejecuta cuando cambia otro valor, así que nunca se ejecuta en absoluto.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "La {etiqueta} calcula el valor que escribe a partir de ese valor por sí misma: cada ejecución comienza desde el resultado anterior, así que el valor depende de cuántas veces se ejecute.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "El {label} solo copia el valor que escribe, por lo que nunca establece un valor.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Los valores se escriben en un bucle: {chain}. Cada escritura reejecuta las expresiones que la leen, por lo que los valores finales dependen del orden en que se responden las preguntas."
       },
