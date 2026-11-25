@@ -905,9 +905,7 @@ export var euStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Aukera bakoitza zutabe bereizi batean",
       // "Allow sorting by this column"
-      allowSort: "Baimendu zutabe honen araberako ordenatzea",
-      // "Allow filtering by this column"
-      allowFiltering: "Baimendu zutabe honen araberako iragazketa"
+      allowSort: "Baimendu zutabe honen araberako ordenatzea"
     },
     matrixcolumn: {
       // "Clear others in the same row"
@@ -1243,10 +1241,6 @@ export var euStrings = {
     pageSize: "Errenkadak orrialde bakoitzeko",
     // "Allow users to sort rows"
     allowSort: "Baimendu erabiltzaileei errenkadak ordenatzen",
-    // "Allow filtering by this question"
-    allowFiltering: "Baimendu galdera honen araberako iragazketa",
-    // "Filter operators"
-    filterOperators: "Iragazki-eragileak",
     // "Maximum sort levels"
     maxSortLevel: "Gehieneko ordenatze-mailak",
     // "Default sort order"
@@ -3085,8 +3079,10 @@ export var euStrings = {
       // "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Erabili eremu-izenak giltzen artean, adibidez: {price} < 20 and {category} anyof ['Beverages']."
     },
-    // "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Erantzuleek eremu honen arabera iragazteko erabil ditzaketen eragileak mugatzen ditu. Utzi hutsik eremuari egokitzen zaizkion eragile guztiak baimentzeko.",
+    filterfield: {
+      // "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Erantzuleek eremu honen arabera iragazteko erabil ditzaketen eragileak mugatzen ditu. Utzi hutsik eremuari egokitzen zaizkion eragile guztiak baimentzeko."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Erantzulearentzat ikusgai ez dagoen zutabe-ID bat.",

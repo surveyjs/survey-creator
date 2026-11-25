@@ -896,9 +896,7 @@ export var arStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "كل خيار في عمود منفصل",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "السماح بالترتيب حسب هذا العمود",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "السماح بالتصفية حسب هذا العمود"
+      allowSort: "السماح بالترتيب حسب هذا العمود"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var arStrings = {
     pageSize: "الصفوف في الصفحة",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "السماح للمستخدمين بفرز الصفوف",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "السماح بالتصفية بناء على هذا السؤال",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "عوامل المرشح",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "أقصى مستويات الفرز",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var arStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "استخدم أسماء الحقول بين قوسين ملتفة، على سبيل المثال: {price} < 20 و {category} أي من ['مشروبات']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "يحدد الحدود التي يمكن للمشاركين استخدامها للتصفية حسب هذا الحقل. اترك فارغا للسماح لجميع المشغلين الذين يناسب الحقل.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "يحدد الحدود التي يمكن للمشاركين استخدامها للتصفية حسب هذا الحقل. اترك فارغا للسماح لجميع المشغلين الذين يناسب الحقل."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "معرف عمود غير مرئي للمستجيبين.",

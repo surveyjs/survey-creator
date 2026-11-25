@@ -896,9 +896,7 @@ export var frenchTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Chaque option dans une colonne distincte",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Autoriser le tri par cette colonne",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Autoriser le filtrage par cette colonne"
+      allowSort: "Autoriser le tri par cette colonne"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var frenchTranslation = {
     pageSize: "Lignes par page",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Permettre aux utilisateurs de trier les lignes",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Autoriser le filtrage par cette question",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Opérateurs de filtre",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Niveaux de tri maximaux",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var frenchTranslation = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Utilisez les noms des champs entre crochets, par exemple : {price} < 20 et {category} anyof ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Limite les opérateurs que les répondants peuvent utiliser pour filtrer par ce champ. Laisser vide pour permettre tous les opérateurs correspondant au champ.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Limite les opérateurs que les répondants peuvent utiliser pour filtrer par ce champ. Laisser vide pour permettre tous les opérateurs correspondant au champ."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID de colonne qui n’est pas visible par les personnes interrogées.",

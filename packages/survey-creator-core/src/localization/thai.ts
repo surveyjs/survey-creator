@@ -896,9 +896,7 @@ export const thStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "แต่ละตัวเลือกในคอลัมน์แยกต่างหาก",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "อนุญาตให้จัดเรียงตามคอลัมน์นี้",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "อนุญาตให้กรองตามคอลัมน์นี้"
+      allowSort: "อนุญาตให้จัดเรียงตามคอลัมน์นี้"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export const thStrings = {
     pageSize: "จํานวนแถวต่อหน้า",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "อนุญาตให้ผู้ใช้จัดเรียงแถว",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "อนุญาตให้กรองตามคําถามนี้",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "ตัวดําเนินการตัวกรอง",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "ระดับการจัดเรียงสูงสุด",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export const thStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "ใช้ชื่อฟิลด์ในวงเล็บโค้ง เช่น: {price} < 20 และ {category} anyof ['เครื่องดื่ม']"
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "จํากัดจํานวนตัวดําเนินการที่ผู้ตอบแบบสอบถามสามารถใช้ในการกรองตามฟิลด์นี้เว้นว่างเพื่ออนุญาตให้ใช้ตัวดําเนินการทั้งหมดที่เหมาะสมกับฟิลด์นั้น",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "จํากัดจํานวนตัวดําเนินการที่ผู้ตอบแบบสอบถามสามารถใช้ในการกรองตามฟิลด์นี้เว้นว่างเพื่ออนุญาตให้ใช้ตัวดําเนินการทั้งหมดที่เหมาะสมกับฟิลด์นั้น"
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID คอลัมน์ที่ไม่มองเห็นได้สำหรับผู้ตอบแบบสำรวจ",

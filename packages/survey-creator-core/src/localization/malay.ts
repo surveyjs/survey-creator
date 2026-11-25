@@ -896,9 +896,7 @@ export var msStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Setiap opsyen dalam lajur berasingan",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Benarkan pengisihan mengikut lajur ini",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Benarkan penapisan mengikut lajur ini"
+      allowSort: "Benarkan pengisihan mengikut lajur ini"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var msStrings = {
     pageSize: "Baris setiap halaman",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Benarkan pengguna menyusun baris",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Benarkan penapisan mengikut soalan ini",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Pengendali penapis",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Tahap pengisihan maksimum",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var msStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Gunakan nama medan dalam kurungan kerinting, contohnya: {price} < 20 dan {category} mana-mana ['Minuman']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Had operator yang boleh digunakan responden untuk menapis mengikut medan ini. Biarkan kosong untuk membenarkan semua operator yang sesuai dengan medan.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Had operator yang boleh digunakan responden untuk menapis mengikut medan ini. Biarkan kosong untuk membenarkan semua operator yang sesuai dengan medan."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID lajur yang tidak kelihatan kepada responden.",

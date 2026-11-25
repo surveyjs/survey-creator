@@ -896,9 +896,7 @@ export var czStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Každá možnost v samostatném sloupci",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Povolit třídění podle tohoto sloupce",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Povolit filtrování podle tohoto sloupce"
+      allowSort: "Povolit třídění podle tohoto sloupce"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var czStrings = {
     pageSize: "Řádky na stránku",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Umožnit uživatelům třídit řádky",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Povolit filtrování podle této otázky",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Filtrační operátory",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximální úrovně třídění",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var czStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Používejte názvy polí v složených závorkách, například: {price} < 20 a {category} kterýkoli z ['Nápoje']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Omezuje operátory, které mohou respondenti použít k filtrování podle tohoto pole. Nechte prázdné, aby byly povoleny všechny operátory, které odpovídají poli.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Omezuje operátory, které mohou respondenti použít k filtrování podle tohoto pole. Nechte prázdné, aby byly povoleny všechny operátory, které odpovídají poli."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID sloupce, které není viditelné pro respondenty.",

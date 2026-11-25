@@ -896,9 +896,7 @@ export var fiStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Jokainen vaihtoehto erillisessä sarakkeessa",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Salli lajittelu tämän sarakkeen mukaan",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Salli suodatus tämän sarakkeen mukaan"
+      allowSort: "Salli lajittelu tämän sarakkeen mukaan"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var fiStrings = {
     pageSize: "Rivit per sivu",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Salli käyttäjien lajitella rivejä",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Salli suodatus tämän kysymyksen perusteella",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Suodatinoperaattorit",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksimilajittelutasot",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var fiStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Käytä kenttien nimiä kiharoissa sulkeissa, esimerkiksi: {price} < 20 ja {category} jokin ['Juomat']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Rajoitukset, joita vastaajat voivat käyttää suodattaakseen tämän kentän perusteella. Jätä tyhjäksi, jotta kaikki kenttään sopivat operaattorit sallitaan.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Rajoitukset, joita vastaajat voivat käyttää suodattaakseen tämän kentän perusteella. Jätä tyhjäksi, jotta kaikki kenttään sopivat operaattorit sallitaan."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Sarakkeen tunnus, joka ei näy vastaajille.",

@@ -896,9 +896,7 @@ export var turkishStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Her seçenek ayrı bir sütunda",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Bu sütuna göre sıralamaya izin verin",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Bu sütuna göre filtrelemeye izin ver"
+      allowSort: "Bu sütuna göre sıralamaya izin verin"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var turkishStrings = {
     pageSize: "Sayfa başına satır sayısı",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Kullanıcıların satırları sıralamasına izin verin",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Bu soruya göre filtrelemeye izin ver",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Filtre operatörleri",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksimum sıralama seviyeleri",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var turkishStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Kıvırcık parantez içinde alan adları kullanın, örneğin: {price} < 20 ve {category} herhangi bir ['İçecekler']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Katılımcıların bu alana göre filtrelemek için kullanabileceği sınırlar. Alana uygun tüm operatörlere izin vermek için boş bırakın.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Katılımcıların bu alana göre filtrelemek için kullanabileceği sınırlar. Alana uygun tüm operatörlere izin vermek için boş bırakın."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Yanıtlayanlar tarafından görülemeyen bir sütun kimliği.",

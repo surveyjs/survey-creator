@@ -896,9 +896,7 @@ export var nlStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Elke optie in een aparte kolom",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Sta sortering toe op deze kolom",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Filteren op deze kolom toestaan"
+      allowSort: "Sta sortering toe op deze kolom"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var nlStrings = {
     pageSize: "Rijen per pagina",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Laat gebruikers rijen sorteren",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Filter op deze vraag toestaan",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Filteroperatoren",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximale sorteerniveaus",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var nlStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Gebruik veldnamen tussen krullende haakjes, bijvoorbeeld: {price} < 20 en {category} elk van ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Beperkt de operatoren die respondenten kunnen gebruiken om op dit veld te filteren. Laat leeg om alle operatoren toe te laten die bij het veld passen.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Beperkt de operatoren die respondenten kunnen gebruiken om op dit veld te filteren. Laat leeg om alle operatoren toe te laten die bij het veld passen."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Een kolom-id die niet zichtbaar is voor respondenten.",

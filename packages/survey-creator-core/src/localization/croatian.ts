@@ -896,9 +896,7 @@ export var hrStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Svaka mogućnost u zasebnom stupcu",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Dopustite sortiranje po ovom stupcu",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Dopusti filtriranje prema ovom stupcu"
+      allowSort: "Dopustite sortiranje po ovom stupcu"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var hrStrings = {
     pageSize: "Redovi po stranici",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Dopustite korisnicima sortiranje redaka",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Dopusti filtriranje prema ovom pitanju",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operatori filtra",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksimalne razine sortiranja",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var hrStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Koristite nazive polja u vitičastim zagradama, na primjer: {price} < 20 i {category} bilo koji od ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Ograničava operatore koje ispitanici mogu koristiti za filtriranje po ovom polju. Ostavite prazno da biste dopustili sve operatore koji odgovaraju polju.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Ograničava operatore koje ispitanici mogu koristiti za filtriranje po ovom polju. Ostavite prazno da biste dopustili sve operatore koji odgovaraju polju."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID stupca koji nije vidljiv ispitanicima.",

@@ -896,9 +896,7 @@ export var bgStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Всяка опция в отделна колона",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Позволете сортиране по тази колона",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Разреши филтриране по тази колона"
+      allowSort: "Позволете сортиране по тази колона"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var bgStrings = {
     pageSize: "Редове на страница",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Позволете на потребителите да сортират редове",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Разреши филтриране по този въпрос",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Оператори на филтри",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Максимални нива на сортиране",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var bgStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Използвайте имена на полета в къдрави скоби, например: {price} < 20 и {category} някое от ['Напитки']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Ограничава операторите, които респондентите могат да използват, за да филтрират по това поле. Оставете празни, за да позволите всички оператори, които отговарят на полето.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Ограничава операторите, които респондентите могат да използват, за да филтрират по това поле. Оставете празни, за да позволите всички оператори, които отговарят на полето."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ИД на колона, която не се вижда от респондентите.",

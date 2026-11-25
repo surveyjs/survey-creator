@@ -896,9 +896,7 @@ export var germanTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Jede Option in einer separaten Spalte",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Sortierung nach dieser Spalte erlauben",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Filtern nach dieser Spalte erlauben"
+      allowSort: "Sortierung nach dieser Spalte erlauben"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var germanTranslation = {
     pageSize: "Zeilen pro Seite",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Erlauben Sie Benutzern, Zeilen zu sortieren",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Filtern nach dieser Frage erlauben",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Filteroperatoren",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximale Sortierstufen",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var germanTranslation = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Verwenden Sie Feldnamen in gelockten Klammern, zum Beispiel: {price} < 20 und {category} beliebige ['Getränke']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Begrenzt die Operatoren, mit denen die Befragten nach diesem Feld filtern können. Lassen Sie leer, um alle Operatoren zuzulassen, die zum Feld passen.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Begrenzt die Operatoren, mit denen die Befragten nach diesem Feld filtern können. Lassen Sie leer, um alle Operatoren zuzulassen, die zum Feld passen."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Eine Spalten-ID, die für die Befragten nicht sichtbar ist.",

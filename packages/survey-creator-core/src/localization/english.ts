@@ -501,8 +501,7 @@ export var enStrings = {
       visibleIf: "Make the column visible if",
       requiredIf: "Make the column required if",
       showInMultipleColumns: "Each option in a separate column",
-      allowSort: "Allow sorting by this column",
-      allowFiltering: "Allow filtering by this column"
+      allowSort: "Allow sorting by this column"
     },
     matrixcolumn: {
       isExclusive: "Clear others in the same row"
@@ -682,8 +681,6 @@ export var enStrings = {
     rowCount: "Initial number of rows",
     pageSize: "Rows per page",
     allowSort: "Allow users to sort rows",
-    allowFiltering: "Allow filtering by this question",
-    filterOperators: "Filter operators",
     maxSortLevel: "Maximum sort levels",
     sortCriteria: "Default sort order",
     showSortBar: "Show sort bar",
@@ -1695,7 +1692,9 @@ export var enStrings = {
     filterpreset: {
       expression: "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
     },
-    filterOperators: "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field.",
+    filterfield: {
+      operators: "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    },
     matrixdropdowncolumn: {
       name: "A column ID that is not visible to respondents.",
       isUnique: "When enabled for a column, a respondent is required to provide a unique response for each question within this column.",

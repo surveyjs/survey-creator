@@ -896,9 +896,7 @@ export var hebrewStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "כל אפשרות בעמודה נפרדת",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "אפשר מיון לפי עמודה זו",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "אפשר סינון לפי עמודה זו"
+      allowSort: "אפשר מיון לפי עמודה זו"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var hebrewStrings = {
     pageSize: "שורות בעמוד",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "אפשר למשתמשים למיין שורות",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "אפשר סינון לפי שאלה זו",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "מפעילי סינון",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "רמות מיון מקסימליות",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var hebrewStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "השתמש בשמות שדות בסוגריים מסולסלים, לדוגמה: {price} < 20 ו-{category} כל אחד מ-['משקאות']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "מגביל את האופרטורים שהמשיבים יכולים להשתמש בהם כדי לסנן לפי שדה זה. השאר ריק כדי לאפשר לכל האופרטורים המתאימים לשדה.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "מגביל את האופרטורים שהמשיבים יכולים להשתמש בהם כדי לסנן לפי שדה זה. השאר ריק כדי לאפשר לכל האופרטורים המתאימים לשדה."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "מזהה עמודה שאינו גלוי למשיבים.",

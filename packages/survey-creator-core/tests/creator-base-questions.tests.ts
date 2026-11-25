@@ -2200,7 +2200,7 @@ test("Renaming a template question of the target Dynamic Panel renames the Filte
   creator.undo();
   expect(filter.fields[0].name, "#2").toBe("city");
 });
-test("A new Question to filter of a Filter Control replaces its fields entries, in the same undo step", (): any => {
+test("A new Question to filter of a Filter Control replaces its fields entries with its visible fields, in the same undo step", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
@@ -2211,14 +2211,14 @@ test("A new Question to filter of a Filter Control replaces its fields entries, 
   };
   const filter = <any>creator.survey.getQuestionByName("f1");
   filter.targetQuestion = "m2";
-  expect(filter.fields.length, "#1").toBe(0);
+  expect(filter.fields.map(f => f.name), "#1").toEqual(["price"]);
   creator.undo();
   expect([filter.targetQuestion, filter.fields.map(f => f.name)], "#2: one step").toEqual(["m1", ["country", "city"]]);
   expect(filter.fields[0].title, "#3").toBe("Land");
   creator.redo();
-  expect([filter.targetQuestion, filter.fields.length], "#4").toEqual(["m2", 0]);
+  expect([filter.targetQuestion, filter.fields.map(f => f.name)], "#4").toEqual(["m2", ["price"]]);
   filter.targetQuestion = "";
-  expect(filter.fields.length, "#5: nothing to replace").toBe(0);
+  expect(filter.fields.length, "#5: no target, no entries").toBe(0);
 });
 test("Renaming the target question keeps the Filter Control's fields entries", (): any => {
   const creator = new CreatorTester();
@@ -2234,7 +2234,7 @@ test("Renaming the target question keeps the Filter Control's fields entries", (
   creator.undo();
   expect([filter.targetQuestion, filter.fields.map(f => f.title)], "#2").toEqual(["m1", ["Land"]]);
 });
-test("A Filter Control's Fields table: a change to a row of the target adds its entry in one undo step", (): any => {
+test("A Filter Control's Fields table: the first change writes the rows outside its undo step; each change is a step", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
@@ -2249,18 +2249,18 @@ test("A Filter Control's Fields table: a change to a row of the target adds its 
   const title = (row: number): any => table().visibleRows[row].cells.filter(c => c.column.name === "title")[0].question;
   expect(names(), "#1").toEqual(["country", "price"]);
   title(1).value = "Cost";
-  expect(filter.toJSON().fields, "#2").toEqual([{ name: "price", title: "Cost" }]);
+  expect(filter.toJSON().fields, "#2").toEqual(["country", { name: "price", title: "Cost" }]);
   creator.undo();
-  expect(filter.toJSON().fields, "#3").toBeUndefined();
-  expect(names(), "#4: the row shows the column again").toEqual(["country", "price"]);
+  expect(filter.toJSON().fields, "#3: the rows written stay").toEqual(["country", "price"]);
+  expect(names(), "#4").toEqual(["country", "price"]);
   expect(title(1).value, "#4a").toBeFalsy();
   creator.redo();
-  expect(filter.toJSON().fields, "#5").toEqual([{ name: "price", title: "Cost" }]);
+  expect(filter.toJSON().fields, "#5").toEqual(["country", { name: "price", title: "Cost" }]);
   expect(title(1).value, "#6").toBe("Cost");
   title(0).value = "Land";
-  expect(filter.toJSON().fields, "#7").toEqual([{ name: "price", title: "Cost" }, { name: "country", title: "Land" }]);
+  expect(filter.toJSON().fields, "#7").toEqual([{ name: "country", title: "Land" }, { name: "price", title: "Cost" }]);
   creator.undo();
-  expect(filter.toJSON().fields, "#8: another row is a step of its own").toEqual([{ name: "price", title: "Cost" }]);
+  expect(filter.toJSON().fields, "#8: another row is a step of its own").toEqual(["country", { name: "price", title: "Cost" }]);
 });
 test("A Filter Control's Fields table follows the target's columns and a new target", (): any => {
   const creator = new CreatorTester();
@@ -2843,4 +2843,109 @@ test("bypage mode - delete questions one by one from last page, Bug#7758", (): a
   expect(creator.survey.pages[2].elements).toHaveLength(0);
   expect(creator.selectedElementName).toBe("page3");
   expect(creator.survey.currentPage.name).toBe("page3");
+});
+test("Filter Control: undo of the first change in the Fields table brings back the written rows, not fields left out", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [
+    { type: "matrixdynamic", name: "m", columns: [{ name: "country" }, { name: "amount" }] },
+    { type: "filter", name: "f", targetQuestion: "m" }] };
+  const filter: any = creator.survey.getQuestionByName("f");
+  creator.selectElement(filter);
+  const matrix = <QuestionMatrixDynamicModel><any>creator.propertyGrid.getQuestionByName("fields");
+  matrix.visibleRows[1].cells.filter(c => c.column.name === "title")[0].question.value = "Sum";
+  expect(filter.toJSON().fields, "#1").toEqual(["country", { name: "amount", title: "Sum" }]);
+  creator.undo();
+  expect(filter.toJSON().fields, "#2").toEqual(["country", "amount"]);
+  matrix.removeRow(1);
+  matrix.removeRow(0);
+  expect(filter.toJSON().fields, "#3").toEqual([]);
+  creator.undo();
+  expect(filter.toJSON().fields, "#4").toEqual(["country"]);
+});
+test("Filter Control: a new question to filter writes the entries of its visible fields; undo brings back the old list", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [
+    { type: "matrixdynamic", name: "m1", columns: [{ name: "a" }, { name: "b", visible: false }] },
+    { type: "matrixdynamic", name: "m2", columns: [{ name: "c" }, { name: "d" }] },
+    { type: "filter", name: "f", targetQuestion: "m1" }] };
+  const filter: any = creator.survey.getQuestionByName("f");
+  filter.targetQuestion = "m2";
+  expect(filter.toJSON().fields, "#1").toEqual(["c", "d"]);
+  creator.undo();
+  expect([filter.targetQuestion, filter.toJSON().fields], "#2: the old target's visible fields, written").toEqual(["m1", ["a"]]);
+  creator.redo();
+  expect(filter.toJSON().fields, "#3").toEqual(["c", "d"]);
+  filter.targetQuestion = "";
+  expect([filter.fields.length, filter.toJSON().fields], "#4: no target, nothing written").toEqual([0, undefined]);
+  creator.undo();
+  expect(filter.toJSON().fields, "#5").toEqual(["c", "d"]);
+});
+test("Filter Control: a renamed key renames its entry and the paths into it, in the rename's undo step", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [
+    { type: "paneldynamic", name: "p", templateElements: [{ type: "text", name: "a" }, { type: "multipletext", name: "addr", items: [{ name: "city" }] }] },
+    { type: "matrixdynamic", name: "m", columns: [{ name: "c" }], detailPanelMode: "underRow", detailElements: [{ type: "text", name: "note" }] },
+    { type: "filter", name: "fp", targetQuestion: "p", fields: ["a", "addr.city"] },
+    { type: "filter", name: "fm", targetQuestion: "m", fields: ["c", "note"] }] };
+  const fp: any = creator.survey.getQuestionByName("fp");
+  const fm: any = creator.survey.getQuestionByName("fm");
+  const p: any = creator.survey.getQuestionByName("p");
+  const m: any = creator.survey.getQuestionByName("m");
+  p.template.getQuestionByName("a").name = "a2";
+  p.template.getQuestionByName("addr").name = "address";
+  expect(fp.toJSON().fields, "#1").toEqual(["a2", "address.city"]);
+  p.template.getQuestionByName("a2").valueName = "k";
+  expect(fp.toJSON().fields, "#2: the valueName is the key").toEqual(["k", "address.city"]);
+  p.template.getQuestionByName("a2").name = "a3";
+  expect(fp.toJSON().fields, "#3: a name under a valueName changes no key").toEqual(["k", "address.city"]);
+  m.columns[0].name = "c2";
+  // The designer edits a detail question in the panel a row shows: in design mode it is the matrix's template.
+  m.visibleRows[0].showDetailPanel();
+  m.detailPanel.getQuestionByName("note").name = "memo";
+  expect(fm.toJSON().fields, "#4").toEqual(["c2", "memo"]);
+  creator.undo();
+  expect(fm.toJSON().fields, "#5").toEqual(["c2", "note"]);
+});
+// Each kind of first change in the Fields table of a control whose fields are left out: the rows are written
+// outside the undo history, the change is one step, and its undo brings back the written rows.
+const filterFieldsTable = (): { creator: CreatorTester, filter: any, matrix: QuestionMatrixDynamicModel } => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [
+    { type: "matrixdynamic", name: "m", columns: [{ name: "country" }, { name: "amount", cellType: "text", inputType: "number" }, { name: "note", visible: false }] },
+    { type: "filter", name: "f", targetQuestion: "m" }] };
+  const filter: any = creator.survey.getQuestionByName("f");
+  creator.selectElement(filter);
+  const matrix = <QuestionMatrixDynamicModel><any>creator.propertyGrid.getQuestionByName("fields");
+  matrix.visibleRows;
+  return { creator, filter, matrix };
+};
+test("Filter Control: moving a row of fields left out", () => {
+  const { creator, filter, matrix } = filterFieldsTable();
+  matrix.moveRowByIndex(0, 1);
+  expect(filter.toJSON().fields, "#1").toEqual(["amount", "country"]);
+  creator.undo();
+  expect(filter.toJSON().fields, "#2").toEqual(["country", "amount"]);
+});
+test("Filter Control: a change in a row's details of fields left out", () => {
+  const { creator, filter, matrix } = filterFieldsTable();
+  const row = matrix.visibleRows[1];
+  row.showDetailPanel();
+  row.detailPanel.getQuestionByName("showInQuickFilters").value = false;
+  expect(filter.toJSON().fields, "#1").toEqual(["country", { name: "amount", showInQuickFilters: false }]);
+  creator.undo();
+  expect(filter.toJSON().fields, "#2").toEqual(["country", "amount"]);
+});
+test("Filter Control: Add field on fields left out takes the first free field, a hidden one too", () => {
+  const { creator, filter, matrix } = filterFieldsTable();
+  matrix.addRow();
+  expect(filter.toJSON().fields, "#1").toEqual(["country", "amount", "note"]);
+  creator.undo();
+  expect(filter.toJSON().fields, "#2").toEqual(["country", "amount"]);
+});
+test("Filter Control: a new Field name on fields left out", () => {
+  const { creator, filter, matrix } = filterFieldsTable();
+  matrix.visibleRows[1].cells.filter(c => c.column.name === "name")[0].question.value = "note";
+  expect(filter.toJSON().fields, "#1").toEqual(["country", "note"]);
+  creator.undo();
+  expect(filter.toJSON().fields, "#2").toEqual(["country", "amount"]);
 });

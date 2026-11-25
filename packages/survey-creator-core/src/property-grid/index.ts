@@ -2245,7 +2245,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       if (text && text !== value) return text;
     }
     // The operators are named the way the logic tab names them.
-    if (prop.name === "filterOperators" || (prop.name === "operators" && !!prop.classInfo && prop.classInfo.name === "filterfield")) {
+    if (prop.name === "operators" && !!prop.classInfo && prop.classInfo.name === "filterfield") {
       let text = editorLocalization.getString("op." + value);
       if (text && text !== value) return text;
     }
@@ -2326,7 +2326,7 @@ export class PropertyGridEditorSet extends PropertyGridEditorDropdown {
     }
   }
 }
-// A string[] property that names its choices (the Filter Control's searchFields, filterOperators) is
+// A string[] property that names its choices (the Filter Control's searchFields, a fields entry's operators) is
 // a pick list; one without them (dataList) stays a text area, see PropertyGridEditorStringArray.
 export class PropertyGridEditorStringArrayChoices extends PropertyGridEditorSet {
   public fit(prop: JsonObjectProperty): boolean {

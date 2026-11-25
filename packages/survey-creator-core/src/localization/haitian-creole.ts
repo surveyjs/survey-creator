@@ -896,9 +896,7 @@ export var htStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Chak opsyon nan yon kolòn separe",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Pèmèt klasman pa kolòn sa a",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Pèmèt filtraj pa kolòn sa a"
+      allowSort: "Pèmèt klasman pa kolòn sa a"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var htStrings = {
     pageSize: "Ranje pou chak paj",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Pèmèt itilizatè yo sòt ranje ranje",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Pèmèt filtraj pa kesyon sa a",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operatè filtè",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Nivo maksimòm sòt",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var htStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Sèvi ak non chan yo nan parantèz, pa egzanp: {price} < 20 ak {category} anyof ['Drinks']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Limite operatè yo ka itilize pou filtre pa chan sa a. Kite vid pou pèmèt tout operatè ki adapte ak chan an.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Limite operatè yo ka itilize pou filtre pa chan sa a. Kite vid pou pèmèt tout operatè ki adapte ak chan an."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Yon ID kolòn ki pa vizib pou moun ki reponn yo.",

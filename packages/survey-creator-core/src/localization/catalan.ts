@@ -896,9 +896,7 @@ export var catalanTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Cada opción en una columna separada",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Permet ordenar per aquesta columna",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Permetre el filtratge per aquesta columna"
+      allowSort: "Permet ordenar per aquesta columna"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var catalanTranslation = {
     pageSize: "Files per pàgina",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Permetre als usuaris ordenar files",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Permetre el filtratge per aquesta pregunta",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operadors de filtre",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Nivells màxims d'ordenació",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var catalanTranslation = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Utilitza noms de camps entre parèntesis, per exemple: {price} < 20 i {category} anyof ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Limita els operadors que els enquestats poden utilitzar per filtrar per aquest camp. Deixa buit per permetre tots els operadors que s'ajustin al camp.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Limita els operadors que els enquestats poden utilitzar per filtrar per aquest camp. Deixa buit per permetre tots els operadors que s'ajustin al camp."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Un identificador de columna que no es visible para los encuestados.",

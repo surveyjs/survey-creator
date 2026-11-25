@@ -896,9 +896,7 @@ export var ruStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Каждый вариант в отдельной колонке",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Разрешите сортировку по этому столбцу",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Разрешить фильтрацию по этому столбцу"
+      allowSort: "Разрешите сортировку по этому столбцу"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var ruStrings = {
     pageSize: "Строки на странице",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Разрешить пользователям сортировать строки",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Разрешить фильтрацию по этому вопросу",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Операторы фильтров",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Максимальные уровни сортировки",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var ruStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Используйте имена полей в завитых скобках, например: {price} < 20 и {category} любой из ['Напитки']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Ограничивает операторы, которые респонденты могут использовать для фильтрации по этому полю. Оставьте пустым, чтобы разрешить все операторы, подходящие для поля.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Ограничивает операторы, которые респонденты могут использовать для фильтрации по этому полю. Оставьте пустым, чтобы разрешить все операторы, подходящие для поля."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Идентификатор столбца, который не виден респондентам.",

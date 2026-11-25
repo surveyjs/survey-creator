@@ -896,9 +896,7 @@ export var indonesianStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Setiap opsi dalam kolom terpisah",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Izinkan pengurutan berdasarkan kolom ini",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Izinkan penyaringan berdasarkan kolom ini"
+      allowSort: "Izinkan pengurutan berdasarkan kolom ini"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var indonesianStrings = {
     pageSize: "Baris per halaman",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Izinkan pengguna mengurutkan baris",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Izinkan penyaringan berdasarkan pertanyaan ini",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operator filter",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Tingkat pengurutan maksimum",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var indonesianStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Gunakan nama bidang dalam tanda kurung melingkar, misalnya: {price} < 20 dan {category} anyof ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Membatasi operator yang dapat digunakan responden untuk memfilter berdasarkan bidang ini. Biarkan kosong untuk mengizinkan semua operator yang sesuai dengan bidang tersebut.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Membatasi operator yang dapat digunakan responden untuk memfilter berdasarkan bidang ini. Biarkan kosong untuk mengizinkan semua operator yang sesuai dengan bidang tersebut."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID kolom yang tidak terlihat oleh responden.",

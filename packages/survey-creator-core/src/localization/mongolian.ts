@@ -896,9 +896,7 @@ export var mnStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Тус тусдаа баганад байгаа сонголт бүр",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Энэ баганаар эрэмбэлэхийг зөвшөөрнө",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Энэ баганаар шүүлтүүр хийхийг зөвшөөрөх"
+      allowSort: "Энэ баганаар эрэмбэлэхийг зөвшөөрнө"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var mnStrings = {
     pageSize: "Хуудас тутамд мөр",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Хэрэглэгчдэд мөрүүдийг эрэмбэлэх боломж олгох",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Энэ асуултаар шүүлтүүр хийхийг зөвшөөрөх",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Шүүлтүүрийн операторууд",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Хамгийн их ангиллын түвшин",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var mnStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Талбарын нэрийг мушгирсан хаалтанд ашиглана уу, жишээ нь: {price} < 20 ба {category} ['Ундаан'] аль нэгэн."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Оролцогчдыг энэ талбараар шүүхэд ашиглаж болох операторуудыг хязгаарлана. Талбарт тохирох бүх операторыг зөвшөөрөхийн тулд хоосон үлдээнэ.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Оролцогчдыг энэ талбараар шүүхэд ашиглаж болох операторуудыг хязгаарлана. Талбарт тохирох бүх операторыг зөвшөөрөхийн тулд хоосон үлдээнэ."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Хариулагчдад харагдахгүй байгаа баганын ID.",

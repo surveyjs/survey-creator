@@ -2850,19 +2850,19 @@ export class SurveyCreatorModel extends Base
     }
     if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
       this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
-      this.updateFilterFieldsOnFieldNameChanged(obj["colOwner"], oldValue, obj["name"]);
     }
-    // A Filter Control's fields entry names a column or a template question of its target: a renamed
-    // one keeps its entry, in the same undo step as the rename.
-    if (propertyName === "name" && this.isObjQuestion(obj) && !!obj["parentQuestion"]) {
-      this.updateFilterFieldsOnFieldNameChanged(obj["parentQuestion"], oldValue, obj["name"]);
+    // A Filter Control's fields entry names a field of its target by its key (valueName || name), a nested one
+    // by its path ({address.city}): a changed key keeps its entries, in the same undo step.
+    if ((propertyName === "name" || propertyName === "valueName") && (obj.isDescendantOf("matrixdropdowncolumn") || this.isObjQuestion(obj))) {
+      this.updateFilterFieldsOnKeyChanged(obj, propertyName, oldValue);
     }
-    // A Filter Control's fields entries are of its target question: a new one replaces them, in the same
-    // undo step - not a rename of the target (updateFilterTargetOnQuestionNameChanged), not undo or redo,
-    // which bring the entries back with the step.
+    // A Filter Control's fields entries are of its target question: a new one gets the entries of its visible
+    // fields, in the same undo step - not a rename of the target (updateFilterTargetOnQuestionNameChanged), not
+    // undo or redo, which bring the entries back with the step. Fields left out are written first, as the old
+    // target's visible fields, outside the undo history: undo brings back that list (survey-library spec G).
     if (propertyName === "targetQuestion" && obj.isDescendantOf("filter") && oldValue !== obj["targetQuestion"] &&
-      !this.isRenamingFilterTarget && !this.isProcessingUndoRedo && Array.isArray(obj["fields"]) && obj["fields"].length > 0) {
-      obj["fields"] = [];
+      !this.isRenamingFilterTarget && !this.isProcessingUndoRedo) {
+      this.replaceFilterFields(obj, oldValue);
     }
     // A Filter Control's defaultPreset names a preset: a renamed default preset stays the default one,
     // in the same undo step as the rename.
@@ -2952,14 +2952,54 @@ export class SurveyCreatorModel extends Base
       this.isRenamingFilterTarget = false;
     }
   }
-  private updateFilterFieldsOnFieldNameChanged(target: Base, oldName: string, newName: string) {
-    if (!target || !oldName || oldName === newName || typeof target["setControlFilter"] !== "function") return;
-    this.getAllQuestions().forEach(q => {
-      if (!q.isDescendantOf("filter") || q["targetQuestion"] !== target["name"]) return;
-      (q["fields"] || []).forEach((entry: any) => {
-        if (entry.name === oldName) entry.name = newName;
+  private replaceFilterFields(filter: any, oldTarget: string): void {
+    if (!filter.isFieldsDefined && !!oldTarget) {
+      this.runWithoutUndoRedo(() => { filter.fields = this.getFilterFieldNames(filter, oldTarget); });
+    }
+    filter.fields = !!filter.targetQuestion ? this.getFilterFieldNames(filter, filter.targetQuestion) : [];
+  }
+  private getFilterFieldNames(filter: any, target: string): Array<string> {
+    return filter.getTargetFilterFields(target, true).map((field: any): string => field.valueName);
+  }
+  private runWithoutUndoRedo(func: () => void): void {
+    const ctrl = this.undoRedoController;
+    const ignore = !!ctrl && ctrl.ignoreChanges;
+    if (!!ctrl) ctrl.ignoreChanges = true;
+    try {
+      func();
+    } finally {
+      if (!!ctrl) ctrl.ignoreChanges = ignore;
+    }
+  }
+  private updateFilterFieldsOnKeyChanged(obj: Base, propertyName: string, oldValue: any): void {
+    const valueName = obj["valueName"];
+    if (propertyName === "name" && !!valueName) return;
+    const name = obj["name"];
+    const oldKey = propertyName === "name" ? oldValue : (oldValue || name);
+    const newKey = propertyName === "name" ? name : (valueName || name);
+    if (!oldKey || !newKey || oldKey === newKey) return;
+    const question = obj.isDescendantOf("matrixdropdowncolumn") ? obj["templateQuestion"] : obj;
+    this.getAllQuestions().forEach((filter: any) => {
+      if (!filter.isDescendantOf("filter") || !filter.isFieldsDefined) return;
+      const owns = filter.getTargetFilterFields().some((field: any): boolean => this.isFilterFieldOf(field.templateQuestion, question));
+      if (!owns) return;
+      filter.fields.forEach((entry: any) => {
+        if (entry.name === oldKey) {
+          entry.name = newKey;
+        } else if (!!entry.name && entry.name.indexOf(oldKey + ".") === 0) {
+          entry.name = newKey + entry.name.substring(oldKey.length);
+        }
       });
     });
+  }
+  // Whether a field of a target is the question renamed or lies in it (an item of a renamed Multiple Textboxes).
+  private isFilterFieldOf(fieldQuestion: any, question: any): boolean {
+    let q = fieldQuestion;
+    while(!!q) {
+      if (q === question) return true;
+      q = q.parentQuestion;
+    }
+    return false;
   }
   public isObjQuestion(obj: Base): boolean {
     return this.isObjThisType(obj, "question");

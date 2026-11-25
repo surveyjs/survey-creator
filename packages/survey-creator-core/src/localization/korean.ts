@@ -897,9 +897,7 @@ export var koreanStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "별도의 열에 있는 각 옵션",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "이 열에 따라 정렬 허용",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "이 열에 따른 필터링 허용"
+      allowSort: "이 열에 따라 정렬 허용"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1235,10 +1233,6 @@ export var koreanStrings = {
     pageSize: "페이지당 행 수",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "사용자가 행을 정렬할 수 있게 합니다",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "이 질문에 따라 필터링 허용",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "필터 연산자",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "최대 정렬 단계",
     // [Auto-translated] "Default sort order"
@@ -3077,8 +3071,10 @@ export var koreanStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "필드 이름을 중괄호 안에 두세요. 예를 들어 {price} < 20, {category} ['Beverages']의 어떤 항목이든지 함께 사용하세요."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "응답자가 이 필드로 필터링할 수 있는 연산자 수를 제한합니다. 필드에 맞는 모든 연산자를 허용하려면 빈 상태로 두세요.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "응답자가 이 필드로 필터링할 수 있는 연산자 수를 제한합니다. 필드에 맞는 모든 연산자를 허용하려면 빈 상태로 두세요."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "응답자에게 표시되지 않는 열 ID입니다.",

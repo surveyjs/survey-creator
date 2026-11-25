@@ -896,9 +896,7 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "每个选项都在单独的列中",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "允许按此列排序",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "允许按此列进行筛选"
+      allowSort: "允许按此列排序"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var simplifiedChineseTranslation = {
     pageSize: "每页行数",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "允许用户排序行",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "允许通过此问题进行筛选",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "滤波器运算符",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "最高排序等级",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "使用大括号中的字段名称，例如：{price} < 20 和 {category} 任意 ['Beverages']。"
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "限制受访者可用来筛选该字段的运算符。留空以允许所有适合该字段的运算符。",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "限制受访者可用来筛选该字段的运算符。留空以允许所有适合该字段的运算符。"
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "受访者不可见的列 ID。",

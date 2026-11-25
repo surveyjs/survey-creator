@@ -896,9 +896,7 @@ export var huStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Minden beállítás külön oszlopban",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Engedélyezzük a rendezést ezen oszlop szerint",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Engedélyezze a szűrést ezen oszlop szerint"
+      allowSort: "Engedélyezzük a rendezést ezen oszlop szerint"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var huStrings = {
     pageSize: "Sorok oldalonként",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Engedd a felhasználók sorok rendezését",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Engedélyezze a szűrést ezen a kérdés alapján",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Szűrő operátorok",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximális rendezési szintek",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var huStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Használjon mezőneveket göndör zárójelben, például: {price} < 20 és {category} bármelyik ['Italok']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Korlátok, amelyeket a válaszadók használhatnak a mező szerinti szűréshez. Hagyja üresen, hogy minden olyan operátor megmaradjon, amely megfelel a mezőnek.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Korlátok, amelyeket a válaszadók használhatnak a mező szerinti szűréshez. Hagyja üresen, hogy minden olyan operátor megmaradjon, amely megfelel a mezőnek."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "A válaszadók számára nem látható oszlopazonosító.",

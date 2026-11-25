@@ -896,9 +896,7 @@ export var slStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Vsaka možnost v ločenem stolpcu",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Dovoli razvrščanje po tem stolpcu",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Dovoli filtriranje po tem stolpcu"
+      allowSort: "Dovoli razvrščanje po tem stolpcu"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var slStrings = {
     pageSize: "Vrstice na stran",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Uporabnikom omogočite razvrščanje vrstic",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Dovoli filtriranje po tem vprašanju",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operatorji filtrov",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Največje ravni sortiranja",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var slStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Uporabite imena polj v zavitih oklepajih, na primer: {price} < 20 in {category} katerikoli od ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Omejuje operatorje, ki jih lahko anketiranci uporabijo za filtriranje po tem polju. Pustite prazno, da dovolite vse operatorje, ki ustrezajo polju.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Omejuje operatorje, ki jih lahko anketiranci uporabijo za filtriranje po tem polju. Pustite prazno, da dovolite vse operatorje, ki ustrezajo polju."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID stolpca, ki ni viden anketirancem.",

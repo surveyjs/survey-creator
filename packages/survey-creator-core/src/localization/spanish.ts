@@ -896,9 +896,7 @@ export var spanishTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Cada opción en una columna separada",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Permitir ordenación por esta columna",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Permitir filtrado por esta columna"
+      allowSort: "Permitir ordenación por esta columna"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var spanishTranslation = {
     pageSize: "Filas por página",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Permitir a los usuarios ordenar filas",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Permitir filtrar por esta pregunta",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operadores de filtro",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Niveles máximos de ordenación",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var spanishTranslation = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Utilice nombres de campos entre corchetes, por ejemplo: {price} < 20 y {category} anyof ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Limita los operadores que los encuestados pueden usar para filtrar por este campo. Dejar vacío para permitir todos los operadores que se adapten al campo.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Limita los operadores que los encuestados pueden usar para filtrar por este campo. Dejar vacío para permitir todos los operadores que se adapten al campo."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Un identificador de columna que no es visible para los encuestados.",

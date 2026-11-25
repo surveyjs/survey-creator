@@ -897,9 +897,7 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "每個選項都在單獨的列中",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "允許依此欄位排序",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "允許依此欄位進行篩選"
+      allowSort: "允許依此欄位排序"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1235,10 +1233,6 @@ export var traditionalChineseTranslation = {
     pageSize: "每頁行數",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "允許使用者排序資料列",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "允許依此問題進行篩選",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "篩選運算子",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "最高排序等級",
     // [Auto-translated] "Default sort order"
@@ -3077,8 +3071,10 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "使用大括號內的欄位名稱，例如：{price} < 20 和 {category} 任意 ['Beverages']。"
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "限制受訪者可用來篩選此欄位的運算子。留空以允許所有適合該欄位的運算子。",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "限制受訪者可用來篩選此欄位的運算子。留空以允許所有適合該欄位的運算子。"
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "受訪者不可見的列ID。",

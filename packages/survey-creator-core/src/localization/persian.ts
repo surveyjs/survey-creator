@@ -896,9 +896,7 @@ export var persianStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "هر گزینه در یک ستون جداگانه",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "اجازه مرتب سازی بر اساس این ستون را بدهید",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "اجازه فیلتر کردن بر اساس این ستون"
+      allowSort: "اجازه مرتب سازی بر اساس این ستون را بدهید"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var persianStrings = {
     pageSize: "ردیف ها در هر صفحه",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "اجازه دادن به کاربران برای مرتب سازی ردیف ها",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "اجازه فیلتر کردن بر اساس این سؤال",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "عملگرهای فیلتر",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "حداکثر سطوح مرتب سازی",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var persianStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "از نام فیلدها در کروشه های پیچ خورده استفاده کنید، برای مثال: {price} < 20 و {category} هر یک از ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "محدودیت هایی که عملگرهایی که پاسخ دهندگان می توانند برای فیلتر کردن بر اساس این فیلد استفاده کنند را مشخص می کند. خالی بگذارید تا همه عملگرهای مناسب برای فیلد مجاز باشند.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "محدودیت هایی که عملگرهایی که پاسخ دهندگان می توانند برای فیلتر کردن بر اساس این فیلد استفاده کنند را مشخص می کند. خالی بگذارید تا همه عملگرهای مناسب برای فیلد مجاز باشند."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "یک شناسه ستون که برای پاسخ دهندگان قابل مشاهده نیست.",

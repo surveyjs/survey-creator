@@ -896,9 +896,7 @@ export var grStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Κάθε επιλογή σε ξεχωριστή στήλη",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Να επιτρέπεται η ταξινόμηση κατά αυτήν τη στήλη",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Επιτρέπεται το φιλτράρισμα με βάση αυτή τη στήλη"
+      allowSort: "Να επιτρέπεται η ταξινόμηση κατά αυτήν τη στήλη"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var grStrings = {
     pageSize: "Σειρές ανά σελίδα",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Να επιτρέπεται στους χρήστες η ταξινόμηση γραμμών",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Να επιτρέπεται το φιλτράρισμα με βάση αυτή την ερώτηση",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Τελεστές φίλτρων",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Μέγιστα επίπεδα ταξινόμησης",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var grStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Χρησιμοποιήστε ονόματα πεδίων σε αγκύλες, για παράδειγμα: {price} < 20 και {category} οποιοδήποτε από τα ['Drinks']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Περιορίζει τους τελεστές που μπορούν να χρησιμοποιήσουν οι ερωτώμενοι για να φιλτράρουν με βάση αυτό το πεδίο. Αφήστε κενό για να επιτρέψετε σε όλους τους τελεστές που ταιριάζουν στο πεδίο.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Περιορίζει τους τελεστές που μπορούν να χρησιμοποιήσουν οι ερωτώμενοι για να φιλτράρουν με βάση αυτό το πεδίο. Αφήστε κενό για να επιτρέψετε σε όλους τους τελεστές που ταιριάζουν στο πεδίο."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Ένα ID στήλης που δεν είναι ορατό στους συμμετέχοντες.",

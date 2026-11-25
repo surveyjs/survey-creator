@@ -897,9 +897,7 @@ export let svStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Varje alternativ i en separat kolumn",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Tillåt sortering efter denna kolumn",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Tillåt filtrering efter denna kolumn"
+      allowSort: "Tillåt sortering efter denna kolumn"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1235,10 +1233,6 @@ export let svStrings = {
     pageSize: "Rader per sida",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Tillåt användare att sortera rader",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Tillåt filtrering efter denna fråga",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Filteroperatorer",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximala sorteringsnivåer",
     // [Auto-translated] "Default sort order"
@@ -3077,8 +3071,10 @@ export let svStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Använd fältnamn inom klammer, till exempel: {price} < 20 och {category} någon av ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Begränsar vilka operatorer respondenter kan använda för att filtrera efter detta fält. Lämna tomt för att tillåta alla operatorer som passar fältet.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Begränsar vilka operatorer respondenter kan använda för att filtrera efter detta fält. Lämna tomt för att tillåta alla operatorer som passar fältet."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Ett kolumn-ID som inte är synligt för svarande.",

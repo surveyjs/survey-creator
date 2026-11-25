@@ -54,18 +54,6 @@ describe("Property grid: the Filter Control", () => {
     const editor = <QuestionTagboxModel>propertyGrid.survey.getQuestionByName("searchFields");
     expect(editor.choices.map(item => item.value), "#2: two tags, not two 'city'").toEqual(["home.city", "work.city"]);
   });
-  test("filter operators are a tag box with operator names", () => {
-    // A question in a Dynamic Panel's template: only there a Filter Control reaches it as a field
-    const survey = new SurveyModel({ elements: [{ type: "paneldynamic", name: "p", templateElements: [{ type: "text", name: "q1" }] }] });
-    const question = (<QuestionPanelDynamicModel>survey.getQuestionByName("p")).template.getQuestionByName("q1");
-    const propertyGrid = new PropertyGridModelTester(question);
-    const editor = <QuestionTagboxModel>propertyGrid.survey.getQuestionByName("filterOperators");
-    expect(editor.getType(), "#1").toBe("tagbox");
-    expect(editor.choices.length, "#2: a text field - anyof, noneof and allof are for choice questions").toBe(10);
-    expect(editor.choices[2].value, "#3").toBe("equal");
-    expect(editor.choices[2].text, "#4").toBe("Equals");
-    expect(editor.isVisible, "#5").toBe(true);
-  });
   test("dataList stays a text area", () => {
     const survey = new SurveyModel({ elements: [{ type: "text", name: "q1" }] });
     const propertyGrid = new PropertyGridModelTester(survey.getQuestionByName("q1"));
@@ -167,95 +155,77 @@ describe("Property grid: the Filter Control fields", () => {
     r.showDetailPanel();
     return r.detailPanel.getQuestionByName(name);
   };
-  test("a table of Field name and Field title; Available operators and Show in quick filters in a row's details", () => {
-    const { matrix } = createGrid({ targetQuestion: "m", fields: [{ name: "price", operators: ["greater"] }] });
-    expect(matrix.columns.map(c => c.name), "#1").toEqual(["name", "title"]);
-    expect(matrix.columns.map(c => c.title), "#2").toEqual(["Field name", "Field title"]);
-    const row = matrix.visibleRows[0];
-    expect(row.hasPanel, "#3").toBe(true);
-    row.showDetailPanel();
-    expect(row.detailPanel.questions.map(q => q.name), "#4").toEqual(["operators", "showInQuickFilters"]);
-    expect(row.detailPanel.questions.map(q => q.title), "#5").toEqual(["Available operators", "Show in quick filters"]);
-    expect(matrix.addRowText, "#6").toBe("Add field");
-  });
-  test("a row for every field of the target question; nothing is written until a row is changed", () => {
+  test("fields left out: a row per visible field of the target; nothing is written until a row is changed", () => {
     const { filter, matrix } = createGrid({ targetQuestion: "m" });
     expect(matrix.visibleRows.map(r => r.editingObj["name"]), "#1").toEqual(["country", "price"]);
-    expect(filter.fields.length, "#2").toBe(0);
-    expect(filter.toJSON().fields, "#3").toBeUndefined();
-    expect(cell(matrix, 0, "title").value, "#4: no title of its own").toBeFalsy();
+    expect([filter.isFieldsDefined, filter.toJSON().fields], "#2").toEqual([false, undefined]);
   });
-  test("changing a row adds its entry once; the row stays where it is", () => {
+  test("the first change writes the rows into fields, then makes the change", () => {
     const { filter, matrix } = createGrid({ targetQuestion: "m" });
     cell(matrix, 1, "title").value = "Cost";
-    expect(filter.fields.map((f: any) => [f.name, f.title]), "#1").toEqual([["price", "Cost"]]);
-    cell(matrix, 1, "title").value = "Price";
-    expect(filter.fields.map((f: any) => [f.name, f.title]), "#2: the same entry").toEqual([["price", "Price"]]);
-    expect(matrix.visibleRows.map(r => r.editingObj["name"]), "#3").toEqual(["country", "price"]);
-    expect(matrix.visibleRows[1].editingObj, "#4").toBe(filter.fields[0]);
-    detail(matrix, 0, "showInQuickFilters").value = false;
-    expect(filter.fields.map((f: any) => f.name), "#5: a change in the details too").toEqual(["price", "country"]);
+    expect(filter.toJSON().fields, "#1").toEqual(["country", { name: "price", title: "Cost" }]);
+    expect(matrix.visibleRows[1].editingObj, "#2: the row's entry").toBe(filter.fields[1]);
   });
-  test("a row's entry and a field of the record: the authored entries in the target's order, the record's after it", () => {
-    const { filter, matrix } = createGrid({ targetQuestion: "m", fields: [{ name: "city" }, { name: "price", title: "Cost" }] });
-    expect(matrix.visibleRows.map(r => r.editingObj["name"]), "#1").toEqual(["country", "price", "city"]);
-    expect(matrix.visibleRows[1].editingObj, "#2").toBe(filter.fields[1]);
-    expect(cell(matrix, 1, "title").value, "#3").toBe("Cost");
+  test("any row can be removed; the last one leaves fields: []", () => {
+    const { filter, matrix } = createGrid({ targetQuestion: "m" });
+    expect(matrix.canRemoveRow(matrix.visibleRows[0]), "#1").toBe(true);
+    matrix.removeRow(0);
+    expect(filter.toJSON().fields, "#2").toEqual(["price"]);
+    matrix.removeRow(0);
+    expect([filter.toJSON().fields, filter.getFilterFields().length], "#3").toEqual([[], 0]);
   });
-  test("a row of a field of the target keeps its name and has nothing to remove until it is changed", () => {
-    const { filter, matrix } = createGrid({ targetQuestion: "m", fields: [{ name: "price", title: "Cost" }, { name: "city" }] });
-    expect([0, 1, 2].map(i => cell(matrix, i, "name").isReadOnly), "#1").toEqual([true, true, false]);
-    expect([0, 1, 2].map(i => matrix.canRemoveRow(matrix.visibleRows[i])), "#2").toEqual([false, true, true]);
-    matrix.removeRow(1);
-    expect(filter.fields.map((f: any) => f.name), "#3: the entry is gone").toEqual(["city"]);
-    expect(matrix.visibleRows.map(r => r.editingObj["name"]), "#4: the column's row is back").toEqual(["country", "price", "city"]);
-    expect(cell(matrix, 1, "title").value, "#5").toBeFalsy();
+  test("rows can be moved", () => {
+    const { matrix } = createGrid({ targetQuestion: "m", fields: ["country", "price"] });
+    expect(matrix.allowRowReorder, "#1").toBe(true);
   });
-  test("Add field adds a field of the record; Field name takes a name of its own", () => {
+  test("Field name: every field of the target, a hidden one too, but those another row has taken", () => {
+    const survey = new SurveyModel({ elements: [
+      { type: "matrixdynamic", name: "m", columns: [{ name: "a", title: "A" }, { name: "b", visible: false }, { name: "c" }] },
+      { type: "filter", name: "f", targetQuestion: "m", fields: ["a", "total"] }] });
+    const matrix = <QuestionMatrixDynamicModel>new PropertyGridModelTester(survey.getQuestionByName("f")).survey.getQuestionByName("fields");
+    const name0 = cell(matrix, 0, "name");
+    expect([name0.isReadOnly, name0.choices.map((c: any) => [c.value, c.text])], "#1").toEqual([false, [["a", "A"], ["b", "b"], ["c", "c"]]]);
+    expect(cell(matrix, 1, "name").choices.map((c: any) => c.value), "#2: a is taken").toEqual(["b", "c"]);
+    expect(cell(matrix, 1, "name").selectedItem.value, "#3: a field of the record is the custom choice").toBe("total");
+    name0.value = "c";
+    expect(cell(matrix, 1, "name").choices.map((c: any) => c.value), "#4: a is free, c taken").toEqual(["a", "b"]);
+  });
+  test("Field title's placeholder: the title of the field, or the entry's name", () => {
+    const { matrix } = createGrid({ targetQuestion: "m", fields: ["country", "city"] });
+    expect(cell(matrix, 0, "title").placeholder, "#1").toBe("Country");
+    expect(cell(matrix, 1, "title").placeholder, "#2").toBe("city");
+  });
+  test("Add field: the first field no row has taken, else field1", () => {
+    const { filter, matrix } = createGrid({ targetQuestion: "m", fields: ["country"] });
+    expect(matrix.visibleRows.length, "#0: the rows as the table renders them").toBe(1);
+    matrix.addRow();
+    expect(filter.fields.map((f: any) => f.name), "#1").toEqual(["country", "price"]);
+    matrix.addRow();
+    expect(filter.fields.map((f: any) => f.name), "#2").toEqual(["country", "price", "field1"]);
+  });
+  test("Add field on fields left out: the rows first", () => {
     const { filter, matrix } = createGrid({ targetQuestion: "m" });
     expect(matrix.visibleRows.length, "#0: the rows as the table renders them").toBe(2);
     matrix.addRow();
-    expect(filter.fields.map((f: any) => f.name), "#1").toEqual(["field1"]);
-    expect(matrix.visibleRows.map(r => r.editingObj["name"]), "#2").toEqual(["country", "price", "field1"]);
-    const name = cell(matrix, 2, "name");
-    expect([name.getType(), name.allowCustomChoices, name.isReadOnly], "#3").toEqual(["dropdown", true, false]);
-    name.value = "total";
-    expect(filter.fields[0].name, "#4").toBe("total");
+    expect(filter.fields.map((f: any) => f.name)).toEqual(["country", "price", "field1"]);
   });
-  test("the title's Add adds a field of the record before the table is drawn", () => {
-    const { filter, matrix } = createGrid({ targetQuestion: "m" });
-    const add = matrix.getTitleActions().filter((a: any) => a.id === "add-item")[0];
-    add.action();
-    expect(filter.fields.map((f: any) => f.name), "#1").toEqual(["field1"]);
-    expect(matrix.visibleRows.map(r => r.editingObj["name"]), "#2").toEqual(["country", "price", "field1"]);
-  });
-  test("Field name shows the name of a field of the record that the target has no column for", () => {
-    const { matrix } = createGrid({ targetQuestion: "m", fields: [{ name: "city" }] });
-    const name = cell(matrix, 2, "name");
-    expect(!!name.selectedItem && name.selectedItem.value, "#1").toBe("city");
-    expect(name.selectedItem.text, "#2").toBe("city");
+  test("the title's Add before the table is drawn: the rows first, then the field", () => {
+    const { filter, matrix } = createGrid({ targetQuestion: "m", fields: ["country"] });
+    matrix.getTitleActions().filter((a: any) => a.id === "add-item")[0].action();
+    expect(filter.fields.map((f: any) => f.name)).toEqual(["country", "price"]);
   });
   test("with no target question the rows are the fields and Field name has nothing to pick", () => {
-    const { matrix } = createGrid({ fields: [{ name: "a" }] });
-    expect(matrix.visibleRows.length, "#1").toBe(1);
-    expect(cell(matrix, 0, "name").choices.length, "#2").toBe(0);
-    expect(cell(matrix, 0, "name").isReadOnly, "#3").toBe(false);
+    const { matrix } = createGrid({ fields: ["a"] });
+    expect([matrix.visibleRows.length, cell(matrix, 0, "name").choices.length]).toEqual([1, 0]);
   });
   test("Available operators are those the field takes, named as the logic tab names them", () => {
-    const { filter, matrix } = createGrid({ targetQuestion: "m", fields: [{ name: "price", operators: ["greater"] }, { name: "city" }] });
+    const { filter, matrix } = createGrid({ targetQuestion: "m", fields: ["country", { name: "price", operators: ["greater"] }, "city"] });
     const ofPrice = detail(matrix, 1, "operators");
-    expect(ofPrice.getType(), "#1").toBe("tagbox");
     const values = ofPrice.choices.map((c: any) => c.value);
-    expect([values.indexOf("greater") > -1, values.indexOf("contains") > -1], "#2: a number field").toEqual([true, false]);
-    expect(ofPrice.choices.filter((c: any) => c.value === "greater")[0].text, "#3").toBe("Greater than");
-    expect(Array.from(ofPrice.value), "#4").toEqual(["greater"]);
-    expect(detail(matrix, 2, "operators").choices.map((c: any) => c.value).indexOf("contains") > -1, "#5: a field of the record").toBe(true);
-    expect(filter.fields[0].operators, "#6").toEqual(["greater"]);
-  });
-  test("a row not changed yet offers the operators of its column", () => {
-    const { matrix } = createGrid({ targetQuestion: "m" });
-    const values = detail(matrix, 1, "operators").choices.map((c: any) => c.value);
-    expect([values.indexOf("greater") > -1, values.indexOf("contains") > -1]).toEqual([true, false]);
+    expect([ofPrice.getType(), values.indexOf("greater") > -1, values.indexOf("contains") > -1], "#1").toEqual(["tagbox", true, false]);
+    expect(ofPrice.choices.filter((c: any) => c.value === "greater")[0].text, "#2").toBe("Greater than");
+    expect(detail(matrix, 2, "operators").choices.map((c: any) => c.value).indexOf("contains") > -1, "#3").toBe(true);
+    expect(filter.fields[1].operators, "#4").toEqual(["greater"]);
   });
 });
 
@@ -285,16 +255,14 @@ describe("Property grid: the Filter Control layout", () => {
     expect(["allowEdit", "allowDelete"].map(name => row.detailPanel.getQuestionByName(name).title), "#2")
       .toEqual(["Allow respondents to edit this preset", "Allow respondents to delete this preset"]);
   });
-  test("filterOperators follows allowFiltering", () => {
-    const survey = new SurveyModel({ elements: [{ type: "text", name: "q1" },
-      { type: "matrixdynamic", name: "m", columns: [{ name: "col1", cellType: "text" }] }] });
-    const questionGrid = new PropertyGridModelTester(survey.getQuestionByName("q1"));
-    const dataNames = elementNames(questionGrid, "data");
-    expect(dataNames.indexOf("filterOperators"), "#1").toBe(dataNames.indexOf("allowFiltering") + 1);
-    expect(questionGrid.survey.getQuestionByName("filterOperators").title, "#2").toBe("Filter operators");
-    const columnGrid = new PropertyGridModelTester((<QuestionMatrixDynamicModel>survey.getQuestionByName("m")).columns[0]);
-    const generalNames = elementNames(columnGrid, "general");
-    expect(generalNames.indexOf("filterOperators"), "#3").toBe(generalNames.indexOf("allowFiltering") + 1);
+  test("Available operators explain themselves as the column's filter operators did", () => {
+    const survey = new SurveyModel({ elements: [{ type: "matrixdynamic", name: "m", columns: [{ name: "a" }] },
+      { type: "filter", name: "f", targetQuestion: "m", fields: ["a"] }] });
+    const matrix = <QuestionMatrixDynamicModel>new PropertyGridModelTester(survey.getQuestionByName("f")).survey.getQuestionByName("fields");
+    const row = matrix.visibleRows[0];
+    row.showDetailPanel();
+    expect(row.detailPanel.getQuestionByName("operators").description).toBe(
+      "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field.");
   });
   test("no Others tab for the filter and a preset", () => {
     const survey = new SurveyModel({ elements: [{ type: "filter", name: "f", presets: [{ name: "a" }] }] });
@@ -400,7 +368,7 @@ describe("Property grid: the Filter Control fields of a new target", () => {
       expect(shown(rowsOf(creator)), "#2." + index).toEqual(expected(name));
     });
     expect(shown(rowsOf(creator)).length, "#3: the columns and the details").toBe(4);
-    expect(filter.fields.length, "#4").toBe(0);
+    expect(filter.fields.map((f: any) => f.name), "#4: the entries of its visible fields").toEqual(expected(matrix.name).map((e: Array<any>) => e[0]));
   });
   test("a target with as many fields under other names, more fields and fewer", () => {
     const creator = new CreatorTester();
@@ -419,6 +387,6 @@ describe("Property grid: the Filter Control fields of a new target", () => {
     expect(shown(rowsOf(creator)), "#3: one more").toEqual([["p", "p"], ["q", "q"], ["r", "r"], ["s", "s"]]);
     target.value = "m1";
     expect(shown(rowsOf(creator)), "#4: one fewer").toEqual([["a", "a"], ["b", "b"], ["c", "c"]]);
-    expect(filter.toJSON().fields, "#5").toBeUndefined();
+    expect(filter.toJSON().fields, "#5").toEqual(["a", "b", "c"]);
   });
 });

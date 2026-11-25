@@ -896,9 +896,7 @@ export var nbStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Hvert alternativ i en egen kolonne",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Tillat sortering etter denne kolonnen",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Tillat filtrering etter denne kolonnen"
+      allowSort: "Tillat sortering etter denne kolonnen"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export var nbStrings = {
     pageSize: "Rader per side",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "La brukere sortere rader",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Tillat filtrering etter dette spørsmålet",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Filteroperatører",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksimale sorteringsnivåer",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export var nbStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Bruk feltnavn i krøllete parenteser, for eksempel: {price} < 20 og {category} any of ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Begrenser hvilke operatorer respondentene kan bruke for å filtrere etter dette feltet. La det være tomt for å tillate alle operatorer som passer til feltet.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Begrenser hvilke operatorer respondentene kan bruke for å filtrere etter dette feltet. La det være tomt for å tillate alle operatorer som passer til feltet."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "En kolonne-ID som ikke er synlig for respondentene.",

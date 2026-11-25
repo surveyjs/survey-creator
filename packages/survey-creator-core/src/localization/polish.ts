@@ -897,9 +897,7 @@ export var polishStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Każda opcja w osobnej kolumnie",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Zezwalaj na sortowanie według tej kolumny",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Zezwól na filtrowanie według tej kolumny"
+      allowSort: "Zezwalaj na sortowanie według tej kolumny"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1235,10 +1233,6 @@ export var polishStrings = {
     pageSize: "Wiersze na stronę",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Pozwól użytkownikom na sortowanie wierszy",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Zezwól na filtrowanie według tego pytania",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operatory filtrów",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksymalne poziomy sortowania",
     // [Auto-translated] "Default sort order"
@@ -3077,8 +3071,10 @@ export var polishStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Używaj nazw pól w nawiasach spiralnych, na przykład: {price} < 20 oraz {category} dowolnego z ['Napojów']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Ogranicza operatory, których respondenci mogą używać do filtrowania według tego pola. Pozostaw puste, aby umożliwić wszystkim operatorom pasującym do pola.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Ogranicza operatory, których respondenci mogą używać do filtrowania według tego pola. Pozostaw puste, aby umożliwić wszystkim operatorom pasującym do pola."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Identyfikator kolumny, który nie jest widoczny dla respondentów.",

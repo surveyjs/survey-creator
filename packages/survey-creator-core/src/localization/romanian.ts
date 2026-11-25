@@ -896,9 +896,7 @@ export const roStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Fiecare opțiune într-o coloană separată",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Permiteți sortarea după această coloană",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Permiteți filtrarea prin această coloană"
+      allowSort: "Permiteți sortarea după această coloană"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1234,10 +1232,6 @@ export const roStrings = {
     pageSize: "Rânduri pe pagină",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Permite utilizatorilor să sorteze rândurile",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Permiteți filtrarea după această întrebare",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operatori de filtru",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Niveluri maxime de sortare",
     // [Auto-translated] "Default sort order"
@@ -3076,8 +3070,10 @@ export const roStrings = {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Folosiți numele câmpurilor între paranteze, de exemplu: {price} < 20 și {category} anyof ['Drinks']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Limitează operatorii pe care respondenții îi pot folosi pentru a filtra după acest câmp. Lasă gol pentru a permite toți operatorii care corespund câmpului.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Limitează operatorii pe care respondenții îi pot folosi pentru a filtra după acest câmp. Lasă gol pentru a permite toți operatorii care corespund câmpului."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Un ID al coloanei care nu este vizibil pentru respondenți.",
