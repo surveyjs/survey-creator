@@ -705,10 +705,11 @@ export interface ICreatorOptions {
    * @since 3.1.1
    */
   variablePresets?: ISurveyVariablePresets;
-  // The options of the surveys that show the user's survey: the designer, Preview, the Themes tab and the panes of
-  // the side-by-side Translation tab. It is the library's survey-options object (new SurveyModel(json, options)):
-  // runtimeSettings, propertyDefaults and events, passed to these surveys as-is. The Creator's own surveys
-  // (property grid, pop-up editors, Logic, the Translation tab's tables and settings) get none of it. A later change
-  // of creator.surveyOptions applies to the surveys created after it.
+  /**
+   * Specifies runtime settings, property defaults, and event handlers for the survey being edited.
+   *
+   * When rendering the survey, pass the same [`ISurveyOptions`](https://surveyjs.io/form-library/documentation/api-reference/isurveyoptions) object as the second argument to the [`SurveyModel`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model) constructor.
+   * @see [SurveyCreatorModel.surveyOptions](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#surveyOptions)
+   */
   surveyOptions?: ISurveyOptions;
 }

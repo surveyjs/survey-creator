@@ -3227,12 +3227,13 @@ export class SurveyCreatorModel extends Base
     if (words.length === 0) return "";
     return words.map(word => word[0]).join("").toLowerCase() + "-";
   }
-  // The library's survey-options object (runtimeSettings, propertyDefaults, events) of the surveys that show the user's
-  // survey: the designer, Preview, the Themes tab and the two panes of the side-by-side Translation tab. It is passed
-  // as-is to these surveys when they are created, before their JSON loads (the JSON omits values equal to the
-  // designer's defaults, so a survey loading it without them would show the library defaults instead); the survey
-  // reads them once, in its constructor, and they cannot change later. Changing the property applies to the surveys created
-  // after the change: the designer survey is rebuilt when JSON is set again, the others when their tab is shown.
+  /**
+   * Specifies runtime settings, property defaults, and event handlers for the survey being edited.
+   *
+   * Changes to `surveyOptions` apply to survey models created afterward. Assign [`creator.JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) again to recreate the Designer survey with the updated options.
+   *
+   * When rendering the survey with Form Library, pass the same [`ISurveyOptions`](https://surveyjs.io/form-library/documentation/api-reference/isurveyoptions) object to the `SurveyModel` constructor.
+   */
   public surveyOptions: ISurveyOptions;
   private static userSurveyAreas = ["designer-tab", "preview-tab", "theme-tab",
     "translation-tab:source-survey", "translation-tab:target-survey"];
