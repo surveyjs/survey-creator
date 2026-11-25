@@ -36,7 +36,12 @@ function createModeEditor(): { editor: ICreatorRichTextEditor, sanitized: Array<
     },
     sanitizeHtml: (html, options) => {
       sanitized.push({ html: html, inline: options?.inline });
-      const text = String(html || "").replace(/<[^>]*>/g, "");
+      let text = String(html || "");
+      let previous: string;
+      do {
+        previous = text;
+        text = text.replace(/<[^>]*>/g, "");
+      } while (text !== previous);
       if (!text.trim()) return "";
       if (String(html).indexOf("<") < 0) return html;
       return "SAN:" + html;
