@@ -1478,6 +1478,16 @@ svc-question,
     margin-top: 0;
   }
 
+  .sv-dropdown-popup {
+    .sd-selectlist__item {
+      background: inherit;
+    }
+
+    .sd-selectlist__item-body {
+      padding-block: 0;
+    }
+  }
+
   .svc-item-value-wrapper.svc-item-value-wrapper--wysiwyg {
     margin-left: 0;
     gap: 0;
