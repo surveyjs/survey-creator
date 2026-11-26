@@ -463,7 +463,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
     properties: [
       { name: "pickerType", tab: "specific" },
       { name: "range", tab: "specific" },
-      { name: "pattern", tab: "specific" },
+      { name: "datePattern", tab: "specific" },
+      { name: "firstDayOfWeek", tab: "specific" },
       { name: "placeholder", tab: "specific" },
       { name: "startPlaceholder", tab: "specific" },
       { name: "endPlaceholder", tab: "specific" },

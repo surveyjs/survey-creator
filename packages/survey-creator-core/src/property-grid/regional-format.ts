@@ -61,8 +61,16 @@ const regionalFormatPropertyGridDefinition: ISurveyPropertyGridDefinition = {
   generateOtherTab: false,
   classes: {
     "regionalformat@regionalFormat": {
-      properties: ["locale"].concat(regionalFormatFormatFields)
-        .map(name => { return { name: name, tab: creatorSettings.propertyGrid.generalTabName }; })
+      properties: [
+        "locale",
+        "datePattern",
+        "timePattern",
+        "firstDayOfWeek",
+        "decimalSeparator",
+        "thousandsSeparator",
+        "currencySymbol",
+        "currencyPattern"
+      ].map(name => { return { name: name, tab: creatorSettings.propertyGrid.generalTabName }; })
     }
   }
 };

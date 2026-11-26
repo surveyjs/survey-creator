@@ -508,6 +508,7 @@ export var enStrings = {
     regionalformat: {
       locale: "Region",
       datePattern: "Date pattern",
+      firstDayOfWeek: "First day of the week",
       timePattern: "Time pattern",
       decimalSeparator: "Decimal separator",
       thousandsSeparator: "Thousands separator",
@@ -531,7 +532,8 @@ export var enStrings = {
       placeholder: "Placeholder text",
       startPlaceholder: "Start date placeholder",
       endPlaceholder: "End date placeholder",
-      pattern: "Pattern",
+      datePattern: "Date pattern",
+      firstDayOfWeek: "First day of the week",
       allowClear: "Show the Clear button",
       minErrorText: "\"Value is below minimum\" error message",
       maxErrorText: "\"Value exceeds maximum\" error message",
@@ -1559,7 +1561,7 @@ export var enStrings = {
       pattern: "Ex.: mm/dd/yyyy HH:MM:ss"
     },
     datetimepicker: {
-      pattern: "Ex.: mm/dd/yyyy"
+      datePattern: "Ex.: mm/dd/yyyy"
     },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"
