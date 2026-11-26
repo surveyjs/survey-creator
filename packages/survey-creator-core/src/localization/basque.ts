@@ -826,36 +826,54 @@ export var euStrings = {
       expression: "Adierazpena"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Iragazi beharreko galdera",
+      // [Auto-translated] "Fields"
+      fields: "Eremuak",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Erakutsi iragazki azkarrak",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Bilaketa barra erakutsi",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Bilatu beharreko eremuak",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Bilatu leku-hartzaile testua",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Erakutsi Iragazki Guztiak botoia",
+      // [Auto-translated] "Filter presets"
+      presets: "Iragazki aurrezarpenak",
       // "Data source"
-      source: "Datu-iturria",
-      // "Show filter chips"
-      allowFastMode: "Erakutsi iragazki-txipak",
-      // "Show the Filters button"
-      allowAdvancedMode: "Erakutsi Iragazkiak botoia",
-      // "Show search"
-      showSearch: "Erakutsi bilaketa",
-      // "Search in"
-      searchFields: "Bilatu hemen",
-      // "Presets"
-      items: "Aurrezarpenak",
-      // "Default preset"
-      defaultItem: "Aurrezarpen lehenetsia",
+      defaultPreset: "Aurrezarpen lehenetsia",
+      // [Auto-translated] "Show presets"
+      showPresets: "Erakutsi aurrezarpenak",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Erantzuleei aurrezarpenak editatzeko aukera eman",
       // "Allow multiple presets"
-      allowMultipleItems: "Baimendu aurrezarpen anitz",
-      // "Allow respondents to add presets"
-      allowAddItems: "Baimendu erantzuleei aurrezarpenak gehitzen"
+      allowAddPresets: "Baimendu erantzuleei aurrezarpenak gehitzen",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Erantzuleei aurrezarpenak ezabatzeko aukera eman"
     },
-    filteritem: {
+    filterpreset: {
       // "Preset name"
       name: "Aurrezarpenaren izena",
       // "Preset title"
       title: "Aurrezarpenaren izenburua",
       // "Filter expression"
       expression: "Iragazki-adierazpena",
-      // "Allow editing"
-      allowEdit: "Baimendu editatzea",
-      // "Allow deleting"
-      allowDelete: "Baimendu ezabatzea"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Erantzuleei aurrezarpen hau editatzeko aukera eman",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Erantzuleei aurrezarpen hau ezabatzeko baimena eman"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Eremuaren izena",
+      // [Auto-translated] "Field title"
+      title: "Zelaiaren izenburua",
+      // [Auto-translated] "Available operators"
+      operators: "Eskuragarri dauden operadoreak",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Erakutsi iragazki azkarretan"
     },
     sortcriterion: {
       // "Sort by"
@@ -918,9 +936,7 @@ export var euStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Aukera bakoitza zutabe bereizi batean",
       // "Allow sorting by this column"
-      allowSort: "Baimendu zutabe honen araberako ordenatzea",
-      // "Allow filtering by this column"
-      allowFiltering: "Baimendu zutabe honen araberako iragazketa"
+      allowSort: "Baimendu zutabe honen araberako ordenatzea"
     },
     matrixcolumn: {
       // "Clear others in the same row"
@@ -1113,7 +1129,9 @@ export var euStrings = {
     // "No sort levels"
     "listIsEmpty@sortCriteria": "Ez dago ordenatze-mailarik",
     // "No presets"
-    "listIsEmpty@filterItems": "Ez dago aurrezarpenik",
+    "listIsEmpty@filterPresets": "Ez dago aurrezarpenik",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Ez eremurik",
     // "Add choice"
     "addNew@choices": "Gehitu aukera",
     // "Add rating value"
@@ -1141,7 +1159,9 @@ export var euStrings = {
     // "Add sort level"
     "addNew@sortCriteria": "Gehitu ordenatze-maila",
     // "Add preset"
-    "addNew@filterItems": "Gehitu aurrezarpena",
+    "addNew@filterPresets": "Gehitu aurrezarpena",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Gehitu eremua",
     // "Value"
     value: "Balioa",
     // "Text"
@@ -1256,10 +1276,6 @@ export var euStrings = {
     pageSize: "Errenkadak orrialde bakoitzeko",
     // "Allow users to sort rows"
     allowSort: "Baimendu erabiltzaileei errenkadak ordenatzen",
-    // "Allow filtering by this question"
-    allowFiltering: "Baimendu galdera honen araberako iragazketa",
-    // "Filter operators"
-    filterOperators: "Iragazki-eragileak",
     // "Maximum sort levels"
     maxSortLevel: "Gehieneko ordenatze-mailak",
     // "Default sort order"
@@ -1818,8 +1834,8 @@ export var euStrings = {
       sliderSettings: "Gradutzailearen ezarpenak",
       // "Filter Settings"
       filterSettings: "Iragazkiaren ezarpenak",
-      // "Presets"
-      presets: "Aurrezarpenak",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Iragazki Aurrezarpenak",
       // "Choices from a Web Service"
       choicesByUrl: "Aukerak web-zerbitzu batetik",
       // "Numbering"
@@ -3092,16 +3108,18 @@ export var euStrings = {
     },
     filter: {
       // "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Hautatu matrize dinamiko bat, goitibeherako matrize bat edo panel dinamiko bat, iragazkiak haien errenkadak edo panelak murrizteko.",
+      targetQuestion: "Hautatu matrize dinamiko bat, goitibeherako matrize bat edo panel dinamiko bat, iragazkiak haien errenkadak edo panelak murrizteko.",
       // "The preset applied when the survey starts."
-      defaultItem: "Inkesta hastean aplikatzen den aurrezarpena."
+      defaultPreset: "Inkesta hastean aplikatzen den aurrezarpena."
     },
-    filteritem: {
+    filterpreset: {
       // "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Erabili eremu-izenak giltzen artean, adibidez: {price} < 20 and {category} anyof ['Beverages']."
     },
-    // "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Erantzuleek eremu honen arabera iragazteko erabil ditzaketen eragileak mugatzen ditu. Utzi hutsik eremuari egokitzen zaizkion eragile guztiak baimentzeko.",
+    filterfield: {
+      // "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Erantzuleek eremu honen arabera iragazteko erabil ditzaketen eragileak mugatzen ditu. Utzi hutsik eremuari egokitzen zaizkion eragile guztiak baimentzeko."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Erantzulearentzat ikusgai ez dagoen zutabe-ID bat.",
@@ -4035,6 +4053,8 @@ export var euStrings = {
       "cycle/value-write": {
         // "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
         self: "{label} berak idazten duen balioa irakurtzen du - beste balio bat aldatzean soilik exekutatzen da, beraz ez da inoiz exekutatzen.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label}-ak idazten duen balioa bakarrik kopiatzen du, beraz, inoiz ez du baliorik ezartzen.",
         // "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Balioak begizta batean idazten dira: {chain}. Idazketa bakoitzak hura irakurtzen duten adierazpenak berriro exekutatzen ditu, beraz azken balioak galderen erantzun-ordernaren araberakoak dira."
       },

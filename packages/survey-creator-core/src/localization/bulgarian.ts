@@ -822,36 +822,54 @@ export var bgStrings = {
       expression: "Изразяване"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Източник на данни",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Показване на филтърни чипове",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Показване на бутона Филтри",
-      // [Auto-translated] "Show search"
-      showSearch: "Покажи търсенето",
-      // [Auto-translated] "Search in"
-      searchFields: "Търсене в",
-      // [Auto-translated] "Presets"
-      items: "Предварителни настройки",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Въпрос за филтриране",
+      // [Auto-translated] "Fields"
+      fields: "Полета",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Показване на бързи филтри",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Показване на лентата за търсене",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Полета за търсене",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Търсене на текст за заместване",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Покажи бутона Всички филтри",
+      // [Auto-translated] "Filter presets"
+      presets: "Филтърни предварителни настройки",
       // [Auto-translated] "Default preset"
-      defaultItem: "По подразбиране предварителна настройка",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Разрешаване на множество предварителни настройки",
+      defaultPreset: "По подразбиране предварителна настройка",
+      // [Auto-translated] "Show presets"
+      showPresets: "Показване на предварителни настройки",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Позволете на респондентите да редактират предварителни настройки",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Позволете на респондентите да добавят предварителни настройки"
+      allowAddPresets: "Позволете на респондентите да добавят предварителни настройки",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Позволете на респондентите да изтриват предварителни настройки"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Име на предварителна настройка",
       // [Auto-translated] "Preset title"
       title: "Заглавие на предварително зададена настройка",
       // [Auto-translated] "Filter expression"
       expression: "Израз за филтър",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Разреши редактиране",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Разреши изтриването"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Позволете на респондентите да редактират тази предварителна настройка",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Позволете на респондентите да изтрият тази предварителна настройка"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Име на полето",
+      // [Auto-translated] "Field title"
+      title: "Титла на полето",
+      // [Auto-translated] "Available operators"
+      operators: "Налични оператори",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Показване в бързи филтри"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +932,7 @@ export var bgStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Всяка опция в отделна колона",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Позволете сортиране по тази колона",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Разреши филтриране по тази колона"
+      allowSort: "Позволете сортиране по тази колона"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1125,9 @@ export var bgStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Няма нива на сортиране",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Без предварителни настройки",
+    "listIsEmpty@filterPresets": "Без предварителни настройки",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Няма полета",
     // "Add new choice"
     "addNew@choices": "Добавяне на възможност за избор",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1155,9 @@ export var bgStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Добавете ниво на сортиране",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Добавяне на предварителна настройка",
+    "addNew@filterPresets": "Добавяне на предварителна настройка",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Добави поле",
     // "Value"
     value: "Стойност",
     // "Text"
@@ -1252,10 +1272,6 @@ export var bgStrings = {
     pageSize: "Редове на страница",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Позволете на потребителите да сортират редове",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Разреши филтриране по този въпрос",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Оператори на филтри",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Максимални нива на сортиране",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1830,8 @@ export var bgStrings = {
       sliderSettings: "Настройки на плъзгача",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Настройки на филтъра",
-      // [Auto-translated] "Presets"
-      presets: "Предварителни настройки",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Филтърни предварителни настройки",
       // "Choices from a Web Service"
       choicesByUrl: "Избор от услугата RESTful",
       // "Numbering"
@@ -3088,16 +3104,18 @@ export var bgStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Изберете динамична матрица, падащо меню или динамичен панел, чиито редове или панели филтърът стеснява.",
+      targetQuestion: "Изберете динамична матрица, падащо меню или динамичен панел, чиито редове или панели филтърът стеснява.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Предварително зададената настройка се прилага при стартиране на проучването."
+      defaultPreset: "Предварително зададената настройка се прилага при стартиране на проучването."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Използвайте имена на полета в къдрави скоби, например: {price} < 20 и {category} някое от ['Напитки']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Ограничава операторите, които респондентите могат да използват, за да филтрират по това поле. Оставете празни, за да позволите всички оператори, които отговарят на полето.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Ограничава операторите, които респондентите могат да използват, за да филтрират по това поле. Оставете празни, за да позволите всички оператори, които отговарят на полето."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ИД на колона, която не се вижда от респондентите.",
@@ -4029,8 +4047,10 @@ export var bgStrings = {
         loop: "Тригерите образуват цикъл чрез стойностите, които задават: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} чете стойността, която сам записва – работи само когато друга стойност се промени, така че никога не се изпълнява.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} изчислява стойността, която записва от тази стойност – всяко изпълнение започва от предишния резултат, така че стойността зависи от това колко пъти се изпълнява.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} копира само стойността, която записва, така че никога не задава стойност.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Стойностите се записват в цикъл: {chain}. Всяко записване повтаря изразите, които го четат, така че крайните стойности зависят от реда, в който се отговарят въпросите."
       },

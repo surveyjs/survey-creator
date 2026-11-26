@@ -822,36 +822,54 @@ export var indonesianStrings = {
       expression: "Ekspresi"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Sumber data",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Tampilkan chip filter",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Tampilkan tombol Filter",
-      // [Auto-translated] "Show search"
-      showSearch: "Tampilkan pencarian",
-      // [Auto-translated] "Search in"
-      searchFields: "Cari di",
-      // [Auto-translated] "Presets"
-      items: "Preset",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Pertanyaan untuk disaring",
+      // [Auto-translated] "Fields"
+      fields: "Bidang",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Tampilkan filter cepat",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Tampilkan bilah pencarian",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Bidang yang akan dicari",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Cari teks placeholder",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Tampilkan tombol Semua Filter",
+      // [Auto-translated] "Filter presets"
+      presets: "Preset filter",
       // [Auto-translated] "Default preset"
-      defaultItem: "Prasetel default",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Izinkan beberapa preset",
+      defaultPreset: "Prasetel default",
+      // [Auto-translated] "Show presets"
+      showPresets: "Tampilkan preset",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Izinkan responden mengedit preset",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Izinkan responden menambahkan preset"
+      allowAddPresets: "Izinkan responden menambahkan preset",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Izinkan responden menghapus preset"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Nama preset",
       // [Auto-translated] "Preset title"
       title: "Judul preset",
       // [Auto-translated] "Filter expression"
       expression: "Ekspresi filter",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Izinkan pengeditan",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Izinkan penghapusan"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Izinkan responden mengedit preset ini",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Izinkan responden menghapus preset ini"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Nama bidang",
+      // [Auto-translated] "Field title"
+      title: "Gelar Lapangan",
+      // [Auto-translated] "Available operators"
+      operators: "Operator yang tersedia",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Tampilkan di filter cepat"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +932,7 @@ export var indonesianStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Setiap opsi dalam kolom terpisah",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Izinkan pengurutan berdasarkan kolom ini",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Izinkan penyaringan berdasarkan kolom ini"
+      allowSort: "Izinkan pengurutan berdasarkan kolom ini"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1125,9 @@ export var indonesianStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Tidak ada tingkat pengurutan",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Tidak ada preset",
+    "listIsEmpty@filterPresets": "Tidak ada preset",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Tidak ada bidang",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Tambahkan pilihan",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1155,9 @@ export var indonesianStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Tambahkan tingkat pengurutan",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Tambahkan preset",
+    "addNew@filterPresets": "Tambahkan preset",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Kolom Tambah",
     // "Value"
     value: "Nilai",
     // "Text"
@@ -1252,10 +1272,6 @@ export var indonesianStrings = {
     pageSize: "Baris per halaman",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Izinkan pengguna mengurutkan baris",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Izinkan penyaringan berdasarkan pertanyaan ini",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operator filter",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Tingkat pengurutan maksimum",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1830,8 @@ export var indonesianStrings = {
       sliderSettings: "Pengaturan Penggeser",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Pengaturan Filter",
-      // [Auto-translated] "Presets"
-      presets: "Preset",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Preset Filter",
       // "Choices from a Web Service"
       choicesByUrl: "Pilih dari Web",
       // [Auto-translated] "Numbering"
@@ -3088,16 +3104,18 @@ export var indonesianStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Pilih matriks dinamis, matriks dropdown, atau panel dinamis yang baris atau panelnya dipersempit oleh filter.",
+      targetQuestion: "Pilih matriks dinamis, matriks dropdown, atau panel dinamis yang baris atau panelnya dipersempit oleh filter.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Preset diterapkan saat survei dimulai."
+      defaultPreset: "Preset diterapkan saat survei dimulai."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Gunakan nama bidang dalam tanda kurung melingkar, misalnya: {price} < 20 dan {category} anyof ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Membatasi operator yang dapat digunakan responden untuk memfilter berdasarkan bidang ini. Biarkan kosong untuk mengizinkan semua operator yang sesuai dengan bidang tersebut.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Membatasi operator yang dapat digunakan responden untuk memfilter berdasarkan bidang ini. Biarkan kosong untuk mengizinkan semua operator yang sesuai dengan bidang tersebut."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID kolom yang tidak terlihat oleh responden.",
@@ -4029,8 +4047,10 @@ export var indonesianStrings = {
         loop: "Pemicu membentuk loop melalui nilai yang mereka tetapkan: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} membaca nilai yang ditulisnya sendiri - ia hanya berjalan ketika nilai lain berubah, jadi tidak pernah berjalan sama sekali.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} menghitung nilai yang ditulisnya dari nilai itu sendiri - setiap run dimulai dari hasil sebelumnya, jadi nilai tergantung pada berapa kali dijalankan.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} hanya menyalin nilai yang ditulisnya, jadi tidak pernah menetapkan nilai.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Nilai-nilai ditulis dalam loop: {chain}. Setiap tulisan menjalankan ulang ekspresi yang membacanya, sehingga nilai akhir bergantung pada urutan menjawab pertanyaan."
       },

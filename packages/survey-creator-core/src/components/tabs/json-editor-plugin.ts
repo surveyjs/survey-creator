@@ -1,4 +1,4 @@
-import { Base, property, ListModel, Action, ComputedUpdater } from "survey-core";
+import { Base, property, ListModel, Action, ActionContainer, ComputedUpdater } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { SurveyTextWorker, SurveyTextWorkerError, SurveyTextWorkerLinterFinding } from "../../textWorker";
@@ -99,6 +99,7 @@ export abstract class JsonEditorBaseModel extends Base {
       this.errorListValue = new ListModel({
         items: [],
         onSelectionChanged: (action: Action) => {
+          if (this.isErrorTextSelected()) return;
           const error: SurveyTextWorkerError = action.data.error;
           if (!!error)this.gotoError(error.at, error.rowAt, error.columnAt);
         },
@@ -116,10 +117,18 @@ export abstract class JsonEditorBaseModel extends Base {
   }
 
   protected setErrors(errors: Array<SurveyTextWorkerError>): void {
+    this.disposeErrorActions();
     const actions = this.createErrorActions(errors);
     // setItems unconditionally: skipping it on an empty list leaves the previous entries in it
     this.errorList.setItems(actions);
     this.hasErrors = actions.length > 0;
+  }
+  private disposeErrorActions(): void {
+    if (!this.errorListValue) return;
+    this.errorListValue.actions.forEach(item => {
+      const bar: ActionContainer = item.data && item.data.actions;
+      if (!!bar) bar.dispose();
+    });
   }
   protected gotoError(at: number, row: number, column: number): void { }
   private errorActionCounter: number = 1;
@@ -127,14 +136,8 @@ export abstract class JsonEditorBaseModel extends Base {
     const res = [];
     errors.forEach(error => {
       const isFinding = error instanceof SurveyTextWorkerLinterFinding;
-      const line = error.rowAt > -1
-        ? (<any>getLinterString("lineNumber"))["format"](error.rowAt + 1)
-        : "";
-      let title = error.text;
-      if (title.length > maxErrorLength + 3) {
-        title = title.substring(0, maxErrorLength) + "...";
-      }
-      title = line + title;
+      const title = this.getErrorItemTitle(error, true);
+      const copyText = this.getErrorItemTitle(error, false);
       // a finding is shown by its own severity; a JSON error is an error by nature
       const kind = isFinding
         ? getFindingSeverityKind((<SurveyTextWorkerLinterFinding>error).severity)
@@ -143,21 +146,77 @@ export abstract class JsonEditorBaseModel extends Base {
         id: (isFinding ? "linterfinding_" : "error_") + this.errorActionCounter++,
         component: "json-error-item",
         title: title,
-        tooltip: error.text,
         iconName: kind === "error" ? "icon-error" : "icon-warning-24x24",
         iconSize: "auto",
         // the base item already carries the alert colours an error needs
         css: kind === "warning" ? "svc-json-errors__item--warning" : undefined,
         data: {
           error: error,
+          actions: this.createErrorItemActions(error, copyText),
           showFixButton: error.isFixable,
           fixError: () => this.applyFix(error),
-          fixButtonIcon: "icon-fix",
           fixButtonTitle: getFixTitle(error)
         }
       }));
     });
     return res;
+  }
+  private createErrorItemActions(error: SurveyTextWorkerError, copyText: string): ActionContainer {
+    const items: Array<Action> = [];
+    items.push(new Action({
+      id: "copy",
+      iconName: "icon-copy-16x16",
+      iconSize: 16,
+      showTitle: false,
+      locTitleName: "ed.surveyJsonCopyButton",
+      locTooltipName: "ed.surveyJsonCopyButton",
+      action: () => this.copyErrorText(copyText)
+    }));
+    if (error.isFixable) {
+      const fixTitle = getFixTitle(error);
+      items.push(new Action({
+        id: "fix",
+        iconName: "icon-fix",
+        iconSize: 24,
+        showTitle: false,
+        title: fixTitle,
+        innerCss: "svc-json-error__fix-button",
+        action: () => this.applyFix(error)
+      }));
+    }
+    const container = new ActionContainer();
+    container.containerCss = "svc-json-error__actions";
+    container.setActionsAppearance({ style: "neutral", size: "xx-small", mode: "tertiary-muted-surface" });
+    container.setItems(items);
+    return container;
+  }
+  private getErrorItemTitle(error: SurveyTextWorkerError, truncate: boolean): string {
+    const line = error.rowAt > -1
+      ? (<any>getLinterString("lineNumber"))["format"](error.rowAt + 1)
+      : "";
+    let title = error.text || "";
+    if (truncate && title.length > maxErrorLength + 3) {
+      title = title.substring(0, maxErrorLength) + "...";
+    }
+    return line + title;
+  }
+  // A selection inside the message means the user is about to copy it. The same click would
+  // otherwise move the caret and take the selection with it.
+  private isErrorTextSelected(): boolean {
+    const selection = DomWindowHelper.getSelection();
+    if (!selection || selection.isCollapsed) return false;
+    if (!selection.toString()) return false;
+    const node = selection.anchorNode;
+    if (!node) return false;
+    const element = node.nodeType === 1 ? <Element><any>node : node.parentElement;
+    if (!element || typeof element.closest !== "function") return false;
+    return !!element.closest(".svc-json-error__title");
+  }
+  private copyErrorText(text: string): void {
+    const win = DomWindowHelper.getWindow();
+    const clipboard = win && win.navigator && win.navigator.clipboard;
+    if (!clipboard || typeof clipboard.writeText !== "function") return;
+    clipboard.writeText(text);
   }
   // The list is rebuilt a second after the last keystroke, so a button may still describe the text
   // as it was before the keystroke, and its error was positioned in that text. The fix is taken
@@ -251,6 +310,7 @@ export abstract class JsonEditorBaseModel extends Base {
   public dispose(): void {
     // the model is disposed as the tab closes: a pause it was waiting out has nothing to apply to
     this.cancelScheduledProcessing();
+    this.disposeErrorActions();
     this.lastTextWorker = undefined;
     this.lastTextWorkerText = undefined;
     this.errorsTextWorker = undefined;

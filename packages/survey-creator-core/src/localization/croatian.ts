@@ -822,36 +822,54 @@ export var hrStrings = {
       expression: "Izraz"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Izvor podataka",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Prikaži filter čipove",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Prikaži gumb Filteri",
-      // [Auto-translated] "Show search"
-      showSearch: "Prikaži pretraživanje",
-      // [Auto-translated] "Search in"
-      searchFields: "Pretraži u",
-      // [Auto-translated] "Presets"
-      items: "Predlošci",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Pitanje za filtriranje",
+      // [Auto-translated] "Fields"
+      fields: "Polja",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Prikaži brze filtre",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Prikaži traku za pretraživanje",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Polja za pretraživanje",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Pretraži tekst rezerviranog mjesta",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Prikaži gumb Svi filtri",
+      // [Auto-translated] "Filter presets"
+      presets: "Predlošci filtera",
       // [Auto-translated] "Default preset"
-      defaultItem: "Zadani predložak",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Dopusti više predložaka",
+      defaultPreset: "Zadani predložak",
+      // [Auto-translated] "Show presets"
+      showPresets: "Prikaži predloške",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Dopusti ispitanicima uređivanje predložaka",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Dopusti ispitanicima dodavanje predložaka"
+      allowAddPresets: "Dopusti ispitanicima dodavanje predložaka",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Dopusti ispitanicima brisanje predložaka"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Naziv predloška",
       // [Auto-translated] "Preset title"
       title: "Unaprijed postavljeni naslov",
       // [Auto-translated] "Filter expression"
       expression: "Izraz filtra",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Dopusti uređivanje",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Dopusti brisanje"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Dopusti ispitanicima uređivanje ovog predloška",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Dopusti ispitanicima brisanje ovog predloška"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Naziv polja",
+      // [Auto-translated] "Field title"
+      title: "Naziv terena",
+      // [Auto-translated] "Available operators"
+      operators: "Dostupni operateri",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Prikaži u brzim filtrima"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +932,7 @@ export var hrStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Svaka mogućnost u zasebnom stupcu",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Dopustite sortiranje po ovom stupcu",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Dopusti filtriranje prema ovom stupcu"
+      allowSort: "Dopustite sortiranje po ovom stupcu"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1125,9 @@ export var hrStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Nema razina sortiranja",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Bez predložaka",
+    "listIsEmpty@filterPresets": "Bez predložaka",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Nema polja",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Dodaj izbor",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1155,9 @@ export var hrStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Dodaj razinu sortiranja",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Dodaj predložak",
+    "addNew@filterPresets": "Dodaj predložak",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Dodaj polje",
     // "Value"
     value: "Vrijednost",
     // "Text"
@@ -1252,10 +1272,6 @@ export var hrStrings = {
     pageSize: "Redovi po stranici",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Dopustite korisnicima sortiranje redaka",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Dopusti filtriranje prema ovom pitanju",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operatori filtra",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksimalne razine sortiranja",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1830,8 @@ export var hrStrings = {
       sliderSettings: "Postavke klizača",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Postavke filtera",
-      // [Auto-translated] "Presets"
-      presets: "Predlošci",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Predlošci filtera",
       // "Choices from a Web Service"
       choicesByUrl: "Izbori s weba",
       // "Numbering"
@@ -3088,16 +3104,18 @@ export var hrStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Odaberite dinamičku matricu, padajuću matricu ili dinamički panel čije retke ili panele filtar sužava.",
+      targetQuestion: "Odaberite dinamičku matricu, padajuću matricu ili dinamički panel čije retke ili panele filtar sužava.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Predložak primijenjen na početku ankete."
+      defaultPreset: "Predložak primijenjen na početku ankete."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Koristite nazive polja u vitičastim zagradama, na primjer: {price} < 20 i {category} bilo koji od ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Ograničava operatore koje ispitanici mogu koristiti za filtriranje po ovom polju. Ostavite prazno da biste dopustili sve operatore koji odgovaraju polju.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Ograničava operatore koje ispitanici mogu koristiti za filtriranje po ovom polju. Ostavite prazno da biste dopustili sve operatore koji odgovaraju polju."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID stupca koji nije vidljiv ispitanicima.",
@@ -4029,8 +4047,10 @@ export var hrStrings = {
         loop: "Okidači tvore petlju kroz vrijednosti koje postave: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} čita vrijednost koju sam zapisuje – pokreće se samo kad se druga vrijednost promijeni, pa se uopće ne pokreće.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} sam izračunava vrijednost koju zapisuje iz te vrijednosti – svako pokretanje počinje od prethodnog rezultata, pa vrijednost ovisi o tome koliko puta se izvrši.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} kopira samo vrijednost koju zapisuje, pa nikada ne postavlja vrijednost.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Vrijednosti se zapisuju u petlji: {chain}. Svaki zapis ponovno pokreće izraze koji ga čitaju, pa konačne vrijednosti ovise o redoslijedu u kojem se pitanja odgovaraju."
       },

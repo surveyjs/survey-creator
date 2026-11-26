@@ -822,36 +822,54 @@ export var persianStrings = {
       expression: "بیان"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "منبع داده",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "نمایش تراشه های فیلتر",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "نمایش دکمه فیلترها",
-      // [Auto-translated] "Show search"
-      showSearch: "نمایش جستجو",
-      // [Auto-translated] "Search in"
-      searchFields: "جستجو در",
-      // [Auto-translated] "Presets"
-      items: "پیش تنظیم ها",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "سوالی برای فیلتر کردن",
+      // [Auto-translated] "Fields"
+      fields: "فیلدها",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "نمایش فیلترهای سریع",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "نمایش نوار جستجو",
+      // [Auto-translated] "Fields to search"
+      searchFields: "فیلدهای جستجو",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "جستجوی متن جایگزین",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "نمایش دکمه همه فیلترها",
+      // [Auto-translated] "Filter presets"
+      presets: "پیش تنظیم های فیلتر",
       // [Auto-translated] "Default preset"
-      defaultItem: "پیش تنظیم پیش فرض",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "اجازه دادن به چندین پیش تنظیم",
+      defaultPreset: "پیش تنظیم پیش فرض",
+      // [Auto-translated] "Show presets"
+      showPresets: "نمایش پیش تنظیم ها",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "اجازه دادن به پاسخ دهندگان برای ویرایش پیش تنظیم ها",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "اجازه دادن به پاسخ دهندگان برای افزودن پیش تنظیم ها"
+      allowAddPresets: "اجازه دادن به پاسخ دهندگان برای افزودن پیش تنظیم ها",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "اجازه دادن به پاسخ دهندگان برای حذف پیش تنظیم ها"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "نام پیش تنظیم",
       // [Auto-translated] "Preset title"
       title: "عنوان پیش فرض",
       // [Auto-translated] "Filter expression"
       expression: "عبارت فیلتر",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "اجازه ویرایش",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "اجازه حذف"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "اجازه دهید پاسخ دهندگان این پیش تنظیم را ویرایش کنند",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "اجازه دهید پاسخ دهندگان این پیش تنظیم را حذف کنند"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "نام فیلد",
+      // [Auto-translated] "Field title"
+      title: "عنوان قهرمانی زمین",
+      // [Auto-translated] "Available operators"
+      operators: "اپراتورهای موجود",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "نمایش در فیلترهای سریع"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +932,7 @@ export var persianStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "هر گزینه در یک ستون جداگانه",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "اجازه مرتب سازی بر اساس این ستون را بدهید",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "اجازه فیلتر کردن بر اساس این ستون"
+      allowSort: "اجازه مرتب سازی بر اساس این ستون را بدهید"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1125,9 @@ export var persianStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "بدون سطح مرتب سازی",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "بدون پیش تنظیم",
+    "listIsEmpty@filterPresets": "بدون پیش تنظیم",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "بدون فیلد",
     // [Auto-translated] "Add choice"
     "addNew@choices": "انتخاب اضافه کنید",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1155,9 @@ export var persianStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "افزودن سطح مرتب سازی",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "افزودن پیش تنظیم",
+    "addNew@filterPresets": "افزودن پیش تنظیم",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "افزودن فیلد",
     // "Value"
     value: "مقدار",
     // "Text"
@@ -1252,10 +1272,6 @@ export var persianStrings = {
     pageSize: "ردیف ها در هر صفحه",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "اجازه دادن به کاربران برای مرتب سازی ردیف ها",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "اجازه فیلتر کردن بر اساس این سؤال",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "عملگرهای فیلتر",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "حداکثر سطوح مرتب سازی",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1830,8 @@ export var persianStrings = {
       sliderSettings: "تنظیمات نوار لغزنده",
       // [Auto-translated] "Filter Settings"
       filterSettings: "تنظیمات فیلتر",
-      // [Auto-translated] "Presets"
-      presets: "پیش تنظیم ها",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "پیش تنظیم های فیلتر",
       // "Choices from a Web Service"
       choicesByUrl: "انتخاب ها از وب",
       // "Numbering"
@@ -3088,16 +3104,18 @@ export var persianStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "یک ماتریس پویا، ماتریس کشویی یا پنل پویا را انتخاب کنید که فیلتر ردیف ها یا پنل های آن را محدود می کند.",
+      targetQuestion: "یک ماتریس پویا، ماتریس کشویی یا پنل پویا را انتخاب کنید که فیلتر ردیف ها یا پنل های آن را محدود می کند.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "پیش تنظیمی که هنگام شروع نظرسنجی اعمال می شود."
+      defaultPreset: "پیش تنظیمی که هنگام شروع نظرسنجی اعمال می شود."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "از نام فیلدها در کروشه های پیچ خورده استفاده کنید، برای مثال: {price} < 20 و {category} هر یک از ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "محدودیت هایی که عملگرهایی که پاسخ دهندگان می توانند برای فیلتر کردن بر اساس این فیلد استفاده کنند را مشخص می کند. خالی بگذارید تا همه عملگرهای مناسب برای فیلد مجاز باشند.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "محدودیت هایی که عملگرهایی که پاسخ دهندگان می توانند برای فیلتر کردن بر اساس این فیلد استفاده کنند را مشخص می کند. خالی بگذارید تا همه عملگرهای مناسب برای فیلد مجاز باشند."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "یک شناسه ستون که برای پاسخ دهندگان قابل مشاهده نیست.",
@@ -4029,8 +4047,10 @@ export var persianStrings = {
         loop: "تریگرها یک حلقه از میان مقادیری که تعیین می کنند تشکیل می دهند: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{برچسب} مقداری را که خودش می نویسد می خواند - فقط زمانی اجرا می شود که مقدار دیگری تغییر کند، بنابراین اصلا اجرا نمی شود.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} مقداری را که از آن مقدار می نویسد محاسبه می کند - هر اجرا از نتیجه قبلی شروع می شود، بنابراین مقدار بستگی به تعداد دفعات اجرا دارد.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} فقط مقداری را که می نویسد کپی می کند، بنابراین هرگز مقداری تنظیم نمی کند.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "مقادیر به صورت حلقه ای نوشته می شوند: {chain}. هر نوشتن عباراتی را که آن را می خوانند دوباره اجرا می کند، بنابراین مقادیر نهایی به ترتیب پاسخ دادن به سوالات بستگی دارد."
       },

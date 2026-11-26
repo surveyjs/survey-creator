@@ -19,11 +19,13 @@ import {
   IConfirmDialogOptions,
   ISurveyVariablePresets,
   SurveyVariablePresets,
+  ILoadFromJSONOptions,
   isAnimationEnabled,
   isReducedMotionPreferred,
   subscribeReducedMotionChange,
   getIdSelector
 } from "survey-core";
+import type { ISurveyOptions } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
@@ -2547,9 +2549,13 @@ export class SurveyCreatorModel extends Base
    * @param insertPageIndex A zero-based index at which to insert new pages.
    */
   public addCollectionItemsJson(json: any, insertPageIndex?: number): void {
-    const survey = new SurveyModel(json);
+    // The pages load with the designer survey's settings and defaults (an explicit value equal to the global default
+    // is kept), without the user's events
+    const survey = new SurveyModel(json, this.getTemporarySurveyOptions());
     this.updateAddingSurvey(survey);
     this.addSurveyPages(survey, insertPageIndex);
+    // Not disposed (its pages are now the designer's): only its defaults layer is released
+    this.releasePropertyDefaults(survey);
   }
   private updateAddingSurvey(survey: SurveyModel): void {
     this.updateAddingPages(survey);
@@ -2845,18 +2851,31 @@ export class SurveyCreatorModel extends Base
       }
       // A question a Filter Control can filter (survey-core finds the source by the same duck typing)
       if (propertyName === "name" && typeof obj["setControlFilter"] === "function") {
-        this.updateFilterSourceOnQuestionNameChanged(oldValue, obj["name"]);
+        this.updateFilterTargetOnQuestionNameChanged(oldValue, obj["name"]);
       }
     }
     if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
       this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
     }
-    // A Filter Control's defaultItem names a preset: a renamed default preset stays the default one,
+    // A Filter Control's fields entry names a field of its target by its key (valueName || name), a nested one
+    // by its path ({address.city}): a changed key keeps its entries, in the same undo step.
+    if ((propertyName === "name" || propertyName === "valueName") && (obj.isDescendantOf("matrixdropdowncolumn") || this.isObjQuestion(obj))) {
+      this.updateFilterFieldsOnKeyChanged(obj, propertyName, oldValue);
+    }
+    // A Filter Control's fields entries are of its target question: a new one gets the entries of its visible
+    // fields, in the same undo step - not a rename of the target (updateFilterTargetOnQuestionNameChanged), not
+    // undo or redo, which bring the entries back with the step. Fields left out are written first, as the old
+    // target's visible fields, outside the undo history: undo brings back that list (survey-library spec G).
+    if (propertyName === "targetQuestion" && obj.isDescendantOf("filter") && oldValue !== obj["targetQuestion"] &&
+      !this.isRenamingFilterTarget && !this.isProcessingUndoRedo) {
+      this.replaceFilterFields(obj, oldValue);
+    }
+    // A Filter Control's defaultPreset names a preset: a renamed default preset stays the default one,
     // in the same undo step as the rename.
-    if (propertyName === "name" && obj.getType() === "filteritem") {
-      const owner = obj["itemOwner"];
-      if (!!oldValue && !!owner && owner["defaultItem"] === oldValue) {
-        owner["defaultItem"] = obj["name"];
+    if (propertyName === "name" && obj.getType() === "filterpreset") {
+      const owner = obj["presetOwner"];
+      if (!!oldValue && !!owner && owner["defaultPreset"] === oldValue) {
+        owner["defaultPreset"] = obj["name"];
       }
     }
   }
@@ -2925,13 +2944,69 @@ export class SurveyCreatorModel extends Base
       }
     });
   }
-  private updateFilterSourceOnQuestionNameChanged(oldName: string, newName: string) {
+  private isRenamingFilterTarget: boolean = false;
+  private updateFilterTargetOnQuestionNameChanged(oldName: string, newName: string) {
     if (!oldName || oldName === newName) return;
-    this.getAllQuestions().forEach(q => {
-      if (q.isDescendantOf("filter") && q["source"] === oldName) {
-        q["source"] = newName;
-      }
+    this.isRenamingFilterTarget = true;
+    try {
+      this.getAllQuestions().forEach(q => {
+        if (q.isDescendantOf("filter") && q["targetQuestion"] === oldName) {
+          q["targetQuestion"] = newName;
+        }
+      });
+    } finally {
+      this.isRenamingFilterTarget = false;
+    }
+  }
+  private replaceFilterFields(filter: any, oldTarget: string): void {
+    if (!filter.isFieldsDefined && !!oldTarget) {
+      this.runWithoutUndoRedo(() => { filter.fields = this.getFilterFieldEntries(filter, oldTarget); });
+    }
+    filter.fields = !!filter.targetQuestion ? this.getFilterFieldEntries(filter, filter.targetQuestion) : [];
+  }
+  // An entry per visible field of the target, named by its valueName: definitions the setter makes entries of.
+  private getFilterFieldEntries(filter: any, target: string): Array<any> {
+    return filter.getTargetFilterFields(target, true).map((field: any): any => ({ name: field.valueName }));
+  }
+  private runWithoutUndoRedo(func: () => void): void {
+    const ctrl = this.undoRedoController;
+    const ignore = !!ctrl && ctrl.ignoreChanges;
+    if (!!ctrl) ctrl.ignoreChanges = true;
+    try {
+      func();
+    } finally {
+      if (!!ctrl) ctrl.ignoreChanges = ignore;
+    }
+  }
+  private updateFilterFieldsOnKeyChanged(obj: Base, propertyName: string, oldValue: any): void {
+    const valueName = obj["valueName"];
+    if (propertyName === "name" && !!valueName) return;
+    const name = obj["name"];
+    const oldKey = propertyName === "name" ? oldValue : (oldValue || name);
+    const newKey = propertyName === "name" ? name : (valueName || name);
+    if (!oldKey || !newKey || oldKey === newKey) return;
+    const question = obj.isDescendantOf("matrixdropdowncolumn") ? obj["templateQuestion"] : obj;
+    this.getAllQuestions().forEach((filter: any) => {
+      if (!filter.isDescendantOf("filter") || !filter.isFieldsDefined) return;
+      const owns = filter.getTargetFilterFields().some((field: any): boolean => this.isFilterFieldOf(field.templateQuestion, question));
+      if (!owns) return;
+      filter.fields.forEach((entry: any) => {
+        if (entry.name === oldKey) {
+          entry.name = newKey;
+        } else if (!!entry.name && entry.name.indexOf(oldKey + ".") === 0) {
+          entry.name = newKey + entry.name.substring(oldKey.length);
+        }
+      });
     });
+  }
+  // Whether a field of a target is the question renamed or lies in it (an item of a renamed Multiple Textboxes).
+  private isFilterFieldOf(fieldQuestion: any, question: any): boolean {
+    let q = fieldQuestion;
+    while(!!q) {
+      if (q === question) return true;
+      q = q.parentQuestion;
+    }
+    return false;
   }
   public isObjQuestion(obj: Base): boolean {
     return this.isObjThisType(obj, "question");
@@ -3112,7 +3187,8 @@ export class SurveyCreatorModel extends Base
     if (!textWorker.isJsonCorrect) return null;
     // the text normalized the way the survey saves it - through a model in design mode, so
     // that loading it runs no expressions and no choicesByUrl requests
-    const survey = new SurveyModel();
+    // With the designer survey's settings and defaults (not its events), the text is normalized the way creator.JSON is
+    const survey = new SurveyModel(undefined, this.getTemporarySurveyOptions());
     survey.setDesignMode(true);
     survey.fromJSON(this.parseJSON(this.text));
     const res = new JsonObject().toJsonObject(survey);
@@ -3220,13 +3296,41 @@ export class SurveyCreatorModel extends Base
     if (words.length === 0) return "";
     return words.map(word => word[0]).join("").toLowerCase() + "-";
   }
+  /**
+   * Specifies runtime settings, property defaults, and event handlers for the survey being edited.
+   *
+   * Changes to `surveyOptions` apply to survey models created afterward. Assign [`creator.JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) again to recreate the Designer survey with the updated options.
+   *
+   * When rendering the survey with Form Library, pass the same [`ISurveyOptions`](https://surveyjs.io/form-library/documentation/api-reference/isurveyoptions) object to the `SurveyModel` constructor.
+   */
+  public surveyOptions: ISurveyOptions;
+  private static userSurveyAreas = ["designer-tab", "preview-tab", "theme-tab",
+    "translation-tab:source-survey", "translation-tab:target-survey"];
+  private getSurveyOptionsByArea(area: string): ISurveyOptions {
+    if (!this.surveyOptions || SurveyCreatorModel.userSurveyAreas.indexOf(area) < 0) return undefined;
+    return this.surveyOptions;
+  }
+  // A hidden temporary survey that loads JSON the way the designer survey does: the designer's runtime settings and
+  // propertyDefaults, but not the user's events, so the application's handlers do not run for it
+  private getTemporarySurveyOptions(): ISurveyOptions {
+    const options = this.getSurveyOptionsByArea("designer-tab");
+    if (!options || !Object.prototype.hasOwnProperty.call(options, "events")) return options;
+    const res: any = {};
+    Object.keys(options).forEach((key: string) => {
+      if (key !== "events") res[key] = options[key];
+    });
+    return res;
+  }
   protected createSurveyCore(json: any = {}, area: string, element: Base): SurveyModel {
+    const surveyOptions = this.getSurveyOptionsByArea(area);
     if (this.onSurveyInstanceSetupHandlers.isEmpty) {
-      const model = new SurveyModel(json);
+      const model = new SurveyModel(json, surveyOptions);
       model.generateStylesheet = false;
       return model;
     }
-    const model = new SurveyModel();
+    // The handlers run after the constructor and before the JSON loads. The survey's runtime settings and property
+    // defaults are this.surveyOptions and cannot change here; options.survey.onX.add() adds to its events
+    const model = new SurveyModel(undefined, surveyOptions);
     model.generateStylesheet = false;
     const options = { survey: model, area: area, element: element, json: json };
     this.onSurveyInstanceSetupHandlers.fire(this, options);
@@ -3567,9 +3671,15 @@ export class SurveyCreatorModel extends Base
       });
     }
   }
+  // The element loads before it is added to the designer survey: with the survey's own property defaults, an explicit
+  // value equal to the global default is kept
+  private getNewElementLoadOptions(): ILoadFromJSONOptions {
+    const propertyDefaults = this.survey?.getOwnPropertyDefaults();
+    return !!propertyDefaults ? { propertyDefaults: propertyDefaults } : undefined;
+  }
   public createNewElement(json: any): IElement {
     const newElement = Serializer.createClass(json["type"]);
-    new JsonObject().toObject(json, newElement);
+    new JsonObject().toObject(json, newElement, this.getNewElementLoadOptions());
     let needNewName = true;
     if (!!json.name) {
       if (newElement.isPage) {
@@ -5290,7 +5400,15 @@ export class SurveyCreatorModel extends Base
         plugin.dispose();
       }
     });
+    // The designer survey is not disposed (creator.JSON stays readable), but its defaults layer is released:
+    // a live layer keeps every survey on the page on the slower default-read path
+    this.releasePropertyDefaults(this.surveyValue);
     super.dispose();
+  }
+  private releasePropertyDefaults(survey: SurveyModel): void {
+    if (!!survey) {
+      survey.releasePropertyDefaults();
+    }
   }
   @property({ defaultValue: true }) enableLinkFileEditor: boolean;
   public getRootCss() {

@@ -822,36 +822,54 @@ export var catalanTranslation = {
       expression: "Expressió"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Font de dades",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Mostra els xips de filtre",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Mostra el botó Filtres",
-      // [Auto-translated] "Show search"
-      showSearch: "Mostra la cerca",
-      // [Auto-translated] "Search in"
-      searchFields: "Cerca a",
-      // [Auto-translated] "Presets"
-      items: "Presets",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Pregunta per filtrar",
+      // [Auto-translated] "Fields"
+      fields: "Camps",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Mostra filtres ràpids",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Mostra la barra de cerca",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Camps a cercar",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Cerca text marcador de posició",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Mostra el botó Tots els filtres",
+      // [Auto-translated] "Filter presets"
+      presets: "Presets de filtre",
       // [Auto-translated] "Default preset"
-      defaultItem: "Predefinició predeterminada",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Permetre múltiples predefinicions",
+      defaultPreset: "Predefinició predeterminada",
+      // [Auto-translated] "Show presets"
+      showPresets: "Mostrar presets",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Permetre als enquestats editar presets",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Permetre als enquestats afegir presets"
+      allowAddPresets: "Permetre als enquestats afegir presets",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Permetre als respondents eliminar presets"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Nom predefinit",
       // [Auto-translated] "Preset title"
       title: "Títol predefinit",
       // [Auto-translated] "Filter expression"
       expression: "Expressió del filtre",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Permetre l'edició",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Permetre l'eliminació"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Permetre als enquestats editar aquest predefinit",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Permetre als enquestats eliminar aquest predefinit"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Nom del camp",
+      // [Auto-translated] "Field title"
+      title: "Títol del camp",
+      // [Auto-translated] "Available operators"
+      operators: "Operadors disponibles",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Mostra en filtres ràpids"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +932,7 @@ export var catalanTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Cada opción en una columna separada",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Permet ordenar per aquesta columna",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Permetre el filtratge per aquesta columna"
+      allowSort: "Permet ordenar per aquesta columna"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1125,9 @@ export var catalanTranslation = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "No hi ha nivells de sort",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Sense presets",
+    "listIsEmpty@filterPresets": "Sense presets",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Sense camps",
     // "Add new choice"
     "addNew@choices": "Añade una opción",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1155,9 @@ export var catalanTranslation = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Afegeix nivell d'ordenació",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Afegeix un ajust predefinit",
+    "addNew@filterPresets": "Afegeix un ajust predefinit",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Afegir camp",
     // "Value"
     value: "Valor",
     // [Auto-translated] "Text"
@@ -1252,10 +1272,6 @@ export var catalanTranslation = {
     pageSize: "Files per pàgina",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Permetre als usuaris ordenar files",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Permetre el filtratge per aquesta pregunta",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operadors de filtre",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Nivells màxims d'ordenació",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1830,8 @@ export var catalanTranslation = {
       sliderSettings: "Configuració del control deslizante",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Configuració del filtre",
-      // [Auto-translated] "Presets"
-      presets: "Presets",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Presets de filtre",
       // "Choices from a Web Service"
       choicesByUrl: "Opcions de la web",
       // "Numbering"
@@ -3088,16 +3104,18 @@ export var catalanTranslation = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Seleccioneu una matriu dinàmica, una matriu desplegable o un panell dinàmic les files o panells del qual el filtre va reduint.",
+      targetQuestion: "Seleccioneu una matriu dinàmica, una matriu desplegable o un panell dinàmic les files o panells del qual el filtre va reduint.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "El preajust s'aplica quan comença l'enquesta."
+      defaultPreset: "El preajust s'aplica quan comença l'enquesta."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Utilitza noms de camps entre parèntesis, per exemple: {price} < 20 i {category} anyof ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Limita els operadors que els enquestats poden utilitzar per filtrar per aquest camp. Deixa buit per permetre tots els operadors que s'ajustin al camp.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Limita els operadors que els enquestats poden utilitzar per filtrar per aquest camp. Deixa buit per permetre tots els operadors que s'ajustin al camp."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Un identificador de columna que no es visible para los encuestados.",
@@ -4029,8 +4047,10 @@ export var catalanTranslation = {
         loop: "Els triggers formen un bucle a través dels valors que estableixen: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "La {etiqueta} llegeix el valor que escriu ella mateixa: només s'executa quan canvia un altre valor, així que mai s'executa.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "El {label} calcula el valor que escriu a partir d'aquest valor: cada execució comença amb el resultat anterior, així que el valor depèn de quantes vegades s'executi.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "El {label} només copia el valor que escriu, així que mai no estableix cap valor.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Els valors s'escriuen en un bucle: {cadena}. Cada escriptura repeteix les expressions que la llegeixen, així que els valors finals depenen de l'ordre en què es responen les preguntes."
       },

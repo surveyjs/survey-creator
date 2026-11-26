@@ -822,36 +822,54 @@ export var nlStrings = {
       expression: "Uitdrukking"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Gegevensbron",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Filterchips weergeven",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "De knop Filters weergeven",
-      // [Auto-translated] "Show search"
-      showSearch: "Zoek weergeven",
-      // [Auto-translated] "Search in"
-      searchFields: "Zoeken in",
-      // [Auto-translated] "Presets"
-      items: "Presets",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Vraag om te filteren",
+      // [Auto-translated] "Fields"
+      fields: "Velden",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Snelle filters weergeven",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Zoekbalk weergeven",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Velden om te doorzoeken",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Zoek plaatsaanduidingstekst",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "De knop Alle filters weergeven",
+      // [Auto-translated] "Filter presets"
+      presets: "Filterpresets",
       // [Auto-translated] "Default preset"
-      defaultItem: "Standaardpreset",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Meerdere presets toestaan",
+      defaultPreset: "Standaardpreset",
+      // [Auto-translated] "Show presets"
+      showPresets: "Presets weergeven",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Sta respondenten toe om presets te bewerken",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Sta respondenten toe om presets toe te voegen"
+      allowAddPresets: "Sta respondenten toe om presets toe te voegen",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Sta respondenten toe om presets te verwijderen"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Vooraf ingestelde naam",
       // [Auto-translated] "Preset title"
       title: "Vooraf ingestelde titel",
       // [Auto-translated] "Filter expression"
       expression: "Filterexpressie",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Staat bewerken toe",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Verwijderen toestaan"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Sta respondenten toe deze preset te bewerken",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Sta respondenten toe deze preset te verwijderen"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Veldnaam",
+      // [Auto-translated] "Field title"
+      title: "Veldtitel",
+      // [Auto-translated] "Available operators"
+      operators: "Beschikbare operators",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Toon in snelle filters"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +932,7 @@ export var nlStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Elke optie in een aparte kolom",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Sta sortering toe op deze kolom",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Filteren op deze kolom toestaan"
+      allowSort: "Sta sortering toe op deze kolom"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1125,9 @@ export var nlStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Geen sort-levels",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Geen presets",
+    "listIsEmpty@filterPresets": "Geen presets",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Geen velden",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Voeg keuze toe",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1155,9 @@ export var nlStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Voeg sorteerniveau toe",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Preset toevoegen",
+    "addNew@filterPresets": "Preset toevoegen",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Veld toevoegen",
     // "Value"
     value: "Waarde",
     // "Text"
@@ -1252,10 +1272,6 @@ export var nlStrings = {
     pageSize: "Rijen per pagina",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Laat gebruikers rijen sorteren",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Filter op deze vraag toestaan",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Filteroperatoren",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximale sorteerniveaus",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1830,8 @@ export var nlStrings = {
       sliderSettings: "Instellingen voor schuifregelaars",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Filterinstellingen",
-      // [Auto-translated] "Presets"
-      presets: "Presets",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Filterpresets",
       // "Choices from a Web Service"
       choicesByUrl: "Keuzes van internet",
       // "Numbering"
@@ -3088,16 +3104,18 @@ export var nlStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Selecteer een dynamische matrix, een dropdown-matrix of een dynamisch paneel waarvan de rijen of panelen door het filter wordt verkleind.",
+      targetQuestion: "Selecteer een dynamische matrix, een dropdown-matrix of een dynamisch paneel waarvan de rijen of panelen door het filter wordt verkleind.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "De preset die wordt toegepast wanneer de enquête begint."
+      defaultPreset: "De preset die wordt toegepast wanneer de enquête begint."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Gebruik veldnamen tussen krullende haakjes, bijvoorbeeld: {price} < 20 en {category} elk van ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Beperkt de operatoren die respondenten kunnen gebruiken om op dit veld te filteren. Laat leeg om alle operatoren toe te laten die bij het veld passen.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Beperkt de operatoren die respondenten kunnen gebruiken om op dit veld te filteren. Laat leeg om alle operatoren toe te laten die bij het veld passen."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Een kolom-id die niet zichtbaar is voor respondenten.",
@@ -4029,8 +4047,10 @@ export var nlStrings = {
         loop: "Triggers vormen een lus via de waarden die ze instellen: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "Het {label} leest de waarde die het zelf schrijft - het draait alleen wanneer een andere waarde verandert, dus het draait helemaal niet.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "Het {label} berekent de waarde die het zelf uit die waarde schrijft – elke run begint bij het vorige resultaat, dus de waarde hangt af van hoe vaak het wordt uitgevoerd.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "Het {label} kopieert alleen de waarde die het schrijft, dus het stelt nooit een waarde in.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Waarden worden geschreven in een lus: {chain}. Elke schrijving voert de expressies die het lezen opnieuw uit, dus de uiteindelijke waarden hangen af van de volgorde waarin de vragen worden beantwoord."
       },

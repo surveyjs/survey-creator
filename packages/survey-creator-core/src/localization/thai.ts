@@ -822,36 +822,54 @@ export const thStrings = {
       expression: "นิพจน์"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "แหล่งข้อมูล",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "แสดงชิปกรอง",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "แสดงปุ่มตัวกรอง",
-      // [Auto-translated] "Show search"
-      showSearch: "แสดงการค้นหา",
-      // [Auto-translated] "Search in"
-      searchFields: "ค้นหาใน",
-      // [Auto-translated] "Presets"
-      items: "การตั้งค่าล่วงหน้า",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "คําถามที่ควรกรอง",
+      // [Auto-translated] "Fields"
+      fields: "สาขา",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "แสดงตัวกรองด่วน",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "แสดงแถบค้นหา",
+      // [Auto-translated] "Fields to search"
+      searchFields: "ช่องสําหรับค้นหา",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "ข้อความตัวแทนค้นหา",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "แสดงปุ่ม All Filters",
+      // [Auto-translated] "Filter presets"
+      presets: "การตั้งค่าตัวกรองล่วงหน้า",
       // [Auto-translated] "Default preset"
-      defaultItem: "การตั้งค่าล่วงหน้าเริ่มต้น",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "อนุญาตให้ตั้งค่าล่วงหน้าหลายแบบ",
+      defaultPreset: "การตั้งค่าล่วงหน้าเริ่มต้น",
+      // [Auto-translated] "Show presets"
+      showPresets: "แสดงพรีเซ็ต",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "อนุญาตให้ผู้ตอบแก้ไขการตั้งค่าล่วงหน้า",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "อนุญาตให้ผู้ตอบเพิ่มการตั้งค่าล่วงหน้า"
+      allowAddPresets: "อนุญาตให้ผู้ตอบเพิ่มการตั้งค่าล่วงหน้า",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "อนุญาตให้ผู้ตอบแบบสอบถามลบการตั้งค่าล่วงหน้า"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "ชื่อที่ตั้งไว้ล่วงหน้า",
       // [Auto-translated] "Preset title"
       title: "ชื่อที่ตั้งไว้ล่วงหน้า",
       // [Auto-translated] "Filter expression"
       expression: "นิพจน์กรอง",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "อนุญาตให้แก้ไข",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "อนุญาตให้ลบ"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "อนุญาตให้ผู้ตอบแก้ไขพรีเซ็ตนี้",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "อนุญาตให้ผู้ตอบแบบสอบถามลบพรีเซ็ตนี้"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "ชื่อฟิลด์",
+      // [Auto-translated] "Field title"
+      title: "ตําแหน่งสนาม",
+      // [Auto-translated] "Available operators"
+      operators: "ผู้ให้บริการที่มีให้บริการ",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "แสดงในตัวกรองด่วน"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +932,7 @@ export const thStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "แต่ละตัวเลือกในคอลัมน์แยกต่างหาก",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "อนุญาตให้จัดเรียงตามคอลัมน์นี้",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "อนุญาตให้กรองตามคอลัมน์นี้"
+      allowSort: "อนุญาตให้จัดเรียงตามคอลัมน์นี้"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1125,9 @@ export const thStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "ไม่มีระดับการจัดเรียง",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "ไม่มีการตั้งค่าล่วงหน้า",
+    "listIsEmpty@filterPresets": "ไม่มีการตั้งค่าล่วงหน้า",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "ไม่มีฟิลด์",
     // "Add new choice"
     "addNew@choices": "เพิ่มตัวเลือกใหม่",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1155,9 @@ export const thStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "เพิ่มระดับการจัดเรียง",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "เพิ่มการตั้งค่าล่วงหน้า",
+    "addNew@filterPresets": "เพิ่มการตั้งค่าล่วงหน้า",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "ฟิลด์เพิ่ม",
     // "Value"
     value: "ค่า",
     // "Text"
@@ -1252,10 +1272,6 @@ export const thStrings = {
     pageSize: "จํานวนแถวต่อหน้า",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "อนุญาตให้ผู้ใช้จัดเรียงแถว",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "อนุญาตให้กรองตามคําถามนี้",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "ตัวดําเนินการตัวกรอง",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "ระดับการจัดเรียงสูงสุด",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1830,8 @@ export const thStrings = {
       sliderSettings: "การตั้งค่าตัวเลื่อน",
       // [Auto-translated] "Filter Settings"
       filterSettings: "การตั้งค่าตัวกรอง",
-      // [Auto-translated] "Presets"
-      presets: "การตั้งค่าล่วงหน้า",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "ตัวกรองที่ตั้งไว้ล่วงหน้า",
       // "Choices from a Web Service"
       choicesByUrl: "ตัวเลือกจากบริการเว็บ",
       // "Numbering"
@@ -3088,16 +3104,18 @@ export const thStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "เลือกเมทริกซ์แบบไดนามิก เมทริกซ์แบบดรอปดาวน์ หรือแผงแบบไดนามิกที่แถวหรือแผงของมันตัวกรองจะจํากัดลง",
+      targetQuestion: "เลือกเมทริกซ์แบบไดนามิก เมทริกซ์แบบดรอปดาวน์ หรือแผงแบบไดนามิกที่แถวหรือแผงของมันตัวกรองจะจํากัดลง",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "การตั้งค่าล่วงหน้าจะถูกใช้เมื่อเริ่มการสํารวจ"
+      defaultPreset: "การตั้งค่าล่วงหน้าจะถูกใช้เมื่อเริ่มการสํารวจ"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "ใช้ชื่อฟิลด์ในวงเล็บโค้ง เช่น: {price} < 20 และ {category} anyof ['เครื่องดื่ม']"
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "จํากัดจํานวนตัวดําเนินการที่ผู้ตอบแบบสอบถามสามารถใช้ในการกรองตามฟิลด์นี้เว้นว่างเพื่ออนุญาตให้ใช้ตัวดําเนินการทั้งหมดที่เหมาะสมกับฟิลด์นั้น",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "จํากัดจํานวนตัวดําเนินการที่ผู้ตอบแบบสอบถามสามารถใช้ในการกรองตามฟิลด์นี้เว้นว่างเพื่ออนุญาตให้ใช้ตัวดําเนินการทั้งหมดที่เหมาะสมกับฟิลด์นั้น"
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID คอลัมน์ที่ไม่มองเห็นได้สำหรับผู้ตอบแบบสำรวจ",
@@ -4029,8 +4047,10 @@ export const thStrings = {
         loop: "ทริกเกอร์จะสร้างลูปผ่านค่าที่ตั้งไว้: {setRoots}"
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} จะอ่านค่าที่มันเขียนเอง - มันจะทํางานเฉพาะเมื่อมีค่าอื่นเปลี่ยนเท่านั้น ดังนั้นมันจึงไม่ทํางานเลย",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} จะคํานวณค่าที่เขียนจากค่านั้นเอง - แต่ละรันจะเริ่มจากผลลัพธ์ก่อนหน้า ดังนั้นค่าจะขึ้นอยู่กับจํานวนครั้งที่รัน",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} จะคัดลอกเฉพาะค่าที่เขียนเท่านั้น ดังนั้นจึงไม่เคยตั้งค่าค่าใด ๆ",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "ค่าจะถูกเขียนเป็นลูป: {chain}แต่ละครั้งที่เขียนจะรันนิพจน์ที่อ่านค่านั้นซ้ํา ดังนั้นค่าสุดท้ายจะขึ้นอยู่กับลําดับการตอบคําถาม"
       },

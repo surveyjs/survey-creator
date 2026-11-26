@@ -822,36 +822,54 @@ export const roStrings = {
       expression: "Expresie"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Sursa de date",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Afișează cipurile de filtru",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Afișează butonul Filtre",
-      // [Auto-translated] "Show search"
-      showSearch: "Afișează căutarea",
-      // [Auto-translated] "Search in"
-      searchFields: "Caută în",
-      // [Auto-translated] "Presets"
-      items: "Presetări",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Întrebare de filtrat",
+      // [Auto-translated] "Fields"
+      fields: "Domenii",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Afișează filtre rapide",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Afișează bara de căutare",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Câmpuri de căutat",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Caută textul placeholder",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Afișează butonul Toate filtrele",
+      // [Auto-translated] "Filter presets"
+      presets: "Presetări de filtru",
       // [Auto-translated] "Default preset"
-      defaultItem: "Presetare implicită",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Permiteți mai multe presetări",
+      defaultPreset: "Presetare implicită",
+      // [Auto-translated] "Show presets"
+      showPresets: "Afișează presetările",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Permiteți respondenților să editeze presetările",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Permiteți respondenților să adauge presetări"
+      allowAddPresets: "Permiteți respondenților să adauge presetări",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Permiteți respondenților să șteargă presetările"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Nume presetat",
       // [Auto-translated] "Preset title"
       title: "Titlu presetat",
       // [Auto-translated] "Filter expression"
       expression: "Expresie de filtru",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Permite editarea",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Permiteți ștergerea"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Permiteți respondenților să editeze această presetare",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Permiteți respondenților să șteargă această presetare"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Denumirea domeniului",
+      // [Auto-translated] "Field title"
+      title: "Titlul terenului",
+      // [Auto-translated] "Available operators"
+      operators: "Operatori disponibili",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Afișează în filtre rapide"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +932,7 @@ export const roStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Fiecare opțiune într-o coloană separată",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Permiteți sortarea după această coloană",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Permiteți filtrarea prin această coloană"
+      allowSort: "Permiteți sortarea după această coloană"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1125,9 @@ export const roStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Fără niveluri de sortare",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Fără presetări",
+    "listIsEmpty@filterPresets": "Fără presetări",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Fără câmpuri",
     // "Add new choice"
     "addNew@choices": "Adăugați o alegere nouă",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1155,9 @@ export const roStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Adaugă nivelul de sortare",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Adaugă preset",
+    "addNew@filterPresets": "Adaugă preset",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Câmp Adaugă",
     // "Value"
     value: "Valoare",
     // [Auto-translated] "Text"
@@ -1252,10 +1272,6 @@ export const roStrings = {
     pageSize: "Rânduri pe pagină",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Permite utilizatorilor să sorteze rândurile",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Permiteți filtrarea după această întrebare",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operatori de filtru",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Niveluri maxime de sortare",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1830,8 @@ export const roStrings = {
       sliderSettings: "Setări glisor",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Setări filtru",
-      // [Auto-translated] "Presets"
-      presets: "Presetări",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Presetări de filtru",
       // "Choices from a Web Service"
       choicesByUrl: "Alegeri dintr-un serviciu web",
       // "Numbering"
@@ -3088,16 +3104,18 @@ export const roStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Selectați o matrice dinamică, o matrice derulantă sau un panou dinamic ale cărui rânduri sau panouri filtrul le restrânge.",
+      targetQuestion: "Selectați o matrice dinamică, o matrice derulantă sau un panou dinamic ale cărui rânduri sau panouri filtrul le restrânge.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Presetul aplicat la începutul sondajului."
+      defaultPreset: "Presetul aplicat la începutul sondajului."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Folosiți numele câmpurilor între paranteze, de exemplu: {price} < 20 și {category} anyof ['Drinks']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Limitează operatorii pe care respondenții îi pot folosi pentru a filtra după acest câmp. Lasă gol pentru a permite toți operatorii care corespund câmpului.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Limitează operatorii pe care respondenții îi pot folosi pentru a filtra după acest câmp. Lasă gol pentru a permite toți operatorii care corespund câmpului."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Un ID al coloanei care nu este vizibil pentru respondenți.",
@@ -4029,8 +4047,10 @@ export const roStrings = {
         loop: "Declanșatoarele formează o buclă prin valorile pe care le setează: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{Label} citește valoarea pe care o scrie singură – rulează doar când o altă valoare se schimbă, deci nu rulează deloc.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} calculează valoarea pe care o scrie chiar din acea valoare – fiecare rulare pornește de la rezultatul anterior, deci valoarea depinde de câte ori rulează ea.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} copiază doar valoarea pe care o scrie, deci nu setează niciodată o valoare.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Valorile sunt scrise într-o buclă: {chain}. Fiecare scriere rerulează expresiile care o citesc, astfel încât valorile finale depind de ordinea în care sunt răspunse la întrebări."
       },

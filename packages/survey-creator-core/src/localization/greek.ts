@@ -822,36 +822,54 @@ export var grStrings = {
       expression: "Έκφραση"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Πηγή δεδομένων",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Εμφάνιση τσιπ φίλτρου",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Εμφάνιση του κουμπιού Φίλτρα",
-      // [Auto-translated] "Show search"
-      showSearch: "Εμφάνιση αναζήτησης",
-      // [Auto-translated] "Search in"
-      searchFields: "Αναζήτηση σε",
-      // [Auto-translated] "Presets"
-      items: "Προεπιλογές",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Ερώτηση προς φιλτράρισμα",
+      // [Auto-translated] "Fields"
+      fields: "Πεδία",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Εμφάνιση γρήγορων φίλτρων",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Εμφάνιση γραμμής αναζήτησης",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Πεδία προς αναζήτηση",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Αναζήτηση κειμένου κράτησης θέσης",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Κουμπί Εμφάνιση Όλων των Φίλτρων",
+      // [Auto-translated] "Filter presets"
+      presets: "Προεπιλογές φίλτρων",
       // [Auto-translated] "Default preset"
-      defaultItem: "Προεπιλεγμένη προεπιλογή",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Επιτρέψτε πολλαπλές προεπιλογές",
+      defaultPreset: "Προεπιλεγμένη προεπιλογή",
+      // [Auto-translated] "Show presets"
+      showPresets: "Εμφάνιση προεπιλογών",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Επιτρέψτε στους συμμετέχοντες να επεξεργάζονται προεπιλογές",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Επιτρέψτε στους συμμετέχοντες να προσθέτουν προεπιλογές"
+      allowAddPresets: "Επιτρέψτε στους συμμετέχοντες να προσθέτουν προεπιλογές",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Επιτρέψτε στους συμμετέχοντες να διαγράφουν προεπιλογές"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Όνομα προεπιλογής",
       // [Auto-translated] "Preset title"
       title: "Τίτλος προεπιλογής",
       // [Auto-translated] "Filter expression"
       expression: "Έκφραση φίλτρου",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Επιτρέψτε την επεξεργασία",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Επιτρέψτε τη διαγραφή"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Επιτρέψτε στους ερωτώμενους να επεξεργαστούν αυτήν την προεπιλογή",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Επιτρέψτε στους συμμετέχοντες να διαγράψουν αυτήν την προεπιλογή"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Όνομα πεδίου",
+      // [Auto-translated] "Field title"
+      title: "Τίτλος πεδίου",
+      // [Auto-translated] "Available operators"
+      operators: "Διαθέσιμοι τελεστές",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Εμφάνιση σε γρήγορα φίλτρα"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +932,7 @@ export var grStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Κάθε επιλογή σε ξεχωριστή στήλη",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Να επιτρέπεται η ταξινόμηση κατά αυτήν τη στήλη",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Επιτρέπεται το φιλτράρισμα με βάση αυτή τη στήλη"
+      allowSort: "Να επιτρέπεται η ταξινόμηση κατά αυτήν τη στήλη"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1125,9 @@ export var grStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Χωρίς επίπεδα ταξινόμησης",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Χωρίς προεπιλογές",
+    "listIsEmpty@filterPresets": "Χωρίς προεπιλογές",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Χωρίς πεδία",
     // "Add new choice"
     "addNew@choices": "Προσθήκη νέας επιλογής",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1155,9 @@ export var grStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Προσθήκη επιπέδου ταξινόμησης",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Προσθήκη προεπιλογής",
+    "addNew@filterPresets": "Προσθήκη προεπιλογής",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Προσθήκη πεδίου",
     // "Value"
     value: "Τιμή",
     // "Text"
@@ -1252,10 +1272,6 @@ export var grStrings = {
     pageSize: "Σειρές ανά σελίδα",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Να επιτρέπεται στους χρήστες η ταξινόμηση γραμμών",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Να επιτρέπεται το φιλτράρισμα με βάση αυτή την ερώτηση",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Τελεστές φίλτρων",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Μέγιστα επίπεδα ταξινόμησης",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1830,8 @@ export var grStrings = {
       sliderSettings: "Ρυθμίσεις ρυθμιστικού",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Ρυθμίσεις Φίλτρου",
-      // [Auto-translated] "Presets"
-      presets: "Προεπιλογές",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Προεπιλογές Φίλτρων",
       // "Choices from a Web Service"
       choicesByUrl: "Επιλογές από Web Service",
       // "Numbering"
@@ -3088,16 +3104,18 @@ export var grStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Επιλέξτε έναν δυναμικό πίνακα, έναν πίνακα αναδυόμενου μενού ή ένα δυναμικό πάνελ του οποίου τις γραμμές ή πάνελ περιορίζει το φίλτρο.",
+      targetQuestion: "Επιλέξτε έναν δυναμικό πίνακα, έναν πίνακα αναδυόμενου μενού ή ένα δυναμικό πάνελ του οποίου τις γραμμές ή πάνελ περιορίζει το φίλτρο.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Η προεπιλογή που εφαρμόζεται όταν ξεκινά η έρευνα."
+      defaultPreset: "Η προεπιλογή που εφαρμόζεται όταν ξεκινά η έρευνα."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Χρησιμοποιήστε ονόματα πεδίων σε αγκύλες, για παράδειγμα: {price} < 20 και {category} οποιοδήποτε από τα ['Drinks']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Περιορίζει τους τελεστές που μπορούν να χρησιμοποιήσουν οι ερωτώμενοι για να φιλτράρουν με βάση αυτό το πεδίο. Αφήστε κενό για να επιτρέψετε σε όλους τους τελεστές που ταιριάζουν στο πεδίο.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Περιορίζει τους τελεστές που μπορούν να χρησιμοποιήσουν οι ερωτώμενοι για να φιλτράρουν με βάση αυτό το πεδίο. Αφήστε κενό για να επιτρέψετε σε όλους τους τελεστές που ταιριάζουν στο πεδίο."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Ένα ID στήλης που δεν είναι ορατό στους συμμετέχοντες.",
@@ -4029,8 +4047,10 @@ export var grStrings = {
         loop: "Τα εναύσματα σχηματίζουν έναν βρόχο μέσω των τιμών που ορίζουν: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "Η {label} διαβάζει την τιμή που γράφει μόνη της - εκτελείται μόνο όταν αλλάζει μια άλλη τιμή, επομένως δεν εκτελείται ποτέ.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "Το {label} υπολογίζει την τιμή που γράφει από αυτήν την τιμή - κάθε εκτέλεση ξεκινά από το προηγούμενο αποτέλεσμα, οπότε η τιμή εξαρτάται από το πόσες φορές εκτελείται.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "Το {label} αντιγράφει μόνο την τιμή που γράφει, οπότε δεν ορίζει ποτέ τιμή.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Οι τιμές γράφονται σε βρόχο: {chain}. Κάθε εγγραφή εκτελεί ξανά τις εκφράσεις που τη διαβάζουν, επομένως οι τελικές τιμές εξαρτώνται από τη σειρά με την οποία απαντώνται οι ερωτήσεις."
       },

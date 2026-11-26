@@ -82,8 +82,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "useDisplayValuesInDynamicTexts", tab: "data" },
       { name: "defaultDisplayValue", tab: "data" },
       { name: "clearIfInvisible", tab: "data" },
-      { name: "allowFiltering", tab: "data" },
-      { name: "filterOperators", tab: "data" },
       { name: "validators", tab: "validation" },
       { name: "requiredErrorText", tab: "validation" },
       { name: "requireTrueErrorText", tab: "validation" }
@@ -151,17 +149,21 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   filter: {
     properties: [
-      "source",
-      { name: "allowFastMode", tab: "filterSettings" },
-      { name: "allowAdvancedMode", tab: "filterSettings" },
-      { name: "showSearch", tab: "filterSettings" },
+      { name: "targetQuestion", tab: "filterSettings" },
+      { name: "fields", tab: "filterSettings" },
+      { name: "showQuickFilters", tab: "filterSettings" },
+      { name: "showSearchBar", tab: "filterSettings" },
       { name: "searchFields", tab: "filterSettings" },
-      { name: "items", tab: "presets" },
-      { name: "defaultItem", tab: "presets" },
-      { name: "allowMultipleItems", tab: "presets" },
-      { name: "allowAddItems", tab: "presets" }
+      { name: "searchPlaceholder", tab: "filterSettings" },
+      { name: "showAllFiltersButton", tab: "filterSettings" },
+      { name: "presets", tab: "filterPresets" },
+      { name: "defaultPreset", tab: "filterPresets" },
+      { name: "showPresets", tab: "filterPresets" },
+      { name: "allowEditPresets", tab: "filterPresets" },
+      { name: "allowAddPresets", tab: "filterPresets" },
+      { name: "allowDeletePresets", tab: "filterPresets" }
     ],
-    tabs: [{ name: "filterSettings", index: 10 }, { name: "presets", index: 20 }]
+    tabs: [{ name: "filterSettings", index: 10 }, { name: "filterPresets", index: 20 }]
   },
   matrixdropdownbase: {
     properties: [
@@ -501,8 +503,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "isUnique",
       "showInMultipleColumns",
       "allowSort",
-      "allowFiltering",
-      "filterOperators",
       "width",
       "minWidth",
       { name: "visibleIf", tab: "logic" },
@@ -760,11 +760,18 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   "calculatedvalue@items": {
     properties: ["name", "expression"]
   },
-  // The Filter Control's presets: the row of the matrix, then its detail panel
-  "filter@items": {
+  // The Filter Control's fields: the row of the matrix, then its detail panel
+  "filter@fields": {
     properties: ["name", "title"]
   },
-  "filteritem@items": {
+  "filterfield@fields": {
+    properties: ["operators", "showInQuickFilters"]
+  },
+  // The Filter Control's presets: the row of the matrix, then its detail panel
+  "filter@presets": {
+    properties: ["name", "title"]
+  },
+  "filterpreset@presets": {
     properties: ["expression", "allowEdit", "allowDelete"]
   },
   paneldynamic: {

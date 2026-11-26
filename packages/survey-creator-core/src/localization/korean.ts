@@ -823,36 +823,54 @@ export var koreanStrings = {
       expression: "식"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "데이터 소스",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "필터 칩 표시",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "필터 버튼 표시",
-      // [Auto-translated] "Show search"
-      showSearch: "검색 보기",
-      // [Auto-translated] "Search in"
-      searchFields: "검색",
-      // [Auto-translated] "Presets"
-      items: "프리셋",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "필터링할 질문",
+      // [Auto-translated] "Fields"
+      fields: "필드",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "빠른 필터 보기",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "검색 표시줄 보기",
+      // [Auto-translated] "Fields to search"
+      searchFields: "검색할 필드",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "검색 자리 표시자 텍스트",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "모든 필터 표시 버튼",
+      // [Auto-translated] "Filter presets"
+      presets: "필터 프리셋",
       // [Auto-translated] "Default preset"
-      defaultItem: "기본 프리셋",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "여러 프리셋 허용",
+      defaultPreset: "기본 프리셋",
+      // [Auto-translated] "Show presets"
+      showPresets: "프리셋 표시",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "응답자가 프리셋을 편집할 수 있도록 허용",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "응답자가 프리셋을 추가할 수 있도록 허용"
+      allowAddPresets: "응답자가 프리셋을 추가할 수 있도록 허용",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "응답자가 프리셋을 삭제할 수 있도록 허용"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "프리셋 이름",
       // [Auto-translated] "Preset title"
       title: "프리셋 제목",
       // [Auto-translated] "Filter expression"
       expression: "필터 표현식",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "편집 허용",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "삭제 허용"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "응답자가 이 프리셋을 편집할 수 있도록 허용하세요",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "응답자가 이 프리셋을 삭제할 수 있도록 허용합니다"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "필드 이름",
+      // [Auto-translated] "Field title"
+      title: "필드 타이틀",
+      // [Auto-translated] "Available operators"
+      operators: "사용 가능한 운영자",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "빠른 필터에서 표시"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -915,9 +933,7 @@ export var koreanStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "별도의 열에 있는 각 옵션",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "이 열에 따라 정렬 허용",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "이 열에 따른 필터링 허용"
+      allowSort: "이 열에 따라 정렬 허용"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1110,7 +1126,9 @@ export var koreanStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "분류 없는 레벨",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "프리셋 없음",
+    "listIsEmpty@filterPresets": "프리셋 없음",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "필드 없음",
     // [Auto-translated] "Add choice"
     "addNew@choices": "선택권 추가로",
     // [Auto-translated] "Add rating value"
@@ -1138,7 +1156,9 @@ export var koreanStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "정렬 단계 추가",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "프리셋 추가",
+    "addNew@filterPresets": "프리셋 추가",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "필드 추가",
     // "Value"
     value: "값",
     // "Text"
@@ -1253,10 +1273,6 @@ export var koreanStrings = {
     pageSize: "페이지당 행 수",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "사용자가 행을 정렬할 수 있게 합니다",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "이 질문에 따라 필터링 허용",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "필터 연산자",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "최대 정렬 단계",
     // [Auto-translated] "Default sort order"
@@ -1815,8 +1831,8 @@ export var koreanStrings = {
       sliderSettings: "슬라이더 설정",
       // [Auto-translated] "Filter Settings"
       filterSettings: "필터 설정",
-      // [Auto-translated] "Presets"
-      presets: "프리셋",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "필터 프리셋",
       // "Choices from a Web Service"
       choicesByUrl: "웹에서 선택",
       // [Auto-translated] "Numbering"
@@ -3089,16 +3105,18 @@ export var koreanStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "필터가 줄 또는 패널을 좁히는 동적 매트릭스, 드롭다운 매트릭스 또는 동적 패널을 선택하세요.",
+      targetQuestion: "필터가 줄 또는 패널을 좁히는 동적 매트릭스, 드롭다운 매트릭스 또는 동적 패널을 선택하세요.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "설문조사가 시작될 때 적용된 프리셋입니다."
+      defaultPreset: "설문조사가 시작될 때 적용된 프리셋입니다."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "필드 이름을 중괄호 안에 두세요. 예를 들어 {price} < 20, {category} ['Beverages']의 어떤 항목이든지 함께 사용하세요."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "응답자가 이 필드로 필터링할 수 있는 연산자 수를 제한합니다. 필드에 맞는 모든 연산자를 허용하려면 빈 상태로 두세요.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "응답자가 이 필드로 필터링할 수 있는 연산자 수를 제한합니다. 필드에 맞는 모든 연산자를 허용하려면 빈 상태로 두세요."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "응답자에게 표시되지 않는 열 ID입니다.",
@@ -4030,8 +4048,10 @@ export var koreanStrings = {
         loop: "트리거는 설정한 값들에 대해 루프를 형성합니다: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label}은 자신이 직접 쓴 값을 읽으며, 다른 값이 바뀔 때만 실행되므로 아예 실행되지 않습니다.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label}은 그 값에서 직접 기록하는 값을 계산합니다 - 각 실행은 이전 결과에서 시작되므로 값은 실행 횟수에 따라 달라집니다.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label}은 자신이 쓴 값만 복사하기 때문에 값을 설정하지 않습니다.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "값은 {chain} 루프 형식으로 작성됩니다. 각 쓰기는 읽은 표현식을 다시 실행하므로 최종 값은 질문에 대한 답변 순서에 따라 달라집니다."
       },

@@ -822,36 +822,54 @@ export var msStrings = {
       expression: "Ungkapan"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Sumber data",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Tunjukkan cip penapis",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Tunjukkan butang Penapis",
-      // [Auto-translated] "Show search"
-      showSearch: "Tunjukkan carian",
-      // [Auto-translated] "Search in"
-      searchFields: "Cari dalam",
-      // [Auto-translated] "Presets"
-      items: "Pratetap",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Soalan untuk ditapis",
+      // [Auto-translated] "Fields"
+      fields: "Medan",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Tunjukkan penapis pantas",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Tunjukkan bar carian",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Medan untuk dicari",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Cari teks tempat letak",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Paparkan butang Semua Penapis",
+      // [Auto-translated] "Filter presets"
+      presets: "Pratetap penapis",
       // [Auto-translated] "Default preset"
-      defaultItem: "Pratetap lalai",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Benarkan pelbagai pratetap",
+      defaultPreset: "Pratetap lalai",
+      // [Auto-translated] "Show presets"
+      showPresets: "Tunjukkan pratetap",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Benarkan responden mengedit pratetap",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Benarkan responden menambah pratetap"
+      allowAddPresets: "Benarkan responden menambah pratetap",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Benarkan responden memadam pratetap"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Nama pratetap",
       // [Auto-translated] "Preset title"
       title: "Tajuk pratetap",
       // [Auto-translated] "Filter expression"
       expression: "Ekspresi penapis",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Benarkan penyuntingan",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Benarkan pemadaman"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Benarkan responden mengedit pratetap ini",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Benarkan responden memadam pratetap ini"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Nama medan",
+      // [Auto-translated] "Field title"
+      title: "Gelaran medan",
+      // [Auto-translated] "Available operators"
+      operators: "Pengendali yang tersedia",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Tunjukkan dalam penapis pantas"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +932,7 @@ export var msStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Setiap opsyen dalam lajur berasingan",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Benarkan pengisihan mengikut lajur ini",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Benarkan penapisan mengikut lajur ini"
+      allowSort: "Benarkan pengisihan mengikut lajur ini"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1125,9 @@ export var msStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Tiada tahap pengisihan",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Tiada pratetap",
+    "listIsEmpty@filterPresets": "Tiada pratetap",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Tiada medan",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Tambah pilihan",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1155,9 @@ export var msStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Tambah tahap pengisihan",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Tambah pratetap",
+    "addNew@filterPresets": "Tambah pratetap",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Medan Tambah",
     // "Value"
     value: "Nilai",
     // "Text"
@@ -1252,10 +1272,6 @@ export var msStrings = {
     pageSize: "Baris setiap halaman",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Benarkan pengguna menyusun baris",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Benarkan penapisan mengikut soalan ini",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Pengendali penapis",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Tahap pengisihan maksimum",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1830,8 @@ export var msStrings = {
       sliderSettings: "Tetapan Gelangsar",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Tetapan Penapis",
-      // [Auto-translated] "Presets"
-      presets: "Pratetap",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Pratetap Penapis",
       // "Choices from a Web Service"
       choicesByUrl: "Pilihan daripada Web",
       // "Numbering"
@@ -3088,16 +3104,18 @@ export var msStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Pilih matriks dinamik, matriks lungsur bawah atau panel dinamik yang baris atau panelnya ditapis.",
+      targetQuestion: "Pilih matriks dinamik, matriks lungsur bawah atau panel dinamik yang baris atau panelnya ditapis.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Pratetap digunakan apabila tinjauan bermula."
+      defaultPreset: "Pratetap digunakan apabila tinjauan bermula."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Gunakan nama medan dalam kurungan kerinting, contohnya: {price} < 20 dan {category} mana-mana ['Minuman']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Had operator yang boleh digunakan responden untuk menapis mengikut medan ini. Biarkan kosong untuk membenarkan semua operator yang sesuai dengan medan.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Had operator yang boleh digunakan responden untuk menapis mengikut medan ini. Biarkan kosong untuk membenarkan semua operator yang sesuai dengan medan."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID lajur yang tidak kelihatan kepada responden.",
@@ -4029,8 +4047,10 @@ export var msStrings = {
         loop: "Pencetus membentuk gelung melalui nilai yang mereka tetapkan: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} membaca nilai yang ditulisnya sendiri - ia hanya berjalan apabila nilai lain berubah, jadi ia tidak pernah berjalan langsung.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} mengira nilai yang ditulis daripada nilai itu sendiri - setiap larian bermula dari hasil sebelumnya, jadi nilai bergantung pada berapa kali ia dijalankan.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} hanya menyalin nilai yang ditulisnya, jadi ia tidak pernah menetapkan nilai.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Nilai-nilai ditulis dalam gelung: {chain}. Setiap penulisan menjalankan semula ungkapan yang membacanya, jadi nilai akhir bergantung pada urutan soalan dijawab."
       },

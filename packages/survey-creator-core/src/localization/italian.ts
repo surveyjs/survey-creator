@@ -822,36 +822,54 @@ export var italianTranslation = {
       expression: "Espressione"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Fonte dati",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Mostra chip di filtro",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Mostra il pulsante Filtri",
-      // [Auto-translated] "Show search"
-      showSearch: "Mostra ricerca",
-      // [Auto-translated] "Search in"
-      searchFields: "Cerca in",
-      // [Auto-translated] "Presets"
-      items: "Presets",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Domanda da filtrare",
+      // [Auto-translated] "Fields"
+      fields: "Campi",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Mostra filtri rapidi",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Mostra barra di ricerca",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Campi da cercare",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Cerca testo segnaposto",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Mostra il pulsante Tutti i filtri",
+      // [Auto-translated] "Filter presets"
+      presets: "Preimpostazioni del filtro",
       // [Auto-translated] "Default preset"
-      defaultItem: "Preimpostazione predefinita",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Consenti più preset",
+      defaultPreset: "Preimpostazione predefinita",
+      // [Auto-translated] "Show presets"
+      showPresets: "Mostra preset",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Consenti ai rispondenti di modificare i preset",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Consenti ai rispondenti di aggiungere preset"
+      allowAddPresets: "Consenti ai rispondenti di aggiungere preset",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Consentire ai rispondenti di eliminare i preset"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Nome preset",
       // [Auto-translated] "Preset title"
       title: "Titolo preimpostato",
       // [Auto-translated] "Filter expression"
       expression: "Espressione del filtro",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Consenti modifica",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Consenti la cancellazione"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Consenti ai rispondenti di modificare questo preset",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Consentire ai rispondenti di eliminare questo preset"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Nome del campo",
+      // [Auto-translated] "Field title"
+      title: "Titolo del campo",
+      // [Auto-translated] "Available operators"
+      operators: "Operatori disponibili",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Mostra in filtri rapidi"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +932,7 @@ export var italianTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Ogni opzione in una colonna separata",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Consentire l'ordinamento tramite questa colonna",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Consenti il filtraggio tramite questa colonna"
+      allowSort: "Consentire l'ordinamento tramite questa colonna"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1125,9 @@ export var italianTranslation = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Nessun livello di sorting",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Nessun preset",
+    "listIsEmpty@filterPresets": "Nessun preset",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Nessun campo",
     // "Add new choice"
     "addNew@choices": "Aggiungi una scelta",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1155,9 @@ export var italianTranslation = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Aggiungi livello di ordinamento",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Aggiungi preset",
+    "addNew@filterPresets": "Aggiungi preset",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Aggiungi campo",
     // "Value"
     value: "Valore",
     // "Text"
@@ -1252,10 +1272,6 @@ export var italianTranslation = {
     pageSize: "Righe per pagina",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Consentire agli utenti di ordinare le righe",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Consenti il filtraggio tramite questa domanda",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operatori di filtro",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Livelli massimi di ordinamento",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1830,8 @@ export var italianTranslation = {
       sliderSettings: "Impostazioni del dispositivo di scorrimento",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Impostazioni del filtro",
-      // [Auto-translated] "Presets"
-      presets: "Presets",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Preimpostazioni del filtro",
       // "Choices from a Web Service"
       choicesByUrl: "Opzioni da URL",
       // "Numbering"
@@ -3088,16 +3104,18 @@ export var italianTranslation = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Seleziona una matrice dinamica, una matrice a tendina opponibile o un pannello dinamico le cui righe o pannelli il filtro restringe.",
+      targetQuestion: "Seleziona una matrice dinamica, una matrice a tendina opponibile o un pannello dinamico le cui righe o pannelli il filtro restringe.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Il preset si applica all'inizio del sondaggio."
+      defaultPreset: "Il preset si applica all'inizio del sondaggio."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Usa i nomi dei campi tra parentesi, ad esempio: {price} < 20 e {category} anyof ['Bevande']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Limita gli operatori che i rispondenti possono utilizzare per filtrare in base a questo campo. Lascia vuoto per consentire tutti gli operatori che si adattano al campo.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Limita gli operatori che i rispondenti possono utilizzare per filtrare in base a questo campo. Lascia vuoto per consentire tutti gli operatori che si adattano al campo."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Un ID colonna che non è visibile ai rispondenti.",
@@ -4029,8 +4047,10 @@ export var italianTranslation = {
         loop: "I trigger formano un ciclo attraverso i valori che impostano: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "La {etichetta} legge il valore che scrive da sola - viene eseguita solo quando un altro valore cambia, quindi non viene mai eseguita.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "Il {label} calcola il valore che scrive da quel valore stesso - ogni esecuzione parte dal risultato precedente, quindi il valore dipende da quante volte viene eseguita.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "Il {label} copia solo il valore che scrive, quindi non imposta mai un valore.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "I valori sono scritti in un ciclo: {chain}. Ogni scrittura riesegue le espressioni che la leggono, quindi i valori finali dipendono dall'ordine in cui vengono risposte alle domande."
       },

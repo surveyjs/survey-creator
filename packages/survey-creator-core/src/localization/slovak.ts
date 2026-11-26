@@ -822,36 +822,54 @@ export var skStrings = {
       expression: "Výraz"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Zdroj údajov",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Zobraziť filtračné čipy",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Zobraziť tlačidlo Filtre",
-      // [Auto-translated] "Show search"
-      showSearch: "Zobraziť vyhľadávanie",
-      // [Auto-translated] "Search in"
-      searchFields: "Hľadať v",
-      // [Auto-translated] "Presets"
-      items: "Prednastavenia",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Otázka na filtrovanie",
+      // [Auto-translated] "Fields"
+      fields: "Polia",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Zobraziť rýchle filtre",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Zobraziť vyhľadávací panel",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Polia na vyhľadávanie",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Vyhľadávanie zástupného textu",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Zobraziť tlačidlo Všetky filtre",
+      // [Auto-translated] "Filter presets"
+      presets: "Prednastavenia filtra",
       // [Auto-translated] "Default preset"
-      defaultItem: "Predvolené prednastavenie",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Povoliť viacero predvolieb",
+      defaultPreset: "Predvolené prednastavenie",
+      // [Auto-translated] "Show presets"
+      showPresets: "Zobraziť prednastavenia",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Povoliť respondentom upravovať prednastavenia",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Povoliť respondentom pridávať prednastavenia"
+      allowAddPresets: "Povoliť respondentom pridávať prednastavenia",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Povoliť respondentom vymazať prednastavenia"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Názov prednastavenia",
       // [Auto-translated] "Preset title"
       title: "Prednastavený názov",
       // [Auto-translated] "Filter expression"
       expression: "Výraz filtra",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Povoliť úpravy",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Povoliť mazanie"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Povoliť respondentom upravovať toto prednastavenie",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Povoliť respondentom vymazať toto prednastavenie"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Názov poľa",
+      // [Auto-translated] "Field title"
+      title: "Názov ihriska",
+      // [Auto-translated] "Available operators"
+      operators: "Dostupní operátori",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Zobraziť v rýchlych filtroch"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +932,7 @@ export var skStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Každá možnosť v samostatnom stĺpci",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Povoľte triedenie podľa tohto stĺpca",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Povoliť filtrovanie podľa tohto stĺpca"
+      allowSort: "Povoľte triedenie podľa tohto stĺpca"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1125,9 @@ export var skStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Žiadne triedenie úrovní",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Žiadne prednastavenia",
+    "listIsEmpty@filterPresets": "Žiadne prednastavenia",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Žiadne polia",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Pridajte výber",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1155,9 @@ export var skStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Pridať úroveň triedenia",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Pridať prednastavenie",
+    "addNew@filterPresets": "Pridať prednastavenie",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Pridať pole",
     // "Value"
     value: "Hodnota",
     // [Auto-translated] "Text"
@@ -1252,10 +1272,6 @@ export var skStrings = {
     pageSize: "Riadky na stránku",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Umožniť používateľom triediť riadky",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Povoliť filtrovanie podľa tejto otázky",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Filtračné operátory",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximálne úrovne triedenia",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1830,8 @@ export var skStrings = {
       sliderSettings: "Nastavenia posuvníka",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Nastavenia filtra",
-      // [Auto-translated] "Presets"
-      presets: "Prednastavenia",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Prednastavenia filtra",
       // "Choices from a Web Service"
       choicesByUrl: "Možnosti z webu",
       // "Numbering"
@@ -3088,16 +3104,18 @@ export var skStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Vyberte dynamickú maticu, rozbaľovaciu maticu alebo dynamický panel, ktorého riadky alebo panely filter zužuje.",
+      targetQuestion: "Vyberte dynamickú maticu, rozbaľovaciu maticu alebo dynamický panel, ktorého riadky alebo panely filter zužuje.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Prednastavenie aplikované na začiatku prieskumu."
+      defaultPreset: "Prednastavenie aplikované na začiatku prieskumu."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Použite názvy polí v zložitých zátvorkách, napríklad: {price} < 20 a {category} ktorýkoľvek z ['Nápoje']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Obmedzuje operátory, ktoré môžu respondenti použiť na filtrovanie podľa tohto poľa. Ponechajte prázdne, aby boli povolené všetky operátory, ktoré zodpovedajú poľu.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Obmedzuje operátory, ktoré môžu respondenti použiť na filtrovanie podľa tohto poľa. Ponechajte prázdne, aby boli povolené všetky operátory, ktoré zodpovedajú poľu."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID stĺpca, ktoré respondenti nevidia.",
@@ -4029,8 +4047,10 @@ export var skStrings = {
         loop: "Triggery vytvárajú slučku cez nastavené hodnoty: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} číta hodnotu, ktorú si sám zapíše – spustí sa len vtedy, keď sa zmení iná hodnota, takže sa vôbec nespustí.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} vypočíta hodnotu, ktorú z tejto hodnoty zapíše – každý beh začína od predchádzajúceho výsledku, takže hodnota závisí od toho, koľkokrát sa spustí.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} kopíruje iba hodnotu, ktorú zapíše, takže nikdy nenastaví hodnotu.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Hodnoty sa zapisujú v slučke: {chain}. Každý zápis opakovane vykonáva výrazy, ktoré ho čítajú, takže konečné hodnoty závisia od poradia, v akom sú otázky zodpovedané."
       },

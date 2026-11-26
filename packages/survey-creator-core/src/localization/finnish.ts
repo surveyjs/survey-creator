@@ -822,36 +822,54 @@ export var fiStrings = {
       expression: "Lauseke"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Tietolähde",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Näytä suodatinpiirit",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Näytä Suodattimet-painike",
-      // [Auto-translated] "Show search"
-      showSearch: "Näytä haku",
-      // [Auto-translated] "Search in"
-      searchFields: "Hae",
-      // [Auto-translated] "Presets"
-      items: "Esiasetukset",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Suodatettava kysymys",
+      // [Auto-translated] "Fields"
+      fields: "Kentät",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Näytä pikasuodattimet",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Näytä hakupalkki",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Haettavat kentät",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Hae paikkamerkkitekstiä",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Näytä Kaikki suodattimet -painike",
+      // [Auto-translated] "Filter presets"
+      presets: "Suodatinesiasetukset",
       // [Auto-translated] "Default preset"
-      defaultItem: "Oletusesiasetus",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Salli useita esiasetuksia",
+      defaultPreset: "Oletusesiasetus",
+      // [Auto-translated] "Show presets"
+      showPresets: "Näytä esiasetukset",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Salli vastaajien muokata esiasetuksia",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Salli vastaajien lisätä esiasetuksia"
+      allowAddPresets: "Salli vastaajien lisätä esiasetuksia",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Salli vastaajien poistaa esiasetukset"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Esiasetuksen nimi",
       // [Auto-translated] "Preset title"
       title: "Esiasetettu otsikko",
       // [Auto-translated] "Filter expression"
       expression: "Suodatinlauseke",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Salli muokkaus",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Salli poistaminen"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Salli vastaajien muokata tätä esiasetusta",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Salli vastaajien poistaa tämä esiasetus"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Kentän nimi",
+      // [Auto-translated] "Field title"
+      title: "Kenttämestaruus",
+      // [Auto-translated] "Available operators"
+      operators: "Saatavilla olevat operaattorit",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Näytä pikasuodattimissa"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +932,7 @@ export var fiStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Jokainen vaihtoehto erillisessä sarakkeessa",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Salli lajittelu tämän sarakkeen mukaan",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Salli suodatus tämän sarakkeen mukaan"
+      allowSort: "Salli lajittelu tämän sarakkeen mukaan"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1125,9 @@ export var fiStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Ei lajittelutasoja",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Ei esiasetuksia",
+    "listIsEmpty@filterPresets": "Ei esiasetuksia",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Ei kenttiä",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Lisää valinta",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1155,9 @@ export var fiStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Lisää lajittelutaso",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Lisää esiasetus",
+    "addNew@filterPresets": "Lisää esiasetus",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Lisää kenttä",
     // "Value"
     value: "Arvo",
     // "Text"
@@ -1252,10 +1272,6 @@ export var fiStrings = {
     pageSize: "Rivit per sivu",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Salli käyttäjien lajitella rivejä",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Salli suodatus tämän kysymyksen perusteella",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Suodatinoperaattorit",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksimilajittelutasot",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1830,8 @@ export var fiStrings = {
       sliderSettings: "Liukusäätimen asetukset",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Suodatinasetukset",
-      // [Auto-translated] "Presets"
-      presets: "Esiasetukset",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Suodatinesiasetukset",
       // "Choices from a Web Service"
       choicesByUrl: "Valintoja verkosta",
       // "Numbering"
@@ -3088,16 +3104,18 @@ export var fiStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Valitse dynaaminen matriisi, pudotusvalikko tai dynaaminen paneeli, jonka rivejä tai paneeleja suodatin kaventaa.",
+      targetQuestion: "Valitse dynaaminen matriisi, pudotusvalikko tai dynaaminen paneeli, jonka rivejä tai paneeleja suodatin kaventaa.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Esiasetus otetaan käyttöön kyselyn alkaessa."
+      defaultPreset: "Esiasetus otetaan käyttöön kyselyn alkaessa."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Käytä kenttien nimiä kiharoissa sulkeissa, esimerkiksi: {price} < 20 ja {category} jokin ['Juomat']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Rajoitukset, joita vastaajat voivat käyttää suodattaakseen tämän kentän perusteella. Jätä tyhjäksi, jotta kaikki kenttään sopivat operaattorit sallitaan.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Rajoitukset, joita vastaajat voivat käyttää suodattaakseen tämän kentän perusteella. Jätä tyhjäksi, jotta kaikki kenttään sopivat operaattorit sallitaan."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Sarakkeen tunnus, joka ei näy vastaajille.",
@@ -4029,8 +4047,10 @@ export var fiStrings = {
         loop: "Triggerit muodostavat silmukan niiden arvojen läpi: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} lukee itse kirjoittamansa arvon – se käynnistyy vain, kun toinen arvo muuttuu, joten se ei koskaan käynnisty.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} laskee itse kirjoittamansa arvon – jokainen ajo alkaa edellisestä tuloksesta, joten arvo riippuu siitä, kuinka monta kertaa se suoritetaan.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} kopioi vain kirjoittamansa arvon, joten se ei koskaan aseta arvoa.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Arvot kirjoitetaan silmukassa: {chain}. Jokainen kirjoitus toistaa lausekkeet, jotka sen lukevat, joten lopulliset arvot riippuvat siitä, missä järjestyksessä kysymyksiin vastataan."
       },

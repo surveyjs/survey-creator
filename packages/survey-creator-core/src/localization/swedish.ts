@@ -823,36 +823,54 @@ export let svStrings = {
       expression: "Uttryck"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Datakälla",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Visa filterchip",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Visa Filter-knappen",
-      // [Auto-translated] "Show search"
-      showSearch: "Visa sökning",
-      // [Auto-translated] "Search in"
-      searchFields: "Sök i",
-      // [Auto-translated] "Presets"
-      items: "Förinställningar",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Fråga att filtrera",
+      // [Auto-translated] "Fields"
+      fields: "Fält",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Visa snabba filter",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Visa sökfält",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Fält att söka i",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Sök i platshållartext",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Visa knappen Alla filter",
+      // [Auto-translated] "Filter presets"
+      presets: "Filterförinställningar",
       // [Auto-translated] "Default preset"
-      defaultItem: "Standardförinställning",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Tillåt flera förinställningar",
+      defaultPreset: "Standardförinställning",
+      // [Auto-translated] "Show presets"
+      showPresets: "Visa förinställningar",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Tillåt respondenter att redigera förinställningar",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Tillåt respondenter att lägga till förinställningar"
+      allowAddPresets: "Tillåt respondenter att lägga till förinställningar",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Tillåt respondenter att ta bort förinställningar"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Förinställt namn",
       // [Auto-translated] "Preset title"
       title: "Förinställd titel",
       // [Auto-translated] "Filter expression"
       expression: "Filteruttryck",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Tillåt redigering",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Tillåt borttagning"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Tillåt respondenter att redigera denna förinställning",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Tillåt respondenter att ta bort denna förinställning"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Fältnamn",
+      // [Auto-translated] "Field title"
+      title: "Fälttitel",
+      // [Auto-translated] "Available operators"
+      operators: "Tillgängliga operatörer",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Visa i snabba filter"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -915,9 +933,7 @@ export let svStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Varje alternativ i en separat kolumn",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Tillåt sortering efter denna kolumn",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Tillåt filtrering efter denna kolumn"
+      allowSort: "Tillåt sortering efter denna kolumn"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1110,7 +1126,9 @@ export let svStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Inga sorteringsnivåer",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Inga förinställningar",
+    "listIsEmpty@filterPresets": "Inga förinställningar",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Inga fält",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Lägg till valmöjligheter",
     // [Auto-translated] "Add rating value"
@@ -1138,7 +1156,9 @@ export let svStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Lägg till sorteringsnivå",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Lägg till förinställning",
+    "addNew@filterPresets": "Lägg till förinställning",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Lägg till fält",
     // "Value"
     value: "Värde",
     // [Auto-translated] "Text"
@@ -1253,10 +1273,6 @@ export let svStrings = {
     pageSize: "Rader per sida",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Tillåt användare att sortera rader",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Tillåt filtrering efter denna fråga",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Filteroperatorer",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maximala sorteringsnivåer",
     // [Auto-translated] "Default sort order"
@@ -1815,8 +1831,8 @@ export let svStrings = {
       sliderSettings: "Inställningar för skjutreglage",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Filterinställningar",
-      // [Auto-translated] "Presets"
-      presets: "Förinställningar",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Filterförinställningar",
       // "Choices from a Web Service"
       choicesByUrl: "Välj från webben",
       // [Auto-translated] "Numbering"
@@ -3089,16 +3105,18 @@ export let svStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Välj en dynamisk matris, en rullgardinsmenysmatris eller en dynamisk panel vars rader eller paneler filtret snävar in till.",
+      targetQuestion: "Välj en dynamisk matris, en rullgardinsmenysmatris eller en dynamisk panel vars rader eller paneler filtret snävar in till.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Förinställningen som tillämpas när undersökningen startar."
+      defaultPreset: "Förinställningen som tillämpas när undersökningen startar."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Använd fältnamn inom klammer, till exempel: {price} < 20 och {category} någon av ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Begränsar vilka operatorer respondenter kan använda för att filtrera efter detta fält. Lämna tomt för att tillåta alla operatorer som passar fältet.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Begränsar vilka operatorer respondenter kan använda för att filtrera efter detta fält. Lämna tomt för att tillåta alla operatorer som passar fältet."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Ett kolumn-ID som inte är synligt för svarande.",
@@ -4030,8 +4048,10 @@ export let svStrings = {
         loop: "Triggers bildar en loop genom de värden de sätter: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} läser värdet den skriver själv – den körs bara när ett annat värde ändras, så den körs aldrig alls.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} beräknar det värde den skriver från det värdet själv – varje körning börjar från det föregående resultatet, så värdet beror på hur många gånger den körs.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} kopierar bara det värde den skriver, så den anger aldrig något värde.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Värden skrivs i en loop: {chain}. Varje skrivning kör om uttrycken som läste dem, så de slutgiltiga värdena beror på i vilken ordning frågorna besvaras."
       },

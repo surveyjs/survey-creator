@@ -822,36 +822,54 @@ export var htStrings = {
       expression: "Ekspresyon"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Sous done",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Montre chip filtè yo",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Montre bouton Filtè yo",
-      // [Auto-translated] "Show search"
-      showSearch: "Montre rechèch",
-      // [Auto-translated] "Search in"
-      searchFields: "Chèche nan",
-      // [Auto-translated] "Presets"
-      items: "Predefini",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Kesyon pou filtre",
+      // [Auto-translated] "Fields"
+      fields: "Jaden",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Montre filtè rapid",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Montre ba rechèch",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Chan pou chèche",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Chèche tèks ranplasan",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Montre bouton Tout Filtè yo",
+      // [Auto-translated] "Filter presets"
+      presets: "Predefini filtè",
       // [Auto-translated] "Default preset"
-      defaultItem: "Predefini default",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Pèmèt plizyè predefini",
+      defaultPreset: "Predefini default",
+      // [Auto-translated] "Show presets"
+      showPresets: "Montre preset yo",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Pèmèt reponn yo modifye predefini",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Pèmèt moun ki reponn yo ajoute predefini"
+      allowAddPresets: "Pèmèt moun ki reponn yo ajoute predefini",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Pèmèt repondè yo efase predefini"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Non predefini",
       // [Auto-translated] "Preset title"
       title: "predefini",
       // [Auto-translated] "Filter expression"
       expression: "Ekspresyon filtè",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Pèmèt edisyon",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Pèmèt efase"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Pèmèt moun ki reponn yo modifye preset sa a",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Pèmèt moun ki reponn yo efase preset sa a"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Non chan an",
+      // [Auto-translated] "Field title"
+      title: "teren an",
+      // [Auto-translated] "Available operators"
+      operators: "Operatè ki disponib",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Montre nan filtè rapid"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +932,7 @@ export var htStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Chak opsyon nan yon kolòn separe",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Pèmèt klasman pa kolòn sa a",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Pèmèt filtraj pa kolòn sa a"
+      allowSort: "Pèmèt klasman pa kolòn sa a"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1125,9 @@ export var htStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Pa gen nivo sòt",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Pa gen predefinisyon",
+    "listIsEmpty@filterPresets": "Pa gen predefinisyon",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Pa gen chan",
     // "Add new choice"
     "addNew@choices": "Ajoute nouvo chwa",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1155,9 @@ export var htStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Ajoute triye nivo",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Ajoute preset",
+    "addNew@filterPresets": "Ajoute preset",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Ajoute chan",
     // "Value"
     value: "Valè",
     // "Text"
@@ -1252,10 +1272,6 @@ export var htStrings = {
     pageSize: "Ranje pou chak paj",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Pèmèt itilizatè yo sòt ranje ranje",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Pèmèt filtraj pa kesyon sa a",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operatè filtè",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Nivo maksimòm sòt",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1830,8 @@ export var htStrings = {
       sliderSettings: "Anviwònman koulis",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Anviwònman Filtè",
-      // [Auto-translated] "Presets"
-      presets: "Predefini",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Predefini Filtè",
       // "Choices from a Web Service"
       choicesByUrl: "Chwa nan yon sèvis entènèt",
       // "Numbering"
@@ -3088,16 +3104,18 @@ export var htStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Chwazi yon matris dinamik, yon matris desann oswa yon panèl dinamik kote filtè a limite ranje oswa panèl yo.",
+      targetQuestion: "Chwazi yon matris dinamik, yon matris desann oswa yon panèl dinamik kote filtè a limite ranje oswa panèl yo.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Preset la aplike lè sondaj la kòmanse."
+      defaultPreset: "Preset la aplike lè sondaj la kòmanse."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Sèvi ak non chan yo nan parantèz, pa egzanp: {price} < 20 ak {category} anyof ['Drinks']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Limite operatè yo ka itilize pou filtre pa chan sa a. Kite vid pou pèmèt tout operatè ki adapte ak chan an.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Limite operatè yo ka itilize pou filtre pa chan sa a. Kite vid pou pèmèt tout operatè ki adapte ak chan an."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Yon ID kolòn ki pa vizib pou moun ki reponn yo.",
@@ -4029,8 +4047,10 @@ export var htStrings = {
         loop: "Deklannche fòme yon bouk nan valè yo mete: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{etikèt} li valè li li tèt li - li kouri sèlman lè yon lòt valè chanje, kidonk li pa janm kouri ditou.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} la kalkile valè li ekri a soti nan valè sa a li menm - chak kouri kòmanse ak rezilta anvan an, kidonk valè a depann de konbyen fwa li kouri.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} la sèlman kopye valè li ekri a, kidonk li pa janm fikse yon valè.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Valè yo ekri nan yon bouk: {chèn}. Chak ekri repete ekspresyon yo ki li li, kidonk valè final yo depann sou lòd la kesyon yo reponn nan."
       },

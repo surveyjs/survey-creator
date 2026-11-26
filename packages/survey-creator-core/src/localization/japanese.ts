@@ -822,36 +822,54 @@ export var jaStrings = {
       expression: "表現"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "データソース",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "フィルターチップを表示",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "フィルターボタンを表示する",
-      // [Auto-translated] "Show search"
-      showSearch: "検索を表示",
-      // [Auto-translated] "Search in"
-      searchFields: "検索",
-      // [Auto-translated] "Presets"
-      items: "プリセット",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "フィルターをかける質問",
+      // [Auto-translated] "Fields"
+      fields: "フィールド",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "クイックフィルターを表示",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "検索バーを表示",
+      // [Auto-translated] "Fields to search"
+      searchFields: "検索するフィールド",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "検索プレースホルダーテキスト",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "すべてのフィルターを表示ボタン",
+      // [Auto-translated] "Filter presets"
+      presets: "フィルタープリセット",
       // [Auto-translated] "Default preset"
-      defaultItem: "デフォルトプリセット",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "複数のプリセットを許可する",
+      defaultPreset: "デフォルトプリセット",
+      // [Auto-translated] "Show presets"
+      showPresets: "プリセットを表示",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "回答者がプリセットを編集できるようにする",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "回答者がプリセットを追加できるようにする"
+      allowAddPresets: "回答者がプリセットを追加できるようにする",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "回答者がプリセットを削除できるようにする"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "プリセット名",
       // [Auto-translated] "Preset title"
       title: "プリセットタイトル",
       // [Auto-translated] "Filter expression"
       expression: "フィルター式",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "編集を許可する",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "削除を許可する"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "回答者がこのプリセットを編集できるようにする",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "回答者がこのプリセットを削除できるようにする"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "フィールド名",
+      // [Auto-translated] "Field title"
+      title: "フィールドタイトル",
+      // [Auto-translated] "Available operators"
+      operators: "利用可能なオペレーター",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "クイックフィルターで表示"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +932,7 @@ export var jaStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "個別の列に各オプション",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "この列によるソートを許可してください",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "この列によるフィルタリングを許可する"
+      allowSort: "この列によるソートを許可してください"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1125,9 @@ export var jaStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "レベルはない",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "プリセットなし",
+    "listIsEmpty@filterPresets": "プリセットなし",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "フィールドなし",
     // [Auto-translated] "Add choice"
     "addNew@choices": "選択肢を加える",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1155,9 @@ export var jaStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "ソートレベルを追加",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "プリセットを追加",
+    "addNew@filterPresets": "プリセットを追加",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "追加フィールド",
     // "Value"
     value: "値",
     // "Text"
@@ -1252,10 +1272,6 @@ export var jaStrings = {
     pageSize: "ページあたりの行数",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "ユーザーが行を並べ替えることを許可します",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "この質問によるフィルタリングを許可する",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "フィルター演算子",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "最大ソートレベル",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1830,8 @@ export var jaStrings = {
       sliderSettings: "スライダー設定",
       // [Auto-translated] "Filter Settings"
       filterSettings: "フィルター設定",
-      // [Auto-translated] "Presets"
-      presets: "プリセット",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "フィルタープリセット",
       // "Choices from a Web Service"
       choicesByUrl: "ウェブの選択",
       // "Numbering"
@@ -3088,16 +3104,18 @@ export var jaStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "動的マトリックス、ドロップダウンマトリックス、またはフィルターの行やパネルを絞り込む動的パネルを選択します。",
+      targetQuestion: "動的マトリックス、ドロップダウンマトリックス、またはフィルターの行やパネルを絞り込む動的パネルを選択します。",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "調査開始時に適用されたプリセット。"
+      defaultPreset: "調査開始時に適用されたプリセット。"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "フィールド名はカールボッコで囲み、例:{price} < 20 や {category} anyof ['Beverages']] を選びます。"
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "回答者がこのフィールドでフィルタリングするために使用できる演算子を制限します。フィールドに合うすべての演算子を使用できるように、空欄のままにします。",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "回答者がこのフィールドでフィルタリングするために使用できる演算子を制限します。フィールドに合うすべての演算子を使用できるように、空欄のままにします。"
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "回答者に表示されない列 ID。",
@@ -4029,8 +4047,10 @@ export var jaStrings = {
         loop: "トリガーは設定した値({setRoots})をループします。"
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label}は自分が書き込んだ値を読み込みます。別の数値が変わったときだけ実行されるため、全く実行されません。",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} はその値から書き込む値を計算します。各実行は前回の結果から始まるため、値は実行回数に応じて決まります。",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} は自分が書き込んだ値だけをコピーするため、値を設定することはありません。",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "値はループ形式で書き込まれます:{chain}。各書き込みは読み取った式を繰り返し実行するため、最終的な値は質問の回答順に依存します。"
       },

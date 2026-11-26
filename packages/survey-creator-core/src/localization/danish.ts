@@ -823,36 +823,54 @@ export var danishStrings = {
       expression: "Udtryk"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Datakilde",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Vis filterchips",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Vis Filtre-knappen",
-      // [Auto-translated] "Show search"
-      showSearch: "Vis søgning",
-      // [Auto-translated] "Search in"
-      searchFields: "Søg i",
-      // [Auto-translated] "Presets"
-      items: "Presets",
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Spørgsmål der skal filtreres",
+      // [Auto-translated] "Fields"
+      fields: "Felter",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Vis hurtige filtre",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Vis søgefeltet",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Felter, der skal søges i",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Søg i pladsholdertekst",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Vis knappen Alle filtre",
+      // [Auto-translated] "Filter presets"
+      presets: "Filterindstillinger",
       // [Auto-translated] "Default preset"
-      defaultItem: "Standardforudindstilling",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Tillad flere forudindstillinger",
+      defaultPreset: "Standardforudindstilling",
+      // [Auto-translated] "Show presets"
+      showPresets: "Vis forudindstillinger",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Tillad respondenter at redigere forudindstillinger",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Tillad respondenter at tilføje forudindstillinger"
+      allowAddPresets: "Tillad respondenter at tilføje forudindstillinger",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Tillad respondenter at slette forudindstillinger"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Forudindstillet navn",
       // [Auto-translated] "Preset title"
       title: "Forudindstillede titel",
       // [Auto-translated] "Filter expression"
       expression: "Filterudtryk",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Tillad redigering",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Tillad sletning"
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Tillad respondenter at redigere denne forudindstilling",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Tillad respondenter at slette denne forudindstilling"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Feltnavn",
+      // [Auto-translated] "Field title"
+      title: "Felttitel",
+      // [Auto-translated] "Available operators"
+      operators: "Tilgængelige operatører",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Vis i hurtige filtre"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -915,9 +933,7 @@ export var danishStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Hver indstilling i en separat kolonne",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Tillad sortering efter denne kolonne",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Tillad filtrering efter denne kolonne"
+      allowSort: "Tillad sortering efter denne kolonne"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1110,7 +1126,9 @@ export var danishStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Ingen sort-niveauer",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Ingen forudindstillinger",
+    "listIsEmpty@filterPresets": "Ingen forudindstillinger",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Ingen felter",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Tilføj valg",
     // [Auto-translated] "Add rating value"
@@ -1138,7 +1156,9 @@ export var danishStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Tilføj sorteringsniveau",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Tilføj forudindstilling",
+    "addNew@filterPresets": "Tilføj forudindstilling",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Tilføj felt",
     // "Value"
     value: "Værdi",
     // "Text"
@@ -1253,10 +1273,6 @@ export var danishStrings = {
     pageSize: "Rækker pr. side",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Tillad brugere at sortere rækker",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Tillad filtrering efter dette spørgsmål",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Filteroperatører",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksimale sorteringsniveauer",
     // [Auto-translated] "Default sort order"
@@ -1815,8 +1831,8 @@ export var danishStrings = {
       sliderSettings: "Indstillinger for skyder",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Filterindstillinger",
-      // [Auto-translated] "Presets"
-      presets: "Presets",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Filterindstillinger",
       // "Choices from a Web Service"
       choicesByUrl: "Valgmuligheder fra Web",
       // [Auto-translated] "Numbering"
@@ -3089,16 +3105,18 @@ export var danishStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Vælg en dynamisk matrix, en dropdown-matrix eller et dynamisk panel, hvis rækker eller paneler filteret indsnævrer i rækker eller paneler.",
+      targetQuestion: "Vælg en dynamisk matrix, en dropdown-matrix eller et dynamisk panel, hvis rækker eller paneler filteret indsnævrer i rækker eller paneler.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Forudindstillingen gælder ved undersøgelsens start."
+      defaultPreset: "Forudindstillingen gælder ved undersøgelsens start."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Brug feltnavne i krøllede parenteser, for eksempel: {price} < 20 og {category} enhver af ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Begrænser de operatorer, respondenter kan bruge til at filtrere efter dette felt. Lad være tomt for at tillade alle operatorer, der passer til feltet.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Begrænser de operatorer, respondenter kan bruge til at filtrere efter dette felt. Lad være tomt for at tillade alle operatorer, der passer til feltet."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Et kolonne-id, der ikke er synligt for svarpersoner.",
@@ -4030,8 +4048,10 @@ export var danishStrings = {
         loop: "Triggere danner en løkke gennem de værdier, de sætter: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} læser den værdi, den skriver selv – den kører kun, når en anden værdi ændres, så den kører aldrig overhovedet.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} beregner selv den værdi, den skriver ud fra den værdi – hvert kørsel starter fra det forrige resultat, så værdien afhænger af, hvor mange gange den kører.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} kopierer kun den værdi, den skriver, så den sætter aldrig en værdi.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Værdierne skrives i en løkke: {chain}. Hver skrivning kører de udtryk, der læser den igen, så de endelige værdier afhænger af rækkefølgen spørgsmålene besvares i."
       },
