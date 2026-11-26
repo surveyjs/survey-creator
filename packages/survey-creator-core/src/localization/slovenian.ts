@@ -822,10 +822,32 @@ export var slStrings = {
       expression: "Izraz"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Vprašanje za filtriranje",
+      // [Auto-translated] "Fields"
+      fields: "Področja",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Prikaži hitre filtre",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Prikaži iskalno vrstico",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Polja za iskanje",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Iskanje nadomestnega besedila",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Prikaži gumb Vsi filtri",
+      // [Auto-translated] "Filter presets"
+      presets: "Prednastavitve filtrov",
       // [Auto-translated] "Default preset"
       defaultPreset: "Privzeta prednastavitev",
+      // [Auto-translated] "Show presets"
+      showPresets: "Prikaži prednastavitve",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Dovoli anketirancem urejanje prednastavitev",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Dovoli anketirancem, da dodajo prednastavitve"
+      allowAddPresets: "Dovoli anketirancem, da dodajo prednastavitve",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Dovoli anketirancem, da izbrišejo prednastavitve"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var slStrings = {
       // [Auto-translated] "Preset title"
       title: "Prednastavljen naslov",
       // [Auto-translated] "Filter expression"
-      expression: "Izraz filtra"
+      expression: "Izraz filtra",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Dovoli anketirancem, da urejajo to prednastavitev",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Dovoli anketirancem, da izbrišejo to prednastavitev"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Ime polja",
+      // [Auto-translated] "Field title"
+      title: "Naziv igrišča",
+      // [Auto-translated] "Available operators"
+      operators: "Razpoložljivi operaterji",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Prikaži v hitrih filtrih"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var slStrings = {
     "listIsEmpty@sortCriteria": "Brez nivojev razvrščanja",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Brez prednastavitev",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Brez polj",
     // "Add new choice"
     "addNew@choices": "Dodaj novo možnost",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var slStrings = {
     "addNew@sortCriteria": "Dodaj stopnjo sortiranja",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Dodaj prednastavitev",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Dodaj polje",
     // "Value"
     value: "Vrednost",
     // "Text"
@@ -1790,6 +1830,8 @@ export var slStrings = {
       sliderSettings: "Nastavitve drsnika",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Nastavitve filtra",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Prednastavitve filtrov",
       // "Choices from a Web Service"
       choicesByUrl: "Možnosti iz spletne storitve",
       // "Numbering"

@@ -822,10 +822,32 @@ export var htStrings = {
       expression: "Ekspresyon"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Kesyon pou filtre",
+      // [Auto-translated] "Fields"
+      fields: "Jaden",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Montre filtè rapid",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Montre ba rechèch",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Chan pou chèche",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Chèche tèks ranplasan",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Montre bouton Tout Filtè yo",
+      // [Auto-translated] "Filter presets"
+      presets: "Predefini filtè",
       // [Auto-translated] "Default preset"
       defaultPreset: "Predefini default",
+      // [Auto-translated] "Show presets"
+      showPresets: "Montre preset yo",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Pèmèt reponn yo modifye predefini",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Pèmèt moun ki reponn yo ajoute predefini"
+      allowAddPresets: "Pèmèt moun ki reponn yo ajoute predefini",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Pèmèt repondè yo efase predefini"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var htStrings = {
       // [Auto-translated] "Preset title"
       title: "predefini",
       // [Auto-translated] "Filter expression"
-      expression: "Ekspresyon filtè"
+      expression: "Ekspresyon filtè",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Pèmèt moun ki reponn yo modifye preset sa a",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Pèmèt moun ki reponn yo efase preset sa a"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Non chan an",
+      // [Auto-translated] "Field title"
+      title: "teren an",
+      // [Auto-translated] "Available operators"
+      operators: "Operatè ki disponib",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Montre nan filtè rapid"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var htStrings = {
     "listIsEmpty@sortCriteria": "Pa gen nivo sòt",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Pa gen predefinisyon",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Pa gen chan",
     // "Add new choice"
     "addNew@choices": "Ajoute nouvo chwa",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var htStrings = {
     "addNew@sortCriteria": "Ajoute triye nivo",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Ajoute preset",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Ajoute chan",
     // "Value"
     value: "Valè",
     // "Text"
@@ -1790,6 +1830,8 @@ export var htStrings = {
       sliderSettings: "Anviwònman koulis",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Anviwònman Filtè",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Predefini Filtè",
       // "Choices from a Web Service"
       choicesByUrl: "Chwa nan yon sèvis entènèt",
       // "Numbering"

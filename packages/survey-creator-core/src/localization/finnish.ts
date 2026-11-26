@@ -822,10 +822,32 @@ export var fiStrings = {
       expression: "Lauseke"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Suodatettava kysymys",
+      // [Auto-translated] "Fields"
+      fields: "Kentät",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Näytä pikasuodattimet",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Näytä hakupalkki",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Haettavat kentät",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Hae paikkamerkkitekstiä",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Näytä Kaikki suodattimet -painike",
+      // [Auto-translated] "Filter presets"
+      presets: "Suodatinesiasetukset",
       // [Auto-translated] "Default preset"
       defaultPreset: "Oletusesiasetus",
+      // [Auto-translated] "Show presets"
+      showPresets: "Näytä esiasetukset",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Salli vastaajien muokata esiasetuksia",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Salli vastaajien lisätä esiasetuksia"
+      allowAddPresets: "Salli vastaajien lisätä esiasetuksia",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Salli vastaajien poistaa esiasetukset"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var fiStrings = {
       // [Auto-translated] "Preset title"
       title: "Esiasetettu otsikko",
       // [Auto-translated] "Filter expression"
-      expression: "Suodatinlauseke"
+      expression: "Suodatinlauseke",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Salli vastaajien muokata tätä esiasetusta",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Salli vastaajien poistaa tämä esiasetus"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Kentän nimi",
+      // [Auto-translated] "Field title"
+      title: "Kenttämestaruus",
+      // [Auto-translated] "Available operators"
+      operators: "Saatavilla olevat operaattorit",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Näytä pikasuodattimissa"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var fiStrings = {
     "listIsEmpty@sortCriteria": "Ei lajittelutasoja",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Ei esiasetuksia",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Ei kenttiä",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Lisää valinta",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var fiStrings = {
     "addNew@sortCriteria": "Lisää lajittelutaso",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Lisää esiasetus",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Lisää kenttä",
     // "Value"
     value: "Arvo",
     // "Text"
@@ -1790,6 +1830,8 @@ export var fiStrings = {
       sliderSettings: "Liukusäätimen asetukset",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Suodatinasetukset",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Suodatinesiasetukset",
       // "Choices from a Web Service"
       choicesByUrl: "Valintoja verkosta",
       // "Numbering"

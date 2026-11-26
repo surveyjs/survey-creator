@@ -826,15 +826,32 @@ export var euStrings = {
       expression: "Adierazpena"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Iragazi beharreko galdera",
+      // [Auto-translated] "Fields"
+      fields: "Eremuak",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Erakutsi iragazki azkarrak",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Bilaketa barra erakutsi",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Bilatu beharreko eremuak",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Bilatu leku-hartzaile testua",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Erakutsi Iragazki Guztiak botoia",
+      // [Auto-translated] "Filter presets"
+      presets: "Iragazki aurrezarpenak",
       // "Data source"
-      // "Show filter chips"
-      // "Show the Filters button"
-      // "Show search"
-      // "Default preset"
       defaultPreset: "Aurrezarpen lehenetsia",
+      // [Auto-translated] "Show presets"
+      showPresets: "Erakutsi aurrezarpenak",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Erantzuleei aurrezarpenak editatzeko aukera eman",
       // "Allow multiple presets"
-      // "Allow respondents to add presets"
-      allowAddPresets: "Baimendu erantzuleei aurrezarpenak gehitzen"
+      allowAddPresets: "Baimendu erantzuleei aurrezarpenak gehitzen",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Erantzuleei aurrezarpenak ezabatzeko aukera eman"
     },
     filterpreset: {
       // "Preset name"
@@ -842,7 +859,21 @@ export var euStrings = {
       // "Preset title"
       title: "Aurrezarpenaren izenburua",
       // "Filter expression"
-      expression: "Iragazki-adierazpena"
+      expression: "Iragazki-adierazpena",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Erantzuleei aurrezarpen hau editatzeko aukera eman",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Erantzuleei aurrezarpen hau ezabatzeko baimena eman"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Eremuaren izena",
+      // [Auto-translated] "Field title"
+      title: "Zelaiaren izenburua",
+      // [Auto-translated] "Available operators"
+      operators: "Eskuragarri dauden operadoreak",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Erakutsi iragazki azkarretan"
     },
     sortcriterion: {
       // "Sort by"
@@ -1099,6 +1130,8 @@ export var euStrings = {
     "listIsEmpty@sortCriteria": "Ez dago ordenatze-mailarik",
     // "No presets"
     "listIsEmpty@filterPresets": "Ez dago aurrezarpenik",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Ez eremurik",
     // "Add choice"
     "addNew@choices": "Gehitu aukera",
     // "Add rating value"
@@ -1127,6 +1160,8 @@ export var euStrings = {
     "addNew@sortCriteria": "Gehitu ordenatze-maila",
     // "Add preset"
     "addNew@filterPresets": "Gehitu aurrezarpena",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Gehitu eremua",
     // "Value"
     value: "Balioa",
     // "Text"
@@ -1799,6 +1834,8 @@ export var euStrings = {
       sliderSettings: "Gradutzailearen ezarpenak",
       // "Filter Settings"
       filterSettings: "Iragazkiaren ezarpenak",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Iragazki Aurrezarpenak",
       // "Choices from a Web Service"
       choicesByUrl: "Aukerak web-zerbitzu batetik",
       // "Numbering"

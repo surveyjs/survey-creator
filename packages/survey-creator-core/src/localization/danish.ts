@@ -823,10 +823,32 @@ export var danishStrings = {
       expression: "Udtryk"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Spørgsmål der skal filtreres",
+      // [Auto-translated] "Fields"
+      fields: "Felter",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Vis hurtige filtre",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Vis søgefeltet",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Felter, der skal søges i",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Søg i pladsholdertekst",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Vis knappen Alle filtre",
+      // [Auto-translated] "Filter presets"
+      presets: "Filterindstillinger",
       // [Auto-translated] "Default preset"
       defaultPreset: "Standardforudindstilling",
+      // [Auto-translated] "Show presets"
+      showPresets: "Vis forudindstillinger",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Tillad respondenter at redigere forudindstillinger",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Tillad respondenter at tilføje forudindstillinger"
+      allowAddPresets: "Tillad respondenter at tilføje forudindstillinger",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Tillad respondenter at slette forudindstillinger"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -834,7 +856,21 @@ export var danishStrings = {
       // [Auto-translated] "Preset title"
       title: "Forudindstillede titel",
       // [Auto-translated] "Filter expression"
-      expression: "Filterudtryk"
+      expression: "Filterudtryk",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Tillad respondenter at redigere denne forudindstilling",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Tillad respondenter at slette denne forudindstilling"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Feltnavn",
+      // [Auto-translated] "Field title"
+      title: "Felttitel",
+      // [Auto-translated] "Available operators"
+      operators: "Tilgængelige operatører",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Vis i hurtige filtre"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1091,6 +1127,8 @@ export var danishStrings = {
     "listIsEmpty@sortCriteria": "Ingen sort-niveauer",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Ingen forudindstillinger",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Ingen felter",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Tilføj valg",
     // [Auto-translated] "Add rating value"
@@ -1119,6 +1157,8 @@ export var danishStrings = {
     "addNew@sortCriteria": "Tilføj sorteringsniveau",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Tilføj forudindstilling",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Tilføj felt",
     // "Value"
     value: "Værdi",
     // "Text"
@@ -1791,6 +1831,8 @@ export var danishStrings = {
       sliderSettings: "Indstillinger for skyder",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Filterindstillinger",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Filterindstillinger",
       // "Choices from a Web Service"
       choicesByUrl: "Valgmuligheder fra Web",
       // [Auto-translated] "Numbering"

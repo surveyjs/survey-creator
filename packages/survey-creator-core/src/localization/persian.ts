@@ -822,10 +822,32 @@ export var persianStrings = {
       expression: "بیان"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "سوالی برای فیلتر کردن",
+      // [Auto-translated] "Fields"
+      fields: "فیلدها",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "نمایش فیلترهای سریع",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "نمایش نوار جستجو",
+      // [Auto-translated] "Fields to search"
+      searchFields: "فیلدهای جستجو",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "جستجوی متن جایگزین",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "نمایش دکمه همه فیلترها",
+      // [Auto-translated] "Filter presets"
+      presets: "پیش تنظیم های فیلتر",
       // [Auto-translated] "Default preset"
       defaultPreset: "پیش تنظیم پیش فرض",
+      // [Auto-translated] "Show presets"
+      showPresets: "نمایش پیش تنظیم ها",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "اجازه دادن به پاسخ دهندگان برای ویرایش پیش تنظیم ها",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "اجازه دادن به پاسخ دهندگان برای افزودن پیش تنظیم ها"
+      allowAddPresets: "اجازه دادن به پاسخ دهندگان برای افزودن پیش تنظیم ها",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "اجازه دادن به پاسخ دهندگان برای حذف پیش تنظیم ها"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var persianStrings = {
       // [Auto-translated] "Preset title"
       title: "عنوان پیش فرض",
       // [Auto-translated] "Filter expression"
-      expression: "عبارت فیلتر"
+      expression: "عبارت فیلتر",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "اجازه دهید پاسخ دهندگان این پیش تنظیم را ویرایش کنند",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "اجازه دهید پاسخ دهندگان این پیش تنظیم را حذف کنند"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "نام فیلد",
+      // [Auto-translated] "Field title"
+      title: "عنوان قهرمانی زمین",
+      // [Auto-translated] "Available operators"
+      operators: "اپراتورهای موجود",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "نمایش در فیلترهای سریع"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var persianStrings = {
     "listIsEmpty@sortCriteria": "بدون سطح مرتب سازی",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "بدون پیش تنظیم",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "بدون فیلد",
     // [Auto-translated] "Add choice"
     "addNew@choices": "انتخاب اضافه کنید",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var persianStrings = {
     "addNew@sortCriteria": "افزودن سطح مرتب سازی",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "افزودن پیش تنظیم",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "افزودن فیلد",
     // "Value"
     value: "مقدار",
     // "Text"
@@ -1790,6 +1830,8 @@ export var persianStrings = {
       sliderSettings: "تنظیمات نوار لغزنده",
       // [Auto-translated] "Filter Settings"
       filterSettings: "تنظیمات فیلتر",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "پیش تنظیم های فیلتر",
       // "Choices from a Web Service"
       choicesByUrl: "انتخاب ها از وب",
       // "Numbering"

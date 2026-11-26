@@ -822,10 +822,32 @@ export const thStrings = {
       expression: "นิพจน์"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "คําถามที่ควรกรอง",
+      // [Auto-translated] "Fields"
+      fields: "สาขา",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "แสดงตัวกรองด่วน",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "แสดงแถบค้นหา",
+      // [Auto-translated] "Fields to search"
+      searchFields: "ช่องสําหรับค้นหา",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "ข้อความตัวแทนค้นหา",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "แสดงปุ่ม All Filters",
+      // [Auto-translated] "Filter presets"
+      presets: "การตั้งค่าตัวกรองล่วงหน้า",
       // [Auto-translated] "Default preset"
       defaultPreset: "การตั้งค่าล่วงหน้าเริ่มต้น",
+      // [Auto-translated] "Show presets"
+      showPresets: "แสดงพรีเซ็ต",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "อนุญาตให้ผู้ตอบแก้ไขการตั้งค่าล่วงหน้า",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "อนุญาตให้ผู้ตอบเพิ่มการตั้งค่าล่วงหน้า"
+      allowAddPresets: "อนุญาตให้ผู้ตอบเพิ่มการตั้งค่าล่วงหน้า",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "อนุญาตให้ผู้ตอบแบบสอบถามลบการตั้งค่าล่วงหน้า"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export const thStrings = {
       // [Auto-translated] "Preset title"
       title: "ชื่อที่ตั้งไว้ล่วงหน้า",
       // [Auto-translated] "Filter expression"
-      expression: "นิพจน์กรอง"
+      expression: "นิพจน์กรอง",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "อนุญาตให้ผู้ตอบแก้ไขพรีเซ็ตนี้",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "อนุญาตให้ผู้ตอบแบบสอบถามลบพรีเซ็ตนี้"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "ชื่อฟิลด์",
+      // [Auto-translated] "Field title"
+      title: "ตําแหน่งสนาม",
+      // [Auto-translated] "Available operators"
+      operators: "ผู้ให้บริการที่มีให้บริการ",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "แสดงในตัวกรองด่วน"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export const thStrings = {
     "listIsEmpty@sortCriteria": "ไม่มีระดับการจัดเรียง",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "ไม่มีการตั้งค่าล่วงหน้า",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "ไม่มีฟิลด์",
     // "Add new choice"
     "addNew@choices": "เพิ่มตัวเลือกใหม่",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export const thStrings = {
     "addNew@sortCriteria": "เพิ่มระดับการจัดเรียง",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "เพิ่มการตั้งค่าล่วงหน้า",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "ฟิลด์เพิ่ม",
     // "Value"
     value: "ค่า",
     // "Text"
@@ -1790,6 +1830,8 @@ export const thStrings = {
       sliderSettings: "การตั้งค่าตัวเลื่อน",
       // [Auto-translated] "Filter Settings"
       filterSettings: "การตั้งค่าตัวกรอง",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "ตัวกรองที่ตั้งไว้ล่วงหน้า",
       // "Choices from a Web Service"
       choicesByUrl: "ตัวเลือกจากบริการเว็บ",
       // "Numbering"

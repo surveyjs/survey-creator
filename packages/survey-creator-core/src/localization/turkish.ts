@@ -822,10 +822,32 @@ export var turkishStrings = {
       expression: "İfade"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Filtrelenecek soru",
+      // [Auto-translated] "Fields"
+      fields: "Alanlar",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Hızlı filtreleri göster",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Arama çubuğunu göster",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Aranacak alanlar",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Yer tutucu metni ara",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Tüm Filtreler düğmesini göster",
+      // [Auto-translated] "Filter presets"
+      presets: "Ön ayarları filtrele",
       // [Auto-translated] "Default preset"
       defaultPreset: "Varsayılan ön ayar",
+      // [Auto-translated] "Show presets"
+      showPresets: "Ön ayarları göster",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Yanıtlayıcıların ön ayarları düzenlemesine izin ver",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Yanıtlayıcıların ön ayar eklemesine izin ver"
+      allowAddPresets: "Yanıtlayıcıların ön ayar eklemesine izin ver",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Yanıtlayıcıların ön ayarları silmesine izin ver"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var turkishStrings = {
       // [Auto-translated] "Preset title"
       title: "Ön ayarlı başlık",
       // [Auto-translated] "Filter expression"
-      expression: "Filtre ifadesi"
+      expression: "Filtre ifadesi",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Yanıtlayıcıların bu ön ayarı düzenlemesine izin ver",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Yanıtlayıcıların bu ön ayarı silmesine izin ver"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Alan adı",
+      // [Auto-translated] "Field title"
+      title: "Saha şampiyonluğu",
+      // [Auto-translated] "Available operators"
+      operators: "Mevcut operatörler",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Hızlı filtrelerde göster"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var turkishStrings = {
     "listIsEmpty@sortCriteria": "Sıralama seviyeleri yok",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Ön ayar yok",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Alan yok",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Seçenek ekle",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var turkishStrings = {
     "addNew@sortCriteria": "Sıralama seviyesi ekleyin",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Ön ayar ekle",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Alan ekle",
     // "Value"
     value: "Değer",
     // "Text"
@@ -1790,6 +1830,8 @@ export var turkishStrings = {
       sliderSettings: "Kaydırıcı Ayarları",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Filtre Ayarları",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Filtre Ön Ayarları",
       // "Choices from a Web Service"
       choicesByUrl: "Webten seçenekler",
       // "Numbering"

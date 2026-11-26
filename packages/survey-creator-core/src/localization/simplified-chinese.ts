@@ -822,10 +822,32 @@ export var simplifiedChineseTranslation = {
       expression: "表达"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "筛选问题",
+      // [Auto-translated] "Fields"
+      fields: "场地",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "显示快速筛选",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "显示搜索栏",
+      // [Auto-translated] "Fields to search"
+      searchFields: "要搜索的字段",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "搜索占位符文本",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "显示“所有筛选器”按钮",
+      // [Auto-translated] "Filter presets"
+      presets: "滤镜预设",
       // [Auto-translated] "Default preset"
       defaultPreset: "默认预设",
+      // [Auto-translated] "Show presets"
+      showPresets: "显示预设",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "允许响应者编辑预设",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "允许受访者添加预设"
+      allowAddPresets: "允许受访者添加预设",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "允许受访者删除预设"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var simplifiedChineseTranslation = {
       // [Auto-translated] "Preset title"
       title: "预设标题",
       // [Auto-translated] "Filter expression"
-      expression: "过滤器表达式"
+      expression: "过滤器表达式",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "允许受访者编辑此预设",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "允许受访者删除此预设"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "田名",
+      // [Auto-translated] "Field title"
+      title: "赛场名称",
+      // [Auto-translated] "Available operators"
+      operators: "可用运营商",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "在快速筛选中显示"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var simplifiedChineseTranslation = {
     "listIsEmpty@sortCriteria": "无等级",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "无预设",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "无字段",
     // [Auto-translated] "Add choice"
     "addNew@choices": "增加选择",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var simplifiedChineseTranslation = {
     "addNew@sortCriteria": "添加排序层级",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "添加预设",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "添加字段",
     // "Value"
     value: "值",
     // "Text"
@@ -1790,6 +1830,8 @@ export var simplifiedChineseTranslation = {
       sliderSettings: "滑块设置",
       // [Auto-translated] "Filter Settings"
       filterSettings: "筛选设置",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "滤镜预设",
       // "Choices from a Web Service"
       choicesByUrl: "通过 URL 导入选项",
       // [Auto-translated] "Numbering"

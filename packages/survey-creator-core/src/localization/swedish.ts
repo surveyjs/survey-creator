@@ -823,10 +823,32 @@ export let svStrings = {
       expression: "Uttryck"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Fråga att filtrera",
+      // [Auto-translated] "Fields"
+      fields: "Fält",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Visa snabba filter",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Visa sökfält",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Fält att söka i",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Sök i platshållartext",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Visa knappen Alla filter",
+      // [Auto-translated] "Filter presets"
+      presets: "Filterförinställningar",
       // [Auto-translated] "Default preset"
       defaultPreset: "Standardförinställning",
+      // [Auto-translated] "Show presets"
+      showPresets: "Visa förinställningar",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Tillåt respondenter att redigera förinställningar",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Tillåt respondenter att lägga till förinställningar"
+      allowAddPresets: "Tillåt respondenter att lägga till förinställningar",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Tillåt respondenter att ta bort förinställningar"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -834,7 +856,21 @@ export let svStrings = {
       // [Auto-translated] "Preset title"
       title: "Förinställd titel",
       // [Auto-translated] "Filter expression"
-      expression: "Filteruttryck"
+      expression: "Filteruttryck",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Tillåt respondenter att redigera denna förinställning",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Tillåt respondenter att ta bort denna förinställning"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Fältnamn",
+      // [Auto-translated] "Field title"
+      title: "Fälttitel",
+      // [Auto-translated] "Available operators"
+      operators: "Tillgängliga operatörer",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Visa i snabba filter"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1091,6 +1127,8 @@ export let svStrings = {
     "listIsEmpty@sortCriteria": "Inga sorteringsnivåer",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Inga förinställningar",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Inga fält",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Lägg till valmöjligheter",
     // [Auto-translated] "Add rating value"
@@ -1119,6 +1157,8 @@ export let svStrings = {
     "addNew@sortCriteria": "Lägg till sorteringsnivå",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Lägg till förinställning",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Lägg till fält",
     // "Value"
     value: "Värde",
     // [Auto-translated] "Text"
@@ -1791,6 +1831,8 @@ export let svStrings = {
       sliderSettings: "Inställningar för skjutreglage",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Filterinställningar",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Filterförinställningar",
       // "Choices from a Web Service"
       choicesByUrl: "Välj från webben",
       // [Auto-translated] "Numbering"

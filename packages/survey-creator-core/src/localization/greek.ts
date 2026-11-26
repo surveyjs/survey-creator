@@ -822,10 +822,32 @@ export var grStrings = {
       expression: "Έκφραση"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Ερώτηση προς φιλτράρισμα",
+      // [Auto-translated] "Fields"
+      fields: "Πεδία",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Εμφάνιση γρήγορων φίλτρων",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Εμφάνιση γραμμής αναζήτησης",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Πεδία προς αναζήτηση",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Αναζήτηση κειμένου κράτησης θέσης",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Κουμπί Εμφάνιση Όλων των Φίλτρων",
+      // [Auto-translated] "Filter presets"
+      presets: "Προεπιλογές φίλτρων",
       // [Auto-translated] "Default preset"
       defaultPreset: "Προεπιλεγμένη προεπιλογή",
+      // [Auto-translated] "Show presets"
+      showPresets: "Εμφάνιση προεπιλογών",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Επιτρέψτε στους συμμετέχοντες να επεξεργάζονται προεπιλογές",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Επιτρέψτε στους συμμετέχοντες να προσθέτουν προεπιλογές"
+      allowAddPresets: "Επιτρέψτε στους συμμετέχοντες να προσθέτουν προεπιλογές",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Επιτρέψτε στους συμμετέχοντες να διαγράφουν προεπιλογές"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var grStrings = {
       // [Auto-translated] "Preset title"
       title: "Τίτλος προεπιλογής",
       // [Auto-translated] "Filter expression"
-      expression: "Έκφραση φίλτρου"
+      expression: "Έκφραση φίλτρου",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Επιτρέψτε στους ερωτώμενους να επεξεργαστούν αυτήν την προεπιλογή",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Επιτρέψτε στους συμμετέχοντες να διαγράψουν αυτήν την προεπιλογή"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Όνομα πεδίου",
+      // [Auto-translated] "Field title"
+      title: "Τίτλος πεδίου",
+      // [Auto-translated] "Available operators"
+      operators: "Διαθέσιμοι τελεστές",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Εμφάνιση σε γρήγορα φίλτρα"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var grStrings = {
     "listIsEmpty@sortCriteria": "Χωρίς επίπεδα ταξινόμησης",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Χωρίς προεπιλογές",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Χωρίς πεδία",
     // "Add new choice"
     "addNew@choices": "Προσθήκη νέας επιλογής",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var grStrings = {
     "addNew@sortCriteria": "Προσθήκη επιπέδου ταξινόμησης",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Προσθήκη προεπιλογής",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Προσθήκη πεδίου",
     // "Value"
     value: "Τιμή",
     // "Text"
@@ -1790,6 +1830,8 @@ export var grStrings = {
       sliderSettings: "Ρυθμίσεις ρυθμιστικού",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Ρυθμίσεις Φίλτρου",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Προεπιλογές Φίλτρων",
       // "Choices from a Web Service"
       choicesByUrl: "Επιλογές από Web Service",
       // "Numbering"

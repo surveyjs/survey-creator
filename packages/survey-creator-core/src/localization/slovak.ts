@@ -822,10 +822,32 @@ export var skStrings = {
       expression: "Výraz"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Otázka na filtrovanie",
+      // [Auto-translated] "Fields"
+      fields: "Polia",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Zobraziť rýchle filtre",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Zobraziť vyhľadávací panel",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Polia na vyhľadávanie",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Vyhľadávanie zástupného textu",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Zobraziť tlačidlo Všetky filtre",
+      // [Auto-translated] "Filter presets"
+      presets: "Prednastavenia filtra",
       // [Auto-translated] "Default preset"
       defaultPreset: "Predvolené prednastavenie",
+      // [Auto-translated] "Show presets"
+      showPresets: "Zobraziť prednastavenia",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Povoliť respondentom upravovať prednastavenia",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Povoliť respondentom pridávať prednastavenia"
+      allowAddPresets: "Povoliť respondentom pridávať prednastavenia",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Povoliť respondentom vymazať prednastavenia"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var skStrings = {
       // [Auto-translated] "Preset title"
       title: "Prednastavený názov",
       // [Auto-translated] "Filter expression"
-      expression: "Výraz filtra"
+      expression: "Výraz filtra",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Povoliť respondentom upravovať toto prednastavenie",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Povoliť respondentom vymazať toto prednastavenie"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Názov poľa",
+      // [Auto-translated] "Field title"
+      title: "Názov ihriska",
+      // [Auto-translated] "Available operators"
+      operators: "Dostupní operátori",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Zobraziť v rýchlych filtroch"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var skStrings = {
     "listIsEmpty@sortCriteria": "Žiadne triedenie úrovní",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Žiadne prednastavenia",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Žiadne polia",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Pridajte výber",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var skStrings = {
     "addNew@sortCriteria": "Pridať úroveň triedenia",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Pridať prednastavenie",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Pridať pole",
     // "Value"
     value: "Hodnota",
     // [Auto-translated] "Text"
@@ -1790,6 +1830,8 @@ export var skStrings = {
       sliderSettings: "Nastavenia posuvníka",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Nastavenia filtra",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Prednastavenia filtra",
       // "Choices from a Web Service"
       choicesByUrl: "Možnosti z webu",
       // "Numbering"

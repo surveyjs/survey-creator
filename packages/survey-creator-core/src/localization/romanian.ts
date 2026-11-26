@@ -822,10 +822,32 @@ export const roStrings = {
       expression: "Expresie"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Întrebare de filtrat",
+      // [Auto-translated] "Fields"
+      fields: "Domenii",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Afișează filtre rapide",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Afișează bara de căutare",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Câmpuri de căutat",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Caută textul placeholder",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Afișează butonul Toate filtrele",
+      // [Auto-translated] "Filter presets"
+      presets: "Presetări de filtru",
       // [Auto-translated] "Default preset"
       defaultPreset: "Presetare implicită",
+      // [Auto-translated] "Show presets"
+      showPresets: "Afișează presetările",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Permiteți respondenților să editeze presetările",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Permiteți respondenților să adauge presetări"
+      allowAddPresets: "Permiteți respondenților să adauge presetări",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Permiteți respondenților să șteargă presetările"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export const roStrings = {
       // [Auto-translated] "Preset title"
       title: "Titlu presetat",
       // [Auto-translated] "Filter expression"
-      expression: "Expresie de filtru"
+      expression: "Expresie de filtru",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Permiteți respondenților să editeze această presetare",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Permiteți respondenților să șteargă această presetare"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Denumirea domeniului",
+      // [Auto-translated] "Field title"
+      title: "Titlul terenului",
+      // [Auto-translated] "Available operators"
+      operators: "Operatori disponibili",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Afișează în filtre rapide"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export const roStrings = {
     "listIsEmpty@sortCriteria": "Fără niveluri de sortare",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Fără presetări",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Fără câmpuri",
     // "Add new choice"
     "addNew@choices": "Adăugați o alegere nouă",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export const roStrings = {
     "addNew@sortCriteria": "Adaugă nivelul de sortare",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Adaugă preset",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Câmp Adaugă",
     // "Value"
     value: "Valoare",
     // [Auto-translated] "Text"
@@ -1790,6 +1830,8 @@ export const roStrings = {
       sliderSettings: "Setări glisor",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Setări filtru",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Presetări de filtru",
       // "Choices from a Web Service"
       choicesByUrl: "Alegeri dintr-un serviciu web",
       // "Numbering"

@@ -822,10 +822,32 @@ export var msStrings = {
       expression: "Ungkapan"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Soalan untuk ditapis",
+      // [Auto-translated] "Fields"
+      fields: "Medan",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Tunjukkan penapis pantas",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Tunjukkan bar carian",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Medan untuk dicari",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Cari teks tempat letak",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Paparkan butang Semua Penapis",
+      // [Auto-translated] "Filter presets"
+      presets: "Pratetap penapis",
       // [Auto-translated] "Default preset"
       defaultPreset: "Pratetap lalai",
+      // [Auto-translated] "Show presets"
+      showPresets: "Tunjukkan pratetap",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Benarkan responden mengedit pratetap",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Benarkan responden menambah pratetap"
+      allowAddPresets: "Benarkan responden menambah pratetap",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Benarkan responden memadam pratetap"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var msStrings = {
       // [Auto-translated] "Preset title"
       title: "Tajuk pratetap",
       // [Auto-translated] "Filter expression"
-      expression: "Ekspresi penapis"
+      expression: "Ekspresi penapis",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Benarkan responden mengedit pratetap ini",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Benarkan responden memadam pratetap ini"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Nama medan",
+      // [Auto-translated] "Field title"
+      title: "Gelaran medan",
+      // [Auto-translated] "Available operators"
+      operators: "Pengendali yang tersedia",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Tunjukkan dalam penapis pantas"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var msStrings = {
     "listIsEmpty@sortCriteria": "Tiada tahap pengisihan",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Tiada pratetap",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Tiada medan",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Tambah pilihan",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var msStrings = {
     "addNew@sortCriteria": "Tambah tahap pengisihan",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Tambah pratetap",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Medan Tambah",
     // "Value"
     value: "Nilai",
     // "Text"
@@ -1790,6 +1830,8 @@ export var msStrings = {
       sliderSettings: "Tetapan Gelangsar",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Tetapan Penapis",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Pratetap Penapis",
       // "Choices from a Web Service"
       choicesByUrl: "Pilihan daripada Web",
       // "Numbering"

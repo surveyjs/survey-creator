@@ -822,10 +822,32 @@ export var ruStrings = {
       expression: "Выражение"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Вопрос для фильтрации",
+      // [Auto-translated] "Fields"
+      fields: "Области",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Показать быстрые фильтры",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Показать строку поиска",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Поля для поиска",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Поиск текста-заполнителя",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Показать кнопку «Все фильтры»",
+      // [Auto-translated] "Filter presets"
+      presets: "Пресеты фильтров",
       // [Auto-translated] "Default preset"
       defaultPreset: "Предустановка по умолчанию",
+      // [Auto-translated] "Show presets"
+      showPresets: "Показать пресеты",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Разрешить респондентам редактировать пресеты",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Разрешить респондентам добавлять пресеты"
+      allowAddPresets: "Разрешить респондентам добавлять пресеты",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Разрешить респондентам удалять предустановки"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var ruStrings = {
       // [Auto-translated] "Preset title"
       title: "Название пресета",
       // [Auto-translated] "Filter expression"
-      expression: "Выражение фильтра"
+      expression: "Выражение фильтра",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Разрешить респондентам редактировать этот пресет",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Разрешить респондентам удалять этот пресет"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Название поля",
+      // [Auto-translated] "Field title"
+      title: "Полевое звание",
+      // [Auto-translated] "Available operators"
+      operators: "Доступные операторы",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Показать в быстрых фильтрах"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var ruStrings = {
     "listIsEmpty@sortCriteria": "Нет уровней сортировки",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Без пресетов",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Нет полей",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Добавьте выбор",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var ruStrings = {
     "addNew@sortCriteria": "Добавить уровень сортировки",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Добавить пресет",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Добавить поле",
     // "Value"
     value: "Значение",
     // "Text"
@@ -1790,6 +1830,8 @@ export var ruStrings = {
       sliderSettings: "Настройки слайдера",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Настройки фильтра",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Предустановки фильтров",
       // "Choices from a Web Service"
       choicesByUrl: "Выбор из Интернета",
       // [Auto-translated] "Numbering"

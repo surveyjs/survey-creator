@@ -822,10 +822,32 @@ export var nlStrings = {
       expression: "Uitdrukking"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Vraag om te filteren",
+      // [Auto-translated] "Fields"
+      fields: "Velden",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Snelle filters weergeven",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Zoekbalk weergeven",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Velden om te doorzoeken",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Zoek plaatsaanduidingstekst",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "De knop Alle filters weergeven",
+      // [Auto-translated] "Filter presets"
+      presets: "Filterpresets",
       // [Auto-translated] "Default preset"
       defaultPreset: "Standaardpreset",
+      // [Auto-translated] "Show presets"
+      showPresets: "Presets weergeven",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Sta respondenten toe om presets te bewerken",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Sta respondenten toe om presets toe te voegen"
+      allowAddPresets: "Sta respondenten toe om presets toe te voegen",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Sta respondenten toe om presets te verwijderen"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var nlStrings = {
       // [Auto-translated] "Preset title"
       title: "Vooraf ingestelde titel",
       // [Auto-translated] "Filter expression"
-      expression: "Filterexpressie"
+      expression: "Filterexpressie",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Sta respondenten toe deze preset te bewerken",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Sta respondenten toe deze preset te verwijderen"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Veldnaam",
+      // [Auto-translated] "Field title"
+      title: "Veldtitel",
+      // [Auto-translated] "Available operators"
+      operators: "Beschikbare operators",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Toon in snelle filters"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var nlStrings = {
     "listIsEmpty@sortCriteria": "Geen sort-levels",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Geen presets",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Geen velden",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Voeg keuze toe",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var nlStrings = {
     "addNew@sortCriteria": "Voeg sorteerniveau toe",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Preset toevoegen",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Veld toevoegen",
     // "Value"
     value: "Waarde",
     // "Text"
@@ -1790,6 +1830,8 @@ export var nlStrings = {
       sliderSettings: "Instellingen voor schuifregelaars",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Filterinstellingen",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Filterpresets",
       // "Choices from a Web Service"
       choicesByUrl: "Keuzes van internet",
       // "Numbering"

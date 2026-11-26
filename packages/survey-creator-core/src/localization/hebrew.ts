@@ -822,10 +822,32 @@ export var hebrewStrings = {
       expression: "ביטוי"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "שאלה לסינון",
+      // [Auto-translated] "Fields"
+      fields: "שדות",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "הצג מסננים מהירים",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "הצג שורת חיפוש",
+      // [Auto-translated] "Fields to search"
+      searchFields: "שדות לחיפוש",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "חיפוש טקסט במקום",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "הצג את כפתור כל המסננים",
+      // [Auto-translated] "Filter presets"
+      presets: "סינון פריסטים",
       // [Auto-translated] "Default preset"
       defaultPreset: "הגדרה מראש ברירת מחדל",
+      // [Auto-translated] "Show presets"
+      showPresets: "הצג פריסטים",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "אפשר למשיבים לערוך פריסטים",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "אפשר למשיבים להוסיף פריסטים"
+      allowAddPresets: "אפשר למשיבים להוסיף פריסטים",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "אפשר למשיבים למחוק פריסטים"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var hebrewStrings = {
       // [Auto-translated] "Preset title"
       title: "כותרת פריסט",
       // [Auto-translated] "Filter expression"
-      expression: "ביטוי מסנן"
+      expression: "ביטוי מסנן",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "אפשר למשיבים לערוך את ההגדרה המוקדמת הזו",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "אפשר למשיבים למחוק הגדרה מראש זו"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "שם השדה",
+      // [Auto-translated] "Field title"
+      title: "תואר השדה",
+      // [Auto-translated] "Available operators"
+      operators: "מפעילים זמינים",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "הצג במסננים מהירים"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var hebrewStrings = {
     "listIsEmpty@sortCriteria": "אין רמות מיון",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "ללא פריסטים",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "ללא שדות",
     // "Add new choice"
     "addNew@choices": "הוסף ברירת בחירה",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var hebrewStrings = {
     "addNew@sortCriteria": "הוספת רמת מיון",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "הוסף פריסט",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "שדה הוסף",
     // "Value"
     value: "ערך",
     // "Text"
@@ -1790,6 +1830,8 @@ export var hebrewStrings = {
       sliderSettings: "הגדרות מחוון",
       // [Auto-translated] "Filter Settings"
       filterSettings: "הגדרות סינון",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "הגדרות מסנן מראש",
       // "Choices from a Web Service"
       choicesByUrl: "בחירות משירות RESTful",
       // "Numbering"

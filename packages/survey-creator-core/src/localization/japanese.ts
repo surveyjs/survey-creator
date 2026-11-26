@@ -822,10 +822,32 @@ export var jaStrings = {
       expression: "表現"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "フィルターをかける質問",
+      // [Auto-translated] "Fields"
+      fields: "フィールド",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "クイックフィルターを表示",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "検索バーを表示",
+      // [Auto-translated] "Fields to search"
+      searchFields: "検索するフィールド",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "検索プレースホルダーテキスト",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "すべてのフィルターを表示ボタン",
+      // [Auto-translated] "Filter presets"
+      presets: "フィルタープリセット",
       // [Auto-translated] "Default preset"
       defaultPreset: "デフォルトプリセット",
+      // [Auto-translated] "Show presets"
+      showPresets: "プリセットを表示",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "回答者がプリセットを編集できるようにする",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "回答者がプリセットを追加できるようにする"
+      allowAddPresets: "回答者がプリセットを追加できるようにする",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "回答者がプリセットを削除できるようにする"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var jaStrings = {
       // [Auto-translated] "Preset title"
       title: "プリセットタイトル",
       // [Auto-translated] "Filter expression"
-      expression: "フィルター式"
+      expression: "フィルター式",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "回答者がこのプリセットを編集できるようにする",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "回答者がこのプリセットを削除できるようにする"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "フィールド名",
+      // [Auto-translated] "Field title"
+      title: "フィールドタイトル",
+      // [Auto-translated] "Available operators"
+      operators: "利用可能なオペレーター",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "クイックフィルターで表示"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var jaStrings = {
     "listIsEmpty@sortCriteria": "レベルはない",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "プリセットなし",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "フィールドなし",
     // [Auto-translated] "Add choice"
     "addNew@choices": "選択肢を加える",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var jaStrings = {
     "addNew@sortCriteria": "ソートレベルを追加",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "プリセットを追加",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "追加フィールド",
     // "Value"
     value: "値",
     // "Text"
@@ -1790,6 +1830,8 @@ export var jaStrings = {
       sliderSettings: "スライダー設定",
       // [Auto-translated] "Filter Settings"
       filterSettings: "フィルター設定",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "フィルタープリセット",
       // "Choices from a Web Service"
       choicesByUrl: "ウェブの選択",
       // "Numbering"

@@ -823,10 +823,32 @@ export var koreanStrings = {
       expression: "식"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "필터링할 질문",
+      // [Auto-translated] "Fields"
+      fields: "필드",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "빠른 필터 보기",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "검색 표시줄 보기",
+      // [Auto-translated] "Fields to search"
+      searchFields: "검색할 필드",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "검색 자리 표시자 텍스트",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "모든 필터 표시 버튼",
+      // [Auto-translated] "Filter presets"
+      presets: "필터 프리셋",
       // [Auto-translated] "Default preset"
       defaultPreset: "기본 프리셋",
+      // [Auto-translated] "Show presets"
+      showPresets: "프리셋 표시",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "응답자가 프리셋을 편집할 수 있도록 허용",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "응답자가 프리셋을 추가할 수 있도록 허용"
+      allowAddPresets: "응답자가 프리셋을 추가할 수 있도록 허용",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "응답자가 프리셋을 삭제할 수 있도록 허용"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -834,7 +856,21 @@ export var koreanStrings = {
       // [Auto-translated] "Preset title"
       title: "프리셋 제목",
       // [Auto-translated] "Filter expression"
-      expression: "필터 표현식"
+      expression: "필터 표현식",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "응답자가 이 프리셋을 편집할 수 있도록 허용하세요",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "응답자가 이 프리셋을 삭제할 수 있도록 허용합니다"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "필드 이름",
+      // [Auto-translated] "Field title"
+      title: "필드 타이틀",
+      // [Auto-translated] "Available operators"
+      operators: "사용 가능한 운영자",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "빠른 필터에서 표시"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1091,6 +1127,8 @@ export var koreanStrings = {
     "listIsEmpty@sortCriteria": "분류 없는 레벨",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "프리셋 없음",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "필드 없음",
     // [Auto-translated] "Add choice"
     "addNew@choices": "선택권 추가로",
     // [Auto-translated] "Add rating value"
@@ -1119,6 +1157,8 @@ export var koreanStrings = {
     "addNew@sortCriteria": "정렬 단계 추가",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "프리셋 추가",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "필드 추가",
     // "Value"
     value: "값",
     // "Text"
@@ -1791,6 +1831,8 @@ export var koreanStrings = {
       sliderSettings: "슬라이더 설정",
       // [Auto-translated] "Filter Settings"
       filterSettings: "필터 설정",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "필터 프리셋",
       // "Choices from a Web Service"
       choicesByUrl: "웹에서 선택",
       // [Auto-translated] "Numbering"

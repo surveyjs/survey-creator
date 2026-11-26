@@ -822,10 +822,32 @@ export var arStrings = {
       expression: "تعبير"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "سؤال للتصفية",
+      // [Auto-translated] "Fields"
+      fields: "الحقول",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "عرض الفلاتر السريعة",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "عرض شريط البحث",
+      // [Auto-translated] "Fields to search"
+      searchFields: "الحقول للبحث",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "البحث في نص العنصر النائب",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "عرض زر جميع الفلاتر",
+      // [Auto-translated] "Filter presets"
+      presets: "إعدادات الفلتر المسبقة",
       // [Auto-translated] "Default preset"
       defaultPreset: "الإعداد المسبق الافتراضي",
+      // [Auto-translated] "Show presets"
+      showPresets: "عرض الإعدادات المسبقة",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "السماح للمستجيبين بتعديل الإعدادات المسبقة",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "السماح للمستجيبين بإضافة إعدادات مسبقة"
+      allowAddPresets: "السماح للمستجيبين بإضافة إعدادات مسبقة",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "السماح للمستجيبين بحذف الإعدادات المسبقة"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var arStrings = {
       // [Auto-translated] "Preset title"
       title: "عنوان الإعداد المسبق",
       // [Auto-translated] "Filter expression"
-      expression: "تعبير المرشح"
+      expression: "تعبير المرشح",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "السماح للمستجيبين بتعديل هذا الإعداد المسبق",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "السماح للمستجيبين بحذف هذا الإعداد المسبق"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "اسم الحقل",
+      // [Auto-translated] "Field title"
+      title: "لقب الملعب",
+      // [Auto-translated] "Available operators"
+      operators: "المشغلون المتاحون",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "العرض في الفلاتر السريعة"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var arStrings = {
     "listIsEmpty@sortCriteria": "لا توجد مستويات فرز",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "لا إعدادات مسبقة",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "لا توجد حقول",
     // [Auto-translated] "Add choice"
     "addNew@choices": "إضافة الاختيار",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var arStrings = {
     "addNew@sortCriteria": "أضف مستوى الفرز",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "إضافة إعداد مسبق",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "إضافة حقل",
     // "Value"
     value: "القيمة",
     // "Text"
@@ -1790,6 +1830,8 @@ export var arStrings = {
       sliderSettings: "إعدادات شريط التمرير",
       // [Auto-translated] "Filter Settings"
       filterSettings: "إعدادات الفلتر",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "إعدادات الفلتر المسبقة",
       // "Choices from a Web Service"
       choicesByUrl: "خيارات من الإنترنت",
       // "Numbering"

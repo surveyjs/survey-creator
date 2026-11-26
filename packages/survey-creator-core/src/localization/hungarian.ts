@@ -822,10 +822,32 @@ export var huStrings = {
       expression: "Kifejezés"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Szűrendő kérdés",
+      // [Auto-translated] "Fields"
+      fields: "Mezők",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Gyors szűrők megjelenítése",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Keresősáv megjelenítése",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Keresendő mezők",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Helyőrző szöveg keresése",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Az Összes szűrő gomb megjelenítése",
+      // [Auto-translated] "Filter presets"
+      presets: "Előbeállítások szűrője",
       // [Auto-translated] "Default preset"
       defaultPreset: "Alapértelmezett előbeállítás",
+      // [Auto-translated] "Show presets"
+      showPresets: "Előbeállítások megjelenítése",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Engedélyezze a válaszadók az előbeállítások szerkesztését",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Engedélyezze a válaszadók számára az előbeállítások hozzáadását"
+      allowAddPresets: "Engedélyezze a válaszadók számára az előbeállítások hozzáadását",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Engedje meg a válaszadóknak az előbeállítások törlését"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var huStrings = {
       // [Auto-translated] "Preset title"
       title: "Előre beállított cím",
       // [Auto-translated] "Filter expression"
-      expression: "Szűrőkifejezés"
+      expression: "Szűrőkifejezés",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Engedélyezze a válaszadók számára az előbeállítás szerkesztését",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Engedélyezze a válaszadók számára ennek az előbeállításnak a törlését"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Mezőnév",
+      // [Auto-translated] "Field title"
+      title: "Mezőnybeli cím",
+      // [Auto-translated] "Available operators"
+      operators: "Elérhető operátorok",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Gyors szűrők megjelenítése"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var huStrings = {
     "listIsEmpty@sortCriteria": "Nincsenek sortozási szintek",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Nincsenek előbeállítások",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Nincsenek mezők",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Választási lehetőségek hozzáadása",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var huStrings = {
     "addNew@sortCriteria": "Szűrési szint hozzáadása",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Előbeállítás hozzáadása",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Mező hozzáadása",
     // "Value"
     value: "Érték",
     // "Text"
@@ -1790,6 +1830,8 @@ export var huStrings = {
       sliderSettings: "Csúszka beállításai",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Szűrőbeállítások",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Szűrőelőbeállítások",
       // "Choices from a Web Service"
       choicesByUrl: "Lehetőségek a webről",
       // [Auto-translated] "Numbering"

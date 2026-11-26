@@ -822,10 +822,32 @@ export var catalanTranslation = {
       expression: "Expressió"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Pregunta per filtrar",
+      // [Auto-translated] "Fields"
+      fields: "Camps",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Mostra filtres ràpids",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Mostra la barra de cerca",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Camps a cercar",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Cerca text marcador de posició",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Mostra el botó Tots els filtres",
+      // [Auto-translated] "Filter presets"
+      presets: "Presets de filtre",
       // [Auto-translated] "Default preset"
       defaultPreset: "Predefinició predeterminada",
+      // [Auto-translated] "Show presets"
+      showPresets: "Mostrar presets",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Permetre als enquestats editar presets",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Permetre als enquestats afegir presets"
+      allowAddPresets: "Permetre als enquestats afegir presets",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Permetre als respondents eliminar presets"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var catalanTranslation = {
       // [Auto-translated] "Preset title"
       title: "Títol predefinit",
       // [Auto-translated] "Filter expression"
-      expression: "Expressió del filtre"
+      expression: "Expressió del filtre",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Permetre als enquestats editar aquest predefinit",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Permetre als enquestats eliminar aquest predefinit"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Nom del camp",
+      // [Auto-translated] "Field title"
+      title: "Títol del camp",
+      // [Auto-translated] "Available operators"
+      operators: "Operadors disponibles",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Mostra en filtres ràpids"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var catalanTranslation = {
     "listIsEmpty@sortCriteria": "No hi ha nivells de sort",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Sense presets",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Sense camps",
     // "Add new choice"
     "addNew@choices": "Añade una opción",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var catalanTranslation = {
     "addNew@sortCriteria": "Afegeix nivell d'ordenació",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Afegeix un ajust predefinit",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Afegir camp",
     // "Value"
     value: "Valor",
     // [Auto-translated] "Text"
@@ -1790,6 +1830,8 @@ export var catalanTranslation = {
       sliderSettings: "Configuració del control deslizante",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Configuració del filtre",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Presets de filtre",
       // "Choices from a Web Service"
       choicesByUrl: "Opcions de la web",
       // "Numbering"

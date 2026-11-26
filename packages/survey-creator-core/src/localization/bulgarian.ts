@@ -822,10 +822,32 @@ export var bgStrings = {
       expression: "Изразяване"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Въпрос за филтриране",
+      // [Auto-translated] "Fields"
+      fields: "Полета",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Показване на бързи филтри",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Показване на лентата за търсене",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Полета за търсене",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Търсене на текст за заместване",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Покажи бутона Всички филтри",
+      // [Auto-translated] "Filter presets"
+      presets: "Филтърни предварителни настройки",
       // [Auto-translated] "Default preset"
       defaultPreset: "По подразбиране предварителна настройка",
+      // [Auto-translated] "Show presets"
+      showPresets: "Показване на предварителни настройки",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Позволете на респондентите да редактират предварителни настройки",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Позволете на респондентите да добавят предварителни настройки"
+      allowAddPresets: "Позволете на респондентите да добавят предварителни настройки",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Позволете на респондентите да изтриват предварителни настройки"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var bgStrings = {
       // [Auto-translated] "Preset title"
       title: "Заглавие на предварително зададена настройка",
       // [Auto-translated] "Filter expression"
-      expression: "Израз за филтър"
+      expression: "Израз за филтър",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Позволете на респондентите да редактират тази предварителна настройка",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Позволете на респондентите да изтрият тази предварителна настройка"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Име на полето",
+      // [Auto-translated] "Field title"
+      title: "Титла на полето",
+      // [Auto-translated] "Available operators"
+      operators: "Налични оператори",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Показване в бързи филтри"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var bgStrings = {
     "listIsEmpty@sortCriteria": "Няма нива на сортиране",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Без предварителни настройки",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Няма полета",
     // "Add new choice"
     "addNew@choices": "Добавяне на възможност за избор",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var bgStrings = {
     "addNew@sortCriteria": "Добавете ниво на сортиране",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Добавяне на предварителна настройка",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Добави поле",
     // "Value"
     value: "Стойност",
     // "Text"
@@ -1790,6 +1830,8 @@ export var bgStrings = {
       sliderSettings: "Настройки на плъзгача",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Настройки на филтъра",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Филтърни предварителни настройки",
       // "Choices from a Web Service"
       choicesByUrl: "Избор от услугата RESTful",
       // "Numbering"

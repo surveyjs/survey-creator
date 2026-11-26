@@ -822,10 +822,32 @@ export var indonesianStrings = {
       expression: "Ekspresi"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Pertanyaan untuk disaring",
+      // [Auto-translated] "Fields"
+      fields: "Bidang",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Tampilkan filter cepat",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Tampilkan bilah pencarian",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Bidang yang akan dicari",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Cari teks placeholder",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Tampilkan tombol Semua Filter",
+      // [Auto-translated] "Filter presets"
+      presets: "Preset filter",
       // [Auto-translated] "Default preset"
       defaultPreset: "Prasetel default",
+      // [Auto-translated] "Show presets"
+      showPresets: "Tampilkan preset",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Izinkan responden mengedit preset",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Izinkan responden menambahkan preset"
+      allowAddPresets: "Izinkan responden menambahkan preset",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Izinkan responden menghapus preset"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var indonesianStrings = {
       // [Auto-translated] "Preset title"
       title: "Judul preset",
       // [Auto-translated] "Filter expression"
-      expression: "Ekspresi filter"
+      expression: "Ekspresi filter",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Izinkan responden mengedit preset ini",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Izinkan responden menghapus preset ini"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Nama bidang",
+      // [Auto-translated] "Field title"
+      title: "Gelar Lapangan",
+      // [Auto-translated] "Available operators"
+      operators: "Operator yang tersedia",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Tampilkan di filter cepat"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var indonesianStrings = {
     "listIsEmpty@sortCriteria": "Tidak ada tingkat pengurutan",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Tidak ada preset",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Tidak ada bidang",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Tambahkan pilihan",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var indonesianStrings = {
     "addNew@sortCriteria": "Tambahkan tingkat pengurutan",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Tambahkan preset",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Kolom Tambah",
     // "Value"
     value: "Nilai",
     // "Text"
@@ -1790,6 +1830,8 @@ export var indonesianStrings = {
       sliderSettings: "Pengaturan Penggeser",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Pengaturan Filter",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Preset Filter",
       // "Choices from a Web Service"
       choicesByUrl: "Pilih dari Web",
       // [Auto-translated] "Numbering"

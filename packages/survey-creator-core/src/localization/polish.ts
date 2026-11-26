@@ -823,10 +823,32 @@ export var polishStrings = {
       expression: "Wyrażenie"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Pytanie do filtrowania",
+      // [Auto-translated] "Fields"
+      fields: "Dziedziny",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Pokaż szybkie filtry",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Pokaż pasek wyszukiwania",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Pola do wyszukiwania",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Wyszukaj tekst zastępczy",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Pokaż przycisk Wszystkie filtry",
+      // [Auto-translated] "Filter presets"
+      presets: "Presety filtrów",
       // [Auto-translated] "Default preset"
       defaultPreset: "Domyślny preset",
+      // [Auto-translated] "Show presets"
+      showPresets: "Pokaż presety",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Pozwól respondentom edytować ustawienia wstępne",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Pozwól respondentom na dodawanie ustawień wstępnych"
+      allowAddPresets: "Pozwól respondentom na dodawanie ustawień wstępnych",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Pozwól respondentom usuwać ustawienia wstępne"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -834,7 +856,21 @@ export var polishStrings = {
       // [Auto-translated] "Preset title"
       title: "Tytuł presetu",
       // [Auto-translated] "Filter expression"
-      expression: "Wyrażenie filtra"
+      expression: "Wyrażenie filtra",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Zezwól respondentom na edycję tego ustawienia wstępnego",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Zezwól respondentom na usunięcie tego ustawienia wstępnego"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Nazwa pola",
+      // [Auto-translated] "Field title"
+      title: "Tytuł boiska",
+      // [Auto-translated] "Available operators"
+      operators: "Dostępne operatorzy",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Pokaż w szybkich filtrach"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1091,6 +1127,8 @@ export var polishStrings = {
     "listIsEmpty@sortCriteria": "Brak poziomów sortowania",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Brak presetów",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Brak pól",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Dodaj wybór",
     // [Auto-translated] "Add rating value"
@@ -1119,6 +1157,8 @@ export var polishStrings = {
     "addNew@sortCriteria": "Dodaj poziom sortowania",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Dodaj preset",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Dodaj pole",
     // "Value"
     value: "Wartość",
     // "Text"
@@ -1791,6 +1831,8 @@ export var polishStrings = {
       sliderSettings: "Ustawienia suwaka",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Ustawienia filtra",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Presety filtrów",
       // "Choices from a Web Service"
       choicesByUrl: "Odpowiedzi z webserwisu",
       // [Auto-translated] "Numbering"

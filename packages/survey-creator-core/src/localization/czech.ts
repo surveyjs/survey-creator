@@ -822,10 +822,32 @@ export var czStrings = {
       expression: "Výraz"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Otázka k filtrování",
+      // [Auto-translated] "Fields"
+      fields: "Pole",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Zobrazit rychlé filtry",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Zobrazit vyhledávací lištu",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Pole k vyhledávání",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Hledat zástupný text",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Zobrazit tlačítko Všechny filtry",
+      // [Auto-translated] "Filter presets"
+      presets: "Přednastavení filtrů",
       // [Auto-translated] "Default preset"
       defaultPreset: "Výchozí přednastavení",
+      // [Auto-translated] "Show presets"
+      showPresets: "Zobrazit přednastavení",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Umožnit respondentům upravovat přednastavení",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Umožnit respondentům přidávat předvolby"
+      allowAddPresets: "Umožnit respondentům přidávat předvolby",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Povolit respondentům mazat předvolby"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var czStrings = {
       // [Auto-translated] "Preset title"
       title: "Přednastavený název",
       // [Auto-translated] "Filter expression"
-      expression: "Výraz filtru"
+      expression: "Výraz filtru",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Povolit respondentům upravovat toto přednastavení",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Povolit respondentům smazat toto přednastavení"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Název pole",
+      // [Auto-translated] "Field title"
+      title: "Název hřiště",
+      // [Auto-translated] "Available operators"
+      operators: "Dostupní operátoři",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Zobrazit v rychlých filtrech"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var czStrings = {
     "listIsEmpty@sortCriteria": "Žádné úrovně třídění",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Žádné přednastavení",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Žádná pole",
     // "Add new choice"
     "addNew@choices": "Přidat volbu",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var czStrings = {
     "addNew@sortCriteria": "Přidat úroveň třídění",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Přidat přednastavení",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Přidat pole",
     // "Value"
     value: "Hodnota",
     // [Auto-translated] "Text"
@@ -1790,6 +1830,8 @@ export var czStrings = {
       sliderSettings: "Nastavení posuvníku",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Nastavení filtru",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Přednastavení filtrů",
       // "Choices from a Web Service"
       choicesByUrl: "Volby z webu",
       // "Numbering"

@@ -823,10 +823,32 @@ export var traditionalChineseTranslation = {
       expression: "表達"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "篩選問題",
+      // [Auto-translated] "Fields"
+      fields: "場地",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "顯示快速篩選",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "顯示搜尋欄",
+      // [Auto-translated] "Fields to search"
+      searchFields: "要搜尋的欄位",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "搜尋佔位符文字",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "顯示所有篩選器按鈕",
+      // [Auto-translated] "Filter presets"
+      presets: "篩選預設",
       // [Auto-translated] "Default preset"
       defaultPreset: "預設預設",
+      // [Auto-translated] "Show presets"
+      showPresets: "顯示預設",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "允許回應者編輯預設",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "允許受訪者新增預設"
+      allowAddPresets: "允許受訪者新增預設",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "允許受訪者刪除預設"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -834,7 +856,21 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Preset title"
       title: "預設標題",
       // [Auto-translated] "Filter expression"
-      expression: "篩選表達式"
+      expression: "篩選表達式",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "允許受訪者編輯此預設",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "允許回應者刪除此預設"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "田名",
+      // [Auto-translated] "Field title"
+      title: "賽事名稱",
+      // [Auto-translated] "Available operators"
+      operators: "可用營運商",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "快速篩選顯示"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1091,6 +1127,8 @@ export var traditionalChineseTranslation = {
     "listIsEmpty@sortCriteria": "無分類等級",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "無預設",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "無欄位",
     // [Auto-translated] "Add choice"
     "addNew@choices": "增加選擇",
     // [Auto-translated] "Add rating value"
@@ -1119,6 +1157,8 @@ export var traditionalChineseTranslation = {
     "addNew@sortCriteria": "新增排序層級",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "新增預設",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "新增欄位",
     // "Value"
     value: "值",
     // "Text"
@@ -1791,6 +1831,8 @@ export var traditionalChineseTranslation = {
       sliderSettings: "滑塊設置",
       // [Auto-translated] "Filter Settings"
       filterSettings: "篩選條件設定",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "濾鏡預設",
       // "Choices from a Web Service"
       choicesByUrl: "通過 URL 導入選項",
       // [Auto-translated] "Numbering"

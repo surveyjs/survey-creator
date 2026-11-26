@@ -822,10 +822,32 @@ export var frenchTranslation = {
       expression: "Expression"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Question à filtrer",
+      // [Auto-translated] "Fields"
+      fields: "Domaines",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Afficher les filtres rapides",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Afficher la barre de recherche",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Champs à rechercher",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Rechercher du texte de place positif",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Afficher le bouton Tous les filtres",
+      // [Auto-translated] "Filter presets"
+      presets: "Préréglages de filtre",
       // [Auto-translated] "Default preset"
       defaultPreset: "Préréglage par défaut",
+      // [Auto-translated] "Show presets"
+      showPresets: "Afficher les préréglages",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Autoriser les répondants à modifier les préréglages",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Autoriser les répondants à ajouter des préréglages"
+      allowAddPresets: "Autoriser les répondants à ajouter des préréglages",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Autoriser les répondants à supprimer des préréglages"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var frenchTranslation = {
       // [Auto-translated] "Preset title"
       title: "Titre prédéfini",
       // [Auto-translated] "Filter expression"
-      expression: "Expression du filtre"
+      expression: "Expression du filtre",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Autoriser les répondants à modifier ce préréglage",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Autoriser les répondants à supprimer ce préréglage"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Nom du champ",
+      // [Auto-translated] "Field title"
+      title: "Titre du terrain",
+      // [Auto-translated] "Available operators"
+      operators: "Opérateurs disponibles",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Afficher dans des filtres rapides"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var frenchTranslation = {
     "listIsEmpty@sortCriteria": "Aucun niveau de tri",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Pas de préréglages",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Pas de champs",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Ajouter le choix",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var frenchTranslation = {
     "addNew@sortCriteria": "Ajouter le niveau de tri",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Ajouter un préréglage",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Ajouter un champ",
     // "Value"
     value: "Valeur",
     // "Text"
@@ -1790,6 +1830,8 @@ export var frenchTranslation = {
       sliderSettings: "Paramètres du curseur",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Paramètres du filtre",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Préréglages de filtre",
       // "Choices from a Web Service"
       choicesByUrl: "Choix depuis API web",
       // [Auto-translated] "Numbering"

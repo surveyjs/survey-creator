@@ -822,10 +822,32 @@ export var mnStrings = {
       expression: "Өгүүлбэр"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Шүүлтүүр хийх асуулт",
+      // [Auto-translated] "Fields"
+      fields: "Талбарууд",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Хурдан шүүлтүүрүүдийг харуулах",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Хайлтын мөрийг харуулах",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Хайх талбарууд",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Орлуулагч текстийг хайх",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Бүх шүүлтүүрүүд товчийг харуулах",
+      // [Auto-translated] "Filter presets"
+      presets: "Шүүлтүүрийн урьдчилсан тохиргоонууд",
       // [Auto-translated] "Default preset"
       defaultPreset: "Анхдагч урьдчилсан тохиргоо",
+      // [Auto-translated] "Show presets"
+      showPresets: "Урьдчилсан тохиргоог харуулах",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Хариулагчдад урьдчилсан тохиргоог засах боломж олгох",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Оролцогчдод урьдчилсан тохиргоо нэмэхийг зөвшөөрөх"
+      allowAddPresets: "Оролцогчдод урьдчилсан тохиргоо нэмэхийг зөвшөөрөх",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Хариулагчдад урьдчилсан тохиргоог устгахыг зөвшөөрөх"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var mnStrings = {
       // [Auto-translated] "Preset title"
       title: "Урьдчилсан тохиргооны гарчиг",
       // [Auto-translated] "Filter expression"
-      expression: "Шүүлтүүрийн илэрхийлэл"
+      expression: "Шүүлтүүрийн илэрхийлэл",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Хариулагчдад энэ тохиргоог засварлахыг зөвшөөрөх",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Оролцогчдод энэ тохиргоог устгахыг зөвшөөрөх"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Талбарын нэр",
+      // [Auto-translated] "Field title"
+      title: "Талбайн аварга",
+      // [Auto-translated] "Available operators"
+      operators: "Боломжит операторууд",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Хурдан шүүлтүүрээр харуулах"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var mnStrings = {
     "listIsEmpty@sortCriteria": "Сортлох түвшин байхгүй",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Урьдчилсан тохиргоо байхгүй",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Талбар байхгүй",
     // "Add new choice"
     "addNew@choices": "Сонголт оруулах",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var mnStrings = {
     "addNew@sortCriteria": "Сорт түвшин нэмэх",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Урьдчилсан тохиргоо нэмэх",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Талбар нэмэх",
     // "Value"
     value: "Утга",
     // "Text"
@@ -1790,6 +1830,8 @@ export var mnStrings = {
       sliderSettings: "Слайдерын тохиргоо",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Шүүлтүүрийн тохиргоо",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Шүүлтүүрийн урьдчилсан тохиргоонууд",
       // "Choices from a Web Service"
       choicesByUrl: "RESTful сервисийн сонголтууд",
       // "Numbering"

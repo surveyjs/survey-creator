@@ -822,10 +822,32 @@ export var nbStrings = {
       expression: "Uttrykk"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Spørsmål som skal filtreres",
+      // [Auto-translated] "Fields"
+      fields: "Felter",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Vis hurtigfiltre",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Vis søkefelt",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Felt å søke i",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Søk i plassholdertekst",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Vis knappen for alle filtre",
+      // [Auto-translated] "Filter presets"
+      presets: "Filterforhåndsinnstillinger",
       // [Auto-translated] "Default preset"
       defaultPreset: "Standard forhåndsinnstilling",
+      // [Auto-translated] "Show presets"
+      showPresets: "Vis forhåndsinnstillinger",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Tillat respondenter å redigere forhåndsinnstillinger",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Tillat respondenter å legge til forhåndsinnstillinger"
+      allowAddPresets: "Tillat respondenter å legge til forhåndsinnstillinger",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Tillat respondenter å slette forhåndsinnstillinger"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var nbStrings = {
       // [Auto-translated] "Preset title"
       title: "Forhåndsbestemt tittel",
       // [Auto-translated] "Filter expression"
-      expression: "Filteruttrykk"
+      expression: "Filteruttrykk",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Tilat respondenter å redigere denne forhåndsinnstillingen",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Tillat respondenter å slette denne forhåndsinnstillingen"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Feltnavn",
+      // [Auto-translated] "Field title"
+      title: "Felttittel",
+      // [Auto-translated] "Available operators"
+      operators: "Tilgjengelige operatører",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Vis i hurtigfiltre"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var nbStrings = {
     "listIsEmpty@sortCriteria": "Ingen sorteringsnivåer",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Ingen forhåndsinnstillinger",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Ingen felt",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Legg til valg",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var nbStrings = {
     "addNew@sortCriteria": "Legg til sorteringsnivå",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Legg til forhåndsinnstilling",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Legg til felt",
     // "Value"
     value: "Verdi",
     // "Text"
@@ -1790,6 +1830,8 @@ export var nbStrings = {
       sliderSettings: "Innstillinger for glidebryter",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Filterinnstillinger",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Filterforhåndsinnstillinger",
       // "Choices from a Web Service"
       choicesByUrl: "Valg fra web",
       // "Numbering"

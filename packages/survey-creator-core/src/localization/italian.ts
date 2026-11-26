@@ -822,10 +822,32 @@ export var italianTranslation = {
       expression: "Espressione"
     },
     filter: {
+      // [Auto-translated] "Question to filter"
+      targetQuestion: "Domanda da filtrare",
+      // [Auto-translated] "Fields"
+      fields: "Campi",
+      // [Auto-translated] "Show quick filters"
+      showQuickFilters: "Mostra filtri rapidi",
+      // [Auto-translated] "Show search bar"
+      showSearchBar: "Mostra barra di ricerca",
+      // [Auto-translated] "Fields to search"
+      searchFields: "Campi da cercare",
+      // [Auto-translated] "Search placeholder text"
+      searchPlaceholder: "Cerca testo segnaposto",
+      // [Auto-translated] "Show the All Filters button"
+      showAllFiltersButton: "Mostra il pulsante Tutti i filtri",
+      // [Auto-translated] "Filter presets"
+      presets: "Preimpostazioni del filtro",
       // [Auto-translated] "Default preset"
       defaultPreset: "Preimpostazione predefinita",
+      // [Auto-translated] "Show presets"
+      showPresets: "Mostra preset",
+      // [Auto-translated] "Allow respondents to edit presets"
+      allowEditPresets: "Consenti ai rispondenti di modificare i preset",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddPresets: "Consenti ai rispondenti di aggiungere preset"
+      allowAddPresets: "Consenti ai rispondenti di aggiungere preset",
+      // [Auto-translated] "Allow respondents to delete presets"
+      allowDeletePresets: "Consentire ai rispondenti di eliminare i preset"
     },
     filterpreset: {
       // [Auto-translated] "Preset name"
@@ -833,7 +855,21 @@ export var italianTranslation = {
       // [Auto-translated] "Preset title"
       title: "Titolo preimpostato",
       // [Auto-translated] "Filter expression"
-      expression: "Espressione del filtro"
+      expression: "Espressione del filtro",
+      // [Auto-translated] "Allow respondents to edit this preset"
+      allowEdit: "Consenti ai rispondenti di modificare questo preset",
+      // [Auto-translated] "Allow respondents to delete this preset"
+      allowDelete: "Consentire ai rispondenti di eliminare questo preset"
+    },
+    filterfield: {
+      // [Auto-translated] "Field name"
+      name: "Nome del campo",
+      // [Auto-translated] "Field title"
+      title: "Titolo del campo",
+      // [Auto-translated] "Available operators"
+      operators: "Operatori disponibili",
+      // [Auto-translated] "Show in quick filters"
+      showInQuickFilters: "Mostra in filtri rapidi"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -1090,6 +1126,8 @@ export var italianTranslation = {
     "listIsEmpty@sortCriteria": "Nessun livello di sorting",
     // [Auto-translated] "No presets"
     "listIsEmpty@filterPresets": "Nessun preset",
+    // [Auto-translated] "No fields"
+    "listIsEmpty@filterFields": "Nessun campo",
     // "Add new choice"
     "addNew@choices": "Aggiungi una scelta",
     // [Auto-translated] "Add rating value"
@@ -1118,6 +1156,8 @@ export var italianTranslation = {
     "addNew@sortCriteria": "Aggiungi livello di ordinamento",
     // [Auto-translated] "Add preset"
     "addNew@filterPresets": "Aggiungi preset",
+    // [Auto-translated] "Add field"
+    "addNew@filterFields": "Aggiungi campo",
     // "Value"
     value: "Valore",
     // "Text"
@@ -1790,6 +1830,8 @@ export var italianTranslation = {
       sliderSettings: "Impostazioni del dispositivo di scorrimento",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Impostazioni del filtro",
+      // [Auto-translated] "Filter Presets"
+      filterPresets: "Preimpostazioni del filtro",
       // "Choices from a Web Service"
       choicesByUrl: "Opzioni da URL",
       // "Numbering"
