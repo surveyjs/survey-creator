@@ -438,22 +438,32 @@ export var enStrings = {
       expression: "Expression"
     },
     filter: {
-      source: "Data source",
-      allowFastMode: "Show filter chips",
-      allowAdvancedMode: "Show the Filters button",
-      showSearch: "Show search",
-      searchFields: "Search in",
-      items: "Presets",
-      defaultItem: "Default preset",
-      allowMultipleItems: "Allow multiple presets",
-      allowAddItems: "Allow respondents to add presets"
+      targetQuestion: "Question to filter",
+      fields: "Fields",
+      showQuickFilters: "Show quick filters",
+      showSearchBar: "Show search bar",
+      searchFields: "Fields to search",
+      searchPlaceholder: "Search placeholder text",
+      showAllFiltersButton: "Show the All Filters button",
+      presets: "Filter presets",
+      defaultPreset: "Default preset",
+      showPresets: "Show presets",
+      allowEditPresets: "Allow respondents to edit presets",
+      allowAddPresets: "Allow respondents to add presets",
+      allowDeletePresets: "Allow respondents to delete presets"
     },
-    filteritem: {
+    filterpreset: {
       name: "Preset name",
       title: "Preset title",
       expression: "Filter expression",
-      allowEdit: "Allow editing",
-      allowDelete: "Allow deleting"
+      allowEdit: "Allow respondents to edit this preset",
+      allowDelete: "Allow respondents to delete this preset"
+    },
+    filterfield: {
+      name: "Field name",
+      title: "Field title",
+      operators: "Available operators",
+      showInQuickFilters: "Show in quick filters"
     },
     sortcriterion: {
       field: "Sort by",
@@ -491,8 +501,7 @@ export var enStrings = {
       visibleIf: "Make the column visible if",
       requiredIf: "Make the column required if",
       showInMultipleColumns: "Each option in a separate column",
-      allowSort: "Allow sorting by this column",
-      allowFiltering: "Allow filtering by this column"
+      allowSort: "Allow sorting by this column"
     },
     matrixcolumn: {
       isExclusive: "Clear others in the same row"
@@ -597,7 +606,8 @@ export var enStrings = {
     "listIsEmpty@navigateToUrlOnCondition": "No links",
     "listIsEmpty@pages": "No pages",
     "listIsEmpty@sortCriteria": "No sort levels",
-    "listIsEmpty@filterItems": "No presets",
+    "listIsEmpty@filterPresets": "No presets",
+    "listIsEmpty@filterFields": "No fields",
     "addNew@choices": "Add choice",
     "addNew@rateValues": "Add rating value",
     "addNew@customLabels": "Add label",
@@ -611,7 +621,8 @@ export var enStrings = {
     "addNew@navigateToUrlOnCondition": "Add link",
     "addNew@pages": "Add page",
     "addNew@sortCriteria": "Add sort level",
-    "addNew@filterItems": "Add preset",
+    "addNew@filterPresets": "Add preset",
+    "addNew@filterFields": "Add field",
     value: "Value",
     text: "Text",
     imageLink: "Image or video file URL",
@@ -670,8 +681,6 @@ export var enStrings = {
     rowCount: "Initial number of rows",
     pageSize: "Rows per page",
     allowSort: "Allow users to sort rows",
-    allowFiltering: "Allow filtering by this question",
-    filterOperators: "Filter operators",
     maxSortLevel: "Maximum sort levels",
     sortCriteria: "Default sort order",
     showSortBar: "Show sort bar",
@@ -964,7 +973,7 @@ export var enStrings = {
       rateValues: "Rating Values",
       sliderSettings: "Slider Settings",
       filterSettings: "Filter Settings",
-      presets: "Presets",
+      filterPresets: "Filter Presets",
       choicesByUrl: "Choices from a Web Service",
       numbering: "Numbering",
       validators: "Validators",
@@ -1677,13 +1686,15 @@ export var enStrings = {
       progressBarLocation: "Sets the location of the progress bar. The \"Auto\" value displays the progress bar above or below the survey header."
     },
     filter: {
-      source: "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down.",
-      defaultItem: "The preset applied when the survey starts."
+      targetQuestion: "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down.",
+      defaultPreset: "The preset applied when the survey starts."
     },
-    filteritem: {
+    filterpreset: {
       expression: "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
     },
-    filterOperators: "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field.",
+    filterfield: {
+      operators: "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+    },
     matrixdropdowncolumn: {
       name: "A column ID that is not visible to respondents.",
       isUnique: "When enabled for a column, a respondent is required to provide a unique response for each question within this column.",

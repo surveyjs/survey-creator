@@ -822,36 +822,18 @@ export var fiStrings = {
       expression: "Lauseke"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Tietolähde",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Näytä suodatinpiirit",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Näytä Suodattimet-painike",
-      // [Auto-translated] "Show search"
-      showSearch: "Näytä haku",
-      // [Auto-translated] "Search in"
-      searchFields: "Hae",
-      // [Auto-translated] "Presets"
-      items: "Esiasetukset",
       // [Auto-translated] "Default preset"
-      defaultItem: "Oletusesiasetus",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Salli useita esiasetuksia",
+      defaultPreset: "Oletusesiasetus",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Salli vastaajien lisätä esiasetuksia"
+      allowAddPresets: "Salli vastaajien lisätä esiasetuksia"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Esiasetuksen nimi",
       // [Auto-translated] "Preset title"
       title: "Esiasetettu otsikko",
       // [Auto-translated] "Filter expression"
-      expression: "Suodatinlauseke",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Salli muokkaus",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Salli poistaminen"
+      expression: "Suodatinlauseke"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +896,7 @@ export var fiStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Jokainen vaihtoehto erillisessä sarakkeessa",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Salli lajittelu tämän sarakkeen mukaan",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Salli suodatus tämän sarakkeen mukaan"
+      allowSort: "Salli lajittelu tämän sarakkeen mukaan"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1089,7 @@ export var fiStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Ei lajittelutasoja",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Ei esiasetuksia",
+    "listIsEmpty@filterPresets": "Ei esiasetuksia",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Lisää valinta",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1117,7 @@ export var fiStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Lisää lajittelutaso",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Lisää esiasetus",
+    "addNew@filterPresets": "Lisää esiasetus",
     // "Value"
     value: "Arvo",
     // "Text"
@@ -1252,10 +1232,6 @@ export var fiStrings = {
     pageSize: "Rivit per sivu",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Salli käyttäjien lajitella rivejä",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Salli suodatus tämän kysymyksen perusteella",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Suodatinoperaattorit",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksimilajittelutasot",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1790,6 @@ export var fiStrings = {
       sliderSettings: "Liukusäätimen asetukset",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Suodatinasetukset",
-      // [Auto-translated] "Presets"
-      presets: "Esiasetukset",
       // "Choices from a Web Service"
       choicesByUrl: "Valintoja verkosta",
       // "Numbering"
@@ -3088,16 +3062,18 @@ export var fiStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Valitse dynaaminen matriisi, pudotusvalikko tai dynaaminen paneeli, jonka rivejä tai paneeleja suodatin kaventaa.",
+      targetQuestion: "Valitse dynaaminen matriisi, pudotusvalikko tai dynaaminen paneeli, jonka rivejä tai paneeleja suodatin kaventaa.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Esiasetus otetaan käyttöön kyselyn alkaessa."
+      defaultPreset: "Esiasetus otetaan käyttöön kyselyn alkaessa."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Käytä kenttien nimiä kiharoissa sulkeissa, esimerkiksi: {price} < 20 ja {category} jokin ['Juomat']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Rajoitukset, joita vastaajat voivat käyttää suodattaakseen tämän kentän perusteella. Jätä tyhjäksi, jotta kaikki kenttään sopivat operaattorit sallitaan.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Rajoitukset, joita vastaajat voivat käyttää suodattaakseen tämän kentän perusteella. Jätä tyhjäksi, jotta kaikki kenttään sopivat operaattorit sallitaan."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Sarakkeen tunnus, joka ei näy vastaajille.",

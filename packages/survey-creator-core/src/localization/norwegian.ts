@@ -822,36 +822,18 @@ export var nbStrings = {
       expression: "Uttrykk"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Datakilde",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Vis filterbrikker",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Vis Filter-knappen",
-      // [Auto-translated] "Show search"
-      showSearch: "Vis søk",
-      // [Auto-translated] "Search in"
-      searchFields: "Søk i",
-      // [Auto-translated] "Presets"
-      items: "Forhåndsinnstillinger",
       // [Auto-translated] "Default preset"
-      defaultItem: "Standard forhåndsinnstilling",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Tillat flere forhåndsinnstillinger",
+      defaultPreset: "Standard forhåndsinnstilling",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Tillat respondenter å legge til forhåndsinnstillinger"
+      allowAddPresets: "Tillat respondenter å legge til forhåndsinnstillinger"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Forhåndsinnstilt navn",
       // [Auto-translated] "Preset title"
       title: "Forhåndsbestemt tittel",
       // [Auto-translated] "Filter expression"
-      expression: "Filteruttrykk",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Tillat redigering",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Tillat sletting"
+      expression: "Filteruttrykk"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +896,7 @@ export var nbStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Hvert alternativ i en egen kolonne",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Tillat sortering etter denne kolonnen",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Tillat filtrering etter denne kolonnen"
+      allowSort: "Tillat sortering etter denne kolonnen"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1089,7 @@ export var nbStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Ingen sorteringsnivåer",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Ingen forhåndsinnstillinger",
+    "listIsEmpty@filterPresets": "Ingen forhåndsinnstillinger",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Legg til valg",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1117,7 @@ export var nbStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Legg til sorteringsnivå",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Legg til forhåndsinnstilling",
+    "addNew@filterPresets": "Legg til forhåndsinnstilling",
     // "Value"
     value: "Verdi",
     // "Text"
@@ -1252,10 +1232,6 @@ export var nbStrings = {
     pageSize: "Rader per side",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "La brukere sortere rader",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Tillat filtrering etter dette spørsmålet",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Filteroperatører",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksimale sorteringsnivåer",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1790,6 @@ export var nbStrings = {
       sliderSettings: "Innstillinger for glidebryter",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Filterinnstillinger",
-      // [Auto-translated] "Presets"
-      presets: "Forhåndsinnstillinger",
       // "Choices from a Web Service"
       choicesByUrl: "Valg fra web",
       // "Numbering"
@@ -3088,16 +3062,18 @@ export var nbStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Velg en dynamisk matrise, en nedtrekksmenymatrise eller et dynamisk panel hvor filteret snevrer inn radene eller panelene.",
+      targetQuestion: "Velg en dynamisk matrise, en nedtrekksmenymatrise eller et dynamisk panel hvor filteret snevrer inn radene eller panelene.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Forhåndsinnstillingen som gjelder når undersøkelsen starter."
+      defaultPreset: "Forhåndsinnstillingen som gjelder når undersøkelsen starter."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Bruk feltnavn i krøllete parenteser, for eksempel: {price} < 20 og {category} any of ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Begrenser hvilke operatorer respondentene kan bruke for å filtrere etter dette feltet. La det være tomt for å tillate alle operatorer som passer til feltet.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Begrenser hvilke operatorer respondentene kan bruke for å filtrere etter dette feltet. La det være tomt for å tillate alle operatorer som passer til feltet."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "En kolonne-ID som ikke er synlig for respondentene.",

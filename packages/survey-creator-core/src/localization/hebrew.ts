@@ -822,36 +822,18 @@ export var hebrewStrings = {
       expression: "ביטוי"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "מקור הנתונים",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "הצג שבבי סינון",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "הצג את כפתור המסננים",
-      // [Auto-translated] "Show search"
-      showSearch: "הצג חיפוש",
-      // [Auto-translated] "Search in"
-      searchFields: "חפש ב",
-      // [Auto-translated] "Presets"
-      items: "פריסטים",
       // [Auto-translated] "Default preset"
-      defaultItem: "הגדרה מראש ברירת מחדל",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "אפשר פריסטים מרובים",
+      defaultPreset: "הגדרה מראש ברירת מחדל",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "אפשר למשיבים להוסיף פריסטים"
+      allowAddPresets: "אפשר למשיבים להוסיף פריסטים"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "שם פריסט",
       // [Auto-translated] "Preset title"
       title: "כותרת פריסט",
       // [Auto-translated] "Filter expression"
-      expression: "ביטוי מסנן",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "אפשר עריכה",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "אפשר מחיקה"
+      expression: "ביטוי מסנן"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +896,7 @@ export var hebrewStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "כל אפשרות בעמודה נפרדת",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "אפשר מיון לפי עמודה זו",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "אפשר סינון לפי עמודה זו"
+      allowSort: "אפשר מיון לפי עמודה זו"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1089,7 @@ export var hebrewStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "אין רמות מיון",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "ללא פריסטים",
+    "listIsEmpty@filterPresets": "ללא פריסטים",
     // "Add new choice"
     "addNew@choices": "הוסף ברירת בחירה",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1117,7 @@ export var hebrewStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "הוספת רמת מיון",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "הוסף פריסט",
+    "addNew@filterPresets": "הוסף פריסט",
     // "Value"
     value: "ערך",
     // "Text"
@@ -1252,10 +1232,6 @@ export var hebrewStrings = {
     pageSize: "שורות בעמוד",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "אפשר למשתמשים למיין שורות",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "אפשר סינון לפי שאלה זו",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "מפעילי סינון",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "רמות מיון מקסימליות",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1790,6 @@ export var hebrewStrings = {
       sliderSettings: "הגדרות מחוון",
       // [Auto-translated] "Filter Settings"
       filterSettings: "הגדרות סינון",
-      // [Auto-translated] "Presets"
-      presets: "פריסטים",
       // "Choices from a Web Service"
       choicesByUrl: "בחירות משירות RESTful",
       // "Numbering"
@@ -3088,16 +3062,18 @@ export var hebrewStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "בחר מטריצה דינמית, מטריצה נפתחת או לוח דינמי שהמסנן מצמצם את השורות או הלוחות שלו.",
+      targetQuestion: "בחר מטריצה דינמית, מטריצה נפתחת או לוח דינמי שהמסנן מצמצם את השורות או הלוחות שלו.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "ההגדרה המוקדמת שהוחלה כאשר הסקר מתחיל."
+      defaultPreset: "ההגדרה המוקדמת שהוחלה כאשר הסקר מתחיל."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "השתמש בשמות שדות בסוגריים מסולסלים, לדוגמה: {price} < 20 ו-{category} כל אחד מ-['משקאות']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "מגביל את האופרטורים שהמשיבים יכולים להשתמש בהם כדי לסנן לפי שדה זה. השאר ריק כדי לאפשר לכל האופרטורים המתאימים לשדה.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "מגביל את האופרטורים שהמשיבים יכולים להשתמש בהם כדי לסנן לפי שדה זה. השאר ריק כדי לאפשר לכל האופרטורים המתאימים לשדה."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "מזהה עמודה שאינו גלוי למשיבים.",

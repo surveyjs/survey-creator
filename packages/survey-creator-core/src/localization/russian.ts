@@ -822,36 +822,18 @@ export var ruStrings = {
       expression: "Выражение"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Источник данных",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Показать фильтрующие чипы",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Показать кнопку «Фильтры»",
-      // [Auto-translated] "Show search"
-      showSearch: "Показать поиск",
-      // [Auto-translated] "Search in"
-      searchFields: "Поиск в",
-      // [Auto-translated] "Presets"
-      items: "Пресеты",
       // [Auto-translated] "Default preset"
-      defaultItem: "Предустановка по умолчанию",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Разрешить несколько предустановок",
+      defaultPreset: "Предустановка по умолчанию",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Разрешить респондентам добавлять пресеты"
+      allowAddPresets: "Разрешить респондентам добавлять пресеты"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Имя пресета",
       // [Auto-translated] "Preset title"
       title: "Название пресета",
       // [Auto-translated] "Filter expression"
-      expression: "Выражение фильтра",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Разрешить редактирование",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Разрешить удаление"
+      expression: "Выражение фильтра"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +896,7 @@ export var ruStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Каждый вариант в отдельной колонке",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Разрешите сортировку по этому столбцу",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Разрешить фильтрацию по этому столбцу"
+      allowSort: "Разрешите сортировку по этому столбцу"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1089,7 @@ export var ruStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Нет уровней сортировки",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Без пресетов",
+    "listIsEmpty@filterPresets": "Без пресетов",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Добавьте выбор",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1117,7 @@ export var ruStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Добавить уровень сортировки",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Добавить пресет",
+    "addNew@filterPresets": "Добавить пресет",
     // "Value"
     value: "Значение",
     // "Text"
@@ -1252,10 +1232,6 @@ export var ruStrings = {
     pageSize: "Строки на странице",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Разрешить пользователям сортировать строки",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Разрешить фильтрацию по этому вопросу",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Операторы фильтров",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Максимальные уровни сортировки",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1790,6 @@ export var ruStrings = {
       sliderSettings: "Настройки слайдера",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Настройки фильтра",
-      // [Auto-translated] "Presets"
-      presets: "Пресеты",
       // "Choices from a Web Service"
       choicesByUrl: "Выбор из Интернета",
       // [Auto-translated] "Numbering"
@@ -3088,16 +3062,18 @@ export var ruStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Выберите динамическую матрицу, выпадающую матрицу или динамическую панель, строки или панели которых фильтр сужает.",
+      targetQuestion: "Выберите динамическую матрицу, выпадающую матрицу или динамическую панель, строки или панели которых фильтр сужает.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Пресет, применяемый при начале опроса."
+      defaultPreset: "Пресет, применяемый при начале опроса."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Используйте имена полей в завитых скобках, например: {price} < 20 и {category} любой из ['Напитки']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Ограничивает операторы, которые респонденты могут использовать для фильтрации по этому полю. Оставьте пустым, чтобы разрешить все операторы, подходящие для поля.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Ограничивает операторы, которые респонденты могут использовать для фильтрации по этому полю. Оставьте пустым, чтобы разрешить все операторы, подходящие для поля."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Идентификатор столбца, который не виден респондентам.",

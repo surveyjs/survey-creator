@@ -196,6 +196,9 @@ export interface IPropertyGridEditor {
   onMatrixCellCreated?: (obj: Base, options: any) => void;
   onMatrixCellValidate?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
+  // The matrix has added or removed a row: called at the end of its add or remove.
+  onMatrixRowAdded?: (obj: Base, options: any) => void;
+  onMatrixRowRemoved?: (obj: Base, options: any) => void;
   onMatrixAllowRemoveRow?: (obj: Base, row: any) => boolean;
   onGetQuestionTitleActions?: (obj: Base, options: any, creator: ISurveyCreatorOptions) => void;
   onUpdateQuestionCssClasses?: (obj: Base, options: any) => void;
@@ -336,6 +339,18 @@ export var PropertyGridEditorCollection = {
       if (!!cellQuestion) {
         row.runCondition({ question: cellQuestion });
       }
+    }
+  },
+  onMatrixRowAdded(obj: Base, prop: JsonObjectProperty, options: any, creatorOptions?: ISurveyCreatorOptions) {
+    const res = this.getEditor(prop, undefined, creatorOptions);
+    if (!!res && !!res.onMatrixRowAdded) {
+      res.onMatrixRowAdded(options.question.obj, options);
+    }
+  },
+  onMatrixRowRemoved(obj: Base, prop: JsonObjectProperty, options: any, creatorOptions?: ISurveyCreatorOptions) {
+    const res = this.getEditor(prop, undefined, creatorOptions);
+    if (!!res && !!res.onMatrixRowRemoved) {
+      res.onMatrixRowRemoved(options.question.obj, options);
     }
   },
   onMatrixAllowRemoveRow(
@@ -1070,6 +1085,9 @@ export class PropertyGridModel {
     this.survey.onMatrixRowAdded.add((sender, options) => {
       this.onMatrixRowAdded(options);
     });
+    this.survey.onMatrixRowRemoved.add((sender, options) => {
+      PropertyGridEditorCollection.onMatrixRowRemoved(this.obj, (<any>options.question).property, options, this.options);
+    });
     this.survey.onGetMatrixRowActions.add((sender, options) => {
       this.onGetMatrixRowAction(options);
     });
@@ -1609,6 +1627,8 @@ export class PropertyGridModel {
         options.question.value
       );
     }
+    // Last: the editor may rebuild the matrix's rows, options.row among them.
+    PropertyGridEditorCollection.onMatrixRowAdded(this.obj, options.question.property, options, this.options);
   }
 }
 
@@ -2256,7 +2276,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       if (text && text !== value) return text;
     }
     // The operators are named the way the logic tab names them.
-    if (prop.name === "filterOperators") {
+    if (prop.name === "operators" && !!prop.classInfo && prop.classInfo.name === "filterfield") {
       let text = editorLocalization.getString("op." + value);
       if (text && text !== value) return text;
     }
@@ -2337,7 +2357,7 @@ export class PropertyGridEditorSet extends PropertyGridEditorDropdown {
     }
   }
 }
-// A string[] property that names its choices (the Filter Control's searchFields, filterOperators) is
+// A string[] property that names its choices (the Filter Control's searchFields, a fields entry's operators) is
 // a pick list; one without them (dataList) stays a text area, see PropertyGridEditorStringArray.
 export class PropertyGridEditorStringArrayChoices extends PropertyGridEditorSet {
   public fit(prop: JsonObjectProperty): boolean {
@@ -2442,9 +2462,9 @@ export class PropertyGridEditorQuestionSelectBase extends PropertyGridEditorQues
 }
 // The Filter Control's source: a question that holds records the control can filter - a dynamic or
 // dropdown matrix, a dynamic panel. survey-core resolves it by the same duck typing.
-export class PropertyGridEditorQuestionFilterSource extends PropertyGridEditorQuestionSelectBase {
+export class PropertyGridEditorQuestionFilterTarget extends PropertyGridEditorQuestionSelectBase {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "question_filtersource";
+    return prop.type == "question_filtertarget";
   }
   protected isQuestionFit(question: Question): boolean {
     const q: any = question;
@@ -2516,7 +2536,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionCarryForward());
-PropertyGridEditorCollection.register(new PropertyGridEditorQuestionFilterSource());
+PropertyGridEditorCollection.register(new PropertyGridEditorQuestionFilterTarget());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
 PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 PropertyGridEditorCollection.register(new PropertyGridEditorColorWithAlpha());

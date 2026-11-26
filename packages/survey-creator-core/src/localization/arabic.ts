@@ -822,36 +822,18 @@ export var arStrings = {
       expression: "تعبير"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "مصدر البيانات",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "عرض شرائح المرشح",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "عرض زر الفلاتر",
-      // [Auto-translated] "Show search"
-      showSearch: "عرض البحث",
-      // [Auto-translated] "Search in"
-      searchFields: "ابحث في",
-      // [Auto-translated] "Presets"
-      items: "الإعدادات المسبقة",
       // [Auto-translated] "Default preset"
-      defaultItem: "الإعداد المسبق الافتراضي",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "السماح بعدة إعدادات مسبقة",
+      defaultPreset: "الإعداد المسبق الافتراضي",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "السماح للمستجيبين بإضافة إعدادات مسبقة"
+      allowAddPresets: "السماح للمستجيبين بإضافة إعدادات مسبقة"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "اسم الإعداد المسبق",
       // [Auto-translated] "Preset title"
       title: "عنوان الإعداد المسبق",
       // [Auto-translated] "Filter expression"
-      expression: "تعبير المرشح",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "السماح بالتحرير",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "السماح بالحذف"
+      expression: "تعبير المرشح"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +896,7 @@ export var arStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "كل خيار في عمود منفصل",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "السماح بالترتيب حسب هذا العمود",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "السماح بالتصفية حسب هذا العمود"
+      allowSort: "السماح بالترتيب حسب هذا العمود"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1089,7 @@ export var arStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "لا توجد مستويات فرز",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "لا إعدادات مسبقة",
+    "listIsEmpty@filterPresets": "لا إعدادات مسبقة",
     // [Auto-translated] "Add choice"
     "addNew@choices": "إضافة الاختيار",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1117,7 @@ export var arStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "أضف مستوى الفرز",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "إضافة إعداد مسبق",
+    "addNew@filterPresets": "إضافة إعداد مسبق",
     // "Value"
     value: "القيمة",
     // "Text"
@@ -1252,10 +1232,6 @@ export var arStrings = {
     pageSize: "الصفوف في الصفحة",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "السماح للمستخدمين بفرز الصفوف",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "السماح بالتصفية بناء على هذا السؤال",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "عوامل المرشح",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "أقصى مستويات الفرز",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1790,6 @@ export var arStrings = {
       sliderSettings: "إعدادات شريط التمرير",
       // [Auto-translated] "Filter Settings"
       filterSettings: "إعدادات الفلتر",
-      // [Auto-translated] "Presets"
-      presets: "الإعدادات المسبقة",
       // "Choices from a Web Service"
       choicesByUrl: "خيارات من الإنترنت",
       // "Numbering"
@@ -3088,16 +3062,18 @@ export var arStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "اختر مصفوفة ديناميكية، أو مصفوفة منسدلة، أو لوحة ديناميكية يضيق الفلتر صفوفها أو لوحاتها.",
+      targetQuestion: "اختر مصفوفة ديناميكية، أو مصفوفة منسدلة، أو لوحة ديناميكية يضيق الفلتر صفوفها أو لوحاتها.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "الإعداد المسبق الذي يطبق عند بدء الاستبيان."
+      defaultPreset: "الإعداد المسبق الذي يطبق عند بدء الاستبيان."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "استخدم أسماء الحقول بين قوسين ملتفة، على سبيل المثال: {price} < 20 و {category} أي من ['مشروبات']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "يحدد الحدود التي يمكن للمشاركين استخدامها للتصفية حسب هذا الحقل. اترك فارغا للسماح لجميع المشغلين الذين يناسب الحقل.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "يحدد الحدود التي يمكن للمشاركين استخدامها للتصفية حسب هذا الحقل. اترك فارغا للسماح لجميع المشغلين الذين يناسب الحقل."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "معرف عمود غير مرئي للمستجيبين.",

@@ -822,36 +822,18 @@ export var spanishTranslation = {
       expression: "Expresión"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Fuente de datos",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Mostrar chips de filtro",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Mostrar el botón Filtros",
-      // [Auto-translated] "Show search"
-      showSearch: "Mostrar búsqueda",
-      // [Auto-translated] "Search in"
-      searchFields: "Buscar en",
-      // [Auto-translated] "Presets"
-      items: "Presets",
       // [Auto-translated] "Default preset"
-      defaultItem: "Ajuste predeterminado",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Permitir múltiples ajustes preestablecidos",
+      defaultPreset: "Ajuste predeterminado",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Permitir que los encuestados añadan ajustes preestablecidos"
+      allowAddPresets: "Permitir que los encuestados añadan ajustes preestablecidos"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Nombre predefinido",
       // [Auto-translated] "Preset title"
       title: "Título predefinido",
       // [Auto-translated] "Filter expression"
-      expression: "Expresión del filtro",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Permitir edición",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Permitir la eliminación"
+      expression: "Expresión del filtro"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +896,7 @@ export var spanishTranslation = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Cada opción en una columna separada",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Permitir ordenación por esta columna",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Permitir filtrado por esta columna"
+      allowSort: "Permitir ordenación por esta columna"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1089,7 @@ export var spanishTranslation = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "No hay niveles de suerte",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Sin ajustes preestablecidos",
+    "listIsEmpty@filterPresets": "Sin ajustes preestablecidos",
     // "Add new choice"
     "addNew@choices": "Añade una opción",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1117,7 @@ export var spanishTranslation = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Añadir nivel de ordenación",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Añadir preajuste",
+    "addNew@filterPresets": "Añadir preajuste",
     // "Value"
     value: "Valor",
     // "Text"
@@ -1252,10 +1232,6 @@ export var spanishTranslation = {
     pageSize: "Filas por página",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Permitir a los usuarios ordenar filas",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Permitir filtrar por esta pregunta",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operadores de filtro",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Niveles máximos de ordenación",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1790,6 @@ export var spanishTranslation = {
       sliderSettings: "Configuración del control deslizante",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Configuración del filtro",
-      // [Auto-translated] "Presets"
-      presets: "Presets",
       // "Choices from a Web Service"
       choicesByUrl: "Opciones de la web",
       // "Numbering"
@@ -3088,16 +3062,18 @@ export var spanishTranslation = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Selecciona una matriz dinámica, una matriz desplegable o un panel dinámico cuyas filas o paneles el filtro acota a la retaguardia.",
+      targetQuestion: "Selecciona una matriz dinámica, una matriz desplegable o un panel dinámico cuyas filas o paneles el filtro acota a la retaguardia.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "El ajuste preestablecido se aplica cuando comienza la encuesta."
+      defaultPreset: "El ajuste preestablecido se aplica cuando comienza la encuesta."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Utilice nombres de campos entre corchetes, por ejemplo: {price} < 20 y {category} anyof ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Limita los operadores que los encuestados pueden usar para filtrar por este campo. Dejar vacío para permitir todos los operadores que se adapten al campo.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Limita los operadores que los encuestados pueden usar para filtrar por este campo. Dejar vacío para permitir todos los operadores que se adapten al campo."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Un identificador de columna que no es visible para los encuestados.",

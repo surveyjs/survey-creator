@@ -822,36 +822,18 @@ export const roStrings = {
       expression: "Expresie"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Sursa de date",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Afișează cipurile de filtru",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Afișează butonul Filtre",
-      // [Auto-translated] "Show search"
-      showSearch: "Afișează căutarea",
-      // [Auto-translated] "Search in"
-      searchFields: "Caută în",
-      // [Auto-translated] "Presets"
-      items: "Presetări",
       // [Auto-translated] "Default preset"
-      defaultItem: "Presetare implicită",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Permiteți mai multe presetări",
+      defaultPreset: "Presetare implicită",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Permiteți respondenților să adauge presetări"
+      allowAddPresets: "Permiteți respondenților să adauge presetări"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Nume presetat",
       // [Auto-translated] "Preset title"
       title: "Titlu presetat",
       // [Auto-translated] "Filter expression"
-      expression: "Expresie de filtru",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Permite editarea",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Permiteți ștergerea"
+      expression: "Expresie de filtru"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +896,7 @@ export const roStrings = {
       // "Each option in a separate column"
       showInMultipleColumns: "Fiecare opțiune într-o coloană separată",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Permiteți sortarea după această coloană",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Permiteți filtrarea prin această coloană"
+      allowSort: "Permiteți sortarea după această coloană"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1089,7 @@ export const roStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Fără niveluri de sortare",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Fără presetări",
+    "listIsEmpty@filterPresets": "Fără presetări",
     // "Add new choice"
     "addNew@choices": "Adăugați o alegere nouă",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1117,7 @@ export const roStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Adaugă nivelul de sortare",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Adaugă preset",
+    "addNew@filterPresets": "Adaugă preset",
     // "Value"
     value: "Valoare",
     // [Auto-translated] "Text"
@@ -1252,10 +1232,6 @@ export const roStrings = {
     pageSize: "Rânduri pe pagină",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Permite utilizatorilor să sorteze rândurile",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Permiteți filtrarea după această întrebare",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operatori de filtru",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Niveluri maxime de sortare",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1790,6 @@ export const roStrings = {
       sliderSettings: "Setări glisor",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Setări filtru",
-      // [Auto-translated] "Presets"
-      presets: "Presetări",
       // "Choices from a Web Service"
       choicesByUrl: "Alegeri dintr-un serviciu web",
       // "Numbering"
@@ -3088,16 +3062,18 @@ export const roStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Selectați o matrice dinamică, o matrice derulantă sau un panou dinamic ale cărui rânduri sau panouri filtrul le restrânge.",
+      targetQuestion: "Selectați o matrice dinamică, o matrice derulantă sau un panou dinamic ale cărui rânduri sau panouri filtrul le restrânge.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Presetul aplicat la începutul sondajului."
+      defaultPreset: "Presetul aplicat la începutul sondajului."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Folosiți numele câmpurilor între paranteze, de exemplu: {price} < 20 și {category} anyof ['Drinks']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Limitează operatorii pe care respondenții îi pot folosi pentru a filtra după acest câmp. Lasă gol pentru a permite toți operatorii care corespund câmpului.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Limitează operatorii pe care respondenții îi pot folosi pentru a filtra după acest câmp. Lasă gol pentru a permite toți operatorii care corespund câmpului."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "Un ID al coloanei care nu este vizibil pentru respondenți.",

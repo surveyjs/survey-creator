@@ -1,12 +1,13 @@
-import { test, expect, url, setJSON, getPropertyGridCategory, generalGroupName, compareScreenshot } from "./helper";
+import { test, expect, url, setJSON, getPropertyGridCategory, generalGroupName, compareScreenshot, resetHoverToCreator } from "./helper";
 
 // The settings of the Filter Control (survey-library #11890) in the property grid
 const title = "Property Grid: the Filter Control";
 const json = {
   elements: [
     {
-      type: "filter", name: "filter1", source: "products", showSearch: true, searchFields: ["name"], defaultItem: "cheap",
-      items: [
+      type: "filter", name: "filter1", targetQuestion: "products", showSearchBar: true, searchFields: ["name"], defaultPreset: "cheap",
+      fields: [{ name: "price", title: "Unit price", operators: ["less", "greater"] }, { name: "name" }, { name: "category", showInQuickFilters: false }],
+      presets: [
         { name: "cheap", title: "Cheap", expression: "{price} < 20" },
         { name: "out-of-stock", title: "Out of stock", expression: "{stock} = 0" }
       ]
@@ -39,17 +40,23 @@ test.describe(title, () => {
     return content;
   };
 
-  test("General: the data source", async ({ page }) => {
+  test("General", async ({ page }) => {
     const content = page.locator(".spg-panel__content").filter({ hasText: "" });
     await expect(content).toBeVisible();
     await compareScreenshot(page, content, "pg-filter-general.png");
   });
 
-  test("Filter Settings: modes and search", async ({ page }) => {
+  test("Filter Settings: the target question, fields, quick filters and search", async ({ page }) => {
     await compareScreenshot(page, await showCategory(page, "Filter Settings"), "pg-filter-settings.png");
   });
 
-  test("Presets", async ({ page }) => {
-    await compareScreenshot(page, await showCategory(page, "Presets"), "pg-filter-presets.png");
+  test("Filter Settings: a field's details", async ({ page }) => {
+    const content = await showCategory(page, "Filter Settings");
+    await content.locator(".sd-action[title='Show Details']").first().click();
+    await resetHoverToCreator(page);
+    await compareScreenshot(page, content, "pg-filter-field-details.png");
+  });
+  test("Filter Presets", async ({ page }) => {
+    await compareScreenshot(page, await showCategory(page, "Filter Presets"), "pg-filter-presets.png");
   });
 });

@@ -822,36 +822,18 @@ export var hrStrings = {
       expression: "Izraz"
     },
     filter: {
-      // [Auto-translated] "Data source"
-      source: "Izvor podataka",
-      // [Auto-translated] "Show filter chips"
-      allowFastMode: "Prikaži filter čipove",
-      // [Auto-translated] "Show the Filters button"
-      allowAdvancedMode: "Prikaži gumb Filteri",
-      // [Auto-translated] "Show search"
-      showSearch: "Prikaži pretraživanje",
-      // [Auto-translated] "Search in"
-      searchFields: "Pretraži u",
-      // [Auto-translated] "Presets"
-      items: "Predlošci",
       // [Auto-translated] "Default preset"
-      defaultItem: "Zadani predložak",
-      // [Auto-translated] "Allow multiple presets"
-      allowMultipleItems: "Dopusti više predložaka",
+      defaultPreset: "Zadani predložak",
       // [Auto-translated] "Allow respondents to add presets"
-      allowAddItems: "Dopusti ispitanicima dodavanje predložaka"
+      allowAddPresets: "Dopusti ispitanicima dodavanje predložaka"
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Preset name"
       name: "Naziv predloška",
       // [Auto-translated] "Preset title"
       title: "Unaprijed postavljeni naslov",
       // [Auto-translated] "Filter expression"
-      expression: "Izraz filtra",
-      // [Auto-translated] "Allow editing"
-      allowEdit: "Dopusti uređivanje",
-      // [Auto-translated] "Allow deleting"
-      allowDelete: "Dopusti brisanje"
+      expression: "Izraz filtra"
     },
     sortcriterion: {
       // [Auto-translated] "Sort by"
@@ -914,9 +896,7 @@ export var hrStrings = {
       // [Auto-translated] "Each option in a separate column"
       showInMultipleColumns: "Svaka mogućnost u zasebnom stupcu",
       // [Auto-translated] "Allow sorting by this column"
-      allowSort: "Dopustite sortiranje po ovom stupcu",
-      // [Auto-translated] "Allow filtering by this column"
-      allowFiltering: "Dopusti filtriranje prema ovom stupcu"
+      allowSort: "Dopustite sortiranje po ovom stupcu"
     },
     matrixcolumn: {
       // [Auto-translated] "Clear others in the same row"
@@ -1109,7 +1089,7 @@ export var hrStrings = {
     // [Auto-translated] "No sort levels"
     "listIsEmpty@sortCriteria": "Nema razina sortiranja",
     // [Auto-translated] "No presets"
-    "listIsEmpty@filterItems": "Bez predložaka",
+    "listIsEmpty@filterPresets": "Bez predložaka",
     // [Auto-translated] "Add choice"
     "addNew@choices": "Dodaj izbor",
     // [Auto-translated] "Add rating value"
@@ -1137,7 +1117,7 @@ export var hrStrings = {
     // [Auto-translated] "Add sort level"
     "addNew@sortCriteria": "Dodaj razinu sortiranja",
     // [Auto-translated] "Add preset"
-    "addNew@filterItems": "Dodaj predložak",
+    "addNew@filterPresets": "Dodaj predložak",
     // "Value"
     value: "Vrijednost",
     // "Text"
@@ -1252,10 +1232,6 @@ export var hrStrings = {
     pageSize: "Redovi po stranici",
     // [Auto-translated] "Allow users to sort rows"
     allowSort: "Dopustite korisnicima sortiranje redaka",
-    // [Auto-translated] "Allow filtering by this question"
-    allowFiltering: "Dopusti filtriranje prema ovom pitanju",
-    // [Auto-translated] "Filter operators"
-    filterOperators: "Operatori filtra",
     // [Auto-translated] "Maximum sort levels"
     maxSortLevel: "Maksimalne razine sortiranja",
     // [Auto-translated] "Default sort order"
@@ -1814,8 +1790,6 @@ export var hrStrings = {
       sliderSettings: "Postavke klizača",
       // [Auto-translated] "Filter Settings"
       filterSettings: "Postavke filtera",
-      // [Auto-translated] "Presets"
-      presets: "Predlošci",
       // "Choices from a Web Service"
       choicesByUrl: "Izbori s weba",
       // "Numbering"
@@ -3088,16 +3062,18 @@ export var hrStrings = {
     },
     filter: {
       // [Auto-translated] "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down."
-      source: "Odaberite dinamičku matricu, padajuću matricu ili dinamički panel čije retke ili panele filtar sužava.",
+      targetQuestion: "Odaberite dinamičku matricu, padajuću matricu ili dinamički panel čije retke ili panele filtar sužava.",
       // [Auto-translated] "The preset applied when the survey starts."
-      defaultItem: "Predložak primijenjen na početku ankete."
+      defaultPreset: "Predložak primijenjen na početku ankete."
     },
-    filteritem: {
+    filterpreset: {
       // [Auto-translated] "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
       expression: "Koristite nazive polja u vitičastim zagradama, na primjer: {price} < 20 i {category} bilo koji od ['Beverages']."
     },
-    // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
-    filterOperators: "Ograničava operatore koje ispitanici mogu koristiti za filtriranje po ovom polju. Ostavite prazno da biste dopustili sve operatore koji odgovaraju polju.",
+    filterfield: {
+      // [Auto-translated] "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Ograničava operatore koje ispitanici mogu koristiti za filtriranje po ovom polju. Ostavite prazno da biste dopustili sve operatore koji odgovaraju polju."
+    },
     matrixdropdowncolumn: {
       // "A column ID that is not visible to respondents."
       name: "ID stupca koji nije vidljiv ispitanicima.",

@@ -768,11 +768,11 @@ export class PropertyGridEditorMatrixCalculatedValues extends PropertyGridEditor
     matrix.useCaseSensitiveComparison = false;
   }
 }
-// The Filter Control's presets: name and title in the row (definition "filter@items"), the rest in the
-// detail panel ("filteritem@items"). The order of the rows is the order of the chips.
-export class PropertyGridEditorMatrixFilterItems extends PropertyGridEditorMatrix {
+// The Filter Control's presets: name and title in the row (definition "filter@presets"), the rest in the
+// detail panel ("filterpreset@presets"). The order of the rows is the order of the chips.
+export class PropertyGridEditorMatrixFilterPresets extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type === "filteritem[]";
+    return prop.type === "filterpreset[]";
   }
   protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
     return obj.getType() + "@" + prop.name;
@@ -791,19 +791,377 @@ export class PropertyGridEditorMatrixFilterItems extends PropertyGridEditorMatri
   }
   // Not pe.addNew@items / pe.listIsEmpty@items: the items of a multiple text question use those.
   protected getAddRowText(prop: JsonObjectProperty): string {
-    return editorLocalization.getString("pe.addNew@filterItems");
+    return editorLocalization.getString("pe.addNew@filterPresets");
   }
   protected getnoRowsText(prop: JsonObjectProperty): string {
-    return editorLocalization.getString("pe.listIsEmpty@filterItems");
+    return editorLocalization.getString("pe.listIsEmpty@filterPresets");
   }
   // A preset renamed or retitled in its row: the Default preset list names it anew. The grid updates
-  // the editors that depend on "items" when the array changes, not when a row of it does.
+  // the editors that depend on "presets" when the array changes, not when a row of it does.
   public onMatrixCellValueChanged(obj: Base, options: any): void {
     const grid = !!options.question ? options.question.survey : undefined;
-    const editor: any = !!grid ? grid.getQuestionByName("defaultItem") : undefined;
+    const editor: any = !!grid ? grid.getQuestionByName("defaultPreset") : undefined;
     if (!!editor && !!editor.property) {
       PropertyGridEditorCollection.onMasterValueChanged(obj, editor.property, editor);
     }
+  }
+}
+// The Filter Control's fields: Field name and Field title in the row, Available operators and Show in quick
+// filters in its details (filterfield@fields). The rows are the entries of fields, in their order; any row can be
+// removed or moved. A control whose JSON leaves fields out filters by the visible fields of its target: the table
+// shows them as rows whose entries are not in fields (getDesignFieldEntries), and the first change writes those rows
+// into fields outside the undo history before it is made - its undo brings back that list (survey-library spec G).
+// Field name is a dropdown of field names while a field of the target is free - every row's choices are the free
+// fields and its own name - and a text box otherwise, in every row at once. The column changes its cell type after
+// the matrix's own add or remove, never in the middle of one: the rows are rebuilt by the change.
+const filterFieldsReleaseKey = "filterFieldsRelease";
+const filterFieldsSignatureKey = "filterFieldsSignature";
+const filterFieldsDesignEntriesKey = "filterFieldsDesignEntries";
+const filterFieldsClearingKey = "filterFieldsClearing";
+const filterFieldsTargetKey = "filterFieldsTarget";
+const filterFieldsOptionsKey = "filterFieldsOptions";
+const filterFieldsDefiningKey = "filterFieldsDefining";
+const filterFieldsRowOperationKey = "filterFieldsRowOperation";
+export class PropertyGridEditorMatrixFilterFields extends PropertyGridEditorMatrix {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type === "filterfield[]";
+  }
+  protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
+    return obj.getType() + "@" + prop.name;
+  }
+  protected getDefaulColumnNames(): Array<string> {
+    return ["name", "title"];
+  }
+  protected getKeyValue(): string {
+    return "name";
+  }
+  protected getBaseValue(prop: JsonObjectProperty): string {
+    return "field";
+  }
+  protected getAddRowText(prop: JsonObjectProperty): string {
+    return editorLocalization.getString("pe.addNew@filterFields");
+  }
+  protected getnoRowsText(prop: JsonObjectProperty): string {
+    return editorLocalization.getString("pe.listIsEmpty@filterFields");
+  }
+  protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
+  protected getColumnsJSON(obj: Base, prop: JsonObjectProperty, propNames: Array<string>,
+    options: ISurveyCreatorOptions, propGridDefinition: ISurveyPropertyGridDefinition
+  ): Array<any> {
+    const res = super.getColumnsJSON(obj, prop, propNames, options, propGridDefinition);
+    const rows = typeof (<any>obj).getDesignFieldEntries === "function" ? (<any>obj).getDesignFieldEntries() : this.getFields(obj);
+    res.forEach((column: any): void => {
+      if (column.name === "name") {
+        column.cellType = this.getNameCellType(obj, rows);
+        if (column.cellType === "dropdown") {
+          column.allowCustomChoices = true;
+        }
+      }
+    });
+    return res;
+  }
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty,
+    options?: ISurveyCreatorOptions, propGridDefinition?: ISurveyPropertyGridDefinition): void {
+    super.onCreated(obj, question, prop, options, propGridDefinition);
+    const matrix = <QuestionMatrixDynamicModel>question;
+    matrix[filterFieldsOptionsKey] = options;
+    // While fields left out are written (defineFields) the rows stay as they are: the write comes in the middle of
+    // the matrix's own change - a row added, a cell changed - and a refresh there would lose the row it is adding.
+    matrix.valueFromDataCallback = (): Array<Base> => !!matrix[filterFieldsClearingKey] ? [] :
+      (!!matrix[filterFieldsDefiningKey] ? matrix.value : this.getRows(obj, matrix));
+    // The rows as the table has them now: a row removed or moved is a change of fields. Fields left out are
+    // written first, as the rows were, outside the undo history. rows is the matrix's own value, which that
+    // write refreshes in place: it is copied before.
+    matrix.valueToDataCallback = (rows: Array<Base>): Array<Base> => {
+      const list = (Array.isArray(rows) ? rows : []).filter((entry: Base): boolean => !!entry);
+      // Fewer rows: the table's own remove, which ends in onMatrixRowRemoved (a move keeps the count).
+      if (list.length < this.getRows(obj, matrix, false).length) {
+        matrix[filterFieldsRowOperationKey] = true;
+      }
+      this.defineFields(obj, matrix);
+      return list;
+    };
+    // A change of a cell or of a question in a row's details: the same, before the change is written.
+    matrix.cellValueChangingCallback = (row: any, columnName: string, value: any, oldValue: any): any => {
+      if (!Helpers.isTwoValueEquals(value, oldValue)) {
+        this.defineFields(obj, matrix);
+      }
+      return value;
+    };
+    this.updateRows(obj, matrix, true);
+    // A column added to the target, a new target or a change of fields from elsewhere changes the rows. The
+    // Creator; the grid of a standalone PropertyGridModel has no onModified.
+    const update = (): void => { this.updateRows(obj, matrix); };
+    const onModified = !!options ? (<any>options).onModified : undefined;
+    if (!!onModified && typeof onModified.add === "function") {
+      onModified.add(update);
+      matrix[filterFieldsReleaseKey] = (): void => { onModified.remove(update); };
+    }
+    // A row removed or added frees or takes a name: the other rows' Field name follow.
+    obj.registerPropertyChangedHandlers(["fields"], (): void => { this.updateNameChoices(obj, matrix); }, this.getNamesKey(matrix));
+  }
+  public onDisposing(obj: Base, question: Question, prop: JsonObjectProperty): void {
+    const release = question[filterFieldsReleaseKey];
+    if (typeof release === "function") {
+      release();
+    }
+    question[filterFieldsReleaseKey] = undefined;
+    obj.unregisterPropertyChangedHandlers(["fields"], this.getNamesKey(question));
+  }
+  public onMatrixCellCreated(obj: Base, options: any): void {
+    super.onMatrixCellCreated(obj, options);
+    const entry = options.row.editingObj;
+    if (!entry) return;
+    const question = options.cellQuestion;
+    if (options.columnName === "name" && question.getType() === "dropdown") {
+      // An entry is named: a cleared Field name would leave an entry of no field.
+      question.allowClear = false;
+      this.setNameChoices(obj, question, entry, this.getRows(obj, options.question, false));
+    }
+    if (options.columnName === "title") {
+      question.placeholder = new ComputedUpdater<string>(() => this.getTitlePlaceholder(obj, entry));
+    }
+  }
+  // A new name: updateRows refreshes the rows and Field name with them (syncNameEditor).
+  public onMatrixCellValueChanged(obj: Base, options: any): void {
+    this.updateRows(obj, options.question);
+  }
+  // The end of the table's own add or remove: Field name may change its cell type now.
+  public onMatrixRowAdded(obj: Base, options: any): void {
+    this.endRowOperation(obj, options.question);
+  }
+  public onMatrixRowRemoved(obj: Base, options: any): void {
+    this.endRowOperation(obj, options.question);
+  }
+  private endRowOperation(obj: Base, matrix: QuestionMatrixDynamicModel): void {
+    matrix[filterFieldsRowOperationKey] = false;
+    this.syncNameEditor(obj, matrix);
+  }
+  // The rows first: the matrix tells the added row by the rows it has built. A rendered table has built
+  // them; the title's Add may come before.
+  protected addItem(creator: ISurveyCreatorOptions, obj: Base, question: QuestionMatrixDynamicModel): void {
+    question.visibleRows;
+    super.addItem(creator, obj, question);
+  }
+  // Add field: the first field of the target no row has taken (as sortCriteria's Add does), else field1.
+  protected createNewItem(matrix: QuestionMatrixDynamicModel, prop: JsonObjectProperty): Base {
+    matrix.visibleRows.forEach(row => row.hideDetailPanel());
+    const obj: Base = matrix.obj;
+    matrix[filterFieldsRowOperationKey] = true;
+    this.defineFields(obj, matrix);
+    const item = Serializer.createClass(prop.className);
+    item.name = this.getFreeFieldName(obj) ||
+      PropertyGridEditorMatrix.getNewColumnName(this.getFields(obj), "name", this.getBaseValue(prop));
+    this.getFields(obj).push(item);
+    return item;
+  }
+  private getFields(obj: Base): Array<Base> {
+    return (<any>obj).fields || [];
+  }
+  private getTargetFields(obj: Base): Array<any> {
+    return typeof (<any>obj).getTargetFilterFields === "function" ? (<any>obj).getTargetFilterFields() : [];
+  }
+  private getFieldTitle(field: any): string {
+    return !!field.locTitle && field.locTitle.textOrHtml || field.name;
+  }
+  private getNamesKey(matrix: Question): string {
+    return "filterFieldsNames_" + matrix.id;
+  }
+  // Fields left out of the JSON: the rows the table shows become the entries, in their order, outside the undo
+  // history - the change that follows is the undo step, and its undo brings back this list. A grid of its own
+  // has no undo controller.
+  private defineFields(obj: Base, matrix: QuestionMatrixDynamicModel): void {
+    if ((<any>obj).isFieldsDefined !== false) return;
+    const rows = this.getRows(obj, matrix, false);
+    const options: any = matrix[filterFieldsOptionsKey];
+    const ctrl = !!options ? options.undoRedoController : undefined;
+    const ignore = !!ctrl && ctrl.ignoreChanges;
+    if (!!ctrl) ctrl.ignoreChanges = true;
+    matrix[filterFieldsDefiningKey] = true;
+    try {
+      (<any>obj).fields = rows;
+    } finally {
+      matrix[filterFieldsDefiningKey] = false;
+      if (!!ctrl) ctrl.ignoreChanges = ignore;
+    }
+  }
+  // The rows: the entries, or - fields left out - an entry per visible field of the target. The same entry for
+  // the same field every time: the matrix follows its rows by their objects.
+  private getRows(obj: Base, matrix: QuestionMatrixDynamicModel, prepare: boolean = true): Array<Base> {
+    const entries: Array<any> = typeof (<any>obj).getDesignFieldEntries === "function"
+      ? (<any>obj).getDesignFieldEntries() : [].concat(this.getFields(obj));
+    const fields = this.getFields(obj);
+    const cache: { [name: string]: Base } = matrix[filterFieldsDesignEntriesKey] || {};
+    const res = entries.map((entry: any): Base => {
+      if (fields.indexOf(entry) > -1) return entry;
+      const cached: any = cache[entry.name];
+      return !!cached && fields.indexOf(cached) < 0 && cached.designOwner === obj ? cached : entry;
+    });
+    if (prepare) {
+      const newCache: { [name: string]: Base } = {};
+      res.forEach((entry: any): void => {
+        if (fields.indexOf(entry) < 0) newCache[entry.name] = entry;
+      });
+      matrix[filterFieldsDesignEntriesKey] = newCache;
+      matrix[filterFieldsSignatureKey] = this.getSignature(obj, res);
+    }
+    return res;
+  }
+  // Field name: the names of the fields of the target - valueName, else name, a nested field's path - a hidden one
+  // too, but those another row has taken: a second entry of a name is the table's duplicate error. A field of the
+  // record the target has no column for is the dropdown's own custom choice, as a typed name is: the dropdown makes
+  // one only while the survey loads its data.
+  private setNameChoices(obj: Base, question: any, entry: any, rows: Array<any>): void {
+    const taken = rows.filter((row: any): boolean => row !== entry).map((row: any): string => row.name);
+    const choices = this.getTargetFields(obj).filter((field: any): boolean => taken.indexOf(field.valueName) < 0)
+      .map((field: any): any => ({ value: field.valueName, text: field.valueName }));
+    const current = question.choices.map((choice: ItemValue): any => ({ value: choice.value, text: choice.text }));
+    if (!Helpers.isTwoValueEquals(current, choices)) {
+      question.choices = choices;
+    }
+    const name = entry.name;
+    question.customChoices = !!name && !choices.some((choice: any): boolean => choice.value === name) ? [new ItemValue(name)] : [];
+  }
+  private updateNameChoices(obj: Base, matrix: QuestionMatrixDynamicModel): void {
+    if (!matrix || matrix.isDisposed) return;
+    const built: Array<any> = (<any>matrix).generatedVisibleRows;
+    if (!Array.isArray(built)) return;
+    const rows = this.getRows(obj, matrix, false);
+    built.forEach((row: any): void => {
+      const cell = row.cells.filter((c: any): boolean => c.column.name === "name")[0];
+      if (!!cell && !!row.editingObj && cell.question.getType() === "dropdown") {
+        this.setNameChoices(obj, cell.question, row.editingObj, rows);
+      }
+    });
+  }
+  // A field of the target no row names: then every row has something to pick besides its own name.
+  private hasFreeField(obj: Base, rows: Array<any>): boolean {
+    const taken = rows.map((row: any): string => row.name);
+    return this.getTargetFields(obj).some((field: any): boolean => taken.indexOf(field.valueName) < 0);
+  }
+  private getNameCellType(obj: Base, rows: Array<any>): string {
+    return this.hasFreeField(obj, rows) ? "dropdown" : "text";
+  }
+  // Field name as the rows are now: the other cell type (the column rebuilds the rows), or the choices anew.
+  // Not in the middle of the table's own add or remove (filterFieldsRowOperationKey): its end calls it.
+  private syncNameEditor(obj: Base, matrix: QuestionMatrixDynamicModel): void {
+    if (!matrix || matrix.isDisposed || !!matrix[filterFieldsRowOperationKey]) return;
+    const column = matrix.getColumnByName("name");
+    if (!column) return;
+    const cellType = this.getNameCellType(obj, this.getRows(obj, matrix, false));
+    if (column.cellType !== cellType) {
+      column.cellType = cellType;
+      if (cellType === "dropdown") {
+        (<any>column).allowCustomChoices = true;
+      }
+    } else {
+      this.updateNameChoices(obj, matrix);
+    }
+  }
+  // Field title's placeholder: the title of the field of the target the entry names, or the entry's name.
+  private getTitlePlaceholder(obj: Base, entry: any): string {
+    const field = typeof (<any>obj).findTargetFilterField === "function" ? (<any>obj).findTargetFilterField(entry.name) : undefined;
+    return !!field ? this.getFieldTitle(field) : (entry.name || "");
+  }
+  private getFreeFieldName(obj: Base): string {
+    const taken = this.getFields(obj).map((entry: any): string => entry.name);
+    const free = this.getTargetFields(obj).filter((field: any): boolean => taken.indexOf(field.valueName) < 0)[0];
+    return !!free ? free.valueName : undefined;
+  }
+  // The rows anew when they are not what the table shows: fields, the target or its fields changed.
+  // Not otherwise - the table would close the details that are open.
+  private updateRows(obj: Base, matrix: QuestionMatrixDynamicModel, force: boolean = false): void {
+    if (!matrix || matrix.isDisposed) return;
+    const rows = this.getRows(obj, matrix, false);
+    const target = (<any>obj).targetQuestion;
+    const isNewTarget = matrix[filterFieldsTargetKey] !== target;
+    matrix[filterFieldsTargetKey] = target;
+    if (!force && !isNewTarget && this.getSignature(obj, rows) === matrix[filterFieldsSignatureKey]) {
+      // The same rows, but the target may have a field more or less (a column added or removed).
+      this.syncNameEditor(obj, matrix);
+      return;
+    }
+    if (!force && (isNewTarget || !this.isOneRowChange(matrix, rows))) {
+      this.rebuildRows(obj, matrix);
+    } else {
+      matrix.updateValueFromSurvey(this.getFields(obj));
+    }
+    if (!force) {
+      this.syncNameEditor(obj, matrix);
+    }
+  }
+  // The matrix follows a live array by its objects: it keeps its rows for an array of the same length
+  // and takes a change of one more or one less object for an insert or a remove of that object. So does
+  // the table for a row added or removed, or a row's entry that joined fields. Rows replaced otherwise - a
+  // new target, its fields changed - would keep the old rows, their entries and the old target's names
+  // in Field name ("Select...").
+  private isOneRowChange(matrix: QuestionMatrixDynamicModel, rows: Array<Base>): boolean {
+    const built: Array<any> = (<any>matrix).generatedVisibleRows;
+    if (!Array.isArray(built)) return true;
+    const old = built.map((row: any): Base => row.editingObj);
+    if (old.length === rows.length) return old.every((entry: Base, index: number): boolean => entry === rows[index]);
+    if (Math.abs(old.length - rows.length) !== 1) return false;
+    const longer = old.length > rows.length ? old : rows;
+    const shorter = old.length > rows.length ? rows : old;
+    let i = 0;
+    while(i < shorter.length && longer[i] === shorter[i]) i++;
+    for (let j = i; j < shorter.length; j++) {
+      if (longer[j + 1] !== shorter[j]) return false;
+    }
+    return true;
+  }
+  // New rows through the matrix's own way of taking an array of another length: an empty one first,
+  // then the rows. Nothing is written into fields: the value comes from the survey, it does not go to it.
+  private rebuildRows(obj: Base, matrix: QuestionMatrixDynamicModel): void {
+    matrix[filterFieldsClearingKey] = true;
+    try {
+      matrix.updateValueFromSurvey(this.getFields(obj));
+    } finally {
+      matrix[filterFieldsClearingKey] = false;
+    }
+    matrix.updateValueFromSurvey(this.getFields(obj));
+  }
+  // What a row is: its name, and the entry's place in fields where it has one.
+  private getSignature(obj: Base, rows: Array<Base>): string {
+    const fields = this.getFields(obj);
+    return JSON.stringify(rows.map((entry: any): any => [entry.name, fields.indexOf(entry)]));
+  }
+}
+// A preset's Allow checkboxes (allowEdit, allowDelete, allowCopy). A preset without a permission of its
+// own (undefined) follows the control's, so the checkbox shows the permission in effect - the
+// control's until the preset has one - and a click writes the preset's own. Registered after
+// PropertyGridEditorUndefinedBoolean, which would fit these properties too and show Inherit / Yes / No.
+const filterPresetControlPermissions: { [name: string]: string } = {
+  allowEdit: "allowEditPresets", allowDelete: "allowDeletePresets", allowCopy: "allowAddPresets"
+};
+export class PropertyGridEditorFilterPresetPermission extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type === "boolean" && !!prop.classInfo && prop.classInfo.name === "filterpreset" &&
+      !!filterPresetControlPermissions[prop.name];
+  }
+  // No default: a boolean question's default would be written into a preset that has no permission.
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    return { type: "boolean", renderAs: "checkbox", titleLocation: "hidden" };
+  }
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty): void {
+    const controlPropName = filterPresetControlPermissions[prop.name];
+    question.valueFromDataCallback = (val: any): boolean => {
+      if (typeof val === "boolean") return val;
+      const control: any = (<any>obj).presetOwner;
+      return !!control && !!control[controlPropName];
+    };
+    question.updateValueFromSurvey((<any>obj)[prop.name]);
+    const control: Base = (<any>obj).presetOwner;
+    if (!control) return;
+    // A question in a row's details is not disposed through onDisposing: the handler takes itself off.
+    const key = "filterPresetPermission_" + question.id;
+    control.registerFunctionOnPropertyValueChanged(controlPropName, (): void => {
+      if (question.isDisposed || obj.isDisposed) {
+        control.unRegisterFunctionOnPropertyValueChanged(controlPropName, key);
+        return;
+      }
+      question.updateValueFromSurvey((<any>obj)[prop.name]);
+    }, key);
   }
 }
 export class PropertyGridEditorMatrixHtmlConditions extends PropertyGridEditorMatrix {
@@ -1138,7 +1496,9 @@ PropertyGridEditorCollection.register(
   new PropertyGridEditorMatrixMutlipleTextItems()
 );
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixSortCriteria());
-PropertyGridEditorCollection.register(new PropertyGridEditorMatrixFilterItems());
+PropertyGridEditorCollection.register(new PropertyGridEditorMatrixFilterPresets());
+PropertyGridEditorCollection.register(new PropertyGridEditorMatrixFilterFields());
+PropertyGridEditorCollection.register(new PropertyGridEditorFilterPresetPermission());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixValidators());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixTriggers());
 
