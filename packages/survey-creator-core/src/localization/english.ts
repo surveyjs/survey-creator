@@ -7,7 +7,8 @@ export var enStrings = {
     duplicate: "Duplicate",
     license: "To use the Survey Creator library in your application, a <a href='https://surveyjs.io/licensing' target='_blank'>developer license</a> is required. If you have an active license, please <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>set up your license key</a> and ensure you're using the <a href='https://surveyjs.io/stay-updated/release-notes' target='_blank'>latest version</a>.",
     license2: "Your maintenance subscription expired on {date}. You may continue using all <a href='https://surveyjs.io/stay-updated/release-notes' target='_blank'>versions released up to that date</a>. To remove this banner in the latest version, please <a href='https://surveyjs.io/manage#license-manager' target='_blank'>renew your subscription</a> and <a href='https://surveyjs.io/remove-alert-banner' target='_blank'>set up a new license key</a>.",
-    licenseEmbedded: "Powered by SurveyJS · <a href='{whiteLabelUrl}' target='_blank'>White-label options</a>"
+    licenseEmbeddedPoweredBy: "Powered by",
+    licenseEmbeddedWhiteLabel: "White-label options"
   },
   // Creator tabs
   tabs: {
@@ -2197,7 +2198,8 @@ export var enStrings = {
         loop: "Triggers form a loop through the values they set: {setRoots}.",
       },
       "cycle/value-write": {
-        self: "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all.",
+        self: "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs.",
+        copiesItself: "The {label} only copies the value it writes, so it never sets a value.",
         loop: "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in.",
       },
       "expression/unknown-choice": {

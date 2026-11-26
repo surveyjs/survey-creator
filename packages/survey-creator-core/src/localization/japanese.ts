@@ -4029,8 +4029,10 @@ export var jaStrings = {
         loop: "トリガーは設定した値({setRoots})をループします。"
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label}は自分が書き込んだ値を読み込みます。別の数値が変わったときだけ実行されるため、全く実行されません。",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} はその値から書き込む値を計算します。各実行は前回の結果から始まるため、値は実行回数に応じて決まります。",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} は自分が書き込んだ値だけをコピーするため、値を設定することはありません。",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "値はループ形式で書き込まれます:{chain}。各書き込みは読み取った式を繰り返し実行するため、最終的な値は質問の回答順に依存します。"
       },

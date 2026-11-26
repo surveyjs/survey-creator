@@ -19,11 +19,13 @@ import {
   IConfirmDialogOptions,
   ISurveyVariablePresets,
   SurveyVariablePresets,
+  ILoadFromJSONOptions,
   isAnimationEnabled,
   isReducedMotionPreferred,
   subscribeReducedMotionChange,
   getIdSelector
 } from "survey-core";
+import type { ISurveyOptions } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations, ITabOptions } from "./creator-settings";
 import { editorLocalization, setupLocale, applyCreatorUiLocaleToPopup } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
@@ -115,6 +117,16 @@ export interface IKeyboardShortcut {
   hotKey: { ctrlKey?: boolean, keyCode: number };
   macOsHotkey?: { shiftKey?: boolean, keyCode: number };
   execute: (context: any) => void;
+}
+
+export interface IEmbeddedLicenseBanner {
+  poweredByText: string;
+  brandText: string;
+  brandIconName: string;
+  linkText: string;
+  linkUrl: string;
+  closeText: string;
+  closeIconName: string;
 }
 
 export class ToolbarActionContainer extends ActionContainer {
@@ -363,12 +375,44 @@ export class SurveyCreatorModel extends Base
     return "";
   }
 
+  private getEmbeddedLicenseInfo(): { name: string, whiteLabelUrl: string } | undefined {
+    // A missing plugin license shows the plugin's own text, so the banner is not "embedded"
+    if (this.getUnlicensedPluginsNames().length > 0) return undefined;
+    return (!!getEmbeddedLicense && getEmbeddedLicense()) || undefined;
+  }
+  public get isEmbeddedLicenseBanner(): boolean {
+    return !!this.getEmbeddedLicenseInfo();
+  }
+  // The embedded banner is a small floating card in the bottom-left corner instead of a full-width row.
+  // Renderers draw it from these texts; undefined means the regular banner (licenseText) is shown.
+  public get embeddedLicenseBanner(): IEmbeddedLicenseBanner | undefined {
+    const info = this.getEmbeddedLicenseInfo();
+    if (!info) return undefined;
+    return {
+      poweredByText: this.getLocString("survey.licenseEmbeddedPoweredBy"),
+      // brandText is the accessible name of the logo image
+      brandText: "SurveyJS",
+      brandIconName: "icon-logo-surveyjs-72x16",
+      linkText: this.getLocString("survey.licenseEmbeddedWhiteLabel"),
+      linkUrl: info.whiteLabelUrl,
+      closeText: this.getLocString("pe.close"),
+      closeIconName: "icon-close-tiny-16x16"
+    };
+  }
+  // Only the embedded card can be closed, and only for the lifetime of this creator instance
+  @property({ defaultValue: false }) isLicenseBannerClosed: boolean;
+  public get showLicenseBanner(): boolean {
+    if (this.haveCommercialLicense) return false;
+    return !(this.isLicenseBannerClosed && this.isEmbeddedLicenseBanner);
+  }
+  public closeLicenseBanner(): void {
+    if (this.isEmbeddedLicenseBanner) {
+      this.isLicenseBannerClosed = true;
+    }
+  }
   public get licenseText(): string {
     const unlicensedPlugins = this.getUnlicensedPluginsNames();
     if (unlicensedPlugins.length > 0) return this.pluginLicenseTexts[unlicensedPlugins[0]];
-    // The "embedded-<name>" marker grants no license; it only replaces the banner text
-    const embedded = !!getEmbeddedLicense && getEmbeddedLicense();
-    if (embedded) return this.getLocString("survey.licenseEmbedded").replace("{whiteLabelUrl}", embedded.whiteLabelUrl);
     const licenseDateString = this.licenseDateString;
     if (licenseDateString) return this.getLocString("survey.license2").replace("{date}", licenseDateString);
     return this.getLocString("survey.license");
@@ -2505,9 +2549,13 @@ export class SurveyCreatorModel extends Base
    * @param insertPageIndex A zero-based index at which to insert new pages.
    */
   public addCollectionItemsJson(json: any, insertPageIndex?: number): void {
-    const survey = new SurveyModel(json);
+    // The pages load with the designer survey's settings and defaults (an explicit value equal to the global default
+    // is kept), without the user's events
+    const survey = new SurveyModel(json, this.getTemporarySurveyOptions());
     this.updateAddingSurvey(survey);
     this.addSurveyPages(survey, insertPageIndex);
+    // Not disposed (its pages are now the designer's): only its defaults layer is released
+    this.releasePropertyDefaults(survey);
   }
   private updateAddingSurvey(survey: SurveyModel): void {
     this.updateAddingPages(survey);
@@ -3070,7 +3118,8 @@ export class SurveyCreatorModel extends Base
     if (!textWorker.isJsonCorrect) return null;
     // the text normalized the way the survey saves it - through a model in design mode, so
     // that loading it runs no expressions and no choicesByUrl requests
-    const survey = new SurveyModel();
+    // With the designer survey's settings and defaults (not its events), the text is normalized the way creator.JSON is
+    const survey = new SurveyModel(undefined, this.getTemporarySurveyOptions());
     survey.setDesignMode(true);
     survey.fromJSON(this.parseJSON(this.text));
     const res = new JsonObject().toJsonObject(survey);
@@ -3178,13 +3227,41 @@ export class SurveyCreatorModel extends Base
     if (words.length === 0) return "";
     return words.map(word => word[0]).join("").toLowerCase() + "-";
   }
+  /**
+   * Specifies runtime settings, property defaults, and event handlers for the survey being edited.
+   *
+   * Changes to `surveyOptions` apply to survey models created afterward. Assign [`creator.JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) again to recreate the Designer survey with the updated options.
+   *
+   * When rendering the survey with Form Library, pass the same [`ISurveyOptions`](https://surveyjs.io/form-library/documentation/api-reference/isurveyoptions) object to the `SurveyModel` constructor.
+   */
+  public surveyOptions: ISurveyOptions;
+  private static userSurveyAreas = ["designer-tab", "preview-tab", "theme-tab",
+    "translation-tab:source-survey", "translation-tab:target-survey"];
+  private getSurveyOptionsByArea(area: string): ISurveyOptions {
+    if (!this.surveyOptions || SurveyCreatorModel.userSurveyAreas.indexOf(area) < 0) return undefined;
+    return this.surveyOptions;
+  }
+  // A hidden temporary survey that loads JSON the way the designer survey does: the designer's runtime settings and
+  // propertyDefaults, but not the user's events, so the application's handlers do not run for it
+  private getTemporarySurveyOptions(): ISurveyOptions {
+    const options = this.getSurveyOptionsByArea("designer-tab");
+    if (!options || !Object.prototype.hasOwnProperty.call(options, "events")) return options;
+    const res: any = {};
+    Object.keys(options).forEach((key: string) => {
+      if (key !== "events") res[key] = options[key];
+    });
+    return res;
+  }
   protected createSurveyCore(json: any = {}, area: string, element: Base): SurveyModel {
+    const surveyOptions = this.getSurveyOptionsByArea(area);
     if (this.onSurveyInstanceSetupHandlers.isEmpty) {
-      const model = new SurveyModel(json);
+      const model = new SurveyModel(json, surveyOptions);
       model.generateStylesheet = false;
       return model;
     }
-    const model = new SurveyModel();
+    // The handlers run after the constructor and before the JSON loads. The survey's runtime settings and property
+    // defaults are this.surveyOptions and cannot change here; options.survey.onX.add() adds to its events
+    const model = new SurveyModel(undefined, surveyOptions);
     model.generateStylesheet = false;
     const options = { survey: model, area: area, element: element, json: json };
     this.onSurveyInstanceSetupHandlers.fire(this, options);
@@ -3525,9 +3602,15 @@ export class SurveyCreatorModel extends Base
       });
     }
   }
+  // The element loads before it is added to the designer survey: with the survey's own property defaults, an explicit
+  // value equal to the global default is kept
+  private getNewElementLoadOptions(): ILoadFromJSONOptions {
+    const propertyDefaults = this.survey?.getOwnPropertyDefaults();
+    return !!propertyDefaults ? { propertyDefaults: propertyDefaults } : undefined;
+  }
   public createNewElement(json: any): IElement {
     const newElement = Serializer.createClass(json["type"]);
-    new JsonObject().toObject(json, newElement);
+    new JsonObject().toObject(json, newElement, this.getNewElementLoadOptions());
     let needNewName = true;
     if (!!json.name) {
       if (newElement.isPage) {
@@ -5272,7 +5355,15 @@ export class SurveyCreatorModel extends Base
         plugin.dispose();
       }
     });
+    // The designer survey is not disposed (creator.JSON stays readable), but its defaults layer is released:
+    // a live layer keeps every survey on the page on the slower default-read path
+    this.releasePropertyDefaults(this.surveyValue);
     super.dispose();
+  }
+  private releasePropertyDefaults(survey: SurveyModel): void {
+    if (!!survey) {
+      survey.releasePropertyDefaults();
+    }
   }
   @property({ defaultValue: true }) enableLinkFileEditor: boolean;
   public getRootCss() {

@@ -4029,8 +4029,10 @@ export var hebrewStrings = {
         loop: "הטריגרים יוצרים לולאה דרך הערכים שהם מגדירים: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "ה-{label} קורא את הערך שהוא כותב בעצמו - הוא רץ רק כשערך אחר משתנה, כך שהוא אף פעם לא רץ בכלל.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "ה-{label} מחשב את הערך שהוא כותב מהערך עצמו - כל ריצה מתחילה מהתוצאה הקודמת, ולכן הערך תלוי בכמה פעמים הוא רץ.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "ה-{label} מעתיק רק את הערך שהוא כותב, ולכן הוא אף פעם לא מגדיר ערך.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "הערכים נכתבים בלולאה: {chain}. כל כתיבה מריצה מחדש את הביטויים שקוראים אותה, כך שהערכים הסופיים תלויים בסדר שבו נענות השאלות."
       },

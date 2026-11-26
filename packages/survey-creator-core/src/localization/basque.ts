@@ -4035,6 +4035,8 @@ export var euStrings = {
       "cycle/value-write": {
         // "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
         self: "{label} berak idazten duen balioa irakurtzen du - beste balio bat aldatzean soilik exekutatzen da, beraz ez da inoiz exekutatzen.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label}-ak idazten duen balioa bakarrik kopiatzen du, beraz, inoiz ez du baliorik ezartzen.",
         // "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Balioak begizta batean idazten dira: {chain}. Idazketa bakoitzak hura irakurtzen duten adierazpenak berriro exekutatzen ditu, beraz azken balioak galderen erantzun-ordernaren araberakoak dira."
       },

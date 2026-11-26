@@ -1,5 +1,6 @@
-import type { Browser, BrowserContext, CDPSession, Locator, Page, TestInfo, ViewportSize } from "@playwright/test";
+import type { Browser, BrowserContext, CDPSession, Locator, Page, Route, TestInfo, ViewportSize } from "@playwright/test";
 import { expect, test as baseTest } from "@playwright/test";
+import * as fs from "fs";
 import * as path from "path";
 
 export const url = "http://127.0.0.1:8080/test-pages/default";
@@ -82,6 +83,40 @@ export async function compareScreenshot(
     await expect.soft(page).toHaveScreenshot(screenshotName, pwOptions);
   }
 }
+
+// Requests to any host other than the local test server (React from esm.sh, Open Sans from fonts.gstatic.com,
+// the widget page's libraries, images in test JSON) are answered from e2e/offline-cache, so a slow or failing
+// CDN cannot slow down or fail a test. The pages keep their URLs, so CSP, module URLs and @font-face behave
+// as before. e2e/offline-cache/refresh.mjs fills the cache. A URL missing from it still goes to the network
+// and is printed once per worker: rerun refresh.mjs when a page adds a CDN URL.
+const offlineCacheDir = path.join(__dirname, "offline-cache");
+const nonLocalUrl = /^https?:\/\/(?!(127\.0\.0\.1|localhost)(:\d+)?\/)/;
+let offlineCache: Record<string, { status: number, headers: Record<string, string>, file?: string }> | undefined;
+const offlineCacheMisses = new Set<string>();
+const serveFromOfflineCache = async (route: Route) => {
+  if (!offlineCache) {
+    offlineCache = JSON.parse(fs.readFileSync(path.join(offlineCacheDir, "manifest.json"), "utf8"));
+  }
+  const url = route.request().url();
+  const entry = offlineCache![url];
+  if (!entry) {
+    if (!offlineCacheMisses.has(url)) {
+      offlineCacheMisses.add(url);
+      // eslint-disable-next-line no-console
+      console.log(`offline-cache miss: ${url}`);
+    }
+    await route.continue();
+    return;
+  }
+  // contentType is needed as well: with `path`, fulfill replaces the content-type header with a guess from
+  // the file extension, and the cached esm.sh modules have none (module scripts reject a non-JS type).
+  await route.fulfill({
+    status: entry.status,
+    headers: entry.headers,
+    contentType: entry.headers["content-type"],
+    path: entry.file ? path.join(offlineCacheDir, entry.file) : undefined
+  });
+};
 
 type MouseButton = "left" | "right" | "middle";
 
@@ -309,6 +344,8 @@ class ReusablePage {
 
   private async open(): Promise<Page> {
     this.context = await this.browser.newContext();
+    // Every test of the worker runs in this context, so one route serves them all.
+    await this.context.route(nonLocalUrl, serveFromOfflineCache);
     const page = await this.context.newPage();
     this.cdp = await this.context.newCDPSession(page);
     // One listener for the page's whole life: an error thrown after a test's check, while the old creator is
@@ -386,6 +423,9 @@ const freshPageTest = baseTest.extend<TestFixtures, WorkerFixtures>({
   // eslint-disable-next-line no-empty-pattern
   reusablePage: [async ({}, use) => await use(undefined), { scope: "worker" }],
   page: async ({ page, skipJSErrors }, use) => {
+    // A regular expression (not a function) is matched inside Playwright's driver, so local requests
+    // never reach this test process.
+    await page.context().route(nonLocalUrl, serveFromOfflineCache);
     const errors: Array<Error> = [];
     page.addListener("pageerror", (error) => {
       errors.push(error);

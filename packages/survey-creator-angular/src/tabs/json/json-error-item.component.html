@@ -1,13 +1,9 @@
 <ng-template #template>
     <svg [iconName]="model.iconName" [size]="model.iconSize" [css]="'svc-json-error__icon'" sv-ng-svg-icon></svg>
     <div class="svc-json-error__container">
-        <div class="svc-json-error__title">
+        <div class="svc-json-error__title" [attr.title]="model.data.error?.text" (mousedown)="onTitleMouseDown($event)">
             <sv-ng-string [model]="model.locTitle"></sv-ng-string>
         </div>
-        <button type="button" *ngIf="model.data.showFixButton" (click)="fixError($event)" [key2click]
-            [attr.title]="model.data.fixButtonTitle" [attr.data-sv-tooltip]="model.data.fixButtonTitle" [attr.aria-label]="model.data.fixButtonTitle"
-            class="svc-json-error__fix-button">
-            <svg [iconName]="model.data.fixButtonIcon" [size]="'auto'" sv-ng-svg-icon></svg>
-        </button>
+        <sv-action-bar [model]="model.data.actions"></sv-action-bar>
     </div>
 </ng-template>

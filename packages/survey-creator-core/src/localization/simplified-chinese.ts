@@ -4029,8 +4029,10 @@ export var simplifiedChineseTranslation = {
         loop: "触发器通过它们设置的值形成一个循环：{setRoots}。"
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} 读取它自己写入的值——只有在另一个值变动时才运行，所以根本不会运行。",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} 会从该值本身计算出它写入的值——每次运行都从上一个结果开始，因此值取决于它运行了多少次。",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label}只复制它写入的值，因此从不设置值。",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "值以循环形式写入：{chain}。每次写入都会重运行读取该表达式，因此最终值取决于问题的回答顺序。"
       },

@@ -1,0 +1,258 @@
+{
+  "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/ace.min.js": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/javascript; charset=utf-8",
+      "access-control-allow-origin": "*"
+    },
+    "file": "cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/ace.min.js",
+    "size": 372827,
+    "sha256": "a8209c007bff674bbb2b7e38b21b19294176351fb9f68a00dd75918f42cf1884"
+  },
+  "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/theme-clouds_midnight.min.js": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/javascript; charset=utf-8",
+      "access-control-allow-origin": "*"
+    },
+    "file": "cdnjs.cloudflare.com/ajax/libs/ace/1.4.10/theme-clouds_midnight.min.js",
+    "size": 2558,
+    "sha256": "06a0601d408169fdad540be324a87693ca07234280f1fd577a398eefb6416ea8"
+  },
+  "https://esm.sh/react-dom@19.3.1/es2022/client.development.mjs": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/javascript; charset=utf-8",
+      "access-control-allow-origin": "*"
+    },
+    "file": "esm.sh/react-dom@19.3.1/es2022/client.development.mjs",
+    "size": 1104260,
+    "sha256": "3706beae2682b2bc259b52d53cf8a889aeeb7e47996b228d91ed7714af02a64b"
+  },
+  "https://esm.sh/react-dom@19.3.1/es2022/react-dom.development.mjs": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/javascript; charset=utf-8",
+      "access-control-allow-origin": "*"
+    },
+    "file": "esm.sh/react-dom@19.3.1/es2022/react-dom.development.mjs",
+    "size": 19803,
+    "sha256": "f9bc969556e90691d0ea9d93619bff6db03e91906eef597a60d1c90b4f07ff9d"
+  },
+  "https://esm.sh/react-dom@19/client?dev": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/javascript; charset=utf-8",
+      "access-control-allow-origin": "*"
+    },
+    "file": "esm.sh/react-dom@19/client__dev",
+    "size": 340,
+    "sha256": "97c77f4257ef8021e328d04d06d29b6d13614056a15c826204247417f8e616a0"
+  },
+  "https://esm.sh/react-dom@19?dev": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/javascript; charset=utf-8",
+      "access-control-allow-origin": "*"
+    },
+    "file": "esm.sh/react-dom@19__dev",
+    "size": 231,
+    "sha256": "4a814a2e6eaea543ee2552261387c3d8f1402542ba3ef2193d34c3ed90678aca"
+  },
+  "https://esm.sh/react@19.3.1/es2022/react.development.mjs": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/javascript; charset=utf-8",
+      "access-control-allow-origin": "*"
+    },
+    "file": "esm.sh/react@19.3.1/es2022/react.development.mjs",
+    "size": 50529,
+    "sha256": "4ffed30422bb3c2806be14d2b40e9ba273f49cd587e641f4737d3d7a0ec09e7d"
+  },
+  "https://esm.sh/react@19/?dev": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/javascript; charset=utf-8",
+      "access-control-allow-origin": "*"
+    },
+    "file": "esm.sh/react@19/index__dev",
+    "size": 158,
+    "sha256": "5eac127a0cf4fc23c9904db3b59d7cd5fbed4e9985de614d70832815a43233fd"
+  },
+  "https://esm.sh/scheduler@%5E0.28.0?target=es2022&dev": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/javascript; charset=utf-8",
+      "access-control-allow-origin": "*"
+    },
+    "file": "esm.sh/scheduler@%5E0.28.0__target_es2022_dev",
+    "size": 178,
+    "sha256": "5a86a72ad5040ccdd780bc85f5154e8f49a8b96f8e5ed88be5c20172ad9530bb"
+  },
+  "https://esm.sh/scheduler@0.28.0/es2022/scheduler.development.mjs": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/javascript; charset=utf-8",
+      "access-control-allow-origin": "*"
+    },
+    "file": "esm.sh/scheduler@0.28.0/es2022/scheduler.development.mjs",
+    "size": 14591,
+    "sha256": "588d089982513b63209355d8c4a97c01639f128fb86fd1ea1deda9d0b1ed0876"
+  },
+  "https://fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2": {
+    "status": 200,
+    "headers": {
+      "content-type": "font/woff2",
+      "access-control-allow-origin": "*"
+    },
+    "file": "fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2",
+    "size": 44856,
+    "sha256": "8778e9af2422858d7052ff9a0f3c12c08ae976bdd6e0316db144cd5579cd97db"
+  },
+  "https://fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS2mu1aB.woff2": {
+    "status": 200,
+    "headers": {
+      "content-type": "font/woff2",
+      "access-control-allow-origin": "*"
+    },
+    "file": "fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS2mu1aB.woff2",
+    "size": 16248,
+    "sha256": "ea1b915d9a1f79eefb62e5c9c1af97e12adacc44deac97601105bdd2d2c46798"
+  },
+  "https://fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSCmu1aB.woff2": {
+    "status": 200,
+    "headers": {
+      "content-type": "font/woff2",
+      "access-control-allow-origin": "*"
+    },
+    "file": "fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSCmu1aB.woff2",
+    "size": 14040,
+    "sha256": "84197a92671b7b7c8715220cea35354699c6221113c0ff531ff087ab8a8aa9e6"
+  },
+  "https://fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSGmu1aB.woff2": {
+    "status": 200,
+    "headers": {
+      "content-type": "font/woff2",
+      "access-control-allow-origin": "*"
+    },
+    "file": "fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSGmu1aB.woff2",
+    "size": 31320,
+    "sha256": "24c0e724005344165ee0a0ff4c96a914e174bb4caa20c8a533fb194d92853e95"
+  },
+  "https://fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSKmu1aB.woff2": {
+    "status": 200,
+    "headers": {
+      "content-type": "font/woff2",
+      "access-control-allow-origin": "*"
+    },
+    "file": "fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSKmu1aB.woff2",
+    "size": 49116,
+    "sha256": "7608d58af9b388dd3736f6f3c0004e0c5a9278eacf320e17d5e787c70c28c218"
+  },
+  "https://fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSOmu1aB.woff2": {
+    "status": 200,
+    "headers": {
+      "content-type": "font/woff2",
+      "access-control-allow-origin": "*"
+    },
+    "file": "fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSOmu1aB.woff2",
+    "size": 4468,
+    "sha256": "910e0f31e8a51c7042bc1a1e4f7b9f2805f6bf78f872d9fccdc4f4e0b18ad53c"
+  },
+  "https://fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSumu1aB.woff2": {
+    "status": 200,
+    "headers": {
+      "content-type": "font/woff2",
+      "access-control-allow-origin": "*"
+    },
+    "file": "fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSumu1aB.woff2",
+    "size": 26240,
+    "sha256": "59bd288e64c57e034672999e33ebda6eb5ad1575945eb563dbfb5b44f226e1e1"
+  },
+  "https://fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSymu1aB.woff2": {
+    "status": 200,
+    "headers": {
+      "content-type": "font/woff2",
+      "access-control-allow-origin": "*"
+    },
+    "file": "fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSymu1aB.woff2",
+    "size": 21048,
+    "sha256": "0c018fe9d09945d93f6f5aa5f1c53a2975621c3043a22344eaf86d6500c245c6"
+  },
+  "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg": {
+    "status": 200,
+    "headers": {
+      "content-type": "image/jpeg"
+    },
+    "file": "surveyjs.io/Content/Images/examples/image-picker/camel.jpg",
+    "size": 18204,
+    "sha256": "27cc7f8d56aedf2bb5cad5b5c3e87f8ac13ba55258cd41f01f5c34df8fe65571"
+  },
+  "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg": {
+    "status": 200,
+    "headers": {
+      "content-type": "image/jpeg"
+    },
+    "file": "surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg",
+    "size": 21664,
+    "sha256": "bb8983b039d87b138479832ed5efc0cf2a9a7f7c1a1a9e5122072310459940ae"
+  },
+  "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg": {
+    "status": 200,
+    "headers": {
+      "content-type": "image/jpeg"
+    },
+    "file": "surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
+    "size": 26520,
+    "sha256": "d2f8e30ba53d6cdf6de715769d110c59416f9d4737825366667ca05867c9fbe3"
+  },
+  "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg": {
+    "status": 200,
+    "headers": {
+      "content-type": "image/jpeg"
+    },
+    "file": "surveyjs.io/Content/Images/examples/image-picker/panda.jpg",
+    "size": 28343,
+    "sha256": "d0c9374251132e4a7681b852af6bb8e1c08c3c944a6227e808ad821cd07757a7"
+  },
+  "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css": {
+    "status": 200,
+    "headers": {
+      "content-type": "text/css; charset=utf-8",
+      "access-control-allow-origin": "*"
+    },
+    "file": "unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css",
+    "size": 121200,
+    "sha256": "f75e846cc83bd11432f4b1e21a45f31bc85283d11d372f7b19accd1bf6a2635c"
+  },
+  "https://unpkg.com/bootstrap@3.3.7/dist/fonts/glyphicons-halflings-regular.woff2": {
+    "status": 200,
+    "headers": {
+      "content-type": "font/woff2",
+      "access-control-allow-origin": "*"
+    },
+    "file": "unpkg.com/bootstrap@3.3.7/dist/fonts/glyphicons-halflings-regular.woff2",
+    "size": 18028,
+    "sha256": "fe185d11a49676890d47bb783312a0cda5a44c4039214094e7957b4c040ef11c"
+  },
+  "https://unpkg.com/sortablejs@1.7.0/Sortable.js": {
+    "status": 200,
+    "headers": {
+      "content-type": "text/javascript; charset=utf-8",
+      "access-control-allow-origin": "*"
+    },
+    "file": "unpkg.com/sortablejs@1.7.0/Sortable.js",
+    "size": 37057,
+    "sha256": "2f7e150f76272ed8c2095f0a9b169f9bd342826bb6cd82e877fdcb9cda374d90"
+  },
+  "https://unpkg.com/surveyjs-widgets@1.8.70/surveyjs-widgets.min.js": {
+    "status": 200,
+    "headers": {
+      "content-type": "text/javascript; charset=utf-8",
+      "access-control-allow-origin": "*"
+    },
+    "file": "unpkg.com/surveyjs-widgets@1.8.70/surveyjs-widgets.min.js",
+    "size": 112499,
+    "sha256": "5c089be7d4a94d9224a5c9314b05306d88baf4465ed5e447ebe95830fccd06c4"
+  }
+}

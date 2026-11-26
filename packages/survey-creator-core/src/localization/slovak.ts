@@ -4029,8 +4029,10 @@ export var skStrings = {
         loop: "Triggery vytvárajú slučku cez nastavené hodnoty: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} číta hodnotu, ktorú si sám zapíše – spustí sa len vtedy, keď sa zmení iná hodnota, takže sa vôbec nespustí.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} vypočíta hodnotu, ktorú z tejto hodnoty zapíše – každý beh začína od predchádzajúceho výsledku, takže hodnota závisí od toho, koľkokrát sa spustí.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} kopíruje iba hodnotu, ktorú zapíše, takže nikdy nenastaví hodnotu.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Hodnoty sa zapisujú v slučke: {chain}. Každý zápis opakovane vykonáva výrazy, ktoré ho čítajú, takže konečné hodnoty závisia od poradia, v akom sú otázky zodpovedané."
       },

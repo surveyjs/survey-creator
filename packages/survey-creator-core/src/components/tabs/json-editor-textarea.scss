@@ -66,7 +66,16 @@ svc-tab-json-editor-textarea {
 
 .svc-json-error .sv-string-viewer {
   pointer-events: all;
-  cursor: pointer;
+  cursor: text;
+}
+
+.svc-json-error__title,
+.svc-json-error__title .sv-string-viewer {
+  cursor: text;
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 .svc-json-error .sv-string-viewer:hover {
@@ -100,31 +109,12 @@ svc-tab-json-editor-textarea {
   min-width: 0;
 }
 
-.svc-json-error__fix-button {
-  appearance: none;
-  flex-grow: 0;
-  flex-shrink: 0;
+.svc-json-error__actions {
   pointer-events: all;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 var(--sjs2-spacing-x100);
-
-  border-radius: var(--sjs2-radius-x050);
-  background: var(--sjs2-color-bg-basic-primary);
-
-  svg {
-    fill: var(--sjs2-color-fg-basic-secondary);
-    line-height: var(--sjs2-line-height-x300);
-    width: 1lh;
-    height: 1lh;
-  }
+  flex: 0 0 auto;
+  --sd-action-bar-gap: var(--sjs2-spacing-x050);
 }
 
-.svc-json-error__fix-button:hover {
-  svg {
-    fill: var(--sjs2-color-bg-brand-primary);
-  }
+.svc-json-error__fix-button {
+  padding: var(--sjs2-spacing-x000) var(--sjs2-spacing-x050);
 }

@@ -16,31 +16,6 @@ import { DropIndicatorPosition } from "../drag-drop-enums";
 import { cleanHtmlElementAfterAnimation, prepareElementForVerticalAnimation } from "survey-core";
 import { SurveyElementActionContainer } from "./action-container-view-model";
 
-function debounce(func, delay) {
-  let timeout;
-  return function (...args) {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      func.apply(this, args);
-    }, delay);
-  };
-}
-
-const updateRowsVisibility = debounce((target: SurveyElementAdornerBase) => {
-  const root = target?.creator?.rootElement;
-  if (!root || typeof (root as any).getAnimations !== "function") {
-    return;
-  }
-  if (root.getAnimations({ subtree: true }).filter((animation => animation.effect.getComputedTiming().activeDuration !== Infinity && (animation.pending || animation.playState !== "finished")))[0]) {
-    updateRowsVisibility(target);
-  } else {
-    const survey = target?.creator?.survey;
-    if (!survey) return;
-    survey.pages.forEach(p => p.ensureRowsVisibility());
-    survey.getAllPanels().forEach(p => p.ensureRowsVisibility());
-  }
-}, 50);
-
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public static AdornerValueName = "__sjs_creator_adorner";
   protected expandCollapseAction: IAction;
@@ -70,9 +45,6 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       if (!val) target.needToRenderContent = true;
       if (target.creator.designerStateManager && target.surveyElement) {
         target.creator.designerStateManager.setElementCollapsed(target.surveyElement, val);
-      }
-      if (!!val !== !!prevVal) {
-        updateRowsVisibility(target);
       }
     }
   }) collapsed: boolean;

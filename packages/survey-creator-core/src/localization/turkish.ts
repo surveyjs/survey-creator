@@ -4029,8 +4029,10 @@ export var turkishStrings = {
         loop: "Tetikleyiciler, belirledikleri değerler üzerinden bir döngü oluşturur: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} kendi yazdığı değeri okur - sadece başka bir değer değiştiğinde çalışır, yani hiç çalışmaz.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label}, yazdığı değeri o değerden kendisi hesaplar - her çalışma önceki sonuçtan başlar, bu yüzden değer kaç kez çalıştırıldığına bağlıdır.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} yalnızca yazdığı değeri kopyalar, bu yüzden asla bir değer ayarlamaz.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Değerler bir döngü içinde yazılır: {chain}. Her yazı, onu okuyan ifadeleri tekrar çalıştırır, bu nedenle nihai değerler soruların cevaplandığı sıraya bağlıdır."
       },

@@ -8,7 +8,7 @@
       <div
         class="svc-full-container svc-creator__area svc-flex-column"
         :class="{
-          'svc-creator__area--with-banner': !model.haveCommercialLicense,
+          'svc-creator__area--with-banner': model.showLicenseBanner,
         }"
       >
         <SvComponent
@@ -85,12 +85,55 @@
             v-if="model.isSidebarVisible"
           ></SvComponent>
         </div>
-        <div class="svc-creator__banner" v-if="!model.haveCommercialLicense">
-          <span
-            class="svc-creator__non-commercial-text"
-            v-html="model.licenseText"
-          ></span>
-        </div>
+        <template v-if="model.showLicenseBanner">
+          <div
+            class="svc-embedded-banner"
+            v-if="model.embeddedLicenseBanner"
+          >
+            <div class="svc-embedded-banner__caption">
+              <span class="svc-embedded-banner__powered-by">{{
+                model.embeddedLicenseBanner.poweredByText
+              }}</span>
+              <span
+                class="svc-embedded-banner__brand"
+                role="img"
+                :aria-label="model.embeddedLicenseBanner.brandText"
+              >
+                <SvComponent
+                  :is="'sv-svg-icon'"
+                  :iconName="model.embeddedLicenseBanner.brandIconName"
+                  :size="'auto'"
+                ></SvComponent>
+              </span>
+            </div>
+            <a
+              class="svc-embedded-banner__link"
+              :href="model.embeddedLicenseBanner.linkUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              >{{ model.embeddedLicenseBanner.linkText }}</a
+            >
+            <button
+              type="button"
+              class="svc-embedded-banner__close"
+              :title="model.embeddedLicenseBanner.closeText"
+              :aria-label="model.embeddedLicenseBanner.closeText"
+              @click="model.closeLicenseBanner()"
+            >
+              <SvComponent
+                :is="'sv-svg-icon'"
+                :iconName="model.embeddedLicenseBanner.closeIconName"
+                :size="'auto'"
+              ></SvComponent>
+            </button>
+          </div>
+          <div class="svc-creator__banner" v-else>
+            <span
+              class="svc-creator__non-commercial-text"
+              v-html="model.licenseText"
+            ></span>
+          </div>
+        </template>
         <SvComponent :is="'sv-notifier'" :model="model.notifier"></SvComponent>
       </div>
     </div>

@@ -4030,8 +4030,10 @@ export var danishStrings = {
         loop: "Triggere danner en løkke gennem de værdier, de sætter: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} læser den værdi, den skriver selv – den kører kun, når en anden værdi ændres, så den kører aldrig overhovedet.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} beregner selv den værdi, den skriver ud fra den værdi – hvert kørsel starter fra det forrige resultat, så værdien afhænger af, hvor mange gange den kører.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} kopierer kun den værdi, den skriver, så den sætter aldrig en værdi.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Værdierne skrives i en løkke: {chain}. Hver skrivning kører de udtryk, der læser den igen, så de endelige værdier afhænger af rækkefølgen spørgsmålene besvares i."
       },

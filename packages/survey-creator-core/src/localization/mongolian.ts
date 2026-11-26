@@ -4029,8 +4029,10 @@ export var mnStrings = {
         loop: "Триггерүүд өөрсдийн тогтоосон утгуудаар дамжуулан давталт үүсгэдэг: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} өөрөө бичдэг утгыг уншдаг - зөвхөн өөр утга өөрчлөгдөхөд ажилладаг тул огт ажилладаггүй.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} нь тухайн утгаас өөрөө бичсэн утгыг тооцоолдог - гүйцэтгэл бүр өмнөх үр дүнгээс эхэлдэг тул утга нь хэдэн удаа ажилласнаас хамаарна.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} зөвхөн бичсэн утгыг хуулдаг тул утга тохируулдаггүй.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Утгуудыг дараах давталтад бичдэг: {chain}. Бичих бүрт уншсан илэрхийлэлүүдийг дахин давтан гүйцэтгэдэг тул эцсийн утгууд нь асуултын хариултын дарааллаар хамаарна."
       },
