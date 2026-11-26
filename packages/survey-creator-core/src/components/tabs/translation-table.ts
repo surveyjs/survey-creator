@@ -18,7 +18,7 @@ import { TranslationGroup, TranslationItem } from "./translation-base";
 //   name, in the first row of the element only - a matrix has no rowspan, see onUpdateMatrixCellCss)
 //   and String;
 // - "element" (the element strings dialog): the rows of a single element, no groups and no Question
-//   column.
+//   column. The rows of nested elements keep their place and the group path in the String column.
 // The owner (TranslationBase) keeps the translation tree, the locales and the writes.
 
 export const translationTableQuestionColumnName = "svc-translation-question";
@@ -131,13 +131,14 @@ export class TranslationTable {
   }
   // Builds the table survey over the tree. afterFill runs once the rows are in, still inside the
   // survey creation (the instance-created event sees the filled table).
-  public createSurvey(root: TranslationGroup, afterFill?: (survey: SurveyModel) => void, area?: string): SurveyModel {
+  public createSurvey(root: TranslationGroup, afterFill?: (survey: SurveyModel) => void, area?: string,
+    reason: string = "translation_strings"): SurveyModel {
     // widthMode is fixed to what "auto" resolves to here (every strings-grid matrix needs a responsive
     // width): with "auto", endLoadingFromJson computes it by reading every element of the grid under a
     // dependency collector, which takes most of the build time on a large survey.
     const json = { autoGrowComment: true, allowResizeComment: false, widthMode: "responsive" };
     setSurveyJSONForPropertyGrid(json, false);
-    const survey = this.owner.createTabSurvey(json, "translation_strings", (survey: SurveyModel): void => {
+    const survey = this.owner.createTabSurvey(json, reason, (survey: SurveyModel): void => {
       survey.lazyRenderEnabled = true;
       survey.skeletonComponentName = "sd-translation-line-skeleton";
       survey.startLoadingFromJson();
@@ -190,6 +191,7 @@ export class TranslationTable {
     survey.onMatrixCellValueChanged.add(this.onMatrixCellValueChanged);
     survey.onUpdateMatrixCellCss.add(this.onUpdateMatrixCellCss);
     survey.onUpdatePanelCssClasses.add(this.onUpdatePanelCssClasses);
+    survey.onUpdateQuestionCssClasses.add(this.onUpdateQuestionCssClasses);
     survey.onAfterRenderSurvey.add(this.onAfterRenderSurvey);
     if (this.isTree) {
       if (!!root)this.addTreeGroup(survey.pages[0], root);
@@ -212,6 +214,7 @@ export class TranslationTable {
     survey.onMatrixCellValueChanged.remove(this.onMatrixCellValueChanged);
     survey.onUpdateMatrixCellCss.remove(this.onUpdateMatrixCellCss);
     survey.onUpdatePanelCssClasses.remove(this.onUpdatePanelCssClasses);
+    survey.onUpdateQuestionCssClasses.remove(this.onUpdateQuestionCssClasses);
     survey.onAfterRenderSurvey.remove(this.onAfterRenderSurvey);
     this.pendingScrollPageName = undefined;
     this.surveyValue = undefined;
@@ -231,7 +234,9 @@ export class TranslationTable {
     matrix.showHeader = false;
     container.addQuestion(matrix);
     this.owner.addLocaleColumns(matrix);
-    const itemValue = new ItemValue(row.item.name, row.item.text);
+    // The row title is hidden, but it is the cells' accessible name: the String column's text, with the
+    // group path ("col1: Choices: A"), in the layouts that have one.
+    const itemValue = new ItemValue(row.item.name, row.text || row.item.text);
     itemValue["translationData"] = row.item;
     matrix.rows.push(itemValue);
     return matrix;
@@ -247,9 +252,17 @@ export class TranslationTable {
     });
     return res;
   }
+  // The values of the string matrices. The values of the other questions an owner adds to the survey
+  // (the filter of the element strings dialog) are kept: the result replaces the whole survey data.
   private getSurveyData(): any {
     const res = {};
-    this.forEachMatrix(matrix => res[matrix.name] = this.getMatrixData(matrix));
+    this.surveyValue.getAllQuestions().forEach((question: Question) => {
+      if (!!this.rowsByMatrixName[question.name]) {
+        res[question.name] = this.getMatrixData(<QuestionMatrixDropdownModel>question);
+      } else if (!question.isEmpty()) {
+        res[question.getValueName()] = question.value;
+      }
+    });
     return res;
   }
   // The matrix values follow the real survey's strings (the owner calls it after they changed).
@@ -329,6 +342,9 @@ export class TranslationTable {
   private addElementRows(group: TranslationGroup, elementName: string, rows: Array<ITranslationTableRow>,
     pageGroups?: Array<TranslationGroup>): void {
     const nested: Array<TranslationGroup> = [];
+    // The "element" layout has no Question column: a nested element is walked in place, its name
+    // becomes a part of the path, as for any other group.
+    const isElementLayout = this.layout === "element";
     const walk = (current: TranslationGroup, path: string): void => {
       current.items.forEach((child, index) => {
         if (child.isGroup) return;
@@ -342,7 +358,7 @@ export class TranslationTable {
         const obj = child.obj;
         if (!!pageGroups && !!obj && obj.isPage) {
           pageGroups.push(child);
-        } else if (isElementObj(obj)) {
+        } else if (isElementObj(obj) && !isElementLayout) {
           nested.push(child);
         } else {
           walk(child, (!!path ? path + ": " : "") + child.text);
@@ -383,6 +399,16 @@ export class TranslationTable {
 
   // --- the groups of the "pages" and "element" layouts -----------------------------------------
 
+  // Builds the rows over another tree in the same survey: a shown dialog keeps rendering the survey it
+  // was opened with (the used/all strings switch of the element strings dialog). The "element" layout
+  // only: its rows are the only elements it adds, so the questions of the owner stay.
+  public refill(root: TranslationGroup): void {
+    const survey = this.surveyValue;
+    if (!survey || this.layout !== "element") return;
+    this.groups.forEach(group => this.clearGroupRows(group));
+    this.groups = this.createGroups(root);
+    this.groups.forEach(group => this.addGroup(survey.pages[0], group));
+  }
   private addGroup(page: PageModel, group: ITranslationTableGroup): void {
     if (this.layout === "element") {
       this.addRowMatrices(page, group);
@@ -709,6 +735,17 @@ export class TranslationTable {
     if (row.isGroupLast) css += " st-translation-table__cell--last";
     options.css = (options.css || "") + " " + css;
   };
+  // The "element" layout has no group panel to draw the table border: the first and the last string
+  // matrix close it (see translation.scss).
+  private onUpdateQuestionCssClasses = (_: SurveyModel, options: any): void => {
+    if (this.layout !== "element") return;
+    const row = this.getRowByMatrix(options.question);
+    if (!row) return;
+    let css = " st-translation-table__row";
+    if (row.isGroupFirst) css += " st-translation-table__row--first";
+    if (row.isGroupLast) css += " st-translation-table__row--last";
+    options.cssClasses.mainRoot += css;
+  };
   private onUpdatePanelCssClasses = (_: SurveyModel, options: any): void => {
     if (options.panel["__translationHasIndent"]) {
       options.cssClasses.panel.content += " st-panel-indent";
@@ -730,16 +767,20 @@ export class TranslationTable {
     const row = !!cellQuestion ? this.getRowByMatrix(cellQuestion.parentQuestion) : undefined;
     return !!row ? row.item : undefined;
   }
-  // Focuses the last cell of the string's row: the target locale column, or the only locale column
-  // without a target. Resolved by the localizable string, not by the item: an item of another tree
-  // (the used-strings tree) is not the item the rows carry.
-  public focusCell(locStr: ILocalizableString): void {
-    let isFound = false;
+  // The question of the last cell of the string's row: the target locale column, or the only locale
+  // column without a target. Resolved by the localizable string, not by the item: an item of another
+  // tree (the used-strings tree) is not the item the rows carry. Reading it creates the row's cells.
+  public getTargetCellQuestion(locStr: ILocalizableString): Question {
+    let res: Question;
     this.forEachMatrix((matrix, row) => {
-      if (isFound || row.item.locString !== locStr) return;
-      isFound = true;
+      if (!!res || row.item.locString !== locStr) return;
       const cells = matrix.visibleRows[0].cells;
-      cells[cells.length - 1].question.focus();
+      res = cells[cells.length - 1].question;
     });
+    return res;
+  }
+  public focusCell(locStr: ILocalizableString): void {
+    const question = this.getTargetCellQuestion(locStr);
+    if (!!question) question.focus();
   }
 }

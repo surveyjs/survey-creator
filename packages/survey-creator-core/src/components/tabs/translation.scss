@@ -152,9 +152,11 @@
   margin-top: var(--sjs2-spacing-x150);
 }
 
-// The "Untranslated strings" dialog (Translate manually): the grid view's table in a survey of its
-// own (see TranslationUntranslatedStrings), between the fixed title row and the footer.
-.st-untranslated-strings-dialog {
+// The "Untranslated strings" dialog (Translate manually) and the element strings dialog: the grid
+// view's table in a survey of its own (see TranslationUntranslatedStrings, TranslationElementStrings),
+// between the fixed title row and the footer.
+.st-untranslated-strings-dialog,
+.st-element-strings-dialog {
   // The table survey: the grid view pads its root, the dialog content has a padding of its own.
   .st-root-modern,
   .sd-root-modern,
@@ -183,7 +185,8 @@
   }
 }
 // The width goes on the content: the popup writes an inline "width: auto" on its container.
-.sv-popup--modal-popup.svc-property-editor.st-untranslated-strings-dialog > .sv-popup__container {
+.sv-popup--modal-popup.svc-property-editor.st-untranslated-strings-dialog > .sv-popup__container,
+.sv-popup--modal-popup.svc-property-editor.st-element-strings-dialog > .sv-popup__container {
   .sd-body,
   .sv-components-column--expandable {
     min-width: 0;
@@ -205,12 +208,22 @@
     overflow-y: auto;
   }
 
-  // The footer is separated from the table by a line across the whole dialog.
   .sv-popup__body-footer {
     margin: 0 calc(-1 * var(--sjs2-spacing-x300));
     padding: var(--sjs2-spacing-x300);
-    border-top: 1px solid var(--sjs2-color-border-basic-secondary);
   }
+}
+
+// The "Untranslated strings" dialog separates its footer from the table by a line across the dialog;
+// the element strings dialog has none.
+.sv-popup--modal-popup.svc-property-editor.st-untranslated-strings-dialog > .sv-popup__container .sv-popup__body-footer {
+  border-top: 1px solid var(--sjs2-color-border-basic-secondary);
+}
+
+// The element strings dialog: the Used Strings / All Strings switch spans the dialog, 40px above the
+// table.
+.st-element-strings-dialog .st-translation-table--element .sv-button-group {
+  margin-bottom: var(--sjs2-spacing-x500);
 }
 
 .st-strings-header {
@@ -614,66 +627,6 @@ td.st-table__cell:first-of-type {
   }
 }
 
-// The element strings dialog: the strings matrix of one element, in a survey of its own (see
-// createStringsHostSurvey). It is the dialog's content, not a survey the user fills in, so the
-// runtime survey's own frame and paddings are dropped.
-.st-element-strings-dialog {
-  .sd-root-modern,
-  .sd-container-modern,
-  .sd-body,
-  .sd-body__page,
-  .sd-page {
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
-    margin: 0;
-    max-width: none;
-  }
-
-  .sd-page__content {
-    padding: 0;
-  }
-}
-
-// The dialog's own width. Its matrix holds a source and a target editor next to the string
-// names, so it needs far more room than the property editor dialogs this one is styled as -
-// their min-width is what the extra classes here are for (see .svc-property-editor in
-// property-grid.scss, whose selector is just as specific). All the width goes to the editors:
-// the string names keep their share of it (see stringsRowTitleWidthPercent). Capped by the
-// viewport, so a narrow screen scrolls the table instead of the page.
-.sv-popup--modal-popup.svc-property-editor.st-element-strings-dialog .sv-popup__container {
-  .sd-body,
-  .sv-components-column--expandable {
-    min-width: min(calc(var(--sjs2-base-unit-size) * 106), 80vw);
-  }
-}
-
-// The strings matrix of the dialog: its title row is the caption row, and its title actions are
-// the caption's buttons (auto-translate, all/used strings).
-.st-element-strings {
-  // The caption row names the element the dialog edits; its buttons end the row, at the
-  // dialog's right edge.
-  .sd-action-title-bar {
-    margin-left: auto;
-  }
-
-  // The language headers start where their editors do, as the grid view's header row does -
-  // the runtime matrix centers its column titles.
-  .sd-table__cell--header {
-    text-align: left;
-  }
-
-  // The first column: the name of the string a row edits, next to the two locale editors
-  // (see createStringsMatrix). A property name is not a text the user reads through - it stays
-  // at the muted weight of a label and wraps instead of stretching the column.
-  .sd-table__cell--row-text {
-    font-size: var(--sjs2-font-size-s, 12px);
-    line-height: var(--sjs2-line-height-s, 16px);
-    color: var(--sjs2-color-fg-basic-primary-muted);
-    overflow-wrap: anywhere;
-  }
-}
-
 // The flattened dropdown/tagbox choice list of the side-by-side panes. The item rows reuse
 // the svc-question__dropdown-choice classes, so the designer's collapse fade rules apply.
 .st-dropdown-choices--wrapper {
@@ -898,7 +851,33 @@ td.st-table__cell:first-of-type {
   flex: 0 0 130px;
 }
 
-.st-translation-table--pages thead .st-table__cell--header:nth-child(3),
-.st-translation-table--element thead .st-table__cell--header:nth-child(2) {
+.st-translation-table--pages thead .st-table__cell--header:nth-child(3) {
   flex: 0 0 200px;
+}
+
+// The "element" layout (the element strings dialog): a narrower String column, and no group panel,
+// so the first and the last string matrix draw the table border (see onUpdateQuestionCssClasses).
+.st-translation-table--element {
+  thead .st-table__cell--header:nth-child(2),
+  .st-translation-table__cell--string {
+    flex: 0 0 180px;
+  }
+
+  .st-translation-table__row {
+    border-left: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+    border-right: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+    overflow: hidden;
+  }
+
+  .st-translation-table__row--first {
+    border-top: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+    border-top-left-radius: var(--sjs2-radius-x150);
+    border-top-right-radius: var(--sjs2-radius-x150);
+  }
+
+  .st-translation-table__row--last {
+    border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+    border-bottom-left-radius: var(--sjs2-radius-x150);
+    border-bottom-right-radius: var(--sjs2-radius-x150);
+  }
 }
