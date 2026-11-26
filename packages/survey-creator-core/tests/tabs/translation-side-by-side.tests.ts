@@ -2927,6 +2927,29 @@ test("element strings dialog: the title is the element title; a markdown title s
     expect(getTitle(survey.getQuestionByName("q2"))).toBe("q2");
   });
 });
+test("element strings dialog: without DOMParser the title is the element title text, markup is not stripped by hand", () => {
+  withDialog(dialogs => {
+    const creator = new CreatorTester({ showTranslationTab: true, translationMode: "sideBySide" });
+    creator.onSurveyInstanceSetupHandlers.add((sender, options) => {
+      if (options.area === "designer-tab") {
+        options.survey.onTextMarkdown.add((_, mdOptions) => {
+          mdOptions.html = "<scr<script>ipt>" + mdOptions.text + "</script>";
+        });
+      }
+    });
+    creator.JSON = { locale: "de", elements: [{ type: "text", name: "q1", title: "Question 1 < 2" }] };
+    creator.activeTab = "translation";
+    const model = getModel(creator);
+    vi.stubGlobal("DOMParser", undefined);
+    try {
+      model.showElementStringsDialog(creator.survey.getQuestionByName("q1"));
+      expect(dialogs[dialogs.length - 1].options.title).toBe("Question 1 < 2");
+      model.hideElementStringsDialog();
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+});
 
 test("element strings dialog: the title is in the source language, not in the target one the survey shows", () => {
   withDialog(dialogs => {

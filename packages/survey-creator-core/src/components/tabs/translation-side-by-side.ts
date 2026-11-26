@@ -43,9 +43,11 @@ const focusCellAttemptDelay = 50;
 const focusCellMaxAttempts = 20;
 
 // The text of an html string, for a place that renders plain text only (the element strings dialog
-// title). Parsed into an inert document: nothing in it loads or runs.
-function getHtmlText(html: string): string {
-  if (typeof DOMParser === "undefined") return html.replace(/<[^>]*>/g, "");
+// title). Parsed into an inert document: nothing in it loads or runs. Without DOMParser (no DOM, so
+// nothing is rendered) it is the given fallback text: markup is never stripped by a regular
+// expression, which leaves fragments of nested or broken tags behind.
+function getHtmlText(html: string, fallbackText: string): string {
+  if (typeof DOMParser === "undefined") return fallbackText;
   return new DOMParser().parseFromString(html, "text/html").body.textContent || "";
 }
 
@@ -2002,7 +2004,7 @@ export class TranslationElementStrings extends TranslationBase {
   public get elementTitleText(): string {
     const text = this.elementTitle;
     const html = (<ILocalizableOwner><any>this.element).getMarkdownHtml(text, "title");
-    return !!html ? getHtmlText(html) : text;
+    return !!html ? getHtmlText(html, text) : text;
   }
   // Set by the owner - the all/used strings choice is kept for the next element.
   public onShowAllStringsChanged: (value: boolean) => void;
