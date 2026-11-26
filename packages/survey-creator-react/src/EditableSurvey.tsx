@@ -24,7 +24,10 @@ export class EditableSurvey extends React.Component<IEditableSurveyProps, IEdita
       showTabs: false,
       showToolbar: false,
       showSidebar: false,
-      showToolbox: false
+      showToolbox: false,
+      allowZoom: false,
+      expandCollapseButtonVisibility: "never",
+      pageEditMode: "bypage"
     });
     this.creator.getPlugin<TabDesignerPlugin>("designer").wysiwygMode = true;
     this.state = { mode: "view", surfaceVersion: 0 };
@@ -96,9 +99,12 @@ class EditableSurveyDesigner extends React.Component<{ creator: SurveyCreator; t
   render(): React.JSX.Element {
     const designer = this.props.creator.getPlugin<TabDesignerPlugin>("designer", false);
     const model = this.state.ready && designer && designer.model;
-    const className = "svc-editable-survey" + (model ? " " + model.getRootCss() : "");
+    const className = "svc-editable-survey" + (model ? " " + model.survey.css.rootTheme + " " + model.getRootCss() : "");
+    // Theme variables live on the design surface. The host is the canvas around that
+    // column, so it needs the same variables for the survey background color.
+    const style = model ? model.surfaceCssVariables : undefined;
     return (
-      <div className={className} ref={this.rootNode}>
+      <div className={className} ref={this.rootNode} style={style}>
         <SvgBundleComponent />
         <PopupModal />
         {model ? <DesignerSurface data={model} /> : null}

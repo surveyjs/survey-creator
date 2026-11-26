@@ -1156,7 +1156,7 @@ creator.JSON = {
           "startWithNewLine": false
         },
         {
-          "type": "text",
+          "type": "dropdown",
           "name": "question3"
         },
         {

@@ -65,6 +65,54 @@ svc-tab-designer {
   }
 }
 
+// Runtime paints the survey surface across the canvas and sizes the column with the theme
+// unit (or the survey width). WYSIWYG keeps that, and drops empty header ghost text.
+// The inline editor (.svc-editable-survey) is not inside .svc-tab-designer.
+.svc-tab-designer.svc-tab-designer--wysiwyg,
+.svc-editable-survey.svc-tab-designer--wysiwyg {
+  background: var(--sjs2-color-utility-surface-survey);
+
+  .sd-container-modern.sd-container-modern--static {
+    width: 100%;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: calc(var(--sjs2-base-unit-size) * 90);
+  }
+
+  .svc-logo-image:not(:has(.sd-logo__image)) {
+    display: none;
+  }
+
+  .svc-designer-header:not(:has(.sd-logo__image)):not(:has(.sv-string-editor:not(:empty))),
+  .svc-designer-header .sd-header__text > .sd-title:not(:has(.sv-string-editor:not(:empty))),
+  .svc-designer-header .sd-header__text > .sd-description:not(:has(.sv-string-editor:not(:empty))),
+  .sd-page__header:not(:has(.sv-string-editor:not(:empty))),
+  .sd-page__title:not(:has(.sv-string-editor:not(:empty))),
+  .sd-page__description:not(:has(.sv-string-editor:not(:empty))) {
+    display: none;
+  }
+
+  .svc-designer-header,
+  .sd-page__header {
+    .sv-string-editor[aria-placeholder]:empty::before {
+      content: none;
+    }
+  }
+
+  .svc-designer-header {
+    .svc-surface-header {
+      padding-top: calc(var(--sjs2-layout-component-survey-header-padding-top) + var(--sjs2-layout-component-survey-box-padding-top));
+      padding-inline: var(--sjs2-layout-component-survey-header-padding-horizontal);
+    }
+  }
+}
+
+.svc-tab-designer.svc-tab-designer--wysiwyg:not(.svc-tab-designer--with-surface-tools) .svc-tab-designer_content {
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}
+
 .svc-tab-designer {
   .svc-designer-header {
     border-bottom: var(--sjs2-border-width-x200, 2px) solid transparent;
@@ -158,11 +206,6 @@ svc-tab-designer {
 
 .svc-editable-survey {
   position: relative;
-}
-
-.svc-editable-survey.svc-tab-designer--with-surface-tools {
-  padding-inline-start: calc(var(--sjs2-base-unit-spacing) * 9.25);
-  padding-inline-end: calc(var(--sjs2-base-unit-spacing) * 9.25);
 }
 
 .svc-editable-survey__mode {

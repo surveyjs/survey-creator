@@ -555,8 +555,8 @@ svc-question {
   .svc-question__content--drag-over-left {
     .svc-question__drop-indicator--left {
       left: calc(
-        calc(var(--sjs2-spacing-x200, 16px) / -2) + var(--sjs2-border-width-x200, 2px) -
-          var(--sd-panelless-padding-compensation-inline, 0px)
+        calc(var(--sjs2-spacing-x200, 16px) / -2) +
+          var(--sjs2-border-width-x200, 2px) - var(--sd-panelless-padding-compensation-inline, 0px)
       );
     }
   }
@@ -564,8 +564,8 @@ svc-question {
   .svc-question__content--drag-over-right {
     .svc-question__drop-indicator--right {
       right: calc(
-        calc(var(--sjs2-spacing-x200, 16px) / -2) + var(--sjs2-border-width-x200, 2px) -
-          var(--sd-panelless-padding-compensation-inline, 0px)
+        calc(var(--sjs2-spacing-x200, 16px) / -2) +
+          var(--sjs2-border-width-x200, 2px) - var(--sd-panelless-padding-compensation-inline, 0px)
       );
     }
   }
@@ -590,8 +590,8 @@ svc-question {
   .svc-question__content--drag-over-top {
     .svc-question__drop-indicator--top {
       top: calc(
-        calc(var(--sjs2-spacing-x200, 16px) / -2) + var(--sjs2-border-width-x200, 2px) -
-          var(--sd-panelless-padding-compensation-top, 0px)
+        calc(var(--sjs2-spacing-x200, 16px) / -2) +
+          var(--sjs2-border-width-x200, 2px) - var(--sd-panelless-padding-compensation-top, 0px)
       );
     }
   }
@@ -599,8 +599,8 @@ svc-question {
   .svc-question__content--drag-over-bottom {
     .svc-question__drop-indicator--bottom {
       bottom: calc(
-        calc(var(--sjs2-spacing-x200, 16px) / -2) + var(--sjs2-border-width-x200, 2px) -
-          var(--sd-panelless-padding-compensation-bottom, 0px)
+        calc(var(--sjs2-spacing-x200, 16px) / -2) +
+          var(--sjs2-border-width-x200, 2px) - var(--sd-panelless-padding-compensation-bottom, 0px)
       );
     }
   }
@@ -1363,13 +1363,15 @@ svc-question,
     );
     --sd-panelless-padding-compensation-bottom: min(
       0px,
-      var(--sjs2-layout-component-panel-simple-content-area-padding-bottom) -
-        var(--sd-panelless-border-padding-vertical)
+      var(--sjs2-layout-component-panel-simple-content-area-padding-bottom) - var(
+          --sd-panelless-border-padding-vertical
+        )
     );
     --sd-panelless-padding-compensation-inline: min(
       0px,
-      var(--sjs2-layout-component-panel-simple-content-area-padding-horizontal) -
-        var(--sd-panelless-border-padding-horizontal)
+      var(--sjs2-layout-component-panel-simple-content-area-padding-horizontal) - var(
+          --sd-panelless-border-padding-horizontal
+        )
     );
     padding-block: max(
         var(--sd-panelless-border-padding-vertical),
@@ -1492,10 +1494,19 @@ svc-question,
     .svc-item-value-controls__drag {
       position: absolute;
       inset-inline-end: 100%;
+      padding-inline: 0;
+      width: var(--sjs2-size-x500);
+      max-width: max(
+        var(--sd-panelless-border-padding-vertical),
+        var(--sjs2-layout-component-panel-simple-content-area-padding-top)
+      );
       top: calc(
         var(--sjs2-layout-component-labeled-group-box-gap-vertical) / 2 - 0.5 * var(--sjs2-size-x400) + 0.5 *
           max(var(--sjs2-size-component-radio-box), 1lh)
       );
+      .svc-item-value-controls__drag-icon {
+        max-width: 100%;
+      }
       pointer-events: auto;
     }
 
