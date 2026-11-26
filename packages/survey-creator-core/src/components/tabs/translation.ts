@@ -15,6 +15,7 @@ import "./translation.scss";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { updateMatrixRemoveAction, updateMatixActionsAppearance } from "../../utils/actions";
 import { isDefaultLocale } from "../../survey-helper";
+import { updateSourceTargetHeaderColumns } from "./translation-table";
 import {
   TranslationBase, TranslationItem, createMachineTranslationAction,
   createStringsHeaderNavigationBar, runItemsMachineTranslation
@@ -278,9 +279,7 @@ export class Translation extends TranslationBase {
       this.mergeLocaleWithDefaultText = this.getMergeLocaleWithDefaultText();
     }
     if (name === "locales") {
-      this.updateHeaderStringsSurveyColumns();
-      this.updateStringsSurveyColumns();
-      // A newly selected locale may hold texts the matrix value has never seen
+      // The base has rebuilt the columns. A newly selected locale may hold texts the matrix value has never seen
       // (e.g. translations applied to the survey while the locale was
       // unchecked) - re-read the data so the rebuilt columns are populated.
       if (!this.isEditMode) {
@@ -596,7 +595,7 @@ export class TranslationEditor {
     }
   }
   private updateHeaderMatrixColumns(matrix: QuestionMatrixDropdownModel) {
-    this.translation.updateSourceTargetHeaderColumns(matrix, this.fromLocale, this.locale);
+    updateSourceTargetHeaderColumns(matrix, this.fromLocale, this.locale);
   }
   private updateMatrixColumns(matrix: QuestionMatrixDropdownModel): void {
     // The base matrix has the editable "Target" column only; the read-only "Source" column is shown at the first position.

@@ -91,8 +91,8 @@ function softUpdateStringsSurveyData(model: any): void {
   }
   try {
     survey.getAllQuestions().forEach((matrix: any) => {
-      // Each row's ItemValue carries its TranslationItem (see the Translation
-      // model's getStringsQuestionData); toJSON() keys are the column names
+      // Each row's ItemValue carries its TranslationItem (see the translation
+      // strings table's getMatrixData); toJSON() keys are the column names
       // ("default" or the locale code).
       const itemByRow: { [rowValue: string]: any } = {};
       (matrix.rows ?? []).forEach((iv: any) => { itemByRow[iv.value] = iv["translationData"]; });

@@ -134,6 +134,28 @@
   padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x300);
 }
 
+// A collapsible page panel (see TranslationTable.setupPagePanel): the chevron before the title.
+.st-title.st-panel__title--expandable {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--sjs2-spacing-x100);
+  cursor: pointer;
+}
+
+.st-panel__title-expandable-svg-container {
+  display: flex;
+  flex-shrink: 0;
+  width: var(--sjs2-size-x200);
+  height: var(--sjs2-size-x200);
+}
+
+.st-panel__title-expandable-svg {
+  width: var(--sjs2-size-x200);
+  height: var(--sjs2-size-x200);
+  fill: var(--sjs2-color-fg-basic-primary-muted);
+}
+
 .st-table {
   tr {
     display: flex;
@@ -577,4 +599,193 @@ td.st-table__cell:first-of-type {
   margin-left: auto;
   flex-shrink: 0;
   color: var(--sjs2-color-fg-basic-primary-muted);
+}
+
+// The grouped strings table of the side-by-side grid view (see TranslationTable): a survey whose
+// page groups are collapsible panels and whose string rows are one-row matrices with the Question,
+// String, Source and Target columns. The grid view is white (README question 7).
+.st-root-modern.st-translation-table {
+  // The whole tab area, not only the rows: the tab's own background is the form view's.
+  height: 100%;
+  background-color: var(--sjs2-color-bg-basic-primary);
+  padding: var(--sjs2-spacing-x300);
+  box-sizing: border-box;
+
+  .st-page {
+    padding: 0;
+    margin: 0;
+  }
+
+  .st-row {
+    margin: 0;
+  }
+}
+
+// The classic header survey stays a valid survey, but the table groups carry their own header rows.
+.st-translation-table-header {
+  display: none;
+}
+
+.st-translation-table {
+  .st-translation-group {
+    margin: 0 0 var(--sjs2-spacing-x300);
+  }
+
+  // The group header bar: the chevron, the page title and "{translated}/{total}".
+  .st-translation-group > .sd-panel__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--sjs2-spacing-x150);
+    box-sizing: border-box;
+    height: var(--sjs2-size-x600);
+    padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x200);
+    background-color: var(--sjs2-color-bg-basic-tertiary);
+    border-radius: var(--sjs2-radius-x150);
+    overflow: hidden;
+  }
+
+  .st-translation-group.sd-element--expanded > .sd-panel__header {
+    border-radius: var(--sjs2-radius-x150) var(--sjs2-radius-x150) 0 0;
+  }
+
+  .st-translation-group > .sd-panel__header > .st-title.st-panel__title {
+    @include sjs2--typography--default-strong;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--sjs2-spacing-x100);
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--sjs2-color-fg-basic-primary);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .st-panel__title-expandable-svg-container {
+    width: var(--sjs2-size-x300);
+    height: var(--sjs2-size-x300);
+  }
+
+  .st-panel__title-expandable-svg {
+    width: var(--sjs2-size-x300);
+    height: var(--sjs2-size-x300);
+    fill: var(--sjs2-color-fg-basic-primary);
+  }
+
+  .st-translation-group > .sd-panel__header > .st-panel__description {
+    @include sjs2--typography--default-strong;
+    margin: 0;
+    padding: 0;
+    color: var(--sjs2-color-fg-basic-primary-muted);
+    white-space: nowrap;
+  }
+
+  // The table under an expanded header: its own border on three sides and the bottom radius.
+  .st-translation-group .st-panel__content {
+    padding: 0;
+    border: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+    border-top: none;
+    border-radius: 0 0 var(--sjs2-radius-x150) var(--sjs2-radius-x150);
+    overflow: hidden;
+    background-color: var(--sjs2-color-bg-basic-primary);
+  }
+
+  .st-question,
+  .st-table-wrapper {
+    margin: 0;
+    padding: 0;
+  }
+
+  // The row text column of a matrixdropdown is not one of the table's columns: the String column
+  // is an html cell of its own (the row text cell and its empty header cell are always rendered).
+  .st-table__cell--row-text,
+  thead .st-table__cell.sd-table__cell--empty {
+    display: none;
+  }
+
+  .st-table__cell {
+    @include sjs2--typography--default;
+    flex: 1 1 0;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x200);
+    color: var(--sjs2-color-fg-basic-primary);
+    background-color: var(--sjs2-color-bg-basic-primary);
+    border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+    border-right: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+    word-break: break-word;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  // The header row: 48px of text and padding plus its bottom border.
+  thead .st-table__cell.st-table__cell--header {
+    @include sjs2--typography--default-strong;
+    color: var(--sjs2-color-fg-basic-primary);
+    min-height: calc(var(--sjs2-size-x600) + var(--sjs2-border-width-x100));
+  }
+
+  .st-translation-table__cell--question {
+    flex: 0 0 130px;
+  }
+
+  .st-translation-table__cell--string {
+    flex: 0 0 200px;
+  }
+
+  // The emulated row span of the Question column: no border inside an element's rows.
+  .st-translation-table__cell--span {
+    border-bottom-color: transparent;
+  }
+
+  // The group's own border closes the table.
+  .st-translation-table__cell--last {
+    border-bottom: none;
+  }
+
+  // The Question and String cells (and a read-only Source): plain text in the cells' typography.
+  .sd-html {
+    @include sjs2--typography--default;
+    padding: 0;
+    margin: 0;
+    color: var(--sjs2-color-fg-basic-primary);
+  }
+
+  // The comment cells look like plain text until they are edited.
+  .st-formbox__input {
+    @include sjs2--typography--default;
+    width: 100%;
+    color: var(--sjs2-color-fg-basic-primary);
+    background: transparent;
+    // The cells grow to their text (autoGrow), so they never scroll. A scrollbar would also break
+    // the growing: survey-core measures the text with the overflow hidden and then restores the
+    // renderer's inline "overflow-y: auto" - the scrollbar that appears narrows the textarea, the
+    // text rewraps to one more line and its last line is cut.
+    overflow-y: hidden !important;
+
+    // An untranslated target shows its source text as the placeholder, muted.
+    &::placeholder {
+      color: var(--sjs2-color-fg-basic-secondary);
+      opacity: 1;
+    }
+  }
+
+  .st-translation-table__cell--source:focus-within,
+  .st-translation-table__cell--target:focus-within {
+    box-shadow: inset 0 0 0 var(--sjs2-border-width-x200) var(--sjs2-color-utility-shadow-surface-focused);
+  }
+}
+
+.st-translation-table--pages thead .st-table__cell--header:nth-child(2) {
+  flex: 0 0 130px;
+}
+
+.st-translation-table--pages thead .st-table__cell--header:nth-child(3),
+.st-translation-table--element thead .st-table__cell--header:nth-child(2) {
+  flex: 0 0 200px;
 }

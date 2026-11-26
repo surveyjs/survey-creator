@@ -144,6 +144,8 @@ export var enStrings = {
     translationPlaceHolder: "Translation...",
     translationSource: "Source: ",
     translationTarget: "Target: ",
+    translationColumnQuestion: "Question",
+    translationColumnString: "String",
     translationSourceLanguage: "Source language",
     translationTargetLanguage: "Target language",
     translationProgress: "{0} of {1} strings translated",

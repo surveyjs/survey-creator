@@ -1,7 +1,7 @@
 import {
   property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty,
   Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, Action,
-  PanelModelBase, QuestionMatrixDropdownModel, QuestionMatrixDynamicModel, PanelModel, QuestionCommentModel,
+  QuestionMatrixDropdownModel, QuestionMatrixDynamicModel,
   Helpers, settings as surveySettings,
   MatrixDropdownColumn,
   MatrixCells,
@@ -13,10 +13,9 @@ import { getActualLocaleName } from "../../utils/creator-locstrings";
 import { unparse, parse } from "papaparse";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../creator-settings";
-import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { SurveyHelper, getDefaultLocaleName, isDefaultLocale } from "../../survey-helper";
-import { translationCss } from "./translation-theme";
 import { CreatorDomHelper } from "../../dom-helper";
+import { TranslationTable } from "./translation-table";
 
 // The library localizes a few strings outside their localizable string: the property itself stays
 // empty and the text the survey renders comes from the error class that falls back to it (see
@@ -818,7 +817,8 @@ export class TranslationBase extends Base implements ITranslationLocales {
   public limitAllPagesOnLargeSurvey: boolean = false;
   // False when the strings grid must be scoped to a single page: building and rendering it over the
   // whole survey takes about 1 ms per element, so a large multi-page survey gets no "All Pages"
-  // (see settings.translation.maxElementsForAllPages).
+  // (see settings.translation.maxElementsForAllPages). Collapsed page panels are not rendered, but
+  // their string matrices are built, and the build is most of that time.
   public get canShowAllPages(): boolean {
     if (!this.limitAllPagesOnLargeSurvey || !this.survey || this.survey.pages.length < 2) return true;
     const max = settings.translation.maxElementsForAllPages;
@@ -879,6 +879,18 @@ export class TranslationBase extends Base implements ITranslationLocales {
       this.isPageFilterResetSuspended = false;
     }
     this.survey = survey;
+  }
+  // The strings survey's builder (see TranslationTable): it outlives the strings survey, which is
+  // rebuilt on every reset, and keeps which page panels are expanded.
+  private stringsTableValue: TranslationTable;
+  public get stringsTable(): TranslationTable {
+    if (!this.stringsTableValue) {
+      this.stringsTableValue = this.createStringsTable();
+    }
+    return this.stringsTableValue;
+  }
+  protected createStringsTable(): TranslationTable {
+    return new TranslationTable(this, { layout: "tree" });
   }
   @property() stringsSurvey: SurveyModel;
   @property() stringsHeaderSurvey: SurveyModel;
@@ -988,79 +1000,28 @@ export class TranslationBase extends Base implements ITranslationLocales {
   private resetStringsSurvey() {
     if (!this.hasStringsSurveyUI) return;
     this.stringsSurvey = this.createStringsSurvey();
-    this.stringsHeaderSurvey = this.createStringsHeaderSurvey();
+    this.stringsHeaderSurvey = this.stringsTable.createHeaderSurvey((survey: SurveyModel): void => this.onSurveyStringsHeaderCreated(survey),
+      this.getSurveyStringsHeaderArea());
     this.updateReadOnly();
   }
   protected getSurveyStringsArea(): string { return undefined; }
   protected getSurveyStringsHeaderArea(): string { return undefined; }
   protected onSurveyStringsCreated(survey: SurveyModel): void { }
   protected onSurveyStringsHeaderCreated(survey: SurveyModel): void { }
-  private createStringsSurvey(): SurveyModel {
-    // widthMode is fixed to what "auto" resolves to here (every strings-grid matrix needs a responsive
-    // width): with "auto", endLoadingFromJson computes it by reading every element of the grid under a
-    // dependency collector, which takes most of the build time on a large survey.
-    var json = { autoGrowComment: true, allowResizeComment: false, widthMode: "responsive" };
-    setSurveyJSONForPropertyGrid(json, false);
-    const survey: SurveyModel = this.options.createSurvey(json, "translation_strings", this, (survey: SurveyModel): void => {
-      this.makeSurveyIdSpaceUnique(survey);
-      survey.lazyRenderEnabled = true;
-      survey.skeletonComponentName = "sd-translation-line-skeleton";
-      survey.startLoadingFromJson();
-      survey.css = translationCss;
-      survey.addNewPage("page");
-      this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root);
-      survey.data = this.getStringsSurveyData(survey);
-      survey.endLoadingFromJson();
-      this.onSurveyStringsCreated(survey);
-    }, this.getSurveyStringsArea());
-    const getTransationItem = (question: QuestionMatrixDropdownModel, rowName: any): TranslationItem => {
-      var itemValue = ItemValue.getItemByValue(question.rows, rowName);
-      return !!itemValue ? itemValue["translationData"] : null;
-    };
-    survey.onMatrixCellCreated.add((sender: SurveyModel, options: any) => {
-      if (options.cell.question instanceof QuestionCommentModel) {
-        const cellQuestion = <QuestionCommentModel>options.cell.question;
-        const item = getTransationItem(options.question, options.row.name);
-        this.setPlaceHolder(cellQuestion, item, options.columnName);
-        let isMultiLine = false;
-        if (!!item) {
-          cellQuestion.maxLength = item.maxLength;
-          const loc = item.locString;
-          isMultiLine = loc.getIsMultiple();
-          cellQuestion.acceptCarriageReturn = isMultiLine || (<LocalizableString>loc).allowLineBreaks;
-        }
-        if (!isMultiLine) {
-          cellQuestion.rows = 1;
-        }
-      }
-    });
-    survey.onMatrixCellValueChanging.add((_: SurveyModel, options: any) => {
-      const item = getTransationItem(options.question, options.row.name);
-      if (!!item) {
-        options.value = this.getProcessedTranslationItemText(options.columnName, item.locString, options.value, item.context);
-      }
-    });
-    survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {
-      const item = getTransationItem(options.question, options.row.name);
-      if (!!item) {
-        this.setItemLocText(item, options.columnName, options.value);
-        const colName = options.columnName;
-        options.row.cells.forEach(cell => {
-          if (colName === getDefaultLocaleName() || cell.column.name.indexOf(colName + "-") === 0)
-            this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
-        });
-      }
-    });
-    survey.onUpdatePanelCssClasses.add((sender: SurveyModel, options) => {
-      if (options.panel["__translationHasIndent"]) {
-        options.cssClasses.panel.content += " st-panel-indent";
-      }
-    });
-    survey.currentPage = survey.pages[0];
-    return survey;
+  protected createStringsSurvey(): SurveyModel {
+    return this.stringsTable.createSurvey(this.root, (survey: SurveyModel): void => this.onSurveyStringsCreated(survey),
+      this.getSurveyStringsArea());
   }
-  private setPlaceHolder(cellQuestion: QuestionCommentModel, item: TranslationItem, locale: string) {
-    cellQuestion.placeholder = item.getPlaceholder(locale);
+  // A survey of the tab, created through the creator (the area lets it be customized), with an
+  // element id space of its own.
+  public createTabSurvey(json: any, reason: string, onCreating: (survey: SurveyModel) => void, area?: string): SurveyModel {
+    return this.options.createSurvey(json, reason, this, (survey: SurveyModel): void => {
+      this.makeSurveyIdSpaceUnique(survey);
+      onCreating(survey);
+    }, area);
+  }
+  public getStringsCellPlaceholder(item: TranslationItem, columnName: string): string {
+    return item.getPlaceholder(columnName);
   }
   // The single write path for translation item edits on the real survey; subclasses hook it
   // to react to the change. No-op writes are filtered out.
@@ -1073,7 +1034,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
     } else if ((newText || "") === current) return;
     item.setLocText(locale, newText);
   }
-  protected setItemLocText(item: TranslationItem, locale: string, text: string): void {
+  public setItemLocText(item: TranslationItem, locale: string, text: string): void {
     this._syncing = true;
     try {
       this.performItemLocTextAction(item, locale, text);
@@ -1126,59 +1087,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
     }
     return undefined;
   }
-  private createStringsHeaderSurvey() {
-    let json = {};
-    setSurveyJSONForPropertyGrid(json, false);
-    const survey: SurveyModel = this.options.createSurvey(json, "translation_strings_header", this, (survey: SurveyModel): void => {
-      this.makeSurveyIdSpaceUnique(survey);
-      survey.css = translationCss;
-      const newPage = survey.addNewPage("page");
-
-      const matrix = <QuestionMatrixDropdownModel>(Serializer.createClass("matrixdropdown"));
-      matrix.name = "stringsHeader";
-      matrix.titleLocation = "hidden";
-      this.addLocaleColumns(matrix);
-
-      newPage.addQuestion(matrix, 0);
-      survey.currentPage = survey.pages[0];
-      this.onSurveyStringsHeaderCreated(survey);
-    }, this.getSurveyStringsHeaderArea());
-    return survey;
-  }
-  private addTranslationGroupIntoStringsSurvey(
-    panel: PanelModelBase,
-    group: TranslationGroup) {
-    for (var i = 0; i < group.items.length; i++) {
-      if (group.items[i].isGroup) continue;
-      let item = <TranslationItem>group.items[i];
-      let matrix = <QuestionMatrixDropdownModel>(
-        Serializer.createClass("matrixdropdown")
-      );
-      matrix.cellType = "comment";
-      matrix.titleLocation = "hidden";
-      matrix.name = group.fullName + i;
-      matrix.showHeader = false;
-      panel.addQuestion(matrix);
-      this.addLocaleColumns(matrix);
-      // let matrix = <QuestionMatrixDropdownModel>panel.questions[0];
-      var itemValue = new ItemValue(item.name, item.text);
-      itemValue["translationData"] = item;
-      matrix.rows.push(itemValue);
-    }
-    for (var i = 0; i < group.items.length; i++) {
-      if (!group.items[i].isGroup) continue;
-      let item = <TranslationGroup>group.items[i];
-      var pnl = <PanelModel>Serializer.createClass("panel");
-      pnl.name = item.name;
-      panel.addElement(pnl);
-      pnl.title = item.text;
-      if (item.hasIndent) {
-        pnl["__translationHasIndent"] = true;
-      }
-      this.addTranslationGroupIntoStringsSurvey(pnl, item);
-    }
-  }
-  protected getLocaleColumnName(loc: string): string {
+  public getLocaleColumnName(loc: string): string {
     return !loc ? getDefaultLocaleName() : loc;
   }
   // Shows a source column before the target column (removing a previously added source column
@@ -1195,23 +1104,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
     column.readOnly = isReadOnly;
     matrix.columns.splice(0, 0, column);
   }
-  // Columns are [Source, Target], or a single column: the target one when the locales are equal,
-  // the source one when there is no target language at all (hasTarget = false).
-  public updateSourceTargetHeaderColumns(matrix: QuestionMatrixDropdownModel, sourceLoc: string, targetLoc: string, hasTarget: boolean = true): void {
-    const cols = matrix.columns;
-    if (cols.length > 1) {
-      cols[0].title = this.getSourceTargetHeaderTitle("translationSource", sourceLoc || "");
-      cols[1].title = this.getSourceTargetHeaderTitle("translationTarget", targetLoc);
-    } else {
-      cols[0].title = hasTarget
-        ? this.getSourceTargetHeaderTitle("translationTarget", targetLoc)
-        : this.getSourceTargetHeaderTitle("translationSource", sourceLoc || "");
-    }
-  }
-  private getSourceTargetHeaderTitle(strName: string, locale: string): string {
-    return editorLocalization.getString("ed." + strName) + this.getLocaleName(locale);
-  }
-  protected addLocaleColumns(matrix: QuestionMatrixDropdownModel): void {
+  public addLocaleColumns(matrix: QuestionMatrixDropdownModel): void {
     if (this.useSourceTargetColumns) {
       const target = this.targetLocale || "";
       // No target language selected - nothing is being translated, so the grid holds the source
@@ -1221,9 +1114,6 @@ export class TranslationBase extends Base implements ITranslationLocales {
       matrix.addColumn(this.getLocaleColumnName(loc), this.getLocaleName(loc));
       if (hasTarget) {
         this.updateMatrixSourceColumn(matrix, this.sourceLocale, target);
-      }
-      if (matrix.name === "stringsHeader") {
-        this.updateSourceTargetHeaderColumns(matrix, this.sourceLocale, target, hasTarget);
       }
       return;
     }
@@ -1237,52 +1127,12 @@ export class TranslationBase extends Base implements ITranslationLocales {
   protected getColumnLocales(): Array<string> {
     return [""];
   }
-  private getStringsSurveyData(survey: SurveyModel): any {
-    var res = {};
-    var questions = survey.getAllQuestions();
-    for (var i = 0; i < questions.length; i++) {
-      res[questions[i].name] = this.getStringsQuestionData(
-        <QuestionMatrixDropdownModel>questions[i]
-      );
-    }
-    return res;
-  }
   public updateStringsSurveyData(): void {
-    const survey = this.stringsSurvey;
-    if (survey) {
-      survey.data = this.getStringsSurveyData(survey);
-    }
+    if (!!this.stringsTableValue)this.stringsTableValue.updateData();
   }
-  private getStringsQuestionData(matrix: QuestionMatrixDropdownModel): any {
-    var res = {};
-    for (var i = 0; i < matrix.rows.length; i++) {
-      var itemValue = matrix.rows[i];
-      var item: TranslationItem = itemValue["translationData"];
-      var value = item.toJSON();
-      if (!Helpers.isValueEmpty(value)) {
-        res[itemValue.value] = value;
-      }
-    }
-    return res;
-  }
-  protected updateHeaderStringsSurveyColumns(): void {
-    if (!this.stringsHeaderSurvey) return;
-    let matrix = <QuestionMatrixDropdownModel>(
-      this.stringsHeaderSurvey.getQuestionByName("stringsHeader")
-    );
-    matrix.columns = [];
-    this.addLocaleColumns(matrix);
-  }
+  // The columns of the strings survey and of its header survey.
   protected updateStringsSurveyColumns(): void {
-    if (!this.stringsSurvey) return;
-    var questions = this.stringsSurvey.getAllQuestions();
-    for (var i = 0; i < questions.length; i++) {
-      var matrix = <QuestionMatrixDropdownModel>questions[i];
-      matrix.beginUpdate();
-      matrix.columns = [];
-      this.addLocaleColumns(matrix);
-      matrix.endUpdate();
-    }
+    if (!!this.stringsTableValue)this.stringsTableValue.updateColumns();
   }
   private addLocaleIntoChoices(
     loc: string,
@@ -1296,7 +1146,6 @@ export class TranslationBase extends Base implements ITranslationLocales {
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "locales") {
-      this.updateHeaderStringsSurveyColumns();
       this.updateStringsSurveyColumns();
     }
     if (name === "useSourceTargetColumns" ||
@@ -1306,7 +1155,6 @@ export class TranslationBase extends Base implements ITranslationLocales {
   }
   // Re-runs the column setup on the header and data matrices, keeping the entered values.
   protected updateStringsSurveyColumnsAndData(): void {
-    this.updateHeaderStringsSurveyColumns();
     this.updateStringsSurveyColumns();
     this.updateStringsSurveyData();
   }
@@ -1316,7 +1164,12 @@ export class TranslationBase extends Base implements ITranslationLocales {
   public set survey(val: SurveyModel) {
     this.surveyValue = val;
     this.setVisibleLocales([]);
+    this.onSurveyReplaced();
     this.reset();
+  }
+  // Called when another survey is assigned, before the model is rebuilt over it.
+  protected onSurveyReplaced(): void {
+    if (!!this.stringsTableValue)this.stringsTableValue.resetPageState();
   }
   // The object the translation tree is built over. Overridden to scope the strings grid
   // to a single element (the side-by-side matrix strings popup).
@@ -1345,6 +1198,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
   public reset(alwaysReset: boolean = true): void {
     if (!alwaysReset && !!this.root) return;
     this.applyPageScopeLimit();
+    this.stringsTable.updateFilteredPage(this.filteredPage);
     const prevVisibleLocales = this.getVisibleLocales();
     const rootInfo = this.getRootTranslationObj();
     const rootObj = rootInfo.obj;
@@ -1581,6 +1435,10 @@ export class TranslationBase extends Base implements ITranslationLocales {
   }
   public dispose(): void {
     this.isEmpty = true;
+    if (!!this.stringsTableValue) {
+      this.stringsTableValue.dispose();
+      this.stringsTableValue = undefined;
+    }
     if (!!this.stringsSurvey) {
       this.stringsSurvey.dispose();
       this.stringsSurvey = undefined;

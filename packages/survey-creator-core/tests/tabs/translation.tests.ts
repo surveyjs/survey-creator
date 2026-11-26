@@ -3516,3 +3516,82 @@ describe("Translation tab: a large survey builds the strings of one page", () =>
     expect(getBuiltStrings(4)).toEqual({ matrices: 41, items: 41, groups: 45, page: undefined });
   });
 });
+
+describe("Translation tab: collapsible page panels", () => {
+  const getJSON = (): any => ({
+    pages: [
+      { name: "page1", elements: [{ type: "text", name: "q1", title: "Question 1" }, { type: "checkbox", name: "q2", choices: ["item1", "item2"] }] },
+      { name: "page2", elements: [{ type: "text", name: "q3", title: "Question 3" }] },
+      { name: "page3", elements: [{ type: "text", name: "q4", title: "Question 4" }] }
+    ]
+  });
+  const createCreator = (json: any = getJSON()): CreatorTester => {
+    const creator = new CreatorTester({ showTranslationTab: true });
+    creator.JSON = json;
+    creator.activeTab = "translation";
+    return creator;
+  };
+  const getPagePanel = (creator: CreatorTester, pageName: string): PanelModel =>
+    <PanelModel>getTranslationModel(creator).stringsSurvey.getPanelByName(pageName);
+  const getStates = (creator: CreatorTester): Array<string> =>
+    ["page1", "page2", "page3"].map(name => !!getPagePanel(creator, name) ? getPagePanel(creator, name).state : "none");
+
+  test("a fresh state expands the first page only; the other pages keep their strings", () => {
+    const creator = createCreator();
+    expect(getStates(creator)).toEqual(["expanded", "collapsed", "collapsed"]);
+    // Only the page panels collapse: the nested element panels do not.
+    const nestedPanels = getPagePanel(creator, "page1").elements.filter(el => el.isPanel);
+    expect(nestedPanels.map(panel => panel.name + ":" + (<PanelModel>panel).state)).toEqual(["q1:default", "q2:default"]);
+    // q1 title, q2 title and two choices; q3; q4.
+    expect(["page1", "page2", "page3"].map(name => getPagePanel(creator, name).questions.length)).toEqual([4, 1, 1]);
+    expect(getPagePanel(creator, "page2").isVisible).toBe(true);
+    // The creator's chevron instead of survey-core's plus/minus.
+    expect(getPagePanel(creator, "page1").titleExpandableSvgIconName).toBe("icon-chevronup-24x24");
+    expect(getPagePanel(creator, "page2").titleExpandableSvgIconName).toBe("icon-chevrondown-24x24");
+  });
+  test("the expanded state survives a rebuild; a new survey drops it", () => {
+    const creator = createCreator();
+    const model = getTranslationModel(creator);
+    getPagePanel(creator, "page1").collapse();
+    getPagePanel(creator, "page3").expand();
+    expect(model.stringsTable.isPageExpanded("page1")).toBe(false);
+    expect(model.stringsTable.isPageExpanded("page3")).toBe(true);
+    model.reset();
+    expect(getStates(creator)).toEqual(["collapsed", "collapsed", "expanded"]);
+    creator.JSON = getJSON();
+    expect(getStates(creator)).toEqual(["expanded", "collapsed", "collapsed"]);
+  });
+  test("choosing a page in the page dropdown expands it", () => {
+    const creator = createCreator();
+    const model = getTranslationModel(creator);
+    model.filteredPage = creator.survey.getPageByName("page2");
+    // A page other than the first is the root: it has no panel of its own.
+    expect(getStates(creator)).toEqual(["none", "none", "none"]);
+    model.filteredPage = null;
+    expect(getStates(creator)).toEqual(["expanded", "expanded", "collapsed"]);
+    // The first page keeps the survey as the root, so it is a panel.
+    getPagePanel(creator, "page1").collapse();
+    model.filteredPage = creator.survey.getPageByName("page1");
+    expect(getStates(creator)).toEqual(["expanded", "none", "none"]);
+  });
+  test("with every page collapsed by hand, a rebuild keeps them collapsed", () => {
+    const creator = createCreator();
+    getPagePanel(creator, "page1").collapse();
+    getTranslationModel(creator).reset();
+    expect(getStates(creator)).toEqual(["collapsed", "collapsed", "collapsed"]);
+  });
+  test("a fresh state expands the first page with strings when the first page has none", () => {
+    const json = getJSON();
+    json.pages[0].elements = [{ type: "panel", name: "panel1" }];
+    const creator = createCreator(json);
+    expect(getStates(creator)).toEqual(["none", "expanded", "collapsed"]);
+  });
+  test("a cell edit in a collapsed page is written and the page stays collapsed", () => {
+    const creator = createCreator();
+    const matrix = <QuestionMatrixDropdownModel>getTranslationModel(creator).stringsSurvey.getAllQuestions()
+      .filter((q: QuestionMatrixDropdownModel) => q.rows[0]["translationData"].context.name === "q3")[0];
+    matrix.visibleRows[0].cells[0].question.value = "New title";
+    expect(creator.survey.getQuestionByName("q3").title).toBe("New title");
+    expect(getPagePanel(creator, "page2").state).toBe("collapsed");
+  });
+});

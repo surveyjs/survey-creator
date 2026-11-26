@@ -971,6 +971,31 @@ test("presence: sticky translation locale survives blur, resets on tab switch", 
   }
 });
 
+test("presence: remote translation focus skips the header cells of a table's first row", (): any => {
+  const { plugin, matrix } = createTranslationCreator();
+  const container = buildTranslationRow(matrix.name);
+  // The side-by-side grid's string tables: the first row of a group carries the header row.
+  const row = container.querySelector("[data-name]");
+  ["", "Source: Default (English)", "Target: Deutsch"].forEach((text, index) => {
+    const header = document.createElement(index === 0 ? "td" : "th");
+    header.className = "st-table__cell st-table__cell--header";
+    header.textContent = text;
+    row.insertBefore(header, row.children[index]);
+  });
+  const dataCells = container.querySelectorAll("td.st-table__cell:not(.st-table__cell--row-text):not(.st-table__cell--header)");
+  const theme = mountThemeRoot();
+  try {
+    plugin.upsertPeer(peerEntry("c1", { state: { tab: "translation", sel: null, focus: { area: "tr", m: matrix.name, l: "de", loc: "/pages/page1/elements/q1", p: "title" }, cur: null } }));
+    (<any>plugin.presence.overlay).render();
+    expect((<HTMLElement>dataCells[1]).getAttribute("data-collab-focus")).toEqual("on");
+    expect(container.querySelectorAll("[data-collab-focus]").length).toEqual(1);
+  } finally {
+    theme.remove();
+    container.remove();
+    plugin.dispose();
+  }
+});
+
 test("presence: remote translation focus decorates the right cell; unknown locale does not", (): any => {
   const { plugin, matrix } = createTranslationCreator();
   const container = buildTranslationRow(matrix.name);

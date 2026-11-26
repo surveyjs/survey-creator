@@ -26,6 +26,9 @@ export var translationCss = {
     titleExpandable: "st-panel__title--expandable",
     titleOnExpand: "st-panel__title--expanded",
     titleOnError: "st-panel__title--error",
+    // The chevron of a collapsible page panel (see TranslationTable.setupPagePanel).
+    titleExpandableSvgContainer: "st-panel__title-expandable-svg-container",
+    titleExpandableSvg: "st-panel__title-expandable-svg",
     description: "st-description st-panel__description",
     container: "st-element st-panel st-row__panel",
     content: "st-panel__content",

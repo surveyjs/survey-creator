@@ -16,6 +16,7 @@ import { QuestionLinkValueModel } from "../link-value";
 import { getDefaultLocaleName, isDefaultLocale } from "../../survey-helper";
 import { TranslationCopiesMap } from "./translation-copies-map";
 import { TranslationRowEqualizer, equalizerSourceSide, equalizerTargetSide } from "./translation-row-equalizer";
+import { TranslationTable, updateSourceTargetHeaderColumns } from "./translation-table";
 import {
   TranslationBase, TranslationEditor, TranslationGroup, TranslationItem,
   createMachineTranslationAction, runItemsMachineTranslation
@@ -146,6 +147,25 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   // the survey copies instead.
   protected get hasStringsSurveyUI(): boolean {
     return this.isSideBySideGrid;
+  }
+  // How the grid was left for the form view: on "All Pages" it comes back on "All Pages".
+  private gridLeftOnAllPages: boolean = false;
+  // The grid view is a grouped table: a collapsible group per page (see TranslationTable).
+  protected createStringsTable(): TranslationTable {
+    return new TranslationTable(this, { layout: "pages" });
+  }
+  protected onSurveyReplaced(): void {
+    super.onSurveyReplaced();
+    this.gridLeftOnAllPages = false;
+  }
+  // An untranslated target shows the text it is translated from, muted (the placeholder colour).
+  public getStringsCellPlaceholder(item: TranslationItem, columnName: string): string {
+    const target = this.targetLocale || "";
+    if (!!target && columnName === this.getLocaleColumnName(target)) {
+      const text = item.getUntranslatedText(target, this.sourceLocale || "");
+      if (!!text) return text;
+    }
+    return super.getStringsCellPlaceholder(item, columnName);
   }
   // The side-by-side property grid: a form/grid view switcher, the source and target language
   // dropdowns and the progress link of the target language (the standard mode shows its
@@ -468,7 +488,11 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       if (!!page && !!this.filteredPage && this.filteredPage !== page) {
         this.filteredPage = page;
       }
-      this.focusGridCell(locStr);
+      // The string's group may be collapsed (also when it is shown alone).
+      if (!!page && !!this.stringsSurvey) {
+        this.stringsTable.expandGroup(page.name);
+      }
+      this.stringsTable.focusCell(locStr);
       return;
     }
     if (!!page) {
@@ -840,13 +864,17 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     if (this.isDisposed) return;
     this.useSourceTargetColumns = this.isSideBySideGrid;
     if (this.isSideBySideGrid) {
+      // Read while root is still the form view's tree.
+      const entry = this.getGridEntryPages();
       this.disposeInstances();
+      // The group of the page the panes showed is expanded; on the first entry it is the only one.
+      if (!!entry.groupPageName)this.stringsTable.markPageExpanded(entry.groupPageName);
       if (this.showAllStrings) {
         this.showAllStrings = false; // its reset builds the grid
       } else {
         this.reset();
       }
-      this.applySelectionToGrid();
+      this.applySelectionToGrid(entry.filterPage, entry.groupPageName);
     } else {
       this.applySelectedPageToForm();
       // The page scope is a grid-view concept: a scoped root would cut the string mappings
@@ -859,24 +887,37 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       this.activateSelectedStringEditor();
     }
   }
-  // form -> grid: the grid opens scoped to the page the panes showed (the selected string's
-  // page when one is known), then the grid cell of the last focused string (when its row is
-  // present) gets the input focus.
-  private applySelectionToGrid(): void {
-    // The scope was cleared on entering the form view, so the root covers the whole survey here.
+  // The pages of the form -> grid switch: the page the grid is scoped to when it was left on a page
+  // (the selected string's page when one is known, else the page the panes showed), and the page
+  // whose group holds the selection on "All Pages" (survey-level strings open the first group).
+  private getGridEntryPages(): { filterPage: PageModel, groupPageName: string } {
     const info = this.findSelectedItemInfo();
     const pageName = !!info && !!info.pageName ? info.pageName : this.selectedPageName;
-    const page = !!pageName ? this.survey.getPageByName(pageName) : undefined;
-    if (!!page && this.filteredPage !== page) {
+    const page = !!pageName && !!this.survey ? this.survey.getPageByName(pageName) : undefined;
+    const pages = !!this.survey ? this.survey.pages : [];
+    const firstPageName = pages.length > 0 ? pages[0].name : "";
+    const groupPageName = !!info && !info.pageName ? firstPageName : (!!page ? page.name : firstPageName);
+    return { filterPage: page, groupPageName: groupPageName };
+  }
+  // form -> grid: a grid left on "All Pages" comes back on "All Pages", with the group of the
+  // selection (or of the page the panes showed) expanded and scrolled into the view; a grid left on
+  // a page is scoped to that page. Then the grid cell of the last focused string (when its row is
+  // present) gets the input focus.
+  private applySelectionToGrid(page: PageModel, groupPageName: string): void {
+    // The scope was cleared on entering the form view, so the root covers the whole survey here.
+    if (!this.gridLeftOnAllPages && !!page && this.filteredPage !== page) {
       this.filteredPage = page; // the property's onSet rebuilds the grid
+    } else if (!this.filteredPage && !!groupPageName) {
+      this.stringsTable.scrollGroupIntoView(groupPageName);
     }
     // Re-resolved: the scoping above rebuilt the root tree and the strings survey.
     const scopedInfo = this.findSelectedItemInfo();
-    if (!!scopedInfo)this.focusGridCell(scopedInfo.item.locString);
+    if (!!scopedInfo)this.stringsTable.focusCell(scopedInfo.item.locString);
   }
   // grid -> form: the panes open on the page of the last focused string (or on the grid's
   // page scope). Called before the instances are rebuilt, while root is still the grid tree.
   private applySelectedPageToForm(): void {
+    this.gridLeftOnAllPages = !this.filteredPage;
     const info = this.findSelectedItemInfo();
     let pageName = !!info ? info.pageName : "";
     if (!pageName && !!this.filteredPage) pageName = this.filteredPage.name;
@@ -914,32 +955,11 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     search(this.root, "");
     return res;
   }
-  // Resolved by the survey's localizable string, not by the translation item: the grid holds a
-  // tree of its own, so an item found in another one (the used-strings tree) is not the item
-  // its rows carry.
-  private focusGridCell(locStr: ILocalizableString): void {
-    const survey = this.stringsSurvey;
-    if (!survey) return;
-    const questions = survey.getAllQuestions();
-    for (let i = 0; i < questions.length; i++) {
-      const matrix = <QuestionMatrixDropdownModel>questions[i];
-      const rows = matrix.rows;
-      const rowItem = Array.isArray(rows) && rows.length > 0 ? <TranslationItem>rows[0]["translationData"] : undefined;
-      if (!!rowItem && rowItem.locString === locStr) {
-        const cells = matrix.visibleRows[0].cells;
-        // The target locale column is the last one - and the only one when no target is selected.
-        cells[cells.length - 1].question.focus();
-        return;
-      }
-    }
-  }
   // Remembers the string behind the focused grid cell for the selection sync with the form view.
   protected onSurveyStringsCreated(survey: SurveyModel): void {
     super.onSurveyStringsCreated(survey);
     survey.onFocusInQuestion.add((sender, options) => {
-      const matrix = <QuestionMatrixDropdownModel>options.question.parentQuestion;
-      const rows = !!matrix ? matrix.rows : undefined;
-      const item = <TranslationItem>(Array.isArray(rows) && rows.length > 0 ? rows[0]["translationData"] : undefined);
+      const item = this.stringsTable.getCellItem(options.question);
       if (!!item)this.selectedLocString = item.locString;
     });
   }
@@ -1932,7 +1952,7 @@ export class TranslationElementStrings extends TranslationBase {
   // so its own header row carries them.
   private addStringsMatrixColumns(matrix: QuestionMatrixDropdownModel): void {
     this.addLocaleColumns(matrix);
-    this.updateSourceTargetHeaderColumns(matrix, this.sourceLocale, this.targetLocale || "", !!this.targetLocale);
+    updateSourceTargetHeaderColumns(matrix, this.sourceLocale, this.targetLocale || "", !!this.targetLocale);
     // A column width reaches the rendered table through the header cells alone (see
     // QuestionMatrixDropdownRenderedTable.createHeaderCell), so the locale columns share what
     // the string names leave over there instead of being sized by their content.
