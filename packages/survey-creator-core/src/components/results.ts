@@ -11,7 +11,7 @@ export class SurveyResultsItemModel extends Base {
 
   constructor(private survey: Survey.SurveyModel, private _data: any, private _lvl: number) {
     super();
-    this.question = survey.getQuestionByName(this.name);
+    this.question = getRowQuestion(survey, _data, _lvl === 0);
     this.items = addCollapsed(survey, _data.data, _lvl + 1);
     this.lvl = _lvl;
   }
@@ -57,6 +57,17 @@ function addCollapsed(survey: Survey.SurveyModel, items: any[] = [], initLvl: nu
   return items.filter((item) => !!item).map((item: any) => {
     return new SurveyResultsItemModel(survey, item, initLvl);
   });
+}
+
+// getPlainData gives only a question's own item its question (not even a cell of a paged matrix's record off its
+// page). A sub-row is never looked up by name: a matrix row or a cell can share another question's name.
+function getRowQuestion(survey: Survey.SurveyModel, data: any, isTopLevel: boolean): Survey.Question {
+  if (typeof data.getQuestion === "function") return data.getQuestion();
+  // A top-level extra data key can be stored by a question getAllQuestions() does not list (one in a choice's panel):
+  // it is that question only if it stores its value under the key.
+  if (!isTopLevel || typeof data.name !== "string") return null;
+  const question = survey.getQuestionByName(data.name);
+  return !!question && question.getValueName() === data.name ? question : null;
 }
 
 export class SurveyResultsModel extends Base {

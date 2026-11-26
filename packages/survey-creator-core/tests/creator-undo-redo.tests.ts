@@ -500,3 +500,132 @@ test("Undo a pop of null from a live array property", (): any => {
     Serializer.removeProperty("question", "tags");
   }
 });
+
+describe("undo-redo: an element undo re-created (nested data, survey-library #12233)", () => {
+  const nestingModes = ["auto", "page", "panelAndPage"];
+  function containerJson(mode: string, elements: Array<any>): any {
+    // "auto" nests a panel with valueName; "page" and "panelAndPage" nest the page itself
+    const inner = mode === "auto" ? [{ type: "panel", name: "outer", valueName: "address", elements: elements }] : elements;
+    return { dataNesting: mode, elements: inner.concat([{ type: "text", name: "other" }]) };
+  }
+  function findIn(container: any, name: string): any {
+    return container.elements.filter((el: any) => el.name === name)[0];
+  }
+  function getContainer(creator: CreatorTester, mode: string): any {
+    return mode === "auto" ? creator.survey.getPanelByName("outer") : creator.survey.pages[0];
+  }
+  // A pin, not a reproduction: pages are found by their bare name in every mode
+  test("the #4721 sequence, ported: undo restores a question removed from the last page", (): any => {
+    for (const mode of nestingModes) {
+      const creator = new CreatorTester();
+      creator.JSON = { dataNesting: mode, pages: [
+        { name: "page1", elements: [{ type: "text", name: "question1" }] },
+        { name: "page2", elements: [{ type: "panel", name: "outer", valueName: "address", elements: [{ type: "text", name: "question2" }] }] }
+      ] };
+      const json = creator.JSON;
+      creator.deleteElement(creator.survey.pages[1].elements[0]);
+      expect(creator.survey.pages, mode + " #1").toHaveLength(1);
+      creator.undo();
+      expect(creator.JSON, mode + " #2: undo").toEqual(json);
+      creator.redo();
+      expect(creator.survey.pages, mode + " #3: redo").toHaveLength(1);
+      creator.undo();
+      expect(creator.JSON, mode + " #4: undo again").toEqual(json);
+    }
+  });
+  test("a question disposed by question.delete(): undo restores its change on the re-created question", (): any => {
+    for (const mode of ["none"].concat(nestingModes)) {
+      const creator = new CreatorTester();
+      creator.JSON = containerJson(mode, [{ type: "checkbox", name: "q", choices: ["a", "b", "c"] }]);
+      const json = creator.JSON;
+      findIn(getContainer(creator, mode), "q").choices.splice(0, 1);
+      const jsonChanged = creator.JSON;
+      findIn(getContainer(creator, mode), "q").delete();
+      expect(findIn(getContainer(creator, mode), "q"), mode + " #1: deleted").toBeFalsy();
+      for (let round = 1; round <= 2; round++) {
+        creator.undo();
+        const q = findIn(getContainer(creator, mode), "q");
+        expect(q.isDisposed, mode + " #2." + round + ": a new instance in its container").toBeFalsy();
+        expect(q.choices.map(c => c.value), mode + " #3." + round).toEqual(["b", "c"]);
+        creator.undo();
+        expect(creator.JSON, mode + " #4." + round + ": undo restores the choices").toEqual(json);
+        expect(findIn(getContainer(creator, mode), "q"), mode + " #5." + round + ": the same instance").toBe(q);
+        creator.redo();
+        expect(creator.JSON, mode + " #6." + round + ": redo").toEqual(jsonChanged);
+        creator.redo();
+        expect(findIn(getContainer(creator, mode), "q"), mode + " #7." + round + ": redo deletes").toBeFalsy();
+      }
+    }
+  });
+  test("a re-created question disposed again: undo follows each re-created instance", (): any => {
+    for (const mode of ["none"].concat(nestingModes)) {
+      const creator = new CreatorTester();
+      creator.JSON = containerJson(mode, [{ type: "checkbox", name: "q", choices: ["a", "b", "c"] }]);
+      const json = creator.JSON;
+      findIn(getContainer(creator, mode), "q").choices.splice(0, 1);
+      findIn(getContainer(creator, mode), "q").delete();
+      creator.undo();
+      const first = findIn(getContainer(creator, mode), "q");
+      first.delete();
+      creator.undo();
+      const second = findIn(getContainer(creator, mode), "q");
+      expect(second, mode + " #1: a second new instance").not.toBe(first);
+      creator.undo();
+      expect(creator.JSON, mode + " #2: undo restores the choices").toEqual(json);
+      expect(findIn(getContainer(creator, mode), "q"), mode + " #3").toBe(second);
+      creator.redo();
+      expect(second.choices.map(c => c.value), mode + " #4: redo").toEqual(["b", "c"]);
+      creator.undo();
+      expect(creator.JSON, mode + " #5: undo again").toEqual(json);
+    }
+  });
+  test("a top-level panel and an inner panel with one name: undo changes the re-created inner one", (): any => {
+    const creator = new CreatorTester();
+    creator.JSON = { dataNesting: "auto", elements: [
+      { type: "panel", name: "panel1", elements: [{ type: "text", name: "a" }] },
+      { type: "panel", name: "outer", valueName: "address", elements: [{ type: "panel", name: "panel1", elements: [{ type: "text", name: "b" }] }] }
+    ] };
+    const json = creator.JSON;
+    const outer = creator.survey.getPanelByName("outer");
+    const topPanel = creator.survey.getPanelByName("panel1");
+    const innerPanel = creator.survey.getPanelByName("outer.panel1");
+    expect(innerPanel, "#1").not.toBe(topPanel);
+    creator.deleteElement(innerPanel.elements[0]);
+    innerPanel.delete();
+    expect(outer.elements, "#2").toHaveLength(0);
+    creator.undo();
+    const recreated = creator.survey.getPanelByName("outer.panel1");
+    expect(recreated, "#3: re-created").toBeTruthy();
+    expect(recreated, "#4: a new instance").not.toBe(innerPanel);
+    creator.undo();
+    expect(topPanel.elements.map(el => el.name), "#5: the top-level panel is not changed").toEqual(["a"]);
+    expect(recreated.elements.map(el => el.name), "#6: the inner panel gets its question back").toEqual(["b"]);
+    expect(creator.JSON, "#7").toEqual(json);
+    creator.redo();
+    creator.redo();
+    expect(outer.elements, "#8: redo").toHaveLength(0);
+    creator.undo();
+    creator.undo();
+    expect(creator.JSON, "#9: undo again").toEqual(json);
+    expect(topPanel.elements.map(el => el.name), "#10").toEqual(["a"]);
+  });
+  // Where nothing nests too (review-01, prompt 02): the lookup by name found the first panel1
+  test("nothing nests, two panels with one name: undo changes the re-created one", (): any => {
+    for (const mode of ["none", "auto"]) {
+      const creator = new CreatorTester();
+      creator.JSON = { dataNesting: mode, elements: [
+        { type: "panel", name: "panel1", elements: [{ type: "text", name: "a" }] },
+        { type: "panel", name: "outer", elements: [{ type: "panel", name: "panel1", elements: [{ type: "text", name: "b" }] }] }
+      ] };
+      const json = creator.JSON;
+      const topPanel = <any>creator.survey.pages[0].elements[0];
+      const innerPanel = <any>creator.survey.getPanelByName("outer").elements[0];
+      creator.deleteElement(innerPanel.elements[0]);
+      innerPanel.delete();
+      creator.undo();
+      creator.undo();
+      expect(topPanel.elements.map(el => el.name), mode + " #1: the first panel1 is not changed").toEqual(["a"]);
+      expect(creator.JSON, mode + " #2").toEqual(json);
+    }
+  });
+});

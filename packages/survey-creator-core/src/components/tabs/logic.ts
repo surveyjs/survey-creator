@@ -3,6 +3,7 @@ import { editorLocalization } from "../../editorLocalization";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
 import { ISurveyLogicItemOwner, SurveyLogicItem, SurveyLogicAction } from "./logic-items";
 import { SurveyLogicTypes, SurveyLogicType, ISurveyLogicType } from "./logic-types";
+import { IVariableRename, isScopedNamesSurvey } from "../../utils/data-path";
 import "./logic.scss";
 
 export function initLogicOperator(question: QuestionDropdownModel) {
@@ -161,6 +162,17 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     this.items.forEach(item => item.renameQuestion(oldName, newName));
     this.invisibleItems.forEach(item => item.renameQuestion(oldName, newName));
   }
+  // true when a rule split into actions with different texts: the items no longer match the survey
+  public renameVariables(getRenames: (owner: Base, element: Base) => Array<IVariableRename>, key?: string): boolean {
+    let res = false;
+    this.items.concat(this.invisibleItems).forEach(item => {
+      if (item.renameVariables(getRenames, key)) res = true;
+    });
+    return res;
+  }
+  public forEachVariable(key: string, callback: (owner: Base, name: string) => void): void {
+    this.items.concat(this.invisibleItems).forEach(item => item.forEachVariable(key, callback));
+  }
   public renameItemValue(item: ItemValue, oldValue: any): void {
     const question = this.getItemValueQuestion(item, oldValue);
     if (!question) return;
@@ -218,10 +230,20 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     return !!this.errorText;
   }
   public getUsedQuestions(): Question[] {
+    // Nested data (survey-library #12233): one text reads different questions in different rules, so each rule
+    // resolves its own variables. Where nothing nests, master's lookup by name, then by variable ({val1} lists q1),
+    // stays: it also lists a question named like a page or like another question's value name.
+    if (isScopedNamesSurvey(this.survey)) {
+      const questions: Array<Question> = [];
+      this.items.forEach(item => item.getUsedQuestions().forEach(q => {
+        if (questions.indexOf(q) < 0) questions.push(q);
+      }));
+      return questions;
+    }
     const names: { [key: string]: Question } = {};
     this.items.forEach(item => {
       item.getQuestionNames().forEach(name => {
-        const question = this.survey.getQuestionByName(name);
+        const question = <Question>this.survey.getQuestionByName(name) || item.getQuestionByVariableName(name);
         if (!!question && !names[name]) {
           names[name] = question;
         }
@@ -229,7 +251,8 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     });
     let res: Question[] = [];
     Object.keys(names).forEach(item => {
-      if (!!names[item]) {
+      // one question can be named twice: {q1} and its value name {val1}
+      if (!!names[item] && res.indexOf(names[item]) < 0) {
         res.push(names[item]);
       }
     });
@@ -342,11 +365,13 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       this.addNewAction();
     }
   }
-  public getExpressionAsDisplayText(expression: string): string {
+  // context: the element the rule's variables resolve in; the root without it
+  public getExpressionAsDisplayText(expression: string, context?: Base): string {
     return SurveyLogicType.expressionToDisplayText(
       this.survey,
       this.options,
-      expression
+      expression,
+      context
     );
   }
   protected buildItems(showInUI: boolean): Array<SurveyLogicItem> {

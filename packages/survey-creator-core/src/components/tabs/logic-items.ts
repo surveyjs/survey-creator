@@ -18,6 +18,15 @@ import { updateLogicExpression } from "./logic-expression";
 import { SurveyLogicType, getLogicString } from "./logic-types";
 import { wrapTextByCurlyBraces } from "../../utils/creator-utils";
 import { SurveyHelper } from "../../survey-helper";
+import { getConditionQuestionKey, getQuestionByVariableName, isInnerQuestion, isScopedNamesSurvey, IVariableRename } from "../../utils/data-path";
+
+// What can follow a renamed name: the variable's end, a path into it, or "-total." ({matrix-total.column})
+function getRenamePostfixes(): Array<string> {
+  const res = [surveyLibSettings.expressionVariableDelimiters.end, ".", "["];
+  const totalsSuffix = surveyLibSettings.matrix.totalsSuffix;
+  if (!!totalsSuffix) res.push(totalsSuffix + ".");
+  return res;
+}
 
 export class SurveyLogicAction {
   private surveyValue: SurveyModel;
@@ -68,6 +77,27 @@ export class SurveyLogicAction {
       }
     }
   }
+  // Nested data (survey-library #12233): a trigger's setToName or fromName can be a data path through a renamed
+  // key. renameQuestion matches the whole name only: where nothing nests, "q1.x" can be another question's name.
+  public renameDataKeyInNames(renames: Array<IVariableRename>): void {
+    if (!this.element || renames.length === 0) return;
+    this.questionNames.forEach(propName => {
+      const str: string = this.element[propName];
+      if (!str || typeof str !== "string") return;
+      const lowStr = str.toLowerCase();
+      for (let i = 0; i < renames.length; i++) {
+        const oldName = renames[i].oldName.toLowerCase();
+        if (lowStr === oldName || lowStr.indexOf(oldName + ".") === 0) {
+          this.element[propName] = renames[i].newName + str.substring(oldName.length);
+          return;
+        }
+      }
+    });
+  }
+  public hasTextInNames(text: string): boolean {
+    const lowText = text.toLowerCase();
+    return this.questionNamesValues.some(str => typeof str === "string" && str.toLowerCase().indexOf(lowText) > -1);
+  }
   public clone(): SurveyLogicAction {
     const el = this.logicType.cloneElement(this.element);
     return new SurveyLogicAction(this.logicType, el, this.survey);
@@ -100,6 +130,25 @@ export class SurveyLogicAction {
       res = this.questionNamesValues.filter(question => { return question === questionName || question.indexOf(questionName + ".") === 0; }).length > 0;
     }
     return res;
+  }
+  public isSuitableByQuestion(question: Question): boolean {
+    if (!this.element) return false;
+    if (this.element === question || this.parentElement === question) return true;
+    return this.questionNames.some(propName => this.findQuestionByName(propName, this.element[propName]) === question);
+  }
+  // gotoName is a path of names; setToName and fromName are data paths, read from the survey data.
+  private findQuestionByName(propName: string, name: string): Question {
+    if (!name || typeof name !== "string") return null;
+    if (propName === "gotoName") return <Question>this.survey.getQuestionByName(name);
+    return getQuestionByVariableName(this.survey, name);
+  }
+  public addUsedQuestions(questions: Array<Question>): void {
+    if (!this.element) return;
+    const add = (q: any): void => {
+      if (!!q && q.isQuestion && questions.indexOf(q) < 0) questions.push(q);
+    };
+    add(this.getOwnerElement());
+    this.questionNames.forEach(propName => add(this.findQuestionByName(propName, this.element[propName])));
   }
   public isSuitableByLogicType(logicTypeName: string): boolean {
     if (!this.logicTypeName) return true;
@@ -150,12 +199,12 @@ export class SurveyLogicAction {
     const owner = this.getOwnerElement();
     return !!owner ? (<any>owner).name || "" : "";
   }
-  private getOwnerElement(): Base {
-    if (!this.element) return null;
-    const parentElement = this.parentElement;
-    return !!parentElement ? parentElement : this.element;
+  // The element whose scopes the action's expression resolves in. survey-core resolves a choice and a validator
+  // as their question.
+  public getOwnerElement(): Base {
+    return this.parentElement || this.element || null;
   }
-  private get questionNamesValues(): Array<string> {
+  public get questionNamesValues(): Array<string> {
     return this.questionNames.map(name => this.element[name]);
   }
 }
@@ -165,7 +214,7 @@ export interface ISurveyLogicItemOwner {
   readOnly: boolean;
   editItem(item: SurveyLogicItem);
   removeItem(item: SurveyLogicItem);
-  getExpressionAsDisplayText(expression: string): string;
+  getExpressionAsDisplayText(expression: string, context?: Base): string;
   getVisibleLogicTypes(): Array<SurveyLogicType>;
 }
 
@@ -301,12 +350,7 @@ export class SurveyLogicItem {
   }
   public renameQuestion(oldName: string, newName: string): void {
     if (!oldName || !newName || oldName === newName) return;
-    // "{matrix-total.column}" refers to a column total of the matrix "matrix"
-    const postFixes = [surveyLibSettings.expressionVariableDelimiters.end, ".", "["];
-    const totalsSuffix = surveyLibSettings.matrix.totalsSuffix;
-    if (!!totalsSuffix) {
-      postFixes.push(totalsSuffix + ".");
-    }
+    const postFixes = getRenamePostfixes();
     ["", "panel.", "row."].forEach(prefix =>
       this.renameQuestionInExpression(prefix + oldName, prefix + newName, postFixes)
     );
@@ -321,13 +365,16 @@ export class SurveyLogicItem {
       this.renameQuestionInExpression("row." + oldName, "row." + column.name, [surveyLibSettings.expressionVariableDelimiters.end]);
     }
     const rows: Array<ItemValue> = question["rows"];
-    if (!Array.isArray(rows) || !this.isQuestionInExpression(question)) return;
-    const questionPrefix = this.getItemValueQuestionName(question) + ".";
-    for (var i = 0; i < rows.length; i++) {
-      if (Helpers.isValueEmpty(rows[i].value)) continue;
-      const rowName = rows[i].value.toString() + ".";
-      this.renameQuestionInExpression(questionPrefix + rowName + oldName, questionPrefix + rowName + column.name, [surveyLibSettings.expressionVariableDelimiters.end]);
-    }
+    const names = this.getItemValueQuestionNames(question);
+    if (!Array.isArray(rows) || !this.isQuestionInExpression(names)) return;
+    names.forEach(name => {
+      const questionPrefix = name + ".";
+      for (var i = 0; i < rows.length; i++) {
+        if (Helpers.isValueEmpty(rows[i].value)) continue;
+        const rowName = rows[i].value.toString() + ".";
+        this.renameQuestionInExpression(questionPrefix + rowName + oldName, questionPrefix + rowName + column.name, [surveyLibSettings.expressionVariableDelimiters.end]);
+      }
+    });
   }
   public renameItemValue(question: Question, item: ItemValue, oldValue: any): void {
     if (!this.canUpdateExpressionByQuestion(question)) return;
@@ -337,62 +384,74 @@ export class SurveyLogicItem {
       }
       if (this.actions[0].parentElement !== question.parentQuestion) return;
     }
-    if (!this.isQuestionInExpression(question)) return;
-    const questionName = this.getItemValueQuestionName(question).toLocaleLowerCase();
+    const names = this.getItemValueQuestionNames(question);
+    if (!this.isQuestionInExpression(names)) return;
     const rows: Array<ItemValue> = question["rows"];
     let newExpression = this.expression;
-    if (!Array.isArray(rows)) {
-      newExpression = updateLogicExpression(newExpression, questionName, oldValue, item.value);
-    } else {
-      for (var i = 0; i < rows.length; i++) {
-        if (Helpers.isValueEmpty(rows[i].value)) continue;
-        const rowName = "." + rows[i].value.toString();
-        newExpression = updateLogicExpression(newExpression, questionName + rowName, oldValue, item.value);
+    names.forEach(name => {
+      const questionName = name.toLocaleLowerCase();
+      if (!Array.isArray(rows)) {
+        newExpression = updateLogicExpression(newExpression, questionName, oldValue, item.value);
+      } else {
+        for (var i = 0; i < rows.length; i++) {
+          if (Helpers.isValueEmpty(rows[i].value)) continue;
+          const rowName = "." + rows[i].value.toString();
+          newExpression = updateLogicExpression(newExpression, questionName + rowName, oldValue, item.value);
+        }
       }
-    }
+    });
     if (newExpression != this.expression) {
       this.applyExpression(newExpression, true);
     }
   }
   private renameDropdownColumnItemValue(question: Question, item: ItemValue, oldValue: any): void {
     const matrix: Question = question.parentQuestion;
-    if (!this.isQuestionInExpression(matrix)) return;
+    const names = this.getItemValueQuestionNames(matrix);
+    if (!this.isQuestionInExpression(names)) return;
     const columnPostFix = "." + question.getValueName();
     if (!this.isStrContainsInExpression(columnPostFix + surveyLibSettings.expressionVariableDelimiters.end)) return;
-    const questionPrefix = matrix.getValueName() + ".";
     const rows: Array<ItemValue> = matrix["rows"];
     let newExpression = this.expression;
-    for (var i = 0; i < rows.length; i++) {
-      if (Helpers.isValueEmpty(rows[i].value)) continue;
-      const rowName = rows[i].value.toString();
-      newExpression = updateLogicExpression(newExpression, questionPrefix + rowName + columnPostFix, oldValue, item.value);
-    }
+    names.forEach(name => {
+      for (var i = 0; i < rows.length; i++) {
+        if (Helpers.isValueEmpty(rows[i].value)) continue;
+        const rowName = rows[i].value.toString();
+        newExpression = updateLogicExpression(newExpression, name + "." + rowName + columnPostFix, oldValue, item.value);
+      }
+    });
     if (newExpression != this.expression) {
       this.applyExpression(newExpression, true);
     }
   }
   public renameRowValue(question: Question, item: ItemValue, oldValue: any): void {
-    if (!this.canUpdateExpressionByQuestion(question) || !this.isQuestionInExpression(question)) return;
-    const questionName = this.getItemValueQuestionName(question);
-    this.renameQuestionInExpression(questionName + "." + oldValue.toString(), questionName + "." + item.value.toString(), [surveyLibSettings.expressionVariableDelimiters.end, "."]);
+    if (!this.canUpdateExpressionByQuestion(question)) return;
+    const names = this.getItemValueQuestionNames(question);
+    if (!this.isQuestionInExpression(names)) return;
+    names.forEach(name =>
+      this.renameQuestionInExpression(name + "." + oldValue.toString(), name + "." + item.value.toString(), [surveyLibSettings.expressionVariableDelimiters.end, "."]));
   }
   private canUpdateExpressionByQuestion(question: Question): boolean {
     return !!this.expression && !!question.name && this.actions.length > 0;
   }
-  private isQuestionInExpression(question: Question): boolean {
-    return this.isStrContainsInExpression(this.getItemValueQuestionName(question).toLocaleLowerCase());
+  private isQuestionInExpression(names: Array<string>): boolean {
+    return names.some(name => this.isStrContainsInExpression(name));
   }
   private isStrContainsInExpression(str: string): boolean {
     if (!str) return false;
     return this.expression.toLocaleLowerCase().indexOf(str.toLocaleLowerCase()) > -1;
   }
-  private getItemValueQuestionName(question: Question): string {
-    const valName = question.getValueName();
+  // The editor may have written either name: the data path from the root ({address.town}) or the name from the
+  // rule's owner ({town} inside address). Each is kept only where it reads the question.
+  private getItemValueQuestionNames(question: Question): Array<string> {
     if (!!question.parentQuestion) {
-      if (question.parentQuestion.isDescendantOf("paneldynamic")) return "panel." + valName;
-      if (question.parentQuestion.isDescendantOf("matrixdropdownbase")) return "row." + valName;
+      const valName = question.getValueName();
+      if (question.parentQuestion.isDescendantOf("paneldynamic")) return ["panel." + valName];
+      if (question.parentQuestion.isDescendantOf("matrixdropdownbase")) return ["row." + valName];
     }
-    return valName;
+    const name = getConditionQuestionKey(question);
+    if (!isScopedNamesSurvey(this.survey)) return [name];
+    const names = [name, getConditionQuestionKey(question, this.getExpressionContext())];
+    return names.filter((item, index) => names.indexOf(item) === index && this.getQuestionsByVariableName(item).indexOf(question) > -1);
   }
   public removeQuestion(name: string): void {
     this.removeQuestionInExpression(name);
@@ -405,6 +464,21 @@ export class SurveyLogicItem {
     const res = [];
     this.getQuestionNamesFromExpression(res);
     this.getQuestionNamesFromActions(res);
+    return res;
+  }
+  // By question, not by text: one text ({street}) reads different questions in different scopes.
+  public getUsedQuestions(): Array<Question> {
+    const res = this.getReadQuestions();
+    this.actions.forEach(action => action.addUsedQuestions(res));
+    return res;
+  }
+  private getReadQuestions(): Array<Question> {
+    const res: Array<Question> = [];
+    const names: Array<string> = [];
+    this.getQuestionNamesFromExpression(names);
+    names.forEach(name => this.getQuestionsByVariableName(name).forEach(question => {
+      if (res.indexOf(question) < 0) res.push(question);
+    }));
     return res;
   }
   public getActionTypes(): string[] {
@@ -434,8 +508,20 @@ export class SurveyLogicItem {
   }
   private getExpressionAsDisplayText(): string {
     return !!this.owner
-      ? this.owner.getExpressionAsDisplayText(this.expression)
+      ? this.owner.getExpressionAsDisplayText(this.expression, this.getExpressionContext())
       : this.expression;
+  }
+  // The element the rule's variables resolve in: its actions' owner when all of them resolve alike, else null
+  // (the root). Owners resolve alike when they share a record, or have none and share the innermost data path.
+  // Compared by path, not by value scope: two containers on one key (an address split across two pages) share a
+  // path, not a scope.
+  public getExpressionContext(): Base {
+    if (this.actions.length === 0 || !isScopedNamesSurvey(this.survey)) return null;
+    const owners = this.actions.map(action => action.getOwnerElement());
+    const [first, ...rest] = owners.map(owner => this.survey.getExpressionScopePaths(owner)[0]);
+    const isAlike = (s: typeof first): boolean => s.record === first.record &&
+      (!!s.record || s.path.length === first.path.length && s.path.every((key, i) => key === first.path[i]));
+    return rest.every(isAlike) ? owners[0] : null;
   }
   public get editText(): string {
     return editorLocalization.getString("pe.edit");
@@ -451,13 +537,100 @@ export class SurveyLogicItem {
     if (!filteredName) {
       return this.isSuitableByLogicTypeInActions(logicTypeName);
     }
-    if (!logicTypeName) {
-      return this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName);
-    }
-    return (this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName)) && this.isSuitableByLogicTypeInActions(logicTypeName);
+    const res = this.isSuitableByQuestionFilter(filteredName);
+    return !logicTypeName ? res : res && this.isSuitableByLogicTypeInActions(logicTypeName);
   }
+  // Where a container nests, the filter is a question's path of names (the filter's entry ids); any other filter
+  // goes to isSuitableInExpression. Where nothing nests, master's text match stays: it differs from the resolution
+  // ({val1} for q1, a setToName "q1.x").
+  private isSuitableByQuestionFilter(filteredName: string): boolean {
+    const question = isScopedNamesSurvey(this.survey) ? <Question>this.survey.getQuestionByName(filteredName) : null;
+    if (!question) return this.isSuitableInExpression(filteredName) || this.isSuitableByNameInActions(filteredName);
+    return this.isQuestionReadInExpression(question) || this.actions.some(action => action.isSuitableByQuestion(question));
+  }
+  private isQuestionReadInExpression(question: Question): boolean {
+    return !!this.expression && this.getReadQuestions().indexOf(question) > -1;
+  }
+  // One question per scope of the rule's actions: actions under one text can read different questions ({street}).
+  // When no scope resolves the text, a top-level question by its name, as master matches {q1} for a question with
+  // another value name. Never an inner question by name: a path of names ({panel1.street}) is no variable.
+  private getQuestionsByVariableName(name: string): Array<Question> {
+    const res: Array<Question> = [];
+    this.getExpressionOwners().forEach(owner => {
+      const question = getQuestionByVariableName(this.survey, name, owner);
+      if (!!question && res.indexOf(question) < 0) res.push(question);
+    });
+    if (res.length === 0) {
+      const question = <Question>this.survey.getQuestionByName(name);
+      if (!!question && !isInnerQuestion(question)) res.push(question);
+    }
+    return res;
+  }
+  // A name that only inner questions have is matched by what the rule's variables read, not by the text: a root
+  // rule's {street} reads no inner street. Any other name keeps the text match.
   private isSuitableInExpression(filteredName: string): boolean {
-    return this.expression.indexOf(wrapTextByCurlyBraces(filteredName)) !== -1 || this.expression.indexOf("'" + filteredName + ".") !== -1;
+    const innerQuestions = this.getInnerQuestionsByName(filteredName);
+    const isInnerOnly = innerQuestions.length > 0 && !this.survey.getQuestionByName(filteredName);
+    if (!isInnerOnly && (this.expression.indexOf(wrapTextByCurlyBraces(filteredName)) !== -1 || this.expression.indexOf("'" + filteredName + ".") !== -1)) return true;
+    return this.isInnerQuestionInExpression(innerQuestions);
+  }
+  private getInnerQuestionsByName(name: string): Array<Question> {
+    if (!this.expression || !this.survey) return [];
+    return <Array<Question>>this.survey.getAllQuestions().filter(q => q.name === name && isInnerQuestion(q));
+  }
+  private isInnerQuestionInExpression(questions: Array<Question>): boolean {
+    if (questions.length === 0) return false;
+    const names: Array<string> = [];
+    this.getQuestionNamesFromExpression(names);
+    return names.some(name => questions.indexOf(this.getQuestionByVariableName(name)) > -1);
+  }
+  // The top-level fallback by name changes nothing for the callers: each looks the name up first or compares with
+  // inner questions only.
+  public getQuestionByVariableName(name: string): Question {
+    return this.getQuestionsByVariableName(name)[0] || null;
+  }
+  private getExpressionOwners(): Array<Base> {
+    return this.actions.length > 0 ? this.actions.map(action => action.getOwnerElement()) : [null];
+  }
+  // getRenames gives the variables a key change rewrites as an action's owner reads them. Returns true when the
+  // actions got different texts (they resolve in different scopes): the rule no longer has one expression, and the
+  // logic is built again. A rule whose texts do not contain key is skipped without resolving its scopes.
+  public renameVariables(getRenames: (owner: Base, element: Base) => Array<IVariableRename>, key?: string): boolean {
+    if (!this.hasKeyText(key)) return false;
+    const texts = this.actions.map(action => {
+      const renames = getRenames(action.getOwnerElement(), action.element);
+      action.renameDataKeyInNames(renames);
+      let res = this.expression;
+      renames.forEach(item => res = this.renameVariablePrefix(res, item.oldName, item.newName));
+      return res;
+    });
+    if (texts.every(text => text === this.expression)) return false;
+    if (texts.every(text => text === texts[0])) {
+      this.applyExpression(texts[0], true);
+      return false;
+    }
+    this.actions.forEach((action, index) => action.apply(texts[index], true));
+    return true;
+  }
+  public forEachVariable(key: string, callback: (owner: Base, name: string) => void): void {
+    if (!this.hasKeyText(key)) return;
+    const names: Array<string> = [];
+    this.getQuestionNamesFromExpression(names);
+    this.actions.forEach(action => names.concat(action.questionNamesValues).forEach(name => {
+      if (!!name && typeof name === "string") callback(action.getOwnerElement(), name);
+    }));
+  }
+  private hasKeyText(key: string): boolean {
+    if (!this.expression || this.actions.length === 0) return false;
+    return !key || this.isStrContainsInExpression(key) || this.actions.some(action => action.hasTextInNames(key));
+  }
+  private renameVariablePrefix(expression: string, oldName: string, newName: string): string {
+    const ob = surveyLibSettings.expressionVariableDelimiters.start;
+    let res = expression;
+    getRenamePostfixes().forEach(ch => {
+      res = this.renameQuestionInExpressionCore(res, res.toLocaleLowerCase(), (ob + oldName + ch).toLocaleLowerCase(), ob + newName + ch);
+    });
+    return res;
   }
   private isSuitableByNameInActions(filteredName: string): boolean {
     return this.actions.some(action => action.isSuitableByQuestionName(filteredName));

@@ -253,6 +253,8 @@ export class SurveyLogicUI extends SurveyLogic {
       const context = <Question>item.getContext();
       res = { expressionEditor: this.createExpressionPropertyEditor(), itemEditor: new LogicItemEditor(item, this.options) };
       this.updateEditModeLogicItem(res);
+      // set before the context and the text: the editor reads them in the rule's scope
+      res.expressionEditor.scopeElement = item.getExpressionContext();
       res.expressionEditor.context = context;
       res.itemEditor.context = context;
       res.expressionEditor.text = item.expression;
@@ -262,7 +264,7 @@ export class SurveyLogicUI extends SurveyLogic {
       // the expression assistant checks a result against what saving this rule writes
       res.expressionEditor.getExpressionCheckInput = () => res.itemEditor.getExpressionCheckInput();
       res.expressionEditor.getExpressionDisplayText = (expression: string): string => {
-        const text = this.getExpressionAsDisplayText(expression);
+        const text = this.getExpressionAsDisplayText(expression, item.getExpressionContext());
         return !!this.options ? this.options.onLogicGetTitleCallback(expression, text, text, item) : text;
       };
       res.expressionEditor.onExpressionAssistantAccepted = (isTextEditor: boolean): void => {
@@ -325,6 +327,18 @@ export class SurveyLogicUI extends SurveyLogic {
     }
     itemUI.itemEditor.resetModified();
     item.isNew = false;
+    this.updateExpressionEditorScope(item, itemUI);
+  }
+  // The editor stays cached after a save, and the saved rule may resolve in another scope now: its rows are read
+  // again there. The text was just applied, so no edit is lost. A row that opens on the new scope's name ({kind}
+  // for {address.kind} inside address) is written in the same save.
+  private updateExpressionEditorScope(item: SurveyLogicItem, itemUI: ILogicItemUI): void {
+    const scope = item.getExpressionContext();
+    const editor = itemUI.expressionEditor;
+    if (scope === editor.scopeElement) return;
+    editor.scopeElement = scope;
+    editor.text = item.expression;
+    if (editor.isReady && editor.text !== item.expression) item.apply(editor.text);
   }
   protected hasErrorInUI(): boolean {
     const creator = (<any>this.survey).creator;

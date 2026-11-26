@@ -7,6 +7,9 @@ import {
 } from "survey-core";
 import { EditableObject } from "../../editable-object";
 
+// A disposed element that an undo re-created from its JSON, mapped to the new instance
+const recreatedElements = new WeakMap<Base, Base>();
+
 export interface IUndoRedoChange {
   object: any;
   propertyName: string;
@@ -326,6 +329,11 @@ export class UndoRedoArrayAction implements IUndoRedoAction {
   }
   private getSenderElement(): Base {
     if (!this._sender.isDisposed || !this.survey) return this._sender;
+    // Follow the instance an undo re-created: a lookup by name can miss it (a template's element, a column, a name
+    // used in two scopes) or find another element with that name
+    let sender = this._sender;
+    while(sender.isDisposed && recreatedElements.has(sender)) sender = recreatedElements.get(sender);
+    if (!sender.isDisposed) return sender;
     const name = this._sender["name"];
     if (this._sender["isPage"] === true) {
       if (this.survey.pages.length === 0) return this.survey.addNewPage();
@@ -341,8 +349,10 @@ export class UndoRedoArrayAction implements IUndoRedoAction {
       let obj = this._deletedItems[i];
       if (!!obj && obj.isDisposed && obj.getType) {
         const json = obj.toJSON();
-        obj = Serializer.createClass(obj.getType());
-        obj.fromJSON(json);
+        const recreated = Serializer.createClass(obj.getType());
+        recreated.fromJSON(json);
+        recreatedElements.set(obj, recreated);
+        obj = recreated;
       }
       res.push(obj);
     }

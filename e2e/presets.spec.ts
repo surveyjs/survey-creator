@@ -291,8 +291,9 @@ test.describe(title, () => {
     await hidden.getByRole("button", { name: "More" }).nth(0).click();
     await hidden.getByRole("menuitem", { name: "Data" }).locator("span").click();
     await page.locator(".svc-sidebar-tabs").getByTitle("Data").click();
-    expect((await getPropertiesTexts(page)).slice(0, 5)).toEqual([
+    expect((await getPropertiesTexts(page)).slice(0, 6)).toEqual([
       "Clear hidden question values",
+      "Store panel and page values in objects",
       "Update input field values",
       "Auto-save survey progress on page change",
       "Save the \"Other\" option value as a separate property",

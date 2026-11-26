@@ -1,6 +1,6 @@
 import {
   Action, Helpers, IAction, IDialogOptions, ISurveyVariablePreset, ITheme, QuestionMatrixDynamicModel,
-  settings as surveySettings, SurveyModel
+  settings as surveySettings, SurveyModel, SurveyVariablePresets
 } from "survey-core";
 import { BorderlessLightPanelless } from "survey-core/themes";
 import { SurveyCreatorModel } from "./creator-base";
@@ -9,7 +9,7 @@ import { getLocString } from "./editorLocalization";
 import "./variable-presets-editor.scss";
 
 // The Edit dialog behind the Preview toolbar button (issue #7982): one survey with two pages - the
-// preset list, and the definition itself as the form for one preset - shown through
+// preset list, and a form built from the definition's variables for one preset - shown through
 // settings.showDialog the way src/ui-preset-editor/presets-manager.ts shows its own editors. There
 // is no new framework component: a dialog holding a plain survey needs none.
 //
@@ -174,7 +174,16 @@ export class VariablePresetsEditor {
       },
       { type: "text", name: this.descriptionKey, title: getLocString("vp.presetDescription") }
     ];
+    // A companion of our own: the creator's may hold the data of a host's validateVariables call,
+    // and a question's JSON would carry it (a matrix's rowCount).
+    const model = new SurveyVariablePresets({ definition: this.creator.variablePresets?.definition });
+    const elements = this.getDefinitionElements(model);
+    const dataNesting = this.getDataNesting(model);
+    model.dispose();
     return {
+      // Explicitly: a host may change the serializer default. The dialog's own
+      // elements do not nest: they are on pages, and the list is a matrix.
+      dataNesting: dataNesting,
       pages: [
         {
           name: "variablePresetsList",
@@ -201,37 +210,49 @@ export class VariablePresetsEditor {
         },
         {
           name: "variablePresetEditor",
-          elements: metaElements.concat(this.getDefinitionElements())
+          elements: metaElements.concat(elements)
         }
       ]
     };
   }
-  // The definition's elements go on the form page at the root, not inside a panel per preset: a
-  // definition that says visibleIf: "{customerTier} = 'gold'" on one variable resolves
-  // {customerTier} against the survey root, so nesting it would make every cross-variable rule in
-  // the definition silently misbehave. At the root the definition behaves exactly as it does inside
-  // SurveyVariablePresets.validateVariables, which is what these values are checked against.
-  private getDefinitionElements(): Array<any> {
-    const definition = this.creator.variablePresets?.definition;
-    if (!definition) return [];
-    const json = Helpers.getUnbindValue(definition);
-    const pages: Array<any> = Array.isArray(json.pages) ? json.pages : [];
-    if (pages.length > 1) {
-      // A definition may declare its own pages, and page 2 of a two-page wizard cannot also be
-      // three pages: each definition page becomes a panel carrying that page's title and
-      // description, so the author's grouping survives without its pagination.
-      return pages.map((page: any, index: number) => {
-        return {
-          type: "panel",
-          name: page.name || ("variablePresetPanel" + index),
-          title: page.title,
-          description: page.description,
-          elements: page.elements || []
-        };
-      });
-    }
-    if (pages.length === 1) return pages[0].elements || [];
-    return Array.isArray(json.elements) ? json.elements : [];
+  // Built from the variable structure, not copied from the definition's JSON: a panel per object
+  // variable, named by its key, so that in "panel" mode the form stores the variables' shape
+  // ({ users: { tier } }) and a rule between two variables resolves as in the definition. A panel
+  // or page that does not nest is not in the structure: its layout and conditions are lost. An
+  // object variable's panel keeps its container's title, description, visible, readOnly and
+  // isRequired, and their conditions.
+  private getDefinitionElements(model: SurveyVariablePresets): Array<any> {
+    const root: Array<any> = [];
+    const panels: { [path: string]: any } = Object.create(null);
+    model.getVariablePaths().forEach(path => {
+      const keys = path.split(".");
+      let elements = root;
+      for (let i = 1; i < keys.length; i++) {
+        const panelPath = keys.slice(0, i).join(".");
+        let panel = panels[panelPath];
+        if (!panel) {
+          // The question, when a question and a container share the key: the panel takes nothing of it.
+          const el: any = model.getVariableElement(panelPath);
+          const json = el.isQuestion ? {} : el.toJSON();
+          panel = { type: "panel", name: keys[i - 1], elements: [] };
+          ["title", "description", "visible", "visibleIf", "enableIf", "requiredIf", "readOnly", "isRequired"].forEach(prop => {
+            if (json[prop] !== undefined) panel[prop] = json[prop];
+          });
+          panels[panelPath] = panel;
+          elements.push(panel);
+        }
+        elements = panel.elements;
+      }
+      const question = model.getVariableQuestion(path);
+      elements.push({ type: question.getType(), ...question.toJSON() });
+    });
+    return root;
+  }
+  // "panel", but "none" for a definition in "none": it has no object variable, and a panel in a
+  // dynamic panel's template nests under its valueName in every other mode.
+  private getDataNesting(model: SurveyVariablePresets): string {
+    const question: any = model.getVariableQuestion(model.getVariablePaths()[0]);
+    return question?.survey?.dataNesting === "none" ? "none" : "panel";
   }
   private setupEvents(): void {
     const survey = this.editSurvey;
@@ -335,9 +356,9 @@ export class VariablePresetsEditor {
     const variables: any = {};
     Object.keys(data).forEach(key => {
       if (key === this.listKey || key === this.nameKey || key === this.descriptionKey) return;
-      // The keys are the definition's own data keys, so valueName is honoured for free. survey.data
-      // already omits empty questions, so a preset that leaves an optional variable blank simply
-      // has no key and the host's setVariable is never called for it.
+      // The keys are the variables' own keys: a question keeps its valueName, a panel is named by
+      // its key. survey.data already omits empty questions, so a preset that leaves an optional
+      // variable blank simply has no key and the host's setVariable is never called for it.
       variables[key] = data[key];
     });
     preset.name = data[this.nameKey];
@@ -351,17 +372,13 @@ export class VariablePresetsEditor {
     preset.variables = variables;
     this.lastEditedName = preset.name;
   }
-  // The one place where the two naming rules meet: variable names match case-insensitively at
-  // runtime (setVariable lower-cases) and core validates { customertier: "gold" } as a perfectly
-  // good preset, while survey data keys are case-sensitive - assigned as it is, that value would
-  // leave the customerTier question blank and sit in the data as an orphan. A key the definition
-  // does not know is kept untouched, so it round-trips unchanged.
+  // The preset's keys as written: a key in another letter case than the definition's is not its
+  // variable's field, and a key the definition does not know round-trips unchanged.
   private assignVariables(data: any, variables: any): void {
     if (!variables) return;
-    const model = this.creator.variablePresetsModel;
     Object.keys(variables).forEach(key => {
-      const question = model.getVariableQuestion(key);
-      data[!!question ? question.getValueName() : key] = variables[key];
+      if (key === this.listKey || key === this.nameKey || key === this.descriptionKey) return;
+      data[key] = variables[key];
     });
   }
   private getPreset(name: string): ISurveyVariablePreset {
@@ -377,11 +394,17 @@ export class VariablePresetsEditor {
     }
     return name;
   }
+  // A preset's key the definition does not know counts too: assignVariables leaves the editor's own
+  // keys alone, so a variable sharing one would be lost on save.
   private getUniqueName(base: string): string {
     const model = this.creator.variablePresetsModel;
+    const presetKeys: { [key: string]: boolean } = {};
+    this.presetsValue.forEach(preset => {
+      Object.keys(preset.variables || {}).forEach(key => { presetKeys[key.toLowerCase()] = true; });
+    });
     let name = base;
     let index = 1;
-    while(model.hasVariable(name)) {
+    while(model.hasVariable(name) || presetKeys[name.toLowerCase()] === true) {
       name = base + "_" + index;
       index++;
     }

@@ -288,6 +288,9 @@ function getMessageParams(finding: ILintFinding): { [key: string]: any } {
     if (finding.reason === "dropdownRowConflict") {
       params.sharedKeyText = getTerm("dropdownRowSharer", finding.elementType);
     }
+    if (finding.reason === "containerKeyShadowed") {
+      params.kindText = getTerm("variableKind", data.kind);
+    }
     if (finding.reason === "valueShapeConflict") {
       params.shapeText = getTerm("sharedValueShape", data.shape);
       params.otherShapeText = getTerm("sharedValueShape", data.otherShape);
@@ -389,7 +392,7 @@ function getSuffixes(finding: ILintFinding, template: string): Array<string> {
     res.push(suffix("knownVariablesHint"));
   }
   if (!!finding.hint) {
-    res.push(formatTemplate("hints." + finding.hint.reason, finding.hint.name));
+    res.push(formatTemplate("hints." + finding.hint.reason, finding.hint.name, finding.hint.variable));
   }
   if (finding.ruleId === "reference/unknown" && data.refKind === "binding") {
     res.push(suffix("inBindings"));

@@ -1870,7 +1870,30 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
         });
         textQuestion.inputActionsContainer.addAction(action);
       }
+      if (prop.name === "valueName" && obj instanceof PanelModelBase) {
+        this.setupDataKeyPlaceholder(obj, textQuestion);
+      }
     }
+  }
+  // Nested data (survey-library #12233): a container that nests under its name (not in a record's template) shows
+  // the name as its valueName placeholder. Callbacks, not a renderedPlaceholder getter: nothing would notify the
+  // rendered editor. Its own move is followed, not a move of its parent. No warning on a rename: the data never moves.
+  private setupDataKeyPlaceholder(container: PanelModelBase, question: QuestionTextBase): void {
+    const staticPlaceholder = question.placeholder;
+    const key = "__pgDataKeyPlaceholder";
+    const containerProps = ["name", "parent"];
+    const update = (): void => {
+      // The grid of another selection disposed this editor. The survey's key is shared by every container's
+      // editor: the live one owns it now, so only this container's callbacks go.
+      if (question.isDisposed) {
+        container.unRegisterFunctionOnPropertiesValueChanged(containerProps, key);
+        return;
+      }
+      question.placeholder = container.getDataNestingKeyFor("", container.name) || staticPlaceholder;
+    };
+    update();
+    container.registerFunctionOnPropertiesValueChanged(containerProps, update, key);
+    (<any>container.survey)?.registerFunctionOnPropertyValueChanged("dataNesting", update, key);
   }
   //Show the default property value as the placeholder. It is based on the edited object locale and doesn't depend on the creator locale.
   private setupDefaultValuePlaceholder(obj: Base, question: QuestionTextBase, prop: JsonObjectProperty): void {
