@@ -168,7 +168,7 @@ test.describe(title, () => {
     const contentBox = await page.locator(".st-side-by-side").boundingBox();
     const sourceBox = await page.locator(".st-side-by-side__source").boundingBox();
     expect(Math.abs(sourceBox!.width - contentBox!.width)).toBeLessThanOrEqual(2);
-    await expect(getBarItemByTitle(page, "Translate remaining strings")).toBeDisabled();
+    await expect(sidebar.getByRole("button", { name: "Translate manually" })).toBeDisabled();
 
     // Selecting a language again brings the pane back with its inline editors.
     await openLocaleDropdown(page, "Target language");
@@ -182,34 +182,76 @@ test.describe(title, () => {
     expect((await getJSON(page)).pages[0].elements[0].title.de).toEqual("Frage 1 neu");
   });
 
-  test("progress link: the target language counts, the way to the next untranslated string and the clear button", async ({ page }) => {
+  test("side panel: the progress text, the buttons and the Clear all alert", async ({ page }) => {
     await openSideBySideTranslation(page);
-    const progress = page.locator(".svc-side-bar .spg-question[data-name=translationProgress]");
-    const progressLink = progress.getByRole("button", { name: /strings translated/ });
-    await expect(progressLink).toHaveText(/^\d+ of \d+ strings translated$/);
-    const before = await progressLink.textContent();
+    const sidebar = page.locator(".svc-side-bar");
+    // Plain text, not a link.
+    const progress = sidebar.locator(".st-language-settings__progress");
+    await expect(progress).toHaveText(/^\d+ of \d+ strings translated$/);
+    await expect(sidebar.getByRole("button", { name: /strings translated/ })).toHaveCount(0);
+    // Without a machine-translation handler there is no Autotranslate all.
+    await expect(sidebar.getByRole("button", { name: "Auto-translate All" })).toHaveCount(0);
+    const buttons = ["Translate manually", "Clear all", "Import from CSV", "Download as CSV"];
+    const dropdownBox = await sidebar.locator(".spg-question[data-name=targetLocale]").boundingBox();
+    for (const name of buttons) {
+      const box = await sidebar.getByRole("button", { name: name }).boundingBox();
+      // 48px buttons as wide as the editors above them.
+      expect(box!.height).toBe(48);
+      expect(Math.abs(box!.width - dropdownBox!.width)).toBeLessThanOrEqual(1);
+    }
+    await expect(sidebar.locator(".st-language-settings__caption")).toHaveText("Actions");
 
-    // The click opens the strings dialog of the first element that has an untranslated string,
-    // with the input focus in its editor - translating there moves the counts.
-    await progressLink.click();
-    const stringsDialog = getStringsDialog(page);
-    await expect(stringsDialog).toBeVisible();
-    const editor = stringsDialog.getByRole("textbox", { name: "row Question title, column Target: Deutsch" });
-    await expect(editor).toBeFocused();
-    await editor.fill("Uebersetzt");
-    await page.keyboard.press("Tab");
-    await expect(progressLink).not.toHaveText(before!);
-    await closeStringsDialog(page);
+    // Cancelled - the language keeps its strings.
+    await sidebar.getByRole("button", { name: "Clear all" }).click();
+    const alert = page.locator(".svc-creator-confirm-dialog");
+    await expect(alert).toBeVisible();
+    await expect(alert.locator(".svc-creator-confirm-dialog__title")).toHaveText("Clear all translations?");
+    await expect(alert.locator(".svc-creator-confirm-dialog__message")).toHaveText("You will not be able to restore it");
+    await expect(alert.locator(".svc-creator-confirm-dialog__icon--danger")).toBeVisible();
+    await alert.getByRole("button", { name: "Cancel" }).click();
+    await expect(alert).toHaveCount(0);
+    expect((await getJSON(page)).pages[0].elements[0].title.de).toEqual("Frage 1");
 
-    // The clear button drops the language's texts after a confirmation; the language stays the
-    // one being translated, so the target pane is still there and the progress starts over.
-    await progress.getByRole("button", { name: "Clear" }).click();
-    const dialog = page.locator(".sv-popup--confirm");
-    await expect(dialog).toBeVisible();
-    await dialog.getByRole("button", { name: "OK" }).click();
-    await expect(progressLink).toHaveText(/^0 of \d+ strings translated$/);
+    // Applied - the language's texts are gone; it stays the one being translated, so the target
+    // pane is still there and the progress starts over.
+    await sidebar.getByRole("button", { name: "Clear all" }).click();
+    await alert.getByRole("button", { name: "Clear" }).click();
+    await expect(alert).toHaveCount(0);
+    await expect(progress).toHaveText(/^0 of \d+ strings translated$/);
+    await expect(sidebar.getByRole("button", { name: "Clear all" })).toBeDisabled();
     await expect(page.locator(".st-side-by-side__target")).toBeVisible();
     expect((await getJSON(page)).pages[0].elements[0].title.de).toBeUndefined();
+  });
+
+  test("Translate manually: the Untranslated strings dialog edits a row live, Done closes it", async ({ page }) => {
+    await openSideBySideTranslation(page);
+    const sidebar = page.locator(".svc-side-bar");
+    const progress = sidebar.locator(".st-language-settings__progress");
+    const before = await progress.textContent();
+    await sidebar.getByRole("button", { name: "Translate manually" }).click();
+    const dialog = page.locator(".sv-popup.st-untranslated-strings-dialog");
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator(".sv-popup__body-header")).toHaveText("Untranslated strings");
+    const box = await dialog.locator(".sv-popup__container").boundingBox();
+    expect(Math.round(box!.width)).toBe(960);
+    // The untranslated strings only: q1's title has a German text.
+    const strings = dialog.locator(".st-translation-table__cell--string");
+    await expect(strings.filter({ hasText: "Choices: Item 1" })).toHaveCount(1);
+    await expect(dialog.locator(".st-translation-table__cell--source").filter({ hasText: "Question 1" })).toHaveCount(0);
+    // The Source column is plain text; the Target cells are the editors.
+    await expect(dialog.locator(".st-translation-table__cell--source textarea")).toHaveCount(0);
+    const row = dialog.locator("tr").filter({ has: page.locator(".st-translation-table__cell--string", { hasText: "Choices: Item 1" }) });
+    const target = row.locator(".st-translation-table__cell--target textarea");
+    await target.click();
+    await target.fill("Element 1");
+    await page.keyboard.press("Tab");
+    // Live: the counts move while the dialog is open, and the row stays.
+    await expect(progress).not.toHaveText(before!);
+    await expect(row).toHaveCount(1);
+    await dialog.locator(".sv-popup__body-footer").getByRole("button", { name: "Done" }).click();
+    await expect(dialog).toHaveCount(0);
+    await expect(page.locator(".st-side-by-side__target").getByText("Element 1")).toBeVisible();
+    expect((await getJSON(page)).pages[0].elements[1].choices[0]).toEqual({ value: "Item 1", text: { de: "Element 1" } });
   });
 
   test("inline edit in target pane updates the JSON translation; source pane unchanged", async ({ page }) => {

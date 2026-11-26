@@ -1498,7 +1498,11 @@ export function runItemsMachineTranslation(
   if (items.length === 0) return;
   const strings = items.map(item => item.getTextToTranslateFrom(fromLocale));
   const callback = (translated: Array<string>): void => {
-    if (!Array.isArray(translated)) return;
+    // No result is a completed request too: the caller may be waiting for it (a disabled button).
+    if (!Array.isArray(translated)) {
+      onCompleted();
+      return;
+    }
     for (let i = 0; i < Math.min(items.length, translated.length); i++) {
       if (!!translated[i]) {
         applyTranslation(items[i], translated[i]);

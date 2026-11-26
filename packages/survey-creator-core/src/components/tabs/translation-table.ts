@@ -630,7 +630,10 @@ export class TranslationTable {
     } else if (column.name === translationTableStringColumnName) {
       text = row.text;
     } else {
-      text = row.item.getSourceText(column["translationLocale"]);
+      // A read-only Source cell has no placeholder: a string that stores no text of its own (a choice
+      // shown by its value, a question by its name) shows the text it is displayed by instead.
+      const locale = column["translationLocale"];
+      text = row.item.getSourceText(locale) || row.item.getTextToTranslateFrom(locale);
     }
     (<any>cellQuestion).html = escapeHtml(text);
   }

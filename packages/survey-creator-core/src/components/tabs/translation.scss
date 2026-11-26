@@ -92,12 +92,125 @@
 // }
 
 // The side-by-side language settings survey: its page is a property grid category
-// (see createSettingsSurvey), so its rows keep the row spacing of the designer's property
-// grid categories. Without it the title-less progress link sits right against the target
-// language dropdown - the other questions get their air from the padding of their titles.
+// (see createSettingsSurvey). The design puts 24px between its blocks: the view switcher, the
+// two language dropdowns, the progress text with its buttons, and the Actions group.
 .st-language-settings__content {
-  row-gap: var(--sjs2-spacing-x200);
+  row-gap: var(--sjs2-spacing-x300);
   column-gap: var(--sjs2-spacing-x200);
+}
+
+// The two button groups of the side panel (see TranslationSideBySide.setupSettingsPanels): a
+// title-less panel whose only element is the text above its buttons, and whose footer actions are
+// the buttons. The panel is a layout box here, not a property grid category.
+.st-language-settings__group {
+  width: 100%;
+
+  .spg-panel__content {
+    padding: 0;
+    row-gap: 0;
+    box-shadow: none;
+  }
+}
+// The progress text ("11 of 27 strings translated"): plain text, empty without a target language.
+.st-language-settings__progress {
+  @include sjs2--typography--default-strong;
+  color: var(--sjs2-color-fg-basic-primary);
+  padding: var(--sjs2-spacing-x100) 0;
+
+  &:empty {
+    display: none;
+  }
+}
+// The "Actions" caption: the look of the editor captions above it ("Source language").
+.st-language-settings__caption {
+  @include sjs2--typography--default;
+  color: var(--sjs2-color-fg-basic-secondary);
+  padding: var(--sjs2-spacing-x100) 0;
+}
+// The buttons: survey-core's medium actions (48px), one per line across the panel.
+.st-language-settings__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--sjs2-spacing-x150);
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  .sd-action-bar__item,
+  .sd-action-bar__item-content {
+    display: flex;
+    width: 100%;
+  }
+  .sd-action {
+    flex-grow: 1;
+    min-width: 0;
+  }
+}
+// 12px between the progress text and the first button, none without the text.
+.st-language-settings__group:has(.st-language-settings__progress:not(:empty)) .st-language-settings__buttons {
+  margin-top: var(--sjs2-spacing-x150);
+}
+
+// The "Untranslated strings" dialog (Translate manually): the grid view's table in a survey of its
+// own (see TranslationUntranslatedStrings), between the fixed title row and the footer.
+.st-untranslated-strings-dialog {
+  // The table survey: the grid view pads its root, the dialog content has a padding of its own.
+  .st-root-modern,
+  .sd-root-modern,
+  .sd-container-modern,
+  .sd-body,
+  .sd-body__page,
+  .sd-page {
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    min-width: 0;
+  }
+
+  .sd-page__content {
+    padding: 0;
+  }
+
+  .st-root-modern.st-translation-table {
+    padding: 0;
+    height: auto;
+  }
+
+  .st-translation-table .sd-page__row:last-child .st-translation-group {
+    margin-bottom: 0;
+  }
+}
+// The width goes on the content: the popup writes an inline "width: auto" on its container.
+.sv-popup--modal-popup.svc-property-editor.st-untranslated-strings-dialog > .sv-popup__container {
+  .sd-body,
+  .sv-components-column--expandable {
+    min-width: 0;
+  }
+
+  & > .sv-popup__body-content {
+    width: min(calc(var(--sjs2-base-unit-size) * 120), calc(100vw - var(--sjs2-spacing-x800)));
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    max-height: calc(100vh - var(--sjs2-spacing-x800));
+    padding: var(--sjs2-spacing-x300) var(--sjs2-spacing-x300) 0;
+    gap: var(--sjs2-spacing-x300);
+  }
+
+  .sv-popup__scrolling-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  // The footer is separated from the table by a line across the whole dialog.
+  .sv-popup__body-footer {
+    margin: 0 calc(-1 * var(--sjs2-spacing-x300));
+    padding: var(--sjs2-spacing-x300);
+    border-top: 1px solid var(--sjs2-color-border-basic-secondary);
+  }
 }
 
 .st-strings-header {

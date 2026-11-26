@@ -68,7 +68,8 @@ export class TranslationCopiesMap {
     const json = (<LocalizableString>realLocStr).getJson();
     copies.forEach(copy => {
       (<LocalizableString>copy).setJson(json);
-      (<LocalizableString>copy).strChanged();
+      // A LocalizableStrings (a text question's dataList) has no strChanged: its setJson notifies.
+      if (typeof (<any>copy).strChanged === "function") (<LocalizableString>copy).strChanged();
     });
     return true;
   }

@@ -170,10 +170,10 @@ test.describe(title, () => {
     // The standard-width property grid fits the button group, so the views are
     // plain buttons - no compact dropdown rendering.
     const switchView = async (viewName: string) => {
-      await viewSwitcher.getByText(viewName).click();
+      await viewSwitcher.getByText(viewName, { exact: true }).click();
     };
 
-    await switchView("Form View");
+    await switchView("Form");
     await expect(page.locator(".st-side-by-side__source")).toBeVisible();
     await expect(page.locator(".st-side-by-side__target")).toBeVisible();
     await expect(page.locator(".st-strings")).toHaveCount(0);
@@ -182,7 +182,7 @@ test.describe(title, () => {
     await expect(sidebar.locator(".spg-question[data-name=sourceLocale]")).toContainText("Default (English)");
     await expect(sidebar.locator(".spg-question[data-name=targetLocale]")).toContainText("Deutsch");
 
-    await switchView("Grid View");
+    await switchView("Grid");
     await expect(page.locator(".st-strings")).toBeVisible();
     await expect(page.locator(".st-side-by-side__source")).toHaveCount(0);
   });

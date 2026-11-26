@@ -89,8 +89,8 @@ test("grid view: activate creates the grid model, no survey copies, toolbar and 
   expect(model.settingsSurvey.getQuestionByName("targetLocale").value).toBe("de");
   expect(creator.toolbar.getActionById("svc-translation-filter-page").visible).toBeTruthy();
   expect(creator.toolbar.getActionById("svc-translation-show-all-strings").visible).toBeTruthy();
-  expect(creator.toolbar.getActionById("svc-translation-import").visible).toBeTruthy();
-  expect(creator.toolbar.getActionById("svc-translation-export").visible).toBeTruthy();
+  expect(creator.toolbar.getActionById("svc-translation-import").visible).toBeFalsy();
+  expect(creator.toolbar.getActionById("svc-translation-export").visible).toBeFalsy();
   expect(creator.toolbar.getActionById("svd-translation-merge_locale_withdefault").visible).toBeFalsy();
   // The locale selectors and the view switcher live in the property grid, not in the toolbar.
   expect(creator.toolbar.getActionById("svc-translation-source-locale")).toBeFalsy();
@@ -277,16 +277,6 @@ test("grid view: CSV export covers the whole survey regardless of the page scope
   const csv = model.exportToCSV();
   expect(csv.indexOf("q1.title")).toBeGreaterThan(-1);
   expect(csv.indexOf("q4.title")).toBeGreaterThan(-1);
-});
-
-test("grid view: the machine-translation editor operates on the whole survey", () => {
-  const creator = createGridCreator();
-  const model = getModel(creator);
-  const editor = model.createTranslationEditor(model.targetLocale);
-  const contexts = editor.translation.root.allLocItems.map(item => (!!item.context ? item.context.name : ""));
-  // q4 (page2, no "de" text yet) must be offered although the grid shows page1 only.
-  expect(contexts.indexOf("q4")).toBeGreaterThan(-1);
-  editor.dispose();
 });
 
 test("view switcher: the property grid button group switches between the form and grid views keeping locales", () => {
@@ -727,21 +717,6 @@ describe("grid view: the grouped table", () => {
     expect(sourceCell.getType()).toBe("html");
     expect((<any>sourceCell).locHtml.renderedHtml).toBe("Page {pageno} of {pagecount}");
   });
-  test("the progress link expands the collapsed group of the string, also when it is shown alone", () => {
-    const creator = createGridCreator();
-    const model = getModel(creator);
-    model.filteredPage = creator.survey.getPageByName("page2");
-    getPanel(model, "page2").collapse();
-    const tracker = trackCommentFocus();
-    try {
-      model.selectFirstUntranslatedString();
-      expect(getPanel(model, "page2").state).toBe("expanded");
-      expect(tracker.focused).toHaveLength(1);
-      expect(tracker.focused[0]).toBe(getTargetCell(findMatrix(model, "q4", "title")));
-    } finally {
-      tracker.restore();
-    }
-  });
   test("a new survey forgets how the grid was left: the next entry is scoped to the page", () => {
     const creator = createGridCreator();
     const model = getModel(creator);
@@ -805,11 +780,16 @@ describe("the translation table model: options for the dialogs", () => {
     expect(getTableKeys(survey).indexOf("q4.title")).toBeGreaterThan(-1);
   });
   test("the source read-only option: plain text, not an input", () => {
-    const { survey } = createTable({ sourceReadOnly: true });
+    const { survey, creator } = createTable({ sourceReadOnly: true });
     const cells = getCells(findTableMatrix(survey, "q1"));
     expect(cells.map(cell => cell.question.getType())).toEqual(["html", "html", "html", "comment"]);
     expect((<any>cells[2].question).html).toBe("Question 1");
     expect(cells[3].question.value).toBe("Frage 1");
+    // A choice with no text of its own: it has no placeholder there, so the plain text is the value
+    // the choice is displayed by.
+    const item2 = (<any>creator.survey.getQuestionByName("q2")).choices[1].locText;
+    const item2Matrix = getTableMatrices(survey).filter(m => m.rows[0]["translationData"].locString === item2)[0];
+    expect((<any>getCells(item2Matrix)[2].question).html).toBe("item2");
   });
   test("the element layout: no groups and no Question column", () => {
     const creator = createGridCreator();

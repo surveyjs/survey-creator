@@ -1,7 +1,6 @@
 import { ItemValue, QuestionDropdownModel, settings as surveySettings } from "survey-core";
 import { TranslationSideBySide, getTranslationLocaleProgress } from "../../src/components/tabs/translation-side-by-side";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
-import { QuestionLinkValueModel } from "../../src/components/link-value";
 import { CreatorTester } from "../creator-tester";
 import "survey-core/survey.i18n";
 
@@ -37,8 +36,12 @@ function getTargetDropdown(creator: CreatorTester): QuestionDropdownModel {
 function getSourceDropdown(creator: CreatorTester): QuestionDropdownModel {
   return <QuestionDropdownModel>getModel(creator).settingsSurvey.getQuestionByName("sourceLocale");
 }
-function getProgressQuestion(creator: CreatorTester): QuestionLinkValueModel {
-  return <QuestionLinkValueModel>getModel(creator).settingsSurvey.getQuestionByName("translationProgress");
+// The progress text of the side panel and the Clear all button below it.
+function getProgressText(creator: CreatorTester): string {
+  return (<any>getModel(creator).settingsSurvey.getQuestionByName("translationProgress")).html;
+}
+function canClearAll(creator: CreatorTester): boolean {
+  return getModel(creator).getSettingsAction("svc-translation-clear-all").enabled;
 }
 // The share of the survey translated into a language, as the target dropdown list shows it -
 // absent for a language nothing is translated into.
@@ -49,16 +52,20 @@ function getTargetProgress(creator: CreatorTester, locale: string): string {
 function getChoiceValues(question: QuestionDropdownModel): Array<any> {
   return question.choices.map((item: ItemValue) => item.value);
 }
+// Clear all asks through a danger alert (showConfirmDialog), confirmed here.
 function mockConfirmDialog(run: () => void): void {
-  const originalCallback = surveySettings.confirmActionAsync;
-  surveySettings.confirmActionAsync = (text, callback) => {
-    callback(true);
-    return true;
+  const origin = surveySettings.showDialog;
+  const shown: Array<any> = [];
+  surveySettings.showDialog = (options: any): any => {
+    const actions = [{ id: "cancel", title: "" }, { id: "apply", title: "" }];
+    shown.push(options);
+    return { footerToolbar: { actions: actions, getActionById: (id: string): any => actions.filter(a => a.id === id)[0] } };
   };
   try {
     run();
+    shown.forEach(options => options.onApply());
   } finally {
-    surveySettings.confirmActionAsync = originalCallback;
+    surveySettings.showDialog = origin;
   }
 }
 
@@ -91,32 +98,31 @@ test("the default language is never a translation language, whatever the survey 
   });
 });
 
-test("a survey without translations: no counters, and the progress link appears with the target language", () => {
+test("a survey without translations: no counters, and the progress text appears with the target language", () => {
   const creator = createSideBySideCreator({
     pages: [{ name: "page1", elements: [{ type: "text", name: "q1", title: "Question 1" }] }]
   });
   const model = getModel(creator);
   expect(getChoiceValues(getSourceDropdown(creator))).toEqual(["default"]);
   expect(getTargetDropdown(creator).choices.every((item: ItemValue) => !getTranslationLocaleProgress(item))).toBeTruthy();
-  // No language is being translated - the progress link says nothing.
+  // No language is being translated - the progress text says nothing.
   expect(model.targetLocale || "").toBe("");
-  expect(getProgressQuestion(creator).visible).toBeFalsy();
+  expect(getProgressText(creator)).toBe("");
   // Targeting a language shows the progress of a translation that has not started yet.
   model.targetLocale = "de";
-  expect(getProgressQuestion(creator).visible).toBeTruthy();
-  expect(getProgressQuestion(creator).value).toBe(0);
-  // Nothing is stored for the language - there is nothing the clear button could drop.
-  expect(getProgressQuestion(creator).showClear).toBeFalsy();
+  expect(getProgressText(creator)).toBe("0 of 1 strings translated");
+  // Nothing is stored for the language - there is nothing Clear all could drop.
+  expect(canClearAll(creator)).toBeFalsy();
   expect(getTargetProgress(creator, "de")).toBeFalsy();
   // The first stored string makes it a translation the survey has.
   model.targetSurvey.getQuestionByName("q1").locTitle.text = "Frage 1";
-  expect(getProgressQuestion(creator).value).toBe(1);
-  expect(getProgressQuestion(creator).showClear).toBeTruthy();
+  expect(getProgressText(creator)).toBe("1 of 1 strings translated");
+  expect(canClearAll(creator)).toBeTruthy();
   expect(getTargetProgress(creator, "de")).toBe("1 / 1");
   // And clearing the language's strings takes it back to where it started.
   mockConfirmDialog(() => model.clearTargetLocaleStrings());
-  expect(getProgressQuestion(creator).value).toBe(0);
-  expect(getProgressQuestion(creator).showClear).toBeFalsy();
+  expect(getProgressText(creator)).toBe("0 of 1 strings translated");
+  expect(canClearAll(creator)).toBeFalsy();
   expect(getTargetProgress(creator, "de")).toBeFalsy();
 });
 
@@ -140,14 +146,13 @@ test("a language joins the translations with its first stored string and leaves 
 test("counts update immediately on an inline edit and follow a CSV import", () => {
   const creator = createSideBySideCreator();
   const model = getModel(creator);
-  const progress = getProgressQuestion(creator);
-  expect(progress.value).toBe(1);
+  expect(getProgressText(creator)).toBe("1 of 2 strings translated");
   expect(getTargetProgress(creator, "de")).toBe("1 / 2");
   model.targetSurvey.getQuestionByName("q2").locTitle.text = "Frage 2";
-  expect(progress.value).toBe(2);
+  expect(getProgressText(creator)).toBe("2 of 2 strings translated");
   expect(getTargetProgress(creator, "de")).toBe("2 / 2");
   model.targetSurvey.getQuestionByName("q2").locTitle.text = "";
-  expect(progress.value).toBe(1);
+  expect(getProgressText(creator)).toBe("1 of 2 strings translated");
   expect(getTargetProgress(creator, "de")).toBe("1 / 2");
   // A bulk write refreshes the counts once, through the reset that follows it.
   model.importFromNestedArray([
@@ -172,14 +177,12 @@ test("grid view: counts ignore the page scope and clearing the language covers t
   expect(model.isSideBySideGrid).toBeTruthy();
   model.filteredPage = creator.survey.pages[0];
   // The denominator is the whole survey, never the grid's page scope.
-  const progress = getProgressQuestion(creator);
-  expect(progress.value).toBe(2);
-  expect(progress.linkValueText).toBe("2 of 2 strings translated");
+  expect(getProgressText(creator)).toBe("2 of 2 strings translated");
   expect(getTargetProgress(creator, "de")).toBe("2 / 2");
   // And so is the deletion.
-  mockConfirmDialog(() => progress.doClearClick());
+  mockConfirmDialog(() => model.getSettingsAction("svc-translation-clear-all").action());
   expect(creator.survey.getQuestionByName("q1").locTitle.getLocaleText("de")).toBeFalsy();
   expect(creator.survey.getQuestionByName("q2").locTitle.getLocaleText("de")).toBeFalsy();
-  expect(getProgressQuestion(creator).value).toBe(0);
+  expect(getProgressText(creator)).toBe("0 of 2 strings translated");
   expect(getTargetProgress(creator, "de")).toBeFalsy();
 });
