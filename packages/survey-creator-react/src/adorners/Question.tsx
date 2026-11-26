@@ -77,7 +77,7 @@ export class QuestionAdornerComponent<T extends QuestionAdornerViewModel = Quest
       >
         {titleForCollapsedState}
         {content}
-        {this.renderWysiwygToolbar()}
+        {this.renderWysiwygMainToolbar()}
       </div>
     );
   }
@@ -106,18 +106,25 @@ export class QuestionAdornerComponent<T extends QuestionAdornerViewModel = Quest
     return ReactElementFactory.Instance.createElement("svc-question-header", { model: this.model });
   }
   protected renderFooter(): React.JSX.Element {
-    if (this.model.wysiwygMode) return null;
+    if (this.model.wysiwygMode) return this.renderWysiwygAddItemToolbar();
     const allowInteractions = this.model.element
       .isInteractiveDesignElement;
     return allowInteractions ? ReactElementFactory.Instance.createElement("svc-question-footer", { className: "svc-question__content-actions", model: this.model }) : null;
   }
-  protected renderWysiwygToolbar(): React.JSX.Element {
+  protected renderWysiwygAddItemToolbar(): React.JSX.Element {
     if (!this.model.wysiwygMode || !this.model.element.isInteractiveDesignElement) return null;
     return (
       <div className="svc-question__wysiwyg-toolbars">
         <div className="svc-question__wysiwyg-toolbar svc-question__wysiwyg-toolbar--add-item">
           <SurveyActionBar model={this.model.addItemActionContainer} handleClick={false}></SurveyActionBar>
         </div>
+      </div>
+    );
+  }
+  protected renderWysiwygMainToolbar(): React.JSX.Element {
+    if (!this.model.wysiwygMode || !this.model.element.isInteractiveDesignElement) return null;
+    return (
+      <div className="svc-question__wysiwyg-toolbars">
         <div className="svc-question__wysiwyg-toolbar svc-question__wysiwyg-toolbar--main">
           <SurveyActionBar model={this.model.actionContainer} handleClick={false}></SurveyActionBar>
         </div>
