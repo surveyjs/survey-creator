@@ -184,11 +184,57 @@ describe("Property grid: the Filter Control fields", () => {
       { type: "filter", name: "f", targetQuestion: "m", fields: ["a", "total"] }] });
     const matrix = <QuestionMatrixDynamicModel>new PropertyGridModelTester(survey.getQuestionByName("f")).survey.getQuestionByName("fields");
     const name0 = cell(matrix, 0, "name");
-    expect([name0.isReadOnly, name0.choices.map((c: any) => [c.value, c.text])], "#1").toEqual([false, [["a", "A"], ["b", "b"], ["c", "c"]]]);
+    expect([name0.isReadOnly, name0.choices.map((c: any) => [c.value, c.text])], "#1").toEqual([false, [["a", "a"], ["b", "b"], ["c", "c"]]]);
     expect(cell(matrix, 1, "name").choices.map((c: any) => c.value), "#2: a is taken").toEqual(["b", "c"]);
     expect(cell(matrix, 1, "name").selectedItem.value, "#3: a field of the record is the custom choice").toBe("total");
     name0.value = "c";
     expect(cell(matrix, 1, "name").choices.map((c: any) => c.value), "#4: a is free, c taken").toEqual(["a", "b"]);
+  });
+  test("Field name shows a field's name - its valueName, else its name, a nested field's path - not its title", () => {
+    const survey = new SurveyModel({ elements: [
+      { type: "paneldynamic", name: "p", templateElements: [
+        { type: "text", name: "price", valueName: "amount", title: "Unit price" },
+        { type: "multipletext", name: "addr", title: "Address", items: [{ name: "city", title: "City" }] }] },
+      { type: "filter", name: "f", targetQuestion: "p", fields: ["amount"] }] });
+    const matrix = <QuestionMatrixDynamicModel>new PropertyGridModelTester(survey.getQuestionByName("f")).survey.getQuestionByName("fields");
+    const name0 = cell(matrix, 0, "name");
+    expect(name0.choices.map((c: any) => [c.value, c.text]), "#1").toEqual([["amount", "amount"], ["addr.city", "addr.city"]]);
+    expect(name0.selectedItem.text, "#2: the cell shows the name").toBe("amount");
+  });
+  test("Field name has no clear button", () => {
+    const { matrix } = createGrid({ targetQuestion: "m", fields: ["country", "city"] });
+    expect([cell(matrix, 0, "name").allowClear, cell(matrix, 1, "name").allowClear]).toEqual([false, false]);
+  });
+  // Every row's choices are the fields no row has taken and its own name: while a field of the target is free
+  // the rows pick from a dropdown, otherwise there is nothing to pick and Field name is a text box.
+  const nameTypes = (matrix: QuestionMatrixDynamicModel): Array<string> => matrix.visibleRows.map(r => cell(matrix, matrix.visibleRows.indexOf(r), "name").getType());
+  test("Field name is a text box when no field of the target is free, a dropdown while one is", () => {
+    expect(nameTypes(createGrid({ targetQuestion: "m", fields: ["country", "price"] }).matrix), "#1").toEqual(["text", "text"]);
+    expect(nameTypes(createGrid({ targetQuestion: "m", fields: ["country"] }).matrix), "#2").toEqual(["dropdown"]);
+    expect(nameTypes(createGrid({ targetQuestion: "m", fields: ["country", "city"] }).matrix), "#3: a field of the record").toEqual(["dropdown", "dropdown"]);
+    expect(nameTypes(createGrid({ targetQuestion: "m" }).matrix), "#4: fields left out take every visible field").toEqual(["text", "text"]);
+  });
+  test("removing a row frees a field: every row's Field name becomes a dropdown", () => {
+    const { filter, matrix } = createGrid({ targetQuestion: "m", fields: ["country", "price"] });
+    expect(nameTypes(matrix), "#1").toEqual(["text", "text"]);
+    matrix.removeRow(1);
+    expect([nameTypes(matrix), filter.toJSON().fields], "#2").toEqual([["dropdown"], ["country"]]);
+    expect(cell(matrix, 0, "name").choices.map((c: any) => c.value), "#3").toEqual(["country", "price"]);
+  });
+  test("Add field takes the last free field: every row's Field name becomes a text box; the rows stay the entries", () => {
+    const { filter, matrix } = createGrid({ targetQuestion: "m", fields: ["country"] });
+    expect(nameTypes(matrix), "#1").toEqual(["dropdown"]);
+    matrix.addRow();
+    expect([nameTypes(matrix), filter.toJSON().fields], "#2").toEqual([["text", "text"], ["country", "price"]]);
+    expect(matrix.visibleRows.map((r, i) => r.editingObj === filter.fields[i]), "#3").toEqual([true, true]);
+    expect(cell(matrix, 1, "name").value, "#4").toBe("price");
+  });
+  test("a name typed into a text box frees a field: dropdowns again", () => {
+    const { filter, matrix } = createGrid({ targetQuestion: "m", fields: ["country", "price"] });
+    expect(nameTypes(matrix), "#0").toEqual(["text", "text"]);
+    cell(matrix, 1, "name").value = "total";
+    expect([nameTypes(matrix), filter.toJSON().fields], "#1").toEqual([["dropdown", "dropdown"], ["country", "total"]]);
+    expect(cell(matrix, 1, "name").selectedItem.value, "#2").toBe("total");
   });
   test("Field title's placeholder: the title of the field, or the entry's name", () => {
     const { matrix } = createGrid({ targetQuestion: "m", fields: ["country", "city"] });
@@ -214,9 +260,9 @@ describe("Property grid: the Filter Control fields", () => {
     matrix.getTitleActions().filter((a: any) => a.id === "add-item")[0].action();
     expect(filter.fields.map((f: any) => f.name)).toEqual(["country", "price"]);
   });
-  test("with no target question the rows are the fields and Field name has nothing to pick", () => {
+  test("with no target question the rows are the fields and Field name, with nothing to pick, is a text box", () => {
     const { matrix } = createGrid({ fields: ["a"] });
-    expect([matrix.visibleRows.length, cell(matrix, 0, "name").choices.length]).toEqual([1, 0]);
+    expect([matrix.visibleRows.length, cell(matrix, 0, "name").getType(), cell(matrix, 0, "name").value]).toEqual([1, "text", "a"]);
   });
   test("Available operators are those the field takes, named as the logic tab names them", () => {
     const { filter, matrix } = createGrid({ targetQuestion: "m", fields: ["country", { name: "price", operators: ["greater"] }, "city"] });
@@ -348,9 +394,11 @@ describe("Property grid: the Filter Control fields of a new target", () => {
     detailPanelMode: "underRowSingle",
     detailElements: [{ type: "text", name: "project", title: "Project" }, { type: "boolean", name: "receipt", title: "Receipt" }] });
   const rowsOf = (creator: CreatorTester): QuestionMatrixDynamicModel => <QuestionMatrixDynamicModel>creator.propertyGrid.getQuestionByName("fields");
+  // What Field name shows: the picked item of a dropdown, the text of a text box (nothing to pick).
   const shown = (matrix: QuestionMatrixDynamicModel): Array<any> => matrix.visibleRows.map(r => {
-    const name = r.cells.filter(c => c.column.name === "name")[0].question;
-    return [r.editingObj && r.editingObj["name"], !!name.selectedItem && name.selectedItem.value];
+    const name: any = r.cells.filter(c => c.column.name === "name")[0].question;
+    const text = name.getType() === "dropdown" ? !!name.selectedItem && name.selectedItem.value : name.value;
+    return [r.editingObj && r.editingObj["name"], text];
   });
   test("a copy of the page: the copied filter switched to the other matrix shows that matrix's fields", () => {
     const creator = new CreatorTester();

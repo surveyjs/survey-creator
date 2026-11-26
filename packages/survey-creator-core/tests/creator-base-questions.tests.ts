@@ -2949,3 +2949,22 @@ test("Filter Control: a new Field name on fields left out", () => {
   creator.undo();
   expect(filter.toJSON().fields, "#2").toEqual(["country", "amount"]);
 });
+// Field name is a dropdown while a field of the target is free and a text box otherwise: changes from outside
+// the table (undo, a column of the question to filter) switch it too.
+const filterNameTypes = (matrix: QuestionMatrixDynamicModel): Array<string> =>
+  matrix.visibleRows.map(r => r.cells.filter(c => c.column.name === "name")[0].question.getType());
+test("Filter Control: undo of Add field that took the last free field brings back the dropdowns", () => {
+  const { creator, filter, matrix } = filterFieldsTable();
+  expect(filterNameTypes(matrix), "#1: note is free").toEqual(["dropdown", "dropdown"]);
+  matrix.addRow();
+  expect([filterNameTypes(matrix), filter.toJSON().fields], "#2").toEqual([["text", "text", "text"], ["country", "amount", "note"]]);
+  creator.undo();
+  expect([filterNameTypes(matrix), filter.toJSON().fields], "#3").toEqual([["dropdown", "dropdown"], ["country", "amount"]]);
+});
+test("Filter Control: a column added to the question to filter frees a field: Field name becomes a dropdown", () => {
+  const { creator, matrix } = filterFieldsTable();
+  matrix.addRow();
+  expect(filterNameTypes(matrix), "#1").toEqual(["text", "text", "text"]);
+  (<any>creator.survey.getQuestionByName("m")).addColumn("extra");
+  expect(filterNameTypes(matrix), "#2").toEqual(["dropdown", "dropdown", "dropdown"]);
+});

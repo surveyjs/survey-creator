@@ -811,6 +811,9 @@ export class PropertyGridEditorMatrixFilterPresets extends PropertyGridEditorMat
 // removed or moved. A control whose JSON leaves fields out filters by the visible fields of its target: the table
 // shows them as rows whose entries are not in fields (getDesignFieldEntries), and the first change writes those rows
 // into fields outside the undo history before it is made - its undo brings back that list (survey-library spec G).
+// Field name is a dropdown of field names while a field of the target is free - every row's choices are the free
+// fields and its own name - and a text box otherwise, in every row at once. The column changes its cell type after
+// the matrix's own add or remove, never in the middle of one: the rows are rebuilt by the change.
 const filterFieldsReleaseKey = "filterFieldsRelease";
 const filterFieldsSignatureKey = "filterFieldsSignature";
 const filterFieldsDesignEntriesKey = "filterFieldsDesignEntries";
@@ -818,6 +821,7 @@ const filterFieldsClearingKey = "filterFieldsClearing";
 const filterFieldsTargetKey = "filterFieldsTarget";
 const filterFieldsOptionsKey = "filterFieldsOptions";
 const filterFieldsDefiningKey = "filterFieldsDefining";
+const filterFieldsRowOperationKey = "filterFieldsRowOperation";
 export class PropertyGridEditorMatrixFilterFields extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type === "filterfield[]";
@@ -845,10 +849,13 @@ export class PropertyGridEditorMatrixFilterFields extends PropertyGridEditorMatr
     options: ISurveyCreatorOptions, propGridDefinition: ISurveyPropertyGridDefinition
   ): Array<any> {
     const res = super.getColumnsJSON(obj, prop, propNames, options, propGridDefinition);
+    const rows = typeof (<any>obj).getDesignFieldEntries === "function" ? (<any>obj).getDesignFieldEntries() : this.getFields(obj);
     res.forEach((column: any): void => {
       if (column.name === "name") {
-        column.cellType = "dropdown";
-        column.allowCustomChoices = true;
+        column.cellType = this.getNameCellType(obj, rows);
+        if (column.cellType === "dropdown") {
+          column.allowCustomChoices = true;
+        }
       }
     });
     return res;
@@ -867,6 +874,10 @@ export class PropertyGridEditorMatrixFilterFields extends PropertyGridEditorMatr
     // write refreshes in place: it is copied before.
     matrix.valueToDataCallback = (rows: Array<Base>): Array<Base> => {
       const list = (Array.isArray(rows) ? rows : []).filter((entry: Base): boolean => !!entry);
+      // Fewer rows: the table's own remove, which ends in onMatrixRowRemoved (a move keeps the count).
+      if (list.length < this.getRows(obj, matrix, false).length) {
+        matrix[filterFieldsRowOperationKey] = true;
+      }
       this.defineFields(obj, matrix);
       return list;
     };
@@ -902,18 +913,29 @@ export class PropertyGridEditorMatrixFilterFields extends PropertyGridEditorMatr
     const entry = options.row.editingObj;
     if (!entry) return;
     const question = options.cellQuestion;
-    if (options.columnName === "name") {
+    if (options.columnName === "name" && question.getType() === "dropdown") {
+      // An entry is named: a cleared Field name would leave an entry of no field.
+      question.allowClear = false;
       this.setNameChoices(obj, question, entry, this.getRows(obj, options.question, false));
     }
     if (options.columnName === "title") {
       question.placeholder = new ComputedUpdater<string>(() => this.getTitlePlaceholder(obj, entry));
     }
   }
+  // A new name: updateRows refreshes the rows and Field name with them (syncNameEditor).
   public onMatrixCellValueChanged(obj: Base, options: any): void {
     this.updateRows(obj, options.question);
-    if (options.columnName === "name") {
-      this.updateNameChoices(obj, options.question);
-    }
+  }
+  // The end of the table's own add or remove: Field name may change its cell type now.
+  public onMatrixRowAdded(obj: Base, options: any): void {
+    this.endRowOperation(obj, options.question);
+  }
+  public onMatrixRowRemoved(obj: Base, options: any): void {
+    this.endRowOperation(obj, options.question);
+  }
+  private endRowOperation(obj: Base, matrix: QuestionMatrixDynamicModel): void {
+    matrix[filterFieldsRowOperationKey] = false;
+    this.syncNameEditor(obj, matrix);
   }
   // The rows first: the matrix tells the added row by the rows it has built. A rendered table has built
   // them; the title's Add may come before.
@@ -925,6 +947,7 @@ export class PropertyGridEditorMatrixFilterFields extends PropertyGridEditorMatr
   protected createNewItem(matrix: QuestionMatrixDynamicModel, prop: JsonObjectProperty): Base {
     matrix.visibleRows.forEach(row => row.hideDetailPanel());
     const obj: Base = matrix.obj;
+    matrix[filterFieldsRowOperationKey] = true;
     this.defineFields(obj, matrix);
     const item = Serializer.createClass(prop.className);
     item.name = this.getFreeFieldName(obj) ||
@@ -984,13 +1007,14 @@ export class PropertyGridEditorMatrixFilterFields extends PropertyGridEditorMatr
     }
     return res;
   }
-  // Field name: every field of the target, a hidden one too, but those another row has taken - a second entry of
-  // a name is the table's duplicate error. A field of the record the target has no column for is the dropdown's
-  // own custom choice, as a typed name is: the dropdown makes one only while the survey loads its data.
+  // Field name: the names of the fields of the target - valueName, else name, a nested field's path - a hidden one
+  // too, but those another row has taken: a second entry of a name is the table's duplicate error. A field of the
+  // record the target has no column for is the dropdown's own custom choice, as a typed name is: the dropdown makes
+  // one only while the survey loads its data.
   private setNameChoices(obj: Base, question: any, entry: any, rows: Array<any>): void {
     const taken = rows.filter((row: any): boolean => row !== entry).map((row: any): string => row.name);
     const choices = this.getTargetFields(obj).filter((field: any): boolean => taken.indexOf(field.valueName) < 0)
-      .map((field: any): any => ({ value: field.valueName, text: this.getFieldTitle(field) }));
+      .map((field: any): any => ({ value: field.valueName, text: field.valueName }));
     const current = question.choices.map((choice: ItemValue): any => ({ value: choice.value, text: choice.text }));
     if (!Helpers.isTwoValueEquals(current, choices)) {
       question.choices = choices;
@@ -1005,10 +1029,34 @@ export class PropertyGridEditorMatrixFilterFields extends PropertyGridEditorMatr
     const rows = this.getRows(obj, matrix, false);
     built.forEach((row: any): void => {
       const cell = row.cells.filter((c: any): boolean => c.column.name === "name")[0];
-      if (!!cell && !!row.editingObj) {
+      if (!!cell && !!row.editingObj && cell.question.getType() === "dropdown") {
         this.setNameChoices(obj, cell.question, row.editingObj, rows);
       }
     });
+  }
+  // A field of the target no row names: then every row has something to pick besides its own name.
+  private hasFreeField(obj: Base, rows: Array<any>): boolean {
+    const taken = rows.map((row: any): string => row.name);
+    return this.getTargetFields(obj).some((field: any): boolean => taken.indexOf(field.valueName) < 0);
+  }
+  private getNameCellType(obj: Base, rows: Array<any>): string {
+    return this.hasFreeField(obj, rows) ? "dropdown" : "text";
+  }
+  // Field name as the rows are now: the other cell type (the column rebuilds the rows), or the choices anew.
+  // Not in the middle of the table's own add or remove (filterFieldsRowOperationKey): its end calls it.
+  private syncNameEditor(obj: Base, matrix: QuestionMatrixDynamicModel): void {
+    if (!matrix || matrix.isDisposed || !!matrix[filterFieldsRowOperationKey]) return;
+    const column = matrix.getColumnByName("name");
+    if (!column) return;
+    const cellType = this.getNameCellType(obj, this.getRows(obj, matrix, false));
+    if (column.cellType !== cellType) {
+      column.cellType = cellType;
+      if (cellType === "dropdown") {
+        (<any>column).allowCustomChoices = true;
+      }
+    } else {
+      this.updateNameChoices(obj, matrix);
+    }
   }
   // Field title's placeholder: the title of the field of the target the entry names, or the entry's name.
   private getTitlePlaceholder(obj: Base, entry: any): string {
@@ -1028,11 +1076,18 @@ export class PropertyGridEditorMatrixFilterFields extends PropertyGridEditorMatr
     const target = (<any>obj).targetQuestion;
     const isNewTarget = matrix[filterFieldsTargetKey] !== target;
     matrix[filterFieldsTargetKey] = target;
-    if (!force && !isNewTarget && this.getSignature(obj, rows) === matrix[filterFieldsSignatureKey]) return;
+    if (!force && !isNewTarget && this.getSignature(obj, rows) === matrix[filterFieldsSignatureKey]) {
+      // The same rows, but the target may have a field more or less (a column added or removed).
+      this.syncNameEditor(obj, matrix);
+      return;
+    }
     if (!force && (isNewTarget || !this.isOneRowChange(matrix, rows))) {
       this.rebuildRows(obj, matrix);
     } else {
       matrix.updateValueFromSurvey(this.getFields(obj));
+    }
+    if (!force) {
+      this.syncNameEditor(obj, matrix);
     }
   }
   // The matrix follows a live array by its objects: it keeps its rows for an array of the same length

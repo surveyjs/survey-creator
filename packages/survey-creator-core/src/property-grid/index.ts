@@ -196,6 +196,9 @@ export interface IPropertyGridEditor {
   onMatrixCellCreated?: (obj: Base, options: any) => void;
   onMatrixCellValidate?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
+  // The matrix has added or removed a row: called at the end of its add or remove.
+  onMatrixRowAdded?: (obj: Base, options: any) => void;
+  onMatrixRowRemoved?: (obj: Base, options: any) => void;
   onMatrixAllowRemoveRow?: (obj: Base, row: any) => boolean;
   onGetQuestionTitleActions?: (obj: Base, options: any, creator: ISurveyCreatorOptions) => void;
   onUpdateQuestionCssClasses?: (obj: Base, options: any) => void;
@@ -336,6 +339,18 @@ export var PropertyGridEditorCollection = {
       if (!!cellQuestion) {
         row.runCondition({ question: cellQuestion });
       }
+    }
+  },
+  onMatrixRowAdded(obj: Base, prop: JsonObjectProperty, options: any, creatorOptions?: ISurveyCreatorOptions) {
+    const res = this.getEditor(prop, undefined, creatorOptions);
+    if (!!res && !!res.onMatrixRowAdded) {
+      res.onMatrixRowAdded(options.question.obj, options);
+    }
+  },
+  onMatrixRowRemoved(obj: Base, prop: JsonObjectProperty, options: any, creatorOptions?: ISurveyCreatorOptions) {
+    const res = this.getEditor(prop, undefined, creatorOptions);
+    if (!!res && !!res.onMatrixRowRemoved) {
+      res.onMatrixRowRemoved(options.question.obj, options);
     }
   },
   onMatrixAllowRemoveRow(
@@ -1070,6 +1085,9 @@ export class PropertyGridModel {
     this.survey.onMatrixRowAdded.add((sender, options) => {
       this.onMatrixRowAdded(options);
     });
+    this.survey.onMatrixRowRemoved.add((sender, options) => {
+      PropertyGridEditorCollection.onMatrixRowRemoved(this.obj, (<any>options.question).property, options, this.options);
+    });
     this.survey.onGetMatrixRowActions.add((sender, options) => {
       this.onGetMatrixRowAction(options);
     });
@@ -1609,6 +1627,8 @@ export class PropertyGridModel {
         options.question.value
       );
     }
+    // Last: the editor may rebuild the matrix's rows, options.row among them.
+    PropertyGridEditorCollection.onMatrixRowAdded(this.obj, options.question.property, options, this.options);
   }
 }
 
