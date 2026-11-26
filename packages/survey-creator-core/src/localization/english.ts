@@ -2223,7 +2223,8 @@ export var enStrings = {
         loop: "Triggers form a loop through the values they set: {setRoots}.",
       },
       "cycle/value-write": {
-        self: "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all.",
+        self: "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs.",
+        copiesItself: "The {label} only copies the value it writes, so it never sets a value.",
         loop: "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in.",
       },
       "expression/unknown-choice": {

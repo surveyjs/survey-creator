@@ -4029,8 +4029,10 @@ export var grStrings = {
         loop: "Τα εναύσματα σχηματίζουν έναν βρόχο μέσω των τιμών που ορίζουν: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "Η {label} διαβάζει την τιμή που γράφει μόνη της - εκτελείται μόνο όταν αλλάζει μια άλλη τιμή, επομένως δεν εκτελείται ποτέ.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "Το {label} υπολογίζει την τιμή που γράφει από αυτήν την τιμή - κάθε εκτέλεση ξεκινά από το προηγούμενο αποτέλεσμα, οπότε η τιμή εξαρτάται από το πόσες φορές εκτελείται.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "Το {label} αντιγράφει μόνο την τιμή που γράφει, οπότε δεν ορίζει ποτέ τιμή.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Οι τιμές γράφονται σε βρόχο: {chain}. Κάθε εγγραφή εκτελεί ξανά τις εκφράσεις που τη διαβάζουν, επομένως οι τελικές τιμές εξαρτώνται από τη σειρά με την οποία απαντώνται οι ερωτήσεις."
       },

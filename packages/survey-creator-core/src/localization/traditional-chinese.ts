@@ -4030,8 +4030,10 @@ export var traditionalChineseTranslation = {
         loop: "觸發器會依照它們設定的值形成一個迴圈：{setRoots}。"
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} 會讀取它自己寫入的值——只有當另一個值改變時才會執行，所以根本不會執行。",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} 會根據該值本身計算它寫入的值——每次執行都從前一個結果開始，因此值取決於執行次數。",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} 只會複製它寫入的值，因此從不設定值。",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "數值以迴圈形式寫入：{chain}。每次寫入都會重跑讀取該題目的表達式，因此最終值取決於問題的回答順序。"
       },

@@ -4029,8 +4029,10 @@ export var ruStrings = {
         loop: "Триггеры образуют петлю через установленные ими значения: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} считывает то значение, которое записывает сам — он запускается только при изменении другого значения, поэтому вообще не запускается.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} вычисляет значение, которое он записывает из этого значения — каждый запуск начинается с предыдущего результата, поэтому значение зависит от того, сколько раз он выполняется.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} копирует только записанное им значение, поэтому никогда не устанавливает значение.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Значения записываются в цикле: {цепочка}. Каждая запись повторяет выражения, которые его читали, поэтому окончательные значения зависят от порядка ответов на вопросы."
       },

@@ -549,8 +549,48 @@ test("An expression that writes the value it reads names the properties it is bu
       { type: "text", name: "q1", setValueIf: "{q1} = 1", setValueExpression: "{q1} + 1" }
     ] }]
   }, "cycle/value-write")).toBe(
-    "The q1.setValueIf/setValueExpression reads the value it writes itself" +
-    " - it runs only when another value changes, so it never runs at all.");
+    "The q1.setValueIf/setValueExpression computes the value it writes from that value itself" +
+    " - each run starts from the previous result, so the value depends on how many times it runs.");
+});
+
+test("An expression that only copies the value it writes says it never sets one", () => {
+  expect(textOf({
+    pages: [{ name: "p1", elements: [
+      { type: "text", name: "q1", setValueExpression: "{q1}" }
+    ] }]
+  }, "cycle/value-write")).toBe(
+    "The q1.setValueExpression only copies the value it writes, so it never sets a value.");
+});
+
+test("A self-referencing fallback expression does not block leaving the JSON tab, Bug#12407", () => {
+  const creator = new CreatorTester({ showJSONEditorTab: true });
+  const plugin = <TabJsonEditorTextareaPlugin>creator.getPlugin("json");
+  creator.activeTab = "json";
+  plugin.model.text = JSON.stringify({
+    elements: [
+      { type: "text", name: "status" },
+      { type: "text", name: "label", defaultValueExpression: "{label} || 'n/a'" },
+      {
+        type: "text", name: "closedAt", visible: false,
+        setValueIf: "{status} = 'closed' and {closedAt} empty",
+        setValueExpression: "today()"
+      }
+    ],
+    calculatedValues: [
+      { name: "openedAt", expression: "{openedAt} || today()", includeIntoResult: true },
+      { name: "onlySelf", expression: "{onlySelf}" }
+    ],
+    clearInvisibleValues: "none"
+  }, null, 2);
+  plugin.model.processErrors(plugin.model.text);
+  // only the expression that reads nothing but itself is reported, and as a warning
+  const findings = plugin.model.linter.findings.map(f => [f.ruleId, f.severity, f.finding.path]);
+  expect(findings).toEqual([["cycle/value-write", "warning", "calculatedValues[1].expression"]]);
+  expect(plugin.model.linter.findings[0].text).toBe(
+    "The calculatedValue \"onlySelf\" only copies the value it writes, so it never sets a value.");
+  expect(plugin.model.allowingDeactivate()).toBe(true);
+  expect(creator.switchTab("designer")).toBeTruthy();
+  expect(creator.activeTab).toBe("designer");
 });
 
 test("A write loop across domains lists its members in order", () => {

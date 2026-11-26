@@ -4029,8 +4029,10 @@ export var htStrings = {
         loop: "Deklannche fòme yon bouk nan valè yo mete: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{etikèt} li valè li li tèt li - li kouri sèlman lè yon lòt valè chanje, kidonk li pa janm kouri ditou.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} la kalkile valè li ekri a soti nan valè sa a li menm - chak kouri kòmanse ak rezilta anvan an, kidonk valè a depann de konbyen fwa li kouri.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} la sèlman kopye valè li ekri a, kidonk li pa janm fikse yon valè.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "Valè yo ekri nan yon bouk: {chèn}. Chak ekri repete ekspresyon yo ki li li, kidonk valè final yo depann sou lòd la kesyon yo reponn nan."
       },

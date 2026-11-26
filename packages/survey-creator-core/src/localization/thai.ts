@@ -4029,8 +4029,10 @@ export const thStrings = {
         loop: "ทริกเกอร์จะสร้างลูปผ่านค่าที่ตั้งไว้: {setRoots}"
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "{label} จะอ่านค่าที่มันเขียนเอง - มันจะทํางานเฉพาะเมื่อมีค่าอื่นเปลี่ยนเท่านั้น ดังนั้นมันจึงไม่ทํางานเลย",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "{label} จะคํานวณค่าที่เขียนจากค่านั้นเอง - แต่ละรันจะเริ่มจากผลลัพธ์ก่อนหน้า ดังนั้นค่าจะขึ้นอยู่กับจํานวนครั้งที่รัน",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "{label} จะคัดลอกเฉพาะค่าที่เขียนเท่านั้น ดังนั้นจึงไม่เคยตั้งค่าค่าใด ๆ",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "ค่าจะถูกเขียนเป็นลูป: {chain}แต่ละครั้งที่เขียนจะรันนิพจน์ที่อ่านค่านั้นซ้ํา ดังนั้นค่าสุดท้ายจะขึ้นอยู่กับลําดับการตอบคําถาม"
       },

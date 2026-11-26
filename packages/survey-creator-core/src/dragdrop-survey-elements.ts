@@ -161,7 +161,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
   private createNewElement(json: any): IElement {
     var newElement = Serializer.createClass(json["type"]);
-    new JsonObject().toObject(json, newElement);
+    // Loaded before it is added to the survey: with the survey's own property defaults, an explicit value equal to the
+    // global default is kept
+    const propertyDefaults = this.survey?.getOwnPropertyDefaults();
+    new JsonObject().toObject(json, newElement, !!propertyDefaults ? { propertyDefaults: propertyDefaults } : undefined);
     return newElement;
   }
 

@@ -14,9 +14,9 @@ export class JsonErrorItemComponent extends BaseAngular<Action> {
     return this.model;
   }
 
-  fixError(event: Event) {
+  // the list cancels mousedown, which also cancels a text selection
+  onTitleMouseDown(event: Event) {
     event.stopPropagation();
-    this.model.data.fixError();
   }
 }
 

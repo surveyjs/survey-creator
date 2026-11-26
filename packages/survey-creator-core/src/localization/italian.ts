@@ -4029,8 +4029,10 @@ export var italianTranslation = {
         loop: "I trigger formano un ciclo attraverso i valori che impostano: {setRoots}."
       },
       "cycle/value-write": {
-        // [Auto-translated] "The {label} reads the value it writes itself - it runs only when another value changes, so it never runs at all."
-        self: "La {etichetta} legge il valore che scrive da sola - viene eseguita solo quando un altro valore cambia, quindi non viene mai eseguita.",
+        // [Auto-translated] "The {label} computes the value it writes from that value itself - each run starts from the previous result, so the value depends on how many times it runs."
+        self: "Il {label} calcola il valore che scrive da quel valore stesso - ogni esecuzione parte dal risultato precedente, quindi il valore dipende da quante volte viene eseguita.",
+        // [Auto-translated] "The {label} only copies the value it writes, so it never sets a value."
+        copiesItself: "Il {label} copia solo il valore che scrive, quindi non imposta mai un valore.",
         // [Auto-translated] "Values are written in a loop: {chain}. Each write reruns the expressions that read it, so the final values depend on the order the questions are answered in."
         loop: "I valori sono scritti in un ciclo: {chain}. Ogni scrittura riesegue le espressioni che la leggono, quindi i valori finali dipendono dall'ordine in cui vengono risposte alle domande."
       },
