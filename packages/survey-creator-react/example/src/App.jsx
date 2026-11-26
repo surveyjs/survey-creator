@@ -19,8 +19,16 @@ function App() {
             expandCollapseButtonVisibility: "never",
             showLogicTab: true,
             showTranslationTab: true,
-            showJSONEditorTab: false
+            showJSONEditorTab: true
         })
+        creatorInstance.activeTab = "json"
+        const jsonTab = creatorInstance.getPlugin("json")
+        jsonTab.model.text = JSON.stringify({
+            elements: [
+                { type: "text", name: "q1", incorrectProp: "abc" },
+                { type: "text", name: "q1" }
+            ]
+        }, null, 2)
 
         window.creator = creatorInstance
         new UIPresetEditor(creatorInstance)
