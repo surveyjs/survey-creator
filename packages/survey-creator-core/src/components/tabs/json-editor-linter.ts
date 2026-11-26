@@ -392,7 +392,7 @@ function getSuffixes(finding: ILintFinding, template: string): Array<string> {
     res.push(suffix("knownVariablesHint"));
   }
   if (!!finding.hint) {
-    res.push(formatTemplate("hints." + finding.hint.reason, finding.hint.name));
+    res.push(formatTemplate("hints." + finding.hint.reason, finding.hint.name, finding.hint.variable));
   }
   if (finding.ruleId === "reference/unknown" && data.refKind === "binding") {
     res.push(suffix("inBindings"));

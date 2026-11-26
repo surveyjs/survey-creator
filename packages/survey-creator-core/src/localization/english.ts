@@ -2365,8 +2365,10 @@ export var enStrings = {
         emptySet: "{ref} is asked to be one of no value at all",
       },
     },
-    // Scope hints of reference/unknown. {0} is the expression variable the hint is about.
+    // Scope hints of reference/unknown. {0} is the expression variable the hint is about;
+    // questionVariableName also gets {1}, the variable that reads the question from where {0} was written.
     hints: {
+      questionVariableName: "\"{0}\" is a question of another data scope - from here, reference it as \"{1}\".",
       rowScopePrefix: "\"{0}.\" references are only available inside a matrix cell or a matrix detail panel.",
       rowScopeStandalone: "\"{0}\" is only available inside a matrix cell or a matrix detail panel.",
       panelScopePrefix: "\"{0}.\" references are only available inside a dynamic panel or a panel container.",
