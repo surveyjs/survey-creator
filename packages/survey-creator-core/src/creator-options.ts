@@ -1,4 +1,5 @@
 import { ISurveyVariablePresets } from "survey-core";
+import type { ISurveyOptions } from "survey-core";
 
 /**
  * Survey Creator configuration. Pass it as an argument to the `SurveyCreator`/`SurveyCreatorModel` constructor:
@@ -704,4 +705,11 @@ export interface ICreatorOptions {
    * @since 3.1.1
    */
   variablePresets?: ISurveyVariablePresets;
+  /**
+   * Specifies runtime settings, property defaults, and event handlers for the survey being edited.
+   *
+   * When rendering the survey, pass the same [`ISurveyOptions`](https://surveyjs.io/form-library/documentation/api-reference/isurveyoptions) object as the second argument to the [`SurveyModel`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model) constructor.
+   * @see [SurveyCreatorModel.surveyOptions](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#surveyOptions)
+   */
+  surveyOptions?: ISurveyOptions;
 }

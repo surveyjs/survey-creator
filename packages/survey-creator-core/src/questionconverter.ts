@@ -83,7 +83,10 @@ export class QuestionConverter {
       }
     }
     QuestionConverter.updateJSON(json, convertToClass, obj.getType());
-    newQuestion.fromJSON(json);
+    // The new question loads before it replaces obj: with the survey's own property defaults, an explicit value equal
+    // to the global default is kept
+    const propertyDefaults = obj.survey?.getOwnPropertyDefaults?.();
+    newQuestion.fromJSON(json, !!propertyDefaults ? { propertyDefaults: propertyDefaults } : undefined);
     QuestionConverter.removeValidators(newQuestion);
     let panel = <PanelModelBase>obj.parent;
     let index = panel.elements.indexOf(obj);
