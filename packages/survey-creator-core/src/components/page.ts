@@ -352,8 +352,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   private addGhostPage = (selectCurrentPage: boolean = true) => {
     const currentPage = this.page;
     if (this.isGhost) {
-      // The title editor may already have promoted this page. Adding it again
-      // pushes the same page into survey.pages a second time.
       const alreadyAdded = this.creator.survey.pages.indexOf(currentPage) > -1;
       if (!alreadyAdded) {
         const addedPage = !!this.creator.addPage(currentPage, selectCurrentPage, () => {

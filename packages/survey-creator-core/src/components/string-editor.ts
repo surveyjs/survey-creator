@@ -425,9 +425,6 @@ export class StringEditorViewModelBase extends Base {
     if (this.locString.text != clearedText &&
       !(!this.locString.text && clearedText == this.locString.calculatedText)) {
       if (!this.errorText) {
-        // Blur runs before click. Committing a ghost page title here promotes the page
-        // and replaces the Add Question button, so the click never adds a question.
-        // Keep the text until after that click.
         if (this.isFocusMovingToAddQuestionButton(event)) {
           const text = clearedText;
           const target = event?.target;
