@@ -2954,12 +2954,13 @@ export class SurveyCreatorModel extends Base
   }
   private replaceFilterFields(filter: any, oldTarget: string): void {
     if (!filter.isFieldsDefined && !!oldTarget) {
-      this.runWithoutUndoRedo(() => { filter.fields = this.getFilterFieldNames(filter, oldTarget); });
+      this.runWithoutUndoRedo(() => { filter.fields = this.getFilterFieldEntries(filter, oldTarget); });
     }
-    filter.fields = !!filter.targetQuestion ? this.getFilterFieldNames(filter, filter.targetQuestion) : [];
+    filter.fields = !!filter.targetQuestion ? this.getFilterFieldEntries(filter, filter.targetQuestion) : [];
   }
-  private getFilterFieldNames(filter: any, target: string): Array<string> {
-    return filter.getTargetFilterFields(target, true).map((field: any): string => field.valueName);
+  // An entry per visible field of the target, named by its valueName: definitions the setter makes entries of.
+  private getFilterFieldEntries(filter: any, target: string): Array<any> {
+    return filter.getTargetFilterFields(target, true).map((field: any): any => ({ name: field.valueName }));
   }
   private runWithoutUndoRedo(func: () => void): void {
     const ctrl = this.undoRedoController;

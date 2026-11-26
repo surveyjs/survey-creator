@@ -6,7 +6,7 @@ const json = {
   elements: [
     {
       type: "filter", name: "filter1", targetQuestion: "products", showSearchBar: true, searchFields: ["name"], defaultPreset: "cheap",
-      fields: [{ name: "price", title: "Unit price", operators: ["less", "greater"] }, "name", { name: "category", showInQuickFilters: false }],
+      fields: [{ name: "price", title: "Unit price", operators: ["less", "greater"] }, { name: "name" }, { name: "category", showInQuickFilters: false }],
       presets: [
         { name: "cheap", title: "Cheap", expression: "{price} < 20" },
         { name: "out-of-stock", title: "Out of stock", expression: "{stock} = 0" }
