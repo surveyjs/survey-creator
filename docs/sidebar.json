@@ -43,6 +43,10 @@
       "Title": "Survey Customization"
     },
     {
+      "Name": "integrate-monaco-or-ace-editor-into-survey-creator",
+      "Title": "Integrate Third-Party JSON Editors"
+    },
+    {
       "Name": "ui-preset-editor",
       "Title": "UI Preset Editor"
     },

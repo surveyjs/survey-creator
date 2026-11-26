@@ -608,6 +608,16 @@ Default value: `false`
 
 **Related APIs:** [`clearTranslationsOnSourceTextChange`](#clearTranslationsOnSourceTextChange)
 
+### `surveyOptions`
+
+**Type**: `ISurveyOptions`
+
+Specifies runtime settings, property defaults, and event handlers for the survey being edited.
+
+When rendering the survey, pass the same [`ISurveyOptions`](https://surveyjs.io/form-library/documentation/api-reference/isurveyoptions) object as the second argument to the [`SurveyModel`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model) constructor.
+
+**Related APIs:** [`SurveyCreatorModel.surveyOptions`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#surveyOptions)
+
 ### `useElementTitles`
 
 **Type**: `boolean`

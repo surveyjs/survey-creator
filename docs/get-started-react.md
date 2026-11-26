@@ -647,38 +647,11 @@ export default function SurveyCreator() {
 
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/react (linkStyle))
 
-## (Optional) Enable Ace Editor in the JSON Editor Tab
+<a id="optional-enable-ace-editor-in-the-json-editor-tab"></a>
 
-The JSON Editor tab enables users to edit survey JSON schemas as text. To make the editing process more convenient, you can integrate the <a href="https://ace.c9.io/" target="_blank">Ace</a> code editor. Install the <a href="https://www.npmjs.com/package/ace-builds" target="_blank">`ace-builds`</a> package to add Ace to your project:
+## (Optional) Enhance the JSON Editor Tab
 
-```sh
-npm install ace-builds
-```
-
-Import Ace and required extensions in a React component that renders Survey Creator. For instance, the following code imports the extensions that enable the Find/Replace dialog in Ace and add support for the dark theme:
-
-```js
-// components/SurveyCreator.tsx
-// ...
-import "ace-builds/src-noconflict/ace";
-import "ace-builds/src-noconflict/ext-searchbox";
-import "ace-builds/src-noconflict/theme-clouds_midnight";
-// ...
-```
-
-To enable code highlighting, set the path to the directory containing the `ace.js` script using the `AceJsonEditorModel.aceBasePath` property. If you host `ace.js` on your server, specify your server path. If you use a CDN or installed Ace via npm, you can use the following path:
-
-```js
-// components/SurveyCreator.tsx
-// ...
-import { AceJsonEditorModel } from "survey-creator-core";
-AceJsonEditorModel.aceBasePath = "https://unpkg.com/ace-builds/src-min-noconflict/";
-// ...
-```
-
-[View Demo](/survey-creator/examples/ace-editor-integration/reactjs (linkStyle))
-
-[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/react (linkStyle))
+You can integrate Monaco or Ace into the JSON Editor tab to provide syntax highlighting and other code editing features. For setup instructions, see [Integrate Third-Party JSON Editors](/survey-creator/documentation/integrate-monaco-or-ace-editor-into-survey-creator).
 
 ## Further Reading
 

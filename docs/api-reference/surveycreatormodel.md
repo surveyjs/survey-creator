@@ -748,6 +748,16 @@ A [survey](https://surveyjs.io/form-library/documentation/api-reference/survey-d
 
 **Related APIs:** [`onSurveyInstanceCreated`](#onSurveyInstanceCreated)
 
+### `surveyOptions`
+
+**Type**: `ISurveyOptions`
+
+Specifies runtime settings, property defaults, and event handlers for the survey being edited.
+
+Changes to `surveyOptions` apply to survey models created afterward. Assign [`creator.JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) again to recreate the Designer survey with the updated options.
+
+When rendering the survey with Form Library, pass the same [`ISurveyOptions`](https://surveyjs.io/form-library/documentation/api-reference/isurveyoptions) object to the `SurveyModel` constructor.
+
 ### `syncSaveButtons`
 
 **Type**: `boolean`
