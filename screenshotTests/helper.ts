@@ -3,6 +3,36 @@ import { test, expect } from "../e2e/helper";
 
 export * from "../e2e/helper";
 
+// The etalons were taken before datetimepicker joined the toolbox.
+const screenshotQuestionTypes = [
+  "radiogroup", "rating", "slider", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking",
+  "text", "comment", "multipletext",
+  "panel", "paneldynamic",
+  "matrix", "matrixdropdown", "matrixdynamic",
+  "html", "expression", "image", "signaturepad", "filter"
+];
+
+export async function useScreenshotQuestionTypes(page: Page): Promise<void> {
+  await page.waitForFunction(() => typeof window["updateCreatorModel"] === "function");
+  await page.evaluate((questionTypes) => {
+    window["updateCreatorModel"]({
+      expandCollapseButtonVisibility: "never",
+      showLogicTab: true,
+      showTranslationTab: true,
+      questionTypes
+    }, {});
+    const creator = window["creator"];
+    creator.tabResponsivenessMode = "menu";
+    creator.animationEnabled = false;
+    creator.showOneCategoryInPropertyGrid = false;
+    creator.allowZoom = false;
+  }, screenshotQuestionTypes);
+  await page.waitForFunction(() => {
+    const items = window["creator"]?.toolbox?.items;
+    return !!items && !items.some((item: { name: string }) => item.name === "datetimepicker");
+  });
+}
+
 export const setOptions = async (page, options) => {
   await page.waitForFunction(() => !!window["creator"]);
   await page.evaluate((options) => {

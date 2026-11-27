@@ -36,6 +36,7 @@ test("Regional format is shown in its own category", () => {
     "locale",
     "datePattern",
     "timePattern",
+    "firstDayOfWeek",
     "decimalSeparator",
     "thousandsSeparator",
     "currencySymbol",

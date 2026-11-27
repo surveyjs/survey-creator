@@ -36,12 +36,15 @@
     SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
     SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
     SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
+    const setupCreator = (creator) => {
+      creator.tabResponsivenessMode = "menu";
+      creator["animationEnabled"] = false;
+      creator.showOneCategoryInPropertyGrid = true;
+      creator.allowZoom = true;
+    };
     const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
     window.creator = creator;
-    creator.tabResponsivenessMode = "menu";
-    creator["animationEnabled"] = false;
-    creator.showOneCategoryInPropertyGrid = true;
-    creator.allowZoom = true;
+    setupCreator(creator);
 
     class SurveyCreatorRenderComponent extends React.Component {
       constructor(props) {
@@ -52,10 +55,7 @@
           const creator = new SurveyCreator.SurveyCreator(options);
           creator.JSON = json;
           this.setState({ creator });
-          creator.tabResponsivenessMode = "menu";
-          creator["animationEnabled"] = false;
-          creator.showOneCategoryInPropertyGrid = false;
-          creator.allowZoom = false;
+          setupCreator(creator);
           window.creator = creator;
         }
       }

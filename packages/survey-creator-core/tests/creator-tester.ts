@@ -7,6 +7,8 @@ import { QuestionLinkValueModel } from "../src/components/link-value";
 
 const dummyQuestion = new QuestionLinkValueModel("q1");
 
+export { toolboxQuestionTypeCount } from "./toolbox-question-type-count";
+
 export class CreatorTester extends SurveyCreatorModel {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);

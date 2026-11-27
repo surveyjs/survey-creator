@@ -400,14 +400,14 @@ export class QuestionToolbox
   static defaultItemGroupComponent = "svc-toolbox-item-group";
   static defaultCategories = {
     choice: ["radiogroup", "rating", "slider", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking"],
-    text: ["text", "comment", "multipletext"],
+    text: ["text", "comment", "multipletext", "datetimepicker"],
     containers: ["panel", "paneldynamic"],
     matrix: ["matrix", "matrixdropdown", "matrixdynamic"],
     misc: ["html", "expression", "image", "signaturepad", "filter"]
   };
   private _orderedQuestions = [
     "radiogroup", "rating", "slider", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking",
-    "text", "comment", "multipletext",
+    "text", "comment", "multipletext", "datetimepicker",
     "panel", "paneldynamic",
     "matrix", "matrixdropdown", "matrixdynamic",
     "html", "expression", "image", "signaturepad", "filter"

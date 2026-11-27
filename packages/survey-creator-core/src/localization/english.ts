@@ -41,6 +41,7 @@ export var enStrings = {
     rating: "Rating Scale",
     slider: "Slider",
     text: "Single-Line Input",
+    datetimepicker: "Date and Time",
     boolean: "Yes/No (Boolean)",
     expression: "Expression (read-only)",
     signaturepad: "Signature",
@@ -516,6 +517,7 @@ export var enStrings = {
     regionalformat: {
       locale: "Region",
       datePattern: "Date pattern",
+      firstDayOfWeek: "First day of the week",
       timePattern: "Time pattern",
       decimalSeparator: "Decimal separator",
       thousandsSeparator: "Thousands separator",
@@ -528,6 +530,23 @@ export var enStrings = {
     datetimemask: {
       min: "Minimum value",
       max: "Maximum value"
+    },
+    datetimepicker: {
+      pickerType: "Picker type",
+      range: "Range selection",
+      min: "Min",
+      max: "Max",
+      minValueExpression: "Minimum value expression",
+      maxValueExpression: "Maximum value expression",
+      placeholder: "Placeholder text",
+      startPlaceholder: "Start date placeholder",
+      endPlaceholder: "End date placeholder",
+      datePattern: "Date pattern",
+      firstDayOfWeek: "First day of the week",
+      allowClear: "Show the Clear button",
+      minErrorText: "\"Value is below minimum\" error message",
+      maxErrorText: "\"Value exceeds maximum\" error message",
+      rangeErrorText: "\"Invalid range\" error message"
     },
     numericmask: {
       allowNegativeValues: "Allow negative values",
@@ -1552,6 +1571,9 @@ export var enStrings = {
     },
     datetimemask: {
       pattern: "Ex.: mm/dd/yyyy HH:MM:ss"
+    },
+    datetimepicker: {
+      datePattern: "Ex.: mm/dd/yyyy"
     },
     panelbase: {
       questionTitleWidth: "Ex.: 200px"

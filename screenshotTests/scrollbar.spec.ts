@@ -1,4 +1,4 @@
-import { url, compareScreenshot, test, setJSON } from "./helper";
+import { url, compareScreenshot, test, setJSON, useScreenshotQuestionTypes } from "./helper";
 
 const title = "Sidebar Screenshot";
 
@@ -8,6 +8,7 @@ test.describe(title, () => {
   });
 
   test("check scrollbars", async ({ page }) => {
+    await useScreenshotQuestionTypes(page);
     await page.setViewportSize({ width: 1920, height: 900 });
 
     const json = {

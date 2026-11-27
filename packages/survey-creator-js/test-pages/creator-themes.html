@@ -34,11 +34,14 @@
   SurveyCreatorCore.registerSurveyTheme(SurveyTheme);
     SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
   SurveyCreatorCore.registerCreatorTheme(SurveyTheme);
+  const setupCreator = (creator) => {
+    creator.tabResponsivenessMode = "menu";
+    creator["animationEnabled"] = false;
+    creator.showOneCategoryInPropertyGrid = true;
+    creator.allowZoom = true;
+  };
   const creator = new SurveyCreator.SurveyCreator({ expandCollapseButtonVisibility: "never", showLogicTab: true, showTranslationTab: true });
-  creator.tabResponsivenessMode = "menu";
-  creator["animationEnabled"] = false;
-  creator.showOneCategoryInPropertyGrid = true;
-  creator.allowZoom = true;
+  setupCreator(creator);
   window.creator = creator;
 
   class SurveyCreatorRenderComponent extends SurveyUI.Component {
@@ -50,10 +53,7 @@
         const creator = new SurveyCreator.SurveyCreator(options);
         creator.JSON = json;
         this.setState({ creator });
-        creator.tabResponsivenessMode = "menu";
-        creator["animationEnabled"] = false;
-        creator.showOneCategoryInPropertyGrid = true;
-        creator.allowZoom = true;
+        setupCreator(creator);
         window.creator = creator;
       }
     }

@@ -1,4 +1,5 @@
 import { urlPresets, test, expect, showPresets, doDragDrop, showCreatorSettings, loadCreatorLocales } from "./helper";
+import { toolboxQuestionTypeCount } from "../packages/survey-creator-core/tests/toolbox-question-type-count";
 
 const title = "Presets";
 async function getRowsInputValues(matrix: any) {
@@ -133,11 +134,11 @@ test.describe(title, () => {
 
     await hidden.getByRole("button", { name: "More" }).nth(0).click();
     await hidden.getByRole("menuitem", { name: "Text Input Questions" }).locator("span").click();
-    expect((await getToolboxTexts(page)).slice(9, 13)).toEqual(["Single-Line Input", "Long Text", "Multiple Textboxes", "Slider"]);
+    expect((await getToolboxTexts(page)).slice(9, 14)).toEqual(["Single-Line Input", "Long Text", "Multiple Textboxes", "Date and Time", "Slider"]);
 
     await items.getByRole("button", { name: "Collapse" }).click();
     await items.getByRole("button", { name: "Delete" }).nth(2).click();
-    expect((await getToolboxTexts(page)).slice(12, 14)).toEqual(["Slider", "Single-Select Matrix"]);
+    expect((await getToolboxTexts(page)).slice(13, 15)).toEqual(["Slider", "Single-Select Matrix"]);
 
     await hidden.getByRole("button", { name: "More" }).last().click();
     await hidden.getByText("Move to new category").click();
@@ -152,7 +153,7 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "Title", exact: true }).fill("Containers2");
     await page.getByRole("button", { name: "Apply" }).click();
     expect(await getRowsInputValues(items)).toEqual(["Choice Questions", "Text Input Questions", "Matrix Questions", "Misc", "Containers2"]);
-    expect((await getToolboxTexts(page)).slice(21, 22)).toEqual(["Dynamic Panel"]);
+    expect((await getToolboxTexts(page)).slice(22, 23)).toEqual(["Dynamic Panel"]);
 
   });
 
@@ -190,7 +191,7 @@ test.describe(title, () => {
     await items.getByRole("row", { name: "Text Input Questions" }).getByTitle("Expand").click();
     await doDragDrop({ page, element: hidden.getByRole("row", { name: "Slider" }).locator(".sps-drag-element__svg"), target: items.getByRole("row", { name: "Multiple Textboxes" }), options: { targetPosition: { x: 25, y: 25 } } });
 
-    expect((await getToolboxTexts(page)).slice(9, 13)).toEqual(["Single-Line Input", "Long Text", "Slider", "Multiple Textboxes"]);
+    expect((await getToolboxTexts(page)).slice(9, 14)).toEqual(["Single-Line Input", "Long Text", "Slider", "Multiple Textboxes", "Date and Time"]);
 
     await doDragDrop({ page, element: items.getByRole("row", { name: "Long Text" }).locator(".sps-drag-element__svg"), target: items.getByRole("row", { name: "Ranking" }), options: { targetPosition: { x: 5, y: 5 } } });
     expect((await getToolboxTexts(page)).slice(7, 12)).toEqual(["Image Picker", "Long Text", "Ranking", "Single-Line Input", "Slider"]);
@@ -258,8 +259,8 @@ test.describe(title, () => {
     await page.getByRole("textbox", { name: "JSON object to apply when users select this toolbox item", exact: true }).blur();
     await page.getByRole("button", { name: "Apply" }).click();
     expect(await items.locator(".sd-table__cell-action--icon-action svg use").filter({ visible: true }).nth(1).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
-    expect(await page.locator(".svc-toolbox__item-title").filter({ visible: true }).nth(23)).toHaveText("Custom 1");
-    expect(await page.locator(".svc-toolbox__item").filter({ visible: true }).nth(23).locator("svg use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
+    expect(await page.locator(".svc-toolbox__item-title").filter({ visible: true }).nth(toolboxQuestionTypeCount)).toHaveText("Custom 1");
+    expect(await page.locator(".svc-toolbox__item").filter({ visible: true }).nth(toolboxQuestionTypeCount).locator("svg use").nth(0).getAttribute("xlink:href")).toBe("#icon-arrowleft-16x16");
 
     await hidden.getByRole("button", { name: "Add new item" }).click();
     await expect(page.getByRole("textbox", { name: "Name", exact: true })).toBeFocused();
