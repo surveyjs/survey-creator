@@ -89,8 +89,8 @@ test("grid view: activate creates the grid model, no survey copies, toolbar and 
   expect(model.settingsSurvey.getQuestionByName("targetLocale").value).toBe("de");
   expect(creator.toolbar.getActionById("svc-translation-filter-page").visible).toBeTruthy();
   expect(creator.toolbar.getActionById("svc-translation-show-all-strings").visible).toBeTruthy();
-  expect(creator.toolbar.getActionById("svc-translation-import").visible).toBeFalsy();
-  expect(creator.toolbar.getActionById("svc-translation-export").visible).toBeFalsy();
+  expect(creator.toolbar.getActionById("svc-translation-import")).toBeFalsy();
+  expect(creator.toolbar.getActionById("svc-translation-export")).toBeFalsy();
   expect(creator.toolbar.getActionById("svd-translation-merge_locale_withdefault").visible).toBeFalsy();
   // The locale selectors and the view switcher live in the property grid, not in the toolbar.
   expect(creator.toolbar.getActionById("svc-translation-source-locale")).toBeFalsy();

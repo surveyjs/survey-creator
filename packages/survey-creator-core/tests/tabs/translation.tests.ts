@@ -58,8 +58,9 @@ test("settingsSurvey layout", () => {
     ]
   });
   const translation = new Translation(survey);
-  expect(translation.settingsSurvey.getAllPanels()).toHaveLength(0);
-  expect(translation.settingsSurvey.getAllQuestions()).toHaveLength(1);
+  // The languages matrix and the Actions group (its caption and the CSV buttons).
+  expect(translation.settingsSurvey.getAllPanels().map(panel => panel.name)).toEqual(["translationActions"]);
+  expect(translation.settingsSurvey.getAllQuestions().map(q => q.name)).toEqual(["locales", "translationActionsCaption"]);
   const question = <QuestionMatrixDynamicModel>translation.settingsSurvey.getQuestionByName("locales");
   expect(question.title).toBe("Languages");
   expect(question.showHeader).toBeFalsy();
@@ -575,7 +576,8 @@ test("Actions mode small", () => {
   const creator = new CreatorTester();
   const tabTranslation = new TabTranslationPlugin(creator);
   const actions = tabTranslation.createActions();
-  expect(actions.length).toBe(5);
+  // The page and strings filters and the merge action; the CSV actions are side panel buttons.
+  expect(actions.length).toBe(3);
   actions.forEach(action => expect(action.mode).toBe("small"));
 });
 
@@ -2592,8 +2594,49 @@ test("Creator read-only", (): any => {
   const translation = tabTranslationPlugin.model;
   expect(translation.stringsSurvey.mode).toBe("display");
   expect(translation.settingsSurvey.mode).toBe("display");
-  const action = creator.toolbar.getActionById("svc-translation-import");
+  const action = translation.getCsvActions().filter(item => item.id === "svc-translation-import-csv")[0];
   expect(action.enabled).toBeFalsy();
+});
+test("Side panel Actions group with the CSV buttons, no CSV actions in the toolbar", (): any => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1", title: { default: "question 1", de: "question de" } }]
+  };
+  creator.activeTab = "translation";
+  expect(creator.toolbar.getActionById("svc-translation-import")).toBeFalsy();
+  expect(creator.toolbar.getActionById("svc-translation-export")).toBeFalsy();
+  const translation: Translation = creator.getPlugin("translation").model;
+  const survey = translation.settingsSurvey;
+  expect(survey.getAllQuestions().map(q => q.name)).toEqual(["locales", "translationActionsCaption"]);
+  expect((<any>survey.getQuestionByName("translationActionsCaption")).html).toBe("Actions");
+  const panel = <any>survey.getPanelByName("translationActions");
+  expect(panel.getContainerCss()).toContain("st-language-settings__group");
+  const toolbar = panel.getFooterToolbar();
+  expect(toolbar.actions.map((action: any) => action.id)).toEqual(["svc-translation-import-csv", "svc-translation-download-csv"]);
+  expect(toolbar.actions.map((action: any) => action.title)).toEqual(["Import from CSV", "Download as CSV"]);
+  expect(toolbar.actions[0].getActionBarItemCss()).toContain("sd-action--neutral sd-action--secondary sd-action--medium");
+
+  let exported = false;
+  let imported = false;
+  translation.exportToCSVFileUI = (): void => { exported = true; };
+  translation.importFromCSVFileDOM = (): void => { imported = true; };
+  toolbar.actions[1].action();
+  toolbar.actions[0].action();
+  expect(exported).toBeTruthy();
+  expect(imported).toBeTruthy();
+
+  // Import follows the creator read-only state while the tab is open.
+  expect(toolbar.actions[0].enabled).toBeTruthy();
+  creator.readOnly = true;
+  expect(toolbar.actions[0].enabled).toBeFalsy();
+  creator.readOnly = false;
+  expect(toolbar.actions[0].enabled).toBeTruthy();
+
+  // The disposed model stops following it.
+  const importAction = toolbar.actions[0];
+  creator.activeTab = "designer";
+  creator.readOnly = true;
+  expect(importAction.enabled).toBeTruthy();
 });
 test("onTranslationStringVisibility for imageLink, Issue #5734", (): void => {
   const creator = new CreatorTester();

@@ -95,15 +95,9 @@ test("pages dropdown: no 'All Pages', real pages only, first page preselected; s
   expect(getSelectedListItem(creator, "svc-translation-filter-page").id).toBe("page1");
   expect(creator.toolbar.getActionById("svc-translation-show-all-strings").visible).toBeFalsy();
   expect(creator.toolbar.getActionById("svd-translation-merge_locale_withdefault").visible).toBeFalsy();
-  // The CSV actions and the translate dialog are buttons of the side panel in this mode; the
-  // multiple-languages mode keeps its toolbar.
-  const classicCreator = new CreatorTester({ showTranslationTab: true });
-  classicCreator.JSON = JSON.parse(JSON.stringify(sideBySideJSON));
-  classicCreator.activeTab = "translation";
-  expect(classicCreator.toolbar.getActionById("svc-translation-import").visible).toBeTruthy();
-  expect(classicCreator.toolbar.getActionById("svc-translation-export").visible).toBeTruthy();
-  expect(creator.toolbar.getActionById("svc-translation-import").visible).toBeFalsy();
-  expect(creator.toolbar.getActionById("svc-translation-export").visible).toBeFalsy();
+  // The CSV actions and the translate dialog are buttons of the side panel.
+  expect(creator.toolbar.getActionById("svc-translation-import")).toBeFalsy();
+  expect(creator.toolbar.getActionById("svc-translation-export")).toBeFalsy();
   expect(creator.toolbar.getActionById("svc-translation-dialog")).toBeFalsy();
   // The locale selectors and the view switcher live in the property grid, not in the toolbar.
   expect(creator.toolbar.getActionById("svc-translation-source-locale")).toBeFalsy();

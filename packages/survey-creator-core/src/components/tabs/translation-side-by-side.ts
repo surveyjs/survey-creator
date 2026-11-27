@@ -20,7 +20,8 @@ import { TranslationTable } from "./translation-table";
 import { TranslationUntranslatedStrings, getUntranslatedTargetPlaceholder } from "./translation-untranslated-strings";
 import {
   TranslationBase, TranslationGroup, TranslationItem,
-  runItemsMachineTranslation
+  runItemsMachineTranslation, createTranslationPanelButton, escapeTranslationHtmlText,
+  getTranslationActionsPanelJSON, getTranslationPanelButtonAppearance, setupTranslationButtonsPanel
 } from "./translation";
 
 // A non-breaking space: rendered instead of an empty header string of the source pane to keep
@@ -67,22 +68,10 @@ export function getTranslationLocaleProgress(item: any): string {
 }
 
 // The side panel below the language dropdowns (see getSideBySideSettingsSurveyJSON): a panel with
-// the progress text and the translation buttons in its footer, then a panel with the "Actions"
-// caption and the CSV buttons in its footer. A panel is the one survey element that renders a row
-// of actions as buttons; it needs a visible element to be shown, which is the text above its buttons.
+// the progress text and the translation buttons in its footer, then the "Actions" group with the
+// CSV buttons that the standard mode has as well (see TranslationBase.setupCsvActionsPanel).
 const translationProgressQuestionName = "translationProgress";
 const translationButtonsPanelName = "translationButtons";
-const translationActionsPanelName = "translationActions";
-const translationActionsCaptionName = "translationActionsCaption";
-// The look of the side panel buttons: survey-core's medium actions (48px high), stretched to the
-// panel width by translation.scss.
-const panelButtonAppearance = (style: "brand" | "neutral", mode: "primary" | "secondary"): IActionAppearance =>
-  ({ style: style, mode: mode, size: "medium" });
-// The key of the creator readOnly subscription (see getSettingsActions).
-const readOnlyHandlerKey = "svc-translation-settings-actions";
-function escapeHtmlText(text: string): string {
-  return (text || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
 
 // The translation state of a target-pane element for the current target language:
 // "none" - no used strings with a stored text (nothing to translate), "untranslated" - at
@@ -247,44 +236,16 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
           // of its elements is.
           elements: [{ type: "html", name: translationProgressQuestionName }]
         },
-        {
-          type: "panel",
-          name: translationActionsPanelName,
-          // An html question has no title, so the caption is its text.
-          elements: [{ type: "html", name: translationActionsCaptionName }]
-        }
+        getTranslationActionsPanelJSON()
       ]
     };
   }
-  // The two panels of the side panel render their buttons as their footer actions. The texts of the
-  // html questions are creator strings, shown as they are (the settings survey does not process them).
+  // The two panels of the side panel render their buttons as their footer actions.
   private setupSettingsPanels(survey: SurveyModel): void {
-    survey.getAllQuestions().forEach((question: Question) => {
-      if (question instanceof QuestionHtmlModel) question.ignoreHtmlProgressing = true;
-    });
-    const caption = <QuestionHtmlModel>survey.getQuestionByName(translationActionsCaptionName);
-    if (!!caption) caption.html = escapeHtmlText(editorLocalization.getString("ed.translationActions"));
-    const setupPanel = (name: string, getActions: () => Array<Action>): void => {
-      const panel = <PanelModel>survey.getPanelByName(name);
-      if (!panel) return;
-      // The buttons are stacked by translation.scss: an adaptive container would measure them as a
-      // row and move the ones that do not fit into its "more" menu.
-      panel.allowAdaptiveActions = false;
-      panel.onGetFooterActionsCallback = getActions;
-      panel.onGetFooterToolbarCssCallback = (): string => "st-language-settings__buttons";
-    };
-    setupPanel(translationButtonsPanelName, () => this.getSettingsActions().translation);
-    setupPanel(translationActionsPanelName, () => this.getSettingsActions().csv);
-    survey.onUpdatePanelCssClasses.add((_, options) => {
-      const name = options.panel.name;
-      if (name === translationButtonsPanelName || name === translationActionsPanelName) {
-        options.cssClasses.panel.container += " st-language-settings__group";
-      }
-    });
+    setupTranslationButtonsPanel(survey, translationButtonsPanelName, () => this.getSettingsActions().translation);
+    this.setupCsvActionsPanel(survey);
     survey.onUpdateQuestionCssClasses.add((_, options) => {
-      const name = options.question.name;
-      if (name === translationProgressQuestionName) options.cssClasses.root += " st-language-settings__progress";
-      if (name === translationActionsCaptionName) options.cssClasses.root += " st-language-settings__caption";
+      if (options.question.name === translationProgressQuestionName) options.cssClasses.root += " st-language-settings__progress";
     });
   }
   // The buttons of the side panel: Autotranslate all, Translate manually and Clear all below the
@@ -294,21 +255,12 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   private autoTranslateAllAction: Action;
   private translateManuallyAction: Action;
   private clearAllAction: Action;
-  private importCsvAction: Action;
   public getSettingsActions(): { translation: Array<Action>, csv: Array<Action> } {
     // A disposed model creates nothing: its readOnly subscription would outlive it.
     if (this.isDisposed && !this.settingsActionsValue) return { translation: [], csv: [] };
     if (!this.settingsActionsValue) {
-      // The texts are assigned from editorLocalization, which keeps them in the creator UI locale.
-      const create = (id: string, titleName: string, appearance: IActionAppearance, action: () => void, iconName?: string): Action =>
-        new Action({
-          id: id,
-          title: editorLocalization.getString(titleName),
-          iconName: iconName,
-          iconSize: "auto",
-          appearance: appearance,
-          action: action
-        });
+      const create = createTranslationPanelButton;
+      const panelButtonAppearance = getTranslationPanelButtonAppearance;
       this.autoTranslateAllAction = create("svc-translation-auto-translate-all", "ed.translateUsigAI",
         panelButtonAppearance("brand", "primary"), () => this.autoTranslateAll());
       this.autoTranslateAllAction.visible = this.options.getHasMachineTranslation();
@@ -316,20 +268,12 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
         panelButtonAppearance("brand", "secondary"), () => this.showUntranslatedStringsDialog());
       this.clearAllAction = create("svc-translation-clear-all", "ed.translationClearAll",
         panelButtonAppearance("neutral", "secondary"), () => this.clearTargetLocaleStrings());
-      this.importCsvAction = create("svc-translation-import-csv", "ed.translationImportFromSCVButton",
-        panelButtonAppearance("neutral", "secondary"), () => this.importFromCSVFileDOM(), "icon-import-24x24");
-      const downloadCsvAction = create("svc-translation-download-csv", "ed.translationDownloadCSV",
-        panelButtonAppearance("neutral", "secondary"), () => this.exportToCSVFileUI(), "icon-download-24x24");
       this.settingsActionsValue = {
         translation: [this.autoTranslateAllAction, this.translateManuallyAction, this.clearAllAction],
-        csv: [this.importCsvAction, downloadCsvAction]
+        csv: this.getCsvActions()
       };
-      // The creator's read-only state can change while the tab is open; the model's own flag is set
-      // once, when the tab is activated.
-      const creator = this.creatorModel;
-      if (!!creator) {
-        creator.registerFunctionOnPropertyValueChanged("readOnly", () => this.updateSettingsActions(), readOnlyHandlerKey);
-      }
+      // The read-only state of the creator can change while the tab is open (see onEditingReadOnlyChanged).
+      this.subscribeOnCreatorReadOnly();
       this.updateSettingsActions();
     }
     return this.settingsActionsValue;
@@ -337,10 +281,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   public getSettingsAction(id: string): Action {
     const actions = this.getSettingsActions();
     return actions.translation.concat(actions.csv).filter(action => action.id === id)[0];
-  }
-  private get isEditingReadOnly(): boolean {
-    const creator = this.creatorModel;
-    return this.readOnly || (!!creator && !!creator.readOnly);
   }
   // There is something to translate into: a target language that differs from the source one (the
   // rule of the former "Translate remaining strings" toolbar action).
@@ -359,7 +299,10 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
       this.getUsedStringsItems().some(item => !this.isItemTranslated(item, target) && !!item.getTextToTranslateFrom(source));
     this.translateManuallyAction.enabled = this.canTranslateManually;
     this.clearAllAction.enabled = !this.isEditingReadOnly && progress.translated > 0;
-    this.importCsvAction.enabled = !this.isEditingReadOnly;
+  }
+  protected onEditingReadOnlyChanged(): void {
+    super.onEditingReadOnlyChanged();
+    this.updateSettingsActions();
   }
   // Pushes the model state (view, locales and the locale choice lists) into the settings survey.
   // Called on activation and on every related model property change.
@@ -622,7 +565,7 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     if (this.isDisposed) return;
     const question = this.translationProgressQuestion;
     if (!!question) {
-      question.html = escapeHtmlText(this.translationProgressText);
+      question.html = escapeTranslationHtmlText(this.translationProgressText);
     }
     this.updateSettingsActions();
   }
@@ -1435,10 +1378,6 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
     this.rowEqualizer.dispose();
     this.hideElementStringsDialog();
     this.hideUntranslatedStringsDialog();
-    const creator = this.creatorModel;
-    if (!!creator && !!this.settingsActionsValue) {
-      creator.unRegisterFunctionOnPropertyValueChanged("readOnly", readOnlyHandlerKey);
-    }
     this.disposeInstances();
     this.selectedLocString = undefined;
     this.resetUsedStringsCache();

@@ -18,7 +18,7 @@ import { isDefaultLocale } from "../../survey-helper";
 import { updateSourceTargetHeaderColumns } from "./translation-table";
 import {
   TranslationBase, TranslationItem, createMachineTranslationAction,
-  createStringsHeaderNavigationBar, runItemsMachineTranslation
+  createStringsHeaderNavigationBar, runItemsMachineTranslation, getTranslationActionsPanelJSON
 } from "./translation-base";
 
 export * from "./translation-base";
@@ -101,6 +101,9 @@ export class Translation extends TranslationBase {
       survey.css = propertyGridCss;
       survey.css.root += " st-properties";
       survey.rootCss += " st-properties";
+      // The gap between the languages matrix and the Actions group, as between the side-by-side blocks.
+      survey.css.page.content += " st-language-settings__content";
+      this.setupCsvActionsPanel(survey);
     });
     res.onValueChanged.add((sender, options) => {
       if (options.name == "locales") {
@@ -191,7 +194,9 @@ export class Translation extends TranslationBase {
           showHeader: false,
           allowAddRows: false,
           rowCount: 0
-        }
+        },
+        // The CSV import and download, as in the side-by-side mode.
+        getTranslationActionsPanelJSON()
       ]
     };
   }

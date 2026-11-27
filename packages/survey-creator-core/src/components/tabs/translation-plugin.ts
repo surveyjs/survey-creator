@@ -3,7 +3,7 @@ import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
 import { SidebarPageModel } from "../side-bar/side-bar-page-model";
-import { Translation, TranslationBase, createImportCSVAction, createExportCSVAction } from "./translation";
+import { Translation, TranslationBase } from "./translation";
 import { TranslationSideBySide } from "./translation-side-by-side";
 import { TabControlModel } from "../side-bar/tab-control-model";
 import { isDefaultLocale } from "../../survey-helper";
@@ -13,8 +13,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private filterStringsAction: Action;
   private filterPageAction: Action;
   private mergeLocaleWithDefaultAction: Action;
-  private importCsvAction: Action;
-  private exportCsvAction: Action;
   private sidebarTab: SidebarPageModel;
   private _showOneCategoryInPropertyGrid: boolean = true;
   private tabControlModel: TabControlModel;
@@ -106,9 +104,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
     this.filterStringsAction.visible = true;
     this.updateFilterStrigsAction(true);
-
-    this.importCsvAction.visible = true;
-    this.exportCsvAction.visible = true;
+    // The CSV import/export are buttons of the side panel in both modes (see TranslationBase.getCsvActions).
 
     this.setFilterPageActionItems();
 
@@ -176,7 +172,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       model.rebuildInstances();
       this.updateSideBySidePagesAction();
     }
-    // The CSV import/export and the translate dialog are buttons of the side panel in this mode
+    // The CSV import/export and the translate dialog are buttons of the side panel
     // (see TranslationSideBySide.getSettingsActions); the toolbar keeps the page and strings filters.
 
     model.onPropertyChanged.add((sender, options) => {
@@ -232,8 +228,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.mergeLocaleWithDefaultAction.title = undefined;
     this.mergeLocaleWithDefaultAction.tooltip = undefined;
     this.mergeLocaleWithDefaultAction.visible = false;
-    this.importCsvAction.visible = false;
-    this.exportCsvAction.visible = false;
     this.creator.sidebar.hideSideBarVisibilityControlActions = false;
     this.creator.sidebar.useMinWidth = false;
     this.creator.sidebar.header.reset();
@@ -325,15 +319,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       }
     });
     items.push(this.mergeLocaleWithDefaultAction);
-
-    this.importCsvAction = createImportCSVAction(() => { this.model.importFromCSVFileDOM(); }, true);
-    this.importCsvAction.enabled = <any>(new ComputedUpdater(() => !this.creator.readOnly));
-    this.importCsvAction.visible = false;
-    items.push(this.importCsvAction);
-
-    this.exportCsvAction = createExportCSVAction(() => { this.model.exportToCSVFileUI(); });
-    this.exportCsvAction.visible = false;
-    items.push(this.exportCsvAction);
 
     return items;
   }

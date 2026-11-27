@@ -6,7 +6,7 @@ import {
   MatrixDropdownColumn,
   MatrixCells,
   QuestionMatrixModel, Question, QuestionPanelDynamicModel,
-  DomDocumentHelper, DomWindowHelper
+  DomDocumentHelper, DomWindowHelper, IActionAppearance, PanelModel, QuestionHtmlModel
 } from "survey-core";
 import { SurveyElementActionContainer } from "../action-container-view-model";
 import { getActualLocaleName } from "../../utils/creator-locstrings";
@@ -949,6 +949,57 @@ export class TranslationBase extends Base implements ITranslationLocales {
   protected createSettingsSurvey(): SurveyModel {
     return undefined;
   }
+  // The "Actions" group of the settings survey, the same in both modes: the "Actions" caption and
+  // the CSV import and download buttons. The settings survey JSON adds the panel
+  // (getTranslationActionsPanelJSON); this sets it up. The buttons are created when the panel first
+  // asks for them (see getCsvActions) - it runs in the base constructor.
+  protected setupCsvActionsPanel(survey: SurveyModel): void {
+    const caption = <QuestionHtmlModel>survey.getQuestionByName(translationActionsCaptionName);
+    if (!!caption) caption.html = escapeTranslationHtmlText(editorLocalization.getString("ed.translationActions"));
+    setupTranslationButtonsPanel(survey, translationActionsPanelName, () => this.getCsvActions());
+    survey.onUpdateQuestionCssClasses.add((_, options) => {
+      if (options.question.name === translationActionsCaptionName) options.cssClasses.root += " st-language-settings__caption";
+    });
+  }
+  private csvActionsValue: Array<Action>;
+  private importCsvAction: Action;
+  public getCsvActions(): Array<Action> {
+    // A disposed model creates nothing: its readOnly subscription would outlive it.
+    if (this.isDisposed && !this.csvActionsValue) return [];
+    if (!this.csvActionsValue) {
+      const appearance = getTranslationPanelButtonAppearance("neutral", "secondary");
+      this.importCsvAction = createTranslationPanelButton("svc-translation-import-csv", "ed.translationImportFromSCVButton",
+        appearance, () => this.importFromCSVFileDOM(), "icon-import-24x24");
+      const downloadCsvAction = createTranslationPanelButton("svc-translation-download-csv", "ed.translationDownloadCSV",
+        appearance, () => this.exportToCSVFileUI(), "icon-download-24x24");
+      this.csvActionsValue = [this.importCsvAction, downloadCsvAction];
+      this.subscribeOnCreatorReadOnly();
+      this.updateCsvActions();
+    }
+    return this.csvActionsValue;
+  }
+  // The model's own flag is set once, when the tab is activated; the creator's read-only state can
+  // change while the tab is open.
+  protected get isEditingReadOnly(): boolean {
+    return this.readOnly || (!!this.options && !!this.options.readOnly);
+  }
+  private readOnlyHandlerKey: string;
+  // Follows the creator's readOnly property while the side panel buttons exist. The options object is
+  // checked structurally: the model stays constructible with EmptySurveyCreatorOptions.
+  protected subscribeOnCreatorReadOnly(): void {
+    const options = <any>this.options;
+    if (!!this.readOnlyHandlerKey || !options || typeof options.registerFunctionOnPropertyValueChanged !== "function") return;
+    // A key per model: the key of the dialog models' handlers must not replace the tab model's one.
+    this.readOnlyHandlerKey = "svc-translation-settings-actions-" + (++translationReadOnlyHandlerCounter);
+    options.registerFunctionOnPropertyValueChanged("readOnly", () => this.onEditingReadOnlyChanged(), this.readOnlyHandlerKey);
+  }
+  protected onEditingReadOnlyChanged(): void {
+    this.updateCsvActions();
+  }
+  private updateCsvActions(): void {
+    if (!this.csvActionsValue || this.isDisposed) return;
+    this.importCsvAction.enabled = !this.isEditingReadOnly;
+  }
   // The locale a row of a settings survey matrix stands for (the languages matrices of both
   // modes): the matrix value is a plain array following the visible rows order, and the default
   // locale is stored as "" there. Undefined when the row is not in the value - it is resolved at
@@ -1222,6 +1273,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
     if (this.stringsSurvey) {
       this.stringsSurvey.readOnly = this.readOnly;
     }
+    this.onEditingReadOnlyChanged();
   }
   public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean = true): boolean {
     const result = isShowing && (!isEmpty || SurveyHelper.isPropertyVisible(obj, prop, this.options));
@@ -1434,6 +1486,10 @@ export class TranslationBase extends Base implements ITranslationLocales {
     group.groups.forEach((group) => this.fillItemsHash(name, group, itemsHash));
   }
   public dispose(): void {
+    if (!!this.readOnlyHandlerKey) {
+      (<any>this.options).unRegisterFunctionOnPropertyValueChanged("readOnly", this.readOnlyHandlerKey);
+      this.readOnlyHandlerKey = undefined;
+    }
     this.isEmpty = true;
     if (!!this.stringsTableValue) {
       this.stringsTableValue.dispose();
@@ -1457,6 +1513,61 @@ export class TranslationBase extends Base implements ITranslationLocales {
     super.dispose();
   }
 }
+
+// The side panel (the settings survey) of the Translation tab renders its buttons as the footer
+// actions of a panel: a panel is the one survey element that renders a row of actions as buttons.
+// It needs a visible element to be shown, which is the html question with the text above its buttons.
+// The "Actions" group with the CSV buttons is the same in both modes (see TranslationBase.setupCsvActionsPanel).
+export const translationActionsPanelName = "translationActions";
+export const translationActionsCaptionName = "translationActionsCaption";
+export function getTranslationActionsPanelJSON(): any {
+  return {
+    type: "panel",
+    name: translationActionsPanelName,
+    // An html question has no title, so the caption is its text.
+    elements: [{ type: "html", name: translationActionsCaptionName }]
+  };
+}
+// The look of the side panel buttons: survey-core's medium actions (48px high), stretched to the
+// panel width by translation.scss.
+export function getTranslationPanelButtonAppearance(style: "brand" | "neutral", mode: "primary" | "secondary"): IActionAppearance {
+  return { style: style, mode: mode, size: "medium" };
+}
+// A side panel button. The title is assigned from editorLocalization, which keeps it in the creator UI locale.
+export function createTranslationPanelButton(id: string, titleName: string, appearance: IActionAppearance,
+  action: () => void, iconName?: string): Action {
+  return new Action({
+    id: id,
+    title: editorLocalization.getString(titleName),
+    iconName: iconName,
+    iconSize: "auto",
+    appearance: appearance,
+    action: action
+  });
+}
+export function escapeTranslationHtmlText(text: string): string {
+  return (text || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+// Turns a settings survey panel into a group of stacked buttons. The texts of its html questions
+// are creator strings, shown as they are (the settings survey does not process them).
+export function setupTranslationButtonsPanel(survey: SurveyModel, panelName: string, getActions: () => Array<Action>): void {
+  const panel = <PanelModel>survey.getPanelByName(panelName);
+  if (!panel) return;
+  panel.questions.forEach((question: Question) => {
+    if (question instanceof QuestionHtmlModel) question.ignoreHtmlProgressing = true;
+  });
+  // The buttons are stacked by translation.scss: an adaptive container would measure them as a
+  // row and move the ones that do not fit into its "more" menu.
+  panel.allowAdaptiveActions = false;
+  panel.onGetFooterActionsCallback = getActions;
+  panel.onGetFooterToolbarCssCallback = (): string => "st-language-settings__buttons";
+  survey.onUpdatePanelCssClasses.add((_, options) => {
+    if (options.panel.name === panelName) {
+      options.cssClasses.panel.container += " st-language-settings__group";
+    }
+  });
+}
+let translationReadOnlyHandlerCounter = 0;
 
 // The top navigation bar of a strings-grid header survey: hosts the machine-translation
 // button and the other dialog actions in the machine-translation and element strings dialogs.
