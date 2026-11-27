@@ -98,12 +98,18 @@ export class QuestionAdornerComponent<T extends QuestionAdornerViewModel = Quest
         <div className="svc-question__drop-indicator svc-question__drop-indicator--bottom"></div>
         {allowInteractions ? this.renderHeader() : null}
         {content}
-        {this.model.needToRenderContent ? this.renderFooter() : null}
+        {this.model.needToRenderContent ? this.renderFooterFrame() : null}
       </div>,
       undefined, { disableTabStop: this.disableTabStop() });
   }
   protected renderHeader(): React.JSX.Element {
     return ReactElementFactory.Instance.createElement("svc-question-header", { model: this.model });
+  }
+  protected renderFooterFrame(): React.JSX.Element {
+    const footer = this.renderFooter();
+    if (!footer || !this.model.wysiwygMode) return footer;
+    const className = "svc-question__footer" + (this.model.wysiwygFooterVisible ? " svc-question__footer--visible" : "");
+    return <div className={className}>{footer}</div>;
   }
   protected renderFooter(): React.JSX.Element {
     if (this.model.wysiwygMode) return this.renderWysiwygAddItemToolbar();
@@ -113,13 +119,8 @@ export class QuestionAdornerComponent<T extends QuestionAdornerViewModel = Quest
   }
   protected renderWysiwygAddItemToolbar(): React.JSX.Element {
     if (!this.model.wysiwygMode || !this.model.element.isInteractiveDesignElement) return null;
-    return (
-      <div className="svc-question__wysiwyg-toolbars">
-        <div className="svc-question__wysiwyg-toolbar svc-question__wysiwyg-toolbar--add-item">
-          <SurveyActionBar model={this.model.addItemActionContainer} handleClick={false}></SurveyActionBar>
-        </div>
-      </div>
-    );
+    if (!this.model.addItemActionContainer.hasVisibleActions) return null;
+    return <SurveyActionBar model={this.model.addItemActionContainer} handleClick={false}></SurveyActionBar>;
   }
   protected renderWysiwygMainToolbar(): React.JSX.Element {
     if (!this.model.wysiwygMode || !this.model.element.isInteractiveDesignElement) return null;

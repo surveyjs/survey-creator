@@ -2129,6 +2129,44 @@ test("WYSIWYG toolbar separator is before copy", (): any => {
   expect(ids.indexOf("isrequired")).toBeLessThan(ids.indexOf("delete"));
   expect(visible.filter(action => action.needSeparator).map(action => action.id)).toEqual(["duplicate"]);
 });
+test("WYSIWYG footer stays hidden until the question is selected", (): any => {
+  const animationEnabled = settings.animationEnabled;
+  settings.animationEnabled = false;
+  onTestFinished(() => { settings.animationEnabled = animationEnabled; });
+  const creator = new CreatorTester();
+  creator.getPlugin("designer").wysiwygMode = true;
+  creator.JSON = { elements: [{ type: "radiogroup", name: "q1", choices: ["a"] }, { type: "text", name: "q2" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const adorner = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  expect(adorner.wysiwygFooterVisible).toBe(false);
+
+  creator.selectElement(q1);
+  expect(adorner.wysiwygFooterVisible).toBe(true);
+
+  creator.selectElement(creator.survey.getQuestionByName("q2"));
+  expect(adorner.wysiwygFooterVisible).toBe(false);
+
+  creator.getPlugin("designer").wysiwygMode = false;
+  creator.selectElement(q1);
+  expect(adorner.wysiwygFooterVisible).toBe(false);
+});
+test("WYSIWYG footer opens with the question expand animation", (): any => {
+  const creator = new CreatorTester();
+  creator.getPlugin("designer").wysiwygMode = true;
+  creator.JSON = { elements: [{ type: "radiogroup", name: "q1", choices: ["a"] }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const adorner = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  const footer = document.createElement("div");
+  const options = adorner["getWysiwygFooterAnimation"]()["animationOptions"];
+  const enter = options.getEnterOptions();
+  const leave = options.getLeaveOptions();
+  expect(enter.cssClass).toBe(adorner["getExpandingCssClassName"]());
+  expect(leave.cssClass).toBe(adorner["getCollapsingCssClassName"]());
+  enter.onBeforeRunAnimation(footer);
+  expect(footer.style.getPropertyValue("--animation-height-from")).toBe("0px");
+  enter.onAfterRunAnimation(footer);
+  expect(footer.style.getPropertyValue("--animation-height-from")).toBe("");
+});
 test("WYSIWYG Add item is a separate toolbar action", (): any => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "radiogroup", name: "q1", choices: ["a", "b"] }, { type: "text", name: "q2" }] };

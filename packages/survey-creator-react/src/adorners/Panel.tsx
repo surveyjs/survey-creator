@@ -38,7 +38,7 @@ export class PanelAdornerComponent extends QuestionAdornerComponent<PanelAdorner
     const addQuestion = !this.model.isEmptyElement && this.model.element.isPanel && this.model.showAddQuestionButton ? (
       <SurveyActionBar model={this.model.addQuestionActionsContainer} handleClick={false}></SurveyActionBar>
     ) : null;
-    if (this.model.wysiwygMode) return <>{addQuestion}</>;
+    if (this.model.wysiwygMode) return addQuestion;
     return (<React.Fragment>
       {addQuestion}
       {super.renderFooter()}

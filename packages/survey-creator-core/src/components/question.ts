@@ -26,7 +26,10 @@ import {
   QuestionCompositeModel,
   QuestionMatrixDynamicModel,
   Base,
-  defaultActionBarCss
+  defaultActionBarCss,
+  AnimationBoolean,
+  cleanHtmlElementAfterAnimation,
+  prepareElementForVerticalAnimation
 } from "survey-core";
 import { SurveyCreatorModel, isContentElement } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -65,6 +68,7 @@ interface IConvertToSelection {
 
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   @property({ defaultValue: false }) wysiwygMode: boolean;
+  @property({ defaultValue: false }) wysiwygFooterVisible: boolean;
   @property({ defaultValue: "" }) _currentAddQuestionType: string;
   get currentAddQuestionType(): string {
     return this._currentAddQuestionType;
@@ -996,6 +1000,43 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       this.updateAddItemActionContainer();
     }
     this.syncWysiwygSurface();
+    this.syncWysiwygFooter();
+  }
+  protected onElementSelectedChanged(isSelected: boolean): void {
+    super.onElementSelectedChanged(isSelected);
+    this.syncWysiwygFooter(isSelected);
+  }
+  // Same height and fade animation as expanding and collapsing a question.
+  private wysiwygFooterAnimationValue: AnimationBoolean;
+  private getWysiwygFooterAnimation(): AnimationBoolean {
+    if (!this.wysiwygFooterAnimationValue) {
+      this.wysiwygFooterAnimationValue = new AnimationBoolean({
+        getEnterOptions: () => ({
+          cssClass: this.getExpandingCssClassName(),
+          onBeforeRunAnimation: prepareElementForVerticalAnimation,
+          onAfterRunAnimation: cleanHtmlElementAfterAnimation
+        }),
+        getLeaveOptions: () => ({
+          cssClass: this.getCollapsingCssClassName(),
+          onBeforeRunAnimation: prepareElementForVerticalAnimation,
+          onAfterRunAnimation: cleanHtmlElementAfterAnimation
+        }),
+        getAnimatedElement: () => this.getWysiwygFooterElement(),
+        isAnimationEnabled: () => this.animationAllowed && this.wysiwygMode,
+        getRerenderEvent: () => this.onElementRerendered
+      }, (val) => {
+        this.wysiwygFooterVisible = val;
+      }, () => this.wysiwygFooterVisible);
+    }
+    return this.wysiwygFooterAnimationValue;
+  }
+  private getWysiwygFooterElement(): HTMLElement {
+    return this.rootElement?.querySelector(":scope > .svc-question__content > .svc-question__footer") as HTMLElement;
+  }
+  private syncWysiwygFooter(isSelected: boolean = !!this.creator?.isElementSelected(this.surveyElement)): void {
+    if (this.isDisposed) return;
+    const show = isSelected && this.wysiwygMode && !!this.surveyElement?.isInteractiveDesignElement;
+    this.getWysiwygFooterAnimation().sync(show);
   }
   protected updateActionsContainer(surveyElement: SurveyElement): void {
     super.updateActionsContainer(surveyElement);
@@ -1006,6 +1047,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return super.getActionById(id) || this.addItemActionContainerValue?.getActionById(id);
   }
   public dispose(): void {
+    this.wysiwygFooterAnimationValue?.cancel();
+    this.wysiwygFooterAnimationValue = undefined;
     const container = this.addItemActionContainerValue;
     this.addItemActionContainerValue = undefined;
     if (container && !container.isDisposed) {
@@ -1094,7 +1137,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private createAddItemActionContainer(): ActionContainer {
     const container = new ActionContainer();
     container.sizeMode = "small";
-    container.setActionsAppearance({ style: "brand", mode: "tertiary-muted", size: "x-small" });
+    // "small" uses the same type size as choice labels. "x-small" is a step smaller.
+    container.setActionsAppearance({ style: "brand", mode: "tertiary", size: "small" });
+    container.containerCss = "svc-question__add-item";
     container.cssClasses = {
       ...defaultActionBarCss,
       root: "svc-survey-element-toolbar " + defaultActionBarCss.root,
@@ -1123,8 +1168,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       actionData: {
         id: "addOptionItem",
         title: this.creator.getLocString("pe.addNew"),
-        iconName: "icon-add_16x16",
-        iconSize: "auto",
+        //iconName: "icon-add_16x16",
+        //iconSize: 16,
         visibleIndex: 0,
         enabled: true,
         showTitle: true
