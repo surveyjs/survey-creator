@@ -211,6 +211,30 @@ test("item value allowRemove on events", () => {
   expect(secondItemAdorner.allowRemove).toBeTruthy();
 });
 
+test("dropdown add action enables None and Other and appends a choice", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "dropdown", name: "q1", choices: ["a"] }] };
+  const question = <QuestionDropdownModel>creator.survey.getAllQuestions()[0];
+  const other = new ItemValueWrapperViewModel(creator, question, question.otherItem);
+  const none = new ItemValueWrapperViewModel(creator, question, question.noneItem);
+  const ghost = new ItemValueWrapperViewModel(creator, question, question.newItem);
+  expect(other.allowAdd).toBeTruthy();
+  expect(none.allowAdd).toBeTruthy();
+  expect(ghost.allowAdd).toBeTruthy();
+
+  other.addAction.action();
+  expect(question.showOtherItem).toBeTruthy();
+  expect(other.allowAdd).toBeFalsy();
+  expect(other.allowRemove).toBeTruthy();
+
+  none.addAction.action();
+  expect(question.showNoneItem).toBeTruthy();
+  expect(none.allowAdd).toBeFalsy();
+
+  ghost.addAction.action();
+  expect(question.choices).toHaveLength(2);
+  expect(ghost.allowAdd).toBeTruthy();
+});
 test("item value operations follow a change of the question permissions", () => {
   const creator = new CreatorTester();
   let readOnly = false;
