@@ -1252,7 +1252,7 @@ svc-question,
   pointer-events: none;
 }
 
-.svc-question__content > .svc-question__footer {
+.svc-question__adorner > div > .svc-question__footer {
   height: 0;
   min-height: 0;
   opacity: 0;
@@ -1261,7 +1261,7 @@ svc-question,
   width: 100%;
 }
 
-.svc-question__content > .svc-question__footer.svc-question__footer--visible {
+.svc-question__adorner > div > .svc-question__footer.svc-question__footer--visible {
   height: auto;
   opacity: 1;
   overflow: visible;
@@ -1449,10 +1449,48 @@ svc-question,
     }
   }
 
+  // Same compensation as panelless questions. Nested frame padding is 0, so half the panel
+  // gap is the card padding and a negative margin keeps the content on the panel edge.
   .sd-panel .svc-question__content {
-    padding-block: var(--sjs2-layout-component-panel-simple-nested-content-area-padding-top)
-      var(--sjs2-layout-component-panel-simple-nested-content-area-padding-bottom);
-    padding-inline: var(--sjs2-layout-component-panel-simple-nested-content-area-padding-horizontal);
+    --sd-panelless-border-padding-vertical: calc(
+      var(--sjs2-layout-component-panel-content-area-gap-vertical) / 2 - var(--sjs2-spacing-x050)
+    );
+    --sd-panelless-border-padding-horizontal: calc(
+      var(--sjs2-layout-component-panel-content-area-gap-horizontal) / 2 - var(--sjs2-spacing-x050)
+    );
+    --sd-panelless-padding-compensation-top: min(
+      0px,
+      var(--sjs2-layout-component-panel-simple-nested-content-area-padding-top) - var(
+          --sd-panelless-border-padding-vertical
+        )
+    );
+    --sd-panelless-padding-compensation-bottom: min(
+      0px,
+      var(--sjs2-layout-component-panel-simple-nested-content-area-padding-bottom) - var(
+          --sd-panelless-border-padding-vertical
+        )
+    );
+    --sd-panelless-padding-compensation-inline: min(
+      0px,
+      var(--sjs2-layout-component-panel-simple-nested-content-area-padding-horizontal) - var(
+          --sd-panelless-border-padding-horizontal
+        )
+    );
+    padding-block: max(
+        var(--sd-panelless-border-padding-vertical),
+        var(--sjs2-layout-component-panel-simple-nested-content-area-padding-top)
+      )
+      max(
+        var(--sd-panelless-border-padding-vertical),
+        var(--sjs2-layout-component-panel-simple-nested-content-area-padding-bottom)
+      );
+    margin-block: var(--sd-panelless-padding-compensation-top) var(--sd-panelless-padding-compensation-bottom);
+    padding-inline: max(
+      var(--sd-panelless-border-padding-horizontal),
+      var(--sjs2-layout-component-panel-simple-nested-content-area-padding-horizontal)
+    );
+    margin-inline: var(--sd-panelless-padding-compensation-inline);
+    width: calc(100% - 2 * var(--sd-panelless-padding-compensation-inline));
     background: var(--sjs2-color-component-panel-simple-nested-default-bg);
     box-shadow: var(--sjs2-border-effect-component-panel-simple-nested-default);
     border-radius: var(--sjs2-radius-component-panel);

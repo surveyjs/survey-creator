@@ -1,4 +1,5 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
+import { PanelAdornerViewModel } from "../src/components/panel";
 import { Action, ComponentCollection, PopupDropdownViewModel, QuestionMatrixDropdownModel, QuestionPanelDynamicModel, QuestionRadiogroupModel, QuestionTextModel, settings, SurveyElement, SurveyModel, settings as surveySettings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { PageAdorner } from "../src/components/page";
@@ -2148,6 +2149,31 @@ test("WYSIWYG footer stays hidden until the question is selected", (): any => {
 
   creator.getPlugin("designer").wysiwygMode = false;
   creator.selectElement(q1);
+  expect(adorner.wysiwygFooterVisible).toBe(false);
+});
+test("WYSIWYG footer of a dynamic panel stays hidden until the dynamic panel is selected", (): any => {
+  const animationEnabled = settings.animationEnabled;
+  settings.animationEnabled = false;
+  onTestFinished(() => { settings.animationEnabled = animationEnabled; });
+  const creator = new CreatorTester();
+  creator.getPlugin("designer").wysiwygMode = true;
+  creator.JSON = {
+    elements: [
+      { type: "paneldynamic", name: "dp1", templateElements: [{ type: "text", name: "q1" }] },
+      { type: "text", name: "q2" }
+    ]
+  };
+  const dynamicPanel = <QuestionPanelDynamicModel>creator.survey.getQuestionByName("dp1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  creator.selectElement(q2);
+  const adorner = new PanelAdornerViewModel(creator, dynamicPanel.template, <any>undefined);
+  expect(dynamicPanel.template.isInteractiveDesignElement).toBe(false);
+  expect(adorner.wysiwygFooterVisible).toBe(false);
+
+  creator.selectElement(dynamicPanel);
+  expect(adorner.wysiwygFooterVisible).toBe(true);
+
+  creator.selectElement(q2);
   expect(adorner.wysiwygFooterVisible).toBe(false);
 });
 test("WYSIWYG footer opens with the question expand animation", (): any => {

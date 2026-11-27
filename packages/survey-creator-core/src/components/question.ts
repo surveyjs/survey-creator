@@ -346,6 +346,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private optionItemsModifiable: boolean;
   private wysiwygModeListener: (value: boolean) => void;
   private wysiwygSubscribed: boolean;
+  // The dynamic panel template is not selectable. Its footer follows the dynamic panel.
+  // No initializer: attachElement runs in the base constructor, before field initializers.
+  private wysiwygFooterSelectionTarget: SurveyElement;
   // No initializer: attachElement runs in the base constructor, before the
   // fields of this class are initialized. Created on the first subscription,
   // kept so that remove() gets the same function.
@@ -402,6 +405,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       }
       delete (<any>surveyElement.locDescription).placeholder;
     }
+    this.unsubscribeWysiwygFooterSelection();
     this.resetPropertyValue("isEmptyElement");
     this.resetPropertyValue("expressionBannerText");
     super.detachElement(this.element);
@@ -450,6 +454,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         }, "expressionBannerAdorner");
       }
       (<any>surveyElement.locDescription).placeholder = "pe.descriptionPlaceholder";
+      this.subscribeWysiwygFooterSelection();
+      this.syncWysiwygFooter();
     }
   }
   get isDraggable() {
@@ -1031,11 +1037,42 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return this.wysiwygFooterAnimationValue;
   }
   private getWysiwygFooterElement(): HTMLElement {
-    return this.rootElement?.querySelector(":scope > .svc-question__content > .svc-question__footer") as HTMLElement;
+    // A dynamic panel template has no svc-question__content class. Its footer is still the content div's child.
+    return this.rootElement?.querySelector(":scope > div > .svc-question__footer") as HTMLElement;
   }
-  private syncWysiwygFooter(isSelected: boolean = !!this.creator?.isElementSelected(this.surveyElement)): void {
+  // A normal panel is selected itself. A dynamic panel template is selected with its parent question.
+  private getWysiwygFooterSelectionTarget(): SurveyElement {
+    const element = this.surveyElement;
+    if (!element?.isPanel || element.isInteractiveDesignElement) return element;
+    const parent = (element as PanelModel).parentQuestion;
+    if (parent && Serializer.isDescendantOf(parent.getType(), "paneldynamic") && (parent as QuestionPanelDynamicModel).template === element) {
+      return parent;
+    }
+    return element;
+  }
+  private subscribeWysiwygFooterSelection(): void {
+    this.unsubscribeWysiwygFooterSelection();
+    const target = this.getWysiwygFooterSelectionTarget();
+    if (!target || target === this.surveyElement) return;
+    this.wysiwygFooterSelectionTarget = target;
+    target.registerFunctionOnPropertyValueChanged("isSelectedInDesigner", () => {
+      this.syncWysiwygFooter();
+    }, "wysiwygFooterSelected");
+  }
+  private unsubscribeWysiwygFooterSelection(): void {
+    const target = this.wysiwygFooterSelectionTarget;
+    this.wysiwygFooterSelectionTarget = undefined;
+    if (!target || target.isDisposed) return;
+    target.unRegisterFunctionOnPropertyValueChanged("isSelectedInDesigner", "wysiwygFooterSelected");
+  }
+  private syncWysiwygFooter(isSelected?: boolean): void {
     if (this.isDisposed) return;
-    const show = isSelected && this.wysiwygMode && !!this.surveyElement?.isInteractiveDesignElement;
+    const target = this.getWysiwygFooterSelectionTarget();
+    const ownTarget = !target || target === this.surveyElement;
+    const selected = ownTarget
+      ? (isSelected !== undefined ? isSelected : !!this.creator?.isElementSelected(this.surveyElement))
+      : !!this.creator?.isElementSelected(target);
+    const show = selected && this.wysiwygMode && (ownTarget ? !!this.surveyElement?.isInteractiveDesignElement : true);
     this.getWysiwygFooterAnimation().sync(show);
   }
   protected updateActionsContainer(surveyElement: SurveyElement): void {
