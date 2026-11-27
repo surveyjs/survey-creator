@@ -1642,6 +1642,10 @@ svc-question,
       padding-bottom: var(--sjs2-layout-component-labeled-group-box-padding-vertical);
     }
   }
+
+  .sd-dropdown__input-prefix-wrapper {
+    user-select: none;
+  }
 }
 
 .sv-drag-drop-choices-shortcut .svc-item-value-wrapper.svc-item-value-wrapper--wysiwyg {

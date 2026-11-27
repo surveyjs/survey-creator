@@ -101,8 +101,6 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel i
         if (model.allowOpenInDesignMode && question.isDesignMode && !question.readOnly && !question.isPreviewStyle && !question.isReadOnlyAttr) {
           dropdown.popupModel.toggleVisibility();
           model.isListFocusedByKeyboard = false;
-          model.focusItemOnClickAndPopup?.();
-          question.focusInputElement(false);
           return;
         }
         original(event);
