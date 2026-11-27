@@ -2221,6 +2221,17 @@ test("WYSIWYG Add item is a separate toolbar action", (): any => {
   expect(textAdorner.addItemActionContainer.visibleActions.length).toBe(0);
   expect(textAdorner.actionContainer.getActionById("addOptionItem")).toBeFalsy();
 });
+test("WYSIWYG Add item stays out of the dropdown footer", (): any => {
+  const creator = new CreatorTester();
+  creator.getPlugin("designer").wysiwygMode = true;
+  creator.JSON = { elements: [{ type: "dropdown", name: "q1", choices: ["a"] }] };
+  const question = creator.survey.getQuestionByName("q1");
+  const adorner = new QuestionAdornerViewModel(creator, question, <any>undefined);
+  expect(adorner.addItemActionContainer.visibleActions.length).toBe(0);
+  expect(question.visibleChoices).toContain(question.newItem);
+  expect(question.visibleChoices).toContain(question.noneItem);
+  expect(question.visibleChoices).toContain(question.otherItem);
+});
 test("Expression question: the banner link of a detached adorner does nothing", (): any => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "text", name: "q1" }, { type: "expression", name: "q2", expression: "1 + 1" }] };

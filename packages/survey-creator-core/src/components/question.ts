@@ -1103,6 +1103,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (element.isDescendantOf("ranking") || element.isDescendantOf("imagepicker")) return false;
     return element.isDescendantOf("radiogroup") || element.isDescendantOf("checkbox") || element.isDescendantOf("dropdown");
   }
+  // A dropdown draws None, Other and New in its popup. The question footer is not that list.
+  private showsAddItemToolbar(): boolean {
+    return this.isWysiwygOptionQuestion() && !this.surveyElement?.isDescendantOf("dropdown");
+  }
   private isPlainCheckbox(): boolean {
     const element = this.surveyElement;
     return !!element && element.isDescendantOf("checkbox") && !element.isDescendantOf("tagbox");
@@ -1189,7 +1193,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private updateAddItemActionContainer(container: ActionContainer = this.addItemActionContainerValue): void {
     if (!container || container.isDisposed) return;
     const current = container.getActionById("addOptionItem");
-    if (this.wysiwygMode && this.isWysiwygOptionQuestion()) {
+    if (this.wysiwygMode && this.showsAddItemToolbar()) {
       if (!current) {
         container.setItems([this.createAddOptionItemAction()]);
       } else {
