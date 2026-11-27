@@ -1577,7 +1577,7 @@ svc-question,
     }
 
     .svc-item-value-controls__remove,
-    > .svc-item-value-controls:not(.svc-choice-elements-button-container) .svc-item-value-controls__add {
+    .svc-item-value-controls__add {
       position: absolute;
       inset-inline-start: calc(var(--sjs2-size-component-checkbox-box) / 2);
       top: calc(
@@ -1592,12 +1592,12 @@ svc-question,
     }
 
     &:has(.sd-radio) .svc-item-value-controls__remove,
-    &:has(.sd-radio) > .svc-item-value-controls:not(.svc-choice-elements-button-container) .svc-item-value-controls__add {
+    &:has(.sd-radio) .svc-item-value-controls__add {
       inset-inline-start: calc(var(--sjs2-size-component-radio-box) / 2);
     }
 
     &:has(.sd-item:first-child:not(.sd-selectbase__item--inline)) .svc-item-value-controls__remove,
-    &:has(.sd-item:first-child:not(.sd-selectbase__item--inline)) > .svc-item-value-controls:not(.svc-choice-elements-button-container) .svc-item-value-controls__add {
+    &:has(.sd-item:first-child:not(.sd-selectbase__item--inline)) .svc-item-value-controls__add {
       top: calc(
         var(--sjs2-layout-component-labeled-group-box-padding-vertical) +
           var(--sjs2-typography-line-height-component-label-content) / 2 +
@@ -1611,7 +1611,7 @@ svc-question,
         visibility: hidden;
       }
 
-      > .svc-item-value-controls:not(.svc-choice-elements-button-container) .svc-item-value-controls__add {
+      .svc-item-value-controls__add {
         opacity: 1;
         pointer-events: auto;
       }
@@ -1624,7 +1624,7 @@ svc-question,
       }
 
       .svc-item-value-controls__remove,
-      > .svc-item-value-controls:not(.svc-choice-elements-button-container) .svc-item-value-controls__add {
+      .svc-item-value-controls__add {
         opacity: 1;
         pointer-events: auto;
       }
@@ -1662,7 +1662,7 @@ svc-question,
   }
 
   .svc-item-value-controls__remove,
-  > .svc-item-value-controls:not(.svc-choice-elements-button-container) .svc-item-value-controls__add {
+  .svc-item-value-controls__add {
     display: none;
   }
 }

@@ -601,6 +601,7 @@ test("item value expand panel action has aria-label with the item text, Bug#8154
   };
   const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
   const itemAdorner = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  expect(itemAdorner.expandPanelAction.innerCss).toBe("svc-item-value-controls__button svc-choice-elements-button");
   expect(itemAdorner.expandPanelAction.ariaLabel).toBe("Expand nested choices of First");
   itemAdorner.togglePanel();
   expect(itemAdorner.expandPanelAction.ariaLabel).toBe("Collapse nested choices of First");
