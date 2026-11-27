@@ -1378,6 +1378,9 @@ export var enStrings = {
       belowheader: "Below the header",
       off: "Hidden"
     },
+    progressBarNavigationTextLocation: {
+      inline: "Inline"
+    },
     sum: "Sum",
     count: "Count",
     min: "Min",

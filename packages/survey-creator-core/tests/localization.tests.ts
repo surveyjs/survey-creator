@@ -416,3 +416,8 @@ test("Preset strings", () => {
   expect(editorLocalization.getPropertyHelpInEditor("panel", "name")).toEqual("A panel ID that is not visible to respondents.");
   editorLocalization.presetStrings = undefined;
 });
+test("Navigation text alignment labels start with a capital letter", () => {
+  expect(editorLocalization.getPropertyValueInEditor("progressBarNavigationTextLocation", "top")).toEqual("Top");
+  expect(editorLocalization.getPropertyValueInEditor("progressBarNavigationTextLocation", "bottom")).toEqual("Bottom");
+  expect(editorLocalization.getPropertyValueInEditor("progressBarNavigationTextLocation", "inline")).toEqual("Inline");
+});
