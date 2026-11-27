@@ -361,8 +361,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     question.setCanShowOptionItemCallback((item: ItemValue): boolean => {
       // Placeholder items exist to add them: none while choices cannot change,
       // and none in WYSIWYG mode (enabled items still render through hasItem).
+      // A dropdown draws None, Other and New in its popup, so they stay in its visible choices.
       this.optionItemsModifiable = this.canModifyChoices();
-      if ((this.wysiwygMode && this.isWysiwygOptionQuestion()) || !this.optionItemsModifiable) return false;
+      const inDropdownPopup = !!this.surveyElement?.isDescendantOf("dropdown");
+      if (((this.wysiwygMode && this.isWysiwygOptionQuestion() && !inDropdownPopup) || !this.optionItemsModifiable)) return false;
       if (item !== question.newItem) return true;
       return this.creator.maxChoices < 1 || question.choices.length < this.creator.maxChoices;
     });

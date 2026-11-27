@@ -59,8 +59,8 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel i
     }
   }
 
-  public getChoiceCss(): string {
-    return this.choicesModel.getChoiceCss();
+  public getChoiceCss(item?: ItemValue): string {
+    return this.choicesModel.getChoiceCss(item);
   }
 
   public getRenderedItems(): ItemValue[] {

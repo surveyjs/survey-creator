@@ -37,7 +37,7 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
             {(this.dropdownModel.getRenderedItems() || []).map(
               (item: ItemValue, index: number) => (
                 <div
-                  className={this.dropdownModel.getChoiceCss()}
+                  className={this.dropdownModel.getChoiceCss(item)}
                   key={`editable_choice_${index}`}
                 >
                   {ReactSurveyElementsWrapper.wrapItemValue(this.question.survey as SurveyModel,

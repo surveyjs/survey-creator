@@ -12,6 +12,17 @@ const json = {
           choices: ["Very satisfied", "Satisfied", "Neutral", "Unsatisfied"]
         },
         {
+          type: "panel",
+          name: "panel1",
+          elements: [
+            {
+              type: "text",
+              name: "text1",
+              title: "Enter your text here"
+            }
+          ]
+        },
+        {
           type: "comment",
           name: "comments",
           title: "What should we change next?"

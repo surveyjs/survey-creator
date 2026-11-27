@@ -1904,13 +1904,28 @@ test("Check QuestionDropdownAdornerViewModel", (): any => {
   expect(question.getPropertyValue("isSelectedInDesigner")).toEqual(undefined);
   expect(model.needToCollapse).toBeTruthy();
 
-  expect(model.getRenderedItems().length).toBe(1);
+  // The placeholder lists real choices only. None, Other and the new item stay in the popup.
+  const collapsed = model.getRenderedItems();
+  expect(collapsed.length).toBe(1);
+  expect(collapsed[0]).toBe(question.choices[0]);
+  expect(collapsed.indexOf(question.choices[1])).toBe(-1);
+  expect(collapsed.indexOf(question.newItem)).toBe(-1);
+  expect(collapsed.indexOf(question.noneItem)).toBe(-1);
+  expect(collapsed.indexOf(question.otherItem)).toBe(-1);
+  creator.getPlugin("designer").wysiwygMode = true;
+  const popupItems = question.dropdownListModel.listModel.actions;
+  expect(popupItems.indexOf(question.choices[0])).toBeGreaterThan(-1);
+  expect(popupItems.indexOf(question.choices[1])).toBeGreaterThan(-1);
+  expect(popupItems.indexOf(question.newItem)).toBeGreaterThan(-1);
+  expect(popupItems.indexOf(question.noneItem)).toBeGreaterThan(-1);
+  expect(popupItems.indexOf(question.otherItem)).toBeGreaterThan(-1);
+  expect(model.getChoiceCss(collapsed[0])).toContain("svc-question__dropdown-choice--fade-1");
   expect(model.getButtonText()).toBe("Show more");
   expect(model.isCollapseView).toBeTruthy();
 
   question.setPropertyValue("isSelectedInDesigner", true);
   model.switchCollapse();
-  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.getRenderedItems().length).toBe(2);
   expect(model.getButtonText()).toBe("Show less");
   expect(model.isCollapseView).toBeFalsy();
 
@@ -1944,15 +1959,15 @@ test("Check QuestionDropdownAdornerViewModel with unset maxVisibleChoices", (): 
 
   expect(question.getPropertyValue("isSelectedInDesigner")).toEqual(undefined);
   expect(model.needToCollapse).toBeFalsy();
-  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.getRenderedItems().length).toBe(2);
   expect(model.isCollapseView).toBeFalsy();
 
   question.setPropertyValue("isSelectedInDesigner", true);
-  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.getRenderedItems().length).toBe(2);
   expect(model.isCollapseView).toBeFalsy();
 
   question.setPropertyValue("isSelectedInDesigner", false);
-  expect(model.getRenderedItems().length).toBe(5);
+  expect(model.getRenderedItems().length).toBe(2);
   expect(model.isCollapseView).toBeFalsy();
 });
 test("creator.onModified, type='ELEMENT_REORDERED'", (): any => {

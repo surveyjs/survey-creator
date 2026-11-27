@@ -34,18 +34,47 @@ export class DropdownChoicesViewModel extends Base {
   }
   public get needToCollapse(): boolean {
     const count = this.host.maxVisibleChoices;
-    return count > 0 && this.question.renderedChoices.length > count;
+    if (count <= 0) return false;
+    // A dropdown keeps None, Other and the new item in its popup, so only the real choices collapse here.
+    if (this.isSingleSelect) return this.getPlaceholderItems().length > count;
+    return this.question.bodyItems.length > count;
   }
   public get isCollapseView(): boolean {
     return this.host.isCollapsed() && this.needToCollapse;
   }
   public getRenderedItems(): Array<ItemValue> {
-    return this.isCollapseView ?
-      this.question.renderedChoices.slice(0, this.host.maxVisibleChoices) :
-      this.question.renderedChoices;
+    if (this.isSingleSelect) {
+      const items = this.getPlaceholderItems();
+      return this.isCollapseView ? items.slice(0, this.host.maxVisibleChoices) : items;
+    }
+    const question = this.question;
+    if (!this.isCollapseView) return question.renderedChoices;
+    const limit = this.host.maxVisibleChoices;
+    return question.headItems.concat(question.bodyItems.slice(0, limit), question.footItems);
   }
-  public getChoiceCss(): string {
-    return toCssClasses("svc-question__dropdown-choice", this.isCollapseView && "svc-question__dropdown-choice--collapsed");
+  // None, Other and the new item are drawn inside the dropdown popup. The placeholder lists the real choices.
+  private getPlaceholderItems(): Array<ItemValue> {
+    const question = this.question;
+    if (question.hasHeadItems || question.hasFootItems) return question.bodyItems;
+    return question.renderedChoices;
+  }
+  public getChoiceCss(item?: ItemValue): string {
+    // Callers that pass the item fade only the cut through the real choices. The others mark every
+    // collapsed row and let the stylesheet fade the last ones.
+    const fade = item ? this.getCollapsedFadeClass(item) : this.isCollapseView && "svc-question__dropdown-choice--collapsed";
+    return toCssClasses("svc-question__dropdown-choice", fade);
+  }
+  // The fade marks the cut through the real choices. Head and foot rows (None, Other, New) stay opaque.
+  private getCollapsedFadeClass(item: ItemValue): string {
+    if (!this.isCollapseView) return "";
+    const limit = this.host.maxVisibleChoices;
+    const body = this.question.bodyItems;
+    if (body.length <= limit) return "";
+    const index = body.slice(0, limit).indexOf(item);
+    if (index < 0) return "";
+    const fromEnd = limit - 1 - index;
+    if (fromEnd > 2) return "";
+    return "svc-question__dropdown-choice--fade-" + (fromEnd + 1);
   }
   public getButtonText(): string {
     return editorLocalization.getString(this.isCollapseView ? "ed.showMoreChoices" : "ed.showLessChoices");
