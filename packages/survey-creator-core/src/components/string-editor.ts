@@ -425,7 +425,13 @@ export class StringEditorViewModelBase extends Base {
     if (this.locString.text != clearedText &&
       !(!this.locString.text && clearedText == this.locString.calculatedText)) {
       if (!this.errorText) {
-        this.setValueIntoLocStr(clearedText, event?.target);
+        if (this.isFocusMovingToAddQuestionButton(event)) {
+          const text = clearedText;
+          const target = event?.target;
+          setTimeout(() => this.setValueIntoLocStr(text, target), 0);
+        } else {
+          this.setValueIntoLocStr(clearedText, event?.target);
+        }
       } else {
         this.creator?.notify(this.errorText, "error");
         this.focusedProgram = true;
@@ -445,6 +451,10 @@ export class StringEditorViewModelBase extends Base {
     window?.getSelection().removeAllRanges();
   }
 
+  private isFocusMovingToAddQuestionButton(event: any): boolean {
+    const related = event && event.relatedTarget;
+    return !!related && typeof related.closest === "function" && !!related.closest(".svc-surface-btn__title-button");
+  }
   private getClearedText(target: HTMLElement): string {
     let html = target.innerHTML;
     // innerText depends on layout: on blur a single-line editor loses "white-space: pre-wrap" (it is set on :focus-within only)

@@ -352,12 +352,17 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   private addGhostPage = (selectCurrentPage: boolean = true) => {
     const currentPage = this.page;
     if (this.isGhost) {
-      const addedPage = !!this.creator.addPage(currentPage, selectCurrentPage, () => {
-        currentPage.unRegisterFunctionOnPropertiesValueChanged(["title", "description"], "add_ghost");
-        currentPage.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
-        return true;
-      });
-      if (addedPage) {
+      const alreadyAdded = this.creator.survey.pages.indexOf(currentPage) > -1;
+      if (!alreadyAdded) {
+        const addedPage = !!this.creator.addPage(currentPage, selectCurrentPage, () => {
+          currentPage.unRegisterFunctionOnPropertiesValueChanged(["title", "description"], "add_ghost");
+          currentPage.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
+          return true;
+        });
+        if (addedPage) {
+          this.creator.survey.currentPage = currentPage;
+        }
+      } else {
         this.creator.survey.currentPage = currentPage;
       }
     }
