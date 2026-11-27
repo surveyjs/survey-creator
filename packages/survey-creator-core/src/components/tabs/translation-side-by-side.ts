@@ -1997,10 +1997,15 @@ export class TranslationElementStrings extends TranslationBase {
         options.html = html;
       }
     });
+    survey.onMatrixCellCreating.add(this.onMatrixCellCreating);
     survey.onMatrixCellCreated.add(this.onMatrixCellCreated);
     survey.onMatrixCellValueChanging.add(this.onMatrixCellValueChanging);
     survey.onMatrixCellValueChanged.add(this.onMatrixCellValueChanged);
   }
+  private onMatrixCellCreating = (_: SurveyModel, options: any): void => {
+    if (options.question !== this.stringsMatrix) return;
+    if (this.richTextModeForItem(this.getMatrixItem(options.row)) !== "none") options.cellType = "richtext";
+  };
   private onMatrixCellCreated = (_: SurveyModel, options: any): void => {
     if (options.question !== this.stringsMatrix) return;
     const cellQuestion = options.cell.question;
@@ -2008,13 +2013,14 @@ export class TranslationElementStrings extends TranslationBase {
     const item = this.getMatrixItem(options.row);
     cellQuestion.autoGrow = true;
     cellQuestion.allowResize = false;
-    cellQuestion.placeholder = !!item ? item.getPlaceholder(options.columnName) : "";
+    cellQuestion.placeholder = !!item ? this.plainRichPlaceholder(item.getPlaceholder(options.columnName), item) : "";
     let isMultiLine = false;
     if (!!item) {
       cellQuestion.maxLength = item.maxLength;
       const loc = item.locString;
       isMultiLine = loc.getIsMultiple();
       cellQuestion.acceptCarriageReturn = isMultiLine || (<LocalizableString>loc).allowLineBreaks;
+      this.configureRichTranslationCell(cellQuestion, item);
     }
     if (!isMultiLine) {
       cellQuestion.rows = 1;
@@ -2036,6 +2042,7 @@ export class TranslationElementStrings extends TranslationBase {
   };
   private disposeStringsMatrix(): void {
     if (!!this.hostSurvey) {
+      this.hostSurvey.onMatrixCellCreating.remove(this.onMatrixCellCreating);
       this.hostSurvey.onMatrixCellCreated.remove(this.onMatrixCellCreated);
       this.hostSurvey.onMatrixCellValueChanging.remove(this.onMatrixCellValueChanging);
       this.hostSurvey.onMatrixCellValueChanged.remove(this.onMatrixCellValueChanged);

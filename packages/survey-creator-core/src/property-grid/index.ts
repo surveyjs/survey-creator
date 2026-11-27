@@ -42,6 +42,7 @@ import { QuestionFactory } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { parsePropertyDescription } from "./description-parser";
+import { richTextModeForProperty } from "../rich-text";
 import { QuestionFileEditorModel } from "../custom-questions/question-file";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
 import { QuestionLinkValueModel } from "../components/link-value";
@@ -223,8 +224,14 @@ export var PropertyGridEditorCollection = {
         if (ed.fit(prop, context) && this.isEditorEnabled(ed, options)) return ed;
       }
     }
+    // A lookup caches the editor for this property. The type can change afterwards
+    // (description becomes html once rich text is turned on), and the editor chosen
+    // for the previous type must not stay in front of the one that fits now.
     var fitEd = this.fitHash[prop.id];
-    if (!!fitEd) return fitEd;
+    if (!!fitEd) {
+      if (fitEd.fit(prop)) return fitEd;
+      delete this.fitHash[prop.id];
+    }
     const search = { dependsOnOptions: false };
     const ed = this.findEditor(prop, false, options, search) || this.findEditor(prop, true, options, search);
     if (!!ed && !search.dependsOnOptions) {
@@ -1870,11 +1877,12 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
     if (prop.name === "title") {
       question.allowSpaceAsAnswer = true;
     }
-    if (question.getType() == "text" || question.getType() == "comment") {
+    if (question.getType() == "text" || question.getType() == "comment" || question.getType() == "richtext") {
       const textQuestion = question as QuestionTextBase;
       if (!textQuestion.getMaxLength() && obj.hasDefaultPropertyValue(prop.name)) {
         this.setupDefaultValuePlaceholder(obj, textQuestion, prop);
         const isDefaultValue = () => prop.isDefaultValueByObj(obj, prop.getValue(obj));
+        const isRichText = question.getType() == "richtext";
         const action = new Action({
           id: "reset",
           title: editorLocalization.getString("pe.resetToDefaultCaption"),
@@ -1885,6 +1893,10 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
           },
           enabled: !isDefaultValue()
         });
+        if (isRichText) {
+          action.iconSize = 16;
+          action.appearance = { size: "x-small" };
+        }
         obj.registerFunctionOnPropertyValueChanged(prop.name, () => {
           action.enabled = !isDefaultValue();
         });
@@ -1905,6 +1917,19 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
       }
     });
   }
+}
+function applyRichTextPropertyEditor(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions, json: any): any {
+  const creator = options as any;
+  if (!creator || typeof creator.isRichStringsEnabled !== "function" || !creator.isRichStringsEnabled()) return json;
+  const mode = richTextModeForProperty(obj, prop.name);
+  if (mode === "none") return json;
+  json.type = "richtext";
+  json.acceptCarriageReturn = mode === "block";
+  if (mode === "inline") {
+    json.rows = 1;
+    json.allowResize = false;
+  }
+  return json;
 }
 export class PropertyGridEditorString extends PropertyGridEditorStringBase {
   public fit(prop: JsonObjectProperty): boolean {
@@ -2143,11 +2168,23 @@ export class PropertyGridEditorHtml extends PropertyGridEditorStringBase {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return this.updateMaxLength(prop, {
+    return applyRichTextPropertyEditor(obj, prop, options, this.updateMaxLength(prop, {
       type: "comment",
       "allowResize": true,
       "autoGrow": false,
-    });
+    }));
+  }
+}
+export class PropertyGridEditorInlineHtml extends PropertyGridEditorStringBase {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type === "inlinehtml";
+  }
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
+    return applyRichTextPropertyEditor(obj, prop, options, this.updateMaxLength(prop, { type: "text" }));
   }
 }
 export class PropertyGridEditorStringArray extends PropertyGridEditor {
@@ -2527,6 +2564,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorNumber());
 PropertyGridEditorCollection.register(new PropertyGridEditorSpinEdit());
 PropertyGridEditorCollection.register(new PropertyGridEditorText());
 PropertyGridEditorCollection.register(new PropertyGridEditorHtml());
+PropertyGridEditorCollection.register(new PropertyGridEditorInlineHtml());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
 PropertyGridEditorCollection.register(new PropertyGridEditorSet());
 PropertyGridEditorCollection.register(new PropertyGridEditorPage());
