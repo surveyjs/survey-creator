@@ -448,16 +448,16 @@ export var enStrings = {
       presets: "Filter presets",
       defaultPreset: "Default preset",
       showPresets: "Show presets",
-      allowEditPresets: "Allow respondents to edit presets",
-      allowAddPresets: "Allow respondents to add presets",
-      allowDeletePresets: "Allow respondents to delete presets"
+      allowEditPresets: "Allow users to edit presets",
+      allowAddPresets: "Allow users to add presets",
+      allowDeletePresets: "Allow users to delete presets"
     },
     filterpreset: {
       name: "Preset name",
       title: "Preset title",
       expression: "Filter expression",
-      allowEdit: "Allow respondents to edit this preset",
-      allowDelete: "Allow respondents to delete this preset"
+      allowEdit: "Allow users to edit this preset",
+      allowDelete: "Allow users to delete this preset"
     },
     filterfield: {
       name: "Field name",
@@ -1690,13 +1690,14 @@ export var enStrings = {
     },
     filter: {
       targetQuestion: "Select a dynamic matrix, a dropdown matrix or a dynamic panel whose rows or panels the filter narrows down.",
-      defaultPreset: "The preset applied when the survey starts."
+      defaultPreset: "The preset applied when the survey starts.",
+      searchFields: "The search bar looks for matches in the selected fields. Leave empty to search in all available fields."
     },
     filterpreset: {
       expression: "Use field names in curly brackets, for example: {price} < 20 and {category} anyof ['Beverages']."
     },
     filterfield: {
-      operators: "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field."
+      operators: "Select the operators users can apply when filtering by this field. Leave empty to offer all operators supported by the field type."
     },
     matrixdropdowncolumn: {
       name: "A column ID that is not visible to respondents.",
