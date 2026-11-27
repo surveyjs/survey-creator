@@ -299,7 +299,7 @@ describe("Property grid: the Filter Control layout", () => {
     const row = (<QuestionMatrixDynamicModel>grid.survey.getQuestionByName("presets")).visibleRows[0];
     row.showDetailPanel();
     expect(["allowEdit", "allowDelete"].map(name => row.detailPanel.getQuestionByName(name).title), "#2")
-      .toEqual(["Allow respondents to edit this preset", "Allow respondents to delete this preset"]);
+      .toEqual(["Allow users to edit this preset", "Allow users to delete this preset"]);
   });
   test("Available operators explain themselves as the column's filter operators did", () => {
     const survey = new SurveyModel({ elements: [{ type: "matrixdynamic", name: "m", columns: [{ name: "a" }] },
@@ -308,7 +308,7 @@ describe("Property grid: the Filter Control layout", () => {
     const row = matrix.visibleRows[0];
     row.showDetailPanel();
     expect(row.detailPanel.getQuestionByName("operators").description).toBe(
-      "Limits the operators respondents can use to filter by this field. Leave empty to allow all operators that suit the field.");
+      "Select the operators users can apply when filtering by this field. Leave empty to offer all operators supported by the field type.");
   });
   test("no Others tab for the filter and a preset", () => {
     const survey = new SurveyModel({ elements: [{ type: "filter", name: "f", presets: [{ name: "a" }] }] });
