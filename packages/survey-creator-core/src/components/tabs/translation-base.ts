@@ -1,22 +1,20 @@
 import {
   property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty,
   Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, Action,
-  PanelModelBase, QuestionMatrixDropdownModel, QuestionMatrixDynamicModel, PanelModel, QuestionCommentModel,
+  QuestionMatrixDynamicModel,
   Helpers, settings as surveySettings,
-  MatrixDropdownColumn,
   MatrixCells,
   QuestionMatrixModel, Question, QuestionPanelDynamicModel,
-  DomDocumentHelper, DomWindowHelper
+  DomDocumentHelper, DomWindowHelper, IActionAppearance, PanelModel, QuestionHtmlModel
 } from "survey-core";
 import { SurveyElementActionContainer } from "../action-container-view-model";
 import { getActualLocaleName } from "../../utils/creator-locstrings";
 import { unparse, parse } from "papaparse";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../creator-settings";
-import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { SurveyHelper, getDefaultLocaleName, isDefaultLocale } from "../../survey-helper";
-import { translationCss } from "./translation-theme";
 import { CreatorDomHelper } from "../../dom-helper";
+import { ITranslationTableLocales, TranslationTable } from "./translation-table";
 
 // The library localizes a few strings outside their localizable string: the property itself stays
 // empty and the text the survey renders comes from the error class that falls back to it (see
@@ -238,6 +236,15 @@ export class TranslationItem extends TranslationItemBase {
     }
     return res;
   }
+  // The text a string shows in place of its missing translation to the locale: the text being
+  // translated from fromLocale (see getTextToTranslateFrom). Empty when the string has a text of
+  // its own in the locale, or takes one from its root language (getRootLanguageText: "pt-br"
+  // shows the "pt" text), since that is what the survey shows.
+  public getUntranslatedText(locale: string, fromLocale: string): string {
+    const loc = locale || "";
+    if (!loc || !!this.getLocText(loc) || !!this.getRootLanguageText(loc)) return "";
+    return this.getTextToTranslateFrom(fromLocale);
+  }
   public getPlaceholder(locale: string, ignorePlaceHolder: boolean = false): string {
     const placeholderText = !ignorePlaceHolder ? editorLocalization.getString("ed.translationPlaceHolder", this.getTextLocale(locale)) : "";
     return this.getPlaceHolderCore(locale) || placeholderText;
@@ -291,8 +298,12 @@ export class TranslationItem extends TranslationItemBase {
     if (!!val && !!val.text) return val.text;
     const res = this.locString.getLocaleText(loc);
     if (!!res) return res;
-    const index = loc.indexOf("-");
-    if (index < 0) return "";
+    return this.getRootLanguageText(loc);
+  }
+  // The text a regional locale ("pt-br") takes from its root language ("pt"); empty for a locale
+  // that is not regional.
+  public getRootLanguageText(loc: string): string {
+    if (!loc || loc.indexOf("-") < 0) return "";
     return this.getPlaceholderText(loc);
   }
   public getPlaceholderText(loc: string): string {
@@ -805,7 +816,8 @@ export class TranslationBase extends Base implements ITranslationLocales {
   public limitAllPagesOnLargeSurvey: boolean = false;
   // False when the strings grid must be scoped to a single page: building and rendering it over the
   // whole survey takes about 1 ms per element, so a large multi-page survey gets no "All Pages"
-  // (see settings.translation.maxElementsForAllPages).
+  // (see settings.translation.maxElementsForAllPages). Collapsed page panels are not rendered, but
+  // their string matrices are built, and the build is most of that time.
   public get canShowAllPages(): boolean {
     if (!this.limitAllPagesOnLargeSurvey || !this.survey || this.survey.pages.length < 2) return true;
     const max = settings.translation.maxElementsForAllPages;
@@ -867,8 +879,20 @@ export class TranslationBase extends Base implements ITranslationLocales {
     }
     this.survey = survey;
   }
+  // The strings survey's builder (see TranslationTable): it outlives the strings survey, which is
+  // rebuilt on every reset, and keeps which page panels are expanded.
+  private stringsTableValue: TranslationTable;
+  public get stringsTable(): TranslationTable {
+    if (!this.stringsTableValue) {
+      this.stringsTableValue = this.createStringsTable();
+    }
+    return this.stringsTableValue;
+  }
+  // The grouped table of the grid view, the same in both modes.
+  protected createStringsTable(): TranslationTable {
+    return new TranslationTable(this);
+  }
   @property() stringsSurvey: SurveyModel;
-  @property() stringsHeaderSurvey: SurveyModel;
   private stringsSurveyInstanceId = 0;
   protected makeSurveyIdSpaceUnique(survey: SurveyModel): void {
     survey.elementIdPrefix = (survey.elementIdPrefix || "") + (++this.stringsSurveyInstanceId) + "-";
@@ -924,6 +948,57 @@ export class TranslationBase extends Base implements ITranslationLocales {
   protected createSettingsSurvey(): SurveyModel {
     return undefined;
   }
+  // The "Actions" group of the settings survey, the same in both modes: the "Actions" caption and
+  // the CSV import and download buttons. The settings survey JSON adds the panel
+  // (getTranslationActionsPanelJSON); this sets it up. The buttons are created when the panel first
+  // asks for them (see getCsvActions) - it runs in the base constructor.
+  protected setupCsvActionsPanel(survey: SurveyModel): void {
+    const caption = <QuestionHtmlModel>survey.getQuestionByName(translationActionsCaptionName);
+    if (!!caption) caption.html = escapeTranslationHtmlText(editorLocalization.getString("ed.translationActions"));
+    setupTranslationButtonsPanel(survey, translationActionsPanelName, () => this.getCsvActions());
+    survey.onUpdateQuestionCssClasses.add((_, options) => {
+      if (options.question.name === translationActionsCaptionName) options.cssClasses.root += " st-language-settings__caption";
+    });
+  }
+  private csvActionsValue: Array<Action>;
+  private importCsvAction: Action;
+  public getCsvActions(): Array<Action> {
+    // A disposed model creates nothing: its readOnly subscription would outlive it.
+    if (this.isDisposed && !this.csvActionsValue) return [];
+    if (!this.csvActionsValue) {
+      const appearance = getTranslationPanelButtonAppearance("neutral", "secondary");
+      this.importCsvAction = createTranslationPanelButton("svc-translation-import-csv", "ed.translationImportFromSCVButton",
+        appearance, () => this.importFromCSVFileDOM(), "icon-import-24x24");
+      const downloadCsvAction = createTranslationPanelButton("svc-translation-download-csv", "ed.translationDownloadCSV",
+        appearance, () => this.exportToCSVFileUI(), "icon-download-24x24");
+      this.csvActionsValue = [this.importCsvAction, downloadCsvAction];
+      this.subscribeOnCreatorReadOnly();
+      this.updateCsvActions();
+    }
+    return this.csvActionsValue;
+  }
+  // The model's own flag is set once, when the tab is activated; the creator's read-only state can
+  // change while the tab is open.
+  protected get isEditingReadOnly(): boolean {
+    return this.readOnly || (!!this.options && !!this.options.readOnly);
+  }
+  private readOnlyHandlerKey: string;
+  // Follows the creator's readOnly property while the side panel buttons exist. The options object is
+  // checked structurally: the model stays constructible with EmptySurveyCreatorOptions.
+  protected subscribeOnCreatorReadOnly(): void {
+    const options = <any>this.options;
+    if (!!this.readOnlyHandlerKey || !options || typeof options.registerFunctionOnPropertyValueChanged !== "function") return;
+    // A key per model: the key of the dialog models' handlers must not replace the tab model's one.
+    this.readOnlyHandlerKey = "svc-translation-settings-actions-" + (++translationReadOnlyHandlerCounter);
+    options.registerFunctionOnPropertyValueChanged("readOnly", () => this.onEditingReadOnlyChanged(), this.readOnlyHandlerKey);
+  }
+  protected onEditingReadOnlyChanged(): void {
+    this.updateCsvActions();
+  }
+  private updateCsvActions(): void {
+    if (!this.csvActionsValue || this.isDisposed) return;
+    this.importCsvAction.enabled = !this.isEditingReadOnly;
+  }
   // The locale a row of a settings survey matrix stands for (the languages matrices of both
   // modes): the matrix value is a plain array following the visible rows order, and the default
   // locale is stored as "" there. Undefined when the row is not in the value - it is resolved at
@@ -975,79 +1050,40 @@ export class TranslationBase extends Base implements ITranslationLocales {
   private resetStringsSurvey() {
     if (!this.hasStringsSurveyUI) return;
     this.stringsSurvey = this.createStringsSurvey();
-    this.stringsHeaderSurvey = this.createStringsHeaderSurvey();
     this.updateReadOnly();
   }
   protected getSurveyStringsArea(): string { return undefined; }
-  protected getSurveyStringsHeaderArea(): string { return undefined; }
   protected onSurveyStringsCreated(survey: SurveyModel): void { }
-  protected onSurveyStringsHeaderCreated(survey: SurveyModel): void { }
-  private createStringsSurvey(): SurveyModel {
-    // widthMode is fixed to what "auto" resolves to here (every strings-grid matrix needs a responsive
-    // width): with "auto", endLoadingFromJson computes it by reading every element of the grid under a
-    // dependency collector, which takes most of the build time on a large survey.
-    var json = { autoGrowComment: true, allowResizeComment: false, widthMode: "responsive" };
-    setSurveyJSONForPropertyGrid(json, false);
-    const survey: SurveyModel = this.options.createSurvey(json, "translation_strings", this, (survey: SurveyModel): void => {
-      this.makeSurveyIdSpaceUnique(survey);
-      survey.lazyRenderEnabled = true;
-      survey.skeletonComponentName = "sd-translation-line-skeleton";
-      survey.startLoadingFromJson();
-      survey.css = translationCss;
-      survey.addNewPage("page");
-      this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root);
-      survey.data = this.getStringsSurveyData(survey);
-      survey.endLoadingFromJson();
-      this.onSurveyStringsCreated(survey);
-    }, this.getSurveyStringsArea());
-    const getTransationItem = (question: QuestionMatrixDropdownModel, rowName: any): TranslationItem => {
-      var itemValue = ItemValue.getItemByValue(question.rows, rowName);
-      return !!itemValue ? itemValue["translationData"] : null;
-    };
-    survey.onMatrixCellCreated.add((sender: SurveyModel, options: any) => {
-      if (options.cell.question instanceof QuestionCommentModel) {
-        const cellQuestion = <QuestionCommentModel>options.cell.question;
-        const item = getTransationItem(options.question, options.row.name);
-        this.setPlaceHolder(cellQuestion, item, options.columnName);
-        let isMultiLine = false;
-        if (!!item) {
-          cellQuestion.maxLength = item.maxLength;
-          const loc = item.locString;
-          isMultiLine = loc.getIsMultiple();
-          cellQuestion.acceptCarriageReturn = isMultiLine || (<LocalizableString>loc).allowLineBreaks;
-        }
-        if (!isMultiLine) {
-          cellQuestion.rows = 1;
-        }
-      }
-    });
-    survey.onMatrixCellValueChanging.add((_: SurveyModel, options: any) => {
-      const item = getTransationItem(options.question, options.row.name);
-      if (!!item) {
-        options.value = this.getProcessedTranslationItemText(options.columnName, item.locString, options.value, item.context);
-      }
-    });
-    survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {
-      const item = getTransationItem(options.question, options.row.name);
-      if (!!item) {
-        this.setItemLocText(item, options.columnName, options.value);
-        const colName = options.columnName;
-        options.row.cells.forEach(cell => {
-          if (colName === getDefaultLocaleName() || cell.column.name.indexOf(colName + "-") === 0)
-            this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
-        });
-      }
-    });
-    survey.onUpdatePanelCssClasses.add((sender: SurveyModel, options) => {
-      if (options.panel["__translationHasIndent"]) {
-        options.cssClasses.panel.content += " st-panel-indent";
-      }
-    });
-    survey.currentPage = survey.pages[0];
-    return survey;
+  protected createStringsSurvey(): SurveyModel {
+    return this.stringsTable.createSurvey(this.root, (survey: SurveyModel): void => this.onSurveyStringsCreated(survey),
+      this.getSurveyStringsArea());
   }
-  private setPlaceHolder(cellQuestion: QuestionCommentModel, item: TranslationItem, locale: string) {
-    cellQuestion.placeholder = item.getPlaceholder(locale);
+  // A survey of the tab, created through the creator (the area lets it be customized), with an
+  // element id space of its own.
+  public createTabSurvey(json: any, reason: string, onCreating: (survey: SurveyModel) => void, area?: string): SurveyModel {
+    return this.options.createSurvey(json, reason, this, (survey: SurveyModel): void => {
+      this.makeSurveyIdSpaceUnique(survey);
+      onCreating(survey);
+    }, area);
+  }
+  // An empty Target cell shows the text it is translated from, muted (the cell placeholder), or the
+  // text of its root language ("pt" for "pt-br"); a Source cell shows the text the string is displayed
+  // by (a choice's value, a question's name).
+  public getStringsCellPlaceholder(item: TranslationItem, columnName: string): string {
+    const locales = this.getTableLocales();
+    const target = locales.targets.filter(loc => this.getLocaleColumnName(loc) === columnName)[0];
+    if (target === undefined) return item.getPlaceholder(columnName);
+    return this.getUntranslatedTargetText(item, target, locales.source) || item.getPlaceholder(columnName, true);
+  }
+  // getUntranslatedText has no answer for the default locale (it is the source everywhere else): the
+  // machine-translation dialog translates into it from another language.
+  private getUntranslatedTargetText(item: TranslationItem, target: string, source: string): string {
+    if (!!target) return item.getUntranslatedText(target, source);
+    return !item.getLocText("") ? item.getTextToTranslateFrom(source) : "";
+  }
+  // The text the group counts of the strings table measure.
+  public getTargetText(item: TranslationItem, locale: string): string {
+    return item.locString.getLocaleText(locale);
   }
   // The single write path for translation item edits on the real survey; subclasses hook it
   // to react to the change. No-op writes are filtered out.
@@ -1060,7 +1096,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
     } else if ((newText || "") === current) return;
     item.setLocText(locale, newText);
   }
-  protected setItemLocText(item: TranslationItem, locale: string, text: string): void {
+  public setItemLocText(item: TranslationItem, locale: string, text: string): void {
     this._syncing = true;
     try {
       this.performItemLocTextAction(item, locale, text);
@@ -1113,163 +1149,35 @@ export class TranslationBase extends Base implements ITranslationLocales {
     }
     return undefined;
   }
-  private createStringsHeaderSurvey() {
-    let json = {};
-    setSurveyJSONForPropertyGrid(json, false);
-    const survey: SurveyModel = this.options.createSurvey(json, "translation_strings_header", this, (survey: SurveyModel): void => {
-      this.makeSurveyIdSpaceUnique(survey);
-      survey.css = translationCss;
-      const newPage = survey.addNewPage("page");
-
-      const matrix = <QuestionMatrixDropdownModel>(Serializer.createClass("matrixdropdown"));
-      matrix.name = "stringsHeader";
-      matrix.titleLocation = "hidden";
-      this.addLocaleColumns(matrix);
-
-      newPage.addQuestion(matrix, 0);
-      survey.currentPage = survey.pages[0];
-      this.onSurveyStringsHeaderCreated(survey);
-    }, this.getSurveyStringsHeaderArea());
-    return survey;
-  }
-  private addTranslationGroupIntoStringsSurvey(
-    panel: PanelModelBase,
-    group: TranslationGroup) {
-    for (var i = 0; i < group.items.length; i++) {
-      if (group.items[i].isGroup) continue;
-      let item = <TranslationItem>group.items[i];
-      let matrix = <QuestionMatrixDropdownModel>(
-        Serializer.createClass("matrixdropdown")
-      );
-      matrix.cellType = "comment";
-      matrix.titleLocation = "hidden";
-      matrix.name = group.fullName + i;
-      matrix.showHeader = false;
-      panel.addQuestion(matrix);
-      this.addLocaleColumns(matrix);
-      // let matrix = <QuestionMatrixDropdownModel>panel.questions[0];
-      var itemValue = new ItemValue(item.name, item.text);
-      itemValue["translationData"] = item;
-      matrix.rows.push(itemValue);
-    }
-    for (var i = 0; i < group.items.length; i++) {
-      if (!group.items[i].isGroup) continue;
-      let item = <TranslationGroup>group.items[i];
-      var pnl = <PanelModel>Serializer.createClass("panel");
-      pnl.name = item.name;
-      panel.addElement(pnl);
-      pnl.title = item.text;
-      if (item.hasIndent) {
-        pnl["__translationHasIndent"] = true;
-      }
-      this.addTranslationGroupIntoStringsSurvey(pnl, item);
-    }
-  }
-  protected getLocaleColumnName(loc: string): string {
+  public getLocaleColumnName(loc: string): string {
     return !loc ? getDefaultLocaleName() : loc;
   }
-  // Shows a source column before the target column (removing a previously added source column
-  // first); no source column when the locales are equal. Shared by the machine-translation
-  // dialog (a read-only source) and the side-by-side grid (an editable one, like any locale
-  // column in the standard mode).
-  public updateMatrixSourceColumn(matrix: QuestionMatrixDropdownModel, sourceLoc: string, targetLoc: string, isReadOnly: boolean = false): void {
-    if (matrix.columns.length === 2) {
-      matrix.columns.splice(0, 1);
-    }
-    const loc = sourceLoc || "";
-    if (loc === (targetLoc || "")) return;
-    const column = new MatrixDropdownColumn(this.getLocaleColumnName(loc), this.getLocaleName(loc));
-    column.readOnly = isReadOnly;
-    matrix.columns.splice(0, 0, column);
-  }
-  // Columns are [Source, Target], or a single column: the target one when the locales are equal,
-  // the source one when there is no target language at all (hasTarget = false).
-  public updateSourceTargetHeaderColumns(matrix: QuestionMatrixDropdownModel, sourceLoc: string, targetLoc: string, hasTarget: boolean = true): void {
-    const cols = matrix.columns;
-    if (cols.length > 1) {
-      cols[0].title = this.getSourceTargetHeaderTitle("translationSource", sourceLoc || "");
-      cols[1].title = this.getSourceTargetHeaderTitle("translationTarget", targetLoc);
-    } else {
-      cols[0].title = hasTarget
-        ? this.getSourceTargetHeaderTitle("translationTarget", targetLoc)
-        : this.getSourceTargetHeaderTitle("translationSource", sourceLoc || "");
-    }
-  }
-  private getSourceTargetHeaderTitle(strName: string, locale: string): string {
-    return editorLocalization.getString("ed." + strName) + this.getLocaleName(locale);
-  }
-  protected addLocaleColumns(matrix: QuestionMatrixDropdownModel): void {
+  // The locale columns of the strings table and their roles (see ITranslationTableLocales). With the
+  // source/target pair: [Source, Target]; the Target alone when the languages are the same; the Source
+  // alone when no target language is selected (editable, exactly as it is next to a target column).
+  // Otherwise the column locales of the mode, the source being the default locale.
+  public getTableLocales(): ITranslationTableLocales {
+    const source = this.sourceLocale || "";
     if (this.useSourceTargetColumns) {
       const target = this.targetLocale || "";
-      // No target language selected - nothing is being translated, so the grid holds the source
-      // column alone (editable, exactly as it is next to a target column).
-      const hasTarget = !!target;
-      const loc = hasTarget ? target : (this.sourceLocale || "");
-      matrix.addColumn(this.getLocaleColumnName(loc), this.getLocaleName(loc));
-      if (hasTarget) {
-        this.updateMatrixSourceColumn(matrix, this.sourceLocale, target);
-      }
-      if (matrix.name === "stringsHeader") {
-        this.updateSourceTargetHeaderColumns(matrix, this.sourceLocale, target, hasTarget);
-      }
-      return;
+      if (!target) return { columns: [source], source: source, targets: [] };
+      return { columns: source !== target ? [source, target] : [target], source: source, targets: [target] };
     }
-    this.getColumnLocales().forEach(loc => {
-      matrix.addColumn(this.getLocaleColumnName(loc), this.getLocaleName(loc));
-    });
+    const columns = this.getColumnLocales();
+    return { columns: columns, source: source, targets: columns.filter(loc => loc !== source) };
   }
-  // The locale columns of the strings grid when the source/target pair is not used. The
-  // multiple-languages mode shows its ordered selected locales (or the single edit locale in the
-  // machine-translation dialog).
+  // The locale columns of the strings table when the source/target pair is not used. The
+  // multiple-languages mode shows its ordered selected locales (or the source and the edit locale in
+  // the machine-translation dialog).
   protected getColumnLocales(): Array<string> {
     return [""];
   }
-  private getStringsSurveyData(survey: SurveyModel): any {
-    var res = {};
-    var questions = survey.getAllQuestions();
-    for (var i = 0; i < questions.length; i++) {
-      res[questions[i].name] = this.getStringsQuestionData(
-        <QuestionMatrixDropdownModel>questions[i]
-      );
-    }
-    return res;
-  }
   public updateStringsSurveyData(): void {
-    const survey = this.stringsSurvey;
-    if (survey) {
-      survey.data = this.getStringsSurveyData(survey);
-    }
+    if (!!this.stringsTableValue)this.stringsTableValue.updateData();
   }
-  private getStringsQuestionData(matrix: QuestionMatrixDropdownModel): any {
-    var res = {};
-    for (var i = 0; i < matrix.rows.length; i++) {
-      var itemValue = matrix.rows[i];
-      var item: TranslationItem = itemValue["translationData"];
-      var value = item.toJSON();
-      if (!Helpers.isValueEmpty(value)) {
-        res[itemValue.value] = value;
-      }
-    }
-    return res;
-  }
-  protected updateHeaderStringsSurveyColumns(): void {
-    if (!this.stringsHeaderSurvey) return;
-    let matrix = <QuestionMatrixDropdownModel>(
-      this.stringsHeaderSurvey.getQuestionByName("stringsHeader")
-    );
-    matrix.columns = [];
-    this.addLocaleColumns(matrix);
-  }
+  // The columns and the group counts of the strings survey.
   protected updateStringsSurveyColumns(): void {
-    if (!this.stringsSurvey) return;
-    var questions = this.stringsSurvey.getAllQuestions();
-    for (var i = 0; i < questions.length; i++) {
-      var matrix = <QuestionMatrixDropdownModel>questions[i];
-      matrix.beginUpdate();
-      matrix.columns = [];
-      this.addLocaleColumns(matrix);
-      matrix.endUpdate();
-    }
+    if (!!this.stringsTableValue)this.stringsTableValue.updateColumns();
   }
   private addLocaleIntoChoices(
     loc: string,
@@ -1283,7 +1191,6 @@ export class TranslationBase extends Base implements ITranslationLocales {
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "locales") {
-      this.updateHeaderStringsSurveyColumns();
       this.updateStringsSurveyColumns();
     }
     if (name === "useSourceTargetColumns" ||
@@ -1291,9 +1198,8 @@ export class TranslationBase extends Base implements ITranslationLocales {
       this.updateStringsSurveyColumnsAndData();
     }
   }
-  // Re-runs the column setup on the header and data matrices, keeping the entered values.
+  // Re-runs the column setup on the string matrices, keeping the entered values.
   protected updateStringsSurveyColumnsAndData(): void {
-    this.updateHeaderStringsSurveyColumns();
     this.updateStringsSurveyColumns();
     this.updateStringsSurveyData();
   }
@@ -1303,7 +1209,12 @@ export class TranslationBase extends Base implements ITranslationLocales {
   public set survey(val: SurveyModel) {
     this.surveyValue = val;
     this.setVisibleLocales([]);
+    this.onSurveyReplaced();
     this.reset();
+  }
+  // Called when another survey is assigned, before the model is rebuilt over it.
+  protected onSurveyReplaced(): void {
+    if (!!this.stringsTableValue)this.stringsTableValue.resetPageState();
   }
   // The object the translation tree is built over. Overridden to scope the strings grid
   // to a single element (the side-by-side matrix strings popup).
@@ -1332,6 +1243,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
   public reset(alwaysReset: boolean = true): void {
     if (!alwaysReset && !!this.root) return;
     this.applyPageScopeLimit();
+    this.stringsTable.updateFilteredPage(this.filteredPage);
     const prevVisibleLocales = this.getVisibleLocales();
     const rootInfo = this.getRootTranslationObj();
     const rootObj = rootInfo.obj;
@@ -1355,6 +1267,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
     if (this.stringsSurvey) {
       this.stringsSurvey.readOnly = this.readOnly;
     }
+    this.onEditingReadOnlyChanged();
   }
   public canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean, isShowing: boolean = true): boolean {
     const result = isShowing && (!isEmpty || SurveyHelper.isPropertyVisible(obj, prop, this.options));
@@ -1567,14 +1480,18 @@ export class TranslationBase extends Base implements ITranslationLocales {
     group.groups.forEach((group) => this.fillItemsHash(name, group, itemsHash));
   }
   public dispose(): void {
+    if (!!this.readOnlyHandlerKey) {
+      (<any>this.options).unRegisterFunctionOnPropertyValueChanged("readOnly", this.readOnlyHandlerKey);
+      this.readOnlyHandlerKey = undefined;
+    }
     this.isEmpty = true;
+    if (!!this.stringsTableValue) {
+      this.stringsTableValue.dispose();
+      this.stringsTableValue = undefined;
+    }
     if (!!this.stringsSurvey) {
       this.stringsSurvey.dispose();
       this.stringsSurvey = undefined;
-    }
-    if (!!this.stringsHeaderSurvey) {
-      this.stringsHeaderSurvey.dispose();
-      this.stringsHeaderSurvey = undefined;
     }
     if (!!this.settingsSurveyValue) {
       this.settingsSurveyValue.dispose();
@@ -1587,8 +1504,63 @@ export class TranslationBase extends Base implements ITranslationLocales {
   }
 }
 
-// The top navigation bar of a strings-grid header survey: hosts the machine-translation
-// button and the other dialog actions in the machine-translation and element strings dialogs.
+// The side panel (the settings survey) of the Translation tab renders its buttons as the footer
+// actions of a panel: a panel is the one survey element that renders a row of actions as buttons.
+// It needs a visible element to be shown, which is the html question with the text above its buttons.
+// The "Actions" group with the CSV buttons is the same in both modes (see TranslationBase.setupCsvActionsPanel).
+export const translationActionsPanelName = "translationActions";
+export const translationActionsCaptionName = "translationActionsCaption";
+export function getTranslationActionsPanelJSON(): any {
+  return {
+    type: "panel",
+    name: translationActionsPanelName,
+    // An html question has no title, so the caption is its text.
+    elements: [{ type: "html", name: translationActionsCaptionName }]
+  };
+}
+// The look of the side panel buttons: survey-core's medium actions (48px high), stretched to the
+// panel width by translation.scss.
+export function getTranslationPanelButtonAppearance(style: "brand" | "neutral", mode: "primary" | "secondary"): IActionAppearance {
+  return { style: style, mode: mode, size: "medium" };
+}
+// A side panel button. The title is assigned from editorLocalization, which keeps it in the creator UI locale.
+export function createTranslationPanelButton(id: string, titleName: string, appearance: IActionAppearance,
+  action: () => void, iconName?: string): Action {
+  return new Action({
+    id: id,
+    title: editorLocalization.getString(titleName),
+    iconName: iconName,
+    iconSize: "auto",
+    appearance: appearance,
+    action: action
+  });
+}
+export function escapeTranslationHtmlText(text: string): string {
+  return (text || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+// Turns a settings survey panel into a group of stacked buttons. The texts of its html questions
+// are creator strings, shown as they are (the settings survey does not process them).
+export function setupTranslationButtonsPanel(survey: SurveyModel, panelName: string, getActions: () => Array<Action>): void {
+  const panel = <PanelModel>survey.getPanelByName(panelName);
+  if (!panel) return;
+  panel.questions.forEach((question: Question) => {
+    if (question instanceof QuestionHtmlModel) question.ignoreHtmlProgressing = true;
+  });
+  // The buttons are stacked by translation.scss: an adaptive container would measure them as a
+  // row and move the ones that do not fit into its "more" menu.
+  panel.allowAdaptiveActions = false;
+  panel.onGetFooterActionsCallback = getActions;
+  panel.onGetFooterToolbarCssCallback = (): string => "st-language-settings__buttons";
+  survey.onUpdatePanelCssClasses.add((_, options) => {
+    if (options.panel.name === panelName) {
+      options.cssClasses.panel.container += " st-language-settings__group";
+    }
+  });
+}
+let translationReadOnlyHandlerCounter = 0;
+
+// The top navigation bar of a strings survey: hosts the toolbar of the machine-translation dialog
+// ("Translate from", the machine-translation button, the CSV import and export) above the table.
 export function createStringsHeaderNavigationBar(survey: SurveyModel): SurveyElementActionContainer {
   const navigationBar = new SurveyElementActionContainer();
   survey.createNavigationBarCallback = () => navigationBar;
@@ -1627,7 +1599,11 @@ export function runItemsMachineTranslation(
   if (items.length === 0) return;
   const strings = items.map(item => item.getTextToTranslateFrom(fromLocale));
   const callback = (translated: Array<string>): void => {
-    if (!Array.isArray(translated)) return;
+    // No result is a completed request too: the caller may be waiting for it (a disabled button).
+    if (!Array.isArray(translated)) {
+      onCompleted();
+      return;
+    }
     for (let i = 0; i < Math.min(items.length, translated.length); i++) {
       if (!!translated[i]) {
         applyTranslation(items[i], translated[i]);

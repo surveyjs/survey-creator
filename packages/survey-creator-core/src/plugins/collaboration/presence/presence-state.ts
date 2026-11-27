@@ -177,7 +177,8 @@ export const PRESENCE_SELECTORS = {
   pgCheckbox: ".sd-checkbox__decorator",
   stringEditor: ".svc-string-editor",
   // Translations strings-table locale cell (td) - one per locale column.
-  translationCell: ".st-table__cell:not(.st-table__cell--row-text)",
+  // Data cells only: the side-by-side grid's string tables carry a header row in their first row.
+  translationCell: ".st-table__cell:not(.st-table__cell--row-text):not(.st-table__cell--header)",
   designerHeader: ".svc-designer-header",
   tabItem: (tabId: string): string => `#${cssEsc(`tab-${tabId}`)}`,
   tabContent: (tabId: string): string => `#${cssEsc(`scrollableDiv-${tabId}`)}`,

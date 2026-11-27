@@ -6,6 +6,7 @@ import { CreatorTester } from "../creator-tester";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { SurveyElementActionContainer } from "../../src/components/action-container-view-model";
 import { parse } from "papaparse";
+import { getLocaleCell, getLocaleColumnNames, getLocaleColumnTitles, getLocaleColumns, getStringMatrices } from "./translation-table-helper";
 
 test("create locales question for edit translation", () => {
   const survey = new SurveyModel({
@@ -84,7 +85,7 @@ test("Auto-translate into the default locale: default locale is not in the 'Tran
   expect(editor.fromLocales).toStrictEqual(["de"]);
 
   // The default locale is the target, so it is not shown in the "Translate from" dropdown; only "de" is available.
-  const fromAction = editor.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale");
+  const fromAction = editor.translation.stringsSurvey.navigationBar.getActionById("svc-translation-fromlocale");
   const dropdownIds = fromAction.popupModel.contentComponentData.model.actions.map((a) => a.id);
   expect(dropdownIds).not.toContain(null); // the default locale (id === null) is not present
   expect(dropdownIds).toStrictEqual(["de"]);
@@ -123,25 +124,19 @@ test("Auto-translate window shows Source column immediately without the Default 
   });
   const editor = new Translation(survey).createTranslationEditor("fr");
   const matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  const headerMatrix = <QuestionMatrixDropdownModel>editor.translation.stringsHeaderSurvey.getAllQuestions()[0];
 
-  // The default locale is not shown as a separate column; the Source column (default locale) is shown immediately.
-  expect(matrix.columns).toHaveLength(2);
-  expect(matrix.columns[0].name).toBe("default");
-  expect(matrix.columns[0].readOnly).toBeTruthy();
-  expect(matrix.columns[1].name).toBe("fr");
-  expect(matrix.columns[1].readOnly).toBeFalsy();
-  expect(headerMatrix.columns[0].title).toBe("Source: Default (English)");
-  expect(headerMatrix.columns[1].title).toBe("Target: Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  // The default locale is not shown as a separate column; the Source column (default locale) is shown
+  // immediately, read-only: an html cell.
+  expect(getLocaleColumnNames(matrix)).toEqual(["default", "fr"]);
+  expect(getLocaleColumns(matrix)[0].cellType).toBe("html");
+  expect(getLocaleColumns(matrix)[1].cellType).toBe("default");
+  expect(getLocaleColumnTitles(matrix)).toEqual(["Source: Default (English)", "Target: Français"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
   // Changing the "translate from" locale updates the Source column instead of adding a Default column.
   editor.setFromLocale("de");
-  expect(matrix.columns).toHaveLength(2);
-  expect(matrix.columns[0].name).toBe("de");
-  expect(matrix.columns[0].readOnly).toBeTruthy();
-  expect(matrix.columns[1].name).toBe("fr");
-  expect(headerMatrix.columns[0].title).toBe("Source: Deutsch");
-  expect(headerMatrix.columns[1].title).toBe("Target: Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(getLocaleColumnNames(matrix)).toEqual(["de", "fr"]);
+  expect(getLocaleColumns(matrix)[0].cellType).toBe("html");
+  expect(getLocaleColumnTitles(matrix)).toEqual(["Source: Deutsch", "Target: Français"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 });
 test("Auto-translate dialog persists the selected Translate from locale", () => {
   const survey = new SurveyModel({
@@ -160,13 +155,13 @@ test("Auto-translate dialog persists the selected Translate from locale", () => 
   translation.setMachineTranslationFromLocale = (locale) => { persisted = locale; };
 
   let editor = translation.createTranslationEditor("es");
-  expect(editor.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale").title).toBe("Default (English)");
+  expect(editor.translation.stringsSurvey.navigationBar.getActionById("svc-translation-fromlocale").title).toBe("Default (English)");
   editor.setFromLocale("de");
 
   editor = translation.createTranslationEditor("es");
   let matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  expect(matrix.columns[0].name).toBe("de");
-  expect(editor.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale").title).toBe("Deutsch");
+  expect(getLocaleColumnNames(matrix)[0]).toBe("de");
+  expect(editor.translation.stringsSurvey.navigationBar.getActionById("svc-translation-fromlocale").title).toBe("Deutsch");
   expect(persisted).toBe("de");
 });
 test("Auto-translate dialog ignores persisted Translate from locale if it is no longer available", () => {
@@ -184,7 +179,7 @@ test("Auto-translate dialog ignores persisted Translate from locale if it is no 
   translation.getMachineTranslationFromLocale = () => "fr";
   const editor = translation.createTranslationEditor("es");
   const matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  expect(matrix.columns[0].name).toBe("default");
+  expect(getLocaleColumnNames(matrix)[0]).toBe("default");
 });
 test("Auto-translate dialog ignores persisted Translate from locale if it matches the target locale", () => {
   const survey = new SurveyModel({
@@ -201,7 +196,7 @@ test("Auto-translate dialog ignores persisted Translate from locale if it matche
   translation.getMachineTranslationFromLocale = () => "de";
   const editor = translation.createTranslationEditor("de");
   const matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  expect(matrix.columns[0].name).toBe("default");
+  expect(getLocaleColumnNames(matrix)[0]).toBe("default");
 });
 test("Auto-translate dialog persists Translate from locale on translation plugin", () => {
   const creator = new CreatorTester();
@@ -225,7 +220,7 @@ test("Auto-translate dialog persists Translate from locale on translation plugin
   tabTranslation.activate();
   editor = tabTranslation.model.createTranslationEditor("es");
   const matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  expect(matrix.columns[0].name).toBe("de");
+  expect(getLocaleColumnNames(matrix)[0]).toBe("de");
   expect(tabTranslation.machineTranslationFromLocale).toBe("de");
 });
 test("onTranslationStringVisibility for editor, Bug#7094", () => {
@@ -317,10 +312,11 @@ test("Default locale column should be read-only", () => {
   });
   const editor = new Translation(survey).createTranslationEditor("fr");
   const translation = editor.translation;
-  const matrix = translation.stringsSurvey.getAllQuestions()[0];
-  expect(matrix.columns).toHaveLength(2);
-  expect(matrix.columns[0].readOnly).toBeTruthy();
-  expect(matrix.columns[1].readOnly).toBeFalsy();
+  const matrix = <QuestionMatrixDropdownModel>translation.stringsSurvey.getAllQuestions()[0];
+  expect(getLocaleColumns(matrix)).toHaveLength(2);
+  // The read-only Source column is an html cell: plain text, not focusable.
+  expect(getLocaleColumns(matrix)[0].cellType).toBe("html");
+  expect(getLocaleColumns(matrix)[1].cellType).toBe("default");
 });
 test("Update data in original translation", () => {
   const survey = new SurveyModel({
@@ -397,9 +393,8 @@ test("Call do machine translation", () => {
   func_translated = ["Title fr", "desc fr"];
   editor.doMachineTranslation();
   expect(q1.locTitle.getLocaleText("fr")).toBeFalsy();
-  const matrix = editor.translation.stringsSurvey.getAllQuestions()[0];
-  const row = matrix.visibleRows[0];
-  expect(row.cells[1].question.value).toBe("Title fr");
+  const matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
+  expect(getLocaleCell(matrix, "fr").value).toBe("Title fr");
   editor.apply();
   expect(q1.locTitle.getLocaleText("fr")).toBe("Title fr");
 });
@@ -423,7 +418,7 @@ test("Implement machine translation for Creator", () => {
   const tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   let editor = tabTranslation.model.createTranslationEditor("fr");
-  let actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  let actions = editor.translation.stringsSurvey.navigationBar.actions;
   expect(actions).toHaveLength(3);
   expect(actions[0].id).toBe("svc-translation-fromlocale");
   expect(actions[0].enabled).toBeFalsy();
@@ -433,7 +428,7 @@ test("Implement machine translation for Creator", () => {
   });
   expect(creator.getHasMachineTranslation()).toBeTruthy();
   editor = tabTranslation.model.createTranslationEditor("fr");
-  actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  actions = editor.translation.stringsSurvey.navigationBar.actions;
   expect(actions).toHaveLength(4);
   expect(actions[0].id).toBe("svc-translation-fromlocale");
   expect(actions[0].enabled).toBeFalsy();
@@ -466,11 +461,11 @@ test("Modify machine translation before apply, Bug#7340", () => {
   const tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   const editor = tabTranslation.model.createTranslationEditor("fr");
-  const actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  const actions = editor.translation.stringsSurvey.navigationBar.actions;
   const machineTranslationAction = actions.find(a => a.id === "svc-translation-machine");
   machineTranslationAction?.action();
   const matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  const cellQuestion = matrix.visibleRows[0].cells[1].question;
+  const cellQuestion = getLocaleCell(matrix, "fr");
   expect(cellQuestion.value).toBe("Title fr");
   cellQuestion.value = "Modified Title fr";
   editor.apply();
@@ -555,51 +550,35 @@ test("Machine translation from non default locale - UI", () => {
   tabTranslation.activate();
   const editor: TranslationEditor = tabTranslation.model.createTranslationEditor("es");
   expect(editor.fromLocales).toHaveLength(2);
-  const actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  const actions = editor.translation.stringsSurvey.navigationBar.actions;
   expect(actions).toHaveLength(4);
   expect(actions[1].visible).toBeTruthy();
 
   expect(editor.translation.root.allLocItems).toHaveLength(3);
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   let matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  let headerMatrix = <QuestionMatrixDropdownModel>editor.translation.stringsHeaderSurvey.getAllQuestions()[0];
   // The default locale is not shown as a separate column; the Source column (default locale) is shown immediately.
-  expect(matrix.showHeader).toBeFalsy();
-  expect(matrix.columns).toHaveLength(2);
-  expect(matrix.columns[0].name).toBe("default");
-  expect(matrix.columns[1].name).toBe("es");
-  expect(headerMatrix.columns[0].title).toBe("Source: Default (English)");
-  expect(headerMatrix.columns[1].title).toBe("Target: Español"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  // The first row of the page group carries the header.
+  expect(matrix.showHeader).toBe(true);
+  expect(getLocaleColumnNames(matrix)).toEqual(["default", "es"]);
+  expect(getLocaleColumnTitles(matrix)).toEqual(["Source: Default (English)", "Target: Español"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
   editor.setFromLocale("de");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  headerMatrix = <QuestionMatrixDropdownModel>editor.translation.stringsHeaderSurvey.getAllQuestions()[0];
-  expect(matrix.showHeader).toBeFalsy();
-  expect(matrix.columns).toHaveLength(2);
-  expect(matrix.columns[0].name).toBe("de");
-  expect(matrix.columns[1].name).toBe("es");
-  expect(headerMatrix.columns[0].title).toBe("Source: Deutsch");
-  expect(headerMatrix.columns[1].title).toBe("Target: Español"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(getLocaleColumnNames(matrix)).toEqual(["de", "es"]);
+  expect(getLocaleColumnTitles(matrix)).toEqual(["Source: Deutsch", "Target: Español"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
   editor.setFromLocale("fr");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  headerMatrix = <QuestionMatrixDropdownModel>editor.translation.stringsHeaderSurvey.getAllQuestions()[0];
-  expect(matrix.showHeader).toBeFalsy();
-  expect(matrix.columns).toHaveLength(2);
-  expect(matrix.columns[0].name).toBe("fr");
-  expect(matrix.columns[1].name).toBe("es");
-  expect(headerMatrix.columns[0].title).toBe("Source: Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-  expect(headerMatrix.columns[1].title).toBe("Target: Español"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(getLocaleColumnNames(matrix)).toEqual(["fr", "es"]);
+  expect(getLocaleColumnTitles(matrix)).toEqual(["Source: Français", "Target: Español"]); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
 
   editor.setFromLocale("");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   matrix = <QuestionMatrixDropdownModel>editor.translation.stringsSurvey.getAllQuestions()[0];
-  expect(matrix.showHeader).toBeFalsy();
-  expect(matrix.columns).toHaveLength(2);
-  expect(matrix.columns[0].name).toBe("default");
-  expect(matrix.columns[1].name).toBe("es");
+  expect(getLocaleColumnNames(matrix)).toEqual(["default", "es"]);
 });
 test("Machine translation from non default locale - onMachineTranslate", () => {
   const creator = new CreatorTester();
@@ -722,7 +701,7 @@ test("Modify translation strings survey in a dialog, remove actions", () => {
   };
   creator.onMachineTranslate.add((sender, options) => { });
   creator.onSurveyInstanceCreated.add((sender, options) => {
-    if (options.area === "translation-tab:table-header-popup-editor") {
+    if (options.area === "translation-tab:table-popup-editor") {
       const actions = options.survey.navigationBar.actions;
       actions.splice(actions.length - 3, 3);
     }
@@ -731,7 +710,7 @@ test("Modify translation strings survey in a dialog, remove actions", () => {
   const tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   const editor = tabTranslation.model.createTranslationEditor("de");
-  const actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  const actions = editor.translation.stringsSurvey.navigationBar.actions;
   expect(actions).toHaveLength(1);
 });
 
@@ -756,8 +735,8 @@ test("Check navigation bar in translation dialog", () => {
   let tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   let editor = tabTranslation.model.createTranslationEditor("de");
-  let stringsHeaderSurvey = editor.translation.stringsHeaderSurvey;
-  let navigationBar = stringsHeaderSurvey.navigationBar;
+  let stringsSurvey = editor.translation.stringsSurvey;
+  let navigationBar = stringsSurvey.navigationBar;
   expect(navigationBar).toBeInstanceOf(SurveyElementActionContainer);
   let fromLocaleAction = navigationBar.getActionById("svc-translation-fromlocale");
   expect(fromLocaleAction.location).toBe("start");
@@ -786,7 +765,7 @@ test("Check navigation bar in translation dialog", () => {
   tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   editor = tabTranslation.model.createTranslationEditor("de");
-  expect(editor.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale").data.containerCss).toBe("st-translation-machine-from__container");
+  expect(editor.translation.stringsSurvey.navigationBar.getActionById("svc-translation-fromlocale").data.containerCss).toBe("st-translation-machine-from__container");
 });
 test("Do not swap languages in the property grid on auto-translation, Bug#6548", () => {
   const creator = new CreatorTester();
@@ -849,7 +828,7 @@ test("Machine translation, editor & export, Bug#7059", () => {
   tabTranslation.activate();
   const translation = tabTranslation.model;
   const editor = translation.createTranslationEditor("fr");
-  const actions = editor.translation.stringsHeaderSurvey.navigationBar.actions;
+  const actions = editor.translation.stringsSurvey.navigationBar.actions;
   expect(actions).toHaveLength(4);
   expect(actions[3].id).toBe("svc-translation-export");
   expect(actions[1].id).toBe("svc-translation-machine");

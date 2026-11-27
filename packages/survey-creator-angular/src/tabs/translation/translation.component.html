@@ -7,11 +7,6 @@
     <ng-container *ngIf="!model.isEmpty">
       <div *ngIf="stringsModel" class="st-content">
         <div class="svc-flex-column st-strings-wrapper">
-          <div class="svc-flex-row st-strings-header">
-            <ng-container *ngFor="let s of [stringsModel.stringsHeaderSurvey]; trackBy: trackStringsSurveyBy">
-              <survey-content [model]="s"></survey-content>
-            </ng-container>
-          </div>
           <div class="svc-flex-row svc-plugin-tab__content st-strings">
             <ng-container *ngFor="let s of [stringsModel.stringsSurvey]; trackBy: trackStringsSurveyBy">
               <survey-content [model]="s"></survey-content>

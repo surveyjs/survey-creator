@@ -2,7 +2,6 @@ import {
   property, Base, SurveyModel, LocalizableString, ILocalizableString,
   ItemValue, FunctionFactory, Action, IAction,
   ComputedUpdater, createDropdownActionModel, QuestionMatrixDynamicModel,
-  QuestionMatrixDropdownModel,
   PopupBaseViewModel, IDialogOptions, settings as surveySettings,
   toCssClasses,
   createPopupModelWithListModel,
@@ -15,9 +14,10 @@ import "./translation.scss";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { updateMatrixRemoveAction, updateMatixActionsAppearance } from "../../utils/actions";
 import { isDefaultLocale } from "../../survey-helper";
+import { ITranslationTableLocales, TranslationTable } from "./translation-table";
 import {
   TranslationBase, TranslationItem, createMachineTranslationAction,
-  createStringsHeaderNavigationBar, runItemsMachineTranslation
+  createStringsHeaderNavigationBar, runItemsMachineTranslation, getTranslationActionsPanelJSON
 } from "./translation-base";
 
 export * from "./translation-base";
@@ -100,6 +100,9 @@ export class Translation extends TranslationBase {
       survey.css = propertyGridCss;
       survey.css.root += " st-properties";
       survey.rootCss += " st-properties";
+      // The gap between the languages matrix and the Actions group, as between the side-by-side blocks.
+      survey.css.page.content += " st-language-settings__content";
+      this.setupCsvActionsPanel(survey);
     });
     res.onValueChanged.add((sender, options) => {
       if (options.name == "locales") {
@@ -190,7 +193,9 @@ export class Translation extends TranslationBase {
           showHeader: false,
           allowAddRows: false,
           rowCount: 0
-        }
+        },
+        // The CSV import and download, as in the side-by-side mode.
+        getTranslationActionsPanelJSON()
       ]
     };
   }
@@ -251,13 +256,26 @@ export class Translation extends TranslationBase {
       }
     }, this.options as any);
   }
+  // The tab: the shown locales in the languages matrix order; the default one is the Source column.
+  // The machine-translation dialog: the "Translate from" locale (the sourceLocale, a read-only
+  // Source column) and the edit locale (the Target column); the default locale has no column of
+  // its own there.
   protected getColumnLocales(): Array<string> {
     if (this.isEditMode) {
-      // In the auto-translate dialog the default locale is not shown as a separate column.
-      // The editable "Target" column is the base; the read-only "Source" column is added by the TranslationEditor.
-      return [this.getEditLocale()];
+      const editLocale = this.getEditLocale() || "";
+      const source = this.sourceLocale || "";
+      return source !== editLocale ? [source, editLocale] : [editLocale];
     }
     return this.getOrderedLocales(true);
+  }
+  public getTableLocales(): ITranslationTableLocales {
+    const res = super.getTableLocales();
+    if (this.isEditMode) res.targets = [this.getEditLocale() || ""];
+    return res;
+  }
+  // The machine-translation dialog counts its working copy, which the AI results go into.
+  public getTargetText(item: TranslationItem, locale: string): string {
+    return this.isEditMode ? item.values(locale).getLocText(locale) : super.getTargetText(item, locale);
   }
   protected getExportLocales(): Array<string> {
     return this.locales;
@@ -278,14 +296,16 @@ export class Translation extends TranslationBase {
       this.mergeLocaleWithDefaultText = this.getMergeLocaleWithDefaultText();
     }
     if (name === "locales") {
-      this.updateHeaderStringsSurveyColumns();
-      this.updateStringsSurveyColumns();
-      // A newly selected locale may hold texts the matrix value has never seen
+      // The base has rebuilt the columns. A newly selected locale may hold texts the matrix value has never seen
       // (e.g. translations applied to the survey while the locale was
       // unchecked) - re-read the data so the rebuilt columns are populated.
       if (!this.isEditMode) {
         this.updateStringsSurveyData();
       }
+    }
+    // The "Translate from" locale of the machine-translation dialog is its Source column.
+    if (name === "sourceLocale" && this.isEditMode) {
+      this.updateStringsSurveyColumnsAndData();
     }
   }
   private getMergeLocaleWithDefaultText(): string {
@@ -453,18 +473,24 @@ export class Translation extends TranslationBase {
     this.createTranslationEditor(locale).showDialog();
   }
 }
+// The model of the machine-translation dialog: the tab's table with a read-only Source column. The
+// callback runs on every strings survey the model builds: it puts the dialog's toolbar into the
+// survey's navigation bar, above the page groups.
 export class TranslationForEditor extends Translation {
   constructor(
     survey: SurveyModel,
     options: ISurveyCreatorOptions,
-    private surveyStringsHeaderCreatedCallback: (survey: SurveyModel) => void
+    private surveyStringsCreatedCallback: (survey: SurveyModel) => void
   ) {
     super(survey, options, true);
   }
+  protected createStringsTable(): TranslationTable {
+    return new TranslationTable(this, { sourceReadOnly: true });
+  }
   protected getSurveyStringsArea(): string { return "translation-tab:table-popup-editor"; }
-  protected getSurveyStringsHeaderArea(): string { return "translation-tab:table-header-popup-editor"; }
-  protected onSurveyStringsHeaderCreated(survey: SurveyModel): void {
-    this.surveyStringsHeaderCreatedCallback(survey);
+  protected onSurveyStringsCreated(survey: SurveyModel): void {
+    super.onSurveyStringsCreated(survey);
+    if (!!this.surveyStringsCreatedCallback)this.surveyStringsCreatedCallback(survey);
   }
 }
 export class TranslationEditor {
@@ -489,8 +515,9 @@ export class TranslationEditor {
     this.translation.reset();
     this.fillFromLocales();
     this.fromLocale = this.getInitialFromLocale();
+    // The Source column of the table.
+    this.translation.sourceLocale = this.fromLocale;
     this.updateFromLocaleAction();
-    this.updateMatricesColumns();
   }
   // The "Source" column is shown immediately by selecting the first item ("Default") from the "Translate from" dropdown.
   private getInitialFromLocale(): string {
@@ -579,28 +606,9 @@ export class TranslationEditor {
     if (this.fromLocale === locale) return;
     this.fromLocale = locale;
     this.translationTab?.setMachineTranslationFromLocale?.(locale);
-    this.updateMatricesColumns();
+    // The table updates its Source column, its titles and its counts.
+    this.translation.sourceLocale = locale;
     this.updateFromLocaleAction();
-  }
-  private updateMatricesColumns(): void {
-    if (!this.translation.stringsHeaderSurvey) return;
-    this.translation.stringsHeaderSurvey.getAllQuestions().forEach(
-      q => {
-        this.updateMatrixColumns(<QuestionMatrixDropdownModel>q);
-        this.updateHeaderMatrixColumns(<QuestionMatrixDropdownModel>q);
-      }
-    );
-    const questions = this.translation.stringsSurvey.getAllQuestions();
-    for (let i = 0; i < questions.length; i++) {
-      this.updateMatrixColumns(<QuestionMatrixDropdownModel>questions[i]);
-    }
-  }
-  private updateHeaderMatrixColumns(matrix: QuestionMatrixDropdownModel) {
-    this.translation.updateSourceTargetHeaderColumns(matrix, this.fromLocale, this.locale);
-  }
-  private updateMatrixColumns(matrix: QuestionMatrixDropdownModel): void {
-    // The base matrix has the editable "Target" column only; the read-only "Source" column is shown at the first position.
-    this.translation.updateMatrixSourceColumn(matrix, this.fromLocale, this.locale, true);
   }
   private fillFromLocales(): void {
     this.fromLocales = [];
@@ -611,7 +619,10 @@ export class TranslationEditor {
   }
   private setupNavigationButtons(survey: SurveyModel): void {
     const navigationBar = createStringsHeaderNavigationBar(survey);
-    navigationBar.addAction(this.createLocaleFromAction());
+    const fromLocaleAction = this.createLocaleFromAction();
+    navigationBar.addAction(fromLocaleAction);
+    // A rebuilt strings survey (a CSV import resets the model) shows the chosen "Translate from" locale.
+    this.updateFromLocaleActionCore(navigationBar.getActionById(fromLocaleAction.id));
     const actionCss = "svc-action-bar-item--right";
     if (this.options.getHasMachineTranslation()) {
       survey.addNavigationItem(createMachineTranslationAction(() => { this.doMachineTranslation(); }));
@@ -686,8 +697,10 @@ export class TranslationEditor {
     return action;
   }
   private updateFromLocaleAction() {
-    if (!this.translation.stringsHeaderSurvey) return;
-    const action = this.translation.stringsHeaderSurvey.navigationBar.getActionById("svc-translation-fromlocale");
+    if (!this.translation.stringsSurvey) return;
+    this.updateFromLocaleActionCore(this.translation.stringsSurvey.navigationBar.getActionById("svc-translation-fromlocale"));
+  }
+  private updateFromLocaleActionCore(action: Action): void {
     if (!!action) {
       action.title = this.getActionTranslateFromText(this.fromLocale || "");
       action.enabled = this.fromLocales.length > 0;

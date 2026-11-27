@@ -249,23 +249,6 @@ test.describe(title, () => {
     expect(Math.abs(shrunk.target.rows["question:q2"].h - before.target.rows["question:q2"].h)).toBeLessThanOrEqual(tolerance);
   });
 
-  test("horizontal: the next untranslated string scrolls the container to the string, the source counterpart at the same offset", async ({ page }) => {
-    await openTranslation(page, createJSON());
-    await waitForVisibleRowsRendered(page);
-    const progressLink = page.locator(".svc-side-bar .spg-question[data-name=translationProgress]").getByRole("button", { name: /strings translated/ });
-    await expect(progressLink).toBeVisible();
-    expect(await isInContainerView(page, getPaneRow(page, "target", "q32"))).toBe(false);
-    await progressLink.click();
-    const stringsDialog = page.locator(".sv-popup.st-element-strings-dialog");
-    await expect(stringsDialog).toBeVisible();
-    await stringsDialog.locator(".sv-popup__body-footer button").click();
-    await expect(stringsDialog).toHaveCount(0);
-    await expect.poll(async () => await isInContainerView(page, getPaneRow(page, "target", "q32")), { timeout: 10000 }).toBe(true);
-    await waitForVisibleRowsRendered(page);
-    const panes = await expectPanesAligned(page, 3);
-    expect(panes.source.rows["question:q32"]).toBeTruthy();
-  });
-
   test("vertical: the panes mirror each other's scroll position", async ({ page }) => {
     await openTranslation(page, createJSON(), "vertical");
     await expect(page.locator(".st-side-by-side--vertical")).toBeVisible();

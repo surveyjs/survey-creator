@@ -92,20 +92,138 @@
 // }
 
 // The side-by-side language settings survey: its page is a property grid category
-// (see createSettingsSurvey), so its rows keep the row spacing of the designer's property
-// grid categories. Without it the title-less progress link sits right against the target
-// language dropdown - the other questions get their air from the padding of their titles.
+// (see createSettingsSurvey). The design puts 24px between its blocks: the view switcher, the
+// two language dropdowns, the progress text with its buttons, and the Actions group.
 .st-language-settings__content {
-  row-gap: var(--sjs2-spacing-x200);
+  row-gap: var(--sjs2-spacing-x300);
   column-gap: var(--sjs2-spacing-x200);
 }
 
-.st-strings-header {
-  .st-table__cell {
-    background: none;
-    background-color: var(--sjs2-color-bg-basic-secondary);
+// The two button groups of the side panel (see TranslationSideBySide.setupSettingsPanels): a
+// title-less panel whose only element is the text above its buttons, and whose footer actions are
+// the buttons. The panel is a layout box here, not a property grid category.
+.st-language-settings__group {
+  width: 100%;
+
+  .spg-panel__content {
+    padding: 0;
+    row-gap: 0;
+    box-shadow: none;
+  }
+}
+// The progress text ("11 of 27 strings translated"): plain text, empty without a target language.
+.st-language-settings__progress {
+  @include sjs2--typography--default-strong;
+  color: var(--sjs2-color-fg-basic-primary);
+  padding: var(--sjs2-spacing-x100) 0;
+
+  &:empty {
+    display: none;
+  }
+}
+// The "Actions" caption: the look of the editor captions above it ("Source language").
+.st-language-settings__caption {
+  @include sjs2--typography--default;
+  color: var(--sjs2-color-fg-basic-secondary);
+  padding: var(--sjs2-spacing-x100) 0;
+}
+// The buttons: survey-core's medium actions (48px), one per line across the panel.
+.st-language-settings__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--sjs2-spacing-x150);
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  .sd-action-bar__item,
+  .sd-action-bar__item-content {
+    display: flex;
+    width: 100%;
+  }
+  .sd-action {
+    flex-grow: 1;
+    min-width: 0;
+  }
+}
+// 12px between the progress text and the first button, none without the text.
+.st-language-settings__group:has(.st-language-settings__progress:not(:empty)) .st-language-settings__buttons {
+  margin-top: var(--sjs2-spacing-x150);
+}
+
+// The "Untranslated strings" dialog (Translate manually) and the element strings dialog: the grid
+// view's table in a survey of its own (see TranslationUntranslatedStrings, TranslationElementStrings),
+// between the fixed title row and the footer.
+.st-untranslated-strings-dialog,
+.st-element-strings-dialog {
+  // The table survey: the grid view pads its root, the dialog content has a padding of its own.
+  .st-root-modern,
+  .sd-root-modern,
+  .sd-container-modern,
+  .sd-body,
+  .sd-body__page,
+  .sd-page {
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    min-width: 0;
+  }
+
+  .sd-page__content {
+    padding: 0;
+  }
+
+  .st-root-modern.st-translation-table {
+    padding: 0;
     height: auto;
   }
+
+  .st-translation-table .sd-page__row:last-child .st-translation-group {
+    margin-bottom: 0;
+  }
+}
+// The width goes on the content: the popup writes an inline "width: auto" on its container.
+.sv-popup--modal-popup.svc-property-editor.st-untranslated-strings-dialog > .sv-popup__container,
+.sv-popup--modal-popup.svc-property-editor.st-element-strings-dialog > .sv-popup__container {
+  .sd-body,
+  .sv-components-column--expandable {
+    min-width: 0;
+  }
+
+  & > .sv-popup__body-content {
+    width: min(calc(var(--sjs2-base-unit-size) * 120), calc(100vw - var(--sjs2-spacing-x800)));
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    max-height: calc(100vh - var(--sjs2-spacing-x800));
+    padding: var(--sjs2-spacing-x300) var(--sjs2-spacing-x300) 0;
+    gap: var(--sjs2-spacing-x300);
+  }
+
+  .sv-popup__scrolling-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .sv-popup__body-footer {
+    margin: 0 calc(-1 * var(--sjs2-spacing-x300));
+    padding: var(--sjs2-spacing-x300);
+  }
+}
+
+// The "Untranslated strings" dialog separates its footer from the table by a line across the dialog;
+// the element strings dialog has none.
+.sv-popup--modal-popup.svc-property-editor.st-untranslated-strings-dialog > .sv-popup__container .sv-popup__body-footer {
+  border-top: 1px solid var(--sjs2-color-border-basic-secondary);
+}
+
+// The element strings dialog: the Used Strings / All Strings switch spans the dialog, 40px above the
+// table.
+.st-element-strings-dialog .st-translation-table--element .sv-button-group {
+  margin-bottom: var(--sjs2-spacing-x500);
 }
 
 .st-root-modern {
@@ -116,7 +234,6 @@
   background-color: var(--sjs2-color-bg-basic-secondary);
 }
 
-.st-title.st-panel__title,
 .st-table__cell.st-table__cell--header {
   @include sjs2--typography--small-strong;
   text-align: left;
@@ -124,14 +241,6 @@
 
 .st-table__cell.st-table__cell--header {
   color: var(--sjs2-color-fg-basic-primary-muted);
-}
-
-.st-title.st-panel__title {
-  margin: 0;
-  color: var(--sjs2-color-fg-basic-primary-muted);
-  background-color: var(--sjs2-color-component-formbox-design-bg);
-  border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
-  padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x300);
 }
 
 .st-table {
@@ -148,24 +257,6 @@
   background-color: var(--sjs2-color-bg-basic-primary);
   border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   padding: var(--sjs2-spacing-x100) 0;
-}
-
-td.st-table__cell:first-of-type {
-  @include sjs2--typography--default-strong;
-  color: var(--sjs2-color-fg-basic-primary);
-  max-width: 300px;
-  padding-right: var(--sjs2-spacing-x300);
-
-  span {
-    display: inline-block;
-    padding-left: var(--sjs2-spacing-x300);
-  }
-}
-
-.st-panel-indent .st-table__cell:first-of-type {
-  span {
-    padding-left: var(--sjs2-spacing-x600);
-  }
 }
 
 .st-table {
@@ -382,99 +473,100 @@ td.st-table__cell:first-of-type {
   }
 }
 
-// The per-element translation state of the target pane, shown by the translate title action
-// itself: the number of untranslated strings (nothing when there are none) and a chevron
-// pointing at the state of its inline strings block (see applyElementStateToAction). Nothing
-// to translate and all translated look the same - both mean "nothing for you here". The svg
-// selector outweighs the theme's action-icon fill rules.
-@mixin translationStateColor($color) {
-  --sd-action-title-color: #{$color};
-  --sd-action-hover-title-color: #{$color};
-  --sd-action-icon-color: #{$color};
-
-  svg use {
-    fill: $color;
-  }
-
-  .sd-action__title {
-    color: $color;
-  }
-}
-
+// The per-element translate action of the target pane, which shows the element's translation
+// state itself (see applyElementStateToAction): the language icon alone (nothing to translate),
+// the progress "translated/total" (no icon), or the language icon followed by a check (all
+// translated). Its look is the tertiary-surface action appearance - a white button with the
+// trigger ring - in every state. The check is the action's marker icon, which the action
+// renderers draw after the title at its natural size.
 .svc-translation-state {
-  @include translationStateColor(var(--sjs2-color-fg-basic-primary-muted));
+  .sd-action__icon ~ .sv-svg-icon {
+    flex-shrink: 0;
+    width: var(--sjs2-size-x200);
+    height: var(--sjs2-size-x200);
 
-  &.svc-translation-state--untranslated {
-    @include translationStateColor(var(--sjs2-color-fg-warning-primary));
-  }
-
-  // The open block: the chevron points up and the button stands out from both other states.
-  &.svc-translation-state--expanded {
-    @include translationStateColor(var(--sjs2-color-fg-brand-primary));
-
-    svg {
-      transform: rotate(180deg);
+    use {
+      fill: var(--sd-action-icon-color);
     }
   }
 }
 
-// The element strings dialog: the strings matrix of one element, in a survey of its own (see
-// createStringsHostSurvey). It is the dialog's content, not a survey the user fills in, so the
-// runtime survey's own frame and paddings are dropped.
-.st-element-strings-dialog {
-  .sd-root-modern,
-  .sd-container-modern,
-  .sd-body,
-  .sd-body__page,
-  .sd-page {
-    background: transparent;
+// The action sits at the top right of its element: the title wraps before it instead of running
+// under it. The action is taller than a title line, so it overhangs the line by the same amount
+// above and below, which keeps the line height, and moves out into the element's side padding -
+// 16px from the top and the right edge of a question's frame (the frame's padding is 24px at the
+// top and 40px at the sides).
+.st-side-by-side__target {
+  .sv-title-actions {
+    align-items: flex-start;
+  }
+
+  .sv-title-actions .sd-action-bar:has(> .svc-translation-state) {
+    margin-top: calc(-1 * var(--sjs2-spacing-x100));
+    margin-bottom: calc(-1 * var(--sjs2-spacing-x100));
+    margin-right: calc(-1 * var(--sjs2-spacing-x300));
+    margin-left: var(--sjs2-spacing-x100);
+  }
+
+  // A frameless element inside a panel has no side padding to move into: the action keeps to the
+  // element's own edge there.
+  .sd-element--nested .sv-title-actions .sd-action-bar:has(> .svc-translation-state) {
+    margin-right: 0;
+  }
+}
+
+// The survey header of both panes lies on the pane background, as the page and its questions
+// do, with the survey's top padding above it and the content edges of the page below it. The
+// runner's basic header is a band of its own (a background and a brand-coloured underline).
+.st-side-by-side {
+  .sd-title.sd-container-modern__title {
+    background-color: var(--sjs2-color-component-survey-header-default-bg);
     box-shadow: none;
-    padding: 0;
-    margin: 0;
-    max-width: none;
-  }
-
-  .sd-page__content {
-    padding: 0;
+    padding: var(--sjs2-layout-component-survey-box-padding-top) var(--sjs2-layout-component-survey-header-padding-horizontal) 0;
   }
 }
 
-// The dialog's own width. Its matrix holds a source and a target editor next to the string
-// names, so it needs far more room than the property editor dialogs this one is styled as -
-// their min-width is what the extra classes here are for (see .svc-property-editor in
-// property-grid.scss, whose selector is just as specific). All the width goes to the editors:
-// the string names keep their share of it (see stringsRowTitleWidthPercent). Capped by the
-// viewport, so a narrow screen scrolls the table instead of the page.
-.sv-popup--modal-popup.svc-property-editor.st-element-strings-dialog .sv-popup__container {
-  .sd-body,
-  .sv-components-column--expandable {
-    min-width: min(calc(var(--sjs2-base-unit-size) * 106), 80vw);
-  }
-}
+// A target-pane string with no translation shows the source text in the placeholder colour of
+// its place (see TranslationSideBySide.isTargetStringUntranslated). Typing a translation over it
+// writes the target language, and the string turns into a regular one.
+.st-side-by-side__target {
+  --st-untranslated-color: var(--sjs2-color-fg-basic-secondary);
 
-// The strings matrix of the dialog: its title row is the caption row, and its title actions are
-// the caption's buttons (auto-translate, all/used strings).
-.st-element-strings {
-  // The caption row names the element the dialog edits; its buttons end the row, at the
-  // dialog's right edge.
-  .sd-action-title-bar {
-    margin-left: auto;
+  .sd-question__title {
+    --st-untranslated-color: var(--sjs2-color-component-question-default-title-placeholder);
   }
 
-  // The language headers start where their editors do, as the grid view's header row does -
-  // the runtime matrix centers its column titles.
-  .sd-table__cell--header {
-    text-align: left;
+  .sd-question__description {
+    --st-untranslated-color: var(--sjs2-color-component-question-default-description-placeholder);
   }
 
-  // The first column: the name of the string a row edits, next to the two locale editors
-  // (see createStringsMatrix). A property name is not a text the user reads through - it stays
-  // at the muted weight of a label and wraps instead of stretching the column.
-  .sd-table__cell--row-text {
-    font-size: var(--sjs2-font-size-s, 12px);
-    line-height: var(--sjs2-line-height-s, 16px);
-    color: var(--sjs2-color-fg-basic-primary-muted);
-    overflow-wrap: anywhere;
+  .sd-panel__title {
+    --st-untranslated-color: var(--sjs2-color-component-panel-default-title-placeholder);
+  }
+
+  .sd-panel__description {
+    --st-untranslated-color: var(--sjs2-color-component-panel-default-description-placeholder);
+  }
+
+  .sd-page__title {
+    --st-untranslated-color: var(--sjs2-color-component-page-default-title-placeholder);
+  }
+
+  .sd-page__description {
+    --st-untranslated-color: var(--sjs2-color-component-page-default-description-placeholder);
+  }
+
+  .sd-header__text .sd-title {
+    --st-untranslated-color: var(--sjs2-color-component-survey-header-default-title-placeholder);
+  }
+
+  .sd-header__text .sd-description {
+    --st-untranslated-color: var(--sjs2-color-component-survey-header-default-description-placeholder);
+  }
+
+  // While it is being edited, the text is the one being typed - the regular colour.
+  .svc-string-editor--untranslated:not(:focus-within) .sv-string-editor {
+    color: var(--st-untranslated-color);
   }
 }
 
@@ -516,4 +608,217 @@ td.st-table__cell:first-of-type {
   margin-left: auto;
   flex-shrink: 0;
   color: var(--sjs2-color-fg-basic-primary-muted);
+}
+
+// The grouped strings table of the grid view, in both modes (see TranslationTable): a survey whose
+// page groups are collapsible panels and whose string rows are one-row matrices with the Question,
+// String, Source and Target columns. The grid view is white (README question 7).
+.st-root-modern.st-translation-table {
+  // The whole tab area, not only the rows: the tab's own background is the form view's.
+  height: 100%;
+  background-color: var(--sjs2-color-bg-basic-primary);
+  padding: var(--sjs2-spacing-x300);
+  box-sizing: border-box;
+
+  .st-page {
+    padding: 0;
+    margin: 0;
+  }
+
+  .st-row {
+    margin: 0;
+  }
+}
+
+.st-translation-table {
+  .st-translation-group {
+    margin: 0 0 var(--sjs2-spacing-x300);
+  }
+
+  // The group header bar: the chevron, the page title and "{translated}/{total}".
+  .st-translation-group > .sd-panel__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--sjs2-spacing-x150);
+    box-sizing: border-box;
+    height: var(--sjs2-size-x600);
+    padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x200);
+    background-color: var(--sjs2-color-bg-basic-tertiary);
+    border-radius: var(--sjs2-radius-x150);
+    overflow: hidden;
+  }
+
+  .st-translation-group.sd-element--expanded > .sd-panel__header {
+    border-radius: var(--sjs2-radius-x150) var(--sjs2-radius-x150) 0 0;
+  }
+
+  .st-translation-group > .sd-panel__header > .st-title.st-panel__title {
+    @include sjs2--typography--default-strong;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--sjs2-spacing-x100);
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--sjs2-color-fg-basic-primary);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  // The chevron of a collapsible page group (see TranslationTable.setupPagePanel).
+  .st-panel__title-expandable-svg-container {
+    display: flex;
+    flex-shrink: 0;
+    width: var(--sjs2-size-x300);
+    height: var(--sjs2-size-x300);
+  }
+
+  .st-panel__title-expandable-svg {
+    width: var(--sjs2-size-x300);
+    height: var(--sjs2-size-x300);
+    fill: var(--sjs2-color-fg-basic-primary);
+  }
+
+  .st-translation-group > .sd-panel__header > .st-panel__description {
+    @include sjs2--typography--default-strong;
+    margin: 0;
+    padding: 0;
+    color: var(--sjs2-color-fg-basic-primary-muted);
+    white-space: nowrap;
+  }
+
+  // The table under an expanded header: its own border on three sides and the bottom radius.
+  .st-translation-group .st-panel__content {
+    padding: 0;
+    border: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+    border-top: none;
+    border-radius: 0 0 var(--sjs2-radius-x150) var(--sjs2-radius-x150);
+    overflow: hidden;
+    background-color: var(--sjs2-color-bg-basic-primary);
+  }
+
+  .st-question,
+  .st-table-wrapper {
+    margin: 0;
+    padding: 0;
+  }
+
+  // The row text column of a matrixdropdown is not one of the table's columns: the String column
+  // is an html cell of its own (the row text cell and its empty header cell are always rendered).
+  .st-table__cell--row-text,
+  thead .st-table__cell.sd-table__cell--empty {
+    display: none;
+  }
+
+  .st-table__cell {
+    @include sjs2--typography--default;
+    flex: 1 1 0;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: var(--sjs2-spacing-x150) var(--sjs2-spacing-x200);
+    color: var(--sjs2-color-fg-basic-primary);
+    background-color: var(--sjs2-color-bg-basic-primary);
+    border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+    border-right: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+    word-break: break-word;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  // The header row: 48px of text and padding plus its bottom border.
+  thead .st-table__cell.st-table__cell--header {
+    @include sjs2--typography--default-strong;
+    color: var(--sjs2-color-fg-basic-primary);
+    min-height: calc(var(--sjs2-size-x600) + var(--sjs2-border-width-x100));
+  }
+
+  .st-translation-table__cell--question {
+    flex: 0 0 130px;
+  }
+
+  .st-translation-table__cell--string {
+    flex: 0 0 200px;
+  }
+
+  // The emulated row span of the Question column: no border inside an element's rows.
+  .st-translation-table__cell--span {
+    border-bottom-color: transparent;
+  }
+
+  // The group's own border closes the table.
+  .st-translation-table__cell--last {
+    border-bottom: none;
+  }
+
+  // The Question and String cells (and a read-only Source): plain text in the cells' typography.
+  .sd-html {
+    @include sjs2--typography--default;
+    padding: 0;
+    margin: 0;
+    color: var(--sjs2-color-fg-basic-primary);
+  }
+
+  // The comment cells look like plain text until they are edited.
+  .st-formbox__input {
+    @include sjs2--typography--default;
+    width: 100%;
+    color: var(--sjs2-color-fg-basic-primary);
+    background: transparent;
+    // The cells grow to their text (autoGrow), so they never scroll. A scrollbar would also break
+    // the growing: survey-core measures the text with the overflow hidden and then restores the
+    // renderer's inline "overflow-y: auto" - the scrollbar that appears narrows the textarea, the
+    // text rewraps to one more line and its last line is cut.
+    overflow-y: hidden !important;
+
+    // An untranslated target shows its source text as the placeholder, muted.
+    &::placeholder {
+      color: var(--sjs2-color-fg-basic-secondary);
+      opacity: 1;
+    }
+  }
+
+  .st-translation-table__cell--source:focus-within,
+  .st-translation-table__cell--target:focus-within {
+    box-shadow: inset 0 0 0 var(--sjs2-border-width-x200) var(--sjs2-color-utility-shadow-surface-focused);
+  }
+}
+
+.st-translation-table--pages thead .st-table__cell--header:nth-child(2) {
+  flex: 0 0 130px;
+}
+
+.st-translation-table--pages thead .st-table__cell--header:nth-child(3) {
+  flex: 0 0 200px;
+}
+
+// The "element" layout (the element strings dialog): a narrower String column, and no group panel,
+// so the first and the last string matrix draw the table border (see onUpdateQuestionCssClasses).
+.st-translation-table--element {
+  thead .st-table__cell--header:nth-child(2),
+  .st-translation-table__cell--string {
+    flex: 0 0 180px;
+  }
+
+  .st-translation-table__row {
+    border-left: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+    border-right: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+    overflow: hidden;
+  }
+
+  .st-translation-table__row--first {
+    border-top: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+    border-top-left-radius: var(--sjs2-radius-x150);
+    border-top-right-radius: var(--sjs2-radius-x150);
+  }
+
+  .st-translation-table__row--last {
+    border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
+    border-bottom-left-radius: var(--sjs2-radius-x150);
+    border-bottom-right-radius: var(--sjs2-radius-x150);
+  }
 }
