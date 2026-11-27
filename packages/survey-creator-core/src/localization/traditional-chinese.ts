@@ -2567,6 +2567,10 @@ export var traditionalChineseTranslation = {
       // [Auto-translated] "Hidden"
       off: "隱藏"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "直列式"
+    },
     // [Auto-translated] "Sum"
     sum: "和",
     // [Auto-translated] "Count"

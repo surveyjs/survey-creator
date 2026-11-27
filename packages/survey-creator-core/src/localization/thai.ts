@@ -2566,6 +2566,10 @@ export const thStrings = {
       // [Auto-translated] "Hidden"
       off: "ซ่อน"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "อินไลน์"
+    },
     // "Sum"
     sum: "รวม",
     // "Count"

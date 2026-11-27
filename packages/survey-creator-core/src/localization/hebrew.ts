@@ -2566,6 +2566,10 @@ export var hebrewStrings = {
       // [Auto-translated] "Hidden"
       off: "מוסתרים"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "אינליין"
+    },
     // [Auto-translated] "Sum"
     sum: "סכום",
     // [Auto-translated] "Count"

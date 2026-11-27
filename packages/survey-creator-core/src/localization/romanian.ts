@@ -2566,6 +2566,10 @@ export const roStrings = {
       // [Auto-translated] "Hidden"
       off: "Ascuns"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Inline"
+    },
     // "Sum"
     sum: "Sumă",
     // "Count"

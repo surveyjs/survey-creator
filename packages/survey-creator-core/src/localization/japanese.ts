@@ -2566,6 +2566,10 @@ export var jaStrings = {
       // [Auto-translated] "Hidden"
       off: "隠れた"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "インライン"
+    },
     // [Auto-translated] "Sum"
     sum: "和",
     // [Auto-translated] "Count"

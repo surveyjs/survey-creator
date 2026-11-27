@@ -2566,6 +2566,10 @@ export var skStrings = {
       // [Auto-translated] "Hidden"
       off: "Skrytý"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Inline"
+    },
     // [Auto-translated] "Sum"
     sum: "Súčet",
     // [Auto-translated] "Count"

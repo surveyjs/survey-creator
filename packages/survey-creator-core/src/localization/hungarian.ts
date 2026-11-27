@@ -2566,6 +2566,10 @@ export var huStrings = {
       // [Auto-translated] "Hidden"
       off: "Rejtett"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Inline"
+    },
     // [Auto-translated] "Sum"
     sum: "Összeg",
     // [Auto-translated] "Count"

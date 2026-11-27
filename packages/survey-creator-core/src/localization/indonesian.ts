@@ -2566,6 +2566,10 @@ export var indonesianStrings = {
       // [Auto-translated] "Hidden"
       off: "Sembunyi"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Inline"
+    },
     // [Auto-translated] "Sum"
     sum: "Jumlah",
     // [Auto-translated] "Count"

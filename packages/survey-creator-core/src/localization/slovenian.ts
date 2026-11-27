@@ -2566,6 +2566,10 @@ export var slStrings = {
       // "Hidden"
       off: "Skrito"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Inline"
+    },
     // "Sum"
     sum: "Vsota",
     // "Count"

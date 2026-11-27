@@ -2566,6 +2566,10 @@ export var nlStrings = {
       // [Auto-translated] "Hidden"
       off: "Verborgen"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Inline"
+    },
     // [Auto-translated] "Sum"
     sum: "Som",
     // [Auto-translated] "Count"

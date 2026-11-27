@@ -2566,6 +2566,10 @@ export var catalanTranslation = {
       // [Auto-translated] "Hidden"
       off: "Escondido"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "En línia"
+    },
     // [Auto-translated] "Sum"
     sum: "Suma",
     // [Auto-translated] "Count"

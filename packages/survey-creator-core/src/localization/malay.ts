@@ -2566,6 +2566,10 @@ export var msStrings = {
       // [Auto-translated] "Hidden"
       off: "Tersembunyi"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Sebaris"
+    },
     // [Auto-translated] "Sum"
     sum: "Jumlah",
     // [Auto-translated] "Count"

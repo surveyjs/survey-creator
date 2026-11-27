@@ -2566,6 +2566,10 @@ export var ruStrings = {
       // [Auto-translated] "Hidden"
       off: "Скрытый"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Встроенный"
+    },
     // [Auto-translated] "Sum"
     sum: "Сумма",
     // [Auto-translated] "Count"

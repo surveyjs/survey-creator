@@ -2567,6 +2567,10 @@ export var koreanStrings = {
       // [Auto-translated] "Hidden"
       off: "숨겨진"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "인라인"
+    },
     // [Auto-translated] "Sum"
     sum: "합계",
     // [Auto-translated] "Count"

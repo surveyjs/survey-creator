@@ -2566,6 +2566,10 @@ export var persianStrings = {
       // [Auto-translated] "Hidden"
       off: "پنهان"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "درون خطی"
+    },
     // [Auto-translated] "Sum"
     sum: "مجموع",
     // [Auto-translated] "Count"

@@ -2567,6 +2567,10 @@ export let svStrings = {
       // [Auto-translated] "Hidden"
       off: "Dold"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Inline"
+    },
     // [Auto-translated] "Sum"
     sum: "Summa",
     // [Auto-translated] "Count"

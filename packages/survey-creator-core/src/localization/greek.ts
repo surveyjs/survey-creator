@@ -2566,6 +2566,10 @@ export var grStrings = {
       // "Hidden"
       off: "Κρυφό"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Ενσωματωμένο"
+    },
     // "Sum"
     sum: "Άθροισμα",
     // "Count"

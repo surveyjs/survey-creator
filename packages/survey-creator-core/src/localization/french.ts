@@ -2566,6 +2566,10 @@ export var frenchTranslation = {
       // [Auto-translated] "Hidden"
       off: "Caché"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "En ligne"
+    },
     // [Auto-translated] "Sum"
     sum: "Somme",
     // [Auto-translated] "Count"

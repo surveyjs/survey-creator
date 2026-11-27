@@ -2566,6 +2566,10 @@ export var portugueseTranslation = {
       // [Auto-translated] "Hidden"
       off: "Escondido"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Inline"
+    },
     // [Auto-translated] "Sum"
     sum: "Soma",
     // [Auto-translated] "Count"

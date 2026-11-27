@@ -2566,6 +2566,10 @@ export var bgStrings = {
       // [Auto-translated] "Hidden"
       off: "Скрит"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Инлайн"
+    },
     // [Auto-translated] "Sum"
     sum: "Сума",
     // [Auto-translated] "Count"

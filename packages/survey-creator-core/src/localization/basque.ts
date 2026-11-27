@@ -2570,6 +2570,10 @@ export var euStrings = {
       // "Hidden"
       off: "Ezkutatuta"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Inline"
+    },
     // "Sum"
     sum: "Batura",
     // "Count"

@@ -2566,6 +2566,10 @@ export var fiStrings = {
       // [Auto-translated] "Hidden"
       off: "Piilotettu"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Inline-versio"
+    },
     // [Auto-translated] "Sum"
     sum: "Summa",
     // "Count"

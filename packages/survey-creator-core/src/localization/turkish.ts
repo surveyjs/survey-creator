@@ -2566,6 +2566,10 @@ export var turkishStrings = {
       // [Auto-translated] "Hidden"
       off: "Gizli"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Satır İçi"
+    },
     // [Auto-translated] "Sum"
     sum: "Toplam",
     // [Auto-translated] "Count"

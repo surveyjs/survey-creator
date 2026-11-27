@@ -2566,6 +2566,10 @@ export var hrStrings = {
       // [Auto-translated] "Hidden"
       off: "Skriven"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Inline"
+    },
     // [Auto-translated] "Sum"
     sum: "Suma",
     // [Auto-translated] "Count"

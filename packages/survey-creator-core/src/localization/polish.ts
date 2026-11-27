@@ -2567,6 +2567,10 @@ export var polishStrings = {
       // [Auto-translated] "Hidden"
       off: "Ukryty"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Inline"
+    },
     // [Auto-translated] "Sum"
     sum: "Suma",
     // [Auto-translated] "Count"

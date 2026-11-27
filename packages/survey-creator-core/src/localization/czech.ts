@@ -2566,6 +2566,10 @@ export var czStrings = {
       // [Auto-translated] "Hidden"
       off: "Schovaný"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Inline"
+    },
     // [Auto-translated] "Sum"
     sum: "Součet",
     // [Auto-translated] "Count"

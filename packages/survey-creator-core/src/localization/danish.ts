@@ -2567,6 +2567,10 @@ export var danishStrings = {
       // [Auto-translated] "Hidden"
       off: "Skjult"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Inline"
+    },
     // [Auto-translated] "Sum"
     sum: "Sum",
     // [Auto-translated] "Count"

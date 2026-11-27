@@ -2566,6 +2566,10 @@ export var arStrings = {
       // [Auto-translated] "Hidden"
       off: "مخفي"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "متداخل"
+    },
     // [Auto-translated] "Sum"
     sum: "مجموع",
     // [Auto-translated] "Count"

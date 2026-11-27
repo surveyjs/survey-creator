@@ -2566,6 +2566,10 @@ export var htStrings = {
       // "Hidden"
       off: "Kache"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "An liy"
+    },
     // "Sum"
     sum: "Sòm",
     // "Count"

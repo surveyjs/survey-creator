@@ -2566,6 +2566,10 @@ export var germanTranslation = {
       // [Auto-translated] "Hidden"
       off: "Versteckt"
     },
+    progressBarNavigationTextLocation: {
+      // [Auto-translated] "Inline"
+      inline: "Inline"
+    },
     // [Auto-translated] "Sum"
     sum: "Summe",
     // [Auto-translated] "Count"
