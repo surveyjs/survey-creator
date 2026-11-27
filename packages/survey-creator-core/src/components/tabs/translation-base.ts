@@ -1,9 +1,8 @@
 import {
   property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty,
   Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, Action,
-  QuestionMatrixDropdownModel, QuestionMatrixDynamicModel,
+  QuestionMatrixDynamicModel,
   Helpers, settings as surveySettings,
-  MatrixDropdownColumn,
   MatrixCells,
   QuestionMatrixModel, Question, QuestionPanelDynamicModel,
   DomDocumentHelper, DomWindowHelper, IActionAppearance, PanelModel, QuestionHtmlModel
@@ -15,7 +14,7 @@ import { editorLocalization, getLocString } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../creator-settings";
 import { SurveyHelper, getDefaultLocaleName, isDefaultLocale } from "../../survey-helper";
 import { CreatorDomHelper } from "../../dom-helper";
-import { TranslationTable } from "./translation-table";
+import { ITranslationTableLocales, TranslationTable } from "./translation-table";
 
 // The library localizes a few strings outside their localizable string: the property itself stays
 // empty and the text the survey renders comes from the error class that falls back to it (see
@@ -889,11 +888,11 @@ export class TranslationBase extends Base implements ITranslationLocales {
     }
     return this.stringsTableValue;
   }
+  // The grouped table of the grid view, the same in both modes.
   protected createStringsTable(): TranslationTable {
-    return new TranslationTable(this, { layout: "tree" });
+    return new TranslationTable(this);
   }
   @property() stringsSurvey: SurveyModel;
-  @property() stringsHeaderSurvey: SurveyModel;
   private stringsSurveyInstanceId = 0;
   protected makeSurveyIdSpaceUnique(survey: SurveyModel): void {
     survey.elementIdPrefix = (survey.elementIdPrefix || "") + (++this.stringsSurveyInstanceId) + "-";
@@ -1051,14 +1050,10 @@ export class TranslationBase extends Base implements ITranslationLocales {
   private resetStringsSurvey() {
     if (!this.hasStringsSurveyUI) return;
     this.stringsSurvey = this.createStringsSurvey();
-    this.stringsHeaderSurvey = this.stringsTable.createHeaderSurvey((survey: SurveyModel): void => this.onSurveyStringsHeaderCreated(survey),
-      this.getSurveyStringsHeaderArea());
     this.updateReadOnly();
   }
   protected getSurveyStringsArea(): string { return undefined; }
-  protected getSurveyStringsHeaderArea(): string { return undefined; }
   protected onSurveyStringsCreated(survey: SurveyModel): void { }
-  protected onSurveyStringsHeaderCreated(survey: SurveyModel): void { }
   protected createStringsSurvey(): SurveyModel {
     return this.stringsTable.createSurvey(this.root, (survey: SurveyModel): void => this.onSurveyStringsCreated(survey),
       this.getSurveyStringsArea());
@@ -1071,8 +1066,24 @@ export class TranslationBase extends Base implements ITranslationLocales {
       onCreating(survey);
     }, area);
   }
+  // An empty Target cell shows the text it is translated from, muted (the cell placeholder), or the
+  // text of its root language ("pt" for "pt-br"); a Source cell shows the text the string is displayed
+  // by (a choice's value, a question's name).
   public getStringsCellPlaceholder(item: TranslationItem, columnName: string): string {
-    return item.getPlaceholder(columnName);
+    const locales = this.getTableLocales();
+    const target = locales.targets.filter(loc => this.getLocaleColumnName(loc) === columnName)[0];
+    if (target === undefined) return item.getPlaceholder(columnName);
+    return this.getUntranslatedTargetText(item, target, locales.source) || item.getPlaceholder(columnName, true);
+  }
+  // getUntranslatedText has no answer for the default locale (it is the source everywhere else): the
+  // machine-translation dialog translates into it from another language.
+  private getUntranslatedTargetText(item: TranslationItem, target: string, source: string): string {
+    if (!!target) return item.getUntranslatedText(target, source);
+    return !item.getLocText("") ? item.getTextToTranslateFrom(source) : "";
+  }
+  // The text the group counts of the strings table measure.
+  public getTargetText(item: TranslationItem, locale: string): string {
+    return item.locString.getLocaleText(locale);
   }
   // The single write path for translation item edits on the real survey; subclasses hook it
   // to react to the change. No-op writes are filtered out.
@@ -1141,47 +1152,30 @@ export class TranslationBase extends Base implements ITranslationLocales {
   public getLocaleColumnName(loc: string): string {
     return !loc ? getDefaultLocaleName() : loc;
   }
-  // Shows a source column before the target column (removing a previously added source column
-  // first); no source column when the locales are equal. Shared by the machine-translation
-  // dialog (a read-only source) and the side-by-side grid (an editable one, like any locale
-  // column in the standard mode).
-  public updateMatrixSourceColumn(matrix: QuestionMatrixDropdownModel, sourceLoc: string, targetLoc: string, isReadOnly: boolean = false): void {
-    if (matrix.columns.length === 2) {
-      matrix.columns.splice(0, 1);
-    }
-    const loc = sourceLoc || "";
-    if (loc === (targetLoc || "")) return;
-    const column = new MatrixDropdownColumn(this.getLocaleColumnName(loc), this.getLocaleName(loc));
-    column.readOnly = isReadOnly;
-    matrix.columns.splice(0, 0, column);
-  }
-  public addLocaleColumns(matrix: QuestionMatrixDropdownModel): void {
+  // The locale columns of the strings table and their roles (see ITranslationTableLocales). With the
+  // source/target pair: [Source, Target]; the Target alone when the languages are the same; the Source
+  // alone when no target language is selected (editable, exactly as it is next to a target column).
+  // Otherwise the column locales of the mode, the source being the default locale.
+  public getTableLocales(): ITranslationTableLocales {
+    const source = this.sourceLocale || "";
     if (this.useSourceTargetColumns) {
       const target = this.targetLocale || "";
-      // No target language selected - nothing is being translated, so the grid holds the source
-      // column alone (editable, exactly as it is next to a target column).
-      const hasTarget = !!target;
-      const loc = hasTarget ? target : (this.sourceLocale || "");
-      matrix.addColumn(this.getLocaleColumnName(loc), this.getLocaleName(loc));
-      if (hasTarget) {
-        this.updateMatrixSourceColumn(matrix, this.sourceLocale, target);
-      }
-      return;
+      if (!target) return { columns: [source], source: source, targets: [] };
+      return { columns: source !== target ? [source, target] : [target], source: source, targets: [target] };
     }
-    this.getColumnLocales().forEach(loc => {
-      matrix.addColumn(this.getLocaleColumnName(loc), this.getLocaleName(loc));
-    });
+    const columns = this.getColumnLocales();
+    return { columns: columns, source: source, targets: columns.filter(loc => loc !== source) };
   }
-  // The locale columns of the strings grid when the source/target pair is not used. The
-  // multiple-languages mode shows its ordered selected locales (or the single edit locale in the
-  // machine-translation dialog).
+  // The locale columns of the strings table when the source/target pair is not used. The
+  // multiple-languages mode shows its ordered selected locales (or the source and the edit locale in
+  // the machine-translation dialog).
   protected getColumnLocales(): Array<string> {
     return [""];
   }
   public updateStringsSurveyData(): void {
     if (!!this.stringsTableValue)this.stringsTableValue.updateData();
   }
-  // The columns of the strings survey and of its header survey.
+  // The columns and the group counts of the strings survey.
   protected updateStringsSurveyColumns(): void {
     if (!!this.stringsTableValue)this.stringsTableValue.updateColumns();
   }
@@ -1204,7 +1198,7 @@ export class TranslationBase extends Base implements ITranslationLocales {
       this.updateStringsSurveyColumnsAndData();
     }
   }
-  // Re-runs the column setup on the header and data matrices, keeping the entered values.
+  // Re-runs the column setup on the string matrices, keeping the entered values.
   protected updateStringsSurveyColumnsAndData(): void {
     this.updateStringsSurveyColumns();
     this.updateStringsSurveyData();
@@ -1499,10 +1493,6 @@ export class TranslationBase extends Base implements ITranslationLocales {
       this.stringsSurvey.dispose();
       this.stringsSurvey = undefined;
     }
-    if (!!this.stringsHeaderSurvey) {
-      this.stringsHeaderSurvey.dispose();
-      this.stringsHeaderSurvey = undefined;
-    }
     if (!!this.settingsSurveyValue) {
       this.settingsSurveyValue.dispose();
       this.settingsSurveyValue = undefined;
@@ -1569,8 +1559,8 @@ export function setupTranslationButtonsPanel(survey: SurveyModel, panelName: str
 }
 let translationReadOnlyHandlerCounter = 0;
 
-// The top navigation bar of a strings-grid header survey: hosts the machine-translation
-// button and the other dialog actions in the machine-translation and element strings dialogs.
+// The top navigation bar of a strings survey: hosts the toolbar of the machine-translation dialog
+// ("Translate from", the machine-translation button, the CSV import and export) above the table.
 export function createStringsHeaderNavigationBar(survey: SurveyModel): SurveyElementActionContainer {
   const navigationBar = new SurveyElementActionContainer();
   survey.createNavigationBarCallback = () => navigationBar;

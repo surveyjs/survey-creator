@@ -76,7 +76,6 @@ test("activate creates side-by-side model, no strings surveys, settings shown in
   expect(model).toBeTruthy();
   expect(model.isSideBySide).toBeTruthy();
   expect(model.stringsSurvey).toBeFalsy();
-  expect(model.stringsHeaderSurvey).toBeFalsy();
   const sidebarPage = creator.sidebar.pages.filter(page => page.id === "translation")[0];
   expect(sidebarPage.visible).toBeTruthy();
   expect(sidebarPage.componentName).toBe("survey-widget");
@@ -707,7 +706,6 @@ test("element strings dialog: the table over the real question in a survey of it
   // Not the strings survey of the base class: the dialog's survey is its own, the 02 table in the
   // "element" layout.
   expect(grid.stringsSurvey).toBeFalsy();
-  expect(grid.stringsHeaderSurvey).toBeFalsy();
   const survey = model.elementStringsSurvey;
   expect(survey).toBe(grid.dialogSurvey);
   expect(survey.pages).toHaveLength(1);

@@ -226,14 +226,6 @@
   margin-bottom: var(--sjs2-spacing-x500);
 }
 
-.st-strings-header {
-  .st-table__cell {
-    background: none;
-    background-color: var(--sjs2-color-bg-basic-secondary);
-    height: auto;
-  }
-}
-
 .st-root-modern {
   width: 100%;
   height: fit-content;
@@ -242,7 +234,6 @@
   background-color: var(--sjs2-color-bg-basic-secondary);
 }
 
-.st-title.st-panel__title,
 .st-table__cell.st-table__cell--header {
   @include sjs2--typography--small-strong;
   text-align: left;
@@ -250,36 +241,6 @@
 
 .st-table__cell.st-table__cell--header {
   color: var(--sjs2-color-fg-basic-primary-muted);
-}
-
-.st-title.st-panel__title {
-  margin: 0;
-  color: var(--sjs2-color-fg-basic-primary-muted);
-  background-color: var(--sjs2-color-component-formbox-design-bg);
-  border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
-  padding: var(--sjs2-spacing-x100) var(--sjs2-spacing-x300);
-}
-
-// A collapsible page panel (see TranslationTable.setupPagePanel): the chevron before the title.
-.st-title.st-panel__title--expandable {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: var(--sjs2-spacing-x100);
-  cursor: pointer;
-}
-
-.st-panel__title-expandable-svg-container {
-  display: flex;
-  flex-shrink: 0;
-  width: var(--sjs2-size-x200);
-  height: var(--sjs2-size-x200);
-}
-
-.st-panel__title-expandable-svg {
-  width: var(--sjs2-size-x200);
-  height: var(--sjs2-size-x200);
-  fill: var(--sjs2-color-fg-basic-primary-muted);
 }
 
 .st-table {
@@ -296,24 +257,6 @@
   background-color: var(--sjs2-color-bg-basic-primary);
   border-bottom: var(--sjs2-border-width-x100) solid var(--sjs2-color-border-basic-secondary);
   padding: var(--sjs2-spacing-x100) 0;
-}
-
-td.st-table__cell:first-of-type {
-  @include sjs2--typography--default-strong;
-  color: var(--sjs2-color-fg-basic-primary);
-  max-width: 300px;
-  padding-right: var(--sjs2-spacing-x300);
-
-  span {
-    display: inline-block;
-    padding-left: var(--sjs2-spacing-x300);
-  }
-}
-
-.st-panel-indent .st-table__cell:first-of-type {
-  span {
-    padding-left: var(--sjs2-spacing-x600);
-  }
 }
 
 .st-table {
@@ -667,7 +610,7 @@ td.st-table__cell:first-of-type {
   color: var(--sjs2-color-fg-basic-primary-muted);
 }
 
-// The grouped strings table of the side-by-side grid view (see TranslationTable): a survey whose
+// The grouped strings table of the grid view, in both modes (see TranslationTable): a survey whose
 // page groups are collapsible panels and whose string rows are one-row matrices with the Question,
 // String, Source and Target columns. The grid view is white (README question 7).
 .st-root-modern.st-translation-table {
@@ -685,11 +628,6 @@ td.st-table__cell:first-of-type {
   .st-row {
     margin: 0;
   }
-}
-
-// The classic header survey stays a valid survey, but the table groups carry their own header rows.
-.st-translation-table-header {
-  display: none;
 }
 
 .st-translation-table {
@@ -730,7 +668,10 @@ td.st-table__cell:first-of-type {
     cursor: pointer;
   }
 
+  // The chevron of a collapsible page group (see TranslationTable.setupPagePanel).
   .st-panel__title-expandable-svg-container {
+    display: flex;
+    flex-shrink: 0;
     width: var(--sjs2-size-x300);
     height: var(--sjs2-size-x300);
   }

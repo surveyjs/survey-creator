@@ -1,6 +1,7 @@
 import { ComponentCollection } from "survey-core";
 import { CreatorTester } from "../tests/creator-tester";
 import { CollaborationPlugin } from "../src/plugins/collaboration";
+import { getLocaleColumns } from "../tests/tabs/translation-table-helper";
 import { IJournalRecord, JournalOp } from "../src/plugins/collaboration/journal/journal-record";
 // Registers the survey-core locale codes: the translation-tab refresher only
 // treats a record target's trailing segment as a locale when the code is known.
@@ -585,11 +586,11 @@ test("journal-sync: checking a peer-added locale shows the peer's already-made t
   expect(translationB.getVisibleLocales()).toContain("fr");
   expect(translationB.getSelectedLocales()).not.toContain("fr");
   const matrixB: any = translationB.stringsSurvey.getAllQuestions()[0];
-  expect(matrixB.columns).toHaveLength(1);
+  expect(getLocaleColumns(matrixB)).toHaveLength(1);
 
   // B opts in: the new column must carry A's translation, not render empty.
   translationB.setSelectedLocales(["fr"]);
-  expect(matrixB.columns).toHaveLength(2);
+  expect(getLocaleColumns(matrixB)).toHaveLength(2);
   const frCell = matrixB.visibleRows[0].cells.filter((cell: any) => cell.column.name === "fr")[0];
   expect(frCell.question.value).toEqual("Bonjour");
 });

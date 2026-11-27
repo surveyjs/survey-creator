@@ -812,7 +812,6 @@ export interface SurveyInstanceCreatedEvent {
    *   - `"theme-tab:property-grid"` - A survey that represents the Property Grid in the Themes tab.
    *   - `"translation-tab:language-list"` - A survey that displays the language list in the Translations tab.
    *   - `"translation-tab:table"` - A survey that displays the translation table in the Translations tab.
-   *   - `"translation-tab:table-header"` - A survey that displays the header of the translation table in the Translations tab.
    *   - `"translation-tab:table-popup-editor"` - A survey that displays a translation table for an individual language in a pop-up window.
    *   - `"table-values-popup-editor"` - A survey that allows you to edit values of a table (Choices, Rows, Columns, etc.) in a pop-up window.
    *   - `"matrix-cell-values-popup-editor"` - A survey that allows you to [specify cell texts of a Single-Select Matrix](https://surveyjs.io/form-library/examples/scoring-rubric-example/) in a pop-up window.

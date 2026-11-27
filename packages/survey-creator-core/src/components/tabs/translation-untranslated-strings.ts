@@ -4,15 +4,6 @@ import { editorLocalization } from "../../editorLocalization";
 import { TranslationBase, TranslationItem } from "./translation-base";
 import { TranslationTable } from "./translation-table";
 
-// The text an untranslated target cell shows, muted (the cell placeholder): the text the string is
-// translated from. "" for any other cell, or when the target has a text of its own. Shared by the
-// side-by-side grid view and the "Untranslated strings" dialog.
-export function getUntranslatedTargetPlaceholder(model: TranslationBase, item: TranslationItem, columnName: string): string {
-  const target = model.targetLocale || "";
-  if (!target || columnName !== model.getLocaleColumnName(target)) return "";
-  return item.getUntranslatedText(target, model.sourceLocale || "");
-}
-
 // The model of the side-by-side "Untranslated strings" dialog (the side panel's Translate manually):
 // the whole survey's used strings that have no text in the target language when the dialog opens,
 // grouped by page in the grid view's table. The rows stay when they get translated: they are taken
@@ -36,9 +27,6 @@ export class TranslationUntranslatedStrings extends TranslationBase {
   }
   // The area of the dialog the multiple-languages mode opens: the same survey role.
   protected getSurveyStringsArea(): string { return "translation-tab:table-popup-editor"; }
-  public getStringsCellPlaceholder(item: TranslationItem, columnName: string): string {
-    return getUntranslatedTargetPlaceholder(this, item, columnName) || super.getStringsCellPlaceholder(item, columnName);
-  }
   // Nothing left to translate: the dialog says so instead of rendering an empty survey.
   protected onSurveyStringsCreated(survey: SurveyModel): void {
     super.onSurveyStringsCreated(survey);

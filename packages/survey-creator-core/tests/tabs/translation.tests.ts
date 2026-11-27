@@ -4,6 +4,10 @@ import {
   countRootBuilds, createTreeOnceCreator, getModelSnapshot, getTranslationModel, getTranslationPlugin, getTreeOnceJSON, getTreeSnapshot
 } from "./translation-tree-once-helper";
 import { treeOnceBaseline } from "./translation-tree-once-baseline";
+import {
+  findStringMatrix, getGroupPanel, getLocaleCell, getLocaleCells, getLocaleColumnNames, getLocaleColumns, getLocaleColumnTitles,
+  getQuestionCellHtml, getStringMatrices, getStringMatrix, getStringMatrixNames
+} from "./translation-table-helper";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { EmptySurveyCreatorOptions, settings } from "../../src/creator-settings";
 import { CreatorTester } from "../creator-tester";
@@ -211,36 +215,32 @@ test("stringsSurvey - one question in survey", () => {
   const page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(1);
   const pagePanel = <PanelModel>page.elements[0];
-  expect(pagePanel.name).toEqual("page1");
-  expect(pagePanel.elements).toHaveLength(1);
-  expect(pagePanel.elements[0].name).toEqual("question1");
-  const question1 = <PanelModel>pagePanel.elements[0];
-  expect(question1.elements).toHaveLength(2);
-  const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.name).toEqual("page1_question1_props0");
+  expect(pagePanel).toBe(getGroupPanel(translation, "page1"));
+  // The page group holds the strings of its elements in a row each: the question title, then its choices.
+  expect(getStringMatrixNames(translation)).toEqual(["page1_question1_props0", "question1_choices0", "question1_choices1", "question1_choices2"]);
+  expect(pagePanel.elements).toHaveLength(4);
+  const question1Props = getStringMatrix(translation, "page1_question1_props0");
+  expect(getQuestionCellHtml(question1Props)).toEqual("question1");
   expect(question1Props.titleLocation).toEqual("hidden");
-  expect(question1Props.columns).toHaveLength(4);
-  expect(question1Props.columns[0].name).toEqual("default");
-  expect(question1Props.columns[0].title).toEqual("Default (English)");
+  expect(getLocaleColumns(question1Props)).toHaveLength(4);
+  expect(getLocaleColumnNames(question1Props)[0]).toEqual("default");
+  expect(getLocaleColumnTitles(question1Props)[0]).toEqual("Source: Default (English)");
   expect(question1Props.rows).toHaveLength(1);
   expect(question1Props.rows[0].value).toEqual("title");
   expect(question1Props.rows[0].text).toEqual("Question title");
-  const choicesPanel = <PanelModel>question1.elements[1];
-  expect(choicesPanel.elements.length).toBe(3);
-  const choicesProps1 = <QuestionMatrixDropdownModel>choicesPanel.elements[0];
-  expect(choicesProps1.name).toEqual("question1_choices0");
-  expect(choicesProps1.columns).toHaveLength(4);
-  expect(choicesProps1.columns[0].name).toEqual("default");
-  expect(choicesProps1.columns[0].title).toEqual("Default (English)");
-  expect(choicesProps1.columns[1].name).toEqual("fr");
-  expect(choicesProps1.columns[1].title).toEqual("Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  const choicesProps1 = getStringMatrix(translation, "question1_choices0");
+  expect(getLocaleColumns(choicesProps1)).toHaveLength(4);
+  expect(getLocaleColumnNames(choicesProps1)[0]).toEqual("default");
+  expect(getLocaleColumnTitles(choicesProps1)[0]).toEqual("Source: Default (English)");
+  expect(getLocaleColumnNames(choicesProps1)[1]).toEqual("fr");
+  expect(getLocaleColumnTitles(choicesProps1)[1]).toEqual("Target: Français"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   expect(choicesProps1.rows).toHaveLength(1);
   expect(choicesProps1.rows[0].value).toEqual("item1");
-  expect(choicesProps1.rows[0].text).toEqual("Item 1");
-  const choicesProps2 = <QuestionMatrixDropdownModel>choicesPanel.elements[2];
+  expect(choicesProps1.rows[0].text).toEqual("Choices: Item 1");
+  const choicesProps2 = getStringMatrix(translation, "question1_choices2");
   expect(choicesProps2.rows).toHaveLength(1);
   expect(choicesProps2.rows[0].value).toEqual("item3");
-  expect(choicesProps2.rows[0].text).toEqual("Item 3");
+  expect(choicesProps2.rows[0].text).toEqual("Choices: Item 3");
   expect(question1Props.value).toEqual({
     title: {
       default: "question 1",
@@ -249,11 +249,11 @@ test("stringsSurvey - one question in survey", () => {
       es: "quéstion 1" // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
     }
   });
-  expect(question1Props.visibleRows[0].cells[1].question.getType()).toEqual("comment");
-  expect(question1Props.visibleRows[0].cells[1].question.value).toEqual("quéstion 1"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(getLocaleCell(question1Props, "fr").getType()).toEqual("comment");
+  expect(getLocaleCell(question1Props, "fr").value).toEqual("quéstion 1"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
   const translationItem: TranslationItem = question1Props.rows[0]["translationData"];
   expect(translationItem.getLocText("fr")).toEqual("quéstion 1"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-  question1Props.visibleRows[0].cells[1].question.value = "changed fr";
+  getLocaleCell(question1Props, "fr").value = "changed fr";
   expect(translationItem.getLocText("fr")).toEqual("changed fr");
 });
 
@@ -281,12 +281,10 @@ test("stringsSurvey - check properties text, should use pe. from localization in
   const translation = new Translation(survey);
   translation.reset();
   expect(translation.stringsSurvey.pages).toHaveLength(1);
-  const page = translation.stringsSurvey.pages[0];
-  const pagePanel = <PanelModel>page.elements[0];
-  const question = <PanelModel>pagePanel.elements[0];
-  const question1Props = <QuestionMatrixDropdownModel>question.elements[0];
+  const matrices = getStringMatrices(translation);
+  const question1Props = matrices[0];
   expect(question1Props.rows[0].text).toEqual("test rating title");
-  const question2Props = <QuestionMatrixDropdownModel>question.elements[1];
+  const question2Props = matrices[1];
   expect(question2Props.rows[0].text).toEqual("test rating min description");
   editorLocalization.currentLocale = "";
 });
@@ -319,9 +317,9 @@ test("Add/remove columns on adding/removing locales", () => {
   const matrix = <QuestionMatrixDropdownModel>(
     translation.stringsSurvey.getAllQuestions()[0]
   );
-  expect(matrix.columns).toHaveLength(1);
+  expect(getLocaleColumns(matrix)).toHaveLength(1);
   translation.addLocale("de");
-  expect(matrix.columns).toHaveLength(2);
+  expect(getLocaleColumns(matrix)).toHaveLength(2);
 });
 test("stringsSurvey and filterPage", () => {
   const survey = new SurveyModel({
@@ -535,7 +533,7 @@ test("Translation filterPage action content and visiblity after activate", () =>
   expect(filterPageAction.visible).toBeFalsy();
 });
 
-test("StringsHeaderSurvey layout", () => {
+test("No header survey: the first row of each page group carries the header", () => {
   const survey = new SurveyModel({
     pages: [
       {
@@ -560,16 +558,17 @@ test("StringsHeaderSurvey layout", () => {
   });
   const translation = new Translation(survey);
   translation.reset();
-  const stringsMatrix = <QuestionMatrixDropdownModel>(translation.stringsSurvey.getAllQuestions()[0]);
-  const headerMatrix = <QuestionMatrixDropdownModel>(translation.stringsHeaderSurvey.getAllQuestions()[0]);
-  expect(stringsMatrix.columns).toHaveLength(1);
-
-  expect(headerMatrix.columns).toHaveLength(1);
+  expect((<any>translation).stringsHeaderSurvey).toBeUndefined();
+  const stringsMatrix = getStringMatrix(translation, "page1_question1_props0");
+  const headerMatrix = getStringMatrix(translation, "page2_question2_props0");
+  expect(stringsMatrix.showHeader).toBe(true);
+  expect(headerMatrix.showHeader).toBe(true);
+  expect(getLocaleColumns(stringsMatrix)).toHaveLength(1);
+  expect(getLocaleColumns(headerMatrix)).toHaveLength(1);
 
   translation.addLocale("de");
-  expect(stringsMatrix.columns).toHaveLength(2);
-
-  expect(headerMatrix.columns).toHaveLength(2);
+  expect(getLocaleColumns(stringsMatrix)).toHaveLength(2);
+  expect(getLocaleColumns(headerMatrix)).toHaveLength(2);
 });
 
 test("Actions mode small", () => {
@@ -787,17 +786,14 @@ test("stringsSurvey - text question dataList property, default", () => {
   const page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(1);
   const pagePanel = <PanelModel>page.elements[0];
-  expect(pagePanel.elements).toHaveLength(1);
-  expect(pagePanel.elements[0].name).toEqual("question1");
-  const question1 = <PanelModel>pagePanel.elements[0];
-  expect(question1.elements).toHaveLength(2);
-  const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.name).toEqual("page1_question1_props0");
-  expect(question1Props.columns).toHaveLength(1);
-  expect(question1Props.columns[0].name).toEqual("default");
+  expect(pagePanel.elements).toHaveLength(2);
+  expect(getStringMatrixNames(translation)).toEqual(["page1_question1_props0", "page1_question1_props1"]);
+  const question1Props = getStringMatrix(translation, "page1_question1_props0");
+  expect(getQuestionCellHtml(question1Props)).toEqual("question1");
+  expect(getLocaleColumnNames(question1Props)).toEqual(["default"]);
   expect(question1Props.rows).toHaveLength(1);
   expect(question1Props.rows[0].value).toEqual("dataList");
-  const cellQuestion = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
+  const cellQuestion = <QuestionCommentModel>getLocaleCell(question1Props, "default");
   expect(cellQuestion.acceptCarriageReturn).toBeTruthy();
   expect(cellQuestion.value).toEqual("Item1\nItem2");
   cellQuestion.value = "Item1\nItem2\nItem3";
@@ -819,11 +815,9 @@ test("stringsSurvey - use question's name instead of question's title in title o
   });
   const translation = new Translation(survey);
   translation.reset();
-  const page = translation.stringsSurvey.pages[0];
-  const pagePanel = <PanelModel>page.elements[0];
-  const panel = pagePanel.elements[0];
-  expect(panel.name).toEqual("question1");
-  expect(panel.title).toEqual("question1");
+  // The Question column names the element.
+  const matrix = getStringMatrices(translation)[0];
+  expect(getQuestionCellHtml(matrix)).toEqual("question1");
 });
 test("stringsSurvey - text question dataList property, several locales", () => {
   const oldValue = settings.translation.sortByName;
@@ -844,20 +838,15 @@ test("stringsSurvey - text question dataList property, several locales", () => {
   const translation = new Translation(survey);
   translation.reset();
   expect(translation.stringsSurvey.pages).toHaveLength(1);
-  const page = translation.stringsSurvey.pages[0];
-  const pagePanel = <PanelModel>page.elements[0];
-  const question1 = <PanelModel>pagePanel.elements[0];
-  expect(question1.elements).toHaveLength(2);
-  const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.columns).toHaveLength(2);
-  expect(question1Props.columns[0].name).toEqual("default");
-  expect(question1Props.columns[1].name).toEqual("de");
+  expect(getStringMatrices(translation)).toHaveLength(2);
+  const question1Props = getStringMatrix(translation, "page1_question1_props0");
+  expect(getLocaleColumnNames(question1Props)).toEqual(["default", "de"]);
   expect(question1Props.rows).toHaveLength(1);
   expect(question1Props.rows[0].value).toEqual("dataList");
-  const cellQuestionDefault = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
+  const cellQuestionDefault = <QuestionCommentModel>getLocaleCell(question1Props, "default");
   expect(cellQuestionDefault.acceptCarriageReturn).toBeTruthy();
   expect(cellQuestionDefault.value).toEqual("Item1\nItem2");
-  const cellQuestionDe = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
+  const cellQuestionDe = <QuestionCommentModel>getLocaleCell(question1Props, "de");
   expect(cellQuestionDe.acceptCarriageReturn).toBeTruthy();
   expect(cellQuestionDe.value).toEqual("Item1-de\nItem2-de");
   cellQuestionDe.value = "Item1-de\nItem2-de\nItem3-de";
@@ -885,16 +874,15 @@ test("acceptCarriageReturn for text properties", () => {
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(1);
-  const pagePanel = <PanelModel>page.elements[0];
-  expect(pagePanel.elements).toHaveLength(1);
-  expect(pagePanel.elements[0].name).toEqual("question1");
-  const question1 = <PanelModel>pagePanel.elements[0];
-  let rows = (<QuestionMatrixDropdownModel>question1.elements[0]).visibleRows;
-  expect((<QuestionCommentModel>rows[0].cells[0].question).acceptCarriageReturn).toBeTruthy();
-  expect((<QuestionCommentModel>rows[0].cells[1].question).acceptCarriageReturn).toBeTruthy();
-  rows = (<QuestionMatrixDropdownModel>question1.elements[1]).visibleRows;
-  expect((<QuestionCommentModel>rows[0].cells[0].question).acceptCarriageReturn).toBeFalsy();
-  expect((<QuestionCommentModel>rows[0].cells[1].question).acceptCarriageReturn).toBeFalsy();
+  const matrices = getStringMatrices(translation);
+  expect(matrices).toHaveLength(2);
+  expect(getQuestionCellHtml(matrices[0])).toEqual("question1");
+  let cells = getLocaleCells(matrices[0]);
+  expect((<QuestionCommentModel>cells[0]).acceptCarriageReturn).toBeTruthy();
+  expect((<QuestionCommentModel>cells[1]).acceptCarriageReturn).toBeTruthy();
+  cells = getLocaleCells(matrices[1]);
+  expect((<QuestionCommentModel>cells[0]).acceptCarriageReturn).toBeFalsy();
+  expect((<QuestionCommentModel>cells[1]).acceptCarriageReturn).toBeFalsy();
 });
 test("Respect property maxLength attrigute in stringsSurvey comment questions", () => {
   Serializer.findProperty("question", "title").maxLength = 10;
@@ -917,15 +905,11 @@ test("Respect property maxLength attrigute in stringsSurvey comment questions", 
   });
   const translation = new Translation(survey);
   translation.reset();
-  const page = translation.stringsSurvey.pages[0];
-  const pagePanel = <PanelModel>page.elements[1];
-  const questionPanel = <PanelModel>pagePanel.elements[1];
-  const surveyProps = <QuestionMatrixDropdownModel>page.elements[0];
-  const pageProps = <QuestionMatrixDropdownModel>pagePanel.elements[0];
-  const questionProps = <QuestionMatrixDropdownModel>questionPanel.elements[0];
-  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[0].question).maxLength).toEqual(30);
-  expect((<QuestionCommentModel>pageProps.visibleRows[0].cells[0].question).maxLength).toEqual(20);
-  expect((<QuestionCommentModel>questionProps.visibleRows[0].cells[0].question).maxLength).toEqual(10);
+  // The survey strings open the first page group, then the page's own strings, then its elements'.
+  const [surveyProps, pageProps, questionProps] = getStringMatrices(translation);
+  expect((<QuestionCommentModel>getLocaleCells(surveyProps)[0]).maxLength).toEqual(30);
+  expect((<QuestionCommentModel>getLocaleCells(pageProps)[0]).maxLength).toEqual(20);
+  expect((<QuestionCommentModel>getLocaleCells(questionProps)[0]).maxLength).toEqual(10);
 
   Serializer.findProperty("question", "title").maxLength = -1;
   Serializer.findProperty("page", "title").maxLength = -1;
@@ -1057,37 +1041,29 @@ test("empty title placeholders", () => {
   const translation = new Translation(survey);
   translation.reset();
   expect(translation.stringsSurvey.pages).toHaveLength(1);
-  const page = translation.stringsSurvey.pages[0];
-  expect(page.elements).toHaveLength(1);
-  const pagePanel = <PanelModel>page.elements[0];
-  expect(pagePanel.elements).toHaveLength(1);
-  expect(pagePanel.elements[0].name).toEqual("question1");
-  const question1 = <PanelModel>pagePanel.elements[0];
-  expect(question1.elements).toHaveLength(1);
-  const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.name).toEqual("page1_question1_props0");
-  expect(question1Props.columns).toHaveLength(2);
-  expect(question1Props.columns[0].name).toEqual("default");
-  expect(question1Props.columns[1].name).toEqual("da");
+  expect(getStringMatrixNames(translation)).toEqual(["page1_question1_props0"]);
+  const question1Props = getStringMatrix(translation, "page1_question1_props0");
+  expect(getQuestionCellHtml(question1Props)).toEqual("question1");
+  expect(getLocaleColumnNames(question1Props)).toEqual(["default", "da"]);
   expect(question1Props.rows).toHaveLength(1);
   expect(question1Props.rows[0].value).toEqual("title");
-  let cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
-  let cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
+  let cellQuestion1 = <QuestionCommentModel>getLocaleCell(question1Props, "default");
+  let cellQuestion2 = <QuestionCommentModel>getLocaleCell(question1Props, "da");
   expect(cellQuestion1.placeholder).toEqual("question1");
   expect(cellQuestion1.value).toBeFalsy();
   expect(cellQuestion2.placeholder).toEqual("question1");
   expect(cellQuestion2.value).toEqual("test");
 
   cellQuestion1.value = "Question 1";
-  cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
-  cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
+  cellQuestion1 = <QuestionCommentModel>getLocaleCell(question1Props, "default");
+  cellQuestion2 = <QuestionCommentModel>getLocaleCell(question1Props, "da");
   expect(cellQuestion1.placeholder).toEqual("question1");
   expect(cellQuestion1.value).toEqual("Question 1");
   expect(cellQuestion2.placeholder).toEqual("Question 1");
   expect(cellQuestion2.value).toEqual("test");
 
-  cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
-  cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
+  cellQuestion1 = <QuestionCommentModel>getLocaleCell(question1Props, "default");
+  cellQuestion2 = <QuestionCommentModel>getLocaleCell(question1Props, "da");
   cellQuestion1.value = "";
   expect(cellQuestion1.placeholder).toEqual("question1");
   expect(cellQuestion1.value).toEqual("");
@@ -1116,22 +1092,14 @@ test("init placeholders", () => {
   const translation = new Translation(survey);
   translation.reset();
   expect(translation.stringsSurvey.pages).toHaveLength(1);
-  const page = translation.stringsSurvey.pages[0];
-  expect(page.elements).toHaveLength(1);
-  const pagePanel = <PanelModel>page.elements[0];
-  expect(pagePanel.elements).toHaveLength(1);
-  expect(pagePanel.elements[0].name).toEqual("question1");
-  const question1 = <PanelModel>pagePanel.elements[0];
-  expect(question1.elements).toHaveLength(1);
-  const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.name).toEqual("page1_question1_props0");
-  expect(question1Props.columns).toHaveLength(2);
-  expect(question1Props.columns[0].name).toEqual("default");
-  expect(question1Props.columns[1].name).toEqual("da");
+  expect(getStringMatrixNames(translation)).toEqual(["page1_question1_props0"]);
+  const question1Props = getStringMatrix(translation, "page1_question1_props0");
+  expect(getQuestionCellHtml(question1Props)).toEqual("question1");
+  expect(getLocaleColumnNames(question1Props)).toEqual(["default", "da"]);
   expect(question1Props.rows).toHaveLength(1);
   expect(question1Props.rows[0].value).toEqual("title");
-  const cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
-  const cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
+  const cellQuestion1 = <QuestionCommentModel>getLocaleCell(question1Props, "default");
+  const cellQuestion2 = <QuestionCommentModel>getLocaleCell(question1Props, "da");
   expect(cellQuestion1.placeholder).toEqual("question1");
   expect(cellQuestion1.value).toEqual("Question 1");
   expect(cellQuestion2.placeholder).toEqual("Question 1");
@@ -1164,18 +1132,11 @@ test("init placeholders for choices", () => {
   const translation = new Translation(survey);
   translation.reset();
   expect(translation.stringsSurvey.pages).toHaveLength(1);
-  const page = translation.stringsSurvey.pages[0];
-  expect(page.elements).toHaveLength(1);
-  const pagePanel = <PanelModel>page.elements[0];
-  expect(pagePanel.elements).toHaveLength(1);
-  const question1 = <PanelModel>pagePanel.elements[0];
-  expect(question1.elements).toHaveLength(2);
-  const choicesPanel = <PanelModel>question1.elements[1];
-  const choicesProps = <QuestionMatrixDropdownModel>choicesPanel.elements[0];
-  expect(choicesProps.name).toEqual("question1_choices0");
-  expect(choicesProps.columns).toHaveLength(2);
-  const cellQuestion1 = <QuestionCommentModel>choicesProps.visibleRows[0].cells[0].question;
-  const cellQuestion2 = <QuestionCommentModel>choicesProps.visibleRows[0].cells[1].question;
+  expect(getStringMatrixNames(translation)).toEqual(["page1_question1_props0", "question1_choices0"]);
+  const choicesProps = getStringMatrix(translation, "question1_choices0");
+  expect(getLocaleColumns(choicesProps)).toHaveLength(2);
+  const cellQuestion1 = <QuestionCommentModel>getLocaleCell(choicesProps, "default");
+  const cellQuestion2 = <QuestionCommentModel>getLocaleCell(choicesProps, "da");
   expect(cellQuestion1.placeholder).toEqual("1");
   expect(cellQuestion1.value).toEqual("Item 1");
   expect(cellQuestion2.placeholder).toEqual("Item 1");
@@ -1220,27 +1181,21 @@ test("Placeholder for different elements, Issue#7333", () => {
   translation.addLocale("de");
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
-  expect(page.elements).toHaveLength(2);
-  const expressionPanel = <PanelModel>page.elements[0];
-  expect(expressionPanel.elements).toHaveLength(1);
-  const pagePanel = <PanelModel>page.elements[1];
-  expect(pagePanel.elements).toHaveLength(2);
-  const question1 = <PanelModel>pagePanel.elements[0];
-  const question2 = <PanelModel>pagePanel.elements[1];
-  expect(question1.elements).toHaveLength(4);
-  expect(question2.elements).toHaveLength(2);
-  const cellIndex = 1;
-  const checkPlaceholder = (matrix: QuestionMatrixDropdownModel, expectedPlaceholder: string, rowIndex: number = 0) => {
-    const cellQuestion = <QuestionCommentModel>matrix.visibleRows[rowIndex].cells[cellIndex].question;
+  // A single page group: the survey's completedHtmlOnCondition opens it, then q1's four strings and q2's two.
+  expect(page.elements).toHaveLength(1);
+  const matrices = getStringMatrices(translation);
+  expect(matrices).toHaveLength(7);
+  const checkPlaceholder = (matrix: QuestionMatrixDropdownModel, expectedPlaceholder: string) => {
+    const cellQuestion = <QuestionCommentModel>getLocaleCell(matrix, "de");
     expect(cellQuestion.placeholder).toEqual(expectedPlaceholder);
   };
-  checkPlaceholder(<QuestionMatrixDropdownModel>question1.elements[0], "q1");
-  checkPlaceholder(<QuestionMatrixDropdownModel>question1.elements[1], "Q1 description");
-  checkPlaceholder(<QuestionMatrixDropdownModel>question1.elements[2], "Please specify");
-  checkPlaceholder(<QuestionMatrixDropdownModel>question1.elements[3], "Other features");
-  checkPlaceholder(<QuestionMatrixDropdownModel>question2.elements[0], "q2");
-  checkPlaceholder(<QuestionMatrixDropdownModel>question2.elements[1], "Enter your email here");
-  checkPlaceholder(<QuestionMatrixDropdownModel>expressionPanel.elements[0], "Exit one");
+  checkPlaceholder(matrices[0], "Exit one");
+  checkPlaceholder(matrices[1], "q1");
+  checkPlaceholder(matrices[2], "Q1 description");
+  checkPlaceholder(matrices[3], "Please specify");
+  checkPlaceholder(matrices[4], "Other features");
+  checkPlaceholder(matrices[5], "q2");
+  checkPlaceholder(matrices[6], "Enter your email here");
 });
 
 test("localize placeholders", () => {
@@ -1267,44 +1222,42 @@ test("localize placeholders", () => {
   translation.showAllStrings = true;
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
-  expect(page.elements).toHaveLength(12);
-  const surveyProps = <QuestionMatrixDropdownModel>page.elements[0];
-  expect(surveyProps.name).toEqual("survey_props0");
-  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[0].question).placeholder).toEqual("Translation...");
-  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[1].question).placeholder).toEqual("Перевод..."); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
-  const pagePanel = <PanelModel>page.elements[11];
-  expect(pagePanel.elements).toHaveLength(5);
-  expect(pagePanel.elements[0].name).toEqual("page1_props0");
-  expect(pagePanel.elements[4].name).toEqual("question1");
-  const page1Props = <QuestionMatrixDropdownModel>pagePanel.elements[0];
-  expect(page1Props.columns).toHaveLength(2);
-  expect(page1Props.columns[0].name).toEqual("default");
-  expect(page1Props.columns[1].name).toEqual("ru");
+  // One page group: the survey's 11 strings open it, then the page's own strings, then question1's.
+  expect(page.elements).toHaveLength(1);
+  const names = getStringMatrixNames(translation);
+  expect(names.slice(0, 12)).toEqual(["survey_props0", "survey_props1", "survey_props2", "survey_props3", "survey_props4",
+    "survey_props5", "survey_props6", "survey_props7", "survey_props8", "survey_props9", "survey_props10", "page1_props0"]);
+  const surveyProps = getStringMatrix(translation, "survey_props0");
+  // The Source cell keeps the "Translation..." placeholder; an empty Target cell shows the source text,
+  // which is empty here.
+  expect((<QuestionCommentModel>getLocaleCell(surveyProps, "default")).placeholder).toEqual("Translation...");
+  expect((<QuestionCommentModel>getLocaleCell(surveyProps, "ru")).placeholder).toEqual("");
+  const page1Props = getStringMatrix(translation, "page1_props0");
+  expect(getLocaleColumnNames(page1Props)).toEqual(["default", "ru"]);
   expect(page1Props.rows).toHaveLength(1);
   expect(page1Props.rows[0].value).toEqual("title");
 
-  const cellQuestion1 = <QuestionCommentModel>page1Props.visibleRows[0].cells[0].question;
-  const cellQuestion2 = <QuestionCommentModel>page1Props.visibleRows[0].cells[1].question;
+  const cellQuestion1 = <QuestionCommentModel>getLocaleCell(page1Props, "default");
+  const cellQuestion2 = <QuestionCommentModel>getLocaleCell(page1Props, "ru");
   expect(cellQuestion1.placeholder).toEqual("Translation...");
   expect(cellQuestion1.value).toBeFalsy();
-  expect(cellQuestion2.placeholder).toEqual("Перевод..."); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  expect(cellQuestion2.placeholder).toEqual("");
   expect(cellQuestion2.value).toBeFalsy();
 
-  const survey_props0 = <QuestionMatrixDropdownModel>page.elements[0];
-  expect(survey_props0.columns).toHaveLength(2);
-  expect(survey_props0.columns[0].name).toEqual("default");
-  expect(survey_props0.columns[1].name).toEqual("ru");
+  const survey_props0 = getStringMatrix(translation, "survey_props0");
+  expect(getLocaleColumnNames(survey_props0)).toEqual(["default", "ru"]);
   expect(survey_props0.rows).toHaveLength(1);
   expect(survey_props0.rows[0].value).toEqual("title");
-  const survey_props11 = <QuestionMatrixDropdownModel>page.elements[10];
+  const survey_props11 = getStringMatrix(translation, "survey_props10");
   expect(survey_props11.rows).toHaveLength(1);
   expect(survey_props11.rows[0].value).toEqual("editText");
 
-  const surveyCell1 = <QuestionCommentModel>survey_props11.visibleRows[0].cells[0].question;
-  const surveyCell2 = <QuestionCommentModel>survey_props11.visibleRows[0].cells[1].question;
+  const surveyCell1 = <QuestionCommentModel>getLocaleCell(survey_props11, "default");
+  const surveyCell2 = <QuestionCommentModel>getLocaleCell(survey_props11, "ru");
   expect(surveyCell1.placeholder).toEqual("Edit");
   expect(surveyCell1.value).toBeFalsy();
-  expect(surveyCell2.placeholder).toEqual("Редактирование"); // eslint-disable-line surveyjs/eslint-plugin-i18n/only-english-or-code
+  // An empty Target cell shows the source text: the library's English text, not its Russian one.
+  expect(surveyCell2.placeholder).toEqual("Edit");
   expect(surveyCell2.value).toBeFalsy();
 });
 test("localize placeholders, default locale is 'fr'", () => {
@@ -1328,10 +1281,10 @@ test("localize placeholders, default locale is 'fr'", () => {
   translation.showAllStrings = true;
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
-  expect(page.elements).toHaveLength(12);
-  const surveyProps = <QuestionMatrixDropdownModel>page.elements[0];
+  expect(page.elements).toHaveLength(1);
+  const surveyProps = getStringMatrices(translation)[0];
   expect(surveyProps.name).toEqual("survey_props0");
-  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[0].question).placeholder).toEqual("Traduction...");
+  expect((<QuestionCommentModel>getLocaleCells(surveyProps)[0]).placeholder).toEqual("Traduction...");
   surveyLocalization.defaultLocale = prevLoc;
 });
 
@@ -1357,17 +1310,12 @@ test("Default column should show the text of the non-default locale, Bug#7802", 
     });
     const translation = new Translation(survey);
     translation.reset();
-    const page = translation.stringsSurvey.pages[0];
-    const pagePanel = <PanelModel>page.elements[0];
+    // The title row of each question, in the page group.
     const getCell = (questionIndex: number, colIndex: number): QuestionCommentModel => {
-      const qPanel = <PanelModel>pagePanel.elements[questionIndex];
-      const props = <QuestionMatrixDropdownModel>qPanel.elements[0];
-      return <QuestionCommentModel>props.visibleRows[0].cells[colIndex].question;
+      return <QuestionCommentModel>getLocaleCells(getStringMatrices(translation)[questionIndex])[colIndex];
     };
     const getColumns = (questionIndex: number): Array<string> => {
-      const qPanel = <PanelModel>pagePanel.elements[questionIndex];
-      const props = <QuestionMatrixDropdownModel>qPanel.elements[0];
-      return props.columns.map(col => col.name);
+      return getLocaleColumnNames(getStringMatrices(translation)[questionIndex]);
     };
 
     expect(getColumns(0)).toEqual(["de", "en"]);
@@ -1408,20 +1356,12 @@ test("init placeholders for dialects", () => {
   expect(page.elements).toHaveLength(1);
   const pagePanel = <PanelModel>page.elements[0];
   expect(pagePanel.elements).toHaveLength(1);
-  expect(pagePanel.elements[0].name).toEqual("question1");
-  const question1 = <PanelModel>pagePanel.elements[0];
-  expect(question1.elements).toHaveLength(1);
-  const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.name).toEqual("page1_question1_props0");
-  expect(question1Props.columns).toHaveLength(4);
-  expect(question1Props.columns[0].name).toEqual("default");
-  expect(question1Props.columns[3].name).toEqual("pt-br");
+  const question1Props = getStringMatrix(translation, "page1_question1_props0");
+  expect(getQuestionCellHtml(question1Props)).toEqual("question1");
+  expect(getLocaleColumnNames(question1Props)).toEqual(["default", "en-GB", "pt", "pt-br"]);
   expect(question1Props.rows).toHaveLength(1);
   expect(question1Props.rows[0].value).toEqual("title");
-  const cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
-  const cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
-  const cellQuestion3 = <QuestionCommentModel>question1Props.visibleRows[0].cells[2].question;
-  const cellQuestion4 = <QuestionCommentModel>question1Props.visibleRows[0].cells[3].question;
+  const [cellQuestion1, cellQuestion2, cellQuestion3, cellQuestion4] = <Array<QuestionCommentModel>>getLocaleCells(question1Props);
   expect(cellQuestion1.placeholder).toEqual("question1");
   expect(cellQuestion1.value).toEqual("Question 1");
   expect(cellQuestion2.placeholder).toEqual("Question 1");
@@ -1457,7 +1397,7 @@ test("init placeholders for for itemvalue array, Bug#6839", () => {
     ]
   });
   const getPlaceholder = (question: QuestionMatrixDropdownModel, cellIndex): string => {
-    return question.visibleRows[0].cells[cellIndex].question.placeholder;
+    return getLocaleCells(question)[cellIndex].placeholder;
   };
   const translation = new Translation(survey);
   translation.reset();
@@ -1465,28 +1405,18 @@ test("init placeholders for for itemvalue array, Bug#6839", () => {
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(1);
-  const pagePanel = <PanelModel>page.elements[0];
-  expect(pagePanel.elements).toHaveLength(2);
-  expect(pagePanel.elements[0].name).toEqual("question1");
-  expect(pagePanel.elements[1].name).toEqual("question2");
-  const question1 = <PanelModel>pagePanel.elements[0];
-  expect(question1.elements).toHaveLength(2);
-  expect(question1.elements[1].getType()).toEqual("panel");
-  const question1Choices = <QuestionMatrixDropdownModel>(<PanelModel>question1.elements[1]).questions[0];
-  expect(question1Choices.name).toEqual("question1_choices0");
-  expect(question1Choices.columns).toHaveLength(2);
-  expect(question1Choices.columns[0].name).toEqual("default");
-  expect(question1Choices.columns[1].name).toEqual("de");
+  expect(getStringMatrixNames(translation)).toEqual(["page1_question1_props0", "question1_choices0",
+    "page1_question2_props0", "question2_columns0", "question2_rows0"]);
+  const question1Choices = getStringMatrix(translation, "question1_choices0");
+  expect(getQuestionCellHtml(getStringMatrix(translation, "page1_question2_props0"))).toEqual("question2");
+  expect(getLocaleColumnNames(question1Choices)).toEqual(["default", "de"]);
   expect(question1Choices.rows).toHaveLength(1);
   expect(question1Choices.rows[0].value).toEqual("item1");
   expect(getPlaceholder(question1Choices, 0)).toEqual("item1");
   expect(getPlaceholder(question1Choices, 1)).toEqual("item1");
 
-  const question2 = <PanelModel>pagePanel.elements[1];
-  expect(question1.elements).toHaveLength(2);
-  expect(question1.elements[1].getType()).toEqual("panel");
-  const question2Columns = <QuestionMatrixDropdownModel>(<PanelModel>question2.elements[1]).questions[0];
-  const question3Rows = <QuestionMatrixDropdownModel>(<PanelModel>question2.elements[2]).questions[0];
+  const question2Columns = getStringMatrix(translation, "question2_columns0");
+  const question3Rows = getStringMatrix(translation, "question2_rows0");
   expect(question2Columns.rows[0].value).toEqual("col1");
   expect(getPlaceholder(question2Columns, 0)).toEqual("col1");
   expect(getPlaceholder(question2Columns, 1)).toEqual("col1");
@@ -1586,8 +1516,8 @@ test("Translation check all locale name are capitalized", () => {
   const val = translation.localesQuestion.visibleRows[1].cells[1].value;
   expect(val).toEqual("Test Locale Name");
   translation.setSelectedLocales(["test_locale"]);
-  const testLocaleColumn = (<QuestionMatrixDropdownModel>translation.stringsHeaderSurvey.getAllQuestions()[0]).columns[1];
-  expect(testLocaleColumn.title).toEqual("Test Locale Name");
+  const testLocaleColumn = getLocaleColumns(getStringMatrices(translation)[0])[1];
+  expect(testLocaleColumn.title).toEqual("Target: Test Locale Name");
   surveyLocalization.locales["test_locale"] = undefined;
   surveyLocalization.localeNames["test_locale"] = undefined;
 });
@@ -1697,16 +1627,16 @@ test("Reset on changing creator.JSON, #1", () => {
   translation.showAllStrings = true;
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   let page = translation.stringsSurvey.pages[0];
-  expect(page.elements).toHaveLength(12);
-  let pagePanel = <PanelModel>page.elements[11];
-  expect(pagePanel.elements).toHaveLength(5);
-  expect(pagePanel.elements[0].name).toEqual("page1_props0");
-  expect(pagePanel.elements[4].name).toEqual("q1");
-  let page1Props = <QuestionMatrixDropdownModel>pagePanel.elements[0];
-  expect(page1Props.columns).toHaveLength(2);
+  expect(page.elements).toHaveLength(1);
+  // The survey's 11 strings, then the page's 4, then q1's.
+  let names = getStringMatrixNames(translation);
+  expect(names[11]).toEqual("page1_props0");
+  expect(getQuestionCellHtml(getStringMatrix(translation, "page1_q1_props0"))).toEqual("q1");
+  let page1Props = getStringMatrix(translation, "page1_props0");
+  expect(getLocaleColumns(page1Props)).toHaveLength(2);
 
-  let cellQuestion1 = <QuestionCommentModel>page1Props.visibleRows[0].cells[0].question;
-  let cellQuestion2 = <QuestionCommentModel>page1Props.visibleRows[0].cells[1].question;
+  let cellQuestion1 = <QuestionCommentModel>getLocaleCell(page1Props, "default");
+  let cellQuestion2 = <QuestionCommentModel>getLocaleCell(page1Props, "de");
   expect(cellQuestion1.value).toBeFalsy();
   expect(cellQuestion2.value).toBeFalsy();
   cellQuestion1.value = "Default title";
@@ -1716,20 +1646,19 @@ test("Reset on changing creator.JSON, #1", () => {
   expect(surveyQuestion.locTitle.getLocaleText("de")).toEqual("De title");
 
   translation.addLocale("fr");
-  expect(page1Props.columns).toHaveLength(3);
+  expect(getLocaleColumns(page1Props)).toHaveLength(3);
   translation.removeLocale("fr");
   creator.JSON = json;
   expect(translation.getSelectedLocales()).toHaveLength(0);
   page = translation.stringsSurvey.pages[0];
-  expect(page.elements).toHaveLength(12);
-  pagePanel = <PanelModel>page.elements[11];
-  expect(pagePanel.elements).toHaveLength(5);
-  expect(pagePanel.elements[0].name).toEqual("page1_props0");
-  expect(pagePanel.elements[4].name).toEqual("q1");
-  page1Props = <QuestionMatrixDropdownModel>pagePanel.elements[0];
-  expect(page1Props.columns).toHaveLength(1);
+  expect(page.elements).toHaveLength(1);
+  names = getStringMatrixNames(translation);
+  expect(names[11]).toEqual("page1_props0");
+  expect(getQuestionCellHtml(getStringMatrix(translation, "page1_q1_props0"))).toEqual("q1");
+  page1Props = getStringMatrix(translation, "page1_props0");
+  expect(getLocaleColumns(page1Props)).toHaveLength(1);
 
-  cellQuestion1 = <QuestionCommentModel>page1Props.visibleRows[0].cells[0].question;
+  cellQuestion1 = <QuestionCommentModel>getLocaleCell(page1Props, "default");
   expect(cellQuestion1.value).toBeFalsy();
 });
 
@@ -1865,10 +1794,8 @@ test("Construction -> Reset -> Dispose", () => {
   tabTranslation.activate();
   const translation: Translation = tabTranslation.model;
   expect(translation.stringsSurvey).toBeDefined();
-  expect(translation.stringsHeaderSurvey).toBeDefined();
   tabTranslation.deactivate();
   expect(translation.stringsSurvey).toBeUndefined();
-  expect(translation.stringsHeaderSurvey).toBeUndefined();
   expect(tabTranslation.model).toBeUndefined();
 });
 test("Check onTranlationItemChanging event", () => {
@@ -1897,11 +1824,8 @@ test("Check onTranlationItemChanging event", () => {
   const tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   const translation: Translation = tabTranslation.model;
-  const page = translation.stringsSurvey.pages[0];
-  const pagePanel = <PanelModel>page.elements[0];
-  const question1 = <PanelModel>pagePanel.elements[0];
-  const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  const cellQuestion = question1Props.visibleRows[0].cells[1].question;
+  const question1Props = findStringMatrix(translation, surveyQuestion.locTitle);
+  const cellQuestion = getLocaleCell(question1Props, "de");
   cellQuestion.value = "changed_de";
   expect(surveyQuestion.locTitle.getLocaleText("de")).toBe("changed_de_changed_text");
   expect(cellQuestion.value).toBe("changed_de_changed_text");
@@ -1965,15 +1889,10 @@ test("choices with 0 value", () => {
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(1);
-  const pagePanel = <PanelModel>page.elements[0];
-  expect(pagePanel.elements).toHaveLength(1);
-  const question1 = <PanelModel>pagePanel.elements[0];
-  expect(question1.elements).toHaveLength(2);
-  const choicesPanel = <PanelModel>question1.elements[1];
-  const choicesProps = <QuestionMatrixDropdownModel>choicesPanel.elements[0];
-  expect(choicesProps.name).toEqual("question1_choices0");
+  expect(getStringMatrixNames(translation)).toEqual(["page1_question1_props0", "question1_choices0", "question1_choices1"]);
+  const choicesProps = getStringMatrix(translation, "question1_choices0");
   expect(choicesProps.visibleRows).toHaveLength(1);
-  const cellQuestion1 = <QuestionCommentModel>choicesProps.visibleRows[0].cells[0].question;
+  const cellQuestion1 = <QuestionCommentModel>getLocaleCell(choicesProps, "default");
   expect(cellQuestion1.value).toEqual("Item 1");
 });
 test("Translation doesnt' work with matrix dynamic and matrix dropdown qestion types. Bug #4450", () => {
@@ -2009,15 +1928,14 @@ test("Translation doesnt' work with matrix dynamic and matrix dropdown qestion t
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(1);
-  const pagePanel = <PanelModel>page.elements[0];
-  expect(pagePanel.elements).toHaveLength(2);
-  const question1 = <PanelModel>pagePanel.elements[0];
-  expect(question1.elements).toHaveLength(2);
-  const choicesPanel = <PanelModel>question1.elements[1];
-  const columnsProps = <QuestionMatrixDropdownModel>choicesPanel.elements[0];
-  expect(columnsProps.name).toEqual("question1_col1_props0");
+  // question1: its title and its column's title; question2: its title, its column's title and two rows.
+  expect(getStringMatrixNames(translation)).toEqual(["page1_question1_props0", "question1_col1_props0",
+    "page1_question2_props0", "question2_col1_props0", "question2_rows0", "question2_rows1"]);
+  const columnsProps = getStringMatrix(translation, "question1_col1_props0");
+  expect(getQuestionCellHtml(columnsProps)).toEqual("");
+  expect(columnsProps.rows[0].text).toEqual("col1: Column title");
   expect(columnsProps.visibleRows).toHaveLength(1);
-  const cellQuestion1 = <QuestionCommentModel>columnsProps.visibleRows[0].cells[0].question;
+  const cellQuestion1 = <QuestionCommentModel>getLocaleCell(columnsProps, "default");
   expect(cellQuestion1.value).toEqual("Column 1");
 });
 test("Translation doesnt' work with two matrix dropdown & choices. Bug #4473", () => {
@@ -2076,18 +1994,12 @@ test("Translation doesnt' work with two matrix dropdown & choices. Bug #4473", (
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(1);
-  const pagePanel = <PanelModel>page.elements[0];
-  expect(pagePanel.elements).toHaveLength(2);
-  const question1 = <PanelModel>pagePanel.elements[0];
-  expect(question1.elements).toHaveLength(3);
-  const choicesPanel = <PanelModel>question1.elements[1];
-  const columnPanel = <QuestionMatrixDropdownModel>choicesPanel.elements[1];
-  const columnsChoices = <QuestionMatrixDropdownModel>columnPanel.elements[0];
-  expect(columnsChoices.name).toEqual("question1_col1_props_choices0");
+  const columnsChoices = getStringMatrix(translation, "question1_col1_props_choices0");
+  expect(columnsChoices.rows[0].text).toEqual("col1: Choices: A");
   expect(columnsChoices.visibleRows).toHaveLength(1);
-  const cells = columnsChoices.visibleRows[0].cells;
-  expect(cells[0].question.value).toEqual("A");
-  expect(cells[1].question.value).toEqual("A (german)");
+  const cells = getLocaleCells(columnsChoices);
+  expect(cells[0].value).toEqual("A");
+  expect(cells[1].value).toEqual("A (german)");
 });
 test("The default locale can be hidden but not removed", () => {
   const survey = new SurveyModel();
@@ -2114,8 +2026,8 @@ test("Default locale can be hidden, moved, auto-translated but not removed, issu
   translation.reset();
   translation.addLocale("de");
   const matrix = translation.localesQuestion;
-  const getHeaderColumnNames = (): Array<string> =>
-    (<QuestionMatrixDropdownModel>translation.stringsHeaderSurvey.getAllQuestions()[0]).columns.map((c) => c.name);
+  // The header row is the first row of the page group.
+  const getHeaderColumnNames = (): Array<string> => getLocaleColumnNames(getStringMatrices(translation)[0]);
 
   // The default locale checkbox is enabled (can be hidden), but the row can't be removed.
   const defaultRow = matrix.visibleRows[0];
@@ -2199,8 +2111,8 @@ test("The default locale can be moved and hidden", () => {
   const translation = new Translation(survey);
   translation.reset();
   translation.addLocale("de");
-  const getHeaderColumnNames = (): Array<string> =>
-    (<QuestionMatrixDropdownModel>translation.stringsHeaderSurvey.getAllQuestions()[0]).columns.map((c) => c.name);
+  // The header row is the first row of the page group.
+  const getHeaderColumnNames = (): Array<string> => getLocaleColumnNames(getStringMatrices(translation)[0]);
 
   expect([...translation.locales]).toStrictEqual(["", "de"]);
   expect(getHeaderColumnNames()).toStrictEqual(["default", "de"]);
@@ -2338,10 +2250,10 @@ test("Remove locale strings from translation via remove row, unchecked locale", 
   const question = translation.localesQuestion;
   expect(question.visibleRows).toHaveLength(2);
   let matrix = <QuestionMatrixDropdownModel>(translation.stringsSurvey.getAllQuestions()[0]);
-  expect(matrix.columns).toHaveLength(2);
+  expect(getLocaleColumns(matrix)).toHaveLength(2);
   question.visibleRows[1].cells[0].question.value = false;
   matrix = <QuestionMatrixDropdownModel>(translation.stringsSurvey.getAllQuestions()[0]);
-  expect(matrix.columns).toHaveLength(1);
+  expect(getLocaleColumns(matrix)).toHaveLength(1);
   question.removeRow(1, false);
   expect(survey.toJSON()).toStrictEqual({
     pages: [
@@ -2903,7 +2815,6 @@ test("Import translations via TabTranslationPlugin should not throw error, Issue
   // Verify that translations are still accessible after import
   expect(translation.root).toBeDefined();
   expect(translation.stringsSurvey).toBeDefined();
-  expect(translation.stringsHeaderSurvey).toBeDefined();
 });
 
 test("TranslationEditor with imported translations should not throw error, Issue#7790", () => {
@@ -2941,8 +2852,8 @@ test("TranslationEditor with imported translations should not throw error, Issue
   translation.importFromNestedArray(JSON.parse(JSON.stringify(csvData)));
 
   // Create a TranslationEditor - this should not throw an error
-  // The constructor calls updateFromLocaleAction() and updateMatricesColumns()
-  // which access stringsHeaderSurvey
+  // The constructor sets the Source column and calls updateFromLocaleAction(), which reads the
+  // strings survey's navigation bar
   expect(() => {
     const editor = translation.createTranslationEditor("fr");
   }).not.toThrow();
@@ -2998,7 +2909,7 @@ test("Import after creating TranslationEditor should not throw error, Issue#7790
   }).not.toThrow();
 
   expect(translation.root).toBeDefined();
-  expect(translation.stringsHeaderSurvey).toBeDefined();
+  expect(translation.stringsSurvey).toBeDefined();
 });
 
 const externalChangeJSON = {
@@ -3143,10 +3054,10 @@ test("checking a locale shows texts applied to the survey while it was unchecked
   const translation = new Translation(survey);
   translation.reset();
   const matrix = <QuestionMatrixDropdownModel>translation.stringsSurvey.getAllQuestions()[0];
-  expect(matrix.columns).toHaveLength(2);
+  expect(getLocaleColumns(matrix)).toHaveLength(2);
 
   translation.setSelectedLocales([]);
-  expect(matrix.columns).toHaveLength(1);
+  expect(getLocaleColumns(matrix)).toHaveLength(1);
 
   // The survey gets a new "de" text while the locale is unchecked (this is how
   // a collaborative peer's translation lands in the model).
@@ -3154,7 +3065,7 @@ test("checking a locale shows texts applied to the survey while it was unchecked
 
   // Re-checking the locale must show the fresh text, not an empty column.
   translation.setSelectedLocales(["de"]);
-  expect(matrix.columns).toHaveLength(2);
+  expect(getLocaleColumns(matrix)).toHaveLength(2);
   const deCell = matrix.visibleRows[0].cells.filter((cell) => cell.column.name === "de")[0];
   expect(deCell.question.value).toEqual("title-de-2");
 });
@@ -3459,7 +3370,7 @@ describe("Translation tab: no \"All Pages\" on a large survey", () => {
     model.filteredPage = creator.survey.getPageByName("page3");
     const q5 = creator.survey.getQuestionByName("q5");
     const matrix = getStringsMatrixFor(model, q5.locTitle);
-    matrix.visibleRows[0].cells[0].question.value = "New title";
+    getLocaleCell(matrix, "default").value = "New title";
     expect(q5.title).toBe("New title");
     creator.undo();
     expect(q5.title).toBe("Question 5");
@@ -3574,17 +3485,18 @@ describe("Translation tab: collapsible page panels", () => {
     creator.activeTab = "translation";
     return creator;
   };
+  // The page groups of the table.
   const getPagePanel = (creator: CreatorTester, pageName: string): PanelModel =>
-    <PanelModel>getTranslationModel(creator).stringsSurvey.getPanelByName(pageName);
+    getGroupPanel(getTranslationModel(creator), pageName);
   const getStates = (creator: CreatorTester): Array<string> =>
     ["page1", "page2", "page3"].map(name => !!getPagePanel(creator, name) ? getPagePanel(creator, name).state : "none");
 
   test("a fresh state expands the first page only; the other pages keep their strings", () => {
     const creator = createCreator();
     expect(getStates(creator)).toEqual(["expanded", "collapsed", "collapsed"]);
-    // Only the page panels collapse: the nested element panels do not.
+    // The page groups hold the string rows only: there are no nested element panels.
     const nestedPanels = getPagePanel(creator, "page1").elements.filter(el => el.isPanel);
-    expect(nestedPanels.map(panel => panel.name + ":" + (<PanelModel>panel).state)).toEqual(["q1:default", "q2:default"]);
+    expect(nestedPanels).toHaveLength(0);
     // q1 title, q2 title and two choices; q3; q4.
     expect(["page1", "page2", "page3"].map(name => getPagePanel(creator, name).questions.length)).toEqual([4, 1, 1]);
     expect(getPagePanel(creator, "page2").isVisible).toBe(true);
@@ -3608,8 +3520,8 @@ describe("Translation tab: collapsible page panels", () => {
     const creator = createCreator();
     const model = getTranslationModel(creator);
     model.filteredPage = creator.survey.getPageByName("page2");
-    // A page other than the first is the root: it has no panel of its own.
-    expect(getStates(creator)).toEqual(["none", "none", "none"]);
+    // A page other than the first is the root: its group is the only one, expanded.
+    expect(getStates(creator)).toEqual(["none", "expanded", "none"]);
     model.filteredPage = null;
     expect(getStates(creator)).toEqual(["expanded", "expanded", "collapsed"]);
     // The first page keeps the survey as the root, so it is a panel.
@@ -3633,7 +3545,7 @@ describe("Translation tab: collapsible page panels", () => {
     const creator = createCreator();
     const matrix = <QuestionMatrixDropdownModel>getTranslationModel(creator).stringsSurvey.getAllQuestions()
       .filter((q: QuestionMatrixDropdownModel) => q.rows[0]["translationData"].context.name === "q3")[0];
-    matrix.visibleRows[0].cells[0].question.value = "New title";
+    getLocaleCell(matrix, "default").value = "New title";
     expect(creator.survey.getQuestionByName("q3").title).toBe("New title");
     expect(getPagePanel(creator, "page2").state).toBe("collapsed");
   });

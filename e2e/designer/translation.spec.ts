@@ -7,8 +7,13 @@ test.describe(title, () => {
     await page.goto(url);
     await page.setViewportSize({ width: 1920, height: 1080 });
 
-    const languageHeaderColumnSelector = page.locator(".st-strings-header table tr").first().locator("th");
-    const stringsColumnSelector = page.locator(".st-strings table tr").first().locator("td");
+    // The table of the grid view: the header row is the first row of the page group, and the locale
+    // columns are the Source and Target ones (the Question and String columns come first).
+    const localeCells = ".st-translation-table__cell--source, .st-translation-table__cell--target";
+    const languageHeaderColumnSelector = page.locator(".st-strings .st-translation-table .st-table__cell--header")
+      .filter({ hasText: /(Source|Target): / });
+    const stringsColumnSelector = page.locator(".st-strings .st-translation-table tr")
+      .filter({ has: page.locator(localeCells) }).first().locator(localeCells);
     const languagesSelector = page.locator(".spg-checkbox");
     const languageDefaultText = page.locator(".spg-table__question-wrapper").getByText("Default (English)");
     const languageDeText = page.locator(".spg-table__question-wrapper").getByText("Deutsch");
@@ -29,7 +34,8 @@ test.describe(title, () => {
     await getTabbedMenuItemByText(page, "Translation").click();
 
     await expect(languageHeaderColumnSelector).toHaveCount(1);
-    await expect(stringsColumnSelector).toHaveCount(2);
+    await expect(languageHeaderColumnSelector.nth(0)).toHaveText("Source: Default (English)");
+    await expect(stringsColumnSelector).toHaveCount(1);
 
     await expect(languagesSelector).toHaveCount(1);
     await expect(languagesSelector.nth(0)).toHaveClass(new RegExp(disabledClassName));
@@ -39,7 +45,8 @@ test.describe(title, () => {
     await page.getByRole("button", { name: "Add Language" }).click();
     await page.locator("span").getByText("Deutsch").click();
     await expect(languageHeaderColumnSelector).toHaveCount(2);
-    await expect(stringsColumnSelector).toHaveCount(3);
+    await expect(languageHeaderColumnSelector.nth(1)).toHaveText("Target: Deutsch");
+    await expect(stringsColumnSelector).toHaveCount(2);
     await expect(languagesSelector).toHaveCount(2);
     await expect(languagesSelector.nth(0)).not.toHaveClass(new RegExp(disabledClassName));
     await expect(languagesSelector.nth(0)).toHaveClass(new RegExp(checkedClassName));
@@ -49,12 +56,12 @@ test.describe(title, () => {
 
     await languagesSelector.nth(1).click();
     await expect(languageHeaderColumnSelector).toHaveCount(1);
-    await expect(stringsColumnSelector).toHaveCount(2);
+    await expect(stringsColumnSelector).toHaveCount(1);
     await expect(languagesSelector.nth(1)).not.toHaveClass(new RegExp(checkedClassName));
 
     await languagesSelector.nth(1).click();
     await expect(languageHeaderColumnSelector).toHaveCount(2);
-    await expect(stringsColumnSelector).toHaveCount(3);
+    await expect(stringsColumnSelector).toHaveCount(2);
     await expect(languagesSelector.nth(1)).toHaveClass(new RegExp(checkedClassName));
   });
 });

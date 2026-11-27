@@ -17,7 +17,7 @@ import { getDefaultLocaleName, isDefaultLocale } from "../../survey-helper";
 import { TranslationCopiesMap } from "./translation-copies-map";
 import { TranslationRowEqualizer, equalizerSourceSide, equalizerTargetSide } from "./translation-row-equalizer";
 import { TranslationTable } from "./translation-table";
-import { TranslationUntranslatedStrings, getUntranslatedTargetPlaceholder } from "./translation-untranslated-strings";
+import { TranslationUntranslatedStrings } from "./translation-untranslated-strings";
 import {
   TranslationBase, TranslationGroup, TranslationItem,
   runItemsMachineTranslation, createTranslationPanelButton, escapeTranslationHtmlText,
@@ -154,19 +154,11 @@ export class TranslationSideBySide extends TranslationBase implements ITranslati
   }
   // How the grid was left for the form view: on "All Pages" it comes back on "All Pages".
   private gridLeftOnAllPages: boolean = false;
-  // The grid view is a grouped table: a collapsible group per page (see TranslationTable).
-  protected createStringsTable(): TranslationTable {
-    return new TranslationTable(this, { layout: "pages" });
-  }
   protected onSurveyReplaced(): void {
     super.onSurveyReplaced();
     this.gridLeftOnAllPages = false;
     // The "Untranslated strings" dialog lists the strings of the survey it was opened over.
     this.hideUntranslatedStringsDialog();
-  }
-  // An untranslated target shows the text it is translated from, muted (the placeholder colour).
-  public getStringsCellPlaceholder(item: TranslationItem, columnName: string): string {
-    return getUntranslatedTargetPlaceholder(this, item, columnName) || super.getStringsCellPlaceholder(item, columnName);
   }
   // The side-by-side property grid: a form/grid view switcher, the source and target language
   // dropdowns, the progress of the target language with the translation buttons, and the CSV
@@ -1949,10 +1941,6 @@ export class TranslationElementStrings extends TranslationBase {
   public onShowAllStringsChanged: (value: boolean) => void;
   protected createStringsTable(): TranslationTable {
     return new TranslationTable(this, { layout: "element" });
-  }
-  // An untranslated target shows the text it is translated from, muted, as in the grid view.
-  public getStringsCellPlaceholder(item: TranslationItem, columnName: string): string {
-    return getUntranslatedTargetPlaceholder(this, item, columnName) || super.getStringsCellPlaceholder(item, columnName);
   }
   // The dialog's survey, built once by buildDialogSurvey. The strings survey of the base class is
   // never built for this model (see hasStringsSurveyUI): a shown dialog keeps rendering the survey it

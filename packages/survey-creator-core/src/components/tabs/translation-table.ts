@@ -1,22 +1,21 @@
 import {
   ItemValue, LocalizableString, MatrixDropdownColumn, PageModel, PanelModel, PanelModelBase, Question,
-  QuestionCommentModel, QuestionMatrixDropdownModel, Serializer, SurveyModel, ILocalizableString, Helpers
+  QuestionCommentModel, QuestionMatrixDropdownModel, Serializer, SurveyModel, ILocalizableString, Helpers,
+  settings as surveySettings
 } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { translationCss } from "./translation-theme";
 import { TranslationGroup, TranslationItem } from "./translation-base";
 
-// The strings survey of the translation tab: a one-row matrix per string, with the locale columns.
-// The table builds it, fills the values, handles the cell editing (placeholders, the write path) and
-// keeps the page panels collapsible. It also builds the header survey above it: a matrix with the
-// locale columns and no rows. The layouts:
-// - "tree" (the standard mode): a nested panel per group of the translation tree, the page panels
-//   collapse;
-// - "pages" (the side-by-side grid view): a collapsible group per page, its description is
-//   "{translated}/{total}"; two html columns go before the locale columns: Question (the element
-//   name, in the first row of the element only - a matrix has no rowspan, see onUpdateMatrixCellCss)
-//   and String;
+// The strings survey of the translation tab, in both modes, and of its dialogs: a one-row matrix per
+// string, with the locale columns. The table builds it, fills the values, handles the cell editing
+// (placeholders, the write path) and keeps the page groups collapsible. The layouts:
+// - "pages" (the tab in both modes, the machine-translation dialog, the "Untranslated strings"
+//   dialog): a collapsible group per page, its description is "{translated}/{total}" when the table
+//   has a single target language; two html columns go before the locale columns: Question (the
+//   element name, in the first row of the element only - a matrix has no rowspan, see
+//   onUpdateMatrixCellCss) and String;
 // - "element" (the element strings dialog): the rows of a single element, no groups and no Question
 //   column. The rows of nested elements keep their place and the group path in the String column.
 // The owner (TranslationBase) keeps the translation tree, the locales and the writes.
@@ -25,16 +24,25 @@ export const translationTableQuestionColumnName = "svc-translation-question";
 export const translationTableStringColumnName = "svc-translation-string";
 // The class of the table survey's root: the table styles in translation.scss are scoped to it.
 export const translationTableRootCss = "st-translation-table";
-// The matrix of the header survey.
-export const translationHeaderMatrixName = "stringsHeader";
 const questionColumnWidth = "130px";
 const stringColumnWidth = "200px";
 
+// The locale columns of the table and their roles, given by the owner (TranslationBase.getTableLocales).
+export interface ITranslationTableLocales {
+  // The locales of the locale columns, in their order ("" is the default locale).
+  columns: Array<string>;
+  // The locale the targets are translated from: the Source column when it is shown, and the text an
+  // empty Target cell shows, muted - also when its column is not shown.
+  source: string;
+  // The locales of the Target columns; every other locale column is the Source one. The side-by-side
+  // models give one target or none, the multiple-languages tab every shown locale but the default one.
+  targets: Array<string>;
+}
+
 export interface ITranslationTableOptions {
   // "pages" by default, see the layouts above.
-  layout?: "tree" | "pages" | "element";
-  // Only the items it accepts get a row. The group counts are counted over the rows. Not used by
-  // the "tree" layout.
+  layout?: "pages" | "element";
+  // Only the items it accepts get a row. The group counts are counted over the rows.
   filter?: (item: TranslationItem) => boolean;
   // The rows are taken once, when the table is built for the first time: an item that stops passing
   // the filter after an edit keeps its row. Without it, such a row is dropped right after the edit.
@@ -46,11 +54,12 @@ export interface ITranslationTableOptions {
 // What the table needs from the translation model it shows (TranslationBase implements it).
 export interface ITranslationTableOwner {
   readonly survey: SurveyModel;
-  readonly sourceLocale: string;
-  readonly targetLocale: string;
-  readonly useSourceTargetColumns: boolean;
+  getTableLocales(): ITranslationTableLocales;
+  getLocaleColumnName(locale: string): string;
+  // The text of the string in a target locale, the one the group count measures.
+  getTargetText(item: TranslationItem, locale: string): string;
+  getLocaleName(locale: string): string;
   createTabSurvey(json: any, reason: string, onCreating: (survey: SurveyModel) => void, area?: string): SurveyModel;
-  addLocaleColumns(matrix: QuestionMatrixDropdownModel): void;
   getStringsCellPlaceholder(item: TranslationItem, columnName: string): string;
   getProcessedTranslationItemText(locale: string, locString: ILocalizableString, newText: string, context: any): string;
   setItemLocText(item: TranslationItem, locale: string, text: string): void;
@@ -60,7 +69,6 @@ interface ITranslationTableRow {
   item: TranslationItem;
   matrixName: string;
   // The String column: the item text prefixed with the path of the groups below its element.
-  // The fields below are not used by the "tree" layout.
   text?: string;
   elementName?: string;
   elementObj?: any;
@@ -79,20 +87,14 @@ interface ITranslationTableGroup {
 
 const groupPanelNamePrefix = "svc-translation-group-";
 
-// The header titles of the source/target locale columns ("Source: English", "Target: Deutsch"):
-// [Source, Target], or a single column - the target one when the locales are equal, the source one
-// when there is no target language at all (hasTarget = false). Also used by the matrices outside the
-// table: the side-by-side element strings dialog and the machine-translation dialog.
-export function updateSourceTargetHeaderColumns(matrix: QuestionMatrixDropdownModel, sourceLoc: string, targetLoc: string, hasTarget: boolean = true): void {
-  const getTitle = (strName: string, locale: string): string =>
-    editorLocalization.getString("ed." + strName) + editorLocalization.getLocaleName(locale);
-  const cols = matrix.columns;
-  if (cols.length > 1) {
-    cols[0].title = getTitle("translationSource", sourceLoc || "");
-    cols[1].title = getTitle("translationTarget", targetLoc);
-  } else {
-    cols[0].title = hasTarget ? getTitle("translationTarget", targetLoc) : getTitle("translationSource", sourceLoc || "");
-  }
+// A locale column of the string matrices, worked out from the owner's locales once for a group's rows
+// (and once for a column update), not for each matrix.
+interface ITranslationTableLocaleColumn {
+  name: string;
+  locale: string;
+  isSource: boolean;
+  // The header title of the design: "Source: English", "Target: Deutsch".
+  title: string;
 }
 
 function escapeHtml(text: string): string {
@@ -104,7 +106,6 @@ function isElementObj(obj: any): boolean {
 
 export class TranslationTable {
   private surveyValue: SurveyModel;
-  private headerSurveyValue: SurveyModel;
   private groups: Array<ITranslationTableGroup> = [];
   private rowsByMatrixName: { [name: string]: ITranslationTableRow } = {};
   // The matrices whose cells exist: survey-core creates them when a matrix is rendered, so the
@@ -120,14 +121,8 @@ export class TranslationTable {
   public get survey(): SurveyModel {
     return this.surveyValue;
   }
-  public get headerSurvey(): SurveyModel {
-    return this.headerSurveyValue;
-  }
-  public get layout(): "tree" | "pages" | "element" {
+  public get layout(): "pages" | "element" {
     return this.options.layout || "pages";
-  }
-  private get isTree(): boolean {
-    return this.layout === "tree";
   }
   // Builds the table survey over the tree. afterFill runs once the rows are in, still inside the
   // survey creation (the instance-created event sees the filled table).
@@ -155,37 +150,10 @@ export class TranslationTable {
     survey.currentPage = survey.pages[0];
     return survey;
   }
-  // Builds the header survey. afterCreate runs inside the survey creation. The "pages" layout hides
-  // it: its groups carry their own header rows, but the tab components still render the survey.
-  public createHeaderSurvey(afterCreate?: (survey: SurveyModel) => void, area?: string): SurveyModel {
-    const json = {};
-    setSurveyJSONForPropertyGrid(json, false);
-    return this.owner.createTabSurvey(json, "translation_strings_header", (survey: SurveyModel): void => {
-      survey.css = translationCss;
-      if (this.layout === "pages") survey.css.root += " st-translation-table-header";
-      const matrix = <QuestionMatrixDropdownModel>Serializer.createClass("matrixdropdown");
-      matrix.name = translationHeaderMatrixName;
-      matrix.titleLocation = "hidden";
-      this.addHeaderColumns(matrix);
-      survey.addNewPage("page").addQuestion(matrix, 0);
-      survey.currentPage = survey.pages[0];
-      this.headerSurveyValue = survey;
-      if (!!afterCreate) afterCreate(survey);
-    }, area);
-  }
-  // The locale columns, titled "Source: ..." / "Target: ..." when the owner shows the source/target pair.
-  private addHeaderColumns(matrix: QuestionMatrixDropdownModel): void {
-    this.owner.addLocaleColumns(matrix);
-    if (!this.owner.useSourceTargetColumns) return;
-    const target = this.owner.targetLocale || "";
-    updateSourceTargetHeaderColumns(matrix, this.owner.sourceLocale, target, !!target);
-  }
   private setupSurvey(survey: SurveyModel, root: TranslationGroup): void {
     this.detachSurvey();
     this.surveyValue = survey;
-    if (!this.isTree) {
-      survey.css.root += " " + translationTableRootCss + " " + translationTableRootCss + "--" + this.layout;
-    }
+    survey.css.root += " " + translationTableRootCss + " " + translationTableRootCss + "--" + this.layout;
     survey.onMatrixCellCreated.add(this.onMatrixCellCreated);
     survey.onMatrixCellValueChanging.add(this.onMatrixCellValueChanging);
     survey.onMatrixCellValueChanged.add(this.onMatrixCellValueChanged);
@@ -193,17 +161,12 @@ export class TranslationTable {
     survey.onUpdatePanelCssClasses.add(this.onUpdatePanelCssClasses);
     survey.onUpdateQuestionCssClasses.add(this.onUpdateQuestionCssClasses);
     survey.onAfterRenderSurvey.add(this.onAfterRenderSurvey);
-    if (this.isTree) {
-      if (!!root)this.addTreeGroup(survey.pages[0], root);
-      return;
-    }
     this.groups = this.createGroups(root);
     this.groups.forEach(group => this.addGroup(survey.pages[0], group));
     this.freezeRows();
   }
   public dispose(): void {
     this.detachSurvey();
-    this.headerSurveyValue = undefined;
   }
   private detachSurvey(): void {
     const survey = this.surveyValue;
@@ -233,7 +196,6 @@ export class TranslationTable {
     matrix.name = row.matrixName;
     matrix.showHeader = false;
     container.addQuestion(matrix);
-    this.owner.addLocaleColumns(matrix);
     // The row title is hidden, but it is the cells' accessible name: the String column's text, with the
     // group path ("col1: Choices: A"), in the layouts that have one.
     const itemValue = new ItemValue(row.item.name, row.text || row.item.text);
@@ -270,30 +232,7 @@ export class TranslationTable {
     const survey = this.surveyValue;
     if (!survey) return;
     survey.data = this.getSurveyData();
-    if (!this.isTree)this.updateCells();
-  }
-
-  // --- the "tree" layout -----------------------------------------------------------------------
-
-  // The strings of the group, then a nested panel per child group.
-  private addTreeGroup(panel: PanelModelBase, group: TranslationGroup): void {
-    group.items.forEach((child, index) => {
-      if (child.isGroup) return;
-      this.addStringsMatrix(panel, { item: <TranslationItem>child, matrixName: group.fullName + index });
-    });
-    group.groups.forEach(item => {
-      const pnl = <PanelModel>Serializer.createClass("panel");
-      pnl.name = item.name;
-      panel.addElement(pnl);
-      pnl.title = item.text;
-      if (item.hasIndent) {
-        pnl["__translationHasIndent"] = true;
-      }
-      if (!!item.obj && item.obj.isPage) {
-        this.setupPagePanel(pnl, item.obj.name);
-      }
-      this.addTreeGroup(pnl, item);
-    });
+    this.updateCells();
   }
 
   // --- the rows of the "pages" and "element" layouts -------------------------------------------
@@ -438,11 +377,12 @@ export class TranslationTable {
     });
   }
   private addRowMatrices(container: PanelModelBase, group: ITranslationTableGroup): void {
+    const localeColumns = this.getLocaleColumns();
     group.rows.forEach(row => {
       const matrix = this.addStringsMatrix(container, row);
       // The header row of the group is the header of its first row's table.
       matrix.showHeader = !!row.isGroupFirst;
-      this.setupColumns(matrix);
+      this.addColumns(matrix, localeColumns);
       // Rows added after the survey was built (a live filter took a row away) get their values here.
       if (!this.surveyValue.isLoadingFromJson) matrix.value = this.getMatrixData(matrix);
     });
@@ -474,14 +414,27 @@ export class TranslationTable {
     const group = this.getGroup(pageName);
     return !!group && !!group.panel ? group.panel.description : "";
   }
-  private updateGroupCount(group: ITranslationTableGroup): void {
+  // The locale the counts measure: the single target when the table shows exactly two languages, the
+  // source and one target (or the target alone, when it is the source language too). Undefined when
+  // there is no target, more than one, or no Source column (the default locale hidden in the
+  // multiple-languages tab).
+  private getCountLocale(): string {
+    const locales = this.owner.getTableLocales();
+    if (locales.targets.length !== 1 || locales.columns.indexOf(locales.source) < 0) return undefined;
+    return locales.targets[0];
+  }
+  private updateGroupCount(group: ITranslationTableGroup, countLocale: string = this.getCountLocale()): void {
     if (!group.panel) return;
-    const target = this.owner.targetLocale || "";
-    const translated = group.rows.filter(row => !!row.item.locString.getLocaleText(target)).length;
-    group.panel.description = !!target ? translated + "/" + group.rows.length : "";
+    if (countLocale === undefined) {
+      group.panel.description = "";
+      return;
+    }
+    const translated = group.rows.filter(row => !!this.owner.getTargetText(row.item, countLocale)).length;
+    group.panel.description = translated + "/" + group.rows.length;
   }
   public updateCounts(): void {
-    this.groups.forEach(group => this.updateGroupCount(group));
+    const countLocale = this.getCountLocale();
+    this.groups.forEach(group => this.updateGroupCount(group, countLocale));
   }
   // Scrolls the group into the view, at once or once the table survey is rendered (it is rebuilt on
   // a reset, so the request usually comes first). survey-core's scrollElementToTop renders the lazy
@@ -511,7 +464,7 @@ export class TranslationTable {
 
   // --- page collapse ---------------------------------------------------------------------------
 
-  // The page panels collapse: the groups of the "pages" layout, the page panels of the "tree" one.
+  // The page groups of the "pages" layout collapse.
   // survey-core does not render the content of a collapsed panel, but its string matrices are built
   // (see TranslationBase.canShowAllPages). The expanded state is kept by page name, so it outlives the
   // table survey (rebuilt on every reset); a new survey drops it (resetPageState). A fresh state
@@ -576,49 +529,57 @@ export class TranslationTable {
 
   // --- columns and cells -----------------------------------------------------------------------
 
-  // The owner's locale columns (Source and Target, or one of them) get the header titles of the
-  // design, then the Question and String columns go before them.
-  public setupColumns(matrix: QuestionMatrixDropdownModel): void {
-    const source = this.owner.sourceLocale || "";
-    const target = this.owner.targetLocale || "";
-    const localeColumns = matrix.columns;
-    localeColumns.forEach((column, index) => {
-      // [Source, Target]; a single column is the Source one without a target language, the Target
-      // one when the languages are the same.
-      const isSource = !target || (localeColumns.length > 1 && index === 0);
-      column["translationIsSource"] = isSource;
-      column["translationLocale"] = isSource ? source : target;
-      if (isSource && this.options.sourceReadOnly) column.cellType = "html";
+  // The owner's locale columns with their roles (see ITranslationTableLocales) and titles.
+  private getLocaleColumns(): Array<ITranslationTableLocaleColumn> {
+    const locales = this.owner.getTableLocales();
+    const sourceTitle = editorLocalization.getString("ed.translationSource");
+    const targetTitle = editorLocalization.getString("ed.translationTarget");
+    return locales.columns.map(locale => {
+      const isSource = locales.targets.indexOf(locale) < 0;
+      const title = (isSource ? sourceTitle : targetTitle) + this.owner.getLocaleName(locale);
+      return { name: this.owner.getLocaleColumnName(locale), locale: locale, isSource: isSource, title: title };
     });
-    updateSourceTargetHeaderColumns(matrix, source, target, !!target);
-    const textColumns: Array<MatrixDropdownColumn> = [];
+  }
+  // The Question and String columns, then the locale columns.
+  private addColumns(matrix: QuestionMatrixDropdownModel, localeColumns: Array<ITranslationTableLocaleColumn>): void {
     if (this.layout === "pages") {
-      textColumns.push(this.createTextColumn(translationTableQuestionColumnName, "ed.translationColumnQuestion", questionColumnWidth));
+      matrix.columns.push(this.createTextColumn(translationTableQuestionColumnName, "ed.translationColumnQuestion", questionColumnWidth));
     }
-    textColumns.push(this.createTextColumn(translationTableStringColumnName, "ed.translationColumnString", stringColumnWidth));
-    matrix.columns.splice(0, 0, ...textColumns);
+    matrix.columns.push(this.createTextColumn(translationTableStringColumnName, "ed.translationColumnString", stringColumnWidth));
+    localeColumns.forEach(info => {
+      const column = matrix.addColumn(info.name, info.title);
+      column["translationIsSource"] = info.isSource;
+      column["translationLocale"] = info.locale;
+      if (info.isSource && this.options.sourceReadOnly) column.cellType = "html";
+    });
   }
   private createTextColumn(name: string, titleName: string, width: string): MatrixDropdownColumn {
-    const column = new MatrixDropdownColumn(name);
+    // A column without a matrix builds its template question for settings.matrix.defaultCellType
+    // ("dropdown", with all of its properties), then a second one for "html". Every string matrix gets
+    // two such columns, so the default is "html" while the column is created: one template only.
+    const defaultCellType = surveySettings.matrix.defaultCellType;
+    surveySettings.matrix.defaultCellType = "html";
+    let column: MatrixDropdownColumn;
+    try {
+      column = new MatrixDropdownColumn(name);
+    } finally {
+      surveySettings.matrix.defaultCellType = defaultCellType;
+    }
     column.title = editorLocalization.getString(titleName);
     column.cellType = "html";
     column.width = width;
     return column;
   }
-  // The columns of both surveys follow the languages (the owner calls it when they change).
+  // The columns and the counts follow the languages (the owner calls it when they change).
   public updateColumns(): void {
-    const header = !!this.headerSurveyValue ? <QuestionMatrixDropdownModel>this.headerSurveyValue.getQuestionByName(translationHeaderMatrixName) : undefined;
-    if (!!header) {
-      header.columns = [];
-      this.addHeaderColumns(header);
-    }
+    const localeColumns = this.getLocaleColumns();
     this.forEachMatrix(matrix => {
       matrix.beginUpdate();
       matrix.columns = [];
-      this.owner.addLocaleColumns(matrix);
-      if (!this.isTree)this.setupColumns(matrix);
+      this.addColumns(matrix, localeColumns);
       matrix.endUpdate();
     });
+    this.updateCounts();
   }
   // The texts the cells show besides the matrix values (the html cells and the placeholders), and
   // the counts: updateData calls it after the values are updated. Cells created later get their
@@ -719,7 +680,6 @@ export class TranslationTable {
   // Classes of the data cells: the column, the emulated Question span (no bottom border inside an
   // element's rows) and the last row of a group (the group's own border closes the table).
   private onUpdateMatrixCellCss = (_: SurveyModel, options: any): void => {
-    if (this.isTree) return;
     const row = this.getRowByMatrix(options.question);
     if (!row || !options.column) return;
     const name = options.column.name;
@@ -747,9 +707,6 @@ export class TranslationTable {
     options.cssClasses.mainRoot += css;
   };
   private onUpdatePanelCssClasses = (_: SurveyModel, options: any): void => {
-    if (options.panel["__translationHasIndent"]) {
-      options.cssClasses.panel.content += " st-panel-indent";
-    }
     if ((options.panel.name || "").indexOf(groupPanelNamePrefix) !== 0) return;
     options.cssClasses.panel.container += " st-translation-group";
   };
@@ -767,15 +724,16 @@ export class TranslationTable {
     const row = !!cellQuestion ? this.getRowByMatrix(cellQuestion.parentQuestion) : undefined;
     return !!row ? row.item : undefined;
   }
-  // The question of the last cell of the string's row: the target locale column, or the only locale
-  // column without a target. Resolved by the localizable string, not by the item: an item of another
+  // The question of the string's first Target cell, or of its last cell when the table has no target
+  // (the Source column alone). Resolved by the localizable string, not by the item: an item of another
   // tree (the used-strings tree) is not the item the rows carry. Reading it creates the row's cells.
   public getTargetCellQuestion(locStr: ILocalizableString): Question {
     let res: Question;
     this.forEachMatrix((matrix, row) => {
       if (!!res || row.item.locString !== locStr) return;
       const cells = matrix.visibleRows[0].cells;
-      res = cells[cells.length - 1].question;
+      const target = cells.filter(cell => cell.column["translationIsSource"] === false)[0];
+      res = (target || cells[cells.length - 1]).question;
     });
     return res;
   }

@@ -3282,7 +3282,6 @@ export class SurveyCreatorModel extends Base
     hash["theme"] = "theme-tab";
     hash["translation_settings"] = "translation-tab:language-list";
     hash["translation_strings"] = "translation-tab:table";
-    hash["translation_strings_header"] = "translation-tab:table-header";
     hash["translation_source"] = "translation-tab:source-survey";
     hash["translation_target"] = "translation-tab:target-survey";
     hash["cells-editor"] = "matrix-cell-values-popup-editor";

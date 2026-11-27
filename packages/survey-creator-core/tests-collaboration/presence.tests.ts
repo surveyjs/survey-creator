@@ -1,6 +1,7 @@
 import { CreatorTester } from "../tests/creator-tester";
 import { getCanvasElement, IPresencePeer, IPresencePeerEntry, IPresenceState, mapOffset, presenceColorSlot, PresenceOverlay } from "../src/plugins/collaboration/presence";
 import { CollaborationPlugin } from "../src/plugins/collaboration";
+import { getLocaleCell } from "../tests/tabs/translation-table-helper";
 
 const initialJSON = {
   pages: [
@@ -887,7 +888,9 @@ function createTranslationCreator(): { creator: CreatorTester, plugin: Collabora
   return { creator, plugin, matrix, stringsSurvey };
 }
 
-// Fake translation-tab DOM: a matrix row with a row-text cell + one td per locale.
+// Fake translation-tab DOM: a matrix row of the strings table - a row-text cell, the Question and
+// String html cells, then one td per locale (the Source one, then the Targets).
+const translationLocaleCellSelector = ".st-translation-table__cell--source, .st-translation-table__cell--target";
 function buildTranslationRow(matrixName: string, cellCount = 2): HTMLElement {
   const container = document.createElement("div");
   container.id = "scrollableDiv-translation";
@@ -896,9 +899,14 @@ function buildTranslationRow(matrixName: string, cellCount = 2): HTMLElement {
   const rowText = document.createElement("td");
   rowText.className = "st-table__cell st-table__cell--row-text";
   row.appendChild(rowText);
+  ["question", "string"].forEach(name => {
+    const cell = document.createElement("td");
+    cell.className = "st-table__cell st-translation-table__cell--" + name;
+    row.appendChild(cell);
+  });
   for (let i = 0; i < cellCount; i++) {
     const cell = document.createElement("td");
-    cell.className = "st-table__cell";
+    cell.className = "st-table__cell st-translation-table__cell--" + (i === 0 ? "source" : "target");
     cell.appendChild(document.createElement("textarea"));
     row.appendChild(cell);
   }
@@ -911,13 +919,13 @@ test("presence: focusing a translation cell claims the focus channel; tab switch
   const { creator, plugin, matrix, stringsSurvey } = createTranslationCreator();
   try {
     expect(matrix).toBeTruthy();
-    const cellQ = matrix.visibleRows[0].cells[0].question;
+    const cellQ = getLocaleCell(matrix, "default");
     stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: cellQ });
     expect(plugin.getState().focus).toEqual({
       area: "tr", m: matrix.name, l: "default", loc: "/pages/page1/elements/q1", p: "title"
     });
     // Another locale column of the same row re-emits with the new column.
-    const deCellQ = matrix.visibleRows[0].cells[1].question;
+    const deCellQ = getLocaleCell(matrix, "de");
     stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: deCellQ });
     expect((<any>plugin.getState().focus).l).toEqual("de");
     // Leaving the tab clears the focus - the table model does not survive it.
@@ -932,7 +940,7 @@ test("presence: translation focus is cleared after blur with no follow-up focus"
   const { plugin, matrix, stringsSurvey } = createTranslationCreator();
   const container = buildTranslationRow(matrix.name);
   try {
-    stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: matrix.visibleRows[0].cells[0].question });
+    stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: getLocaleCell(matrix, "default") });
     expect(plugin.getState().focus).toBeTruthy();
     const textarea = <HTMLElement>container.querySelector("textarea");
     textarea.dispatchEvent(new FocusEvent("focusin", { bubbles: true }));
@@ -950,10 +958,10 @@ test("presence: sticky translation locale survives blur, resets on tab switch", 
   const container = buildTranslationRow(matrix.name);
   try {
     // The default-locale column claims "default", same encoding as focus.l.
-    stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: matrix.visibleRows[0].cells[0].question });
+    stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: getLocaleCell(matrix, "default") });
     expect(plugin.getState().trLoc).toEqual("default");
     // Moving to the de column re-claims it.
-    stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: matrix.visibleRows[0].cells[1].question });
+    stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: getLocaleCell(matrix, "de") });
     expect(plugin.getState().trLoc).toEqual("de");
     // Blur clears the focus channel but NOT the sticky locale.
     const textarea = <HTMLElement>container.querySelector("textarea");
@@ -974,15 +982,15 @@ test("presence: sticky translation locale survives blur, resets on tab switch", 
 test("presence: remote translation focus skips the header cells of a table's first row", (): any => {
   const { plugin, matrix } = createTranslationCreator();
   const container = buildTranslationRow(matrix.name);
-  // The side-by-side grid's string tables: the first row of a group carries the header row.
+  // The strings table: the first row of a group carries the header row.
   const row = container.querySelector("[data-name]");
-  ["", "Source: Default (English)", "Target: Deutsch"].forEach((text, index) => {
+  ["", "Question", "String", "Source: Default (English)", "Target: Deutsch"].forEach((text, index) => {
     const header = document.createElement(index === 0 ? "td" : "th");
     header.className = "st-table__cell st-table__cell--header";
     header.textContent = text;
     row.insertBefore(header, row.children[index]);
   });
-  const dataCells = container.querySelectorAll("td.st-table__cell:not(.st-table__cell--row-text):not(.st-table__cell--header)");
+  const dataCells = container.querySelectorAll(translationLocaleCellSelector);
   const theme = mountThemeRoot();
   try {
     plugin.upsertPeer(peerEntry("c1", { state: { tab: "translation", sel: null, focus: { area: "tr", m: matrix.name, l: "de", loc: "/pages/page1/elements/q1", p: "title" }, cur: null } }));
@@ -999,7 +1007,7 @@ test("presence: remote translation focus skips the header cells of a table's fir
 test("presence: remote translation focus decorates the right cell; unknown locale does not", (): any => {
   const { plugin, matrix } = createTranslationCreator();
   const container = buildTranslationRow(matrix.name);
-  const boxes = container.querySelectorAll(".st-table__cell:not(.st-table__cell--row-text)");
+  const boxes = container.querySelectorAll(translationLocaleCellSelector);
   const trState = (trCell: any): any =>
     ({ tab: "translation", sel: null, focus: { area: "tr", ...trCell }, cur: null });
   const trCell = { m: matrix.name, l: "de", loc: "/pages/page1/elements/q1", p: "title" };
@@ -1046,7 +1054,7 @@ test("presence: a hidden tab releases its translation cell and re-claims it on r
   };
   try {
     textarea.focus();
-    stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: matrix.visibleRows[0].cells[0].question });
+    stringsSurvey.onFocusInQuestion.fire(stringsSurvey, { question: getLocaleCell(matrix, "default") });
     expect(plugin.getState().focus).toBeTruthy();
 
     // Tab switch: no blur fires, but a backgrounded client must not keep
@@ -1076,7 +1084,7 @@ test("presence: a hidden tab releases its translation cell and re-claims it on r
 test("presence: a locally focused translation cell drops the peer decoration entirely", (): any => {
   const { plugin, matrix } = createTranslationCreator();
   const container = buildTranslationRow(matrix.name);
-  const box = <HTMLElement>container.querySelector(".st-table__cell:not(.st-table__cell--row-text)");
+  const box = <HTMLElement>container.querySelector(translationLocaleCellSelector);
   const textarea = <HTMLTextAreaElement>box.querySelector("textarea");
   const trState: any = {
     tab: "translation", sel: null,
@@ -1109,7 +1117,7 @@ test("presence: a locally focused translation cell drops the peer decoration ent
 test("presence: first peer wins a contested translation cell", (): any => {
   const { plugin, matrix } = createTranslationCreator();
   const container = buildTranslationRow(matrix.name);
-  const box = <HTMLElement>container.querySelector(".st-table__cell:not(.st-table__cell--row-text)");
+  const box = <HTMLElement>container.querySelector(translationLocaleCellSelector);
   const trState: any = {
     tab: "translation", sel: null,
     focus: { area: "tr", m: matrix.name, l: "default", loc: "/pages/page1/elements/q1", p: "title" }, cur: null

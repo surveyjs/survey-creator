@@ -2,14 +2,15 @@ import { QuestionCommentModel, QuestionMatrixDropdownModel, SurveyModel } from "
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TranslationSideBySide } from "../../src/components/tabs/translation-side-by-side";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
-import { translationHeaderMatrixName, updateSourceTargetHeaderColumns } from "../../src/components/tabs/translation-table";
 import { getDefaultLocaleName } from "../../src/survey-helper";
+import { getLocaleColumnNames, getLocaleColumnTitles } from "./translation-table-helper";
 import { CreatorTester } from "../creator-tester";
 import "survey-core/survey.i18n";
 
 // The strings survey builder of both translation modes (TranslationTable). The layouts are tested
 // through the models (translation.tests.ts, translation-side-by-side-grid.tests.ts); these tests
-// cover what the table does on its own: the survey it replaces, the header survey and the lookups.
+// cover what the table does on its own: the survey it replaces, the header row, the column titles
+// and the lookups.
 
 const json = {
   pages: [
@@ -51,35 +52,25 @@ describe("TranslationTable", () => {
     getCell(findMatrix(translation.stringsSurvey, "q1", "title"), getDefaultLocaleName()).value = "New survey";
     expect(locTitle.getLocaleText("")).toBe("New survey");
   });
-  test("the header survey follows the locale columns of the strings survey", () => {
+  test("no header survey: the first row of the page group is the header, its columns follow the languages", () => {
     const translation = new Translation(new SurveyModel(json));
     translation.reset();
-    const header = <QuestionMatrixDropdownModel>translation.stringsHeaderSurvey.getQuestionByName(translationHeaderMatrixName);
+    expect((<any>translation).stringsHeaderSurvey).toBeUndefined();
     const matrix = findMatrix(translation.stringsSurvey, "q1", "title");
-    expect(header.columns.map(col => col.name)).toEqual(matrix.columns.map(col => col.name));
-    expect(translation.stringsHeaderSurvey.css.root.indexOf("st-translation-table-header")).toBe(-1);
+    expect(matrix.showHeader).toBe(true);
     translation.addLocale("fr");
-    expect(header.columns.map(col => col.name)).toEqual([getDefaultLocaleName(), "de", "fr"]);
-    expect(matrix.columns.map(col => col.name)).toEqual([getDefaultLocaleName(), "de", "fr"]);
+    expect(getLocaleColumnNames(matrix)).toEqual([getDefaultLocaleName(), "de", "fr"]);
   });
-  test("the header survey of the \"pages\" layout: hidden, the source/target titles follow the languages", () => {
+  test("the column titles: the pair, the source alone, the target alone", () => {
     const model = createSideBySideGrid();
-    expect(model.stringsHeaderSurvey.css.root.indexOf("st-translation-table-header")).toBeGreaterThan(-1);
+    expect((<any>model).stringsHeaderSurvey).toBeUndefined();
     model.targetLocale = "de";
-    const header = <QuestionMatrixDropdownModel>model.stringsHeaderSurvey.getQuestionByName(translationHeaderMatrixName);
-    expect(header.columns.map(col => col.title)).toEqual(["Source: Default (English)", "Target: Deutsch"]);
-  });
-  test("updateSourceTargetHeaderColumns: the pair, the target alone, the source alone", () => {
-    const matrix = new QuestionMatrixDropdownModel("m");
-    matrix.addColumn("default");
-    matrix.addColumn("de");
-    updateSourceTargetHeaderColumns(matrix, "", "de");
-    expect(matrix.columns.map(col => col.title)).toEqual(["Source: Default (English)", "Target: Deutsch"]);
-    matrix.columns.splice(0, 1);
-    updateSourceTargetHeaderColumns(matrix, "de", "de");
-    expect(matrix.columns[0].title).toBe("Target: Deutsch");
-    updateSourceTargetHeaderColumns(matrix, "de", "", false);
-    expect(matrix.columns[0].title).toBe("Source: Deutsch");
+    expect(getLocaleColumnTitles(findMatrix(model.stringsSurvey, "q1", "title"))).toEqual(["Source: Default (English)", "Target: Deutsch"]);
+    model.targetLocale = "";
+    expect(getLocaleColumnTitles(findMatrix(model.stringsSurvey, "q1", "title"))).toEqual(["Source: Default (English)"]);
+    model.sourceLocale = "de";
+    model.targetLocale = "de";
+    expect(getLocaleColumnTitles(findMatrix(model.stringsSurvey, "q1", "title"))).toEqual(["Target: Deutsch"]);
   });
   test("the lookups by a cell and by a string: getCellItem, focusCell", () => {
     const translation = new Translation(new SurveyModel(json));

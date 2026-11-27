@@ -3,9 +3,6 @@
     <SurfacePlaceholder v-if="model.isEmpty" :name="'translation'" :placeholderTitleText="model.placeholderTitleText" :placeholderDescriptionText="model.placeholderDescriptionText" />
     <div v-if="!model.isEmpty && stringsModel" class="st-content">
       <div class="svc-flex-column st-strings-wrapper">
-        <div class="svc-flex-row st-strings-header">
-          <SurveyComponent :key="stringsModel.stringsHeaderSurvey?.elementIdPrefix" :model="stringsModel.stringsHeaderSurvey"></SurveyComponent>
-        </div>
         <div class="svc-flex-row svc-plugin-tab__content st-strings">
           <SurveyComponent :key="stringsModel.stringsSurvey?.elementIdPrefix" :model="stringsModel.stringsSurvey"></SurveyComponent>
         </div>
