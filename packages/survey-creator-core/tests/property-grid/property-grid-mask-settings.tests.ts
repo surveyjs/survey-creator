@@ -244,13 +244,13 @@ test("Date time picker pattern is a text input, min and max use the picker", () 
   const question = <Question>Serializer.createClass("datetimepicker");
   question.name = "q1";
   const propertyGrid = new PropertyGridModelTester(question);
-  const patternQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("pattern");
+  const patternQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("datePattern");
   expect(patternQuestion.getType()).toBe("text");
   expect(patternQuestion.placeholder).toBe("Ex.: mm/dd/yyyy");
 
   question["min"] = "2026-01-02";
   question["max"] = "2026-06-01";
-  question["pattern"] = "dd.mm.yyyy";
+  question["datePattern"] = "dd.mm.yyyy";
   const propertyGridWithLimits = new PropertyGridModelTester(question);
   const minQuestion = propertyGridWithLimits.survey.getQuestionByName("min");
   const maxQuestion = propertyGridWithLimits.survey.getQuestionByName("max");
@@ -260,8 +260,8 @@ test("Date time picker pattern is a text input, min and max use the picker", () 
   expect(maxQuestion.title).toBe("Max");
   expect(minQuestion["allowClear"]).toBe(false);
   expect(maxQuestion["allowClear"]).toBe(false);
-  expect(minQuestion["pattern"]).toBe("dd.mm.yyyy");
-  expect(maxQuestion["pattern"]).toBe("dd.mm.yyyy");
+  expect(minQuestion["datePattern"]).toBe("dd.mm.yyyy");
+  expect(maxQuestion["datePattern"]).toBe("dd.mm.yyyy");
   expect(minQuestion["max"]).toBe("2026-06-01");
   expect(maxQuestion["min"]).toBe("2026-01-02");
   minQuestion.value = "2026-02-01";
